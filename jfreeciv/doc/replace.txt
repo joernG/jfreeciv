@@ -1,0 +1,34 @@
+\bbool\b, bool
+\bFALSE\b, false
+\bTRUE\b, true
+\bNULL\b, null
+\bchar\s+\*\b, String 
+\(void\), ()
+const char *, final String 
+final String\s+([\w_]+)\,\s+\.\.\.,	Object ... $1
+
+
+
+
+
+-----------------------------------
+in a c enum
+add 
+	private final int index;
+	Erfc_status(int index) {
+		this.index = index;
+	}
+	public int getIndex() {
+		return index;
+	}
+  
+replace all enum constant with fullname
+replace:
+\=\s*([\-0-9\.]+)  ,	($1)
+------------------------------
+enum rfc_status, Erfc_status
+_\(\"([^"]+)\"\), "$1"
+strlen\(([a-zA-Z0-9._]+)\), $1.length()
+struct\s+([a-zA-Z\_0-9]+)\s+unit *, $1 
+->, .
+\#define\s+([a-zA-Z0-9\_]+)\s+([0-9a-zA-Z\_\.]+), public static final int $1 = $2;
