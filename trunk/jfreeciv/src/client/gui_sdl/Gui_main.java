@@ -143,7 +143,7 @@ public class Gui_main{
 //client_option gui_options[] = {
 //  /* None. */
 //};
-//const int num_gui_options = ARRAY_SIZE(gui_options);
+//final int num_gui_options = ARRAY_SIZE(gui_options);
 //
 ///* =========================================================== */
 //
@@ -475,7 +475,7 @@ public class Gui_main{
 //}
 //
 ///* This function may run in a separate event thread */
-//int FilterMouseMotionEvents(const SDL_Event *event)
+//int FilterMouseMotionEvents(final SDL_Event *event)
 //{
 //  if (event.type == SDL_MOUSEMOTION) {
 //    static int x = 0, y = 0;

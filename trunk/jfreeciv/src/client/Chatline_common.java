@@ -42,7 +42,7 @@ public class Chatline_common{
 //  TYPED_LIST_ITERATE(struct remaining, rlist, pline)
 //#define remaining_list_iterate_end LIST_ITERATE_END
 //
-//static struct remaining_list remains;
+//static Speclists<remaining> remains;
 //
 ///**************************************************************************
 //  Initialize data structures.
@@ -85,11 +85,11 @@ public class Chatline_common{
 //  assert(frozen_level >= 0);
 //
 //  if (frozen_level == 0) {
-//    remaining_list_iterate(remains, pline) {
+//    for (remaining pline : remains.data) {
 //      append_output_window_full(pline.text, pline.conn_id);
 //      free(pline.text);
 //      free(pline);
-//    } remaining_list_iterate_end;
+//    } }
 //    remaining_list_unlink_all(&remains);
 //  }
 //}

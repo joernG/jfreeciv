@@ -186,7 +186,7 @@ public class Chatline{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//static void construct_widgets()
+//static void finalruct_widgets()
 //{
 //  sw_widget button;
 //  struct ct_rect rect_up, rect_down, rect_left, rect_right;
@@ -275,6 +275,6 @@ public class Chatline{
 //void chatline_create()
 //{
 //  read_config();
-//  construct_widgets();
+//  finalruct_widgets();
 //}
 }

@@ -342,9 +342,9 @@ public class Repodlgs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//static gint cmp_func(gconstpointer a_p, gconstpointer b_p)
+//static gint cmp_func(gfinalpointer a_p, gfinalpointer b_p)
 //{
-//  const gchar *a_str, *b_str;
+//  final gchar *a_str, *b_str;
 //  gchar text_a[512], text_b[512];
 //  gint a = GPOINTER_TO_INT(a_p), b = GPOINTER_TO_INT(b_p);
 //
@@ -454,7 +454,7 @@ public class Repodlgs{
 //  /* sort the list and build from it the menu */
 //  sorting_list = g_list_sort(sorting_list, cmp_func);
 //  for (i = 0; i < g_list_length(sorting_list); i++) {
-//    const gchar *data;
+//    final gchar *data;
 //
 //    if (GPOINTER_TO_INT(g_list_nth_data(sorting_list, i)) <
 //	game.num_tech_types) {
@@ -518,7 +518,7 @@ public class Repodlgs{
 //  /* sort the list and build from it the menu */
 //  sorting_list = g_list_sort(sorting_list, cmp_func);
 //  for (i = 0; i < g_list_length(sorting_list); i++) {
-//    const gchar *data =
+//    final gchar *data =
 //	advances[GPOINTER_TO_INT(g_list_nth_data(sorting_list, i))].name;
 //
 //    item = gtk_menu_item_new_with_label(data);
@@ -1020,7 +1020,7 @@ public class Repodlgs{
 //    }
 //
 //    memset(unitarray, '\0', sizeof(unitarray));
-//    unit_list_iterate(game.player_ptr.units, punit) {
+//    for (unit punit : game.player_ptr.units.data) {
 //      (unitarray[punit.type].active_count)++;
 //      if (punit.homecity) {
 //	unitarray[punit.type].upkeep_shield += punit.upkeep;
@@ -1028,13 +1028,13 @@ public class Repodlgs{
 //	unitarray[punit.type].upkeep_gold += punit.upkeep_gold;
 //      }
 //    }
-//    unit_list_iterate_end;
+//    }
 //    city_list_iterate(game.player_ptr.cities,pcity) {
 //      if (pcity.is_building_unit &&
 //	  (unit_type_exists (pcity.currently_building)))
 //	(unitarray[pcity.currently_building].building_count)++;
 //    }
-//    city_list_iterate_end;
+//    }
 //
 //    k = 0;
 //    memset(&unittotals, '\0', sizeof(unittotals));

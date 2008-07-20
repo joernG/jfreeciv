@@ -95,7 +95,7 @@ public class Diplodlg{
 //    TYPED_LIST_ITERATE(struct Diplomacy_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_list_has_been_initialised = false;
 //
 //static Diplomacy_dialog create_diplomacy_dialog(int other_player_id);
@@ -112,10 +112,10 @@ public class Diplodlg{
 //  char buf[64];
 //  ListBox_ResetContent(pdialog.list);
 //  
-//  clause_list_iterate(pdialog.treaty.clauses, pclause) {
+//  for (clause pclause : pdialog.treaty.clauses.data) {
 //    client_diplomacy_clause_string(buf, sizeof(buf), pclause);
 //    ListBox_AddString(pdialog.list,buf);
-//  } clause_list_iterate_end;
+//  } }
 //  
 //  pdialog.thumb0=sprites.treaty_thumb[BOOL_VAL(pdialog.treaty.accept0)];
 //  pdialog.thumb1=sprites.treaty_thumb[BOOL_VAL(pdialog.treaty.accept1)];
@@ -216,12 +216,12 @@ public class Diplodlg{
 //    city_list_ptrs = null;
 //  }
 //  
-//  city_list_iterate(plr0.cities, pcity) {
+//  for (city pcity : plr0.cities.data) {
 //    if (!is_capital(pcity)) {
 //      city_list_ptrs[i] = pcity;
 //      i++;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  qsort(city_list_ptrs, i, sizeof(struct city*), city_name_compare);
 //  
@@ -401,7 +401,7 @@ public class Diplodlg{
 //  row=ListBox_GetCurSel(pdialog.list);
 //  if (row==LB_ERR)
 //    return;
-//  clause_list_iterate(pdialog.treaty.clauses, pclause) {
+//  for (clause pclause : pdialog.treaty.clauses.data) {
 //    if(i == row) {
 //      dsend_packet_diplomacy_remove_clause_req(&aconnection,
 //					       pdialog.treaty.plr1.player_no,
@@ -410,7 +410,7 @@ public class Diplodlg{
 //      return;
 //    }
 //    i++;
-//  } clause_list_iterate_end;
+//  } }
 //}
 //
 ///****************************************************************
@@ -696,12 +696,12 @@ public class Diplodlg{
 //    dialog_list_list_has_been_initialised = true;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if ((pdialog.treaty.plr0 == plr0 && pdialog.treaty.plr1 == plr1) ||
 //	(pdialog.treaty.plr0 == plr1 && pdialog.treaty.plr1 == plr0)) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}

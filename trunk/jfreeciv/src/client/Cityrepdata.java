@@ -40,7 +40,7 @@ public class Cityrepdata{
 // is handled later.
 //*************************************************************************/
 //
-//static final String cr_entry_cityname(const city pcity)
+//static final String cr_entry_cityname(final city pcity)
 //{
 //  /* We used to truncate the name to 14 bytes.  This should not be needed
 //   * in any modern GUI library and may give an invalid string if a
@@ -48,14 +48,14 @@ public class Cityrepdata{
 //  return pcity.name;
 //}
 //
-//static final String cr_entry_size(const city pcity)
+//static final String cr_entry_size(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.size);
 //  return buf;
 //}
 //
-//static final String cr_entry_hstate_concise(const city pcity)
+//static final String cr_entry_hstate_concise(final city pcity)
 //{
 //  static char buf[4];
 //  my_snprintf(buf, sizeof(buf), "%s", (city_celebrating(pcity) ? "*" :
@@ -63,7 +63,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_hstate_verbose(const city pcity)
+//static final String cr_entry_hstate_verbose(final city pcity)
 //{
 //  static char buf[16];
 //  my_snprintf(buf, sizeof(buf), "%s",
@@ -73,7 +73,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_workers(const city pcity)
+//static final String cr_entry_workers(final city pcity)
 //{
 //  static char buf[32];
 //  my_snprintf(buf, sizeof(buf), "%d/%d/%d/%d", pcity.ppl_happy[4],
@@ -82,66 +82,66 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_happy(const city pcity)
+//static final String cr_entry_happy(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_happy[4]);
 //  return buf;
 //}
 //
-//static final String cr_entry_content(const city pcity)
+//static final String cr_entry_content(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_content[4]);
 //  return buf;
 //}
 //
-//static final String cr_entry_unhappy(const city pcity)
+//static final String cr_entry_unhappy(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_unhappy[4]);
 //  return buf;
 //}
 //
-//static final String cr_entry_angry(const city pcity)
+//static final String cr_entry_angry(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_angry[4]);
 //  return buf;
 //}
 //
-//static final String cr_entry_specialists(const city pcity)
+//static final String cr_entry_specialists(final city pcity)
 //{
 //  return specialists_string(pcity.specialists);
 //}
 //
-//static final String cr_entry_entertainers(const city pcity)
+//static final String cr_entry_entertainers(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.specialists[SP_ELVIS]);
 //  return buf;
 //}
 //
-//static final String cr_entry_scientists(const city pcity)
+//static final String cr_entry_scientists(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.specialists[SP_SCIENTIST]);
 //  return buf;
 //}
 //
-//static final String cr_entry_taxmen(const city pcity)
+//static final String cr_entry_taxmen(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%2d", pcity.specialists[SP_TAXMAN]);
 //  return buf;
 //}
 //
-//static final String cr_entry_attack(const city pcity)
+//static final String cr_entry_attack(final city pcity)
 //{
 //  static char buf[32];
 //  int attack_best[4] = {-1, -1, -1, -1}, i;
 //
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    /* What about allied units?  Should we just count them? */
 //    attack_best[3] = get_unit_type(punit.type).attack_strength;
 //
@@ -152,7 +152,7 @@ public class Cityrepdata{
 //      attack_best[i] = attack_best[i + 1];
 //      attack_best[i + 1] = tmp;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  buf[0] = '\0';
 //  for (i = 0; i < 3; i++) {
@@ -168,12 +168,12 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_defense(const city pcity)
+//static final String cr_entry_defense(final city pcity)
 //{
 //  static char buf[32];
 //  int defense_best[4] = {-1, -1, -1, -1}, i;
 //
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    /* What about allied units?  Should we just count them? */
 //    defense_best[3] = get_unit_type(punit.type).defense_strength;
 //
@@ -184,7 +184,7 @@ public class Cityrepdata{
 //      defense_best[i] = defense_best[i + 1];
 //      defense_best[i + 1] = tmp;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  buf[0] = '\0';
 //  for (i = 0; i < 3; i++) {
@@ -200,35 +200,35 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_supported(const city pcity)
+//static final String cr_entry_supported(final city pcity)
 //{
 //  static char buf[8];
 //  int num_supported = 0;
 //
-//  unit_list_iterate(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    num_supported++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  my_snprintf(buf, sizeof(buf), "%2d", num_supported);
 //
 //  return buf;
 //}
 //
-//static final String cr_entry_present(const city pcity)
+//static final String cr_entry_present(final city pcity)
 //{
 //  static char buf[8];
 //  int num_present = 0;
 //
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    num_present++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  my_snprintf(buf, sizeof(buf), "%2d", num_present);
 //
 //  return buf;
 //}
 //
-//static final String cr_entry_resources(const city pcity)
+//static final String cr_entry_resources(final city pcity)
 //{
 //  static char buf[32];
 //  my_snprintf(buf, sizeof(buf), "%d/%d/%d",
@@ -238,7 +238,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_foodplus(const city pcity)
+//static final String cr_entry_foodplus(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d",
@@ -246,7 +246,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_prodplus(const city pcity)
+//static final String cr_entry_prodplus(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d",
@@ -254,7 +254,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_tradeplus(const city pcity)
+//static final String cr_entry_tradeplus(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d",
@@ -262,7 +262,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_output(const city pcity)
+//static final String cr_entry_output(final city pcity)
 //{
 //  static char buf[32];
 //  int goldie;
@@ -276,7 +276,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_gold(const city pcity)
+//static final String cr_entry_gold(final city pcity)
 //{
 //  static char buf[8];
 //  int income = city_gold_surplus(pcity, pcity.tax_total);
@@ -288,7 +288,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_luxury(const city pcity)
+//static final String cr_entry_luxury(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d",
@@ -296,7 +296,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_science(const city pcity)
+//static final String cr_entry_science(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d",
@@ -304,7 +304,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_food(const city pcity)
+//static final String cr_entry_food(final city pcity)
 //{
 //  static char buf[32];
 //  my_snprintf(buf, sizeof(buf), "%d/%d",
@@ -313,7 +313,7 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_growturns(const city pcity)
+//static final String cr_entry_growturns(final city pcity)
 //{
 //  static char buf[8];
 //  int turns = city_turns_to_grow(pcity);
@@ -327,28 +327,28 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_pollution(const city pcity)
+//static final String cr_entry_pollution(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d", pcity.pollution);
 //  return buf;
 //}
 //
-//static final String cr_entry_num_trade(const city pcity)
+//static final String cr_entry_num_trade(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%d", city_num_trade_routes(pcity));
 //  return buf;
 //}
 //
-//static final String cr_entry_building(const city pcity)
+//static final String cr_entry_building(final city pcity)
 //{
 //  static char buf[128];
 //  final String from_worklist =
 //    worklist_is_empty(&pcity.worklist) ? "" :
 //    concise_city_production ? "*" : "(worklist)";
 //	
-//  if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //    my_snprintf(buf, sizeof(buf), "%s (%d/X/X/X)%s",
 //		get_impr_name_ex(pcity, pcity.currently_building),
 //		MAX(0, pcity.shield_surplus), from_worklist);
@@ -381,21 +381,21 @@ public class Cityrepdata{
 //  return buf;
 //}
 //
-//static final String cr_entry_corruption(const city pcity)
+//static final String cr_entry_corruption(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d", pcity.corruption);
 //  return buf;
 //}
 //
-//static final String cr_entry_waste(const city pcity)
+//static final String cr_entry_waste(final city pcity)
 //{
 //  static char buf[8];
 //  my_snprintf(buf, sizeof(buf), "%3d", pcity.shield_waste);
 //  return buf;
 //}
 //
-//static final String cr_entry_cma(const city pcity)
+//static final String cr_entry_cma(final city pcity)
 //{
 //  return cmafec_get_short_descr_of_city(pcity);
 //}
@@ -488,7 +488,7 @@ public class Cityrepdata{
 //};
 //
 //#if 0
-//const int num_report_cols = ARRAY_SIZE(city_report_specs);
+//final int num_report_cols = ARRAY_SIZE(city_report_specs);
 //#endif
 //
 ///******************************************************************

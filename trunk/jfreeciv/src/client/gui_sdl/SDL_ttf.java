@@ -131,7 +131,7 @@ public class SDL_ttf{
 //static int TTF_byteswapped = 0;
 //
 ///* UNICODE string utilities */
-//static __inline__ int UNICODE_strlen(const Uint16 *text)
+//static __inline__ int UNICODE_strlen(final Uint16 *text)
 //{
 //	int size = 0;
 //	while ( *text++ ) {
@@ -139,7 +139,7 @@ public class SDL_ttf{
 //	}
 //	return size;
 //}
-//static __inline__ void UNICODE_strcpy(Uint16 *dst, const Uint16 *src, int swap)
+//static __inline__ void UNICODE_strcpy(Uint16 *dst, final Uint16 *src, int swap)
 //{
 //	if ( swap ) {
 //		while ( *src ) {
@@ -159,7 +159,7 @@ public class SDL_ttf{
 //}
 //
 ///* rcg06192001 get linked library's version. */
-//const SDL_version *TTF_Linked_Version()
+//final SDL_version *TTF_Linked_Version()
 //{
 //	static SDL_version linked_version;
 //	TTF_VERSION(&linked_version);
@@ -180,10 +180,10 @@ public class SDL_ttf{
 //#ifdef USE_FREETYPE_ERRORS
 //#undef FTERRORS_H
 //#define FT_ERRORDEF( e, v, s )  { e, s },
-//	static const struct
+//	static final struct
 //	{
 //	  int          err_code;
-//	  const char*  err_msg;
+//	  final char*  err_msg;
 //	} ft_errors[] = {
 //#include <freetype/fterrors.h>
 //	};
@@ -679,7 +679,7 @@ public class SDL_ttf{
 //	int i;
 //
 //	for ( i=0; i < len; ++i ) {
-//		unicode[i] = ((const unsigned char *)text)[i];
+//		unicode[i] = ((final unsigned char *)text)[i];
 //	}
 //	unicode[i] = 0;
 //
@@ -692,7 +692,7 @@ public class SDL_ttf{
 //	Uint16 ch;
 //
 //	for ( i=0, j=0; i < len; ++i, ++j ) {
-//		ch = ((const unsigned char *)utf8)[i];
+//		ch = ((final unsigned char *)utf8)[i];
 //		if ( ch >= 0xF0 ) {
 //			ch  =  (Uint16)(utf8[i]&0x07) << 18;
 //			ch |=  (Uint16)(utf8[++i]&0x3F) << 12;
@@ -835,10 +835,10 @@ public class SDL_ttf{
 //	return status;
 //}
 //
-//int TTF_SizeUNICODE(TTF_Font *font, const Uint16 *text, int *w, int *h)
+//int TTF_SizeUNICODE(TTF_Font *font, final Uint16 *text, int *w, int *h)
 //{
 //	int status;
-//	const Uint16 *ch;
+//	final Uint16 *ch;
 //	int swapped;
 //	int x, z;
 //	int minx, maxx;
@@ -996,14 +996,14 @@ public class SDL_ttf{
 //}
 //
 //SDL_Surface *TTF_RenderUNICODE_Solid(TTF_Font *font,
-//				const Uint16 *text, SDL_Color fg)
+//				final Uint16 *text, SDL_Color fg)
 //{
 //	int xstart;
 //	int width;
 //	int height;
 //	SDL_Surface* textbuf;
 //	SDL_Palette* palette;
-//	const Uint16* ch;
+//	final Uint16* ch;
 //	Uint8* src;
 //	Uint8* dst;
 //	int swapped;
@@ -1223,7 +1223,7 @@ public class SDL_ttf{
 //}
 //
 //SDL_Surface* TTF_RenderUNICODE_Shaded( TTF_Font* font,
-//				       const Uint16* text,
+//				       final Uint16* text,
 //				       SDL_Color fg,
 //				       SDL_Color bg )
 //{
@@ -1236,7 +1236,7 @@ public class SDL_ttf{
 //	int rdiff;
 //	int gdiff;
 //	int bdiff;
-//	const Uint16* ch;
+//	final Uint16* ch;
 //	Uint8* src;
 //	Uint8* dst;
 //	int swapped;
@@ -1463,14 +1463,14 @@ public class SDL_ttf{
 //}
 //
 //SDL_Surface *TTF_RenderUNICODE_Blended(TTF_Font *font,
-//				const Uint16 *text, SDL_Color fg)
+//				final Uint16 *text, SDL_Color fg)
 //{
 //	int xstart;
 //	int width, height;
 //	SDL_Surface *textbuf;
 //	Uint32 alpha;
 //	Uint32 pixel;
-//	const Uint16 *ch;
+//	final Uint16 *ch;
 //	Uint8 *src;
 //	Uint32 *dst;
 //	int swapped;
@@ -1678,7 +1678,7 @@ public class SDL_ttf{
 //}
 //
 //SDL_Surface *TTF_RenderUNICODE_Blended_Shaded(TTF_Font *font,
-//			const Uint16 *text, SDL_Color fg, SDL_Color bg)
+//			final Uint16 *text, SDL_Color fg, SDL_Color bg)
 //{
 //	int xstart;
 //	int width, height;
@@ -1689,7 +1689,7 @@ public class SDL_ttf{
 //#ifndef HAVE_MMX1  
 //	Uint32 buf1, buf2;
 //#endif  
-//	const Uint16 *ch;
+//	final Uint16 *ch;
 //	Uint8 *src;
 //	Uint32 *dst;
 //	int row, col;

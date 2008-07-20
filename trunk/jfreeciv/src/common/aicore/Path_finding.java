@@ -107,7 +107,7 @@ public class Path_finding{
 //};
 //
 //static boolean danger_iterate_map(pf_map pf_map);
-//static struct pf_path* danger_construct_path(const pf_map pf_map,
+//static struct pf_path* danger_finalruct_path(final pf_map pf_map,
 //					     tile ptile);
 //static pf_path danger_get_path(pf_map pf_map,
 //				       tile ptile);
@@ -118,7 +118,7 @@ public class Path_finding{
 ///********************************************************************
 //  Number of turns required to reach node
 //********************************************************************/
-//static int get_turn(const pf_map pf_map, int cost)
+//static int get_turn(final pf_map pf_map, int cost)
 //{
 //  /* Negative cost can happen when a unit initially has more MP than its
 //   * move-rate (due to wonders transfer etc).  Although this may be a bug, 
@@ -131,7 +131,7 @@ public class Path_finding{
 ///********************************************************************
 //  Moves left after node is reached
 //********************************************************************/
-//static int get_moves_left(const pf_map pf_map, int cost)
+//static int get_moves_left(final pf_map pf_map, int cost)
 //{
 //  /* Cost may be negative; see get_turn(). */
 //  return (cost < 0 ? pf_map.params.move_rate - cost
@@ -141,7 +141,7 @@ public class Path_finding{
 ///********************************************************************
 //  Adjust MC to reflect the turn mode and the move_rate.
 //********************************************************************/
-//static int adjust_cost(const pf_map pf_map, int cost)
+//static int adjust_cost(final pf_map pf_map, int cost)
 //{
 //  assert(cost >= 0);
 //
@@ -441,7 +441,7 @@ public class Path_finding{
 //  Sets up the map according to the parameters
 //  Does not do any iterations
 //***************************************************************/
-//pf_map pf_create_map(const pf_parameter const parameter)
+//pf_map pf_create_map(final pf_parameter final parameter)
 //{
 //  pf_map pf_map = create_map((parameter.is_pos_dangerous != null));
 //
@@ -510,7 +510,7 @@ public class Path_finding{
 //  Fill in the position which must be discovered already. A helper 
 //  for *_get_position functions.
 //*******************************************************************/
-//static void fill_position(const pf_map pf_map, tile ptile,
+//static void fill_position(final pf_map pf_map, tile ptile,
 //			     pf_position pos)
 //{
 //  mapindex_t index = ptile.index;
@@ -519,7 +519,7 @@ public class Path_finding{
 //  /* Debug period only!  Please remove after PF is settled */
 //  if (pf_map.status[index] != NS_PROCESSED
 //      && !same_pos(ptile, pf_map.tile)) {
-//    die("pf_construct_path to an unreached destination");
+//    die("pf_finalruct_path to an unreached destination");
 //    return;
 //  }
 //
@@ -547,7 +547,7 @@ public class Path_finding{
 ///*******************************************************************
 //  Read all info about the current position into pos
 //*******************************************************************/
-//void pf_next_get_position(const pf_map pf_map,
+//void pf_next_get_position(final pf_map pf_map,
 //			  pf_position pos)
 //{
 //  fill_position(pf_map, pf_map.tile, pos);
@@ -586,7 +586,7 @@ public class Path_finding{
 //  Read off the path to the node (x,y), which must already be 
 //  discovered.  A helper for *get_path functions.
 //*******************************************************************/
-//static struct pf_path* construct_path(const pf_map pf_map, 
+//static struct pf_path* finalruct_path(final pf_map pf_map, 
 //                                      tile dest_tile)
 //{
 //  int i;
@@ -599,7 +599,7 @@ public class Path_finding{
 //  assert(!pf_map.params.is_pos_dangerous);
 //  if (pf_map.status[index] != NS_PROCESSED
 //      && !same_pos(dest_tile, pf_map.tile)) {
-//    die("construct_path to an unreached destination");
+//    die("finalruct_path to an unreached destination");
 //    return null;
 //  }
 //
@@ -649,13 +649,13 @@ public class Path_finding{
 ///************************************************************************
 //  Get the path to our current position
 //************************************************************************/
-//pf_path pf_next_get_path(const pf_map pf_map)
+//pf_path pf_next_get_path(final pf_map pf_map)
 //{
 //  if (!pf_map.params.is_pos_dangerous) {
-//    return construct_path(pf_map, pf_map.tile);
+//    return finalruct_path(pf_map, pf_map.tile);
 //  } else {
 //    /* It's very different in the presence of danger */
-//    return danger_construct_path(pf_map, pf_map.tile);
+//    return danger_finalruct_path(pf_map, pf_map.tile);
 //  }
 //}
 //
@@ -675,13 +675,13 @@ public class Path_finding{
 //
 //  if (status == NS_PROCESSED || same_pos(ptile, pf_map.tile)) {
 //    /* We already reached (x,y) */
-//    return construct_path(pf_map, ptile);
+//    return finalruct_path(pf_map, ptile);
 //  }
 //
 //  while (pf_next(pf_map)) {
 //    if (same_pos(ptile, pf_map.tile)) {
 //      /* That's the one */
-//      return construct_path(pf_map, ptile);
+//      return finalruct_path(pf_map, ptile);
 //    }
 //  }
 //
@@ -699,7 +699,7 @@ public class Path_finding{
 ///************************************************************************
 //  Printing a path
 //************************************************************************/
-//void pf_print_path(int log_level, const pf_path path)
+//void pf_print_path(int log_level, final pf_path path)
 //{
 //  int i;
 //
@@ -816,7 +816,7 @@ public class Path_finding{
 ///**********************************************************************
 //  Adjust cost taking into account possibility of making the move
 //**********************************************************************/
-//static int danger_adjust_cost(const pf_map pf_map, int cost, 
+//static int danger_adjust_cost(final pf_map pf_map, int cost, 
 //                              boolean to_danger, int moves_left)
 //{
 //
@@ -1045,7 +1045,7 @@ public class Path_finding{
 //  Read off the path to the node (x, y), but with danger
 //  NB: will only find paths to safe tiles!
 //*******************************************************************/
-//static pf_path danger_construct_path(const pf_map pf_map,
+//static pf_path danger_finalruct_path(final pf_map pf_map,
 //                                             tile ptile)
 //{
 //  pf_path path = fc_malloc(sizeof(*path));
@@ -1200,13 +1200,13 @@ public class Path_finding{
 //  if (status == NS_PROCESSED || status == NS_WAITING 
 //      || same_pos(ptile, pf_map.tile)) {
 //    /* We already reached (x,y) */
-//    return danger_construct_path(pf_map, ptile);
+//    return danger_finalruct_path(pf_map, ptile);
 //  }
 //
 //  while (pf_next(pf_map)) {
 //    if (same_pos(ptile, pf_map.tile)) {
 //      /* That's the one */
-//      return danger_construct_path(pf_map, ptile);
+//      return danger_finalruct_path(pf_map, ptile);
 //    }
 //  }
 //

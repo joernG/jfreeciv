@@ -72,7 +72,7 @@ public class Inteldlg{
 //    TYPED_LIST_ITERATE(struct intel_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 //
 ///******************************************************************/
@@ -103,11 +103,11 @@ public class Inteldlg{
 //    dialog_list_has_been_initialised = true;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pplayer == pplayer) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -347,12 +347,12 @@ public class Inteldlg{
 //**************************************************************************/
 //void intel_dialog_msg_close(Widget w)
 //{
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.intel_dialog_shell == w) {
 //      popdown_intel_dialog(pdialog);
 //      return;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //}
 //
 ///****************************************************************
@@ -476,7 +476,7 @@ public class Inteldlg{
 //  Dimension width;
 //  static char *namelist_ptrs[MAX_NUM_PLAYERS];
 //  static char namelist_text[MAX_NUM_PLAYERS][72];
-//  const player_diplstate state;
+//  final player_diplstate state;
 //
 //  if (pdialog.intel_diplo_dialog_shell) {
 //    i = 0;
@@ -515,11 +515,11 @@ public class Inteldlg{
 //**************************************************************************/
 //void intel_diplo_dialog_msg_close(Widget w)
 //{
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.intel_diplo_dialog_shell == w) {
 //      popdown_intel_diplo_dialog(pdialog);
 //      return;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //}
 }

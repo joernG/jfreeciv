@@ -519,7 +519,7 @@ public class Connectdlg{
 //
 //      fcwin_listview_add_row(list,0,6,row);
 //
-//    } server_list_iterate_end;
+//    } }
 //  }
 //
 //  ListView_SetColumnWidth(list, 0, LVSCW_AUTOSIZE);
@@ -566,7 +566,7 @@ public class Connectdlg{
 //    sz_strlcpy(buf[4], pserver.nplayers);
 //    sz_strlcpy(buf[5], pserver.message);
 //    fcwin_listview_add_row(list, 0, 6, row);
-//  } server_list_iterate_end;
+//  } }
 //  
 //  ListView_SetColumnWidth(list, 0, LVSCW_AUTOSIZE);
 //  ListView_SetColumnWidth(list, 1, LVSCW_AUTOSIZE);

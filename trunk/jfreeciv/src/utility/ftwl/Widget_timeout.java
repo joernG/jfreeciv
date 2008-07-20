@@ -64,7 +64,7 @@ public class Widget_timeout{
 //    TYPED_LIST_ITERATE(struct callback, list, item)
 //#define callback_list_iterate_end  LIST_ITERATE_END
 //
-//static struct callback_list callback_list;
+//static Speclists<callback> callback_list;
 //static boolean callback_list_list_has_been_initialised = false;
 //static int id_counter = 1;
 //
@@ -114,12 +114,12 @@ public class Widget_timeout{
 //void sw_remove_timeout(int id)
 //{
 //  assert(id > 0);
-//  callback_list_iterate(callback_list, callback) {
+//  for (callback callback : callback_list.data) {
 //    if (callback.id == id) {
 //      callback_list_unlink(&callback_list, callback);
 //      free(callback);
 //    }
-//  } callback_list_iterate_end;
+//  } }
 //}
 //
 ///*************************************************************************
@@ -138,7 +138,7 @@ public class Widget_timeout{
 //
 //  for (;;) {
 //    boolean change = false;
-//    callback_list_iterate(callback_list, callback) {
+//    for (callback callback : callback_list.data) {
 //      /*printf("  callback   %ld.%ld\n", callback.time.tv_sec,
 //         callback.time.tv_usec); */
 //      if (timercmp(&callback.time, &now, <)) {
@@ -150,7 +150,7 @@ public class Widget_timeout{
 //	change = true;
 //	break;
 //      }
-//    } callback_list_iterate_end;
+//    } }
 //    if (!change) {
 //      break;
 //    }
@@ -170,12 +170,12 @@ public class Widget_timeout{
 //
 //  ensure_init();
 //
-//  callback_list_iterate(callback_list, callback) {
+//  for (callback callback : callback_list.data) {
 //    if (!earliest || timercmp(&callback.time, &earliest.time, <)) {
 //      earliest = callback;
 //    }
 //  }
-//  callback_list_iterate_end;
+//  }
 //  if (!earliest) {
 //    timeout.tv_sec = 100000;
 //    timeout.tv_usec = 0;

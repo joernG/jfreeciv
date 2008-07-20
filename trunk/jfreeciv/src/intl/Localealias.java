@@ -122,8 +122,8 @@ public class Localealias{
 //static size_t read_alias_file PARAMS ((final String fname, int fname_len))
 //     internal_function;
 //static int extend_alias_table PARAMS (());
-//static int alias_compare PARAMS ((const alias_map map1,
-//				  const alias_map map2));
+//static int alias_compare PARAMS ((final alias_map map1,
+//				  final alias_map map2));
 //
 //
 //final String
@@ -148,8 +148,8 @@ public class Localealias{
 //      if (nmap > 0)
 //	retval = (alias_map ) bsearch (&item, map, nmap,
 //					       sizeof (struct alias_map),
-//					       (int (*) PARAMS ((const void *,
-//								 const void *))
+//					       (int (*) PARAMS ((final void *,
+//								 final void *))
 //						) alias_compare);
 //      else
 //	retval = null;
@@ -198,7 +198,7 @@ public class Localealias{
 //  FILE *fp;
 //  char *full_fname;
 //  size_t added;
-//  static const char aliasfile[] = "/locale.alias";
+//  static final char aliasfile[] = "/locale.alias";
 //
 //  full_fname = (char *) alloca (fname_len + sizeof aliasfile);
 //#ifdef HAVE_MEMPCPY
@@ -335,7 +335,7 @@ public class Localealias{
 //
 //  if (added > 0)
 //    qsort (map, nmap, sizeof (struct alias_map),
-//	   (int (*) PARAMS ((const void *, const void *))) alias_compare);
+//	   (int (*) PARAMS ((final void *, final void *))) alias_compare);
 //
 //  return added;
 //}
@@ -375,14 +375,14 @@ public class Localealias{
 //
 //static int
 //alias_compare (map1, map2)
-//     const alias_map map1;
-//     const alias_map map2;
+//     final alias_map map1;
+//     final alias_map map2;
 //{
 //#if defined _LIBC || defined HAVE_STRCASECMP
 //  return strcasecmp (map1.alias, map2.alias);
 //#else
-//  const unsigned char *p1 = (const unsigned char *) map1.alias;
-//  const unsigned char *p2 = (const unsigned char *) map2.alias;
+//  final unsigned char *p1 = (final unsigned char *) map1.alias;
+//  final unsigned char *p2 = (final unsigned char *) map2.alias;
 //  unsigned char c1, c2;
 //
 //  if (p1 == p2)

@@ -84,9 +84,9 @@ public class Citydlg_common{
 //**************************************************************************/
 //boolean city_to_canvas_pos(int *canvas_x, int *canvas_y, int city_x, int city_y)
 //{
-//  const int x0 = CITY_MAP_RADIUS, y0 = CITY_MAP_RADIUS;
-//  const int width = get_citydlg_canvas_width();
-//  const int height = get_citydlg_canvas_height();
+//  final int x0 = CITY_MAP_RADIUS, y0 = CITY_MAP_RADIUS;
+//  final int width = get_citydlg_canvas_width();
+//  final int height = get_citydlg_canvas_height();
 //
 //  /* The citymap is centered over the center of the citydlg canvas. */
 //  map_to_gui_vector(canvas_x, canvas_y, city_x - x0, city_y - y0);
@@ -107,15 +107,15 @@ public class Citydlg_common{
 //boolean canvas_to_city_pos(int *city_x, int *city_y, int canvas_x, int canvas_y)
 //{
 //  int orig_canvas_x = canvas_x, orig_canvas_y = canvas_y;
-//  const int width = get_citydlg_canvas_width();
-//  const int height = get_citydlg_canvas_height();
+//  final int width = get_citydlg_canvas_width();
+//  final int height = get_citydlg_canvas_height();
 //
 //  /* The citymap is centered over the center of the citydlg canvas. */
 //  canvas_x -= (width - NORMAL_TILE_WIDTH) / 2;
 //  canvas_y -= (height - NORMAL_TILE_HEIGHT) / 2;
 //
 //  if (is_isometric) {
-//    const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//    final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
 //
 //    /* Shift the tile left so the top corner of the origin tile is at
 //       canvas position (0,0). */
@@ -241,7 +241,7 @@ public class Citydlg_common{
 //    cost = impr_build_shield_cost(pcity.currently_building);
 //  }
 //
-//  if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //    my_snprintf(buffer, buffer_len, "%3d gold per turn",
 //		MAX(0, pcity.shield_surplus));
 //  } else {
@@ -461,9 +461,9 @@ public class Citydlg_common{
 //    if (game.player_idx == punit.owner) {
 //      /* Activate this unit. */
 //      pmyunit = punit;
-//      request_new_unit_activity(punit, ACTIVITY_IDLE);
+//      request_new_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //  if (pmyunit) {
 //    /* Put the focus on one of the activated units. */
 //    set_unit_focus(pmyunit);
@@ -619,7 +619,7 @@ public class Citydlg_common{
 ///**************************************************************************
 //  Return true iff the city can buy.
 //**************************************************************************/
-//boolean city_can_buy(const city pcity)
+//boolean city_can_buy(final city pcity)
 //{
 //  return (can_client_issue_orders()
 //	  && !pcity.did_buy

@@ -58,7 +58,7 @@ public class Finddlg{
 //  {
 //    city_list_iterate(game.players[i].cities, pcity)
 //      DoMethod(find_cities_listview, MUIM_NList_InsertSingle, pcity.name, MUIV_NList_Insert_Bottom);
-//    city_list_iterate_end;
+//    }
 //  }
 //
 //  DoMethod(find_cities_listview, MUIM_NList_Sort);
@@ -104,7 +104,7 @@ public class Finddlg{
 //                End,
 //            Child, find_cities_listview = NListviewObject,
 //                MUIA_NListview_NList, NListObject,
-//                    MUIA_NList_ConstructHook, MUIV_NList_ConstructHook_String,
+//                    MUIA_NList_finalructHook, MUIV_NList_finalructHook_String,
 //                    MUIA_NList_DestructHook, MUIV_NList_DestructHook_String,
 //                    End,
 //                End,

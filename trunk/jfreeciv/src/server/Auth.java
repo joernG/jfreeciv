@@ -93,7 +93,7 @@ public class Auth{
 //
 ///* after each wrong guess for a password, the server waits this
 // * many seconds to reply to the client */
-//static const int auth_fail_wait[] = { 1, 1, 2, 3 };
+//static final int auth_fail_wait[] = { 1, 1, 2, 3 };
 //
 //static boolean is_good_password(final String password, char *msg);
 //

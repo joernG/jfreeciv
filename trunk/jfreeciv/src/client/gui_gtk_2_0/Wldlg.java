@@ -203,8 +203,8 @@ public class Wldlg{
 //...
 //*****************************************************************/
 //static void cell_edited(GtkCellRendererText *cell,
-//			const gchar *spath,
-//			const gchar *text, gpointer data)
+//			final gchar *spath,
+//			final gchar *text, gpointer data)
 //{
 //  GtkTreePath *path;
 //  GtkTreeIter it;

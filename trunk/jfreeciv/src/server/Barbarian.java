@@ -150,8 +150,8 @@ public class Barbarian{
 //  /* Ensure that we are at war with everyone else */
 //  players_iterate(pplayer) {
 //    if (pplayer != barbarians) {
-//      pplayer.diplstates[barbarians.player_no].type = DS_WAR;
-//      barbarians.diplstates[pplayer.player_no].type = DS_WAR;
+//      pplayer.diplstates[barbarians.player_no].type = diplstate_type.DS_WAR;
+//      barbarians.diplstates[pplayer.player_no].type = diplstate_type.DS_WAR;
 //    }
 //  } players_iterate_end;
 //
@@ -208,7 +208,7 @@ public class Barbarian{
 //  if (game.barbarianrate == 0 || (game.year < game.onsetbarbarian)) {
 //    unit_list_iterate_safe((ptile).units, punit) {
 //      wipe_unit(punit);
-//    } unit_list_iterate_safe_end;
+//    }
 //    return false;
 //  }
 //
@@ -240,7 +240,7 @@ public class Barbarian{
 //        freelog(LOG_DEBUG, "Moved barbarian unit from %d %d to %d, %d", 
 //                ptile.x, ptile.y, utile.x, utile.y);
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } else {
 //    if (sea_cnt > 0) {         /* maybe it's an island, try to get on boats */
 //      tile btile = null;
@@ -268,7 +268,7 @@ public class Barbarian{
 //          }
 //          () handle_unit_move_request(punit2, utile, true, false);
 //        }
-//      } unit_list_iterate_end;
+//      } }
 //    } else {             /* The village is surrounded! Kill the explorer. */
 //      unit_list_iterate_safe((ptile).units, punit2) {
 //        if (punit2.owner != me) {
@@ -277,7 +277,7 @@ public class Barbarian{
 //        } else {
 //          send_unit_info(null, punit2);
 //        }
-//      } unit_list_iterate_safe_end;
+//      }
 //    }
 //  }
 //
@@ -424,9 +424,9 @@ public class Barbarian{
 //  }
 //
 //  /* Is this necessary?  create_unit_full already sends unit info. */
-//  unit_list_iterate(utile.units, punit2) {
+//  for (unit punit2 : utile.units.data) {
 //    send_unit_info(null, punit2);
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* to let them know where to get you */
 //  show_area(barbarians, utile, 3);

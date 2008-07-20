@@ -64,7 +64,7 @@ public class Plrdlg{
 //static int listindex_to_playerindex[MAX_NUM_PLAYERS];
 //static int playerindex_to_listindex[MAX_NUM_PLAYERS];
 //
-///* a simple macro that makes an often used construct look readable */
+///* a simple macro that makes an often used finalruct look readable */
 //#define LI_2_PI(no) *(int*)(gtk_clist_get_row_data(GTK_CLIST(players_list), no))
 //
 //static SPRITE *flags[MAX_NUM_PLAYERS];
@@ -277,7 +277,7 @@ public class Plrdlg{
 //  static char namebuf[MAX_LEN_NAME], flagbuf[1], aibuf[2], dsbuf[32],
 //      repbuf[32], statebuf[32], idlebuf[32];
 //  static final String colbuf = "";
-//  const player_diplstate pds;
+//  final player_diplstate pds;
 //
 //  /* we assume that the player's name, flag,
 //   * nation and color never change. */
@@ -467,7 +467,7 @@ public class Plrdlg{
 //
 //      /* now add some eye candy ... */
 //      switch (pplayer_get_diplstate(game.player_ptr, get_player(i)).type) {
-//      case DS_WAR:
+//      case diplstate_type.DS_WAR:
 //	state_col = colors_standard[COLOR_STD_RED];
 //	break;
 //      case DS_ALLIANCE:
@@ -516,8 +516,8 @@ public class Plrdlg{
 //
 //  switch (pplayer_get_diplstate
 //	  (game.player_ptr, get_player(player_index)).type) {
-//  case DS_WAR:
-//  case DS_NO_CONTACT:
+//  case diplstate_type.DS_WAR:
+//  case diplstate_type.DS_NO_CONTACT:
 //    gtk_widget_set_sensitive(players_war_command, false);
 //    break;
 //  default:

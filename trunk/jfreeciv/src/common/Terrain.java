@@ -169,7 +169,7 @@ public class Terrain{
 ///****************************************************************************
 //  Returns true iff any adjacent tile contains the given terrain.
 //****************************************************************************/
-//boolean is_terrain_near_tile(const tile ptile, Terrain_type_id t)
+//boolean is_terrain_near_tile(final tile ptile, Terrain_type_id t)
 //{
 //  adjc_iterate(ptile, adjc_tile) {
 //    if (adjc_tile.terrain == t) {
@@ -183,7 +183,7 @@ public class Terrain{
 ///****************************************************************************
 //  Return the number of adjacent tiles that have the given terrain.
 //****************************************************************************/
-//int count_terrain_near_tile(const tile ptile,
+//int count_terrain_near_tile(final tile ptile,
 //			    boolean cardinal_only, boolean percentage,
 //			    Terrain_type_id t)
 //{
@@ -205,7 +205,7 @@ public class Terrain{
 ///****************************************************************************
 //  Returns true iff any tile adjacent to (map_x,map_y) has the given special.
 //****************************************************************************/
-//boolean is_special_near_tile(const tile ptile, enum tile_special_type spe)
+//boolean is_special_near_tile(final tile ptile, enum tile_special_type spe)
 //{
 //  adjc_iterate(ptile, adjc_tile) {
 //    if (map_has_special(adjc_tile, spe)) {
@@ -219,7 +219,7 @@ public class Terrain{
 ///****************************************************************************
 //  Returns the number of adjacent tiles that have the given map special.
 //****************************************************************************/
-//int count_special_near_tile(const tile ptile,
+//int count_special_near_tile(final tile ptile,
 //			    boolean cardinal_only, boolean percentage,
 //			    enum tile_special_type spe)
 //{
@@ -241,7 +241,7 @@ public class Terrain{
 ///****************************************************************************
 //  Returns true iff any adjacent tile contains terrain with the given flag.
 //****************************************************************************/
-//boolean is_terrain_flag_near_tile(const tile ptile,
+//boolean is_terrain_flag_near_tile(final tile ptile,
 //			       enum terrain_flag_id flag)
 //{
 //  adjc_iterate(ptile, adjc_tile) {
@@ -256,7 +256,7 @@ public class Terrain{
 ///****************************************************************************
 //  Return the number of adjacent tiles that have terrain with the given flag.
 //****************************************************************************/
-//int count_terrain_flag_near_tile(const tile ptile,
+//int count_terrain_flag_near_tile(final tile ptile,
 //				 boolean cardinal_only, boolean percentage,
 //				 enum terrain_flag_id flag)
 //{

@@ -100,8 +100,8 @@ public class Cma_core{
 // results for the given city.
 //*****************************************************************************/
 //static boolean results_are_equal(city pcity,
-//			     const cm_result const result1,
-//			     const cm_result const result2)
+//			     final cm_result final result1,
+//			     final cm_result final result2)
 //{
 //  enum cm_stat stat;
 //
@@ -195,7 +195,7 @@ public class Cma_core{
 // the actual data matches the calculated one.
 //*****************************************************************************/
 //static boolean apply_result_on_server(city pcity,
-//				   const cm_result const result)
+//				   final cm_result final result)
 //{
 //  int first_request_id = 0, last_request_id = 0, i, sp;
 //  struct cm_result current_state;
@@ -408,7 +408,7 @@ public class Cma_core{
 //      if (!apply_result_on_server(pcity, &result)) {
 //	freelog(HANDLE_CITY_LOG_LEVEL2, "  doesn't cleanly apply");
 //	if (check_city(city_id, null) && i == 0) {
-//	  create_event(pcity.tile, E_NOEVENT,
+//	  create_event(pcity.tile, event_type.E_NOEVENT,
 //		       _("CMA: %s has changed and the calculated "
 //			 "result can't be applied. Will retry."),
 //		       pcity.name);
@@ -504,7 +504,7 @@ public class Cma_core{
 //...
 //*****************************************************************************/
 //boolean cma_apply_result(city pcity,
-//		     const cm_result const result)
+//		     final cm_result final result)
 //{
 //  assert(!cma_is_city_under_agent(pcity, null));
 //  if (result.found_a_valid) {
@@ -517,7 +517,7 @@ public class Cma_core{
 //...
 //*****************************************************************************/
 //void cma_put_city_under_agent(city pcity,
-//			      const cm_parameter const parameter)
+//			      final cm_parameter final parameter)
 //{
 //  freelog(LOG_DEBUG, "cma_put_city_under_agent(city='%s'(%d))",
 //	  pcity.name, pcity.id);
@@ -544,7 +544,7 @@ public class Cma_core{
 ///****************************************************************************
 //...
 //*****************************************************************************/
-//boolean cma_is_city_under_agent(const city pcity,
+//boolean cma_is_city_under_agent(final city pcity,
 //			     cm_parameter parameter)
 //{
 //  struct cm_parameter my_parameter;
@@ -607,7 +607,7 @@ public class Cma_core{
 // ...
 //**************************************************************************/
 //void cma_set_parameter(enum attr_city attr, int city_id,
-//		       const cm_parameter parameter)
+//		       final cm_parameter parameter)
 //{
 //  char buffer[SAVED_PARAMETER_SIZE];
 //  struct data_out dout;

@@ -53,7 +53,7 @@ public class Messagewin{
 //#include "muistuff.h"
 //
 //static Object *mes_wnd;
-//static struct Hook mes_consthook;
+//static struct Hook mes_finalhook;
 //static struct Hook mes_desthook;
 //static struct Hook mes_disphook;
 //static Object *mes_listview;
@@ -92,9 +92,9 @@ public class Messagewin{
 //};
 //
 ///****************************************************************
-// Constructor of a new entry in the message listview
+// finalructor of a new entry in the message listview
 //*****************************************************************/
-//HOOKPROTONHNO(mes_construct, message_entry , message_entry entry)
+//HOOKPROTONHNO(mes_finalruct, message_entry , message_entry entry)
 //{
 //  message_entry newentry = (message_entry ) AllocVec(sizeof(*newentry), 0);
 //  if (newentry)
@@ -192,7 +192,7 @@ public class Messagewin{
 //  if (mes_wnd)
 //    return;
 //
-//  mes_consthook.h_Entry = (HOOKFUNC) mes_construct;
+//  mes_finalhook.h_Entry = (HOOKFUNC) mes_finalruct;
 //  mes_desthook.h_Entry = (HOOKFUNC) mes_destruct;
 //  mes_disphook.h_Entry = (HOOKFUNC) mes_display;
 //
@@ -202,7 +202,7 @@ public class Messagewin{
 //    WindowContents, VGroup,
 //        Child, mes_listview = NListviewObject,
 //	    MUIA_NListview_NList, NListObject,
-//		MUIA_NList_ConstructHook, &mes_consthook,
+//		MUIA_NList_finalructHook, &mes_finalhook,
 //		MUIA_NList_DestructHook, &mes_desthook,
 //		MUIA_NList_DisplayHook, &mes_disphook,
 //		End,

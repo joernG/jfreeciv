@@ -445,7 +445,7 @@ public class Gui_string{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//boolean convert_string_to_const_surface_width(SDL_String16 *pString,
+//boolean convert_string_to_final_surface_width(SDL_String16 *pString,
 //								int width)
 //{  
 //  int w;
@@ -522,7 +522,7 @@ public class Gui_string{
 //	  change_ptsize16(pString, pString.ptsize - 1);
 //	  w = str16size(pString).w;
 //	} else {
-//	  die("Can't convert string to const width");
+//	  die("Can't convert string to final width");
 //	}
 //      }  
 //      
@@ -543,7 +543,7 @@ public class Gui_string{
 //  assert(pString != null);
 //  
 //  ptsize = pString.ptsize;
-//  convert_string_to_const_surface_width(pString, w);
+//  convert_string_to_final_surface_width(pString, w);
 //  pText = create_text_surf_from_str16(pString);
 //  if(pString.ptsize != ptsize) {
 //    change_ptsize16(pString, ptsize);

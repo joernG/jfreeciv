@@ -165,9 +165,9 @@ public class Airgoto{
 // * Priority function for refuel points --- on the basis of their 
 // * turn-distance from the starting point
 // ************************************************************************/
-//static int queue_priority_function(const void *value)
+//static int queue_priority_function(final void *value)
 //{
-//  const refuel point = (const refuel ) value;
+//  final refuel point = (final refuel ) value;
 //
 //  return -(MAX_FLIGHT * point.turns - point.moves_left);
 //}

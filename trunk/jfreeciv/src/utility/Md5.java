@@ -62,7 +62,7 @@ public class Md5{
 //#endif
 ///* This array contains the bytes used to pad the buffer to the next
 //   64-byte boundary.  (RFC 1321, 3.1: Step 1)  */
-//static const unsigned char fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
+//static final unsigned char fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
 //
 ///**************************************************************************
 // from a string, create an md5sum and store it in output in hex form
@@ -102,7 +102,7 @@ public class Md5{
 //  IMPORTANT: On some systems it is required that RESBUF is correctly
 //  aligned for a 32 bits value.
 //**************************************************************************/
-//void *md5_read_ctx(const md5_ctx ctx, void *resbuf)
+//void *md5_read_ctx(final md5_ctx ctx, void *resbuf)
 //{
 //  ((md5_uint32 *) resbuf)[0] = SWAP(ctx.A);
 //  ((md5_uint32 *) resbuf)[1] = SWAP(ctx.B);
@@ -204,7 +204,7 @@ public class Md5{
 //  if (sum > 0)
 //    md5_process_bytes(buffer, sum, &ctx);
 //
-//  /* Construct result in desired memory.  */
+//  /* finalruct result in desired memory.  */
 //  md5_finish_ctx(&ctx, resblock);
 //  return 0;
 //}
@@ -233,7 +233,7 @@ public class Md5{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//void md5_process_bytes(const void *buffer, size_t len, md5_ctx ctx)
+//void md5_process_bytes(final void *buffer, size_t len, md5_ctx ctx)
 //{
 //  /* When we already have some bits in our internal buffer concatenate
 //     both inputs first.  */
@@ -311,12 +311,12 @@ public class Md5{
 //  Process LEN bytes of BUFFER, accumulating context into CTX.
 //  It is assumed that LEN % 64 == 0.
 //**************************************************************************/
-//void md5_process_block(const void *buffer, size_t len, md5_ctx ctx)
+//void md5_process_block(final void *buffer, size_t len, md5_ctx ctx)
 //{
 //  md5_uint32 correct_words[16];
-//  const md5_uint32 *words = buffer;
+//  final md5_uint32 *words = buffer;
 //  size_t nwords = len / sizeof(md5_uint32);
-//  const md5_uint32 *endp = words + nwords;
+//  final md5_uint32 *endp = words + nwords;
 //  md5_uint32 A = ctx.A;
 //  md5_uint32 B = ctx.B;
 //  md5_uint32 C = ctx.C;
@@ -339,7 +339,7 @@ public class Md5{
 //    md5_uint32 C_save = C;
 //    md5_uint32 D_save = D;
 //
-//    /* First round: using the given function, the context and a constant
+//    /* First round: using the given function, the context and a finalant
 //       the next context is computed.  Because the algorithms processing
 //       unit is a 32-bit word and it is determined to work on words in
 //       little endian byte order we perhaps have to change the byte order
@@ -356,7 +356,7 @@ public class Md5{
 //        }								\
 //      while (0)
 //
-//    /* Before we start, one word to the strange constants.
+//    /* Before we start, one word to the strange finalants.
 //       They are defined in RFC 1321 as
 //
 //       T[i] = (int) (4294967296.0 * fabs (sin (i))), i=1..64, or

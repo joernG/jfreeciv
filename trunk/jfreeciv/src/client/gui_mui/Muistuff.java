@@ -108,7 +108,7 @@ public class Muistuff{
 ///****************************************************************
 // Duplicates a string. Must be freed via FreeVec()
 //*****************************************************************/
-//STRPTR StrCopy(const STRPTR str)
+//STRPTR StrCopy(final STRPTR str)
 //{
 //  STRPTR dest = 0;
 //

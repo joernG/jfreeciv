@@ -43,7 +43,7 @@ public class Helpdata{
 //
 //#include "helpdata.h"
 //
-//static final String const help_type_names[] = {
+//static final String final help_type_names[] = {
 //  "(Any)", "(Text)", "Units", "Improvements", "Wonders",
 //  "Techs", "Terrain", "Governments", null
 //};
@@ -59,7 +59,7 @@ public class Helpdata{
 //#define help_list_iterate_end  LIST_ITERATE_END
 //
 //static genlist_link help_nodes_iterator;
-//static struct help_list help_nodes;
+//static Speclists<help> help_nodes;
 //static boolean help_nodes_init = false;
 ///* helpnodes_init is not quite the same as booted in boot_help_texts();
 //   latter can be 0 even after call, eg if couldn't find helpdata.txt.
@@ -86,11 +86,11 @@ public class Helpdata{
 //void free_help_texts()
 //{
 //  check_help_nodes_init();
-//  help_list_iterate(help_nodes, ptmp) {
+//  for (help ptmp : help_nodes.data) {
 //    free(ptmp.topic);
 //    free(ptmp.text);
 //    free(ptmp);
-//  } help_list_iterate_end;
+//  } }
 //  help_list_unlink_all(&help_nodes);
 //}
 //
@@ -99,7 +99,7 @@ public class Helpdata{
 //
 //  Currently only for terrain ("TerrainAlterations") is such a table created.
 //****************************************************************************/
-//static void insert_generated_table(const char* name, char* outbuf)
+//static void insert_generated_table(final char* name, char* outbuf)
 //{
 //  if (0 == strcmp (name, "TerrainAlterations")) {
 //    int i;
@@ -156,12 +156,12 @@ public class Helpdata{
 // for help_list_sort(); sort by topic via compare_strings()
 // (sort topics with more leading spaces after those with fewer)
 //*****************************************************************/
-//static int help_item_compar(const void *a, const void *b)
+//static int help_item_compar(final void *a, final void *b)
 //{
-//  const help_item ha, *hb;
+//  final help_item ha, *hb;
 //  char *ta, *tb;
-//  ha = (const struct help_item*) *(const void**)a;
-//  hb = (const struct help_item*) *(const void**)b;
+//  ha = (final struct help_item*) *(final void**)a;
+//  hb = (final struct help_item*) *(final void**)b;
 //  for (ta = ha.topic, tb = hb.topic; *ta != '\0' && *tb != '\0'; ta++, tb++) {
 //    if (*ta != ' ') {
 //      if (*tb == ' ') return -1;
@@ -241,7 +241,7 @@ public class Helpdata{
 //	   to change that now.  --dwp
 //	*/
 //	char name[2048];
-//	struct help_list category_nodes;
+//	Speclists<help> category_nodes;
 //	
 //	help_list_init(&category_nodes);
 //	if (current_type == HELP_UNIT) {
@@ -322,9 +322,9 @@ public class Helpdata{
 //	  die("Bad current_type %d", current_type);
 //	}
 //	help_list_sort(&category_nodes, help_item_compar);
-//	help_list_iterate(category_nodes, ptmp) {
+//	for (help ptmp : category_nodes.data) {
 //	  help_list_insert_back(&help_nodes, ptmp);
-//	} help_list_iterate_end;
+//	} }
 //	help_list_unlink_all(&category_nodes);
 //	continue;
 //      }
@@ -385,7 +385,7 @@ public class Helpdata{
 //  Returns null for 1 past end.
 //  Returns null and prints error message for other out-of bounds.
 //*****************************************************************/
-//const help_item get_help_item(int pos)
+//final help_item get_help_item(int pos)
 //{
 //  int size;
 //  
@@ -407,18 +407,18 @@ public class Helpdata{
 //  If no item, returns pointer to static internal item with
 //  some faked data, and sets (*pos) to -1.
 //*****************************************************************/
-//const struct help_item*
+//final struct help_item*
 //get_help_item_spec(final String name, enum help_page_type htype, int *pos)
 //{
 //  int idx;
-//  const help_item pitem = null;
+//  final help_item pitem = null;
 //  static struct help_item vitem; /* v = virtual */
 //  static char vtopic[128];
 //  static char vtext[256];
 //
 //  check_help_nodes_init();
 //  idx = 0;
-//  help_list_iterate(help_nodes, ptmp) {
+//  for (help ptmp : help_nodes.data) {
 //    char *p=ptmp.topic;
 //    while (*p == ' ') {
 //      p++;
@@ -429,7 +429,7 @@ public class Helpdata{
 //    }
 //    idx++;
 //  }
-//  help_list_iterate_end;
+//  }
 //  
 //  if(!pitem) {
 //    idx = -1;
@@ -469,9 +469,9 @@ public class Helpdata{
 //  Returns next help item; after help_iter_start(), this is
 //  the first item.  At end, returns null.
 //*****************************************************************/
-//const help_item help_iter_next()
+//final help_item help_iter_next()
 //{
-//  const help_item pitem;
+//  final help_item pitem;
 //  
 //  check_help_nodes_init();
 //  pitem = ITERATOR_PTR(help_nodes_iterator);
@@ -532,7 +532,7 @@ public class Helpdata{
 //
 //  if (building_has_effect(which, EFT_ENABLE_NUKE)
 //      && num_role_units(F_NUCLEAR) > 0) {
-//    Unit_Type_id u;
+//    int u;
 //    Tech_Type_id t;
 //
 //    u = get_role_unit(F_NUCLEAR, 0);
@@ -548,7 +548,7 @@ public class Helpdata{
 //  }
 //
 //  impr_type_iterate(impr) {
-//    const impr_type b = get_improvement_type(impr);
+//    final impr_type b = get_improvement_type(impr);
 //
 //    if (improvement_exists(impr) && b.bldg_req == which) {
 //      char req_buf[1024] = "";
@@ -584,7 +584,7 @@ public class Helpdata{
 //  } impr_type_iterate_end;
 //
 //  unit_type_iterate(utype) {
-//    const unit_type u = get_unit_type(utype);
+//    final unit_type u = get_unit_type(utype);
 //
 //    if (unit_type_exists(utype) && u.impr_requirement == which) {
 //      if (u.tech_requirement != A_LAST) {
@@ -828,7 +828,7 @@ public class Helpdata{
 //  if (unit_type_flag(i, F_MISSILE)) {
 //    sprintf(buf + buf.length(),
 //	    "* A missile unit: gets used up in making an attack.\n");
-//  } else if(unit_type_flag(i, F_ONEATTACK)) {
+//  } else if(unit_type_flag(i, Eunit_flag_id.F_ONEATTACK)) {
 //    sprintf(buf + buf.length(),
 //	    "* Making an attack ends this unit's turn.\n");
 //  }
@@ -865,7 +865,7 @@ public class Helpdata{
 //  if (unit_type_flag(i, F_IGZOC)) {
 //    sprintf(buf + buf.length(), "* Ignores zones of control.\n");
 //  }
-//  if (unit_type_flag(i, F_NONMIL)) {
+//  if (unit_type_flag(i, Eunit_flag_id.F_NONMIL)) {
 //    sprintf(buf + buf.length(), _("* A non-military unit"
 //				 " (cannot attack; no martial law).\n"));
 //  }
@@ -909,7 +909,7 @@ public class Helpdata{
 //
 //    n = num_role_units(F_CARRIER);
 //    for (j = 0; j < n; j++) {
-//      Unit_Type_id id = get_role_unit(F_CARRIER, j);
+//      int id = get_role_unit(F_CARRIER, j);
 //
 //      mystrlcpy(allowed_units[num_allowed_units],
 //		unit_name(id), sizeof(allowed_units[num_allowed_units]));
@@ -921,7 +921,7 @@ public class Helpdata{
 //      n = num_role_units(F_MISSILE_CARRIER);
 //
 //      for (j = 0; j < n; j++) {
-//	Unit_Type_id id = get_role_unit(F_MISSILE_CARRIER, j);
+//	int id = get_role_unit(F_MISSILE_CARRIER, j);
 //
 //	if (get_unit_type(id).transport_capacity > 0) {
 //	  mystrlcpy(allowed_units[num_allowed_units],

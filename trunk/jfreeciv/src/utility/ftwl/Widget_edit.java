@@ -31,7 +31,7 @@ public class Widget_edit{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static boolean key(sw_widget widget, const be_key key,
+//static boolean key(sw_widget widget, final be_key key,
 //		void *data)
 //{
 //  int cursor = widget.data.edit.cursor;
@@ -91,7 +91,7 @@ public class Widget_edit{
 //  int chars = strlen(widget.data.edit.buffer);
 //  struct ct_point pos;
 //  struct ct_rect rect;
-//  //const int PADDING = 5;
+//  //final int PADDING = 5;
 //  int i;
 //  ct_string all = ct_string_clone3(widget.data.edit.template,
 //					   widget.data.edit.buffer);

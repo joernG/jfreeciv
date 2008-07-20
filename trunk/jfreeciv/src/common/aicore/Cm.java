@@ -78,7 +78,7 @@ public class Cm{
 //static cm_state cm_init_state(city pcity);
 //static void cm_free_state(cm_state state);
 //static void cm_find_best_solution(cm_state state,
-//		     const cm_parameter const parameter,
+//		     final cm_parameter final parameter,
 //		     cm_result result);
 //
 ///****************************************************************************
@@ -119,7 +119,7 @@ public class Cm{
 ///* Fitness of a solution.  */
 //struct cm_fitness {
 //  int weighted; /* weighted sum */
-//  boolean sufficient; /* false => doesn't meet constraints */
+//  boolean sufficient; /* false => doesn't meet finalraints */
 //};
 //
 //
@@ -135,7 +135,7 @@ public class Cm{
 // * Used mostly just for converting to cm_result.
 // */
 //struct cm_tile {
-//  const cm_tile_type type;
+//  final cm_tile_type type;
 //  int x, y; /* valid only if !is_specialist */
 //};
 //
@@ -218,8 +218,8 @@ public class Cm{
 //  struct partial_solution best;
 //  struct cm_fitness best_value;
 //
-//  /* hard constraints on production: any solution with less production than
-//   * this fails to satisfy the constraints, so we can stop investigating
+//  /* hard finalraints on production: any solution with less production than
+//   * this fails to satisfy the finalraints, so we can stop investigating
 //   * this branch.  A solution with more production than this may still
 //   * fail (for being unhappy, for instance). */
 //  int min_production[NUM_STATS];
@@ -239,18 +239,18 @@ public class Cm{
 //
 //
 ///* return #fields + specialist types */
-//static int num_types(const cm_state state);
+//static int num_types(final cm_state state);
 //
 //
 ///* debugging functions */
 //#ifdef CM_DEBUG
-//static void print_tile_type(int loglevel, const cm_tile_type ptype,
+//static void print_tile_type(int loglevel, final cm_tile_type ptype,
 //    final String prefix);
 //static void print_lattice(int loglevel,
-//    const tile_type_vector lattice);
+//    final tile_type_vector lattice);
 //static void print_partial_solution(int loglevel,
-//    const partial_solution soln,
-//    const cm_state state);
+//    final partial_solution soln,
+//    final cm_state state);
 //#else
 //#define print_tile_type(loglevel, ptype, prefix)
 //#define print_lattice(loglevel, lattice)
@@ -340,7 +340,7 @@ public class Cm{
 //  Duplicate a tile type, except for the vectors - the vectors of the new tile
 //  type will be empty.
 //****************************************************************************/
-//static cm_tile_type tile_type_dup(const cm_tile_type oldtype)
+//static cm_tile_type tile_type_dup(final cm_tile_type oldtype)
 //{
 //  cm_tile_type newtype = fc_malloc(sizeof(*newtype));
 //
@@ -383,8 +383,8 @@ public class Cm{
 //  all production outputs are equal and the is_specialist fields are also
 //  equal.
 //****************************************************************************/
-//static boolean tile_type_equal(const cm_tile_type a,
-//			    const cm_tile_type b)
+//static boolean tile_type_equal(final cm_tile_type a,
+//			    final cm_tile_type b)
 //{
 //  enum cm_stat stat;
 //
@@ -407,8 +407,8 @@ public class Cm{
 //  Specialists are considered better than workers (all else being equal)
 //  since we have an unlimited number of them.
 //****************************************************************************/
-//static boolean tile_type_better(const cm_tile_type a,
-//			     const cm_tile_type b)
+//static boolean tile_type_better(final cm_tile_type a,
+//			     final cm_tile_type b)
 //{
 //  enum cm_stat stat;
 //
@@ -438,8 +438,8 @@ public class Cm{
 //  Equivalence is defined in tile_type_equal().
 //****************************************************************************/
 //static int tile_type_vector_find_equivalent(
-//				const tile_type_vector vec,
-//				const cm_tile_type ptype)
+//				final tile_type_vector vec,
+//				final cm_tile_type ptype)
 //{
 //  int i;
 //
@@ -457,7 +457,7 @@ public class Cm{
 //  is_specialist types this will always be infinite but for other types of
 //  tiles it is limited by what's available in the citymap.
 //****************************************************************************/
-//static int tile_type_num_tiles(const cm_tile_type type)
+//static int tile_type_num_tiles(final cm_tile_type type)
 //{
 //  if(type.is_specialist) {
 //    return FC_INFINITY;
@@ -472,7 +472,7 @@ public class Cm{
 //  Note this isn't the same as the number of *tiles* that are better.  There
 //  may be more than one tile of each type (see tile_type_num_tiles).
 //****************************************************************************/
-//static int tile_type_num_prereqs(const cm_tile_type ptype)
+//static int tile_type_num_prereqs(final cm_tile_type ptype)
 //{
 //  return ptype.better_types.size;
 //}
@@ -482,7 +482,7 @@ public class Cm{
 //  number of tile types, which may be iterated over using this function
 //  as a lookup.
 //****************************************************************************/
-//static const cm_tile_type tile_type_get(const cm_state state,
+//static final cm_tile_type tile_type_get(final cm_state state,
 //						int type)
 //{
 //  /* Sanity check the index. */
@@ -497,7 +497,7 @@ public class Cm{
 //  over using this function for index.  Don't call this for is_specialist
 //  types.  See also tile_type_num_tiles().
 //****************************************************************************/
-//static const cm_tile tile_get(const cm_tile_type ptype, int j)
+//static final cm_tile tile_get(final cm_tile_type ptype, int j)
 //{
 //  assert(j >= 0);
 //  assert(j < ptype.tiles.size);
@@ -537,9 +537,9 @@ public class Cm{
 //  Compute the fitness of the given surplus (and disorder/happy status)
 //  according to the weights and minimums given in the parameter.
 //****************************************************************************/
-//static struct cm_fitness compute_fitness(const int surplus[NUM_STATS],
+//static struct cm_fitness compute_fitness(final int surplus[NUM_STATS],
 //					 boolean disorder, boolean happy,
-//					const cm_parameter parameter)
+//					final cm_parameter parameter)
 //{
 //  enum cm_stat stat;
 //  struct cm_fitness fitness;
@@ -601,8 +601,8 @@ public class Cm{
 //  solution must already be allocated).
 //****************************************************************************/
 //static void copy_partial_solution(partial_solution dst,
-//				  const partial_solution src,
-//				  const cm_state state)
+//				  final partial_solution src,
+//				  final cm_state state)
 //{
 //  memcpy(dst.worker_counts, src.worker_counts,
 //	 sizeof(*dst.worker_counts) * num_types(state));
@@ -624,7 +624,7 @@ public class Cm{
 //  other code which uses accessor functions.
 //****************************************************************************/
 //static void apply_solution(cm_state state,
-//                           const partial_solution soln)
+//                           final partial_solution soln)
 //{
 //  city pcity = state.pcity;
 //  int i;
@@ -653,7 +653,7 @@ public class Cm{
 //   * of that type. */
 //  for (i = 0 ; i < num_types(state); i++) {
 //    int nworkers = soln.worker_counts[i];
-//    const cm_tile_type type;
+//    final cm_tile_type type;
 //
 //    if (nworkers == 0) {
 //      /* No citizens of this type. */
@@ -671,7 +671,7 @@ public class Cm{
 //
 //      /* Place citizen workers onto the citymap tiles. */
 //      for (j = 0; j < nworkers; j++) {
-//        const cm_tile tile = tile_get(type, j);
+//        final cm_tile tile = tile_get(type, j);
 //
 //        pcity.city_map[tile.x][tile.y] = C_TILE_WORKER;
 //      }
@@ -688,7 +688,7 @@ public class Cm{
 //  values, too.  This fills in the surplus array and disorder and happy 
 //  values based on the city's data.
 //****************************************************************************/
-//static void get_city_surplus(const city pcity,
+//static void get_city_surplus(final city pcity,
 //			     int surplus[NUM_STATS],
 //			     boolean *disorder, boolean *happy)
 //{
@@ -707,7 +707,7 @@ public class Cm{
 //  Compute the fitness of the solution.  This is a fairly expensive operation.
 //****************************************************************************/
 //static struct cm_fitness evaluate_solution(cm_state state,
-//    const partial_solution soln)
+//    final partial_solution soln)
 //{
 //  city pcity = state.pcity;
 //  struct city backup;
@@ -729,7 +729,7 @@ public class Cm{
 //  operation.
 //****************************************************************************/
 //static void convert_solution_to_result(cm_state state,
-//				       const partial_solution soln,
+//				       final partial_solution soln,
 //				       cm_result result)
 //{
 //  struct city backup;
@@ -766,8 +766,8 @@ public class Cm{
 //  the worse_types vectors of a and b), but requires that lattice_depth
 //  has already been computed.
 //****************************************************************************/
-//static int compare_tile_type_by_lattice_order(const cm_tile_type a,
-//					      const cm_tile_type b)
+//static int compare_tile_type_by_lattice_order(final cm_tile_type a,
+//					      final cm_tile_type b)
 //{
 //  enum cm_stat stat;
 //
@@ -798,10 +798,10 @@ public class Cm{
 //  this respects the partial order -- unless a and b have equal fitness.
 //  In that case, use compare_tile_type_by_lattice_order.
 //****************************************************************************/
-//static int compare_tile_type_by_fitness(const void *va, const void *vb)
+//static int compare_tile_type_by_fitness(final void *va, final void *vb)
 //{
-//  cm_tile_type  const *a = va;
-//  cm_tile_type  const *b = vb;
+//  cm_tile_type  final *a = va;
+//  cm_tile_type  final *b = vb;
 //  double diff;
 //
 //  if (*a == *b) {
@@ -829,10 +829,10 @@ public class Cm{
 //  this respects the partial order -- unless a and b produce equal food.
 //  In that case, use compare_tile_type_by_lattice_order.
 //****************************************************************************/
-//static int compare_tile_type_by_stat(const void *va, const void *vb)
+//static int compare_tile_type_by_stat(final void *va, final void *vb)
 //{
-//  cm_tile_type  const *a = va;
-//  cm_tile_type  const *b = vb;
+//  cm_tile_type  final *a = va;
+//  cm_tile_type  final *b = vb;
 //
 //  if (*a == *b) {
 //    return 0;
@@ -855,7 +855,7 @@ public class Cm{
 //  Compute the production of tile [x,y] and stuff it into the tile type.
 //  Doesn't touch the other fields.
 //****************************************************************************/
-//static void compute_tile_production(const city pcity, int x, int y,
+//static void compute_tile_production(final city pcity, int x, int y,
 //				    cm_tile_type out)
 //{
 //  boolean is_celebrating = base_city_celebrating(pcity);
@@ -878,7 +878,7 @@ public class Cm{
 //  The lattice_depth is not set.
 //****************************************************************************/
 //static void tile_type_lattice_add(tile_type_vector lattice,
-//				  const cm_tile_type newtype,
+//				  final cm_tile_type newtype,
 //				  int x, int y)
 //{
 //  cm_tile_type type;
@@ -929,7 +929,7 @@ public class Cm{
 //  enum specialist_type spec;
 //  enum cm_stat stat;
 //};
-//const static struct spec_stat_pair pairs[SP_COUNT] =  {
+//final static struct spec_stat_pair pairs[SP_COUNT] =  {
 //  { SP_ELVIS, LUXURY },
 //  { SP_SCIENTIST, SCIENCE },
 //  { SP_TAXMAN, GOLD }
@@ -940,7 +940,7 @@ public class Cm{
 //  tile_type for each specialist type.
 //****************************************************************************/
 //static void init_specialist_lattice_nodes(tile_type_vector lattice,
-//					  const city pcity)
+//					  final city pcity)
 //{
 //  struct cm_tile_type type;
 //
@@ -1067,7 +1067,7 @@ public class Cm{
 //  wouldn't save us anything later.
 //****************************************************************************/
 //static void clean_lattice(tile_type_vector lattice,
-//			  const city pcity)
+//			  final city pcity)
 //{
 //  int i, j; /* i is the index we read, j is the index we write */
 //  struct tile_type_vector tofree;
@@ -1091,7 +1091,7 @@ public class Cm{
 //      j++;
 //
 //      for (ci = 0, cj = 0; ci < ptype.worse_types.size; ci++) {
-//        const cm_tile_type ptype2 = ptype.worse_types.p[ci];
+//        final cm_tile_type ptype2 = ptype.worse_types.p[ci];
 //
 //        if (ptype2.lattice_depth < pcity.size) {
 //          ptype.worse_types.p[cj] = ptype.worse_types.p[ci];
@@ -1111,10 +1111,10 @@ public class Cm{
 //  estimate_fitness is later, in a section of code that isolates
 //  much of the domain-specific knowledge.
 //****************************************************************************/
-//static double estimate_fitness(const cm_state state,
-//			       const int production[NUM_STATS]);
+//static double estimate_fitness(final cm_state state,
+//			       final int production[NUM_STATS]);
 //
-//static void sort_lattice_by_fitness(const cm_state state,
+//static void sort_lattice_by_fitness(final cm_state state,
 //				    tile_type_vector lattice)
 //{
 //  int i;
@@ -1140,7 +1140,7 @@ public class Cm{
 ///****************************************************************************
 //  Create the lattice.
 //****************************************************************************/
-//static void init_tile_lattice(const city pcity,
+//static void init_tile_lattice(final city pcity,
 //			      tile_type_vector lattice)
 //{
 //  struct cm_tile_type type;
@@ -1198,7 +1198,7 @@ public class Cm{
 //  each type specialist, plus one for each distinct (different amounts of
 //  production) citymap tile.
 //****************************************************************************/
-//static int num_types(const cm_state state)
+//static int num_types(final cm_state state)
 //{
 //  return tile_type_vector_size(&state.lattice);
 //}
@@ -1211,10 +1211,10 @@ public class Cm{
 //****************************************************************************/
 //static void add_workers(partial_solution soln,
 //			int itype, int number,
-//			const cm_state state)
+//			final cm_state state)
 //{
 //  enum cm_stat stat;
-//  const cm_tile_type ptype = tile_type_get(state, itype);
+//  final cm_tile_type ptype = tile_type_get(state, itype);
 //  int newcount;
 //  int old_worker_count = soln.worker_counts[itype];
 //
@@ -1263,7 +1263,7 @@ public class Cm{
 //  Add just one worker to the solution.
 //****************************************************************************/
 //static void add_worker(partial_solution soln,
-//		       int itype, const cm_state state)
+//		       int itype, final cm_state state)
 //{
 //  add_workers(soln, itype, 1, state);
 //}
@@ -1272,7 +1272,7 @@ public class Cm{
 //  Remove just one worker from the solution.
 //****************************************************************************/
 //static void remove_worker(partial_solution soln,
-//			  int itype, const cm_state state)
+//			  int itype, final cm_state state)
 //{
 //  add_workers(soln, itype, -1, state);
 //}
@@ -1291,10 +1291,10 @@ public class Cm{
 ///****************************************************************************
 //  true if all tiles better than this type have been used.
 //****************************************************************************/
-//static boolean prereqs_filled(const partial_solution soln, int type,
-//			   const cm_state state)
+//static boolean prereqs_filled(final partial_solution soln, int type,
+//			   final cm_state state)
 //{
-//  const cm_tile_type ptype = tile_type_get(state, type);
+//  final cm_tile_type ptype = tile_type_get(state, type);
 //  int prereqs = tile_type_num_prereqs(ptype);
 //
 //  return soln.prereqs_filled[type] == prereqs;
@@ -1317,7 +1317,7 @@ public class Cm{
 //
 //  for (newchoice = oldchoice + 1;
 //       newchoice < num_types(state); newchoice++) {
-//    const cm_tile_type ptype = tile_type_get(state, newchoice);
+//    final cm_tile_type ptype = tile_type_get(state, newchoice);
 //
 //    if(!ptype.is_specialist && (state.current.worker_counts[newchoice]
 //				 == tile_vector_size(&ptype.tiles))) {
@@ -1412,8 +1412,8 @@ public class Cm{
 //  tile lattice.
 //****************************************************************************/
 //static void complete_solution(partial_solution soln,
-//			      const cm_state state,
-//			      const tile_type_vector lattice)
+//			      final cm_state state,
+//			      final tile_type_vector lattice)
 //{
 //  int last_choice = -1;
 //  int i;
@@ -1470,8 +1470,8 @@ public class Cm{
 //
 //  This function computes the max-stats produced by a partial solution.
 //****************************************************************************/
-//static void compute_max_stats_heuristic(const cm_state state,
-//					const partial_solution soln,
+//static void compute_max_stats_heuristic(final cm_state state,
+//					final partial_solution soln,
 //					int production[NUM_STATS],
 //					int check_choice)
 //{
@@ -1486,7 +1486,7 @@ public class Cm{
 //    /* Then the total solution is soln + this new worker.  So we know the
 //       production exactly, and can shortcut the later code. */
 //    enum cm_stat stat;
-//    const cm_tile_type ptype = tile_type_get(state, check_choice);
+//    final cm_tile_type ptype = tile_type_get(state, check_choice);
 //
 //    memcpy(production, soln.production, sizeof(soln.production));
 //    for (stat = 0; stat < NUM_STATS; stat++) {
@@ -1621,10 +1621,10 @@ public class Cm{
 //
 //  The only fields of the state used are the city and parameter.
 //****************************************************************************/
-//static double estimate_fitness(const cm_state state,
-//			       const int production[NUM_STATS]) {
-//  const city pcity = state.pcity;
-//  const player pplayer = get_player(pcity.owner);
+//static double estimate_fitness(final cm_state state,
+//			       final int production[NUM_STATS]) {
+//  final city pcity = state.pcity;
+//  final player pplayer = get_player(pcity.owner);
 //  enum cm_stat stat;
 //  double estimates[NUM_STATS];
 //  double sum = 0;
@@ -1645,7 +1645,7 @@ public class Cm{
 //  estimates[SCIENCE] *= pcity.science_bonus / 100.0;
 //
 //  /* finally, sum it all up, weighted by the parameter, but give additional
-//   * weight to luxuries to take account of disorder/happy constraints */
+//   * weight to luxuries to take account of disorder/happy finalraints */
 //  for (stat = 0; stat < NUM_STATS; stat++) {
 //    sum += estimates[stat] * state.parameter.factor[stat];
 //  }
@@ -1748,7 +1748,7 @@ public class Cm{
 //  solving anything.
 //****************************************************************************/
 //static void begin_search(cm_state state,
-//			 const cm_parameter parameter)
+//			 final cm_parameter parameter)
 //{
 //#ifdef GATHER_TIME_STATS
 //  start_timer(performance.current.wall_timer);
@@ -1808,7 +1808,7 @@ public class Cm{
 //  Run B&B until we find the best solution.
 //****************************************************************************/
 //void cm_find_best_solution(cm_state state,
-//		      const cm_parameter const parameter,
+//		      final cm_parameter final parameter,
 //		     cm_result result) {
 //#ifdef GATHER_TIME_STATS
 //  performance.current = &performance.opt;
@@ -1832,7 +1832,7 @@ public class Cm{
 //  solution.
 // ***************************************************************************/
 //void cm_query_result(city pcity,
-//		     const cm_parameter param,
+//		     final cm_parameter param,
 //		     cm_result result)
 //{
 //  cm_state state = cm_init_state(pcity);
@@ -1875,8 +1875,8 @@ public class Cm{
 ///**************************************************************************
 //  Returns true if the two cm_parameters are equal.
 //**************************************************************************/
-//boolean cm_are_parameter_equal(const cm_parameter const p1,
-//			    const cm_parameter const p2)
+//boolean cm_are_parameter_equal(final cm_parameter final p1,
+//			    final cm_parameter final p2)
 //{
 //  int i;
 //
@@ -1908,7 +1908,7 @@ public class Cm{
 //  Copy the parameter from the source to the destination field.
 //**************************************************************************/
 //void cm_copy_parameter(cm_parameter dest,
-//		       const cm_parameter const src)
+//		       final cm_parameter final src)
 //{
 //  memcpy(dest, src, sizeof(struct cm_parameter));
 //}
@@ -1953,8 +1953,8 @@ public class Cm{
 ///****************************************************************************
 //  cm_result routines.
 //****************************************************************************/
-//int cm_count_worker(const city  pcity,
-//		    const cm_result result)
+//int cm_count_worker(final city  pcity,
+//		    final cm_result result)
 //{
 //  int count = 0;
 //
@@ -1969,8 +1969,8 @@ public class Cm{
 ///****************************************************************************
 //  Count the total number of specialists in the result.
 //****************************************************************************/
-//int cm_count_specialist(const city pcity,
-//			const cm_result result)
+//int cm_count_specialist(final city pcity,
+//			final cm_result result)
 //{
 //  int count = 0;
 //
@@ -1984,7 +1984,7 @@ public class Cm{
 ///****************************************************************************
 //  Copy the city's current setup into the cm result structure.
 //****************************************************************************/
-//void cm_copy_result_from_city(const city pcity,
+//void cm_copy_result_from_city(final city pcity,
 //			      cm_result result)
 //{
 //  /* copy the map of where workers are */
@@ -2011,7 +2011,7 @@ public class Cm{
 //****************************************************************************/
 //#ifdef CM_DEBUG
 //static void snprint_production(char *buffer, size_t bufsz,
-//			      const int production[NUM_STATS])
+//			      final int production[NUM_STATS])
 //{
 //  int nout;
 //
@@ -2026,7 +2026,7 @@ public class Cm{
 ///****************************************************************************
 //  Print debugging data about a particular tile type.
 //****************************************************************************/
-//static void print_tile_type(int loglevel, const cm_tile_type ptype,
+//static void print_tile_type(int loglevel, final cm_tile_type ptype,
 //			    final String prefix)
 //{
 //  char prodstr[256];
@@ -2041,7 +2041,7 @@ public class Cm{
 //  Print debugging data about a whole B&B lattice.
 //****************************************************************************/
 //static void print_lattice(int loglevel,
-//			  const tile_type_vector lattice)
+//			  final tile_type_vector lattice)
 //{
 //  freelog(loglevel, "lattice has %u terrain types", (unsigned)lattice.size);
 //  tile_type_vector_iterate(lattice, ptype) {
@@ -2053,8 +2053,8 @@ public class Cm{
 //  Print debugging data about a partial CM solution.
 //****************************************************************************/
 //static void print_partial_solution(int loglevel,
-//				   const partial_solution soln,
-//				   const cm_state state)
+//				   final partial_solution soln,
+//				   final cm_state state)
 //{
 //  int i;
 //  int last_type = 0;
@@ -2086,7 +2086,7 @@ public class Cm{
 //
 //  freelog(loglevel, "tiles available:");
 //  for (i = last_type; i < num_types(state); i++) {
-//    const cm_tile_type ptype = tile_type_get(state, i);
+//    final cm_tile_type ptype = tile_type_get(state, i);
 //
 //    if (soln.prereqs_filled[i] == tile_type_num_prereqs(ptype)
 //	&& soln.worker_counts[i] < tile_type_num_tiles(ptype)) {
@@ -2124,7 +2124,7 @@ public class Cm{
 ///****************************************************************************
 //  Print debugging inormation about one city.
 //****************************************************************************/
-//void cm_print_city(const city pcity)
+//void cm_print_city(final city pcity)
 //{
 //  freelog(LOG_NORMAL, "print_city(city='%s'(id=%d))",
 //          pcity.name, pcity.id);
@@ -2156,8 +2156,8 @@ public class Cm{
 ///****************************************************************************
 //  Print debugging inormation about a full CM result.
 //****************************************************************************/
-//void cm_print_result(const city pcity,
-//		     const cm_result result)
+//void cm_print_result(final city pcity,
+//		     final cm_result result)
 //{
 //  int y, i, worker = cm_count_worker(pcity, result);
 //  freelog(LOG_NORMAL, "print_result(result=%p)", result);

@@ -284,7 +284,7 @@ public class Dialogs{
 //*****************************************************************/
 //
 ///* surely this should use genlists??  --dwp */
-//struct widget_list {
+//Speclists<widget> {
 //  GtkWidget *w;
 //  tile tile;
 //  widget_list next;
@@ -329,7 +329,7 @@ public class Dialogs{
 //static void notify_goto_add_widget_tile(GtkWidget *w, tile ptile)
 //{
 //  widget_list newwidget;
-//  newwidget = fc_malloc(sizeof(struct widget_list));
+//  newwidget = fc_malloc(sizeof(Speclists<widget>));
 //  newwidget.w = w;
 //  newwidget.tile = ptile;
 //  newwidget.next = notify_goto_widget_list;
@@ -727,7 +727,7 @@ public class Dialogs{
 //  advance_type[j] = -1;
 //
 //  if (pvictim) { /* you don't want to know what lag can do -- Syela */
-//    const gchar *row[1];
+//    final gchar *row[1];
 //
 //    for(i=A_FIRST; i<game.num_tech_types; i++) {
 //      if(get_invention(pvictim, i)==TECH_KNOWN && 
@@ -1359,7 +1359,7 @@ public class Dialogs{
 //				     void (*close_callback) (gpointer),
 //				     gpointer close_callback_data,
 //				     int num_buttons,
-//				     const button_descr buttons)
+//				     final button_descr buttons)
 //{
 //  GtkWidget *dshell, *dlabel, *vbox;
 //  GtkAccelGroup *accel = gtk_accel_group_new();
@@ -1585,7 +1585,7 @@ public class Dialogs{
 //
 //    unit_select_commands[i]=gtk_button_new();
 //    gtk_widget_set_sensitive(unit_select_commands[i],
-//       can_unit_do_activity(punit, ACTIVITY_IDLE) );
+//       can_unit_do_activity(punit, unit_activity.ACTIVITY_IDLE) );
 //    gtk_widget_set_usize(unit_select_commands[i],
 //			 UNIT_TILE_WIDTH+4, UNIT_TILE_HEIGHT+4);
 //    gtk_container_add(GTK_CONTAINER(unit_select_commands[i]), pix);
@@ -1700,7 +1700,7 @@ public class Dialogs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//static gint cmp_func(gconstpointer a_p, gconstpointer b_p)
+//static gint cmp_func(gfinalpointer a_p, gfinalpointer b_p)
 //{
 //  return strcmp(get_nation_name(GPOINTER_TO_INT(a_p)),
 //		get_nation_name(GPOINTER_TO_INT(b_p)));

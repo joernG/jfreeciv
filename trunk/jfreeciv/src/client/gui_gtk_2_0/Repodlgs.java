@@ -362,9 +362,9 @@ public class Repodlgs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//static gint cmp_func(gconstpointer a_p, gconstpointer b_p)
+//static gint cmp_func(gfinalpointer a_p, gfinalpointer b_p)
 //{
-//  const gchar *a_str, *b_str;
+//  final gchar *a_str, *b_str;
 //  gchar text_a[512], text_b[512];
 //  gint a = GPOINTER_TO_INT(a_p), b = GPOINTER_TO_INT(b_p);
 //
@@ -487,7 +487,7 @@ public class Repodlgs{
 //  /* sort the list and build from it the menu */
 //  sorting_list = g_list_sort(sorting_list, cmp_func);
 //  for (i = 0; i < g_list_length(sorting_list); i++) {
-//    const gchar *data;
+//    final gchar *data;
 //
 //    if (GPOINTER_TO_INT(g_list_nth_data(sorting_list, i)) <
 //	game.num_tech_types) {
@@ -1078,13 +1078,13 @@ public class Repodlgs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//static unit find_nearest_unit(Unit_Type_id type, tile ptile)
+//static unit find_nearest_unit(int type, tile ptile)
 //{
 //  unit best_candidate;
 //  int best_dist = 99999;
 //
 //  best_candidate = null;
-//  unit_list_iterate(game.player_ptr.units, punit) {
+//  for (unit punit : game.player_ptr.units.data) {
 //    if (punit.type == type) {
 //      if (punit.focus_status==FOCUS_AVAIL
 //	  && punit.moves_left > 0
@@ -1099,7 +1099,7 @@ public class Repodlgs{
 //      }
 //    }
 //  }
-//  unit_list_iterate_end;
+//  }
 //  return best_candidate;
 //}
 //
@@ -1139,9 +1139,9 @@ public class Repodlgs{
 //    if ((punit = find_nearest_unit(ut1, ptile))) {
 //      center_tile_mapcanvas(punit.tile);
 //
-//      if (punit.activity == ACTIVITY_IDLE
+//      if (punit.activity == unit_activity.ACTIVITY_IDLE
 //	  || punit.activity == ACTIVITY_SENTRY) {
-//	if (can_unit_do_activity(punit, ACTIVITY_IDLE)) {
+//	if (can_unit_do_activity(punit, unit_activity.ACTIVITY_IDLE)) {
 //	  set_unit_focus_and_select(punit);
 //	}
 //      }
@@ -1198,7 +1198,7 @@ public class Repodlgs{
 //    gtk_list_store_clear(activeunits_store);
 //
 //    memset(unitarray, '\0', sizeof(unitarray));
-//    unit_list_iterate(game.player_ptr.units, punit) {
+//    for (unit punit : game.player_ptr.units.data) {
 //      (unitarray[punit.type].active_count)++;
 //      if (punit.homecity) {
 //	unitarray[punit.type].upkeep_shield += punit.upkeep;
@@ -1206,13 +1206,13 @@ public class Repodlgs{
 //	unitarray[punit.type].upkeep_gold += punit.upkeep_gold;
 //      }
 //    }
-//    unit_list_iterate_end;
+//    }
 //    city_list_iterate(game.player_ptr.cities,pcity) {
 //      if (pcity.is_building_unit &&
 //	  (unit_type_exists (pcity.currently_building)))
 //	(unitarray[pcity.currently_building].building_count)++;
 //    }
-//    city_list_iterate_end;
+//    }
 //
 //    k = 0;
 //    memset(&unittotals, '\0', sizeof(unittotals));

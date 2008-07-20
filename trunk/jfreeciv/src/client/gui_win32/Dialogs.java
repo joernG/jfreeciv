@@ -430,7 +430,7 @@ public class Dialogs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//static int cmp_func(const void * a_p, const void * b_p)
+//static int cmp_func(final void * a_p, final void * b_p)
 //{
 //  return strcmp(get_nation_name((*(int *)a_p)-ID_RACESDLG_NATION_BASE),
 //                get_nation_name((*(int *)b_p)-ID_RACESDLG_NATION_BASE));

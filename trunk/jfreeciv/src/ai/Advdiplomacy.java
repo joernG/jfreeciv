@@ -90,7 +90,7 @@ public class Advdiplomacy{
 //{
 //  if (diplomacy_verbose) {
 //    va_list ap;
-//    conn_list dest = (struct conn_list*)&pplayer.connections;
+//    Speclists<Connection> dest = (Speclists<conn>*)&pplayer.connections;
 //
 //    va_start(ap, text);
 //    vnotify_conn_ex(dest, null, E_DIPLOMACY, text, ap);
@@ -150,7 +150,7 @@ public class Advdiplomacy{
 //    if (gives_shared_vision(aplayer, eplayer)) {
 //      enum diplstate_type ds = pplayer_get_diplstate(pplayer, eplayer).type;
 //
-//      if (ds != DS_NO_CONTACT && ds != DS_ALLIANCE) {
+//      if (ds != diplstate_type.DS_NO_CONTACT && ds != DS_ALLIANCE) {
 //        return false;
 //      }
 //    }
@@ -484,7 +484,7 @@ public class Advdiplomacy{
 //  assert(!is_barbarian(pplayer));
 //
 //  /* Evaluate clauses */
-//  clause_list_iterate(ptreaty.clauses, pclause) {
+//  for (clause pclause : ptreaty.clauses.data) {
 //    total_balance += ai_goldequiv_clause(pplayer, aplayer, pclause, ai, true);
 //    if (is_pact_clause(pclause.type)) {
 //      has_treaty = true;
@@ -504,7 +504,7 @@ public class Advdiplomacy{
 //       * against us, unless we know that we want this tech anyway. */
 //      only_gifts = false;
 //    }
-//  } clause_list_iterate_end;
+//  } }
 //
 //  /* If we are at war, and no peace is offered, then no deal, unless
 //   * it is just gifts, in which case we gratefully accept. */
@@ -574,7 +574,7 @@ public class Advdiplomacy{
 //  ai_data ai = ai_data_get(pplayer);
 //
 //  /* Evaluate clauses */
-//  clause_list_iterate(ptreaty.clauses, pclause) {
+//  for (clause pclause : ptreaty.clauses.data) {
 //    int balance = ai_goldequiv_clause(pplayer, aplayer, pclause, ai, true);
 //    total_balance += balance;
 //    gift = (gift && (balance >= 0));
@@ -582,7 +582,7 @@ public class Advdiplomacy{
 //    if (pclause.type == CLAUSE_ALLIANCE && ai.diplomacy.target == aplayer) {
 //      ai.diplomacy.target = null; /* Oooops... */
 //    }
-//  } clause_list_iterate_end;
+//  } }
 //
 //  /* Rather arbitrary algorithm to increase our love for a player if
 //   * he or she offers us gifts. It is only a gift if _all_ the clauses
@@ -613,22 +613,22 @@ public class Advdiplomacy{
 //  /* Count settlers in production for us, indicating our expansionism,
 //   * while counting all enemy settlers as (worst case) indicators of
 //   * enemy expansionism */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    if (pcity.is_building_unit 
 //        && unit_type_flag(pcity.currently_building, F_CITIES)) {
 //      kill_desire -= 1;
 //    }
-//  } city_list_iterate_end;
-//  unit_list_iterate(aplayer.units, punit) { 
+//  } }
+//  for (unit punit : aplayer.units.data) { 
 //    if (unit_flag(punit, F_CITIES)) {
 //      kill_desire += 1;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* Count big cities as twice the threat */
-//  city_list_iterate(aplayer.cities, pcity) {
+//  for (city pcity : aplayer.cities.data) {
 //    kill_desire += pcity.size > 8 ? 1 : 0;
-//  } city_list_iterate_end;
+//  } }
 //
 //  /* Tech lead is worrisome */
 //  kill_desire += MAX(aplayer.research.techs_researched -
@@ -741,7 +741,7 @@ public class Advdiplomacy{
 //      pplayer.ai.love[aplayer.player_no] += ai.diplomacy.love_incr;
 //      PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Increased love for %s (now %d)",
 //                 aplayer.name, pplayer.ai.love[aplayer.player_no]);
-//    } else if (pplayer.diplstates[aplayer.player_no].type == DS_WAR) {
+//    } else if (pplayer.diplstates[aplayer.player_no].type == diplstate_type.DS_WAR) {
 //      pplayer.ai.love[aplayer.player_no] -= ai.diplomacy.love_incr;
 //      if (ai.diplomacy.target != aplayer && 
 //          pplayer.ai.love[aplayer.player_no] < 0) {
@@ -831,7 +831,7 @@ public class Advdiplomacy{
 //     */
 //    if (aplayer == pplayer
 //        || !aplayer.is_alive
-//        || ds == DS_NO_CONTACT
+//        || ds == diplstate_type.DS_NO_CONTACT
 //        || players_on_same_team(pplayer, aplayer)
 //        || (pplayer != ai.diplomacy.alliance_leader && 
 //	    aplayer != ai.diplomacy.alliance_leader &&
@@ -1012,7 +1012,7 @@ public class Advdiplomacy{
 //        adip.warned_about_space = 10 + myrand(6);
 //        notify(aplayer, _("*%s (AI)* Your attempt to unilaterally "
 //               "dominate outer space is highly offensive."), pplayer.name);
-//        notify(aplayer, _("*%s (AI)* If you do not stop constructing your "
+//        notify(aplayer, _("*%s (AI)* If you do not stop finalructing your "
 //               "spaceship, I may be forced to take action!"), pplayer.name);
 //      }
 //      if (aplayer.spaceship.state == SSHIP_LAUNCHED
@@ -1211,8 +1211,8 @@ public class Advdiplomacy{
 //             "a joint campaign against %s?"), pplayer.name, target.name);
 //      break;
 //
-//    case DS_NO_CONTACT: /* but we do have embassy! weird. */
-//    case DS_WAR:
+//    case diplstate_type.DS_NO_CONTACT: /* but we do have embassy! weird. */
+//    case diplstate_type.DS_WAR:
 //      clause.type = CLAUSE_CEASEFIRE;
 //      if (ai_goldequiv_clause(pplayer, aplayer, &clause, ai, false) < 0
 //          || (adip.asked_about_ceasefire > 0 && !aplayer.ai.control)

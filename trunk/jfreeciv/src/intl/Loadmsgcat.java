@@ -137,14 +137,14 @@ public class Loadmsgcat{
 //#if (defined __GNUC__ && !defined __APPLE_CC__) \
 //    || (defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L)
 //
-///* These structs are the constant expression for the germanic plural
+///* These structs are the finalant expression for the germanic plural
 //   form determination.  It represents the expression  "n != 1".  */
-//static const struct expression plvar =
+//static final struct expression plvar =
 //{
 //  .nargs = 0,
 //  .operation = var,
 //};
-//static const struct expression plone =
+//static final struct expression plone =
 //{
 //  .nargs = 0,
 //  .operation = num,

@@ -41,7 +41,7 @@ public class Audio_sdl{
 ///**************************************************************************
 //  Play sound
 //**************************************************************************/
-//static boolean my_play(final String const tag, final String const fullpath,
+//static boolean my_play(final String final tag, final String final fullpath,
 //		    boolean repeat)
 //{
 //  int i, j;
@@ -188,9 +188,9 @@ public class Audio_sdl{
 //static boolean my_init()
 //{
 //  /* Initialize variables */
-//  const int audio_rate = MIX_DEFAULT_FREQUENCY;
-//  const int audio_format = MIX_DEFAULT_FORMAT;
-//  const int audio_channels = 2;
+//  final int audio_rate = MIX_DEFAULT_FREQUENCY;
+//  final int audio_format = MIX_DEFAULT_FORMAT;
+//  final int audio_channels = 2;
 //  int i;
 //
 //  if (init_sdl_audio() < 0) {

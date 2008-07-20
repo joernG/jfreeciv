@@ -70,7 +70,7 @@ public class Spaceshipdlg{
 //    TYPED_LIST_ITERATE(struct spaceship_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 //
 //static spaceship_dialog get_spaceship_dialog(player pplayer);
@@ -94,11 +94,11 @@ public class Spaceshipdlg{
 //    dialog_list_has_been_initialised=true;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pplayer == pplayer) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -362,12 +362,12 @@ public class Spaceshipdlg{
 //*****************************************************************/
 //void close_spaceship_dialog_action(GtkWidget * w, gpointer data)
 //{
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.shell == w) {
 //      close_spaceship_dialog(pdialog);
 //      return;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //}
 //
 //

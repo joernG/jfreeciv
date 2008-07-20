@@ -37,7 +37,7 @@ public class Unistring{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//size_t unistrlen(const Uint16 *pUniString)
+//size_t unistrlen(final Uint16 *pUniString)
 //{
 //  size_t ret = 0;
 //  if (pUniString) {
@@ -52,7 +52,7 @@ public class Unistring{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//Uint16 *unistrcpy(Uint16 *pToUniString, const Uint16 *pFromUniString)
+//Uint16 *unistrcpy(Uint16 *pToUniString, final Uint16 *pFromUniString)
 //{
 //  size_t size = (unipFromUniString.length() + 1) << 1;
 //  if (!pToUniString) {
@@ -65,7 +65,7 @@ public class Unistring{
 //  ...
 //**************************************************************************/
 //Uint16 *unistrcat(Uint16 *pToUniString,
-//		  const Uint16 *pFromUniString)
+//		  final Uint16 *pFromUniString)
 //{
 //  size_t src_size = (unipFromUniString.length() + 1) << 1;
 //  size_t dst_size = unipToUniString.length() << 1;
@@ -77,7 +77,7 @@ public class Unistring{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//Uint16 *unistrdup(const Uint16 *pUniString)
+//Uint16 *unistrdup(final Uint16 *pUniString)
 //{
 //  size_t size = (unipUniString.length() + 1) << 1;
 //  Uint16 *pNewUniString = MALLOC(size);
@@ -87,7 +87,7 @@ public class Unistring{
 ///**************************************************************************
 //  Don't free return array, only arrays members
 //**************************************************************************/
-//Uint16 ** create_new_line_unistrings(const Uint16 *pUnistring)
+//Uint16 ** create_new_line_unistrings(final Uint16 *pUnistring)
 //{
 //  static Uint16 *pBuf[32];
 //  Uint16 *pFromUnistring = (Uint16 *)pUnistring;

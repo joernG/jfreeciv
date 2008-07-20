@@ -68,7 +68,7 @@ public class Citydlg{
 //#include "transparentstringclass.h"
 //#include "worklistclass.h"
 //
-///* get 'struct dialog_list' and related functions: */
+///* get 'Speclists<dialog>' and related functions: */
 //#define SPECLIST_TAG dialog
 //#define SPECLIST_TYPE struct city_dialog
 //#include "speclist.h"
@@ -133,7 +133,7 @@ public class Citydlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static final String const get_prod_complete_string(city pcity,
+//static final String final get_prod_complete_string(city pcity,
 //						  int surplus)
 //{
 //  int stock, cost, turns;
@@ -834,7 +834,7 @@ public class Citydlg{
 //	&& is_unit == pdialog.pcity.is_building_unit;
 //
 //    /* Very special case: If we are currently building a wonder we
-//       allow the construction to continue, even if we the wonder is
+//       allow the finalruction to continue, even if we the wonder is
 //       finished elsewhere, ie unbuildable. */
 //    if (k == 0 && !is_unit && is_wonder(id) && same_as_current_build) {
 //      worklist_remove(pwl, k);
@@ -2328,13 +2328,13 @@ public class Citydlg{
 //  if (pdialog)
 //  {
 //    genlist_unlink(&dialog_list, pdialog);
-//    unit_list_iterate(pdialog.pcity.info_units_supported, psunit) {
+//    for (unit psunit : pdialog.pcity.info_units_supported.data) {
 //      free(psunit);
-//    } unit_list_iterate_end;
+//    } }
 //    unit_list_unlink_all(&(pdialog.pcity.info_units_supported));
-//    unit_list_iterate(pdialog.pcity.info_units_present, psunit) {
+//    for (unit psunit : pdialog.pcity.info_units_present.data) {
 //      free(psunit);
-//    } unit_list_iterate_end;
+//    } }
 //    unit_list_unlink_all(&(pdialog.pcity.info_units_present));
 //    set(pdialog.wnd, MUIA_Window_Open, false);
 //    if (pdialog.sell_wnd)

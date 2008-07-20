@@ -47,16 +47,16 @@ public class Aihunt{
 //static unit ai_hunter_find(player pplayer, 
 //                                   city pcity)
 //{
-//  unit_list_iterate(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    if (ai_hunter_qualify(pplayer, punit)) {
 //      return punit;
 //    }
-//  } unit_list_iterate_end;
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  } }
+//  for (unit punit : pcity.tile.units.data) {
 //    if (ai_hunter_qualify(pplayer, punit)) {
 //      return punit;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -64,10 +64,10 @@ public class Aihunt{
 ///**************************************************************************
 //  Guess best hunter unit type.
 //**************************************************************************/
-//static Unit_Type_id ai_hunter_guess_best(city pcity,
+//static int ai_hunter_guess_best(city pcity,
 //                                         enum unit_move_type umt)
 //{
-//  Unit_Type_id bestid = -1;
+//  int bestid = -1;
 //  int best = 0;
 //
 //  unit_type_iterate(i) {
@@ -127,7 +127,7 @@ public class Aihunt{
 //  int best = -1, best_unit_type = -1;
 //  boolean have_hunter = false;
 //
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    if (ai_hunter_qualify(pplayer, punit)
 //        && (unit_flag(punit, F_MISSILE_CARRIER)
 //            || unit_flag(punit, F_CARRIER))) {
@@ -136,7 +136,7 @@ public class Aihunt{
 //      have_hunter = true;
 //      break;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  if (!have_hunter) {
 //    return;
@@ -273,7 +273,7 @@ public class Aihunt{
 //      continue;
 //    }
 //    /* Note that we need not (yet) be at war with aplayer */
-//    unit_list_iterate(aplayer.units, target) {
+//    for (unit target : aplayer.units.data) {
 //      tile ptile = target.tile;
 //      int dist1, dist2, stackthreat = 0, stackcost = 0;
 //      unit defender;
@@ -312,13 +312,13 @@ public class Aihunt{
 //                 TILE_XY(target.tile));
 //        continue;
 //      }
-//      unit_list_iterate(ptile.units, sucker) {
+//      for (unit sucker : ptile.units.data) {
 //        stackthreat += ATTACK_POWER(sucker);
 //        if (unit_flag(sucker, F_DIPLOMAT)) {
 //          stackthreat += 500;
 //        }
 //        stackcost += unit_type(sucker).build_cost;
-//      } unit_list_iterate_end;
+//      } }
 //      defender = get_defender(punit, target.tile);
 //      if (stackcost < unit_type(punit).build_cost
 //          && unit_win_chance(punit, defender) < 0.6) {
@@ -342,7 +342,7 @@ public class Aihunt{
 //        best_val = stackthreat;
 //        best_id = target.id;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  punit.ai.target = best_id;
@@ -369,7 +369,7 @@ public class Aihunt{
 //  struct pf_parameter parameter;
 //  pf_map map;
 //
-//  unit_list_iterate(punit.tile.units, missile) {
+//  for (unit missile : punit.tile.units.data) {
 //    unit sucker = null;
 //
 //    if (missile.owner == pplayer.player_no
@@ -386,12 +386,12 @@ public class Aihunt{
 //            || !can_unit_attack_tile(punit, pos.tile)) {
 //          continue;
 //        }
-//        unit_list_iterate(pos.tile.units, victim) {
+//        for (unit victim : pos.tile.units.data) {
 //          unit_type ut = unit_type(victim);
 //          enum diplstate_type ds = pplayer_get_diplstate(pplayer, 
 //                                                         unit_owner(victim)).type;
 //
-//          if (ds != DS_WAR) {
+//          if (ds != diplstate_type.DS_WAR) {
 //            continue;
 //          }
 //          if (victim == target) {
@@ -411,7 +411,7 @@ public class Aihunt{
 //                     victim.id, TILE_XY(victim.tile));
 //            break;
 //          }
-//        } unit_list_iterate_end;
+//        } }
 //        if (sucker) {
 //          break; /* found something - kill it! */
 //        }
@@ -430,7 +430,7 @@ public class Aihunt{
 //        break; /* try next missile, if any */
 //      }
 //    } /* if */
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************

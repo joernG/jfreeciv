@@ -1170,7 +1170,7 @@ public class Citydlg{
 //        && is_unit == pdialog.pcity.is_building_unit;
 //
 //    /* Very special case: If we are currently building a wonder we
-//       allow the construction to continue, even if we the wonder is
+//       allow the finalruction to continue, even if we the wonder is
 //       finished elsewhere, ie unbuildable. */
 //    if (k == 0 && !is_unit && is_wonder(id) && same_as_current_build) {
 //      worklist_remove(pwl, k);

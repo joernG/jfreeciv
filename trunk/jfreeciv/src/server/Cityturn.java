@@ -72,7 +72,7 @@ public class Cityturn{
 //static boolean city_build_stuff(player pplayer, city pcity);
 //static Impr_Type_id building_upgrades_to(city pcity, Impr_Type_id b);
 //static void upgrade_building_prod(city pcity);
-//static Unit_Type_id unit_upgrades_to(city pcity, Unit_Type_id id);
+//static int unit_upgrades_to(city pcity, int id);
 //static void upgrade_unit_prod(city pcity);
 //static void pay_for_buildings(player pplayer, city pcity);
 //
@@ -104,7 +104,7 @@ public class Cityturn{
 //  city_list_iterate(pplayer.cities, pcity)
 //    city_refresh(pcity);
 //    send_city_info(pplayer, pcity);
-//  city_list_iterate_end;
+//  }
 //  conn_list_do_unbuffer(&pplayer.connections);
 //}
 //
@@ -139,9 +139,9 @@ public class Cityturn{
 //**************************************************************************/
 //void remove_obsolete_buildings(player pplayer)
 //{
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    remove_obsolete_buildings_city(pcity, false);
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -306,13 +306,13 @@ public class Cityturn{
 ///**************************************************************************
 //Notices about cities that should be sent to all players.
 //**************************************************************************/
-//void send_global_city_turn_notifications(conn_list dest)
+//void send_global_city_turn_notifications(Speclists<Connection> dest)
 //{
 //  if (!dest)
 //    dest = &game.all_connections;
 //
 //  players_iterate(pplayer) {
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      /* can_player_build_improvement() checks whether wonder is build
 //	 elsewhere (or destroyed) */
 //      if (!pcity.is_building_unit && is_wonder(pcity.currently_building)
@@ -326,7 +326,7 @@ public class Cityturn{
 //		       get_improvement_name(pcity.currently_building),
 //		       pcity.name);
 //      }
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //}
 //
@@ -334,7 +334,7 @@ public class Cityturn{
 //  Send turn notifications for specified city to specified connections.
 //  Neither dest nor pcity may be null.
 //**************************************************************************/
-//void send_city_turn_notifications(conn_list dest, city pcity)
+//void send_city_turn_notifications(Speclists<Connection> dest, city pcity)
 //{
 //  int turns_growth, turns_granary;
 //  boolean can_grow;
@@ -344,7 +344,7 @@ public class Cityturn{
 //		   / pcity.food_surplus;
 //
 //    if (get_city_bonus(pcity, EFT_GROWTH_FOOD) == 0
-//	&& get_current_construction_bonus(pcity, EFT_GROWTH_FOOD) > 0
+//	&& get_current_finalruction_bonus(pcity, EFT_GROWTH_FOOD) > 0
 //	&& pcity.shield_surplus > 0) {
 //      turns_granary = (impr_build_shield_cost(pcity.currently_building)
 //		       - pcity.shield_stock) / pcity.shield_surplus;
@@ -390,7 +390,7 @@ public class Cityturn{
 //  pplayer.research.bulbs_last_turn = 0;
 //  city_list_iterate(pplayer.cities, pcity)
 //     update_city_activity(pplayer, pcity);
-//  city_list_iterate_end;
+//  }
 //  pplayer.ai.prev_gold = gold;
 //  /* This test include the cost of the units because pay_for_units is called
 //   * in update_city_activity */
@@ -466,7 +466,7 @@ public class Cityturn{
 //  Normally this value is 0% but this can be increased by EFT_GROWTH_FOOD
 //  effects.
 //**************************************************************************/
-//static int granary_savings(const city pcity)
+//static int granary_savings(final city pcity)
 //{
 //  int savings = get_city_bonus(pcity, EFT_GROWTH_FOOD);
 //
@@ -484,8 +484,8 @@ public class Cityturn{
 //  boolean rapture_grow = city_rapture_grow(pcity); /* check before size increase! */
 //
 //  if (!city_can_grow_to(pcity, pcity.size + 1)) { /* need improvement */
-//    if (get_current_construction_bonus(pcity, EFT_SIZE_ADJ) > 0
-//        || get_current_construction_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
+//    if (get_current_finalruction_bonus(pcity, EFT_SIZE_ADJ) > 0
+//        || get_current_finalruction_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
 //      notify_player_ex(powner, pcity.tile, E_CITY_AQ_BUILDING,
 //		       _("Game: %s needs %s (being built) "
 //			 "to grow any further."), pcity.name,
@@ -564,7 +564,7 @@ public class Cityturn{
 //     * you want to disband a unit that is draining your food
 //     * reserves.  Hence, I'll assume food upkeep > 0 units. -- jjm
 //     */
-//    unit_list_iterate_safe(pcity.units_supported, punit) {
+//    for (unit punit : pcity.units_supported.data) {
 //      if (unit_type(punit).food_cost > 0 
 //          && !unit_flag(punit, F_UNDISBANDABLE)) {
 //
@@ -579,7 +579,7 @@ public class Cityturn{
 //			     * granary_savings(pcity)) / 100;
 //	return;
 //      }
-//    } unit_list_iterate_safe_end;
+//    }
 //    notify_player_ex(city_owner(pcity), pcity.tile, E_CITY_FAMINE,
 //		     "Game: Famine causes population loss in %s.",
 //		     pcity.name);
@@ -815,9 +815,9 @@ public class Cityturn{
 //  id doesn't guarantee that pcity really _can_ build id; just that
 //  pcity can't build whatever _obsoletes_ id.
 //**************************************************************************/
-//static Unit_Type_id unit_upgrades_to(city pcity, Unit_Type_id id)
+//static int unit_upgrades_to(city pcity, int id)
 //{
-//  Unit_Type_id check = id, latest_ok = id;
+//  int check = id, latest_ok = id;
 //
 //  if (!can_build_unit_direct(pcity, check)) {
 //    return -1;
@@ -863,7 +863,7 @@ public class Cityturn{
 //  government g = get_gov_pplayer(pplayer);
 //
 //  if (pcity.shield_surplus < 0) {
-//    unit_list_iterate_safe(pcity.units_supported, punit) {
+//    for (unit punit : pcity.units_supported.data) {
 //      if (utype_shield_cost(unit_type(punit), g) > 0
 //	  && pcity.shield_surplus < 0
 //          && !unit_flag(punit, F_UNDISBANDABLE)) {
@@ -873,7 +873,7 @@ public class Cityturn{
 //        handle_unit_disband(pplayer, punit.id);
 //	/* pcity.shield_surplus is automatically updated. */
 //      }
-//    } unit_list_iterate_safe_end;
+//    }
 //  }
 //
 //  if (pcity.shield_surplus < 0) {
@@ -881,7 +881,7 @@ public class Cityturn{
 //     * It'd rather make the citizens pay in blood for their failure to upkeep
 //     * it! If we make it here all normal units are already disbanded, so only
 //     * undisbandable ones remain. */
-//    unit_list_iterate_safe(pcity.units_supported, punit) {
+//    for (unit punit : pcity.units_supported.data) {
 //      int upkeep = utype_shield_cost(unit_type(punit), g);
 //
 //      if (upkeep > 0 && pcity.shield_surplus < 0) {
@@ -896,7 +896,7 @@ public class Cityturn{
 //	/* No upkeep for the unit this turn. */
 //	pcity.shield_surplus += upkeep;
 //      }
-//    } unit_list_iterate_safe_end;
+//    }
 //  }
 //
 //  /* Now we confirm changes made last turn. */
@@ -915,7 +915,7 @@ public class Cityturn{
 //  boolean space_part;
 //  int mod;
 //
-//  if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //    assert(pcity.shield_surplus >= 0);
 //    /* pcity.before_change_shields already contains the surplus from
 //     * this turn. */
@@ -936,20 +936,20 @@ public class Cityturn{
 //  if (pcity.shield_stock
 //      >= impr_build_shield_cost(pcity.currently_building)) {
 //    if (pcity.currently_building == game.palace_building) {
-//      city_list_iterate(pplayer.cities, palace) {
+//      for (city palace : pplayer.cities.data) {
 //	if (city_got_building(palace, game.palace_building)) {
 //	  city_remove_improvement(palace, game.palace_building);
 //	  break;
 //	}
-//      } city_list_iterate_end;
+//      } }
 //    }
 //
 //    space_part = true;
-//    if (get_current_construction_bonus(pcity, EFT_SS_STRUCTURAL) > 0) {
+//    if (get_current_finalruction_bonus(pcity, EFT_SS_STRUCTURAL) > 0) {
 //      pplayer.spaceship.structurals++;
-//    } else if (get_current_construction_bonus(pcity, EFT_SS_COMPONENT) > 0) {
+//    } else if (get_current_finalruction_bonus(pcity, EFT_SS_COMPONENT) > 0) {
 //      pplayer.spaceship.components++;
-//    } else if (get_current_construction_bonus(pcity, EFT_SS_MODULE) > 0) {
+//    } else if (get_current_finalruction_bonus(pcity, EFT_SS_MODULE) > 0) {
 //      pplayer.spaceship.modules++;
 //    } else {
 //      space_part = false;
@@ -978,7 +978,7 @@ public class Cityturn{
 //		     improvement_types[pcity.currently_building].name);
 //
 //
-//    if ((mod = get_current_construction_bonus(pcity, EFT_GIVE_IMM_TECH))) {
+//    if ((mod = get_current_finalruction_bonus(pcity, EFT_GIVE_IMM_TECH))) {
 //      int i;
 //
 //      notify_player(pplayer, PL_("Game: %s boosts research; "
@@ -1209,10 +1209,10 @@ public class Cityturn{
 //  /* Gold factor */
 //  cost = city_owner(pcity).economic.gold + 1000;
 //
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    cost += (unit_build_shield_cost(punit.type)
 //	     * game.incite_cost.unit_factor);
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* Buildings */
 //  built_impr_iterate(pcity, i) {

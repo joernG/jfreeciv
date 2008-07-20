@@ -23,7 +23,7 @@ public class Resources{
 //Fallback resources
 //**************************************************************************/
 ///*
-//const gchar *fallback_resources =
+//final gchar *fallback_resources =
 //#include <Freeciv.h>
 //;
 //*/

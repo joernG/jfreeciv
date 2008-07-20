@@ -129,7 +129,7 @@ public class Gui_stuff{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//GtkWidget *gtk_accelbutton_new(const gchar *label, GtkAccelGroup *accel)
+//GtkWidget *gtk_accelbutton_new(final gchar *label, GtkAccelGroup *accel)
 //{
 //  GtkWidget *button;
 //  GtkWidget *accel_label;

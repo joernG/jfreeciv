@@ -52,7 +52,7 @@ public class Be_x11_ximage{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void be_init(const ct_size screen_size, boolean fullscreen)
+//void be_init(final ct_size screen_size, boolean fullscreen)
 //{
 //  XGCValues values;
 //
@@ -317,7 +317,7 @@ public class Be_x11_ximage{
 //  ...
 //*************************************************************************/
 //static void fill_ximage_from_image_565(XImage * ximage,
-//				       const image image)
+//				       final image image)
 //{
 //  int x, y;
 //  unsigned short *pdest = (unsigned short *) ximage.data;
@@ -343,7 +343,7 @@ public class Be_x11_ximage{
 //#define COMP_555_GREEN(x)	((((x)>>3)&0x1f)<< 5)
 //#define COMP_555_BLUE(x)	((((x)>>3)&0x1f)<< 0)
 //static void fill_ximage_from_image_555(XImage * ximage,
-//				       const image image)
+//				       final image image)
 //{
 //  int x, y;
 //  unsigned short *pdest = (unsigned short *) ximage.data;
@@ -366,7 +366,7 @@ public class Be_x11_ximage{
 //  ...
 //*************************************************************************/
 //static void fill_ximage_from_image_8888(XImage * ximage,
-//					const image image)
+//					final image image)
 //{
 //  int x, y;
 //  unsigned char *pdest = (unsigned char *) ximage.data;

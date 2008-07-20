@@ -410,7 +410,7 @@ public class Helpdlg{
 //  if (buffer[0] != '\0')
 //  {
 //    SDL_String16 *pStr = create_str16_from_char(buffer, 12);
-//    convert_string_to_const_surface_width(pStr,	640 - start_x - 20);
+//    convert_string_to_final_surface_width(pStr,	640 - start_x - 20);
 //    pBuf = create_iconlabel(null, pWindow.dst, pStr, 0);
 //    pBuf.ID = ID_LABEL;
 //    DownAdd(pBuf, pDock);
@@ -537,7 +537,7 @@ public class Helpdlg{
 //}
 //
 //
-//void popup_unit_info(Unit_Type_id type_id)
+//void popup_unit_info(int type_id)
 //{ 
 //  GUI pBuf;
 //  GUI pDock;
@@ -800,7 +800,7 @@ public class Helpdlg{
 //  if (buffer[0] != '\0')
 //  {
 //    SDL_String16 *pStr = create_str16_from_char(buffer, 12);
-//    convert_string_to_const_surface_width(pStr,	640 - start_x - 20);
+//    convert_string_to_final_surface_width(pStr,	640 - start_x - 20);
 //    pBuf = create_iconlabel(null, pWindow.dst, pStr, 0);
 //    pBuf.ID = ID_LABEL;
 //    DownAdd(pBuf, pDock);
@@ -1128,7 +1128,7 @@ public class Helpdlg{
 //  if (buffer[0] != '\0')
 //  {
 //    SDL_String16 *pStr = create_str16_from_char(buffer, 12);
-//    convert_string_to_const_surface_width(pStr,	640 - start_x - 20);
+//    convert_string_to_final_surface_width(pStr,	640 - start_x - 20);
 //    pBuf = create_iconlabel(null, pWindow.dst, pStr, 0);
 //    pBuf.ID = ID_LABEL;
 //    DownAdd(pBuf, pDock);

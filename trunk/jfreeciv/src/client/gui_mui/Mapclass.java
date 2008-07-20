@@ -361,7 +361,7 @@ public class Mapclass{
 //  ULONG id;
 //};
 //
-//struct Command_List
+//Speclists<Command>
 //{
 //  struct MinList list;
 //  APTR pool;
@@ -1656,7 +1656,7 @@ public class Mapclass{
 //	  {
 //	    if (punit && punit.owner == game.player_idx)
 //	    {
-//	      struct Command_List list;
+//	      Speclists<Command> list;
 //	      NewList((List ) &list);
 //	      if ((list.pool = CreatePool(0, 1024, 1024)))
 //	      {
@@ -1765,7 +1765,7 @@ public class Mapclass{
 //		Map_MakeContextBarlabel(menu_title);
 //	      }
 //
-//	      if (can_unit_do_connect(focus, ACTIVITY_IDLE))
+//	      if (can_unit_do_connect(focus, unit_activity.ACTIVITY_IDLE))
 //	      {
 //		Map_MakeContextItem(menu_title, "Connect to this location", PACK_USERDATA(focus, UNIT_CONNECT_TO));
 //	      }

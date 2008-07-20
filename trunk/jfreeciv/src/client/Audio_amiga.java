@@ -81,7 +81,7 @@ public class Audio_amiga{
 ///**************************************************************************
 //  Play sound sample
 //**************************************************************************/
-//static boolean my_play(final String const tag, final String const fullpath, boolean repeat)
+//static boolean my_play(final String final tag, final String final fullpath, boolean repeat)
 //{
 //  Object  *CurrentSample  = null;
 //  ULONG time, dummy;

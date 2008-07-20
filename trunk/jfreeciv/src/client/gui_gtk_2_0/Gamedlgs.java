@@ -388,7 +388,7 @@ public class Gamedlgs{
 //      break;
 //    case COT_STR:
 //      if (o.p_string_vals) {
-//	const char* new_value = gtk_entry_get_text(GTK_ENTRY
+//	final char* new_value = gtk_entry_get_text(GTK_ENTRY
 //					(GTK_COMBO(o.p_gui_data).entry));
 //	if (strcmp(o.p_string_value, new_value)) {
 //	  mystrlcpy(o.p_string_value, new_value, o.string_length);

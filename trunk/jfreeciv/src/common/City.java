@@ -1,27 +1,11 @@
 package common;
 
-public class City{
+import static utility.shared.Shared_H.*;
+import static common.Game.*;
+import common.city.city;
+import common.player.player;
 
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <stdlib.h>
-//#include <string.h>
-//
+public class City{
 //#include "distribute.h"
 //#include "fcintl.h"
 //#include "log.h"
@@ -48,7 +32,7 @@ public class City{
 //  Return true if the given city coordinate pair is "valid"; that is, if it
 //  is a part of the citymap and thus is workable by the city.
 //**************************************************************************/
-//boolean is_valid_city_coords(const int city_x, const int city_y)
+//boolean is_valid_city_coords(final int city_x, final int city_y)
 //{
 //  int dist = map_vector_to_sq_distance(city_x - CITY_MAP_RADIUS,
 //				       city_y - CITY_MAP_RADIUS);
@@ -77,8 +61,8 @@ public class City{
 //  center. Returns whether the map position is inside of the city map.
 //**************************************************************************/
 //static boolean base_map_to_city_map(int *city_map_x, int *city_map_y,
-//				 const tile city_tile,
-//				 const tile map_tile)
+//				 final tile city_tile,
+//				 final tile map_tile)
 //{
 //  map_distance_vector(city_map_x, city_map_y, city_tile, map_tile);
 //  *city_map_x += CITY_MAP_RADIUS;
@@ -91,8 +75,8 @@ public class City{
 //city. Returns whether the map position is inside of the city map.
 //**************************************************************************/
 //boolean map_to_city_map(int *city_map_x, int *city_map_y,
-//		     const city const pcity,
-//		     const tile map_tile)
+//		     final city final pcity,
+//		     final tile map_tile)
 //{
 //  return base_map_to_city_map(city_map_x, city_map_y, pcity.tile, map_tile);
 //}
@@ -101,7 +85,7 @@ public class City{
 //Finds the map position for a given city map coordinate of a certain
 //city. Returns true if the map position found is real.
 //**************************************************************************/
-//tile base_city_map_to_map(const tile city_tile,
+//tile base_city_map_to_map(final tile city_tile,
 //				  int city_map_x, int city_map_y)
 //{
 //  int x, y;
@@ -117,7 +101,7 @@ public class City{
 //Finds the map position for a given city map coordinate of a certain
 //city. Returns true if the map position found is real.
 //**************************************************************************/
-//tile city_map_to_map(const city const pcity,
+//tile city_map_to_map(final city final pcity,
 //			     int city_map_x, int city_map_y)
 //{
 //  return base_city_map_to_map(pcity.tile, city_map_x, city_map_y);
@@ -144,9 +128,9 @@ public class City{
 //  or the sort order will be left up to qsort and will be undefined.  This
 //  would mean that server execution would not be reproducable.
 //***************************************************************************/
-//int compare_iter_index(const void *a, const void *b)
+//int compare_iter_index(final void *a, final void *b)
 //{
-//  const iter_index index1 = a, *index2 = b;
+//  final iter_index index1 = a, *index2 = b;
 //  int value;
 //
 //  value = cmp(index1.dist, index2.dist);
@@ -235,7 +219,7 @@ public class City{
 //  Return the worker status of the given tile on the citymap for the given
 //  city.
 //**************************************************************************/
-//enum city_tile_type get_worker_city(const city pcity, 
+//enum city_tile_type get_worker_city(final city pcity, 
 //                                    int city_x, int city_y)
 //{
 //  if (!is_valid_city_coords(city_x, city_y)) {
@@ -247,7 +231,7 @@ public class City{
 ///**************************************************************************
 //  Return true if this tile on the citymap is being worked by this city.
 //**************************************************************************/
-//boolean is_worker_here(const city pcity, int city_x, int city_y) 
+//boolean is_worker_here(final city pcity, int city_x, int city_y) 
 //{
 //  if (!is_valid_city_coords(city_x, city_y)) {
 //    return false;
@@ -259,7 +243,7 @@ public class City{
 ///**************************************************************************
 //  Return the extended name of the building.
 //**************************************************************************/
-//final String get_impr_name_ex(const city pcity, Impr_Type_id id)
+//final String get_impr_name_ex(final city pcity, Impr_Type_id id)
 //{
 //  static char buffer[256];
 //  final String state = null;
@@ -290,7 +274,7 @@ public class City{
 ///**************************************************************************
 //  Return the cost (gold) to buy the current city production.
 //**************************************************************************/
-//int city_buy_cost(const city pcity)
+//int city_buy_cost(final city pcity)
 //{
 //  int cost, build = pcity.shield_stock;
 //
@@ -301,21 +285,21 @@ public class City{
 //  }
 //  return cost;
 //}
-//
-///**************************************************************************
-//  Return the owner of the city.
-//**************************************************************************/
-//player city_owner(const city pcity)
-//{
-//  return (&game.players[pcity.owner]);
-//}
-//
-///**************************************************************************
+
+	/***************************************************************************
+	 * Return the owner of the city.
+	 **************************************************************************/
+	public static player city_owner(final city pcity)
+	{
+		return (game.players[pcity.owner]);
+	}
+
+// /**************************************************************************
 // Returns 1 if the given city is next to or on one of the given building's
 // terr_gate (terrain) or spec_gate (specials), or if the building has no
 // terrain/special requirements.
 //**************************************************************************/
-//boolean city_has_terr_spec_gate(const city pcity, Impr_Type_id id)
+//boolean city_has_terr_spec_gate(final city pcity, Impr_Type_id id)
 //{
 //  impr_type impr;
 //  Terrain_type_id *terr_gate;
@@ -350,9 +334,9 @@ public class City{
 //  Return whether given city can build given building, ignoring whether
 //  it is obsolete.
 //**************************************************************************/
-//boolean can_build_improvement_direct(const city pcity, Impr_Type_id id)
+//boolean can_build_improvement_direct(final city pcity, Impr_Type_id id)
 //{
-//  const impr_type building = get_improvement_type(id);
+//  final impr_type building = get_improvement_type(id);
 //
 //  if (!can_player_build_improvement_direct(city_owner(pcity), id)) {
 //    return false;
@@ -378,7 +362,7 @@ public class City{
 //  Return whether given city can build given building; returns false if
 //  the building is obsolete.
 //**************************************************************************/
-//boolean can_build_improvement(const city pcity, Impr_Type_id id)
+//boolean can_build_improvement(final city pcity, Impr_Type_id id)
 //{  
 //  if (!can_build_improvement_direct(pcity, id)) {
 //    return false;
@@ -393,7 +377,7 @@ public class City{
 //  Return whether player can eventually build given building in the city;
 //  returns false if improvement can never possibly be built in this city.
 //**************************************************************************/
-//boolean can_eventually_build_improvement(const city pcity,
+//boolean can_eventually_build_improvement(final city pcity,
 //				      Impr_Type_id id)
 //{
 //  /* Can the _player_ ever build this improvement? */
@@ -412,7 +396,7 @@ public class City{
 //  Return whether given city can build given unit, ignoring whether unit 
 //  is obsolete.
 //**************************************************************************/
-//boolean can_build_unit_direct(const city pcity, Unit_Type_id id)
+//boolean can_build_unit_direct(final city pcity, int id)
 //{
 //  Impr_Type_id impr_req;
 //
@@ -438,7 +422,7 @@ public class City{
 //  Return whether given city can build given unit; returns 0 if unit is 
 //  obsolete.
 //**************************************************************************/
-//boolean can_build_unit(const city pcity, Unit_Type_id id)
+//boolean can_build_unit(final city pcity, int id)
 //{  
 //  if (!can_build_unit_direct(pcity, id)) {
 //    return false;
@@ -455,7 +439,7 @@ public class City{
 //  Return whether player can eventually build given unit in the city;
 //  returns 0 if unit can never possibly be built in this city.
 //**************************************************************************/
-//boolean can_eventually_build_unit(const city pcity, Unit_Type_id id)
+//boolean can_eventually_build_unit(final city pcity, int id)
 //{
 //  /* Can the _player_ ever build this unit? */
 //  if (!can_player_eventually_build_unit(city_owner(pcity), id)) {
@@ -474,7 +458,7 @@ public class City{
 ///****************************************************************************
 //  Returns true iff if the given city can use this kind of specialist.
 //****************************************************************************/
-//boolean city_can_use_specialist(const city pcity,
+//boolean city_can_use_specialist(final city pcity,
 //			     Specialist_type_id type)
 //{
 //  return pcity.size >= game.rgame.specialists[type].min_size;
@@ -483,7 +467,7 @@ public class City{
 ///****************************************************************************
 //  Returns true iff if the given city can change what it is building
 //****************************************************************************/
-//boolean city_can_change_build(const city pcity)
+//boolean city_can_change_build(final city pcity)
 //{
 //  return !pcity.did_buy || pcity.shield_stock <= 0;
 //}
@@ -491,7 +475,7 @@ public class City{
 ///**************************************************************************
 // Returns how many thousand citizen live in this city.
 //**************************************************************************/
-//int city_population(const city pcity)
+//int city_population(final city pcity)
 //{
 //  /*  Sum_{i=1}^{n} i  ==  n*(n+1)/2  */
 //  return pcity.size * (pcity.size + 1) * 5;
@@ -500,7 +484,7 @@ public class City{
 ///**************************************************************************
 //  Return true if the city has this building in it.
 //**************************************************************************/
-//boolean city_got_building(const city pcity, Impr_Type_id id) 
+//boolean city_got_building(final city pcity, Impr_Type_id id) 
 //{
 //  if (!improvement_exists(id)) {
 //    return false;
@@ -513,7 +497,7 @@ public class City{
 //  Return the upkeep (gold) needed each turn to upkeep the given improvement
 //  in the given city.
 //**************************************************************************/
-//int improvement_upkeep(const city pcity, Impr_Type_id i) 
+//int improvement_upkeep(final city pcity, Impr_Type_id i) 
 //{
 //  if (!improvement_exists(i))
 //    return 0;
@@ -532,8 +516,8 @@ public class City{
 //  (city_x, city_y) must be valid city coordinates and is_celebrating tells
 //  whether the city is celebrating.
 //**************************************************************************/
-//static int base_get_shields_tile(const tile ptile,
-//				 const city pcity,
+//static int base_get_shields_tile(final tile ptile,
+//				 final city pcity,
 //				 int city_x, int city_y, boolean is_celebrating)
 //{
 //  enum tile_special_type spec_t = map_get_special(ptile);
@@ -596,7 +580,7 @@ public class City{
 //  Calculate the shields produced by the tile.  This obviously won't take
 //  into account any city or government bonuses.
 //**************************************************************************/
-//int get_shields_tile(const tile ptile)
+//int get_shields_tile(final tile ptile)
 //{
 //  return base_get_shields_tile(ptile, null, -1, -1, false);
 //}
@@ -605,7 +589,7 @@ public class City{
 //  Calculate the shields the given tile is capable of producing for the
 //  city.
 //**************************************************************************/
-//int city_get_shields_tile(int city_x, int city_y, const city pcity)
+//int city_get_shields_tile(int city_x, int city_y, final city pcity)
 //{
 //  return base_city_get_shields_tile(city_x, city_y, pcity,
 //				    city_celebrating(pcity));
@@ -618,7 +602,7 @@ public class City{
 //  This can be used to calculate the benefits celebration would give.
 //**************************************************************************/
 //int base_city_get_shields_tile(int city_x, int city_y,
-//			       const city pcity,
+//			       final city pcity,
 //			       boolean is_celebrating)
 //{
 //  tile ptile;
@@ -637,8 +621,8 @@ public class City{
 //  (city_x, city_y) must be valid city coordinates and is_celebrating tells
 //  whether the city is celebrating.
 //**************************************************************************/
-//static int base_get_trade_tile(const tile ptile,
-//			       const city pcity,
+//static int base_get_trade_tile(final tile ptile,
+//			       final city pcity,
 //			       int city_x, int city_y, boolean is_celebrating)
 //{
 //  enum tile_special_type spec_t = map_get_special(ptile);
@@ -707,7 +691,7 @@ public class City{
 //  Calculate the trade produced by the tile.  This obviously won't take
 //  into account any city or government bonuses.
 //**************************************************************************/
-//int get_trade_tile(const tile ptile)
+//int get_trade_tile(final tile ptile)
 //{
 //  return base_get_trade_tile(ptile, null, -1, -1, false);
 //}
@@ -716,7 +700,7 @@ public class City{
 //  Calculate the trade the given tile is capable of producing for the
 //  city.
 //**************************************************************************/
-//int city_get_trade_tile(int city_x, int city_y, const city pcity)
+//int city_get_trade_tile(int city_x, int city_y, final city pcity)
 //{
 //  return base_city_get_trade_tile(city_x, city_y,
 //				  pcity, city_celebrating(pcity));
@@ -729,7 +713,7 @@ public class City{
 //  This can be used to calculate the benefits celebration would give.
 //**************************************************************************/
 //int base_city_get_trade_tile(int city_x, int city_y,
-//			     const city pcity, boolean is_celebrating)
+//			     final city pcity, boolean is_celebrating)
 //{
 //  tile ptile;
 //
@@ -746,16 +730,16 @@ public class City{
 //  (city_x, city_y) must be valid city coordinates and is_celebrating tells
 //  whether the city is celebrating.
 //**************************************************************************/
-//static int base_get_food_tile(const tile ptile,
-//			      const city pcity,
+//static int base_get_food_tile(final tile ptile,
+//			      final city pcity,
 //			      int city_x, int city_y, boolean is_celebrating)
 //{
-//  const enum tile_special_type spec_t = map_get_special(ptile);
-//  const Terrain_type_id tile_t = ptile.terrain;
+//  final enum tile_special_type spec_t = map_get_special(ptile);
+//  final Terrain_type_id tile_t = ptile.terrain;
 //  tile_type type = get_tile_type(tile_t);
 //  struct tile tile;
 //  int f;
-//  const boolean auto_water = (pcity && is_city_center(city_x, city_y)
+//  final boolean auto_water = (pcity && is_city_center(city_x, city_y)
 //			   && tile_t == type.irrigation_result
 //			   && terrain_control.may_irrigate);
 //
@@ -826,7 +810,7 @@ public class City{
 //  Calculate the food produced by the tile.  This obviously won't take
 //  into account any city or government bonuses.
 //**************************************************************************/
-//int get_food_tile(const tile ptile)
+//int get_food_tile(final tile ptile)
 //{
 //  return base_get_food_tile(ptile, null, -1, -1, false);
 //}
@@ -835,7 +819,7 @@ public class City{
 //  Calculate the food the given tile is capable of producing for the
 //  city.
 //**************************************************************************/
-//int city_get_food_tile(int city_x, int city_y, const city pcity)
+//int city_get_food_tile(int city_x, int city_y, final city pcity)
 //{
 //  return base_city_get_food_tile(city_x, city_y, pcity,
 //				 city_celebrating(pcity));
@@ -847,7 +831,7 @@ public class City{
 //
 //  This can be used to calculate the benefits celebration would give.
 //**************************************************************************/
-//int base_city_get_food_tile(int city_x, int city_y, const city pcity,
+//int base_city_get_food_tile(int city_x, int city_y, final city pcity,
 //			    boolean is_celebrating)
 //{
 //  tile ptile;
@@ -865,7 +849,7 @@ public class City{
 //  coordinates.  punit is the founding unit, which may be null in some
 //  cases (e.g., cities from huts).
 //**************************************************************************/
-//boolean city_can_be_built_here(const tile ptile, unit punit)
+//boolean city_can_be_built_here(final tile ptile, unit punit)
 //{
 //  if (terrain_has_flag(ptile.terrain, TER_NO_CITIES)) {
 //    /* No cities on this terrain. */
@@ -900,7 +884,7 @@ public class City{
 //
 //  See also can_establish_trade_route().
 //**************************************************************************/
-//boolean can_cities_trade(const city pc1, const city pc2)
+//boolean can_cities_trade(final city pc1, final city pc2)
 //{
 //  /* If you change the logic here, make sure to update the help in
 //   * helptext_unit(). */
@@ -914,7 +898,7 @@ public class City{
 //  trade route is returned and its position (slot) is put into the slot
 //  variable.
 //**************************************************************************/
-//int get_city_min_trade_route(const city pcity, int *slot)
+//int get_city_min_trade_route(final city pcity, int *slot)
 //{
 //  int i, value = pcity.trade_value[0];
 //
@@ -940,7 +924,7 @@ public class City{
 //  trade routes.  Should only be called if you already know that
 //  can_cities_trade().
 //**************************************************************************/
-//boolean can_establish_trade_route(const city pc1, const city pc2)
+//boolean can_establish_trade_route(final city pc1, final city pc2)
 //{
 //  int trade = -1;
 //
@@ -976,7 +960,7 @@ public class City{
 //  Return the trade that exists between these cities, assuming they have a
 //  trade route.
 //**************************************************************************/
-//int trade_between_cities(const city pc1, const city pc2)
+//int trade_between_cities(final city pc1, final city pc2)
 //{
 //  int bonus = 0;
 //
@@ -998,7 +982,7 @@ public class City{
 ///**************************************************************************
 // Return number of trade route city has
 //**************************************************************************/
-//int city_num_trade_routes(const city pcity)
+//int city_num_trade_routes(final city pcity)
 //{
 //  int i, n = 0;
 //
@@ -1016,8 +1000,8 @@ public class City{
 //  Note if you trade with a city you already have a trade route with,
 //  you'll only get 1/3 of this value.
 //**************************************************************************/
-//int get_caravan_enter_city_trade_bonus(const city pc1, 
-//                                       const city pc2)
+//int get_caravan_enter_city_trade_bonus(final city pc1, 
+//                                       final city pc2)
 //{
 //  int i, tb;
 //
@@ -1041,7 +1025,7 @@ public class City{
 ///**************************************************************************
 //  Check if cities have an established trade route.
 //**************************************************************************/
-//boolean have_cities_trade_route(const city pc1, const city pc2)
+//boolean have_cities_trade_route(final city pc1, final city pc2)
 //{
 //  int i;
 //  
@@ -1058,7 +1042,7 @@ public class City{
 //  Calculate amount of gold remaining in city after paying for buildings 
 //  and units.  Does not count capitalization.
 //*************************************************************************/
-//int city_gold_surplus(const city pcity, int tax_total)
+//int city_gold_surplus(final city pcity, int tax_total)
 //{
 //  int cost = 0;
 //
@@ -1066,9 +1050,9 @@ public class City{
 //    cost += improvement_upkeep(pcity, i);
 //  } built_impr_iterate_end;
 //
-//  unit_list_iterate(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    cost += punit.upkeep_gold;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return tax_total - cost;
 //}
@@ -1077,7 +1061,7 @@ public class City{
 //  Return true iff this city is its nation's capital.  The capital city is
 //  special-cased in a number of ways.
 //**************************************************************************/
-//boolean is_capital(const city pcity)
+//boolean is_capital(final city pcity)
 //{
 //  return (get_city_bonus(pcity, EFT_CAPITAL_CITY) != 0);
 //}
@@ -1085,7 +1069,7 @@ public class City{
 ///**************************************************************************
 // Whether a city has its own City Walls, or the same effect via a wonder.
 //**************************************************************************/
-//boolean city_got_citywalls(const city pcity)
+//boolean city_got_citywalls(final city pcity)
 //{
 //  return (get_city_bonus(pcity, EFT_LAND_DEFEND) > 0);
 //}
@@ -1094,7 +1078,7 @@ public class City{
 //  Return true iff the city is happy.  A happy city will start celebrating
 //  soon.
 //**************************************************************************/
-//boolean city_happy(const city pcity)
+//boolean city_happy(final city pcity)
 //{
 //  return (pcity.ppl_happy[4] >= (pcity.size + 1) / 2 &&
 //	  pcity.ppl_unhappy[4] == 0 && pcity.ppl_angry[4] == 0);
@@ -1104,7 +1088,7 @@ public class City{
 //  Return true iff the city is unhappy.  An unhappy city will start
 //  revolting soon.
 //**************************************************************************/
-//boolean city_unhappy(const city pcity)
+//boolean city_unhappy(final city pcity)
 //{
 //  return (pcity.ppl_happy[4] <
 //	  pcity.ppl_unhappy[4] + 2 * pcity.ppl_angry[4]);
@@ -1113,7 +1097,7 @@ public class City{
 ///**************************************************************************
 //  Return true if the city was celebrating at the start of the turn.
 //**************************************************************************/
-//boolean base_city_celebrating(const city pcity)
+//boolean base_city_celebrating(final city pcity)
 //{
 //  return (pcity.size >= get_gov_pcity(pcity).rapture_size
 //	  && pcity.was_happy);
@@ -1122,7 +1106,7 @@ public class City{
 ///**************************************************************************
 //cities celebrate only after consecutive happy turns
 //**************************************************************************/
-//boolean city_celebrating(const city pcity)
+//boolean city_celebrating(final city pcity)
 //{
 //  return base_city_celebrating(pcity) && city_happy(pcity);
 //}
@@ -1131,7 +1115,7 @@ public class City{
 //.rapture is checked instead of city_celebrating() because this function is
 //called after .was_happy was updated.
 //**************************************************************************/
-//boolean city_rapture_grow(const city pcity)
+//boolean city_rapture_grow(final city pcity)
 //{
 //  government g = get_gov_pcity(pcity);
 //
@@ -1150,7 +1134,7 @@ public class City{
 //      if (pcity.id == id) {
 //	return pcity;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //  }
 //
 //  return null;
@@ -1165,7 +1149,7 @@ public class City{
 //    if (mystrcasecmp(name, pcity.name) == 0) {
 //      return pcity;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -1175,17 +1159,17 @@ public class City{
 //Args are really (struct city**), to sort an array of pointers.
 //(Compare with old_city_name_compare() in game.c, which use city_id's)
 //**************************************************************************/
-//int city_name_compare(const void *p1, const void *p2)
+//int city_name_compare(final void *p1, final void *p2)
 //{
-//  return mystrcasecmp( (*(const struct city**)p1).name,
-//		       (*(const struct city**)p2).name );
+//  return mystrcasecmp( (*(final struct city**)p1).name,
+//		       (*(final struct city**)p2).name );
 //}
 //
 ///**************************************************************************
 //  Return the number of free shields for unit support the city would get
 //  under the given government.
 //**************************************************************************/
-//int citygov_free_shield(const city pcity, government gov)
+//int citygov_free_shield(final city pcity, government gov)
 //{
 //  if (gov.free_shield == G_CITY_SIZE_FREE) {
 //    return pcity.size;
@@ -1197,7 +1181,7 @@ public class City{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//int citygov_free_happy(const city pcity, government gov)
+//int citygov_free_happy(final city pcity, government gov)
 //{
 //  if (gov.free_happy == G_CITY_SIZE_FREE) {
 //    return pcity.size;
@@ -1209,7 +1193,7 @@ public class City{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//int citygov_free_food(const city pcity, government gov)
+//int citygov_free_food(final city pcity, government gov)
 //{
 //  if (gov.free_food == G_CITY_SIZE_FREE) {
 //    return pcity.size;
@@ -1221,7 +1205,7 @@ public class City{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static int citygov_free_gold(const city pcity, 
+//static int citygov_free_gold(final city pcity, 
 //                             government gov)
 //{
 //  if (gov.free_gold == G_CITY_SIZE_FREE) {
@@ -1234,7 +1218,7 @@ public class City{
 ///**************************************************************************
 //Evaluate which style should be used to draw a city.
 //**************************************************************************/
-//int get_city_style(const city pcity)
+//int get_city_style(final city pcity)
 //{
 //  return get_player_city_style(city_owner(pcity));
 //}
@@ -1323,7 +1307,7 @@ public class City{
 // But only on the first switch that turn.  Also, if ever change back to
 // original improvement class of this turn, restore lost production.
 //**************************************************************************/
-//int city_change_production_penalty(const city pcity,
+//int city_change_production_penalty(final city pcity,
 //				   int target, boolean is_unit)
 //{
 //  int shield_stock_after_adjustment;
@@ -1383,7 +1367,7 @@ public class City{
 // Calculates the turns which are needed to build the requested
 // improvement in the city.  GUI Independent.
 //**************************************************************************/
-//int city_turns_to_build(const city pcity, int id, boolean id_is_unit,
+//int city_turns_to_build(final city pcity, int id, boolean id_is_unit,
 //			boolean include_shield_stock)
 //{
 //  int city_shield_surplus = pcity.shield_surplus;
@@ -1410,7 +1394,7 @@ public class City{
 // shrink in x turns.  A positive value of x means the city will grow in
 // x turns.
 //**************************************************************************/
-//int city_turns_to_grow(const city pcity)
+//int city_turns_to_grow(final city pcity)
 //{
 //  if (pcity.food_surplus > 0) {
 //    return (city_granary_size(pcity.size) - pcity.food_stock +
@@ -1426,7 +1410,7 @@ public class City{
 ///****************************************************************************
 //  Return true iff the city can grow to the given size.
 //****************************************************************************/
-//boolean city_can_grow_to(const city pcity, int pop_size)
+//boolean city_can_grow_to(final city pcity, int pop_size)
 //{
 //  if (get_city_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
 //    return true;
@@ -1441,7 +1425,7 @@ public class City{
 ///**************************************************************************
 // is there an enemy city on this tile?
 //**************************************************************************/
-//city is_enemy_city_tile(const tile ptile,
+//city is_enemy_city_tile(final tile ptile,
 //				player pplayer)
 //{
 //  city pcity = ptile.city;
@@ -1455,7 +1439,7 @@ public class City{
 ///**************************************************************************
 // is there an friendly city on this tile?
 //**************************************************************************/
-//city is_allied_city_tile(const tile ptile,
+//city is_allied_city_tile(final tile ptile,
 //				 player pplayer)
 //{
 //  city pcity = ptile.city;
@@ -1469,7 +1453,7 @@ public class City{
 ///**************************************************************************
 // is there an enemy city on this tile?
 //**************************************************************************/
-//city is_non_attack_city_tile(const tile ptile,
+//city is_non_attack_city_tile(final tile ptile,
 //				     player pplayer)
 //{
 //  city pcity = ptile.city;
@@ -1483,7 +1467,7 @@ public class City{
 ///**************************************************************************
 // is there an non_allied city on this tile?
 //**************************************************************************/
-//city is_non_allied_city_tile(const tile ptile,
+//city is_non_allied_city_tile(final tile ptile,
 //				     player pplayer)
 //{
 //  city pcity = ptile.city;
@@ -1505,7 +1489,7 @@ public class City{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//boolean is_friendly_city_near(player owner, const tile ptile)
+//boolean is_friendly_city_near(player owner, final tile ptile)
 //{
 //  square_iterate(ptile, 3, ptile1) {
 //    city  pcity = ptile1.city;
@@ -1520,7 +1504,7 @@ public class City{
 //  Return true iff a city exists within a city radius of the given 
 //  location. may_be_on_center determines if a city at x,y counts.
 //**************************************************************************/
-//boolean city_exists_within_city_radius(const tile ptile,
+//boolean city_exists_within_city_radius(final tile ptile,
 //				    boolean may_be_on_center)
 //{
 //  map_city_radius_iterate(ptile, ptile1) {
@@ -1578,9 +1562,9 @@ public class City{
 ///**************************************************************************
 // Return the factor (in %) by which the shield should be multiplied.
 //**************************************************************************/
-//int get_city_shield_bonus(const city pcity)
+//int get_city_shield_bonus(final city pcity)
 //{
-//  const int bonus = 100 + get_city_bonus(pcity, EFT_PROD_BONUS);
+//  final int bonus = 100 + get_city_bonus(pcity, EFT_PROD_BONUS);
 //
 //  return MAX(bonus, 0);
 //}
@@ -1588,9 +1572,9 @@ public class City{
 ///**************************************************************************
 //  Return the factor (in %) by which the tax should be multiplied.
 //**************************************************************************/
-//int get_city_tax_bonus(const city pcity)
+//int get_city_tax_bonus(final city pcity)
 //{
-//  const int bonus = 100 + get_city_bonus(pcity, EFT_TAX_BONUS);
+//  final int bonus = 100 + get_city_bonus(pcity, EFT_TAX_BONUS);
 //
 //  return MAX(bonus, 0);
 //}
@@ -1598,9 +1582,9 @@ public class City{
 ///**************************************************************************
 //  Return the factor (in %) by which the luxury should be multiplied.
 //**************************************************************************/
-//int get_city_luxury_bonus(const city pcity)
+//int get_city_luxury_bonus(final city pcity)
 //{
-//  const int bonus = 100 + get_city_bonus(pcity, EFT_LUXURY_BONUS);
+//  final int bonus = 100 + get_city_bonus(pcity, EFT_LUXURY_BONUS);
 //
 //  return MAX(bonus, 0);
 //}
@@ -1609,7 +1593,7 @@ public class City{
 //  Return the amount of gold generated by buildings under "tithe" attribute
 //  governments.
 //**************************************************************************/
-//int get_city_tithes_bonus(const city pcity)
+//int get_city_tithes_bonus(final city pcity)
 //{
 //  int tithes_bonus = 0;
 //
@@ -1627,7 +1611,7 @@ public class City{
 ///**************************************************************************
 //  Return the factor (in %) by which the science should be multiplied.
 //**************************************************************************/
-//int get_city_science_bonus(const city pcity)
+//int get_city_science_bonus(final city pcity)
 //{
 //  int science_bonus;
 //
@@ -1647,7 +1631,7 @@ public class City{
 //void get_tax_income(player pplayer, int trade, int *sci, 
 //                    int *lux, int *tax)
 //{
-//  const int SCIENCE = 0, TAX = 1, LUXURY = 2;
+//  final int SCIENCE = 0, TAX = 1, LUXURY = 2;
 //  int rates[3], result[3];
 //
 //  if (game.rgame.changable_tax) {
@@ -1680,7 +1664,7 @@ public class City{
 //  Return true if the city built something last turn (meaning production
 //  was completed between last turn and this).
 //**************************************************************************/
-//boolean city_built_last_turn(const city pcity)
+//boolean city_built_last_turn(final city pcity)
 //{
 //  return pcity.turn_last_built + 1 >= game.turn;
 //}
@@ -1775,7 +1759,7 @@ public class City{
 //   * then content are made happy, then unhappy content, etc.
 //   * each conversions costs 2 or 4 luxuries.
 //**************************************************************************/
-//static inline void citizen_luxury_happy(const city pcity, int *luxuries,
+//static inline void citizen_luxury_happy(final city pcity, int *luxuries,
 //                                        int *angry, int *unhappy, int *happy, 
 //                                        int *content)
 //{
@@ -1955,7 +1939,7 @@ public class City{
 //  Calculate food, trade and shields generated by a city, and set
 //  associated variables given to us.
 //**************************************************************************/
-//void get_food_trade_shields(const city pcity, int *food, int *trade,
+//void get_food_trade_shields(final city pcity, int *food, int *trade,
 //                            int *shields)
 //{
 //  boolean is_celebrating = base_city_celebrating(pcity);
@@ -2033,12 +2017,12 @@ public class City{
 //   */
 //  if (g.martial_law_max > 0) {
 //    int city_units = 0;
-//    unit_list_iterate(pcity.tile.units, punit) {
+//    for (unit punit : pcity.tile.units.data) {
 //      if (city_units < g.martial_law_max && is_military_unit(punit)
 //	  && punit.owner == pcity.owner)
 //	city_units++;
 //    }
-//    unit_list_iterate_end;
+//    }
 //    city_units *= g.martial_law_per;
 //    /* get rid of angry first, then make unhappy content */
 //    while (city_units > 0 && pcity.ppl_angry[3] > 0) {
@@ -2055,7 +2039,7 @@ public class City{
 //
 //  /* loop over units, subtracting appropriate amounts of food, shields,
 //   * gold etc -- SKi */
-//  unit_list_iterate(pcity.units_supported, this_unit) {
+//  for (unit this_unit : pcity.units_supported.data) {
 //    unit_type ut = unit_type(this_unit);
 //    int shield_cost = utype_shield_cost(ut, g);
 //    int happy_cost = utype_happy_cost(ut, g);
@@ -2131,7 +2115,7 @@ public class City{
 //      send_unit_info(unit_owner(this_unit), this_unit);
 //    }
 //  }
-//  unit_list_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -2195,7 +2179,7 @@ public class City{
 //  Give corruption generated by city. Corruption is halved during love 
 //  the XXX days.
 //**************************************************************************/
-//int city_corruption(const city pcity, int trade)
+//int city_corruption(final city pcity, int trade)
 //{
 //  government g = get_gov_pcity(pcity);
 //  city capital;
@@ -2243,7 +2227,7 @@ public class City{
 ///************************************************************************** 
 //  Give amount of waste generated by city. Waste is corruption for shields.
 //**************************************************************************/
-//int city_waste(const city pcity, int shields)
+//int city_waste(final city pcity, int shields)
 //{
 //  government g = get_gov_pcity(pcity);
 //  city capital;
@@ -2279,7 +2263,7 @@ public class City{
 ///**************************************************************************
 //  Give the number of specialists in a city.
 //**************************************************************************/
-//int city_specialists(const city pcity)
+//int city_specialists(final city pcity)
 //{
 //  int count = 0;
 //
@@ -2299,7 +2283,7 @@ public class City{
 //
 //  and you'll get "0/3/1".
 //**************************************************************************/
-//final String specialists_string(const int *specialists)
+//final String specialists_string(final int *specialists)
 //{
 //  size_t len = 0;
 //  static char buf[5 * SP_COUNT];
@@ -2360,7 +2344,7 @@ public class City{
 //uses this tile is also returned. If status isn't C_TILE_WORKER the
 //city pointer is set to null.
 //**************************************************************************/
-//void get_worker_on_map_position(const tile ptile,
+//void get_worker_on_map_position(final tile ptile,
 //				enum city_tile_type *result_city_tile_type,
 //				city *result_pcity)
 //{
@@ -2371,15 +2355,16 @@ public class City{
 //    *result_city_tile_type = C_TILE_EMPTY;
 //  }
 //}
-//
-///**************************************************************************
-// Returns true iff the city has set the given option.
-//**************************************************************************/
-//boolean is_city_option_set(const city pcity, enum city_options option)
-//{
-//  return TEST_BIT(pcity.city_options, option);
-//}
-//
+
+	/***************************************************************************
+	 * Returns true iff the city has set the given option.
+	 **************************************************************************/
+ //	boolean is_city_option_set(final city pcity, city_options option)
+	public static boolean is_city_option_set(final city pcity, int option)
+	{
+		return TEST_BIT(pcity.city_options, option);
+	}
+
 ///**************************************************************************
 // Allocate memory for this amount of city styles.
 //**************************************************************************/

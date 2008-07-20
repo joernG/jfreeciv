@@ -166,7 +166,7 @@ public class Dataio{
 //  Initializes the input to the given input buffer and the given
 //  number of valid input bytes.
 //**************************************************************************/
-//void dio_input_init(data_in din, const void *src, size_t src_size)
+//void dio_input_init(data_in din, final void *src, size_t src_size)
 //{
 //  din.src = src;
 //  din.src_size = src_size;
@@ -308,7 +308,7 @@ public class Dataio{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//void dio_put_memory(data_out dout, const void *value, size_t size)
+//void dio_put_memory(data_out dout, final void *value, size_t size)
 //{
 //  if (enough_space(dout, size)) {
 //    memcpy(ADD_TO_POINTER(dout.dest, dout.current), value, size);
@@ -372,7 +372,7 @@ public class Dataio{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//void dio_put_tech_list(data_out dout, const int *value)
+//void dio_put_tech_list(data_out dout, final int *value)
 //{
 //  int i;
 //
@@ -387,7 +387,7 @@ public class Dataio{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//void dio_put_worklist(data_out dout, const worklist pwl)
+//void dio_put_worklist(data_out dout, final worklist pwl)
 //{
 //  dio_put_bool8(dout, pwl.is_valid);
 //
@@ -717,7 +717,7 @@ public class Dataio{
 //}
 //
 //void dio_put_diplstate(data_out dout,
-//		       const player_diplstate pds)
+//		       final player_diplstate pds)
 //{
 //  dio_put_uint8(dout, pds.type);
 //  dio_put_uint16(dout, pds.turns_left);

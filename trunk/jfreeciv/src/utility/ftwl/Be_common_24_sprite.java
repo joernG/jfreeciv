@@ -183,7 +183,7 @@ public class Be_common_24_sprite{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void be_sprite_get_size(ct_size size, const Sprite sprite)
+//void be_sprite_get_size(ct_size size, final Sprite sprite)
 //{
 //  size.width = sprite.image.width;
 //  size.height = sprite.image.height;

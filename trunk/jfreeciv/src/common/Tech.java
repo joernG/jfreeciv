@@ -52,7 +52,7 @@ public class Tech{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//enum tech_state get_invention(const player pplayer,
+//enum tech_state get_invention(final player pplayer,
 //			      Tech_Type_id tech)
 //{
 //  assert(tech >= 0);
@@ -634,7 +634,7 @@ public class Tech{
 //}
 //
 ///**************************************************************************
-// Returns true if the costs for the given technology will stay constant
+// Returns true if the costs for the given technology will stay finalant
 // during the game. false otherwise.
 //**************************************************************************/
 //boolean techs_have_fixed_costs()

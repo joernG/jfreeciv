@@ -258,7 +258,7 @@ public class Mapview{
 //	units++;
 //      }
 //    }
-//    unit_list_iterate_end;
+//    }
 //
 //    if (xget(main_below_group, MUIA_AutoGroup_NumObjects) == units + 1)
 //    {
@@ -276,7 +276,7 @@ public class Mapview{
 //          }
 //        }
 //      }
-//      unit_list_iterate_end;
+//      }
 //    } else
 //    {
 //      Object *obj;
@@ -292,7 +292,7 @@ public class Mapview{
 //	  }
 //        }
 //      }
-//      unit_list_iterate_end;
+//      }
 //
 //      DoMethod(main_below_group, OM_ADDMEMBER, RectangleObject, MUIA_Weight,0,End);
 //      DoMethod(main_below_group, MUIM_Group_ExitChange);

@@ -39,7 +39,7 @@ public class Report{
 //#include "report.h"
 //#include "score.h"
 //
-//static void page_conn_etype(conn_list dest, final String caption,
+//static void page_conn_etype(Speclists<Connection> dest, final String caption,
 //			    final String headline, final String lines,
 //			    enum event_type event);
 //enum historian_type {
@@ -71,7 +71,7 @@ public class Report{
 //    N"Pan Ku's"
 //};
 //
-//static const char scorelog_magic[] = "#FREECIV SCORELOG2 ";
+//static final char scorelog_magic[] = "#FREECIV SCORELOG2 ";
 //
 //struct player_score_entry {
 //  player player;
@@ -104,7 +104,7 @@ public class Report{
 // * Describes a row.
 // */
 //static struct dem_row {
-//  const char key;
+//  final char key;
 //  final String name;
 //  int (*get_value) (player );
 //  final String(*to_text) (int);
@@ -143,10 +143,10 @@ public class Report{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static int secompare(const void *a, const void *b)
+//static int secompare(final void *a, final void *b)
 //{
-//  return (((const player_score_entry )b).value -
-//	  ((const player_score_entry )a).value);
+//  return (((final player_score_entry )b).value -
+//	  ((final player_score_entry )a).value);
 //}
 //
 //static final String greatness[MAX_NUM_PLAYERS] = {
@@ -229,11 +229,11 @@ public class Report{
 ///**************************************************************************
 //  Send report listing the "best" 5 cities in the world.
 //**************************************************************************/
-//void report_top_five_cities(conn_list dest)
+//void report_top_five_cities(Speclists<Connection> dest)
 //{
-//  const int NUM_BEST_CITIES = 5;
+//  final int NUM_BEST_CITIES = 5;
 //  /* a wonder equals WONDER_FACTOR citizen */
-//  const int WONDER_FACTOR = 5;
+//  final int WONDER_FACTOR = 5;
 //  struct city_score_entry size[NUM_BEST_CITIES];
 //  int i;
 //  char buffer[4096];
@@ -244,7 +244,7 @@ public class Report{
 //  }
 //
 //  players_iterate(pplayer) {
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      int value_of_pcity = pcity.size + nr_wonders(pcity) * WONDER_FACTOR;
 //
 //      if (value_of_pcity > size[NUM_BEST_CITIES - 1].value) {
@@ -253,7 +253,7 @@ public class Report{
 //	qsort(size, NUM_BEST_CITIES, sizeof(struct player_score_entry),
 //	      secompare);
 //      }
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  buffer[0] = '\0';
@@ -289,7 +289,7 @@ public class Report{
 //  Send report listing all built and destroyed wonders, and wonders
 //  currently being built.
 //**************************************************************************/
-//void report_wonders_of_the_world(conn_list dest)
+//void report_wonders_of_the_world(Speclists<Connection> dest)
 //{
 //  char buffer[4096];
 //
@@ -313,14 +313,14 @@ public class Report{
 //  impr_type_iterate(i) {
 //    if (is_wonder(i)) {
 //      players_iterate(pplayer) {
-//	city_list_iterate(pplayer.cities, pcity) {
+//	for (city pcity : pplayer.cities.data) {
 //	  if (pcity.currently_building == i && !pcity.is_building_unit) {
 //	    cat_snprintf(buffer, sizeof(buffer),
 //			 "(building %s in %s (%s))\n",
 //			 get_improvement_type(i).name, pcity.name,
 //			 get_nation_name(pplayer.nation));
 //	  }
-//	} city_list_iterate_end;
+//	} }
 //      } players_iterate_end;
 //    }
 //  } impr_type_iterate_end;
@@ -405,11 +405,11 @@ public class Report{
 //  int result = 0;
 //
 //  /* count up military units */
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (is_military_unit(punit)) {
 //      result++;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return result;
 //}
@@ -419,11 +419,11 @@ public class Report{
 //  int result = 0;
 //
 //  /* count up settlers */
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (unit_flag(punit, F_CITIES)) {
 //      result++;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return result;
 //}
@@ -472,11 +472,11 @@ public class Report{
 //{
 //  int result = 0;
 //
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    if (pcity.anarchy > 0) {
 //      result++;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  return result;
 //}
@@ -520,9 +520,9 @@ public class Report{
 //{
 //  int result = 0;
 //
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    result += pcity.corruption;
-//  } city_list_iterate_end;
+//  } }
 //
 //  return result;
 //}
@@ -872,7 +872,7 @@ public class Report{
 //**************************************************************************/
 //static void log_civ_score()
 //{
-//  static const char logname[] = "civscore.log";
+//  static final char logname[] = "civscore.log";
 //  static FILE *fp = null;
 //  static boolean disabled = false;
 //  static char player_names[MAX_NUM_PLAYERS +
@@ -884,7 +884,7 @@ public class Report{
 //   * Add new tags only at end of this list. Maintaining the order of
 //   * old tags is critical.
 //   */
-//  static const struct {
+//  static final struct {
 //    char *name;
 //    int (*get_value) (player );
 //  } score_tags[] = {
@@ -1157,7 +1157,7 @@ public class Report{
 ///**************************************************************************
 //This function pops up a non-modal message dialog on the player's desktop
 //**************************************************************************/
-//void page_conn(conn_list dest, final String caption, 
+//void page_conn(Speclists<Connection> dest, final String caption, 
 //	       final String headline, final String lines) {
 //  page_conn_etype(dest, caption, headline, lines, E_REPORT);
 //}
@@ -1174,7 +1174,7 @@ public class Report{
 //                   watching AI players with ai_popup_windows off.  For
 //                   example: Herodot's report... and similar messages.
 //**************************************************************************/
-//static void page_conn_etype(conn_list dest, final String caption,
+//static void page_conn_etype(Speclists<Connection> dest, final String caption,
 //			    final String headline, final String lines,
 //			    enum event_type event)
 //{

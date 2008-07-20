@@ -276,7 +276,7 @@ public class Widget_list{
 //  ...
 //*************************************************************************/
 //static void draw_extra_background(sw_widget widget,
-//				  const ct_rect region)
+//				  final ct_rect region)
 //{
 //  struct ct_rect rect;
 //  sw_widget list = widget.data.window.list;
@@ -301,7 +301,7 @@ public class Widget_list{
 //  ...
 //*************************************************************************/
 //static void click_start(sw_widget widget,
-//			const ct_point mouse,
+//			final ct_point mouse,
 //			enum be_mouse_button button, int state, void *data)
 //{
 //  int y, row = -1;
@@ -406,7 +406,7 @@ public class Widget_list{
 //  ...
 //*************************************************************************/
 //void sw_list_set_offset(sw_widget widget,
-//			const ct_point position)
+//			final ct_point position)
 //{
 //  sw_widget window = widget.data.list.window;
 //  struct ct_point pos = *position;

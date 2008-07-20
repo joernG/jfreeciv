@@ -113,8 +113,8 @@ public class Hash{
 //
 //struct hash_bucket {
 //  enum Bucket_State used;
-//  const void *key;
-//  const void *data;
+//  final void *key;
+//  final void *data;
 //  unsigned int hash_val;	/* to avoid recalculating, or an extra fcmp,
 //				   in lookup */
 //};
@@ -161,19 +161,19 @@ public class Hash{
 //  A supplied hash function where key is pointer to int.  
 //  Prefers table sizes that are prime numbers.
 //**************************************************************************/
-//unsigned int hash_fval_int(const void *vkey, unsigned int num_buckets)
+//unsigned int hash_fval_int(final void *vkey, unsigned int num_buckets)
 //{
-//  const unsigned int key = (unsigned int) *(const int*)vkey;
+//  final unsigned int key = (unsigned int) *(final int*)vkey;
 //  return (key % num_buckets);
 //}
 //
 ///**************************************************************************
 //  A supplied function for comparison of pointers to int:
 //**************************************************************************/
-//int hash_fcmp_int(const void *vkey1, const void *vkey2)
+//int hash_fcmp_int(final void *vkey1, final void *vkey2)
 //{
-//  const int key1 = *(const int*)vkey1;
-//  const int key2 = *(const int*)vkey2;
+//  final int key1 = *(final int*)vkey1;
+//  final int key2 = *(final int*)vkey2;
 //  /* avoid overflow issues: */
 //  return (key1 < key2) ? -1 : (key1 > key2) ? 1 : 0;
 //}
@@ -183,9 +183,9 @@ public class Hash{
 //  A supplied hash function appropriate to nul-terminated strings.
 //  Prefers table sizes that are prime numbers.
 //**************************************************************************/
-//unsigned int hash_fval_string(const void *vkey, unsigned int num_buckets)
+//unsigned int hash_fval_string(final void *vkey, unsigned int num_buckets)
 //{
-//  final String key = (const char*)vkey;
+//  final String key = (final char*)vkey;
 //  unsigned long result=0;
 //
 //  for (; *key != '\0'; key++) {
@@ -199,9 +199,9 @@ public class Hash{
 ///**************************************************************************
 //  A supplied function for comparison of nul-terminated strings:
 //**************************************************************************/
-//int hash_fcmp_string(const void *vkey1, const void *vkey2)
+//int hash_fcmp_string(final void *vkey1, final void *vkey2)
 //{
-//  return strcmp((const char*)vkey1, (const char*)vkey2);
+//  return strcmp((final char*)vkey1, (final char*)vkey2);
 //}
 //
 //
@@ -210,7 +210,7 @@ public class Hash{
 //  themselves; this way a void* (or, with casting, a long) can be used
 //  as a key, and also without having allocated space for it.
 //**************************************************************************/
-//unsigned int hash_fval_keyval(const void *vkey, unsigned int num_buckets)
+//unsigned int hash_fval_keyval(final void *vkey, unsigned int num_buckets)
 //{
 //  unsigned long result = ((unsigned long)vkey);
 //  return (result % num_buckets);
@@ -220,7 +220,7 @@ public class Hash{
 //  A supplied function for comparison of the raw void pointers (or,
 //  with casting, longs)
 //**************************************************************************/
-//int hash_fcmp_keyval(const void *vkey1, const void *vkey2)
+//int hash_fcmp_keyval(final void *vkey1, final void *vkey2)
 //{
 //  /* Simplicity itself. */
 //  return (vkey1 < vkey2) ? -1 : (vkey1 > vkey2) ? 1 : 0;
@@ -232,7 +232,7 @@ public class Hash{
 //  sequence A_n=3*2^n; to be used for table sizes.
 //**************************************************************************/
 //public static final int MIN_BUCKETS = 29; /* historical purposes */
-//static const unsigned long ht_sizes[] =
+//static final unsigned long ht_sizes[] =
 //{
 //  MIN_BUCKETS,          53,         97,           193, 
 //  389,       769,       1543,       3079,         6151,     
@@ -259,7 +259,7 @@ public class Hash{
 //**************************************************************************/
 //static unsigned int calc_appropriate_nbuckets(unsigned int num_entries)
 //{
-//  const unsigned long *pframe=&ht_sizes[0], *pmid;
+//  final unsigned long *pframe=&ht_sizes[0], *pmid;
 //  int fsize=NSIZES-1, lpart;
 //
 //  num_entries <<= 1; /* breathing room */
@@ -278,7 +278,7 @@ public class Hash{
 //}
 //
 ///**************************************************************************
-//  Internal constructor, specifying exact number of buckets:
+//  Internal finalructor, specifying exact number of buckets:
 //**************************************************************************/
 //static hash_table hash_new_nbuckets(hash_val_fn_t fval,
 //					    hash_cmp_fn_t fcmp,
@@ -307,7 +307,7 @@ public class Hash{
 //}
 //
 ///**************************************************************************
-//  Constructor specifying number of entries:
+//  finalructor specifying number of entries:
 //**************************************************************************/
 //hash_table hash_new_nentries(hash_val_fn_t fval, hash_cmp_fn_t fcmp,
 //				     unsigned int nentries)
@@ -316,7 +316,7 @@ public class Hash{
 //}
 //
 ///**************************************************************************
-//  Constructor with unspecified number of entries:
+//  finalructor with unspecified number of entries:
 //**************************************************************************/
 //hash_table hash_new(hash_val_fn_t fval, hash_cmp_fn_t fcmp)
 //{
@@ -430,8 +430,8 @@ public class Hash{
 //  know that the key is not in the table.  Use first such deleted
 //  to speed subsequent lookups on that key.)
 //**************************************************************************/
-//static hash_bucket internal_lookup(const hash_table h,
-//					   const void *key,
+//static hash_bucket internal_lookup(final hash_table h,
+//					   final void *key,
 //					   unsigned int hash_val)
 //{
 //  hash_bucket bucket;
@@ -474,7 +474,7 @@ public class Hash{
 //  Insert entry: returns 1 if inserted, or 0 if there was already an entry
 //  with the same key, in which case the entry was not inserted.
 //**************************************************************************/
-//boolean hash_insert(hash_table h, const void *key, const void *data)
+//boolean hash_insert(hash_table h, final void *key, final void *data)
 //{
 //  hash_bucket bucket;
 //  int hash_val;
@@ -502,11 +502,11 @@ public class Hash{
 //  Returns user-data of replaced entry if there was one, or null.
 //  (E.g. this allows caller to free or adjust data being replaced.)
 //**************************************************************************/
-//void *hash_replace(hash_table h, const void *key, const void *data)
+//void *hash_replace(hash_table h, final void *key, final void *data)
 //{
 //  hash_bucket bucket;
 //  int hash_val;
-//  const void *ret;
+//  final void *ret;
 //    
 //  hash_maybe_expand(h);
 //  hash_val = HASH_VAL(h, key);
@@ -532,7 +532,7 @@ public class Hash{
 //  Delete an entry with specified key.  Returns user-data of deleted
 //  entry, or null if not found.
 //**************************************************************************/
-//void *hash_delete_entry(hash_table h, const void *key)
+//void *hash_delete_entry(hash_table h, final void *key)
 //{
 //  return hash_delete_entry_full(h, key, null);
 //}
@@ -543,7 +543,7 @@ public class Hash{
 //  key that was used for the bucket (the caller may need to free this
 //  value).
 //**************************************************************************/
-//void *hash_delete_entry_full(hash_table h, const void *key,
+//void *hash_delete_entry_full(hash_table h, final void *key,
 //			     void **old_key)
 //{
 //  hash_bucket bucket;
@@ -551,7 +551,7 @@ public class Hash{
 //  hash_maybe_shrink(h);  
 //  bucket = internal_lookup(h, key, HASH_VAL(h,key));
 //  if (bucket.used == BUCKET_USED) {
-//    const void *ret = bucket.data;
+//    final void *ret = bucket.data;
 //
 //    if (old_key) {
 //      *old_key = (void *)bucket.key;
@@ -582,7 +582,7 @@ public class Hash{
 ///**************************************************************************
 //  Lookup: return existence:
 //**************************************************************************/
-//boolean hash_key_exists(const hash_table h, const void *key)
+//boolean hash_key_exists(final hash_table h, final void *key)
 //{
 //  hash_bucket bucket = internal_lookup(h, key, HASH_VAL(h,key));
 //  return (bucket.used == BUCKET_USED);
@@ -593,7 +593,7 @@ public class Hash{
 //  (Note that in other respects null is treated as a valid value, this is
 //  merely intended as a convenience when caller never uses null as value.)
 //**************************************************************************/
-//void *hash_lookup_data(const hash_table h, const void *key)
+//void *hash_lookup_data(final hash_table h, final void *key)
 //{
 //  hash_bucket bucket = internal_lookup(h, key, HASH_VAL(h,key));
 //  return ((bucket.used == BUCKET_USED) ? (void*)bucket.data : null);
@@ -602,15 +602,15 @@ public class Hash{
 ///**************************************************************************
 //  Accessor functions:
 //**************************************************************************/
-//unsigned int hash_num_entries(const hash_table h)
+//unsigned int hash_num_entries(final hash_table h)
 //{
 //  return h.num_entries;
 //}
-//unsigned int hash_num_buckets(const hash_table h)
+//unsigned int hash_num_buckets(final hash_table h)
 //{
 //  return h.num_buckets;
 //}
-//unsigned int hash_num_deleted(const hash_table h)
+//unsigned int hash_num_deleted(final hash_table h)
 //{
 //  return h.num_deleted;
 //}
@@ -619,7 +619,7 @@ public class Hash{
 //  Enumeration: returns the pointer to a key. The keys are returned in
 //  random order.
 //**************************************************************************/
-//const void *hash_key_by_number(const hash_table h,
+//final void *hash_key_by_number(final hash_table h,
 //			       unsigned int entry_number)
 //{
 //  unsigned int bucket_nr, counter = 0;
@@ -642,7 +642,7 @@ public class Hash{
 ///**************************************************************************
 //  Enumeration: returns the pointer to a value. 
 //**************************************************************************/
-//const void *hash_value_by_number(const hash_table h,
+//final void *hash_value_by_number(final hash_table h,
 //				 unsigned int entry_number)
 //{
 //  return hash_lookup_data(h, hash_key_by_number(h, entry_number));

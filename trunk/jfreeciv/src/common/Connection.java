@@ -1,42 +1,6 @@
 package common;
 
 public class Connection{
-
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <errno.h>
-//#include <string.h>
-//#include <time.h>
-//
-//#ifdef HAVE_SYS_TYPES_H
-//#include <sys/types.h>
-//#endif
-//#ifdef HAVE_SYS_SELECT_H
-///* For some platforms this must be below sys/types.h. */
-//#include <sys/select.h>
-//#endif
-//#ifdef HAVE_UNISTD_H
-//#include <unistd.h>
-//#endif
-//#ifdef HAVE_WINSOCK
-//#include <winsock.h>
-//#endif
-//
 //#include "fcintl.h"
 //#include "game.h"		/* game.all_connections */
 //#include "hash.h"
@@ -47,11 +11,146 @@ public class Connection{
 //#include "support.h"		/* mystr(n)casecmp */
 //
 //#include "connection.h"
+	/***********************************************************
+	  The connection struct represents a single client or server
+	  at the other end of a network connection.
+	***********************************************************/
+//	struct connection {
+	  public int id;			/* used for server/client communication */
+	  public int sock;
+	// bool used;
+	// bool established; /* have negotiated initial packets */
+	// struct player *player; /* NULL for connections not yet associated
+	// with a specific player */
+	// /*
+	// * connection is "observer", not controller; may be observing
+	// * specific player, or all (implementation incomplete).
+	// */
+	// bool observer;
+	// struct socket_packet_buffer *buffer;
+	// struct socket_packet_buffer *send_buffer;
+	// time_t last_write;
+
+	// double ping_time;
+
+	// struct Speclists<Connection> self; /* list with this connection as single element */
+	// char username[MAX_LEN_NAME];
+	// char addr[MAX_LEN_ADDR];
+
+	// /*
+	// * "capability" gives the capability string of the executable (be it
+	// * a client or server) at the other end of the connection.
+	// */
+	// char capability[MAX_LEN_CAPSTR];
+
+	// /*
+	// * "access_level" stores the access granted to the client
+	// * corresponding to this connection.
+	// */
+	// enum cmdlevel_id access_level;
+
+	// /*
+	// * Something has occurred that means the connection should be
+	// * closed, but the closing has been postponed.
+	// */
+	// bool delayed_disconnect;
+
+	// void (*notify_of_writable_data) (struct connection * pc,
+	// bool data_available_and_socket_full);
+
+	// struct {
+	// /*
+	// * Increases for every packet send to the server.
+	// */
+	// int last_request_id_used;
+
+	// /*
+	// * Increases for every received PACKET_PROCESSING_FINISHED packet.
+	// */
+	// int last_processed_request_id_seen;
+
+	// /*
+	// * Holds the id of the request which caused this packet. Can be
+	// * zero.
+	// */
+	// int request_id_of_currently_handled_packet;
+	// } client;
+
+	// struct {
+	// /*
+	// * Holds the id of the request which is processed now. Can be
+	// * zero.
+	// */
+	// int currently_processed_request_id;
+
+	// /*
+	// * Will increase for every received packet.
+	// */
+	// int last_request_id_seen;
+
+	// /*
+	// * The start times of the PACKET_CONN_PING which have been sent
+	// * but weren't PACKET_CONN_PONGed yet?
+	// */
+	// struct timer_list *ping_timers;
+
+	// /* Holds number of tries for authentication from client. */
+	// int auth_tries;
+
+	// /* the time that the server will respond after receiving an auth reply.
+	// * this is used to throttle the connection. Also used to reject a
+	// * connection if we've waited too long for a password. */
+	// time_t auth_settime;
+
+	// /* used to follow where the connection is in the authentication process
+	// */
+	// enum auth_status status;
+	// char password[MAX_LEN_PASSWORD];
+
+	// /* for reverse lookup and blacklisting in db */
+	// char ipaddr[MAX_LEN_ADDR];
+	// } server;
+
+	// /*
+	// * Called before an incoming packet is processed. The packet_type
+	// * argument should really be a "enum packet_type". However due
+	// * circular dependency this is impossible.
+	// */
+	// void (*incoming_packet_notify) (struct connection * pc,
+	// int packet_type, int size);
+
+	// /*
+	// * Called before a packet is sent. The packet_type argument should
+	// * really be a "enum packet_type". However due circular dependency
+	// * this is impossible.
+	// */
+	// void (*outgoing_packet_notify) (struct connection * pc,
+	// int packet_type, int size,
+	// int request_id);
+	// struct {
+	// struct hash_table **sent;
+	// struct hash_table **received;
+	// int *variant;
+	// } phs;
+
+	// #ifdef USE_COMPRESSION
+	// struct {
+	// int frozen_level;
+
+	// struct byte_vector queue;
+	//	  } compression;
+	//	  #endif
+	//	  struct {
+	//	  int bytes_send;
+	//	  } statistics;
+//	};
+
+	
 //
 ///* String used for connection.addr and related cases to indicate
 // * blank/unknown/not-applicable address:
 // */
-//const char blank_addr_str[] = "---.---.---.---";
+//final char blank_addr_str[] = "---.---.---.---";
 //
 ///* This is only used by the server.
 //   If it is set the disconnection of conns is posponed. This is sometimes
@@ -302,7 +401,7 @@ public class Connection{
 //...
 //**************************************************************************/
 //static boolean add_connection_data(connection pc,
-//				const unsigned char *data, int len)
+//				final unsigned char *data, int len)
 //{
 //  if (pc && pc.delayed_disconnect) {
 //    if (delayed_disconnect > 0) {
@@ -343,7 +442,7 @@ public class Connection{
 ///**************************************************************************
 //  write data to socket
 //**************************************************************************/
-//void send_connection_data(connection pc, const unsigned char *data,
+//void send_connection_data(connection pc, final unsigned char *data,
 //			  int len)
 //{
 //  if (pc && pc.used) {
@@ -398,17 +497,17 @@ public class Connection{
 ///**************************************************************************
 //  Convenience functions to buffer/unbuffer a list of connections:
 //**************************************************************************/
-//void conn_list_do_buffer(conn_list dest)
+//void conn_list_do_buffer(Speclists<Connection> dest)
 //{
 //  conn_list_iterate(*dest, pconn)
 //    connection_do_buffer(pconn);
-//  conn_list_iterate_end;
+//  }
 //}
-//void conn_list_do_unbuffer(conn_list dest)
+//void conn_list_do_unbuffer(Speclists<Connection> dest)
 //{
 //  conn_list_iterate(*dest, pconn)
 //    connection_do_unbuffer(pconn);
-//  conn_list_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -417,11 +516,11 @@ public class Connection{
 //***************************************************************/
 //connection find_conn_by_user(final String user_name)
 //{
-//  conn_list_iterate(game.all_connections, pconn) {
+//  for (conn pconn : game.all_connections.data) {
 //    if (mystrcasecmp(user_name, pconn.username)==0) {
 //      return pconn;
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //  return null;
 //}
 //
@@ -460,12 +559,12 @@ public class Connection{
 //***************************************************************/
 //connection find_conn_by_id(int id)
 //{
-//  conn_list_iterate(game.all_connections, pconn) {
+//  for (conn pconn : game.all_connections.data) {
 //    if (pconn.id == id) {
 //      return pconn;
 //    }
 //  }
-//  conn_list_iterate_end;
+//  }
 //  return null;
 //}
 //
@@ -506,7 +605,7 @@ public class Connection{
 //  pconn.name and pconn.addr contain empty string, and pconn.player
 //  is null: in this case return string "server".
 //**************************************************************************/
-//final String conn_description(const connection pconn)
+//final String conn_description(final connection pconn)
 //{
 //  static char buffer[MAX_LEN_NAME*2 + MAX_LEN_ADDR + 128];
 //
@@ -669,7 +768,7 @@ public class Connection{
 //    if (pc.phs.sent != null && pc.phs.sent[i] != null) {
 //      hash_table hash = pc.phs.sent[i];
 //      while (hash_num_entries(hash) > 0) {
-//	const void *key = hash_key_by_number(hash, 0);
+//	final void *key = hash_key_by_number(hash, 0);
 //	hash_delete_entry(hash, key);
 //	free((void *) key);
 //      }
@@ -677,7 +776,7 @@ public class Connection{
 //    if (pc.phs.received != null && pc.phs.received[i] != null) {
 //      hash_table hash = pc.phs.received[i];
 //      while (hash_num_entries(hash) > 0) {
-//	const void *key = hash_key_by_number(hash, 0);
+//	final void *key = hash_key_by_number(hash, 0);
 //	hash_delete_entry(hash, key);
 //	free((void *) key);
 //      }

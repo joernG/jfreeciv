@@ -142,7 +142,7 @@ public class Savegame{
 //                                                                            \
 //  boolean _warning_printed = false;                                            \
 //  for (_nat_y = 0; _nat_y < map.ysize; _nat_y++) {			    \
-//    const int nat_y = _nat_y;						    \
+//    final int nat_y = _nat_y;						    \
 //    final String _line = (SECFILE_LOOKUP_LINE);                              \
 //                                                                            \
 //    if (!_line || _line.length() != map.xsize) {                             \
@@ -169,7 +169,7 @@ public class Savegame{
 //      continue;                                                             \
 //    }                                                                       \
 //    for (_nat_x = 0; _nat_x < map.xsize; _nat_x++) {			    \
-//      const char ch = _line[_nat_x];                                        \
+//      final char ch = _line[_nat_x];                                        \
 //      tile ptile = native_pos_to_tile(_nat_x, _nat_y);		    \
 //                                                                            \
 //      (SET_XY_CHAR);                                                        \
@@ -185,7 +185,7 @@ public class Savegame{
 //"attributes watchtower rulesetdir client_worklists orders " \
 //"startunits turn_last_built improvement_order technology_order"
 //
-//static const char hex_chars[] = "0123456789abcdef";
+//static final char hex_chars[] = "0123456789abcdef";
 //
 ///***************************************************************
 //This returns an ascii hex value of the given half-byte of the binary
@@ -362,7 +362,7 @@ public class Savegame{
 //static char activity2char(enum unit_activity activity)
 //{
 //  switch (activity) {
-//  case ACTIVITY_IDLE:
+//  case unit_activity.ACTIVITY_IDLE:
 //    return 'w';
 //  case ACTIVITY_POLLUTION:
 //    return 'p';
@@ -382,7 +382,7 @@ public class Savegame{
 //    return 'l';
 //  case ACTIVITY_PILLAGE:
 //    return 'e';
-//  case ACTIVITY_GOTO:
+//  case unit_activity.ACTIVITY_GOTO:
 //    return 'g';
 //  case ACTIVITY_EXPLORE:
 //    return 'x';
@@ -429,7 +429,7 @@ public class Savegame{
 //of " a-f0-9:". The returned string has to be freed by the caller using
 //free().
 //***************************************************************/
-//static char *quote_block(const void *const data, int length)
+//static char *quote_block(final void *final data, int length)
 //{
 //  char *buffer = fc_malloc(length * 3 + 10);
 //  size_t offset;
@@ -450,7 +450,7 @@ public class Savegame{
 //unqoted data will be largern than dest_length the function aborts. It
 //returns the actual length of the unquoted block.
 //***************************************************************/
-//static int unquote_block(final String const quoted_, void *dest,
+//static int unquote_block(final String final quoted_, void *dest,
 //			 int dest_length)
 //{
 //  int i, length, parsed, tmp;
@@ -781,7 +781,7 @@ public class Savegame{
 // */
 //
 ///* old (~1.14.1) unit order in default/civ2/history ruleset */
-//static const char* old_default_unit_types[] = {
+//static final char* old_default_unit_types[] = {
 //  "Settlers",	"Engineers",	"Warriors",	"Phalanx",
 //  "Archers",	"Legion",	"Pikemen",	"Musketeers",
 //  "Fanatics",	"Partisan",	"Alpine Troops","Riflemen",
@@ -799,7 +799,7 @@ public class Savegame{
 //};
 //
 ///* old (~1.14.1) unit order in civ1 ruleset */
-//static const char* old_civ1_unit_types[] = {
+//static final char* old_civ1_unit_types[] = {
 //  "Settlers",	"Engineers",	"Militia",	"Phalanx",
 //  "Archers",	"Legion",	"Pikemen",	"Musketeers",
 //  "Fanatics",	"Partisan",	"Alpine Troops","Riflemen",
@@ -816,7 +816,7 @@ public class Savegame{
 //};
 //
 ///* old (1.14.1) improvement order in default ruleset */
-//const char* old_impr_types[] =
+//final char* old_impr_types[] =
 //{
 //  "Airport",		"Aqueduct",		"Bank",
 //  "Barracks",		"Barracks II",		"Barracks III",
@@ -851,7 +851,7 @@ public class Savegame{
 // * Nowadays we save A_FUTURE as "A_FUTURE", A_NONE as "A_NONE".
 // * A_UNSET as "A_UNSET" - they used to be saved as 198, 0 or -1, 0.
 // */
-//const char* old_default_techs[] = 
+//final char* old_default_techs[] = 
 //{
 //  "A_NONE",
 //  "Advanced Flight",	"Alphabet",		"Amphibious Warfare",
@@ -860,7 +860,7 @@ public class Savegame{
 //  "Ceremonial Burial",	"Chemistry",		"Chivalry",
 //  "Code of Laws",	"Combined Arms",	"Combustion",
 //  "Communism",		"Computers",		"Conscription",
-//  "Construction",	"Currency",		"Democracy",
+//  "finalruction",	"Currency",		"Democracy",
 //  "Economics",		"Electricity",		"Electronics",
 //  "Engineering",	"Environmentalism",	"Espionage",
 //  "Explosives",		"Feudalism",		"Flight",
@@ -887,13 +887,13 @@ public class Savegame{
 //};
 //
 ///* old (~1.14.1) government order in default, civ1, and history rulesets */
-//const char* old_default_governments[] = 
+//final char* old_default_governments[] = 
 //{
 //  "Anarchy", "Despotism", "Monarchy", "Communism", "Republic", "Democracy"
 //};
 //
 ///* old (~1.14.1) government order in the civ2 ruleset */
-//const char* old_civ2_governments[] =
+//final char* old_civ2_governments[] =
 //{
 //  "Anarchy", "Despotism", "Monarchy", "Communism", "Fundamentalism",
 //  "Republic", "Democracy"
@@ -901,12 +901,12 @@ public class Savegame{
 //
 ///****************************************************************************
 //  Nowadays unit types are saved by name, but old servers need the
-//  unit_type_id.  This function tries to find the correct _old_ id for the
+//  int.  This function tries to find the correct _old_ id for the
 //  unit's type.  It is used when the unit is saved.
 //****************************************************************************/
-//static int old_unit_type_id(Unit_Type_id type)
+//static int old_int(int type)
 //{
-//  const char** types;
+//  final char** types;
 //  int num_types, i;
 //
 //  if (strcmp(game.rulesetdir, "civ1") == 0) {
@@ -931,7 +931,7 @@ public class Savegame{
 ///****************************************************************************
 //  Convert an old-style unit type id into a unit type name.
 //****************************************************************************/
-//static const char* old_unit_type_name(int id)
+//static final char* old_unit_type_name(int id)
 //{
 //  /* before 1.15.0 unit types used to be saved by id */
 //  if (id < 0) {
@@ -978,7 +978,7 @@ public class Savegame{
 ///***************************************************************
 //  Convert old-style improvement type id into improvement type name
 //***************************************************************/
-//static const char* old_impr_type_name(int id)
+//static final char* old_impr_type_name(int id)
 //{
 //  /* before 1.15.0 improvement types used to be saved by id */
 //  if (id < 0 || id >= ARRAY_SIZE(old_impr_types)) {
@@ -1030,7 +1030,7 @@ public class Savegame{
 //****************************************************************************/
 //static int old_tech_id(Tech_Type_id tech)
 //{
-//  const char* technology_name;
+//  final char* technology_name;
 //  int i;
 //  
 //  /* old (1.14.1) servers used to save it as 0 and interpret it from context */
@@ -1065,7 +1065,7 @@ public class Savegame{
 ///****************************************************************************
 //  Convert an old-style technology id into a tech name.
 //****************************************************************************/
-//static const char* old_tech_name(int id)
+//static final char* old_tech_name(int id)
 //{
 //  /* This was 1.14.1 value for A_FUTURE */
 //  if (id == 198) {
@@ -1132,10 +1132,10 @@ public class Savegame{
 //  is too old) load from path.
 //*****************************************************************************/
 //static Tech_Type_id load_technology(section_file file,
-//                                    const char* path, int plrno)
+//                                    final char* path, int plrno)
 //{
 //  char path_with_name[128];
-//  const char* name;
+//  final char* name;
 //  int id;
 //  
 //  my_snprintf(path_with_name, sizeof(path_with_name), 
@@ -1174,10 +1174,10 @@ public class Savegame{
 //  compatibility in path(by number).
 //*****************************************************************************/
 //static void save_technology(section_file file,
-//                            const char* path, int plrno, Tech_Type_id tech)
+//                            final char* path, int plrno, Tech_Type_id tech)
 //{
 //  char path_with_name[128];
-//  const char* name;
+//  final char* name;
 // 
 //  my_snprintf(path_with_name, sizeof(path_with_name), 
 //              "%s_name", path);
@@ -1210,7 +1210,7 @@ public class Savegame{
 //****************************************************************************/
 //static int old_government_id(government gov)
 //{
-//  const char** names;
+//  final char** names;
 //  int num_names, i;
 //
 //  if (strcmp(game.rulesetdir, "civ2") == 0) {
@@ -1235,7 +1235,7 @@ public class Savegame{
 ///****************************************************************************
 //  Convert an old-style government index into a government name.
 //****************************************************************************/
-//static const char* old_government_name(int id)
+//static final char* old_government_name(int id)
 //{
 //  /* before 1.15.0 governments used to be saved by index */
 //  if (id < 0) {
@@ -1272,7 +1272,7 @@ public class Savegame{
 //  char namepath[64];
 //  int i;
 //  boolean end = false;
-//  const char* name;
+//  final char* name;
 //
 //  sz_strlcpy(efpath, path);
 //  sz_strlcat(efpath, ".wlef%d");
@@ -1293,7 +1293,7 @@ public class Savegame{
 //      name = secfile_lookup_str_default(file, null, namepath, plrno, wlinx, i);
 //
 //      if (pwl.wlefs[i] == WEF_UNIT) {
-//	Unit_Type_id type;
+//	int type;
 //
 //	if (!name) {
 //	    /* before 1.15.0 unit types used to be saved by id */
@@ -1346,7 +1346,7 @@ public class Savegame{
 //{
 //  int i, id;
 //  boolean end = false;
-//  const char* name;
+//  final char* name;
 //
 //  for (i = 0; i < MAX_LEN_WORKLIST; i++) {
 //    if (end) {
@@ -1396,8 +1396,8 @@ public class Savegame{
 //    unit punit;
 //    city pcity;
 //    int nat_x, nat_y;
-//    const char* type_name;
-//    Unit_Type_id type;
+//    final char* type_name;
+//    int type;
 //    
 //    type_name = secfile_lookup_str_default(file, null, 
 //                                           "player%d.u%d.type_by_name",
@@ -1447,14 +1447,14 @@ public class Savegame{
 //    punit.fuel = secfile_lookup_int(file, "player%d.u%d.fuel", plrno, i);
 //    activity = secfile_lookup_int(file, "player%d.u%d.activity", plrno, i);
 //    if (activity == ACTIVITY_PATROL_UNUSED) {
-//      /* Previously ACTIVITY_PATROL and ACTIVITY_GOTO were used for
+//      /* Previously ACTIVITY_PATROL and unit_activity.ACTIVITY_GOTO were used for
 //       * client-side goto.  Now client-side goto is handled by setting
-//       * a special flag, and units with orders generally have ACTIVITY_IDLE.
+//       * a special flag, and units with orders generally have unit_activity.ACTIVITY_IDLE.
 //       * Old orders are lost.  Old client-side goto units will still have
-//       * ACTIVITY_GOTO and will goto the correct position via server goto.
+//       * unit_activity.ACTIVITY_GOTO and will goto the correct position via server goto.
 //       * Old client-side patrol units lose their patrol routes and are put
 //       * into idle mode. */
-//      activity = ACTIVITY_IDLE;
+//      activity = unit_activity.ACTIVITY_IDLE;
 //    }
 //    set_unit_activity(punit, activity);
 //
@@ -1871,7 +1871,7 @@ public class Savegame{
 //					     "player%d.reputation", plrno);
 //  for (i=0; i < game.nplayers; i++) {
 //    plr.diplstates[i].type = 
-//      secfile_lookup_int_default(file, DS_WAR,
+//      secfile_lookup_int_default(file, diplstate_type.DS_WAR,
 //				 "player%d.diplstate%d.type", plrno, i);
 //    plr.diplstates[i].turns_left = 
 //      secfile_lookup_int_default(file, -2,
@@ -1960,7 +1960,7 @@ public class Savegame{
 //    int nat_x = secfile_lookup_int(file, "player%d.c%d.x", plrno, i);
 //    int nat_y = secfile_lookup_int(file, "player%d.c%d.y", plrno, i);
 //    tile ptile = native_pos_to_tile(nat_x, nat_y);
-//    const char* name;
+//    final char* name;
 //    int id, k;
 //
 //    pcity = create_city_virtual(plr, ptile,
@@ -2388,7 +2388,7 @@ public class Savegame{
 //  for (i = 0; i < MAX_LEN_WORKLIST; i++) {
 //    secfile_insert_int(file, pwl.wlefs[i], efpath, plrno, wlinx, i);
 //    if (pwl.wlefs[i] == WEF_UNIT) {
-//      secfile_insert_int(file, old_unit_type_id(pwl.wlids[i]), idpath,
+//      secfile_insert_int(file, old_int(pwl.wlids[i]), idpath,
 //			 plrno, wlinx, i);
 //      secfile_insert_str(file, unit_name_orig(pwl.wlids[i]), namepath, plrno,
 //			 wlinx, i);
@@ -2603,7 +2603,7 @@ public class Savegame{
 //		     plrno);
 //
 //  i = -1;
-//  unit_list_iterate(plr.units, punit) {
+//  for (unit punit : plr.units.data) {
 //    i++;
 //    secfile_insert_int(file, punit.id, "player%d.u%d.id", plrno, i);
 //    secfile_insert_int(file, punit.tile.nat_x, "player%d.u%d.x", plrno, i);
@@ -2616,7 +2616,7 @@ public class Savegame{
 //    secfile_insert_int(file, punit.homecity, "player%d.u%d.homecity",
 //				plrno, i);
 //    /* .type is actually kept only for forward compatibility */
-//    secfile_insert_int(file, old_unit_type_id(punit.type),
+//    secfile_insert_int(file, old_int(punit.type),
 //		       "player%d.u%d.type",
 //		       plrno, i);
 //    secfile_insert_str(file, unit_name_orig(punit.type),
@@ -2711,10 +2711,10 @@ public class Savegame{
 //			 "player%d.u%d.activity_list", plrno, i);
 //    }
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  i = -1;
-//  city_list_iterate(plr.cities, pcity) {
+//  for (city pcity : plr.cities.data) {
 //    int j, x, y;
 //    char buf[512];
 //
@@ -2746,7 +2746,7 @@ public class Savegame{
 //    secfile_insert_bool(file, pcity.changed_from_is_unit,
 //		       "player%d.c%d.changed_from_is_unit", plrno, i);
 //    if (pcity.changed_from_is_unit) {
-//      secfile_insert_int(file, old_unit_type_id(pcity.changed_from_id),
+//      secfile_insert_int(file, old_int(pcity.changed_from_id),
 //		         "player%d.c%d.changed_from_id", plrno, i);
 //      secfile_insert_str(file, unit_name_orig(pcity.changed_from_id),
 //                         "player%d.c%d.changed_from_name", plrno, i);
@@ -2802,7 +2802,7 @@ public class Savegame{
 //    secfile_insert_bool(file, pcity.is_building_unit, 
 //		       "player%d.c%d.is_building_unit", plrno, i);
 //    if (pcity.is_building_unit) {
-//      secfile_insert_int(file, old_unit_type_id(pcity.currently_building), 
+//      secfile_insert_int(file, old_int(pcity.currently_building), 
 //		         "player%d.c%d.currently_building", plrno, i);
 //      secfile_insert_str(file, unit_name_orig(pcity.currently_building),
 //                         "player%d.c%d.currently_building_name", plrno, i);
@@ -2840,7 +2840,7 @@ public class Savegame{
 //    secfile_insert_int(file, pcity.ai.urgency,
 //		       "player%d.c%d.ai.urgency", plrno, i);
 //  }
-//  city_list_iterate_end;
+//  }
 //
 //  /********** Put the players private map **********/
 // /* Otherwise the player can see all, and there's no reason to save the private map. */
@@ -2958,22 +2958,22 @@ public class Savegame{
 //
 //  players_iterate(pplayer) {
 //    /* to avoid junk values for unsupported units: */
-//    unit_list_iterate(pplayer.units, punit) {
+//    for (unit punit : pplayer.units.data) {
 //      punit.ord_city = 0;
-//    } unit_list_iterate_end;
-//    city_list_iterate(pplayer.cities, pcity) {
+//    } }
+//    for (city pcity : pplayer.cities.data) {
 //      j = 0;
-//      unit_list_iterate(pcity.units_supported, punit) {
+//      for (unit punit : pcity.units_supported.data) {
 //	punit.ord_city = j++;
-//      } unit_list_iterate_end;
-//    } city_list_iterate_end;
+//      } }
+//    } }
 //  } players_iterate_end;
 //
 //  whole_map_iterate(ptile) {
 //    j = 0;
-//    unit_list_iterate(ptile.units, punit) {
+//    for (unit punit : ptile.units.data) {
 //      punit.ord_map = j++;
-//    } unit_list_iterate_end;
+//    } }
 //  } whole_map_iterate_end;
 //}
 //
@@ -2984,10 +2984,10 @@ public class Savegame{
 //static void apply_unit_ordering()
 //{
 //  players_iterate(pplayer) {
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      unit_list_sort_ord_city(&pcity.units_supported);
 //    }
-//    city_list_iterate_end;
+//    }
 //  } players_iterate_end;
 //
 //  whole_map_iterate(ptile) {
@@ -3051,7 +3051,7 @@ public class Savegame{
 //  int improvement_order_size = 0;
 //  char** technology_order = null;
 //  int technology_order_size = 0;
-//  const char* name;
+//  final char* name;
 //
 //  game.version = secfile_lookup_int_default(file, 0, "game.version");
 //  tmp_server_state = (enum server_states)
@@ -3524,16 +3524,16 @@ public class Savegame{
 //
 //    /* Make sure everything is consistent. */
 //    players_iterate(pplayer) {
-//      unit_list_iterate(pplayer.units, punit) {
+//      for (unit punit : pplayer.units.data) {
 //	if (!can_unit_continue_current_activity(punit)) {
 //	  freelog(LOG_ERROR, "ERROR: Unit doing illegal activity in savegame!");
-//	  punit.activity = ACTIVITY_IDLE;
+//	  punit.activity = unit_activity.ACTIVITY_IDLE;
 //	}
-//      } unit_list_iterate_end;
+//      } }
 //
-//      city_list_iterate(pplayer.cities, pcity) {
+//      for (city pcity : pplayer.cities.data) {
 //	check_city(pcity);
-//      } city_list_iterate_end;
+//      } }
 //    } players_iterate_end;
 //  } else {
 //    game.nplayers = 0;
@@ -3564,7 +3564,7 @@ public class Savegame{
 //
 //  /* Fix ferrying sanity */
 //  players_iterate(pplayer) {
-//    unit_list_iterate_safe(pplayer.units, punit) {
+//    for (unit punit : pplayer.units.data) {
 //      unit ferry = find_unit_by_id(punit.transported_by);
 //
 //      if (is_ocean(map_get_terrain(punit.tile))
@@ -3573,7 +3573,7 @@ public class Savegame{
 //                pplayer.name, unit_name(punit.type), TILE_XY(punit.tile));
 //        bounce_unit(punit, true);
 //      }
-//    } unit_list_iterate_safe_end;
+//    }
 //  } players_iterate_end;
 //
 //  /* Fix stacking issues.  We don't rely on the savegame preserving
@@ -3636,7 +3636,7 @@ public class Savegame{
 //   * so we can not save the order.
 //   */
 //  if (game.num_impr_types > 0) {
-//    const char* buf[game.num_impr_types];
+//    final char* buf[game.num_impr_types];
 //    impr_type_iterate(id) {
 //      buf[id] = get_improvement_name_orig(id);
 //    } impr_type_iterate_end;
@@ -3648,7 +3648,7 @@ public class Savegame{
 //   * order. If the game isn't started advances aren't loaded 
 //   * so we can not save the order. */
 //  if (game.num_tech_types > 0) {
-//    const char* buf[game.num_tech_types];
+//    final char* buf[game.num_tech_types];
 //    tech_type_iterate(tech) {
 //      if (tech == A_NONE) {
 //        buf[tech] = "A_NONE";

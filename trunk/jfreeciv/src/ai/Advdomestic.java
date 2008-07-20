@@ -43,7 +43,7 @@ public class Advdomestic{
 //#include "advdomestic.h"
 //
 ///***************************************************************************
-// * Evaluate the need for units (like caravans) that aid wonder construction.
+// * Evaluate the need for units (like caravans) that aid wonder finalruction.
 // * If another city is building wonder and needs help but pplayer is not
 // * advanced enough to build caravans, the corresponding tech will be 
 // * stimulated.
@@ -53,13 +53,13 @@ public class Advdomestic{
 //{
 //  player pplayer = city_owner(pcity);
 //  /* Continent where the city is --- we won't be aiding any wonder 
-//   * construction on another continent */
+//   * finalruction on another continent */
 //  Continent_id continent = map_get_continent(pcity.tile);
 //  /* Total count of caravans available or already being built 
 //   * on this continent */
 //  int caravans = 0;
 //  /* The type of the caravan */
-//  Unit_Type_id unit_type;
+//  int unit_type;
 //
 //  if (num_role_units(F_HELP_WONDER) == 0) {
 //    /* No such units available in the ruleset */
@@ -67,14 +67,14 @@ public class Advdomestic{
 //  }
 //
 //  /* Count existing caravans */
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (unit_flag(punit, F_HELP_WONDER)
 //        && map_get_continent(punit.tile) == continent)
 //      caravans++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* Count caravans being built */
-//  city_list_iterate(pplayer.cities, acity) {
+//  for (city acity : pplayer.cities.data) {
 //    if (acity.is_building_unit
 //        && unit_type_flag(acity.currently_building, F_HELP_WONDER)
 //        && (acity.shield_stock
@@ -82,11 +82,11 @@ public class Advdomestic{
 //        && map_get_continent(acity.tile) == continent) {
 //      caravans++;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  /* Check all wonders in our cities being built, if one isn't worth a little
 //   * help */
-//  city_list_iterate(pplayer.cities, acity) {  
+//  for (city acity : pplayer.cities.data) {  
 //    unit_type = best_role_unit(pcity, F_HELP_WONDER);
 //    
 //    if (unit_type == U_LAST) {
@@ -135,7 +135,7 @@ public class Advdomestic{
 //        pplayer.ai.tech_want[tech_req] += want;
 //      }
 //    }
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///************************************************************************** 
@@ -149,7 +149,7 @@ public class Advdomestic{
 //  /* Government of the player */
 //  government gov = get_gov_pplayer(pplayer);
 //  /* Unit type with certain role */
-//  Unit_Type_id unit_type;
+//  int unit_type;
 //  /* Food surplus assuming that workers and elvii are already accounted for
 //   * and properly balanced. */
 //  int est_food = pcity.food_surplus
@@ -214,7 +214,7 @@ public class Advdomestic{
 //    struct ai_choice cur;
 //
 //    init_choice(&cur);
-//    /* Consider building caravan-type units to aid wonder construction */  
+//    /* Consider building caravan-type units to aid wonder finalruction */  
 //    ai_choose_help_wonder(pcity, &cur);
 //    copy_if_better_choice(&cur, choice);
 //

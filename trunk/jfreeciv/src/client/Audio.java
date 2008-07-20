@@ -67,7 +67,7 @@ public class Audio{
 //***********************************************************************/
 //final String*get_soundplugin_list()
 //{
-//  static const char* plugin_list[MAX_NUM_PLUGINS + 1];
+//  static final char* plugin_list[MAX_NUM_PLUGINS + 1];
 //  int i;
 //  
 //  for (i = 0; i < num_plugins_used; i++) {
@@ -110,7 +110,7 @@ public class Audio{
 ///**************************************************************************
 //  Choose plugin. Returns true on success, false if not
 //**************************************************************************/
-//boolean audio_select_plugin(final String const name)
+//boolean audio_select_plugin(final String final name)
 //{
 //  int i;
 //  boolean found = false;
@@ -206,8 +206,8 @@ public class Audio{
 ///**************************************************************************
 //  Initialize audio system and autoselect a plugin
 //**************************************************************************/
-//void audio_real_init(final String const spec_name,
-//		     final String const prefered_plugin_name)
+//void audio_real_init(final String final spec_name,
+//		     final String final prefered_plugin_name)
 //{
 //  final String filename;
 //  char *file_capstr;
@@ -331,7 +331,7 @@ public class Audio{
 ///**************************************************************************
 //  Play an audio sample as suggested by sound tags
 //**************************************************************************/
-//void audio_play_sound(final String const tag, char *const alt_tag)
+//void audio_play_sound(final String final tag, char *final alt_tag)
 //{
 //  char *pretty_alt_tag = alt_tag ? alt_tag : "(null)";
 //
@@ -349,7 +349,7 @@ public class Audio{
 ///**************************************************************************
 //  Loop sound sample as suggested by sound tags
 //**************************************************************************/
-//void audio_play_music(final String const tag, char *const alt_tag)
+//void audio_play_music(final String final tag, char *final alt_tag)
 //{
 //  char *pretty_alt_tag = alt_tag ? alt_tag : "(null)";
 //

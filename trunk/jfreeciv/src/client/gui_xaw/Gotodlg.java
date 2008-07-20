@@ -232,7 +232,7 @@ public class Gotodlg{
 //      }
 //      city_name_ptrs[j++]=mystrdup(name);
 //    }
-//    city_list_iterate_end;
+//    }
 //  }
 //
 //  if(ncities_total) {

@@ -115,7 +115,7 @@ public class Spacerace{
 //  if src is null) to specified destinations.  If dest is null then
 //  game.game_connections is used.
 //**************************************************************************/
-//void send_spaceship_info(player src, conn_list dest)
+//void send_spaceship_info(player src, Speclists<Connection> dest)
 //{
 //  int j;
 //

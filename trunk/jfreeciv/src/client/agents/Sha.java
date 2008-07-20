@@ -35,7 +35,7 @@ public class Sha{
 //**************************************************************************/
 //
 //static tile previous_tiles = null;
-//static struct unit_list previous_units;
+//static Speclists<unit> previous_units;
 //
 ///**************************************************************************
 //...

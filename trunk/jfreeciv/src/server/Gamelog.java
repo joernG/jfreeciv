@@ -464,16 +464,16 @@ public class Gamelog{
 //    {
 //      int food = 0, shields = 0, trade = 0, settlers = 0;
 //
-//      unit_list_iterate(pplayer.units, punit) {
+//      for (unit punit : pplayer.units.data) {
 //        if (unit_flag(punit, F_CITIES)) {
 //          settlers++;
 //        }
-//      } unit_list_iterate_end;
-//      city_list_iterate(pplayer.cities, pcity) {
+//      } }
+//      for (city pcity : pplayer.cities.data) {
 //        shields += pcity.shield_prod;
 //        food += pcity.food_prod;
 //        trade += pcity.trade_prod;
-//      } city_list_iterate_end;
+//      } }
 //
 //      my_snprintf(buf, sizeof(buf), "<n>%d</n><cities>%d</cities>"
 //                  "<pop>%d</pop><food>%d</food><prod>%d</prod>"
@@ -605,10 +605,10 @@ public class Gamelog{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//static int secompare1(const void *a, const void *b)
+//static int secompare1(final void *a, final void *b)
 //{
-//  return (((const player_score_entry )b).value -
-//	  ((const player_score_entry )a).value);
+//  return (((final player_score_entry )b).value -
+//	  ((final player_score_entry )a).value);
 //}
 //
 ///**************************************************************************

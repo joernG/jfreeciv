@@ -42,7 +42,7 @@ public class Capability{
 // * are allowed to start with a "+", but the capability in cap must not.
 // */
 //static boolean my_has_capability(final String cap, final String capstr,
-//			     const size_t cap_len)
+//			     final size_t cap_len)
 //{
 //  final String next;
 //

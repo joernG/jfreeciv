@@ -163,7 +163,7 @@ public class Aihand{
 //    cmp.factor[FOOD] = 20;
 //    cmp.minimal_surplus[GOLD] = -FC_INFINITY;
 //
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      cm_clear_cache(pcity);
 //      cm_query_result(pcity, &cmp, &cmr); /* burn some CPU */
 //
@@ -178,12 +178,12 @@ public class Aihand{
 //      } else {
 //        pcity.ai.celebrate = false;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //    /* If more than half our cities can celebrate, go for it! */
 //    celebrate = (can_celebrate * 2 > total_cities);
 //    if (celebrate) {
 //      freelog(LOGLEVEL_TAX, "*** %s CELEBRATES! ***", pplayer.name);
-//      city_list_iterate(pplayer.cities, pcity) {
+//      for (city pcity : pplayer.cities.data) {
 //        if (pcity.ai.celebrate == true) {
 //          freelog(LOGLEVEL_TAX, "setting %s to celebrate", pcity.name);
 //          cm_query_result(pcity, &cmp, &cmr);
@@ -195,17 +195,17 @@ public class Aihand{
 //            }
 //          }
 //        }
-//      } city_list_iterate_end;
+//      } }
 //    } else {
 //      pplayer.economic.luxury = luxrate;
 //      pplayer.economic.science = scirate;
-//      city_list_iterate(pplayer.cities, pcity) {
+//      for (city pcity : pplayer.cities.data) {
 //        /* KLUDGE: Must refresh to restore the original values which 
 //         * were clobbered in cm_query_result, after the tax rates 
 //         * were changed.  This is because the cm_query_result() calls
 //         * generic_city_refresh(). */
 //        generic_city_refresh(pcity, true, null);
-//      } city_list_iterate_end;
+//      } }
 //    }
 //  }
 //
@@ -272,15 +272,15 @@ public class Aihand{
 //      /* Ideally we should change tax rates here, but since
 //       * this is a rather big CPU operation, we'd rather not. */
 //      check_player_government_rates(pplayer);
-//      city_list_iterate(pplayer.cities, acity) {
+//      for (city acity : pplayer.cities.data) {
 //        acity.ai.celebrate = false;
 //	/* This isn't strictly necessary since it's done in aaw. */
 //        generic_city_refresh(acity, true, null);
 //        auto_arrange_workers(acity);
-//      } city_list_iterate_end;
-//      city_list_iterate(pplayer.cities, pcity) {
+//      } }
+//      for (city pcity : pplayer.cities.data) {
 //        val += ai_eval_calc_city(pcity, ai);
-//      } city_list_iterate_end;
+//      } }
 //
 //      /* Bonuses for non-economic abilities. We increase val by
 //       * a very small amount here to choose govt in cases where
@@ -314,11 +314,11 @@ public class Aihand{
 //    } government_iterate_end;
 //    /* Now reset our gov to it's real state. */
 //    pplayer.government = current_gov;
-//    city_list_iterate(pplayer.cities, acity) {
+//    for (city acity : pplayer.cities.data) {
 //      /* This isn't strictly necessary since it's done in aaw. */
 //      generic_city_refresh(acity, true, null);
 //      auto_arrange_workers(acity);
-//    } city_list_iterate_end;
+//    } }
 //    ai.govt_reeval = CLIP(5, city_list_size(&pplayer.cities), 20);
 //  }
 //  ai.govt_reeval--;

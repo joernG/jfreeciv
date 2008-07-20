@@ -44,7 +44,7 @@ public class Gui_main{
 //
 //client_option gui_options[] = {
 //};
-//const int num_gui_options = ARRAY_SIZE(gui_options);
+//final int num_gui_options = ARRAY_SIZE(gui_options);
 //
 //sw_widget root_window;
 //
@@ -139,7 +139,7 @@ public class Gui_main{
 //  ...
 //**************************************************************************/
 //static boolean my_key_handler(sw_widget widget,
-//			   const be_key key, void *data)
+//			   final be_key key, void *data)
 //{
 //  if (key.type == BE_KEY_NORMAL && key.key == '\'') {
 //    chat_popup_input();

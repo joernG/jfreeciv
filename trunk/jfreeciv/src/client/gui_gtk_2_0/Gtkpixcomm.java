@@ -79,7 +79,7 @@ public class Gtkpixcomm{
 //  static GtkType pixcomm_type = 0;
 //
 //  if (!pixcomm_type) {
-//    static const GTypeInfo pixcomm_info = {
+//    static final GTypeInfo pixcomm_info = {
 //      sizeof(GtkPixcommClass),
 //      null,		/* base_init */
 //      null,		/* base_finalize */
@@ -240,7 +240,7 @@ public class Gtkpixcomm{
 //
 //    /* draw! */
 //    for (i = 0; i < p.actions.len; i++) {
-//      const op rop = &g_array_index(p.actions, struct op, i);
+//      final op rop = &g_array_index(p.actions, struct op, i);
 //
 //      switch (rop.type) {
 //      case OP_FILL:

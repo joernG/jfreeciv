@@ -111,7 +111,7 @@ public class Mapgen{
 ///***************************************************************************
 //  Checks if the given location satisfy some wetness condition
 //***************************************************************************/
-//static boolean test_wetness(const tile ptile, wetness_c c)
+//static boolean test_wetness(final tile ptile, wetness_c c)
 //{
 //  switch(c) {
 //  case WC_ALL:
@@ -128,7 +128,7 @@ public class Mapgen{
 ///***************************************************************************
 //  Checks if the given location satisfy some miscellaneous condition
 //***************************************************************************/
-//static boolean test_miscellaneous(const tile ptile, miscellaneous_c c)
+//static boolean test_miscellaneous(final tile ptile, miscellaneous_c c)
 //{
 //  switch(c) {
 //  case MC_NONE:
@@ -155,9 +155,9 @@ public class Mapgen{
 //  A filter function to be passed to rand_map_pos_filtered().  See
 //  rand_map_pos_characteristic for more explanation.
 //****************************************************************************/
-//static boolean condition_filter(const tile ptile, const void *data)
+//static boolean condition_filter(final tile ptile, final void *data)
 //{
-//  const DataFilter filter = data;
+//  final DataFilter filter = data;
 //
 //  return  not_placed(ptile) 
 //       && tmap_is(ptile, filter.tc) 
@@ -991,7 +991,7 @@ public class Mapgen{
 //**************************************************************************/
 //static void print_mapgen_map()
 //{
-//  const int loglevel = LOG_DEBUG;
+//  final int loglevel = LOG_DEBUG;
 //  int terrain_count[T_COUNT];
 //  int total = 0;
 //
@@ -1292,8 +1292,8 @@ public class Mapgen{
 //Returns a random position in the rectangle denoted by the given state.
 //**************************************************************************/
 //static tile get_random_map_position_from_state(
-//					       const struct gen234_state
-//					       *const pstate)
+//					       final struct gen234_state
+//					       *final pstate)
 //{
 //  int xn, yn;
 //
@@ -1318,7 +1318,7 @@ public class Mapgen{
 //			Terrain_type_id warm1,
 //			Terrain_type_id cold0,
 //			Terrain_type_id cold1,
-//			const gen234_state const pstate)
+//			final gen234_state final pstate)
 //{
 //  int i, k, capac;
 //  long int failsafe;
@@ -1375,7 +1375,7 @@ public class Mapgen{
 //  fill an island with rivers
 //**************************************************************************/
 //static void fill_island_rivers(int coast, long int *bucket,
-//			       const gen234_state const pstate)
+//			       final gen234_state final pstate)
 //{
 //  int i, k, capac;
 //  long int failsafe;
@@ -1749,7 +1749,7 @@ public class Mapgen{
 //  int i;
 //  boolean done = false;
 //  int spares= 1; 
-//  /* constant that makes up that an island actually needs additional space */
+//  /* finalant that makes up that an island actually needs additional space */
 //
 //  /* put 70% of land in big continents, 
 //   *     20% in medium, and 

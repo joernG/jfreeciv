@@ -84,7 +84,7 @@ public class Inteldlg{
 //    TYPED_LIST_ITERATE(struct intel_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 ///******************************************************************/
 //
@@ -101,11 +101,11 @@ public class Inteldlg{
 //    dialog_list_has_been_initialised = true;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pplayer == pplayer) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -311,7 +311,7 @@ public class Inteldlg{
 //    }
 //
 //    players_iterate(other) {
-//      const player_diplstate state;
+//      final player_diplstate state;
 //      GtkTreeIter it;
 //      GValue v = { 0, };
 //

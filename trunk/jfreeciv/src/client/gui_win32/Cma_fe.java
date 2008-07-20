@@ -79,7 +79,7 @@ public class Cma_fe{
 //
 //static void handle_hscroll(HWND win, HWND winctl, UINT code, int pos);
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 //static int allow_refreshes = 1;
 //
@@ -102,11 +102,11 @@ public class Cma_fe{
 //{
 //  ensure_initialised_dialog_list();
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pcity == pcity) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -226,7 +226,7 @@ public class Cma_fe{
 // called to adjust the sliders when a preset is selected
 // notice that we don't want to call update_result here. 
 //*****************************************************************/
-//static void set_hscales(const cm_parameter const parameter,
+//static void set_hscales(final cm_parameter final parameter,
 //                        cma_dialog pdialog)
 //{
 //  int i;
@@ -321,7 +321,7 @@ public class Cma_fe{
 //static void cma_select_preset_callback(cma_dialog pdialog)
 //{
 //  int preset_index = ListBox_GetCurSel(pdialog.preset_list);
-//  const cm_parameter pparam;
+//  final cm_parameter pparam;
 //  
 //  if (preset_index == LB_ERR)
 //    return;

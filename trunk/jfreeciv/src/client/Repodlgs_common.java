@@ -53,13 +53,13 @@ public class Repodlgs_common{
 //  impr_type_iterate(impr_id) {
 //    if (!is_wonder(impr_id)) {
 //      int count = 0, cost = 0;
-//      city_list_iterate(game.player_ptr.cities, pcity) {
+//      for (city pcity : game.player_ptr.cities.data) {
 //	if (city_got_building(pcity, impr_id)) {
 //	  count++;
 //	  cost += improvement_upkeep(pcity, impr_id);
 //	}
 //      }
-//      city_list_iterate_end;
+//      }
 //
 //      if (count == 0) {
 //	continue;
@@ -82,12 +82,12 @@ public class Repodlgs_common{
 //
 //  *total_income = 0;
 //
-//  city_list_iterate(game.player_ptr.cities, pcity) {
+//  for (city pcity : game.player_ptr.cities.data) {
 //    *total_income += pcity.tax_total;
-//    if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //      *total_income += MAX(0, pcity.shield_surplus);
 //    }
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///******************************************************************
@@ -111,16 +111,16 @@ public class Repodlgs_common{
 //    count = 0;
 //    partial_cost = 0;
 //
-//    city_list_iterate(game.player_ptr.cities, pcity) {
-//      unit_list_iterate(pcity.units_supported, punit) {
+//    for (city pcity : game.player_ptr.cities.data) {
+//      for (unit punit : pcity.units_supported.data) {
 //
 //	if (punit.type == utype) {
 //	  count++;
 //	  partial_cost += punit.upkeep_gold;
 //	}
 //
-//      } unit_list_iterate_end;
-//    } city_list_iterate_end;
+//      } }
+//    } }
 //
 //    if (count == 0) {
 //      continue;
@@ -320,7 +320,7 @@ public class Repodlgs_common{
 //    return;
 //  }
 //
-//  city_list_iterate(game.player_ptr.cities, pcity) {
+//  for (city pcity : game.player_ptr.cities.data) {
 //    if (!pcity.did_sell && city_got_building(pcity, impr)
 //	&& (!obsolete_only
 //	    || improvement_obsolete(game.player_ptr, impr)
@@ -329,7 +329,7 @@ public class Repodlgs_common{
 //      gold += impr_sell_gold(impr);
 //      city_sell_improvement(pcity, impr);
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  if (count > 0) {
 //    my_snprintf(message, message_sz, "Sold %d %s for %d gold.",
@@ -347,7 +347,7 @@ public class Repodlgs_common{
 //  The "message" string will be filled with a GUI-friendly message about
 //  what was sold.
 //****************************************************************************/
-//void disband_all_units(Unit_Type_id type, boolean in_cities_only,
+//void disband_all_units(int type, boolean in_cities_only,
 //		       char *message, size_t message_sz)
 //{
 //  int count = 0;
@@ -364,10 +364,10 @@ public class Repodlgs_common{
 //    return;
 //  }
 //
-//  city_list_iterate(game.player_ptr.cities, pcity) {
+//  for (city pcity : game.player_ptr.cities.data) {
 //    /* Only supported units are disbanded.  Units with no homecity have no
 //     * cost and are not disbanded. */
-//    unit_list_iterate(pcity.units_supported, punit) {
+//    for (unit punit : pcity.units_supported.data) {
 //      city incity = map_get_city(punit.tile);
 //
 //      if (punit.type == type
@@ -376,8 +376,8 @@ public class Repodlgs_common{
 //	count++;
 //	request_unit_disband(punit);
 //      }
-//    } unit_list_iterate_end;
-//  } city_list_iterate_end;
+//    } }
+//  } }
 //
 //  if (count > 0) {
 //    my_snprintf(message, message_sz, "Disbanded %d %s.",

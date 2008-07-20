@@ -84,7 +84,7 @@ public class Widget_button{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static boolean key(sw_widget widget, const be_key key,
+//static boolean key(sw_widget widget, final be_key key,
 //		void *data)
 //{
 //  if (widget.data.button.shortcut
@@ -287,7 +287,7 @@ public class Widget_button{
 //sw_widget sw_button_create_bounded(sw_widget parent,
 //					   ct_string string,
 //					   Sprite background_faces,
-//					   const ct_rect bounds,
+//					   final ct_rect bounds,
 //					   enum ws_alignment alignment)
 //{
 //  int size;
@@ -323,7 +323,7 @@ public class Widget_button{
 //  ...
 //*************************************************************************/
 //void sw_button_set_shortcut(sw_widget widget,
-//			    const be_key key)
+//			    final be_key key)
 //{
 //  if (widget.data.button.shortcut) {
 //    ct_key_destroy(widget.data.button.shortcut);

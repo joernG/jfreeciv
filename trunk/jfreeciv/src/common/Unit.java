@@ -1,25 +1,17 @@
 package common;
+import static common.Unittype_P.*;
+import static common.Player_P.*;
+import static common.Game.*;
+import static common.Terrain_H.*;
+import utility.Speclists;
+
+import common.map.tile;
+import common.player.player;
+import common.unit.unit;
+import common.unit.unit_activity;
+import common.unittype.Eunit_flag_id;
 
 public class Unit{
-
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//
 //#include "fcintl.h"
 //#include "game.h"
 //#include "log.h"
@@ -33,59 +25,57 @@ public class Unit{
 //
 //#include "city.h"
 //#include "unit.h"
+
+	/***************************************************************************
+	 * This function calculates the move rate of the unit taking into account
+	 * the penalty for reduced hitpoints (affects sea and land units only) and
+	 * the effects of wonders for sea units + veteran bonus.
+	 * 
+	 * FIXME: Use generalised improvements code instead of hardcoded wonder
+	 * effects --RK
+	 **************************************************************************/
+	public static int unit_move_rate(unit punit) {
+		//TODO
+		int move_rate = 0;
+//		int base_move_rate = unit_type(punit).move_rate
+//				+ unit_type(punit).veteran[punit.veteran].move_bonus;
 //
-///***************************************************************
-//This function calculates the move rate of the unit taking into 
-//account the penalty for reduced hitpoints (affects sea and land 
-//units only) and the effects of wonders for sea units
-//+ veteran bonus.
+//		switch (unit_type(punit).move_type) {
+//		case LAND_MOVING:
+//			move_rate = (base_move_rate * punit.hp) / unit_type(punit).hp;
+//			break;
 //
-//FIXME: Use generalised improvements code instead of hardcoded
-//wonder effects --RK
-//***************************************************************/
-//int unit_move_rate(unit punit)
-//{
-//  int move_rate = 0;
-//  int base_move_rate = unit_type(punit).move_rate 
-//                       + unit_type(punit).veteran[punit.veteran].move_bonus;
+//		case SEA_MOVING:
+//			move_rate = (base_move_rate * punit.hp) / unit_type(punit).hp;
 //
-//  switch (unit_type(punit).move_type) {
-//  case LAND_MOVING:
-//    move_rate = (base_move_rate * punit.hp) / unit_type(punit).hp;
-//    break;
-// 
-//  case SEA_MOVING:
-//    move_rate = (base_move_rate * punit.hp) / unit_type(punit).hp;
+//			move_rate += (get_player_bonus(unit_owner(punit), EFT_SEA_MOVE) * SINGLE_MOVE);
 //
-//    move_rate += (get_player_bonus(unit_owner(punit), EFT_SEA_MOVE)
-//		  * SINGLE_MOVE);
+//			if (player_knows_techs_with_flag(unit_owner(punit), TF_BOAT_FAST)) {
+//				move_rate += SINGLE_MOVE;
+//			}
 //
-//    if (player_knows_techs_with_flag(unit_owner(punit), TF_BOAT_FAST)) {
-//      move_rate += SINGLE_MOVE;
-//    }
-// 
-//    if (move_rate < 2 * SINGLE_MOVE) {
-//      move_rate = MIN(2 * SINGLE_MOVE, base_move_rate);
-//    }
-//    break;
+//			if (move_rate < 2 * SINGLE_MOVE) {
+//				move_rate = MIN(2 * SINGLE_MOVE, base_move_rate);
+//			}
+//			break;
 //
-//  case HELI_MOVING:
-//  case AIR_MOVING:
-//    move_rate = base_move_rate;
-//    break;
+//		case HELI_MOVING:
+//		case AIR_MOVING:
+//			move_rate = base_move_rate;
+//			break;
 //
-//  default:
-//    die("In common/unit.c:unit_move_rate: illegal move type %d",
-//  					unit_type(punit).move_type);
-//  }
-//  
-//  if (move_rate < SINGLE_MOVE && base_move_rate > 0) {
-//    move_rate = SINGLE_MOVE;
-//  }
-//  return move_rate;
-//}
+//		default:
+//			die("In common/unit.c:unit_move_rate: illegal move type %d",
+//					unit_type(punit).move_type);
+//		}
 //
-///**************************************************************************
+//		if (move_rate < SINGLE_MOVE && base_move_rate > 0) {
+//			move_rate = SINGLE_MOVE;
+//		}
+		return move_rate;
+	}
+
+// /**************************************************************************
 //bribe unit
 //investigate
 //poison
@@ -100,7 +90,7 @@ public class Unit{
 //**************************************************************************/
 //boolean diplomat_can_do_action(unit pdiplomat,
 //			    enum diplomat_actions action, 
-//			    const tile ptile)
+//			    final tile ptile)
 //{
 //  if (!is_diplomat_action_available(pdiplomat, action, ptile)) {
 //    return false;
@@ -125,7 +115,7 @@ public class Unit{
 //**************************************************************************/
 //boolean is_diplomat_action_available(unit pdiplomat,
 //				  enum diplomat_actions action, 
-//				  const tile ptile)
+//				  final tile ptile)
 //{
 //  city pcity=map_get_city(ptile);
 //
@@ -274,12 +264,12 @@ public class Unit{
 ///**************************************************************************
 //Returns the number of free spaces for ground units. Can be 0 or negative.
 //**************************************************************************/
-//int ground_unit_transporter_capacity(const tile ptile,
+//int ground_unit_transporter_capacity(final tile ptile,
 //				     player pplayer)
 //{
 //  int availability = 0;
 //
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if (unit_owner(punit) == pplayer
 //        || pplayers_allied(unit_owner(punit), pplayer)) {
 //      if (is_ground_units_transport(punit)
@@ -290,30 +280,28 @@ public class Unit{
 //      }
 //    }
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  return availability;
 //}
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static int get_transporter_capacity(unit punit) {
+		return unit_type(punit).transport_capacity;
+	}
+
+//	/***************************************************************************
+//	 * ...
+//	 **************************************************************************/
+//	boolean is_ground_units_transport(unit punit) {
+//		return (get_transporter_capacity(punit) > 0
+//				&& !unit_flag(punit, F_MISSILE_CARRIER) && !unit_flag(punit,
+//				F_CARRIER));
+//	}
 //
-///**************************************************************************
-//...
-//**************************************************************************/
-//int get_transporter_capacity(unit punit)
-//{
-//  return unit_type(punit).transport_capacity;
-//}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//boolean is_ground_units_transport(unit punit)
-//{
-//  return (get_transporter_capacity(punit) > 0
-//	  && !unit_flag(punit, F_MISSILE_CARRIER)
-//	  && !unit_flag(punit, F_CARRIER));
-//}
-//
-///**************************************************************************
+// /**************************************************************************
 //...
 //**************************************************************************/
 //boolean is_air_units_transport(unit punit)
@@ -362,17 +350,16 @@ public class Unit{
 //{
 //  return (unit_type(punit).attack_strength > 0);
 //}
-//
-///**************************************************************************
-//  Military units are capable of enforcing martial law. Military ground
-//  and heli units can occupy empty cities -- see COULD_OCCUPY(punit).
-//  Some military units, like the Galleon, have no attack strength.
-//**************************************************************************/
-//boolean is_military_unit(unit punit)
-//{
-//  return !unit_flag(punit, F_NONMIL);
-//}
-//
+
+	/***************************************************************************
+	 * Military units are capable of enforcing martial law. Military ground and
+	 * heli units can occupy empty cities -- see COULD_OCCUPY(punit). Some
+	 * military units, like the Galleon, have no attack strength.
+	 **************************************************************************/
+	public static boolean is_military_unit(unit punit) {
+		return !unit_flag(punit, Eunit_flag_id.F_NONMIL);
+	}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -394,14 +381,14 @@ public class Unit{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//boolean is_square_threatened(player pplayer, const tile ptile)
+//boolean is_square_threatened(player pplayer, final tile ptile)
 //{
 //  square_iterate(ptile, 2, ptile1) {
-//    unit_list_iterate(ptile1.units, punit) {
+//    for (unit punit : ptile1.units.data) {
 //      if (is_ground_threat(pplayer, punit)) {
 //	return true;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } square_iterate_end;
 //
 //  return false;
@@ -576,7 +563,7 @@ public class Unit{
 //**************************************************************************/
 //int get_turns_for_activity_at(unit punit,
 //			      enum unit_activity activity,
-//			      const tile ptile)
+//			      final tile ptile)
 //{
 //  /* FIXME: This is just an approximation since we don't account for
 //   * get_activity_rate_this_turn. */
@@ -615,7 +602,7 @@ public class Unit{
 //   * handling.  This enables the compiler to detect missing entries
 //   * automatically, and still handles everything correctly. */
 //  switch (activity) {
-//  case ACTIVITY_IDLE:
+//  case unit_activity.ACTIVITY_IDLE:
 //    return "Idle";
 //  case ACTIVITY_POLLUTION:
 //    return "Pollution";
@@ -637,7 +624,7 @@ public class Unit{
 //    return "Railroad";
 //  case ACTIVITY_PILLAGE:
 //    return "Pillage";
-//  case ACTIVITY_GOTO:
+//  case unit_activity.ACTIVITY_GOTO:
 //    return "Goto";
 //  case ACTIVITY_EXPLORE:
 //    return "Explore";
@@ -803,7 +790,7 @@ public class Unit{
 //              (current == ACTIVITY_FORTIFIED) ? ACTIVITY_FORTIFYING : current;
 //  boolean result;
 //
-//  punit.activity = ACTIVITY_IDLE;
+//  punit.activity = unit_activity.ACTIVITY_IDLE;
 //  punit.activity_target = S_NO_SPECIAL;
 //
 //  result = can_unit_do_activity_targeted(punit, current2, target);
@@ -845,14 +832,14 @@ public class Unit{
 //boolean can_unit_do_activity_targeted_at(unit punit,
 //				      enum unit_activity activity,
 //				      enum tile_special_type target,
-//				      const tile ptile)
+//				      final tile ptile)
 //{
 //  player pplayer = unit_owner(punit);
 //  tile_type type = get_tile_type(ptile.terrain);
 //
 //  switch(activity) {
-//  case ACTIVITY_IDLE:
-//  case ACTIVITY_GOTO:
+//  case unit_activity.ACTIVITY_IDLE:
+//  case unit_activity.ACTIVITY_GOTO:
 //    return true;
 //
 //  case ACTIVITY_POLLUTION:
@@ -888,11 +875,11 @@ public class Unit{
 //		    || can_channel_land(ptile))
 //		&& (!is_ocean(type.mining_result)
 //		    || !map_get_city(ptile))))) {
-//      unit_list_iterate(ptile.units, tunit) {
+//      for (unit tunit : ptile.units.data) {
 //	if (tunit.activity == ACTIVITY_IRRIGATE) {
 //	  return false;
 //	}
-//      } unit_list_iterate_end;
+//      } }
 //      return true;
 //    } else {
 //      return false;
@@ -918,11 +905,11 @@ public class Unit{
 //		    || can_channel_land(ptile))
 //		&& (!is_ocean(type.irrigation_result)
 //		    || !map_get_city(ptile))))) {
-//      unit_list_iterate(ptile.units, tunit) {
+//      for (unit tunit : ptile.units.data) {
 //	if (tunit.activity == ACTIVITY_MINE) {
 //	  return false;
 //	}
-//      } unit_list_iterate_end;
+//      } }
 //      return true;
 //    } else {
 //      return false;
@@ -1022,21 +1009,21 @@ public class Unit{
 //	  activity);
 //  return false;
 //}
-//
-///**************************************************************************
-//  assign a new task to a unit.
-//**************************************************************************/
-//void set_unit_activity(unit punit, enum unit_activity new_activity)
-//{
-//  punit.activity=new_activity;
-//  punit.activity_count=0;
-//  punit.activity_target = S_NO_SPECIAL;
-//  if (new_activity == ACTIVITY_IDLE && punit.moves_left > 0) {
-//    /* No longer done. */
-//    punit.done_moving = false;
-//  }
-//}
-//
+
+	/*******************************************************************************
+	 * assign a new task to a unit.
+	 ******************************************************************************/
+	public static void set_unit_activity(unit punit, unit_activity new_activity)
+	{
+		punit.activity=new_activity;
+		punit.activity_count=0;
+		punit.activity_target = S_NO_SPECIAL;
+		if (new_activity == unit_activity.ACTIVITY_IDLE && punit.moves_left > 0) {
+			/* No longer done. */
+			punit.done_moving = false;
+		}
+	}
+
 ///**************************************************************************
 //  assign a new targeted task to a unit.
 //**************************************************************************/
@@ -1052,26 +1039,26 @@ public class Unit{
 //...
 //**************************************************************************/
 //boolean is_unit_activity_on_tile(enum unit_activity activity,
-//			      const tile ptile)
+//			      final tile ptile)
 //{
 //  unit_list_iterate(ptile.units, punit) 
 //    if(punit.activity==activity)
 //      return true;
-//  unit_list_iterate_end;
+//  }
 //  return false;
 //}
 //
 ///**************************************************************************
 //...
 //**************************************************************************/
-//enum tile_special_type get_unit_tile_pillage_set(const tile ptile)
+//enum tile_special_type get_unit_tile_pillage_set(final tile ptile)
 //{
 //  enum tile_special_type tgt_ret = S_NO_SPECIAL;
 //
 //  unit_list_iterate(ptile.units, punit)
 //    if(punit.activity==ACTIVITY_PILLAGE)
 //      tgt_ret |= punit.activity_target;
-//  unit_list_iterate_end;
+//  }
 //  return tgt_ret;
 //}
 //
@@ -1084,7 +1071,7 @@ public class Unit{
 //  final String moves_str;
 //   
 //  switch(punit.activity) {
-//   case ACTIVITY_IDLE:
+//   case unit_activity.ACTIVITY_IDLE:
 //     moves_str = "Moves";
 //     if (is_air_unit(punit) && unit_type(punit).fuel > 0) {
 //       int rate,f;
@@ -1135,7 +1122,7 @@ public class Unit{
 //   case ACTIVITY_AIRBASE:
 //   case ACTIVITY_FORTRESS:
 //   case ACTIVITY_SENTRY:
-//   case ACTIVITY_GOTO:
+//   case unit_activity.ACTIVITY_GOTO:
 //   case ACTIVITY_EXPLORE:
 //     return get_activity_text (punit.activity);
 //   case ACTIVITY_PILLAGE:
@@ -1152,21 +1139,22 @@ public class Unit{
 //  }
 //  return null;
 //}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//unit unit_list_find(unit_list This, int id)
-//{
-//  unit_list_iterate(*This, punit) {
-//    if (punit.id == id) {
-//      return punit;
-//    }
-//  } unit_list_iterate_end;
-//
-//  return null;
-//}
-//
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static unit unit_list_find(Speclists<unit> This, int id)
+	{
+		for(unit punit: This.data){
+//		unit_list_iterate(*This, punit) {
+			if (punit.id == id) {
+				return punit;
+			}
+		} 
+
+		return null;
+	}
+
 ///**************************************************************************
 // Comparison function for genlist_sort, sorting by ord_map:
 // The indirection is a bit gory:
@@ -1175,22 +1163,22 @@ public class Unit{
 //   2. dereference to get the "void*"
 //   3. cast that "void*" to a "struct unit*"
 //**************************************************************************/
-//static int compar_unit_ord_map(const void *a, const void *b)
+//static int compar_unit_ord_map(final void *a, final void *b)
 //{
-//  const unit ua, *ub;
-//  ua = (const struct unit*) *(const void**)a;
-//  ub = (const struct unit*) *(const void**)b;
+//  final unit ua, *ub;
+//  ua = (final struct unit*) *(final void**)a;
+//  ub = (final struct unit*) *(final void**)b;
 //  return ua.ord_map - ub.ord_map;
 //}
 //
 ///**************************************************************************
 // Comparison function for genlist_sort, sorting by ord_city: see above.
 //**************************************************************************/
-//static int compar_unit_ord_city(const void *a, const void *b)
+//static int compar_unit_ord_city(final void *a, final void *b)
 //{
-//  const unit ua, *ub;
-//  ua = (const struct unit*) *(const void**)a;
-//  ub = (const struct unit*) *(const void**)b;
+//  final unit ua, *ub;
+//  ua = (final struct unit*) *(final void**)a;
+//  ub = (final struct unit*) *(final void**)b;
 //  return ua.ord_city - ub.ord_city;
 //}
 //
@@ -1199,7 +1187,7 @@ public class Unit{
 //**************************************************************************/
 //void unit_list_sort_ord_map(unit_list This)
 //{
-//  if (unit_list_size(This) > 1) {
+//  if (This.foo_list_size() > 1) {
 //    genlist_sort(&This.list, compar_unit_ord_map);
 //  }
 //}
@@ -1209,19 +1197,19 @@ public class Unit{
 //**************************************************************************/
 //void unit_list_sort_ord_city(unit_list This)
 //{
-//  if (unit_list_size(This) > 1) {
+//  if (This.foo_list_size() > 1) {
 //    genlist_sort(&This.list, compar_unit_ord_city);
 //  }
 //}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//player unit_owner(unit punit)
-//{
-//  return (&game.players[punit.owner]);
-//}
-//
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static player unit_owner(unit punit)
+	{
+		return (game.players[punit.owner]);
+	}
+
 ///****************************************************************************
 //  Measure the carrier (missile + airplane) capacity of the given tile for
 //  a player.
@@ -1231,13 +1219,13 @@ public class Unit{
 //  leave loading up to the caller.
 //****************************************************************************/
 //static void count_carrier_capacity(int *airall, int *misonly,
-//				   const tile ptile,
+//				   final tile ptile,
 //				   player pplayer,
 //				   boolean count_units_with_extra_fuel)
 //{
 //  *airall = *misonly = 0;
 //
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if (unit_owner(punit) == pplayer) {
 //      if (unit_flag(punit, F_CARRIER)
 //	  && !(is_ground_unit(punit) && is_ocean(ptile.terrain))) {
@@ -1260,13 +1248,13 @@ public class Unit{
 //	}
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
 //Returns the number of free spaces for missiles. Can be 0 or negative.
 //**************************************************************************/
-//int missile_carrier_capacity(const tile ptile,
+//int missile_carrier_capacity(final tile ptile,
 //			     player pplayer,
 //			     boolean count_units_with_extra_fuel)
 //{
@@ -1284,7 +1272,7 @@ public class Unit{
 //Returns the number of free spaces for airunits (includes missiles).
 //Can be 0 or negative.
 //**************************************************************************/
-//int airunit_carrier_capacity(const tile ptile,
+//int airunit_carrier_capacity(final tile ptile,
 //			     player pplayer,
 //			     boolean count_units_with_extra_fuel)
 //{
@@ -1303,48 +1291,45 @@ public class Unit{
 //(ie, if your nation A is allied with B, and B is allied with C, a tile
 //containing units from B and C will return false)
 //**************************************************************************/
-//unit is_allied_unit_tile(const tile ptile,
+//unit is_allied_unit_tile(final tile ptile,
 //				 player pplayer)
 //{
 //  unit punit = null;
 //
-//  unit_list_iterate(ptile.units, cunit) {
+//  for (unit cunit : ptile.units.data) {
 //    if (pplayers_allied(pplayer, unit_owner(cunit)))
 //      punit = cunit;
 //    else
 //      return null;
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  return punit;
 //}
-//
-///**************************************************************************
-// is there an enemy unit on this tile?
-//**************************************************************************/
-//unit is_enemy_unit_tile(const tile ptile,
-//				player pplayer)
-//{
-//  unit_list_iterate(ptile.units, punit) {
-//    if (pplayers_at_war(unit_owner(punit), pplayer))
-//      return punit;
-//  }
-//  unit_list_iterate_end;
-//
-//  return null;
-//}
-//
+
+	/***************************************************************************
+	 * is there an enemy unit on this tile?
+	 **************************************************************************/
+	public static unit is_enemy_unit_tile(final tile ptile,
+			player pplayer) {
+		for (unit punit : ptile.units.data) {
+			if (pplayers_at_war(unit_owner(punit), pplayer))
+				return punit;
+		}
+		return null;
+	}
+
 ///**************************************************************************
 // is there an non-allied unit on this tile?
 //**************************************************************************/
-//unit is_non_allied_unit_tile(const tile ptile,
+//unit is_non_allied_unit_tile(final tile ptile,
 //				     player pplayer)
 //{
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if (!pplayers_allied(unit_owner(punit), pplayer))
 //      return punit;
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  return null;
 //}
@@ -1352,14 +1337,14 @@ public class Unit{
 ///**************************************************************************
 // is there an unit we have peace or ceasefire with on this tile?
 //**************************************************************************/
-//unit is_non_attack_unit_tile(const tile ptile,
+//unit is_non_attack_unit_tile(final tile ptile,
 //				     player pplayer)
 //{
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if (pplayers_non_attack(unit_owner(punit), pplayer))
 //      return punit;
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  return null;
 //}
@@ -1376,7 +1361,7 @@ public class Unit{
 //  client-specific features, like FoW and the fact that the client cannot 
 //  see units inside enemy cities.
 //**************************************************************************/
-//boolean is_my_zoc(player pplayer, const tile ptile0)
+//boolean is_my_zoc(player pplayer, final tile ptile0)
 //{
 //  square_iterate(ptile0, 1, ptile) {
 //    if (is_ocean(ptile.terrain)) {
@@ -1406,7 +1391,7 @@ public class Unit{
 ///**************************************************************************
 //  Takes into account unit move_type as well as IGZOC
 //**************************************************************************/
-//boolean unit_type_really_ignores_zoc(Unit_Type_id type)
+//boolean unit_type_really_ignores_zoc(int type)
 //{
 //  return (!is_ground_unittype(type)) || (unit_type_flag(type, F_IGZOC));
 //}
@@ -1422,10 +1407,10 @@ public class Unit{
 //  5. You're moving from an ocean square (from a boat)
 //  6. The spot you're moving from or to is in your ZOC
 //**************************************************************************/
-//boolean can_step_taken_wrt_to_zoc(Unit_Type_id type,
+//boolean can_step_taken_wrt_to_zoc(int type,
 //			       player unit_owner,
-//			       const tile src_tile,
-//			       const tile dst_tile)
+//			       final tile src_tile,
+//			       final tile dst_tile)
 //{
 //  if (unit_type_really_ignores_zoc(type))
 //    return true;
@@ -1446,8 +1431,8 @@ public class Unit{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static boolean zoc_ok_move_gen(unit punit, const tile ptile1,
-//			    const tile ptile2)
+//static boolean zoc_ok_move_gen(unit punit, final tile ptile1,
+//			    final tile ptile2)
 //{
 //  return can_step_taken_wrt_to_zoc(punit.type, unit_owner(punit),
 //				   ptile1, ptile2);
@@ -1457,7 +1442,7 @@ public class Unit{
 //  Convenience wrapper for zoc_ok_move_gen(), using the unit's (x,y)
 //  as the starting point.
 //**************************************************************************/
-//boolean zoc_ok_move(unit punit, const tile ptile)
+//boolean zoc_ok_move(unit punit, final tile ptile)
 //{
 //  return zoc_ok_move_gen(punit, punit.tile, ptile);
 //}
@@ -1466,7 +1451,7 @@ public class Unit{
 //  Return true iff the unit can "exist" at this location.  This means it can
 //  physically be present on the tile (without the use of a transporter).
 //****************************************************************************/
-//boolean can_unit_exist_at_tile(unit punit, const tile ptile)
+//boolean can_unit_exist_at_tile(unit punit, final tile ptile)
 //{
 //  if (ptile.city) {
 //    return true;
@@ -1491,7 +1476,7 @@ public class Unit{
 //  indefinitely on its own (without a transporter).  Units that require fuel
 //  or have a danger of drowning are examples of non-survivable units.
 //****************************************************************************/
-//boolean can_unit_survive_at_tile(unit punit, const tile ptile)
+//boolean can_unit_survive_at_tile(unit punit, final tile ptile)
 //{
 //  if (!can_unit_exist_at_tile(punit, ptile)) {
 //    return false;
@@ -1518,7 +1503,7 @@ public class Unit{
 ///**************************************************************************
 //  Convenience wrapper for test_unit_move_to_tile.
 //**************************************************************************/
-//boolean can_unit_move_to_tile(unit punit, const tile dst_tile,
+//boolean can_unit_move_to_tile(unit punit, final tile dst_tile,
 //			   boolean igzoc)
 //{
 //  return MR_OK == test_unit_move_to_tile(punit.type, unit_owner(punit),
@@ -1541,19 +1526,19 @@ public class Unit{
 //  9) there is not a peaceful but un-allied city on the target tile
 //  10) there is no non-allied unit blocking (zoc) [or igzoc is true]
 //**************************************************************************/
-//enum unit_move_result test_unit_move_to_tile(Unit_Type_id type,
+//enum unit_move_result test_unit_move_to_tile(int type,
 //					     player unit_owner,
 //					     enum unit_activity activity,
-//					     const tile pfromtile,
-//					     const tile ptotile,
+//					     final tile pfromtile,
+//					     final tile ptotile,
 //					     boolean igzoc)
 //{
 //  boolean zoc;
 //  city pcity;
 //
 //  /* 1) */
-//  if (activity != ACTIVITY_IDLE
-//      && activity != ACTIVITY_GOTO) {
+//  if (activity != unit_activity.ACTIVITY_IDLE
+//      && activity != unit_activity.ACTIVITY_GOTO) {
 //    return MR_BAD_ACTIVITY;
 //  }
 //
@@ -1621,7 +1606,7 @@ public class Unit{
 //  to know more.  The AI code uses base_trireme_loss_pct and
 //  base_unsafe_terrain_loss_pct directly.
 //**************************************************************************/
-//int unit_loss_pct(player pplayer, const tile ptile,
+//int unit_loss_pct(player pplayer, final tile ptile,
 //		  unit punit)
 //{
 //  int loss_pct = 0;
@@ -1724,7 +1709,7 @@ public class Unit{
 //  to set x, y and homecity yourself.
 //**************************************************************************/
 //unit create_unit_virtual(player pplayer, city pcity,
-//                                 Unit_Type_id type, int veteran_level)
+//                                 int type, int veteran_level)
 //{
 //  unit punit = fc_calloc(1, sizeof(struct unit));
 //
@@ -1770,7 +1755,7 @@ public class Unit{
 //  punit.focus_status = FOCUS_AVAIL;
 //  punit.ord_map = 0;
 //  punit.ord_city = 0;
-//  set_unit_activity(punit, ACTIVITY_IDLE);
+//  set_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //  punit.occupy = 0;
 //  punit.client.colored = false;
 //  punit.has_orders = false;
@@ -1809,11 +1794,11 @@ public class Unit{
 //{
 //  int occupied = 0;
 //
-//  unit_list_iterate(ptrans.tile.units, pcargo) {
+//  for (unit pcargo : ptrans.tile.units.data) {
 //    if (pcargo.transported_by == ptrans.id) {
 //      occupied++;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return occupied;
 //}
@@ -1822,13 +1807,13 @@ public class Unit{
 //  Find a transporter at the given location for the unit.
 //****************************************************************************/
 //unit find_transporter_for_unit(unit pcargo,
-//				       const tile ptile)
+//				       final tile ptile)
 //{ 
-//  unit_list_iterate(ptile.units, ptrans) {
+//  for (unit ptrans : ptile.units.data) {
 //    if (can_unit_load(pcargo, ptrans)) {
 //      return ptrans;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -1845,7 +1830,7 @@ public class Unit{
 //enum unit_upgrade_result test_unit_upgrade(unit punit, boolean is_free)
 //{
 //  player pplayer = unit_owner(punit);
-//  Unit_Type_id to_unittype = can_upgrade_unittype(pplayer, punit.type);
+//  int to_unittype = can_upgrade_unittype(pplayer, punit.type);
 //  city pcity;
 //  int cost;
 //
@@ -1890,8 +1875,8 @@ public class Unit{
 //  player pplayer = unit_owner(punit);
 //  enum unit_upgrade_result result = test_unit_upgrade(punit, false);
 //  int upgrade_cost;
-//  Unit_Type_id from_unittype = punit.type;
-//  Unit_Type_id to_unittype = can_upgrade_unittype(pplayer,
+//  int from_unittype = punit.type;
+//  int to_unittype = can_upgrade_unittype(pplayer,
 //						  punit.type);
 //
 //  switch (result) {

@@ -171,7 +171,7 @@ public class Gotodlg{
 //      }
 //      
 //      n++;  
-//    } city_list_iterate_end;
+//    } }
 //  }
 //
 //  if(n) {
@@ -255,7 +255,7 @@ public class Gotodlg{
 //  for(i = 0; i < game.nplayers; i++) {
 //    if(i != game.player_idx
 //      && pplayer_get_diplstate(
-//    		game.player_ptr, &game.players[i]).type == DS_NO_CONTACT) {
+//    		game.player_ptr, &game.players[i]).type == diplstate_type.DS_NO_CONTACT) {
 //      continue;
 //    }
 //    

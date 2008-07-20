@@ -36,24 +36,24 @@ public class Log{
 //	extern int fc_log_level;
 //
 //	/* Return an updated struct logdebug_afile_info: */
-//	struct logdebug_afile_info logdebug_update(const char *file);
+//	struct logdebug_afile_info logdebug_update(final char *file);
 //
 //
 //	/* A function type to enable custom output of log messages other than
 //	 * via fputs(stderr).  Eg, to the server console while handling prompts,
 //	 * rfcstyle, client notifications; Eg, to the client window output window?
 //	 */
-//	typedef void (*log_callback_fn)(int, const char*);
+//	typedef void (*log_callback_fn)(int, final char*);
 //
-//	int log_parse_level_str(const char *level_str);
-//	void log_init(const char *filename, int initial_level,
+//	int log_parse_level_str(final char *level_str);
+//	void log_init(final char *filename, int initial_level,
 //		      log_callback_fn callback);
 //	void log_set_level(int level);
 //	void log_set_callback(log_callback_fn callback);
 //
-//	void real_freelog(int level, const char *message, ...)
+//	void real_freelog(int level, final char *message, ...)
 //	                  fc__attribute((__format__ (__printf__, 2, 3)));
-//	void vreal_freelog(int level, const char *message, va_list ap);
+//	void vreal_freelog(int level, final char *message, va_list ap);
 //
 //
 //	#ifdef DEBUG
@@ -62,7 +62,7 @@ public class Log{
 //	 * It returns whether such a LOG_DEBUG message should be sent on
 //	 * to real_freelog.
 //	 */
-//	static inline int logdebug_check(const char *file, int line)
+//	static inline int logdebug_check(final char *file, int line)
 //	{
 //	  if (logdebug_this_init < logd_init_counter) {  
 //	    logdebug_thisfile = logdebug_update(file);
@@ -124,9 +124,9 @@ public class Log{
 //  int level;
 //  
 //#ifdef DEBUG
-//  const int max_level = LOG_DEBUG;
+//  final int max_level = LOG_DEBUG;
 //#else
-//  const int max_level = LOG_VERBOSE;
+//  final int max_level = LOG_VERBOSE;
 //#endif
 //
 //  /* re-entrant: */

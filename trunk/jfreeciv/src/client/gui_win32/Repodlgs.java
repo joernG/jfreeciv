@@ -619,7 +619,7 @@ public class Repodlgs{
 //    }
 //
 //    memset(unitarray, '\0', sizeof(unitarray));
-//    unit_list_iterate(game.player_ptr.units, punit) {
+//    for (unit punit : game.player_ptr.units.data) {
 //      (unitarray[punit.type].active_count)++;
 //      if (punit.homecity) {
 //        unitarray[punit.type].upkeep_shield += punit.upkeep;
@@ -627,13 +627,13 @@ public class Repodlgs{
 //      }
 //    }
 //
-//    unit_list_iterate_end;
+//    }
 //    city_list_iterate(game.player_ptr.cities,pcity) {
 //      if (pcity.is_building_unit &&
 //          (unit_type_exists (pcity.currently_building)))
 //        (unitarray[pcity.currently_building].building_count)++;
 //    }
-//    city_list_iterate_end;
+//    }
 //
 //    k = 0;
 //    memset(&unittotals, '\0', sizeof(unittotals));

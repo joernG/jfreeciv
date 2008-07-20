@@ -591,7 +591,7 @@ public class Dialogs{
 //
 //  popdown_unit_select_dialog();
 //  if (pUnit) {
-//    request_new_unit_activity(pUnit, ACTIVITY_IDLE);
+//    request_new_unit_activity(pUnit, unit_activity.ACTIVITY_IDLE);
 //    set_unit_focus(pUnit);
 //  }
 //
@@ -1146,7 +1146,7 @@ public class Dialogs{
 //  popdown_advanced_terrain_dialog();
 //  
 //  if (pUnit) {
-//    request_new_unit_activity(pUnit, ACTIVITY_IDLE);
+//    request_new_unit_activity(pUnit, unit_activity.ACTIVITY_IDLE);
 //    set_unit_focus(pUnit);
 //  }
 //
@@ -1179,12 +1179,12 @@ public class Dialogs{
 //  
 //  if (pUnit) {
 //    tile ptile = map_get_tile(pUnit.x, pUnit.y);
-//    unit_list_iterate(ptile.units, punit) {
-//      if (game.player_idx == punit.owner && (punit.activity == ACTIVITY_IDLE)
+//    for (unit punit : ptile.units.data) {
+//      if (game.player_idx == punit.owner && (punit.activity == unit_activity.ACTIVITY_IDLE)
 //	 && !punit.ai.control && can_unit_do_activity(punit, ACTIVITY_SENTRY)) {
 //        request_new_unit_activity(punit, ACTIVITY_SENTRY);
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  }
 //  return -1;
 //}
@@ -1245,7 +1245,7 @@ public class Dialogs{
 //**************************************************************************/
 //static int unit_help_callback(GUI pWidget)
 //{
-//  Unit_Type_id unit_id = MAX_ID - pWidget.ID;
+//  int unit_id = MAX_ID - pWidget.ID;
 //    
 //  popdown_advanced_terrain_dialog();
 //  popup_unit_info(unit_id);

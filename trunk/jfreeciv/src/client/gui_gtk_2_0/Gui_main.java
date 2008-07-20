@@ -151,7 +151,7 @@ public class Gui_main{
 //  GEN_BOOL_OPTION(better_fog,
 //		  N"Better fog-of-war drawing")
 //};
-//const int num_gui_options = ARRAY_SIZE(gui_options);
+//final int num_gui_options = ARRAY_SIZE(gui_options);
 //
 //static GtkWidget *main_menubar;
 //static GtkWidget *unit_pixmap_table;
@@ -1047,7 +1047,7 @@ public class Gui_main{
 //void ui_main(int argc, char **argv)
 //{
 //  GdkBitmap *icon_bitmap;
-//  const gchar *home;
+//  final gchar *home;
 //  guint sig;
 //  GtkStyle *style;
 //
@@ -1200,10 +1200,10 @@ public class Gui_main{
 //  
 //  if (get_client_state() != CLIENT_GAME_RUNNING_STATE) {
 //    gtk_list_store_clear(conn_model);
-//    conn_list_iterate(game.est_connections, pconn) {
+//    for (conn pconn : game.est_connections.data) {
 //      gtk_list_store_append(conn_model, &it);
 //      gtk_list_store_set(conn_model, &it, 0, pconn.username, -1);
-//    } conn_list_iterate_end;
+//    } }
 //  }
 //}
 //

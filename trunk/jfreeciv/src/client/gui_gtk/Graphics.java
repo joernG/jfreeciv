@@ -91,7 +91,7 @@ public class Graphics{
 //			      GdkFont *fontset,
 //			      GdkGC *black_gc,
 //			      GdkGC *white_gc,
-//			      gint x, gint y, const gchar *string)
+//			      gint x, gint y, final gchar *string)
 //{
 //  gdk_draw_string(drawable, fontset, black_gc, x + 1, y + 1, string);
 //  gdk_draw_string(drawable, fontset, white_gc, x, y, string);

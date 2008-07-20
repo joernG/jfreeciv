@@ -252,7 +252,7 @@ public class Pages{
 //static void update_server_list(GtkTreeSelection *selection,
 //			       GtkListStore *store, server_list list)
 //{
-//  const gchar *host, *port;
+//  final gchar *host, *port;
 //
 //  host = gtk_entry_get_text(GTK_ENTRY(network_host));
 //  port = gtk_entry_get_text(GTK_ENTRY(network_port));
@@ -283,7 +283,7 @@ public class Pages{
 //    if (strcmp(host, pserver.host) == 0 && strcmp(port, pserver.port) == 0) {
 //      gtk_tree_selection_select_iter(selection, &it);
 //    }
-//  } server_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -1117,13 +1117,13 @@ public class Pages{
 //**************************************************************************/
 //static void update_saves_store(GtkListStore *store)
 //{
-//  struct datafile_list files;
+//  Speclists<datafile> files;
 //
 //  gtk_list_store_clear(store);
 //
 //  /* search for user saved games. */
 //  files = datafilelist_infix("saves", ".sav", false);
-//  datafile_list_iterate(files, pfile) {
+//  for (datafile pfile : files.data) {
 //    GtkTreeIter it;
 //
 //    gtk_list_store_append(store, &it);
@@ -1133,12 +1133,12 @@ public class Pages{
 //    free(pfile.name);
 //    free(pfile.fullname);
 //    free(pfile);
-//  } datafile_list_iterate_end;
+//  } }
 //
 //  datafile_list_unlink_all(&files);
 //
 //  files = datafilelist_infix(null, ".sav", false);
-//  datafile_list_iterate(files, pfile) {
+//  for (datafile pfile : files.data) {
 //    GtkTreeIter it;
 //
 //    gtk_list_store_append(store, &it);
@@ -1148,7 +1148,7 @@ public class Pages{
 //    free(pfile.name);
 //    free(pfile.fullname);
 //    free(pfile);
-//  } datafile_list_iterate_end;
+//  } }
 //
 //  datafile_list_unlink_all(&files);
 //}
@@ -1274,13 +1274,13 @@ public class Pages{
 //**************************************************************************/
 //static void update_scenario_page()
 //{
-//  struct datafile_list files;
+//  Speclists<datafile> files;
 //
 //  gtk_list_store_clear(scenario_store);
 //
 //  /* search for scenario files. */
 //  files = datafilelist_infix("scenario", ".sav", true);
-//  datafile_list_iterate(files, pfile) {
+//  for (datafile pfile : files.data) {
 //    GtkTreeIter it;
 //
 //    gtk_list_store_append(scenario_store, &it);
@@ -1290,7 +1290,7 @@ public class Pages{
 //    free(pfile.name);
 //    free(pfile.fullname);
 //    free(pfile);
-//  } datafile_list_iterate_end;
+//  } }
 //
 //  datafile_list_unlink_all(&files);
 //}

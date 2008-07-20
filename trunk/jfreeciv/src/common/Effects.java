@@ -205,11 +205,11 @@ public class Effects{
 //}
 //
 ///**************************************************************************
-//  The code creates a ruleset cache on ruleset load. This constant cache
+//  The code creates a ruleset cache on ruleset load. This finalant cache
 //  is used to speed up effects queries.  After the cache is created it is
 //  not modified again (though it may later be freed).
 //
-//  Since the cache is constant, the server only needs to send effects data to
+//  Since the cache is finalant, the server only needs to send effects data to
 //  the client upon connect. It also means that an AI can do fast searches in
 //  the effects space by trying the possible combinations of addition or
 //  removal of buildings with the effects it cares about.
@@ -325,7 +325,7 @@ public class Effects{
 //
 //    /* This array provides a full list of the effects of this type provided
 //     * by each building.  (It's not really a cache, it's the real data.) */
-//    struct effect_list buckets[B_LAST];
+//    Speclists<effect> buckets[B_LAST];
 //  } effects[EFT_LAST];
 //
 //  /* This cache shows for each building, which effect types it provides. */
@@ -428,12 +428,12 @@ public class Effects{
 //{
 //  int group_id = 0;
 //
-//  effect_group_list_iterate(groups, pgroup) {
+//  effect_for (group pgroup : groups.data) {
 //    if (0 == mystrcasecmp(pgroup.name, name)) {
 //      return group_id;
 //    }
 //    group_id++;
-//  } effect_group_list_iterate_end;
+//  } effect_}
 //
 //  return -1;
 //}
@@ -484,7 +484,7 @@ public class Effects{
 //      effect_list_iterate(*get_building_effects(j, i), peffect) {
 //	/* Allocated in ruleset_cache_add. */
 //	free(peffect);
-//      } effect_list_iterate_end;
+//      } }
 //      effect_list_unlink_all(get_building_effects(j, i));
 //    }
 //  }
@@ -508,7 +508,7 @@ public class Effects{
 //{
 //  boolean problem;
 //  int data = -1;
-//  const government pgov;
+//  final government pgov;
 //
 //  switch (req_type) {
 //  case REQ_NONE:
@@ -650,12 +650,12 @@ public class Effects{
 ///**************************************************************************
 //  Send the ruleset cache groups data.
 //**************************************************************************/
-//static void send_ruleset_cache_groups(conn_list dest)
+//static void send_ruleset_cache_groups(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_cache_group packet;
 //  int i;
 //
-//  effect_group_list_iterate(groups, pgroup) {
+//  effect_for (group pgroup : groups.data) {
 //    sz_strlcpy(packet.name, pgroup.name);
 //
 //    packet.num_elements = effect_group_element_list_size(&pgroup.elements);
@@ -669,13 +669,13 @@ public class Effects{
 //    }
 //
 //    lsend_packet_ruleset_cache_group(dest, &packet);
-//  } effect_group_list_iterate_end;
+//  } effect_}
 //}
 //
 ///**************************************************************************
 //  Send the ruleset cache effects data.
 //**************************************************************************/
-//static void send_ruleset_cache_effects(conn_list dest)
+//static void send_ruleset_cache_effects(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_cache_effect packet;
 //  enum effect_type effect_type;
@@ -725,7 +725,7 @@ public class Effects{
 //	}
 //
 //	lsend_packet_ruleset_cache_effect(dest, &packet);
-//      } effect_list_iterate_end;
+//      } }
 //    } building_vector_iterate_end;
 //  }
 //}
@@ -733,7 +733,7 @@ public class Effects{
 ///**************************************************************************
 //  Send the ruleset cache data over the network.
 //**************************************************************************/
-//void send_ruleset_cache(conn_list dest)
+//void send_ruleset_cache(Speclists<Connection> dest)
 //{
 //  send_ruleset_cache_groups(dest);
 //  send_ruleset_cache_effects(dest);
@@ -818,7 +818,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the number of buildings of a certain type owned by plr.
 //**************************************************************************/
-//static int num_player_buildings(const player pplayer,
+//static int num_player_buildings(final player pplayer,
 //				Impr_Type_id building)
 //{
 //  if (is_wonder(building)) {
@@ -838,11 +838,11 @@ public class Effects{
 ///**************************************************************************
 //  Returns the number of buildings of a certain type on a continent.
 //**************************************************************************/
-//static int num_continent_buildings(const player pplayer,
+//static int num_continent_buildings(final player pplayer,
 //				   int continent, Impr_Type_id building)
 //{
 //  if (is_wonder(building)) {
-//    const city pcity;
+//    final city pcity;
 //
 //    pcity = player_find_city_by_id(pplayer, game.global_wonders[building]);
 //    if (pcity && map_get_continent(pcity.tile) == continent) {
@@ -859,7 +859,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the number of buildings of a certain type in a city.
 //**************************************************************************/
-//static int num_city_buildings(const city pcity, Impr_Type_id id)
+//static int num_city_buildings(final city pcity, Impr_Type_id id)
 //{
 //  return (city_got_building(pcity, id) ? 1 : 0);
 //}
@@ -904,8 +904,8 @@ public class Effects{
 //  the cache doesn't exist then we return 0.
 //**************************************************************************/
 //static int count_sources_in_range(enum target_type target,
-//				  const player target_player,
-//				  const city target_city,
+//				  final player target_player,
+//				  final city target_city,
 //				  Impr_Type_id target_building,
 //				  enum effect_range range, boolean survives,
 //				  Impr_Type_id source)
@@ -966,11 +966,11 @@ public class Effects{
 //  peffect is the exact effect
 //**************************************************************************/
 //static boolean is_effect_redundant(enum target_type target,
-//				const player target_player,
-//				const city target_city,
+//				final player target_player,
+//				final city target_city,
 //				Impr_Type_id target_building,
 //				Impr_Type_id source,
-//				const effect peffect)
+//				final effect peffect)
 //{
 //  if (!peffect.group) {
 //    /* No group: the effect can't be redundant. */
@@ -979,7 +979,7 @@ public class Effects{
 //
 //  /* If there is more than one building in the same effects "group", then
 //   * only the first one that exists can be active. */
-//  effect_group_element_list_iterate(peffect.group.elements, elt) {
+//  effect_group_for (element elt : peffect.group.elements.data) {
 //    if (elt.source_building == source) {
 //      return false;
 //    } else {
@@ -992,7 +992,7 @@ public class Effects{
 //	return true;
 //      }
 //    }
-//  } effect_group_element_list_iterate_end;
+//  } effect_group_}
 //
 //  return false;
 //}
@@ -1012,12 +1012,12 @@ public class Effects{
 //  player as well as the city itself as the target city.
 //**************************************************************************/
 //static boolean are_effect_reqs_active(enum target_type target,
-//				   const player target_player,
-//				   const city target_city,
+//				   final player target_player,
+//				   final city target_city,
 //				   Impr_Type_id target_building,
-//				   const tile target_tile,
+//				   final tile target_tile,
 //				   Impr_Type_id source,
-//				   const effect peffect)
+//				   final effect peffect)
 //{
 //  /* Note the target may actually not exist.  In particular, effects that
 //   * have a REQ_SPECIAL or REQ_TERRAIN may often be passed to this function
@@ -1077,11 +1077,11 @@ public class Effects{
 //  peffect gives the exact effect value
 //**************************************************************************/
 //boolean is_effect_useful(enum target_type target,
-//		      const player target_player,
-//		      const city target_city,
+//		      final player target_player,
+//		      final city target_city,
 //		      Impr_Type_id target_building,
-//		      const tile target_tile,
-//		      Impr_Type_id source, const effect peffect)
+//		      final tile target_tile,
+//		      Impr_Type_id source, final effect peffect)
 //{
 //  if (is_effect_redundant(target, target_player, target_city,
 //			  target_building, source, peffect)) {
@@ -1105,12 +1105,12 @@ public class Effects{
 //  peffect gives the exact effect value
 //**************************************************************************/
 //static boolean is_effect_active(enum target_type target,
-//			     const player plr,
-//			     const city pcity,
+//			     final player plr,
+//			     final city pcity,
 //			     Impr_Type_id building,
-//			     const tile ptile,
+//			     final tile ptile,
 //			     Impr_Type_id source,
-//			     const effect peffect)
+//			     final effect peffect)
 //{
 //  if (count_sources_in_range(target, plr, pcity, building, peffect.range,
 //			     peffect.survives, source) == 0) {
@@ -1124,7 +1124,7 @@ public class Effects{
 //  Returns true if a building is replaced.  To be replaced, all its effects
 //  must be made redundant by groups that it is in.
 //**************************************************************************/
-//boolean is_building_replaced(const city pcity, Impr_Type_id building)
+//boolean is_building_replaced(final city pcity, Impr_Type_id building)
 //{
 //  boolean groups_present = false;
 //
@@ -1141,7 +1141,7 @@ public class Effects{
 //      if (peffect.group) {
 //	groups_present = true;
 //      }
-//    } effect_list_iterate_end;
+//    } }
 //  } effect_type_vector_iterate_end;
 //
 //  return groups_present;
@@ -1157,10 +1157,10 @@ public class Effects{
 //  effect_type gives the effect type to be considered
 //**************************************************************************/
 //static int get_effect_value(enum target_type target,
-//			    const player target_player,
-//			    const city target_city,
+//			    final player target_player,
+//			    final city target_city,
 //			    Impr_Type_id target_building,
-//			    const tile target_tile,
+//			    final tile target_tile,
 //			    Impr_Type_id source,
 //			    enum effect_type effect_type)
 //{
@@ -1175,7 +1175,7 @@ public class Effects{
 //      /* And if so add on the value. */
 //      value += peffect.value;
 //    }
-//  } effect_list_iterate_end;
+//  } }
 //
 //  return value;
 //}
@@ -1194,10 +1194,10 @@ public class Effects{
 //**************************************************************************/
 //static int get_target_bonus_sources(effect_source_vector sources,
 //    				    enum target_type target,
-//			  	    const player target_player,
-//				    const city target_city,
+//			  	    final player target_player,
+//				    final city target_city,
 //				    Impr_Type_id target_building,
-//				    const tile target_tile,
+//				    final tile target_tile,
 //				    enum effect_type effect_type)
 //{
 //  int bonus = 0;
@@ -1234,7 +1234,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the effect bonus for a player.
 //**************************************************************************/
-//int get_player_bonus(const player pplayer,
+//int get_player_bonus(final player pplayer,
 //		     enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_PLAYER,
@@ -1245,7 +1245,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the effect bonus at a city.
 //**************************************************************************/
-//int get_city_bonus(const city pcity, enum effect_type effect_type)
+//int get_city_bonus(final city pcity, enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_CITY,
 //			 	  city_owner(pcity), pcity, B_LAST, null,
@@ -1255,7 +1255,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the effect bonus at a city tile.
 //**************************************************************************/
-//int get_city_tile_bonus(const city pcity, const tile ptile,
+//int get_city_tile_bonus(final city pcity, final tile ptile,
 //			enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_CITY,
@@ -1266,7 +1266,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the effect bonus at a building.
 //**************************************************************************/
-//int get_building_bonus(const city pcity, Impr_Type_id id,
+//int get_building_bonus(final city pcity, Impr_Type_id id,
 //		       enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_BUILDING,
@@ -1281,7 +1281,7 @@ public class Effects{
 //  is done with it.
 //**************************************************************************/
 //int get_player_bonus_sources(effect_source_vector sources,
-//    const player pplayer, enum effect_type effect_type)
+//    final player pplayer, enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(sources, TARGET_PLAYER,
 //			  	  pplayer, null, B_LAST, null,
@@ -1295,7 +1295,7 @@ public class Effects{
 //  is done with it.
 //**************************************************************************/
 //int get_city_bonus_sources(effect_source_vector sources,
-//    const city pcity, enum effect_type effect_type)
+//    final city pcity, enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(sources, TARGET_CITY,
 //			 	  city_owner(pcity), pcity, B_LAST, null,
@@ -1303,12 +1303,12 @@ public class Effects{
 //}
 //
 ///**************************************************************************
-//  Returns the effect bonus the currently-in-construction-item will provide.
+//  Returns the effect bonus the currently-in-finalruction-item will provide.
 //
 //  Note this is not called get_current_production_bonus because that would
 //  be confused with EFT_PROD_BONUS.
 //**************************************************************************/
-//int get_current_construction_bonus(const city pcity,
+//int get_current_finalruction_bonus(final city pcity,
 //				   enum effect_type effect_type)
 //{
 //  if (!pcity.is_building_unit) {
@@ -1320,7 +1320,7 @@ public class Effects{
 //			   pcity, bldg, null, bldg, peffect)) {
 //	power += peffect.value;
 //      }
-//    } effect_list_iterate_end;
+//    } }
 //
 //    return power;
 //  }

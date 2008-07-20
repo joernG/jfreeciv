@@ -176,7 +176,7 @@ public class Connectdlg{
 //        pList = get_lan_server_list();
 //        SDL_Delay(100);
 //      }
-//      if(!pList || (pList && !server_list_size(pList)))
+//      if(!pList || (pList && !pList.foo_list_size()))
 //      {
 //        my_snprintf(errbuf, n_errbuf, "No LAN Server Found");
 //        finish_lanserver_scan();
@@ -296,7 +296,7 @@ public class Connectdlg{
 //      set_wflag(pBuf, WF_HIDDEN);
 //    }
 //    
-//  } server_list_iterate_end;
+//  } }
 //  
 //  pMeta_Severs.pBeginWidgetList = pBuf;
 //  pMeta_Severs.pBeginActiveWidgetList = pBuf;

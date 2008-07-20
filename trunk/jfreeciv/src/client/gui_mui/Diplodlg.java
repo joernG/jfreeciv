@@ -84,7 +84,7 @@ public class Diplodlg{
 //    TYPED_LIST_ITERATE(struct Diplomacy_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_list_has_been_initialised = false;
 //
 //void request_diplomacy_cancel_meeting(Treaty treaty)
@@ -114,7 +114,7 @@ public class Diplodlg{
 //{
 //  int i = 0;
 //
-//  clause_list_iterate(treaty.clauses, pclause) {
+//  for (clause pclause : treaty.clauses.data) {
 //    if (i == clause_no) {
 //      struct packet_diplomacy_info pa;
 //
@@ -128,7 +128,7 @@ public class Diplodlg{
 //      return;
 //    }
 //    i++;
-//  } clause_list_iterate_end;
+//  } }
 //}
 //
 //void request_diplomacy_accept_treaty(Treaty treaty, int from)
@@ -292,7 +292,7 @@ public class Diplodlg{
 //  int flag=0;
 //  Object *entry;
 //
-//  city_list_iterate(plr0.cities, pcity) {
+//  for (city pcity : plr0.cities.data) {
 //    if (!is_capital(pcity)) {
 //      entry = MUI_MakeObject(MUIO_Menuitem,pcity.name,null,0,0);
 //      set(entry,MUIA_UserData,pcity.id);
@@ -300,7 +300,7 @@ public class Diplodlg{
 //      DoMethod(menu_title,MUIM_Family_AddTail, entry);
 //      flag=1;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  if (!flag)
 //  {
@@ -502,7 +502,7 @@ public class Diplodlg{
 //                  Child, diplo_text = TextObject, MUIA_Weight,0,MUIA_Text_PreParse,"\33c",End,
 //                  Child, pdialog.clauses_listview = NListviewObject,
 //                      MUIA_NListview_NList, NListObject,
-//                          MUIA_NList_ConstructHook, MUIV_NList_ConstructHook_String,
+//                          MUIA_NList_finalructHook, MUIV_NList_finalructHook_String,
 //                          MUIA_NList_DestructHook , MUIV_NList_DestructHook_String,
 //                          End,
 //                      End,
@@ -689,10 +689,10 @@ public class Diplodlg{
 //  set(pdialog.clauses_listview,MUIA_NList_Quiet,true);
 //  DoMethod(pdialog.clauses_listview, MUIM_NList_Clear);
 //
-//  clause_list_iterate(pdialog.treaty.clauses, pclause) {
+//  for (clause pclause : pdialog.treaty.clauses.data) {
 //    client_diplomacy_clause_string(buf, sizeof(buf), pclause);
 //    DoMethod(pdialog.clauses_listview,MUIM_NList_InsertSingle, buf, MUIV_NList_Insert_Bottom);
-//  } clause_list_iterate_end;
+//  } }
 //
 //  set(pdialog.clauses_listview,MUIA_NList_Quiet,false);
 //  set(pdialog.plr0_thumb_sprite, MUIA_Sprite_Sprite,get_thumb_sprite(pdialog.treaty.accept0));
@@ -725,12 +725,12 @@ public class Diplodlg{
 //    dialog_list_list_has_been_initialised = 1;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if ((pdialog.treaty.plr0 == plr0 && pdialog.treaty.plr1 == plr1) ||
 //	(pdialog.treaty.plr0 == plr1 && pdialog.treaty.plr1 == plr0)) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}

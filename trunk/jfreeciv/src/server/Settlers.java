@@ -68,7 +68,7 @@ public class Settlers{
 //  city pcity;
 //
 //  assert(pplayer == unit_owner(punit));
-//  handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //
 //  /* Free city reservations */
 //  ai_unit_new_role(punit, AIUNIT_NONE, null);
@@ -176,7 +176,7 @@ public class Settlers{
 //        return true; /* oops, tile is occupied! */
 //      if (unit_flag(punit, F_SETTLERS) && unit_flag(myunit, F_SETTLERS))
 //        return true;
-//    unit_list_iterate_end;
+//    }
 //    return false;
 //  }
 //  return TEST_BIT(ptile.assigned, pplayer.player_no);
@@ -539,14 +539,14 @@ public class Settlers{
 //      is_slow[i] = (ptype.road_time == 0 || ptype.road_time > 5);
 //
 //      if (!has_road[i]) {
-//	unit_list_iterate(tile1.units, punit) {
+//	for (unit punit : tile1.units.data) {
 //	  if (punit.activity == ACTIVITY_ROAD 
 //              || punit.activity == ACTIVITY_RAILROAD) {
 //	    /* If a road is being built here, consider as if it's already
 //	     * built. */
 //	    has_road[i] = true;
 //          }
-//	} unit_list_iterate_end;
+//	} }
 //      }
 //    }
 //  }
@@ -722,10 +722,10 @@ public class Settlers{
 //  ground_unit_transporter_capacity will return negative.
 //  TODO: Kill me.  There is a reliable version of this, find_ferry.
 //**************************************************************************/
-//Unit_Type_id find_boat(player pplayer, tile *ptile, int cap)
+//int find_boat(player pplayer, tile *ptile, int cap)
 //{
 //  int best = 22; /* arbitrary maximum distance, I will admit! */
-//  Unit_Type_id id = 0;
+//  int id = 0;
 //  unit_list_iterate(pplayer.units, aunit)
 //    if (is_ground_units_transport(aunit)) {
 //      if (WARMAP_COST(aunit.tile) < best &&
@@ -737,7 +737,7 @@ public class Settlers{
 //	*ptile = aunit.tile;
 //      }
 //    }
-//  unit_list_iterate_end;
+//  }
 //  if (id != 0) return(id);
 //  return(id);
 //}
@@ -750,7 +750,7 @@ public class Settlers{
 //{
 //  unit_list_iterate(punit.tile.units, aunit)
 //    if (is_ground_unit(aunit) && aunit != punit) return aunit;
-//  unit_list_iterate_end;
+//  }
 //  return null;
 //}
 //
@@ -892,7 +892,7 @@ public class Settlers{
 //
 //  generate_warmap(mycity, punit);
 //
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //#ifdef REALLY_DEBUG_THIS
 //    freelog(LOG_DEBUG, "Evaluating improvements for %s...", pcity.name);
 //#endif
@@ -1006,7 +1006,7 @@ public class Settlers{
 //#endif
 //      } /* end if we are a legal destination */
 //    } city_map_checked_iterate_end;
-//  } city_list_iterate_end;
+//  } }
 //
 //  best_newv = (best_newv - food_upkeep * FOOD_WEIGHTING) * 100 / (40 + food_cost);
 //  if (best_newv < 0)
@@ -1020,7 +1020,7 @@ public class Settlers{
 //  } else {
 //    /* Fill in dummy values.  The callers should check if the return value
 //     * is > 0 but this will avoid confusing them. */
-//    *best_act = ACTIVITY_IDLE;
+//    *best_act = unit_activity.ACTIVITY_IDLE;
 //    *best_tile = null;
 //  }
 //
@@ -1059,7 +1059,7 @@ public class Settlers{
 //	|| !city_can_be_built_here(ptile, punit)) {
 //      UNIT_LOG(LOG_SETTLER, punit, "city founding mission failed");
 //      ai_unit_new_role(punit, AIUNIT_NONE, null);
-//      set_unit_activity(punit, ACTIVITY_IDLE);
+//      set_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //      send_unit_info(null, punit);
 //      return; /* avoid recursion at all cost */
 //    } else {
@@ -1141,7 +1141,7 @@ public class Settlers{
 //      return; /* We cannot do anything */
 //    }
 //    punit.goto_tile = best_tile; /* TMP */
-//    if (do_unit_goto(punit, GOTO_MOVE_ANY, false) == GR_DIED) {
+//    if (do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false) == GR_DIED) {
 //      return;
 //    }
 //    if (punit.moves_left > 0
@@ -1190,7 +1190,7 @@ public class Settlers{
 //**************************************************************************/
 //void initialize_infrastructure_cache(player pplayer)
 //{
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    int best = best_worker_tile_value(pcity);
 //
 //    city_map_iterate(city_x, city_y) {
@@ -1232,7 +1232,7 @@ public class Settlers{
 //      /* Make sure nothing was accidentally changed by these calculations. */
 //      assert(old_terrain == ptile.terrain && old_special == ptile.special);
 //    } city_map_checked_iterate_end;
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///************************************************************************** 
@@ -1262,7 +1262,7 @@ public class Settlers{
 //   * player auto-settler mode) or if the player is an AI.  But don't
 //   * auto-settle with a unit under orders even for an AI player - these come
 //   * from the human player and take precedence. */
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if ((punit.ai.control || pplayer.ai.control)
 //	&& (unit_flag(punit, F_SETTLERS)
 //	    || unit_flag(punit, F_CITIES))
@@ -1270,17 +1270,17 @@ public class Settlers{
 //      freelog(LOG_DEBUG, "%s's settler at (%d, %d) is ai controlled.",
 //	      pplayer.name, TILE_XY(punit.tile)); 
 //      if (punit.activity == ACTIVITY_SENTRY) {
-//	handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//	handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //      }
-//      if (punit.activity == ACTIVITY_GOTO && punit.moves_left > 0) {
-//        handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//      if (punit.activity == unit_activity.ACTIVITY_GOTO && punit.moves_left > 0) {
+//        handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //      }
-//      if (punit.activity == ACTIVITY_IDLE) {
+//      if (punit.activity == unit_activity.ACTIVITY_IDLE) {
 //        auto_settler_findwork(pplayer, punit);
 //      }
 //    }
 //  }
-//  unit_list_iterate_end;
+//  }
 //  if (timer_in_use(t)) {
 //    freelog(LOG_VERBOSE, "%s's autosettlers consumed %g milliseconds.",
 // 	    pplayer.name, 1000.0*read_timer_seconds(t));
@@ -1300,7 +1300,7 @@ public class Settlers{
 //  unit_list_iterate(pplayer.units, punit)
 //    if (unit_flag(punit, F_SETTLERS)
 //	|| unit_flag(punit, F_CITIES)) {
-//      if (punit.activity == ACTIVITY_GOTO) {
+//      if (punit.activity == unit_activity.ACTIVITY_GOTO) {
 //        ptile = punit.goto_tile;
 //        ptile.assigned = ptile.assigned | i; /* assigned for us only */
 //      } else {
@@ -1311,7 +1311,7 @@ public class Settlers{
 //      ptile = punit.tile;
 //      ptile.assigned = ptile.assigned | (0xFFFFFFFF ^ i); /* assigned for everyone else */
 //    }
-//  unit_list_iterate_end;
+//  }
 //}
 //
 ///************************************************************************** 
@@ -1374,10 +1374,10 @@ public class Settlers{
 //        assign_region(punit.tile, n, 1 + unit_type(punit).move_rate / SINGLE_MOVE, 0);
 //      } 
 //    }
-//  unit_list_iterate_end;
+//  }
 //  city_list_iterate(pplayer.cities, pcity)
 //    assign_region(pcity.tile, n, 3, 0);
-//  city_list_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -1429,7 +1429,7 @@ public class Settlers{
 //{
 //  player pplayer = city_owner(pcity);
 //  unit virtualunit;
-//  Unit_Type_id unit_type = best_role_unit(pcity, F_CITIES); 
+//  int unit_type = best_role_unit(pcity, F_CITIES); 
 //
 //  if (unit_type == U_LAST) {
 //    freelog(LOG_DEBUG, "No F_CITIES role unit available");
@@ -1476,7 +1476,7 @@ public class Settlers{
 //  enum unit_activity best_act;
 //  tile ptile = pcity.tile;
 //  ai_data ai = ai_data_get(pplayer);
-//  Unit_Type_id unit_type = best_role_unit(pcity, F_SETTLERS);
+//  int unit_type = best_role_unit(pcity, F_SETTLERS);
 //
 //  if (unit_type == U_LAST) {
 //    freelog(LOG_DEBUG, "No F_SETTLERS role unit available");

@@ -204,7 +204,7 @@ public class Plrdlg{
 //    Dimension width;
 //    static char *namelist_ptrs[MAX_NUM_PLAYERS];
 //    static char namelist_text[MAX_NUM_PLAYERS][256];
-//    const player_diplstate pds;
+//    final player_diplstate pds;
 //
 //    for(i=0,j=0; i<game.nplayers; i++) {
 //      char idlebuf[32], statebuf[32], namebuf[32], dsbuf[32], repbuf[32];

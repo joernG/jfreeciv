@@ -64,7 +64,7 @@ public class Citydlg{
 //
 //struct city_dialog;
 //
-///* get 'struct dialog_list' and related function */
+///* get 'Speclists<dialog>' and related function */
 //#define SPECLIST_TAG dialog
 //#define SPECLIST_TYPE struct city_dialog
 //#include "speclist.h"
@@ -175,7 +175,7 @@ public class Citydlg{
 //static GdkBitmap *icon_bitmap;
 //static GtkRcStyle *info_label_style[NUM_INFO_STYLES] = { null, null, null };
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean city_dialogs_have_been_initialised;
 //static int canvas_width, canvas_height;
 //static int new_dialog_def_page = OVERVIEW_PAGE;
@@ -320,12 +320,12 @@ public class Citydlg{
 //
 //  init_citydlg_dimensions();
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    /* There's no reasonable way to resize a GtkPixcomm, so we don't try.
 //       Instead we just redraw the overview within the existing area.  The
 //       player has to close and reopen the dialog to fix this. */
 //    city_dialog_update_map(pdialog);
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  popdown_all_city_dialogs();
 //}
@@ -338,11 +338,11 @@ public class Citydlg{
 //  if (!city_dialogs_have_been_initialised)
 //    initialize_city_dialogs();
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pcity == pcity)
 //      return pdialog;
 //  }
-//  dialog_list_iterate_end;
+//  }
 //  return null;
 //}
 //
@@ -1247,7 +1247,7 @@ public class Citydlg{
 //static void city_dialog_update_title(city_dialog pdialog)
 //{
 //  char buf[512];
-//  const gchar *now;
+//  final gchar *now;
 //
 //  my_snprintf(buf, sizeof(buf), "<b>%s</b> - %s citizens",
 //	      pdialog.pcity.name,
@@ -1521,7 +1521,7 @@ public class Citydlg{
 //
 //  nodes = &pdialog.overview.supported_units;
 //
-//  n = unit_list_size(units);
+//  n = units.foo_list_size();
 //  m = unit_node_vector_size(nodes);
 //
 //  gtk_table_resize(GTK_TABLE(pdialog.overview.supported_unit_table),
@@ -1610,7 +1610,7 @@ public class Citydlg{
 //      gtk_widget_show(cmd);
 //    }
 //    i++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  gtk_tooltips_enable(pdialog.tips);
 //
@@ -1637,7 +1637,7 @@ public class Citydlg{
 //
 //  nodes = &pdialog.overview.present_units;
 //
-//  n = unit_list_size(units);
+//  n = units.foo_list_size();
 //  m = unit_node_vector_size(nodes);
 //
 //  gtk_table_resize(GTK_TABLE(pdialog.overview.present_unit_table),
@@ -1720,7 +1720,7 @@ public class Citydlg{
 //      gtk_widget_show(cmd);
 //    }
 //    i++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  gtk_tooltips_enable(pdialog.tips);
 //
@@ -1780,26 +1780,26 @@ public class Citydlg{
 //
 //  /* the first time, we see if all the city dialogs are open */
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pcity.owner == game.player_idx)
 //      count++;
 //  }
-//  dialog_list_iterate_end;
+//  }
 //
 //  if (count == city_number) {	/* all are open, shouldn't prev/next */
-//    dialog_list_iterate(dialog_list, pdialog) {
+//    for (dialog pdialog : dialog_list.data) {
 //      gtk_widget_set_sensitive(pdialog.prev_command, false);
 //      gtk_widget_set_sensitive(pdialog.next_command, false);
 //    }
-//    dialog_list_iterate_end;
+//    }
 //  } else {
-//    dialog_list_iterate(dialog_list, pdialog) {
+//    for (dialog pdialog : dialog_list.data) {
 //      if (pdialog.pcity.owner == game.player_idx) {
 //	gtk_widget_set_sensitive(pdialog.prev_command, true);
 //	gtk_widget_set_sensitive(pdialog.next_command, true);
 //      }
 //    }
-//    dialog_list_iterate_end;
+//    }
 //  }
 //}
 //
@@ -2276,7 +2276,7 @@ public class Citydlg{
 //    return false;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //#ifdef DEBUG
 //    {
 //      gint x, y, width, height, depth;
@@ -2296,7 +2296,7 @@ public class Citydlg{
 //      pcity = pdialog.pcity;
 //      break;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  if (pcity) {
 //    int xtile, ytile;
@@ -2661,17 +2661,17 @@ public class Citydlg{
 //
 //  g_object_unref(pdialog.map_canvas_store);
 //
-//  unit_list_iterate(pdialog.pcity.info_units_supported, psunit) {
+//  for (unit psunit : pdialog.pcity.info_units_supported.data) {
 //    free(psunit);
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  unit_list_unlink_all(&(pdialog.pcity.info_units_supported));
 //
-//  unit_list_iterate(pdialog.pcity.info_units_present, psunit) {
+//  for (unit psunit : pdialog.pcity.info_units_present.data) {
 //    free(psunit);
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  unit_list_unlink_all(&(pdialog.pcity.info_units_present));
 //

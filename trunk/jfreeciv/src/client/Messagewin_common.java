@@ -111,7 +111,7 @@ public class Messagewin_common{
 //void add_notify_window(char *message, tile ptile,
 //		       enum event_type event)
 //{
-//  const size_t min_msg_len = 50;
+//  final size_t min_msg_len = 50;
 //  final String game_prefix1 = "Game: ";
 //  final String game_prefix2 = "Game: ";
 //  size_t gp_len1 = game_prefix1.length();

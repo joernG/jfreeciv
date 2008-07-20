@@ -199,7 +199,7 @@ public class Gotodlg{
 //      j=ListBox_AddString(list,name);
 //      ListBox_SetItemData(list,j,pcity.id);
 //    }
-//    city_list_iterate_end;
+//    }
 //  }
 //}
 //

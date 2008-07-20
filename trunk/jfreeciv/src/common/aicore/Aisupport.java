@@ -84,19 +84,19 @@ public class Aisupport{
 //  }
 //
 //  /* For all our cities, find the closest distance to an enemy city. */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    int min_dist = FC_INFINITY;
 //
-//    city_list_iterate(target.cities, c2) {
+//    for (city c2 : target.cities.data) {
 //      int dist = real_map_distance(c2.tile, pcity.tile);
 //
 //      if (min_dist > dist) {
 //        min_dist = dist;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //    dists += min_dist;
 //    cities++;
-//  } city_list_iterate_end;
+//  } }
 //
 //  return MAX(dists / cities, 1);
 //}
@@ -109,9 +109,9 @@ public class Aisupport{
 //  int worth;
 //
 //  worth = pcity.size * 150; /* reasonable base cost */
-//  unit_list_iterate(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    if (same_pos(punit.tile, pcity.tile)) {
-//      Unit_Type_id id = unit_type(punit).obsoleted_by;
+//      int id = unit_type(punit).obsoleted_by;
 //
 //      if (id >= 0 && can_build_unit_direct(pcity, id)) {
 //        worth += unit_disband_shields(punit.type) / 2; /* obsolete */
@@ -119,7 +119,7 @@ public class Aisupport{
 //        worth += unit_disband_shields(punit.type); /* good stuff */
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //  built_impr_iterate(pcity, impr) {
 //    if (improvement_types[impr].is_wonder && !wonder_obsolete(impr)) {
 //      worth += impr_sell_gold(impr);

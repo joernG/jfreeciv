@@ -60,7 +60,7 @@ public class Utilities{
 //#define pmap(ptile) (placed_map[(ptile).index])
 //
 ///* Checks if land has not yet been placed on pmap at (x, y) */
-//boolean not_placed(const tile ptile)
+//boolean not_placed(final tile ptile)
 //{
 //  return !pmap(ptile);
 //}
@@ -107,8 +107,8 @@ public class Utilities{
 //  true will be considered.
 //**************************************************************************/
 //void adjust_int_map_filtered(int *int_map, int int_map_max, void *data,
-//			     boolean (*filter)(const tile ptile,
-//					    const void *data))
+//			     boolean (*filter)(final tile ptile,
+//					    final void *data))
 //{
 //  int minval = 0, maxval = 0, total = 0;
 //  boolean first = true;
@@ -131,7 +131,7 @@ public class Utilities{
 //  }
 //
 //  {
-//    int const size = 1 + maxval - minval;
+//    int final size = 1 + maxval - minval;
 //    int i, count = 0, frequencies[size];
 //
 //    INITIALIZE_ARRAY(frequencies, size, 0);

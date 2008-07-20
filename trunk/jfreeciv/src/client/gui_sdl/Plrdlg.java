@@ -263,7 +263,7 @@ public class Plrdlg{
 //	          putline(pPlayer1.dst, x0, y0, x1, y1, 0xFF000000);
 //	        }
 //	      break;
-//              case DS_WAR:
+//              case diplstate_type.DS_WAR:
 //	        if(SDL_Client_Flags & CF_DRAW_PLAYERS_WAR_STATUS) {
 //	          putline(pPlayer1.dst, x0, y0, x1, y1,
 //	    		get_game_color(COLOR_STD_RED, pPlayer1.dst));
@@ -369,7 +369,7 @@ public class Plrdlg{
 //	pBuf.action = toggle_draw_neutral_status_callback;
 //	pBuf.key = SDLK_n;
 //      break;
-//      case DS_WAR:
+//      case diplstate_type.DS_WAR:
 //	pBuf = create_checkbox(pWindow.dst,
 //		(SDL_Client_Flags & CF_DRAW_PLAYERS_WAR_STATUS),
 //      						WF_DRAW_THEME_TRANSPARENT);
@@ -486,7 +486,7 @@ public class Plrdlg{
 //	case DS_NEUTRAL:
 //	  pStr.fgcol = *(get_game_colorRGB(COLOR_STD_BLACK));
 //	break;
-//        case DS_WAR:
+//        case diplstate_type.DS_WAR:
 //	  pStr.fgcol = *(get_game_colorRGB(COLOR_STD_RED));
 //	break;
 //	case DS_CEASEFIRE:
@@ -610,7 +610,7 @@ public class Plrdlg{
 //  char cBuf[128], *state;
 //  int i, n = 0, w = 0, h, units_h = 0;
 //  player pPlayer;
-//  const player_diplstate pDS;
+//  final player_diplstate pDS;
 //  
 //  if (pShort_Players_Dlg) {
 //    return;
@@ -687,7 +687,7 @@ public class Plrdlg{
 //                      
 //      /* now add some eye candy ... */
 //      switch (pDS.type) {
-//        case DS_WAR:
+//        case diplstate_type.DS_WAR:
 //	  if(can_meet_with_player(pPlayer) || can_intel_with_player(pPlayer)) {
 //            set_wstate(pBuf, FC_WS_NORMAL);
 //	    pBuf.string16.fgcol = *(get_game_colorRGB(COLOR_STD_RED));
@@ -707,7 +707,7 @@ public class Plrdlg{
 //	  pBuf.string16.fgcol = *(get_game_colorRGB(COLOR_STD_CITY_GOLD));
 //	  set_wstate(pBuf, FC_WS_NORMAL);
 //        break;
-//	case DS_NO_CONTACT:
+//	case diplstate_type.DS_NO_CONTACT:
 //	  pBuf.string16.fgcol = *(get_game_colorRGB(COLOR_STD_DISABLED));
 //	break;
 //        default:

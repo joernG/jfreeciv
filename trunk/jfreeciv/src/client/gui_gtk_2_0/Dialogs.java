@@ -58,9 +58,9 @@ public class Dialogs{
 //#include "wldlg.h"
 //
 ///******************************************************************/
-//GtkWidget *message_dialog_start(GtkWindow *parent, const gchar *name,
-//				const gchar *text);
-//void message_dialog_add(GtkWidget *dshell, const gchar *label,
+//GtkWidget *message_dialog_start(GtkWindow *parent, final gchar *name,
+//				final gchar *text);
+//void message_dialog_add(GtkWidget *dshell, final gchar *label,
 //			GCallback handler, gpointer data);
 //void message_dialog_end(GtkWidget *dshell);
 //
@@ -1122,8 +1122,8 @@ public class Dialogs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//GtkWidget *message_dialog_start(GtkWindow *parent, const gchar *name,
-//				const gchar *text)
+//GtkWidget *message_dialog_start(GtkWindow *parent, final gchar *name,
+//				final gchar *text)
 //{
 //  GtkWidget *dshell, *dlabel, *vbox, *bbox;
 //
@@ -1173,7 +1173,7 @@ public class Dialogs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//void message_dialog_add(GtkWidget *dshell, const gchar *label,
+//void message_dialog_add(GtkWidget *dshell, final gchar *label,
 //			GCallback handler, gpointer data)
 //{
 //  GtkWidget *button, *bbox;
@@ -1222,8 +1222,8 @@ public class Dialogs{
 ///****************************************************************
 //...
 //*****************************************************************/
-//GtkWidget *popup_message_dialog(GtkWindow *parent, const gchar *dialogname,
-//				const gchar *text, ...)
+//GtkWidget *popup_message_dialog(GtkWindow *parent, final gchar *dialogname,
+//				final gchar *text, ...)
 //{
 //  GtkWidget *dshell;
 //  va_list args;
@@ -1312,7 +1312,7 @@ public class Dialogs{
 //**************************************************************************/
 //static void unit_select_recurse(int root_id, GtkTreeIter *it_root)
 //{
-//  unit_list_iterate(unit_select_ptile.units, pleaf) {
+//  for (unit pleaf : unit_select_ptile.units.data) {
 //    GtkTreeIter it_leaf;
 //
 //    if (pleaf.transported_by == root_id) {
@@ -1321,7 +1321,7 @@ public class Dialogs{
 //	unit_select_recurse(pleaf.id, &it_leaf);
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -1364,7 +1364,7 @@ public class Dialogs{
 //    {
 //      unit pmyunit = null;
 //
-//      unit_list_iterate(ptile.units, punit) {
+//      for (unit punit : ptile.units.data) {
 //        if (game.player_idx == punit.owner) {
 //          pmyunit = punit;
 //
@@ -1373,12 +1373,12 @@ public class Dialogs{
 //	  if (unit_has_orders(punit)) {
 //	    request_orders_cleared(punit);
 //	  }
-//	  if (punit.activity != ACTIVITY_IDLE || punit.ai.control) {
+//	  if (punit.activity != unit_activity.ACTIVITY_IDLE || punit.ai.control) {
 //	    punit.ai.control = false;
-//	    request_new_unit_activity(punit, ACTIVITY_IDLE);
+//	    request_new_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //	  }
 //        }
-//      } unit_list_iterate_end;
+//      } }
 //
 //      if (pmyunit) {
 //        /* Put the focus on one of the activated units. */
@@ -1389,15 +1389,15 @@ public class Dialogs{
 //
 //  case SELECT_UNIT_SENTRY:
 //    {
-//      unit_list_iterate(ptile.units, punit) {
+//      for (unit punit : ptile.units.data) {
 //        if (game.player_idx == punit.owner) {
-//          if ((punit.activity == ACTIVITY_IDLE) &&
+//          if ((punit.activity == unit_activity.ACTIVITY_IDLE) &&
 //              !punit.ai.control &&
 //              can_unit_do_activity(punit, ACTIVITY_SENTRY)) {
 //            request_new_unit_activity(punit, ACTIVITY_SENTRY);
 //          }
 //        }
-//      } unit_list_iterate_end;
+//      } }
 //    }
 //    break;
 //
@@ -1839,7 +1839,7 @@ public class Dialogs{
 ///****************************************************************
 //  ...
 // *****************************************************************/
-//static gint cmp_func(gconstpointer ap, gconstpointer bp)
+//static gint cmp_func(gfinalpointer ap, gfinalpointer bp)
 //{
 //  return strcmp((final String)ap, (final String)bp);
 //}
@@ -2029,7 +2029,7 @@ public class Dialogs{
 //**************************************************************************/
 //static void races_leader_callback()
 //{
-//  const gchar *name;
+//  final gchar *name;
 //
 //  name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(races_leader).entry));
 //

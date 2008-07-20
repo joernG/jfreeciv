@@ -469,11 +469,11 @@ public class Civclient{
 //    /*
 //     * Extra kludge for end-game handling of the CMA.
 //     */
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      if (cma_is_city_under_agent(pcity, null)) {
 //        cma_release_city(pcity);
 //      }
-//    } city_list_iterate_end;
+//    } }
 //    popdown_all_city_dialogs();
 //    popdown_all_game_dialogs();
 //    set_unit_focus(null);

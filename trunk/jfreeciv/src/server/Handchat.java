@@ -79,7 +79,7 @@ public class Handchat{
 //  default:
 //    assert(0);
 //  }
-//  dsend_packet_chat_msg(pconn, message, -1, -1, E_NOEVENT, -1);
+//  dsend_packet_chat_msg(pconn, message, -1, -1, event_type.E_NOEVENT, -1);
 //}
 //
 ///**************************************************************************
@@ -97,11 +97,11 @@ public class Handchat{
 //  form_chat_name(dest, dest_name, sizeof(dest_name));
 //
 //  my_snprintf(message, sizeof(message), ".*%s* %s", dest_name, msg);
-//  dsend_packet_chat_msg(sender, message, -1, -1, E_NOEVENT, sender.id);
+//  dsend_packet_chat_msg(sender, message, -1, -1, event_type.E_NOEVENT, sender.id);
 //
 //  if (sender != dest) {
 //    my_snprintf(message, sizeof(message), "*%s* %s", sender_name, msg);
-//    dsend_packet_chat_msg(dest, message, -1, -1, E_NOEVENT, sender.id);
+//    dsend_packet_chat_msg(dest, message, -1, -1, event_type.E_NOEVENT, sender.id);
 //  }
 //}
 //
@@ -118,15 +118,15 @@ public class Handchat{
 //  form_chat_name(sender, sender_name, sizeof(sender_name));
 //
 //  my_snprintf(message, sizeof(message), ".[%s] %s", pdest.name, msg);
-//  dsend_packet_chat_msg(sender, message, -1, -1, E_NOEVENT, sender.id);
+//  dsend_packet_chat_msg(sender, message, -1, -1, event_type.E_NOEVENT, sender.id);
 //
 //  my_snprintf(message, sizeof(message), "[%s] %s", sender_name, msg);
-//  conn_list_iterate(pdest.connections, dest_conn) {
+//  for (conn dest_conn : pdest.connections.data) {
 //    if (dest_conn != sender) {
 //      dsend_packet_chat_msg(dest_conn, message,
-//			    -1, -1, E_NOEVENT, sender.id);
+//			    -1, -1, event_type.E_NOEVENT, sender.id);
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -187,7 +187,7 @@ public class Handchat{
 //    if (!pconn.player) {
 //      my_snprintf(chat, sizeof(chat),
 //                  "Game: You are not attached to a player.");
-//      dsend_packet_chat_msg(pconn, chat, -1, -1, E_NOEVENT, -1);
+//      dsend_packet_chat_msg(pconn, chat, -1, -1, event_type.E_NOEVENT, -1);
 //      return;
 //    }
 //
@@ -203,7 +203,7 @@ public class Handchat{
 //        continue;
 //      }
 //      dlsend_packet_chat_msg(&aplayer.connections, chat, -1, -1,
-//			     E_NOEVENT, pconn.id);
+//			     event_type.E_NOEVENT, pconn.id);
 //    } players_iterate_end;
 //    return;
 //  }
@@ -289,7 +289,7 @@ public class Handchat{
 //	/* Would have done something above if connected */
 //	my_snprintf(chat, sizeof(chat),
 //		    "Game: %s is not connected.", pdest.name);
-//	dsend_packet_chat_msg(pconn, chat, -1, -1, E_NOEVENT, -1);
+//	dsend_packet_chat_msg(pconn, chat, -1, -1, event_type.E_NOEVENT, -1);
 //	return;
 //      }
 //    }
@@ -306,7 +306,7 @@ public class Handchat{
 //		    "Game: There is no player nor connection by the name %s.",
 //		    name);
 //      }
-//      dsend_packet_chat_msg(pconn, chat, -1, -1, E_NOEVENT, -1);
+//      dsend_packet_chat_msg(pconn, chat, -1, -1, event_type.E_NOEVENT, -1);
 //      return;
 //    }
 //  }
@@ -315,6 +315,6 @@ public class Handchat{
 //  my_snprintf(chat, sizeof(chat),
 //	      "<%s> %s", sender_name, message);
 //  dlsend_packet_chat_msg(&game.est_connections, chat,
-//			 -1, -1, E_NOEVENT, pconn.id);
+//			 -1, -1, event_type.E_NOEVENT, pconn.id);
 //}
 }

@@ -122,7 +122,7 @@ public class Registry{
 //  seems sufficient and relatively simple...
 //  
 //  There is a limited ability to save data in tabular:
-//  So long as the section_file is constructed in an expected way,
+//  So long as the section_file is finalructed in an expected way,
 //  tabular data (with no missing or extra values) can be saved
 //  in tabular form.  (See section_file_save().)
 //
@@ -191,7 +191,7 @@ public class Registry{
 //  char *comment;                /* comment, may be null */
 //};
 //
-///* create a 'struct entry_list' and related functions: */
+///* create a 'Speclists<entry>' and related functions: */
 //#define SPECLIST_TAG entry
 //#include "speclist.h"
 //
@@ -202,10 +202,10 @@ public class Registry{
 //
 //struct section {
 //  char *name;
-//  struct entry_list entries;
+//  Speclists<entry> entries;
 //};
 //
-///* create a 'struct section_list' and related functions: */
+///* create a 'Speclists<section>' and related functions: */
 //#define SPECLIST_TAG section
 //#include "speclist.h"
 //
@@ -245,7 +245,7 @@ public class Registry{
 //  The memory is managed internally, and should not be altered,
 //  nor used after section_file_free() called for the sectionfile.
 //**************************************************************************/
-//final String secfile_filename(const section_file file)
+//final String secfile_filename(final section_file file)
 //{
 //  if (file.filename) {
 //    return file.filename;
@@ -260,7 +260,7 @@ public class Registry{
 //void section_file_init(section_file file)
 //{
 //  file.filename = null;
-//  file.sections = fc_malloc(sizeof(struct section_list));
+//  file.sections = fc_malloc(sizeof(Speclists<section>));
 //  section_list_init(file.sections);
 //  file.num_entries = 0;
 //  file.hashd = null;
@@ -278,7 +278,7 @@ public class Registry{
 //  section_list_iterate(*file.sections, psection) {
 //    entry_list_unlink_all(&psection.entries);
 //  }
-//  section_list_iterate_end;
+//  }
 //  
 //  section_list_unlink_all(file.sections);
 //  
@@ -312,7 +312,7 @@ public class Registry{
 //  int any = 0;
 //
 //  section_list_iterate(*file.sections, psection) {
-//    entry_list_iterate(psection.entries, pentry) {
+//    for (entry pentry : psection.entries.data) {
 //      if (pentry.used == 0) {
 //	if (any == 0 && filename) {
 //	  freelog(LOG_VERBOSE, "Unused entries in file %s:", filename);
@@ -322,9 +322,9 @@ public class Registry{
 //		psection.name, pentry.name);
 //      }
 //    }
-//    entry_list_iterate_end;
+//    }
 //  }
-//  section_list_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -800,7 +800,7 @@ public class Registry{
 //      }
 //    }
 //  }
-//  section_list_iterate_end;
+//  }
 //  
 //  () moutstr(null);		/* free internal buffer */
 //
@@ -904,7 +904,7 @@ public class Registry{
 //...
 //**************************************************************************/
 //void secfile_insert_int_comment(section_file my_section_file,
-//				int val, final String const comment,
+//				int val, final String final comment,
 //				final String path)
 //{
 //  entry pentry;
@@ -978,7 +978,7 @@ public class Registry{
 //...
 //**************************************************************************/
 //void secfile_insert_str_comment(section_file my_section_file,
-//				char *sval, final String const comment,
+//				char *sval, final String final comment,
 //				final String path)
 //{
 //  entry pentry;
@@ -1248,13 +1248,13 @@ public class Registry{
 //
 //  psection = find_section_by_name(my_section_file, sec_name);
 //  if (psection) {
-//    entry_list_iterate(psection.entries, pentry) {
+//    for (entry pentry : psection.entries.data) {
 //      if (strcmp(pentry.name, ent_name) == 0) {
 //	result = pentry;
 //	result.used++;
 //	return result;
 //      }
-//    } entry_list_iterate_end;
+//    } }
 //  }
 //
 //  return null;
@@ -1395,13 +1395,13 @@ public class Registry{
 //  hashd.num_duplicates = 0;
 //  
 //  section_list_iterate(*file.sections, psection) {
-//    entry_list_iterate(psection.entries, pentry) {
+//    for (entry pentry : psection.entries.data) {
 //      my_snprintf(buf, sizeof(buf), "%s.%s", psection.name, pentry.name);
 //      secfilehash_insert(file, buf, pentry);
 //    }
-//    entry_list_iterate_end;
+//    }
 //  }
-//  section_list_iterate_end;
+//  }
 //  
 //  if (hashd.allow_duplicates) {
 //    freelog(LOG_DEBUG, "Hash duplicates during build: %d",
@@ -1619,7 +1619,7 @@ public class Registry{
 //      i++;
 //    }
 //  }
-//  section_list_iterate_end;
+//  }
 //  (*num) = i;
 //
 //  if (i==0) {
@@ -1634,7 +1634,7 @@ public class Registry{
 //      ret[i++] = psection.name;
 //    }
 //  }
-//  section_list_iterate_end;
+//  }
 //  return ret;
 //}
 //
@@ -1670,9 +1670,9 @@ public class Registry{
 //  ret = fc_malloc((*num) * sizeof(*ret));
 //
 //  i = 0;  
-//  entry_list_iterate(psection.entries, pentry) {
+//  for (entry pentry : psection.entries.data) {
 //    ret[i++] = pentry.name;
-//  } entry_list_iterate_end;
+//  } }
 //
 //  return ret;
 //}

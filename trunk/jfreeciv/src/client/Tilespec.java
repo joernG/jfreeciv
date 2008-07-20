@@ -67,7 +67,7 @@ public class Tilespec{
 // * options.h since that variable is changed by the GUI code. */
 //static char current_tileset[512];
 //
-//static const int DIR4_TO_DIR8[4] =
+//static final int DIR4_TO_DIR8[4] =
 //    { DIR8_NORTH, DIR8_SOUTH, DIR8_EAST, DIR8_WEST };
 //
 //int NORMAL_TILE_WIDTH;
@@ -141,7 +141,7 @@ public class Tilespec{
 //    TYPED_LIST_ITERATE(struct small_sprite, list, pitem)
 //#define small_sprite_list_iterate_end  LIST_ITERATE_END
 //
-//static struct specfile_list specfiles;
+//static Speclists<specfile> specfiles;
 //static struct small_sprite_list small_sprites;
 //
 //struct specfile {
@@ -383,7 +383,7 @@ public class Tilespec{
 //  }
 //
 //  while (hash_num_entries(terrain_hash) > 0) {
-//    const terrain_drawing_data draw;
+//    final terrain_drawing_data draw;
 //
 //    draw = hash_value_by_number(terrain_hash, 0);
 //    hash_delete_entry(terrain_hash, draw.name);
@@ -1233,7 +1233,7 @@ public class Tilespec{
 //static void tilespec_lookup_sprite_tags()
 //{
 //  char buffer[512];
-//  const char dir_char[] = "nsew";
+//  final char dir_char[] = "nsew";
 //  int i;
 //  
 //  assert(sprite_hash != null);
@@ -1475,7 +1475,7 @@ public class Tilespec{
 //    {
 //      /* Isometric: take a single tx.darkness tile and split it into 4. */
 //      Sprite darkness = load_sprite("tx.darkness");
-//      const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//      final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
 //      int offsets[4][2] = {{W / 2, 0}, {0, H / 2}, {W / 2, H / 2}, {0, 0}};
 //
 //      if (!darkness) {
@@ -1672,10 +1672,10 @@ public class Tilespec{
 //	break;
 //      case CELL_RECT:
 //	{
-//	  const int count = draw.layer[l].match_count;
+//	  final int count = draw.layer[l].match_count;
 //	  /* N directions (NSEW) * 3 dimensions of matching */
 //	  /* FIXME: should use exp() or expi() here. */
-//	  const int number = NUM_CORNER_DIRS * count * count * count;
+//	  final int number = NUM_CORNER_DIRS * count * count * count;
 //
 //	  draw.layer[l].cells
 //	    = fc_malloc(number * sizeof(*draw.layer[l].cells));
@@ -1683,7 +1683,7 @@ public class Tilespec{
 //	  for (i = 0; i < number; i++) {
 //	    int value = i / NUM_CORNER_DIRS;
 //	    enum direction4 dir = i % NUM_CORNER_DIRS;
-//	    const char dirs[4] = "udrl"; /* Matches direction4 ordering */
+//	    final char dirs[4] = "udrl"; /* Matches direction4 ordering */
 //
 //	    switch (draw.layer[l].match_style) {
 //	    case MATCH_NONE:
@@ -1751,7 +1751,7 @@ public class Tilespec{
 //
 //		if (sprite) {
 //		  /* Crop the sprite to separate this cell. */
-//		  const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//		  final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
 //		  int x[4] = {W / 4, W / 4, 0, W / 2};
 //		  int y[4] = {H / 2, 0, H / 4, H / 4};
 //		  int xo[4] = {0, 0, -W / 2, W / 2};
@@ -1779,8 +1779,8 @@ public class Tilespec{
 //
 //  if (draw.is_blended && is_isometric) {
 //    /* Set up blending sprites. This only works in iso-view! */
-//    const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
-//    const int offsets[4][2] = {
+//    final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//    final int offsets[4][2] = {
 //      {W / 2, 0}, {0, H / 2}, {W / 2, H / 2}, {0, 0}
 //    };
 //    enum direction4 dir;
@@ -1998,7 +1998,7 @@ public class Tilespec{
 //    ADD_SPRITE_FULL(sprites.unit.loaded);
 //  }
 //
-//  if(punit.activity!=ACTIVITY_IDLE) {
+//  if(punit.activity!=unit_activity.ACTIVITY_IDLE) {
 //    Sprite s = null;
 //    switch(punit.activity) {
 //    case ACTIVITY_MINE:
@@ -2038,7 +2038,7 @@ public class Tilespec{
 //    case ACTIVITY_SENTRY:
 //      s = sprites.unit.sentry;
 //      break;
-//    case ACTIVITY_GOTO:
+//    case unit_activity.ACTIVITY_GOTO:
 //      s = sprites.unit.go_to;
 //      break;
 //    case ACTIVITY_TRANSFORM:
@@ -2062,7 +2062,7 @@ public class Tilespec{
 //  if (unit_has_orders(punit)) {
 //    if (punit.orders.repeat) {
 //      ADD_SPRITE_FULL(sprites.unit.patrol);
-//    } else if (punit.activity != ACTIVITY_IDLE) {
+//    } else if (punit.activity != unit_activity.ACTIVITY_IDLE) {
 //      ADD_SPRITE_SIMPLE(sprites.unit.connect);
 //    } else {
 //      ADD_SPRITE_FULL(sprites.unit.go_to);
@@ -2426,8 +2426,8 @@ public class Tilespec{
 //
 //  if (is_isometric && sprites.terrain[ttype].is_blended) {
 //    enum direction4 dir;
-//    const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
-//    const int offsets[4][2] = {
+//    final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//    final int offsets[4][2] = {
 //      {W/2, 0}, {0, H / 2}, {W / 2, H / 2}, {0, 0}
 //    };
 //
@@ -2523,18 +2523,18 @@ public class Tilespec{
 //	 * for each of the 4 cells (32 sprites total).
 //	 *
 //	 * These arrays correspond to the direction4 ordering. */
-//	const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
-//	const int iso_offsets[4][2] = {
+//	final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//	final int iso_offsets[4][2] = {
 //	  {W / 4, 0}, {W / 4, H / 2}, {W / 2, H / 4}, {0, H / 4}
 //	};
-//	const int noniso_offsets[4][2] = {
+//	final int noniso_offsets[4][2] = {
 //	  {0, 0}, {W / 2, H / 2}, {W / 2, 0}, {0, H / 2}
 //	};
 //	int i;
 //
 //	/* put corner cells */
 //	for (i = 0; i < NUM_CORNER_DIRS; i++) {
-//	  const int count = draw.layer[l].match_count;
+//	  final int count = draw.layer[l].match_count;
 //	  int array_index = 0;
 //	  enum direction8 dir = dir_ccw(DIR4_TO_DIR8[i]);
 //	  int x = (is_isometric ? iso_offsets[i][0] : noniso_offsets[i][0]);
@@ -2590,7 +2590,7 @@ public class Tilespec{
 //	break;
 //      case DARKNESS_ISORECT:
 //	for (i = 0; i < 4; i++) {
-//	  const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//	  final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
 //	  int offsets[4][2] = {{W / 2, 0}, {0, H / 2}, {W / 2, H / 2}, {0, 0}};
 //
 //	  if (UNKNOWN(DIR4_TO_DIR8[i])) {
@@ -3068,16 +3068,16 @@ public class Tilespec{
 //  hash_free(sprite_hash);
 //  sprite_hash = null;
 //
-//  small_sprite_list_iterate(small_sprites, ss) {
+//  small_for (sprite ss : small_sprites.data) {
 //    small_sprite_list_unlink(&small_sprites, ss);
 //    if (ss.file) {
 //      free(ss.file);
 //    }
 //    assert(ss.sprite == null);
 //    free(ss);
-//  } small_sprite_list_iterate_end;
+//  } small_}
 //
-//  specfile_list_iterate(specfiles, sf) {
+//  for (specfile sf : specfiles.data) {
 //    specfile_list_unlink(&specfiles, sf);
 //    free(sf.file_name);
 //    if (sf.big_sprite) {
@@ -3085,7 +3085,7 @@ public class Tilespec{
 //      sf.big_sprite = null;
 //    }
 //    free(sf);
-//  } specfile_list_iterate_end;
+//  } }
 //
 //  if (num_tiles_explode_unit > 0) {
 //    free(sprites.explode.unit);
@@ -3101,7 +3101,7 @@ public class Tilespec{
 //**************************************************************************/
 //Sprite get_citizen_sprite(struct citizen_type type,
 //				  int citizen_index,
-//				  const city pcity)
+//				  final city pcity)
 //{
 //  citizen_graphic graphic;
 //
@@ -3208,11 +3208,11 @@ public class Tilespec{
 //**************************************************************************/
 //void finish_loading_sprites()
 //{
-//  specfile_list_iterate(specfiles, sf) {
+//  for (specfile sf : specfiles.data) {
 //    if (sf.big_sprite) {
 //      free_sprite(sf.big_sprite);
 //      sf.big_sprite = null;
 //    }
-//  } specfile_list_iterate_end;
+//  } }
 //}
 }

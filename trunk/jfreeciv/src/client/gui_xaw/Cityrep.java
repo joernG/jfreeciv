@@ -548,9 +548,9 @@ public class Cityrep{
 //     * having to find city corresponding to id for each comparison.
 //     */
 //    i=0;
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      cities_in_list[i++] = pcity;
-//    } city_list_iterate_end;
+//    } }
 //    assert(i==n);
 //    qsort(cities_in_list, n, sizeof(struct city*), city_name_compare);
 //    for(i=0; i<n; i++) {

@@ -111,7 +111,7 @@ public class Stdinhand{
 //static struct voting votes[MAX_NUM_PLAYERS];
 //static int last_vote;
 //
-//static const char horiz_line[] =
+//static final char horiz_line[] =
 //"------------------------------------------------------------------------------";
 //
 ///********************************************************************
@@ -385,12 +385,12 @@ public class Stdinhand{
 //  }
 //
 //  if (rfc_status == C_OK) {
-//    conn_list_iterate(game.est_connections, pconn) {
+//    for (conn pconn : game.est_connections.data) {
 //      /* Do not tell caller, since he was told above! */
 //      if (pconn != caller) {
 //        notify_conn(&pconn.self, "Game: %s", line);
 //      }
-//    } conn_list_iterate_end;
+//    } }
 //  }
 //}
 //
@@ -1163,12 +1163,12 @@ public class Stdinhand{
 //*********************************************************************/
 //static boolean first_access_level_is_taken()
 //{
-//  conn_list_iterate(game.est_connections, pconn) {
+//  for (conn pconn : game.est_connections.data) {
 //    if (pconn.access_level >= first_access_level) {
 //      return true;
 //    }
 //  }
-//  conn_list_iterate_end;
+//  }
 //  return false;
 //}
 //
@@ -1227,11 +1227,11 @@ public class Stdinhand{
 //
 //    cmd_reply(CMD_CMDLEVEL, caller, Erfc_status.C_COMMENT, "Command access levels in effect:");
 //
-//    conn_list_iterate(game.est_connections, pconn) {
+//    for (conn pconn : game.est_connections.data) {
 //      cmd_reply(CMD_CMDLEVEL, caller, Erfc_status.C_COMMENT, "cmdlevel %s %s",
 //		cmdlevel_name(pconn.access_level), pconn.username);
 //    }
-//    conn_list_iterate_end;
+//    }
 //    cmd_reply(CMD_CMDLEVEL, caller, Erfc_status.C_COMMENT,
 //	      "Command access level for new connections: %s",
 //	      cmdlevel_name(default_access_level));
@@ -1274,7 +1274,7 @@ public class Stdinhand{
 // 
 //  if (arg_name[0] == '\0') {
 //    /* no playername supplied: set for all connections, and set the default */
-//    conn_list_iterate(game.est_connections, pconn) {
+//    for (conn pconn : game.est_connections.data) {
 //      if (set_cmdlevel(caller, pconn, level)) {
 //	cmd_reply(CMD_CMDLEVEL, caller, C_OK,
 //		  "Command access level set to '%s' for connection %s.",
@@ -1287,7 +1287,7 @@ public class Stdinhand{
 //        return false;
 //      }
 //    }
-//    conn_list_iterate_end;
+//    }
 //    
 //    default_access_level = level;
 //    cmd_reply(CMD_CMDLEVEL, caller, C_OK,
@@ -1628,7 +1628,7 @@ public class Stdinhand{
 //2: ongoing options only 
 //(which=0 means all options; this is now obsolete and no longer used.)
 //******************************************************************/
-//void report_server_options(conn_list dest, int which)
+//void report_server_options(Speclists<Connection> dest, int which)
 //{
 //  int i, c;
 //  char buffer[4096];
@@ -2335,7 +2335,7 @@ public class Stdinhand{
 //      cmd_reply(CMD_DEBUG, caller, C_SYNTAX, "Bad map coordinates.");
 //      goto cleanup;
 //    }
-//    unit_list_iterate(ptile.units, punit) {
+//    for (unit punit : ptile.units.data) {
 //      if (punit.debug) {
 //        punit.debug = false;
 //        cmd_reply(CMD_DEBUG, caller, C_OK, "%s's %s no longer debugged.",
@@ -2345,7 +2345,7 @@ public class Stdinhand{
 //        UNIT_LOG(LOG_NORMAL, punit, "%s's %s debugged.",
 //                 unit_owner(punit).name, unit_name(punit.type));
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } else if (ntokens > 0 && strcmp(arg[0], "unit") == 0) {
 //    int id;
 //    unit punit;
@@ -2917,7 +2917,7 @@ public class Stdinhand{
 //
 //  /* if we're taking another player with a user attached, 
 //   * forcibly detach the user from the player. */
-//  conn_list_iterate(pplayer.connections, aconn) {
+//  for (conn aconn : pplayer.connections.data) {
 //    if (!aconn.observer) {
 //      if (server_state == RUN_GAME_STATE) {
 //        send_game_state(&aconn.self, CLIENT_PRE_GAME_STATE);
@@ -2926,7 +2926,7 @@ public class Stdinhand{
 //      unattach_connection_from_player(aconn);
 //      send_conn_info(&aconn.self, &game.est_connections);
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //
 //  /* if the connection is already attached to a player,
 //   * unattach and cleanup old player (rename, remove, etc) */
@@ -3077,13 +3077,13 @@ public class Stdinhand{
 //  if (!pplayer.is_connected && !pplayer.was_created && is_newgame
 //      && !one_obs_among_many) {
 //    /* detach any observers */
-//    conn_list_iterate(pplayer.connections, aconn) {
+//    for (conn aconn : pplayer.connections.data) {
 //      if (aconn.observer) {
 //        unattach_connection_from_player(aconn);
 //        send_conn_info(&aconn.self, &game.est_connections);
 //        notify_conn(&aconn.self, "detaching from %s.", pplayer.name);
 //      }
-//    } conn_list_iterate_end;
+//    } }
 //
 //    /* actually do the removal */
 //    game_remove_player(pplayer);
@@ -3224,7 +3224,7 @@ public class Stdinhand{
 //  /* attach connections to players. currently, this applies only 
 //   * to connections that have the correct username. Any attachments
 //   * made before the game load are unattached. */
-//  conn_list_iterate(game.est_connections, pconn) {
+//  for (conn pconn : game.est_connections.data) {
 //    if (pconn.player) {
 //      unattach_connection_from_player(pconn);
 //    }
@@ -3234,7 +3234,7 @@ public class Stdinhand{
 //        break;
 //      }
 //    } players_iterate_end;
-//  } conn_list_iterate_end;
+//  } }
 //  return true;
 //}
 //
@@ -3660,7 +3660,7 @@ public class Stdinhand{
 //      return true;
 //    } else {
 //      int started = 0, notstarted = 0;
-//      const int percent_required = 100;
+//      final int percent_required = 100;
 //
 //      /* Note this is called even if the player has pressed /start once
 //       * before.  This is a good thing given that no other code supports
@@ -3782,7 +3782,7 @@ public class Stdinhand{
 //			      enum command_id help_cmd,
 //			      enum command_id id)
 //{
-//  const command cmd = &commands[id];
+//  final command cmd = &commands[id];
 //  
 //  if (cmd.short_help) {
 //    cmd_reply(help_cmd, caller, Erfc_status.C_COMMENT,
@@ -3862,7 +3862,7 @@ public class Stdinhand{
 //**************************************************************************/
 //enum HELP_GENERAL_ARGS { HELP_GENERAL_COMMANDS, HELP_GENERAL_OPTIONS,
 //			 HELP_GENERAL_NUM /* Must be last */ };
-//static final String const help_general_args[] = {
+//static final String final help_general_args[] = {
 //  "commands", "options", null
 //};
 //
@@ -3949,7 +3949,7 @@ public class Stdinhand{
 //**************************************************************************/
 //enum LIST_ARGS { LIST_PLAYERS, LIST_CONNECTIONS,
 //		 LIST_ARG_NUM /* Must be last */ };
-//static final String const list_args[] = {
+//static final String final list_args[] = {
 //  "players", "connections", null
 //};
 //static final String listarg_accessor(int i) {
@@ -4065,7 +4065,7 @@ public class Stdinhand{
 //      }
 //      cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, "%s", buf);
 //      
-//      conn_list_iterate(pplayer.connections, pconn) {
+//      for (conn pconn : pplayer.connections.data) {
 //	if (!pconn.used) {
 //	  /* A bug that we haven't been able to trace leaves unused
 //	   * connections on the lists.  We skip them. */
@@ -4080,7 +4080,7 @@ public class Stdinhand{
 //	  sz_strlcat(buf, " (observer mode)");
 //	}
 //	cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, "%s", buf);
-//      } conn_list_iterate_end;
+//      } }
 //    } players_iterate_end;
 //  }
 //  cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, horiz_line);
@@ -4100,7 +4100,7 @@ public class Stdinhand{
 //    cmd_reply(CMD_LIST, caller, C_WARNING, "<no connections>");
 //  }
 //  else {
-//    conn_list_iterate(game.all_connections, pconn) {
+//    for (conn pconn : game.all_connections.data) {
 //      sz_strlcpy(buf, conn_description(pconn));
 //      if (pconn.established) {
 //	cat_snprintf(buf, sizeof(buf), " command access level %s",
@@ -4108,7 +4108,7 @@ public class Stdinhand{
 //      }
 //      cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, "%s", buf);
 //    }
-//    conn_list_iterate_end;
+//    }
 //  }
 //  cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, horiz_line);
 //}
@@ -4127,7 +4127,7 @@ public class Stdinhand{
 //  which returns each possible completion string by index.
 //**************************************************************************/
 //static char *generic_generator(final String text, int state, int num,
-//			       const char*(*index2str)(int))
+//			       final char*(*index2str)(int))
 //{
 //  static int list_index, len;
 //  final String name;
@@ -4312,7 +4312,7 @@ public class Stdinhand{
 ///**************************************************************************
 //Commands that may be followed by a player name
 //**************************************************************************/
-//static const int player_cmd[] = {
+//static final int player_cmd[] = {
 //  CMD_AITOGGLE,
 //  CMD_NOVICE,
 //  CMD_EASY,
@@ -4396,7 +4396,7 @@ public class Stdinhand{
 //  CMD_SHOW is handled by option_level_cmd, which is for both option levels
 //  and server options
 //**************************************************************************/
-//static const int server_option_cmd[] = {
+//static final int server_option_cmd[] = {
 //  CMD_EXPLAIN,
 //  CMD_SET,
 //  -1
@@ -4424,7 +4424,7 @@ public class Stdinhand{
 ///**************************************************************************
 //  Commands that may be followed by an option level or server option
 //**************************************************************************/
-//static const int option_level_cmd[] = {
+//static final int option_level_cmd[] = {
 //  CMD_SHOW,
 //  -1
 //};
@@ -4451,7 +4451,7 @@ public class Stdinhand{
 ///**************************************************************************
 //Commands that may be followed by a filename
 //**************************************************************************/
-//static const int filename_cmd[] = {
+//static final int filename_cmd[] = {
 //  CMD_LOAD,
 //  CMD_SAVE,
 //  CMD_READ_SCRIPT,

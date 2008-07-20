@@ -337,7 +337,7 @@ public class Goto{
 //  PF callback to get the path with the minimal number of steps (out of 
 //  all shortest paths).
 //***********************************************************************/
-//static int get_EC(const tile ptile, enum known_type known,
+//static int get_EC(final tile ptile, enum known_type known,
 //		  pf_parameter param)
 //{
 //  return 1;
@@ -347,7 +347,7 @@ public class Goto{
 //  PF callback to prohibit going into the unknown.  Also makes sure we 
 //  don't plan our route through enemy city/tile.
 //***********************************************************************/
-//static enum tile_behavior get_TB_aggr(const tile ptile,
+//static enum tile_behavior get_TB_aggr(final tile ptile,
 //				      enum known_type known,
 //                                      pf_parameter param)
 //{
@@ -367,7 +367,7 @@ public class Goto{
 //  PF callback for caravans. Caravans doesn't go into the unknown and
 //  don't attack enemy units but enter enemy cities.
 //***********************************************************************/
-//static enum tile_behavior get_TB_caravan(const tile ptile,
+//static enum tile_behavior get_TB_caravan(final tile ptile,
 //					 enum known_type known,
 //					 pf_parameter param)
 //{
@@ -392,7 +392,7 @@ public class Goto{
 //  Return the number of MP needed to do the connect activity at this
 //  position.  A negative number means it's impossible.
 //****************************************************************************/
-//static int get_activity_time(const tile ptile,
+//static int get_activity_time(final tile ptile,
 //			     player pplayer)
 //{
 //  tile_type ttype = get_tile_type(ptile.terrain);
@@ -447,7 +447,7 @@ public class Goto{
 //  nonallied cities
 //****************************************************************************/
 //static boolean is_non_allied_city_adjacent(player pplayer,
-//					const tile ptile)
+//					final tile ptile)
 //{
 //  adjc_iterate(ptile, tile1) {
 //    if (is_non_allied_city_tile(tile1, pplayer)) {
@@ -468,8 +468,8 @@ public class Goto{
 //  param.data should contain the result of
 //  get_activity_rate(punit) / ACTIVITY_FACTOR.
 //****************************************************************************/
-//static int get_connect_road(const tile src_tile, enum direction8 dir,
-//			    const tile dest_tile,
+//static int get_connect_road(final tile src_tile, enum direction8 dir,
+//			    final tile dest_tile,
 //			    int src_cost, int src_extra,
 //			    int *dest_cost, int *dest_extra,
 //			    pf_parameter param)
@@ -534,7 +534,7 @@ public class Goto{
 //
 //  /* Now we determine if we have found a better path.  When building a road,
 //   * we care most about the length of the result.  When building a rail, we 
-//   * care most about the constructions time (assuming MOVE_COST_RAIL == 0) */
+//   * care most about the finalructions time (assuming MOVE_COST_RAIL == 0) */
 //
 //  /* *dest_cost==-1 means we haven't reached dest until now */
 //  if (*dest_cost != -1) {
@@ -568,9 +568,9 @@ public class Goto{
 //
 //  param.data should contain the result of get_activity_rate(punit) / 10.
 //****************************************************************************/
-//static int get_connect_irrig(const tile src_tile,
+//static int get_connect_irrig(final tile src_tile,
 //			     enum direction8 dir,
-//			     const tile dest_tile,
+//			     final tile dest_tile,
 //                             int src_cost, int src_extra,
 //                             int *dest_cost, int *dest_extra,
 //                             pf_parameter param)
@@ -639,7 +639,7 @@ public class Goto{
 //  PF callback to prohibit going into the unknown (conditionally).  Also
 //  makes sure we don't plan to attack anyone.
 //***********************************************************************/
-//static enum tile_behavior no_fights_or_unknown_goto(const tile ptile,
+//static enum tile_behavior no_fights_or_unknown_goto(final tile ptile,
 //						    enum known_type known,
 //						    pf_parameter p)
 //{

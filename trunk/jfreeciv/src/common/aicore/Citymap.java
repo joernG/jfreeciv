@@ -69,7 +69,7 @@ public class Citymap{
 //  memset(citymap, 0, MAX_MAP_INDEX * sizeof(*citymap));
 //
 //  players_iterate(pplayer) {
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      map_city_radius_iterate(pcity.tile, ptile) {
 //        if (ptile.worked) {
 //          citymap[ptile.index] = -(ptile.worked.id);
@@ -77,9 +77,9 @@ public class Citymap{
 //	  citymap[ptile.index]++;
 //        }
 //      } map_city_radius_iterate_end;
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (unit_flag(punit, F_CITIES)
 //        && punit.ai.ai_role == AIUNIT_BUILD_CITY) {
 //      map_city_radius_iterate(punit.goto_tile, ptile) {
@@ -89,7 +89,7 @@ public class Citymap{
 //      } map_city_radius_iterate_end;
 //      citymap[punit.goto_tile.index] = -(punit.id);
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************

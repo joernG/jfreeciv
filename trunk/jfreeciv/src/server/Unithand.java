@@ -1,28 +1,9 @@
 package server;
 
-public class Unithand{
+import common.unit.unit;
+import common.unit.unit_activity;
 
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//
+public class Unithand{
 //#include "city.h"
 //#include "combat.h"
 //#include "events.h"
@@ -85,11 +66,11 @@ public class Unithand{
 //  free_unit_orders(punit); /* This may reset punit.goto_tile also. */
 //
 //  punit.goto_tile = ptile;
-//  set_unit_activity(punit, ACTIVITY_GOTO);
+//  set_unit_activity(punit, unit_activity.ACTIVITY_GOTO);
 //
 //  send_unit_info(null, punit);
 //
-//  () do_unit_goto(punit, GOTO_MOVE_ANY, true);
+//  () do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, true);
 //}
 //
 ///**************************************************************************
@@ -108,10 +89,10 @@ public class Unithand{
 ///**************************************************************************
 // Upgrade all units of a given type.
 //**************************************************************************/
-//void handle_unit_type_upgrade(player pplayer, Unit_Type_id type)
+//void handle_unit_type_upgrade(player pplayer, int type)
 //{
-//  const Unit_Type_id from_unittype = type;
-//  const Unit_Type_id to_unittype = can_upgrade_unittype(pplayer,
+//  final int from_unittype = type;
+//  final int to_unittype = can_upgrade_unittype(pplayer,
 //							from_unittype);
 //  int number_of_upgraded_units = 0;
 //
@@ -127,7 +108,7 @@ public class Unithand{
 //   * the player really cared they should have done it manually). 
 //   */
 //  conn_list_do_buffer(&pplayer.connections);
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (punit.type == from_unittype) {
 //      enum unit_upgrade_result result = test_unit_upgrade(punit, false);
 //
@@ -138,12 +119,12 @@ public class Unithand{
 //	break;
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //  conn_list_do_unbuffer(&pplayer.connections);
 //
 //  /* Alert the player about what happened. */
 //  if (number_of_upgraded_units > 0) {
-//    const int cost = unit_upgrade_price(pplayer, from_unittype, to_unittype);
+//    final int cost = unit_upgrade_price(pplayer, from_unittype, to_unittype);
 //    notify_player(pplayer, "Game: %d %s upgraded to %s for %d gold.",
 //		  number_of_upgraded_units, unit_types[from_unittype].name,
 //		  unit_types[to_unittype].name,
@@ -167,8 +148,8 @@ public class Unithand{
 //  }
 //
 //  if (get_unit_upgrade_info(buf, sizeof(buf), punit) == UR_OK) {
-//    Unit_Type_id from_unit = punit.type;
-//    Unit_Type_id to_unit = can_upgrade_unittype(pplayer, punit.type);
+//    int from_unit = punit.type;
+//    int to_unit = can_upgrade_unittype(pplayer, punit.type);
 //    int cost = unit_upgrade_price(pplayer, punit.type, to_unit);
 //
 //    upgrade_unit(punit, to_unit, false);
@@ -344,7 +325,7 @@ public class Unithand{
 //    }
 //    wipe_unit(punit);
 //  } else {
-//    notify_player_ex(unit_owner(punit), punit.tile, E_NOEVENT,
+//    notify_player_ex(unit_owner(punit), punit.tile, event_type.E_NOEVENT,
 //              "Game: %s refuses to disband!", unit_name(punit.type));
 //    return;
 //  }
@@ -367,19 +348,19 @@ public class Unithand{
 //
 //  switch (res) {
 //  case AB_NOT_BUILD_LOC:
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: Can't place city here.");
 //    break;
 //  case AB_NOT_BUILD_UNIT:
 //    {
 //      final String us = get_units_with_flag_string(F_CITIES);
 //      if (us) {
-//	notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//	notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //			 "Game: Only %s can build a city.",
 //			 us);
 //	free((void *) us);
 //      } else {
-//	notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//	notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //			 "Game: Can't build a city.");
 //      }
 //    }
@@ -388,33 +369,33 @@ public class Unithand{
 //    {
 //      final String us = get_units_with_flag_string(F_ADD_TO_CITY);
 //      if (us) {
-//	notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//	notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //			 "Game: Only %s can add to a city.",
 //			 us);
 //	free((void *) us);
 //      } else {
-//	notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//	notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //			 "Game: Can't add to a city.");
 //      }
 //    }
 //    break;
 //  case AB_NO_MOVES_ADD:
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: %s unit has no moves left to add to %s.",
 //		     unit_name, pcity.name);
 //    break;
 //  case AB_NO_MOVES_BUILD:
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: %s unit has no moves left to build city.",
 //		     unit_name);
 //    break;
 //  case AB_TOO_BIG:
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: %s is too big to add %s.",
 //		     pcity.name, unit_name);
 //    break;
 //  case AB_NO_SPACE:
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     _("Game: %s needs an improvement to grow, so "
 //		       "you cannot add %s."),
 //		     pcity.name, unit_name);
@@ -423,7 +404,7 @@ public class Unithand{
 //    /* Shouldn't happen */
 //    freelog(LOG_ERROR, "Cannot add %s to %s for unknown reason",
 //	    unit_name, pcity.name);
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: Can't add %s to %s.",
 //		     unit_name, pcity.name);
 //    break;
@@ -447,7 +428,7 @@ public class Unithand{
 //  auto_arrange_workers(pcity);
 //  wipe_unit(punit);
 //  send_city_info(null, pcity);
-//  notify_player_ex(pplayer, pcity.tile, E_NOEVENT,
+//  notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //		   "Game: %s added to aid %s in growing.",
 //		   unit_name, pcity.name);
 //}
@@ -464,7 +445,7 @@ public class Unithand{
 //  char message[1024];
 //
 //  if (!is_allowed_city_name(pplayer, name, message, sizeof(message))) {
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: %s", message);
 //    return;
 //  }
@@ -528,7 +509,7 @@ public class Unithand{
 //      if ((punit = find_unit_by_id(id))) {
 //	assert(punit.activity == ACTIVITY_EXPLORE);
 //	if (!more_to_explore) {
-//	  set_unit_activity(punit, ACTIVITY_IDLE);
+//	  set_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //	  punit.ai.control = false;
 //	}
 //	send_unit_info(null, punit);
@@ -629,11 +610,11 @@ public class Unithand{
 //
 //  /* Send combat info to non-player observers as well.  They already know
 //   * about the unit so no unit_info is needed. */
-//  conn_list_iterate(game.game_connections, pconn) {
+//  for (conn pconn : game.game_connections.data) {
 //    if (!pconn.player && pconn.observer) {
 //      send_packet_unit_combat_info(pconn, &combat);
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -649,7 +630,7 @@ public class Unithand{
 //  freelog(LOG_DEBUG, "Start bombard: %s's %s to %d, %d.",
 //	  pplayer.name, unit_type(punit).name, TILE_XY(ptile));
 //
-//  unit_list_iterate_safe(ptile.units, pdefender) {
+//  for (unit pdefender : ptile.units.data) {
 //
 //    /* Sanity checks */
 //    if (pplayers_non_attack(unit_owner(punit), unit_owner(pdefender))) {
@@ -673,7 +654,7 @@ public class Unithand{
 //      send_unit_info(null, pdefender);
 //    }
 //
-//  } unit_list_iterate_safe_end;
+//  }
 //
 //  punit.moves_left = 0;
 //  
@@ -785,7 +766,7 @@ public class Unithand{
 //    city_refresh(pcity);
 //    send_city_info(null, pcity);
 //  }
-//  if (unit_flag(punit, F_ONEATTACK)) 
+//  if (unit_flag(punit, Eunit_flag_id.F_ONEATTACK)) 
 //    punit.moves_left = 0;
 //  pwinner = (punit.hp > 0) ? punit : pdefender;
 //  plooser = (pdefender.hp > 0) ? punit : pdefender;
@@ -897,7 +878,7 @@ public class Unithand{
 //**************************************************************************/
 //static void how_to_declare_war(player pplayer)
 //{
-//  notify_player_ex(pplayer, null, E_NOEVENT,
+//  notify_player_ex(pplayer, null, event_type.E_NOEVENT,
 //		   "Game: Cancel treaty in the players dialog first (F3).");
 //}
 //
@@ -922,19 +903,19 @@ public class Unithand{
 //    final String units_str = get_units_with_flag_string(F_MARINES);
 //    if (units_str) {
 //      notify_player_ex(unit_owner(punit), src_tile,
-//		       E_NOEVENT, "Game: Only %s can attack from sea.",
+//		       event_type.E_NOEVENT, "Game: Only %s can attack from sea.",
 //		       units_str);
 //      free((void *) units_str);
 //    } else {
 //      notify_player_ex(unit_owner(punit), src_tile,
-//		       E_NOEVENT, "Game: Cannot attack from sea.");
+//		       event_type.E_NOEVENT, "Game: Cannot attack from sea.");
 //    }
 //  } else if (reason == MR_NO_WAR) {
 //    notify_player_ex(unit_owner(punit), src_tile,
-//		     E_NOEVENT,
+//		     event_type.E_NOEVENT,
 //		     "Game: Cannot attack unless you declare war first.");
 //  } else if (reason == MR_ZOC) {
-//    notify_player_ex(unit_owner(punit), src_tile, E_NOEVENT,
+//    notify_player_ex(unit_owner(punit), src_tile, event_type.E_NOEVENT,
 //		     "Game: %s can only move into your own zone of control.",
 //		     unit_type(punit).name);
 //  }
@@ -971,7 +952,7 @@ public class Unithand{
 //
 //
 //  if (punit.moves_left<=0)  {
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                     "Game: This unit has no moves left.");
 //    return false;
 //  }
@@ -1024,7 +1005,7 @@ public class Unithand{
 //						 punit.id, target_id);
 //        return false;
 //      } else if (!can_unit_move_to_tile(punit, pdesttile, igzoc)) {
-//        notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//        notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                         is_ocean(map_get_terrain(punit.tile))
 //                         ? _("Game: Unit must be on land to "
 //                             "perform diplomatic action.")
@@ -1042,7 +1023,7 @@ public class Unithand{
 //
 //    /* We can attack ONLY in enemy cities */
 //    if (pcity && !pplayers_at_war(city_owner(pcity), pplayer)) {
-//      notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//      notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		       _("Game: Can't attack %s "
 //			 "because you are not at war with %s."),
 //		       pcity.name,
@@ -1053,7 +1034,7 @@ public class Unithand{
 //
 //    /* Tile must contain ONLY enemy units. */
 //    if ((victim = is_non_attack_unit_tile(pdesttile, pplayer))) {
-//      notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//      notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                       _("Game: Can't attack %s's unit "
 //			 "because you are not at war with %s."),
 //                       unit_owner(victim).name,
@@ -1071,7 +1052,7 @@ public class Unithand{
 //	  unit_bombard(punit, pdesttile);
 //	  return true;
 //	} else {
-//	  notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//	  notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //			   _("Game: This unit is being transported, and"
 //			     " so cannot bombard."));
 //	  return false;
@@ -1086,7 +1067,7 @@ public class Unithand{
 //    if (victim) {
 //      /* Must be physically able to attack EVERY unit there */
 //      if (!can_unit_attack_all_at_tile(punit, pdesttile)) {
-//        notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//        notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                         "Game: You can't attack there.");
 //        return false;
 //      }
@@ -1106,7 +1087,7 @@ public class Unithand{
 //       * If not it would have been caught in the attack case. 
 //       * FIXME: Move this check into test_unit_move_tile */
 //      if (!COULD_OCCUPY(punit)) {
-//        notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//        notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                         _("Game: This type of troops cannot "
 //                           "take over a city."));
 //        return false;
@@ -1120,16 +1101,16 @@ public class Unithand{
 //  /* We cannot move a transport into a tile that holds
 //   * units or cities not allied with all of our cargo. */
 //  if (get_transporter_capacity(punit) > 0) {
-//    unit_list_iterate(punit.tile.units, pcargo) {
+//    for (unit pcargo : punit.tile.units.data) {
 //      if (pcargo.transported_by == punit.id
 //          && (is_non_allied_unit_tile(pdesttile, unit_owner(pcargo))
 //              || is_non_allied_city_tile(pdesttile, unit_owner(pcargo)))) {
-//         notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//         notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                          _("Game: A transported unit is not allied to all "
 //                            "units or city on target tile."));
 //         return false;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  }
 //
 //
@@ -1173,7 +1154,7 @@ public class Unithand{
 //  } else {
 //    text = "Game: Your %s helps build the %s in %s (%d surplus).";
 //  }
-//  notify_player_ex(pplayer, pcity_dest.tile, E_NOEVENT,
+//  notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		   text, /* Must match arguments below. */
 //		   unit_name(punit.type),
 //		   get_improvement_type(pcity_dest.currently_building).name,
@@ -1214,7 +1195,7 @@ public class Unithand{
 //  pcity_homecity = player_find_city_by_id(pplayer, punit.homecity);
 //
 //  if (!pcity_homecity) {
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     _("Game: Sorry, your %s cannot establish"
 //		       " a trade route because it has no home city"),
 //		     unit_name(punit.type));
@@ -1224,7 +1205,7 @@ public class Unithand{
 //
 //    
 //  if (!can_cities_trade(pcity_homecity, pcity_dest)) {
-//    notify_player_ex(pplayer, pcity_dest.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		     _("Game: Sorry, your %s cannot establish"
 //		       " a trade route between %s and %s"),
 //		     unit_name(punit.type),pcity_homecity.name,
@@ -1252,10 +1233,10 @@ public class Unithand{
 //	pcity_out_of_home = find_city_by_id(pcity_homecity.trade[slot]);
 //	assert(pcity_out_of_home != null);
 //      } else {
-//	notify_player_ex(pplayer, pcity_dest.tile, E_NOEVENT,
+//	notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		     _("Game: Sorry, your %s cannot establish"
 //		       " a trade route here!"), unit_name(punit.type));
-//        notify_player_ex(pplayer, pcity_dest.tile, E_NOEVENT,
+//        notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		       _("      The city of %s already has %d "
 //			 "better trade routes!"), pcity_homecity.name,
 //		       NUM_TRADEROUTES);
@@ -1269,10 +1250,10 @@ public class Unithand{
 //	pcity_out_of_dest = find_city_by_id(pcity_dest.trade[slot]);
 //	assert(pcity_out_of_dest != null);
 //      } else {
-//	notify_player_ex(pplayer, pcity_dest.tile, E_NOEVENT,
+//	notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		     _("Game: Sorry, your %s cannot establish"
 //		       " a trade route here!"), unit_name(punit.type));
-//        notify_player_ex(pplayer, pcity_dest.tile, E_NOEVENT,
+//        notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		       _("      The city of %s already has %d "
 //			 "better trade routes!"), pcity_dest.name,
 //		       NUM_TRADEROUTES);
@@ -1284,7 +1265,7 @@ public class Unithand{
 //    if (can_establish && pcity_out_of_home) {
 //      remove_trade_route(pcity_homecity, pcity_out_of_home);
 //      notify_player_ex(city_owner(pcity_out_of_home),
-//		       pcity_out_of_home.tile, E_NOEVENT,
+//		       pcity_out_of_home.tile, event_type.E_NOEVENT,
 //		       _("Game: Sorry, %s has canceled the trade route "
 //			 "from %s to your city %s."),
 //		       city_owner(pcity_homecity).name,
@@ -1295,7 +1276,7 @@ public class Unithand{
 //    if (can_establish && pcity_out_of_dest) {
 //      remove_trade_route(pcity_dest, pcity_out_of_dest);
 //      notify_player_ex(city_owner(pcity_out_of_dest),
-//		       pcity_out_of_dest.tile, E_NOEVENT,
+//		       pcity_out_of_dest.tile, event_type.E_NOEVENT,
 //		       _("Game: Sorry, %s has canceled the trade route "
 //			 "from %s to your city %s."),
 //		       city_owner(pcity_dest).name,
@@ -1327,7 +1308,7 @@ public class Unithand{
 //  }
 //  
 //  conn_list_do_buffer(&pplayer.connections);
-//  notify_player_ex(pplayer, pcity_dest.tile, E_NOEVENT,
+//  notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		   _("Game: Your %s from %s has arrived in %s,"
 //		     " and revenues amount to %d in gold and research."), 
 //		   unit_name(punit.type), pcity_homecity.name,
@@ -1430,7 +1411,7 @@ public class Unithand{
 //				enum tile_special_type old_target)
 //{
 //  switch (punit.activity) {
-//  case ACTIVITY_IDLE:
+//  case unit_activity.ACTIVITY_IDLE:
 //    switch (old_activity) {
 //    case ACTIVITY_PILLAGE: 
 //      {
@@ -1440,10 +1421,10 @@ public class Unithand{
 //          unit_list_iterate (punit.tile.units, punit2)
 //            if ((punit2.activity == ACTIVITY_PILLAGE) &&
 //                (punit2.activity_target == prereq)) {
-//              set_unit_activity(punit2, ACTIVITY_IDLE);
+//              set_unit_activity(punit2, unit_activity.ACTIVITY_IDLE);
 //              send_unit_info(null, punit2);
 //            }
-//          unit_list_iterate_end;
+//          }
 //        }
 //        break;
 //      }
@@ -1465,24 +1446,24 @@ public class Unithand{
 //    break;
 //  }
 //}
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static void handle_unit_activity_request(unit punit, 
+			unit_activity new_activity)
+	{
+//		if (can_unit_do_activity(punit, new_activity)) {
+//			unit_activity old_activity = punit.activity;
+//			tile_special_type old_target = punit.activity_target;
 //
-///**************************************************************************
-//...
-//**************************************************************************/
-//void handle_unit_activity_request(unit punit, 
-//				  enum unit_activity new_activity)
-//{
-//  if (can_unit_do_activity(punit, new_activity)) {
-//    enum unit_activity old_activity = punit.activity;
-//    enum tile_special_type old_target = punit.activity_target;
-//
-//    free_unit_orders(punit);
-//    set_unit_activity(punit, new_activity);
-//    send_unit_info(null, punit);
-//    handle_unit_activity_dependencies(punit, old_activity, old_target);
-//  }
-//}
-//
+//			free_unit_orders(punit);
+//			set_unit_activity(punit, new_activity);
+//			send_unit_info(null, punit);
+//			handle_unit_activity_dependencies(punit, old_activity, old_target);
+//		}
+	}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -1596,7 +1577,7 @@ public class Unithand{
 //  unit punit = player_find_unit_by_id(pplayer, packet.unit_id);
 //  int i;
 //
-//  if (!punit || packet.length < 0 || punit.activity != ACTIVITY_IDLE
+//  if (!punit || packet.length < 0 || punit.activity != unit_activity.ACTIVITY_IDLE
 //      || packet.length > MAX_LEN_ROUTE) {
 //    return;
 //  }

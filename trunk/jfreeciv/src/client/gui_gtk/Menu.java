@@ -903,7 +903,7 @@ public class Menu{
 //*****************************************************************/
 //void setup_menus(GtkWidget *window, GtkWidget **menubar)
 //{
-//  const int nmenu_items = ARRAY_SIZE(menu_items);
+//  final int nmenu_items = ARRAY_SIZE(menu_items);
 //  GtkAccelGroup *accel;
 //  int i;
 //

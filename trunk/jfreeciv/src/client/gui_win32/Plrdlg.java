@@ -121,7 +121,7 @@ public class Plrdlg{
 //{
 //  static char namebuf[MAX_LEN_NAME],  aibuf[2], dsbuf[32],
 //      repbuf[32], statebuf[32], idlebuf[32];
-//  const player_diplstate pds;
+//  final player_diplstate pds;
 //
 //  /* we cassume that neither name nor the nation of a player changes */
 //  if (update == 0) {
@@ -223,8 +223,8 @@ public class Plrdlg{
 //		 false);
 //  switch (pplayer_get_diplstate
 //	  (game.player_ptr, get_player(player_index)).type) {
-//  case DS_WAR:
-//  case DS_NO_CONTACT:
+//  case diplstate_type.DS_WAR:
+//  case diplstate_type.DS_NO_CONTACT:
 //    EnableWindow(GetDlgItem(players_dialog,ID_PLAYERS_WAR), false);
 //    break;
 //  default:

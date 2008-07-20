@@ -22,7 +22,7 @@ public class Spaceship{
 //
 //#include "spaceship.h"
 //
-//const struct sship_part_info structurals_info[NUM_SS_STRUCTURALS] = {
+//final struct sship_part_info structurals_info[NUM_SS_STRUCTURALS] = {
 //  {19, 13, -1},		/* -1 means none required */
 //  {19, 15,  0},
 //  {19, 11,  0},
@@ -57,7 +57,7 @@ public class Spaceship{
 //  { 5, 19, 21}
 //};
 //
-//const struct sship_part_info components_info[NUM_SS_COMPONENTS] = {
+//final struct sship_part_info components_info[NUM_SS_COMPONENTS] = {
 //  {21, 13,  0},
 //  {24, 13, 12},
 //  {21, 15,  1},
@@ -76,7 +76,7 @@ public class Spaceship{
 //  {24, 25, 29}
 //};
 //
-//const struct sship_part_info modules_info[NUM_SS_MODULES] = {
+//final struct sship_part_info modules_info[NUM_SS_MODULES] = {
 //  {16, 12,  0},
 //  {16, 16,  1},
 //  {14,  6, 10},

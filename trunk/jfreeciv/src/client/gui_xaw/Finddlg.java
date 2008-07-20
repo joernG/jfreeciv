@@ -160,7 +160,7 @@ public class Finddlg{
 //  for(i=0, j=0; i<game.nplayers; i++) {
 //    city_list_iterate(game.players[i].cities, pcity) 
 //      *(city_name_ptrs+j++)=mystrdup(pcity.name);
-//    city_list_iterate_end;
+//    }
 //  }
 //  
 //  if(ncities_total) {

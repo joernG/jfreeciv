@@ -52,7 +52,7 @@ public class Diplhand{
 //    TYPED_LIST_ITERATE(struct Treaty, list, p)
 //#define treaty_list_iterate_end  LIST_ITERATE_END
 //
-//static struct treaty_list treaties;
+//static Speclists<treaty> treaties;
 //
 ///**************************************************************************
 //...
@@ -75,12 +75,12 @@ public class Diplhand{
 //**************************************************************************/
 //Treaty find_treaty(player plr0, player plr1)
 //{
-//  treaty_list_iterate(treaties, ptreaty) {
+//  for (treaty ptreaty : treaties.data) {
 //    if ((ptreaty.plr0 == plr0 && ptreaty.plr1 == plr1) ||
 //	(ptreaty.plr0 == plr1 && ptreaty.plr1 == plr0)) {
 //      return ptreaty;
 //    }
-//  } treaty_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -120,7 +120,7 @@ public class Diplhand{
 //
 //    /* Check that player who accepts can keep what (s)he promises. */
 //
-//    clause_list_iterate(ptreaty.clauses, pclause) {
+//    for (clause pclause : ptreaty.clauses.data) {
 //      city pcity = null;
 //
 //      if (pclause.from == pplayer) {
@@ -207,7 +207,7 @@ public class Diplhand{
 //	  ; /* nothing */
 //	}
 //      }
-//    } clause_list_iterate_end;
+//    } }
 //  }
 //
 //  *player_accept = ! *player_accept;
@@ -243,7 +243,7 @@ public class Diplhand{
 //    /* Check that one who accepted treaty earlier still have everything
 //       (s)he promised to give. */
 //
-//    clause_list_iterate(ptreaty.clauses, pclause) {
+//    for (clause pclause : ptreaty.clauses.data) {
 //      city pcity;
 //      if (pclause.from == pother) {
 //	switch (pclause.type) {
@@ -313,7 +313,7 @@ public class Diplhand{
 //	  ; /* nothing */
 //	}
 //      }
-//    } clause_list_iterate_end;
+//    } }
 //
 //    if (pplayer.ai.control) {
 //      ai_treaty_accepted(pplayer, pother, ptreaty);
@@ -322,7 +322,7 @@ public class Diplhand{
 //      ai_treaty_accepted(pother, pplayer, ptreaty);
 //    }
 //
-//    clause_list_iterate(ptreaty.clauses, pclause) {
+//    for (clause pclause : ptreaty.clauses.data) {
 //      player pgiver = pclause.from;
 //      player pdest = (pplayer == pgiver) ? pother : pplayer;
 //      enum diplstate_type old_diplstate = 
@@ -473,7 +473,7 @@ public class Diplhand{
 //        break;
 //      }
 //
-//    } clause_list_iterate_end;
+//    } }
 //  cleanup:
 //    treaty_list_unlink(&treaties, ptreaty);
 //    clear_treaty(ptreaty);
@@ -685,12 +685,12 @@ public class Diplhand{
 //    if (ptreaty) {
 //      dsend_packet_diplomacy_init_meeting(dest, pplayer.player_no,
 //					  other_player.player_no);
-//      clause_list_iterate(ptreaty.clauses, pclause) {
+//      for (clause pclause : ptreaty.clauses.data) {
 //	dsend_packet_diplomacy_create_clause(dest, pplayer.player_no,
 //					     other_player.player_no,
 //					     pclause.type,
 //					     pclause.from.player_no);
-//      } clause_list_iterate_end;
+//      } }
 //    }
 //  } players_iterate_end;
 //}

@@ -32,7 +32,7 @@ public class Mapgen_topology{
 //  functions instead (x,y) coordinate to place terrains
 //  colatitude is 0 at poles and MAX_COLATITUDE at equator
 //****************************************************************************/
-//int map_colatitude(const tile ptile)
+//int map_colatitude(final tile ptile)
 //{
 //  double x, y;
 //  
@@ -102,7 +102,7 @@ public class Mapgen_topology{
 //
 //  /* Otherwise we have a torus topology.  We set it up as an approximation
 //   * of a sphere with two circular polar zones and a square equatorial
-//   * zone.  In this case north and south are not constant directions on the
+//   * zone.  In this case north and south are not finalant directions on the
 //   * map because we have to use a more complicated (custom) projection.
 //   *
 //   * Generators 2 and 5 work best if the center of the map is free.  So
@@ -163,7 +163,7 @@ public class Mapgen_topology{
 //  Return true if the map in a city radius is SINGULAR.  This is used to
 //  avoid putting (non-polar) land near the edge of the map.
 //****************************************************************************/
-//boolean near_singularity(const tile ptile)
+//boolean near_singularity(final tile ptile)
 //{
 //  return is_singular_tile(ptile, CITY_MAP_RADIUS);
 //}
@@ -177,17 +177,17 @@ public class Mapgen_topology{
 //{
 //  /* Some code in generator assumes even dimension, so this is set to 2.
 //   * Future topologies may also require even dimensions. */
-//  const int even = 2;
+//  final int even = 2;
 //
 //  /* In iso-maps we need to double the map.ysize factor, since xsize is
 //   * in native coordinates which are compressed 2x in the X direction. */ 
-//  const int iso = MAP_IS_ISOMETRIC ? 2 : 1;
+//  final int iso = MAP_IS_ISOMETRIC ? 2 : 1;
 //
 //  /* We have:
 //   *
 //   *   1000 * size = xsize * ysize
 //   *
-//   * And to satisfy the ratios and other constraints we set
+//   * And to satisfy the ratios and other finalraints we set
 //   *
 //   *   xsize = i_size * xratio * even
 //   *   ysize = i_size * yratio * even * iso
@@ -200,7 +200,7 @@ public class Mapgen_topology{
 //   * Make sure to round off i_size to preserve exact wanted ratios,
 //   * that may be importante for some topologies.
 //   */
-//  const int i_size
+//  final int i_size
 //    = sqrt((float)(1000 * size)
 //	   / (float)(Xratio * Yratio * iso * even * even)) + 0.49;
 //
@@ -250,10 +250,10 @@ public class Mapgen_topology{
 //   * "size" server option.  Others may want to set xsize/ysize directly. */
 //  if (autosize) {
 //    /* Changing or reordering the topo_flag enum will break this code. */
-//    const int default_ratios[4][2] =
+//    final int default_ratios[4][2] =
 //      {AUTO_RATIO_FLAT, AUTO_RATIO_CLASSIC,
 //       AUTO_RATIO_URANUS, AUTO_RATIO_TORUS};
-//    const int id = 0x3 & map.topology_id;
+//    final int id = 0x3 & map.topology_id;
 //
 //    assert(TF_WRAPX == 0x1 && TF_WRAPY == 0x2);
 //

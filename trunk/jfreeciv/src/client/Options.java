@@ -174,7 +174,7 @@ public class Options{
 //int sorted_events[E_LAST];
 //
 //#define GEN_EV(descr, event) { #event, null, descr, null, event }
-//#define GEN_EV_TERMINATOR { null, null, null, null, E_NOEVENT }
+//#define GEN_EV_TERMINATOR { null, null, null, null, event_type.E_NOEVENT }
 //
 ///*
 // * Holds information about all event types. The entries don't have
@@ -289,7 +289,7 @@ public class Options{
 //static int event_to_index[E_LAST];
 //
 //static void save_cma_preset(section_file file, char *name,
-//			    const cm_parameter const pparam,
+//			    final cm_parameter final pparam,
 //			    int inx);
 //static void load_cma_preset(section_file file, int inx);
 //
@@ -317,10 +317,10 @@ public class Options{
 //  Comparison function for qsort; i1 and i2 are pointers to an event
 //  (enum event_type).
 //**************************************************************************/
-//static int compar_message_texts(const void *i1, const void *i2)
+//static int compar_message_texts(final void *i1, final void *i2)
 //{
-//  int j1 = *(const int*)i1;
-//  int j2 = *(const int*)i2;
+//  int j1 = *(final int*)i1;
+//  int j2 = *(final int*)i2;
 //  
 //  return mystrcasecmp(get_message_text(j1), get_message_text(j2));
 //}
@@ -357,7 +357,7 @@ public class Options{
 //  for (i = 0;; i++) {
 //    int j;
 //
-//    if (events[i].event == E_NOEVENT) {
+//    if (events[i].event == event_type.E_NOEVENT) {
 //      break;
 //    }
 //    events[i].descr = _(events[i].descr_orig);
@@ -424,7 +424,7 @@ public class Options{
 //void load_general_options()
 //{
 //  struct section_file sf;
-//  final String const prefix = "client";
+//  final String final prefix = "client";
 //  char *name;
 //  int i, num;
 //  view_option *v;
@@ -665,7 +665,7 @@ public class Options{
 // Does heavy lifting for inserting a preset.
 //*****************************************************************/
 //static void save_cma_preset(section_file file, char *name,
-//			    const cm_parameter const pparam,
+//			    final cm_parameter final pparam,
 //			    int inx)
 //{
 //  int i;
@@ -688,7 +688,7 @@ public class Options{
 //*****************************************************************/
 //final String get_sound_tag_for_event(enum event_type event)
 //{
-//  if (event == E_NOEVENT) {
+//  if (event == event_type.E_NOEVENT) {
 //    return null;
 //  }
 //

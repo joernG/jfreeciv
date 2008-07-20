@@ -142,7 +142,7 @@ public class Dcigettext{
 //static char *stpcpy PARAMS ((char *dest, final String src));
 //# endif
 //# ifndef HAVE_MEMPCPY
-//static void *mempcpy PARAMS ((void *dest, const void *src, size_t n));
+//static void *mempcpy PARAMS ((void *dest, final void *src, size_t n));
 //# endif
 //#endif
 //
@@ -246,18 +246,18 @@ public class Dcigettext{
 //# endif
 //
 ///* Function to compare two entries in the table of known translations.  */
-//static int transcmp PARAMS ((const void *p1, const void *p2));
+//static int transcmp PARAMS ((final void *p1, final void *p2));
 //static int
 //transcmp (p1, p2)
-//     const void *p1;
-//     const void *p2;
+//     final void *p1;
+//     final void *p2;
 //{
-//  const known_translation_t s1;
-//  const known_translation_t s2;
+//  final known_translation_t s1;
+//  final known_translation_t s2;
 //  int result;
 //
-//  s1 = (const known_translation_t ) p1;
-//  s2 = (const known_translation_t ) p2;
+//  s1 = (final known_translation_t ) p1;
+//  s2 = (final known_translation_t ) p2;
 //
 //  result = strcmp (s1.msgid, s2.msgid);
 //  if (result == 0)
@@ -276,13 +276,13 @@ public class Dcigettext{
 //
 ///* Name of the default domain used for gettext(3) prior any call to
 //   textdomain(3).  The default value for this is "messages".  */
-//const char _nl_default_default_domain[] = "messages";
+//final char _nl_default_default_domain[] = "messages";
 //
 ///* Value used as the default domain for gettext(3).  */
 //final String _nl_current_default_domain = _nl_default_default_domain;
 //
 ///* Contains the default location of the message catalogs.  */
-//const char _nl_default_dirname[] = LOCALEDIR;
+//final char _nl_default_dirname[] = LOCALEDIR;
 //
 ///* List with bindings of specific domains created by bindtextdomain()
 //   calls.  */
@@ -310,7 +310,7 @@ public class Dcigettext{
 //# define ADD_BLOCK(list, address) /* nothing */
 //# define FREE_BLOCKS(list) /* nothing */
 //#else
-//struct block_list
+//Speclists<block>
 //{
 //  void *address;
 //  block_list next;
@@ -341,7 +341,7 @@ public class Dcigettext{
 //
 //#ifdef _LIBC
 ///* List of blocks allocated for translations.  */
-//typedef struct transmem_list
+//typedef Speclists<transmem>
 //{
 //  transmem_list next;
 //  char data[ZERO];
@@ -820,7 +820,7 @@ public class Dcigettext{
 //	  static unsigned char *freemem;
 //	  static size_t freemem_size;
 //
-//	  const unsigned char *inbuf;
+//	  final unsigned char *inbuf;
 //	  unsigned char *outbuf;
 //	  int malloc_count;
 //# ifndef _LIBC
@@ -829,7 +829,7 @@ public class Dcigettext{
 //
 //	  __libc_lock_lock (lock);
 //
-//	  inbuf = (const unsigned char *) result;
+//	  inbuf = (final unsigned char *) result;
 //	  outbuf = freemem + sizeof (size_t);
 //
 //	  malloc_count = 0;
@@ -927,7 +927,7 @@ public class Dcigettext{
 //	      transmem_list = newmem;
 //
 //	      freemem = newmem.data;
-//	      freemem_size -= offsetof (struct transmem_list, data);
+//	      freemem_size -= offsetof (Speclists<transmem>, data);
 //# else
 //	      transmem_list = newmem;
 //	      freemem = newmem;
@@ -1213,7 +1213,7 @@ public class Dcigettext{
 //static void *
 //mempcpy (dest, src, n)
 //     void *dest;
-//     const void *src;
+//     final void *src;
 //     size_t n;
 //{
 //  return (void *) ((char *) memcpy (dest, src, n) + n);

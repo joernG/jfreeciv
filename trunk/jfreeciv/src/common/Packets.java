@@ -572,7 +572,7 @@ public class Packets{
 // Updates pplayer.attribute_block according to the given packet.
 //**************************************************************************/
 //void generic_handle_player_attribute_chunk(player pplayer,
-//					   const struct
+//					   final struct
 //					   packet_player_attribute_chunk
 //					   *chunk)
 //{
@@ -625,7 +625,7 @@ public class Packets{
 ///**************************************************************************
 // Split the attribute block into chunks and send them over pconn.
 //**************************************************************************/
-//void send_attribute_block(const player pplayer,
+//void send_attribute_block(final player pplayer,
 //			  connection pconn)
 //{
 //  struct packet_player_attribute_chunk packet;
@@ -724,7 +724,7 @@ public class Packets{
 //  conn_clear_packet_cache(pc);
 //}
 //void post_send_packet_game_state(connection pc,
-//				 const packet_game_state packet)
+//				 final packet_game_state packet)
 //{
 //  conn_clear_packet_cache(pc);
 //}

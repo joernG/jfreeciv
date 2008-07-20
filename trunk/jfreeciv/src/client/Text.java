@@ -131,7 +131,7 @@ public class Text{
 ///***************************************************************
 //  Return a (static) string with a tile's food/prod/trade
 //***************************************************************/
-//static final String map_get_tile_fpt_text(const tile ptile)
+//static final String map_get_tile_fpt_text(final tile ptile)
 //{
 //  static char s[64];
 //  char food[16];
@@ -323,7 +323,7 @@ public class Text{
 //      int att_chance = FC_INFINITY, def_chance = FC_INFINITY;
 //      boolean found = false;
 //
-//      unit_list_iterate(ptile.units, tile_unit) {
+//      for (unit tile_unit : ptile.units.data) {
 //	if (tile_unit.owner != pfocus_unit.owner) {
 //	  int att = unit_win_chance(pfocus_unit, tile_unit) * 100;
 //	  int def = (1.0 - unit_win_chance(tile_unit, pfocus_unit)) * 100;
@@ -334,7 +334,7 @@ public class Text{
 //	  att_chance = MIN(att, att_chance);
 //	  def_chance = MIN(def, def_chance);
 //	}
-//      } unit_list_iterate_end;
+//      } }
 //
 //      if (found) {
 //	/* TRANS: "Chance to win: A:95% D:46%" */
@@ -378,11 +378,11 @@ public class Text{
 //  memset(activity_total, 0, sizeof(activity_total));
 //  memset(activity_units, 0, sizeof(activity_units));
 //
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    activity_total[punit.activity] += punit.activity_count;
 //    activity_total[punit.activity] += get_activity_rate_this_turn(punit);
 //    activity_units[punit.activity] += get_activity_rate(punit);
-//  } unit_list_iterate_end;
+//  } }
 //
 //  for (i = 0; i < ACTIVITY_LAST; i++) {
 //    if (is_build_or_clean_activity(i) && activity_units[i] > 0) {
@@ -473,9 +473,9 @@ public class Text{
 //    enum diplstate_type ds = pplayer_get_diplstate(plr, pplayer).type;
 //
 //    if (plr == pplayer) {
-//      city_list_iterate(pplayer.cities, pcity) {
+//      for (city pcity : pplayer.cities.data) {
 //        ours += pcity.science_total;
-//      } city_list_iterate_end;
+//      } }
 //    } else if (ds == DS_TEAM) {
 //      theirs += pplayer.research.bulbs_last_turn;
 //    }
@@ -649,35 +649,35 @@ public class Text{
 //    memset(&ship, 0, sizeof(ship));
 //  }
 //
-//  /* TRANS: spaceship text; should have constant width. */
+//  /* TRANS: spaceship text; should have finalant width. */
 //  add_line("Population:      %5d", pship.population);
 //
-//  /* TRANS: spaceship text; should have constant width. */
+//  /* TRANS: spaceship text; should have finalant width. */
 //  add_line("Support:         %5d %%",
 //	   (int) (pship.support_rate * 100.0));
 //
-//  /* TRANS: spaceship text; should have constant width. */
+//  /* TRANS: spaceship text; should have finalant width. */
 //  add_line("Energy:          %5d %%",
 //	   (int) (pship.energy_rate * 100.0));
 //
-//  /* TRANS: spaceship text; should have constant width. */
+//  /* TRANS: spaceship text; should have finalant width. */
 //  add_line(PL_("Mass:            %5d ton",
 //	       "Mass:            %5d tons", pship.mass), pship.mass);
 //
 //  if (pship.propulsion > 0) {
-//    /* TRANS: spaceship text; should have constant width. */
+//    /* TRANS: spaceship text; should have finalant width. */
 //    add_line("Travel time:     %5.1f years",
 //	     (float) (0.1 * ((int) (pship.travel_time * 10.0))));
 //  } else {
-//    /* TRANS: spaceship text; should have constant width. */
+//    /* TRANS: spaceship text; should have finalant width. */
 //    add_line("%s", "Travel time:        N/A     ");
 //  }
 //
-//  /* TRANS: spaceship text; should have constant width. */
+//  /* TRANS: spaceship text; should have finalant width. */
 //  add_line("Success prob.:   %5d %%",
 //	   (int) (pship.success_rate * 100.0));
 //
-//  /* TRANS: spaceship text; should have constant width. */
+//  /* TRANS: spaceship text; should have finalant width. */
 //  add_line("Year of arrival: %8s",
 //	   (pship.state ==
 //	    SSHIP_LAUNCHED) ? textyear((int) (pship.launch_year +
@@ -780,7 +780,7 @@ public class Text{
 ///****************************************************************************
 //  Get the text describing buildings that affect happiness.
 //****************************************************************************/
-//final String get_happiness_buildings(const city pcity)
+//final String get_happiness_buildings(final city pcity)
 //{
 //  int faces = 0;
 //  struct effect_source_vector sources;
@@ -805,7 +805,7 @@ public class Text{
 ///****************************************************************************
 //  Get the text describing wonders that affect happiness.
 //****************************************************************************/
-//final String get_happiness_wonders(const city pcity)
+//final String get_happiness_wonders(final city pcity)
 //{
 //  int faces = 0;
 //  struct effect_source_vector sources;

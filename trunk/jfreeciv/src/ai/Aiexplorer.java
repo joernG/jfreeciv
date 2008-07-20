@@ -138,7 +138,7 @@ public class Aiexplorer{
 //
 ///* The maximum number of tiles that the unit might uncover in a move. 
 // * #define MAX_NEW_TILES          (1 + 4 * (unit_type(punit).vision_range))
-// * The previous line would be ideal, but we'd like these to be constants
+// * The previous line would be ideal, but we'd like these to be finalants
 // * for efficiency, so pretend vision_range == 1 */
 //public static final int MAX_NEW_TILES = 5;
 //

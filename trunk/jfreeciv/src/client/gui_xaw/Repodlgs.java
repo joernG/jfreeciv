@@ -198,7 +198,7 @@ public class Repodlgs{
 //{
 //  Widget science_form;
 //  Widget  close_command;
-//  const static char *tech_list_names_ptrs[A_LAST + 1];
+//  final static char *tech_list_names_ptrs[A_LAST + 1];
 //  int j, flag, num_list;
 //  size_t i;
 //  Dimension width;
@@ -1052,20 +1052,20 @@ public class Repodlgs{
 //    free((void *) report_title);
 //
 //    memset(unitarray, '\0', sizeof(unitarray));
-//    unit_list_iterate(game.player_ptr.units, punit) {
+//    for (unit punit : game.player_ptr.units.data) {
 //      (unitarray[punit.type].active_count)++;
 //      if (punit.homecity) {
 //	unitarray[punit.type].upkeep_shield += punit.upkeep;
 //	unitarray[punit.type].upkeep_food += punit.upkeep_food;
 //      }
 //    }
-//    unit_list_iterate_end;
+//    }
 //    city_list_iterate(game.player_ptr.cities,pcity) {
 //      if (pcity.is_building_unit &&
 //	  (unit_type_exists (pcity.currently_building)))
 //	(unitarray[pcity.currently_building].building_count)++;
 //    }
-//    city_list_iterate_end;
+//    }
 //
 //    k = 0;
 //    memset(&unittotals, '\0', sizeof(unittotals));

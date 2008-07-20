@@ -1,28 +1,13 @@
 package server;
+import static common.Game.*;
+
+import utility.Speclists;
+import common.Connection;
+import common.map.tile;
+import common.player.player;
+import common.unit.unit;
 
 public class Unittools{
-
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//
 //#include "city.h"
 //#include "combat.h"
 //#include "events.h"
@@ -208,7 +193,7 @@ public class Unittools{
 //static void do_upgrade_effects(player pplayer)
 //{
 //  int upgrades = get_player_bonus(pplayer, EFT_UPGRADE_UNIT);
-//  struct unit_list candidates;
+//  Speclists<unit> candidates;
 //
 //  if (upgrades <= 0) {
 //    return;
@@ -216,20 +201,20 @@ public class Unittools{
 //
 //  unit_list_init(&candidates);
 //
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    /* We have to be careful not to strand units at sea, for example by
 //     * upgrading a frigate to an ironclad while it was carrying a unit. */
 //    if (test_unit_upgrade(punit, true) == UR_OK) {
 //      unit_list_insert(&candidates, punit);	/* Potential candidate :) */
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  while (upgrades > 0 && unit_list_size(&candidates) > 0) {
 //    /* Upgrade one unit.  The unit is chosen at random from the list of
 //     * available candidates. */
 //    int candidate_to_upgrade = myrand(unit_list_size(&candidates));
 //    unit punit = unit_list_get(&candidates, candidate_to_upgrade);
-//    Unit_Type_id upgrade_type = can_upgrade_unittype(pplayer, punit.type);
+//    int upgrade_type = can_upgrade_unittype(pplayer, punit.type);
 //
 //    notify_player(pplayer,
 //		  "Game: %s was upgraded for free to %s%s.",
@@ -260,7 +245,7 @@ public class Unittools{
 //    potential_gold += impr_sell_gold(pimpr);
 //  } built_impr_iterate_end;
 //
-//  unit_list_iterate_safe(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //
 //    if (pplayer.economic.gold + potential_gold < punit.upkeep_gold) {
 //      /* We cannot upkeep this unit any longer and selling off city
@@ -277,7 +262,7 @@ public class Unittools{
 //       * upkeep give gold when they are disbanded? */
 //      pplayer.economic.gold -= punit.upkeep_gold;
 //    }
-//  } unit_list_iterate_safe_end;
+//  }
 //}
 //
 ///***************************************************************************
@@ -302,7 +287,7 @@ public class Unittools{
 //  /* 1) get Leonardo out of the way first: */
 //  do_upgrade_effects(pplayer);
 //
-//  unit_list_iterate_safe(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //
 //    /* 2) Modify unit hitpoints. Helicopters can even lose them. */
 //    unit_restore_hitpoints(pplayer, punit);
@@ -373,9 +358,9 @@ public class Unittools{
 //				      itr_tile, unit_owner(punit)) >= 0)) {
 //	    free_unit_orders(punit);
 //	    punit.goto_tile = itr_tile;
-//	    set_unit_activity(punit, ACTIVITY_GOTO);
-//	    () do_unit_goto(punit, GOTO_MOVE_ANY, false);
-//	    notify_player_ex(pplayer, punit.tile, E_NOEVENT, 
+//	    set_unit_activity(punit, unit_activity.ACTIVITY_GOTO);
+//	    () do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
+//	    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT, 
 //			     "Game: Your %s has returned to refuel.",
 //			     unit_name(punit.type));
 //	    goto OUT;
@@ -395,10 +380,10 @@ public class Unittools{
 //	punit.fuel=unit_type(punit).fuel;
 //      }
 //    }
-//  } unit_list_iterate_safe_end;
+//  }
 //
 //  /* 8) Check if there are air units without fuel */
-//  unit_list_iterate_safe(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (is_air_unit(punit) && punit.fuel <= 0
 //        && unit_type(punit).fuel > 0) {
 //      notify_player_ex(pplayer, punit.tile, E_UNIT_LOST, 
@@ -407,7 +392,7 @@ public class Unittools{
 //      gamelog(GAMELOG_UNITLOSS, punit, null, "fuel");
 //      wipe_unit(punit);
 //    } 
-//  } unit_list_iterate_safe_end;
+//  }
 //}
 //
 ///****************************************************************************
@@ -441,7 +426,7 @@ public class Unittools{
 //  if(punit.hp>=unit_type(punit).hp) {
 //    punit.hp=unit_type(punit).hp;
 //    if(was_lower&&punit.activity==ACTIVITY_SENTRY){
-//      set_unit_activity(punit,ACTIVITY_IDLE);
+//      set_unit_activity(punit,unit_activity.ACTIVITY_IDLE);
 //    }
 //  }
 //  if(punit.hp<0)
@@ -520,7 +505,7 @@ public class Unittools{
 //  unit_list_iterate (ptile.units, punit)
 //    if (punit.activity == act)
 //      total += punit.activity_count;
-//  unit_list_iterate_end;
+//  }
 //  return total;
 //}
 //
@@ -536,7 +521,7 @@ public class Unittools{
 //  unit_list_iterate (ptile.units, punit)
 //    if ((punit.activity == act) && (punit.activity_target == tgt))
 //      total += punit.activity_count;
-//  unit_list_iterate_end;
+//  }
 //  return total;
 //}
 //
@@ -574,8 +559,8 @@ public class Unittools{
 //  tile ptile = punit.tile;
 //  boolean check_adjacent_units = false;
 //  
-//  if (activity != ACTIVITY_IDLE && activity != ACTIVITY_FORTIFIED
-//      && activity != ACTIVITY_GOTO && activity != ACTIVITY_EXPLORE) {
+//  if (activity != unit_activity.ACTIVITY_IDLE && activity != ACTIVITY_FORTIFIED
+//      && activity != unit_activity.ACTIVITY_GOTO && activity != ACTIVITY_EXPLORE) {
 //    /*  We don't need the activity_count for the above */
 //    punit.activity_count += get_activity_rate_this_turn(punit);
 //
@@ -600,7 +585,7 @@ public class Unittools{
 //
 //    assert(punit.activity == ACTIVITY_EXPLORE); 
 //    if (!more_to_explore) {
-//      handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //    send_unit_info(null, punit);
 //    return;
@@ -616,13 +601,13 @@ public class Unittools{
 //	if (what != S_NO_SPECIAL) {
 //	  map_clear_special(punit.tile, what);
 //	  update_tile_knowledge(punit.tile);
-//	  set_unit_activity(punit, ACTIVITY_IDLE);
+//	  set_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //	  check_adjacent_units = true;
 //	}
 //
 //	/* If a watchtower has been pillaged, reduce sight to normal */
 //	if (what == S_FORTRESS) {
-//	  unit_list_iterate(punit.tile.units, punit2) {
+//	  for (unit punit2 : punit.tile.units.data) {
 //            player owner = unit_owner(punit2);
 //            freelog(LOG_VERBOSE, "Watchtower pillaged!");
 //            if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
@@ -637,7 +622,7 @@ public class Unittools{
 //              }
 //            }
 //          }
-//	  unit_list_iterate_end;
+//	  }
 //	}
 //      }
 //    }
@@ -649,16 +634,16 @@ public class Unittools{
 //      unit_list_iterate (punit.tile.units, punit2) {
 //        if ((punit2.activity == ACTIVITY_PILLAGE) &&
 //	    (punit2.activity_target == what_pillaged)) {
-//	  set_unit_activity(punit2, ACTIVITY_IDLE);
+//	  set_unit_activity(punit2, unit_activity.ACTIVITY_IDLE);
 //	  send_unit_info(null, punit2);
 //	}
-//      } unit_list_iterate_end;
+//      } }
 //      update_tile_knowledge(punit.tile);
 //      
 //      /* If a watchtower has been pillaged, reduce sight to normal */
 //      if (what_pillaged == S_FORTRESS) {
 //	freelog(LOG_VERBOSE, "Watchtower(2) pillaged!");
-//	unit_list_iterate(punit.tile.units, punit2) {
+//	for (unit punit2 : punit.tile.units.data) {
 //          player owner = unit_owner(punit2);
 //          if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
 //            if (is_ground_unit(punit2)) {
@@ -672,7 +657,7 @@ public class Unittools{
 //            }
 //          }
 //        }
-//	unit_list_iterate_end;
+//	}
 //      }
 //    }  
 //  }
@@ -699,7 +684,7 @@ public class Unittools{
 //      map_set_special(punit.tile, S_FORTRESS);
 //      unit_activity_done = true;
 //      /* watchtower becomes effective */
-//      unit_list_iterate(ptile.units, punit) {
+//      for (unit punit : ptile.units.data) {
 //        player owner = unit_owner(punit);
 //        if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
 //	  if (is_ground_unit(punit)) {
@@ -713,7 +698,7 @@ public class Unittools{
 //	  }
 //	}
 //      }
-//      unit_list_iterate_end;
+//      }
 //    }
 //  }
 //
@@ -778,20 +763,20 @@ public class Unittools{
 //    update_tile_knowledge(punit.tile);
 //    unit_list_iterate (punit.tile.units, punit2) {
 //      if (punit2.activity == activity) {
-//	set_unit_activity(punit2, ACTIVITY_IDLE);
+//	set_unit_activity(punit2, unit_activity.ACTIVITY_IDLE);
 //	send_unit_info(null, punit2);
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  }
 //
 //  /* Some units nearby can not continue irrigating */
 //  if (check_adjacent_units) {
 //    adjc_iterate(punit.tile, ptile2) {
-//      unit_list_iterate(ptile2.units, punit2) {
+//      for (unit punit2 : ptile2.units.data) {
 //        if (!can_unit_continue_current_activity(punit2)) {
-//          handle_unit_activity_request(punit2, ACTIVITY_IDLE);
+//          handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //        }
-//      } unit_list_iterate_end;
+//      } }
 //    } adjc_iterate_end;
 //  }
 //
@@ -801,12 +786,12 @@ public class Unittools{
 //    }
 //  }
 //
-//  if (activity==ACTIVITY_GOTO) {
+//  if (activity==unit_activity.ACTIVITY_GOTO) {
 //    if (!punit.ai.control && (!is_military_unit(punit) ||
 //       punit.ai.passenger != 0 || !pplayer.ai.control)) {
 ///* autosettlers otherwise waste time; idling them breaks assignment */
 ///* Stalling infantry on GOTO so I can see where they're GOing TO. -- Syela */
-//      () do_unit_goto(punit, GOTO_MOVE_ANY, true);
+//      () do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, true);
 //    }
 //    return;
 //  }
@@ -820,12 +805,12 @@ public class Unittools{
 //
 //  send_unit_info(null, punit);
 //
-//  unit_list_iterate(ptile.units, punit2) {
+//  for (unit punit2 : ptile.units.data) {
 //    if (!can_unit_continue_current_activity(punit2))
 //    {
-//      handle_unit_activity_request(punit2, ACTIVITY_IDLE);
+//      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* Any units that landed in water or boats that landed on land as a
 //     result of settlers changing terrain must be moved back into their
@@ -849,7 +834,7 @@ public class Unittools{
 //    break; /* nothing */
 //
 //  case OLC_LAND_TO_OCEAN:
-//    unit_list_iterate(ptile.units, punit2) {
+//    for (unit punit2 : ptile.units.data) {
 //      if (is_ground_unit(punit2)) {
 //	/* look for nearby land */
 //	adjc_iterate(punit.tile, ptile2) {
@@ -867,7 +852,7 @@ public class Unittools{
 //			       " land to sea."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, ACTIVITY_IDLE);
+//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	} adjc_iterate_end;
@@ -888,7 +873,7 @@ public class Unittools{
 //			       " land to sea."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, ACTIVITY_IDLE);
+//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	} adjc_iterate_end;
@@ -904,10 +889,10 @@ public class Unittools{
 //	wipe_unit_spec_safe(punit2, false);
 //	goto START;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //    break;
 //  case OLC_OCEAN_TO_LAND:
-//    unit_list_iterate(ptile.units, punit2) {
+//    for (unit punit2 : ptile.units.data) {
 //      if (is_sailing_unit(punit2)) {
 //	/* look for nearby water */
 //	adjc_iterate(punit.tile, ptile2) {
@@ -925,7 +910,7 @@ public class Unittools{
 //			       " sea to land."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, ACTIVITY_IDLE);
+//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	} adjc_iterate_end;
@@ -945,7 +930,7 @@ public class Unittools{
 //			       " sea to land."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, ACTIVITY_IDLE);
+//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	} adjc_iterate_end;
@@ -961,7 +946,7 @@ public class Unittools{
 //	wipe_unit_spec_safe(punit2, false);
 //	goto START;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //    break;
 //  }
 //}
@@ -1028,9 +1013,9 @@ public class Unittools{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//enum goto_move_restriction get_activity_move_restriction(enum unit_activity activity)
+//goto_move_restriction get_activity_move_restriction(enum unit_activity activity)
 //{
-//  enum goto_move_restriction restr;
+//  goto_move_restriction restr;
 //
 //  switch (activity) {
 //  case ACTIVITY_IRRIGATE:
@@ -1048,7 +1033,7 @@ public class Unittools{
 //    restr = GOTO_MOVE_STRAIGHTEST;
 //    break;
 //  default:
-//    restr = GOTO_MOVE_ANY;
+//    restr = goto_move_restriction.GOTO_MOVE_ANY;
 //    break;
 //  }
 //
@@ -1178,7 +1163,7 @@ public class Unittools{
 //      /* We cannot see danger at (ptile1) => assume there is none */
 //      continue;
 //    }
-//    unit_list_iterate(ptile1.units, enemy) {
+//    for (unit enemy : ptile1.units.data) {
 //      if (pplayers_at_war(unit_owner(enemy), unit_owner(punit)) 
 //          && can_unit_attack_unit_at_tile(enemy, punit, ptile)
 //          && can_unit_attack_all_at_tile(enemy, ptile)) {
@@ -1188,7 +1173,7 @@ public class Unittools{
 //          return true;
 //        }
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } adjc_iterate_end;
 //
 //  return false; /* as good a quick'n'dirty should be -- Syela */
@@ -1209,7 +1194,7 @@ public class Unittools{
 //	    unit_owner(punit).name, unit_name(punit.type),
 //	    src_tile.x, src_tile.y, pcity.name);
 //    if (verbose) {
-//      notify_player_ex(unit_owner(punit), pcity.tile, E_NOEVENT,
+//      notify_player_ex(unit_owner(punit), pcity.tile, event_type.E_NOEVENT,
 //		       "Game: Teleported your %s to %s.",
 //		       unit_name(punit.type), pcity.name);
 //    }
@@ -1238,7 +1223,7 @@ public class Unittools{
 //  } else {
 //    /* remove it */
 //    if (verbose) {
-//      notify_player_ex(unit_owner(punit), punit.tile, E_NOEVENT,
+//      notify_player_ex(unit_owner(punit), punit.tile, event_type.E_NOEVENT,
 //		       "Game: Disbanded your %s.",
 //		       unit_name(punit.type));
 //    }
@@ -1255,13 +1240,13 @@ public class Unittools{
 //static void throw_units_from_illegal_cities(player pplayer,
 //                                           boolean verbose)
 //{
-//  unit_list_iterate_safe(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    tile ptile = punit.tile;
 //
 //    if (ptile.city && !pplayers_allied(city_owner(ptile.city), pplayer)) {
 //      bounce_unit(punit, verbose);
 //    }
-//  } unit_list_iterate_safe_end;    
+//  }    
 //}
 //
 ///**************************************************************************
@@ -1275,19 +1260,19 @@ public class Unittools{
 //static void resolve_stack_conflicts(player pplayer,
 //                                    player aplayer, boolean verbose)
 //{
-//  unit_list_iterate_safe(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    tile ptile = punit.tile;
 //
 //    if (is_non_allied_unit_tile(ptile, pplayer)) {
-//      unit_list_iterate_safe(ptile.units, aunit) {
+//      for (unit aunit : ptile.units.data) {
 //        if (unit_owner(aunit) == pplayer
 //            || unit_owner(aunit) == aplayer
 //            || is_ocean(ptile.terrain)) {
 //          bounce_unit(aunit, verbose);
 //        }
-//      } unit_list_iterate_safe_end;
+//      }
 //    }    
-//  } unit_list_iterate_safe_end;
+//  }
 //}
 //				
 ///**************************************************************************
@@ -1320,7 +1305,7 @@ public class Unittools{
 //****************************************************************************/
 //void remove_allied_visibility(struct player* pplayer, struct player* aplayer)
 //{
-//  unit_list_iterate(aplayer.units, punit) {
+//  for (unit punit : aplayer.units.data) {
 //    /* We don't know exactly which units have been hidden.  But only a unit
 //     * whose tile is visible but who aren't visible themselves are
 //     * candidates.  This solution just tells the client to drop all such
@@ -1330,23 +1315,23 @@ public class Unittools{
 //        !can_player_see_unit(pplayer, punit)) {
 //      unit_goes_out_of_sight(pplayer, punit);
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
-//  city_list_iterate(aplayer.cities, pcity) {
+//  for (city pcity : aplayer.cities.data) {
 //    /* The player used to know what units were in these cities.  Now that he
 //     * doesn't, he needs to get a new short city packet updating the
 //     * occupied status. */
 //    if (map_is_known_and_seen(pcity.tile, pplayer)) {
 //      send_city_info(pplayer, pcity);
 //    }
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
 //...
 //**************************************************************************/
 //boolean is_airunit_refuel_point(tile ptile, player pplayer,
-//			     Unit_Type_id type, boolean unit_is_on_tile)
+//			     int type, boolean unit_is_on_tile)
 //{
 //  player_tile plrtile = map_get_player_tile(ptile, pplayer);
 //
@@ -1380,7 +1365,7 @@ public class Unittools{
 //
 //  Note that this function is strongly tied to unit.c:test_unit_upgrade().
 //**************************************************************************/
-//void upgrade_unit(unit punit, Unit_Type_id to_unit, boolean is_free)
+//void upgrade_unit(unit punit, int to_unit, boolean is_free)
 //{
 //  player pplayer = unit_owner(punit);
 //  int range;
@@ -1433,7 +1418,7 @@ public class Unittools{
 //  Wrapper of the below
 //*************************************************************************/
 //unit create_unit(player pplayer, tile ptile, 
-//                         Unit_Type_id type, int veteran_level, 
+//                         int type, int veteran_level, 
 //                         int homecity_id, int moves_left)
 //{
 //  return create_unit_full(pplayer, ptile, type, veteran_level, homecity_id, 
@@ -1446,7 +1431,7 @@ public class Unittools{
 //  If moves_left is less than zero, unit will get max moves.
 //**************************************************************************/
 //unit create_unit_full(player pplayer, tile ptile,
-//			      Unit_Type_id type, int veteran_level, 
+//			      int type, int veteran_level, 
 //                              int homecity_id, int moves_left, int hp_left,
 //			      unit ptrans)
 //{
@@ -1539,9 +1524,9 @@ public class Unittools{
 //  player unitowner = unit_owner(punit);
 //
 //#ifndef NDEBUG
-//  unit_list_iterate(punit.tile.units, pcargo) {
+//  for (unit pcargo : punit.tile.units.data) {
 //    assert(pcargo.transported_by != punit.id);
-//  } unit_list_iterate_end;
+//  } }
 //#endif
 //
 //  /* Since settlers plot in new cities in the minimap before they
@@ -1616,7 +1601,7 @@ public class Unittools{
 //    /* FIXME: there's no send_unit_info call below so these units aren't
 //     * updated at the client.  I guess this works because the unit info
 //     * will be sent eventually anyway, but it's surely a bug. */
-//    unit_list_iterate(ptile.units, pcargo) {
+//    for (unit pcargo : ptile.units.data) {
 //      if (pcargo.transported_by == punit.id) {
 //	/* Could use unload_unit_from_transporter here, but that would
 //	 * call send_unit_info for the transporter unnecessarily. */
@@ -1625,11 +1610,11 @@ public class Unittools{
 //	  /* Activate sentried units - like planes on a disbanded carrier.
 //	   * Note this will activate ground units even if they just change
 //	   * transporter. */
-//	  set_unit_activity(pcargo, ACTIVITY_IDLE);
+//	  set_unit_activity(pcargo, unit_activity.ACTIVITY_IDLE);
 //	}
 //	send_unit_info(null, pcargo);
 //      } 
-//    } unit_list_iterate_end;
+//    } }
 //  }
 //
 //  /* No need to wipe the cargo unless it's a ground transporter. */
@@ -1648,7 +1633,7 @@ public class Unittools{
 //
 //    /* Get rid of excess standard units. */
 //    if (capacity < 0) {
-//      unit_list_iterate_safe(ptile.units, pcargo) {
+//      for (unit pcargo : ptile.units.data) {
 //	if (is_ground_unit(pcargo)
 //	    && pcargo.transported_by == -1
 //	    && !unit_flag(pcargo, F_UNDISBANDABLE)
@@ -1658,18 +1643,18 @@ public class Unittools{
 //	    break;
 //	  }
 //	}
-//      } unit_list_iterate_safe_end;
+//      }
 //    }
 //
 //    /* Get rid of excess undisbandable/gameloss units. */
 //    if (capacity < 0) {
-//      unit_list_iterate_safe(ptile.units, pcargo) {
+//      for (unit pcargo : ptile.units.data) {
 //	if (is_ground_unit(pcargo) && pcargo.transported_by == -1) {
 //	  if (unit_flag(pcargo, F_UNDISBANDABLE)) {
 //	    pcity = find_closest_owned_city(unit_owner(pcargo),
 //					    pcargo.tile, true, null);
 //	    if (pcity && teleport_unit_to_city(pcargo, pcity, 0, false)) {
-//	      notify_player_ex(pplayer, ptile, E_NOEVENT,
+//	      notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
 //			       _("Game: %s escaped the destruction of %s, and "
 //				 "fled to %s."), unit_type(pcargo).name,
 //			       ptype.name, pcity.name);
@@ -1687,15 +1672,15 @@ public class Unittools{
 //	    break;
 //	  }
 //	}
-//      } unit_list_iterate_safe_end;
+//      }
 //    }
 //
 //    /* Reassign existing units.  This is an O(n^2) operation as written. */
-//    unit_list_iterate(ptile.units, ptrans) {
+//    for (unit ptrans : ptile.units.data) {
 //      if (is_ground_units_transport(ptrans)) {
 //	int occupancy = get_transporter_occupancy(ptrans);
 //
-//	unit_list_iterate(ptile.units, pcargo) {
+//	for (unit pcargo : ptile.units.data) {
 //	  if (occupancy >= get_transporter_capacity(ptrans)) {
 //	    break;
 //	  }
@@ -1703,9 +1688,9 @@ public class Unittools{
 //	    put_unit_onto_transporter(pcargo, ptrans);
 //	    occupancy++;
 //	  }
-//	} unit_list_iterate_end;
+//	} }
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  }
 //}
 //
@@ -1748,7 +1733,7 @@ public class Unittools{
 //    unit_list_iterate(punit.tile.units, vunit)
 //      if (pplayers_at_war(unit_owner(pkiller), unit_owner(vunit)))
 //	unitcount++;
-//    unit_list_iterate_end;
+//    }
 //  }
 //
 //  if (!is_stack_vulnerable(punit.tile) || unitcount == 1) {
@@ -1773,7 +1758,7 @@ public class Unittools{
 //    unit_list_iterate(punit.tile.units, vunit)
 //      if (pplayers_at_war(unit_owner(pkiller), unit_owner(vunit)))
 //	num_killed[vunit.owner]++;
-//    unit_list_iterate_end;
+//    }
 //
 //    /* inform the owners */
 //    for (i = 0; i<MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS; i++) {
@@ -1790,7 +1775,7 @@ public class Unittools{
 //    }
 //
 //    /* remove the units */
-//    unit_list_iterate(punit.tile.units, punit2) {
+//    for (unit punit2 : punit.tile.units.data) {
 //      if (pplayers_at_war(unit_owner(pkiller), unit_owner(punit2))) {
 //	notify_player_ex(unit_owner(punit2), 
 //			 punit2.tile, E_UNIT_LOST,
@@ -1803,7 +1788,7 @@ public class Unittools{
 //	wipe_unit_spec_safe(punit2, false);
 //      }
 //    }
-//    unit_list_iterate_end;
+//    }
 //  }
 //}
 //
@@ -1902,8 +1887,8 @@ public class Unittools{
 //  packet.hp = punit.hp;
 //  packet.occupied = (get_transporter_occupancy(punit) > 0);
 //  if (punit.activity == ACTIVITY_EXPLORE
-//      || punit.activity == ACTIVITY_GOTO) {
-//    packet.activity = ACTIVITY_IDLE;
+//      || punit.activity == unit_activity.ACTIVITY_GOTO) {
+//    packet.activity = unit_activity.ACTIVITY_IDLE;
 //  } else {
 //    packet.activity = punit.activity;
 //  }
@@ -1939,91 +1924,97 @@ public class Unittools{
 //    lsend_packet_unit_short_info(&pplayer.connections, &packet);
 //  }
 //}
-//
-///**************************************************************************
-//  Send the unit into to those connections in dest which can see the units
-//  at it's position, or the specified (x,y) (if different).
-//  Eg, use x and y as where the unit came from, so that the info can be
-//  sent if the other players can see either the target or destination tile.
-//  dest = null means all connections (game.game_connections)
-//**************************************************************************/
-//void send_unit_info_to_onlookers(conn_list dest, unit punit,
-//				 tile ptile, boolean remove_unseen)
-//{
-//  struct packet_unit_info info;
-//  struct packet_unit_short_info sinfo;
-//  boolean new_information_for_enemy = false;
-//
-//  if (!dest) {
-//    dest = &game.game_connections;
-//  }
-//
-///* maybe the wrong position for that, but this is the lowlevel function
-// * where we check if we have to increase timeout, or remove_turn_done */
-//  
-//  package_unit(punit, &info);
-//  package_short_unit(punit, &sinfo, UNIT_INFO_IDENTITY, false, false);
-//            
-//  conn_list_iterate(*dest, pconn) {
-//    player pplayer = pconn.player;
-//    
-//    if ((!pplayer && pconn.observer) 
-//	|| (pplayer && pplayer.player_no == punit.owner)) {
-//      send_packet_unit_info(pconn, &info);
-//    } else if (pplayer) {
-//      boolean see_in_old;
-//      boolean see_in_new = can_player_see_unit_at(pplayer, punit, punit.tile);
-//
-//      if (punit.tile == ptile) {
-//	/* This is not about movement */
-//	see_in_old = see_in_new;
-//      } else {
-//	see_in_old = can_player_see_unit_at(pplayer, punit, ptile);
-//      }
-//
-//      if (see_in_new || see_in_old) {
-//        /* First send movement */
-//        send_packet_unit_short_info(pconn, &sinfo);
-//
-//        if (!see_in_new) {
-//          /* Then remove unit if necessary */
-//          unit_goes_out_of_sight(pplayer, punit);
-//        }
-//	if (pplayers_at_war(pplayer,unit_owner(punit))
-//	    && !pplayer.ai.control) {
-//	  /* increase_timeout_because_unit_moved(pplayer) possible here */
-//	   new_information_for_enemy = true;
-//	}
-//      } else {
-//	if (remove_unseen) {
-//	  dsend_packet_unit_remove(pconn, punit.id);
-//	}
-//      }
-//    }
-//  } conn_list_iterate_end;
-//  
-//  if (game.timeout != 0 && new_information_for_enemy){
-//    increase_timeout_because_unit_moved();
-//  }
-//
-//}
-//
-///**************************************************************************
-//  send the unit to the players who need the info 
-//  dest = null means all connections (game.game_connections)
-//**************************************************************************/
-//void send_unit_info(player dest, unit punit)
-//{
-//  conn_list conn_dest = (dest ? &dest.connections
-//				 : &game.game_connections);
-//  send_unit_info_to_onlookers(conn_dest, punit, punit.tile, false);
-//}
-//
-///**************************************************************************
+
+	/***************************************************************************
+	 * Send the unit into to those connections in dest which can see the units
+	 * at it's position, or the specified (x,y) (if different). Eg, use x and y
+	 * as where the unit came from, so that the info can be sent if the other
+	 * players can see either the target or destination tile. dest = null means
+	 * all connections (game.game_connections)
+	 **************************************************************************/
+	public static void send_unit_info_to_onlookers(Speclists<Connection> dest, unit punit,
+			tile ptile, boolean remove_unseen)
+	{
+		// struct packet_unit_info info;
+		// struct packet_unit_short_info sinfo;
+		// boolean new_information_for_enemy = false;
+
+		// if (!dest) {
+		// dest = &game.game_connections;
+		// }
+
+		// /*
+		// * maybe the wrong position for that, but this is the lowlevel
+		// function
+		// * where we check if we have to increase timeout, or remove_turn_done
+		// */
+
+		// package_unit(punit, &info);
+		// package_short_unit(punit, &sinfo, UNIT_INFO_IDENTITY, false, false);
+
+		// conn_list_iterate(*dest, pconn) {
+		// player pplayer = pconn.player;
+
+		// if ((!pplayer && pconn.observer)
+		// || (pplayer && pplayer.player_no == punit.owner)) {
+		// send_packet_unit_info(pconn, &info);
+		// } else if (pplayer) {
+		// boolean see_in_old;
+		// boolean see_in_new = can_player_see_unit_at(pplayer, punit,
+		// punit.tile);
+
+		// if (punit.tile == ptile) {
+		// /* This is not about movement */
+		// see_in_old = see_in_new;
+		// } else {
+		// see_in_old = can_player_see_unit_at(pplayer, punit, ptile);
+		// }
+
+		// if (see_in_new || see_in_old) {
+		// /* First send movement */
+		// send_packet_unit_short_info(pconn, &sinfo);
+
+		// if (!see_in_new) {
+		// /* Then remove unit if necessary */
+		// unit_goes_out_of_sight(pplayer, punit);
+		// }
+		// if (pplayers_at_war(pplayer,unit_owner(punit))
+		// && !pplayer.ai.control) {
+		// /*
+		// * increase_timeout_because_unit_moved(pplayer) possible
+		// * here
+		// */
+		// new_information_for_enemy = true;
+		// }
+		// } else {
+		// if (remove_unseen) {
+		// dsend_packet_unit_remove(pconn, punit.id);
+		// }
+		// }
+		// }
+		// } }
+
+		// if (game.timeout != 0 && new_information_for_enemy){
+		//		increase_timeout_because_unit_moved();
+		//		}
+
+	}
+
+	/***************************************************************************
+	 * send the unit to the players who need the info dest = null means all
+	 * connections (game.game_connections)
+	 **************************************************************************/
+	public static void send_unit_info(player dest, unit punit)
+	{
+		Speclists<Connection> conn_dest = (dest!=null ? dest.connections
+				: game.game_connections);
+		send_unit_info_to_onlookers(conn_dest, punit, punit.tile, false);
+	}
+	// /**************************************************************************
 //  For each specified connections, send information about all the units
 //  known to that player/conn.
 //**************************************************************************/
-//void send_all_known_units(conn_list dest)
+//void send_all_known_units(Speclists<Connection> dest)
 //{
 //  int p;
 //  
@@ -2035,17 +2026,17 @@ public class Unittools{
 //    }
 //    for(p=0; p<game.nplayers; p++) { /* send the players units */
 //      player unitowner = &game.players[p];
-//      unit_list_iterate(unitowner.units, punit) {
+//      for (unit punit : unitowner.units.data) {
 //	if (!pplayer
 //	    || map_is_known_and_seen(punit.tile, pplayer)) {
 //	  send_unit_info_to_onlookers(&pconn.self, punit,
 //				      punit.tile, false);
 //	}
 //      }
-//      unit_list_iterate_end;
+//      }
 //    }
 //  }
-//  conn_list_iterate_end;
+//  }
 //  conn_list_do_unbuffer(dest);
 //  flush_packets();
 //}
@@ -2059,14 +2050,14 @@ public class Unittools{
 //{
 //  tile ptile = ptrans.tile;
 //
-//  unit_list_iterate(ptile.units, pcargo) {
+//  for (unit pcargo : ptile.units.data) {
 //    if (pcargo.transported_by == ptrans.id
 //	&& pcargo.id != ptrans.id
-//	&& pcargo.activity == ACTIVITY_IDLE) {
+//	&& pcargo.activity == unit_activity.ACTIVITY_IDLE) {
 //      pcargo.activity = ACTIVITY_SENTRY;
 //      send_unit_info(unit_owner(pcargo), pcargo);
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -2080,7 +2071,7 @@ public class Unittools{
 //{
 //  city pcity = map_get_city(ptile);
 //
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    notify_player_ex(unit_owner(punit), ptile, E_UNIT_LOST,
 //		     "Game: Your %s was nuked by %s.",
 //		     unit_name(punit.type),
@@ -2093,7 +2084,7 @@ public class Unittools{
 //		       unit_name(punit.type));
 //    }
 //    wipe_unit_spec_safe(punit, false);
-//  } unit_list_iterate_end;
+//  } }
 //
 //  if (pcity) {
 //    notify_player_ex(city_owner(pcity),
@@ -2182,7 +2173,7 @@ public class Unittools{
 //  city1.airlift = false;
 //  city2.airlift = false;
 //
-//  notify_player_ex(unit_owner(punit), city2.tile, E_NOEVENT,
+//  notify_player_ex(unit_owner(punit), city2.tile, event_type.E_NOEVENT,
 //		   "Game: %s transported succesfully.",
 //		   unit_name(punit.type));
 //
@@ -2205,7 +2196,7 @@ public class Unittools{
 //  player pplayer = unit_owner(punit);
 //
 //  if (!unit_flag(punit, F_PARATROOPERS)) {
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                     "Game: This unit type can not be paradropped.");
 //    return false;
 //  }
@@ -2215,19 +2206,19 @@ public class Unittools{
 //  }
 //
 //  if (get_transporter_occupancy(punit) > 0) {
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: You cannot paradrop a transporter unit.");
 //  }
 //
 //  if (!map_is_known(ptile, pplayer)) {
-//    notify_player_ex(pplayer, ptile, E_NOEVENT,
+//    notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
 //                     "Game: The destination location is not known.");
 //    return false;
 //  }
 //
 //  if (is_ocean(map_get_player_tile(ptile, pplayer).terrain)
 //      && is_ground_unit(punit)) {
-//    notify_player_ex(pplayer, ptile, E_NOEVENT,
+//    notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
 //                     "Game: This unit cannot paradrop into ocean.");
 //    return false;    
 //  }
@@ -2236,7 +2227,7 @@ public class Unittools{
 //      && ((ptile.city
 //	  && pplayers_non_attack(pplayer, city_owner(ptile.city)))
 //      || is_non_attack_unit_tile(ptile, pplayer))) {
-//    notify_player_ex(pplayer, ptile, E_NOEVENT,
+//    notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
 //                     "Game: Cannot attack unless you declare war first.");
 //    return false;    
 //  }
@@ -2245,7 +2236,7 @@ public class Unittools{
 //    int range = unit_type(punit).paratroopers_range;
 //    int distance = real_map_distance(punit.tile, ptile);
 //    if (distance > range) {
-//      notify_player_ex(pplayer, ptile, E_NOEVENT,
+//      notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
 //                       _("Game: The distance to the target (%i) "
 //                         "is greater than the unit's range (%i)."),
 //                       distance, range);
@@ -2350,7 +2341,7 @@ public class Unittools{
 //  } else {
 //    /* save coords and type in case unit dies */
 //    tile unit_tile = punit.tile;
-//    Unit_Type_id type = punit.type;
+//    int type = punit.type;
 //
 //    ok = unleash_barbarians(unit_tile);
 //
@@ -2413,7 +2404,7 @@ public class Unittools{
 //  update_tile_knowledge(punit.tile);
 //
 //  if (game.rgame.hut_overflight==OVERFLIGHT_FRIGHTEN && is_air_unit(punit)) {
-//    notify_player_ex(pplayer, punit.tile, E_NOEVENT,
+//    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     _("Game: Your overflight frightens the tribe;"
 //		       " they scatter in terror."));
 //    return ok;
@@ -2503,7 +2494,7 @@ public class Unittools{
 //  /* There may be sentried units with a sightrange>3, but we don't
 //     wake them up if the punit is farther away than 3. */
 //  square_iterate(punit.tile, 3, ptile) {
-//    unit_list_iterate(ptile.units, penemy) {
+//    for (unit penemy : ptile.units.data) {
 //      int range;
 //      enum unit_move_type move_type = unit_type(penemy).move_type;
 //      Terrain_type_id terrain = map_get_terrain(ptile);
@@ -2520,16 +2511,16 @@ public class Unittools{
 //	  && can_player_see_unit(unit_owner(penemy), punit)
 //	  /* on board transport; don't awaken */
 //	  && !(move_type == LAND_MOVING && is_ocean(terrain))) {
-//	set_unit_activity(penemy, ACTIVITY_IDLE);
+//	set_unit_activity(penemy, unit_activity.ACTIVITY_IDLE);
 //	send_unit_info(null, penemy);
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } square_iterate_end;
 //
 //  /* Wakeup patrolling units we bump into.
 //     We do not wakeup units further away than 3 squares... */
 //  square_iterate(punit.tile, 3, ptile) {
-//    unit_list_iterate(ptile.units, ppatrol) {
+//    for (unit ppatrol : ptile.units.data) {
 //      if (punit != ppatrol
 //	  && unit_has_orders(ppatrol)
 //	  && ppatrol.orders.vigilant) {
@@ -2540,7 +2531,7 @@ public class Unittools{
 //			   unit_name(ppatrol.type));
 //	}
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } square_iterate_end;
 //}
 //
@@ -2649,11 +2640,11 @@ public class Unittools{
 //**************************************************************************/
 //static void check_unit_activity(unit punit)
 //{
-//  if (punit.activity != ACTIVITY_IDLE
+//  if (punit.activity != unit_activity.ACTIVITY_IDLE
 //      && punit.activity != ACTIVITY_SENTRY
 //      && punit.activity != ACTIVITY_EXPLORE
-//      && punit.activity != ACTIVITY_GOTO) {
-//    set_unit_activity(punit, ACTIVITY_IDLE);
+//      && punit.activity != unit_activity.ACTIVITY_GOTO) {
+//    set_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //  }
 //}
 //
@@ -2680,19 +2671,19 @@ public class Unittools{
 //     then insert them again. The way this is done makes sure that the
 //     units stay in the same order. */
 //  if (get_transporter_capacity(punit) > 0) {
-//    struct unit_list cargo_units;
+//    Speclists<unit> cargo_units;
 //
 //    /* First make a list of the units to be moved. */
 //    unit_list_init(&cargo_units);
-//    unit_list_iterate(psrctile.units, pcargo) {
+//    for (unit pcargo : psrctile.units.data) {
 //      if (pcargo.transported_by == punit.id) {
 //	unit_list_unlink(&psrctile.units, pcargo);
 //	unit_list_insert(&cargo_units, pcargo);
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //
 //    /* Insert them again. */
-//    unit_list_iterate(cargo_units, pcargo) {
+//    for (unit pcargo : cargo_units.data) {
 //      unfog_area(unit_owner(pcargo), pdesttile, unit_type(pcargo).vision_range);
 //
 //      /* Silently free orders since they won't be applicable anymore. */
@@ -2705,7 +2696,7 @@ public class Unittools{
 //      send_unit_info_to_onlookers(null, pcargo, psrctile, false);
 //      fog_area(unit_owner(pcargo), psrctile, unit_type(pcargo).vision_range);
 //      handle_unit_move_consequences(pcargo, psrctile, pdesttile);
-//    } unit_list_iterate_end;
+//    } }
 //    unit_list_unlink_all(&cargo_units);
 //  }
 //
@@ -2814,11 +2805,11 @@ public class Unittools{
 //       * hidden units that are no longer visible.  These units will not
 //       * have been handled by the fog code, above. */
 //      if (map_get_known(tile1, pplayer) == TILE_KNOWN) {
-//        unit_list_iterate(tile1.units, punit2) {
+//        for (unit punit2 : tile1.units.data) {
 //          if (punit2 != punit && !can_player_see_unit(pplayer, punit2)) {
 //	    unit_goes_out_of_sight(pplayer, punit2);
 //	  }
-//        } unit_list_iterate_end;
+//        } }
 //      }
 //    } players_iterate_end;
 //  } square_iterate_end;
@@ -2889,7 +2880,7 @@ public class Unittools{
 //  } square_iterate_end;
 //
 //  if (cancel) {
-//    handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//    handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  }
 //
 //  return cancel;
@@ -2932,7 +2923,7 @@ public class Unittools{
 //
 //  assert(unit_has_orders(punit));
 //
-//  if (punit.activity != ACTIVITY_IDLE) {
+//  if (punit.activity != unit_activity.ACTIVITY_IDLE) {
 //    /* Unit's in the middle of an activity; wait for it to finish. */
 //    punit.done_moving = true;
 //    return true;

@@ -141,7 +141,7 @@ public class Gotodlg{
 //  {
 //    city_list_iterate(game.players[i].cities, pcity)
 //      DoMethod(goto_cities_listview, MUIM_NList_InsertSingle, pcity, MUIV_NList_Insert_Bottom);
-//    city_list_iterate_end;
+//    }
 //  }
 //  set(goto_cities_listview, MUIA_NList_Quiet, false);
 //  set(goto_airlift_button, MUIA_Disabled, true);
