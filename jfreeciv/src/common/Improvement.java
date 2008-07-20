@@ -248,7 +248,7 @@ public class Improvement{
 ///**************************************************************************
 // Returns 1 if the improvement is obsolete, now also works for wonders
 //**************************************************************************/
-//boolean improvement_obsolete(const player pplayer, Impr_Type_id id) 
+//boolean improvement_obsolete(final player pplayer, Impr_Type_id id) 
 //{
 //  if (!tech_exists(improvement_types[id].obsolete_by)) {
 //    return false;
@@ -301,7 +301,7 @@ public class Improvement{
 // Checks whether the building is within the equiv_range of a building that
 // replaces it
 //**************************************************************************/
-//boolean improvement_redundant(player pplayer, const city pcity,
+//boolean improvement_redundant(player pplayer, final city pcity,
 //                          Impr_Type_id id, boolean want_to_build)
 //{
 //  enum impr_range i;
@@ -382,7 +382,7 @@ public class Improvement{
 //
 //  impr = get_improvement_type(id);
 //
-//  /* Check for space part construction.  This assumes that space parts have
+//  /* Check for space part finalruction.  This assumes that space parts have
 //   * no other effects. */
 //  if (building_has_effect(id, EFT_SS_STRUCTURAL)) {
 //    space_part = true;
@@ -490,7 +490,7 @@ public class Improvement{
 //    } 
 //
 //    /* Fill the lists with existent improvements with Island equiv_range */
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      Continent_id cont = map_get_continent(pcity.tile);
 //      Impr_Status *improvs = 
 //                           &pplayer.island_improv[cont * game.num_impr_types];
@@ -502,7 +502,7 @@ public class Improvement{
 //    
 //        improvs[id] = pcity.improvements[id];
 //      } built_impr_iterate_end;
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  improvements_update_redundant(null, null, 0, IR_WORLD);  
@@ -524,7 +524,7 @@ public class Improvement{
 //  boolean did_mark = false;
 //
 //  players_iterate(pplayer) {
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      built_impr_iterate(pcity, i) {
 //        if (improvement_obsolete(pplayer, i)) {
 //          freelog(LOG_DEBUG,"%s in %s is obsolete",
@@ -533,7 +533,7 @@ public class Improvement{
 //          did_mark = true;
 //        }
 //      } built_impr_iterate_end;
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  /* Ideally, we could track at what max range and for which players, but
@@ -591,24 +591,24 @@ public class Improvement{
 //    break;
 //  case IR_WORLD:
 //    players_iterate(plr) {
-//      city_list_iterate(plr.cities, pcity2) {
+//      for (city pcity2 : plr.cities.data) {
 //        CHECK_CITY_IMPR(pcity2);
-//      } city_list_iterate_end;
+//      } }
 //    } players_iterate_end;
 //    break;
 //  case IR_PLAYER:
 //    assert(pplayer != null);
-//    city_list_iterate(pplayer.cities, pcity2) {
+//    for (city pcity2 : pplayer.cities.data) {
 //      CHECK_CITY_IMPR(pcity2);
-//    } city_list_iterate_end;
+//    } }
 //    break;
 //  case IR_ISLAND:
 //    assert(cont > 0);
-//    city_list_iterate(pplayer.cities, pcity2) {
+//    for (city pcity2 : pplayer.cities.data) {
 //      if (map_get_continent(pcity2.tile) == cont) {
 //        CHECK_CITY_IMPR(pcity2);
 //      }
-//    } city_list_iterate_end;
+//    } }
 //    break;
 //  default:
 //    break;

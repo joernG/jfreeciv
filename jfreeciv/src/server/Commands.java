@@ -25,7 +25,7 @@ public class Commands{
 //#include "commands.h"
 //
 ///* Commands must match the values in enum command_id. */
-//const struct command commands[] = {
+//final struct command commands[] = {
 //  {"start",	ALLOW_INFO, ALLOW_INFO,
 //   "start",
 //   N"Start the game, or restart after loading a savegame.",

@@ -267,7 +267,7 @@ public class Connectdlg{
 //      sz_strlcpy(buf[5], pserver.message);
 //
 //      gtk_clist_append(GTK_CLIST(lan_list), row);
-//    } server_list_iterate_end;
+//    } }
 //
 //    gtk_clist_thaw(GTK_CLIST(lan_list));
 //    gtk_clist_set_sort_type(GTK_CLIST(lan_list), GTK_SORT_ASCENDING);
@@ -611,7 +611,7 @@ public class Connectdlg{
 //
 //    gtk_clist_append(GTK_CLIST(meta_list), row);
 //  }
-//  server_list_iterate_end;
+//  }
 //
 //  delete_server_list(server_list);
 //  gtk_clist_thaw(GTK_CLIST(meta_list));

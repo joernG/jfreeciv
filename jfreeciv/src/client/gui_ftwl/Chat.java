@@ -306,7 +306,7 @@ public class Chat{
 // ...
 //*************************************************************************/
 //static boolean my_key_handler(sw_widget widget,
-//			   const be_key key, void *data)
+//			   final be_key key, void *data)
 //{
 //  if (key.type == BE_KEY_RETURN) {
 //    fc_send();

@@ -217,7 +217,7 @@ public class L10nflist{
 //  retval = null;
 //  last = null;
 //
-//  /* Construct file name.  */
+//  /* finalruct file name.  */
 //  memcpy (abs_filename, dirlist, dirlist_len);
 //  __argz_stringify (abs_filename, dirlist_len, PATH_SEPARATOR);
 //  cp = abs_filename + (dirlist_len - 1);

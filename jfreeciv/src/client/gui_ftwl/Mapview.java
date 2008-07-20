@@ -55,7 +55,7 @@ public class Mapview{
 //static te_screen screen;
 //static sw_widget mapview_canvas_window = null;
 //static sw_widget overview_window = null;
-//static struct widget_list city_descr_windows;
+//static Speclists<widget> city_descr_windows;
 //static int drag_factor = 2;
 ///*
 // * 0 - pixel
@@ -83,7 +83,7 @@ public class Mapview{
 //  TLI_UNIT
 //};
 //
-//struct tile_list_item {
+//Speclists<tile>_item {
 //  enum tile_list_item_type type;
 //  osda unselected;
 //  osda selected;
@@ -94,10 +94,10 @@ public class Mapview{
 //  char *info_text;
 //};
 //
-//static struct tile_list {
+//static Speclists<tile> {
 //  int items;
 //  int selected;
-//  struct tile_list_item item[MAX_TILE_LIST_ITEMS];
+//  Speclists<tile>_item item[MAX_TILE_LIST_ITEMS];
 //} tile_list;
 //
 //static ct_tooltip tooltip_template = null;
@@ -238,7 +238,7 @@ public class Mapview{
 //  ...
 //**************************************************************************/
 //static void overview_mouse_press_callback(sw_widget widget,
-//					  const ct_point pos,
+//					  final ct_point pos,
 //					  enum be_mouse_button button,
 //					  int state, void *data)
 //{
@@ -585,10 +585,10 @@ public class Mapview{
 //{
 //  freelog(LOG_DEBUG, "prepare_show_city_descriptions");
 //  
-//  widget_list_iterate(city_descr_windows, widget) {
+//  for (widget widget : city_descr_windows.data) {
 //    widget_list_unlink(&city_descr_windows, widget);
 //    sw_widget_destroy(widget);
-//  } widget_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -744,12 +744,12 @@ public class Mapview{
 //  set_unit_focus(null);
 //
 //  ptile = get_focus_tile();
-//  unit_list_iterate(ptile.units, aunit) {
+//  for (unit aunit : ptile.units.data) {
 //    if (game.player_idx == aunit.owner) {
 //      set_unit_focus(aunit);
 //      break;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  for (i = 0; i < tile_list.items; i++) {
 //    printf("destroy button %d\n", i);
@@ -789,7 +789,7 @@ public class Mapview{
 //    item.info_text=mystrdup(mapview_get_city_info_text(pcity));
 //  }
 //
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    tile_list_item item = &tile_list.item[tile_list.items];
 //
 //    tile_list.items++;
@@ -802,7 +802,7 @@ public class Mapview{
 //
 //    item.tooltip = mystrdup(mapview_get_unit_tooltip_text(punit));
 //    item.info_text=mystrdup(mapview_get_unit_info_text(punit));
-//  } unit_list_iterate_end;
+//  } }
 //
 //  if(tile_list.items>1) {
 //      /* Take the city or unit */
@@ -816,7 +816,7 @@ public class Mapview{
 //  ...
 //**************************************************************************/
 //static void canvas_mouse_press_callback(sw_widget widget,
-//					const ct_point pos,
+//					final ct_point pos,
 //					enum be_mouse_button button,
 //					int state, void *data)
 //{
@@ -899,7 +899,7 @@ public class Mapview{
 //  ...
 //**************************************************************************/
 //static void my_drag_start(sw_widget widget,
-//			  const ct_point mouse,
+//			  final ct_point mouse,
 //			  enum be_mouse_button button)
 //{
 //  get_mapview_scroll_pos(&starting_map_position_x,&starting_map_position_y);
@@ -912,8 +912,8 @@ public class Mapview{
 //  ...
 //**************************************************************************/
 //static void my_drag_move(sw_widget widget,
-//			 const ct_point start_position,
-//			 const ct_point current_position,
+//			 final ct_point start_position,
+//			 final ct_point current_position,
 //			 enum be_mouse_button button)
 //{
 //  int dx = drag_factor * (current_position.x - start_position.x);
@@ -1404,7 +1404,7 @@ public class Mapview{
 //    X(ACTIVITY_FALLOUT, "unit_fallout");
 //    X(ACTIVITY_FORTIFYING, "unit_fortifying");
 //    X(ACTIVITY_FORTRESS, "unit_fortress");
-//    //	ACTIVITY_GOTO, 
+//    //	unit_activity.ACTIVITY_GOTO, 
 //    X(ACTIVITY_IRRIGATE,  "unit_irrigate");
 //    X(ACTIVITY_MINE,  "unit_mine");
 //    X(ACTIVITY_PILLAGE,  "unit_pillage");
@@ -1451,7 +1451,7 @@ public class Mapview{
 //    if (is_unit_activity_on_tile(ACTIVITY_SENTRY, punit.tile)) {
 //      ADD("unit_wake_others");
 //    }
-//    if (can_unit_do_connect(punit, ACTIVITY_IDLE)) {
+//    if (can_unit_do_connect(punit, unit_activity.ACTIVITY_IDLE)) {
 //      ADD("unit_connect");
 //    }
 //    if (!(is_air_unit(punit) || is_heli_unit(punit))) {
@@ -1503,10 +1503,10 @@ public class Mapview{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//static int mysort(const void *p1, const void *p2)
+//static int mysort(final void *p1, final void *p2)
 //{
-//  const shown_action a1 = (const shown_action ) p1;
-//  const shown_action a2 = (const shown_action ) p2;
+//  final shown_action a1 = (final shown_action ) p1;
+//  final shown_action a2 = (final shown_action ) p2;
 //
 //  return a1.order - a2.order;
 //}

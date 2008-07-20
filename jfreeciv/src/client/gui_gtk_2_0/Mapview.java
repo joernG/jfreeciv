@@ -905,7 +905,7 @@ public class Mapview{
 //  int x, y;
 //  GdkPixbuf *fogged;
 //  guchar *pixel;
-//  const int bright = 65; /* Brightness percentage */
+//  final int bright = 65; /* Brightness percentage */
 //
 //  fogged = gdk_pixbuf_new(GDK_COLORSPACE_RGB, true, 8,
 //			  sprite.width, sprite.height);

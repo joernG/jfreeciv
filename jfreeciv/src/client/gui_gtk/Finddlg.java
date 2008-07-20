@@ -145,7 +145,7 @@ public class Finddlg{
 //    city_list_iterate(game.players[i].cities, pcity) 
 //	row[0] = pcity.name;
 //	gtk_clist_append(GTK_CLIST(find_list), row);
-//    city_list_iterate_end;
+//    }
 //
 //  }
 //  gtk_clist_thaw(GTK_CLIST(find_list));

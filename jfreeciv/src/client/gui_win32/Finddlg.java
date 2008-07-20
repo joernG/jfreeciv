@@ -51,7 +51,7 @@ public class Finddlg{
 //    id=ListBox_AddString(GetDlgItem(finddialog,ID_FINDCITY_LIST),pcity.name);
 //    ListBox_SetItemData(GetDlgItem(finddialog,ID_FINDCITY_LIST),id,i);
 //    
-//    city_list_iterate_end;
+//    }
 // 
 //  }        
 //}

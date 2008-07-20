@@ -75,7 +75,7 @@ public class Agents{
 //      int wait_at_network, wait_at_network_requests;
 //    } stats;
 //  } entries[MAX_AGENTS];
-//  struct call_list calls;
+//  Speclists<call> calls;
 //} agents;
 //
 //static boolean initialized = false;
@@ -85,8 +85,8 @@ public class Agents{
 ///****************************************************************************
 //  Return true iff the two agent calls are equal.
 //****************************************************************************/
-//static boolean calls_are_equal(const call pcall1,
-//			    const call pcall2)
+//static boolean calls_are_equal(final call pcall1,
+//			    final call pcall2)
 //{
 //  if (pcall1.type != pcall2.type && pcall1.cb_type != pcall2.cb_type) {
 //    return false;
@@ -148,12 +148,12 @@ public class Agents{
 //  pcall2.cb_type = cb_type;
 //  pcall2.arg = arg;
 //
-//  call_list_iterate(agents.calls, pcall) {
+//  for (call pcall : agents.calls.data) {
 //    if (calls_are_equal(pcall, pcall2)) {
 //      free(pcall2);
 //      return;
 //    }
-//  } call_list_iterate_end;
+//  } }
 //
 //  call_list_insert(&agents.calls, pcall2);
 //
@@ -167,10 +167,10 @@ public class Agents{
 ///***********************************************************************
 // Helper.
 //***********************************************************************/
-//static int my_call_sort(const void *a, const void *b)
+//static int my_call_sort(final void *a, final void *b)
 //{
-//  const call c1 = (const call ) *(const void **) a;
-//  const call c2 = (const call ) *(const void **) b;
+//  final call c1 = (final call ) *(final void **) a;
+//  final call c2 = (final call ) *(final void **) b;
 //
 //  return c1.agent.agent.level - c2.agent.agent.level;
 //}
@@ -202,7 +202,7 @@ public class Agents{
 ///***********************************************************************
 // Calls an callback of an agent as described in the given call.
 //***********************************************************************/
-//static void execute_call(const call call)
+//static void execute_call(final call call)
 //{
 //  if (call.type == OCT_NEW_TURN) {
 //    call.agent.agent.turn_start_notify();
@@ -384,7 +384,7 @@ public class Agents{
 ///***********************************************************************
 // Registers an agent.
 //***********************************************************************/
-//void register_agent(const agent agent)
+//void register_agent(final agent agent)
 //{
 //  my_agent priv_agent = &agents.entries[agents.entries_used];
 //

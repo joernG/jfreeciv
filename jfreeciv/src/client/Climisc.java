@@ -184,7 +184,7 @@ public class Climisc{
 //      {
 //	last_request_id = city_change_production(pcity, to_is_unit, to_id);
 //      }
-//  } city_list_iterate_end;
+//  } }
 //
 //  connection_do_unbuffer(&aconnection);
 //  reports_freeze_till(last_request_id);
@@ -500,11 +500,11 @@ public class Climisc{
 //  if (cid_is_unit(cid)) {
 //    int unit_type = cid_id(cid);
 //
-//    unit_list_iterate(pcity.units_supported, punit) {
+//    for (unit punit : pcity.units_supported.data) {
 //      if (punit.type == unit_type)
 //	return true;
 //    }
-//    unit_list_iterate_end;
+//    }
 //  }
 //  return false;
 //}
@@ -517,11 +517,11 @@ public class Climisc{
 //  if (cid_is_unit(cid)) {
 //    int unit_type = cid_id(cid);
 //
-//    unit_list_iterate(pcity.tile.units, punit) {
+//    for (unit punit : pcity.tile.units.data) {
 //      if (punit.type == unit_type)
 //	return true;
 //    }
-//    unit_list_iterate_end;
+//    }
 //  }
 //  return false;
 //}
@@ -542,10 +542,10 @@ public class Climisc{
 ///**************************************************************************
 // Helper for name_and_sort_items.
 //**************************************************************************/
-//static int my_cmp(const void *p1, const void *p2)
+//static int my_cmp(final void *p1, final void *p2)
 //{
-//  const item i1 = (const item ) p1;
-//  const item i2 = (const item ) p2;
+//  final item i1 = (final item ) p1;
+//  final item i2 = (final item ) p2;
 //
 //  if (i1.section == i2.section)
 //    return mystrcasecmp(i1.descr, i2.descr);
@@ -558,7 +558,7 @@ public class Climisc{
 //
 // section 0: normal buildings
 // section 1: Capitalization
-// section 2: F_NONMIL units
+// section 2: Eunit_flag_id.F_NONMIL units
 // section 3: other units
 // section 4: wonders
 //**************************************************************************/
@@ -578,7 +578,7 @@ public class Climisc{
 //    if (is_unit) {
 //      name = get_unit_name(id);
 //      cost = unit_build_shield_cost(id);
-//      pitem.section = unit_type_flag(id, F_NONMIL) ? 2 : 3;
+//      pitem.section = unit_type_flag(id, Eunit_flag_id.F_NONMIL) ? 2 : 3;
 //    } else {
 //      name = get_impr_name_ex(pcity, id);
 //      if (building_has_effect(id, EFT_PROD_TO_GOLD)) {
@@ -631,10 +631,10 @@ public class Climisc{
 //      continue;
 //
 //    if (!change_prod) {
-//      city_list_iterate(game.player_ptr.cities, pcity) {
+//      for (city pcity : game.player_ptr.cities.data) {
 //	append |= test_func(pcity, cid);
 //      }
-//      city_list_iterate_end;
+//      }
 //    } else {
 //      int i;
 //
@@ -663,10 +663,10 @@ public class Climisc{
 //  cid cid;
 //
 //  memset(mapping, 0, sizeof(mapping));
-//  city_list_iterate(game.player_ptr.cities, pcity) {
+//  for (city pcity : game.player_ptr.cities.data) {
 //    mapping[cid_encode_from_city(pcity)] = true;
 //  }
-//  city_list_iterate_end;
+//  }
 //
 //  for (cid = 0; cid < ARRAY_SIZE(mapping); cid++) {
 //    if (mapping[cid]) {
@@ -827,7 +827,7 @@ public class Climisc{
 //    plist = &pcity.units_supported;
 //  }
 //
-//  return unit_list_size(plist);
+//  return plist.foo_list_size();
 //}
 //
 ///**************************************************************************
@@ -843,7 +843,7 @@ public class Climisc{
 //    plist = &pcity.tile.units;
 //  }
 //
-//  return unit_list_size(plist);
+//  return plist.foo_list_size();
 //}
 //
 ///**************************************************************************
@@ -965,7 +965,7 @@ public class Climisc{
 ///*************************************************************************
 //...
 //*************************************************************************/
-//enum known_type map_get_known(const tile ptile,
+//enum known_type map_get_known(final tile ptile,
 //			      player pplayer)
 //{
 //  assert(pplayer == game.player_ptr);
@@ -988,7 +988,7 @@ public class Climisc{
 //    pcity_near = null;
 //    pcity_near_dist = -1;
 //    players_iterate(pplayer) {
-//      city_list_iterate(pplayer.cities, pcity_current) {
+//      for (city pcity_current : pplayer.cities.data) {
 //        int dist = sq_map_distance(pcity_current.tile, punit.tile);
 //        if (pcity_near_dist == -1 || dist < pcity_near_dist
 //	    || (dist == pcity_near_dist
@@ -996,7 +996,7 @@ public class Climisc{
 //          pcity_near = pcity_current;
 //          pcity_near_dist = dist;
 //        }
-//      } city_list_iterate_end;
+//      } }
 //    } players_iterate_end;
 //  }
 //
@@ -1016,7 +1016,7 @@ public class Climisc{
 //{
 //  int value = city_buy_cost(pcity);
 //
-//  if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //    char buf[512];
 //
 //    assert(!pcity.is_building_unit);

@@ -79,7 +79,7 @@ public class Netintf{
 ///***************************************************************
 //  Write to a socket.
 //***************************************************************/
-//int my_writesocket(int sock, const void *buf, size_t size)
+//int my_writesocket(int sock, final void *buf, size_t size)
 //{
 //#ifdef HAVE_WINSOCK
 //  return send(sock, buf, size, 0);

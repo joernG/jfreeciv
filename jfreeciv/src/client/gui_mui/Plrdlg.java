@@ -104,7 +104,7 @@ public class Plrdlg{
 //    static char namebuf[32];
 //    static char dsbuf[32];
 //    static char repbuf[32];
-//    const player_diplstate pds;
+//    final player_diplstate pds;
 //
 //    if (game.players[i].nturns_idle > 3)
 //      my_snprintf(idlebuf, sizeof(idlebuf),
@@ -199,8 +199,8 @@ public class Plrdlg{
 //      set(player_spaceship_button, MUIA_Disabled, true);
 //
 //    switch (pplayer_get_diplstate(game.player_ptr, pplayer).type) {
-//      case DS_WAR:
-//      case DS_NO_CONTACT:
+//      case diplstate_type.DS_WAR:
+//      case diplstate_type.DS_NO_CONTACT:
 //	   set(player_war_button, MUIA_Disabled, true);
 //           break;
 //

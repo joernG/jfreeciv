@@ -50,7 +50,7 @@ public class Audio_winmm{
 ///**************************************************************************
 //  Play sound sample
 //**************************************************************************/
-//static boolean my_play(final String const tag, final String const fullpath,
+//static boolean my_play(final String final tag, final String final fullpath,
 //		    boolean repeat)
 //{
 //  if (!fullpath) {

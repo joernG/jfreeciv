@@ -307,12 +307,12 @@ public class Srv_main{
 //  Send all information for when game starts or client reconnects.
 //  Ruleset information should have been sent before this.
 //**************************************************************************/
-//void send_all_info(conn_list dest)
+//void send_all_info(Speclists<Connection> dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //      send_attribute_block(pconn.player,pconn);
 //  }
-//  conn_list_iterate_end;
+//  }
 //
 //  send_game_info(dest);
 //  send_map_info(dest);
@@ -334,9 +334,9 @@ public class Srv_main{
 //  players_iterate(pplayer) {
 //    if (get_player_bonus(pplayer, EFT_REVEAL_CITIES) > 0) {
 //      players_iterate(other_player) {
-//	city_list_iterate(other_player.cities, pcity) {
+//	for (city pcity : other_player.cities.data) {
 //	  show_area(pplayer, pcity.tile, 0);
-//	} city_list_iterate_end;
+//	} }
 //      } players_iterate_end;
 //    }
 //    if (get_player_bonus(pplayer, EFT_REVEAL_MAP) > 0) {
@@ -805,7 +805,7 @@ public class Srv_main{
 //**************************************************************************/
 //void handle_report_req(connection pconn, enum report_type type)
 //{
-//  conn_list dest = &pconn.self;
+//  Speclists<Connection> dest = &pconn.self;
 //  
 //  if (server_state != RUN_GAME_STATE && server_state != GAME_OVER_STATE
 //      && type != REPORT_SERVER_OPTIONS1 && type != REPORT_SERVER_OPTIONS2) {
@@ -1040,7 +1040,7 @@ public class Srv_main{
 //static boolean is_default_nation_name(final String name,
 //				   Nation_Type_id nation_id)
 //{
-//  const nation_type nation = get_nation_by_idx(nation_id);
+//  final nation_type nation = get_nation_by_idx(nation_id);
 //
 //  int choice;
 //
@@ -1247,7 +1247,7 @@ public class Srv_main{
 //  Select a random available nation.  If 'class' is non-null, then choose
 //  a nation from that class if possible.
 //**************************************************************************/
-//static Nation_Type_id select_random_nation(const char* class)
+//static Nation_Type_id select_random_nation(final char* class)
 //{
 //  Nation_Type_id i, available[game.playable_nation_count];
 //  int count = 0;

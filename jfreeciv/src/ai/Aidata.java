@@ -100,7 +100,7 @@ public class Aidata{
 //        if (peff.range > ai.impr_range[id]) {
 //          ai.impr_range[id] = peff.range;
 //        }
-//      } effect_list_iterate_end;
+//      } }
 //      break;
 //      default:
 //      /* Nothing! */
@@ -132,7 +132,7 @@ public class Aidata{
 //
 //  memset(&ai.stats.units, 0, sizeof(ai.stats.units));
 //
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    switch (unit_type(punit).move_type) {
 //    case LAND_MOVING:
 //      ai.stats.units.land++;
@@ -155,7 +155,7 @@ public class Aidata{
 //    if (can_upgrade_unittype(pplayer, punit.type) >= 0) {
 //      ai.stats.units.upgradeable++;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -197,12 +197,12 @@ public class Aidata{
 //     * our continent, the danger of land attacks is not big
 //     * enough to warrant city walls. Concentrate instead on 
 //     * coastal fortresses and hunting down enemy transports. */
-//    city_list_iterate(aplayer.cities, acity) {
+//    for (city acity : aplayer.cities.data) {
 //      Continent_id continent = map_get_continent(acity.tile);
 //      ai.threats.continent[continent] = true;
-//    } city_list_iterate_end;
+//    } }
 //
-//    unit_list_iterate(aplayer.units, punit) {
+//    for (unit punit : aplayer.units.data) {
 //      if (unit_flag(punit, F_IGWALL)) {
 //        ai.threats.igwall = true;
 //      }
@@ -249,11 +249,11 @@ public class Aidata{
 //      if (unit_flag(punit, F_NUCLEAR)) {
 //        danger_of_nukes = true;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //
 //    /* Check for nuke capability */
 //    for (i = 0; i < nuke_units; i++) {
-//      Unit_Type_id nuke = get_role_unit(F_NUCLEAR, i);
+//      int nuke = get_role_unit(F_NUCLEAR, i);
 //      if (can_player_build_unit_direct(aplayer, nuke)) { 
 //        ai.threats.nuclear = 1;
 //      }
@@ -305,13 +305,13 @@ public class Aidata{
 //  ai.stats.workers = fc_calloc(ai.num_continents + 1, sizeof(int));
 //  ai.stats.cities = fc_calloc(ai.num_continents + 1, sizeof(int));
 //  ai.stats.average_production = 0;
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    ai.stats.cities[(int)map_get_continent(pcity.tile)]++;
 //    ai.stats.average_production += pcity.shield_surplus;
-//  } city_list_iterate_end;
+//  } }
 //  ai.stats.average_production /= MAX(1, city_list_size(&pplayer.cities));
 //  BV_CLR_ALL(ai.stats.diplomat_reservations);
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    tile ptile = punit.tile;
 //
 //    if (!is_ocean(ptile.terrain) && unit_flag(punit, F_SETTLERS)) {
@@ -325,7 +325,7 @@ public class Aidata{
 //        BV_SET(ai.stats.diplomat_reservations, pcity.id);
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //  aiferry_init_stats(pplayer);
 //
 //  /*** Diplomacy ***/
@@ -368,11 +368,11 @@ public class Aidata{
 //        continue;
 //      }
 //      if (pplayers_allied(aplayer, check_pl)
-//          && pplayer_get_diplstate(pplayer, check_pl).type == DS_WAR) {
+//          && pplayer_get_diplstate(pplayer, check_pl).type == diplstate_type.DS_WAR) {
 //       ai.diplomacy.player_intel[i].is_allied_with_enemy = check_pl;
 //      }
 //      if (pplayers_allied(pplayer, check_pl)
-//          && pplayer_get_diplstate(aplayer, check_pl).type == DS_WAR) {
+//          && pplayer_get_diplstate(aplayer, check_pl).type == diplstate_type.DS_WAR) {
 //        ai.diplomacy.player_intel[i].at_war_with_ally = check_pl;
 //      }
 //      if (pplayers_allied(aplayer, check_pl)
@@ -428,7 +428,7 @@ public class Aidata{
 //    if (!aplayer.is_alive || aplayer == pplayer) {
 //      continue;
 //    }
-//    unit_list_iterate(aplayer.units, punit) {
+//    for (unit punit : aplayer.units.data) {
 //      if (!punit.ai.cur_pos) {
 //        /* Start tracking */
 //        punit.ai.cur_pos = &punit.ai.cur_struct;
@@ -438,7 +438,7 @@ public class Aidata{
 //        punit.ai.prev_pos = &punit.ai.prev_struct;
 //      }
 //      *punit.ai.cur_pos = punit.tile;
-//    } unit_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  count_my_units(pplayer);

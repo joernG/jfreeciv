@@ -1,26 +1,13 @@
 package common;
+import static common.map.Map_H.*;
+import static utility.shared.Shared_H.*;
+
+import common.city.city;
+import common.map.Point;
+import common.map.civ_map;
+import common.map.tile;
 
 public class Map{
-
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <string.h>		/* strlen */
-//
 //#include "city.h"
 //#include "fcintl.h"
 //#include "log.h"
@@ -32,9 +19,9 @@ public class Map{
 //#include "unit.h"
 //
 //#include "map.h"
-//
-///* the very map */
-//struct civ_map map;
+
+/* the very map */
+	public static civ_map map;
 //
 ///* these are initialized from the terrain ruleset */
 //struct terrain_misc terrain_control;
@@ -54,8 +41,8 @@ public class Map{
 // *   -------
 // * Note that you must normalize x1 and y1 yourself.
 // */
-//const int DIR_DX[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
-//const int DIR_DY[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+//final int DIR_DX[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+//final int DIR_DY[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
 //
 ///* Names of specials.
 // * (These must correspond to enum tile_special_type in terrain.h.)
@@ -80,7 +67,7 @@ public class Map{
 ///****************************************************************************
 //  Return a bitfield of the specials on the tile that are infrastructure.
 //****************************************************************************/
-//enum tile_special_type get_tile_infrastructure_set(const tile ptile)
+//enum tile_special_type get_tile_infrastructure_set(final tile ptile)
 //{
 //  return (ptile.special
 //	  & (S_ROAD | S_RAILROAD | S_IRRIGATION | S_FARMLAND | S_MINE
@@ -93,7 +80,7 @@ public class Map{
 //  eg: "Hills (Coals)"
 //  eg: "Hills (Coals) [Pollution]"
 //***************************************************************/
-//final String map_get_tile_info_text(const tile ptile)
+//final String map_get_tile_info_text(final tile ptile)
 //{
 //  static char s[64];
 //  boolean first;
@@ -360,7 +347,7 @@ public class Map{
 //  Step from the given tile in the given direction.  The new tile is returned,
 //  or null if the direction is invalid or leads off the map.
 //****************************************************************************/
-//tile mapstep(const tile ptile, enum direction8 dir)
+//tile mapstep(final tile ptile, enum direction8 dir)
 //{
 //  int x, y;
 //
@@ -374,67 +361,68 @@ public class Map{
 //
 //  return map_pos_to_tile(x, y);
 //}
-//
-///****************************************************************************
-//  Return the tile for the given native position, with wrapping.
-//
-//  This is a backend function used by map_pos_to_tile and native_pos_to_tile.
-//  It is called extremely often so it is made inline.
-//****************************************************************************/
-//static inline tile base_native_pos_to_tile(int nat_x, int nat_y)
-//{
-//  /* If the position is out of range in a non-wrapping direction, it is
-//   * unreal. */
-//  if (!((topo_has_flag(TF_WRAPX) || (nat_x >= 0 && nat_x < map.xsize))
-//	&& (topo_has_flag(TF_WRAPY) || (nat_y >= 0 && nat_y < map.ysize)))) {
-//    return null;
-//  }
-//
-//  /* Wrap in X and Y directions, as needed. */
-//  if (topo_has_flag(TF_WRAPX)) {
-//    nat_x = FC_WRAP(nat_x, map.xsize);
-//  }
-//  if (topo_has_flag(TF_WRAPY)) {
-//    nat_y = FC_WRAP(nat_y, map.ysize);
-//  }
-//
-//  return map.tiles + native_pos_to_index(nat_x, nat_y);
-//}
-//
-///****************************************************************************
-//  Return the tile for the given cartesian (map) position.
-//****************************************************************************/
-//tile map_pos_to_tile(int map_x, int map_y)
-//{
-//  int nat_x, nat_y;
-//
-//  if (!map.tiles) {
-//    return null;
-//  }
-//
-//  /* Normalization is best done in native coordinates. */
-//  MAP_TO_NATIVE_POS(&nat_x, &nat_y, map_x, map_y);
-//  return base_native_pos_to_tile(nat_x, nat_y);
-//}
-//
-///****************************************************************************
-//  Return the tile for the given native position.
-//****************************************************************************/
-//tile native_pos_to_tile(int nat_x, int nat_y)
-//{
-//  if (!map.tiles) {
-//    return null;
-//  }
-//
-//  return base_native_pos_to_tile(nat_x, nat_y);
-//}
-//
-///****************************************************************************
+
+	/***************************************************************************
+	 * Return the tile for the given native position, with wrapping.
+	 * 
+	 * This is a backend function used by map_pos_to_tile and
+	 * native_pos_to_tile. It is called extremely often so it is made inline.
+	 **************************************************************************/
+	static tile base_native_pos_to_tile(int nat_x, int nat_y)
+	{
+		/*
+		 * If the position is out of range in a non-wrapping direction, it is
+		 * unreal.
+		 */
+		if (!((topo_has_flag(TF_WRAPX) || (nat_x >= 0 && nat_x < map.xsize))
+				&& (topo_has_flag(TF_WRAPY) || (nat_y >= 0 && nat_y < map.ysize)))) {
+			return null;
+		}
+
+		/* Wrap in X and Y directions, as needed. */
+		if (topo_has_flag(TF_WRAPX)) {
+			nat_x = FC_WRAP(nat_x, map.xsize);
+		}
+		if (topo_has_flag(TF_WRAPY)) {
+			nat_y = FC_WRAP(nat_y, map.ysize);
+		}
+
+		return map.tiles[ native_pos_to_index(nat_x, nat_y) ];
+	}
+
+	/***************************************************************************
+	 * Return the tile for the given cartesian (map) position.
+	 **************************************************************************/
+	static tile map_pos_to_tile(int map_x, int map_y)
+	{
+		int nat_x=0, nat_y=0;
+
+		if (null==map.tiles) {
+			return null;
+		}
+
+		/* Normalization is best done in native coordinates. */
+		Point p = MAP_TO_NATIVE_POS(nat_x, nat_y, map_x, map_y);
+		return base_native_pos_to_tile(p.x, p.y);
+	}
+
+	/***************************************************************************
+	 * Return the tile for the given native position.
+	 **************************************************************************/
+	tile native_pos_to_tile(int nat_x, int nat_y) {
+		if (null==map.tiles) {
+			return null;
+		}
+
+		return base_native_pos_to_tile(nat_x, nat_y);
+	}
+
+// /****************************************************************************
 //  Return the tile for the given index position.
 //****************************************************************************/
 //tile index_to_tile(int index)
 //{
-//  if (!map.tiles) {
+//  if (null==map.tiles) {
 //    return null;
 //  }
 //
@@ -450,7 +438,7 @@ public class Map{
 ///**************************************************************************
 //  Return the player who owns this tile (or null if none).
 //**************************************************************************/
-//player map_get_owner(const tile ptile)
+//player map_get_owner(final tile ptile)
 //{
 //  return ptile.owner;
 //}
@@ -496,7 +484,7 @@ public class Map{
 //    CHECK_MAP_POS(map_x, map_y);
 //    CHECK_NATIVE_POS(nat_x, nat_y);
 //
-//    /* HACK: these fields are declared const to keep anyone from changing
+//    /* HACK: these fields are declared final to keep anyone from changing
 //     * them.  But we have to set them somewhere!  This should be the only
 //     * place. */
 //    *(int *)&ptile.index = index;
@@ -632,7 +620,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int real_map_distance(const tile tile0, const tile tile1)
+//int real_map_distance(final tile tile0, final tile tile1)
 //{
 //  int dx, dy;
 //
@@ -643,7 +631,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int sq_map_distance(const tile tile0, const tile tile1)
+//int sq_map_distance(final tile tile0, final tile tile1)
 //{
 //  /* We assume map_distance_vector gives us the vector with the
 //     minimum squared distance. Right now this is true. */
@@ -656,7 +644,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_distance(const tile tile0, const tile tile1)
+//int map_distance(final tile tile0, final tile tile1)
 //{
 //  /* We assume map_distance_vector gives us the vector with the
 //     minimum map distance. Right now this is true. */
@@ -671,7 +659,7 @@ public class Map{
 //  intentionally made awkward to prevent people from using it in place of
 //  is_ocean_near_tile
 //*************************************************************************/
-//boolean is_cardinally_adj_to_ocean(const tile ptile)
+//boolean is_cardinally_adj_to_ocean(final tile ptile)
 //{
 //  cardinal_adjc_iterate(ptile, tile1) {
 //    if (is_ocean(map_get_terrain(tile1))) {
@@ -685,7 +673,7 @@ public class Map{
 ///****************************************************************************
 //  Return true if this ocean terrain is adjacent to a safe coastline.
 //****************************************************************************/
-//boolean is_safe_ocean(const tile ptile)
+//boolean is_safe_ocean(final tile ptile)
 //{
 //  adjc_iterate(ptile, tile1) {
 //    Terrain_type_id ter = map_get_terrain(tile1);
@@ -701,7 +689,7 @@ public class Map{
 //Returns whether you can put a city on land near enough to use
 //the tile.
 //***************************************************************/
-//boolean is_sea_usable(const tile ptile)
+//boolean is_sea_usable(final tile ptile)
 //{
 //  map_city_radius_iterate(ptile, tile1) {
 //    if (!is_ocean(map_get_terrain(tile1))) {
@@ -715,7 +703,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int get_tile_food_base(const tile ptile)
+//int get_tile_food_base(final tile ptile)
 //{
 //  if (tile_has_special(ptile, S_SPECIAL_1)) 
 //    return get_tile_type(ptile.terrain).food_special_1;
@@ -728,7 +716,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int get_tile_shield_base(const tile ptile)
+//int get_tile_shield_base(final tile ptile)
 //{
 //  if (tile_has_special(ptile, S_SPECIAL_1))
 //    return get_tile_type(ptile.terrain).shield_special_1;
@@ -741,7 +729,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int get_tile_trade_base(const tile ptile)
+//int get_tile_trade_base(final tile ptile)
 //{
 //  if (tile_has_special(ptile, S_SPECIAL_1))
 //    return get_tile_type(ptile.terrain).trade_special_1;
@@ -833,7 +821,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//boolean is_water_adjacent_to_tile(const tile ptile)
+//boolean is_water_adjacent_to_tile(final tile ptile)
 //{
 //  if (is_ocean(ptile.terrain)
 //      || tile_has_special(ptile, S_RIVER)
@@ -853,7 +841,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_build_road_time(const tile ptile)
+//int map_build_road_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).road_time * ACTIVITY_FACTOR;
 //}
@@ -861,7 +849,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_build_irrigation_time(const tile ptile)
+//int map_build_irrigation_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).irrigation_time * ACTIVITY_FACTOR;
 //}
@@ -869,7 +857,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_build_mine_time(const tile ptile)
+//int map_build_mine_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).mining_time * ACTIVITY_FACTOR;
 //}
@@ -877,7 +865,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_transform_time(const tile ptile)
+//int map_transform_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).transform_time * ACTIVITY_FACTOR;
 //}
@@ -885,7 +873,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_build_rail_time(const tile ptile)
+//int map_build_rail_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).rail_time * ACTIVITY_FACTOR;
 //}
@@ -893,7 +881,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_build_airbase_time(const tile ptile)
+//int map_build_airbase_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).airbase_time * ACTIVITY_FACTOR;
 //}
@@ -901,7 +889,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_build_fortress_time(const tile ptile)
+//int map_build_fortress_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).fortress_time * ACTIVITY_FACTOR;
 //}
@@ -909,7 +897,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_clean_pollution_time(const tile ptile)
+//int map_clean_pollution_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).clean_pollution_time * ACTIVITY_FACTOR;
 //}
@@ -917,7 +905,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//int map_clean_fallout_time(const tile ptile)
+//int map_clean_fallout_time(final tile ptile)
 //{
 //  return get_tile_type(ptile.terrain).clean_fallout_time * ACTIVITY_FACTOR;
 //}
@@ -925,7 +913,7 @@ public class Map{
 ///***************************************************************
 //  Time to complete given activity on given tile.
 //***************************************************************/
-//int map_activity_time(enum unit_activity activity, const tile ptile)
+//int map_activity_time(enum unit_activity activity, final tile ptile)
 //{
 //  switch (activity) {
 //  case ACTIVITY_POLLUTION:
@@ -1073,7 +1061,7 @@ public class Map{
 //"reclaimed" from ocean into land.  This is the case only when there are
 //a sufficient number of adjacent tiles that are not ocean.
 //**************************************************************************/
-//boolean can_reclaim_ocean(const tile ptile)
+//boolean can_reclaim_ocean(final tile ptile)
 //{
 //  int land_tiles = 100 - count_ocean_near_tile(ptile, false, true);
 //
@@ -1085,7 +1073,7 @@ public class Map{
 //"channeled" from land into ocean.  This is the case only when there are
 //a sufficient number of adjacent tiles that are ocean.
 //**************************************************************************/
-//boolean can_channel_land(const tile ptile)
+//boolean can_channel_land(final tile ptile)
 //{
 //  int ocean_tiles = count_ocean_near_tile(ptile, false, true);
 //
@@ -1102,7 +1090,7 @@ public class Map{
 //  tests are not done (for unit-independent results).
 //***************************************************************/
 //static int tile_move_cost_ptrs(unit punit,
-//			       const tile t1, const tile t2)
+//			       final tile t1, final tile t2)
 //{
 //  boolean cardinal_move;
 //
@@ -1254,7 +1242,7 @@ public class Map{
 //  The cost to move punit from where it is to tile x,y.
 //  It is assumed the move is a valid one, e.g. the tiles are adjacent.
 //***************************************************************/
-//int map_move_cost(unit punit, const tile ptile)
+//int map_move_cost(unit punit, final tile ptile)
 //{
 //  return tile_move_cost_ptrs(punit, punit.tile, ptile);
 //}
@@ -1262,7 +1250,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//boolean is_tiles_adjacent(const tile tile0, const tile tile1)
+//boolean is_tiles_adjacent(final tile tile0, final tile tile1)
 //{
 //  return real_map_distance(tile0, tile1) == 1;
 //}
@@ -1270,7 +1258,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//Continent_id map_get_continent(const tile ptile)
+//Continent_id map_get_continent(final tile ptile)
 //{
 //  return ptile.continent;
 //}
@@ -1286,7 +1274,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//Terrain_type_id map_get_terrain(const tile ptile)
+//Terrain_type_id map_get_terrain(final tile ptile)
 //{
 //  return ptile.terrain;
 //}
@@ -1302,7 +1290,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//enum tile_special_type map_get_special(const tile ptile)
+//enum tile_special_type map_get_special(final tile ptile)
 //{
 //  return ptile.special;
 //}
@@ -1311,7 +1299,7 @@ public class Map{
 // Returns true iff the given special is found at the given map
 // position.
 //***************************************************************/
-//boolean map_has_special(const tile ptile, enum tile_special_type special)
+//boolean map_has_special(final tile ptile, enum tile_special_type special)
 //{
 //  return contains_special(ptile.special, special);
 //}
@@ -1319,7 +1307,7 @@ public class Map{
 ///***************************************************************
 // Returns true iff the given tile has the given special.
 //***************************************************************/
-//boolean tile_has_special(const tile ptile,
+//boolean tile_has_special(final tile ptile,
 //		      enum tile_special_type special)
 //{
 //  return contains_special(ptile.special, special);
@@ -1367,47 +1355,46 @@ public class Map{
 //    reset_move_costs(ptile);
 //  }
 //}
-//
-///***************************************************************
-//  Remove any specials which may exist at these map co-ordinates.
-//***************************************************************/
-//void map_clear_all_specials(tile ptile)
-//{
-//  ptile.special = S_NO_SPECIAL;
-//}
-//
-///***************************************************************
-//...
-//***************************************************************/
-//city map_get_city(const tile ptile)
-//{
-//  return ptile.city;
-//}
-//
-///***************************************************************
-//...
-//***************************************************************/
-//void map_set_city(tile ptile, city pcity)
-//{
-//  ptile.city = pcity;
-//}
-//
-///***************************************************************
-//  Are (x1,y1) and (x2,y2) really the same when adjusted?
-//  This function might be necessary ALOT of places...
-//***************************************************************/
-//boolean same_pos(const tile tile1, const tile tile2)
-//{
-//  assert(tile1 != null && tile2 != null);
-//  return (tile1 == tile2);
-//}
-//
-//boolean is_real_map_pos(int x, int y)
-//{
-//  return normalize_map_pos(&x, &y);
-//}
-//
-///**************************************************************************
+
+	/***************************************************************************
+	 * Remove any specials which may exist at these map co-ordinates.
+	 **************************************************************************/
+//	void map_clear_all_specials(tile ptile)
+//	{
+//		ptile.special = S_NO_SPECIAL;
+//	}
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static city map_get_city(final tile ptile)
+	{
+		return ptile.city;
+	}
+
+	/*******************************************************************************
+	 * ...
+	 ******************************************************************************/
+	public static void map_set_city(tile ptile, city pcity)
+	{
+		ptile.city = pcity;
+	}
+
+	/*******************************************************************************
+	 * Are (x1,y1) and (x2,y2) really the same when adjusted? This function might be
+	 * necessary ALOT of places...
+	 ******************************************************************************/
+	public static boolean same_pos(final tile tile1, final tile tile2)
+	{
+		assert(tile1 != null && tile2 != null);
+		return (tile1 == tile2);
+	}
+
+	boolean is_real_map_pos(int x, int y)
+	{
+		return normalize_map_pos(x, y);
+	}
+	// /**************************************************************************
 //Returns true iff the map position is normal. "Normal" here means that
 //it is both a real/valid coordinate set and that the coordinates are in
 //their canonical/proper form. In plain English: the coordinates must be
@@ -1420,28 +1407,28 @@ public class Map{
 //  MAP_TO_NATIVE_POS(&nat_x, &nat_y, x, y);
 //  return nat_x >= 0 && nat_x < map.xsize && nat_y >= 0 && nat_y < map.ysize;
 //}
-//
-///**************************************************************************
-//  If the position is real, it will be normalized and true will be returned.
-//  If the position is unreal, it will be left unchanged and false will be
-//  returned.
-//
-//  Note, we need to leave x and y with sane values even in the unreal case.
-//  Some callers may for instance call nearest_real_pos on these values.
-//**************************************************************************/
-//boolean normalize_map_pos(int *x, int *y)
-//{
-//  tile ptile = map_pos_to_tile(*x, *y);
-//
-//  if (ptile) {
-//    *x = ptile.x;
-//    *y = ptile.y;
-//    return true;
-//  } else {
-//    return false;
-//  }
-//}
-//
+
+	/***************************************************************************
+	 * If the position is real, it will be normalized and true will be returned.
+	 * If the position is unreal, it will be left unchanged and false will be
+	 * returned.
+	 * 
+	 * Note, we need to leave x and y with sane values even in the unreal case.
+	 * Some callers may for instance call nearest_real_pos on these values.
+	 **************************************************************************/
+	public static boolean normalize_map_pos(Integer x, Integer y)	{
+		//TODO: use point to replace (x,y)
+		tile ptile = map_pos_to_tile(x, y);
+
+		if (ptile!=null) {
+			x = ptile.x;
+			y = ptile.y;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 ///**************************************************************************
 //Twiddle *x and *y to point the the nearest real tile, and ensure that the
 //position is normalized.
@@ -1525,8 +1512,8 @@ public class Map{
 //    -map.ysize   <  dy <  map.ysize
 //****************************************************************************/
 //void map_distance_vector(int *dx, int *dy,
-//			 const tile tile0,
-//			 const tile tile1)
+//			 final tile tile0,
+//			 final tile tile1)
 //{
 //  base_map_distance_vector(dx, dy,
 //			   tile0.x, tile0.y, tile1.x, tile1.y);
@@ -1535,7 +1522,7 @@ public class Map{
 ///**************************************************************************
 //Random neighbouring square.
 //**************************************************************************/
-//tile rand_neighbour(const tile ptile)
+//tile rand_neighbour(final tile ptile)
 //{
 //  int n;
 //  tile tile1;
@@ -1586,12 +1573,12 @@ public class Map{
 //  effects.
 //**************************************************************************/
 //tile rand_map_pos_filtered(void *data,
-//				   boolean (*filter)(const tile ptile,
-//						  const void *data))
+//				   boolean (*filter)(final tile ptile,
+//						  final void *data))
 //{
 //  tile ptile;
 //  int tries = 0;
-//  const int max_tries = map.xsize * map.ysize / ACTIVITY_FACTOR;
+//  final int max_tries = map.xsize * map.ysize / ACTIVITY_FACTOR;
 //
 //  /* First do a few quick checks to find a spot.  The limit on number of
 //   * tries could use some tweaking. */
@@ -1762,8 +1749,8 @@ public class Map{
 //end_y) can be reached from (start_x, start_y) in one step. Return
 //false otherwise (value of dir is unchanged in this case).
 //**************************************************************************/
-//boolean base_get_direction_for_step(const tile start_tile,
-//				 const tile end_tile,
+//boolean base_get_direction_for_step(final tile start_tile,
+//				 final tile end_tile,
 //				 enum direction8 *dir)
 //{
 //  adjc_dir_iterate(start_tile, test_tile, test_dir) {
@@ -1780,8 +1767,8 @@ public class Map{
 //Return the direction which is needed for a step on the map from
 //(start_x, start_y) to (end_x, end_y).
 //**************************************************************************/
-//int get_direction_for_step(const tile start_tile,
-//			   const tile end_tile)
+//int get_direction_for_step(final tile start_tile,
+//			   final tile end_tile)
 //{
 //  enum direction8 dir;
 //
@@ -1797,8 +1784,8 @@ public class Map{
 //  Returns true iff the move from the position (start_x,start_y) to
 //  (end_x,end_y) is a cardinal one.
 //**************************************************************************/
-//boolean is_move_cardinal(const tile start_tile,
-//		      const tile end_tile)
+//boolean is_move_cardinal(final tile start_tile,
+//		      final tile end_tile)
 //{
 //  return is_cardinal_dir(get_direction_for_step(start_tile, end_tile));
 //}
@@ -1811,7 +1798,7 @@ public class Map{
 //
 //  dist is the "real" map distance.
 //****************************************************************************/
-//boolean is_singular_tile(const tile ptile, int dist)
+//boolean is_singular_tile(final tile ptile, int dist)
 //{
 //  do_in_natural_pos(ntl_x, ntl_y, ptile.x, ptile.y) {
 //    /* Iso-natural coordinates are doubled in scale. */

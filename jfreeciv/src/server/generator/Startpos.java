@@ -96,9 +96,9 @@ public class Startpos{
 //    'nr' is the number of other start positions in
 //    map.start_positions to check for too closeness.
 //**************************************************************************/
-//static boolean is_valid_start_pos(const tile ptile, const void *dataptr)
+//static boolean is_valid_start_pos(final tile ptile, final void *dataptr)
 //{
-//  const start_filter_data pdata = dataptr;
+//  final start_filter_data pdata = dataptr;
 //  int i;
 //  islands_data_type island;
 //  int cont_size, cont = map_get_continent(ptile);
@@ -145,9 +145,9 @@ public class Startpos{
 ///*************************************************************************
 // help function for qsort
 // *************************************************************************/
-//static int compare_islands(const void *A_, const void *B_)
+//static int compare_islands(final void *A_, final void *B_)
 //{
-//  const islands_data_type A = A_, *B = B_;
+//  final islands_data_type A = A_, *B = B_;
 //
 //  return B.goodies - A.goodies;
 //}
@@ -176,7 +176,7 @@ public class Startpos{
 ///****************************************************************************
 //  A function that filters for TER_STARTER tiles.
 //****************************************************************************/
-//static boolean filter_starters(const tile ptile, const void *data)
+//static boolean filter_starters(final tile ptile, final void *data)
 //{
 //  return terrain_has_flag(map_get_terrain(ptile), TER_STARTER);
 //}

@@ -38,8 +38,8 @@ public class Pf_tools{
 //  Should be used in conjunction with a TB callback which 
 //  prohibits going through an enemy city/tile.
 //*************************************************************/
-//static int seamove(const tile ptile, enum direction8 dir,
-//                   const tile ptile1, pf_parameter param)
+//static int seamove(final tile ptile, enum direction8 dir,
+//                   final tile ptile1, pf_parameter param)
 //{
 //  /* MOVE_COST_FOR_VALID_SEA_STEP means ships can move between */
 //  if (ptile.move_cost[dir] == MOVE_COST_FOR_VALID_SEA_STEP
@@ -54,8 +54,8 @@ public class Pf_tools{
 ///*************************************************************
 //  SINGLE_MOVE cost function for AIR_MOVING
 //*************************************************************/
-//static int single_airmove(const tile ptile, enum direction8 dir,
-//			  const tile ptile1,
+//static int single_airmove(final tile ptile, enum direction8 dir,
+//			  final tile ptile1,
 //			  pf_parameter param)
 //{
 //  return SINGLE_MOVE; /* simple, eh? */
@@ -65,8 +65,8 @@ public class Pf_tools{
 //  A cost function for SEA_MOVING.  Does not allow shore 
 //  bombardment.
 //*************************************************************/
-//static int seamove_no_bombard(const tile ptile, enum direction8 dir,
-//			      const tile ptile1,
+//static int seamove_no_bombard(final tile ptile, enum direction8 dir,
+//			      final tile ptile1,
 //			      pf_parameter param)
 //{
 //  /* MOVE_COST_FOR_VALID_SEA_STEP means ships can move between */
@@ -85,8 +85,8 @@ public class Pf_tools{
 //  anywhere, unless we are leaving a friendly city, in which
 //  case we can move into the ocean but not into the land.
 //************************************************************/
-//static int sea_overlap_move(const tile ptile, enum direction8 dir,
-//			    const tile ptile1,
+//static int sea_overlap_move(final tile ptile, enum direction8 dir,
+//			    final tile ptile1,
 //			    pf_parameter param)
 //{
 //  if (is_ocean(ptile.terrain)) {
@@ -103,8 +103,8 @@ public class Pf_tools{
 //  Sea attack is the same as overlap (consider bombardment) but we don't
 //  want to pass through enemy tiles.
 //**********************************************************************/
-//static int sea_attack_move(const tile src_tile, enum direction8 dir,
-//			   const tile dest_tile,
+//static int sea_attack_move(final tile src_tile, enum direction8 dir,
+//			   final tile dest_tile,
 //			   pf_parameter param)
 //{
 //  if (is_ocean(src_tile.terrain)) {
@@ -123,8 +123,8 @@ public class Pf_tools{
 ///************************************************************ 
 //  LAND_MOVE cost function for a unit 
 //************************************************************/
-//static int normal_move_unit(const tile ptile, enum direction8 dir,
-//			    const tile ptile1,
+//static int normal_move_unit(final tile ptile, enum direction8 dir,
+//			    final tile ptile1,
 //			    pf_parameter param)
 //{
 //  Terrain_type_id terrain1 = ptile1.terrain;
@@ -155,8 +155,8 @@ public class Pf_tools{
 //  LAND_MOVE cost function for a unit, but taking into account
 //  possibilities of attacking.
 //*******************************************************************/
-//static int land_attack_move(const tile src_tile, enum direction8 dir,
-//			    const tile tgt_tile,
+//static int land_attack_move(final tile src_tile, enum direction8 dir,
+//			    final tile tgt_tile,
 //			    pf_parameter param)
 //{
 //  int move_cost;
@@ -218,8 +218,8 @@ public class Pf_tools{
 //  }
 //  which will achieve the same without call-back.
 //************************************************************/
-//static int land_overlap_move(const tile ptile, enum direction8 dir,
-//			     const tile ptile1,
+//static int land_overlap_move(final tile ptile, enum direction8 dir,
+//			     final tile ptile1,
 //			     pf_parameter param)
 //{
 //  Terrain_type_id terrain1 = ptile1.terrain;
@@ -241,8 +241,8 @@ public class Pf_tools{
 //  Will be used. DO NOT REMOVE.
 //************************************************************/
 //#ifdef UNUSED
-//static int reverse_move_unit(const tile tile0, enum direction8 dir,
-//			     const tile ptile,
+//static int reverse_move_unit(final tile tile0, enum direction8 dir,
+//			     final tile ptile,
 //			     pf_parameter param)
 //{
 //  int terrain0 = map_get_terrain(tile0);
@@ -271,8 +271,8 @@ public class Pf_tools{
 ///************************************************************ 
 //  IGTER_MOVE cost function for a unit 
 //************************************************************/
-//static int igter_move_unit(const tile ptile, enum direction8 dir,
-//			   const tile ptile1,
+//static int igter_move_unit(final tile ptile, enum direction8 dir,
+//			   final tile ptile1,
 //			   pf_parameter param)
 //{
 //  int move_cost;
@@ -302,9 +302,9 @@ public class Pf_tools{
 //  Will be used. DO NOT REMOVE.
 //************************************************************/
 //#ifdef UNUSED
-//static int reverse_igter_move_unit(const tile tile0,
+//static int reverse_igter_move_unit(final tile tile0,
 //				   enum direction8 dir,
-//				   const tile ptile,
+//				   final tile ptile,
 //				   pf_parameter param)
 //{
 //  int move_cost;
@@ -334,7 +334,7 @@ public class Pf_tools{
 //  An example of EC callback.  DO NOT REMOVE you pricks!
 //*********************************************************************/
 //#ifdef UNUSED
-//static int afraid_of_dark_forest(const tile ptile,
+//static int afraid_of_dark_forest(final tile ptile,
 //				 enum known_type known,
 //				 pf_parameter param)
 //{
@@ -354,7 +354,7 @@ public class Pf_tools{
 //  A callback for maps overlapping one square into the ocean.  Insures 
 //  that we don't continue walking over ocean.
 //*********************************************************************/
-//static enum tile_behavior dont_cross_ocean(const tile ptile,
+//static enum tile_behavior dont_cross_ocean(final tile ptile,
 //					   enum known_type known,
 //					   pf_parameter param)
 //{
@@ -368,7 +368,7 @@ public class Pf_tools{
 //  PF callback to prohibit going into the unknown.  Also makes sure we 
 //  don't plan to attack anyone.
 //***********************************************************************/
-//enum tile_behavior no_fights_or_unknown(const tile ptile,
+//enum tile_behavior no_fights_or_unknown(final tile ptile,
 //                                        enum known_type known,
 //                                        pf_parameter param)
 //{
@@ -384,7 +384,7 @@ public class Pf_tools{
 
 //  PF callback to prohibit attacking anyone.
 //***********************************************************************/
-//enum tile_behavior no_fights(const tile ptile, enum known_type known,
+//enum tile_behavior no_fights(final tile ptile, enum known_type known,
 //			     pf_parameter param)
 //{
 //  if (is_non_allied_unit_tile(ptile, param.owner)
@@ -402,7 +402,7 @@ public class Pf_tools{
 //  An example of position-dangerous callback.  For triremes.
 //  FIXME: it cheats.
 //***********************************************************************/
-//static boolean trireme_is_pos_dangerous(const tile ptile,
+//static boolean trireme_is_pos_dangerous(final tile ptile,
 //				     enum known_type known,
 //				     pf_parameter param)
 //{
@@ -422,7 +422,7 @@ public class Pf_tools{
 ///**********************************************************************
 //  Position-dangerous callback for all units other than triremes.
 //***********************************************************************/
-//static boolean is_pos_dangerous(const tile ptile, enum known_type known,
+//static boolean is_pos_dangerous(final tile ptile, enum known_type known,
 //			     pf_parameter param)
 //{
 //  /* Unsafe tiles without cities are dangerous. */
@@ -584,7 +584,7 @@ public class Pf_tools{
 //  If dest_path == null, we just copy the src_path and nothing else.
 //***********************************************************************/
 //pf_path pft_concat(pf_path dest_path,
-//			   const pf_path src_path)
+//			   final pf_path src_path)
 //{
 //  if (!dest_path) {
 //    dest_path = fc_malloc(sizeof(*dest_path));

@@ -66,7 +66,7 @@ public class Spaceshipdlg{
 //    TYPED_LIST_ITERATE(struct SMALL_DLG, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //    
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 //
 ///****************************************************************
@@ -79,11 +79,11 @@ public class Spaceshipdlg{
 //    dialog_list_has_been_initialised = true;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pDialog) {
+//  for (dialog pDialog : dialog_list.data) {
 //    if (pDialog.pEndWidgetList.data.player == pplayer) {
 //      return pDialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}

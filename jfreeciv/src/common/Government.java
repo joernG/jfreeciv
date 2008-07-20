@@ -91,7 +91,7 @@ public class Government{
 ///****************************************************************************
 //  Returns true iff the given government has the given flag.
 //****************************************************************************/
-//boolean government_has_flag(const government gov,
+//boolean government_has_flag(final government gov,
 //			 enum government_flag_id flag)
 //{
 //  assert(flag>=G_FIRST_FLAG && flag<G_LAST_FLAG);
@@ -151,7 +151,7 @@ public class Government{
 ///****************************************************************************
 //  Return the government of the player who owns the city.
 //****************************************************************************/
-//government get_gov_pcity(const city pcity)
+//government get_gov_pcity(final city pcity)
 //{
 //  assert(pcity != null);
 //  return get_gov_pplayer(city_owner(pcity));

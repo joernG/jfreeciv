@@ -45,7 +45,7 @@ public class Be_sdl{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void be_init(const ct_size screen_size, boolean fullscreen)
+//void be_init(final ct_size screen_size, boolean fullscreen)
 //{
 //  Uint32 flags = SDL_HWSURFACE | (fullscreen ? SDL_FULLSCREEN : 0);
 //
@@ -64,7 +64,7 @@ public class Be_sdl{
 //  freelog(LOG_NORMAL, "Using Video Output: %s",
 //	  SDL_VideoDriverName(device, sizeof(device)));
 //  {
-//    const SDL_VideoInfo *info = SDL_GetVideoInfo();
+//    final SDL_VideoInfo *info = SDL_GetVideoInfo();
 //    freelog(LOG_NORMAL, "Video memory of driver: %dkb", info.video_mem);
 //    freelog(LOG_NORMAL, "Preferred depth: %d bits per pixel",
 //	    info.vfmt.BitsPerPixel);
@@ -282,7 +282,7 @@ public class Be_sdl{
 //  ...
 //*************************************************************************/
 //static void fill_surface_from_image_565(SDL_Surface * surface,
-//					const image image)
+//					final image image)
 //{
 //  int x, y;
 //  unsigned short *pdest = (unsigned short *) surface.pixels;
@@ -309,7 +309,7 @@ public class Be_sdl{
 //  ...
 //*************************************************************************/
 //static void fill_surface_from_image_555(SDL_Surface * surface,
-//					const image image)
+//					final image image)
 //{
 //  int x, y;
 //  unsigned short *pdest = (unsigned short *) surface.pixels;
@@ -332,7 +332,7 @@ public class Be_sdl{
 //  ...
 //*************************************************************************/
 //static void fill_surface_from_image_8888(SDL_Surface * surface,
-//					const image image)
+//					final image image)
 //{
 //  int x, y;
 //  unsigned char *pdest = (unsigned char *) surface.pixels;

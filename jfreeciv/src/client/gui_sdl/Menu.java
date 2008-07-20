@@ -1196,7 +1196,7 @@ public class Menu{
 //	local_hide(ID_UNIT_ORDER_AUTO_EXPLORE);
 //      }
 //
-//      if (can_unit_do_connect(pUnit, ACTIVITY_IDLE)) {
+//      if (can_unit_do_connect(pUnit, unit_activity.ACTIVITY_IDLE)) {
 //	local_show(ID_UNIT_ORDER_CONNECT);
 //      } else {
 //	local_hide(ID_UNIT_ORDER_CONNECT);

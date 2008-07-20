@@ -43,10 +43,10 @@ public class Attribute{
 ///****************************************************************************
 // Hash function for attribute_hash.
 //*****************************************************************************/
-//static unsigned int attr_hash_val_fn(const void *key,
+//static unsigned int attr_hash_val_fn(final void *key,
 //				     unsigned int num_buckets)
 //{
-//  const attr_key pkey = (const attr_key ) key;
+//  final attr_key pkey = (final attr_key ) key;
 //
 //  return (pkey.id ^ pkey.x ^ pkey.y ^ pkey.key) % num_buckets;
 //}
@@ -54,7 +54,7 @@ public class Attribute{
 ///****************************************************************************
 // Compare-function for the keys in the hash table.
 //*****************************************************************************/
-//static int attr_hash_cmp_fn(const void *key1, const void *key2)
+//static int attr_hash_cmp_fn(final void *key1, final void *key2)
 //{
 //  return memcmp(key1, key2, sizeof(struct attr_key));
 //}
@@ -78,7 +78,7 @@ public class Attribute{
 //  assert(attribute_hash != null);
 //
 //  for (i = 0; i < entries; i++) {
-//    const void *pkey = hash_key_by_number(attribute_hash, 0);
+//    final void *pkey = hash_key_by_number(attribute_hash, 0);
 //    void *pvalue = hash_delete_entry(attribute_hash, pkey);
 //
 //    free((void *) pkey);
@@ -123,7 +123,7 @@ public class Attribute{
 //   * Step 1: loop through all keys and fill value_lengths
 //   */
 //  for (i = 0; i < entries; i++) {
-//    const void *pvalue = hash_value_by_number(hash, i);
+//    final void *pvalue = hash_value_by_number(hash, i);
 //    struct data_in din;
 //    int tmp_len;
 //
@@ -163,8 +163,8 @@ public class Attribute{
 //   * Step 5: fill out the body
 //   */
 //  for (i = 0; i < entries; i++) {
-//    const attr_key pkey = hash_key_by_number(hash, i);
-//    const void *pvalue = hash_value_by_number(hash, i);
+//    final attr_key pkey = hash_key_by_number(hash, i);
+//    final void *pvalue = hash_value_by_number(hash, i);
 //
 //    dio_put_uint32(&dout, value_lengths[i]);
 //
@@ -296,7 +296,7 @@ public class Attribute{
 // attribute is removed.
 //*****************************************************************************/
 //void attribute_set(int key, int id, int x, int y, size_t data_length,
-//		   const void *const data)
+//		   final void *final data)
 //{
 //  attr_key pkey;
 //  void *pvalue = null;
@@ -387,7 +387,7 @@ public class Attribute{
 //...
 //*****************************************************************************/
 //void attr_unit_set(enum attr_unit what, int unit_id, size_t data_length,
-//		   const void *const data)
+//		   final void *final data)
 //{
 //  attribute_set(what, unit_id, -1, -2, data_length, data);
 //}
@@ -421,7 +421,7 @@ public class Attribute{
 //...
 //*****************************************************************************/
 //void attr_city_set(enum attr_city what, int city_id, size_t data_length,
-//		   const void *const data)
+//		   final void *final data)
 //{
 //  attribute_set(what, city_id, -1, -1, data_length, data);
 //}
@@ -455,7 +455,7 @@ public class Attribute{
 //...
 //*****************************************************************************/
 //void attr_player_set(enum attr_player what, int player_id, size_t data_length,
-//		     const void *const data)
+//		     final void *final data)
 //{
 //  attribute_set(what, player_id, -1, -1, data_length, data);
 //}
@@ -473,7 +473,7 @@ public class Attribute{
 //...
 //*****************************************************************************/
 //void attr_tile_set(enum attr_tile what, int x, int y, size_t data_length,
-//		   const void *const data)
+//		   final void *final data)
 //{
 //  attribute_set(what, -1, x, y, data_length, data);
 //}

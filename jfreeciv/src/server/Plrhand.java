@@ -1,26 +1,15 @@
 package server;
 
-public class Plrhand{
+import static common.Game.*;
 
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <stdarg.h>
-//
+import utility.Speclists;
+import common.Connection;
+import common.event_type;
+import common.map.tile;
+
+import common.player.player;
+
+public class Plrhand{
 //#include "diptreaty.h"
 //#include "events.h"
 //#include "fcintl.h"
@@ -104,25 +93,25 @@ public class Plrhand{
 //  Send end-of-turn notifications relevant to specified dests.
 //  If dest is null, do all players, sending to pplayer.connections.
 //**************************************************************************/
-//void send_player_turn_notifications(conn_list dest)
+//void send_player_turn_notifications(Speclists<Connection> dest)
 //{
 //  if (dest) {
 //    conn_list_iterate(*dest, pconn) {
 //      player pplayer = pconn.player;
 //      if (pplayer) {
-//	city_list_iterate(pplayer.cities, pcity) {
+//	for (city pcity : pplayer.cities.data) {
 //	  send_city_turn_notifications(&pconn.self, pcity);
 //	}
-//	city_list_iterate_end;
+//	}
 //      }
 //    }
-//    conn_list_iterate_end;
+//    }
 //  }
 //  else {
 //    players_iterate(pplayer) {
-//      city_list_iterate(pplayer.cities, pcity) {
+//      for (city pcity : pplayer.cities.data) {
 //	send_city_turn_notifications(&pplayer.connections, pcity);
-//      } city_list_iterate_end;
+//      } }
 //    } players_iterate_end;
 //  }
 //
@@ -233,7 +222,7 @@ public class Plrhand{
 //     rightful owners, if they are still around */
 //  palace = game.savepalace;
 //  game.savepalace = false; /* moving it around is dumb */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    if ((pcity.original != pplayer.player_no)
 //        && (get_player(pcity.original).is_alive)) {
 //      /* Transfer city to original owner, kill all its units outside of
@@ -241,17 +230,17 @@ public class Plrhand{
 //         and raze buildings according to raze chance (also removes palace) */
 //      transfer_city(get_player(pcity.original), pcity, 3, true, true, true);
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  /* Remove all units that are still ours */
-//  unit_list_iterate_safe(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    wipe_unit(punit);
-//  } unit_list_iterate_safe_end;
+//  }
 //
 //  /* Destroy any remaining cities */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    remove_city(pcity);
-//  } city_list_iterate_end;
+//  } }
 //  game.savepalace = palace;
 //
 //  /* Ensure this dead player doesn't win with a spaceship.
@@ -359,7 +348,7 @@ public class Plrhand{
 //
 //  /* enhance vision of units inside a fortress */
 //  if (tech_flag(tech_found, TF_WATCHTOWER)) {
-//    unit_list_iterate(plr.units, punit) {
+//    for (unit punit : plr.units.data) {
 //      if (map_has_special(punit.tile, S_FORTRESS)
 //	  && is_ground_unit(punit)) {
 //	unfog_area(plr, punit.tile, get_watchtower_vision(punit));
@@ -367,7 +356,7 @@ public class Plrhand{
 //		 unit_type(punit).vision_range);
 //      }
 //    }
-//    unit_list_iterate_end;
+//    }
 //  }
 //
 //  if (tech_found == plr.ai.tech_goal) {
@@ -462,10 +451,10 @@ public class Plrhand{
 //      || tech_found == game.rtech.cathedral_minus
 //      || tech_found == game.rtech.colosseum_plus
 //      || tech_found == game.rtech.temple_plus) {
-//    city_list_iterate(plr.cities, pcity) {
+//    for (city pcity : plr.cities.data) {
 //      city_refresh(pcity);
 //      send_city_info(plr, pcity);
-//    } city_list_iterate_end;
+//    } }
 //  }
 //
 //  /*
@@ -1250,9 +1239,9 @@ public class Plrhand{
 //  /* check what the new status will be, and what will happen to our
 //     reputation */
 //  switch(old_type) {
-//  case DS_NO_CONTACT: /* possible if someone declares war on our ally */
+//  case diplstate_type.DS_NO_CONTACT: /* possible if someone declares war on our ally */
 //  case DS_NEUTRAL:
-//    new_type = DS_WAR;
+//    new_type = diplstate_type.DS_WAR;
 //    break;
 //  case DS_CEASEFIRE:
 //    new_type = DS_NEUTRAL;
@@ -1289,7 +1278,7 @@ public class Plrhand{
 //
 //  /* We want to go all the way to war, whatever the cost! 
 //   * This is only used by the AI. */
-//  if (clause == CLAUSE_LAST && new_type != DS_WAR) {
+//  if (clause == CLAUSE_LAST && new_type != diplstate_type.DS_WAR) {
 //    repeat = true;
 //    old_type = new_type;
 //    goto repeat_break_treaty;
@@ -1301,7 +1290,7 @@ public class Plrhand{
 //    if (has_senate && !repeat) {
 //      notify_player_ex(pplayer, null, E_TREATY_BROKEN,
 //                       _("The senate passes your bill because of the "
-//                         "constant provocations of the %s."),
+//                         "finalant provocations of the %s."),
 //                       get_nation_name_plural(pplayer2.nation));
 //    }
 //  }
@@ -1364,7 +1353,7 @@ public class Plrhand{
 //  /* Check fall-out of a war declaration. */
 //  players_iterate(other) {
 //    if (other.is_alive && other != pplayer && other != pplayer2
-//        && new_type == DS_WAR && pplayers_allied(pplayer2, other)
+//        && new_type == diplstate_type.DS_WAR && pplayers_allied(pplayer2, other)
 //        && pplayers_allied(pplayer, other)) {
 //      if (!players_on_same_team(pplayer, other)) {
 //        /* If an ally declares war on another ally, break off your alliance
@@ -1392,21 +1381,21 @@ public class Plrhand{
 //    }
 //  } players_iterate_end;
 //}
-//
-///**************************************************************************
-//  This is the basis for following notify_conn* and notify_player* functions.
-//  Notify specified connections of an event of specified type (from events.h)
-//  and specified (x,y) coords associated with the event.  Coords will only
-//  apply if game has started and the conn's player knows that tile (or
-//  pconn.player==null && pconn.observer).  If coords are not required,
-//  caller should specify (x,y) = (-1,-1); otherwise make sure that the
-//  coordinates have been normalized.  For generic event use E_NOEVENT.
-//  (But current clients do not use (x,y) data for E_NOEVENT events.)
-//**************************************************************************/
-//void vnotify_conn_ex(conn_list dest, tile ptile,
-//		     enum event_type event, final String format,
-//		     va_list vargs)
-//{
+
+	/**************************************************************************
+  This is the basis for following notify_conn* and notify_player* functions.
+  Notify specified connections of an event of specified type (from events.h)
+  and specified (x,y) coords associated with the event.  Coords will only
+  apply if game has started and the conn's player knows that tile (or
+  pconn.player==null && pconn.observer).  If coords are not required,
+  caller should specify (x,y) = (-1,-1); otherwise make sure that the
+  coordinates have been normalized.  For generic event use event_type.E_NOEVENT.
+  (But current clients do not use (x,y) data for event_type.E_NOEVENT events.)
+	 **************************************************************************/
+	public static void vnotify_conn_ex(Speclists<Connection> dest, tile ptile,
+			event_type event, final String format,
+			Object... vargs)
+	{
 //  struct packet_chat_msg genmsg;
 //  
 //  my_vsnprintf(genmsg.message, sizeof(genmsg.message), format, vargs);
@@ -1427,25 +1416,26 @@ public class Plrhand{
 //    }
 //    send_packet_chat_msg(pconn, &genmsg);
 //  }
-//  conn_list_iterate_end;
-//}
-//
-///**************************************************************************
-//  See vnotify_conn_ex - this is just the "non-v" version, with varargs.
-//**************************************************************************/
-//void notify_conn_ex(conn_list dest, tile ptile,
-//		    enum event_type event, final String format)
-//{
-//  va_list args;
-//  va_start(args, format);
-//  vnotify_conn_ex(dest, ptile, event, format, args);
-//  va_end(args);
-//}
-//
+//  }
+}
+
+	/***************************************************************************
+	 * See vnotify_conn_ex - this is just the "non-v" version, with varargs.
+	 **************************************************************************/
+	public static void notify_conn_ex(Speclists<Connection> dest, tile ptile,
+			event_type event, final String format)
+	{
+//		va_list args;
+//		va_start(args, format);
+//		vnotify_conn_ex(dest, ptile, event, format, args);
+		vnotify_conn_ex(dest, ptile, event, format, format);
+//		va_end(args);
+	}
+
 ///**************************************************************************
 //  See vnotify_conn_ex - this is varargs, and cannot specify (x,y), event.
 //**************************************************************************/
-//void notify_conn(conn_list dest, final String format) 
+//void notify_conn(Speclists<Connection> dest, final String format) 
 //{
 //  va_list args;
 //
@@ -1453,50 +1443,50 @@ public class Plrhand{
 //    dest = &game.est_connections;
 //  }
 //  va_start(args, format);
-//  vnotify_conn_ex(dest, null, E_NOEVENT, format, args);
+//  vnotify_conn_ex(dest, null, event_type.E_NOEVENT, format, args);
 //  va_end(args);
 //}
-//
-///**************************************************************************
-//  Similar to vnotify_conn_ex (see also), but takes player as "destination".
-//  If player != null, sends to all connections for that player.
-//  If player == null, sends to all game connections, to support
-//  old code, but this feature may go away - should use notify_conn with
-//  explicitly game.est_connections or game.game_connections as dest.
-//**************************************************************************/
-//void notify_player_ex(const player pplayer, tile ptile,
-//		      enum event_type event, final String format) 
-//{
-//  conn_list dest;
-//  va_list args;
-//
-//  if (pplayer) {
-//    dest = (struct conn_list*)&pplayer.connections;
-//  } else {
-//    dest = &game.game_connections;
-//  }
-//  
-//  va_start(args, format);
-//  vnotify_conn_ex(dest, ptile, event, format, args);
-//  va_end(args);
-//}
-//
+
+	/***************************************************************************
+	 * Similar to vnotify_conn_ex (see also), but takes player as "destination".
+	 * If player != null, sends to all connections for that player. If player ==
+	 * null, sends to all game connections, to support old code, but this
+	 * feature may go away - should use notify_conn with explicitly
+	 * game.est_connections or game.game_connections as dest.
+	 **************************************************************************/
+	public static void notify_player_ex(final player pplayer, tile ptile,
+			event_type event, final String format, Object ... msg) 
+	{
+		Speclists<Connection> dest;
+//		va_list args;
+
+		if (pplayer!=null) {
+			dest = pplayer.connections;
+		} else {
+			dest = game.game_connections;
+		}
+
+//		va_start(args, format);
+		vnotify_conn_ex(dest, ptile, event, format, msg);
+//		va_end(args);
+	}
+
 ///**************************************************************************
 //  Just like notify_player_ex, but no (x,y) nor event type.
 //**************************************************************************/
-//void notify_player(const player pplayer, final String format) 
+//void notify_player(final player pplayer, final String format) 
 //{
-//  conn_list dest;
+//  Speclists<Connection> dest;
 //  va_list args;
 //
 //  if (pplayer) {
-//    dest = (struct conn_list*)&pplayer.connections;
+//    dest = (Speclists<conn>*)&pplayer.connections;
 //  } else {
 //    dest = &game.game_connections;
 //  }
 //  
 //  va_start(args, format);
-//  vnotify_conn_ex(dest, null, E_NOEVENT, format, args);
+//  vnotify_conn_ex(dest, null, event_type.E_NOEVENT, format, args);
 //  va_end(args);
 //}
 //
@@ -1516,7 +1506,7 @@ public class Plrhand{
 //
 //  genmsg.x = -1;
 //  genmsg.y = -1;
-//  genmsg.event = E_NOEVENT;
+//  genmsg.event = event_type.E_NOEVENT;
 //  genmsg.conn_id = -1;
 //
 //  players_iterate(other_player) {
@@ -1535,7 +1525,7 @@ public class Plrhand{
 //  Note: package_player_info contains incomplete info if it has null as a
 //        dest arg and and info is < INFO_EMBASSY.
 //**************************************************************************/
-//void send_player_info_c(player src, conn_list dest)
+//void send_player_info_c(player src, Speclists<Connection> dest)
 //{
 //  players_iterate(pplayer) {
 //    if(!src || pplayer==src) {
@@ -1555,7 +1545,7 @@ public class Plrhand{
 //	}
 //
 //        send_packet_player_info(pconn, &info);
-//      } conn_list_iterate_end;
+//      } }
 //    }
 //  } players_iterate_end;
 //}
@@ -1763,7 +1753,7 @@ public class Plrhand{
 //  Convenience function to return "reply" destination connection list
 //  for player: pplayer.current_conn if set, else pplayer.connections.
 //**************************************************************************/
-//conn_list player_reply_dest(player pplayer)
+//Speclists<Connection> player_reply_dest(player pplayer)
 //{
 //  return (pplayer.current_conn ?
 //	  &pplayer.current_conn.self :
@@ -1805,11 +1795,11 @@ public class Plrhand{
 //  dlsend_packet_player_remove(&game.game_connections, pplayer.player_no);
 //
 //  /* Note it is ok to remove the _current_ item in a list_iterate. */
-//  conn_list_iterate(pplayer.connections, pconn) {
+//  for (conn pconn : pplayer.connections.data) {
 //    if (!unattach_connection_from_player(pconn)) {
 //      die("player had a connection attached that didn't belong to it!");
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //
 //  game_remove_player(pplayer);
 //  game_renumber_players(pplayer.player_no);
@@ -1832,11 +1822,11 @@ public class Plrhand{
 //  pplayer1.diplstates[player2].contact_turns_left = game.contactturns;
 //  pplayer2.diplstates[player1].contact_turns_left = game.contactturns;
 //
-//  if (pplayer_get_diplstate(pplayer1, pplayer2).type == DS_NO_CONTACT) {
+//  if (pplayer_get_diplstate(pplayer1, pplayer2).type == diplstate_type.DS_NO_CONTACT) {
 //    /* Set default new diplomatic state depending on game.diplomacy
 //     * server setting. Default is zero, which gives DS_NEUTRAL. */
 //    enum diplstate_type dipstate = diplomacy_possible(pplayer1,pplayer2)
-//                                    ? DS_NEUTRAL : DS_WAR;
+//                                    ? DS_NEUTRAL : diplstate_type.DS_WAR;
 //
 //    pplayer1.diplstates[player2].type
 //      = pplayer2.diplstates[player1].type
@@ -1858,7 +1848,7 @@ public class Plrhand{
 //    check_city_workers(pplayer2);
 //    return;
 //  } else {
-//    assert(pplayer_get_diplstate(pplayer2, pplayer1).type != DS_NO_CONTACT);
+//    assert(pplayer_get_diplstate(pplayer2, pplayer1).type != diplstate_type.DS_NO_CONTACT);
 //  }
 //  if (player_has_embassy(pplayer1, pplayer2)
 //      || player_has_embassy(pplayer2, pplayer1)) {
@@ -1878,9 +1868,9 @@ public class Plrhand{
 //    if (pcity) {
 //      make_contact(pplayer, city_owner(pcity), ptile);
 //    }
-//    unit_list_iterate(tile1.units, punit) {
+//    for (unit punit : tile1.units.data) {
 //      make_contact(pplayer, unit_owner(punit), ptile);
-//    } unit_list_iterate_end;
+//    } }
 //  } square_iterate_end;
 //}
 //
@@ -2060,11 +2050,11 @@ public class Plrhand{
 //  players_iterate(other_player) {
 //    /* Barbarians are at war with everybody */
 //    if (is_barbarian(other_player)) {
-//      cplayer.diplstates[other_player.player_no].type = DS_WAR;
-//      other_player.diplstates[cplayer.player_no].type = DS_WAR;
+//      cplayer.diplstates[other_player.player_no].type = diplstate_type.DS_WAR;
+//      other_player.diplstates[cplayer.player_no].type = diplstate_type.DS_WAR;
 //    } else {
-//      cplayer.diplstates[other_player.player_no].type = DS_NO_CONTACT;
-//      other_player.diplstates[cplayer.player_no].type = DS_NO_CONTACT;
+//      cplayer.diplstates[other_player.player_no].type = diplstate_type.DS_NO_CONTACT;
+//      other_player.diplstates[cplayer.player_no].type = diplstate_type.DS_NO_CONTACT;
 //    }
 //
 //    cplayer.diplstates[other_player.player_no].has_reason_to_cancel = 0;
@@ -2197,7 +2187,7 @@ public class Plrhand{
 //    if (city_celebrating(pcity)) {
 //      prob -= 5;
 //    }
-//  city_list_iterate_end;
+//  }
 //
 //  freelog(LOG_VERBOSE, "Civil war chance for %s: prob %d, dice %d",
 //	  pplayer.name, prob, dice);
@@ -2268,7 +2258,7 @@ public class Plrhand{
 //
 //  i = city_list_size(&pplayer.cities)/2;   /* number to flip */
 //  j = city_list_size(&pplayer.cities);	    /* number left to process */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    if (!is_capital(pcity)) {
 //      if (i >= j || (i > 0 && myrand(2) == 1)) {
 //	/* Transfer city and units supported by this city to the new owner
@@ -2289,7 +2279,7 @@ public class Plrhand{
 //    }
 //    j--;
 //  }
-//  city_list_iterate_end;
+//  }
 //
 //  i = 0;
 //

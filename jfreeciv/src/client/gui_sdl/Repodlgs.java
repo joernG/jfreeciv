@@ -93,7 +93,7 @@ public class Repodlgs{
 //  for(time_to_build = 0; time_to_build < U_LAST; time_to_build++) {
 //    entries[time_to_build].soonest_completions = FC_INFINITY;
 //  }
-//  unit_list_iterate(game.player_ptr.units, pUnit) {
+//  for (unit pUnit : game.player_ptr.units.data) {
 //    (entries[pUnit.type].active_count)++;
 //    (total.active_count)++;
 //    if (pUnit.homecity) {
@@ -104,9 +104,9 @@ public class Repodlgs{
 //      entries[pUnit.type].upkeep_gold += pUnit.upkeep_gold;
 //      total.upkeep_gold += pUnit.upkeep_gold;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //    
-//  city_list_iterate(game.player_ptr.cities, pCity) {
+//  for (city pCity : game.player_ptr.cities.data) {
 //    if (pCity.is_building_unit &&
 //      (unit_type_exists(pCity.currently_building))) {
 //        (entries[pCity.currently_building].building_count)++;
@@ -116,7 +116,7 @@ public class Repodlgs{
 //			city_turns_to_build(pCity,
 //				pCity.currently_building, true, true));
 //    }
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 //
@@ -348,7 +348,7 @@ public class Repodlgs{
 //  pStr.style |= SF_CENTER;
 //  pText1 = create_text_surf_from_str16(pStr);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "under\nconstruction");
+//  my_snprintf(cBuf, sizeof(cBuf), "under\nfinalruction");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText2 = create_text_surf_from_str16(pStr);
 //    
@@ -1399,14 +1399,14 @@ public class Repodlgs{
 //  enable_economy_dlg();
 //  
 //  /* send sell */
-//  city_list_iterate(game.player_ptr.cities, pCity) {
+//  for (city pCity : game.player_ptr.cities.data) {
 //    if(!pCity.did_sell && city_got_building(pCity, imp)){
 //	count++;
 //
 //	city_sell_improvement(pCity, imp);
 //      
 //    }
-//  } city_list_iterate_end;
+//  } }
 //  
 //  if(count == total_count) {
 //    del_widget_from_vertical_scroll_widget_list(pEconomyDlg, pImpr);
@@ -1462,12 +1462,12 @@ public class Repodlgs{
 //  total_count = pWidget.data.cont.id1;
 //  value = impr_sell_gold(imp);
 //  
-//  city_list_iterate(game.player_ptr.cities, pCity) {
+//  for (city pCity : game.player_ptr.cities.data) {
 //    if(!pCity.did_sell && city_got_building(pCity, imp)) {
 //	count++;
 //        gold += value;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //  
 //  if(count > 0) {
 //    my_snprintf(cBuf, sizeof(cBuf),
@@ -2517,9 +2517,9 @@ public class Repodlgs{
 //    redraw_group(pScienceDlg.pBeginWidgetList, pWindow.prev, 0);
 //    /* ------------------------------------- */
 //
-//    city_list_iterate(game.player_ptr.cities, pCity) {
+//    for (city pCity : game.player_ptr.cities.data) {
 //      curent_output += pCity.science_total;
-//    } city_list_iterate_end;
+//    } }
 //
 //    if (curent_output <= 0) {
 //      my_snprintf(cBuf, sizeof(cBuf),

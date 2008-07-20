@@ -367,7 +367,7 @@ public class Graphics{
 //      struct RastPort rp;
 //      struct BitMap bmap;
 //      Sprite sprite = sprites.black_tile;
-//      const static UWORD patt[] = {0xaaaa,0x5555};
+//      final static UWORD patt[] = {0xaaaa,0x5555};
 //      LONG bpr = GetBitMapAttr(sprite.parent.bitmap, BMA_WIDTH) / 8;
 //      PLANEPTR mask = (PLANEPTR)(((UWORD*)sprite.parent.mask)+(sprite.offx/16+(sprite.offy)*bpr/2));
 //
@@ -449,7 +449,7 @@ public class Graphics{
 ///****************************************************************
 // A safer BltBitMapRastPort (ignores negativ coordinates)
 //*****************************************************************/
-//VOID MyBltBitMapRastPort( CONST BitMap srcBitMap, LONG xSrc, LONG ySrc, RastPort destRP, LONG xDest, LONG yDest, LONG xSize, LONG ySize, ULONG minterm )
+//VOID MyBltBitMapRastPort( final BitMap srcBitMap, LONG xSrc, LONG ySrc, RastPort destRP, LONG xDest, LONG yDest, LONG xSize, LONG ySize, ULONG minterm )
 //{
 //  if (xSrc < 0)
 //  {
@@ -500,7 +500,7 @@ public class Graphics{
 //};
 //
 ///* Similar to BltMaskBitMapRastPort but for BitMaps only */
-//static VOID MyBltMaskBitMap(CONST BitMap srcBitMap, LONG xSrc, LONG ySrc, BitMap destBitMap,
+//static VOID MyBltMaskBitMap(final BitMap srcBitMap, LONG xSrc, LONG ySrc, BitMap destBitMap,
 //                            LONG xDest, LONG yDest, LONG xSize, LONG ySize, BitMap maskBitMap )
 //{
 //  BltBitMap((BitMap )srcBitMap,xSrc,ySrc,destBitMap, xDest, yDest, xSize, ySize, 0x99,~0,null);
@@ -509,7 +509,7 @@ public class Graphics{
 //}
 //
 ///* Similar to BltMaskBitMapRastPort but for BitMaps only and Mask can have differnt dimensions/offsets than Source BitMap */
-//static VOID MyExtBltMaskBitMap(CONST BitMap srcBitMap, LONG xSrc, LONG ySrc, BitMap destBitMap,
+//static VOID MyExtBltMaskBitMap(final BitMap srcBitMap, LONG xSrc, LONG ySrc, BitMap destBitMap,
 //                               LONG xDest, LONG yDest, LONG xSize, LONG ySize, 
 //                               BitMap maskBitMap, LONG xMask, LONG yMask)
 //{

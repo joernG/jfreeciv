@@ -60,7 +60,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_rect_valid(const ct_rect rect)
+//boolean ct_rect_valid(final ct_rect rect)
 //{
 //  return rect.x >= 0 && rect.y >= 0 && rect.width >= 0 && rect.height >= 0;
 //}
@@ -68,7 +68,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_point_valid(const ct_point point)
+//boolean ct_point_valid(final ct_point point)
 //{
 //  return point.x >= 0 && point.y >= 0;
 //}
@@ -76,22 +76,22 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_rect_in_rect_list(const ct_rect item,
-//			  const region_list region_list)
+//boolean ct_rect_in_rect_list(final ct_rect item,
+//			  final region_list region_list)
 //{
 //  region_list_iterate(*region_list, container) {
 //    if (ct_rect_in_rect(item, container)) {
 //      return true;
 //    }
-//  } region_list_iterate_end;
+//  } }
 //  return false;
 //}
 //
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_rect_in_rect(const ct_rect item,
-//		     const ct_rect container)
+//boolean ct_rect_in_rect(final ct_rect item,
+//		     final ct_rect container)
 //		    
 //{
 //    assert(ct_rect_valid(container) && ct_rect_valid(item));
@@ -104,8 +104,8 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_point_in_rect(const ct_point item,
-//		      const ct_rect container)
+//boolean ct_point_in_rect(final ct_point item,
+//		      final ct_rect container)
 //{
 //    assert(ct_rect_valid(container) && ct_point_valid(item));
 //
@@ -205,7 +205,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_string ct_string_clone(const ct_string orig)
+//ct_string ct_string_clone(final ct_string orig)
 //{
 //  return ct_string_create(orig.font, orig.font_size, orig.foreground,
 //			  orig.background, orig.text, orig.anti_alias,
@@ -216,7 +216,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_string ct_string_clone1(const ct_string orig,
+//ct_string ct_string_clone1(final ct_string orig,
 //				   int new_size)
 //{
 //  return ct_string_create(orig.font, new_size, orig.foreground,
@@ -228,7 +228,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_string ct_string_clone2(const ct_string orig,
+//ct_string ct_string_clone2(final ct_string orig,
 //				   int new_size, final String new_text)
 //{
 //  return ct_string_create(orig.font, new_size, orig.foreground,
@@ -240,7 +240,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_string ct_string_clone3(const ct_string orig,
+//ct_string ct_string_clone3(final ct_string orig,
 //				   final String new_text)
 //{
 //  return ct_string_create(orig.font, orig.font_size, orig.foreground,
@@ -252,7 +252,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_string ct_string_clone4(const ct_string orig,
+//ct_string ct_string_clone4(final ct_string orig,
 //				   final String new_text, be_color new_color)
 //{
 //  return ct_string_create(orig.font, orig.font_size, new_color,
@@ -264,7 +264,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_string ct_string_wrap(const ct_string orig, int max_width)
+//ct_string ct_string_wrap(final ct_string orig, int max_width)
 //{
 //  ct_string result;
 //  int columns;
@@ -286,7 +286,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//final String ct_rect_to_string(const ct_rect rect)
+//final String ct_rect_to_string(final ct_rect rect)
 //{
 //  static char buffer[100];
 //
@@ -298,7 +298,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_rect_equal(const ct_rect rect1, const ct_rect rect2)
+//boolean ct_rect_equal(final ct_rect rect1, final ct_rect rect2)
 //{
 //  return ct_rect_in_rect(rect1, rect2) && ct_rect_in_rect(rect2, rect1);
 //}
@@ -306,7 +306,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void ct_rect_intersect(ct_rect dest, const ct_rect src)
+//void ct_rect_intersect(ct_rect dest, final ct_rect src)
 //{
 //  int last_x = MIN(dest.x + dest.width, src.x + src.width);
 //  int last_y = MIN(dest.y + dest.height, src.y + src.height);
@@ -323,7 +323,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void ct_clip_point(ct_point to_draw, const ct_rect available)
+//void ct_clip_point(ct_point to_draw, final ct_rect available)
 //{
 //  to_draw.x =
 //      CLIP(available.x, to_draw.x, available.x + available.width-1);
@@ -335,7 +335,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void ct_clip_rect(ct_rect to_draw, const ct_rect available)
+//void ct_clip_rect(ct_rect to_draw, final ct_rect available)
 //{
 //  struct ct_point p1 = { to_draw.x, to_draw.y };
 //  struct ct_point p2 =
@@ -351,7 +351,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_rect ct_rect_clone(const ct_rect src)
+//ct_rect ct_rect_clone(final ct_rect src)
 //{
 //  ct_rect result = fc_malloc(sizeof(*result));
 //
@@ -362,7 +362,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_rect_empty(const ct_rect rect)
+//boolean ct_rect_empty(final ct_rect rect)
 //{
 //  return rect.width == 0 || rect.height == 0;
 //}
@@ -370,7 +370,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_size_empty(const ct_size size)
+//boolean ct_size_empty(final ct_size size)
 //{
 //  return size.width == 0 || size.height == 0;
 //}
@@ -379,8 +379,8 @@ public class Common_types{
 //  ...
 //*************************************************************************/
 //void ct_rect_fill_on_2_points(ct_rect rect,
-//			      const ct_point point1,
-//			      const ct_point point2)
+//			      final ct_point point1,
+//			      final ct_point point2)
 //{
 //  rect.x = MIN(point1.x, point2.x);
 //  rect.y = MIN(point1.y, point2.y);
@@ -391,7 +391,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_tooltip ct_tooltip_create(const ct_string text,
+//ct_tooltip ct_tooltip_create(final ct_string text,
 //				     int delay, int shadow,
 //				     be_color shadow_color)
 //{
@@ -417,7 +417,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_tooltip ct_tooltip_clone(const ct_tooltip orig)
+//ct_tooltip ct_tooltip_clone(final ct_tooltip orig)
 //{
 //  return ct_tooltip_create(orig.text, orig.delay, orig.shadow,
 //			   orig.shadow_color);
@@ -426,7 +426,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//ct_tooltip ct_tooltip_clone1(const ct_tooltip orig,
+//ct_tooltip ct_tooltip_clone1(final ct_tooltip orig,
 //				     final String new_text)
 //{
 //  ct_tooltip result;
@@ -441,7 +441,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void ct_get_placement(const ct_placement placement,
+//void ct_get_placement(final ct_placement placement,
 //		      ct_point dest, int i, int num)
 //{
 //  if (placement.type == PL_LINE) {
@@ -464,7 +464,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//final String ct_key_format(const be_key key)
+//final String ct_key_format(final be_key key)
 //{
 //  static char out[100];
 //  char buffer[100];
@@ -497,9 +497,9 @@ public class Common_types{
 //be_key ct_key_parse(final String string)
 //{
 //  be_key result = fc_malloc(sizeof(*result));
-//  const char alt[] = "Alt-";
-//  const char ctrl[] = "Ctrl-";
-//  const char shift[] = "Shift-";
+//  final char alt[] = "Alt-";
+//  final char ctrl[] = "Ctrl-";
+//  final char shift[] = "Shift-";
 //  final String orig=string;
 //  int i;
 //  boolean found = false;
@@ -546,8 +546,8 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_key_matches(const be_key template,
-//		    const be_key actual_key)
+//boolean ct_key_matches(final be_key template,
+//		    final be_key actual_key)
 //{
 //  if (template.alt && !actual_key.alt)
 //    return false;
@@ -565,7 +565,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//be_key ct_key_clone(const be_key key)
+//be_key ct_key_clone(final be_key key)
 //{
 //  be_key result = fc_malloc(sizeof(*result));
 //  *result = *key;
@@ -583,7 +583,7 @@ public class Common_types{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean ct_key_is_valid(const be_key key)
+//boolean ct_key_is_valid(final be_key key)
 //{
 //  if (key.shift && key.type == BE_KEY_NORMAL && key.key != ' ') {
 //    return false;

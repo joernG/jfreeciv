@@ -136,17 +136,17 @@ public class Sanitycheck{
 //      assert(same_pos(pcity.tile, ptile));
 //    }
 //
-//    unit_list_iterate(ptile.units, punit) {
+//    for (unit punit : ptile.units.data) {
 //      assert(same_pos(punit.tile, ptile));
 //
 //      /* Check diplomatic status of stacked units. */
-//      unit_list_iterate(ptile.units, punit2) {
+//      for (unit punit2 : ptile.units.data) {
 //	assert(pplayers_allied(unit_owner(punit), unit_owner(punit2)));
-//      } unit_list_iterate_end;
+//      } }
 //      if (pcity) {
 //	assert(pplayers_allied(unit_owner(punit), city_owner(pcity)));
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } whole_map_iterate_end;
 //}
 //
@@ -162,10 +162,10 @@ public class Sanitycheck{
 //  assert(!terrain_has_flag(map_get_terrain(pcity.tile),
 //			   TER_NO_CITIES));
 //
-//  unit_list_iterate(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    assert(punit.homecity == pcity.id);
 //    assert(unit_owner(punit) == pplayer);
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* Note that cities may be found on land or water. */
 //
@@ -257,11 +257,11 @@ public class Sanitycheck{
 //static void check_cities()
 //{
 //  players_iterate(pplayer) {
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      assert(city_owner(pcity) == pplayer);
 //
 //      sanity_check_city(pcity);
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  whole_map_iterate(ptile) {
@@ -289,7 +289,7 @@ public class Sanitycheck{
 //**************************************************************************/
 //static void check_units() {
 //  players_iterate(pplayer) {
-//    unit_list_iterate(pplayer.units, punit) {
+//    for (unit punit : pplayer.units.data) {
 //      tile ptile = punit.tile;
 //      city pcity;
 //      unit transporter = null, *transporter2 = null;
@@ -323,11 +323,11 @@ public class Sanitycheck{
 //        assert(transporter != null);
 //
 //	/* Make sure the transporter is on the tile. */
-//	unit_list_iterate(punit.tile.units, tile_unit) {
+//	for (unit tile_unit : punit.tile.units.data) {
 //	  if (tile_unit == transporter) {
 //	    transporter2 = tile_unit;
 //	  }
-//	} unit_list_iterate_end;
+//	} }
 //	assert(transporter2 != null);
 //
 //        /* Also in the list of owner? */
@@ -357,7 +357,7 @@ public class Sanitycheck{
 //      /* Check for over-full transports. */
 //      assert(get_transporter_occupancy(punit)
 //	     <= get_transporter_capacity(punit));
-//    } unit_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //}
 //
@@ -377,12 +377,12 @@ public class Sanitycheck{
 //      continue;
 //    }
 //
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      if (is_capital(pcity)) {
 //	found_palace++;
 //      }
 //      assert(found_palace <= 1);
-//    } city_list_iterate_end;
+//    } }
 //
 //    players_iterate(pplayer2) {
 //      assert(pplayer.diplstates[pplayer2.player_no].type

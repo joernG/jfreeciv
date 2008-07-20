@@ -39,7 +39,7 @@ public class Temperature_map{
 ///*********************************************************
 // return true if the tile has tt temperature type
 //**********************************************************/
-//boolean tmap_is(const tile ptile, temperature_type tt)
+//boolean tmap_is(final tile ptile, temperature_type tt)
 //{
 //  return BOOL_VAL(tmap(ptile) & (tt));
 //}
@@ -47,7 +47,7 @@ public class Temperature_map{
 ///*****************************************************************
 // return true if at last one tile has tt temperature type
 //****************************************************************/
-//boolean is_temperature_type_near(const tile ptile, temperature_type tt) 
+//boolean is_temperature_type_near(final tile ptile, temperature_type tt) 
 //{
 //  adjc_iterate(ptile, tile1) {
 //    if (BOOL_VAL(tmap(tile1) & (tt))) {

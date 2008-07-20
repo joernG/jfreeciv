@@ -155,7 +155,7 @@ public class Widget_slider{
 //  ...
 //*************************************************************************/
 //static void drag_start(sw_widget widget,
-//		       const ct_point mouse,
+//		       final ct_point mouse,
 //		       enum be_mouse_button button)
 //{
 //  widget.data.slider.pos_at_drag_start = widget.data.slider.offset;
@@ -169,8 +169,8 @@ public class Widget_slider{
 //  ...
 //*************************************************************************/
 //static void drag_move(sw_widget widget,
-//		      const ct_point start_position,
-//		      const ct_point current_position,
+//		      final ct_point start_position,
+//		      final ct_point current_position,
 //		      enum be_mouse_button button)
 //{
 //  int diff =

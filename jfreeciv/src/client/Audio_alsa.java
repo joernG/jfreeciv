@@ -169,7 +169,7 @@ public class Audio_alsa{
 //{
 //  snd_pcm_uframes_t left, frames, offset;
 //  snd_pcm_sframes_t commit;
-//  const snd_pcm_channel_area_t *area;
+//  final snd_pcm_channel_area_t *area;
 //
 //  left = period_size;
 //  if (left > left_fcount) {

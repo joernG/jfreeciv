@@ -98,7 +98,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void mouse_released(sw_widget widget,
-//			   const ct_point position,
+//			   final ct_point position,
 //			   boolean released_inside)
 //{
 //  if (widget.can_be_pressed && widget.pressed) {
@@ -125,7 +125,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void mouse_leaves(sw_widget widget,
-//			 const ct_point position)
+//			 final ct_point position)
 //{
 //  untooltip(widget);
 //
@@ -144,7 +144,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void mouse_enters(sw_widget widget,
-//			 const ct_point position)
+//			 final ct_point position)
 //{
 //  if (widget.can_be_selected) {
 //    widget.selected = true;
@@ -168,7 +168,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void mouse_pressed(sw_widget widget,
-//			  const ct_point position,
+//			  final ct_point position,
 //			  enum be_mouse_button button, int state)
 //{
 //  if (widget.click_start) {
@@ -203,7 +203,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void mouse_moved(sw_widget widget,
-//			const ct_point position)
+//			final ct_point position)
 //{
 //  if (widget && widget.dragged) {
 //    assert(widget == dragged_widget);
@@ -219,7 +219,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void handle_mouse_motion(sw_widget widget,
-//				const ct_point position)
+//				final ct_point position)
 //{
 //  selected_widget_gets_keyboard = false;
 //
@@ -259,7 +259,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void handle_mouse_press(sw_widget widget,
-//			       const ct_point position,
+//			       final ct_point position,
 //			       enum be_mouse_button button, int state)
 //{
 //  if (pressed_widget == widget) {
@@ -281,7 +281,7 @@ public class Widget{
 //  ...
 //*************************************************************************/
 //static void handle_mouse_release(sw_widget widget,
-//				 const ct_point position,
+//				 final ct_point position,
 //				 enum be_mouse_button button)
 //{
 //  if (pressed_widget == widget && pressed_button == button) {
@@ -304,7 +304,7 @@ public class Widget{
 //  }
 //
 //  freelog(LOG_NORMAL, "handle destroy");
-//  widget_list_iterate(deferred_destroyed_widgets, pwidget) {
+//  for (widget pwidget : deferred_destroyed_widgets.data) {
 //    if ((pwidget.tooltip && pwidget.tooltip_shown)
 //	|| dragged_widget == pwidget || selected_widget == pwidget
 //	|| pressed_widget == pwidget) {
@@ -321,7 +321,7 @@ public class Widget{
 //
 //    real_widget_destroy(pwidget);
 //    widget_list_unlink(&deferred_destroyed_widgets, pwidget);
-//  } widget_list_iterate_end;
+//  } }
 //}
 //
 ///*************************************************************************

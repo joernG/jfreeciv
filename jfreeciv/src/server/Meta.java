@@ -172,7 +172,7 @@ public class Meta{
 //}
 //
 ///*************************************************************************
-// construct the POST message and send info to metaserver.
+// finalruct the POST message and send info to metaserver.
 //*************************************************************************/
 //static boolean send_to_metaserver(enum meta_flag flag)
 //{

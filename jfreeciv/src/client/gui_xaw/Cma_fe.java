@@ -489,7 +489,7 @@ public class Cma_fe{
 //                          XtPointer call_data)
 //{
 //  XawListReturnStruct *ret;
-//  const cm_parameter param;
+//  final cm_parameter param;
 //  struct cm_parameter parameter;
 //  struct cm_result result;
 //  int i;

@@ -35,7 +35,7 @@ public class Climap{
 // uses the stock tilespec.c file, this function serves as a wrapper.
 //
 //*************************************************************************/
-//enum known_type tile_get_known(const tile ptile)
+//enum known_type tile_get_known(final tile ptile)
 //{
 //  return (enum known_type) ptile.known;
 //}

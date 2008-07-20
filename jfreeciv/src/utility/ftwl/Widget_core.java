@@ -31,7 +31,7 @@ public class Widget_core{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static enum widget_type sw_widget_get_type(const sw_widget widget)
+//static enum widget_type sw_widget_get_type(final sw_widget widget)
 //{
 //  return widget.type;
 //}
@@ -96,7 +96,7 @@ public class Widget_core{
 //  ...
 //*************************************************************************/
 //void sw_widget_set_tooltip(sw_widget widget,
-//			   const ct_tooltip tooltip)
+//			   final ct_tooltip tooltip)
 //{
 //  if (widget.tooltip) {
 //    untooltip(widget);
@@ -237,7 +237,7 @@ public class Widget_core{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void align(const ct_rect bb, ct_rect item,
+//void align(final ct_rect bb, ct_rect item,
 //	   enum ws_alignment alignment)
 //{
 //  assert(item.width <= bb.width && item.height <= bb.height);
@@ -321,7 +321,7 @@ public class Widget_core{
 //  ...
 //*************************************************************************/
 //void sw_widget_align_box(sw_widget widget,
-//			 enum ws_alignment alignment, const struct ct_rect
+//			 enum ws_alignment alignment, final struct ct_rect
 //			 *box)
 //{
 //  struct ct_rect rect, bb;

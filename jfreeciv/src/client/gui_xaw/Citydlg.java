@@ -143,7 +143,7 @@ public class Citydlg{
 //    TYPED_LIST_ITERATE(struct city_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 //
 //static city_dialog get_city_dialog(city pcity);
@@ -322,11 +322,11 @@ public class Citydlg{
 //    dialog_list_has_been_initialised = true;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pcity == pcity) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -1702,7 +1702,7 @@ public class Citydlg{
 //		  support_units_callback, INT_TO_XTPOINTER(punit.id));
 //    XtSetSensitive(pixcomm, true);
 //    i++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* Disable any empty slots */
 //  for(; i<pdialog.num_units_shown; i++) {
@@ -1764,7 +1764,7 @@ public class Citydlg{
 //		  present_units_callback, INT_TO_XTPOINTER(punit.id));
 //    XtSetSensitive(pixcomm, true);
 //    i++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  for(; i<pdialog.num_units_shown; i++) {
 //    XawPixcommClear(pdialog.present_unit_pixcomms[i]);
@@ -1836,12 +1836,12 @@ public class Citydlg{
 //  XButtonEvent *ev=&event.xbutton;
 //  city pcity = null;
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.map_canvas == w) {
 //      pcity = pdialog.pcity;
 //      break;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  if (pcity) {
 //    if (!cma_is_city_under_agent(pcity, null)) {
@@ -2214,7 +2214,7 @@ public class Citydlg{
 //      && is_unit == pdialog.pcity.is_building_unit;
 //
 //    /* Very special case: If we are currently building a wonder we
-//       allow the construction to continue, even if we the wonder is
+//       allow the finalruction to continue, even if we the wonder is
 //       finished elsewhere, ie unbuildable. */
 //    if (k == 0 && !is_unit && is_wonder(id) && same_as_current_build) {
 //      worklist_remove(pwl, k);
@@ -2327,13 +2327,13 @@ public class Citydlg{
 //  free(pdialog.support_unit_pixcomms);
 //  free(pdialog.present_unit_pixcomms);
 //
-//  unit_list_iterate(pdialog.pcity.info_units_supported, psunit) {
+//  for (unit psunit : pdialog.pcity.info_units_supported.data) {
 //    free(psunit);
-//  } unit_list_iterate_end;
+//  } }
 //  unit_list_unlink_all(&(pdialog.pcity.info_units_supported));
-//  unit_list_iterate(pdialog.pcity.info_units_present, psunit) {
+//  for (unit psunit : pdialog.pcity.info_units_present.data) {
 //    free(psunit);
-//  } unit_list_iterate_end;
+//  } }
 //  unit_list_unlink_all(&(pdialog.pcity.info_units_present));
 //
 //  if(pdialog.is_modal)
@@ -2355,12 +2355,12 @@ public class Citydlg{
 //*****************************************************************/
 //void citydlg_msg_close(Widget w)
 //{
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.shell == w) {
 //      close_city_dialog(pdialog);
 //      return;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //}
 //
 ///****************************************************************

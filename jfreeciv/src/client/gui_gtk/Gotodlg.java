@@ -207,7 +207,7 @@ public class Gotodlg{
 //      }
 //      gtk_clist_append( GTK_CLIST( goto_list ), row );
 //    }
-//    city_list_iterate_end;
+//    }
 //  }
 //  gtk_clist_thaw(GTK_CLIST(goto_list));
 //  gtk_widget_show_all(goto_list);

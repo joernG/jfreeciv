@@ -408,7 +408,7 @@ public class Repodlgs{
 //static Object *trade_wnd;
 //static Object *trade_title_text;
 //static Object *trade_imprv_listview;
-//static struct Hook trade_imprv_consthook;
+//static struct Hook trade_imprv_finalhook;
 //static struct Hook trade_imprv_desthook;
 //static struct Hook trade_imprv_disphook;
 //static Object *trade_total_text;
@@ -417,9 +417,9 @@ public class Repodlgs{
 //static Object *trade_sellall_button;
 //
 ///****************************************************************
-// Constructor of a new entry in the trade listview
+// finalructor of a new entry in the trade listview
 //*****************************************************************/
-//HOOKPROTONHNO(trade_imprv_construct, improvement_entry , improvement_entry entry)
+//HOOKPROTONHNO(trade_imprv_finalruct, improvement_entry , improvement_entry entry)
 //{
 //  improvement_entry newentry = (improvement_entry ) AllocVec(sizeof(*newentry), 0);
 //  if (newentry)
@@ -500,7 +500,7 @@ public class Repodlgs{
 //  if (trade_wnd)
 //    return;
 //
-//  trade_imprv_consthook.h_Entry = (HOOKFUNC) trade_imprv_construct;
+//  trade_imprv_finalhook.h_Entry = (HOOKFUNC) trade_imprv_finalruct;
 //  trade_imprv_desthook.h_Entry = (HOOKFUNC) trade_imprv_destruct;
 //  trade_imprv_disphook.h_Entry = (HOOKFUNC) trade_imprv_render;
 //
@@ -511,7 +511,7 @@ public class Repodlgs{
 //	Child, trade_title_text = TextObject, MUIA_Text_PreParse, "\33c", End,
 //	Child, trade_imprv_listview = NListviewObject,
 //	    MUIA_NListview_NList, NListObject,
-//		MUIA_NList_ConstructHook, &trade_imprv_consthook,
+//		MUIA_NList_finalructHook, &trade_imprv_finalhook,
 //		MUIA_NList_DestructHook, &trade_imprv_desthook,
 //		MUIA_NList_DisplayHook, &trade_imprv_disphook,
 //		MUIA_NList_Title, true,
@@ -581,7 +581,7 @@ public class Repodlgs{
 //static Object *actunit_wnd;
 //static Object *actunit_title_text;
 //static Object *actunit_units_listview;
-//static struct Hook actunit_units_consthook;
+//static struct Hook actunit_units_finalhook;
 //static struct Hook actunit_units_desthook;
 //static struct Hook actunit_units_disphook;
 //static Object *actunit_total_text;
@@ -614,9 +614,9 @@ public class Repodlgs{
 //};
 //
 ///****************************************************************
-// Constructor of a new entry in the units listview
+// finalructor of a new entry in the units listview
 //*****************************************************************/
-//HOOKPROTONHNO(actunit_units_construct, actunit_units_entry , actunit_units_entry entry)
+//HOOKPROTONHNO(actunit_units_finalruct, actunit_units_entry , actunit_units_entry entry)
 //{
 //  actunit_units_entry newentry = (actunit_units_entry ) AllocVec(sizeof(*newentry), 0);
 //  if (newentry)
@@ -741,7 +741,7 @@ public class Repodlgs{
 //  if (actunit_wnd)
 //    return;
 //
-//  actunit_units_consthook.h_Entry = (HOOKFUNC) actunit_units_construct;
+//  actunit_units_finalhook.h_Entry = (HOOKFUNC) actunit_units_finalruct;
 //  actunit_units_desthook.h_Entry = (HOOKFUNC) actunit_units_destruct;
 //  actunit_units_disphook.h_Entry = (HOOKFUNC) actunit_units_display;
 //
@@ -754,7 +754,7 @@ public class Repodlgs{
 //	    End,
 //	Child, actunit_units_listview = NListviewObject,
 //	    MUIA_NListview_NList, NListObject,
-//		MUIA_NList_ConstructHook, &actunit_units_consthook,
+//		MUIA_NList_finalructHook, &actunit_units_finalhook,
 //		MUIA_NList_DestructHook, &actunit_units_desthook,
 //		MUIA_NList_DisplayHook, &actunit_units_disphook,
 //		MUIA_NList_Title, true,
@@ -819,7 +819,7 @@ public class Repodlgs{
 //      unitarray[punit.type].upkeep_food += punit.upkeep_food;
 //    }
 //  }
-//  unit_list_iterate_end;
+//  }
 //
 //  city_list_iterate(game.player_ptr.cities, pcity)
 //  {
@@ -827,7 +827,7 @@ public class Repodlgs{
 //	(unit_type_exists(pcity.currently_building)))
 //      (unitarray[pcity.currently_building].building_count)++;
 //  }
-//  city_list_iterate_end;
+//  }
 //
 //
 //  set(actunit_units_listview, MUIA_NList_Quiet, true);

@@ -132,7 +132,7 @@ public class Dialogs{
 //          MUIA_Font, MUIV_Font_Fixed,
 //          MUIA_NList_Input, false,
 //          MUIA_NList_TypeSelect,MUIV_NList_TypeSelect_Char,
-//          MUIA_NList_ConstructHook, MUIV_NList_ConstructHook_String,
+//          MUIA_NList_finalructHook, MUIV_NList_finalructHook_String,
 //          MUIA_NList_DestructHook , MUIV_NList_DestructHook_String,
 //          MUIA_NList_AutoCopyToClip, true,
 //          End,
@@ -1145,7 +1145,7 @@ public class Dialogs{
 //
 //    if ((punit = find_unit_by_id(unit_to_use_to_connect)))
 //    {
-//      if (activity != ACTIVITY_IDLE)
+//      if (activity != unit_activity.ACTIVITY_IDLE)
 //      {
 //        struct packet_unit_connect req;
 //        req.activity_type = activity;
@@ -1172,7 +1172,7 @@ public class Dialogs{
 //    int count = 0;
 //    int activity;
 //
-//    for (activity = ACTIVITY_IDLE + 1; activity < ACTIVITY_LAST; activity++)
+//    for (activity = unit_activity.ACTIVITY_IDLE + 1; activity < ACTIVITY_LAST; activity++)
 //    {
 //      if (!can_unit_do_connect (punit, activity)) continue;
 //      count++;
@@ -1191,7 +1191,7 @@ public class Dialogs{
 //      {
 //	int i=0;
 //
-//	for (activity = ACTIVITY_IDLE + 1; activity < ACTIVITY_LAST; activity++)
+//	for (activity = unit_activity.ACTIVITY_IDLE + 1; activity < ACTIVITY_LAST; activity++)
 //	{
 //	  if ( !can_unit_do_connect (punit, activity)) continue;
 //          msg_dlg[i].label = mystrdup(get_activity_text(activity));
@@ -1418,7 +1418,7 @@ public class Dialogs{
 //            ButtonFrame,
 //            MUIA_InputMode, MUIV_InputMode_RelVerify,
 //            MUIA_Unit_Unit,punit,
-//            MUIA_Disabled, !can_unit_do_activity(punit, ACTIVITY_IDLE),
+//            MUIA_Disabled, !can_unit_do_activity(punit, unit_activity.ACTIVITY_IDLE),
 //            MUIA_CycleChain,1,
 //            End,
 //          Child, TextObject,

@@ -1,25 +1,16 @@
 package common;
 
-public class Player{
+import static common.player.player_ai.*;
+import static utility.shared.Shared_H.*;
 
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//
+import common.city.city;
+import common.map.tile;
+import common.player.diplstate_type;
+import common.player.player;
+import common.player.player_diplstate;
+import common.unit.unit;
+
+public class Player_P{
 //#include "city.h"
 //#include "fcintl.h"
 //#include "game.h"
@@ -52,7 +43,7 @@ public class Player{
 //    if (pplayer != p1
 //        && pplayer != p2
 //        && pplayers_allied(p2, pplayer)
-//        && ds == DS_WAR /* do not count 'never met' as war here */
+//        && ds == diplstate_type.DS_WAR /* do not count 'never met' as war here */
 //        && pplayer.is_alive) {
 //      return false;
 //    }
@@ -103,7 +94,7 @@ public class Player{
 //  plr.capital = false;
 //  unit_list_init(&plr.units);
 //  city_list_init(&plr.cities);
-//  conn_list_init(&plr.connections);
+//  Speclists<Connection>_init(&plr.connections);
 //  plr.current_conn = null;
 //  plr.is_connected = false;
 //  plr.is_observer = false;
@@ -113,7 +104,7 @@ public class Player{
 //  plr.embassy=0;
 //  plr.reputation=GAME_DEFAULT_REPUTATION;
 //  for(i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
-//    plr.diplstates[i].type = DS_NO_CONTACT;
+//    plr.diplstates[i].type = diplstate_type.DS_NO_CONTACT;
 //    plr.diplstates[i].has_reason_to_cancel = 0;
 //    plr.diplstates[i].contact_turns_left = 0;
 //  }
@@ -166,7 +157,7 @@ public class Player{
 //{
 //  unit_list_iterate(pplayer.units, punit) 
 //    punit.focus_status=FOCUS_AVAIL;
-//  unit_list_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -224,74 +215,74 @@ public class Player{
 //  
 //  return null;
 //}
-//
-///****************************************************************************
-//  Checks if a unit can be seen by pplayer at (x,y).
-//  A player can see a unit if he:
-//  (a) can see the tile AND
-//  (b) can see the unit at the tile (i.e. unit not invisible at this tile) AND
-//  (c) the unit is outside a city OR in an allied city AND
-//  (d) the unit isn't in a transporter, or we are allied AND
-//  (e) the unit isn't in a transporter, or we can see the transporter
-//****************************************************************************/
-//boolean can_player_see_unit_at(player pplayer, unit punit,
-//			    tile ptile)
-//{
-//  city pcity;
-//
-//  /* If the player can't even see the tile... */
-//  if (map_get_known(ptile, pplayer) != TILE_KNOWN) {
-//    return false;
-//  }
-//
-//  /* Don't show non-allied units that are in transports.  This is logical
-//   * because allied transports can also contain our units.  Shared vision
-//   * isn't taken into account. */
-//  if (punit.transported_by != -1 && unit_owner(punit) != pplayer
-//      && !pplayers_allied(pplayer, unit_owner(punit))) {
-//    return false;
-//  }
-//
-//  /* Units in cities may be hidden. */
-//  pcity = map_get_city(ptile);
-//  if (pcity && !can_player_see_units_in_city(pplayer, pcity)) {
-//    return false;
-//  }
-//
-//  /* Allied or non-hiding units are always seen. */
-//  if (pplayers_allied(unit_owner(punit), pplayer)
-//      || !is_hiding_unit(punit)) {
-//    return true;
-//  }
-//
-//  /* Hiding units may only be seen by adjacent allied units or cities. */
-//  /* FIXME: shouldn't a check for shared vision be done here? */
-//  adjc_iterate(ptile, ptile1) {
-//    city pcity = map_get_city(ptile1);
-//    if (pcity && pplayers_allied(city_owner(pcity), pplayer)) {
-//      return true;
-//    }  
-//    unit_list_iterate(ptile1.units, punit2) {
-//      if (pplayers_allied(unit_owner(punit2), pplayer)) {
-//	return true;
-//      }
-//    } unit_list_iterate_end;
-//  } adjc_iterate_end;
-//
-//  return false;
-//}
-//
-//
-///****************************************************************************
-//  Checks if a unit can be seen by pplayer at its current location.
-//
-//  See can_player_see_unit_at.
-//****************************************************************************/
-//boolean can_player_see_unit(player pplayer, unit punit)
-//{
-//  return can_player_see_unit_at(pplayer, punit, punit.tile);
-//}
-//
+
+	/***************************************************************************
+	 * Checks if a unit can be seen by pplayer at (x,y). A player can see a unit
+	 * if he: (a) can see the tile AND (b) can see the unit at the tile (i.e.
+	 * unit not invisible at this tile) AND (c) the unit is outside a city OR in
+	 * an allied city AND (d) the unit isn't in a transporter, or we are allied
+	 * AND (e) the unit isn't in a transporter, or we can see the transporter
+	 **************************************************************************/
+	public static boolean can_player_see_unit_at(player pplayer, unit punit,
+			tile ptile)
+	{
+		city pcity;
+
+		// /* If the player can't even see the tile... */
+		// if (map_get_known(ptile, pplayer) != TILE_KNOWN) {
+		// return false;
+		// }
+
+		// /*
+		// * Don't show non-allied units that are in transports. This is logical
+		// * because allied transports can also contain our units. Shared vision
+		// * isn't taken into account.
+		// */
+		// if (punit.transported_by != -1 && unit_owner(punit) != pplayer
+		// && !pplayers_allied(pplayer, unit_owner(punit))) {
+		// return false;
+		// }
+
+		// /* Units in cities may be hidden. */
+		// pcity = map_get_city(ptile);
+		// if (pcity && !can_player_see_units_in_city(pplayer, pcity)) {
+		// return false;
+		// }
+
+		// /* Allied or non-hiding units are always seen. */
+		// if (pplayers_allied(unit_owner(punit), pplayer)
+		// || !is_hiding_unit(punit)) {
+		// return true;
+		// }
+
+		// /* Hiding units may only be seen by adjacent allied units or cities.
+		// */
+		// /* FIXME: shouldn't a check for shared vision be done here? */
+		// adjc_iterate(ptile, ptile1) {
+		// city pcity = map_get_city(ptile1);
+		// if (pcity && pplayers_allied(city_owner(pcity), pplayer)) {
+		// return true;
+		// }
+		// for (unit punit2 : ptile1.units.data) {
+		// if (pplayers_allied(unit_owner(punit2), pplayer)) {
+		// return true;
+		//		}
+		//		} }
+		//		} adjc_iterate_end;
+
+		return false;
+	}
+
+
+	/***************************************************************************
+	 * Checks if a unit can be seen by pplayer at its current location.
+	 * 
+	 * See can_player_see_unit_at.
+	 **************************************************************************/
+	public static boolean can_player_see_unit(player pplayer, unit punit) {
+		return can_player_see_unit_at(pplayer, punit, punit.tile);
+	}
+
 ///****************************************************************************
 //  Return true iff the player can see units in the city.  Either they
 //  can see all units or none.
@@ -334,7 +325,7 @@ public class Player{
 // return pointer to the city struct.  Else return null.
 // Now always uses fast idex_lookup_city.
 //***************************************************************/
-//city player_find_city_by_id(const player pplayer,
+//city player_find_city_by_id(final player pplayer,
 //				    int city_id)
 //{
 //  city pcity = idex_lookup_city(city_id);
@@ -351,7 +342,7 @@ public class Player{
 // return pointer to the unit struct.  Else return null.
 // Uses fast idex_lookup_city.
 //***************************************************************/
-//unit player_find_unit_by_id(const player pplayer,
+//unit player_find_unit_by_id(final player pplayer,
 //				    int unit_id)
 //{
 //  unit punit = idex_lookup_unit(unit_id);
@@ -399,15 +390,15 @@ public class Player{
 //  int income = 0;
 //
 //  /* City income/expenses. */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    /* Gold suplus accounts for imcome plus building and unit upkeep. */
 //    income += city_gold_surplus(pcity, pcity.tax_total);
 //
 //    /* Capitalization income. */
-//    if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //      income += pcity.shield_stock + pcity.shield_surplus;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  return income;
 //}
@@ -475,11 +466,11 @@ public class Player{
 //**************************************************************************/
 //city find_palace(player pplayer)
 //{
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    if (is_capital(pcity)) {
 //      return pcity;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //  return null;
 //}
 //
@@ -494,18 +485,19 @@ public class Player{
 //  t = get_improvement_type(id).tech_req;
 //  return (get_invention(pplayer, t) == TECH_KNOWN);
 //}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//boolean ai_handicap(player pplayer, enum handicap_type htype)
-//{
-//  if (!pplayer.ai.control) {
-//    return true;
-//  }
-//  return BOOL_VAL(pplayer.ai.handicap & htype);
-//}
-//
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+//	boolean ai_handicap(player pplayer, enum handicap_type htype)
+	public static boolean ai_handicap(player pplayer, int htype)
+	{
+		if (!pplayer.ai.control) {
+			return true;
+		}
+		return BOOL_VAL(pplayer.ai.handicap & htype);
+	}
+
 ///**************************************************************************
 //Return the value normal_decision (a boolean), except if the AI is fuzzy,
 //then sometimes flip the value.  The intention of this is that instead of
@@ -537,7 +529,7 @@ public class Player{
 //  "The x are y towards us"
 //  "The Babylonians are respectful towards us"
 //**************************************************************************/
-//final String love_text(const int love)
+//final String love_text(final int love)
 //{
 //  if (love <= - MAX_AI_LOVE * 90 / 100) {
 //    return Q"?attitude:Genocidal";
@@ -568,7 +560,7 @@ public class Player{
 ///**************************************************************************
 //Return a reputation level as a human-readable string
 //**************************************************************************/
-//final String reputation_text(const int rep)
+//final String reputation_text(final int rep)
 //{
 //  if (rep == -1)
 //    return "-";
@@ -593,7 +585,7 @@ public class Player{
 ///**************************************************************************
 //  Return a diplomatic state as a human-readable string
 //**************************************************************************/
-//final String diplstate_text(const enum diplstate_type type)
+//final String diplstate_text(final enum diplstate_type type)
 //{
 //  static final String ds_names[DS_LAST] = 
 //  {
@@ -612,37 +604,37 @@ public class Player{
 //  die("Bad diplstate_type in diplstate_text: %d", type);
 //  return null;
 //}
-//
-///***************************************************************
-//returns diplomatic state type between two players
-//***************************************************************/
-//const player_diplstate pplayer_get_diplstate(const player pplayer,
-//						     const player pplayer2)
-//{
-//  return &(pplayer.diplstates[pplayer2.player_no]);
-//}
-//
-///***************************************************************
-//  Returns true iff players can attack each other.
-//***************************************************************/
-//boolean pplayers_at_war(const player pplayer,
-//                     const player pplayer2)
-//{
-//  enum diplstate_type ds = pplayer_get_diplstate(pplayer, pplayer2).type;
-//  if (pplayer == pplayer2) {
-//    return false;
-//  }
-//  if (is_barbarian(pplayer) || is_barbarian(pplayer2)) {
-//    return true;
-//  }
-//  return ds == DS_WAR || ds == DS_NO_CONTACT;
-//}
-//
+
+	/***************************************************************************
+	 * returns diplomatic state type between two players
+	 **************************************************************************/
+	public static final player_diplstate pplayer_get_diplstate(final player pplayer,
+			final player pplayer2)
+	{
+		return (pplayer.diplstates[pplayer2.player_no]);
+	}
+
+	/***************************************************************************
+	 * Returns true iff players can attack each other.
+	 **************************************************************************/
+	public static boolean pplayers_at_war(final player pplayer,
+			final player pplayer2)
+	{
+		diplstate_type ds = pplayer_get_diplstate(pplayer, pplayer2).type;
+		if (pplayer == pplayer2) {
+			return false;
+		}
+		if (is_barbarian(pplayer) || is_barbarian(pplayer2)) {
+			return true;
+		}
+		return ds == diplstate_type.DS_WAR || ds == diplstate_type.DS_NO_CONTACT;
+	}
+
 ///***************************************************************
 //  Returns true iff players are allied.
 //***************************************************************/
-//boolean pplayers_allied(const player pplayer,
-//                     const player pplayer2)
+//boolean pplayers_allied(final player pplayer,
+//                     final player pplayer2)
 //{
 //  enum diplstate_type ds = pplayer_get_diplstate(pplayer, pplayer2).type;
 //  if (pplayer == pplayer2) {
@@ -657,8 +649,8 @@ public class Player{
 ///***************************************************************
 //  Returns true iff players are allied or at peace.
 //***************************************************************/
-//boolean pplayers_in_peace(const player pplayer,
-//                       const player pplayer2)
+//boolean pplayers_in_peace(final player pplayer,
+//                       final player pplayer2)
 //{
 //  enum diplstate_type ds = pplayer_get_diplstate(pplayer, pplayer2).type;
 //
@@ -674,8 +666,8 @@ public class Player{
 ///***************************************************************
 //  Returns true iff players have peace or cease-fire.
 //***************************************************************/
-//boolean pplayers_non_attack(const player pplayer,
-//                         const player pplayer2)
+//boolean pplayers_non_attack(final player pplayer,
+//                         final player pplayer2)
 //{
 //  enum diplstate_type ds = pplayer_get_diplstate(pplayer, pplayer2).type;
 //  if (pplayer == pplayer2) {
@@ -690,21 +682,20 @@ public class Player{
 ///**************************************************************************
 //  Return true if players are in the same team
 //**************************************************************************/
-//boolean players_on_same_team(const player pplayer1,
-//                          const player pplayer2)
+//boolean players_on_same_team(final player pplayer1,
+//                          final player pplayer2)
 //{
 //  if (pplayer1.team == TEAM_NONE) {
 //    return false;
 //  }
 //  return (pplayer1.team == pplayer2.team);
 //}
-//
-//boolean is_barbarian(const player pplayer)
-//{
-//  return pplayer.ai.barbarian_type != NOT_A_BARBARIAN;
-//}
-//
-///**************************************************************************
+
+	static boolean is_barbarian(final player pplayer) {
+		return pplayer.ai.barbarian_type != NOT_A_BARBARIAN;
+	}
+
+	// /**************************************************************************
 //  Return true iff the player me gives shared vision to player them.
 //**************************************************************************/
 //boolean gives_shared_vision(player me, player them)
@@ -715,8 +706,8 @@ public class Player{
 ///**************************************************************************
 //  Return true iff the two diplstates are equal.
 //**************************************************************************/
-//boolean are_diplstates_equal(const player_diplstate pds1,
-//			  const player_diplstate pds2)
+//boolean are_diplstates_equal(final player_diplstate pds1,
+//			  final player_diplstate pds2)
 //{
 //  return (pds1.type == pds2.type && pds1.turns_left == pds2.turns_left
 //	  && pds1.has_reason_to_cancel == pds2.has_reason_to_cancel
@@ -739,7 +730,7 @@ public class Player{
 //   * Note this may be quite slow.  An even slower alternative is to iterate
 //   * over the entire map, checking all units inside the player's territory
 //   * to see if they're owned by the enemy. */
-//  unit_list_iterate(pplayer2.units, punit) {
+//  for (unit punit : pplayer2.units.data) {
 //    /* Get the owner of the tile/territory. */
 //    player owner = map_get_owner(punit.tile);
 //
@@ -747,7 +738,7 @@ public class Player{
 //      /* Found one! */
 //      in_territory += 1;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return in_territory;
 //}

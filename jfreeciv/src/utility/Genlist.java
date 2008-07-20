@@ -24,7 +24,7 @@ public class Genlist{
 //
 //#include "genlist.h"
 //
-//static genlist_link find_genlist_position(const genlist pgenlist,
+//static genlist_link find_genlist_position(final genlist pgenlist,
 //						  int pos);
 //
 ///************************************************************************
@@ -42,7 +42,7 @@ public class Genlist{
 ///************************************************************************
 //  Returns the number of elements stored in the genlist.
 //************************************************************************/
-//int genlist_size(const genlist pgenlist)
+//int genlist_size(final genlist pgenlist)
 //{
 //  return pgenlist.nelements;
 //}
@@ -54,7 +54,7 @@ public class Genlist{
 //  returns null.
 //  Recall 'idx' can be -1 meaning the last element.
 //************************************************************************/
-//void *genlist_get(const genlist pgenlist, int idx)
+//void *genlist_get(final genlist pgenlist, int idx)
 //{
 //  genlist_link link=find_genlist_position(pgenlist, idx);
 //
@@ -179,7 +179,7 @@ public class Genlist{
 //  For pos out of range returns null.
 //  Traverses list either forwards or backwards for best efficiency.
 //************************************************************************/
-//static genlist_link find_genlist_position(const genlist pgenlist,
+//static genlist_link find_genlist_position(final genlist pgenlist,
 //						  int pos)
 //{
 //  genlist_link plink;
@@ -208,17 +208,17 @@ public class Genlist{
 // Sort the elements of a genlist.
 // 
 // The comparison function should be a function usable by qsort; note
-// that the const void * arguments to compar should really be "pointers to
+// that the final void * arguments to compar should really be "pointers to
 // void*", where the void* being pointed to are the genlist dataptrs.
 // That is, there are two levels of indirection.
-// To do the sort we first construct an array of pointers corresponding
+// To do the sort we first finalruct an array of pointers corresponding
 // the the genlist dataptrs, then sort those and put them back into
 // the genlist.
 //************************************************************************/
 //void genlist_sort(genlist pgenlist,
-//		  int (*compar)(const void *, const void *))
+//		  int (*compar)(final void *, final void *))
 //{
-//  const int n = genlist_size(pgenlist);
+//  final int n = genlist_size(pgenlist);
 //  void *sortbuf[n];
 //  genlist_link myiter;
 //  int i;

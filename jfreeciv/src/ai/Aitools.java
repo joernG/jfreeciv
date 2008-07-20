@@ -163,11 +163,11 @@ public class Aitools{
 //  }
 //
 //  /* Estimate enemy attack power. */
-//  unit_list_iterate(dest_tile.units, aunit) {
+//  for (unit aunit : dest_tile.units.data) {
 //    if (HOSTILE_PLAYER(pplayer, ai, unit_owner(aunit))) {
 //      danger += unit_att_rating(aunit);
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //  dcity = map_get_city(dest_tile);
 //  if (dcity && HOSTILE_PLAYER(pplayer, ai, city_owner(dcity))) {
 //    /* Assume enemy will build another defender, add it's attack strength */
@@ -276,7 +276,7 @@ public class Aitools{
 //**************************************************************************/
 //boolean ai_unit_goto(unit punit, tile ptile)
 //{
-//  enum goto_result result;
+//  goto_result result;
 //  tile old_tile;
 //  enum unit_activity activity = punit.activity;
 //
@@ -285,8 +285,8 @@ public class Aitools{
 //  CHECK_UNIT(punit);
 //  /* TODO: log error on same_pos with punit.x|y */
 //  punit.goto_tile = ptile;
-//  handle_unit_activity_request(punit, ACTIVITY_GOTO);
-//  result = do_unit_goto(punit, GOTO_MOVE_ANY, false);
+//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_GOTO);
+//  result = do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
 //  if (result != GR_DIED) {
 //    handle_unit_activity_request(punit, activity);
 //    punit.goto_tile = old_tile; /* May be null. */
@@ -319,9 +319,9 @@ public class Aitools{
 //    aiferry_clear_boat(punit);
 //  }
 //
-//  if (punit.activity == ACTIVITY_GOTO) {
+//  if (punit.activity == unit_activity.ACTIVITY_GOTO) {
 //    /* It would indicate we're going somewhere otherwise */
-//    handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//    handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  }
 //
 //  if (punit.ai.ai_role == AIUNIT_BUILD_CITY) {
@@ -370,7 +370,7 @@ public class Aitools{
 //    /* Grab missiles lying around and bring them along */
 //    if (unit_flag(punit, F_MISSILE_CARRIER)
 //        || unit_flag(punit, F_CARRIER)) {
-//      unit_list_iterate(punit.tile.units, missile) {
+//      for (unit missile : punit.tile.units.data) {
 //        if (missile.ai.ai_role != AIUNIT_ESCORT
 //            && missile.transported_by == -1
 //            && missile.owner == punit.owner
@@ -380,7 +380,7 @@ public class Aitools{
 //          ai_unit_new_role(missile, AIUNIT_ESCORT, target.tile);
 //          load_unit_onto_transporter(missile, punit);
 //        }
-//      } unit_list_iterate_end;
+//      } }
 //    }
 //  }
 //}
@@ -442,7 +442,7 @@ public class Aitools{
 //    return;
 //  }
 //
-//  handle_unit_activity_request(bodyguard, ACTIVITY_IDLE);
+//  handle_unit_activity_request(bodyguard, unit_activity.ACTIVITY_IDLE);
 //  () ai_unit_move(bodyguard, ptile);
 //}
 //
@@ -481,7 +481,7 @@ public class Aitools{
 //  assert(unit_owner(punit).ai.control);
 //  assert(is_tiles_adjacent(punit.tile, ptile));
 //
-//  handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  () handle_unit_move_request(punit, ptile, false, false);
 //  alive = (find_unit_by_id(sanity) != null);
 //
@@ -544,7 +544,7 @@ public class Aitools{
 //  }
 //
 //  /* go */
-//  handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  () handle_unit_move_request(punit, ptile, false, true);
 //
 //  /* handle the results */
@@ -578,7 +578,7 @@ public class Aitools{
 //      continue;
 //    }
 //
-//    city_list_iterate(pplay.cities, pcity) {
+//    for (city pcity : pplay.cities.data) {
 //      int city_dist = real_map_distance(ptile, pcity.tile);
 //
 //      /* Find the closest city known to the player with a matching
@@ -590,7 +590,7 @@ public class Aitools{
 //	best_dist = city_dist;
 //        pc = pcity;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  return(pc);
@@ -607,9 +607,9 @@ public class Aitools{
 //
 //  if (is_stack_vulnerable(pdef.tile)) {
 //    /* lotsa people die */
-//    unit_list_iterate(pdef.tile.units, aunit) {
+//    for (unit aunit : pdef.tile.units.data) {
 //      victim_cost += unit_build_shield_cost(aunit.type);
-//    } unit_list_iterate_end;
+//    } }
 //  } else {
 //    /* Only one unit dies if attack is successful */
 //    victim_cost = unit_build_shield_cost(pdef.type);
@@ -629,9 +629,9 @@ public class Aitools{
 //
 //  handle_player_change_government(pplayer, gov);
 //
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    auto_arrange_workers(pcity); /* update cities */
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -693,7 +693,7 @@ public class Aitools{
 //{
 //  player pplayer = city_owner(pcity);
 //
-//  city_list_iterate(pplayer.cities, acity) {
+//  for (city acity : pplayer.cities.data) {
 //    if (pcity != acity
 //	&& !acity.is_building_unit
 //	&& is_wonder(acity.currently_building)
@@ -701,7 +701,7 @@ public class Aitools{
 //	    == map_get_continent(pcity.tile))) {
 //      return true;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //
 //  return false;
 //}
@@ -725,7 +725,7 @@ public class Aitools{
 //    danger += acity.ai.danger;
 //    downtown += acity.ai.downtown;
 //    cities++;
-//  city_list_iterate_end;
+//  }
 //
 //  impr_type_iterate(i) {
 //    if (!plr.ai.control
@@ -794,7 +794,7 @@ public class Aitools{
 //  /* ??  This does the right thing for normal Republic and Democ -- dwp */
 //  free_happy += get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL);
 //
-//  unit_list_iterate(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    int happy_cost = utype_happy_cost(unit_type(punit), g);
 //
 //    if (happy_cost <= 0) {
@@ -821,7 +821,7 @@ public class Aitools{
 //    if (happy_cost > 0) {
 //      unhap += happy_cost;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 // 
 //  if (unhap < 0) {
 //    unhap = 0;

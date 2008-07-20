@@ -75,7 +75,7 @@ public class Gui_main{
 //client_option gui_options[] = {
 //  /* None. */
 //};
-//const int num_gui_options = ARRAY_SIZE(gui_options);
+//final int num_gui_options = ARRAY_SIZE(gui_options);
 //
 //static AppResources appResources;
 //

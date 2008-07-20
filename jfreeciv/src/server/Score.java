@@ -169,11 +169,11 @@ public class Score{
 //  pcmap.edges = fc_malloc(nbytes);
 //
 //  players_iterate(pplayer) {
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      map_city_radius_iterate(pcity.tile, tile1) {
 //	pcmap.claims[tile1.index].cities |= (1u << pcity.owner);
 //      } map_city_radius_iterate_end;
-//    } city_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //}
 //
@@ -407,7 +407,7 @@ public class Score{
 //    return;
 //  }
 //
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    int bonus;
 //
 //    pplayer.score.happy += pcity.ppl_happy[4];
@@ -426,7 +426,7 @@ public class Score{
 //
 //    bonus = CLIP(0, get_city_bonus(pcity, EFT_SCIENCE_BONUS), 100);
 //    pplayer.score.literacy += (city_population(pcity) * bonus) / 100;
-//  } city_list_iterate_end;
+//  } }
 //
 //  if (pplayer.player_no == 0) {
 //    free_landarea_map(&cmap);
@@ -446,7 +446,7 @@ public class Score{
 //  } tech_type_iterate_end;
 //  pplayer.score.techs += pplayer.future_tech * 5 / 2;
 //  
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (is_military_unit(punit)) {
 //      pplayer.score.units++;
 //    }
@@ -471,7 +471,7 @@ public class Score{
 ///**************************************************************************
 //  Return the civilization score (a numerical value) for the player.
 //**************************************************************************/
-//int get_civ_score(const player pplayer)
+//int get_civ_score(final player pplayer)
 //{
 //  /* We used to count pplayer.score.happy here too, but this is too easily
 //   * manipulated by players at the endyear. */
@@ -484,7 +484,7 @@ public class Score{
 ///**************************************************************************
 //  Return the total number of citizens in the player's nation.
 //**************************************************************************/
-//int total_player_citizens(const player pplayer)
+//int total_player_citizens(final player pplayer)
 //{
 //  return (pplayer.score.happy
 //	  + pplayer.score.content

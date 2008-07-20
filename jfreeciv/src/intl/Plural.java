@@ -79,7 +79,7 @@ public class Plural{
 //
 ///* Prototypes for local functions.  */
 //static expression new_exp PARAMS ((int nargs, enum operator op,
-//					   expression  const *args));
+//					   expression  final *args));
 //static inline expression new_exp_0 PARAMS ((enum operator op));
 //static inline expression new_exp_1 PARAMS ((enum operator op,
 //						   expression right));
@@ -99,7 +99,7 @@ public class Plural{
 //new_exp (nargs, op, args)
 //     int nargs;
 //     enum operator op;
-//     expression  const *args;
+//     expression  final *args;
 //{
 //  int i;
 //  expression newp;
@@ -177,7 +177,7 @@ public class Plural{
 //
 //#ifndef __cplusplus
 //#ifndef __STDC__
-//#define const
+//#define final
 //#endif
 //#endif
 //
@@ -189,7 +189,7 @@ public class Plural{
 //
 //#define YYTRANSLATE(x) ((unsigned)(x) <= 261 ? yytranslate[x] : 18)
 //
-//static const char yytranslate[] = {     0,
+//static final char yytranslate[] = {     0,
 //     2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
 //     2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
 //     2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -220,12 +220,12 @@ public class Plural{
 //};
 //
 //#if YYDEBUG != 0
-//static const short yyprhs[] = {     0,
+//static final short yyprhs[] = {     0,
 //     0,     2,     8,    12,    16,    20,    24,    28,    32,    35,
 //    37,    39
 //};
 //
-//static const short yyrhs[] = {    17,
+//static final short yyrhs[] = {    17,
 //     0,    17,     3,    17,    12,    17,     0,    17,     4,    17,
 //     0,    17,     5,    17,     0,    17,     6,    17,     0,    17,
 //     7,    17,     0,    17,     8,    17,     0,    17,     9,    17,
@@ -236,7 +236,7 @@ public class Plural{
 //#endif
 //
 //#if YYDEBUG != 0
-//static const short yyrline[] = { 0,
+//static final short yyrline[] = { 0,
 //   177,   185,   189,   193,   197,   201,   205,   209,   213,   217,
 //   221,   226
 //};
@@ -245,39 +245,39 @@ public class Plural{
 //
 //#if YYDEBUG != 0 || defined (YYERROR_VERBOSE)
 //
-//static final String const yytname[] = {   "$","error","$undefined.","'?'","'|'",
+//static final String final yytname[] = {   "$","error","$undefined.","'?'","'|'",
 //"'&'","EQUOP2","CMPOP2","ADDOP2","MULOP2","'!'","NUMBER","':'","'n'","'('","')'",
 //"start","exp", null
 //};
 //#endif
 //
-//static const short yyr1[] = {     0,
+//static final short yyr1[] = {     0,
 //    16,    17,    17,    17,    17,    17,    17,    17,    17,    17,
 //    17,    17
 //};
 //
-//static const short yyr2[] = {     0,
+//static final short yyr2[] = {     0,
 //     1,     5,     3,     3,     3,     3,     3,     3,     2,     1,
 //     1,     3
 //};
 //
-//static const short yydefact[] = {     0,
+//static final short yydefact[] = {     0,
 //     0,    11,    10,     0,     1,     9,     0,     0,     0,     0,
 //     0,     0,     0,     0,    12,     0,     3,     4,     5,     6,
 //     7,     8,     0,     2,     0,     0,     0
 //};
 //
-//static const short yydefgoto[] = {    25,
+//static final short yydefgoto[] = {    25,
 //     5
 //};
 //
-//static const short yypact[] = {    -9,
+//static final short yypact[] = {    -9,
 //    -9,-32768,-32768,    -9,    34,-32768,    11,    -9,    -9,    -9,
 //    -9,    -9,    -9,    -9,-32768,    24,    39,    43,    16,    26,
 //    -3,-32768,    -9,    34,    21,    53,-32768
 //};
 //
-//static const short yypgoto[] = {-32768,
+//static final short yypgoto[] = {-32768,
 //    -1
 //};
 //
@@ -285,7 +285,7 @@ public class Plural{
 //public static final int YYLAST = 53;
 //
 //
-//static const short yytable[] = {     6,
+//static final short yytable[] = {     6,
 //     1,     2,     7,     3,     4,    14,    16,    17,    18,    19,
 //    20,    21,    22,     8,     9,    10,    11,    12,    13,    14,
 //    26,    24,    12,    13,    14,    15,     8,     9,    10,    11,
@@ -294,7 +294,7 @@ public class Plural{
 //    13,    14,    27
 //};
 //
-//static const short yycheck[] = {     1,
+//static final short yycheck[] = {     1,
 //    10,    11,     4,    13,    14,     9,     8,     9,    10,    11,
 //    12,    13,    14,     3,     4,     5,     6,     7,     8,     9,
 //     0,    23,     7,     8,     9,    15,     3,     4,     5,     6,

@@ -37,7 +37,7 @@ public class Aiferry{
 //#include "aiferry.h"
 //
 // 
-///* =================== constants with special meaning =================== */
+///* =================== finalants with special meaning =================== */
 //
 ///* 
 // * This one is used only by ferryboats in ai.passenger field 
@@ -75,7 +75,7 @@ public class Aiferry{
 //  ai.stats.boats = 0;
 //  ai.stats.available_boats = 0;
 // 
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (is_sailing_unit(punit) && is_ground_units_transport(punit)) {
 //      ai.stats.boats++;
 //      if (punit.ai.passenger == FERRY_AVAILABLE) {
@@ -86,7 +86,7 @@ public class Aiferry{
 //      UNIT_LOG(LOG_DEBUG, punit, "wants a boat.");
 //      ai.stats.passengers++;
 //    }  
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -102,13 +102,13 @@ public class Aiferry{
 //	  pplayer.name, pplayer.player_no);
 //  freelog(LOG_NORMAL, "Registered: %d free out of total %d",
 //	  ai.stats.available_boats, ai.stats.boats);
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (is_sailing_unit(punit) && is_ground_units_transport(punit)) {
 //      freelog(LOG_NORMAL, "#%d. %s[%d], psngr=%d", 
 //	      n, unit_type(punit).name, punit.id, punit.ai.passenger);
 //      n++;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //}
 //#endif /* DEBUG_FERRY_STATS */
 //
@@ -196,12 +196,12 @@ public class Aiferry{
 //#if DEBUG_FERRY_STATS
 //  int boats = 0;
 //
-//  unit_list_iterate(pplayer.units, punit) {
+//  for (unit punit : pplayer.units.data) {
 //    if (is_sailing_unit(punit) && is_ground_units_transport(punit) 
 //	&& punit.ai.passenger == FERRY_AVAILABLE) {
 //      boats++;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  if (boats != ai.stats.available_boats) {
 //    freelog(LOG_ERROR, "Player[%d] in turn %d: boats miscounted.",
@@ -229,9 +229,9 @@ public class Aiferry{
 //  call-back.  Doesn't care for enemy/neutral tiles, these should be 
 //  excluded using a TB call-back.
 //**************************************************************************/
-//static int combined_land_sea_move(const tile src_tile,
+//static int combined_land_sea_move(final tile src_tile,
 //				  enum direction8 dir,
-//				  const tile tgt_tile,
+//				  final tile tgt_tile,
 //                                  pf_parameter param)
 //{
 //  int move_cost;
@@ -254,7 +254,7 @@ public class Aiferry{
 //  EC callback to account for the cost of sea moves by a ferry hurrying to 
 //  pick our unit up.
 //****************************************************************************/
-//static int sea_move(const tile ptile, enum known_type known,
+//static int sea_move(final tile ptile, enum known_type known,
 //                    pf_parameter param)
 //{
 //  if (is_ocean(ptile.terrain)) {
@@ -334,7 +334,7 @@ public class Aiferry{
 //    }
 //    
 //    square_iterate(pos.tile, radius, ptile) {
-//      unit_list_iterate(ptile.units, aunit) {
+//      for (unit aunit : ptile.units.data) {
 //        if (is_boat_free(aunit, punit, cap)) {
 //          /* Turns for the unit to get to rendezvous pnt */
 //          int u_turns = pos.turn;
@@ -356,7 +356,7 @@ public class Aiferry{
 //            best_id = aunit.id;
 //          }
 //        }
-//      } unit_list_iterate_end;
+//      } }
 //    } square_iterate_end;
 //  } pf_iterator_end;
 //  pf_destroy_map(search_map);
@@ -374,11 +374,11 @@ public class Aiferry{
 //  UNIT_LOG(LOGLEVEL_FINDFERRY, punit, "asked find_ferry_nearby for a boat");
 //
 //  square_iterate(punit.tile, 1, ptile) {
-//    unit_list_iterate(ptile.units, aunit) {
+//    for (unit aunit : ptile.units.data) {
 //      if (is_boat_free(aunit, punit, cap)) {
 //        return aunit.id;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } square_iterate_end;
 //
 //  return 0;
@@ -548,7 +548,7 @@ public class Aiferry{
 //    }
 //
 //    UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, "Our boat has arrived");
-//    handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//    handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  }
 //
 //  return true;
@@ -589,7 +589,7 @@ public class Aiferry{
 //
 //    pf_next_get_position(map, &pos);
 //    
-//    unit_list_iterate(pos.tile.units, aunit) {
+//    for (unit aunit : pos.tile.units.data) {
 //      if (pferry.owner == aunit.owner 
 //	  && (aunit.ai.ferryboat == FERRY_WANTED
 //	      || aunit.ai.ferryboat == pferry.id)) {
@@ -602,7 +602,7 @@ public class Aiferry{
 //        pf_destroy_map(map);
 //        return true;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  }
 //
 //  /* false positive can happen if we cannot find a route to the passenger
@@ -683,7 +683,7 @@ public class Aiferry{
 //        continue;
 //      }
 //
-//      unit_list_iterate(pos.tile.units, aunit) {
+//      for (unit aunit : pos.tile.units.data) {
 //	if (aunit != pferry && aunit.owner == pferry.owner
 //            && unit_has_role(aunit.type, L_FERRYBOAT)) {
 //
@@ -692,7 +692,7 @@ public class Aiferry{
 //	  really_needed = false;
 //	  break;
 //	}
-//      } unit_list_iterate_end;
+//      } }
 //
 //      if (really_needed) {
 //        UNIT_LOG(LOGLEVEL_FERRY, pferry, "will go to %s unless we "
@@ -710,7 +710,7 @@ public class Aiferry{
 //
 ///****************************************************************************
 //  It's about 12 feet square and has a capacity of almost 1000 pounds.
-//  It is well constructed of teak, and looks seaworthy.
+//  It is well finalructed of teak, and looks seaworthy.
 //
 //  Manage ferryboat.  If there is a passenger-in-charge, we let it drive the 
 //  boat.  If there isn't, appoint one from those we have on board.
@@ -760,7 +760,7 @@ public class Aiferry{
 //      unit candidate = null;
 //    
 //      /* Try to select passanger-in-charge from among our passengers */
-//      unit_list_iterate(ptile.units, aunit) {
+//      for (unit aunit : ptile.units.data) {
 //        if (unit_owner(aunit) != pplayer 
 //            || (aunit.ai.ferryboat != punit.id 
 //                && aunit.ai.ferryboat != FERRY_WANTED)) {
@@ -774,7 +774,7 @@ public class Aiferry{
 //          /* Bodyguards shouldn't be in charge of boats so continue looking */
 //          candidate = aunit;
 //        }
-//      } unit_list_iterate_end;
+//      } }
 //      
 //      if (candidate) {
 //        UNIT_LOG(LOGLEVEL_FERRY, punit, 
@@ -832,7 +832,7 @@ public class Aiferry{
 //
 //  UNIT_LOG(LOGLEVEL_FERRY, punit, "Ferryboat is not carrying anyone.");
 //  aiferry_make_available(punit);
-//  handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  ai_unit_new_role(punit, AIUNIT_NONE, null);
 //  CHECK_UNIT(punit);
 //

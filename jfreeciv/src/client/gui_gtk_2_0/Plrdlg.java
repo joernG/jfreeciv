@@ -154,8 +154,8 @@ public class Plrdlg{
 //    }
 //
 //    switch (pplayer_get_diplstate(game.player_ptr, get_player(plrno)).type) {
-//    case DS_WAR:
-//    case DS_NO_CONTACT:
+//    case diplstate_type.DS_WAR:
+//    case diplstate_type.DS_NO_CONTACT:
 //      gtk_widget_set_sensitive(players_war_command, false);
 //      break;
 //    default:
@@ -561,7 +561,7 @@ public class Plrdlg{
 //
 //   /* now add some eye candy ... */
 //   switch (pplayer_get_diplstate(game.player_ptr, plr).type) {
-//   case DS_WAR:
+//   case diplstate_type.DS_WAR:
 //     weight = PANGO_WEIGHT_NORMAL;
 //     style = PANGO_STYLE_ITALIC;
 //     break;

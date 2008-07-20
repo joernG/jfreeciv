@@ -638,7 +638,7 @@ public class Cma_fe{
 //    
 //}
 //
-//static boolean is_worker(const city pCity, int x, int y)
+//static boolean is_worker(final city pCity, int x, int y)
 //{
 //  return pCma && pCma.pResult && pCma.pResult.worker_positions_used[x][y];
 //}

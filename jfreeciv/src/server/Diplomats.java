@@ -48,7 +48,7 @@ public class Diplomats{
 //static boolean diplomat_infiltrate_tile(player pplayer, player cplayer,
 //				     unit pdiplomat, tile ptile);
 //static void diplomat_escape(player pplayer, unit pdiplomat,
-//			    const city pcity);
+//			    final city pcity);
 //static void maybe_cause_incident(enum diplomat_actions action, player offender,
 //				 unit victim_unit, city victim_city);
 //
@@ -160,18 +160,18 @@ public class Diplomats{
 //     send a list of them all before sending the city info.
 //     As this is a special case we bypass send_unit_info. */
 //  first_packet = true;
-//  unit_list_iterate(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    package_short_unit(punit, &unit_packet,
 //                       UNIT_INFO_CITY_SUPPORTED, pcity.id, first_packet);
 //    lsend_packet_unit_short_info(&pplayer.connections, &unit_packet);
 //    first_packet = false;
-//  } unit_list_iterate_end;
+//  } }
 //  unit_list_iterate((pcity.tile).units, punit) {
 //    package_short_unit(punit, &unit_packet,
 //                       UNIT_INFO_CITY_PRESENT, pcity.id, first_packet);
 //    lsend_packet_unit_short_info(&pplayer.connections, &unit_packet);
 //    first_packet = false;
-//  } unit_list_iterate_end;
+//  } }
 //  /* Send city info to investigator's player.
 //     As this is a special case we bypass send_city_info. */
 //  package_city(pcity, &city_packet, true);
@@ -521,7 +521,7 @@ public class Diplomats{
 //  - If a technology has already been stolen from this city at any time:
 //    - Diplomats will be caught and executed.
 //    - Spies will have an increasing chance of being caught and executed.
-//  - Determine target, given arguments and constraints.
+//  - Determine target, given arguments and finalraints.
 //  - Steal technology!
 //
 //  - The thief may be captured and executed, or escape to its home town.
@@ -865,7 +865,7 @@ public class Diplomats{
 //
 //  - Check for infiltration success.  Our saboteur may not survive this.
 //  - Check for basic success.  Again, our saboteur may not survive this.
-//  - Determine target, given arguments and constraints.
+//  - Determine target, given arguments and finalraints.
 //  - If specified, city walls and anything in a capital are 50% likely to fail.
 //  - Do sabotage!
 //
@@ -1157,7 +1157,7 @@ public class Diplomats{
 //
 //  /* We don't need a _safe iterate since no transporters should be
 //   * destroyed. */
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if (unit_flag(punit, F_DIPLOMAT) || unit_flag(punit, F_SUPERSPY)) {
 //      /* A F_SUPERSPY unit may not acutally be a spy, but a superboss which 
 //         we cannot allow puny diplomats from getting the better of. Note that 
@@ -1227,7 +1227,7 @@ public class Diplomats{
 //	return false;
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return true;
 //}
@@ -1243,7 +1243,7 @@ public class Diplomats{
 //    - Escapee may become a veteran.
 //**************************************************************************/
 //static void diplomat_escape(player pplayer, unit pdiplomat,
-//                            const city pcity)
+//                            final city pcity)
 //{
 //  tile ptile;
 //  int escapechance;
@@ -1374,8 +1374,8 @@ public class Diplomats{
 //      die("Bug in maybe_cause_incident()");
 //    }
 //    switch (ds) {
-//    case DS_WAR:
-//    case DS_NO_CONTACT:
+//    case diplstate_type.DS_WAR:
+//    case diplstate_type.DS_NO_CONTACT:
 //      freelog(LOG_VERBOSE,"Trying to cause an incident between players at war");
 //      punishment = 0;
 //      break;
@@ -1460,7 +1460,7 @@ public class Diplomats{
 //  unit_list_iterate((ptile).units, punit)
 //    if (unit_flag(punit, F_DIPLOMAT))
 //      count++;
-//  unit_list_iterate_end;
+//  }
 //  return count;
 //}
 }

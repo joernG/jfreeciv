@@ -38,9 +38,9 @@ public class Widget_window{
 //public static final int DEBUG_PAINT_ALL = false;
 //
 //sw_widget root_window;
-//static struct widget_list windows_back_to_front;
-//static struct widget_list windows_front_to_back;
-//struct widget_list deferred_destroyed_widgets;
+//static Speclists<widget> windows_back_to_front;
+//static Speclists<widget> windows_front_to_back;
+//Speclists<widget> deferred_destroyed_widgets;
 //static boolean dump_screen = false;
 //
 //public static final int TITLE_PADDING = 3;
@@ -49,7 +49,7 @@ public class Widget_window{
 //  ...
 //*************************************************************************/
 //static void draw_extra_background(sw_widget widget,
-//				  const ct_rect region)
+//				  final ct_rect region)
 //{
 //  if (widget.data.window.canvas_background) {
 //    struct ct_size size = { region.width,
@@ -89,7 +89,7 @@ public class Widget_window{
 //  ...
 //*************************************************************************/
 //static void drag_start(sw_widget widget,
-//		       const ct_point mouse,
+//		       final ct_point mouse,
 //		       enum be_mouse_button button)
 //{
 //  if (button == BE_MB_LEFT) {
@@ -106,8 +106,8 @@ public class Widget_window{
 //  ...
 //*************************************************************************/
 //static void drag_move(sw_widget widget,
-//		      const ct_point start_position,
-//		      const ct_point current_position,
+//		      final ct_point start_position,
+//		      final ct_point current_position,
 //		      enum be_mouse_button button)
 //{
 //  if (button == BE_MB_LEFT) {
@@ -145,9 +145,9 @@ public class Widget_window{
 //*************************************************************************/
 //static void destroy(sw_widget widget)
 //{
-//  widget_list_iterate(widget.data.window.children, pwidget) {
+//  for (widget pwidget : widget.data.window.children.data) {
 //    real_widget_destroy(pwidget);
-//  } widget_list_iterate_end;
+//  } }
 //
 //
 //  be_free_osda(widget.data.window.target);
@@ -162,12 +162,12 @@ public class Widget_window{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static int my_sort_back_to_front(const void *p1, const void *p2)
+//static int my_sort_back_to_front(final void *p1, final void *p2)
 //{
-//  const sw_widget w1 =
-//      (const sw_widget ) *(const void **) p1;
-//  const sw_widget w2 =
-//      (const sw_widget ) *(const void **) p2;
+//  final sw_widget w1 =
+//      (final sw_widget ) *(final void **) p1;
+//  final sw_widget w2 =
+//      (final sw_widget ) *(final void **) p2;
 //
 //  return w1.data.window.depth - w2.data.window.depth;
 //}
@@ -175,12 +175,12 @@ public class Widget_window{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static int my_sort_front_to_back(const void *p1, const void *p2)
+//static int my_sort_front_to_back(final void *p1, final void *p2)
 //{
-//  const sw_widget w1 =
-//      (const sw_widget ) *(const void **) p1;
-//  const sw_widget w2 =
-//      (const sw_widget ) *(const void **) p2;
+//  final sw_widget w1 =
+//      (final sw_widget ) *(final void **) p1;
+//  final sw_widget w2 =
+//      (final sw_widget ) *(final void **) p2;
 //
 //  return w2.data.window.depth - w1.data.window.depth;
 //}
@@ -310,9 +310,9 @@ public class Widget_window{
 //  assert(window && widget);
 //  assert(!widget.parent);
 //
-//  widget_list_iterate(window.data.window.children, pwidget) {
+//  for (widget pwidget : window.data.window.children.data) {
 //    assert(pwidget != widget);
-//  } widget_list_iterate_end;
+//  } }
 //
 //  widget_list_insert(&window.data.window.children, widget);
 //  widget.parent = window;
@@ -338,11 +338,11 @@ public class Widget_window{
 //
 //  assert(old_parent);
 //
-//  widget_list_iterate(old_parent.data.window.children, pwidget) {
+//  for (widget pwidget : old_parent.data.window.children.data) {
 //    if (pwidget == widget) {
 //      found++;
 //    }
-//  } widget_list_iterate_end;
+//  } }
 //
 //  assert(found == 1);
 //  widget_list_unlink(&old_parent.data.window.children, widget);
@@ -353,7 +353,7 @@ public class Widget_window{
 //  ...
 //*************************************************************************/
 //static void flush_one_window(sw_widget widget,
-//			     const ct_rect screen_rect)
+//			     final ct_rect screen_rect)
 //{
 //  struct ct_size size;
 //  struct ct_point src_pos, dest_pos;
@@ -411,7 +411,7 @@ public class Widget_window{
 //  ...
 //*************************************************************************/
 //static void draw_background_region(sw_widget widget,
-//				   const ct_rect  rect)
+//				   final ct_rect  rect)
 //{
 //  if (widget.draw_extra_background) {
 //    widget.draw_extra_background(widget, rect);
@@ -463,7 +463,7 @@ public class Widget_window{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void add_flush_region(sw_widget widget, const struct ct_rect
+//static void add_flush_region(sw_widget widget, final struct ct_rect
 //			     *region)
 //{
 //  sw_widget window;
@@ -474,11 +474,11 @@ public class Widget_window{
 //    window = widget.parent;
 //  }
 //
-//  region_list_iterate(window.data.window.to_flush, pregion) {
+//  for (region pregion : window.data.window.to_flush.data) {
 //    if (ct_rect_in_rect(region, pregion)) {
 //      return;
 //    }
-//  } region_list_iterate_end;
+//  } }
 //  
 //  region_list_insert(&window.data.window.to_flush, ct_rect_clone(region));
 //}
@@ -490,7 +490,7 @@ public class Widget_window{
 //{
 //  struct ct_point pos;
 //  struct ct_rect rect;
-//  const int PADDING = 5;
+//  final int PADDING = 5;
 //  enum be_draw_type draw_type = BE_OPAQUE;
 //  osda osda;
 //  int i, extra = 2 * PADDING + widget.tooltip.shadow;
@@ -546,18 +546,18 @@ public class Widget_window{
 //  if (widget.needs_repaint) {
 //    draw_one(widget);
 //
-//    widget_list_iterate(widget.data.window.children, pwidget) {
+//    for (widget pwidget : widget.data.window.children.data) {
 //      if (pwidget.type != WT_WINDOW) {
 //	draw_one(pwidget);
 //      }
 //    }
-//    widget_list_iterate_end;
+//    }
 //
-//    widget_list_iterate(widget.data.window.children, pwidget) {
+//    for (widget pwidget : widget.data.window.children.data) {
 //      if (pwidget.tooltip && pwidget.tooltip_shown) {
 //	draw_tooltip(pwidget);
 //      }
-//    } widget_list_iterate_end;
+//    } }
 //    if (widget.tooltip && widget.tooltip_shown) {
 //      draw_tooltip(widget);
 //    }
@@ -570,14 +570,14 @@ public class Widget_window{
 //      add_flush_region(widget, &tmp);
 //    }
 //  } else {
-//    widget_list_iterate(widget.data.window.children, pwidget) {
+//    for (widget pwidget : widget.data.window.children.data) {
 //      if (pwidget.type != WT_WINDOW && pwidget.needs_repaint) {
 //	draw_one(pwidget);
 //	pwidget.needs_repaint = false;
 //	add_flush_region(widget, &pwidget.outer_bounds);
 //      }
 //    }
-//    widget_list_iterate_end;
+//    }
 //  }
 //}
 //
@@ -602,7 +602,7 @@ public class Widget_window{
 //*************************************************************************/
 //static void merge_regions(region_list list)
 //{
-//  struct region_list tmp, *orig, *copy;
+//  Speclists<region> tmp, *orig, *copy;
 //
 //  orig = list;
 //  copy = &tmp;
@@ -615,7 +615,7 @@ public class Widget_window{
 //    } else {
 //      region_list_insert(copy, region);
 //    }
-//  } region_list_iterate_end;
+//  } }
 //
 //  orig = &tmp;
 //  copy = list;
@@ -628,7 +628,7 @@ public class Widget_window{
 //    } else {
 //      region_list_insert(copy, region);
 //    }
-//  } region_list_iterate_end;
+//  } }
 //}
 //
 ///*************************************************************************
@@ -641,7 +641,7 @@ public class Widget_window{
 //  timer timer2 = new_timer(TIMER_USER, TIMER_ACTIVE);
 //  timer timer3 = new_timer(TIMER_USER, TIMER_ACTIVE);
 //  timer timer4 = new_timer(TIMER_USER, TIMER_ACTIVE);
-//  struct region_list normalized_regions;
+//  Speclists<region> normalized_regions;
 //  static int call = -1;
 //#if DUMP_UPDATES
 //  char filename[100];
@@ -657,10 +657,10 @@ public class Widget_window{
 //  region_list_init(&normalized_regions);
 //
 //  start_timer(timer1);
-//  widget_list_iterate(windows_back_to_front, widget) {
+//  for (widget widget : windows_back_to_front.data) {
 //    update_window(widget);
 //    regions += region_list_size(&widget.data.window.to_flush);
-//  } widget_list_iterate_end;
+//  } }
 //  stop_timer(timer1);
 //
 //  if (regions == 0) {
@@ -670,41 +670,41 @@ public class Widget_window{
 //  if(DEBUG_PAINT_ALL)  printf("%%%%%%%% updated windows; %d regions have to be flushed\n",regions);
 //
 //  if (DUMP_WINDOWS) {
-//    widget_list_iterate(windows_back_to_front, widget) {
+//    for (widget widget : windows_back_to_front.data) {
 //      char name[100];
 //
 //      if (widget.data.window.depth > -1) {
 //	sprintf(name, "window-c%03d-%p.ppm", call, widget);
 //	be_write_osda_to_file(widget.data.window.target, name);
 //      }
-//    } widget_list_iterate_end;
+//    } }
 //  }
 //
 //  start_timer(timer2);
-//  widget_list_iterate(windows_back_to_front, widget) {
+//  for (widget widget : windows_back_to_front.data) {
 //    if (DEBUG_PAINT_ALL) {
 //      printf("window=%s d=%d is_opaque=%d\n",
 //	     ct_rect_to_string(&widget.outer_bounds),
 //	     widget.data.window.depth, is_opaque(widget));
-//      region_list_iterate(widget.data.window.to_flush, region) {
+//      for (region region : widget.data.window.to_flush.data) {
 //	printf("  region=%s\n", ct_rect_to_string(region));
-//      } region_list_iterate_end;
+//      } }
 //    }
 //
-//    region_list_iterate(widget.data.window.to_flush, region) {
+//    for (region region : widget.data.window.to_flush.data) {
 //      region.x += widget.outer_bounds.x;
 //      region.y += widget.outer_bounds.y;
 //      region_list_unlink(&widget.data.window.to_flush, region);
 //      region_list_insert(&normalized_regions, region);
-//    } region_list_iterate_end;
-//  } widget_list_iterate_end;
+//    } }
+//  } }
 //  stop_timer(timer2);
 //
 //  if (DEBUG_PAINT_ALL) {
 //    printf("  normalized_regions\n");
-//    region_list_iterate(normalized_regions, region) {
+//    for (region region : normalized_regions.data) {
 //      printf("    region=%s\n", ct_rect_to_string(region));
-//    } region_list_iterate_end;
+//    } }
 //  }
 //
 //  merge_regions(&normalized_regions);
@@ -720,13 +720,13 @@ public class Widget_window{
 //#endif
 //
 //  start_timer(timer3);
-//  region_list_iterate(normalized_regions, region) {
+//  for (region region : normalized_regions.data) {
 //    int window_nr = 0;
 //
 //    if (DEBUG_UPDATES)
 //      printf("region = %s\n", ct_rect_to_string(region));
 //
-//    widget_list_iterate(windows_back_to_front, widget) {
+//    for (widget widget : windows_back_to_front.data) {
 //      struct ct_rect rect = *region;
 //
 //      ct_rect_intersect(&rect, &widget.outer_bounds);
@@ -754,13 +754,13 @@ public class Widget_window{
 //	  printf("    disjunkt\n");
 //      }
 //      window_nr++;
-//    } widget_list_iterate_end;
+//    } }
 //    region_list_unlink(&normalized_regions, region);
 //    free(region);
 //#if DUMP_UPDATES
 //    region_nr++;
 //#endif
-//  } region_list_iterate_end;
+//  } }
 //  stop_timer(timer3);
 //#if DUMP_UPDATES
 //  sprintf(filename,"whole-c%03d-r999-after.ppm",call);
@@ -780,7 +780,7 @@ public class Widget_window{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//sw_widget search_widget(const ct_point pos,
+//sw_widget search_widget(final ct_point pos,
 //				enum event_type event_type)
 //{
 //  struct ct_point tmp;
@@ -791,7 +791,7 @@ public class Widget_window{
 //  }
 //
 //  if (0) {
-//    widget_list_iterate(windows_front_to_back, pwidget) {
+//    for (widget pwidget : windows_front_to_back.data) {
 //      printf("%p: shown=%d accepts=%d inside=%d depth=%d size=%dx%d\n",
 //	     pwidget, pwidget.data.window.shown,
 //	     pwidget.accepts_events[event_type], ct_point_in_rect(pos,
@@ -799,10 +799,10 @@ public class Widget_window{
 //								   outer_bounds),
 //	     pwidget.data.window.depth, pwidget.outer_bounds.width,
 //	     pwidget.outer_bounds.height);
-//    } widget_list_iterate_end;
+//    } }
 //  }
 //
-//  widget_list_iterate(windows_front_to_back, pwidget) {
+//  for (widget pwidget : windows_front_to_back.data) {
 //    if (pwidget.data.window.shown && pwidget.accepts_events[event_type]
 //	&& ct_point_in_rect(pos, &pwidget.outer_bounds)) {
 //	boolean is_transparent;
@@ -819,20 +819,20 @@ public class Widget_window{
 //	break;
 //      }
 //    }
-//  } widget_list_iterate_end;
+//  } }
 //
 //  if (!window) {
 //    return null;
 //  }
 //  assert(ct_point_valid(&tmp));
 //
-//  widget_list_iterate(window.data.window.children, pwidget) {
+//  for (widget pwidget : window.data.window.children.data) {
 //    if (pwidget.type != WT_WINDOW && pwidget.accepts_events[event_type]
 //	&& ct_point_in_rect(&tmp, &pwidget.outer_bounds)) {
 //	assert(pwidget.type<=WT_LAST);
 //      return pwidget;
 //    }
-//  } widget_list_iterate_end;
+//  } }
 //
 //  assert(window.type<=WT_LAST);
 //  return window;
@@ -882,7 +882,7 @@ public class Widget_window{
 //void sw_window_set_mouse_press_notify(sw_widget widget,
 //				      void (*callback) (sw_widget 
 //							widget,
-//							const struct ct_point
+//							final struct ct_point
 //							* pos, enum be_mouse_button button,
 //							int state,
 //							void *data),
@@ -896,7 +896,7 @@ public class Widget_window{
 //  ...
 //*************************************************************************/
 //void sw_window_canvas_background_region_needs_repaint(struct sw_widget
-//						      *widget, const struct ct_rect
+//						      *widget, final struct ct_rect
 //						      *region)
 //{
 //#if 0
@@ -943,7 +943,7 @@ public class Widget_window{
 //void sw_window_set_key_notify(sw_widget widget,
 //			      boolean(*callback) (sw_widget 
 //					       widget,
-//					       const be_key  key,
+//					       final be_key  key,
 //					       void *data), void *data)
 //{
 //  widget.key = callback;
@@ -953,9 +953,9 @@ public class Widget_window{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean deliver_key(const be_key key)
+//boolean deliver_key(final be_key key)
 //{
-//  widget_list_iterate(windows_front_to_back, pwidget) {
+//  for (widget pwidget : windows_front_to_back.data) {
 //    if (!pwidget.data.window.shown || !pwidget.accepts_events[EV_KEYBOARD]) {
 //      continue;
 //    }
@@ -964,13 +964,13 @@ public class Widget_window{
 //      return true;
 //    }
 //
-//    widget_list_iterate(pwidget.data.window.children, pwidget2) {
+//    for (widget pwidget2 : pwidget.data.window.children.data) {
 //      if (pwidget2.key && pwidget2.key(pwidget2, key, pwidget2.key_data)) {
 //        // printf("deliver key %s to widget %p\n", ct_key_format(key), pwidget2);
 //	return true;
 //      }
-//    } widget_list_iterate_end;
-//  } widget_list_iterate_end;
+//    } }
+//  } }
 //
 //  return false;
 //}
@@ -980,12 +980,12 @@ public class Widget_window{
 //*************************************************************************/
 //void sw_window_set_user_drag(sw_widget  widget,void (*drag_start)
 //			      (sw_widget  widget,
-//			       const ct_point  mouse,
+//			       final ct_point  mouse,
 //			       enum be_mouse_button button),
 //			     void (*drag_move) (sw_widget  widget,
-//						const ct_point 
+//						final ct_point 
 //						start_position,
-//						const ct_point 
+//						final ct_point 
 //						current_position,
 //						enum be_mouse_button button),
 //			     void (*drag_end) (sw_widget  widget,

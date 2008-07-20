@@ -54,7 +54,7 @@ public class Connecthand{
 //**************************************************************************/
 //void establish_new_connection(connection pconn)
 //{
-//  conn_list dest = &pconn.self;
+//  Speclists<Connection> dest = &pconn.self;
 //  player pplayer;
 //  struct packet_server_join_reply packet;
 //  char hostname[512];
@@ -90,12 +90,12 @@ public class Connecthand{
 //  /* notify the console and other established connections that you're here */
 //  freelog(LOG_NORMAL, "%s has connected from %s.",
 //          pconn.username, pconn.addr);
-//  conn_list_iterate(game.est_connections, aconn) {
+//  for (conn aconn : game.est_connections.data) {
 //    if (aconn != pconn) {
 //      notify_conn(&aconn.self, "Server: %s has connected from %s.",
 //                  pconn.username, pconn.addr);
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //
 //  /* a player has already been created for this user, reconnect him */
 //  if ((pplayer = find_player_by_user(pconn.username))) {
@@ -252,7 +252,7 @@ public class Connecthand{
 //  } 
 //
 //  /* don't allow duplicate logins */
-//  conn_list_iterate(game.all_connections, aconn) {
+//  for (conn aconn : game.all_connections.data) {
 //    if (mystrcasecmp(req.username, aconn.username) == 0) { 
 //      my_snprintf(msg, sizeof(msg), "'%s' already connected.", 
 //                  req.username);
@@ -261,7 +261,7 @@ public class Connecthand{
 //              req.username, pconn.addr);
 //      return false;
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //
 //  if (srvarg.auth_enabled) {
 //    return authenticate_user(pconn, req.username);
@@ -365,8 +365,8 @@ public class Connecthand{
 //  on 'remove' arg.  Sends conn_info packets for 'src' to 'dest', turning
 //  off 'used' if 'remove' is specified.
 //**************************************************************************/
-//static void send_conn_info_arg(conn_list src,
-//                               conn_list dest, boolean remove)
+//static void send_conn_info_arg(Speclists<Connection> src,
+//                               Speclists<Connection> dest, boolean remove)
 //{
 //  struct packet_conn_info packet;
 //  
@@ -377,14 +377,14 @@ public class Connecthand{
 //    }
 //    lsend_packet_conn_info(dest, &packet);
 //  }
-//  conn_list_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
 //  Send conn_info packets to tell 'dest' connections all about
 //  'src' connections.
 //**************************************************************************/
-//void send_conn_info(conn_list src, conn_list dest)
+//void send_conn_info(Speclists<Connection> src, Speclists<Connection> dest)
 //{
 //  send_conn_info_arg(src, dest, false);
 //}
@@ -393,7 +393,7 @@ public class Connecthand{
 //  Like send_conn_info(), but turn off the 'used' bits to tell clients
 //  to remove info about these connections instead of adding it.
 //**************************************************************************/
-//void send_conn_info_remove(conn_list src, conn_list dest)
+//void send_conn_info_remove(Speclists<Connection> src, Speclists<Connection> dest)
 //{
 //  send_conn_info_arg(src, dest, true);
 //}
@@ -453,12 +453,12 @@ public class Connecthand{
 //
 //  /* If any other (non-observing) conn is attached to 
 //   * this player, the player is still connected. */
-//  conn_list_iterate(pconn.player.connections, aconn) {
+//  for (conn aconn : pconn.player.connections.data) {
 //    if (!aconn.observer) {
 //      pconn.player.is_connected = true;
 //      break;
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //
 //  pconn.player = null;
 //

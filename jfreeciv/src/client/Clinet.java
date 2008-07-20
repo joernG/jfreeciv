@@ -243,7 +243,7 @@ public class Clinet{
 //**************************************************************************/
 //void disconnect_from_server()
 //{
-//  const boolean force = !aconnection.used;
+//  final boolean force = !aconnection.used;
 //
 //  attribute_flush();
 //  /* If it's internal server - kill him 
@@ -521,7 +521,7 @@ public class Clinet{
 //  struct section_file the_file, *file = &the_file;
 //  int nservers, i, j;
 //
-//  server_list = fc_malloc(sizeof(struct server_list));
+//  server_list = fc_malloc(sizeof(Speclists<server>));
 //  server_list_init(server_list);
 //
 //  /* This call closes f. */
@@ -715,7 +715,7 @@ public class Clinet{
 //    free(ptmp.nplayers);
 //
 //    free(ptmp);
-//  } server_list_iterate_end;
+//  } }
 //
 //  server_list_unlink_all(server_list);
 //  free(server_list);
@@ -757,13 +757,13 @@ public class Clinet{
 //
 //  /* Set the Time-to-Live field for the packet  */
 //  ttl = SERVER_LAN_TTL;
-//  if (setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, (const char*)&ttl, 
+//  if (setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, (final char*)&ttl, 
 //                 sizeof(ttl))) {
 //    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return 0;
 //  }
 //
-//  if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (const char*)&opt, 
+//  if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (final char*)&opt, 
 //                 sizeof(opt))) {
 //    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return 0;
@@ -810,12 +810,12 @@ public class Clinet{
 //  mreq.imr_multiaddr.s_addr = inet_addr(group);
 //  mreq.imr_interface.s_addr = htonl(INADDR_ANY);
 //  if (setsockopt(socklan, IPPROTO_IP, IP_ADD_MEMBERSHIP, 
-//                 (const char*)&mreq, sizeof(mreq)) < 0) {
+//                 (final char*)&mreq, sizeof(mreq)) < 0) {
 //    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return 0;
 //  }
 //
-//  lan_servers = fc_malloc(sizeof(struct server_list));
+//  lan_servers = fc_malloc(sizeof(Speclists<server>));
 //  server_list_init(lan_servers);
 //
 //  return 1;
@@ -899,7 +899,7 @@ public class Clinet{
 //          && !mystrcasecmp(aserver.port, port)) {
 //	goto again;
 //      } 
-//    } server_list_iterate_end;
+//    } }
 //
 //    freelog(LOG_DEBUG,
 //            ("Received a valid announcement from a server on the LAN."));

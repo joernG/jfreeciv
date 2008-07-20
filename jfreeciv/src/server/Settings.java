@@ -43,7 +43,7 @@ public class Settings{
 //				  N"Vital",
 //				  N"Situational",
 //				  N"Rare"};
-//const int OLEVELS_NUM = ARRAY_SIZE(sset_level_names);
+//final int OLEVELS_NUM = ARRAY_SIZE(sset_level_names);
 //
 //
 ///**************************************************************************
@@ -1025,5 +1025,5 @@ public class Settings{
 //};
 //
 ///* The number of settings, not including the END. */
-//const int SETTINGS_NUM = ARRAY_SIZE(settings) - 1;
+//final int SETTINGS_NUM = ARRAY_SIZE(settings) - 1;
 }

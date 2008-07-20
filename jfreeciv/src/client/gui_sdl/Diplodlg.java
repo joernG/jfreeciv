@@ -499,7 +499,7 @@ public class Diplodlg{
 //    add_to_gui_list(ID_LABEL, pBuf);
 //    count++;
 //    
-//    /*if(type == DS_WAR || type == DS_NEUTRAL) {*/
+//    /*if(type == diplstate_type.DS_WAR || type == DS_NEUTRAL) {*/
 //    if(type != DS_CEASEFIRE) {
 //      my_snprintf(cBuf, sizeof(cBuf), "  %s", Q"?diplomatic_state:Cease-fire");
 //      pBuf = create_iconlabel_from_chars(null, pWindow.dst,
@@ -701,12 +701,12 @@ public class Diplodlg{
 //
 //    if (n > 0) {
 //      city_list_ptrs = MALLOC(sizeof(city ) * n);
-//      city_list_iterate(pPlayer0.cities, pCity) {
+//      for (city pCity : pPlayer0.cities.data) {
 //        if (!is_capital(pCity)) {
 //	  city_list_ptrs[i] = pCity;
 //	  i++;
 //        }
-//      } city_list_iterate_end;	
+//      } }	
 //    } else {
 //      city_list_ptrs = null;
 //    }
@@ -1184,7 +1184,7 @@ public class Diplodlg{
 //		  pplayer_get_diplstate(game.player_ptr, pPlayer).type;
 //  
 //  if(!can_meet_with_player(pPlayer)) {
-//    if(type == DS_WAR || pPlayer == game.player_ptr) {
+//    if(type == diplstate_type.DS_WAR || pPlayer == game.player_ptr) {
 //      flush_dirty();
 //      return;
 //    } else {
@@ -1237,7 +1237,7 @@ public class Diplodlg{
 //    ww = MAX(ww , pText.w);
 //    hh += pText.h + 15;
 //          
-//    if(type != DS_WAR && can_client_issue_orders()) {
+//    if(type != diplstate_type.DS_WAR && can_client_issue_orders()) {
 //      
 //      if(type == DS_NEUTRAL) {
 //	my_snprintf(cBuf, sizeof(cBuf), "Declare WAR");
@@ -1308,7 +1308,7 @@ public class Diplodlg{
 //    button_h += 4;
 //    ww = MAX(ww, button_w + 20);
 //    
-//    if(type != DS_WAR) {
+//    if(type != diplstate_type.DS_WAR) {
 //      if(shared) {
 //	hh += 4 * (button_h + 10);
 //      } else {
@@ -1347,7 +1347,7 @@ public class Diplodlg{
 //         
 //    pBuf = pWindow;
 //  
-//    if(type != DS_WAR) {
+//    if(type != diplstate_type.DS_WAR) {
 //      /* cancel treaty */
 //      pBuf = pBuf.prev;
 //      pBuf.size.w = button_w;

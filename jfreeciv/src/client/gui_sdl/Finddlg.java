@@ -199,7 +199,7 @@ public class Finddlg{
 //      }
 //      
 //      n++;  
-//    } city_list_iterate_end;
+//    } }
 //  }
 //  pFind_City_Dlg.pBeginWidgetList = pBuf;
 //  pFind_City_Dlg.pBeginActiveWidgetList = pBuf;

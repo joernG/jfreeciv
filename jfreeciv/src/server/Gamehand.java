@@ -48,7 +48,7 @@ public class Gamehand{
 //****************************************************************************/
 //static void init_game_id()
 //{
-//  static const char chars[] =
+//  static final char chars[] =
 //    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //  int i;
 //
@@ -64,8 +64,8 @@ public class Gamehand{
 //static void place_starting_unit(tile ptile, player pplayer,
 //				char crole)
 //{
-//  Unit_Type_id utype;
-//  enum unit_flag_id role;
+//  int utype;
+//  Eunit_flag_id role;
 //
 //  assert(!is_non_allied_unit_tile(ptile, pplayer));
 //
@@ -146,7 +146,7 @@ public class Gamehand{
 //****************************************************************************/
 //void init_new_game()
 //{
-//  const int NO_START_POS = -1;
+//  final int NO_START_POS = -1;
 //  int start_pos[game.nplayers];
 //  boolean pos_used[map.num_start_positions];
 //  int i, num_used = 0;
@@ -292,7 +292,7 @@ public class Gamehand{
 //  Send specified state; should be a CLIENT_GAME_*_STATE ?
 //  (But note client also changes state from other events.)
 //**************************************************************************/
-//void send_game_state(conn_list dest, int state)
+//void send_game_state(Speclists<Connection> dest, int state)
 //{
 //  dlsend_packet_game_state(dest, state);
 //}
@@ -302,7 +302,7 @@ public class Gamehand{
 //  Send game_info packet; some server options and various stuff...
 //  dest==null means game.game_connections
 //**************************************************************************/
-//void send_game_info(conn_list dest)
+//void send_game_info(Speclists<Connection> dest)
 //{
 //  struct packet_game_info ginfo;
 //  int i;
@@ -355,7 +355,7 @@ public class Gamehand{
 //    ginfo.player_idx = (pconn.player ? pconn.player.player_no : -1);
 //    send_packet_game_info(pconn, &ginfo);
 //  }
-//  conn_list_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -383,7 +383,7 @@ public class Gamehand{
 //    game.timeoutint += game.timeoutintinc;
 //
 //    if (game.timeout > GAME_MAX_TIMEOUT) {
-//      notify_conn_ex(&game.game_connections, null, E_NOEVENT,
+//      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
 //		     _("The turn timeout has exceeded its maximum value, "
 //		       "fixing at its maximum"));
 //      freelog(LOG_DEBUG, "game.timeout exceeded maximum value");
@@ -391,7 +391,7 @@ public class Gamehand{
 //      game.timeoutint = 0;
 //      game.timeoutinc = 0;
 //    } else if (game.timeout < 0) {
-//      notify_conn_ex(&game.game_connections, null, E_NOEVENT,
+//      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
 //		     _("The turn timeout is smaller than zero, "
 //		       "fixing at zero."));
 //      freelog(LOG_DEBUG, "game.timeout less than zero");
@@ -479,7 +479,7 @@ public class Gamehand{
 //the file values. Sends an answer to the client once it's done.
 //**************************************************************************/
 //void handle_single_want_hack_req(connection pc,
-//    				 const struct packet_single_want_hack_req
+//    				 final struct packet_single_want_hack_req
 //				 *packet)
 //{
 //  struct section_file file;

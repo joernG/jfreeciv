@@ -235,7 +235,7 @@ public class Connectdlg_common{
 //  
 //  if (server_pid == 0) {
 //    int fd, argc = 0;
-//    const int max_nargs = 13;
+//    final int max_nargs = 13;
 //    char *argv[max_nargs + 1], port_buf[32];
 //
 //    /* inside the child */
@@ -410,7 +410,7 @@ public class Connectdlg_common{
 //*************************************************************************/
 //static void randomize_string(char *str, size_t n)
 //{
-//  const char chars[] =
+//  final char chars[] =
 //    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //  int i;
 //

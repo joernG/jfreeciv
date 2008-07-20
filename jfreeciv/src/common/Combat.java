@@ -1,156 +1,136 @@
 package common;
+import static common.Unit.*;
+import static common.Player_P.*;
+import static common.City.*;
+import common.city.city;
+import common.map.tile;
+import common.player.player;
+import common.unit.unit;
 
 public class Combat{
-
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <math.h>
-//
 //#include "log.h"
 //#include "map.h"
 //#include "packets.h"
 //#include "unit.h"
 //
 //#include "combat.h"
+
+	/***************************************************************************
+	 * Checks if player is restricted diplomatically from attacking the tile.
+	 * Returns FLASE if 1) the tile is empty or 2) the tile contains a non-enemy
+	 * city or 3) the tile contains a non-enemy unit
+	 **************************************************************************/
+	static boolean can_player_attack_tile(player pplayer, final tile ptile)
+	{
+		city pcity = ptile.city;
+
+		/* 1. Is there anyone there at all? */
+		if (null==pcity && (ptile.units.foo_list_size()) == 0) {
+			return false;
+		}
+
+		/* 2. If there is a city there, can we attack it? */
+		if (pcity!=null && !pplayers_at_war(city_owner(pcity), pplayer)) {
+			return false;
+		}
+
+		/* 3. Are we allowed to attack _all_ units there? */
+		for (unit aunit : ptile.units.data) {
+			if (!pplayers_at_war(unit_owner(aunit), pplayer)) {
+				/* Enemy hiding behind a human/diplomatic shield */
+				return false;
+			}
+		} 
+
+		return true;
+	}
+
+	/***************************************************************************
+	 * Checks if a unit can physically attack pdefender at the tile (assuming it
+	 * is adjacent and at war).
+	 * 
+	 * Unit can NOT attack if: 1) it does not have any attack power. 2) it is
+	 * not a fighter and defender is a flying unit (except city/airbase). 3) it
+	 * is a ground unit without marine ability and it attacks from ocean. 4) it
+	 * is a ground unit and it attacks a target on an ocean square. 5) it is a
+	 * sailing unit without shore bombardment capability and it attempts to
+	 * attack land.
+	 * 
+	 * Does NOT check: 1) Moves left 2) Adjacency 3) Diplomatic status
+	 **************************************************************************/
+	static boolean can_unit_attack_unit_at_tile(unit punit, unit pdefender,
+			final tile dest_tile) {
+//		Terrain_type_id fromtile = punit.tile.terrain;
+//		Terrain_type_id totile = dest_tile.terrain;
+//		city pcity = dest_tile.city;
 //
-///***********************************************************************
-//  Checks if player is restricted diplomatically from attacking the tile.
-//  Returns FLASE if
-//  1) the tile is empty or
-//  2) the tile contains a non-enemy city or
-//  3) the tile contains a non-enemy unit
-//***********************************************************************/
-//boolean can_player_attack_tile(player pplayer, const tile ptile)
-//{
-//  city pcity = ptile.city;
-//  
-//  /* 1. Is there anyone there at all? */
-//  if (!pcity && unit_list_size(&(ptile.units)) == 0) {
-//    return false;
-//  }
+//		/* 1. Can we attack _anything_ ? */
+//		if (!is_military_unit(punit) || !is_attack_unit(punit)) {
+//			return false;
+//		}
 //
-//  /* 2. If there is a city there, can we attack it? */
-//  if (pcity && !pplayers_at_war(city_owner(pcity), pplayer)) {
-//    return false;
-//  }
+//		/* 2. Only fighters can attack planes, except in city or airbase attacks */
+//		if (!unit_flag(punit, F_FIGHTER) && is_air_unit(pdefender)
+//				&& !(pcity || map_has_special(dest_tile, S_AIRBASE))) {
+//			return false;
+//		}
 //
-//  /* 3. Are we allowed to attack _all_ units there? */
-//  unit_list_iterate(ptile.units, aunit) {
-//    if (!pplayers_at_war(unit_owner(aunit), pplayer)) {
-//      /* Enemy hiding behind a human/diplomatic shield */
-//      return false;
-//    }
-//  } unit_list_iterate_end;
+//		/* 3. Can't attack with ground unit from ocean, except for marines */
+//		if (is_ocean(fromtile) && is_ground_unit(punit)
+//				&& !unit_flag(punit, F_MARINES)) {
+//			return false;
+//		}
 //
-//  return true;
-//}
+//		/* 4. Ground units cannot attack water units */
+//		if (is_ocean(totile) && is_ground_unit(punit)) {
+//			return false;
+//		}
 //
-///***********************************************************************
-//  Checks if a unit can physically attack pdefender at the tile
-//  (assuming it is adjacent and at war).
-//
-//  Unit can NOT attack if:
-//  1) it does not have any attack power.
-//  2) it is not a fighter and defender is a flying unit (except city/airbase).
-//  3) it is a ground unit without marine ability and it attacks from ocean.
-//  4) it is a ground unit and it attacks a target on an ocean square.
-//  5) it is a sailing unit without shore bombardment capability and it
-//     attempts to attack land.
-//
-//  Does NOT check:
-//  1) Moves left
-//  2) Adjacency
-//  3) Diplomatic status
-//***********************************************************************/
-//boolean can_unit_attack_unit_at_tile(unit punit, unit pdefender,
-//                                  const tile dest_tile)
-//{
-//  Terrain_type_id fromtile = punit.tile.terrain;
-//  Terrain_type_id totile = dest_tile.terrain;
-//  city pcity = dest_tile.city;
-//
-//  /* 1. Can we attack _anything_ ? */
-//  if (!is_military_unit(punit) || !is_attack_unit(punit)) {
-//    return false;
-//  }
-//
-//  /* 2. Only fighters can attack planes, except in city or airbase attacks */
-//  if (!unit_flag(punit, F_FIGHTER) && is_air_unit(pdefender)
-//      && !(pcity || map_has_special(dest_tile, S_AIRBASE))) {
-//    return false;
-//  }
-//
-//  /* 3. Can't attack with ground unit from ocean, except for marines */
-//  if (is_ocean(fromtile)
-//      && is_ground_unit(punit)
-//      && !unit_flag(punit, F_MARINES)) {
-//    return false;
-//  }
-//
-//  /* 4. Ground units cannot attack water units */
-//  if (is_ocean(totile) && is_ground_unit(punit)) {
-//    return false;
-//  }
-//
-//  /* 5. Shore bombardement can be done by certain units only */
-//  if (unit_flag(punit, F_NO_LAND_ATTACK) && !is_ocean(totile)) {
-//    return false;
-//  }
-//
-//  return true;
-//}
-//
-///***********************************************************************
-//  To attack a stack, unit must be able to attack every unit there (not
-//  including transported units).
-//************************************************************************/
-//boolean can_unit_attack_all_at_tile(unit punit,
-//				 const tile ptile)
-//{
-//  unit_list_iterate(ptile.units, aunit) {
-//    /* HACK: we don't count transported units here.  This prevents some
-//     * bugs like a submarine carrying a cruise missile being invulnerable
-//     * to other sea units.  However from a gameplay perspective it's a hack,
-//     * since players can load and unload their units manually to protect
-//     * their transporters. */
-//    if (aunit.transported_by == -1
-//	&& !can_unit_attack_unit_at_tile(punit, aunit, ptile)) {
-//      return false;
-//    }
-//  } unit_list_iterate_end;
-//
-//  return true;
-//}
-//
-///***********************************************************************
-//  Is unit (1) diplomatically allowed to attack and (2) physically able
-//  to do so?
-//***********************************************************************/
-//boolean can_unit_attack_tile(unit punit, const tile dest_tile)
-//{
-//  if (!can_player_attack_tile(unit_owner(punit), dest_tile)) {
-//    return false;
-//  }
-//
-//  return can_unit_attack_all_at_tile(punit, dest_tile);
-//}
-//
-///***********************************************************************
+//		/* 5. Shore bombardement can be done by certain units only */
+//		if (unit_flag(punit, F_NO_LAND_ATTACK) && !is_ocean(totile)) {
+//			return false;
+//		}
+
+		return true;
+	}
+
+	/***************************************************************************
+	 * To attack a stack, unit must be able to attack every unit there (not
+	 * including transported units).
+	 **************************************************************************/
+	public static boolean can_unit_attack_all_at_tile(unit punit,
+			final tile ptile)
+	{
+		for (unit aunit : ptile.units.data) {
+			/*
+			 * HACK: we don't count transported units here. This prevents some
+			 * bugs like a submarine carrying a cruise missile being
+			 * invulnerable to other sea units. However from a gameplay
+			 * perspective it's a hack, since players can load and unload their
+			 * units manually to protect their transporters.
+			 */
+			if (aunit.transported_by == -1
+					&& !can_unit_attack_unit_at_tile(punit, aunit, ptile)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/***************************************************************************
+	 * Is unit (1) diplomatically allowed to attack and (2) physically able to
+	 * do so?
+	 **************************************************************************/
+	public static boolean can_unit_attack_tile(unit punit, final tile dest_tile) {
+		if (!can_player_attack_tile(unit_owner(punit), dest_tile)) {
+			return false;
+		}
+
+		return can_unit_attack_all_at_tile(punit, dest_tile);
+	}
+
+// /***********************************************************************
 //Returns the chance of the attacker winning, a number between 0 and 1.
 //If you want the chance that the defender wins just use 1-chance(...)
 //
@@ -325,7 +305,7 @@ public class Combat{
 //  a wrapper function returns 1 if there is a sdi-defense close to the square
 //**************************************************************************/
 //city sdi_defense_close(player owner,
-//			       const tile ptile)
+//			       final tile ptile)
 //{
 //  square_iterate(ptile, 2, ptile1) {
 //    city pcity = map_get_city(ptile1);
@@ -352,7 +332,7 @@ public class Combat{
 // status. Set moves_left to SINGLE_MOVE to disable the reduction of
 // power caused by tired units.
 //**************************************************************************/
-//int base_get_attack_power(Unit_Type_id type, int veteran, int moves_left)
+//int base_get_attack_power(int type, int veteran, int moves_left)
 //{
 //  int power;
 //
@@ -411,9 +391,9 @@ public class Combat{
 //May be called with a non-existing att_type to avoid any unit type
 //effects.
 //**************************************************************************/
-//static int defense_multiplication(Unit_Type_id att_type,
-//				  Unit_Type_id def_type,
-//				  const tile ptile,
+//static int defense_multiplication(int att_type,
+//				  int def_type,
+//				  final tile ptile,
 //				  int defensepower, boolean fortified)
 //{
 //  city pcity = map_get_city(ptile);
@@ -471,8 +451,8 @@ public class Combat{
 // May be called with a non-existing att_type to avoid any effects which
 // depend on the attacker.
 //**************************************************************************/
-//int get_virtual_defense_power(Unit_Type_id att_type, Unit_Type_id def_type,
-//			      const tile ptile,
+//int get_virtual_defense_power(int att_type, int def_type,
+//			      final tile ptile,
 //			      boolean fortified, int veteran)
 //{
 //  int defensepower = unit_types[def_type].defense_strength;
@@ -527,27 +507,27 @@ public class Combat{
 //
 //  return rating;
 //}
-//
-///**************************************************************************
-//  Finds the best defender on the tile, given an attacker.  The diplomatic
-//  relationship of attacker and defender is ignored; the caller should check
-//  this.
-//**************************************************************************/
-//unit get_defender(unit attacker, const tile ptile)
-//{
-//  unit bestdef = null;
-//  int bestvalue = -1, best_cost = 0, rating_of_best = 0;
-//
-//  /* Simply call win_chance with all the possible defenders in turn, and
-//   * take the best one.  It currently uses build cost as a tiebreaker in
-//   * case 2 units are identical, but this is crude as build cost does not
-//   * neccesarily have anything to do with the value of a unit.  This function
-//   * could be improved to take the value of the unit into account.  It would
-//   * also be nice if the function was a bit more fuzzy about prioritizing,
-//   * making it able to fx choose a 1a/9d unit over a 10a/10d unit. It should
-//   * also be able to spare units without full hp's to some extent, as these
-//   * could be more valuable later. */
-//  unit_list_iterate(ptile.units, defender) {
+
+	/***************************************************************************
+	 * Finds the best defender on the tile, given an attacker. The diplomatic
+	 * relationship of attacker and defender is ignored; the caller should check
+	 * this.
+	 **************************************************************************/
+	public static unit get_defender(unit attacker, final tile ptile)
+	{
+		unit bestdef = null;
+		int bestvalue = -1, best_cost = 0, rating_of_best = 0;
+
+		/* Simply call win_chance with all the possible defenders in turn, and
+		 * take the best one.  It currently uses build cost as a tiebreaker in
+		 * case 2 units are identical, but this is crude as build cost does not
+		 * neccesarily have anything to do with the value of a unit.  This function
+		 * could be improved to take the value of the unit into account.  It would
+		 * also be nice if the function was a bit more fuzzy about prioritizing,
+		 * making it able to fx choose a 1a/9d unit over a 10a/10d unit. It should
+		 * also be able to spare units without full hp's to some extent, as these
+		 * could be more valuable later. */
+//  for (unit defender : ptile.units.data) {
 //    /* We used to skip over allied units, but the logic for that is
 //     * complicated and is now handled elsewhere. */
 //    if (unit_can_defend_here(defender)) {
@@ -579,7 +559,7 @@ public class Combat{
 //	rating_of_best = defense_rating;
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  if (unit_list_size(&ptile.units) > 0 && !bestdef) {
 //    unit punit = unit_list_get(&ptile.units, 0);
@@ -590,9 +570,9 @@ public class Combat{
 //            unit_type(punit).name, unit_list_size(&ptile.units), 
 //            get_terrain_name(ptile.terrain), ptile.x, ptile.y);
 //  }
-//
-//  return bestdef;
-//}
+
+		return bestdef;
+	}
 //
 ///**************************************************************************
 //get unit at (x, y) that wants to kill defender.
@@ -600,12 +580,12 @@ public class Combat{
 //Works like get_defender; see comment there.
 //This function is mostly used by the AI.
 //**************************************************************************/
-//unit get_attacker(unit defender, const tile ptile)
+//unit get_attacker(unit defender, final tile ptile)
 //{
 //  unit bestatt = 0;
 //  int bestvalue = -1, unit_a, best_cost = 0;
 //
-//  unit_list_iterate(ptile.units, attacker) {
+//  for (unit attacker : ptile.units.data) {
 //    int build_cost = unit_build_shield_cost(attacker.type);
 //
 //    if (pplayers_allied(unit_owner(defender), unit_owner(attacker))) {
@@ -618,7 +598,7 @@ public class Combat{
 //      bestatt = attacker;
 //      best_cost = build_cost;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return bestatt;
 //}
@@ -626,7 +606,7 @@ public class Combat{
 ///**************************************************************************
 //  Is it a city/fortress/air base or will the whole stack die in an attack
 //**************************************************************************/
-//boolean is_stack_vulnerable(const tile ptile)
+//boolean is_stack_vulnerable(final tile ptile)
 //{
 //  return !(ptile.city != null
 //           || map_has_special(ptile, S_FORTRESS)

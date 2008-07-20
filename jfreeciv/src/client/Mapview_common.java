@@ -166,8 +166,8 @@ public class Mapview_common{
 //****************************************************************************/
 //static void gui_to_map_pos(int *map_x, int *map_y, int gui_x, int gui_y)
 //{
-//  const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
-//  const int HH = hex_height, HW = hex_width;
+//  final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//  final int HH = hex_height, HW = hex_width;
 //
 //  if (HH > 0 || HW > 0) {
 //    /* To handle hexagonal cases we have to revert to a less elegant method
@@ -347,7 +347,7 @@ public class Mapview_common{
 //****************************************************************************/
 //static void normalize_gui_pos(int *gui_x, int *gui_y)
 //{
-//  int map_x, map_y, nat_x, nat_y, gui_x0, gui_y0, diff_x, diff_y;
+//  int map_x, map_y, nat_x=0, nat_y=0, gui_x0, gui_y0, diff_x, diff_y;
 //
 //  /* Convert the (gui_x, gui_y) into a (map_x, map_y) plus a GUI offset
 //   * from this tile. */
@@ -359,7 +359,8 @@ public class Mapview_common{
 //  /* Perform wrapping without any realness check.  It's important that
 //   * we wrap even if the map position is unreal, which normalize_map_pos
 //   * doesn't necessarily do. */
-//  MAP_TO_NATIVE_POS(&nat_x, &nat_y, map_x, map_y);
+//  Point p = MAP_TO_NATIVE_POS(nat_x, nat_y, map_x, map_y);
+//	nat_x = p.x; nat_y =p.y;
 //  if (topo_has_flag(TF_WRAPX)) {
 //    nat_x = FC_WRAP(nat_x, map.xsize);
 //  }
@@ -425,7 +426,7 @@ public class Mapview_common{
 //static void base_set_mapview_origin(int gui_x0, int gui_y0)
 //{
 //  int old_gui_x0, old_gui_y0, dx, dy;
-//  const int width = mapview_canvas.width, height = mapview_canvas.height;
+//  final int width = mapview_canvas.width, height = mapview_canvas.height;
 //  int common_x0, common_x1, common_y0, common_y1;
 //  int update_x0, update_x1, update_y0, update_y1;
 //  tile map_center;
@@ -576,18 +577,18 @@ public class Mapview_common{
 //  ends of the map rectangle so that it's capable of reaching the whole
 //  area.
 //
-//  This function gives constraints on how far the window is allowed to
+//  This function gives finalraints on how far the window is allowed to
 //  slide.  xmin and ymin are the minimum values for the window origin.
 //  xsize and ysize give the scroll dimensions of the mapview window.
 //  xmax and ymax give the maximum values that the bottom/left ends of the
-//  window may reach.  The constraints, therefore, are that:
+//  window may reach.  The finalraints, therefore, are that:
 //
 //    get_mapview_scroll_pos(&scroll_x, &scroll_y);
 //    xmin <= scroll_x < xmax - xsize
 //    ymin <= scroll_y < ymax - ysize
 //
 //  This function should be used anywhere and everywhere that scrolling is
-//  constrained.
+//  finalrained.
 //
 //  Note that scroll coordinates, not map coordinates, are used.  Currently
 //  these correspond to native coordinates.
@@ -758,9 +759,9 @@ public class Mapview_common{
 //{
 //  int canvas_x, canvas_y;
 //  int xmin, ymin, xmax, ymax, xsize, ysize, scroll_x, scroll_y;
-//  const int border_x = (is_isometric ? NORMAL_TILE_WIDTH / 2
+//  final int border_x = (is_isometric ? NORMAL_TILE_WIDTH / 2
 //			: 2 * NORMAL_TILE_WIDTH);
-//  const int border_y = (is_isometric ? NORMAL_TILE_HEIGHT / 2
+//  final int border_y = (is_isometric ? NORMAL_TILE_HEIGHT / 2
 //			: 2 * NORMAL_TILE_HEIGHT);
 //  boolean same = (is_isometric == MAP_IS_ISOMETRIC);
 //
@@ -1109,9 +1110,9 @@ public class Mapview_common{
 //				int *start_x, int *start_y,
 //				int *end_x, int *end_y)
 //{
-//  const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
-//  const int HW = hex_width, HH = hex_height;
-//  const int overlap = (width > 1) ? 1 : 0;
+//  final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//  final int HW = hex_width, HH = hex_height;
+//  final int overlap = (width > 1) ? 1 : 0;
 //
 //  assert(inset >= 0);
 //  assert(width >= 1);
@@ -1456,7 +1457,7 @@ public class Mapview_common{
 //				tile ptile,
 //				int canvas_x, int canvas_y, boolean citymode)
 //{
-//  const int inset = (is_isometric ? 0 : 1);
+//  final int inset = (is_isometric ? 0 : 1);
 //  enum direction8 dir;
 //
 //  if (citymode) {
@@ -1717,7 +1718,7 @@ public class Mapview_common{
 //void show_city_descriptions(int canvas_x, int canvas_y,
 //			    int width, int height)
 //{
-//  const int dx = max_desc_width - NORMAL_TILE_WIDTH, dy = max_desc_height;
+//  final int dx = max_desc_width - NORMAL_TILE_WIDTH, dy = max_desc_height;
 //
 //  if (!draw_city_names && !draw_city_productions) {
 //    return;
@@ -1886,7 +1887,7 @@ public class Mapview_common{
 //  punit1.hp = MAX(punit1.hp, hp1);
 //
 //  while (punit0.hp > hp0 || punit1.hp > hp1) {
-//    const int diff0 = punit0.hp - hp0, diff1 = punit1.hp - hp1;
+//    final int diff0 = punit0.hp - hp0, diff1 = punit1.hp - hp1;
 //
 //    anim_timer = renew_timer_start(anim_timer, TIMER_USER, TIMER_ACTIVE);
 //
@@ -2092,7 +2093,7 @@ public class Mapview_common{
 //    tile tile1 = base_city_map_to_map(ptile, city_x, city_y);;
 //
 //    if (tile1) {
-//      unit_list_iterate(tile1.units, psettler) {
+//      for (unit psettler : tile1.units.data) {
 //	if (psettler.owner == game.player_idx
 //	    && unit_flag(psettler, F_CITIES)
 //	    && city_can_be_built_here(psettler.tile, psettler)) {
@@ -2103,7 +2104,7 @@ public class Mapview_common{
 //	    best_settler = psettler;
 //	  }
 //	}
-//      } unit_list_iterate_end;
+//      } }
 //    }
 //  } city_map_iterate_outwards_end;
 //
@@ -2150,7 +2151,7 @@ public class Mapview_common{
 //  } else {
 //    impr_type pimprovement_type =
 //		get_improvement_type(pcity.currently_building);
-//    if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //      my_snprintf(buffer, buffer_len, "%s", pimprovement_type.name);
 //    } else if (turns < 999) {
 //      my_snprintf(buffer, buffer_len, "%s %d",
@@ -2514,7 +2515,7 @@ public class Mapview_common{
 //**************************************************************************/
 //static boolean can_do_cached_drawing()
 //{
-//  const int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
+//  final int W = NORMAL_TILE_WIDTH, H = NORMAL_TILE_HEIGHT;
 //  int w = mapview_canvas.store_width, h = mapview_canvas.store_height;
 //
 //  /* If the mapview window is too large, cached drawing is not possible.
@@ -2564,8 +2565,8 @@ public class Mapview_common{
 //	    && h <= (NATURAL_WIDTH + NATURAL_HEIGHT) * H / 4);
 //  } else {
 //    /* Matching. */
-//    const int isofactor = (is_isometric ? 2 : 1);
-//    const int isodiff = (is_isometric ? 6 : 2);
+//    final int isofactor = (is_isometric ? 2 : 1);
+//    final int isodiff = (is_isometric ? 6 : 2);
 //
 //    /* Now we can use the full width and height, with the exception of a small
 //     * area on each side. */

@@ -69,30 +69,30 @@ public class Gui_zoom{
 //#include "mmx.h"
 //#endif
 //
-//static int AA_ZoomSurfaceRGBn(const SDL_Surface *src, SDL_Surface *dst);
+//static int AA_ZoomSurfaceRGBn(final SDL_Surface *src, SDL_Surface *dst);
 //
-//static int AA_ZoomSurfaceFastRGBA32(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGBA32(final SDL_Surface * src,
 //				    SDL_Surface * dst);
 //
-//static int AA_ZoomSurfaceFastRGB24(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGB24(final SDL_Surface * src,
 //				   SDL_Surface * dst);
 //
-//static int AA_ZoomSurfaceFastRGB16(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGB16(final SDL_Surface * src,
 //				   SDL_Surface * dst);
-//static int AA_ZoomSurfaceFastRGB15(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGB15(final SDL_Surface * src,
 //				   SDL_Surface * dst);
 //
-//static int zoomSurfaceRGB32(const SDL_Surface * src, SDL_Surface * dst);
-//static int zoomSurfaceRGB24(const SDL_Surface * src, SDL_Surface * dst);
-//static int zoomSurfaceRGB16(const SDL_Surface * src, SDL_Surface * dst);
+//static int zoomSurfaceRGB32(final SDL_Surface * src, SDL_Surface * dst);
+//static int zoomSurfaceRGB24(final SDL_Surface * src, SDL_Surface * dst);
+//static int zoomSurfaceRGB16(final SDL_Surface * src, SDL_Surface * dst);
 //
-//static int zoomSurfaceY(const SDL_Surface * src, SDL_Surface * dst);
+//static int zoomSurfaceY(final SDL_Surface * src, SDL_Surface * dst);
 //
 ///**************************************************************************
 //  used by AA Zoomers
 //**************************************************************************/
-//static void precalculate_8bit_row_increments(const SDL_Surface * src,
-//					     const SDL_Surface * dst,
+//static void precalculate_8bit_row_increments(final SDL_Surface * src,
+//					     final SDL_Surface * dst,
 //					     Uint32 * pSax, Uint32 * pSay)
 //{
 //  register Uint32 csx, csy;
@@ -128,8 +128,8 @@ public class Gui_zoom{
 //}
 //
 ///* used by not AA Zoomers */
-//static void precalculate_16bit_row_increments(const SDL_Surface * src,
-//					      const SDL_Surface * dst,
+//static void precalculate_16bit_row_increments(final SDL_Surface * src,
+//					      final SDL_Surface * dst,
 //					      Uint32 * pSax, Uint32 * pSay)
 //{
 //  register Uint32 csx, csy;
@@ -168,7 +168,7 @@ public class Gui_zoom{
 //
 //  Zooms 32bit RGBA/ABGR 'src' surface to 'dst' surface using MMX1 code.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGBA32(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastRGBA32(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -299,7 +299,7 @@ public class Gui_zoom{
 //
 //  Zooms 24bit RGB/BGR 'src' surface to 'dst' surface using MMX1 code.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGB24(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastRGB24(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height, step;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -445,7 +445,7 @@ public class Gui_zoom{
 //
 //  Zooms 16bit RGB/BGR 'src' surface to 'dst' surface using MMX1 code.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGB16(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastRGB16(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  register Uint16 *sp, *spp, *csp, *dp;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -632,7 +632,7 @@ public class Gui_zoom{
 //
 //  Zooms 15bit RGBA/ABGR 'src' surface to 'dst' surface using MMX1 code.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGB15(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastRGB15(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  register Uint16 *sp, *spp, *csp, *dp;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -816,10 +816,10 @@ public class Gui_zoom{
 //
 //#else
 //
-//static int AA_ZoomSurfaceFastRGB32(const SDL_Surface *src, SDL_Surface *dst);
-//static int AA_ZoomSurfaceFastestRGB15(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGB32(final SDL_Surface *src, SDL_Surface *dst);
+//static int AA_ZoomSurfaceFastestRGB15(final SDL_Surface * src,
 //				      	SDL_Surface * dst);
-//static int AA_ZoomSurfaceFastestRGB16(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastestRGB16(final SDL_Surface * src,
 //				      	SDL_Surface * dst);
 //
 ///**************************************************************************
@@ -827,7 +827,7 @@ public class Gui_zoom{
 //
 //  Zooms 32bit Full RGBA/ABGR 'src' surface to 'dst' surface.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGBA32(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGBA32(final SDL_Surface * src,
 //				    SDL_Surface * dst)
 //{
 //  Uint32 width, height;
@@ -957,7 +957,7 @@ public class Gui_zoom{
 //
 //  Amask == 0 and 8-8-8 color coding ( 24bit ) . no alpha.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGB32(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGB32(final SDL_Surface * src,
 //				   SDL_Surface * dst)
 //{
 //  Uint32 width, height;
@@ -1085,7 +1085,7 @@ public class Gui_zoom{
 //
 //  Zooms 24bit RGB/BGR 'src' surface to 'dst' surface.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGB24(const SDL_Surface * src,
+//static int AA_ZoomSurfaceFastRGB24(final SDL_Surface * src,
 //				   SDL_Surface * dst)
 //{
 //  Uint32 width, height;
@@ -1207,7 +1207,7 @@ public class Gui_zoom{
 //
 //  Zooms 16bit RGB/BGR 'src' surface to 'dst' surface.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGB16(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastRGB16(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -1344,7 +1344,7 @@ public class Gui_zoom{
 //  Zooms 16bit RGB/BGR 'src' surface to 'dst' surface.
 //  Move green to upper 16 bit and cut alpha to 5 bits.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastestRGB16(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastestRGB16(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -1464,7 +1464,7 @@ public class Gui_zoom{
 //
 //  Zooms 15bit RGBA/ABGR 'src' surface to 'dst' surface.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastRGB15(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastRGB15(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -1602,7 +1602,7 @@ public class Gui_zoom{
 //  Zooms 15bit RGB/BGR 'src' surface to 'dst' surface.
 //  Move green to upper 16 bit and cut alpha to 5 bits.
 //**************************************************************************/
-//static int AA_ZoomSurfaceFastestRGB15(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceFastestRGB15(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -1748,7 +1748,7 @@ public class Gui_zoom{
 //  Zooms N bit RGB/BGR 'src' surface to 'dst' surface.
 //  This is most slowest function and is called in no-standart pixel codings.
 //**************************************************************************/
-//static int AA_ZoomSurfaceRGBn(const SDL_Surface *src, SDL_Surface *dst)
+//static int AA_ZoomSurfaceRGBn(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -1900,7 +1900,7 @@ public class Gui_zoom{
 //
 //  Zoomes 32bit RGB/BGR 'src' surface to 'dst' surface.
 //**************************************************************************/
-//static int zoomSurfaceRGB32(const SDL_Surface *src, SDL_Surface *dst)
+//static int zoomSurfaceRGB32(final SDL_Surface *src, SDL_Surface *dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -1976,7 +1976,7 @@ public class Gui_zoom{
 //
 //  Zoomes 24bit RGBA/ABGR 'src' surface to 'dst' surface. 
 //**************************************************************************/
-//static int zoomSurfaceRGB24(const SDL_Surface * src, SDL_Surface * dst)
+//static int zoomSurfaceRGB24(final SDL_Surface * src, SDL_Surface * dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -2056,7 +2056,7 @@ public class Gui_zoom{
 //
 //  Zoomes 16bit RGBA/ABGR 'src' surface to 'dst' surface.
 //**************************************************************************/
-//static int zoomSurfaceRGB16(const SDL_Surface * src, SDL_Surface * dst)
+//static int zoomSurfaceRGB16(final SDL_Surface * src, SDL_Surface * dst)
 //{
 //  Uint32 width, height;
 //  Uint32 *sax, *say, *csax, *csay;
@@ -2132,7 +2132,7 @@ public class Gui_zoom{
 //
 //  Zoomes 8bit palette/Y 'src' surface to 'dst' surface.
 //**************************************************************************/
-//static int zoomSurfaceY(const SDL_Surface * src, SDL_Surface * dst)
+//static int zoomSurfaceY(final SDL_Surface * src, SDL_Surface * dst)
 //{
 //  Uint32 width, height, sx, sy, *sax, *say, *csax, *csay;
 //  register Uint32 csx, csy;
@@ -2294,7 +2294,7 @@ public class Gui_zoom{
 //
 //  ZoomSurface calls ResizeSurface(...) to do main job.
 //**************************************************************************/
-//SDL_Surface *ZoomSurface(const SDL_Surface * pSrc, double zoomx,
+//SDL_Surface *ZoomSurface(final SDL_Surface * pSrc, double zoomx,
 //			 double zoomy, int smooth)
 //{
 //  int dstwidth, dstheight;
@@ -2317,7 +2317,7 @@ public class Gui_zoom{
 //    1 = resize with AA.
 //    2 = resize with Faster AA ( lower quality ) <. only 16bit surfaces.
 //**************************************************************************/
-//SDL_Surface *ResizeSurface(const SDL_Surface * pSrc, Uint16 new_width,
+//SDL_Surface *ResizeSurface(final SDL_Surface * pSrc, Uint16 new_width,
 //			   Uint16 new_height, int smooth)
 //{
 //  SDL_Surface *pReal_dst, *pBuf_Src = (SDL_Surface *) pSrc;

@@ -259,7 +259,7 @@ public class Gotodlg{
 //      /* FIXME: should use unit_can_airlift_to(). */
 //      gtk_list_store_set(store, &it, 0, pcity.name, 1, pcity.airlift, -1);
 //    }
-//    city_list_iterate_end;
+//    }
 //  }
 //}
 //

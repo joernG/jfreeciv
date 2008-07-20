@@ -78,11 +78,11 @@ public class Be_common_24{
 //  vanilla one. The other is a testbed for optimizations.
 //*************************************************************************/
 //#if 1
-//static void image_blit_masked(const ct_size size,
-//			      const image src,
-//			      const ct_point src_pos,
+//static void image_blit_masked(final ct_size size,
+//			      final image src,
+//			      final ct_point src_pos,
 //			      image dest,
-//			      const ct_point dest_pos)
+//			      final ct_point dest_pos)
 //{
 //  int y;
 //  int width = size.width;
@@ -136,11 +136,11 @@ public class Be_common_24{
 //}
 //#define rdtscll(val) __asm__ __volatile__ ("rdtsc" : "=A" (val))
 //#define PREFETCH(x) __asm__ __volatile__ ("prefetchnta %0": : "m"(*(char *)(x)))
-//static void image_blit_masked(const ct_size size,
-//			      const image src,
-//			      const ct_point src_pos,
+//static void image_blit_masked(final ct_size size,
+//			      final image src,
+//			      final ct_point src_pos,
 //			      image dest,
-//			      const ct_point dest_pos)
+//			      final ct_point dest_pos)
 //{
 //  int y;
 //  int width = size.width;
@@ -238,11 +238,11 @@ public class Be_common_24{
 //  dest with transparency.  Will copy all pixels which have a mask 
 //  == MASK_OPAQUE from src to dest.
 //*************************************************************************/
-//static void image_blit_masked_trans(const ct_size size,
-//				    const image src,
-//				    const ct_point src_pos,
+//static void image_blit_masked_trans(final ct_size size,
+//				    final image src,
+//				    final ct_point src_pos,
 //				    image dest,
-//				    const ct_point dest_pos,
+//				    final ct_point dest_pos,
 //				    int transparency)
 //{
 //  int x, y;
@@ -291,10 +291,10 @@ public class Be_common_24{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void update_masks(const ct_size size,
-//			 const image src,
-//			 const ct_point src_pos,
-//			 image dest, const ct_point dest_pos)
+//static void update_masks(final ct_size size,
+//			 final image src,
+//			 final ct_point src_pos,
+//			 image dest, final ct_point dest_pos)
 //{
 //#if 0
 //  int x, y;
@@ -317,8 +317,8 @@ public class Be_common_24{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void clip_two_regions(const image dest,
-//			     const image src,
+//static void clip_two_regions(final image dest,
+//			     final image src,
 //			     ct_size size,
 //			     ct_point dest_pos,
 //			     ct_point src_pos)
@@ -367,11 +367,11 @@ public class Be_common_24{
 ///*************************************************************************
 //  Changes the mask in dest for all !=0 src masks.
 //*************************************************************************/
-//static void set_mask_masked(const ct_size size,
-//			    const image src,
-//			    const ct_point src_pos,
+//static void set_mask_masked(final ct_size size,
+//			    final image src,
+//			    final ct_point src_pos,
 //			    image dest,
-//			    const ct_point dest_pos,
+//			    final ct_point dest_pos,
 //			    unsigned char mask)
 //{
 //  int x, y;
@@ -404,9 +404,9 @@ public class Be_common_24{
 //*************************************************************************/
 //static void image_copy(image dest,
 //		       image src,
-//		       const ct_size size,
-//		       const ct_point dest_pos,
-//		       const ct_point src_pos, int transparency)
+//		       final ct_size size,
+//		       final ct_point dest_pos,
+//		       final ct_point src_pos, int transparency)
 //{
 //  struct ct_point real_src_pos = *src_pos, real_dest_pos = *dest_pos;
 //  struct ct_size real_size = *size;
@@ -426,9 +426,9 @@ public class Be_common_24{
 //*************************************************************************/
 //void be_copy_osda_to_osda(osda dest,
 //			  osda src,
-//			  const ct_size size,
-//			  const ct_point dest_pos,
-//			  const ct_point src_pos, int transparency)
+//			  final ct_size size,
+//			  final ct_point dest_pos,
+//			  final ct_point src_pos, int transparency)
 //{
 //  struct ct_point tmp_pos = { 0, 0 };
 //
@@ -456,7 +456,7 @@ public class Be_common_24{
 //static void draw_mono_bitmap(image image,
 //			     enum be_draw_type draw_type,
 //			     be_color color,
-//			     const ct_point position,
+//			     final ct_point position,
 //			     FT_Bitmap_ bitmap)
 //{
 //  int x, y;
@@ -487,7 +487,7 @@ public class Be_common_24{
 //static void draw_alpha_bitmap(image image,
 //			      enum be_draw_type draw_type,
 //			      be_color color_,
-//			      const ct_point position,
+//			      final ct_point position,
 //			      FT_Bitmap_ bitmap)
 //{
 //  int x, y;
@@ -524,7 +524,7 @@ public class Be_common_24{
 //*************************************************************************/
 //void be_draw_bitmap(osda target, enum be_draw_type draw_type,
 //		    be_color color,
-//		    const ct_point position,
+//		    final ct_point position,
 //		    FT_Bitmap_ bitmap)
 //{
 //  if (bitmap.pixel_mode == ft_pixel_mode_mono) {
@@ -569,7 +569,7 @@ public class Be_common_24{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void image_set_mask(const image image, const ct_rect rect,
+//void image_set_mask(final image image, final ct_rect rect,
 //		    unsigned char mask)
 //{
 //  int x, y;
@@ -585,7 +585,7 @@ public class Be_common_24{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void be_set_transparent(osda osda, const ct_rect rect)
+//void be_set_transparent(osda osda, final ct_rect rect)
 //{
 //  image_set_mask(osda.image, rect, 0);
 //  osda.has_transparent_pixels = true;
@@ -599,7 +599,7 @@ public class Be_common_24{
 //  ...
 //*************************************************************************/
 //void be_draw_rectangle(osda target, enum be_draw_type draw_type,
-//		       const ct_rect spec,
+//		       final ct_rect spec,
 //		       int line_width, be_color color)
 //{
 //  int i;
@@ -721,8 +721,8 @@ public class Be_common_24{
 //  ...
 //*************************************************************************/
 //void be_draw_line(osda target, enum be_draw_type draw_type,
-//		  const ct_point start,
-//		  const ct_point end,
+//		  final ct_point start,
+//		  final ct_point end,
 //		  int line_width, boolean dashed, be_color color)
 //{
 //  unsigned char tmp[4];
@@ -763,7 +763,7 @@ public class Be_common_24{
 //  ...
 //*************************************************************************/
 //void be_draw_region(osda target, enum be_draw_type draw_type,
-//		    const ct_rect region, be_color color)
+//		    final ct_rect region, be_color color)
 //{
 //  unsigned char tmp[4];
 //  int x, y;
@@ -796,7 +796,7 @@ public class Be_common_24{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//boolean be_is_transparent_pixel(osda osda, const ct_point pos)
+//boolean be_is_transparent_pixel(osda osda, final ct_point pos)
 //{
 //  struct ct_rect bounds = { 0, 0, osda.image.width, osda.image.height };
 //  if (!ct_point_in_rect(pos, &bounds)) {
@@ -811,10 +811,10 @@ public class Be_common_24{
 //  size, dest_pos and src_pos can be null
 //*************************************************************************/
 //void be_draw_sprite(osda target, enum be_draw_type draw_type,
-//		    const Sprite sprite,
-//		    const ct_size size,
-//		    const ct_point dest_pos,
-//		    const ct_point src_pos)
+//		    final Sprite sprite,
+//		    final ct_size size,
+//		    final ct_point dest_pos,
+//		    final ct_point src_pos)
 //{
 //  struct ct_size tmp_size;
 //  struct ct_point tmp_pos = { 0, 0 };
@@ -923,7 +923,7 @@ public class Be_common_24{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void be_osda_get_size(ct_size size, const osda osda)
+//void be_osda_get_size(ct_size size, final osda osda)
 //{
 //  size.width = osda.image.width;
 //  size.height = osda.image.height;

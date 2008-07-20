@@ -99,7 +99,7 @@ public class Helpdlg{
 //
 //static void clear_page_objects();
 //static void free_help_page();
-//static void help_update_dialog(const help_item pitem);
+//static void help_update_dialog(final help_item pitem);
 //static void create_help_page(enum help_page_type type);
 //
 //static void select_help_item(int item);
@@ -143,7 +143,7 @@ public class Helpdlg{
 //*****************************************************************/
 //static void help_topic_active(ULONG * newact)
 //{
-//  const help_item pitem = get_help_item(*newact);
+//  final help_item pitem = get_help_item(*newact);
 //  if (pitem)
 //  {
 //    help_update_dialog(pitem);
@@ -291,7 +291,7 @@ public class Helpdlg{
 //          Child, help_topic_listview = NListviewObject,
 //              MUIA_Weight, 50,
 //              MUIA_NListview_NList, NListObject,
-//                  MUIA_NList_ConstructHook, MUIV_NList_ConstructHook_String,
+//                  MUIA_NList_finalructHook, MUIV_NList_finalructHook_String,
 //                  MUIA_NList_DestructHook, MUIV_NList_DestructHook_String,
 //                  End,
 //              End,
@@ -304,7 +304,7 @@ public class Helpdlg{
 //                 Child, help_text_listview = NListviewObject,
 //                     MUIA_Weight, 100,
 //                     MUIA_NListview_NList, NListObject,
-//                         MUIA_NList_ConstructHook, MUIV_NList_ConstructHook_String,
+//                         MUIA_NList_finalructHook, MUIV_NList_finalructHook_String,
 //                         MUIA_NList_DestructHook, MUIV_NList_DestructHook_String,
 //                         MUIA_NList_Input, false,
 //                         MUIA_NList_TypeSelect, MUIV_NList_TypeSelect_Char,
@@ -605,7 +605,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_improvement(const help_item pitem,
+//static void help_update_improvement(final help_item pitem,
 //				    char *title, int which)
 //{
 //  char buf[64000];
@@ -630,7 +630,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_wonder(const help_item pitem,
+//static void help_update_wonder(final help_item pitem,
 //			       char *title, int which)
 //{
 //  char buf[64000];
@@ -661,7 +661,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_unit_type(const help_item pitem,
+//static void help_update_unit_type(final help_item pitem,
 //				  char *title, int i)
 //{
 //  char *buf = &long_buffer[0];
@@ -722,7 +722,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_tech(const help_item pitem, char *title, int i)
+//static void help_update_tech(final help_item pitem, char *title, int i)
 //{
 //  char *buf = &long_buffer[0];
 //
@@ -845,7 +845,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_terrain(const help_item pitem,
+//static void help_update_terrain(final help_item pitem,
 //				char *title, int i)
 //{
 //  char *buf = &long_buffer[0];
@@ -941,7 +941,7 @@ public class Helpdlg{
 ///**************************************************************************
 //  This is currently just a text page, with special text:
 //**************************************************************************/
-//static void help_update_government(const help_item pitem,
+//static void help_update_government(final help_item pitem,
 //				   char *title, government gov)
 //{
 //  char *buf = &long_buffer[0];
@@ -963,7 +963,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_dialog(const help_item pitem)
+//static void help_update_dialog(final help_item pitem)
 //{
 //  int i;
 //  char *top;

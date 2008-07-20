@@ -72,7 +72,7 @@ public class Text_renderer{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static FT_Bitmap_ clone_bitmap(const FT_Bitmap_ orig)
+//static FT_Bitmap_ clone_bitmap(final FT_Bitmap_ orig)
 //{
 //  if (orig.rows == 0 || orig.width == 0) {
 //    return null;
@@ -264,7 +264,7 @@ public class Text_renderer{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//void tr_string_get_size(ct_size size, const ct_string string)
+//void tr_string_get_size(ct_size size, final ct_string string)
 //{
 //  int row;
 //
@@ -280,8 +280,8 @@ public class Text_renderer{
 //  ...
 //*************************************************************************/
 //void tr_draw_string(osda target, enum be_draw_type draw_type,
-//		    const ct_point position,
-//		    const ct_string string)
+//		    final ct_point position,
+//		    final ct_string string)
 //{
 //  int row, offset_y = 0;
 //

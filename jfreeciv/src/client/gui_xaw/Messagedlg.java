@@ -113,7 +113,7 @@ public class Messagedlg{
 //                                scrolled, null);
 //
 //  /* space_head labels are "empty" labels in column heading which are
-//   * used so that we can arrange the constraints without loops.
+//   * used so that we can arrange the finalraints without loops.
 //   * They essentially act as vertical filler.
 //   */
 //  space_head = XtVaCreateManagedWidget("messageoptspacehead", labelWidgetClass,

@@ -1,50 +1,6 @@
 package utility;
 
 public class Shared{
-
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#ifdef HAVE_SYS_TYPES_H
-///* Under Mac OS X sys/types.h must be included before dirent.h */
-//#include <sys/types.h>
-//#endif
-//
-//#include <assert.h>
-//#include <dirent.h>
-//#include <errno.h>
-//#include <limits.h>
-//#include <stdarg.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//#include <sys/stat.h>
-//#include <sys/types.h>
-//
-//#ifdef HAVE_PWD_H
-//#include <pwd.h>
-//#endif
-//#ifdef HAVE_UNISTD_H
-//#include <unistd.h>
-//#endif
-//#ifdef WIN32_NATIVE
-//#include <windows.h>
-//#include <lmcons.h>	/* UNLEN */
-//#endif
-//
 //#include "astring.h"
 //#include "fciconv.h"
 //#include "fcintl.h"
@@ -384,7 +340,7 @@ public class Shared{
 //***************************************************************/
 //boolean is_ascii_name(final String name)
 //{
-//  const char illegal_chars[] = {'|', '%', '"', ',', '*', '<', '>', '\0'};
+//  final char illegal_chars[] = {'|', '%', '"', ',', '*', '<', '>', '\0'};
 //  int i, j;
 //
 //  /* must not be null or empty */
@@ -433,7 +389,7 @@ public class Shared{
 //  given pointers to the two strings (i.e., given "char *"s).
 //  Case-sensitive.  Designed to be called from qsort().
 //**************************************************************************/
-//int compare_strings(const void *first, const void *second)
+//int compare_strings(final void *first, final void *second)
 //{
 //#if defined(ENABLE_NLS) && defined(HAVE_STRCOLL)
 //  return strcoll((final String)first, (final String)second);
@@ -447,7 +403,7 @@ public class Shared{
 //  given pointers to the two string pointers (i.e., given "char **"s).
 //  Case-sensitive.  Designed to be called from qsort().
 //**************************************************************************/
-//int compare_strings_ptrs(const void *first, const void *second)
+//int compare_strings_ptrs(final void *first, final void *second)
 //{
 //#if defined(ENABLE_NLS) && defined(HAVE_STRCOLL)
 //  return strcoll(*((final String*)first), *((final String*)second));
@@ -909,7 +865,7 @@ public class Shared{
 //  The suffixes are removed from the filenames before the list is
 //  returned.
 //***************************************************************************/
-//final String*datafilelist(const char* suffix)
+//final String*datafilelist(final char* suffix)
 //{
 //  final String*dirs = get_data_dirs(null);
 //  char **file_list = null;
@@ -949,7 +905,7 @@ public class Shared{
 //	char *match = mystrdup(entry.d_name);
 //
 //	/* Make sure the list is big enough; grow exponentially to keep
-//	   constant ammortized overhead. */
+//	   finalant ammortized overhead. */
 //	if (num_matches >= list_size) {
 //	  list_size = list_size > 0 ? list_size * 2 : 10;
 //	  file_list = fc_realloc(file_list, list_size * sizeof(*file_list));
@@ -1051,10 +1007,10 @@ public class Shared{
 ///**************************************************************************
 //  Compare modification times.
 //**************************************************************************/
-//static int compare_file_mtime_ptrs(const void *a, const void *b)
+//static int compare_file_mtime_ptrs(final void *a, final void *b)
 //{
-//  datafile  const *ppa = a;
-//  datafile  const *ppb = b;
+//  datafile  final *ppa = a;
+//  datafile  final *ppb = b;
 //
 //  return ((*ppa).mtime < (*ppb).mtime);
 //}
@@ -1062,10 +1018,10 @@ public class Shared{
 ///**************************************************************************
 //  Compare names.
 //**************************************************************************/
-//static int compare_file_name_ptrs(const void *a, const void *b)
+//static int compare_file_name_ptrs(final void *a, final void *b)
 //{
-//  datafile  const *ppa = a;
-//  datafile  const *ppb = b;
+//  datafile  final *ppa = a;
+//  datafile  final *ppb = b;
 //
 //  return compare_strings((*ppa).name, (*ppb).name);
 //}
@@ -1078,13 +1034,13 @@ public class Shared{
 //  second. Returned "name"s will be truncated starting at the "infix"
 //  substring. The returned list must be freed.
 //**************************************************************************/
-//struct datafile_list datafilelist_infix(final String subpath,
+//Speclists<datafile> datafilelist_infix(final String subpath,
 //    final String infix, boolean nodups)
 //{
 //  final String*dirs = get_data_dirs(null);
 //  int num_matches = 0;
 //  int dir_num;
-//  struct datafile_list res;
+//  Speclists<datafile> res;
 //
 //  datafile_list_init(&res);
 //
@@ -1151,7 +1107,7 @@ public class Shared{
 //  if (nodups) {
 //    char *name = "";
 //
-//    datafile_list_iterate(res, pfile) {
+//    for (datafile pfile : res.data) {
 //      if (compare_strings(name, pfile.name) != 0) {
 //	name = pfile.name;
 //      } else {
@@ -1159,7 +1115,7 @@ public class Shared{
 //	free(pfile.fullname);
 //	datafile_list_unlink(&res, pfile);
 //      }
-//    } datafile_list_iterate_end;
+//    } }
 //  }
 //
 //  /* Sort the list by last modification time. */
@@ -1329,7 +1285,7 @@ public class Shared{
 //***************************************************************************/
 //final String m_pre_description(enum m_pre_result result)
 //{
-//  static final String const descriptions[] = {
+//  static final String final descriptions[] = {
 //    N"exact match",
 //    N"only match",
 //    N"ambiguous",
@@ -1397,7 +1353,7 @@ public class Shared{
 // Don't call this function directly, use BV_CHECK_MASK macro
 // instead. Don't call this function with two different bitvectors.
 //***************************************************************************/
-//boolean bv_check_mask(const unsigned char *vec1, const unsigned char *vec2,
+//boolean bv_check_mask(final unsigned char *vec1, final unsigned char *vec2,
 //		   size_t size1, size_t size2)
 //{
 //  size_t i;
@@ -1413,7 +1369,7 @@ public class Shared{
 //  return false;
 //}
 //
-//boolean bv_are_equal(const unsigned char *vec1, const unsigned char *vec2,
+//boolean bv_are_equal(final unsigned char *vec1, final unsigned char *vec2,
 //		  size_t size1, size_t size2)
 //{
 //  size_t i;
@@ -1456,7 +1412,7 @@ public class Shared{
 //  Interpret ~/ in filename as home dir
 //  New path is returned in buf of size buf_size
 //***************************************************************************/
-//void interpret_tilde(char* buf, size_t buf_size, const char* filename)
+//void interpret_tilde(char* buf, size_t buf_size, final char* filename)
 //{
 //  if (filename[0] == '~' && filename[1] == '/') {
 //    my_snprintf(buf, buf_size, "%s/%s", user_home_dir(), filename + 2);

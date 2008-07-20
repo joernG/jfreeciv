@@ -250,7 +250,7 @@ public class Aitech{
 //
 //      pplayer.ai.tech_want[hint.tech] += 
 //	city_list_size(&pplayer.cities)
-//	* (hint.turns_factor * steps + hint.const_factor);
+//	* (hint.turns_factor * steps + hint.final_factor);
 //      if (hint.get_first) {
 //	break;
 //      }
@@ -274,7 +274,7 @@ public class Aitech{
 //
 //  /* If there are humans in our team, they will choose the techs */
 //  players_iterate(aplayer) {
-//    const player_diplstate ds = pplayer_get_diplstate(pplayer, aplayer);
+//    final player_diplstate ds = pplayer_get_diplstate(pplayer, aplayer);
 //
 //    if (ds.type == DS_TEAM) {
 //      return;

@@ -522,7 +522,7 @@ public class Packhand{
 //  pcity.last_turns_shield_surplus = packet.last_turns_shield_surplus;
 //
 //  for (i = 0; i < CITY_MAP_SIZE * CITY_MAP_SIZE; i++) {
-//    const int x = i % CITY_MAP_SIZE, y = i / CITY_MAP_SIZE;
+//    final int x = i % CITY_MAP_SIZE, y = i / CITY_MAP_SIZE;
 //
 //    if (city_is_new) {
 //      /* Need to pre-initialize before set_worker_city()  -- dwp */
@@ -611,7 +611,7 @@ public class Packhand{
 //      unit_list_iterate(game.players[i].units, punit) 
 //	if(punit.homecity==pcity.id)
 //	  unit_list_insert(&pcity.units_supported, punit);
-//      unit_list_iterate_end;
+//      }
 //    }
 //  } else {
 //    if(pcity.owner == game.player_idx) {
@@ -820,12 +820,12 @@ public class Packhand{
 //  update_info_label();
 //
 //  player_set_unit_focus_status(game.player_ptr);
-//  city_list_iterate(game.player_ptr.cities, pcity) {
+//  for (city pcity : game.player_ptr.cities.data) {
 //    pcity.client.colored = false;
-//  } city_list_iterate_end;
-//  unit_list_iterate(game.player_ptr.units, punit) {
+//  } }
+//  for (unit punit : game.player_ptr.units.data) {
 //    punit.client.colored = false;
-//  } unit_list_iterate_end;
+//  } }
 //  update_unit_focus();
 //  auto_center_on_focus_unit();
 //
@@ -1027,7 +1027,7 @@ public class Packhand{
 //       * But if new activity is Idle, it means user specifically selected
 //       * the unit */
 //      if (punit == get_unit_in_focus()
-//	  && (packet_unit.activity != ACTIVITY_IDLE
+//	  && (packet_unit.activity != unit_activity.ACTIVITY_IDLE
 //	      || packet_unit.has_orders)) {
 //        check_focus = true;
 //      }
@@ -1039,7 +1039,7 @@ public class Packhand{
 //          && !game.player_ptr.ai.control
 //          && punit.owner == game.player_idx
 //          && punit.activity == ACTIVITY_SENTRY
-//          && packet_unit.activity == ACTIVITY_IDLE
+//          && packet_unit.activity == unit_activity.ACTIVITY_IDLE
 //          && (!get_unit_in_focus()
 //              /* only 1 wakeup focus per tile is useful */
 //              || !same_pos(packet_unit.tile, get_unit_in_focus().tile))) {
@@ -1332,13 +1332,13 @@ public class Packhand{
 //    /* New serial number -- clear (free) everything */
 //    if (last_serial_num != packet.serial_num) {
 //      last_serial_num = packet.serial_num;
-//      unit_list_iterate(pcity.info_units_supported, psunit) {
+//      for (unit psunit : pcity.info_units_supported.data) {
 //	destroy_unit_virtual(psunit);
-//      } unit_list_iterate_end;
+//      } }
 //      unit_list_unlink_all(&(pcity.info_units_supported));
-//      unit_list_iterate(pcity.info_units_present, ppunit) {
+//      for (unit ppunit : pcity.info_units_present.data) {
 //	destroy_unit_virtual(ppunit);
-//      } unit_list_iterate_end;
+//      } }
 //      unit_list_unlink_all(&(pcity.info_units_present));
 //    }
 //
@@ -1642,7 +1642,7 @@ public class Packhand{
 //   * connections to this player are lost. If this is the case, insert the
 //   * correct conn back into the player.connections list */
 //  if (conn_list_size(&pplayer.connections) == 0) {
-//    conn_list_iterate(game.est_connections, pconn) {
+//    for (conn pconn : game.est_connections.data) {
 //      if (pconn.player == pplayer) {
 //        /* insert the controller into first position */
 //        if (pconn.observer) {
@@ -1651,17 +1651,17 @@ public class Packhand{
 //          conn_list_insert(&pplayer.connections, pconn);
 //        }
 //      }
-//    } conn_list_iterate_end;
+//    } }
 //  }
 //
 //  if (has_capability("username_info", aconnection.capability)) {
 //    sz_strlcpy(pplayer.username, pinfo.username);
 //  } else {
-//    conn_list_iterate(game.est_connections, pconn) {
+//    for (conn pconn : game.est_connections.data) {
 //      if (pconn.player == pplayer && !pconn.observer) {
 //        sz_strlcpy(pplayer.username, pconn.username);
 //      }
-//    } conn_list_iterate_end;
+//    } }
 //  }
 //
 //  /* Just about any changes above require an update to the intelligence
@@ -2019,11 +2019,11 @@ public class Packhand{
 //  if (ptile.known <= TILE_KNOWN_FOGGED && old_known == TILE_KNOWN) {
 //    /* This is an error.  So first we log the error, then make an assertion.
 //     * But for NDEBUG clients we fix the error. */
-//    unit_list_iterate(ptile.units, punit) {
+//    for (unit punit : ptile.units.data) {
 //      freelog(LOG_ERROR, "%p %s at (%d,%d) %s", punit,
 //	      unit_type(punit).name, TILE_XY(punit.tile),
 //	      unit_owner(punit).name);
-//    } unit_list_iterate_end;
+//    } }
 //    unit_list_unlink_all(&ptile.units);
 //  }
 //

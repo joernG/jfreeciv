@@ -563,12 +563,12 @@ public class Cityrep{
 //    int found;
 //
 //    found = 0;
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      if (!cma_is_city_under_agent(pcity, null)) {
 //	found = 1;
 //	break;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //
 //    if (found) {
 //      w = gtk_menu_item_new_with_label("none");
@@ -582,13 +582,13 @@ public class Cityrep{
 //     * take a lonnggg time.
 //     */
 //    found = 0;
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      if (cma_is_city_under_agent(pcity, &parameter) &&
 //	  cmafec_preset_get_index_of_parameter(&parameter) == -1) {
 //	found = 1;
 //	break;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //
 //    if (found) {
 //      /* we found city that's under agent but not a preset */
@@ -602,14 +602,14 @@ public class Cityrep{
 //    /* only fill in presets that are being used. */
 //    for (i = 0; i < cmafec_preset_num(); i++) {
 //      found = 0;
-//      city_list_iterate(game.player_ptr.cities, pcity) {
+//      for (city pcity : game.player_ptr.cities.data) {
 //	if (cma_is_city_under_agent(pcity, &parameter) &&
 //	    cm_are_parameter_equal(&parameter,
 //				   cmafec_preset_get_parameter(i))) {
 //	  found = 1;
 //	  break;
 //	}
-//      } city_list_iterate_end;
+//      } }
 //      if (found) {
 //	w = gtk_menu_item_new_with_label(cmafec_preset_get_descr(i));
 //
@@ -1100,12 +1100,12 @@ public class Cityrep{
 //{
 //  if (city_dialog_shell && !is_report_dialogs_frozen()) {
 //
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      GtkTreeIter it;
 //
 //      gtk_list_store_append(city_model, &it);
 //      update_row(&it, pcity);
-//    } city_list_iterate_end;
+//    } }
 //  }
 //}
 //
@@ -1137,14 +1137,14 @@ public class Cityrep{
 //    /* update. */
 //    gtk_list_store_clear(city_model);
 //
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      gtk_list_store_append(city_model, &it);
 //      update_row(&it, pcity);
 //
 //      if (g_hash_table_remove(copy, pcity)) {
 //	gtk_tree_selection_select_iter(city_selection, &it);
 //      }
-//    } city_list_iterate_end;
+//    } }
 //
 //    /* free the selection. */
 //    g_hash_table_destroy(copy);

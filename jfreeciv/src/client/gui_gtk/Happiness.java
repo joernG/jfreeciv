@@ -61,7 +61,7 @@ public class Happiness{
 //    TYPED_LIST_ITERATE(struct happiness_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 //
 //static GdkPixmap *create_happiness_pixmap(city pcity, int index);
@@ -89,11 +89,11 @@ public class Happiness{
 //    dialog_list_has_been_initialised = true;
 //  }
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pcity == pcity) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}

@@ -45,7 +45,7 @@ public class Ruleset{
 //
 //#include "ruleset.h"
 //
-//static const char name_too_long[] = "Name \"%s\" too long; truncating.";
+//static final char name_too_long[] = "Name \"%s\" too long; truncating.";
 //#define check_name(name) (check_strlen(name, MAX_LEN_NAME, name_too_long))
 //#define name_strlcpy(dst, src) (() sz_loud_strlcpy(dst, src, name_too_long))
 //
@@ -96,14 +96,14 @@ public class Ruleset{
 //
 //static void load_ruleset_game();
 //
-//static void send_ruleset_techs(conn_list dest);
-//static void send_ruleset_units(conn_list dest);
-//static void send_ruleset_buildings(conn_list dest);
-//static void send_ruleset_terrain(conn_list dest);
-//static void send_ruleset_governments(conn_list dest);
-//static void send_ruleset_nations(conn_list dest);
-//static void send_ruleset_cities(conn_list dest);
-//static void send_ruleset_game(conn_list dest);
+//static void send_ruleset_techs(Speclists<Connection> dest);
+//static void send_ruleset_units(Speclists<Connection> dest);
+//static void send_ruleset_buildings(Speclists<Connection> dest);
+//static void send_ruleset_terrain(Speclists<Connection> dest);
+//static void send_ruleset_governments(Speclists<Connection> dest);
+//static void send_ruleset_nations(Speclists<Connection> dest);
+//static void send_ruleset_cities(Speclists<Connection> dest);
+//static void send_ruleset_game(Speclists<Connection> dest);
 //
 ///**************************************************************************
 //  datafilename() wrapper: tries to match in two ways.
@@ -1969,8 +1969,8 @@ public class Ruleset{
 //    }
 //    hint.turns_factor =
 //      secfile_lookup_int(file, "governments.ai_tech_hints%d.turns_factor", j);
-//    hint.const_factor =
-//      secfile_lookup_int(file, "governments.ai_tech_hints%d.const_factor", j);
+//    hint.final_factor =
+//      secfile_lookup_int(file, "governments.ai_tech_hints%d.final_factor", j);
 //    hint.get_first =
 //      secfile_lookup_bool(file, "governments.ai_tech_hints%d.get_first", j);
 //    hint.done =
@@ -1989,7 +1989,7 @@ public class Ruleset{
 //  Send information in packet_ruleset_control (numbers of units etc, and
 //  other miscellany) to specified connections.
 //**************************************************************************/
-//static void send_ruleset_control(conn_list dest)
+//static void send_ruleset_control(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_control packet;
 //  int i;
@@ -2809,7 +2809,7 @@ public class Ruleset{
 //  Send the units ruleset information (all individual units) to the
 //  specified connections.
 //**************************************************************************/
-//static void send_ruleset_units(conn_list dest)
+//static void send_ruleset_units(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_unit packet;
 //  int i;
@@ -2868,7 +2868,7 @@ public class Ruleset{
 //  Send the techs ruleset information (all individual advances) to the
 //  specified connections.
 //**************************************************************************/
-//static void send_ruleset_techs(conn_list dest)
+//static void send_ruleset_techs(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_tech packet;
 //
@@ -2899,7 +2899,7 @@ public class Ruleset{
 //  Send the buildings ruleset information (all individual improvements and
 //  wonders) to the specified connections.
 //**************************************************************************/
-//static void send_ruleset_buildings(conn_list dest)
+//static void send_ruleset_buildings(Speclists<Connection> dest)
 //{
 //  impr_type_iterate(i) {
 //    impr_type b = &improvement_types[i];
@@ -2946,7 +2946,7 @@ public class Ruleset{
 //  Send the terrain ruleset information (terrain_control, and the individual
 //  terrain types) to the specified connections.
 //**************************************************************************/
-//static void send_ruleset_terrain(conn_list dest)
+//static void send_ruleset_terrain(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_terrain packet;
 //
@@ -3019,7 +3019,7 @@ public class Ruleset{
 //  Send the government ruleset information to the specified connections.
 //  One packet per government type, and for each type one per ruler title.
 //**************************************************************************/
-//static void send_ruleset_governments(conn_list dest)
+//static void send_ruleset_governments(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_government gov;
 //  struct packet_ruleset_government_ruler_title title;
@@ -3111,7 +3111,7 @@ public class Ruleset{
 //  Send the nations ruleset information (info on each nation) to the
 //  specified connections.
 //**************************************************************************/
-//static void send_ruleset_nations(conn_list dest)
+//static void send_ruleset_nations(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_nation packet;
 //  nation_type n;
@@ -3145,7 +3145,7 @@ public class Ruleset{
 //  Send the city-style ruleset information (each style) to the specified
 //  connections.
 //**************************************************************************/
-//static void send_ruleset_cities(conn_list dest)
+//static void send_ruleset_cities(Speclists<Connection> dest)
 //{
 //  struct packet_ruleset_city city_p;
 //  int k;
@@ -3170,7 +3170,7 @@ public class Ruleset{
 //  Send information in packet_ruleset_game (miscellaneous rules) to the
 //  specified connections.
 //**************************************************************************/
-//static void send_ruleset_game(conn_list dest)
+//static void send_ruleset_game(Speclists<Connection> dest)
 //{
 //  int i;
 //  struct packet_ruleset_game misc_p;
@@ -3264,7 +3264,7 @@ public class Ruleset{
 ///**************************************************************************
 //  Send all ruleset information to the specified connections.
 //**************************************************************************/
-//void send_rulesets(conn_list dest)
+//void send_rulesets(Speclists<Connection> dest)
 //{
 //  conn_list_do_buffer(dest);
 //  lsend_packet_freeze_hint(dest);

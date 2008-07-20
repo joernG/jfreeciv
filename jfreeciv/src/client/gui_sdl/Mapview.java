@@ -566,7 +566,7 @@ public class Mapview{
 //{
 //  unit pUnit = pWidget.data.unit;
 //  if (pUnit) {
-//    request_new_unit_activity(pUnit, ACTIVITY_IDLE);
+//    request_new_unit_activity(pUnit, unit_activity.ACTIVITY_IDLE);
 //    set_unit_focus(pUnit);
 //  }
 //  return -1;
@@ -841,7 +841,7 @@ public class Mapview{
 //	num_h = (pInfo_Window.size.h - sy - FRAME_WH) / 52;
 //	pDock = pInfo_Window;
 //	n = 0;
-//        unit_list_iterate(pTile.units, aunit) {
+//        for (unit aunit : pTile.units.data) {
 //          if (aunit == pUnit) {
 //	    continue;
 //	  }
@@ -897,7 +897,7 @@ public class Mapview{
 //    
 //          pBuf.action = fucus_units_info_callback;
 //    
-//	} unit_list_iterate_end;	  
+//	} }	  
 //	    
 //	pDlg.pBeginActiveWidgetList = pBuf;
 //	pDlg.pEndActiveWidgetList = pEnd;

@@ -49,9 +49,9 @@ public class Advmilitary{
 ///**************************************************************************
 //  Choose the best unit the city can build to defend against attacker v.
 //**************************************************************************/
-//Unit_Type_id ai_choose_defender_versus(city pcity, Unit_Type_id v)
+//int ai_choose_defender_versus(city pcity, int v)
 //{
-//  Unit_Type_id bestid = 0; /* ??? Zero is legal value! (Settlers by default) */
+//  int bestid = 0; /* ??? Zero is legal value! (Settlers by default) */
 //  int j, m;
 //  int best = 0;
 //
@@ -89,10 +89,10 @@ public class Advmilitary{
 //  desirability without regard to cost, unless costs are equal. This is
 //  very wrong. FIXME, use amortize on time to build.
 //**************************************************************************/
-//static Unit_Type_id ai_choose_attacker(city pcity,
+//static int ai_choose_attacker(city pcity,
 //                                       enum unit_move_type which)
 //{
-//  Unit_Type_id bestid = -1;
+//  int bestid = -1;
 //  int best = -1;
 //  int cur;
 //
@@ -121,11 +121,11 @@ public class Advmilitary{
 //  We should only be passed with L_DEFEND_GOOD role for now, since this
 //  is the only role being considered worthy of bodyguarding in findjob.
 //**************************************************************************/
-//static Unit_Type_id ai_choose_bodyguard(city pcity,
+//static int ai_choose_bodyguard(city pcity,
 //                                        enum unit_move_type move_type,
 //                                        enum unit_role_id role)
 //{
-//  Unit_Type_id bestid = -1;
+//  int bestid = -1;
 //  int j, best = 0;
 //
 //  simple_ai_unit_type_iterate(i) {
@@ -199,7 +199,7 @@ public class Advmilitary{
 //{
 //  int defense = 0, walls = 0;
 //  /* This can be an arg if needed, but we don't need to change it now. */
-//  const boolean igwall = false;
+//  final boolean igwall = false;
 //
 //  /* wallvalue = 10, walls = 10,
 //   * wallvalue = 40, walls = 20,
@@ -208,10 +208,10 @@ public class Advmilitary{
 //  while (walls * walls < pcity.ai.wallvalue * 10)
 //    walls++;
 //
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    defense += base_assess_defense_unit(pcity, punit, igwall, false,
 //                                        walls);
-//  } unit_list_iterate_end;
+//  } }
 //
 //  if (defense > 1<<12) {
 //    CITY_LOG(LOG_VERBOSE, pcity, "Overflow danger in assess_defense_quadratic:"
@@ -245,9 +245,9 @@ public class Advmilitary{
 //  /* Estimate of our total city defensive might */
 //  int defense = 0;
 //
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    defense += assess_defense_unit(pcity, punit, igwall);
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return defense;
 //}
@@ -379,9 +379,9 @@ public class Advmilitary{
 //***********************************************************************/
 //void assess_danger_player(player pplayer)
 //{
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    assess_danger(pcity);
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 
@@ -459,10 +459,10 @@ public class Advmilitary{
 //  pcity.ai.diplomat_threat = false;
 //  pcity.ai.has_diplomat = false;
 //
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if (unit_flag(punit, F_DIPLOMAT)) pcity.ai.has_diplomat = true;
 //    if (unit_flag(punit, F_PIKEMEN)) pikemen = true;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  players_iterate(aplayer) {
 //    if (!is_player_dangerous(city_owner(pcity), aplayer)) {
@@ -472,7 +472,7 @@ public class Advmilitary{
 //     * at war with. */
 //
 //    /* Look for enemy units */
-//    unit_list_iterate(aplayer.units, punit) {
+//    for (unit punit : aplayer.units.data) {
 //      int paramove = 0;
 //      int move_rate = unit_move_rate(punit);
 //      unsigned int vulnerability = assess_danger_unit(pcity, punit);
@@ -534,7 +534,7 @@ public class Advmilitary{
 //          igwall_threat += vulnerability;
 //        }
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //  } players_iterate_end;
 //
 //  if (igwall_threat == 0) {
@@ -596,7 +596,7 @@ public class Advmilitary{
 //  How much we would want that unit to defend a city? (Do not use this 
 //  function to find bodyguards for ships or air units.)
 //**************************************************************************/
-//int ai_unit_defence_desirability(Unit_Type_id i)
+//int ai_unit_defence_desirability(int i)
 //{
 //  int desire = get_unit_type(i).hp;
 //  int attack = get_unit_type(i).attack_strength;
@@ -625,7 +625,7 @@ public class Advmilitary{
 ///************************************************************************** 
 //  How much we would want that unit to attack with?
 //**************************************************************************/
-//int ai_unit_attack_desirability(Unit_Type_id i)
+//int ai_unit_attack_desirability(int i)
 //{
 //  int desire = get_unit_type(i).hp;
 //  int attack = get_unit_type(i).attack_strength;
@@ -670,7 +670,7 @@ public class Advmilitary{
 //  int tech_desire[U_LAST];
 //  /* Our favourite unit. */
 //  int best = 0;
-//  Unit_Type_id best_unit_type = 0; /* zero is settler but not a problem */
+//  int best_unit_type = 0; /* zero is settler but not a problem */
 //
 //  memset(tech_desire, 0, sizeof(tech_desire));
 //  
@@ -781,10 +781,10 @@ public class Advmilitary{
 //  consider units of the same move_type as best_choice
 //**************************************************************************/
 //static void process_attacker_want(city pcity,
-//                                  int value, Unit_Type_id victim_unit_type,
+//                                  int value, int victim_unit_type,
 //                                  int veteran, tile ptile,
 //                                  ai_choice best_choice,
-//                                  unit boat, Unit_Type_id boattype)
+//                                  unit boat, int boattype)
 //{
 //  player pplayer = city_owner(pcity);
 //  /* The enemy city.  acity == null means stray enemy unit */
@@ -979,7 +979,7 @@ public class Advmilitary{
 //  /* Benefit from fighting the target */
 //  int benefit;
 //  /* Enemy defender type */
-//  Unit_Type_id def_type;
+//  int def_type;
 //  /* Target coordinates */
 //  tile ptile;
 //  /* Our transport */
@@ -991,7 +991,7 @@ public class Advmilitary{
 //  /* Coordinates of the boat */
 //  tile boat_tile = null;
 //  /* Type of the boat (real or a future one) */
-//  Unit_Type_id boattype = U_LAST;
+//  int boattype = U_LAST;
 //  boolean go_by_boat;
 //  /* Is the defender veteran? */
 //  int def_vet;
@@ -1142,7 +1142,7 @@ public class Advmilitary{
 //    if want is 0 this advisor doesn't want anything
 //***********************************************************************/
 //static void ai_unit_consider_bodyguard(city pcity,
-//                                       Unit_Type_id unit_type,
+//                                       int unit_type,
 //                                       ai_choice choice)
 //{
 //  unit virtualunit;
@@ -1181,7 +1181,7 @@ public class Advmilitary{
 //
 //  /* Sanity */
 //  if (!is_unit_choice_type(choice.type)) return;
-//  if (unit_type_flag(choice.choice, F_NONMIL)) return;
+//  if (unit_type_flag(choice.choice, Eunit_flag_id.F_NONMIL)) return;
 //  if (do_make_unit_veteran(pcity, choice.choice)) return;
 //
 //  move_type = get_unit_type(choice.choice).move_type;
@@ -1221,7 +1221,7 @@ public class Advmilitary{
 //void military_advisor_choose_build(player pplayer, city pcity,
 //				   ai_choice choice)
 //{
-//  Unit_Type_id unit_type;
+//  int unit_type;
 //  unsigned int our_def, danger, urgency;
 //  tile ptile = pcity.tile;
 //  unit virtualunit;

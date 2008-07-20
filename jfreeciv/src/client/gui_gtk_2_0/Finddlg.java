@@ -148,7 +148,7 @@ public class Finddlg{
 //	g_value_unset(&value);
 //
 //	gtk_list_store_set(store, &it, 1, pcity, -1);
-//    } city_list_iterate_end;
+//    } }
 //  }
 //}
 //

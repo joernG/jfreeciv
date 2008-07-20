@@ -54,7 +54,7 @@ public class Cma_fec{
 //    TYPED_LIST_ITERATE(struct cma_preset, presetlist, ppreset)
 //#define preset_list_iterate_end  LIST_ITERATE_END
 //
-//static struct preset_list preset_list;
+//static Speclists<preset> preset_list;
 //static boolean preset_list_has_been_initialized = false;
 //
 ///****************************************************************************
@@ -99,7 +99,7 @@ public class Cma_fec{
 // Sets the front-end parameter.
 //**************************************************************************/
 //void cmafec_set_fe_parameter(city pcity,
-//			     const cm_parameter const parameter)
+//			     final cm_parameter final parameter)
 //{
 //  cma_set_parameter(ATTR_CITY_CMAFE_PARAMETER, pcity.id, parameter);
 //}
@@ -176,7 +176,7 @@ public class Cma_fec{
 ///**************************************************************************
 // Returns the indexed preset's parameter.
 //**************************************************************************/
-//const cm_parameter cmafec_preset_get_parameter(int index)
+//final cm_parameter cmafec_preset_get_parameter(int index)
 //{
 //  cma_preset ppreset;
 //
@@ -190,8 +190,8 @@ public class Cma_fec{
 // Returns the index of the preset which matches the given
 // parameter. Returns -1 if no preset could be found.
 //**************************************************************************/
-//int cmafec_preset_get_index_of_parameter(const struct cm_parameter
-//					 *const parameter)
+//int cmafec_preset_get_index_of_parameter(final struct cm_parameter
+//					 *final parameter)
 //{
 //  int i;
 //
@@ -215,7 +215,7 @@ public class Cma_fec{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//final String cmafec_get_short_descr_of_city(const city pcity)
+//final String cmafec_get_short_descr_of_city(final city pcity)
 //{
 //  struct cm_parameter parameter;
 //
@@ -230,7 +230,7 @@ public class Cma_fec{
 // Returns the description of the matching preset or "custom" if no
 // preset could be found.
 //**************************************************************************/
-//final String cmafec_get_short_descr(const cm_parameter const
+//final String cmafec_get_short_descr(final cm_parameter final
 //				   parameter)
 //{
 //  int index = cmafec_preset_get_index_of_parameter(parameter);
@@ -293,7 +293,7 @@ public class Cma_fec{
 //  if (pcity.is_building_unit) {
 //    cost = unit_build_shield_cost(pcity.currently_building);
 //  } else {
-//    if (get_current_construction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //      my_snprintf(buffer, sizeof(buffer),
 //		  get_improvement_type(pcity.currently_building).name);
 //      return buffer;
@@ -323,9 +323,9 @@ public class Cma_fec{
 //...
 //**************************************************************************/
 //final String cmafec_get_result_descr(city pcity,
-//				    const cm_result const
+//				    final cm_result final
 //				    result,
-//				    const cm_parameter const
+//				    final cm_parameter final
 //				    parameter)
 //{
 //  int j;
@@ -418,7 +418,7 @@ public class Cma_fec{
 //     .happy_factor = 0
 //   }
 // };
-// const char* names[ARRAY_SIZE(parameters)] = {
+// final char* names[ARRAY_SIZE(parameters)] = {
 //   N"?cma:Very happy",
 //   N"?cma:Max food",
 //   N"?cma:Max production",

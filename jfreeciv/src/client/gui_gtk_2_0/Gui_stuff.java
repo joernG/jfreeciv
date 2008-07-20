@@ -67,7 +67,7 @@ public class Gui_stuff{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//GtkWidget *gtk_stockbutton_new(const gchar *stock, const gchar *label_text)
+//GtkWidget *gtk_stockbutton_new(final gchar *stock, final gchar *label_text)
 //{
 //  GtkWidget *label;
 //  GtkWidget *image;

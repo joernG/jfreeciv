@@ -1145,7 +1145,7 @@ public class Cityrep{
 //    }
 //  /* FIXME restore old selection */
 //  ListBox_ResetContent(GetDlgItem(hCityRep,ID_CITYREP_LIST));
-//  city_list_iterate(game.player_ptr.cities, pcity) {
+//  for (city pcity : game.player_ptr.cities.data) {
 //    get_city_text(pcity, row, sizeof(buf[0]));
 //    full_row[0]=0;
 //    for(i=0; i<NUM_CREPORT_COLS; i++)
@@ -1156,7 +1156,7 @@ public class Cityrep{
 //			full_row,row);
 // 
 //    
-//  } city_list_iterate_end;         
+//  } }         
 //}
 //
 //

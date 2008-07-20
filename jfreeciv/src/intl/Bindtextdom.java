@@ -59,7 +59,7 @@ public class Bindtextdom{
 ///* @@ end of prolog @@ */
 //
 ///* Contains the default location of the message catalogs.  */
-//extern const char _nl_default_dirname[];
+//extern final char _nl_default_dirname[];
 //
 ///* List with bindings of specific domains.  */
 //extern binding _nl_domain_bindings;

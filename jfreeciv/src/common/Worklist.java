@@ -49,7 +49,7 @@ public class Worklist{
 //  also be used as the next available worklist index (assuming that
 //  len < MAX_LEN_WORKLIST).
 //****************************************************************************/
-//int worklist_length(const worklist pwl)
+//int worklist_length(final worklist pwl)
 //{
 //  int len = 0;
 //
@@ -65,7 +65,7 @@ public class Worklist{
 ///****************************************************************
 //...
 //****************************************************************/
-//boolean worklist_is_empty(const worklist pwl)
+//boolean worklist_is_empty(final worklist pwl)
 //{
 //  return !pwl || pwl.wlefs[0] == WEF_END;
 //}
@@ -75,7 +75,7 @@ public class Worklist{
 //  if the worklist is non-empty.  Return 1 iff id and is_unit
 //  are valid.
 //****************************************************************/
-//boolean worklist_peek(const worklist pwl, int *id, boolean *is_unit)
+//boolean worklist_peek(final worklist pwl, int *id, boolean *is_unit)
 //{
 //  if (worklist_is_empty(pwl))
 //    return false;
@@ -88,7 +88,7 @@ public class Worklist{
 //  worklist. If the worklist has fewer than idx elements,
 //  return false.
 //****************************************************************/
-//boolean worklist_peek_ith(const worklist pwl, int *id, boolean *is_unit,
+//boolean worklist_peek_ith(final worklist pwl, int *id, boolean *is_unit,
 //		      int idx)
 //{
 //  int i;
@@ -119,7 +119,7 @@ public class Worklist{
 ///****************************************************************
 //...
 //****************************************************************/
-//void copy_worklist(worklist dst, const worklist src)
+//void copy_worklist(worklist dst, final worklist src)
 //{
 //  memcpy(dst, src, sizeof(struct worklist));
 //}
@@ -209,8 +209,8 @@ public class Worklist{
 ///**************************************************************************
 //  Return true iff the two worklists are equal.
 //**************************************************************************/
-//boolean are_worklists_equal(const worklist wlist1,
-//			 const worklist wlist2)
+//boolean are_worklists_equal(final worklist wlist1,
+//			 final worklist wlist2)
 //{
 //  int i, len = worklist_length(wlist1);
 //

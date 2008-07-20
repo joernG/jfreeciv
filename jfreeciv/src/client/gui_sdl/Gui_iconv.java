@@ -46,9 +46,9 @@ public class Gui_iconv{
 //#endif
 //#endif
 //
-//#ifndef ICONV_CONST
-//#define ICONV_CONST	const
-//#endif /* ICONV_CONST */
+//#ifndef ICONV_final
+//#define ICONV_final	final
+//#endif /* ICONV_final */
 //
 //#include "gui_mem.h"
 //#include "unistring.h"
@@ -158,7 +158,7 @@ public class Gui_iconv{
 //  Function return (char *) pointer to (new) pToString.
 //**************************************************************************/
 //char *convertcopy_to_chars(char *pToString, size_t length,
-//			    const Uint16 * pFromUniString)
+//			    final Uint16 * pFromUniString)
 //{
 //  /* Start Parametrs */
 //  final String pFromcode = get_display_encoding();

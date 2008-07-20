@@ -61,14 +61,14 @@ public class Aicity{
 //#define city_range_iterate(city_here, list, range, city)            \
 //{                                                                   \
 //  Continent_id continent = map_get_continent(city_here.tile);	    \
-//  city_list_iterate(list, city) {                                   \
+//  for (city city : list.data) {                                   \
 //    if ((range == EFR_CITY && city == city_here)                    \
 //        || (range == EFR_LOCAL && city == city_here)                \
 //        || (range == EFR_CONTINENT                                  \
 //            && map_get_continent(city.tile) == continent)	    \
 //        || (range == EFR_PLAYER)) {
 //#define city_range_iterate_end \
-//  } } city_list_iterate_end; }
+//  } } } }
 //
 //#define CITY_EMERGENCY(pcity)                        \
 // (pcity.shield_surplus < 0 || city_unhappy(pcity)   \
@@ -497,7 +497,7 @@ public class Aicity{
 //	    break;
 //	}
 //      }
-//    } effect_list_iterate_end;
+//    } }
 //  } effect_type_vector_iterate_end;
 //
 //  /* Reduce want if building gets obsoleted soon */
@@ -522,16 +522,16 @@ public class Aicity{
 //  ai_data ai = ai_data_get(pplayer);
 //
 //  /* First find current worth of cities and cache this. */
-//  city_list_iterate(pplayer.cities, acity) {
+//  for (city acity : pplayer.cities.data) {
 //    acity.ai.worth = city_want(pplayer, acity, ai);
-//  } city_list_iterate_end;
+//  } }
 //
 //  impr_type_iterate(id) {
 //    if (!can_player_build_improvement(pplayer, id)
 //        || improvement_obsolete(pplayer, id)) {
 //      continue;
 //    }
-//    city_list_iterate(pplayer.cities, pcity) {
+//    for (city pcity : pplayer.cities.data) {
 //      if (pplayer.ai.control && pcity.ai.next_recalc > game.turn) {
 //        continue; /* do not recalc yet */
 //      } else {
@@ -546,17 +546,17 @@ public class Aicity{
 //      adjust_building_want_by_effects(pcity, id);
 //      CITY_LOG(LOG_DEBUG, pcity, "want to build %s with %d", 
 //               get_improvement_name(id), pcity.ai.building_want[id]);
-//    } city_list_iterate_end;
+//    } }
 //  } impr_type_iterate_end;
 //
 //  /* Reset recalc counter */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    if (pcity.ai.next_recalc <= game.turn) {
 //      /* This will spread recalcs out so that no one turn end is 
 //       * much longer than others */
 //      pcity.ai.next_recalc = game.turn + myrand(RECALC_SPEED) + RECALC_SPEED;
 //    }
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///*************************************************************************** 
@@ -576,7 +576,7 @@ public class Aicity{
 //{
 //  int distance;
 //  Continent_id wonder_continent;
-//  Unit_Type_id freight = best_role_unit(pcity, F_HELP_WONDER);
+//  int freight = best_role_unit(pcity, F_HELP_WONDER);
 //  int moverate = (freight == U_LAST) ? SINGLE_MOVE
 //                                     : get_unit_type(freight).move_rate;
 //
@@ -587,7 +587,7 @@ public class Aicity{
 //  }
 //
 //  pcity.ai.downtown = 0;
-//  city_list_iterate(pplayer.cities, othercity) {
+//  for (city othercity : pplayer.cities.data) {
 //    distance = WARMAP_COST(othercity.tile);
 //    if (wonder_continent != 0
 //        && map_get_continent(othercity.tile) == wonder_continent) {
@@ -597,7 +597,7 @@ public class Aicity{
 //    /* How many people near enough would help us? */
 //    distance += moverate - 1; distance /= moverate;
 //    pcity.ai.downtown += MAX(0, 5 - distance);
-//  } city_list_iterate_end;
+//  } }
 //}
 //
 ///**************************************************************************
@@ -611,12 +611,12 @@ public class Aicity{
 //static void ai_barbarian_choose_build(player pplayer, 
 //				      ai_choice choice)
 //{
-//  Unit_Type_id bestunit = -1;
+//  int bestunit = -1;
 //  int i, bestattack = 0;
 //
 //  /* Choose the best unit among the basic ones */
 //  for(i = 0; i < num_role_units(L_BARBARIAN_BUILD); i++) {
-//    Unit_Type_id iunit = get_role_unit(L_BARBARIAN_BUILD, i);
+//    int iunit = get_role_unit(L_BARBARIAN_BUILD, i);
 //
 //    if (get_unit_type(iunit).attack_strength > bestattack) {
 //      bestunit = iunit;
@@ -626,7 +626,7 @@ public class Aicity{
 //
 //  /* Choose among those made available through other civ's research */
 //  for(i = 0; i < num_role_units(L_BARBARIAN_BUILD_TECH); i++) {
-//    Unit_Type_id iunit = get_role_unit(L_BARBARIAN_BUILD_TECH, i);
+//    int iunit = get_role_unit(L_BARBARIAN_BUILD_TECH, i);
 //
 //    if (game.global_advances[get_unit_type(iunit).tech_requirement] != 0
 //	&& get_unit_type(iunit).attack_strength > bestattack) {
@@ -771,7 +771,7 @@ public class Aicity{
 //static void ai_upgrade_units(city pcity, int limit, boolean military)
 //{
 //  player pplayer = city_owner(pcity);
-//  unit_list_iterate(pcity.tile.units, punit) {
+//  for (unit punit : pcity.tile.units.data) {
 //    int id = can_upgrade_unittype(pplayer, punit.type);
 //    if (military && (!is_military_unit(punit) || !is_ground_unit(punit))) {
 //      /* Only upgrade military units this round */
@@ -797,7 +797,7 @@ public class Aicity{
 //        increase_maxbuycost(pplayer, cost);
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //}
 //
 ///************************************************************************** 
@@ -811,9 +811,9 @@ public class Aicity{
 //  /* Disband explorers that are at home but don't serve a purpose. 
 //   * FIXME: This is a hack, and should be removed once we
 //   * learn how to ferry explorers to new land. */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    tile ptile = pcity.tile;
-//    unit_list_iterate_safe(ptile.units, punit) {
+//    for (unit punit : ptile.units.data) {
 //      if (unit_has_role(punit.type, L_EXPLORER)
 //          && pcity.id == punit.homecity
 //          && pcity.ai.urgency == 0) {
@@ -821,8 +821,8 @@ public class Aicity{
 //                 unit_name(punit.type));
 //	handle_unit_disband(pplayer,punit.id);
 //      }
-//    } unit_list_iterate_safe_end;
-//  } city_list_iterate_end;
+//    }
+//  } }
 //  
 //  do {
 //    int limit = cached_limit; /* cached_limit is our gold reserve */
@@ -832,14 +832,14 @@ public class Aicity{
 //
 //    /* Find highest wanted item on the buy list */
 //    init_choice(&bestchoice);
-//    city_list_iterate(pplayer.cities, acity) {
+//    for (city acity : pplayer.cities.data) {
 //      if (acity.ai.choice.want > bestchoice.want && ai_fuzzy(pplayer, true)) {
 //        bestchoice.choice = acity.ai.choice.choice;
 //        bestchoice.want = acity.ai.choice.want;
 //        bestchoice.type = acity.ai.choice.type;
 //        pcity = acity;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //
 //    /* We found nothing, so we're done */
 //    if (bestchoice.want == 0) {
@@ -938,9 +938,9 @@ public class Aicity{
 //  } while (true);
 //
 //  /* Civilian upgrades now */
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    ai_upgrade_units(pcity, cached_limit, false);
-//  } city_list_iterate_end;
+//  } }
 //
 //  freelog(LOG_BUY, "%s wants to keep %d in reserve (tax factor %d)", 
 //          pplayer.name, cached_limit, pplayer.ai.maxbuycost);
@@ -956,7 +956,7 @@ public class Aicity{
 //{
 //  pplayer.ai.maxbuycost = 0;
 //
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    if (CITY_EMERGENCY(pcity)) {
 //      auto_arrange_workers(pcity); /* this usually helps */
 //    }
@@ -966,13 +966,13 @@ public class Aicity{
 //    }
 //    ai_sell_obsolete_buildings(pcity);
 //    sync_cities();
-//  } city_list_iterate_end;
+//  } }
 //
 //  ai_manage_buildings(pplayer);
 //
 //  /* Initialize the infrastructure cache, which is used shortly. */
 //  initialize_infrastructure_cache(pplayer);
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    /* Note that this function mungs the seamap, but we don't care */
 //    military_advisor_choose_build(pplayer, pcity, &pcity.ai.choice);
 //    /* because establish_city_distances doesn't need the seamap
@@ -988,11 +988,11 @@ public class Aicity{
 //      /* Avoid recalculating all the time.. */
 //      pcity.ai.next_founder_want_recalc = game.turn + myrand(RECALC_SPEED) + RECALC_SPEED;
 //    } 
-//  } city_list_iterate_end;
+//  } }
 //
-//  city_list_iterate(pplayer.cities, pcity) {
+//  for (city pcity : pplayer.cities.data) {
 //    ai_city_choose_build(pplayer, pcity);
-//  } city_list_iterate_end;
+//  } }
 //
 //  ai_spend_gold(pplayer);
 //}
@@ -1051,7 +1051,7 @@ public class Aicity{
 //static void resolve_city_emergency(player pplayer, city pcity)
 //public static final int LOG_EMERGENCY = LOG_DEBUG;
 //{
-//  struct city_list minilist;
+//  Speclists<city> minilist;
 //
 //  freelog(LOG_EMERGENCY,
 //          "Emergency in %s (%s, angry%d, unhap%d food%d, prod%d)",
@@ -1088,7 +1088,7 @@ public class Aicity{
 //    goto cleanup;
 //  }
 //
-//  unit_list_iterate_safe(pcity.units_supported, punit) {
+//  for (unit punit : pcity.units_supported.data) {
 //    if (city_unhappy(pcity)
 //        && punit.unhappiness != 0
 //        && punit.ai.passenger == 0) {
@@ -1096,7 +1096,7 @@ public class Aicity{
 //      handle_unit_disband(pplayer, punit.id);
 //      city_refresh(pcity);
 //    }
-//  } unit_list_iterate_safe_end;
+//  }
 //
 //  if (CITY_EMERGENCY(pcity)) {
 //    freelog(LOG_EMERGENCY, "Emergency in %s remains unresolved", 
@@ -1107,11 +1107,11 @@ public class Aicity{
 //  }
 //
 //  cleanup:
-//  city_list_iterate(minilist, acity) {
+//  for (city acity : minilist.data) {
 //    /* otherwise food total and stuff was wrong. -- Syela */
 //    city_refresh(acity);
 //    auto_arrange_workers(pcity);
-//  } city_list_iterate_end;
+//  } }
 //
 //  city_list_unlink_all(&minilist);
 //

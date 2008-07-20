@@ -130,7 +130,7 @@ public class Aiair{
 //
 //  balanced_cost = build_cost_balanced(punit.type);
 //
-//  sortie_time = (unit_flag(punit, F_ONEATTACK) ? 1 : 0);
+//  sortie_time = (unit_flag(punit, Eunit_flag_id.F_ONEATTACK) ? 1 : 0);
 //
 //  profit = kill_desire(victim_cost, unit_attack, unit_cost, victim_defence, 1) 
 //    - SHIELD_WEIGHTING + 2 * TRADE_WEIGHTING;
@@ -299,7 +299,7 @@ public class Aiair{
 //    /* We are out in the open, what shall we do? */
 //    tile refuel_tile;
 //
-//    if (punit.activity == ACTIVITY_GOTO
+//    if (punit.activity == unit_activity.ACTIVITY_GOTO
 //      /* We are on a GOTO.  Check if it will get us anywhere */
 //	&& is_airunit_refuel_point(punit.goto_tile, 
 //				   pplayer, punit.type, false)
@@ -337,7 +337,7 @@ public class Aiair{
 //      /* goto would be aborted: "Aborting GOTO for AI attack procedures"
 //       * now actually need to attack */
 //      /* We could use ai_military_findvictim here, but I don't trust it... */
-//      handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //      if (is_tiles_adjacent(punit.tile, punit.goto_tile)) {
 //        () handle_unit_move_request(punit, punit.goto_tile,
 //					true, false);
@@ -352,7 +352,7 @@ public class Aiair{
 //    } else {
 //      freelog(LOG_DEBUG, "%s cannot find anything to kill and is staying put", 
 //              unit_type(punit).name);
-//      handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //  }
 //

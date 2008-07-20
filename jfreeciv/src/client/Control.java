@@ -152,10 +152,10 @@ public class Control{
 //      /* Clear the focus unit's orders. */
 //      request_orders_cleared(punit);
 //    }
-//    if (punit.activity != ACTIVITY_IDLE || punit.ai.control)  {
+//    if (punit.activity != unit_activity.ACTIVITY_IDLE || punit.ai.control)  {
 //      punit.ai.control = false;
 //      refresh_unit_city_dialogs(punit);
-//      request_new_unit_activity(punit, ACTIVITY_IDLE);
+//      request_new_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //  }
 //  
@@ -200,9 +200,9 @@ public class Control{
 //void update_unit_focus()
 //{
 //  if (!punit_focus
-//      || (punit_focus.activity != ACTIVITY_IDLE
+//      || (punit_focus.activity != unit_activity.ACTIVITY_IDLE
 //	  && !unit_has_orders(punit_focus)
-//	  && punit_focus.activity != ACTIVITY_GOTO)
+//	  && punit_focus.activity != unit_activity.ACTIVITY_GOTO)
 //      || punit_focus.done_moving
 //      || punit_focus.moves_left == 0 
 //      || punit_focus.ai.control) {
@@ -237,11 +237,11 @@ public class Control{
 //
 //  if(!candidate) {
 //    /* First try for "waiting" units. */
-//    unit_list_iterate(game.player_ptr.units, punit) {
+//    for (unit punit : game.player_ptr.units.data) {
 //      if(punit.focus_status == FOCUS_WAIT) {
 //        punit.focus_status = FOCUS_AVAIL;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //    candidate = find_best_focus_candidate(false);
 //  }
 //
@@ -289,10 +289,10 @@ public class Control{
 //  }
 //
 //  best_candidate = null;
-//  unit_list_iterate(game.player_ptr.units, punit) {
+//  for (unit punit : game.player_ptr.units.data) {
 //    if ((punit != punit_focus || accept_current)
 //      && punit.focus_status == FOCUS_AVAIL
-//      && punit.activity == ACTIVITY_IDLE
+//      && punit.activity == unit_activity.ACTIVITY_IDLE
 //	&& !unit_has_orders(punit)
 //      && punit.moves_left > 0
 //      && !punit.done_moving
@@ -303,7 +303,7 @@ public class Control{
 //          best_dist = d;
 //        }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //  return best_candidate;
 //}
 //
@@ -323,21 +323,21 @@ public class Control{
 //  if (punit_attacking && same_pos(punit_attacking.tile, ptile)) {
 //    unit_list_iterate(ptile.units, punit)
 //      if(punit == punit_attacking) return punit;
-//    unit_list_iterate_end;
+//    }
 //  }
 //
 //  /* If a unit is defending we should show that on top */
 //  if (punit_defending && same_pos(punit_defending.tile, ptile)) {
 //    unit_list_iterate(ptile.units, punit)
 //      if(punit == punit_defending) return punit;
-//    unit_list_iterate_end;
+//    }
 //  }
 //
 //  /* If the unit in focus is at this tile, show that on top */
 //  if (punit_focus && same_pos(punit_focus.tile, ptile)) {
 //    unit_list_iterate(ptile.units, punit)
 //      if(punit == punit_focus) return punit;
-//    unit_list_iterate_end;
+//    }
 //  }
 //
 //  /* If a city is here, return nothing (unit hidden by city). */
@@ -367,7 +367,7 @@ public class Control{
 //	panyother = punit;
 //      }
 //    }
-//  unit_list_iterate_end;
+//  }
 //
 //  return (panyowned ? panyowned : (ptptother ? ptptother : panyother));
 //}
@@ -425,7 +425,7 @@ public class Control{
 //    set_unit_icon(-1, punit);
 //
 //    i = 0;			/* index into unit_below_canvas */
-//    unit_list_iterate(punit.tile.units, aunit) {
+//    for (unit aunit : punit.tile.units.data) {
 //      if (aunit != punit) {
 //	if (i < num_units_below) {
 //	  set_unit_icon(i, aunit);
@@ -433,7 +433,7 @@ public class Control{
 //	i++;
 //      }
 //    }
-//    unit_list_iterate_end;
+//    }
 //    
 //    if (i > num_units_below) {
 //      set_unit_icons_more_arrow(true);
@@ -622,18 +622,18 @@ public class Control{
 //static boolean is_activity_on_tile(tile ptile,
 //				enum unit_activity activity)
 //{
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if (punit.activity == ACTIVITY_MINE) {
 //      return true;
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  return false;
 //}
 //
 ///**************************************************************************
 //  Return whether the unit can connect with given activity (or with
-//  any activity if activity arg is set to ACTIVITY_IDLE)
+//  any activity if activity arg is set to unit_activity.ACTIVITY_IDLE)
 //
 //  This function is client-specific.
 //**************************************************************************/
@@ -719,19 +719,19 @@ public class Control{
 //
 //  request_unit_wait(punit);    /* RP: unfocus the ship */
 //
-//  unit_list_iterate(ptile.units, pcargo) {
+//  for (unit pcargo : ptile.units.data) {
 //    if (pcargo.transported_by == punit.id) {
 //      request_unit_unload(pcargo);
 //
 //      if (pcargo.activity == ACTIVITY_SENTRY) {
-//	request_new_unit_activity(pcargo, ACTIVITY_IDLE);
+//	request_new_unit_activity(pcargo, unit_activity.ACTIVITY_IDLE);
 //      }
 //
 //      if (pcargo.owner == game.player_idx) {
 //	plast = pcargo;
 //      }
 //    }
-//  } unit_list_iterate_end;
+//  } }
 //
 //  if (plast) {
 //    /* If the above unloading failed this focus will still happen.  That's
@@ -799,12 +799,12 @@ public class Control{
 //
 //void wakeup_sentried_units(tile ptile)
 //{
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    if(punit.activity==ACTIVITY_SENTRY && game.player_idx==punit.owner) {
-//      request_new_unit_activity(punit, ACTIVITY_IDLE);
+//      request_new_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //  }
-//  unit_list_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -960,7 +960,7 @@ public class Control{
 //
 //    /* Activate the unit. */
 //    dsend_packet_unit_change_activity(&aconnection, pcargo.id,
-//				      ACTIVITY_IDLE, S_NO_SPECIAL);
+//				      unit_activity.ACTIVITY_IDLE, S_NO_SPECIAL);
 //  }
 //}
 //
@@ -1374,7 +1374,7 @@ public class Control{
 //  if (game.player_idx == punit.owner
 //      && auto_center_on_unit
 //      && !unit_has_orders(punit)
-//      && punit.activity != ACTIVITY_GOTO
+//      && punit.activity != unit_activity.ACTIVITY_GOTO
 //      && punit.activity != ACTIVITY_SENTRY
 //      && !tile_visible_and_not_on_border_mapcanvas(target_unit.tile)) {
 //    center_tile_mapcanvas(target_unit.tile);
@@ -1479,7 +1479,7 @@ public class Control{
 //      && !unit_list_get(&ptile.units, 0).occupy) {
 //    unit punit=unit_list_get(&ptile.units, 0);
 //    if(game.player_idx==punit.owner) {
-//      if(can_unit_do_activity(punit, ACTIVITY_IDLE)) {
+//      if(can_unit_do_activity(punit, unit_activity.ACTIVITY_IDLE)) {
 //        maybe_goto = keyboardless_goto;
 //	set_unit_focus_and_select(punit);
 //      }
@@ -1540,7 +1540,7 @@ public class Control{
 //   *          Any unit
 //   */
 //
-//    unit_list_iterate(ptile.units, punit)  {
+//    for (unit punit : ptile.units.data) {
 //  if(game.player_idx != punit.owner || punit == punit_focus) {
 //    continue;
 //  }
@@ -1589,7 +1589,7 @@ public class Control{
 //  if (!panyunit) {
 //    panyunit = punit;
 //  }
-//    } unit_list_iterate_end;
+//    } }
 //
 //  if (qtype == SELECT_SEA) {
 //    if (panytransporter) {

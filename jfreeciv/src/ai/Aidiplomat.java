@@ -108,7 +108,7 @@ public class Aidiplomat{
 //     to protect us. If we see an enemy diplomat and we don't have diplomat
 //     tech... race it! */
 //  if (def != 0 && pcity.ai.diplomat_threat && !pcity.ai.has_diplomat) {
-//    Unit_Type_id u = best_role_unit(pcity, F_DIPLOMAT);
+//    int u = best_role_unit(pcity, F_DIPLOMAT);
 //
 //    if (u < U_LAST) {
 //       freelog(LOG_DIPLOMAT_BUILD, 
@@ -139,7 +139,7 @@ public class Aidiplomat{
 //                                  city pcity,
 //                                  ai_choice choice)
 //{
-//  Unit_Type_id u = best_role_unit(pcity, F_DIPLOMAT);
+//  int u = best_role_unit(pcity, F_DIPLOMAT);
 //  ai_data ai = ai_data_get(pplayer);
 //
 //  if (u >= U_LAST) {
@@ -266,7 +266,7 @@ public class Aidiplomat{
 //    UNIT_LOG(LOG_ERROR, punit, "no moves left in ai_diplomat_city()!");
 //  }
 //
-//  handle_unit_activity_request(punit, ACTIVITY_IDLE);
+//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //
 //#define T(my_act,my_val)                                            \
 //  if (diplomat_can_do_action(punit, my_act, ctarget.tile)) {	    \
@@ -372,7 +372,7 @@ public class Aidiplomat{
 //**************************************************************************/
 //static city ai_diplomat_defend(player pplayer,
 //                                       unit punit,
-//                                       Unit_Type_id utype, pf_map map)
+//                                       int utype, pf_map map)
 //{
 //  int best_dist = 30; /* any city closer than this is better than none */
 //  int best_urgency = 0;
@@ -463,12 +463,12 @@ public class Aidiplomat{
 //
 //    /* Calculate if enemy is a threat */
 //    /* First find best defender on our tile */
-//    unit_list_iterate(ptile.units, aunit) {
+//    for (unit aunit : ptile.units.data) {
 //      newval = DEFENCE_POWER(aunit);
 //      if (bestval < newval) {
 //        bestval = newval;
 //      }
-//    } unit_list_iterate_end;
+//    } }
 //    /* Compare with victim's attack power */
 //    newval = ATTACK_POWER(pvictim);
 //    if (newval > bestval

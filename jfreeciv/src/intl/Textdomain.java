@@ -53,7 +53,7 @@ public class Textdomain{
 ///* @@ end of prolog @@ */
 //
 ///* Name of the default text domain.  */
-//extern const char _nl_default_default_domain[];
+//extern final char _nl_default_default_domain[];
 //
 ///* Default text domain in which entries for gettext(3) are to be found.  */
 //extern final String _nl_current_default_domain;

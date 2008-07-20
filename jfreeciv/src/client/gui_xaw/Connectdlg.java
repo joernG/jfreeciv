@@ -522,7 +522,7 @@ public class Connectdlg{
 //    if (*list) free(*list);
 //    *list=mystrdup(line);
 //    list++;
-//  } server_list_iterate_end;
+//  } }
 //
 //  if (!lan_mode) {
 //    delete_server_list(server_list);

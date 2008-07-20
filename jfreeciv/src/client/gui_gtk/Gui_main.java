@@ -132,7 +132,7 @@ public class Gui_main{
 //  GEN_BOOL_OPTION(map_scrollbars, N"Show Map Scrollbars"),
 //  GEN_BOOL_OPTION(keyboardless_goto, N"Keyboardless goto"),
 //};
-//const int num_gui_options = ARRAY_SIZE(gui_options);
+//final int num_gui_options = ARRAY_SIZE(gui_options);
 //
 //static gint show_info_button_release(GtkWidget *w, GdkEventButton *ev);
 //static gint show_info_popup(GtkWidget *w, GdkEventButton *ev);

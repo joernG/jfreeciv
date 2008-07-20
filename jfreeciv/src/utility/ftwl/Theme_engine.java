@@ -120,7 +120,7 @@ public class Theme_engine{
 //*************************************************************************/
 //Sprite te_load_gfx(final String filename)
 //{
-//  const int prefixes = 6;
+//  final int prefixes = 6;
 //  char prefix[prefixes][512];
 //  int i;
 //
@@ -431,7 +431,7 @@ public class Theme_engine{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void construct_labels(section_file file,
+//static void finalruct_labels(section_file file,
 //			     te_screen screen)
 //{
 //  char **sec;
@@ -459,13 +459,13 @@ public class Theme_engine{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void construct_infos_text(section_file file,
+//static void finalruct_infos_text(section_file file,
 //				 te_screen screen)
 //{
 //  char **sec;
 //  int num;
 //  int i;
-//  const char prefix[] = "info_text_";
+//  final char prefix[] = "info_text_";
 //
 //  sec = secfile_get_secnames_prefix(file, prefix, &num);
 //
@@ -492,13 +492,13 @@ public class Theme_engine{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void construct_infos_tooltip(section_file file,
+//static void finalruct_infos_tooltip(section_file file,
 //				    te_screen screen)
 //{
 //  char **sec;
 //  int num;
 //  int i;
-//  const char prefix[] = "info_tooltip_";
+//  final char prefix[] = "info_tooltip_";
 //
 //  sec = secfile_get_secnames_prefix(file, prefix, &num);
 //
@@ -535,7 +535,7 @@ public class Theme_engine{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void construct_edits(section_file file,
+//static void finalruct_edits(section_file file,
 //			    te_screen screen)
 //{
 //  char **sec;
@@ -580,7 +580,7 @@ public class Theme_engine{
 ///*************************************************************************
 //  ...
 //*************************************************************************/
-//static void construct_buttons(section_file file,
+//static void finalruct_buttons(section_file file,
 //			      te_screen screen)
 //{
 //  char **sec;
@@ -641,7 +641,7 @@ public class Theme_engine{
 //  ...
 //*************************************************************************/
 //static boolean my_key_handler(sw_widget widget,
-//			   const be_key key, void *data)
+//			   final be_key key, void *data)
 //{
 //  te_screen screen = data;
 //
@@ -650,7 +650,7 @@ public class Theme_engine{
 //      screen.env.action_callback(pbinding.action);
 //      return true;
 //    }
-//  } keybinding_list_iterate_end;
+//  } }
 //
 //  return false;
 //}
@@ -687,7 +687,7 @@ public class Theme_engine{
 //*************************************************************************/
 //te_screen te_get_screen(sw_widget parent_window,
 //				final String screen_name,
-//				const te_screen_env env, int depth)
+//				final te_screen_env env, int depth)
 //{
 //  te_screen result = fc_malloc(sizeof(*result));
 //  section_file file;
@@ -703,11 +703,11 @@ public class Theme_engine{
 //  file = te_open_themed_file(filename);
 //
 //  customize_window(file, result.window);
-//  construct_labels(file, result);
-//  construct_infos_text(file, result);
-//  construct_infos_tooltip(file, result);
-//  construct_edits(file, result);
-//  construct_buttons(file, result);
+//  finalruct_labels(file, result);
+//  finalruct_infos_text(file, result);
+//  finalruct_infos_tooltip(file, result);
+//  finalruct_edits(file, result);
+//  finalruct_buttons(file, result);
 //  read_keybindings(file, result);
 //
 //  section_file_check_unused(file, filename);

@@ -193,7 +193,7 @@ public class Civmanual{
 //      fprintf(doc, "<h1>Freeciv %s server commands</h1>\n\n",
 //	      VERSION_STRING);
 //      for (i = 0; i < CMD_NUM; i++) {
-//	const command cmd = &commands[i];
+//	final command cmd = &commands[i];
 //
 //	fprintf(doc, SEPARATOR);
 //	fprintf(doc, "%s%s  -  %s%s\n\n", SECTION_BEGIN, cmd.name,

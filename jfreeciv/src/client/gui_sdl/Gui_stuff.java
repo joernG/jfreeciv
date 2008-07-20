@@ -108,10 +108,10 @@ public class Gui_stuff{
 //  SDL_Surface *pTsurf;
 //};
 //
-//static size_t chainlen(const UniChar pChain);
+//static size_t chainlen(final UniChar pChain);
 //static void del_chain(UniChar pChain);
-//static UniChar  text2chain(const Uint16 *pInText);
-//static Uint16 * chain2text(const UniChar pInChain, size_t len);
+//static UniChar  text2chain(final Uint16 *pInText);
+//static Uint16 * chain2text(final UniChar pInChain, size_t len);
 //		       
 //static void correct_size_bcgnd_surf(SDL_Surface *pTheme,
 //				    Uint16 *pWidth, Uint16 *pHigh);
@@ -300,7 +300,7 @@ public class Gui_stuff{
 //  Simple "Search and De..." no search in 'pGUI_List' == "Widget's list" and
 //  return ( not Disabled and not Hiden ) widget under cursor 'pPosition'.
 //**************************************************************************/
-//GUI  WidgetListScaner(const GUI pGUI_List, int x, int y)
+//GUI  WidgetListScaner(final GUI pGUI_List, int x, int y)
 //{
 //  while (pGUI_List) {
 //    if (is_in_rect_area(x, y, pGUI_List.size)
@@ -318,7 +318,7 @@ public class Gui_stuff{
 //  return ( not Disabled and not Hiden ) widget with 'Key' allias.
 //  NOTE: This function ignores CapsLock and NumLock Keys.
 //**************************************************************************/
-//GUI WidgetListKeyScaner(const GUI pGUI_List, SDL_keysym Key)
+//GUI WidgetListKeyScaner(final GUI pGUI_List, SDL_keysym Key)
 //{
 //  Key.mod &= ~(KMOD_NUM | KMOD_CAPS);
 //  while (pGUI_List) {
@@ -759,7 +759,7 @@ public class Gui_stuff{
 //  Find ID in Widget's List ('pGUI_List') and return pointer to this
 //  Widgets.
 //**************************************************************************/
-//GUI get_widget_pointer_form_ID(const GUI pGUI_List,
+//GUI get_widget_pointer_form_ID(final GUI pGUI_List,
 //				       Uint16 ID)
 //{
 //  while (pGUI_List) {
@@ -922,8 +922,8 @@ public class Gui_stuff{
 //  WindowGroup: start draw from 'pEnd' and stop on 'pBegin', in theory
 //  'pEnd' is window widget;
 //**************************************************************************/
-//Uint16 redraw_group(const GUI pBeginGroupWidgetList,
-//		    const GUI pEndGroupWidgetList,
+//Uint16 redraw_group(final GUI pBeginGroupWidgetList,
+//		    final GUI pEndGroupWidgetList,
 //		      int add_to_update)
 //{
 //  Uint16 count = 0;
@@ -969,8 +969,8 @@ public class Gui_stuff{
 ///**************************************************************************
 //  ...
 //**************************************************************************/
-//void set_new_group_start_pos(const GUI pBeginGroupWidgetList,
-//			     const GUI pEndGroupWidgetList,
+//void set_new_group_start_pos(final GUI pBeginGroupWidgetList,
+//			     final GUI pEndGroupWidgetList,
 //			     Sint16 Xrel, Sint16 Yrel)
 //{
 //  GUI pTmpWidget = (GUI ) pEndGroupWidgetList;
@@ -3233,7 +3233,7 @@ public class Gui_stuff{
 //  WARRNING: if struct UniChar has 1 member and UniChar.chr == 0 then
 //  this function return 1 ( not 0 like in strlen )
 //**************************************************************************/
-//static size_t chainlen(const UniChar pChain)
+//static size_t chainlen(final UniChar pChain)
 //{
 //  size_t length = 0;
 //
@@ -3279,7 +3279,7 @@ public class Gui_stuff{
 //  Convert Unistring ( Uint16[] ) to UniChar structure.
 //  Memmory alocation . after all use need call del_chain(...) !
 //**************************************************************************/
-//static UniChar text2chain(const Uint16 * pInText)
+//static UniChar text2chain(final Uint16 * pInText)
 //{
 //  int i, len;
 //  UniChar pOutChain = null;
@@ -3311,7 +3311,7 @@ public class Gui_stuff{
 //  Convert UniChar structure to Unistring ( Uint16[] ).
 //  WARRING: Do not free UniChar structure but allocate new Unistring.   
 //**************************************************************************/
-//static Uint16 *chain2text(const UniChar pInChain, size_t len)
+//static Uint16 *chain2text(final UniChar pInChain, size_t len)
 //{
 //  int i;
 //  Uint16 *pOutText = null;

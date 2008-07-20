@@ -922,7 +922,7 @@ public class Menu{
 ///****************************************************************
 //...
 //*****************************************************************/
-//static gchar *translate_func(const gchar *path, gpointer data)
+//static gchar *translate_func(final gchar *path, gpointer data)
 //{
 //#ifndef ENABLE_NLS
 //    static gchar res[100];
@@ -995,7 +995,7 @@ public class Menu{
 // *****************************************************************/
 //void setup_menus(GtkWidget *window, GtkWidget **menubar)
 //{
-//  const int nmenu_items = ARRAY_SIZE(menu_items);
+//  final int nmenu_items = ARRAY_SIZE(menu_items);
 //
 //  toplevel_accel = gtk_accel_group_new();
 //  item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>",

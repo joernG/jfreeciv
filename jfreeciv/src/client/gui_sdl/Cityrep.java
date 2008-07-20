@@ -251,7 +251,7 @@ public class Cityrep{
 //    
 //  pLast = pBuf;
 //  count = 0; 
-//  city_list_iterate(game.player_ptr.cities, pCity) {
+//  for (city pCity : game.player_ptr.cities.data) {
 //    
 //    pStr = create_str16_from_char(pCity.name, 12);
 //    pStr.style |= TTF_STYLE_BOLD;
@@ -559,7 +559,7 @@ public class Cityrep{
 //    
 //    count += COL;
 //    h += (hh + 2);
-//  } city_list_iterate_end;
+//  } }
 //  
 //  H = hh;
 //  pCityRep.pBeginWidgetList = pBuf;
@@ -1092,7 +1092,7 @@ public class Cityrep{
 //  
 //    /* find if the lists are identical (if not then rebuild all) */
 //    pWidget = pCityRep.pEndActiveWidgetList;/* name of first city */
-//    city_list_iterate(game.player_ptr.cities, pCity) {
+//    for (city pCity : game.player_ptr.cities.data) {
 //      if (pCity.id == MAX_ID - pWidget.ID) {
 //        count = COL;
 //        while(count) {
@@ -1103,7 +1103,7 @@ public class Cityrep{
 //        real_info_city_report_dialog_update();
 //        return;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //    /* check it there are some city widgets left on list */
 //    if(pWidget && pWidget.next != pCityRep.pBeginActiveWidgetList) {
 //      real_info_city_report_dialog_update();
@@ -1112,9 +1112,9 @@ public class Cityrep{
 //
 //    /* update widget city list (widget list is the same that city list) */
 //    pWidget = pCityRep.pEndActiveWidgetList;
-//    city_list_iterate(game.player_ptr.cities, pCity) {
+//    for (city pCity : game.player_ptr.cities.data) {
 //      pWidget = real_city_report_dialog_update_city(pWidget, pCity);  
-//    } city_list_iterate_end;
+//    } }
 //
 //    /* -------------------------------------- */
 //    redraw_group(pCityRep.pBeginWidgetList, pCityRep.pEndWidgetList, 0);

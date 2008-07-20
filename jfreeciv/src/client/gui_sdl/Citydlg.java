@@ -757,7 +757,7 @@ public class Citydlg{
 //    
 //    pBuf.action = units_orders_city_dlg_callback;
 //
-//  } unit_list_iterate_end;
+//  } }
 //  
 //  pCityDlg.pPanel = MALLOC(sizeof(struct ADVANCED_DLG));
 //  pCityDlg.pPanel.pEndWidgetList = pEnd;
@@ -1651,7 +1651,7 @@ public class Citydlg{
 //  int orig_canvas_x = canvas_x, orig_canvas_y = canvas_y;
 //
 //  if (is_isometric) {
-//    const int W = SCALLED_TILE_WIDTH, H = SCALLED_TILE_HEIGHT;
+//    final int W = SCALLED_TILE_WIDTH, H = SCALLED_TILE_HEIGHT;
 //
 //    /* Shift the tile right so the top corner of tile (-2,2) is at
 //       canvas position (0,0). */
@@ -1757,7 +1757,7 @@ public class Citydlg{
 //  ...
 //**************************************************************************/
 //static void fill_tile_resorce_surf(SDL_Surface * pTile,
-//				   const city pCity,
+//				   final city pCity,
 //				   Uint16 city_col, Uint16 city_row)
 //{
 //  int i, step;
@@ -1798,8 +1798,8 @@ public class Citydlg{
 //  Refresh (update) the city resource map
 //**************************************************************************/
 //void refresh_city_resource_map(SDL_Surface *pDest, int x, int y,
-//			       const city pCity,
-//			       boolean (*worker_check) (const city ,
+//			       final city pCity,
+//			       boolean (*worker_check) (final city ,
 //						     int, int))
 //{
 //#ifndef NO_ISO
@@ -1898,7 +1898,7 @@ public class Citydlg{
 ///************************************************************************
 //  Helper for switch_city_callback.
 //*************************************************************************/
-//static int city_comp_by_turn_founded(const void *a, const void *b)
+//static int city_comp_by_turn_founded(final void *a, final void *b)
 //{
 //  city pcity1 = *((city *) a);
 //  city pcity2 = *((city *) b);
@@ -2074,7 +2074,7 @@ public class Citydlg{
 //    pList = &(pCityDlg.pCity.units_supported);
 //  }
 //
-//  size = unit_list_size(pList);
+//  size = pList.foo_list_size();
 //
 //  my_snprintf(cBuf, sizeof(cBuf), "Unit maintenance panel (%d %s)",
 //	      size, PL_("unit", "units", size));
@@ -2135,7 +2135,7 @@ public class Citydlg{
 //    pList = &(map_get_tile(pCityDlg.pCity.x, pCityDlg.pCity.y).units);
 //  }
 //
-//  size = unit_list_size(pList);
+//  size = pList.foo_list_size();
 //
 //  my_snprintf(cBuf, sizeof(cBuf), "Garrison Panel (%d %s)",
 //	      size, PL_("unit", "units", size));
@@ -2338,7 +2338,7 @@ public class Citydlg{
 //  207 - max panel width
 //  180 - max citizens icons area width
 //**************************************************************************/
-//static void redraw_happyness_city_dialog(const GUI pCityWindow,
+//static void redraw_happyness_city_dialog(final GUI pCityWindow,
 //					 city pCity)
 //{
 //  char cBuf[30];

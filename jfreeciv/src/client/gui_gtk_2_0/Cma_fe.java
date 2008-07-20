@@ -52,7 +52,7 @@ public class Cma_fe{
 //    TYPED_LIST_ITERATE(struct cma_dialog, dialoglist, pdialog)
 //#define dialog_list_iterate_end  LIST_ITERATE_END
 //
-//static struct dialog_list dialog_list;
+//static Speclists<dialog> dialog_list;
 //static boolean dialog_list_has_been_initialised = false;
 //
 //static int allow_refreshes = 1;
@@ -78,7 +78,7 @@ public class Cma_fe{
 //				         GtkTreeViewColumn *col, gpointer data);
 //
 //static void hscale_changed(GtkAdjustment *get, gpointer data);
-//static void set_hscales(const cm_parameter const parameter,
+//static void set_hscales(final cm_parameter final parameter,
 //			cma_dialog pdialog);
 //
 ///**************************************************************************
@@ -122,11 +122,11 @@ public class Cma_fe{
 //{
 //  ensure_initialised_dialog_list();
 //
-//  dialog_list_iterate(dialog_list, pdialog) {
+//  for (dialog pdialog : dialog_list.data) {
 //    if (pdialog.pcity == pcity) {
 //      return pdialog;
 //    }
-//  } dialog_list_iterate_end;
+//  } }
 //
 //  return null;
 //}
@@ -504,7 +504,7 @@ public class Cma_fe{
 //{
 //  cma_dialog pdialog = (cma_dialog ) data;
 //  int preset_index;
-//  const cm_parameter pparam;
+//  final cm_parameter pparam;
 //
 //  preset_index = gtk_tree_path_get_indices(path) [0];
 //
@@ -701,7 +701,7 @@ public class Cma_fe{
 // called to adjust the sliders when a preset is selected
 // notice that we don't want to call update_result here. 
 //*****************************************************************/
-//static void set_hscales(const cm_parameter const parameter,
+//static void set_hscales(final cm_parameter final parameter,
 //			cma_dialog pdialog)
 //{
 //  int i;

@@ -132,7 +132,7 @@ public class Dialogs{
 //static int races_style_buttons_get_current();
 //static void races_sex_buttons_set_current(int i);
 //
-//static int races_indirect_compare(const void *first, const void *second);
+//static int races_indirect_compare(final void *first, final void *second);
 //
 //static void races_toggles_callback(Widget w, XtPointer client_data, 
 //				   XtPointer call_data);
@@ -265,7 +265,7 @@ public class Dialogs{
 //*****************************************************************/
 //
 ///* surely this should use genlists??  --dwp */
-//struct widget_list {
+//Speclists<widget> {
 //  Widget w;
 //  tile tile;
 //  widget_list next;
@@ -1491,7 +1491,7 @@ public class Dialogs{
 //    nargs=0;
 //    XtSetArg(args[nargs], XtNbitmap, (XtArgVal)unit_select_pixmaps[i]);nargs++;
 //    XtSetArg(args[nargs], XtNsensitive, 
-//             can_unit_do_activity(punit, ACTIVITY_IDLE));nargs++;
+//             can_unit_do_activity(punit, unit_activity.ACTIVITY_IDLE));nargs++;
 //    if(i%r)  {
 //      XtSetArg(args[nargs], XtNfromVert, unit_select_commands[i-1]); nargs++;
 //    }
@@ -2119,15 +2119,15 @@ public class Dialogs{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//int races_indirect_compare(const void *first, const void *second)
+//int races_indirect_compare(final void *first, final void *second)
 //{
 //  int first_index;
 //  int second_index;
 //  final String first_string;
 //  final String second_string;
 //
-//  first_index = *((const int *)first);
-//  second_index = *((const int *)second);
+//  first_index = *((final int *)first);
+//  second_index = *((final int *)second);
 //
 //  first_string = get_nation_name(first_index);
 //  second_string = get_nation_name(second_index);

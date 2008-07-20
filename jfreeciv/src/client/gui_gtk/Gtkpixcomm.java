@@ -57,7 +57,7 @@ public class Gtkpixcomm{
 //
 //  if (!pixcomm_type)
 //    {
-//      static const GtkTypeInfo pixcomm_info =
+//      static final GtkTypeInfo pixcomm_info =
 //      {
 //	(char *)"GtkPixcomm",
 //	sizeof (GtkPixcomm),

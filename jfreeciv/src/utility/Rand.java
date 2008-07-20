@@ -19,14 +19,14 @@ public class Rand{
 //   Computer Programming Vol 2._ (2nd ed) by Donald E. Knuth. (C)  1998.
 //   The algorithm is described in section 3.2.2 as Mitchell and Moore's
 //   variant of a standard additive number generator.  Note that the
-//   the constants 55 and 24 are not random.  Please become familiar with
+//   the finalants 55 and 24 are not random.  Please become familiar with
 //   this algorithm before you mess with it.
 //
 //   Since the additive number generator requires a table of numbers from
 //   which to generate its random sequences, we must invent a way to 
 //   populate that table from a single seed value.  I have chosen to do
 //   this with a different PRNG, known as the "linear congruential method" 
-//   (also found in Knuth, Vol2).  I must admit that my choices of constants
+//   (also found in Knuth, Vol2).  I must admit that my choices of finalants
 //   (3, 257, and MAX_UINT32) are probably not optimal, but they seem to
 //   work well enough for our purposes.
 //   

@@ -165,15 +165,15 @@ public class Height_map{
 //**************************************************************************/
 //void make_pseudofractal1_hmap(int extra_div)
 //{
-//  const boolean xnowrap = !topo_has_flag(TF_WRAPX);
-//  const boolean ynowrap = !topo_has_flag(TF_WRAPY);
+//  final boolean xnowrap = !topo_has_flag(TF_WRAPX);
+//  final boolean ynowrap = !topo_has_flag(TF_WRAPY);
 //
 //  /* 
 //   * How many blocks should the x and y directions be divided into
 //   * initially. 
 //   */
-//  const int xdiv = 5 + extra_div;		
-//  const int ydiv = 5 + extra_div;
+//  final int xdiv = 5 + extra_div;		
+//  final int ydiv = 5 + extra_div;
 //
 //  int xdiv2 = xdiv + (xnowrap ? 1 : 0);
 //  int ydiv2 = ydiv + (ynowrap ? 1 : 0);

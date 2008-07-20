@@ -93,7 +93,7 @@ public class Gui_main{
 //
 //boolean better_fog = true;
 //
-//const static RECT textwin_size={0,1,0,100};
+//final static RECT textwin_size={0,1,0,100};
 //
 //fcwin_box main_win_box;
 //fcwin_box output_box;
@@ -102,7 +102,7 @@ public class Gui_main{
 //  GEN_BOOL_OPTION(better_fog,
 //		  N"Better fog-of-war drawing")
 //};
-//const int num_gui_options = ARRAY_SIZE(gui_options);
+//final int num_gui_options = ARRAY_SIZE(gui_options);
 //
 //void socket_timer();
 //

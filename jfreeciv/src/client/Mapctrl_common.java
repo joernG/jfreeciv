@@ -107,14 +107,14 @@ public class Mapctrl_common{
 //**************************************************************************/
 //static void define_tiles_within_rectangle()
 //{
-//  const int W = NORMAL_TILE_WIDTH,   half_W = W / 2;
-//  const int H = NORMAL_TILE_HEIGHT,  half_H = H / 2;
-//  const int segments_x = abs(rec_w / half_W);
-//  const int segments_y = abs(rec_h / half_H);
+//  final int W = NORMAL_TILE_WIDTH,   half_W = W / 2;
+//  final int H = NORMAL_TILE_HEIGHT,  half_H = H / 2;
+//  final int segments_x = abs(rec_w / half_W);
+//  final int segments_y = abs(rec_h / half_H);
 //
 //  /* Iteration direction */
-//  const int inc_x = (rec_w > 0 ? half_W : -half_W);
-//  const int inc_y = (rec_h > 0 ? half_H : -half_H);
+//  final int inc_x = (rec_w > 0 ? half_W : -half_W);
+//  final int inc_y = (rec_h > 0 ? half_H : -half_H);
 //
 //  int x, y, x2, y2, xx, yy;
 //
@@ -164,8 +164,8 @@ public class Mapctrl_common{
 //**************************************************************************/
 //void update_selection_rectangle(int canvas_x, int canvas_y)
 //{
-//  const int W = NORMAL_TILE_WIDTH,    half_W = W / 2;
-//  const int H = NORMAL_TILE_HEIGHT,   half_H = H / 2;
+//  final int W = NORMAL_TILE_WIDTH,    half_W = W / 2;
+//  final int H = NORMAL_TILE_HEIGHT,   half_H = H / 2;
 //  static tile rec_tile = null;
 //  int diff_x, diff_y;
 //  tile center_tile;
@@ -390,11 +390,11 @@ public class Mapctrl_common{
 //  }
 //  else {
 //    connection_do_buffer(&aconnection);
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      if (is_city_hilited(pcity)) {
 //        clipboard_send_production_packet(pcity);
 //      }
-//    } city_list_iterate_end;
+//    } }
 //    connection_do_unbuffer(&aconnection);
 //  }
 //}
@@ -690,10 +690,10 @@ public class Mapctrl_common{
 //    transporting may be recursive).
 //  - Otherwise we sort by ID (which is what the list is originally sorted by).
 //****************************************************************************/
-//static int unit_list_compare(const void *a, const void *b)
+//static int unit_list_compare(final void *a, final void *b)
 //{
-//  const unit punit1 = *(unit *)a;
-//  const unit punit2 = *(unit *)b;
+//  final unit punit1 = *(unit *)a;
+//  final unit punit2 = *(unit *)b;
 //
 //  if (punit1.transported_by == punit2.transported_by) {
 //    /* For units with the same transporter or no transporter: sort by id. */
@@ -706,8 +706,8 @@ public class Mapctrl_common{
 //  } else {
 //    /* If the transporters aren't the same, put in order by the
 //     * transporters. */
-//    const unit ptrans1 = find_unit_by_id(punit1.transported_by);
-//    const unit ptrans2 = find_unit_by_id(punit2.transported_by);
+//    final unit ptrans1 = find_unit_by_id(punit1.transported_by);
+//    final unit ptrans2 = find_unit_by_id(punit2.transported_by);
 //
 //    if (!ptrans1) {
 //      ptrans1 = punit1;
@@ -728,10 +728,10 @@ public class Mapctrl_common{
 //  int i = 0;
 //
 //  /* First populate the unit list. */
-//  unit_list_iterate(ptile.units, punit) {
+//  for (unit punit : ptile.units.data) {
 //    unit_list[i] = punit;
 //    i++;
-//  } unit_list_iterate_end;
+//  } }
 //
 //  /* Then sort it. */
 //  qsort(unit_list, i, sizeof(*unit_list), unit_list_compare);

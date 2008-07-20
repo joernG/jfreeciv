@@ -129,7 +129,7 @@ public class Plrdlg_common{
 //static final String col_diplstate(player player)
 //{
 //  static char buf[100];
-//  const player_diplstate pds;
+//  final player_diplstate pds;
 //
 //  if (player == game.player_ptr) {
 //    return "-";
@@ -240,7 +240,7 @@ public class Plrdlg_common{
 //  {false, COL_RIGHT_TEXT, N"Ping", get_ping_time_text, null, "ping"}
 //};
 //
-//const int num_player_dlg_columns = ARRAY_SIZE(player_dlg_columns);
+//final int num_player_dlg_columns = ARRAY_SIZE(player_dlg_columns);
 //
 ///******************************************************************
 // ...
@@ -274,11 +274,11 @@ public class Plrdlg_common{
 //**************************************************************************/
 //final String player_addr_hack(player pplayer)
 //{ 
-//  conn_list_iterate(pplayer.connections, pconn) {
+//  for (conn pconn : pplayer.connections.data) {
 //    if (!pconn.observer) {
 //      return pconn.addr;
 //    }
-//  } conn_list_iterate_end;
+//  } }
 //
 //  return blank_addr_str;
 //}   

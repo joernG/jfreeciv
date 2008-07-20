@@ -58,7 +58,7 @@ public class Worklistclass{
 //
 //struct Worklistview_Data
 //{
-//  struct Hook construct_hook;
+//  struct Hook finalruct_hook;
 //  struct Hook destruct_hook;
 //  struct Hook display_hook;
 //  city pcity;
@@ -75,9 +75,9 @@ public class Worklistclass{
 //};
 //
 ///****************************************************************
-// Constructor of a new entry in the listview
+// finalructor of a new entry in the listview
 //*****************************************************************/
-//HOOKPROTONHNO(worklistview_construct, worklist_entry , worklist_entry entry)
+//HOOKPROTONHNO(worklistview_finalruct, worklist_entry , worklist_entry entry)
 //{
 //  worklist_entry newentry = (worklist_entry ) AllocVec(sizeof(*newentry), 0);
 //  if (newentry)
@@ -267,7 +267,7 @@ public class Worklistclass{
 //      set(o,MUIA_NList_DragSortable, true);
 //    }
 //
-//    data.construct_hook.h_Entry = (HOOKFUNC)worklistview_construct;
+//    data.finalruct_hook.h_Entry = (HOOKFUNC)worklistview_finalruct;
 //    data.destruct_hook.h_Entry = (HOOKFUNC)worklistview_destruct;
 //    data.display_hook.h_Entry = (HOOKFUNC)worklistview_display;
 //    data.display_hook.h_SubEntry = (HOOKFUNC)data;
@@ -276,7 +276,7 @@ public class Worklistclass{
 //    for (i = 0; i < COLUMNS; i++)
 //	data.row[i] = data.buf[i];
 //
-//    SetAttrs(o, MUIA_NList_ConstructHook, &data.construct_hook,
+//    SetAttrs(o, MUIA_NList_finalructHook, &data.finalruct_hook,
 //                MUIA_NList_DestructHook, &data.destruct_hook,
 //                MUIA_NList_DisplayHook, &data.display_hook,
 //                TAG_DONE);

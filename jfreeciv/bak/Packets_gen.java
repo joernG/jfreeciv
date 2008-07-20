@@ -28,12 +28,12 @@ public class Packets_gen{
 //
 //#include "packets.h"
 //
-//static unsigned int hash_const(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_final(final void *vkey, unsigned int num_buckets)
 //{
 //  return 0;
 //}
 //
-//static int cmp_const(const void *vkey1, const void *vkey2)
+//static int cmp_final(final void *vkey1, final void *vkey2)
 //{
 //  return 0;
 //}
@@ -958,11 +958,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_freeze_hint(struct conn_list *dest)
+//void lsend_packet_freeze_hint(Speclists<conn> *dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_freeze_hint(pconn);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //static struct packet_thaw_hint *receive_packet_thaw_hint_100(struct connection *pc, enum packet_type type)
@@ -1035,11 +1035,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_thaw_hint(struct conn_list *dest)
+//void lsend_packet_thaw_hint(Speclists<conn> *dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_thaw_hint(pconn);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //static struct packet_server_join_req *receive_packet_server_join_req_100(struct connection *pc, enum packet_type type)
@@ -1070,9 +1070,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_server_join_req_100(struct connection *pc, const struct packet_server_join_req *packet)
+//static int send_packet_server_join_req_100(struct connection *pc, final struct packet_server_join_req *packet)
 //{
-//  const struct packet_server_join_req *real_packet = packet;
+//  final struct packet_server_join_req *real_packet = packet;
 //  SEND_PACKET_START(PACKET_SERVER_JOIN_REQ);
 //
 //  dio_put_string(&dout, real_packet->username);
@@ -1122,7 +1122,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_server_join_req(struct connection *pc, const struct packet_server_join_req *packet)
+//int send_packet_server_join_req(struct connection *pc, final struct packet_server_join_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -1173,9 +1173,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_server_join_reply_100(struct connection *pc, const struct packet_server_join_reply *packet)
+//static int send_packet_server_join_reply_100(struct connection *pc, final struct packet_server_join_reply *packet)
 //{
-//  const struct packet_server_join_reply *real_packet = packet;
+//  final struct packet_server_join_reply *real_packet = packet;
 //  SEND_PACKET_START(PACKET_SERVER_JOIN_REPLY);
 //
 //  dio_put_bool8(&dout, real_packet->you_can_join);
@@ -1224,7 +1224,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_server_join_reply(struct connection *pc, const struct packet_server_join_reply *packet)
+//int send_packet_server_join_reply(struct connection *pc, final struct packet_server_join_reply *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -1244,9 +1244,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_authentication_req_100 hash_const
+//#define hash_packet_authentication_req_100 hash_final
 //
-//#define cmp_packet_authentication_req_100 cmp_const
+//#define cmp_packet_authentication_req_100 cmp_final
 //
 //BV_DEFINE(packet_authentication_req_100_fields, 2);
 //
@@ -1294,9 +1294,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_authentication_req_100(struct connection *pc, const struct packet_authentication_req *packet)
+//static int send_packet_authentication_req_100(struct connection *pc, final struct packet_authentication_req *packet)
 //{
-//  const struct packet_authentication_req *real_packet = packet;
+//  final struct packet_authentication_req *real_packet = packet;
 //  packet_authentication_req_100_fields fields;
 //  struct packet_authentication_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -1387,7 +1387,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_authentication_req(struct connection *pc, const struct packet_authentication_req *packet)
+//int send_packet_authentication_req(struct connection *pc, final struct packet_authentication_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -1417,9 +1417,9 @@ public class Packets_gen{
 //  return send_packet_authentication_req(pc, real_packet);
 //}
 //
-//#define hash_packet_authentication_reply_100 hash_const
+//#define hash_packet_authentication_reply_100 hash_final
 //
-//#define cmp_packet_authentication_reply_100 cmp_const
+//#define cmp_packet_authentication_reply_100 cmp_final
 //
 //BV_DEFINE(packet_authentication_reply_100_fields, 1);
 //
@@ -1459,9 +1459,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_authentication_reply_100(struct connection *pc, const struct packet_authentication_reply *packet)
+//static int send_packet_authentication_reply_100(struct connection *pc, final struct packet_authentication_reply *packet)
 //{
-//  const struct packet_authentication_reply *real_packet = packet;
+//  final struct packet_authentication_reply *real_packet = packet;
 //  packet_authentication_reply_100_fields fields;
 //  struct packet_authentication_reply *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -1545,7 +1545,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_authentication_reply(struct connection *pc, const struct packet_authentication_reply *packet)
+//int send_packet_authentication_reply(struct connection *pc, final struct packet_authentication_reply *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -1635,16 +1635,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_server_shutdown(struct conn_list *dest)
+//void lsend_packet_server_shutdown(Speclists<conn> *dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_server_shutdown(pconn);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_nation_unavailable_100 hash_const
+//#define hash_packet_nation_unavailable_100 hash_final
 //
-//#define cmp_packet_nation_unavailable_100 cmp_const
+//#define cmp_packet_nation_unavailable_100 cmp_final
 //
 //BV_DEFINE(packet_nation_unavailable_100_fields, 1);
 //
@@ -1689,9 +1689,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_nation_unavailable_100(struct connection *pc, const struct packet_nation_unavailable *packet)
+//static int send_packet_nation_unavailable_100(struct connection *pc, final struct packet_nation_unavailable *packet)
 //{
-//  const struct packet_nation_unavailable *real_packet = packet;
+//  final struct packet_nation_unavailable *real_packet = packet;
 //  packet_nation_unavailable_100_fields fields;
 //  struct packet_nation_unavailable *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -1775,7 +1775,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_nation_unavailable(struct connection *pc, const struct packet_nation_unavailable *packet)
+//int send_packet_nation_unavailable(struct connection *pc, final struct packet_nation_unavailable *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -1795,11 +1795,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_nation_unavailable(struct conn_list *dest, const struct packet_nation_unavailable *packet)
+//void lsend_packet_nation_unavailable(Speclists<conn> *dest, final struct packet_nation_unavailable *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_nation_unavailable(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //static struct packet_select_races *receive_packet_select_races_100(struct connection *pc, enum packet_type type)
@@ -1872,16 +1872,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_select_races(struct conn_list *dest)
+//void lsend_packet_select_races(Speclists<conn> *dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_select_races(pconn);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_nation_select_req_100 hash_const
+//#define hash_packet_nation_select_req_100 hash_final
 //
-//#define cmp_packet_nation_select_req_100 cmp_const
+//#define cmp_packet_nation_select_req_100 cmp_final
 //
 //BV_DEFINE(packet_nation_select_req_100_fields, 4);
 //
@@ -1938,9 +1938,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_nation_select_req_100(struct connection *pc, const struct packet_nation_select_req *packet)
+//static int send_packet_nation_select_req_100(struct connection *pc, final struct packet_nation_select_req *packet)
 //{
-//  const struct packet_nation_select_req *real_packet = packet;
+//  final struct packet_nation_select_req *real_packet = packet;
 //  packet_nation_select_req_100_fields fields;
 //  struct packet_nation_select_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -2043,7 +2043,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_nation_select_req(struct connection *pc, const struct packet_nation_select_req *packet)
+//int send_packet_nation_select_req(struct connection *pc, final struct packet_nation_select_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -2145,16 +2145,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_nation_select_ok(struct conn_list *dest)
+//void lsend_packet_nation_select_ok(Speclists<conn> *dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_nation_select_ok(pconn);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_game_state_100 hash_const
+//#define hash_packet_game_state_100 hash_final
 //
-//#define cmp_packet_game_state_100 cmp_const
+//#define cmp_packet_game_state_100 cmp_final
 //
 //BV_DEFINE(packet_game_state_100_fields, 1);
 //
@@ -2200,9 +2200,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_game_state_100(struct connection *pc, const struct packet_game_state *packet)
+//static int send_packet_game_state_100(struct connection *pc, final struct packet_game_state *packet)
 //{
-//  const struct packet_game_state *real_packet = packet;
+//  final struct packet_game_state *real_packet = packet;
 //  packet_game_state_100_fields fields;
 //  struct packet_game_state *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -2287,7 +2287,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_game_state(struct connection *pc, const struct packet_game_state *packet)
+//int send_packet_game_state(struct connection *pc, final struct packet_game_state *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -2307,11 +2307,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_game_state(struct conn_list *dest, const struct packet_game_state *packet)
+//void lsend_packet_game_state(Speclists<conn> *dest, final struct packet_game_state *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_game_state(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_game_state(struct connection *pc, int value)
@@ -2323,7 +2323,7 @@ public class Packets_gen{
 //  return send_packet_game_state(pc, real_packet);
 //}
 //
-//void dlsend_packet_game_state(struct conn_list *dest, int value)
+//void dlsend_packet_game_state(Speclists<conn> *dest, int value)
 //{
 //  struct packet_game_state packet, *real_packet = &packet;
 //
@@ -2332,9 +2332,9 @@ public class Packets_gen{
 //  lsend_packet_game_state(dest, real_packet);
 //}
 //
-//#define hash_packet_endgame_report_100 hash_const
+//#define hash_packet_endgame_report_100 hash_final
 //
-//#define cmp_packet_endgame_report_100 cmp_const
+//#define cmp_packet_endgame_report_100 cmp_final
 //
 //BV_DEFINE(packet_endgame_report_100_fields, 15);
 //
@@ -2645,9 +2645,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_endgame_report_100(struct connection *pc, const struct packet_endgame_report *packet)
+//static int send_packet_endgame_report_100(struct connection *pc, final struct packet_endgame_report *packet)
 //{
-//  const struct packet_endgame_report *real_packet = packet;
+//  final struct packet_endgame_report *real_packet = packet;
 //  packet_endgame_report_100_fields fields;
 //  struct packet_endgame_report *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -3095,7 +3095,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_endgame_report(struct connection *pc, const struct packet_endgame_report *packet)
+//int send_packet_endgame_report(struct connection *pc, final struct packet_endgame_report *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -3115,24 +3115,24 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_endgame_report(struct conn_list *dest, const struct packet_endgame_report *packet)
+//void lsend_packet_endgame_report(Speclists<conn> *dest, final struct packet_endgame_report *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_endgame_report(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//static unsigned int hash_packet_tile_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_tile_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_tile_info *key = (const struct packet_tile_info *) vkey;
+//  final struct packet_tile_info *key = (final struct packet_tile_info *) vkey;
 //
 //  return (((key->x << 8) ^ key->y) % num_buckets);
 //}
 //
-//static int cmp_packet_tile_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_tile_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_tile_info *key1 = (const struct packet_tile_info *) vkey1;
-//  const struct packet_tile_info *key2 = (const struct packet_tile_info *) vkey2;
+//  final struct packet_tile_info *key1 = (final struct packet_tile_info *) vkey1;
+//  final struct packet_tile_info *key2 = (final struct packet_tile_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->x - key2->x;
@@ -3244,9 +3244,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_tile_info_100(struct connection *pc, const struct packet_tile_info *packet)
+//static int send_packet_tile_info_100(struct connection *pc, final struct packet_tile_info *packet)
 //{
-//  const struct packet_tile_info *real_packet = packet;
+//  final struct packet_tile_info *real_packet = packet;
 //  packet_tile_info_100_fields fields;
 //  struct packet_tile_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -3367,7 +3367,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_tile_info(struct connection *pc, const struct packet_tile_info *packet)
+//int send_packet_tile_info(struct connection *pc, final struct packet_tile_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -3387,16 +3387,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_tile_info(struct conn_list *dest, const struct packet_tile_info *packet)
+//void lsend_packet_tile_info(Speclists<conn> *dest, final struct packet_tile_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_tile_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_game_info_100 hash_const
+//#define hash_packet_game_info_100 hash_final
 //
-//#define cmp_packet_game_info_100 cmp_const
+//#define cmp_packet_game_info_100 cmp_final
 //
 //BV_DEFINE(packet_game_info_100_fields, 30);
 //
@@ -3692,9 +3692,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_game_info_100(struct connection *pc, const struct packet_game_info *packet)
+//static int send_packet_game_info_100(struct connection *pc, final struct packet_game_info *packet)
 //{
-//  const struct packet_game_info *real_packet = packet;
+//  final struct packet_game_info *real_packet = packet;
 //  packet_game_info_100_fields fields;
 //  struct packet_game_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -4029,7 +4029,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_game_info(struct connection *pc, const struct packet_game_info *packet)
+//int send_packet_game_info(struct connection *pc, final struct packet_game_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -4049,9 +4049,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_map_info_100 hash_const
+//#define hash_packet_map_info_100 hash_final
 //
-//#define cmp_packet_map_info_100 cmp_const
+//#define cmp_packet_map_info_100 cmp_final
 //
 //BV_DEFINE(packet_map_info_100_fields, 3);
 //
@@ -4112,9 +4112,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_map_info_100(struct connection *pc, const struct packet_map_info *packet)
+//static int send_packet_map_info_100(struct connection *pc, final struct packet_map_info *packet)
 //{
-//  const struct packet_map_info *real_packet = packet;
+//  final struct packet_map_info *real_packet = packet;
 //  packet_map_info_100_fields fields;
 //  struct packet_map_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -4212,7 +4212,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_map_info(struct connection *pc, const struct packet_map_info *packet)
+//int send_packet_map_info(struct connection *pc, final struct packet_map_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -4232,16 +4232,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_map_info(struct conn_list *dest, const struct packet_map_info *packet)
+//void lsend_packet_map_info(Speclists<conn> *dest, final struct packet_map_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_map_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_nuke_tile_info_100 hash_const
+//#define hash_packet_nuke_tile_info_100 hash_final
 //
-//#define cmp_packet_nuke_tile_info_100 cmp_const
+//#define cmp_packet_nuke_tile_info_100 cmp_final
 //
 //BV_DEFINE(packet_nuke_tile_info_100_fields, 2);
 //
@@ -4294,9 +4294,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_nuke_tile_info_100(struct connection *pc, const struct packet_nuke_tile_info *packet)
+//static int send_packet_nuke_tile_info_100(struct connection *pc, final struct packet_nuke_tile_info *packet)
 //{
-//  const struct packet_nuke_tile_info *real_packet = packet;
+//  final struct packet_nuke_tile_info *real_packet = packet;
 //  packet_nuke_tile_info_100_fields fields;
 //  struct packet_nuke_tile_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -4387,7 +4387,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_nuke_tile_info(struct connection *pc, const struct packet_nuke_tile_info *packet)
+//int send_packet_nuke_tile_info(struct connection *pc, final struct packet_nuke_tile_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -4407,11 +4407,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_nuke_tile_info(struct conn_list *dest, const struct packet_nuke_tile_info *packet)
+//void lsend_packet_nuke_tile_info(Speclists<conn> *dest, final struct packet_nuke_tile_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_nuke_tile_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_nuke_tile_info(struct connection *pc, int x, int y)
@@ -4424,7 +4424,7 @@ public class Packets_gen{
 //  return send_packet_nuke_tile_info(pc, real_packet);
 //}
 //
-//void dlsend_packet_nuke_tile_info(struct conn_list *dest, int x, int y)
+//void dlsend_packet_nuke_tile_info(Speclists<conn> *dest, int x, int y)
 //{
 //  struct packet_nuke_tile_info packet, *real_packet = &packet;
 //
@@ -4434,9 +4434,9 @@ public class Packets_gen{
 //  lsend_packet_nuke_tile_info(dest, real_packet);
 //}
 //
-//#define hash_packet_chat_msg_100 hash_const
+//#define hash_packet_chat_msg_100 hash_final
 //
-//#define cmp_packet_chat_msg_100 cmp_const
+//#define cmp_packet_chat_msg_100 cmp_final
 //
 //BV_DEFINE(packet_chat_msg_100_fields, 5);
 //
@@ -4509,9 +4509,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_chat_msg_100(struct connection *pc, const struct packet_chat_msg *packet)
+//static int send_packet_chat_msg_100(struct connection *pc, final struct packet_chat_msg *packet)
 //{
-//  const struct packet_chat_msg *real_packet = packet;
+//  final struct packet_chat_msg *real_packet = packet;
 //  packet_chat_msg_100_fields fields;
 //  struct packet_chat_msg *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -4639,7 +4639,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_chat_msg(struct connection *pc, const struct packet_chat_msg *packet)
+//int send_packet_chat_msg(struct connection *pc, final struct packet_chat_msg *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -4659,11 +4659,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_chat_msg(struct conn_list *dest, const struct packet_chat_msg *packet)
+//void lsend_packet_chat_msg(Speclists<conn> *dest, final struct packet_chat_msg *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_chat_msg(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_chat_msg(struct connection *pc, final String message, int x, int y, enum event_type event, int conn_id)
@@ -4679,7 +4679,7 @@ public class Packets_gen{
 //  return send_packet_chat_msg(pc, real_packet);
 //}
 //
-//void dlsend_packet_chat_msg(struct conn_list *dest, final String message, int x, int y, enum event_type event, int conn_id)
+//void dlsend_packet_chat_msg(Speclists<conn> *dest, final String message, int x, int y, enum event_type event, int conn_id)
 //{
 //  struct packet_chat_msg packet, *real_packet = &packet;
 //
@@ -4692,9 +4692,9 @@ public class Packets_gen{
 //  lsend_packet_chat_msg(dest, real_packet);
 //}
 //
-//#define hash_packet_chat_msg_req_100 hash_const
+//#define hash_packet_chat_msg_req_100 hash_final
 //
-//#define cmp_packet_chat_msg_req_100 cmp_const
+//#define cmp_packet_chat_msg_req_100 cmp_final
 //
 //BV_DEFINE(packet_chat_msg_req_100_fields, 1);
 //
@@ -4734,9 +4734,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_chat_msg_req_100(struct connection *pc, const struct packet_chat_msg_req *packet)
+//static int send_packet_chat_msg_req_100(struct connection *pc, final struct packet_chat_msg_req *packet)
 //{
-//  const struct packet_chat_msg_req *real_packet = packet;
+//  final struct packet_chat_msg_req *real_packet = packet;
 //  packet_chat_msg_req_100_fields fields;
 //  struct packet_chat_msg_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -4820,7 +4820,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_chat_msg_req(struct connection *pc, const struct packet_chat_msg_req *packet)
+//int send_packet_chat_msg_req(struct connection *pc, final struct packet_chat_msg_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -4849,9 +4849,9 @@ public class Packets_gen{
 //  return send_packet_chat_msg_req(pc, real_packet);
 //}
 //
-//#define hash_packet_city_remove_100 hash_const
+//#define hash_packet_city_remove_100 hash_final
 //
-//#define cmp_packet_city_remove_100 cmp_const
+//#define cmp_packet_city_remove_100 cmp_final
 //
 //BV_DEFINE(packet_city_remove_100_fields, 1);
 //
@@ -4896,9 +4896,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_remove_100(struct connection *pc, const struct packet_city_remove *packet)
+//static int send_packet_city_remove_100(struct connection *pc, final struct packet_city_remove *packet)
 //{
-//  const struct packet_city_remove *real_packet = packet;
+//  final struct packet_city_remove *real_packet = packet;
 //  packet_city_remove_100_fields fields;
 //  struct packet_city_remove *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -4982,7 +4982,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_remove(struct connection *pc, const struct packet_city_remove *packet)
+//int send_packet_city_remove(struct connection *pc, final struct packet_city_remove *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -5002,11 +5002,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_city_remove(struct conn_list *dest, const struct packet_city_remove *packet)
+//void lsend_packet_city_remove(Speclists<conn> *dest, final struct packet_city_remove *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_city_remove(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_city_remove(struct connection *pc, int city_id)
@@ -5018,7 +5018,7 @@ public class Packets_gen{
 //  return send_packet_city_remove(pc, real_packet);
 //}
 //
-//void dlsend_packet_city_remove(struct conn_list *dest, int city_id)
+//void dlsend_packet_city_remove(Speclists<conn> *dest, int city_id)
 //{
 //  struct packet_city_remove packet, *real_packet = &packet;
 //
@@ -5027,17 +5027,17 @@ public class Packets_gen{
 //  lsend_packet_city_remove(dest, real_packet);
 //}
 //
-//static unsigned int hash_packet_city_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_city_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_city_info *key = (const struct packet_city_info *) vkey;
+//  final struct packet_city_info *key = (final struct packet_city_info *) vkey;
 //
 //  return ((key->id) % num_buckets);
 //}
 //
-//static int cmp_packet_city_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_city_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_city_info *key1 = (const struct packet_city_info *) vkey1;
-//  const struct packet_city_info *key2 = (const struct packet_city_info *) vkey2;
+//  final struct packet_city_info *key1 = (final struct packet_city_info *) vkey1;
+//  final struct packet_city_info *key2 = (final struct packet_city_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->id - key2->id;
@@ -5445,9 +5445,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_info_100(struct connection *pc, const struct packet_city_info *packet)
+//static int send_packet_city_info_100(struct connection *pc, final struct packet_city_info *packet)
 //{
-//  const struct packet_city_info *real_packet = packet;
+//  final struct packet_city_info *real_packet = packet;
 //  packet_city_info_100_fields fields;
 //  struct packet_city_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -5978,7 +5978,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_info(struct connection *pc, const struct packet_city_info *packet)
+//int send_packet_city_info(struct connection *pc, final struct packet_city_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -5998,24 +5998,24 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_city_info(struct conn_list *dest, const struct packet_city_info *packet)
+//void lsend_packet_city_info(Speclists<conn> *dest, final struct packet_city_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_city_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//static unsigned int hash_packet_city_short_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_city_short_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_city_short_info *key = (const struct packet_city_short_info *) vkey;
+//  final struct packet_city_short_info *key = (final struct packet_city_short_info *) vkey;
 //
 //  return ((key->id) % num_buckets);
 //}
 //
-//static int cmp_packet_city_short_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_city_short_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_city_short_info *key1 = (const struct packet_city_short_info *) vkey1;
-//  const struct packet_city_short_info *key2 = (const struct packet_city_short_info *) vkey2;
+//  final struct packet_city_short_info *key1 = (final struct packet_city_short_info *) vkey1;
+//  final struct packet_city_short_info *key2 = (final struct packet_city_short_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->id - key2->id;
@@ -6119,9 +6119,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_short_info_100(struct connection *pc, const struct packet_city_short_info *packet)
+//static int send_packet_city_short_info_100(struct connection *pc, final struct packet_city_short_info *packet)
 //{
-//  const struct packet_city_short_info *real_packet = packet;
+//  final struct packet_city_short_info *real_packet = packet;
 //  packet_city_short_info_100_fields fields;
 //  struct packet_city_short_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -6266,7 +6266,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_short_info(struct connection *pc, const struct packet_city_short_info *packet)
+//int send_packet_city_short_info(struct connection *pc, final struct packet_city_short_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -6286,16 +6286,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_city_short_info(struct conn_list *dest, const struct packet_city_short_info *packet)
+//void lsend_packet_city_short_info(Speclists<conn> *dest, final struct packet_city_short_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_city_short_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_city_sell_100 hash_const
+//#define hash_packet_city_sell_100 hash_final
 //
-//#define cmp_packet_city_sell_100 cmp_const
+//#define cmp_packet_city_sell_100 cmp_final
 //
 //BV_DEFINE(packet_city_sell_100_fields, 2);
 //
@@ -6348,9 +6348,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_sell_100(struct connection *pc, const struct packet_city_sell *packet)
+//static int send_packet_city_sell_100(struct connection *pc, final struct packet_city_sell *packet)
 //{
-//  const struct packet_city_sell *real_packet = packet;
+//  final struct packet_city_sell *real_packet = packet;
 //  packet_city_sell_100_fields fields;
 //  struct packet_city_sell *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -6441,7 +6441,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_sell(struct connection *pc, const struct packet_city_sell *packet)
+//int send_packet_city_sell(struct connection *pc, final struct packet_city_sell *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -6471,9 +6471,9 @@ public class Packets_gen{
 //  return send_packet_city_sell(pc, real_packet);
 //}
 //
-//#define hash_packet_city_buy_100 hash_const
+//#define hash_packet_city_buy_100 hash_final
 //
-//#define cmp_packet_city_buy_100 cmp_const
+//#define cmp_packet_city_buy_100 cmp_final
 //
 //BV_DEFINE(packet_city_buy_100_fields, 1);
 //
@@ -6518,9 +6518,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_buy_100(struct connection *pc, const struct packet_city_buy *packet)
+//static int send_packet_city_buy_100(struct connection *pc, final struct packet_city_buy *packet)
 //{
-//  const struct packet_city_buy *real_packet = packet;
+//  final struct packet_city_buy *real_packet = packet;
 //  packet_city_buy_100_fields fields;
 //  struct packet_city_buy *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -6604,7 +6604,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_buy(struct connection *pc, const struct packet_city_buy *packet)
+//int send_packet_city_buy(struct connection *pc, final struct packet_city_buy *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -6633,9 +6633,9 @@ public class Packets_gen{
 //  return send_packet_city_buy(pc, real_packet);
 //}
 //
-//#define hash_packet_city_change_100 hash_const
+//#define hash_packet_city_change_100 hash_final
 //
-//#define cmp_packet_city_change_100 cmp_const
+//#define cmp_packet_city_change_100 cmp_final
 //
 //BV_DEFINE(packet_city_change_100_fields, 3);
 //
@@ -6689,9 +6689,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_change_100(struct connection *pc, const struct packet_city_change *packet)
+//static int send_packet_city_change_100(struct connection *pc, final struct packet_city_change *packet)
 //{
-//  const struct packet_city_change *real_packet = packet;
+//  final struct packet_city_change *real_packet = packet;
 //  packet_city_change_100_fields fields;
 //  struct packet_city_change *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -6787,7 +6787,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_change(struct connection *pc, const struct packet_city_change *packet)
+//int send_packet_city_change(struct connection *pc, final struct packet_city_change *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -6818,9 +6818,9 @@ public class Packets_gen{
 //  return send_packet_city_change(pc, real_packet);
 //}
 //
-//#define hash_packet_city_worklist_100 hash_const
+//#define hash_packet_city_worklist_100 hash_final
 //
-//#define cmp_packet_city_worklist_100 cmp_const
+//#define cmp_packet_city_worklist_100 cmp_final
 //
 //BV_DEFINE(packet_city_worklist_100_fields, 2);
 //
@@ -6868,9 +6868,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_worklist_100(struct connection *pc, const struct packet_city_worklist *packet)
+//static int send_packet_city_worklist_100(struct connection *pc, final struct packet_city_worklist *packet)
 //{
-//  const struct packet_city_worklist *real_packet = packet;
+//  final struct packet_city_worklist *real_packet = packet;
 //  packet_city_worklist_100_fields fields;
 //  struct packet_city_worklist *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -6961,7 +6961,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_worklist(struct connection *pc, const struct packet_city_worklist *packet)
+//int send_packet_city_worklist(struct connection *pc, final struct packet_city_worklist *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -6991,9 +6991,9 @@ public class Packets_gen{
 //  return send_packet_city_worklist(pc, real_packet);
 //}
 //
-//#define hash_packet_city_make_specialist_100 hash_const
+//#define hash_packet_city_make_specialist_100 hash_final
 //
-//#define cmp_packet_city_make_specialist_100 cmp_const
+//#define cmp_packet_city_make_specialist_100 cmp_final
 //
 //BV_DEFINE(packet_city_make_specialist_100_fields, 3);
 //
@@ -7054,9 +7054,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_make_specialist_100(struct connection *pc, const struct packet_city_make_specialist *packet)
+//static int send_packet_city_make_specialist_100(struct connection *pc, final struct packet_city_make_specialist *packet)
 //{
-//  const struct packet_city_make_specialist *real_packet = packet;
+//  final struct packet_city_make_specialist *real_packet = packet;
 //  packet_city_make_specialist_100_fields fields;
 //  struct packet_city_make_specialist *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -7154,7 +7154,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_make_specialist(struct connection *pc, const struct packet_city_make_specialist *packet)
+//int send_packet_city_make_specialist(struct connection *pc, final struct packet_city_make_specialist *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -7185,9 +7185,9 @@ public class Packets_gen{
 //  return send_packet_city_make_specialist(pc, real_packet);
 //}
 //
-//#define hash_packet_city_make_worker_100 hash_const
+//#define hash_packet_city_make_worker_100 hash_final
 //
-//#define cmp_packet_city_make_worker_100 cmp_const
+//#define cmp_packet_city_make_worker_100 cmp_final
 //
 //BV_DEFINE(packet_city_make_worker_100_fields, 3);
 //
@@ -7248,9 +7248,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_make_worker_100(struct connection *pc, const struct packet_city_make_worker *packet)
+//static int send_packet_city_make_worker_100(struct connection *pc, final struct packet_city_make_worker *packet)
 //{
-//  const struct packet_city_make_worker *real_packet = packet;
+//  final struct packet_city_make_worker *real_packet = packet;
 //  packet_city_make_worker_100_fields fields;
 //  struct packet_city_make_worker *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -7348,7 +7348,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_make_worker(struct connection *pc, const struct packet_city_make_worker *packet)
+//int send_packet_city_make_worker(struct connection *pc, final struct packet_city_make_worker *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -7379,9 +7379,9 @@ public class Packets_gen{
 //  return send_packet_city_make_worker(pc, real_packet);
 //}
 //
-//#define hash_packet_city_change_specialist_100 hash_const
+//#define hash_packet_city_change_specialist_100 hash_final
 //
-//#define cmp_packet_city_change_specialist_100 cmp_const
+//#define cmp_packet_city_change_specialist_100 cmp_final
 //
 //BV_DEFINE(packet_city_change_specialist_100_fields, 3);
 //
@@ -7442,9 +7442,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_change_specialist_100(struct connection *pc, const struct packet_city_change_specialist *packet)
+//static int send_packet_city_change_specialist_100(struct connection *pc, final struct packet_city_change_specialist *packet)
 //{
-//  const struct packet_city_change_specialist *real_packet = packet;
+//  final struct packet_city_change_specialist *real_packet = packet;
 //  packet_city_change_specialist_100_fields fields;
 //  struct packet_city_change_specialist *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -7542,7 +7542,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_change_specialist(struct connection *pc, const struct packet_city_change_specialist *packet)
+//int send_packet_city_change_specialist(struct connection *pc, final struct packet_city_change_specialist *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -7573,9 +7573,9 @@ public class Packets_gen{
 //  return send_packet_city_change_specialist(pc, real_packet);
 //}
 //
-//#define hash_packet_city_rename_100 hash_const
+//#define hash_packet_city_rename_100 hash_final
 //
-//#define cmp_packet_city_rename_100 cmp_const
+//#define cmp_packet_city_rename_100 cmp_final
 //
 //BV_DEFINE(packet_city_rename_100_fields, 2);
 //
@@ -7623,9 +7623,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_rename_100(struct connection *pc, const struct packet_city_rename *packet)
+//static int send_packet_city_rename_100(struct connection *pc, final struct packet_city_rename *packet)
 //{
-//  const struct packet_city_rename *real_packet = packet;
+//  final struct packet_city_rename *real_packet = packet;
 //  packet_city_rename_100_fields fields;
 //  struct packet_city_rename *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -7716,7 +7716,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_rename(struct connection *pc, const struct packet_city_rename *packet)
+//int send_packet_city_rename(struct connection *pc, final struct packet_city_rename *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -7746,9 +7746,9 @@ public class Packets_gen{
 //  return send_packet_city_rename(pc, real_packet);
 //}
 //
-//#define hash_packet_city_options_req_100 hash_const
+//#define hash_packet_city_options_req_100 hash_final
 //
-//#define cmp_packet_city_options_req_100 cmp_const
+//#define cmp_packet_city_options_req_100 cmp_final
 //
 //BV_DEFINE(packet_city_options_req_100_fields, 2);
 //
@@ -7801,9 +7801,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_options_req_100(struct connection *pc, const struct packet_city_options_req *packet)
+//static int send_packet_city_options_req_100(struct connection *pc, final struct packet_city_options_req *packet)
 //{
-//  const struct packet_city_options_req *real_packet = packet;
+//  final struct packet_city_options_req *real_packet = packet;
 //  packet_city_options_req_100_fields fields;
 //  struct packet_city_options_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -7894,7 +7894,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_options_req(struct connection *pc, const struct packet_city_options_req *packet)
+//int send_packet_city_options_req(struct connection *pc, final struct packet_city_options_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -7924,9 +7924,9 @@ public class Packets_gen{
 //  return send_packet_city_options_req(pc, real_packet);
 //}
 //
-//#define hash_packet_city_refresh_100 hash_const
+//#define hash_packet_city_refresh_100 hash_final
 //
-//#define cmp_packet_city_refresh_100 cmp_const
+//#define cmp_packet_city_refresh_100 cmp_final
 //
 //BV_DEFINE(packet_city_refresh_100_fields, 1);
 //
@@ -7971,9 +7971,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_refresh_100(struct connection *pc, const struct packet_city_refresh *packet)
+//static int send_packet_city_refresh_100(struct connection *pc, final struct packet_city_refresh *packet)
 //{
-//  const struct packet_city_refresh *real_packet = packet;
+//  final struct packet_city_refresh *real_packet = packet;
 //  packet_city_refresh_100_fields fields;
 //  struct packet_city_refresh *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -8057,7 +8057,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_refresh(struct connection *pc, const struct packet_city_refresh *packet)
+//int send_packet_city_refresh(struct connection *pc, final struct packet_city_refresh *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -8086,9 +8086,9 @@ public class Packets_gen{
 //  return send_packet_city_refresh(pc, real_packet);
 //}
 //
-//#define hash_packet_city_incite_inq_100 hash_const
+//#define hash_packet_city_incite_inq_100 hash_final
 //
-//#define cmp_packet_city_incite_inq_100 cmp_const
+//#define cmp_packet_city_incite_inq_100 cmp_final
 //
 //BV_DEFINE(packet_city_incite_inq_100_fields, 1);
 //
@@ -8133,9 +8133,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_incite_inq_100(struct connection *pc, const struct packet_city_incite_inq *packet)
+//static int send_packet_city_incite_inq_100(struct connection *pc, final struct packet_city_incite_inq *packet)
 //{
-//  const struct packet_city_incite_inq *real_packet = packet;
+//  final struct packet_city_incite_inq *real_packet = packet;
 //  packet_city_incite_inq_100_fields fields;
 //  struct packet_city_incite_inq *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -8219,7 +8219,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_incite_inq(struct connection *pc, const struct packet_city_incite_inq *packet)
+//int send_packet_city_incite_inq(struct connection *pc, final struct packet_city_incite_inq *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -8248,9 +8248,9 @@ public class Packets_gen{
 //  return send_packet_city_incite_inq(pc, real_packet);
 //}
 //
-//#define hash_packet_city_incite_info_100 hash_const
+//#define hash_packet_city_incite_info_100 hash_final
 //
-//#define cmp_packet_city_incite_info_100 cmp_const
+//#define cmp_packet_city_incite_info_100 cmp_final
 //
 //BV_DEFINE(packet_city_incite_info_100_fields, 2);
 //
@@ -8303,9 +8303,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_incite_info_100(struct connection *pc, const struct packet_city_incite_info *packet)
+//static int send_packet_city_incite_info_100(struct connection *pc, final struct packet_city_incite_info *packet)
 //{
-//  const struct packet_city_incite_info *real_packet = packet;
+//  final struct packet_city_incite_info *real_packet = packet;
 //  packet_city_incite_info_100_fields fields;
 //  struct packet_city_incite_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -8396,7 +8396,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_incite_info(struct connection *pc, const struct packet_city_incite_info *packet)
+//int send_packet_city_incite_info(struct connection *pc, final struct packet_city_incite_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -8426,9 +8426,9 @@ public class Packets_gen{
 //  return send_packet_city_incite_info(pc, real_packet);
 //}
 //
-//#define hash_packet_city_name_suggestion_req_100 hash_const
+//#define hash_packet_city_name_suggestion_req_100 hash_final
 //
-//#define cmp_packet_city_name_suggestion_req_100 cmp_const
+//#define cmp_packet_city_name_suggestion_req_100 cmp_final
 //
 //BV_DEFINE(packet_city_name_suggestion_req_100_fields, 1);
 //
@@ -8473,9 +8473,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_name_suggestion_req_100(struct connection *pc, const struct packet_city_name_suggestion_req *packet)
+//static int send_packet_city_name_suggestion_req_100(struct connection *pc, final struct packet_city_name_suggestion_req *packet)
 //{
-//  const struct packet_city_name_suggestion_req *real_packet = packet;
+//  final struct packet_city_name_suggestion_req *real_packet = packet;
 //  packet_city_name_suggestion_req_100_fields fields;
 //  struct packet_city_name_suggestion_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -8559,7 +8559,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_name_suggestion_req(struct connection *pc, const struct packet_city_name_suggestion_req *packet)
+//int send_packet_city_name_suggestion_req(struct connection *pc, final struct packet_city_name_suggestion_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -8588,9 +8588,9 @@ public class Packets_gen{
 //  return send_packet_city_name_suggestion_req(pc, real_packet);
 //}
 //
-//#define hash_packet_city_name_suggestion_info_100 hash_const
+//#define hash_packet_city_name_suggestion_info_100 hash_final
 //
-//#define cmp_packet_city_name_suggestion_info_100 cmp_const
+//#define cmp_packet_city_name_suggestion_info_100 cmp_final
 //
 //BV_DEFINE(packet_city_name_suggestion_info_100_fields, 2);
 //
@@ -8638,9 +8638,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_name_suggestion_info_100(struct connection *pc, const struct packet_city_name_suggestion_info *packet)
+//static int send_packet_city_name_suggestion_info_100(struct connection *pc, final struct packet_city_name_suggestion_info *packet)
 //{
-//  const struct packet_city_name_suggestion_info *real_packet = packet;
+//  final struct packet_city_name_suggestion_info *real_packet = packet;
 //  packet_city_name_suggestion_info_100_fields fields;
 //  struct packet_city_name_suggestion_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -8731,7 +8731,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_name_suggestion_info(struct connection *pc, const struct packet_city_name_suggestion_info *packet)
+//int send_packet_city_name_suggestion_info(struct connection *pc, final struct packet_city_name_suggestion_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -8751,11 +8751,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_city_name_suggestion_info(struct conn_list *dest, const struct packet_city_name_suggestion_info *packet)
+//void lsend_packet_city_name_suggestion_info(Speclists<conn> *dest, final struct packet_city_name_suggestion_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_city_name_suggestion_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_city_name_suggestion_info(struct connection *pc, int unit_id, final String name)
@@ -8768,7 +8768,7 @@ public class Packets_gen{
 //  return send_packet_city_name_suggestion_info(pc, real_packet);
 //}
 //
-//void dlsend_packet_city_name_suggestion_info(struct conn_list *dest, int unit_id, final String name)
+//void dlsend_packet_city_name_suggestion_info(Speclists<conn> *dest, int unit_id, final String name)
 //{
 //  struct packet_city_name_suggestion_info packet, *real_packet = &packet;
 //
@@ -8778,9 +8778,9 @@ public class Packets_gen{
 //  lsend_packet_city_name_suggestion_info(dest, real_packet);
 //}
 //
-//#define hash_packet_city_sabotage_list_100 hash_const
+//#define hash_packet_city_sabotage_list_100 hash_final
 //
-//#define cmp_packet_city_sabotage_list_100 cmp_const
+//#define cmp_packet_city_sabotage_list_100 cmp_final
 //
 //BV_DEFINE(packet_city_sabotage_list_100_fields, 3);
 //
@@ -8836,9 +8836,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_sabotage_list_100(struct connection *pc, const struct packet_city_sabotage_list *packet)
+//static int send_packet_city_sabotage_list_100(struct connection *pc, final struct packet_city_sabotage_list *packet)
 //{
-//  const struct packet_city_sabotage_list *real_packet = packet;
+//  final struct packet_city_sabotage_list *real_packet = packet;
 //  packet_city_sabotage_list_100_fields fields;
 //  struct packet_city_sabotage_list *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -8936,7 +8936,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_city_sabotage_list(struct connection *pc, const struct packet_city_sabotage_list *packet)
+//int send_packet_city_sabotage_list(struct connection *pc, final struct packet_city_sabotage_list *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -8956,16 +8956,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_city_sabotage_list(struct conn_list *dest, const struct packet_city_sabotage_list *packet)
+//void lsend_packet_city_sabotage_list(Speclists<conn> *dest, final struct packet_city_sabotage_list *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_city_sabotage_list(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_player_remove_100 hash_const
+//#define hash_packet_player_remove_100 hash_final
 //
-//#define cmp_packet_player_remove_100 cmp_const
+//#define cmp_packet_player_remove_100 cmp_final
 //
 //BV_DEFINE(packet_player_remove_100_fields, 1);
 //
@@ -9010,9 +9010,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_remove_100(struct connection *pc, const struct packet_player_remove *packet)
+//static int send_packet_player_remove_100(struct connection *pc, final struct packet_player_remove *packet)
 //{
-//  const struct packet_player_remove *real_packet = packet;
+//  final struct packet_player_remove *real_packet = packet;
 //  packet_player_remove_100_fields fields;
 //  struct packet_player_remove *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -9096,7 +9096,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_player_remove(struct connection *pc, const struct packet_player_remove *packet)
+//int send_packet_player_remove(struct connection *pc, final struct packet_player_remove *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -9116,11 +9116,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_player_remove(struct conn_list *dest, const struct packet_player_remove *packet)
+//void lsend_packet_player_remove(Speclists<conn> *dest, final struct packet_player_remove *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_player_remove(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_player_remove(struct connection *pc, int player_id)
@@ -9132,7 +9132,7 @@ public class Packets_gen{
 //  return send_packet_player_remove(pc, real_packet);
 //}
 //
-//void dlsend_packet_player_remove(struct conn_list *dest, int player_id)
+//void dlsend_packet_player_remove(Speclists<conn> *dest, int player_id)
 //{
 //  struct packet_player_remove packet, *real_packet = &packet;
 //
@@ -9141,17 +9141,17 @@ public class Packets_gen{
 //  lsend_packet_player_remove(dest, real_packet);
 //}
 //
-//static unsigned int hash_packet_player_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_player_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_player_info *key = (const struct packet_player_info *) vkey;
+//  final struct packet_player_info *key = (final struct packet_player_info *) vkey;
 //
 //  return ((key->playerno) % num_buckets);
 //}
 //
-//static int cmp_packet_player_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_player_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_player_info *key1 = (const struct packet_player_info *) vkey1;
-//  const struct packet_player_info *key2 = (const struct packet_player_info *) vkey2;
+//  final struct packet_player_info *key1 = (final struct packet_player_info *) vkey1;
+//  final struct packet_player_info *key2 = (final struct packet_player_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->playerno - key2->playerno;
@@ -9414,9 +9414,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_info_100(struct connection *pc, const struct packet_player_info *packet)
+//static int send_packet_player_info_100(struct connection *pc, final struct packet_player_info *packet)
 //{
-//  const struct packet_player_info *real_packet = packet;
+//  final struct packet_player_info *real_packet = packet;
 //  packet_player_info_100_fields fields;
 //  struct packet_player_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -9702,17 +9702,17 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static unsigned int hash_packet_player_info_101(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_player_info_101(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_player_info *key = (const struct packet_player_info *) vkey;
+//  final struct packet_player_info *key = (final struct packet_player_info *) vkey;
 //
 //  return ((key->playerno) % num_buckets);
 //}
 //
-//static int cmp_packet_player_info_101(const void *vkey1, const void *vkey2)
+//static int cmp_packet_player_info_101(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_player_info *key1 = (const struct packet_player_info *) vkey1;
-//  const struct packet_player_info *key2 = (const struct packet_player_info *) vkey2;
+//  final struct packet_player_info *key1 = (final struct packet_player_info *) vkey1;
+//  final struct packet_player_info *key2 = (final struct packet_player_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->playerno - key2->playerno;
@@ -9972,9 +9972,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_info_101(struct connection *pc, const struct packet_player_info *packet)
+//static int send_packet_player_info_101(struct connection *pc, final struct packet_player_info *packet)
 //{
-//  const struct packet_player_info *real_packet = packet;
+//  final struct packet_player_info *real_packet = packet;
 //  packet_player_info_101_fields fields;
 //  struct packet_player_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -10293,7 +10293,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_player_info(struct connection *pc, const struct packet_player_info *packet)
+//int send_packet_player_info(struct connection *pc, final struct packet_player_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -10384,9 +10384,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_player_rates_100 hash_const
+//#define hash_packet_player_rates_100 hash_final
 //
-//#define cmp_packet_player_rates_100 cmp_const
+//#define cmp_packet_player_rates_100 cmp_final
 //
 //BV_DEFINE(packet_player_rates_100_fields, 3);
 //
@@ -10447,9 +10447,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_rates_100(struct connection *pc, const struct packet_player_rates *packet)
+//static int send_packet_player_rates_100(struct connection *pc, final struct packet_player_rates *packet)
 //{
-//  const struct packet_player_rates *real_packet = packet;
+//  final struct packet_player_rates *real_packet = packet;
 //  packet_player_rates_100_fields fields;
 //  struct packet_player_rates *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -10547,7 +10547,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_player_rates(struct connection *pc, const struct packet_player_rates *packet)
+//int send_packet_player_rates(struct connection *pc, final struct packet_player_rates *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -10578,9 +10578,9 @@ public class Packets_gen{
 //  return send_packet_player_rates(pc, real_packet);
 //}
 //
-//#define hash_packet_player_change_government_100 hash_const
+//#define hash_packet_player_change_government_100 hash_final
 //
-//#define cmp_packet_player_change_government_100 cmp_const
+//#define cmp_packet_player_change_government_100 cmp_final
 //
 //BV_DEFINE(packet_player_change_government_100_fields, 1);
 //
@@ -10625,9 +10625,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_change_government_100(struct connection *pc, const struct packet_player_change_government *packet)
+//static int send_packet_player_change_government_100(struct connection *pc, final struct packet_player_change_government *packet)
 //{
-//  const struct packet_player_change_government *real_packet = packet;
+//  final struct packet_player_change_government *real_packet = packet;
 //  packet_player_change_government_100_fields fields;
 //  struct packet_player_change_government *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -10711,7 +10711,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_player_change_government(struct connection *pc, const struct packet_player_change_government *packet)
+//int send_packet_player_change_government(struct connection *pc, final struct packet_player_change_government *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -10740,9 +10740,9 @@ public class Packets_gen{
 //  return send_packet_player_change_government(pc, real_packet);
 //}
 //
-//#define hash_packet_player_research_100 hash_const
+//#define hash_packet_player_research_100 hash_final
 //
-//#define cmp_packet_player_research_100 cmp_const
+//#define cmp_packet_player_research_100 cmp_final
 //
 //BV_DEFINE(packet_player_research_100_fields, 1);
 //
@@ -10787,9 +10787,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_research_100(struct connection *pc, const struct packet_player_research *packet)
+//static int send_packet_player_research_100(struct connection *pc, final struct packet_player_research *packet)
 //{
-//  const struct packet_player_research *real_packet = packet;
+//  final struct packet_player_research *real_packet = packet;
 //  packet_player_research_100_fields fields;
 //  struct packet_player_research *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -10873,7 +10873,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_player_research(struct connection *pc, const struct packet_player_research *packet)
+//int send_packet_player_research(struct connection *pc, final struct packet_player_research *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -10902,9 +10902,9 @@ public class Packets_gen{
 //  return send_packet_player_research(pc, real_packet);
 //}
 //
-//#define hash_packet_player_tech_goal_100 hash_const
+//#define hash_packet_player_tech_goal_100 hash_final
 //
-//#define cmp_packet_player_tech_goal_100 cmp_const
+//#define cmp_packet_player_tech_goal_100 cmp_final
 //
 //BV_DEFINE(packet_player_tech_goal_100_fields, 1);
 //
@@ -10949,9 +10949,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_tech_goal_100(struct connection *pc, const struct packet_player_tech_goal *packet)
+//static int send_packet_player_tech_goal_100(struct connection *pc, final struct packet_player_tech_goal *packet)
 //{
-//  const struct packet_player_tech_goal *real_packet = packet;
+//  final struct packet_player_tech_goal *real_packet = packet;
 //  packet_player_tech_goal_100_fields fields;
 //  struct packet_player_tech_goal *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -11035,7 +11035,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_player_tech_goal(struct connection *pc, const struct packet_player_tech_goal *packet)
+//int send_packet_player_tech_goal(struct connection *pc, final struct packet_player_tech_goal *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -11134,9 +11134,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_player_attribute_chunk_100 hash_const
+//#define hash_packet_player_attribute_chunk_100 hash_final
 //
-//#define cmp_packet_player_attribute_chunk_100 cmp_const
+//#define cmp_packet_player_attribute_chunk_100 cmp_final
 //
 //BV_DEFINE(packet_player_attribute_chunk_100_fields, 4);
 //
@@ -11200,9 +11200,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_attribute_chunk_100(struct connection *pc, const struct packet_player_attribute_chunk *packet)
+//static int send_packet_player_attribute_chunk_100(struct connection *pc, final struct packet_player_attribute_chunk *packet)
 //{
-//  const struct packet_player_attribute_chunk *real_packet = packet;
+//  final struct packet_player_attribute_chunk *real_packet = packet;
 //  packet_player_attribute_chunk_100_fields fields;
 //  struct packet_player_attribute_chunk *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -11320,7 +11320,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_player_attribute_chunk(struct connection *pc, const struct packet_player_attribute_chunk *packet)
+//int send_packet_player_attribute_chunk(struct connection *pc, final struct packet_player_attribute_chunk *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -11337,9 +11337,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_unit_remove_100 hash_const
+//#define hash_packet_unit_remove_100 hash_final
 //
-//#define cmp_packet_unit_remove_100 cmp_const
+//#define cmp_packet_unit_remove_100 cmp_final
 //
 //BV_DEFINE(packet_unit_remove_100_fields, 1);
 //
@@ -11384,9 +11384,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_remove_100(struct connection *pc, const struct packet_unit_remove *packet)
+//static int send_packet_unit_remove_100(struct connection *pc, final struct packet_unit_remove *packet)
 //{
-//  const struct packet_unit_remove *real_packet = packet;
+//  final struct packet_unit_remove *real_packet = packet;
 //  packet_unit_remove_100_fields fields;
 //  struct packet_unit_remove *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -11470,7 +11470,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_remove(struct connection *pc, const struct packet_unit_remove *packet)
+//int send_packet_unit_remove(struct connection *pc, final struct packet_unit_remove *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -11490,11 +11490,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_unit_remove(struct conn_list *dest, const struct packet_unit_remove *packet)
+//void lsend_packet_unit_remove(Speclists<conn> *dest, final struct packet_unit_remove *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_unit_remove(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_unit_remove(struct connection *pc, int unit_id)
@@ -11506,7 +11506,7 @@ public class Packets_gen{
 //  return send_packet_unit_remove(pc, real_packet);
 //}
 //
-//void dlsend_packet_unit_remove(struct conn_list *dest, int unit_id)
+//void dlsend_packet_unit_remove(Speclists<conn> *dest, int unit_id)
 //{
 //  struct packet_unit_remove packet, *real_packet = &packet;
 //
@@ -11515,17 +11515,17 @@ public class Packets_gen{
 //  lsend_packet_unit_remove(dest, real_packet);
 //}
 //
-//static unsigned int hash_packet_unit_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_unit_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_unit_info *key = (const struct packet_unit_info *) vkey;
+//  final struct packet_unit_info *key = (final struct packet_unit_info *) vkey;
 //
 //  return ((key->id) % num_buckets);
 //}
 //
-//static int cmp_packet_unit_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_unit_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_unit_info *key1 = (const struct packet_unit_info *) vkey1;
-//  const struct packet_unit_info *key2 = (const struct packet_unit_info *) vkey2;
+//  final struct packet_unit_info *key1 = (final struct packet_unit_info *) vkey1;
+//  final struct packet_unit_info *key2 = (final struct packet_unit_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->id - key2->id;
@@ -11822,9 +11822,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_info_100(struct connection *pc, const struct packet_unit_info *packet)
+//static int send_packet_unit_info_100(struct connection *pc, final struct packet_unit_info *packet)
 //{
-//  const struct packet_unit_info *real_packet = packet;
+//  final struct packet_unit_info *real_packet = packet;
 //  packet_unit_info_100_fields fields;
 //  struct packet_unit_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -12174,7 +12174,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_info(struct connection *pc, const struct packet_unit_info *packet)
+//int send_packet_unit_info(struct connection *pc, final struct packet_unit_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -12194,24 +12194,24 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_unit_info(struct conn_list *dest, const struct packet_unit_info *packet)
+//void lsend_packet_unit_info(Speclists<conn> *dest, final struct packet_unit_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_unit_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//static unsigned int hash_packet_unit_short_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_unit_short_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_unit_short_info *key = (const struct packet_unit_short_info *) vkey;
+//  final struct packet_unit_short_info *key = (final struct packet_unit_short_info *) vkey;
 //
 //  return ((key->id) % num_buckets);
 //}
 //
-//static int cmp_packet_unit_short_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_unit_short_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_unit_short_info *key1 = (const struct packet_unit_short_info *) vkey1;
-//  const struct packet_unit_short_info *key2 = (const struct packet_unit_short_info *) vkey2;
+//  final struct packet_unit_short_info *key1 = (final struct packet_unit_short_info *) vkey1;
+//  final struct packet_unit_short_info *key2 = (final struct packet_unit_short_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->id - key2->id;
@@ -12358,9 +12358,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_short_info_100(struct connection *pc, const struct packet_unit_short_info *packet)
+//static int send_packet_unit_short_info_100(struct connection *pc, final struct packet_unit_short_info *packet)
 //{
-//  const struct packet_unit_short_info *real_packet = packet;
+//  final struct packet_unit_short_info *real_packet = packet;
 //  packet_unit_short_info_100_fields fields;
 //  struct packet_unit_short_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -12530,7 +12530,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_short_info(struct connection *pc, const struct packet_unit_short_info *packet)
+//int send_packet_unit_short_info(struct connection *pc, final struct packet_unit_short_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -12550,16 +12550,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_unit_short_info(struct conn_list *dest, const struct packet_unit_short_info *packet)
+//void lsend_packet_unit_short_info(Speclists<conn> *dest, final struct packet_unit_short_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_unit_short_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_unit_combat_info_100 hash_const
+//#define hash_packet_unit_combat_info_100 hash_final
 //
-//#define cmp_packet_unit_combat_info_100 cmp_const
+//#define cmp_packet_unit_combat_info_100 cmp_final
 //
 //BV_DEFINE(packet_unit_combat_info_100_fields, 5);
 //
@@ -12629,9 +12629,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_combat_info_100(struct connection *pc, const struct packet_unit_combat_info *packet)
+//static int send_packet_unit_combat_info_100(struct connection *pc, final struct packet_unit_combat_info *packet)
 //{
-//  const struct packet_unit_combat_info *real_packet = packet;
+//  final struct packet_unit_combat_info *real_packet = packet;
 //  packet_unit_combat_info_100_fields fields;
 //  struct packet_unit_combat_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -12741,7 +12741,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_combat_info(struct connection *pc, const struct packet_unit_combat_info *packet)
+//int send_packet_unit_combat_info(struct connection *pc, final struct packet_unit_combat_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -12761,16 +12761,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_unit_combat_info(struct conn_list *dest, const struct packet_unit_combat_info *packet)
+//void lsend_packet_unit_combat_info(Speclists<conn> *dest, final struct packet_unit_combat_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_unit_combat_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_unit_move_100 hash_const
+//#define hash_packet_unit_move_100 hash_final
 //
-//#define cmp_packet_unit_move_100 cmp_const
+//#define cmp_packet_unit_move_100 cmp_final
 //
 //BV_DEFINE(packet_unit_move_100_fields, 3);
 //
@@ -12831,9 +12831,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_move_100(struct connection *pc, const struct packet_unit_move *packet)
+//static int send_packet_unit_move_100(struct connection *pc, final struct packet_unit_move *packet)
 //{
-//  const struct packet_unit_move *real_packet = packet;
+//  final struct packet_unit_move *real_packet = packet;
 //  packet_unit_move_100_fields fields;
 //  struct packet_unit_move *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -12931,7 +12931,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_move(struct connection *pc, const struct packet_unit_move *packet)
+//int send_packet_unit_move(struct connection *pc, final struct packet_unit_move *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -12962,9 +12962,9 @@ public class Packets_gen{
 //  return send_packet_unit_move(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_build_city_100 hash_const
+//#define hash_packet_unit_build_city_100 hash_final
 //
-//#define cmp_packet_unit_build_city_100 cmp_const
+//#define cmp_packet_unit_build_city_100 cmp_final
 //
 //BV_DEFINE(packet_unit_build_city_100_fields, 2);
 //
@@ -13012,9 +13012,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_build_city_100(struct connection *pc, const struct packet_unit_build_city *packet)
+//static int send_packet_unit_build_city_100(struct connection *pc, final struct packet_unit_build_city *packet)
 //{
-//  const struct packet_unit_build_city *real_packet = packet;
+//  final struct packet_unit_build_city *real_packet = packet;
 //  packet_unit_build_city_100_fields fields;
 //  struct packet_unit_build_city *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -13105,7 +13105,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_build_city(struct connection *pc, const struct packet_unit_build_city *packet)
+//int send_packet_unit_build_city(struct connection *pc, final struct packet_unit_build_city *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -13135,9 +13135,9 @@ public class Packets_gen{
 //  return send_packet_unit_build_city(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_disband_100 hash_const
+//#define hash_packet_unit_disband_100 hash_final
 //
-//#define cmp_packet_unit_disband_100 cmp_const
+//#define cmp_packet_unit_disband_100 cmp_final
 //
 //BV_DEFINE(packet_unit_disband_100_fields, 1);
 //
@@ -13182,9 +13182,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_disband_100(struct connection *pc, const struct packet_unit_disband *packet)
+//static int send_packet_unit_disband_100(struct connection *pc, final struct packet_unit_disband *packet)
 //{
-//  const struct packet_unit_disband *real_packet = packet;
+//  final struct packet_unit_disband *real_packet = packet;
 //  packet_unit_disband_100_fields fields;
 //  struct packet_unit_disband *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -13268,7 +13268,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_disband(struct connection *pc, const struct packet_unit_disband *packet)
+//int send_packet_unit_disband(struct connection *pc, final struct packet_unit_disband *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -13297,9 +13297,9 @@ public class Packets_gen{
 //  return send_packet_unit_disband(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_change_homecity_100 hash_const
+//#define hash_packet_unit_change_homecity_100 hash_final
 //
-//#define cmp_packet_unit_change_homecity_100 cmp_const
+//#define cmp_packet_unit_change_homecity_100 cmp_final
 //
 //BV_DEFINE(packet_unit_change_homecity_100_fields, 2);
 //
@@ -13352,9 +13352,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_change_homecity_100(struct connection *pc, const struct packet_unit_change_homecity *packet)
+//static int send_packet_unit_change_homecity_100(struct connection *pc, final struct packet_unit_change_homecity *packet)
 //{
-//  const struct packet_unit_change_homecity *real_packet = packet;
+//  final struct packet_unit_change_homecity *real_packet = packet;
 //  packet_unit_change_homecity_100_fields fields;
 //  struct packet_unit_change_homecity *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -13445,7 +13445,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_change_homecity(struct connection *pc, const struct packet_unit_change_homecity *packet)
+//int send_packet_unit_change_homecity(struct connection *pc, final struct packet_unit_change_homecity *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -13475,9 +13475,9 @@ public class Packets_gen{
 //  return send_packet_unit_change_homecity(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_establish_trade_100 hash_const
+//#define hash_packet_unit_establish_trade_100 hash_final
 //
-//#define cmp_packet_unit_establish_trade_100 cmp_const
+//#define cmp_packet_unit_establish_trade_100 cmp_final
 //
 //BV_DEFINE(packet_unit_establish_trade_100_fields, 1);
 //
@@ -13522,9 +13522,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_establish_trade_100(struct connection *pc, const struct packet_unit_establish_trade *packet)
+//static int send_packet_unit_establish_trade_100(struct connection *pc, final struct packet_unit_establish_trade *packet)
 //{
-//  const struct packet_unit_establish_trade *real_packet = packet;
+//  final struct packet_unit_establish_trade *real_packet = packet;
 //  packet_unit_establish_trade_100_fields fields;
 //  struct packet_unit_establish_trade *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -13608,7 +13608,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_establish_trade(struct connection *pc, const struct packet_unit_establish_trade *packet)
+//int send_packet_unit_establish_trade(struct connection *pc, final struct packet_unit_establish_trade *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -13637,9 +13637,9 @@ public class Packets_gen{
 //  return send_packet_unit_establish_trade(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_help_build_wonder_100 hash_const
+//#define hash_packet_unit_help_build_wonder_100 hash_final
 //
-//#define cmp_packet_unit_help_build_wonder_100 cmp_const
+//#define cmp_packet_unit_help_build_wonder_100 cmp_final
 //
 //BV_DEFINE(packet_unit_help_build_wonder_100_fields, 1);
 //
@@ -13684,9 +13684,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_help_build_wonder_100(struct connection *pc, const struct packet_unit_help_build_wonder *packet)
+//static int send_packet_unit_help_build_wonder_100(struct connection *pc, final struct packet_unit_help_build_wonder *packet)
 //{
-//  const struct packet_unit_help_build_wonder *real_packet = packet;
+//  final struct packet_unit_help_build_wonder *real_packet = packet;
 //  packet_unit_help_build_wonder_100_fields fields;
 //  struct packet_unit_help_build_wonder *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -13770,7 +13770,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_help_build_wonder(struct connection *pc, const struct packet_unit_help_build_wonder *packet)
+//int send_packet_unit_help_build_wonder(struct connection *pc, final struct packet_unit_help_build_wonder *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -13799,9 +13799,9 @@ public class Packets_gen{
 //  return send_packet_unit_help_build_wonder(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_goto_100 hash_const
+//#define hash_packet_unit_goto_100 hash_final
 //
-//#define cmp_packet_unit_goto_100 cmp_const
+//#define cmp_packet_unit_goto_100 cmp_final
 //
 //BV_DEFINE(packet_unit_goto_100_fields, 3);
 //
@@ -13862,9 +13862,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_goto_100(struct connection *pc, const struct packet_unit_goto *packet)
+//static int send_packet_unit_goto_100(struct connection *pc, final struct packet_unit_goto *packet)
 //{
-//  const struct packet_unit_goto *real_packet = packet;
+//  final struct packet_unit_goto *real_packet = packet;
 //  packet_unit_goto_100_fields fields;
 //  struct packet_unit_goto *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -13962,7 +13962,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_goto(struct connection *pc, const struct packet_unit_goto *packet)
+//int send_packet_unit_goto(struct connection *pc, final struct packet_unit_goto *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -13993,9 +13993,9 @@ public class Packets_gen{
 //  return send_packet_unit_goto(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_orders_100 hash_const
+//#define hash_packet_unit_orders_100 hash_final
 //
-//#define cmp_packet_unit_orders_100 cmp_const
+//#define cmp_packet_unit_orders_100 cmp_final
 //
 //BV_DEFINE(packet_unit_orders_100_fields, 9);
 //
@@ -14123,9 +14123,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_orders_100(struct connection *pc, const struct packet_unit_orders *packet)
+//static int send_packet_unit_orders_100(struct connection *pc, final struct packet_unit_orders *packet)
 //{
-//  const struct packet_unit_orders *real_packet = packet;
+//  final struct packet_unit_orders *real_packet = packet;
 //  packet_unit_orders_100_fields fields;
 //  struct packet_unit_orders *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -14318,7 +14318,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_orders(struct connection *pc, const struct packet_unit_orders *packet)
+//int send_packet_unit_orders(struct connection *pc, final struct packet_unit_orders *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -14338,9 +14338,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_unit_auto_100 hash_const
+//#define hash_packet_unit_auto_100 hash_final
 //
-//#define cmp_packet_unit_auto_100 cmp_const
+//#define cmp_packet_unit_auto_100 cmp_final
 //
 //BV_DEFINE(packet_unit_auto_100_fields, 1);
 //
@@ -14385,9 +14385,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_auto_100(struct connection *pc, const struct packet_unit_auto *packet)
+//static int send_packet_unit_auto_100(struct connection *pc, final struct packet_unit_auto *packet)
 //{
-//  const struct packet_unit_auto *real_packet = packet;
+//  final struct packet_unit_auto *real_packet = packet;
 //  packet_unit_auto_100_fields fields;
 //  struct packet_unit_auto *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -14471,7 +14471,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_auto(struct connection *pc, const struct packet_unit_auto *packet)
+//int send_packet_unit_auto(struct connection *pc, final struct packet_unit_auto *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -14500,9 +14500,9 @@ public class Packets_gen{
 //  return send_packet_unit_auto(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_load_100 hash_const
+//#define hash_packet_unit_load_100 hash_final
 //
-//#define cmp_packet_unit_load_100 cmp_const
+//#define cmp_packet_unit_load_100 cmp_final
 //
 //BV_DEFINE(packet_unit_load_100_fields, 2);
 //
@@ -14555,9 +14555,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_load_100(struct connection *pc, const struct packet_unit_load *packet)
+//static int send_packet_unit_load_100(struct connection *pc, final struct packet_unit_load *packet)
 //{
-//  const struct packet_unit_load *real_packet = packet;
+//  final struct packet_unit_load *real_packet = packet;
 //  packet_unit_load_100_fields fields;
 //  struct packet_unit_load *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -14648,7 +14648,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_load(struct connection *pc, const struct packet_unit_load *packet)
+//int send_packet_unit_load(struct connection *pc, final struct packet_unit_load *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -14678,9 +14678,9 @@ public class Packets_gen{
 //  return send_packet_unit_load(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_unload_100 hash_const
+//#define hash_packet_unit_unload_100 hash_final
 //
-//#define cmp_packet_unit_unload_100 cmp_const
+//#define cmp_packet_unit_unload_100 cmp_final
 //
 //BV_DEFINE(packet_unit_unload_100_fields, 2);
 //
@@ -14733,9 +14733,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_unload_100(struct connection *pc, const struct packet_unit_unload *packet)
+//static int send_packet_unit_unload_100(struct connection *pc, final struct packet_unit_unload *packet)
 //{
-//  const struct packet_unit_unload *real_packet = packet;
+//  final struct packet_unit_unload *real_packet = packet;
 //  packet_unit_unload_100_fields fields;
 //  struct packet_unit_unload *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -14826,7 +14826,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_unload(struct connection *pc, const struct packet_unit_unload *packet)
+//int send_packet_unit_unload(struct connection *pc, final struct packet_unit_unload *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -14856,9 +14856,9 @@ public class Packets_gen{
 //  return send_packet_unit_unload(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_upgrade_100 hash_const
+//#define hash_packet_unit_upgrade_100 hash_final
 //
-//#define cmp_packet_unit_upgrade_100 cmp_const
+//#define cmp_packet_unit_upgrade_100 cmp_final
 //
 //BV_DEFINE(packet_unit_upgrade_100_fields, 1);
 //
@@ -14903,9 +14903,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_upgrade_100(struct connection *pc, const struct packet_unit_upgrade *packet)
+//static int send_packet_unit_upgrade_100(struct connection *pc, final struct packet_unit_upgrade *packet)
 //{
-//  const struct packet_unit_upgrade *real_packet = packet;
+//  final struct packet_unit_upgrade *real_packet = packet;
 //  packet_unit_upgrade_100_fields fields;
 //  struct packet_unit_upgrade *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -14989,7 +14989,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_upgrade(struct connection *pc, const struct packet_unit_upgrade *packet)
+//int send_packet_unit_upgrade(struct connection *pc, final struct packet_unit_upgrade *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -15018,9 +15018,9 @@ public class Packets_gen{
 //  return send_packet_unit_upgrade(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_nuke_100 hash_const
+//#define hash_packet_unit_nuke_100 hash_final
 //
-//#define cmp_packet_unit_nuke_100 cmp_const
+//#define cmp_packet_unit_nuke_100 cmp_final
 //
 //BV_DEFINE(packet_unit_nuke_100_fields, 1);
 //
@@ -15065,9 +15065,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_nuke_100(struct connection *pc, const struct packet_unit_nuke *packet)
+//static int send_packet_unit_nuke_100(struct connection *pc, final struct packet_unit_nuke *packet)
 //{
-//  const struct packet_unit_nuke *real_packet = packet;
+//  final struct packet_unit_nuke *real_packet = packet;
 //  packet_unit_nuke_100_fields fields;
 //  struct packet_unit_nuke *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -15151,7 +15151,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_nuke(struct connection *pc, const struct packet_unit_nuke *packet)
+//int send_packet_unit_nuke(struct connection *pc, final struct packet_unit_nuke *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -15180,9 +15180,9 @@ public class Packets_gen{
 //  return send_packet_unit_nuke(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_paradrop_to_100 hash_const
+//#define hash_packet_unit_paradrop_to_100 hash_final
 //
-//#define cmp_packet_unit_paradrop_to_100 cmp_const
+//#define cmp_packet_unit_paradrop_to_100 cmp_final
 //
 //BV_DEFINE(packet_unit_paradrop_to_100_fields, 3);
 //
@@ -15243,9 +15243,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_paradrop_to_100(struct connection *pc, const struct packet_unit_paradrop_to *packet)
+//static int send_packet_unit_paradrop_to_100(struct connection *pc, final struct packet_unit_paradrop_to *packet)
 //{
-//  const struct packet_unit_paradrop_to *real_packet = packet;
+//  final struct packet_unit_paradrop_to *real_packet = packet;
 //  packet_unit_paradrop_to_100_fields fields;
 //  struct packet_unit_paradrop_to *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -15343,7 +15343,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_paradrop_to(struct connection *pc, const struct packet_unit_paradrop_to *packet)
+//int send_packet_unit_paradrop_to(struct connection *pc, final struct packet_unit_paradrop_to *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -15374,9 +15374,9 @@ public class Packets_gen{
 //  return send_packet_unit_paradrop_to(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_airlift_100 hash_const
+//#define hash_packet_unit_airlift_100 hash_final
 //
-//#define cmp_packet_unit_airlift_100 cmp_const
+//#define cmp_packet_unit_airlift_100 cmp_final
 //
 //BV_DEFINE(packet_unit_airlift_100_fields, 2);
 //
@@ -15429,9 +15429,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_airlift_100(struct connection *pc, const struct packet_unit_airlift *packet)
+//static int send_packet_unit_airlift_100(struct connection *pc, final struct packet_unit_airlift *packet)
 //{
-//  const struct packet_unit_airlift *real_packet = packet;
+//  final struct packet_unit_airlift *real_packet = packet;
 //  packet_unit_airlift_100_fields fields;
 //  struct packet_unit_airlift *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -15522,7 +15522,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_airlift(struct connection *pc, const struct packet_unit_airlift *packet)
+//int send_packet_unit_airlift(struct connection *pc, final struct packet_unit_airlift *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -15552,9 +15552,9 @@ public class Packets_gen{
 //  return send_packet_unit_airlift(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_bribe_inq_100 hash_const
+//#define hash_packet_unit_bribe_inq_100 hash_final
 //
-//#define cmp_packet_unit_bribe_inq_100 cmp_const
+//#define cmp_packet_unit_bribe_inq_100 cmp_final
 //
 //BV_DEFINE(packet_unit_bribe_inq_100_fields, 1);
 //
@@ -15599,9 +15599,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_bribe_inq_100(struct connection *pc, const struct packet_unit_bribe_inq *packet)
+//static int send_packet_unit_bribe_inq_100(struct connection *pc, final struct packet_unit_bribe_inq *packet)
 //{
-//  const struct packet_unit_bribe_inq *real_packet = packet;
+//  final struct packet_unit_bribe_inq *real_packet = packet;
 //  packet_unit_bribe_inq_100_fields fields;
 //  struct packet_unit_bribe_inq *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -15685,7 +15685,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_bribe_inq(struct connection *pc, const struct packet_unit_bribe_inq *packet)
+//int send_packet_unit_bribe_inq(struct connection *pc, final struct packet_unit_bribe_inq *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -15714,9 +15714,9 @@ public class Packets_gen{
 //  return send_packet_unit_bribe_inq(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_bribe_info_100 hash_const
+//#define hash_packet_unit_bribe_info_100 hash_final
 //
-//#define cmp_packet_unit_bribe_info_100 cmp_const
+//#define cmp_packet_unit_bribe_info_100 cmp_final
 //
 //BV_DEFINE(packet_unit_bribe_info_100_fields, 2);
 //
@@ -15769,9 +15769,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_bribe_info_100(struct connection *pc, const struct packet_unit_bribe_info *packet)
+//static int send_packet_unit_bribe_info_100(struct connection *pc, final struct packet_unit_bribe_info *packet)
 //{
-//  const struct packet_unit_bribe_info *real_packet = packet;
+//  final struct packet_unit_bribe_info *real_packet = packet;
 //  packet_unit_bribe_info_100_fields fields;
 //  struct packet_unit_bribe_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -15862,7 +15862,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_bribe_info(struct connection *pc, const struct packet_unit_bribe_info *packet)
+//int send_packet_unit_bribe_info(struct connection *pc, final struct packet_unit_bribe_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -15892,9 +15892,9 @@ public class Packets_gen{
 //  return send_packet_unit_bribe_info(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_type_upgrade_100 hash_const
+//#define hash_packet_unit_type_upgrade_100 hash_final
 //
-//#define cmp_packet_unit_type_upgrade_100 cmp_const
+//#define cmp_packet_unit_type_upgrade_100 cmp_final
 //
 //BV_DEFINE(packet_unit_type_upgrade_100_fields, 1);
 //
@@ -15939,9 +15939,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_type_upgrade_100(struct connection *pc, const struct packet_unit_type_upgrade *packet)
+//static int send_packet_unit_type_upgrade_100(struct connection *pc, final struct packet_unit_type_upgrade *packet)
 //{
-//  const struct packet_unit_type_upgrade *real_packet = packet;
+//  final struct packet_unit_type_upgrade *real_packet = packet;
 //  packet_unit_type_upgrade_100_fields fields;
 //  struct packet_unit_type_upgrade *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -16025,7 +16025,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_type_upgrade(struct connection *pc, const struct packet_unit_type_upgrade *packet)
+//int send_packet_unit_type_upgrade(struct connection *pc, final struct packet_unit_type_upgrade *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -16045,7 +16045,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int dsend_packet_unit_type_upgrade(struct connection *pc, Unit_Type_id type)
+//int dsend_packet_unit_type_upgrade(struct connection *pc, int type)
 //{
 //  struct packet_unit_type_upgrade packet, *real_packet = &packet;
 //
@@ -16054,9 +16054,9 @@ public class Packets_gen{
 //  return send_packet_unit_type_upgrade(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_diplomat_action_100 hash_const
+//#define hash_packet_unit_diplomat_action_100 hash_final
 //
-//#define cmp_packet_unit_diplomat_action_100 cmp_const
+//#define cmp_packet_unit_diplomat_action_100 cmp_final
 //
 //BV_DEFINE(packet_unit_diplomat_action_100_fields, 4);
 //
@@ -16125,9 +16125,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_diplomat_action_100(struct connection *pc, const struct packet_unit_diplomat_action *packet)
+//static int send_packet_unit_diplomat_action_100(struct connection *pc, final struct packet_unit_diplomat_action *packet)
 //{
-//  const struct packet_unit_diplomat_action *real_packet = packet;
+//  final struct packet_unit_diplomat_action *real_packet = packet;
 //  packet_unit_diplomat_action_100_fields fields;
 //  struct packet_unit_diplomat_action *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -16232,7 +16232,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_diplomat_action(struct connection *pc, const struct packet_unit_diplomat_action *packet)
+//int send_packet_unit_diplomat_action(struct connection *pc, final struct packet_unit_diplomat_action *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -16264,9 +16264,9 @@ public class Packets_gen{
 //  return send_packet_unit_diplomat_action(pc, real_packet);
 //}
 //
-//#define hash_packet_unit_diplomat_popup_dialog_100 hash_const
+//#define hash_packet_unit_diplomat_popup_dialog_100 hash_final
 //
-//#define cmp_packet_unit_diplomat_popup_dialog_100 cmp_const
+//#define cmp_packet_unit_diplomat_popup_dialog_100 cmp_final
 //
 //BV_DEFINE(packet_unit_diplomat_popup_dialog_100_fields, 2);
 //
@@ -16319,9 +16319,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_diplomat_popup_dialog_100(struct connection *pc, const struct packet_unit_diplomat_popup_dialog *packet)
+//static int send_packet_unit_diplomat_popup_dialog_100(struct connection *pc, final struct packet_unit_diplomat_popup_dialog *packet)
 //{
-//  const struct packet_unit_diplomat_popup_dialog *real_packet = packet;
+//  final struct packet_unit_diplomat_popup_dialog *real_packet = packet;
 //  packet_unit_diplomat_popup_dialog_100_fields fields;
 //  struct packet_unit_diplomat_popup_dialog *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -16412,7 +16412,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_diplomat_popup_dialog(struct connection *pc, const struct packet_unit_diplomat_popup_dialog *packet)
+//int send_packet_unit_diplomat_popup_dialog(struct connection *pc, final struct packet_unit_diplomat_popup_dialog *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -16432,11 +16432,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_unit_diplomat_popup_dialog(struct conn_list *dest, const struct packet_unit_diplomat_popup_dialog *packet)
+//void lsend_packet_unit_diplomat_popup_dialog(Speclists<conn> *dest, final struct packet_unit_diplomat_popup_dialog *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_unit_diplomat_popup_dialog(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_unit_diplomat_popup_dialog(struct connection *pc, int diplomat_id, int target_id)
@@ -16449,7 +16449,7 @@ public class Packets_gen{
 //  return send_packet_unit_diplomat_popup_dialog(pc, real_packet);
 //}
 //
-//void dlsend_packet_unit_diplomat_popup_dialog(struct conn_list *dest, int diplomat_id, int target_id)
+//void dlsend_packet_unit_diplomat_popup_dialog(Speclists<conn> *dest, int diplomat_id, int target_id)
 //{
 //  struct packet_unit_diplomat_popup_dialog packet, *real_packet = &packet;
 //
@@ -16459,9 +16459,9 @@ public class Packets_gen{
 //  lsend_packet_unit_diplomat_popup_dialog(dest, real_packet);
 //}
 //
-//#define hash_packet_unit_change_activity_100 hash_const
+//#define hash_packet_unit_change_activity_100 hash_final
 //
-//#define cmp_packet_unit_change_activity_100 cmp_const
+//#define cmp_packet_unit_change_activity_100 cmp_final
 //
 //BV_DEFINE(packet_unit_change_activity_100_fields, 3);
 //
@@ -16522,9 +16522,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_change_activity_100(struct connection *pc, const struct packet_unit_change_activity *packet)
+//static int send_packet_unit_change_activity_100(struct connection *pc, final struct packet_unit_change_activity *packet)
 //{
-//  const struct packet_unit_change_activity *real_packet = packet;
+//  final struct packet_unit_change_activity *real_packet = packet;
 //  packet_unit_change_activity_100_fields fields;
 //  struct packet_unit_change_activity *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -16622,7 +16622,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_unit_change_activity(struct connection *pc, const struct packet_unit_change_activity *packet)
+//int send_packet_unit_change_activity(struct connection *pc, final struct packet_unit_change_activity *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -16653,9 +16653,9 @@ public class Packets_gen{
 //  return send_packet_unit_change_activity(pc, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_init_meeting_req_100 hash_const
+//#define hash_packet_diplomacy_init_meeting_req_100 hash_final
 //
-//#define cmp_packet_diplomacy_init_meeting_req_100 cmp_const
+//#define cmp_packet_diplomacy_init_meeting_req_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_init_meeting_req_100_fields, 1);
 //
@@ -16700,9 +16700,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_init_meeting_req_100(struct connection *pc, const struct packet_diplomacy_init_meeting_req *packet)
+//static int send_packet_diplomacy_init_meeting_req_100(struct connection *pc, final struct packet_diplomacy_init_meeting_req *packet)
 //{
-//  const struct packet_diplomacy_init_meeting_req *real_packet = packet;
+//  final struct packet_diplomacy_init_meeting_req *real_packet = packet;
 //  packet_diplomacy_init_meeting_req_100_fields fields;
 //  struct packet_diplomacy_init_meeting_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -16786,7 +16786,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_init_meeting_req(struct connection *pc, const struct packet_diplomacy_init_meeting_req *packet)
+//int send_packet_diplomacy_init_meeting_req(struct connection *pc, final struct packet_diplomacy_init_meeting_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -16815,9 +16815,9 @@ public class Packets_gen{
 //  return send_packet_diplomacy_init_meeting_req(pc, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_init_meeting_100 hash_const
+//#define hash_packet_diplomacy_init_meeting_100 hash_final
 //
-//#define cmp_packet_diplomacy_init_meeting_100 cmp_const
+//#define cmp_packet_diplomacy_init_meeting_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_init_meeting_100_fields, 2);
 //
@@ -16870,9 +16870,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_init_meeting_100(struct connection *pc, const struct packet_diplomacy_init_meeting *packet)
+//static int send_packet_diplomacy_init_meeting_100(struct connection *pc, final struct packet_diplomacy_init_meeting *packet)
 //{
-//  const struct packet_diplomacy_init_meeting *real_packet = packet;
+//  final struct packet_diplomacy_init_meeting *real_packet = packet;
 //  packet_diplomacy_init_meeting_100_fields fields;
 //  struct packet_diplomacy_init_meeting *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -16963,7 +16963,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_init_meeting(struct connection *pc, const struct packet_diplomacy_init_meeting *packet)
+//int send_packet_diplomacy_init_meeting(struct connection *pc, final struct packet_diplomacy_init_meeting *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -16983,11 +16983,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_diplomacy_init_meeting(struct conn_list *dest, const struct packet_diplomacy_init_meeting *packet)
+//void lsend_packet_diplomacy_init_meeting(Speclists<conn> *dest, final struct packet_diplomacy_init_meeting *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_diplomacy_init_meeting(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_diplomacy_init_meeting(struct connection *pc, int counterpart, int initiated_from)
@@ -17000,7 +17000,7 @@ public class Packets_gen{
 //  return send_packet_diplomacy_init_meeting(pc, real_packet);
 //}
 //
-//void dlsend_packet_diplomacy_init_meeting(struct conn_list *dest, int counterpart, int initiated_from)
+//void dlsend_packet_diplomacy_init_meeting(Speclists<conn> *dest, int counterpart, int initiated_from)
 //{
 //  struct packet_diplomacy_init_meeting packet, *real_packet = &packet;
 //
@@ -17010,9 +17010,9 @@ public class Packets_gen{
 //  lsend_packet_diplomacy_init_meeting(dest, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_cancel_meeting_req_100 hash_const
+//#define hash_packet_diplomacy_cancel_meeting_req_100 hash_final
 //
-//#define cmp_packet_diplomacy_cancel_meeting_req_100 cmp_const
+//#define cmp_packet_diplomacy_cancel_meeting_req_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_cancel_meeting_req_100_fields, 1);
 //
@@ -17057,9 +17057,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_cancel_meeting_req_100(struct connection *pc, const struct packet_diplomacy_cancel_meeting_req *packet)
+//static int send_packet_diplomacy_cancel_meeting_req_100(struct connection *pc, final struct packet_diplomacy_cancel_meeting_req *packet)
 //{
-//  const struct packet_diplomacy_cancel_meeting_req *real_packet = packet;
+//  final struct packet_diplomacy_cancel_meeting_req *real_packet = packet;
 //  packet_diplomacy_cancel_meeting_req_100_fields fields;
 //  struct packet_diplomacy_cancel_meeting_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -17143,7 +17143,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_cancel_meeting_req(struct connection *pc, const struct packet_diplomacy_cancel_meeting_req *packet)
+//int send_packet_diplomacy_cancel_meeting_req(struct connection *pc, final struct packet_diplomacy_cancel_meeting_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -17172,9 +17172,9 @@ public class Packets_gen{
 //  return send_packet_diplomacy_cancel_meeting_req(pc, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_cancel_meeting_100 hash_const
+//#define hash_packet_diplomacy_cancel_meeting_100 hash_final
 //
-//#define cmp_packet_diplomacy_cancel_meeting_100 cmp_const
+//#define cmp_packet_diplomacy_cancel_meeting_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_cancel_meeting_100_fields, 2);
 //
@@ -17227,9 +17227,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_cancel_meeting_100(struct connection *pc, const struct packet_diplomacy_cancel_meeting *packet)
+//static int send_packet_diplomacy_cancel_meeting_100(struct connection *pc, final struct packet_diplomacy_cancel_meeting *packet)
 //{
-//  const struct packet_diplomacy_cancel_meeting *real_packet = packet;
+//  final struct packet_diplomacy_cancel_meeting *real_packet = packet;
 //  packet_diplomacy_cancel_meeting_100_fields fields;
 //  struct packet_diplomacy_cancel_meeting *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -17320,7 +17320,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_cancel_meeting(struct connection *pc, const struct packet_diplomacy_cancel_meeting *packet)
+//int send_packet_diplomacy_cancel_meeting(struct connection *pc, final struct packet_diplomacy_cancel_meeting *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -17340,11 +17340,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_diplomacy_cancel_meeting(struct conn_list *dest, const struct packet_diplomacy_cancel_meeting *packet)
+//void lsend_packet_diplomacy_cancel_meeting(Speclists<conn> *dest, final struct packet_diplomacy_cancel_meeting *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_diplomacy_cancel_meeting(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_diplomacy_cancel_meeting(struct connection *pc, int counterpart, int initiated_from)
@@ -17357,7 +17357,7 @@ public class Packets_gen{
 //  return send_packet_diplomacy_cancel_meeting(pc, real_packet);
 //}
 //
-//void dlsend_packet_diplomacy_cancel_meeting(struct conn_list *dest, int counterpart, int initiated_from)
+//void dlsend_packet_diplomacy_cancel_meeting(Speclists<conn> *dest, int counterpart, int initiated_from)
 //{
 //  struct packet_diplomacy_cancel_meeting packet, *real_packet = &packet;
 //
@@ -17367,9 +17367,9 @@ public class Packets_gen{
 //  lsend_packet_diplomacy_cancel_meeting(dest, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_create_clause_req_100 hash_const
+//#define hash_packet_diplomacy_create_clause_req_100 hash_final
 //
-//#define cmp_packet_diplomacy_create_clause_req_100 cmp_const
+//#define cmp_packet_diplomacy_create_clause_req_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_create_clause_req_100_fields, 4);
 //
@@ -17438,9 +17438,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_create_clause_req_100(struct connection *pc, const struct packet_diplomacy_create_clause_req *packet)
+//static int send_packet_diplomacy_create_clause_req_100(struct connection *pc, final struct packet_diplomacy_create_clause_req *packet)
 //{
-//  const struct packet_diplomacy_create_clause_req *real_packet = packet;
+//  final struct packet_diplomacy_create_clause_req *real_packet = packet;
 //  packet_diplomacy_create_clause_req_100_fields fields;
 //  struct packet_diplomacy_create_clause_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -17545,7 +17545,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_create_clause_req(struct connection *pc, const struct packet_diplomacy_create_clause_req *packet)
+//int send_packet_diplomacy_create_clause_req(struct connection *pc, final struct packet_diplomacy_create_clause_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -17577,9 +17577,9 @@ public class Packets_gen{
 //  return send_packet_diplomacy_create_clause_req(pc, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_create_clause_100 hash_const
+//#define hash_packet_diplomacy_create_clause_100 hash_final
 //
-//#define cmp_packet_diplomacy_create_clause_100 cmp_const
+//#define cmp_packet_diplomacy_create_clause_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_create_clause_100_fields, 4);
 //
@@ -17648,9 +17648,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_create_clause_100(struct connection *pc, const struct packet_diplomacy_create_clause *packet)
+//static int send_packet_diplomacy_create_clause_100(struct connection *pc, final struct packet_diplomacy_create_clause *packet)
 //{
-//  const struct packet_diplomacy_create_clause *real_packet = packet;
+//  final struct packet_diplomacy_create_clause *real_packet = packet;
 //  packet_diplomacy_create_clause_100_fields fields;
 //  struct packet_diplomacy_create_clause *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -17755,7 +17755,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_create_clause(struct connection *pc, const struct packet_diplomacy_create_clause *packet)
+//int send_packet_diplomacy_create_clause(struct connection *pc, final struct packet_diplomacy_create_clause *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -17775,11 +17775,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_diplomacy_create_clause(struct conn_list *dest, const struct packet_diplomacy_create_clause *packet)
+//void lsend_packet_diplomacy_create_clause(Speclists<conn> *dest, final struct packet_diplomacy_create_clause *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_diplomacy_create_clause(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_diplomacy_create_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
@@ -17794,7 +17794,7 @@ public class Packets_gen{
 //  return send_packet_diplomacy_create_clause(pc, real_packet);
 //}
 //
-//void dlsend_packet_diplomacy_create_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type type, int value)
+//void dlsend_packet_diplomacy_create_clause(Speclists<conn> *dest, int counterpart, int giver, enum clause_type type, int value)
 //{
 //  struct packet_diplomacy_create_clause packet, *real_packet = &packet;
 //
@@ -17806,9 +17806,9 @@ public class Packets_gen{
 //  lsend_packet_diplomacy_create_clause(dest, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_remove_clause_req_100 hash_const
+//#define hash_packet_diplomacy_remove_clause_req_100 hash_final
 //
-//#define cmp_packet_diplomacy_remove_clause_req_100 cmp_const
+//#define cmp_packet_diplomacy_remove_clause_req_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_remove_clause_req_100_fields, 4);
 //
@@ -17877,9 +17877,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_remove_clause_req_100(struct connection *pc, const struct packet_diplomacy_remove_clause_req *packet)
+//static int send_packet_diplomacy_remove_clause_req_100(struct connection *pc, final struct packet_diplomacy_remove_clause_req *packet)
 //{
-//  const struct packet_diplomacy_remove_clause_req *real_packet = packet;
+//  final struct packet_diplomacy_remove_clause_req *real_packet = packet;
 //  packet_diplomacy_remove_clause_req_100_fields fields;
 //  struct packet_diplomacy_remove_clause_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -17984,7 +17984,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_remove_clause_req(struct connection *pc, const struct packet_diplomacy_remove_clause_req *packet)
+//int send_packet_diplomacy_remove_clause_req(struct connection *pc, final struct packet_diplomacy_remove_clause_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -18016,9 +18016,9 @@ public class Packets_gen{
 //  return send_packet_diplomacy_remove_clause_req(pc, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_remove_clause_100 hash_const
+//#define hash_packet_diplomacy_remove_clause_100 hash_final
 //
-//#define cmp_packet_diplomacy_remove_clause_100 cmp_const
+//#define cmp_packet_diplomacy_remove_clause_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_remove_clause_100_fields, 4);
 //
@@ -18087,9 +18087,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_remove_clause_100(struct connection *pc, const struct packet_diplomacy_remove_clause *packet)
+//static int send_packet_diplomacy_remove_clause_100(struct connection *pc, final struct packet_diplomacy_remove_clause *packet)
 //{
-//  const struct packet_diplomacy_remove_clause *real_packet = packet;
+//  final struct packet_diplomacy_remove_clause *real_packet = packet;
 //  packet_diplomacy_remove_clause_100_fields fields;
 //  struct packet_diplomacy_remove_clause *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -18194,7 +18194,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_remove_clause(struct connection *pc, const struct packet_diplomacy_remove_clause *packet)
+//int send_packet_diplomacy_remove_clause(struct connection *pc, final struct packet_diplomacy_remove_clause *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -18214,11 +18214,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_diplomacy_remove_clause(struct conn_list *dest, const struct packet_diplomacy_remove_clause *packet)
+//void lsend_packet_diplomacy_remove_clause(Speclists<conn> *dest, final struct packet_diplomacy_remove_clause *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_diplomacy_remove_clause(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_diplomacy_remove_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
@@ -18233,7 +18233,7 @@ public class Packets_gen{
 //  return send_packet_diplomacy_remove_clause(pc, real_packet);
 //}
 //
-//void dlsend_packet_diplomacy_remove_clause(struct conn_list *dest, int counterpart, int giver, enum clause_type type, int value)
+//void dlsend_packet_diplomacy_remove_clause(Speclists<conn> *dest, int counterpart, int giver, enum clause_type type, int value)
 //{
 //  struct packet_diplomacy_remove_clause packet, *real_packet = &packet;
 //
@@ -18245,9 +18245,9 @@ public class Packets_gen{
 //  lsend_packet_diplomacy_remove_clause(dest, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_accept_treaty_req_100 hash_const
+//#define hash_packet_diplomacy_accept_treaty_req_100 hash_final
 //
-//#define cmp_packet_diplomacy_accept_treaty_req_100 cmp_const
+//#define cmp_packet_diplomacy_accept_treaty_req_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_accept_treaty_req_100_fields, 1);
 //
@@ -18292,9 +18292,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_accept_treaty_req_100(struct connection *pc, const struct packet_diplomacy_accept_treaty_req *packet)
+//static int send_packet_diplomacy_accept_treaty_req_100(struct connection *pc, final struct packet_diplomacy_accept_treaty_req *packet)
 //{
-//  const struct packet_diplomacy_accept_treaty_req *real_packet = packet;
+//  final struct packet_diplomacy_accept_treaty_req *real_packet = packet;
 //  packet_diplomacy_accept_treaty_req_100_fields fields;
 //  struct packet_diplomacy_accept_treaty_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -18378,7 +18378,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_accept_treaty_req(struct connection *pc, const struct packet_diplomacy_accept_treaty_req *packet)
+//int send_packet_diplomacy_accept_treaty_req(struct connection *pc, final struct packet_diplomacy_accept_treaty_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -18407,9 +18407,9 @@ public class Packets_gen{
 //  return send_packet_diplomacy_accept_treaty_req(pc, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_accept_treaty_100 hash_const
+//#define hash_packet_diplomacy_accept_treaty_100 hash_final
 //
-//#define cmp_packet_diplomacy_accept_treaty_100 cmp_const
+//#define cmp_packet_diplomacy_accept_treaty_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_accept_treaty_100_fields, 3);
 //
@@ -18456,9 +18456,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_accept_treaty_100(struct connection *pc, const struct packet_diplomacy_accept_treaty *packet)
+//static int send_packet_diplomacy_accept_treaty_100(struct connection *pc, final struct packet_diplomacy_accept_treaty *packet)
 //{
-//  const struct packet_diplomacy_accept_treaty *real_packet = packet;
+//  final struct packet_diplomacy_accept_treaty *real_packet = packet;
 //  packet_diplomacy_accept_treaty_100_fields fields;
 //  struct packet_diplomacy_accept_treaty *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -18552,7 +18552,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_accept_treaty(struct connection *pc, const struct packet_diplomacy_accept_treaty *packet)
+//int send_packet_diplomacy_accept_treaty(struct connection *pc, final struct packet_diplomacy_accept_treaty *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -18572,11 +18572,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_diplomacy_accept_treaty(struct conn_list *dest, const struct packet_diplomacy_accept_treaty *packet)
+//void lsend_packet_diplomacy_accept_treaty(Speclists<conn> *dest, final struct packet_diplomacy_accept_treaty *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_diplomacy_accept_treaty(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //int dsend_packet_diplomacy_accept_treaty(struct connection *pc, int counterpart, boolean I_accepted, boolean other_accepted)
@@ -18590,7 +18590,7 @@ public class Packets_gen{
 //  return send_packet_diplomacy_accept_treaty(pc, real_packet);
 //}
 //
-//void dlsend_packet_diplomacy_accept_treaty(struct conn_list *dest, int counterpart, boolean I_accepted, boolean other_accepted)
+//void dlsend_packet_diplomacy_accept_treaty(Speclists<conn> *dest, int counterpart, boolean I_accepted, boolean other_accepted)
 //{
 //  struct packet_diplomacy_accept_treaty packet, *real_packet = &packet;
 //
@@ -18601,9 +18601,9 @@ public class Packets_gen{
 //  lsend_packet_diplomacy_accept_treaty(dest, real_packet);
 //}
 //
-//#define hash_packet_diplomacy_cancel_pact_100 hash_const
+//#define hash_packet_diplomacy_cancel_pact_100 hash_final
 //
-//#define cmp_packet_diplomacy_cancel_pact_100 cmp_const
+//#define cmp_packet_diplomacy_cancel_pact_100 cmp_final
 //
 //BV_DEFINE(packet_diplomacy_cancel_pact_100_fields, 2);
 //
@@ -18656,9 +18656,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_cancel_pact_100(struct connection *pc, const struct packet_diplomacy_cancel_pact *packet)
+//static int send_packet_diplomacy_cancel_pact_100(struct connection *pc, final struct packet_diplomacy_cancel_pact *packet)
 //{
-//  const struct packet_diplomacy_cancel_pact *real_packet = packet;
+//  final struct packet_diplomacy_cancel_pact *real_packet = packet;
 //  packet_diplomacy_cancel_pact_100_fields fields;
 //  struct packet_diplomacy_cancel_pact *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -18749,7 +18749,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_diplomacy_cancel_pact(struct connection *pc, const struct packet_diplomacy_cancel_pact *packet)
+//int send_packet_diplomacy_cancel_pact(struct connection *pc, final struct packet_diplomacy_cancel_pact *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -18779,9 +18779,9 @@ public class Packets_gen{
 //  return send_packet_diplomacy_cancel_pact(pc, real_packet);
 //}
 //
-//#define hash_packet_page_msg_100 hash_const
+//#define hash_packet_page_msg_100 hash_final
 //
-//#define cmp_packet_page_msg_100 cmp_const
+//#define cmp_packet_page_msg_100 cmp_final
 //
 //BV_DEFINE(packet_page_msg_100_fields, 2);
 //
@@ -18829,9 +18829,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_page_msg_100(struct connection *pc, const struct packet_page_msg *packet)
+//static int send_packet_page_msg_100(struct connection *pc, final struct packet_page_msg *packet)
 //{
-//  const struct packet_page_msg *real_packet = packet;
+//  final struct packet_page_msg *real_packet = packet;
 //  packet_page_msg_100_fields fields;
 //  struct packet_page_msg *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -18922,7 +18922,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_page_msg(struct connection *pc, const struct packet_page_msg *packet)
+//int send_packet_page_msg(struct connection *pc, final struct packet_page_msg *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -18942,16 +18942,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_page_msg(struct conn_list *dest, const struct packet_page_msg *packet)
+//void lsend_packet_page_msg(Speclists<conn> *dest, final struct packet_page_msg *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_page_msg(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_report_req_100 hash_const
+//#define hash_packet_report_req_100 hash_final
 //
-//#define cmp_packet_report_req_100 cmp_const
+//#define cmp_packet_report_req_100 cmp_final
 //
 //BV_DEFINE(packet_report_req_100_fields, 1);
 //
@@ -18996,9 +18996,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_report_req_100(struct connection *pc, const struct packet_report_req *packet)
+//static int send_packet_report_req_100(struct connection *pc, final struct packet_report_req *packet)
 //{
-//  const struct packet_report_req *real_packet = packet;
+//  final struct packet_report_req *real_packet = packet;
 //  packet_report_req_100_fields fields;
 //  struct packet_report_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -19082,7 +19082,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_report_req(struct connection *pc, const struct packet_report_req *packet)
+//int send_packet_report_req(struct connection *pc, final struct packet_report_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -19111,17 +19111,17 @@ public class Packets_gen{
 //  return send_packet_report_req(pc, real_packet);
 //}
 //
-//static unsigned int hash_packet_conn_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_conn_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_conn_info *key = (const struct packet_conn_info *) vkey;
+//  final struct packet_conn_info *key = (final struct packet_conn_info *) vkey;
 //
 //  return ((key->id) % num_buckets);
 //}
 //
-//static int cmp_packet_conn_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_conn_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_conn_info *key1 = (const struct packet_conn_info *) vkey1;
-//  const struct packet_conn_info *key2 = (const struct packet_conn_info *) vkey2;
+//  final struct packet_conn_info *key1 = (final struct packet_conn_info *) vkey1;
+//  final struct packet_conn_info *key2 = (final struct packet_conn_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->id - key2->id;
@@ -19205,9 +19205,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_info_100(struct connection *pc, const struct packet_conn_info *packet)
+//static int send_packet_conn_info_100(struct connection *pc, final struct packet_conn_info *packet)
 //{
-//  const struct packet_conn_info *real_packet = packet;
+//  final struct packet_conn_info *real_packet = packet;
 //  packet_conn_info_100_fields fields;
 //  struct packet_conn_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -19335,7 +19335,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_conn_info(struct connection *pc, const struct packet_conn_info *packet)
+//int send_packet_conn_info(struct connection *pc, final struct packet_conn_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -19355,16 +19355,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_conn_info(struct conn_list *dest, const struct packet_conn_info *packet)
+//void lsend_packet_conn_info(Speclists<conn> *dest, final struct packet_conn_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_conn_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_conn_ping_info_100 hash_const
+//#define hash_packet_conn_ping_info_100 hash_final
 //
-//#define cmp_packet_conn_ping_info_100 cmp_const
+//#define cmp_packet_conn_ping_info_100 cmp_final
 //
 //BV_DEFINE(packet_conn_ping_info_100_fields, 3);
 //
@@ -19445,9 +19445,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_ping_info_100(struct connection *pc, const struct packet_conn_ping_info *packet)
+//static int send_packet_conn_ping_info_100(struct connection *pc, final struct packet_conn_ping_info *packet)
 //{
-//  const struct packet_conn_ping_info *real_packet = packet;
+//  final struct packet_conn_ping_info *real_packet = packet;
 //  packet_conn_ping_info_100_fields fields;
 //  struct packet_conn_ping_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -19546,9 +19546,9 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//#define hash_packet_conn_ping_info_101 hash_const
+//#define hash_packet_conn_ping_info_101 hash_final
 //
-//#define cmp_packet_conn_ping_info_101 cmp_const
+//#define cmp_packet_conn_ping_info_101 cmp_final
 //
 //BV_DEFINE(packet_conn_ping_info_101_fields, 3);
 //
@@ -19629,9 +19629,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_ping_info_101(struct connection *pc, const struct packet_conn_ping_info *packet)
+//static int send_packet_conn_ping_info_101(struct connection *pc, final struct packet_conn_ping_info *packet)
 //{
-//  const struct packet_conn_ping_info *real_packet = packet;
+//  final struct packet_conn_ping_info *real_packet = packet;
 //  packet_conn_ping_info_101_fields fields;
 //  struct packet_conn_ping_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -19770,7 +19770,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_conn_ping_info(struct connection *pc, const struct packet_conn_ping_info *packet)
+//int send_packet_conn_ping_info(struct connection *pc, final struct packet_conn_ping_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -19791,11 +19791,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_conn_ping_info(struct conn_list *dest, const struct packet_conn_ping_info *packet)
+//void lsend_packet_conn_ping_info(Speclists<conn> *dest, final struct packet_conn_ping_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_conn_ping_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //static struct packet_conn_ping *receive_packet_conn_ping_100(struct connection *pc, enum packet_type type)
@@ -20008,11 +20008,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_before_new_year(struct conn_list *dest)
+//void lsend_packet_before_new_year(Speclists<conn> *dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_before_new_year(pconn);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //static struct packet_start_turn *receive_packet_start_turn_100(struct connection *pc, enum packet_type type)
@@ -20085,16 +20085,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_start_turn(struct conn_list *dest)
+//void lsend_packet_start_turn(Speclists<conn> *dest)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_start_turn(pconn);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_new_year_100 hash_const
+//#define hash_packet_new_year_100 hash_final
 //
-//#define cmp_packet_new_year_100 cmp_const
+//#define cmp_packet_new_year_100 cmp_final
 //
 //BV_DEFINE(packet_new_year_100_fields, 2);
 //
@@ -20147,9 +20147,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_new_year_100(struct connection *pc, const struct packet_new_year *packet)
+//static int send_packet_new_year_100(struct connection *pc, final struct packet_new_year *packet)
 //{
-//  const struct packet_new_year *real_packet = packet;
+//  final struct packet_new_year *real_packet = packet;
 //  packet_new_year_100_fields fields;
 //  struct packet_new_year *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -20240,7 +20240,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_new_year(struct connection *pc, const struct packet_new_year *packet)
+//int send_packet_new_year(struct connection *pc, final struct packet_new_year *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -20260,11 +20260,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_new_year(struct conn_list *dest, const struct packet_new_year *packet)
+//void lsend_packet_new_year(Speclists<conn> *dest, final struct packet_new_year *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_new_year(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 //static struct packet_spaceship_launch *receive_packet_spaceship_launch_100(struct connection *pc, enum packet_type type)
@@ -20337,9 +20337,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_spaceship_place_100 hash_const
+//#define hash_packet_spaceship_place_100 hash_final
 //
-//#define cmp_packet_spaceship_place_100 cmp_const
+//#define cmp_packet_spaceship_place_100 cmp_final
 //
 //BV_DEFINE(packet_spaceship_place_100_fields, 2);
 //
@@ -20392,9 +20392,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_spaceship_place_100(struct connection *pc, const struct packet_spaceship_place *packet)
+//static int send_packet_spaceship_place_100(struct connection *pc, final struct packet_spaceship_place *packet)
 //{
-//  const struct packet_spaceship_place *real_packet = packet;
+//  final struct packet_spaceship_place *real_packet = packet;
 //  packet_spaceship_place_100_fields fields;
 //  struct packet_spaceship_place *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -20485,7 +20485,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_spaceship_place(struct connection *pc, const struct packet_spaceship_place *packet)
+//int send_packet_spaceship_place(struct connection *pc, final struct packet_spaceship_place *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -20515,17 +20515,17 @@ public class Packets_gen{
 //  return send_packet_spaceship_place(pc, real_packet);
 //}
 //
-//static unsigned int hash_packet_spaceship_info_100(const void *vkey, unsigned int num_buckets)
+//static unsigned int hash_packet_spaceship_info_100(final void *vkey, unsigned int num_buckets)
 //{
-//  const struct packet_spaceship_info *key = (const struct packet_spaceship_info *) vkey;
+//  final struct packet_spaceship_info *key = (final struct packet_spaceship_info *) vkey;
 //
 //  return ((key->player_num) % num_buckets);
 //}
 //
-//static int cmp_packet_spaceship_info_100(const void *vkey1, const void *vkey2)
+//static int cmp_packet_spaceship_info_100(final void *vkey1, final void *vkey2)
 //{
-//  const struct packet_spaceship_info *key1 = (const struct packet_spaceship_info *) vkey1;
-//  const struct packet_spaceship_info *key2 = (const struct packet_spaceship_info *) vkey2;
+//  final struct packet_spaceship_info *key1 = (final struct packet_spaceship_info *) vkey1;
+//  final struct packet_spaceship_info *key2 = (final struct packet_spaceship_info *) vkey2;
 //  int diff;
 //
 //  diff = key1->player_num - key2->player_num;
@@ -20712,9 +20712,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_spaceship_info_100(struct connection *pc, const struct packet_spaceship_info *packet)
+//static int send_packet_spaceship_info_100(struct connection *pc, final struct packet_spaceship_info *packet)
 //{
-//  const struct packet_spaceship_info *real_packet = packet;
+//  final struct packet_spaceship_info *real_packet = packet;
 //  packet_spaceship_info_100_fields fields;
 //  struct packet_spaceship_info *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = false;
@@ -20911,7 +20911,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_spaceship_info(struct connection *pc, const struct packet_spaceship_info *packet)
+//int send_packet_spaceship_info(struct connection *pc, final struct packet_spaceship_info *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -20931,16 +20931,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_spaceship_info(struct conn_list *dest, const struct packet_spaceship_info *packet)
+//void lsend_packet_spaceship_info(Speclists<conn> *dest, final struct packet_spaceship_info *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_spaceship_info(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_unit_100 hash_const
+//#define hash_packet_ruleset_unit_100 hash_final
 //
-//#define cmp_packet_ruleset_unit_100 cmp_const
+//#define cmp_packet_ruleset_unit_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_unit_100_fields, 36);
 //
@@ -21229,9 +21229,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_unit_100(struct connection *pc, const struct packet_ruleset_unit *packet)
+//static int send_packet_ruleset_unit_100(struct connection *pc, final struct packet_ruleset_unit *packet)
 //{
-//  const struct packet_ruleset_unit *real_packet = packet;
+//  final struct packet_ruleset_unit *real_packet = packet;
 //  packet_ruleset_unit_100_fields fields;
 //  struct packet_ruleset_unit *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -21617,7 +21617,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_unit(struct connection *pc, const struct packet_ruleset_unit *packet)
+//int send_packet_ruleset_unit(struct connection *pc, final struct packet_ruleset_unit *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -21637,16 +21637,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_unit(struct conn_list *dest, const struct packet_ruleset_unit *packet)
+//void lsend_packet_ruleset_unit(Speclists<conn> *dest, final struct packet_ruleset_unit *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_unit(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_game_100 hash_const
+//#define hash_packet_ruleset_game_100 hash_final
 //
-//#define cmp_packet_ruleset_game_100 cmp_const
+//#define cmp_packet_ruleset_game_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_game_100_fields, 26);
 //
@@ -21909,9 +21909,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_game_100(struct connection *pc, const struct packet_ruleset_game *packet)
+//static int send_packet_ruleset_game_100(struct connection *pc, final struct packet_ruleset_game *packet)
 //{
-//  const struct packet_ruleset_game *real_packet = packet;
+//  final struct packet_ruleset_game *real_packet = packet;
 //  packet_ruleset_game_100_fields fields;
 //  struct packet_ruleset_game *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -22309,7 +22309,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_game(struct connection *pc, const struct packet_ruleset_game *packet)
+//int send_packet_ruleset_game(struct connection *pc, final struct packet_ruleset_game *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -22329,16 +22329,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_game(struct conn_list *dest, const struct packet_ruleset_game *packet)
+//void lsend_packet_ruleset_game(Speclists<conn> *dest, final struct packet_ruleset_game *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_game(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_government_ruler_title_100 hash_const
+//#define hash_packet_ruleset_government_ruler_title_100 hash_final
 //
-//#define cmp_packet_ruleset_government_ruler_title_100 cmp_const
+//#define cmp_packet_ruleset_government_ruler_title_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_government_ruler_title_100_fields, 5);
 //
@@ -22405,9 +22405,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_government_ruler_title_100(struct connection *pc, const struct packet_ruleset_government_ruler_title *packet)
+//static int send_packet_ruleset_government_ruler_title_100(struct connection *pc, final struct packet_ruleset_government_ruler_title *packet)
 //{
-//  const struct packet_ruleset_government_ruler_title *real_packet = packet;
+//  final struct packet_ruleset_government_ruler_title *real_packet = packet;
 //  packet_ruleset_government_ruler_title_100_fields fields;
 //  struct packet_ruleset_government_ruler_title *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -22519,7 +22519,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_government_ruler_title(struct connection *pc, const struct packet_ruleset_government_ruler_title *packet)
+//int send_packet_ruleset_government_ruler_title(struct connection *pc, final struct packet_ruleset_government_ruler_title *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -22539,16 +22539,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_government_ruler_title(struct conn_list *dest, const struct packet_ruleset_government_ruler_title *packet)
+//void lsend_packet_ruleset_government_ruler_title(Speclists<conn> *dest, final struct packet_ruleset_government_ruler_title *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_government_ruler_title(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_tech_100 hash_const
+//#define hash_packet_ruleset_tech_100 hash_final
 //
-//#define cmp_packet_ruleset_tech_100 cmp_const
+//#define cmp_packet_ruleset_tech_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_tech_100_fields, 10);
 //
@@ -22652,9 +22652,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_tech_100(struct connection *pc, const struct packet_ruleset_tech *packet)
+//static int send_packet_ruleset_tech_100(struct connection *pc, final struct packet_ruleset_tech *packet)
 //{
-//  const struct packet_ruleset_tech *real_packet = packet;
+//  final struct packet_ruleset_tech *real_packet = packet;
 //  packet_ruleset_tech_100_fields fields;
 //  struct packet_ruleset_tech *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -22820,7 +22820,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_tech(struct connection *pc, const struct packet_ruleset_tech *packet)
+//int send_packet_ruleset_tech(struct connection *pc, final struct packet_ruleset_tech *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -22840,16 +22840,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_tech(struct conn_list *dest, const struct packet_ruleset_tech *packet)
+//void lsend_packet_ruleset_tech(Speclists<conn> *dest, final struct packet_ruleset_tech *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_tech(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_government_100 hash_const
+//#define hash_packet_ruleset_government_100 hash_final
 //
-//#define cmp_packet_ruleset_government_100 cmp_const
+//#define cmp_packet_ruleset_government_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_government_100_fields, 45);
 //
@@ -23226,9 +23226,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_government_100(struct connection *pc, const struct packet_ruleset_government *packet)
+//static int send_packet_ruleset_government_100(struct connection *pc, final struct packet_ruleset_government *packet)
 //{
-//  const struct packet_ruleset_government *real_packet = packet;
+//  final struct packet_ruleset_government *real_packet = packet;
 //  packet_ruleset_government_100_fields fields;
 //  struct packet_ruleset_government *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -23620,7 +23620,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_government(struct connection *pc, const struct packet_ruleset_government *packet)
+//int send_packet_ruleset_government(struct connection *pc, final struct packet_ruleset_government *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -23640,16 +23640,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_government(struct conn_list *dest, const struct packet_ruleset_government *packet)
+//void lsend_packet_ruleset_government(Speclists<conn> *dest, final struct packet_ruleset_government *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_government(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_terrain_control_100 hash_const
+//#define hash_packet_ruleset_terrain_control_100 hash_final
 //
-//#define cmp_packet_ruleset_terrain_control_100 cmp_const
+//#define cmp_packet_ruleset_terrain_control_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_terrain_control_100_fields, 22);
 //
@@ -23829,9 +23829,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_terrain_control_100(struct connection *pc, const struct packet_ruleset_terrain_control *packet)
+//static int send_packet_ruleset_terrain_control_100(struct connection *pc, final struct packet_ruleset_terrain_control *packet)
 //{
-//  const struct packet_ruleset_terrain_control *real_packet = packet;
+//  final struct packet_ruleset_terrain_control *real_packet = packet;
 //  packet_ruleset_terrain_control_100_fields fields;
 //  struct packet_ruleset_terrain_control *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -24054,7 +24054,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_terrain_control(struct connection *pc, const struct packet_ruleset_terrain_control *packet)
+//int send_packet_ruleset_terrain_control(struct connection *pc, final struct packet_ruleset_terrain_control *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -24074,16 +24074,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_terrain_control(struct conn_list *dest, const struct packet_ruleset_terrain_control *packet)
+//void lsend_packet_ruleset_terrain_control(Speclists<conn> *dest, final struct packet_ruleset_terrain_control *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_terrain_control(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_nation_100 hash_const
+//#define hash_packet_ruleset_nation_100 hash_final
 //
-//#define cmp_packet_ruleset_nation_100 cmp_const
+//#define cmp_packet_ruleset_nation_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_nation_100_fields, 12);
 //
@@ -24193,9 +24193,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_nation_100(struct connection *pc, const struct packet_ruleset_nation *packet)
+//static int send_packet_ruleset_nation_100(struct connection *pc, final struct packet_ruleset_nation *packet)
 //{
-//  const struct packet_ruleset_nation *real_packet = packet;
+//  final struct packet_ruleset_nation *real_packet = packet;
 //  packet_ruleset_nation_100_fields fields;
 //  struct packet_ruleset_nation *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -24406,7 +24406,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_nation(struct connection *pc, const struct packet_ruleset_nation *packet)
+//int send_packet_ruleset_nation(struct connection *pc, final struct packet_ruleset_nation *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -24426,16 +24426,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_nation(struct conn_list *dest, const struct packet_ruleset_nation *packet)
+//void lsend_packet_ruleset_nation(Speclists<conn> *dest, final struct packet_ruleset_nation *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_nation(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_city_100 hash_const
+//#define hash_packet_ruleset_city_100 hash_final
 //
-//#define cmp_packet_ruleset_city_100 cmp_const
+//#define cmp_packet_ruleset_city_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_city_100_fields, 8);
 //
@@ -24511,9 +24511,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_city_100(struct connection *pc, const struct packet_ruleset_city *packet)
+//static int send_packet_ruleset_city_100(struct connection *pc, final struct packet_ruleset_city *packet)
 //{
-//  const struct packet_ruleset_city *real_packet = packet;
+//  final struct packet_ruleset_city *real_packet = packet;
 //  packet_ruleset_city_100_fields fields;
 //  struct packet_ruleset_city *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -24646,7 +24646,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_city(struct connection *pc, const struct packet_ruleset_city *packet)
+//int send_packet_ruleset_city(struct connection *pc, final struct packet_ruleset_city *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -24666,16 +24666,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_city(struct conn_list *dest, const struct packet_ruleset_city *packet)
+//void lsend_packet_ruleset_city(Speclists<conn> *dest, final struct packet_ruleset_city *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_city(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_building_100 hash_const
+//#define hash_packet_ruleset_building_100 hash_final
 //
-//#define cmp_packet_ruleset_building_100 cmp_const
+//#define cmp_packet_ruleset_building_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_building_100_fields, 24);
 //
@@ -24911,9 +24911,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_building_100(struct connection *pc, const struct packet_ruleset_building *packet)
+//static int send_packet_ruleset_building_100(struct connection *pc, final struct packet_ruleset_building *packet)
 //{
-//  const struct packet_ruleset_building *real_packet = packet;
+//  final struct packet_ruleset_building *real_packet = packet;
 //  packet_ruleset_building_100_fields fields;
 //  struct packet_ruleset_building *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -25232,7 +25232,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_building(struct connection *pc, const struct packet_ruleset_building *packet)
+//int send_packet_ruleset_building(struct connection *pc, final struct packet_ruleset_building *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -25252,16 +25252,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_building(struct conn_list *dest, const struct packet_ruleset_building *packet)
+//void lsend_packet_ruleset_building(Speclists<conn> *dest, final struct packet_ruleset_building *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_building(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_terrain_100 hash_const
+//#define hash_packet_ruleset_terrain_100 hash_final
 //
-//#define cmp_packet_ruleset_terrain_100 cmp_const
+//#define cmp_packet_ruleset_terrain_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_terrain_100_fields, 38);
 //
@@ -25547,9 +25547,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_terrain_100(struct connection *pc, const struct packet_ruleset_terrain *packet)
+//static int send_packet_ruleset_terrain_100(struct connection *pc, final struct packet_ruleset_terrain *packet)
 //{
-//  const struct packet_ruleset_terrain *real_packet = packet;
+//  final struct packet_ruleset_terrain *real_packet = packet;
 //  packet_ruleset_terrain_100_fields fields;
 //  struct packet_ruleset_terrain *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -25892,7 +25892,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_terrain(struct connection *pc, const struct packet_ruleset_terrain *packet)
+//int send_packet_ruleset_terrain(struct connection *pc, final struct packet_ruleset_terrain *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -25912,16 +25912,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_terrain(struct conn_list *dest, const struct packet_ruleset_terrain *packet)
+//void lsend_packet_ruleset_terrain(Speclists<conn> *dest, final struct packet_ruleset_terrain *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_terrain(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_control_100 hash_const
+//#define hash_packet_ruleset_control_100 hash_final
 //
-//#define cmp_packet_ruleset_control_100 cmp_const
+//#define cmp_packet_ruleset_control_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_control_100_fields, 24);
 //
@@ -26133,9 +26133,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_control_100(struct connection *pc, const struct packet_ruleset_control *packet)
+//static int send_packet_ruleset_control_100(struct connection *pc, final struct packet_ruleset_control *packet)
 //{
-//  const struct packet_ruleset_control *real_packet = packet;
+//  final struct packet_ruleset_control *real_packet = packet;
 //  packet_ruleset_control_100_fields fields;
 //  struct packet_ruleset_control *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -26407,7 +26407,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_control(struct connection *pc, const struct packet_ruleset_control *packet)
+//int send_packet_ruleset_control(struct connection *pc, final struct packet_ruleset_control *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -26427,16 +26427,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_control(struct conn_list *dest, const struct packet_ruleset_control *packet)
+//void lsend_packet_ruleset_control(Speclists<conn> *dest, final struct packet_ruleset_control *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_control(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_single_want_hack_req_100 hash_const
+//#define hash_packet_single_want_hack_req_100 hash_final
 //
-//#define cmp_packet_single_want_hack_req_100 cmp_const
+//#define cmp_packet_single_want_hack_req_100 cmp_final
 //
 //BV_DEFINE(packet_single_want_hack_req_100_fields, 1);
 //
@@ -26476,9 +26476,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_single_want_hack_req_100(struct connection *pc, const struct packet_single_want_hack_req *packet)
+//static int send_packet_single_want_hack_req_100(struct connection *pc, final struct packet_single_want_hack_req *packet)
 //{
-//  const struct packet_single_want_hack_req *real_packet = packet;
+//  final struct packet_single_want_hack_req *real_packet = packet;
 //  packet_single_want_hack_req_100_fields fields;
 //  struct packet_single_want_hack_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -26525,9 +26525,9 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//#define hash_packet_single_want_hack_req_101 hash_const
+//#define hash_packet_single_want_hack_req_101 hash_final
 //
-//#define cmp_packet_single_want_hack_req_101 cmp_const
+//#define cmp_packet_single_want_hack_req_101 cmp_final
 //
 //BV_DEFINE(packet_single_want_hack_req_101_fields, 1);
 //
@@ -26572,9 +26572,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_single_want_hack_req_101(struct connection *pc, const struct packet_single_want_hack_req *packet)
+//static int send_packet_single_want_hack_req_101(struct connection *pc, final struct packet_single_want_hack_req *packet)
 //{
-//  const struct packet_single_want_hack_req *real_packet = packet;
+//  final struct packet_single_want_hack_req *real_packet = packet;
 //  packet_single_want_hack_req_101_fields fields;
 //  struct packet_single_want_hack_req *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -26661,7 +26661,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_single_want_hack_req(struct connection *pc, const struct packet_single_want_hack_req *packet)
+//int send_packet_single_want_hack_req(struct connection *pc, final struct packet_single_want_hack_req *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -26682,9 +26682,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_single_want_hack_reply_100 hash_const
+//#define hash_packet_single_want_hack_reply_100 hash_final
 //
-//#define cmp_packet_single_want_hack_reply_100 cmp_const
+//#define cmp_packet_single_want_hack_reply_100 cmp_final
 //
 //BV_DEFINE(packet_single_want_hack_reply_100_fields, 1);
 //
@@ -26722,9 +26722,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_single_want_hack_reply_100(struct connection *pc, const struct packet_single_want_hack_reply *packet)
+//static int send_packet_single_want_hack_reply_100(struct connection *pc, final struct packet_single_want_hack_reply *packet)
 //{
-//  const struct packet_single_want_hack_reply *real_packet = packet;
+//  final struct packet_single_want_hack_reply *real_packet = packet;
 //  packet_single_want_hack_reply_100_fields fields;
 //  struct packet_single_want_hack_reply *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -26806,7 +26806,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_single_want_hack_reply(struct connection *pc, const struct packet_single_want_hack_reply *packet)
+//int send_packet_single_want_hack_reply(struct connection *pc, final struct packet_single_want_hack_reply *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -26835,9 +26835,9 @@ public class Packets_gen{
 //  return send_packet_single_want_hack_reply(pc, real_packet);
 //}
 //
-//#define hash_packet_game_load_100 hash_const
+//#define hash_packet_game_load_100 hash_final
 //
-//#define cmp_packet_game_load_100 cmp_const
+//#define cmp_packet_game_load_100 cmp_final
 //
 //BV_DEFINE(packet_game_load_100_fields, 9);
 //
@@ -26970,9 +26970,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_game_load_100(struct connection *pc, const struct packet_game_load *packet)
+//static int send_packet_game_load_100(struct connection *pc, final struct packet_game_load *packet)
 //{
-//  const struct packet_game_load *real_packet = packet;
+//  final struct packet_game_load *real_packet = packet;
 //  packet_game_load_100_fields fields;
 //  struct packet_game_load *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -27224,7 +27224,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_game_load(struct connection *pc, const struct packet_game_load *packet)
+//int send_packet_game_load(struct connection *pc, final struct packet_game_load *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -27244,16 +27244,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_game_load(struct conn_list *dest, const struct packet_game_load *packet)
+//void lsend_packet_game_load(Speclists<conn> *dest, final struct packet_game_load *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_game_load(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_options_settable_control_100 hash_const
+//#define hash_packet_options_settable_control_100 hash_final
 //
-//#define cmp_packet_options_settable_control_100 cmp_const
+//#define cmp_packet_options_settable_control_100 cmp_final
 //
 //BV_DEFINE(packet_options_settable_control_100_fields, 3);
 //
@@ -27320,9 +27320,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_options_settable_control_100(struct connection *pc, const struct packet_options_settable_control *packet)
+//static int send_packet_options_settable_control_100(struct connection *pc, final struct packet_options_settable_control *packet)
 //{
-//  const struct packet_options_settable_control *real_packet = packet;
+//  final struct packet_options_settable_control *real_packet = packet;
 //  packet_options_settable_control_100_fields fields;
 //  struct packet_options_settable_control *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -27439,7 +27439,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_options_settable_control(struct connection *pc, const struct packet_options_settable_control *packet)
+//int send_packet_options_settable_control(struct connection *pc, final struct packet_options_settable_control *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -27459,9 +27459,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_options_settable_100 hash_const
+//#define hash_packet_options_settable_100 hash_final
 //
-//#define cmp_packet_options_settable_100 cmp_const
+//#define cmp_packet_options_settable_100 cmp_final
 //
 //BV_DEFINE(packet_options_settable_100_fields, 12);
 //
@@ -27569,9 +27569,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_options_settable_100(struct connection *pc, const struct packet_options_settable *packet)
+//static int send_packet_options_settable_100(struct connection *pc, final struct packet_options_settable *packet)
 //{
-//  const struct packet_options_settable *real_packet = packet;
+//  final struct packet_options_settable *real_packet = packet;
 //  packet_options_settable_100_fields fields;
 //  struct packet_options_settable *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -27732,7 +27732,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_options_settable(struct connection *pc, const struct packet_options_settable *packet)
+//int send_packet_options_settable(struct connection *pc, final struct packet_options_settable *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -27752,9 +27752,9 @@ public class Packets_gen{
 //  }
 //}
 //
-//#define hash_packet_ruleset_cache_group_100 hash_const
+//#define hash_packet_ruleset_cache_group_100 hash_final
 //
-//#define cmp_packet_ruleset_cache_group_100 cmp_const
+//#define cmp_packet_ruleset_cache_group_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_cache_group_100_fields, 5);
 //
@@ -27854,9 +27854,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_cache_group_100(struct connection *pc, const struct packet_ruleset_cache_group *packet)
+//static int send_packet_ruleset_cache_group_100(struct connection *pc, final struct packet_ruleset_cache_group *packet)
 //{
-//  const struct packet_ruleset_cache_group *real_packet = packet;
+//  final struct packet_ruleset_cache_group *real_packet = packet;
 //  packet_ruleset_cache_group_100_fields fields;
 //  struct packet_ruleset_cache_group *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -28025,7 +28025,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_cache_group(struct connection *pc, const struct packet_ruleset_cache_group *packet)
+//int send_packet_ruleset_cache_group(struct connection *pc, final struct packet_ruleset_cache_group *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -28045,16 +28045,16 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_cache_group(struct conn_list *dest, const struct packet_ruleset_cache_group *packet)
+//void lsend_packet_ruleset_cache_group(Speclists<conn> *dest, final struct packet_ruleset_cache_group *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_cache_group(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
-//#define hash_packet_ruleset_cache_effect_100 hash_const
+//#define hash_packet_ruleset_cache_effect_100 hash_final
 //
-//#define cmp_packet_ruleset_cache_effect_100 cmp_const
+//#define cmp_packet_ruleset_cache_effect_100 cmp_final
 //
 //BV_DEFINE(packet_ruleset_cache_effect_100_fields, 8);
 //
@@ -28148,9 +28148,9 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_cache_effect_100(struct connection *pc, const struct packet_ruleset_cache_effect *packet)
+//static int send_packet_ruleset_cache_effect_100(struct connection *pc, final struct packet_ruleset_cache_effect *packet)
 //{
-//  const struct packet_ruleset_cache_effect *real_packet = packet;
+//  final struct packet_ruleset_cache_effect *real_packet = packet;
 //  packet_ruleset_cache_effect_100_fields fields;
 //  struct packet_ruleset_cache_effect *old, *clone;
 //  boolean differ, old_from_hash, force_send_of_unchanged = true;
@@ -28281,7 +28281,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int send_packet_ruleset_cache_effect(struct connection *pc, const struct packet_ruleset_cache_effect *packet)
+//int send_packet_ruleset_cache_effect(struct connection *pc, final struct packet_ruleset_cache_effect *packet)
 //{
 //  if(!pc->used) {
 //    freelog(LOG_ERROR,
@@ -28301,11 +28301,11 @@ public class Packets_gen{
 //  }
 //}
 //
-//void lsend_packet_ruleset_cache_effect(struct conn_list *dest, const struct packet_ruleset_cache_effect *packet)
+//void lsend_packet_ruleset_cache_effect(Speclists<conn> *dest, final struct packet_ruleset_cache_effect *packet)
 //{
 //  conn_list_iterate(*dest, pconn) {
 //    send_packet_ruleset_cache_effect(pconn, packet);
-//  } conn_list_iterate_end;
+//  } }
 //}
 //
 }

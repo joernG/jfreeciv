@@ -90,9 +90,9 @@ public class Diptreaty{
 //*****************************************************************/
 //void clear_treaty(Treaty ptreaty)
 //{
-//  clause_list_iterate(ptreaty.clauses, pclause) {
+//  for (clause pclause : ptreaty.clauses.data) {
 //    free(pclause);
-//  } clause_list_iterate_end;
+//  } }
 //  clause_list_unlink_all(&ptreaty.clauses);
 //}
 //
@@ -102,7 +102,7 @@ public class Diptreaty{
 //boolean remove_clause(Treaty ptreaty, player pfrom, 
 //		  enum clause_type type, int val)
 //{
-//  clause_list_iterate(ptreaty.clauses, pclause) {
+//  for (clause pclause : ptreaty.clauses.data) {
 //    if(pclause.type==type && pclause.from==pfrom &&
 //       pclause.value==val) {
 //      clause_list_unlink(&ptreaty.clauses, pclause);
@@ -113,7 +113,7 @@ public class Diptreaty{
 //
 //      return true;
 //    }
-//  } clause_list_iterate_end;
+//  } }
 //
 //  return false;
 //}
@@ -150,7 +150,7 @@ public class Diptreaty{
 //    return false;
 //  }
 //
-//  clause_list_iterate(ptreaty.clauses, pclause) {
+//  for (clause pclause : ptreaty.clauses.data) {
 //    if(pclause.type==type
 //       && pclause.from==pfrom
 //       && pclause.value==val) {
@@ -173,7 +173,7 @@ public class Diptreaty{
 //      pclause.value=val;
 //      return true;
 //    }
-//  } clause_list_iterate_end;
+//  } }
 //   
 //  pclause=(Clause )fc_malloc(sizeof(struct Clause));
 //

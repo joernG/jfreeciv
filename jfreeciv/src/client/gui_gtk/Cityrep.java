@@ -97,10 +97,10 @@ public class Cityrep{
 // to enable correct sorting of numbers included in text strings.
 //*******************************************************************/
 //static gint report_sort(GtkCList *report,
-//			gconstpointer ptr1, gconstpointer ptr2)
+//			gfinalpointer ptr1, gfinalpointer ptr2)
 //{
-//  const GtkCListRow *row1 = ptr1;
-//  const GtkCListRow *row2 = ptr2;
+//  final GtkCListRow *row1 = ptr1;
+//  final GtkCListRow *row2 = ptr2;
 //  final String buf1, *buf2;
 //
 //  /* Retrieve the text of the fields... */
@@ -473,12 +473,12 @@ public class Cityrep{
 //    int found;
 //
 //    found = 0;
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      if (!cma_is_city_under_agent(pcity, null)) {
 //	found = 1;
 //	break;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //
 //    if (found) {
 //      w = gtk_menu_item_new_with_label("none");
@@ -492,13 +492,13 @@ public class Cityrep{
 //     * take a lonnggg time.
 //     */
 //    found = 0;
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      if (cma_is_city_under_agent(pcity, &parameter) &&
 //	  cmafec_preset_get_index_of_parameter(&parameter) == -1) {
 //	found = 1;
 //	break;
 //      }
-//    } city_list_iterate_end;
+//    } }
 //
 //    if (found) {
 //      /* we found city that's under agent but not a preset */
@@ -512,14 +512,14 @@ public class Cityrep{
 //    /* only fill in presets that are being used. */
 //    for (i = 0; i < cmafec_preset_num(); i++) {
 //      found = 0;
-//      city_list_iterate(game.player_ptr.cities, pcity) {
+//      for (city pcity : game.player_ptr.cities.data) {
 //	if (cma_is_city_under_agent(pcity, &parameter) &&
 //	    cm_are_parameter_equal(&parameter,
 //				   cmafec_preset_get_parameter(i))) {
 //	  found = 1;
 //	  break;
 //	}
-//      } city_list_iterate_end;
+//      } }
 //      if (found) {
 //	w = gtk_menu_item_new_with_label(cmafec_preset_get_descr(i));
 //
@@ -1263,13 +1263,13 @@ public class Cityrep{
 //    gtk_clist_freeze(GTK_CLIST(city_list));
 //    gtk_clist_clear(GTK_CLIST(city_list));
 //
-//    city_list_iterate(game.player_ptr.cities, pcity) {
+//    for (city pcity : game.player_ptr.cities.data) {
 //      get_city_text(pcity, row, sizeof(buf[0]));
 //      i=gtk_clist_append(GTK_CLIST(city_list), row);
 //      gtk_clist_set_row_data (GTK_CLIST(city_list), i, pcity);
 //      if(g_list_find(copy,pcity))
 //	gtk_clist_select_row(GTK_CLIST(city_list), i, -1);
-//    } city_list_iterate_end;
+//    } }
 //    gtk_clist_thaw(GTK_CLIST(city_list));
 //    gtk_widget_show_all(city_list);
 //

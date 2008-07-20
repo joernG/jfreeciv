@@ -99,7 +99,7 @@ public class Gui_main{
 //client_option gui_options[] = {
 //  /* None. */
 //};
-//const int num_gui_options = ARRAY_SIZE(gui_options);
+//final int num_gui_options = ARRAY_SIZE(gui_options);
 //
 ///**************************************************************************
 //  Print extra usage information, including one line help on each option,
@@ -720,7 +720,7 @@ public class Gui_main{
 //  }
 //  else
 //  {
-//    if(can_unit_do_activity(punit, ACTIVITY_IDLE)) {
+//    if(can_unit_do_activity(punit, unit_activity.ACTIVITY_IDLE)) {
 //      set_unit_focus_and_select(punit);
 //    }
 //  }
@@ -963,7 +963,7 @@ public class Gui_main{
 //                    MUIA_CycleChain, 1,
 //                    MUIA_NList_Input, false,
 //                    MUIA_NList_TypeSelect, MUIV_NList_TypeSelect_Char,
-//                    MUIA_NList_ConstructHook, MUIV_NList_ConstructHook_String,
+//                    MUIA_NList_finalructHook, MUIV_NList_finalructHook_String,
 //                    MUIA_NList_DestructHook, MUIV_NList_DestructHook_String,
 //                    MUIA_NList_AutoCopyToClip, true,
 //                    End,
@@ -1268,7 +1268,7 @@ public class Gui_main{
 //      menu_entry_sensitive(MENU_ORDER_AUTO_SETTLER, (can_unit_do_auto(punit) && unit_flag(punit, F_SETTLERS)));
 //      menu_entry_sensitive(MENU_ORDER_AUTO_ATTACK, (can_unit_do_auto(punit) && !unit_flag(punit, F_SETTLERS)));
 //      menu_entry_sensitive(MENU_ORDER_AUTO_EXPLORE, can_unit_do_activity(punit, ACTIVITY_EXPLORE));
-//      menu_entry_sensitive(MENU_ORDER_CONNECT, can_unit_do_connect(punit, ACTIVITY_IDLE));
+//      menu_entry_sensitive(MENU_ORDER_CONNECT, can_unit_do_connect(punit, unit_activity.ACTIVITY_IDLE));
 //      menu_entry_sensitive(MENU_ORDER_GOTO_CITY, any_cities);
 //      menu_entry_sensitive(MENU_ORDER_BUILD_WONDER, unit_can_help_build_wonder_here(punit));
 //      menu_entry_sensitive(MENU_ORDER_TRADEROUTE, unit_can_est_traderoute_here(punit));

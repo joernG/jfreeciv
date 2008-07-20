@@ -114,7 +114,7 @@ public class Helpdlg{
 //
 //
 //static void create_help_dialog();
-//static void help_update_dialog(const help_item pitem);
+//static void help_update_dialog(final help_item pitem);
 //static void create_help_page(enum help_page_type type);
 //
 //static void select_help_item(int item);
@@ -398,7 +398,7 @@ public class Helpdlg{
 //  return button;
 //}
 //
-//static GtkWidget *help_slink_new(const gchar *txt, enum help_page_type type)
+//static GtkWidget *help_slink_new(final gchar *txt, enum help_page_type type)
 //{
 //  GtkWidget *button;
 //
@@ -413,7 +413,7 @@ public class Helpdlg{
 //static void selected_topic(GtkCList *clist, gint row, gint column,
 //			   GdkEventButton *event)
 //{
-//  const help_item p = null;
+//  final help_item p = null;
 //
 //  help_items_iterate(pitem) {
 //    if ((row--)==0)
@@ -645,7 +645,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_improvement(const help_item pitem,
+//static void help_update_improvement(final help_item pitem,
 //				    char *title, int which)
 //{
 //  char buf[64000];
@@ -685,7 +685,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_wonder(const help_item pitem,
+//static void help_update_wonder(final help_item pitem,
 //			       char *title, int which)
 //{
 //  char buf[64000];
@@ -729,7 +729,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_unit_type(const help_item pitem,
+//static void help_update_unit_type(final help_item pitem,
 //				  char *title, int i)
 //{
 //  char *buf = &long_buffer[0];
@@ -802,7 +802,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_tech(const help_item pitem, char *title, int i)
+//static void help_update_tech(final help_item pitem, char *title, int i)
 //{
 //  int j;
 //  GtkWidget *w, *hbox;
@@ -915,7 +915,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_terrain(const help_item pitem,
+//static void help_update_terrain(final help_item pitem,
 //				char *title, int i)
 //{
 //  char *buf = &long_buffer[0];
@@ -1028,7 +1028,7 @@ public class Helpdlg{
 ///**************************************************************************
 //  This is currently just a text page, with special text:
 //**************************************************************************/
-//static void help_update_government(const help_item pitem,
+//static void help_update_government(final help_item pitem,
 //				   char *title, government gov)
 //{
 //  char *buf = &long_buffer[0];
@@ -1049,7 +1049,7 @@ public class Helpdlg{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void help_update_dialog(const help_item pitem)
+//static void help_update_dialog(final help_item pitem)
 //{
 //  int i;
 //  char *top;
@@ -1121,7 +1121,7 @@ public class Helpdlg{
 //static void select_help_item_string(final String item,
 //				    enum help_page_type htype)
 //{
-//  const help_item pitem;
+//  final help_item pitem;
 //  int idx;
 //
 //  pitem = get_help_item_spec(item, htype, &idx);

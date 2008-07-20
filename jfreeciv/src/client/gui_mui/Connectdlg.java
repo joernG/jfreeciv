@@ -114,9 +114,9 @@ public class Connectdlg{
 //}
 //
 ///**************************************************************************
-// Constructor of a new entry in the meta listview
+// finalructor of a new entry in the meta listview
 //**************************************************************************/
-//HOOKPROTONHNO(connect_meta_construct, server , server entry)
+//HOOKPROTONHNO(connect_meta_finalruct, server , server entry)
 //{
 //  server newentry = (struct server*)AllocVec(sizeof(*newentry),0);
 //  if(newentry)
@@ -183,11 +183,11 @@ public class Connectdlg{
 //
 //  if(!connect_wnd)
 //  {
-//    static struct Hook const_hook;
+//    static struct Hook final_hook;
 //    static struct Hook dest_hook;
 //    static struct Hook display_hook;
 //
-//    const_hook.h_Entry = (HOOKFUNC)connect_meta_construct;
+//    final_hook.h_Entry = (HOOKFUNC)connect_meta_finalruct;
 //    dest_hook.h_Entry = (HOOKFUNC)connect_meta_destruct;
 //    display_hook.h_Entry = (HOOKFUNC)connect_meta_display;
 //
@@ -216,7 +216,7 @@ public class Connectdlg{
 //			MUIA_NListview_NList,NListObject,
 //			    MUIA_NList_Format,",,,,,",
 //			    MUIA_NList_Title,true,
-//			    MUIA_NList_ConstructHook, &const_hook,
+//			    MUIA_NList_finalructHook, &final_hook,
 //			    MUIA_NList_DestructHook, &dest_hook,
 //			    MUIA_NList_DisplayHook, &display_hook,
 //			    End,

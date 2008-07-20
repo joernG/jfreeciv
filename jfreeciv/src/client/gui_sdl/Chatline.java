@@ -151,7 +151,7 @@ public class Chatline{
 //    char message[MAX_LEN_MSG];
 //    my_snprintf(message , MAX_LEN_MSG, "%s" , astring);
 //    
-//    add_notify_window(message, -1, -1, E_NOEVENT);
+//    add_notify_window(message, -1, -1, event_type.E_NOEVENT);
 //  }
 //}
 //
@@ -207,7 +207,7 @@ public class Chatline{
 //  
 //  pStr = create_string16(pUniStr, n_alloc, 12);
 //   
-//  if (convert_string_to_const_surface_width(pStr, pConnDlg.text_width - 5)) {
+//  if (convert_string_to_final_surface_width(pStr, pConnDlg.text_width - 5)) {
 //    SDL_String16 *pStr2;
 //    int count = 0;
 //    Uint16 **UniTexts = create_new_line_unistrings(pStr.text);
@@ -338,7 +338,7 @@ public class Chatline{
 //    
 //      hide_scrollbar(pConnDlg.pUsers_Dlg.pScroll);
 //      create = true;
-//      conn_list_iterate(game.est_connections, pconn) {
+//      for (conn pconn : game.est_connections.data) {
 //      
 //        copy_chars_to_string16(pStr, pconn.username);
 //      
@@ -362,7 +362,7 @@ public class Chatline{
 //	      		pWindow.size.y + 14);
 //        }
 //            
-//      } conn_list_iterate_end;
+//      } }
 //  
 //      pConnDlg.pBeginWidgetList = pConnDlg.pUsers_Dlg.pBeginWidgetList;
 //      FREESTRING16(pStr);
