@@ -114,7 +114,7 @@ public class Tech{
 //
 //  if (advances[tech].req[0] == goal || advances[tech].req[1] == goal) {
 //    /* TRANS: Obscure ruleset error */
-//    freelog(LOG_FATAL, _("tech \"%s\": requires itself"),
+//    util.freelog(LOG_FATAL, _("tech \"%s\": requires itself"),
 //	    get_tech_name(pplayer, goal));
 //    assert(0);
 //    exit(EXIT_FAILURE);
@@ -617,7 +617,7 @@ public class Tech{
 //    if (!future.p[pplayer.future_tech]) {
 //      char buffer[1024];
 //
-//      my_snprintf(buffer, sizeof(buffer), "Future Tech. %d",
+//      buffer = util.my_snprintf( "Future Tech. %d",
 //		  pplayer.future_tech + 1);
 //      future.p[pplayer.future_tech] = mystrdup(buffer);
 //    }

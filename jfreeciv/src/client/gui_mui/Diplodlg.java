@@ -293,7 +293,7 @@ public class Diplodlg{
 //  Object *entry;
 //
 //  for (city pcity : plr0.cities.data) {
-//    if (!is_capital(pcity)) {
+//    if (!pcity.is_capital()) {
 //      entry = MUI_MakeObject(MUIO_Menuitem,pcity.name,null,0,0);
 //      set(entry,MUIA_UserData,pcity.id);
 //      DoMethod(entry,MUIM_Notify,MUIA_Menuitem_Trigger, MUIV_EveryTime, entry,6, MUIM_CallHook, &civstandard_hook, diplomacy_city, pdialog, plr0.player_no,entry);

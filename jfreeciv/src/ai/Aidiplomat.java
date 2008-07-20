@@ -111,7 +111,7 @@ public class Aidiplomat{
 //    int u = best_role_unit(pcity, F_DIPLOMAT);
 //
 //    if (u < U_LAST) {
-//       freelog(LOG_DIPLOMAT_BUILD, 
+//       util.freelog(LOG_DIPLOMAT_BUILD, 
 //               "A defensive diplomat will be built in city %s.", pcity.name);
 //       choice.want = 16000; /* diplomat more important than soldiers */
 //       pcity.ai.urgency = 1;
@@ -119,7 +119,7 @@ public class Aidiplomat{
 //       choice.choice = u;
 //    } else if (num_role_units(F_DIPLOMAT) > 0) {
 //      /* We don't know diplomats yet... */
-//      freelog(LOG_DIPLOMAT_BUILD,
+//      util.freelog(LOG_DIPLOMAT_BUILD,
 //              "A defensive diplomat is wanted badly in city %s.", pcity.name);
 //      u = get_role_unit(F_DIPLOMAT, 0);
 //      /* 3000 is a just a large number, but not hillariously large as the
@@ -221,13 +221,13 @@ public class Aidiplomat{
 //
 //    if (!player_has_embassy(pplayer, city_owner(acity))
 //        && want < 99) {
-//        freelog(LOG_DIPLOMAT_BUILD,
+//        util.freelog(LOG_DIPLOMAT_BUILD,
 //                "A diplomat desired in %s to establish an embassy with %s "
 //                "in %s", pcity.name, city_owner(acity).name, acity.name);
 //        want = 99;
 //    }
 //    if (want > choice.want) {
-//      freelog(LOG_DIPLOMAT_BUILD,
+//      util.freelog(LOG_DIPLOMAT_BUILD,
 //              "%s, %s: %s is desired with want %d to spy in %s (incite "
 //              "want %d cost %d gold %d, tech theft want %d, ttd %d)",
 //              pplayer.name, pcity.name, ut.name, want, acity.name, 
@@ -263,14 +263,14 @@ public class Aidiplomat{
 //  assert(pplayer.ai.control);
 //
 //  if (punit.moves_left == 0) {
-//    UNIT_LOG(LOG_ERROR, punit, "no moves left in ai_diplomat_city()!");
+//    UNIT_LOG(Log.LOG_ERROR, punit, "no moves left in ai_diplomat_city()!");
 //  }
 //
 //  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //
 //#define T(my_act,my_val)                                            \
 //  if (diplomat_can_do_action(punit, my_act, ctarget.tile)) {	    \
-//    freelog(LOG_DIPLOMAT, "Player %s's diplomat %d does " #my_act   \
+//    util.freelog(LOG_DIPLOMAT, "Player %s's diplomat %d does " #my_act   \
 //            " on %s", pplayer.name, punit.id, ctarget.name);     \
 //    handle_unit_diplomat_action(pplayer, punit.id, my_act,         \
 //                                ctarget.id, my_val);               \
@@ -650,7 +650,7 @@ public class Aidiplomat{
 //
 //  CHECK_UNIT(punit);
 //  if (ctarget == null) {
-//    UNIT_LOG(LOG_ERROR, punit, "ctarget not set (role==%d)",
+//    UNIT_LOG(Log.LOG_ERROR, punit, "ctarget not set (role==%d)",
 //	     punit.ai.ai_role);
 //    pf_destroy_map(map);
 //    return;

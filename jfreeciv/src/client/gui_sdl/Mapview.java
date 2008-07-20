@@ -288,7 +288,7 @@ public class Mapview{
 //      /* We don't want to set is_flush_queued in this case, since then
 //       * the flush code would simply stop working.  But this means the
 //       * below message may be repeated many times. */
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      _("The SDL event buffer is full; you may see drawing errors\n"
 //		"as a result.  If you see this message often, please\n"
 //		"report it to freeciv-dev@freeciv.org."));
@@ -433,7 +433,7 @@ public class Mapview{
 //    pBuf = get_revolution_widget();
 //    set_new_icon2_theme(pBuf, GET_SURF(sprite), false);
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "Revolution (Shift + R)\n%s",
+//    cBuf = util.my_snprintf( "Revolution (Shift + R)\n%s",
 //    				get_gov_pplayer(game.player_ptr).name);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //        
@@ -466,7 +466,7 @@ public class Mapview{
 //  
 //  pBuf = get_research_widget();
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "Research (F6)\n%s (%d/%d)",
+//  cBuf = util.my_snprintf( "Research (F6)\n%s (%d/%d)",
 //	      	get_tech_name(game.player_ptr,
 //			    game.player_ptr.research.researching),
 //	      	game.player_ptr.research.bulbs_researched,
@@ -501,12 +501,12 @@ public class Mapview{
 //  pText.fgcol.b = 255;
 //
 //
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //	      _("%s Population: %s  Year: %s  "
 //		"Gold %d Tax: %d Lux: %d Sci: %d "),
 //	      get_nation_name(game.player_ptr.nation),
 //	      population_to_text(civ_population(game.player_ptr)),
-//	      textyear(game.year),
+//	      Shared.textyear(game.year),
 //	      game.player_ptr.economic.gold,
 //	      game.player_ptr.economic.tax,
 //	      game.player_ptr.economic.luxury,
@@ -630,7 +630,7 @@ public class Mapview{
 //      /* get and draw other info (MP, terran, city, etc.) */
 //      change_ptsize16(pStr, 10);
 //
-//      my_snprintf(buffer, sizeof(buffer), "%s\n%s\n%s%s%s",
+//      buffer = util.my_snprintf( "%s\n%s\n%s%s%s",
 //		  (hover_unit == pUnit.id) ? "Select destination" :
 //		  unit_activity_text(pUnit),
 //		  sdl_map_get_tile_info_text(pTile),
@@ -645,7 +645,7 @@ public class Mapview{
 //      if (pInfo_Window.size.h > DEFAULT_UNITS_H || right) {
 //	int h = TTF_FontHeight(pInfo_Window.string16.font);
 //				     
-//	my_snprintf(buffer, sizeof(buffer),"%s",
+//	buffer = util.my_snprintf("%s",
 //				sdl_get_tile_defense_info_text(pTile));
 //	
 //        if (pInfo_Window.size.h > 2 * h + DEFAULT_UNITS_H || right) {
@@ -669,7 +669,7 @@ public class Mapview{
 //	          cat_snprintf(buffer, sizeof(buffer), "\nTerritory of the %s %s",
 //		    diplo_nation_plural_adjectives[
 //		  	game.player_ptr.diplstates[pTile.owner.player_no].type],
-//		    		get_nation_name_plural(pTile.owner.nation));
+//		    		Nation.get_nation_name_plural(pTile.owner.nation));
 //                }
 //              } else { /* !pTile.owner */
 //                cat_snprintf(buffer, sizeof(buffer), "\nUnclaimed territory");
@@ -848,7 +848,7 @@ public class Mapview{
 //	    
 //	  pUType = get_unit_type(aunit.type);
 //          pHome_City = find_city_by_id(aunit.homecity);
-//          my_snprintf(buffer, sizeof(buffer), "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
+//          buffer = util.my_snprintf( "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
 //		pUType.name, pUType.attack_strength,
 //		pUType.defense_strength, pUType.move_rate / SINGLE_MOVE,
 //                (aunit.veteran ? "\nveteran" : ""),
@@ -1129,12 +1129,12 @@ public class Mapview{
 //
 //void update_timeout_label()
 //{
-//  freelog(LOG_DEBUG, "MAPVIEW: update_timeout_label : PORT ME");
+//  util.freelog(LOG_DEBUG, "MAPVIEW: update_timeout_label : PORT ME");
 //}
 //
 //void update_turn_done_button(boolean do_restore)
 //{
-//  freelog(LOG_DEBUG, "MAPVIEW: update_turn_done_button : PORT ME");
+//  util.freelog(LOG_DEBUG, "MAPVIEW: update_turn_done_button : PORT ME");
 //}
 //
 ///* ===================================================================== */
@@ -1195,19 +1195,19 @@ public class Mapview{
 //      togrow = city_turns_to_grow(pCity);
 //      switch (togrow) {
 //      case 0:
-//	my_snprintf(buffer, sizeof(buffer), "%s: #", pCity.name);
+//	buffer = util.my_snprintf( "%s: #", pCity.name);
 //	break;
 //      case FC_INFINITY:
-//	my_snprintf(buffer, sizeof(buffer), "%s: --", pCity.name);
+//	buffer = util.my_snprintf( "%s: --", pCity.name);
 //	break;
 //      default:
-//	my_snprintf(buffer, sizeof(buffer), "%s: %d", pCity.name, togrow);
+//	buffer = util.my_snprintf( "%s: %d", pCity.name, togrow);
 //	break;
 //      }
 //    } else {
 //      /* Force certain behavior below. */
 //      togrow = 0;
-//      my_snprintf(buffer, sizeof(buffer), "%s\n%s", pCity.name , 
+//      buffer = util.my_snprintf( "%s\n%s", pCity.name , 
 //	    get_nation_name(get_player(pCity.owner).nation));
 //    }
 //
@@ -1258,7 +1258,7 @@ public class Mapview{
 //    {
 //      /* Civ3 style don't draw player flag and size
 //         outside city description and that is reason I made this hack */
-//      my_snprintf(buffer, sizeof(buffer), "%s", 
+//      buffer = util.my_snprintf( "%s", 
 //	    get_nation_name(get_player(pCity.owner).nation));
 //	    
 //      copy_chars_to_string16(pText, buffer);
@@ -1272,7 +1272,7 @@ public class Mapview{
 //  
 //    /* city size */
 //    if (pCity_Name || pCity_Prod) {
-//      my_snprintf(buffer , sizeof(buffer), "%d", pCity.size);
+//      buffer = util.my_snprintf( "%d", pCity.size);
 //      copy_chars_to_string16(pText, buffer);
 //      pText.style |= TTF_STYLE_BOLD;
 //      pText.fgcol.r = 255;
@@ -1466,7 +1466,7 @@ public class Mapview{
 //  int width = pMMap.size.w - 30 - DOUBLE_FRAME_WH;
 //  int height = pMMap.size.h - DOUBLE_FRAME_WH;
 //  
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //    "MAPVIEW: 'set_overview_dimensions' call with x = %d  y = %d", w, h);
 //
 //  if(w > width || h > height) {
@@ -1641,7 +1641,7 @@ public class Mapview{
 //			OVERVIEW_TILE_WIDTH, OVERVIEW_TILE_HEIGHT};
 //  SDL_Color color = sdl_overview_tile_color(x, y);
 //
-//  freelog(LOG_DEBUG, "MAPVIEW: overview_update_tile (x = %d y = %d )", x, y);
+//  util.freelog(LOG_DEBUG, "MAPVIEW: overview_update_tile (x = %d y = %d )", x, y);
 //			 
 //  SDL_FillRect(pMMap.theme, &cell_size,
 //	    SDL_MapRGBA(pMMap.theme.format, color.r,color.g,
@@ -1767,7 +1767,7 @@ public class Mapview{
 //    return;
 //  }
 //  
-//  freelog(LOG_DEBUG, "MAPVIEW: refresh_overview_viewrect");
+//  util.freelog(LOG_DEBUG, "MAPVIEW: refresh_overview_viewrect");
 //  
 //  pMMap = get_minimap_window_widget();
 //    
@@ -1780,9 +1780,9 @@ public class Mapview{
 //    
 //    map_area.x += OVERVIEW_START_X;
 //    map_area.y += OVERVIEW_START_Y;
-//    map_area.w = MIN(pMMap.size.w - 30 - DOUBLE_FRAME_WH,
+//    map_area.w = Math.min(pMMap.size.w - 30 - DOUBLE_FRAME_WH,
 //					    OVERVIEW_TILE_WIDTH * map.xsize);
-//    map_area.h = MIN(pMMap.size.h - DOUBLE_FRAME_WH,
+//    map_area.h = Math.min(pMMap.size.h - DOUBLE_FRAME_WH,
 //					    OVERVIEW_TILE_HEIGHT * map.ysize);
 //    
 //    if(OVERVIEW_START_X != FRAME_WH || OVERVIEW_START_Y != FRAME_WH) {
@@ -1823,7 +1823,7 @@ public class Mapview{
 //
 //    putline_on_mini_map(&map_area, Wx, Wy, Nx, Ny, color, pMMap.dst);
 //
-//    freelog(LOG_DEBUG, "wx,wy: %d,%d nx,ny:%d,%x ex,ey:%d,%d, sx,sy:%d,%d",
+//    util.freelog(LOG_DEBUG, "wx,wy: %d,%d nx,ny:%d,%x ex,ey:%d,%d, sx,sy:%d,%d",
 //	    Wx, Wy, Nx, Ny, Ex, Ey, Sx, Sy);
 //    /* ===== */
 //
@@ -2240,7 +2240,7 @@ public class Mapview{
 //        }
 //        des = dst;
 //      } else {
-//        freelog(LOG_ERROR, "sprite is null");
+//        util.freelog(Log.LOG_ERROR, "sprite is null");
 //      }
 //    }
 //  }
@@ -2677,7 +2677,7 @@ public class Mapview{
 //**************************************************************************/
 //void put_cross_overlay_tile(int x, int y)
 //{
-//  freelog(LOG_DEBUG, "MAPVIEW: put_cross_overlay_tile : PORT ME");
+//  util.freelog(LOG_DEBUG, "MAPVIEW: put_cross_overlay_tile : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -2686,7 +2686,7 @@ public class Mapview{
 //**************************************************************************/
 //void put_city_workers(city pcity, int color)
 //{
-//  freelog(LOG_DEBUG, "MAPVIEW: put_city_workers : PORT ME");
+//  util.freelog(LOG_DEBUG, "MAPVIEW: put_city_workers : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -2705,7 +2705,7 @@ public class Mapview{
 //    char tag[32];
 //    int i;
 //    
-//    my_snprintf(tag , sizeof(tag), "explode.iso_nuke_0");
+//    tag = util.my_snprintf( "explode.iso_nuke_0");
 //    pNuke = load_sprite(tag);
 //    assert(pNuke != null);   
 //    /* copy screen area */
@@ -2723,7 +2723,7 @@ public class Mapview{
 //    for (i = 0; i < pAnim.num_tiles_explode_nuke; i++) {
 //
 //      if(!pNuke) {
-//       my_snprintf(tag , sizeof(tag), "explode.iso_nuke_%d", i);
+//       tag = util.my_snprintf( "explode.iso_nuke_%d", i);
 //        pNuke = load_sprite(tag);
 //      }
 //      assert(pNuke != null);
@@ -2792,8 +2792,8 @@ public class Mapview{
 //  putline(Main.map,
 //  	canvas_start_x,	canvas_start_y,	canvas_end_x, canvas_end_y, color);
 //  
-//  dirty_rect(MIN(canvas_start_x, canvas_end_x),
-//		  MIN(canvas_start_y, canvas_end_y),
+//  dirty_rect(Math.min(canvas_start_x, canvas_end_x),
+//		  Math.min(canvas_start_y, canvas_end_y),
 //  			dest_x ? dest_x : 1, dest_y ? dest_y : 1);
 //  
 //  

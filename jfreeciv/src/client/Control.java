@@ -122,7 +122,7 @@ public class Control{
 //  unit punit_old_focus = punit_focus;
 //
 //  if (punit && punit.owner != game.player_idx) {
-//    freelog(LOG_ERROR, "Trying to focus on another player's unit!");
+//    util.freelog(Log.LOG_ERROR, "Trying to focus on another player's unit!");
 //    return;
 //  }
 //
@@ -978,7 +978,7 @@ public class Control{
 //  } else if (action == PACKET_UNIT_HELP_BUILD_WONDER) {
 //    dsend_packet_unit_help_build_wonder(&aconnection, punit.id);
 //  } else {
-//    freelog(LOG_ERROR, "Bad action (%d) in request_unit_caravan_action",
+//    util.freelog(Log.LOG_ERROR, "Bad action (%d) in request_unit_caravan_action",
 //	    action);
 //  }
 //}
@@ -1747,7 +1747,7 @@ public class Control{
 //**************************************************************************/
 //void key_center_capital()
 //{
-//  city capital = find_palace(game.player_ptr);
+//  city capital = game.player_ptr.find_palace();
 //
 //  if (capital)  {
 //    /* Center on the tile, and pop up the crosshair overlay. */

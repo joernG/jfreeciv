@@ -28,7 +28,7 @@ public class Unittools{
 //#include "citytools.h"
 //#include "cityturn.h"
 //#include "diplhand.h"
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "gotohand.h"
 //#include "maphand.h"
 //#include "plrhand.h"
@@ -145,7 +145,7 @@ public class Unittools{
 //  get_modified_firepower(attacker, defender,
 //			 &attack_firepower, &defense_firepower);
 //
-//  freelog(LOG_VERBOSE, "attack:%d, defense:%d, attack firepower:%d, defense firepower:%d",
+//  util.freelog(LOG_VERBOSE, "attack:%d, defense:%d, attack firepower:%d, defense firepower:%d",
 //	  attackpower, defensepower, attack_firepower, defense_firepower);
 //
 //  if (bombard) {
@@ -300,7 +300,7 @@ public class Unittools{
 //      notify_player_ex(pplayer, punit.tile, E_UNIT_LOST, 
 //          "Game: Your %s has run out of hit points.", 
 //          unit_name(punit.type));
-//      gamelog(GAMELOG_UNITLOSS, punit, null, "out of hp");
+//      Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "out of hp");
 //      wipe_unit(punit);
 //      continue; /* Continue iterating... */
 //    }
@@ -317,7 +317,7 @@ public class Unittools{
 //        notify_player_ex(pplayer, punit.tile, E_UNIT_LOST, 
 //                         "Game: Your %s has been lost on the high seas.",
 //                         unit_name(punit.type));
-//        gamelog(GAMELOG_UNITLOSS, punit, null, "lost at sea");
+//        Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "lost at sea");
 //        wipe_unit(punit);
 //        continue; /* Continue iterating... */
 //      } else if (loss_chance > 0) {
@@ -336,7 +336,7 @@ public class Unittools{
 //      notify_player_ex(pplayer, punit.tile, E_UNIT_LOST,
 //		       "Game: Your %s has been lost on unsafe terrain.",
 //		       unit_name(punit.type));
-//      gamelog(GAMELOG_UNITLOSS, punit, null, "unsafe terrain");
+//      Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "unsafe terrain");
 //      wipe_unit(punit);
 //      continue;			/* Continue iterating... */
 //    }
@@ -389,7 +389,7 @@ public class Unittools{
 //      notify_player_ex(pplayer, punit.tile, E_UNIT_LOST, 
 //		       "Game: Your %s has run out of fuel.",
 //		       unit_name(punit.type));
-//      gamelog(GAMELOG_UNITLOSS, punit, null, "fuel");
+//      Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "fuel");
 //      wipe_unit(punit);
 //    } 
 //  }
@@ -609,7 +609,7 @@ public class Unittools{
 //	if (what == S_FORTRESS) {
 //	  for (unit punit2 : punit.tile.units.data) {
 //            player owner = unit_owner(punit2);
-//            freelog(LOG_VERBOSE, "Watchtower pillaged!");
+//            util.freelog(LOG_VERBOSE, "Watchtower pillaged!");
 //            if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
 //              if (is_ground_unit(punit2)) {
 //                /* Unfog (increase seen counter) first, fog (decrease counter)
@@ -642,7 +642,7 @@ public class Unittools{
 //      
 //      /* If a watchtower has been pillaged, reduce sight to normal */
 //      if (what_pillaged == S_FORTRESS) {
-//	freelog(LOG_VERBOSE, "Watchtower(2) pillaged!");
+//	util.freelog(LOG_VERBOSE, "Watchtower(2) pillaged!");
 //	for (unit punit2 : punit.tile.units.data) {
 //          player owner = unit_owner(punit2);
 //          if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
@@ -842,7 +842,7 @@ public class Unittools{
 //	      && !is_non_allied_unit_tile(ptile2, unit_owner(punit2))) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    freelog(LOG_VERBOSE,
+//	    util.freelog(LOG_VERBOSE,
 //		    "Moved %s's %s due to changing land to sea at (%d, %d).",
 //		    unit_owner(punit2).name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
@@ -863,7 +863,7 @@ public class Unittools{
 //						  unit_owner(punit2)) > 0) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    freelog(LOG_VERBOSE,
+//	    util.freelog(LOG_VERBOSE,
 //		    "Embarked %s's %s due to changing land to sea at (%d, %d).",
 //		    unit_owner(punit2).name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.x);
@@ -878,7 +878,7 @@ public class Unittools{
 //	  }
 //	} adjc_iterate_end;
 //	/* if we get here we could not move punit2 */
-//	freelog(LOG_VERBOSE,
+//	util.freelog(LOG_VERBOSE,
 //		"Disbanded %s's %s due to changing land to sea at (%d, %d).",
 //		unit_owner(punit2).name, unit_name(punit2.type),
 //		punit2.tile.x, punit2.tile.y);
@@ -900,7 +900,7 @@ public class Unittools{
 //	      && !is_non_allied_unit_tile(ptile2, unit_owner(punit2))) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    freelog(LOG_VERBOSE,
+//	    util.freelog(LOG_VERBOSE,
 //		    "Moved %s's %s due to changing sea to land at (%d, %d).",
 //		    unit_owner(punit2).name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
@@ -920,7 +920,7 @@ public class Unittools{
 //	      && !is_non_allied_unit_tile(ptile2, unit_owner(punit2))) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    freelog(LOG_VERBOSE,
+//	    util.freelog(LOG_VERBOSE,
 //		    "Docked %s's %s due to changing sea to land at (%d, %d).",
 //		    unit_owner(punit2).name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
@@ -935,7 +935,7 @@ public class Unittools{
 //	  }
 //	} adjc_iterate_end;
 //	/* if we get here we could not move punit2 */
-//	freelog(LOG_VERBOSE,
+//	util.freelog(LOG_VERBOSE,
 //		"Disbanded %s's %s due to changing sea to land at (%d, %d).",
 //		unit_owner(punit2).name, unit_name(punit2.type),
 //		punit2.tile.x, punit2.tile.y);
@@ -973,18 +973,18 @@ public class Unittools{
 //  incity = map_get_city(ptile);
 //  if (incity) {
 //    if (use_at) {
-//      my_snprintf(buffer, sizeof(buffer), " at %s", incity.name);
+//      buffer = util.my_snprintf( " at %s", incity.name);
 //    } else {
-//      my_snprintf(buffer, sizeof(buffer), " in %s", incity.name);
+//      buffer = util.my_snprintf( " in %s", incity.name);
 //    }
 //  } else {
 //    nearcity = dist_nearest_city(pplayer, ptile, false, false);
 //    if (nearcity) {
 //      if (is_tiles_adjacent(ptile, nearcity.tile)) {
-//	my_snprintf(buffer, sizeof(buffer),
+//	buffer = util.my_snprintf(
 //		   " outside %s", nearcity.name);
 //      } else {
-//	my_snprintf(buffer, sizeof(buffer),
+//	buffer = util.my_snprintf(
 //		    " near %s", nearcity.name);
 //      }
 //    } else {
@@ -1190,7 +1190,7 @@ public class Unittools{
 //  tile src_tile = punit.tile, *dst_tile = pcity.tile;
 //
 //  if (pcity.owner == punit.owner){
-//    freelog(LOG_VERBOSE, "Teleported %s's %s from (%d, %d) to %s",
+//    util.freelog(LOG_VERBOSE, "Teleported %s's %s from (%d, %d) to %s",
 //	    unit_owner(punit).name, unit_name(punit.type),
 //	    src_tile.x, src_tile.y, pcity.name);
 //    if (verbose) {
@@ -1459,7 +1459,7 @@ public class Unittools{
 //
 //  if (moves_left >= 0) {
 //    /* Override default full MP */
-//    punit.moves_left = MIN(moves_left, unit_move_rate(punit));
+//    punit.moves_left = Math.min(moves_left, unit_move_rate(punit));
 //  }
 //
 //  if (ptrans) {
@@ -1553,7 +1553,7 @@ public class Unittools{
 //                   unit_name(punit.type), unit_owner(punit).name);
 //    notify_player(unit_owner(punit), _("Losing %s meant losing the game! "
 //                  "Be more careful next time!"), unit_name(punit.type));
-//    gamelog(GAMELOG_UNITGAMELOSS, punit);
+//    Gamelog.gamelog(GAMELOG_UNITGAMELOSS, punit);
 //    unit_owner(punit).is_dying = true;
 //  }
 //
@@ -1665,7 +1665,7 @@ public class Unittools{
 //			     "Game: %s lost when %s was lost.",
 //			     unit_type(pcargo).name,
 //			     ptype.name);
-//	    gamelog(GAMELOG_UNITLOSS, pcargo, null, "transport lost");
+//	    Gamelog.gamelog(GAMELOG_UNITLOSS, pcargo, null, "transport lost");
 //	    server_remove_unit(pcargo);
 //	  }
 //	  if (++capacity >= 0) {
@@ -1742,7 +1742,7 @@ public class Unittools{
 //		     unit_type(punit).name, destroyer.name,
 //		     unit_name(pkiller.type), loc_str);
 //
-//    gamelog(GAMELOG_UNITLOSS, punit, destroyer);
+//    Gamelog.gamelog(GAMELOG_UNITLOSS, punit, destroyer);
 //    wipe_unit(punit);
 //  } else { /* unitcount > 1 */
 //    int i;
@@ -1784,7 +1784,7 @@ public class Unittools{
 //			 unit_type(punit2).name, destroyer.name,
 //			 unit_name(pkiller.type));
 //
-//        gamelog(GAMELOG_UNITLOSS, punit2, destroyer);
+//        Gamelog.gamelog(GAMELOG_UNITLOSS, punit2, destroyer);
 //	wipe_unit_spec_safe(punit2, false);
 //      }
 //    }
@@ -2305,10 +2305,10 @@ public class Unittools{
 //  notify_player_ex(pplayer, punit.tile, E_HUT_TECH,
 //		   "Game: You found %s in ancient scrolls of wisdom.",
 //		   tech_name);
-//  gamelog(GAMELOG_TECH, pplayer, null, new_tech);
+//  Gamelog.gamelog(GAMELOG_TECH, pplayer, null, new_tech);
 //  notify_embassies(pplayer, null, _("Game: The %s have acquired %s"
 //				    " from ancient scrolls of wisdom."),
-//		   get_nation_name_plural(pplayer.nation), tech_name);
+//		   Nation.get_nation_name_plural(pplayer.nation), tech_name);
 //}
 //
 ///**************************************************************************
@@ -2893,7 +2893,7 @@ public class Unittools{
 //{
 //  free_unit_orders(punit);
 //  send_unit_info(null, punit);
-//  freelog(LOG_DEBUG, "%s", dbg_msg);
+//  util.freelog(LOG_DEBUG, "%s", dbg_msg);
 //}
 //
 ///****************************************************************************
@@ -2929,7 +2929,7 @@ public class Unittools{
 //    return true;
 //  }
 //
-//  freelog(LOG_DEBUG, "Executing orders for %s %d",
+//  util.freelog(LOG_DEBUG, "Executing orders for %s %d",
 //	  unit_name(punit.type), punit.id);   
 //
 //  /* Any time the orders are canceled we should give the player a message. */
@@ -2939,12 +2939,12 @@ public class Unittools{
 //
 //    if (punit.moves_left == 0) {
 //      /* FIXME: this check won't work when actions take 0 MP. */
-//      freelog(LOG_DEBUG, "  stopping because of no more move points");
+//      util.freelog(LOG_DEBUG, "  stopping because of no more move points");
 //      return true;
 //    }
 //
 //    if (punit.done_moving) {
-//      freelog(LOG_DEBUG, "  stopping because we're done this turn");
+//      util.freelog(LOG_DEBUG, "  stopping because we're done this turn");
 //      return true;
 //    }
 //
@@ -2960,7 +2960,7 @@ public class Unittools{
 //
 //    if (moves_made == punit.orders.length) {
 //      /* For repeating orders, don't repeat more than once per turn. */
-//      freelog(LOG_DEBUG, "  stopping because we ran a round");
+//      util.freelog(LOG_DEBUG, "  stopping because we ran a round");
 //      punit.done_moving = true;
 //      send_unit_info(null, punit);
 //      return true;
@@ -2992,7 +2992,7 @@ public class Unittools{
 //	 * next turn.  We assume that the next turn it will have full MP
 //	 * (there's no check for that). */
 //	punit.done_moving = true;
-//	freelog(LOG_DEBUG, "  waiting this turn");
+//	util.freelog(LOG_DEBUG, "  waiting this turn");
 //	send_unit_info(null, punit);
 //      }
 //      break;
@@ -3031,18 +3031,18 @@ public class Unittools{
 //	return true;
 //      }
 //
-//      freelog(LOG_DEBUG, "  moving to %d,%d",
+//      util.freelog(LOG_DEBUG, "  moving to %d,%d",
 //	      dst_tile.x, dst_tile.y);
 //      res = handle_unit_move_request(punit, dst_tile, false, !last_order);
 //      if (!player_find_unit_by_id(pplayer, unitid)) {
-//	freelog(LOG_DEBUG, "  unit died while moving.");
+//	util.freelog(LOG_DEBUG, "  unit died while moving.");
 //	/* A player notification should already have been sent. */
 //	return false;
 //      }
 //
 //      if (res && !same_pos(dst_tile, punit.tile)) {
 //	/* Movement succeeded but unit didn't move. */
-//	freelog(LOG_DEBUG, "  orders resulted in combat.");
+//	util.freelog(LOG_DEBUG, "  orders resulted in combat.");
 //	send_unit_info(null, punit);
 //	return true;
 //      }
@@ -3060,7 +3060,7 @@ public class Unittools{
 //      if (!res && punit.moves_left == 0) {
 //	/* Movement failed (not enough MP).  Keep this move around for
 //	 * next turn. */
-//	freelog(LOG_DEBUG, "  orders move failed (out of MP).");
+//	util.freelog(LOG_DEBUG, "  orders move failed (out of MP).");
 //	if (unit_has_orders(punit)) {
 //	  punit.orders.index--;
 //	} else {
@@ -3091,14 +3091,14 @@ public class Unittools{
 //
 //    if (last_order) {
 //      assert(punit.has_orders == false);
-//      freelog(LOG_DEBUG, "  stopping because orders are complete");
+//      util.freelog(LOG_DEBUG, "  stopping because orders are complete");
 //      return true;
 //    }
 //
 //    if (punit.orders.index == punit.orders.length) {
 //      assert(punit.orders.repeat);
 //      /* Start over. */
-//      freelog(LOG_DEBUG, "  repeating orders.");
+//      util.freelog(LOG_DEBUG, "  repeating orders.");
 //      punit.orders.index = 0;
 //    }
 //  } /* end while */

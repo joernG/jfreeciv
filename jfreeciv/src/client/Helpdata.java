@@ -195,22 +195,22 @@ public class Helpdata{
 //  popdown_help_dialog();
 //
 //  if(!booted) {
-//    freelog(LOG_VERBOSE, "Booting help texts");
+//    util.freelog(LOG_VERBOSE, "Booting help texts");
 //  } else {
 //    /* free memory allocated last time booted */
 //    free_help_texts();
-//    freelog(LOG_VERBOSE, "Rebooting help texts");
+//    util.freelog(LOG_VERBOSE, "Rebooting help texts");
 //  }    
 //
 //  filename = datafilename("helpdata.txt");
 //  if (!filename) {
-//    freelog(LOG_ERROR, "Did not read help texts");
+//    util.freelog(Log.LOG_ERROR, "Did not read help texts");
 //    return;
 //  }
 //  /* after following call filename may be clobbered; use sf.filename instead */
 //  if (!section_file_load(sf, filename)) {
 //    /* this is now unlikely to happen */
-//    freelog(LOG_ERROR, "failed reading help-texts");
+//    util.freelog(Log.LOG_ERROR, "failed reading help-texts");
 //    return;
 //  }
 //
@@ -232,7 +232,7 @@ public class Helpdata{
 //	}
 //      }
 //      if (current_type == HELP_ANY) {
-//	freelog(LOG_ERROR, "bad help-generate category \"%s\"", gen_str);
+//	util.freelog(Log.LOG_ERROR, "bad help-generate category \"%s\"", gen_str);
 //	continue;
 //      }
 //      {
@@ -248,7 +248,7 @@ public class Helpdata{
 //	  unit_type_iterate(i) {
 //	    if (unit_type_exists(i)) {
 //	      pitem = new_help_item(current_type);
-//	      my_snprintf(name, sizeof(name), " %s", unit_name(i));
+//	      name = util.my_snprintf( " %s", unit_name(i));
 //	      pitem.topic = mystrdup(name);
 //	      pitem.text = mystrdup("");
 //	      help_list_insert_back(&category_nodes, pitem);
@@ -258,7 +258,7 @@ public class Helpdata{
 //	  tech_type_iterate(i) {
 //	    if (i != A_NONE && tech_exists(i)) {
 //	      pitem = new_help_item(current_type);
-//	      my_snprintf(name, sizeof(name), " %s",
+//	      name = util.my_snprintf( " %s",
 //			  get_tech_name(game.player_ptr, i));
 //	      pitem.topic = mystrdup(name);
 //	      pitem.text = mystrdup("");
@@ -271,7 +271,7 @@ public class Helpdata{
 //
 //	    if (*(ptype.terrain_name) != '\0') {
 //	      pitem = new_help_item(current_type);
-//	      my_snprintf(name, sizeof(name), " %s",
+//	      name = util.my_snprintf( " %s",
 //			  ptype.terrain_name);
 //	      pitem.topic = mystrdup(name);
 //	      pitem.text = mystrdup("");
@@ -291,7 +291,7 @@ public class Helpdata{
 //	} else if (current_type == HELP_GOVERNMENT) {
 //	  government_iterate(gov) {
 //	    pitem = new_help_item(current_type);
-//	    my_snprintf(name, sizeof(name), " %s", gov.name);
+//	    name = util.my_snprintf( " %s", gov.name);
 //	    pitem.topic = mystrdup(name);
 //	    pitem.text = mystrdup("");
 //	    help_list_insert_back(&category_nodes, pitem);
@@ -300,7 +300,7 @@ public class Helpdata{
 //	  impr_type_iterate(i) {
 //	    if (improvement_exists(i) && !is_wonder(i)) {
 //	      pitem = new_help_item(current_type);
-//	      my_snprintf(name, sizeof(name), " %s",
+//	      name = util.my_snprintf( " %s",
 //			  improvement_types[i].name);
 //	      pitem.topic = mystrdup(name);
 //	      pitem.text = mystrdup("");
@@ -311,7 +311,7 @@ public class Helpdata{
 //	  impr_type_iterate(i) {
 //	    if (improvement_exists(i) && is_wonder(i)) {
 //	      pitem = new_help_item(current_type);
-//	      my_snprintf(name, sizeof(name), " %s",
+//	      name = util.my_snprintf( " %s",
 //			  improvement_types[i].name);
 //	      pitem.topic = mystrdup(name);
 //	      pitem.text = mystrdup("");
@@ -361,7 +361,7 @@ public class Helpdata{
 //  section_file_check_unused(sf, sf.filename);
 //  section_file_free(sf);
 //  booted = true;
-//  freelog(LOG_VERBOSE, "Booted help texts ok");
+//  util.freelog(LOG_VERBOSE, "Booted help texts ok");
 //}
 //
 ///****************************************************************
@@ -392,7 +392,7 @@ public class Helpdata{
 //  check_help_nodes_init();
 //  size = help_list_size(&help_nodes);
 //  if (pos < 0 || pos > size) {
-//    freelog(LOG_ERROR, "Bad index %d to get_help_item (size %d)", pos, size);
+//    util.freelog(Log.LOG_ERROR, "Bad index %d to get_help_item (size %d)", pos, size);
 //    return null;
 //  }
 //  if (pos == size) {
@@ -437,11 +437,11 @@ public class Helpdata{
 //    sz_strlcpy(vtopic, name);
 //    vitem.text = vtext;
 //    if(htype==HELP_ANY || htype==HELP_TEXT) {
-//      my_snprintf(vtext, sizeof(vtext),
+//      vtext = util.my_snprintf(
 //		  "Sorry, no help topic for %s.\n", vitem.topic);
 //      vitem.type = HELP_TEXT;
 //    } else {
-//      my_snprintf(vtext, sizeof(vtext),
+//      vtext = util.my_snprintf(
 //		  _("Sorry, no help topic for %s.\n"
 //		    "This page was auto-generated.\n\n"),
 //		  vitem.topic);

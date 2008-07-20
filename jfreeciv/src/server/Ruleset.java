@@ -115,21 +115,21 @@ public class Ruleset{
 //
 //  assert(subdir && whichset);
 //
-//  my_snprintf(filename, sizeof(filename), "%s/%s.ruleset", subdir, whichset);
+//  filename = util.my_snprintf( "%s/%s.ruleset", subdir, whichset);
 //  dfilename = datafilename(filename);
 //  if (dfilename)
 //    return dfilename;
 //
-//  freelog(LOG_VERBOSE, "Trying to load file from default ruleset directory "
+//  util.freelog(LOG_VERBOSE, "Trying to load file from default ruleset directory "
 //	  "instead.");
-//  my_snprintf(filename, sizeof(filename), "default/%s.ruleset", whichset);
+//  filename = util.my_snprintf( "default/%s.ruleset", whichset);
 //  dfilename = datafilename(filename);
 //  if (dfilename)
 //    return dfilename;
 //
 //  /* TRANS: message for an obscure ruleset error. */
-//  freelog(LOG_ERROR, "Trying alternative ruleset filename syntax.");
-//  my_snprintf(filename, sizeof(filename), "%s_%s.ruleset", subdir, whichset);
+//  util.freelog(Log.LOG_ERROR, "Trying alternative ruleset filename syntax.");
+//  filename = util.my_snprintf( "%s_%s.ruleset", subdir, whichset);
 //  dfilename = datafilename(filename);
 //  if (dfilename)
 //    return dfilename;
@@ -148,7 +148,7 @@ public class Ruleset{
 //  char *dfilename = valid_ruleset_filename(game.rulesetdir, whichset);
 //
 //  if (!dfilename) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    /* TRANS: message for an obscure ruleset error. */
 //	    _("Could not find a readable \"%s\" ruleset file."), whichset);
 //    exit(EXIT_FAILURE);
@@ -160,7 +160,7 @@ public class Ruleset{
 //  sz_strlcpy(sfilename, dfilename);
 //
 //  if (!section_file_load_nodup(file, sfilename)) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    /* TRANS: message for an obscure ruleset error. */
 //	    _("Could not load ruleset file \"%s\"."), sfilename);
 //    exit(EXIT_FAILURE);
@@ -179,18 +179,18 @@ public class Ruleset{
 //  
 //  datafile_options = secfile_lookup_str(file, "datafile.options");
 //  if (!has_capabilities(us_capstr, datafile_options)) {
-//    freelog(LOG_FATAL, "Ruleset datafile appears incompatible:");
-//    freelog(LOG_FATAL, _("file: \"%s\""), filename);
-//    freelog(LOG_FATAL, "file options: %s", datafile_options);
-//    freelog(LOG_FATAL, "supported options: %s", us_capstr);
+//    util.freelog(LOG_FATAL, "Ruleset datafile appears incompatible:");
+//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, "file options: %s", datafile_options);
+//    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!has_capabilities(datafile_options, us_capstr)) {
-//    freelog(LOG_FATAL, _("Ruleset datafile claims required option(s)"
+//    util.freelog(LOG_FATAL, _("Ruleset datafile claims required option(s)"
 //			 " which we don't support:"));
-//    freelog(LOG_FATAL, _("file: \"%s\""), filename);
-//    freelog(LOG_FATAL, "file options: %s", datafile_options);
-//    freelog(LOG_FATAL, "supported options: %s", us_capstr);
+//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, "file options: %s", datafile_options);
+//    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
 //  }
 //  return datafile_options;
@@ -218,7 +218,7 @@ public class Ruleset{
 //  } else {
 //    i = find_tech_by_name(sval);
 //    if (i==A_LAST) {
-//      freelog((required?LOG_FATAL:LOG_ERROR),
+//      util.freelog((required?LOG_FATAL:Log.LOG_ERROR),
 //	   "for %s %s couldn't match tech \"%s\" (%s)",
 //	   (description?description:prefix), entry, sval, filename);
 //      if (required) {
@@ -251,12 +251,12 @@ public class Ruleset{
 //  }
 //  slist = secfile_lookup_str_vec(file, &nval, "%s.%s", prefix, entry);
 //  if (nval==0) {
-//    freelog(LOG_FATAL, "Missing string vector %s.%s (%s)",
+//    util.freelog(LOG_FATAL, "Missing string vector %s.%s (%s)",
 //	    prefix, entry, filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (nval>MAX_NUM_TECH_LIST) {
-//    freelog(LOG_FATAL, "String vector %s.%s too long (%d, max %d) (%s)",
+//    util.freelog(LOG_FATAL, "String vector %s.%s too long (%d, max %d) (%s)",
 //	    prefix, entry, nval, MAX_NUM_TECH_LIST, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -268,17 +268,17 @@ public class Ruleset{
 //    char *sval = slist[i];
 //    int tech = find_tech_by_name(sval);
 //    if (tech==A_LAST) {
-//      freelog(LOG_FATAL, "For %s %s (%d) couldn't match tech \"%s\" (%s)",
+//      util.freelog(LOG_FATAL, "For %s %s (%d) couldn't match tech \"%s\" (%s)",
 //	      prefix, entry, i, sval, filename);
 //      exit(EXIT_FAILURE);
 //    }
 //    if (!tech_exists(tech)) {
-//      freelog(LOG_FATAL, "For %s %s (%d) tech \"%s\" is removed (%s)",
+//      util.freelog(LOG_FATAL, "For %s %s (%d) tech \"%s\" is removed (%s)",
 //	      prefix, entry, i, sval, filename);
 //      exit(EXIT_FAILURE);
 //    }
 //    output[i] = tech;
-//    freelog(LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, tech);
+//    util.freelog(LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, tech);
 //  }
 //  free(slist);
 //  return;
@@ -305,12 +305,12 @@ public class Ruleset{
 //  }
 //  slist = secfile_lookup_str_vec(file, &nval, "%s.%s", prefix, entry);
 //  if (nval == 0) {
-//    freelog(LOG_FATAL, "Missing string vector %s.%s (%s)",
+//    util.freelog(LOG_FATAL, "Missing string vector %s.%s (%s)",
 //	    prefix, entry, filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (nval > MAX_NUM_BUILDING_LIST) {
-//    freelog(LOG_FATAL, "String vector %s.%s too long (%d, max %d) (%s)",
+//    util.freelog(LOG_FATAL, "String vector %s.%s too long (%d, max %d) (%s)",
 //	    prefix, entry, nval, MAX_NUM_BUILDING_LIST, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -323,12 +323,12 @@ public class Ruleset{
 //    int building = find_improvement_by_name(sval);
 //
 //    if (building == B_LAST) {
-//      freelog(LOG_FATAL, "For %s %s (%d) couldn't match building \"%s\" (%s)",
+//      util.freelog(LOG_FATAL, "For %s %s (%d) couldn't match building \"%s\" (%s)",
 //	      prefix, entry, i, sval, filename);
 //      exit(EXIT_FAILURE);
 //    }
 //    output[i] = building;
-//    freelog(LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, building);
+//    util.freelog(LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, building);
 //  }
 //  free(slist);
 //}
@@ -358,7 +358,7 @@ public class Ruleset{
 //  } else {
 //    i = find_unit_type_by_name(sval);
 //    if (i==U_LAST) {
-//      freelog((required?LOG_FATAL:LOG_ERROR),
+//      util.freelog((required?LOG_FATAL:Log.LOG_ERROR),
 //	   "for %s %s couldn't match unit_type \"%s\" (%s)",
 //	   (description?description:prefix), entry, sval, filename);
 //      if (required) {
@@ -396,7 +396,7 @@ public class Ruleset{
 //  } else {
 //    id = find_improvement_by_name(sval);
 //    if (id==B_LAST) {
-//      freelog((required?LOG_FATAL:LOG_ERROR),
+//      util.freelog((required?LOG_FATAL:Log.LOG_ERROR),
 //	   "for %s %s couldn't match impr_type \"%s\" (%s)",
 //	   (description?description:prefix), entry, sval, filename);
 //      if (required) {
@@ -421,7 +421,7 @@ public class Ruleset{
 //  sval = secfile_lookup_str(file, "%s", entry);
 //  gov = find_government_by_name(sval);
 //  if (!gov) {
-//    freelog(LOG_FATAL, "for %s couldn't match government \"%s\" (%s)",
+//    util.freelog(LOG_FATAL, "for %s couldn't match government \"%s\" (%s)",
 //	    entry, sval, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -444,7 +444,7 @@ public class Ruleset{
 //    if (mystrcasecmp(sval, "City_Size") == 0) {
 //      ival = G_CITY_SIZE_FREE;
 //    } else {
-//      freelog(LOG_FATAL, "Bad %s \"%s\" for %s (%s)",
+//      util.freelog(LOG_FATAL, "Bad %s \"%s\" for %s (%s)",
 //	      entry, sval, prefix, filename);
 //      exit(EXIT_FAILURE);
 //    }
@@ -500,7 +500,7 @@ public class Ruleset{
 //  }
 //
 //  /* TRANS: message for an obscure ruleset error. */
-//  freelog(LOG_ERROR, "Unknown terrain %s in entry %s.",
+//  util.freelog(Log.LOG_ERROR, "Unknown terrain %s in entry %s.",
 //	  name, get_tile_type(tthis).terrain_name);
 //  return T_NONE;
 //}
@@ -520,14 +520,14 @@ public class Ruleset{
 //
 //  /* The names: */
 //  sec = secfile_get_secnames_prefix(file, "advance_", &num_techs);
-//  freelog(LOG_VERBOSE, "%d advances (including possibly unused)", num_techs);
+//  util.freelog(LOG_VERBOSE, "%d advances (including possibly unused)", num_techs);
 //  if(num_techs == 0) {
-//    freelog(LOG_FATAL, "No Advances?! (%s)", filename);
+//    util.freelog(LOG_FATAL, "No Advances?! (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if(num_techs + A_FIRST > A_LAST_REAL) {
-//    freelog(LOG_FATAL, "Too many advances (%d, max %d) (%s)",
+//    util.freelog(LOG_FATAL, "Too many advances (%d, max %d) (%s)",
 //	    num_techs, A_LAST_REAL-A_FIRST, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -581,12 +581,12 @@ public class Ruleset{
 //
 //    if ((a.req[0]==A_LAST && a.req[1]!=A_LAST) ||
 //	(a.req[0]!=A_LAST && a.req[1]==A_LAST)) {
-//      freelog(LOG_ERROR, "for tech %s: \"Never\" with non-\"Never\" (%s)",
+//      util.freelog(Log.LOG_ERROR, "for tech %s: \"Never\" with non-\"Never\" (%s)",
 //	   a.name, filename);
 //      a.req[0] = a.req[1] = A_LAST;
 //    }
 //    if (a.req[0]==A_NONE && a.req[1]!=A_NONE) {
-//      freelog(LOG_ERROR, "tech %s: should have \"None\" second (%s)",
+//      util.freelog(Log.LOG_ERROR, "tech %s: should have \"None\" second (%s)",
 //	   a.name, filename);
 //      a.req[0] = a.req[1];
 //      a.req[1] = A_NONE;
@@ -602,7 +602,7 @@ public class Ruleset{
 //      }
 //      ival = tech_flag_from_str(sval);
 //      if (ival==TF_LAST) {
-//        freelog(LOG_ERROR, "for advance_type \"%s\": bad flag name \"%s\" (%s)",
+//        util.freelog(Log.LOG_ERROR, "for advance_type \"%s\": bad flag name \"%s\" (%s)",
 //                a.name, sval, filename);
 //      }
 //      a.flags |= (1<<ival);
@@ -674,12 +674,12 @@ public class Ruleset{
 //      /* We check for recursive tech loops later,
 //       * in build_required_techs_helper. */
 //      if (!tech_exists(a.req[0])) {
-//	freelog(LOG_FATAL, "tech \"%s\": req1 leads to removed tech \"%s\" (%s)",
+//	util.freelog(LOG_FATAL, "tech \"%s\": req1 leads to removed tech \"%s\" (%s)",
 //	     a.name, advances[a.req[0]].name, filename);
 //	exit(EXIT_FAILURE);
 //      } 
 //      if (!tech_exists(a.req[1])) {
-//	freelog(LOG_FATAL, "tech \"%s\": req2 leads to removed tech \"%s\" (%s)",
+//	util.freelog(LOG_FATAL, "tech \"%s\": req2 leads to removed tech \"%s\" (%s)",
 //	     a.name, advances[a.req[1]].name, filename);
 //	exit(EXIT_FAILURE);
 //      }
@@ -706,13 +706,13 @@ public class Ruleset{
 //
 //  /* The names: */
 //  sec = secfile_get_secnames_prefix(file, "unit_", &nval);
-//  freelog(LOG_VERBOSE, "%d unit types (including possibly unused)", nval);
+//  util.freelog(LOG_VERBOSE, "%d unit types (including possibly unused)", nval);
 //  if(nval == 0) {
-//    freelog(LOG_FATAL, "No units?! (%s)", filename);
+//    util.freelog(LOG_FATAL, "No units?! (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(nval > U_LAST) {
-//    freelog(LOG_FATAL, "Too many units (%d, max %d) (%s)",
+//    util.freelog(LOG_FATAL, "Too many units (%d, max %d) (%s)",
 //	    nval, U_LAST, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -750,7 +750,7 @@ public class Ruleset{
 //
 //#define CHECK_VETERAN_LIMIT                                         \
 //if (vet_levels_default > MAX_VET_LEVELS || vet_levels > MAX_VET_LEVELS) { \
-//  freelog(LOG_FATAL, "Too many veteran levels, %d is the maximum!", \
+//  util.freelog(LOG_FATAL, "Too many veteran levels, %d is the maximum!", \
 //          MAX_VET_LEVELS);                                          \
 //  exit(EXIT_FAILURE);                                               \
 //}                                                                   \
@@ -904,7 +904,7 @@ public class Ruleset{
 //    sval = secfile_lookup_str(file, "%s.move_type", sec[i]);
 //    ival = unit_move_type_from_str(sval);
 //    if (ival==0) {
-//      freelog(LOG_FATAL, "for unit_type \"%s\": bad move_type %s (%s)",
+//      util.freelog(LOG_FATAL, "for unit_type \"%s\": bad move_type %s (%s)",
 //	   u.name, sval, filename);
 //      exit(EXIT_FAILURE);
 //    }
@@ -946,7 +946,7 @@ public class Ruleset{
 //    u.hp = secfile_lookup_int(file,"%s.hitpoints", sec[i]);
 //    u.firepower = secfile_lookup_int(file,"%s.firepower", sec[i]);
 //    if (u.firepower <= 0) {
-//      freelog(LOG_FATAL, "for unit_type \"%s\": firepower is %d but "
+//      util.freelog(LOG_FATAL, "for unit_type \"%s\": firepower is %d but "
 //	      "must be at least 1.\nSet the unit's attack strength to 0 "
 //	      "if you want it to not have any attack ability. (%s)",
 //	      u.name, u.firepower, filename);
@@ -985,7 +985,7 @@ public class Ruleset{
 //      }
 //	ival = unit_flag_from_str(sval);
 //      if (ival==F_LAST) {
-//	freelog(LOG_ERROR, "for unit_type \"%s\": bad flag name \"%s\" (%s)",
+//	util.freelog(Log.LOG_ERROR, "for unit_type \"%s\": bad flag name \"%s\" (%s)",
 //	     u.name, sval, filename);
 //      }
 //      BV_SET(u.flags, ival);
@@ -1007,7 +1007,7 @@ public class Ruleset{
 //      }
 //      ival = unit_role_from_str(sval);
 //      if (ival==L_LAST) {
-//	freelog(LOG_ERROR, "for unit_type \"%s\": bad role name \"%s\" (%s)",
+//	util.freelog(Log.LOG_ERROR, "for unit_type \"%s\": bad role name \"%s\" (%s)",
 //	     u.name, sval, filename);
 //      }
 //      BV_SET(u.roles, ival - L_FIRST);
@@ -1024,13 +1024,13 @@ public class Ruleset{
 //    if (unit_type_exists(i)) {
 //      u = &unit_types[i];
 //      if (!tech_exists(u.tech_requirement)) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"unit_type \"%s\" depends on removed tech \"%s\" (%s)",
 //		u.name, advances[u.tech_requirement].name, filename);
 //	u.tech_requirement = A_LAST;
 //      }
 //      if (u.obsoleted_by!=-1 && !unit_type_exists(u.obsoleted_by)) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"unit_type \"%s\" obsoleted by removed unit \"%s\" (%s)",
 //		u.name, unit_types[u.obsoleted_by].name, filename);
 //	u.obsoleted_by = -1;
@@ -1043,52 +1043,52 @@ public class Ruleset{
 //     
 //  /* Check some required flags and roles etc: */
 //  if(num_role_units(F_CITIES)==0) {
-//    freelog(LOG_FATAL, "No flag=cities units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No flag=cities units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(F_SETTLERS)==0) {
-//    freelog(LOG_FATAL, "No flag=settler units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No flag=settler units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_EXPLORER)==0) {
-//    freelog(LOG_FATAL, "No role=explorer units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=explorer units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_FERRYBOAT)==0) {
-//    freelog(LOG_FATAL, "No role=ferryboat units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=ferryboat units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_HUT)==0) {
-//    freelog(LOG_FATAL, "No role=hut units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=hut units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_FIRSTBUILD)==0) {
-//    freelog(LOG_FATAL, "No role=firstbuild units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=firstbuild units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_BARBARIAN)==0) {
-//    freelog(LOG_FATAL, "No role=barbarian units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=barbarian units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_BARBARIAN_LEADER)==0) {
-//    freelog(LOG_FATAL, "No role=barbarian leader units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=barbarian leader units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_BARBARIAN_BUILD)==0) {
-//    freelog(LOG_FATAL, "No role=barbarian build units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=barbarian build units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_BARBARIAN_BOAT)==0) {
-//    freelog(LOG_FATAL, "No role=barbarian ship units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=barbarian ship units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if(num_role_units(L_BARBARIAN_SEA)==0) {
-//    freelog(LOG_FATAL, "No role=sea raider barbarian units? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No role=sea raider barbarian units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  u = &unit_types[get_role_unit(L_BARBARIAN_BOAT,0)];
 //  if(u.move_type != SEA_MOVING) {
-//    freelog(LOG_FATAL, "Barbarian boat (%s) needs to be a sea unit (%s)",
+//    util.freelog(LOG_FATAL, "Barbarian boat (%s) needs to be a sea unit (%s)",
 //            u.name, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1099,7 +1099,7 @@ public class Ruleset{
 //    j = get_role_unit(L_FERRYBOAT,i);
 //    if (!unit_type_flag(j, F_TRIREME)) {
 //      j = get_unit_type(j).tech_requirement;
-//      freelog(LOG_DEBUG, "nav tech is %s", advances[j].name);
+//      util.freelog(LOG_DEBUG, "nav tech is %s", advances[j].name);
 //      game.rtech.nav = j;
 //      break;
 //    }
@@ -1112,7 +1112,7 @@ public class Ruleset{
 //  } else {
 //    j = get_role_unit(L_PARTISAN, 0);
 //    j = game.rtech.u_partisan = get_unit_type(j).tech_requirement;
-//    freelog(LOG_DEBUG, "partisan tech is %s", advances[j].name);
+//    util.freelog(LOG_DEBUG, "partisan tech is %s", advances[j].name);
 //  }
 //
 //  update_simple_ai_types();
@@ -1135,13 +1135,13 @@ public class Ruleset{
 //
 //  /* The names: */
 //  sec = secfile_get_secnames_prefix(file, "building_", &nval);
-//  freelog(LOG_VERBOSE, "%d improvement types (including possibly unused)", nval);
+//  util.freelog(LOG_VERBOSE, "%d improvement types (including possibly unused)", nval);
 //  if (nval == 0) {
-//    freelog(LOG_FATAL, "No improvements?! (%s)", filename);
+//    util.freelog(LOG_FATAL, "No improvements?! (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (nval > B_LAST) {
-//    freelog(LOG_FATAL, "Too many improvements (%d, max %d) (%s)",
+//    util.freelog(LOG_FATAL, "Too many improvements (%d, max %d) (%s)",
 //	    nval, B_LAST, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1193,7 +1193,7 @@ public class Ruleset{
 //      boolean survives;
 //
 //      if ((id = find_improvement_by_name(item)) == B_LAST) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		/* TRANS: Obscure ruleset error */
 //		_("Group %s lists unknown building: \"%s\" (%s)"),
 //	    	name, item, filename);
@@ -1204,7 +1204,7 @@ public class Ruleset{
 //	  				sec[i], j);
 //      if (item) {
 //	if ((range = effect_range_from_str(item)) == EFR_LAST) {
-//	  freelog(LOG_ERROR,
+//	  util.freelog(Log.LOG_ERROR,
 //		  /* TRANS: Obscure ruleset error */
 //		  _("Group %s lists bad range: \"%s\" (%s)"),
 //		  name, item, filename);
@@ -1238,7 +1238,7 @@ public class Ruleset{
 //    for (j = 0; j < count; j++) {
 //      b.terr_gate[k] = get_terrain_by_name(list[j]);
 //      if (b.terr_gate[k] == T_UNKNOWN) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"for %s terr_gate[%d] couldn't match terrain \"%s\" (%s)",
 //		b.name, j, list[j], filename);
 //      } else {
@@ -1254,7 +1254,7 @@ public class Ruleset{
 //    for (j = 0; j < count; j++) {
 //      b.spec_gate[k] = get_special_by_name(list[j]);
 //      if (b.spec_gate[k] == S_NO_SPECIAL) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"for %s spec_gate[%d] couldn't match special \"%s\" (%s)",
 //		b.name, j, list[j], filename);
 //      } else {
@@ -1267,7 +1267,7 @@ public class Ruleset{
 //    item = secfile_lookup_str(file, "%s.equiv_range", sec[i]);
 //    b.equiv_range = impr_range_from_str(item);
 //    if (b.equiv_range == IR_LAST) {
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      "for %s equiv_range couldn't match range \"%s\" (%s)",
 //	      b.name, item, filename);
 //      b.equiv_range = IR_NONE;
@@ -1279,7 +1279,7 @@ public class Ruleset{
 //    for (j = 0; j < count; j++) {
 //      b.equiv_dupl[k] = find_improvement_by_name(list[j]);
 //      if (b.equiv_dupl[k] == B_LAST) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"for %s equiv_dupl[%d] couldn't match improvement \"%s\" (%s)",
 //		b.name, j, list[j], filename);
 //      } else {
@@ -1295,7 +1295,7 @@ public class Ruleset{
 //    for (j = 0; j < count; j++) {
 //      b.equiv_repl[k] = find_improvement_by_name(list[j]);
 //      if (b.equiv_repl[k] == B_LAST) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"for %s equiv_repl[%d] couldn't match improvement \"%s\" (%s)",
 //		b.name, j, list[j], filename);
 //      } else {
@@ -1342,7 +1342,7 @@ public class Ruleset{
 //	int req, equiv;
 //
 //	if ((eff = effect_type_from_str(item)) == EFT_LAST) {
-//	  freelog(LOG_ERROR,
+//	  util.freelog(Log.LOG_ERROR,
 //		  /* TRANS: Obscure ruleset error */
 //		  _("Building %s lists unknown effect type: \"%s\" (%s)"),
 //		  b.name, item, filename);
@@ -1353,7 +1353,7 @@ public class Ruleset{
 //	    				  sec[i], j);
 //	if (item) {
 //	  if ((range = effect_range_from_str(item)) == EFR_LAST) {
-//	    freelog(LOG_ERROR,
+//	    util.freelog(Log.LOG_ERROR,
 //		    /* TRANS: Obscure ruleset error */
 //		    _("Building %s lists bad range: \"%s\" (%s)"),
 //		    b.name, item, filename);
@@ -1374,7 +1374,7 @@ public class Ruleset{
 //	    				  sec[i], j);
 //	if (item[0] != '\0') {
 //	  if ((equiv = find_effect_group_id(item)) == -1) {
-//	    freelog(LOG_ERROR,
+//	    util.freelog(Log.LOG_ERROR,
 //		    /* TRANS: Obscure ruleset error */
 //		    _("Building %s lists bad effect group: \"%s\" (%s)"),
 //		    b.name, item, filename);
@@ -1389,7 +1389,7 @@ public class Ruleset{
 //	    				  sec[i], j);
 //	if (item[0] != '\0') {
 //	  if ((type = effect_req_type_from_str(item)) == REQ_LAST) {
-//	    freelog(LOG_ERROR,
+//	    util.freelog(Log.LOG_ERROR,
 //		    /* TRANS: Obscure ruleset error */
 //		    _("Building %s has unknown req type: \"%s\" (%s)"),
 //		    b.name, item, filename);
@@ -1400,7 +1400,7 @@ public class Ruleset{
 //					    sec[i], j);
 //
 //	  if (!item) {
-//	    freelog(LOG_ERROR,
+//	    util.freelog(Log.LOG_ERROR,
 //		    /* TRANS: Obscure ruleset error */
 //		    "Building %s has missing requirement data (%s)",
 //		    b.name, filename);
@@ -1436,7 +1436,7 @@ public class Ruleset{
 //   */
 //  game.palace_building = get_building_for_effect(EFT_CAPITAL_CITY);
 //  if (game.palace_building == B_LAST) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    /* TRANS: Obscure ruleset error */
 //	    "Cannot find any palace building");
 //    exit(EXIT_FAILURE);
@@ -1444,7 +1444,7 @@ public class Ruleset{
 //
 //  game.land_defend_building = get_building_for_effect(EFT_LAND_DEFEND);
 //  if (game.land_defend_building == B_LAST) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    /* TRANS: Obscure ruleset error */
 //	    "Cannot find any land defend building");
 //    exit(EXIT_FAILURE);
@@ -1455,14 +1455,14 @@ public class Ruleset{
 //    b = &improvement_types[i];
 //    if (improvement_exists(i)) {
 //      if (!tech_exists(b.tech_req)) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"improvement \"%s\": depends on removed tech \"%s\" (%s)",
 //		b.name, advances[b.tech_req].name, filename);
 //	b.tech_req = A_LAST;
 //      }
 //      if (b.obsolete_by != A_LAST
 //	  && (b.obsolete_by == A_NONE || !tech_exists(b.obsolete_by))) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"improvement \"%s\": obsoleted by removed tech \"%s\" (%s)",
 //		b.name, advances[b.obsolete_by].name, filename);
 //	b.obsolete_by = A_LAST;
@@ -1476,7 +1476,7 @@ public class Ruleset{
 //  if (*item != '\0') {
 //    game.default_building = find_improvement_by_name(item);
 //    if (game.default_building == B_LAST) {
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      /* TRANS: Obscure ruleset error */
 //	      _("Bad value \"%s\" for b_special.default (%s)"),
 //	      item, filename);
@@ -1517,7 +1517,7 @@ public class Ruleset{
 //  sec = secfile_get_secnames_prefix(file, "terrain_", &nval);
 //  if (nval == 0) {
 //    /* TRANS: Obscure ruleset error.  "%s" is a filename. */
-//    freelog(LOG_FATAL, "Ruleset doesn't have any terrains (%s)",
+//    util.freelog(LOG_FATAL, "Ruleset doesn't have any terrains (%s)",
 //	    filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1620,7 +1620,7 @@ public class Ruleset{
 //      t.identifier = secfile_lookup_str(file, "%s.identifier", sec[i])[0];
 //      for (j = T_FIRST; j < i; j++) {
 //	if (t.identifier == get_tile_type(j).identifier) {
-//	  freelog(LOG_FATAL,
+//	  util.freelog(LOG_FATAL,
 //		  /* TRANS: message for an obscure ruleset error. */
 //		  "Terrains %s and %s have the same identifier.",
 //		  t.terrain_name, get_tile_type(j).terrain_name);
@@ -1629,7 +1629,7 @@ public class Ruleset{
 //      }
 //      if (t.identifier == UNKNOWN_TERRAIN_IDENTIFIER) {
 //	/* TRANS: message for an obscure ruleset error. */
-//	freelog(LOG_FATAL, _("'%c' cannot be used as a terrain identifier; "
+//	util.freelog(LOG_FATAL, _("'%c' cannot be used as a terrain identifier; "
 //			     "it is reserved."), UNKNOWN_TERRAIN_IDENTIFIER);
 //	exit(EXIT_FAILURE);
 //      }
@@ -1720,7 +1720,7 @@ public class Ruleset{
 //
 //	if (flag == TER_LAST) {
 //	  /* TRANS: message for an obscure ruleset error. */
-//	  freelog(LOG_FATAL, "Terrain %s has unknown flag %s",
+//	  util.freelog(LOG_FATAL, "Terrain %s has unknown flag %s",
 //		  t.terrain_name, sval);
 //	  exit(EXIT_FAILURE);
 //	} else {
@@ -1750,13 +1750,13 @@ public class Ruleset{
 //
 //  sec = secfile_get_secnames_prefix(file, "government_", &nval);
 //  if (nval == 0) {
-//    freelog(LOG_FATAL, "No governments!? (%s)", filename);
+//    util.freelog(LOG_FATAL, "No governments!? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  } else if(nval > G_MAGIC) {
 //    /* upper limit is really about 255 for 8-bit id values, but
 //       use G_MAGIC elsewhere as a sanity check, and should be plenty
 //       big enough --dwp */
-//    freelog(LOG_FATAL, "Too many governments! (%d, max %d; %s)",
+//    util.freelog(LOG_FATAL, "Too many governments! (%d, max %d; %s)",
 //	    nval, G_MAGIC, filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1796,7 +1796,7 @@ public class Ruleset{
 //  game.ai_goal_government
 //    = lookup_government(file, "governments.ai_goal", filename);
 //
-//  freelog(LOG_DEBUG, "govs: def %d, anarchy %d, ai_goal %d",
+//  util.freelog(LOG_DEBUG, "govs: def %d, anarchy %d, ai_goal %d",
 //	  game.default_government, game.government_when_anarchy,
 //	  game.ai_goal_government);
 //  
@@ -1918,7 +1918,7 @@ public class Ruleset{
 //        continue;
 //      }
 //      if (flag == G_LAST_FLAG) {
-//        freelog(LOG_FATAL, "government %s has unknown flag %s", g.name, sval);
+//        util.freelog(LOG_FATAL, "government %s has unknown flag %s", g.name, sval);
 //        exit(EXIT_FAILURE);
 //      } else {
 //        g.flags |= (1<<flag);
@@ -1953,17 +1953,17 @@ public class Ruleset{
 //    ai_gov_tech_hint hint = &ai_gov_tech_hints[j];
 //
 //    if (j >= MAX_NUM_TECH_LIST) {
-//      freelog(LOG_FATAL, "Too many ai tech_hints in %s", filename);
+//      util.freelog(LOG_FATAL, "Too many ai tech_hints in %s", filename);
 //      exit(EXIT_FAILURE);
 //    }
 //    hint.tech = find_tech_by_name(c);
 //    if (hint.tech == A_LAST) {
-//      freelog(LOG_FATAL, "Could not match tech %s for gov ai_tech_hint %d (%s)",
+//      util.freelog(LOG_FATAL, "Could not match tech %s for gov ai_tech_hint %d (%s)",
 //	      c, j, filename);
 //      exit(EXIT_FAILURE);
 //    }
 //    if (!tech_exists(hint.tech)) {
-//      freelog(LOG_FATAL, "For gov ai_tech_hint %d, tech \"%s\" is removed (%s)",
+//      util.freelog(LOG_FATAL, "For gov ai_tech_hint %d, tech \"%s\" is removed (%s)",
 //	      j, c, filename);
 //      exit(EXIT_FAILURE);
 //    }
@@ -2038,7 +2038,7 @@ public class Ruleset{
 //previous nation, or twice in its own leader name table.
 //If not return null, if yes return pointer to name which is repeated.
 //**************************************************************************/
-//static char *check_leader_names(Nation_Type_id nation)
+//static char *check_leader_names(int nation)
 //{
 //  int k;
 //  nation_type pnation = get_nation_by_idx(nation);
@@ -2046,7 +2046,7 @@ public class Ruleset{
 //  for (k = 0; k < pnation.leader_count; k++) {
 //    char *leader = pnation.leaders[k].name;
 //    int i;
-//    Nation_Type_id nation2;
+//    int nation2;
 //
 //    for (i = 0; i < k; i++) {
 //      if (0 == strcmp(leader, pnation.leaders[i].name)) {
@@ -2079,10 +2079,10 @@ public class Ruleset{
 //
 //  sec = secfile_get_secnames_prefix(file, "nation", &game.nation_count);
 //  game.playable_nation_count = game.nation_count - 2;
-//  freelog(LOG_VERBOSE, "There are %d nations defined", game.playable_nation_count);
+//  util.freelog(LOG_VERBOSE, "There are %d nations defined", game.playable_nation_count);
 //
 //  if (game.playable_nation_count < 0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    "There must be at least one nation defined; number is %d",
 //	    game.playable_nation_count);
 //    exit(EXIT_FAILURE);
@@ -2106,8 +2106,8 @@ public class Ruleset{
 //    /* Check if nation name is already defined. */
 //    for(j = 0; j < i; j++) {
 //      if (0 == strcmp(get_nation_name(j), pl.name)
-//	  || 0 == strcmp(get_nation_name_plural(j), pl.name_plural)) {
-//        freelog(LOG_FATAL,
+//	  || 0 == strcmp(Nation.get_nation_name_plural(j), pl.name_plural)) {
+//        util.freelog(LOG_FATAL,
 //		"Nation %s (the %s) defined twice; "
 //		"in section nation%d and section nation%d",
 //		pl.name, pl.name_plural, j, i);
@@ -2173,7 +2173,7 @@ public class Ruleset{
 //       */
 //      char *next = strchr(name + 1, ')');
 //      if (!next) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //	        "Badly formed city name %s in city name "
 //	        "ruleset \"%s%s\": unmatched parenthesis.",
 //	        cities[j], secfile_str1, secfile_str2);
@@ -2225,7 +2225,7 @@ public class Ruleset{
 //	      }
 //	    }
 //	    if (!handled) {
-//	      freelog(LOG_ERROR, "Unreadable terrain description %s "
+//	      util.freelog(Log.LOG_ERROR, "Unreadable terrain description %s "
 //	              "in city name ruleset \"%s%s\" - skipping it.",
 //	    	      name, secfile_str1, secfile_str2);
 //	      assert(false);
@@ -2240,7 +2240,7 @@ public class Ruleset{
 //    if (check_name(city_names[j].name)) {
 //      /* The ruleset contains a name that is too long.  This shouldn't
 //	 happen - if it does, the author should get immediate feedback */
-//      freelog(LOG_ERROR, "City name %s in ruleset for %s%s is too long "
+//      util.freelog(Log.LOG_ERROR, "City name %s in ruleset for %s%s is too long "
 //	      "- shortening it.",
 //              city_names[j].name, secfile_str1, secfile_str2);
 //      assert(false);
@@ -2277,11 +2277,11 @@ public class Ruleset{
 //
 //    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader", sec[i]);
 //    if (dim > MAX_NUM_LEADERS) {
-//      freelog(LOG_ERROR, "Nation %s: too many leaders; only using %d of %d",
+//      util.freelog(Log.LOG_ERROR, "Nation %s: too many leaders; only using %d of %d",
 //	      pl.name, MAX_NUM_LEADERS, dim);
 //      dim = MAX_NUM_LEADERS;
 //    } else if (dim < 1) {
-//      freelog(LOG_FATAL,
+//      util.freelog(LOG_FATAL,
 //	      "Nation %s: number of leaders is %d; at least one is required.",
 //	      pl.name, dim);
 //      exit(EXIT_FAILURE);
@@ -2298,14 +2298,14 @@ public class Ruleset{
 //
 //    /* check if leader name is not already defined */
 //    if( (bad_leader=check_leader_names(i)) ) {
-//        freelog(LOG_FATAL, "Nation %s: leader %s defined more than once",
+//        util.freelog(LOG_FATAL, "Nation %s: leader %s defined more than once",
 //		pl.name, bad_leader);
 //        exit(EXIT_FAILURE);
 //    }
 //    /* read leaders'sexes */
 //    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader_sex", sec[i]);
 //    if (dim != pl.leader_count) {
-//      freelog(LOG_FATAL,
+//      util.freelog(LOG_FATAL,
 //	      "Nation %s: the leader sex count (%d) "
 //	      "is not equal to the number of leaders (%d)",
 //              pl.name, dim, pl.leader_count);
@@ -2317,7 +2317,7 @@ public class Ruleset{
 //      } else if (0 == mystrcasecmp(leaders[j], "Female")) {
 //        pl.leaders[j].is_male = false;
 //      } else {
-//        freelog(LOG_ERROR,
+//        util.freelog(Log.LOG_ERROR,
 //		"Nation %s, leader %s: sex must be either Male or Female; "
 //		"assuming Male",
 //		pl.name, pl.leaders[j].name);
@@ -2354,9 +2354,9 @@ public class Ruleset{
 //	/* Truncation is handled by set_ruler_title(). */
 //	set_ruler_title(gov, i, male_name, female_name);
 //      } else {
-//	/* LOG_VERBOSE rather than LOG_ERROR so that can use single nation
+//	/* LOG_VERBOSE rather than Log.LOG_ERROR so that can use single nation
 //	   ruleset file with variety of government ruleset files: */
-//        freelog(LOG_VERBOSE,
+//        util.freelog(LOG_VERBOSE,
 //		"Nation %s: government %s not found", pl.name, g);
 //      }
 //    }
@@ -2367,7 +2367,7 @@ public class Ruleset{
 //	       secfile_lookup_str_default(file, "-", "%s.city_style", sec[i]));
 //    pl.city_style = get_style_by_name(temp_name);
 //    if (pl.city_style == -1) {
-//      freelog(Log.LOG_NORMAL,
+//      util.freelog(Log.LOG_NORMAL,
 //	      "Nation %s: city style %s is unknown, using default.", 
 //	      pl.name_plural, temp_name);
 //      pl.city_style = 0;
@@ -2375,13 +2375,13 @@ public class Ruleset{
 //
 //    while (city_styles[pl.city_style].techreq != A_NONE) {
 //      if (pl.city_style == 0) {
-//	freelog(LOG_FATAL,
+//	util.freelog(LOG_FATAL,
 //	       "Nation %s: the default city style is not available "
 //	       "from the beginning", pl.name);
 //	/* Note that we can't use temp_name here. */
 //	exit(EXIT_FAILURE);
 //      }
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      "Nation %s: city style %s is not available from beginning; "
 //	      "using default.", pl.name, temp_name);
 //      pl.city_style = 0;
@@ -2391,7 +2391,7 @@ public class Ruleset{
 //
 //    civilwar_nations = secfile_lookup_str_vec(file, &dim,
 //					      "%s.civilwar_nations", sec[i]);
-//    pl.civilwar_nations = fc_malloc(sizeof(Nation_Type_id) * (dim + 1));
+//    pl.civilwar_nations = fc_malloc(sizeof(int) * (dim + 1));
 //
 //    for (j = 0, k = 0; k < dim; j++, k++) {
 //      /* HACK: At this time, all the names are untranslated and the name_orig
@@ -2405,7 +2405,7 @@ public class Ruleset{
 //	 * But it can happen normally.  The civ1 compatability ruleset only
 //	 * uses the nations that were in civ1, so not all of the links will
 //	 * exist. */
-//	freelog(LOG_VERBOSE,
+//	util.freelog(LOG_VERBOSE,
 //		"Civil war nation %s for nation %s not defined.",
 //		civilwar_nations[k], pl.name);
 //      }
@@ -2427,31 +2427,31 @@ public class Ruleset{
 //
 //    techs = secfile_lookup_str_vec(file, &dim, "%s.tech_goals", sec[i]);
 //    if( dim > MAX_NUM_TECH_GOALS ) {
-//      freelog(LOG_VERBOSE,
+//      util.freelog(LOG_VERBOSE,
 //	      "Only %d techs can be used from %d defined for nation %s",
 //	      MAX_NUM_TECH_GOALS, dim, pl.name_plural);
 //      dim = MAX_NUM_TECH_GOALS;
 //    }
-//    /* Below LOG_VERBOSE rather than LOG_ERROR so that can use single
+//    /* Below LOG_VERBOSE rather than Log.LOG_ERROR so that can use single
 //       nation ruleset file with variety of tech ruleset files: */
 //    for( j=0; j<dim; j++) {
 //      val = find_tech_by_name(techs[j]);
 //      if(val == A_LAST) {
-//	freelog(LOG_VERBOSE, "Could not match tech goal \"%s\" for the %s",
+//	util.freelog(LOG_VERBOSE, "Could not match tech goal \"%s\" for the %s",
 //		techs[j], pl.name_plural);
 //      } else if (!tech_exists(val)) {
-//	freelog(LOG_VERBOSE, "Goal tech \"%s\" for the %s doesn't exist",
+//	util.freelog(LOG_VERBOSE, "Goal tech \"%s\" for the %s doesn't exist",
 //		techs[j], pl.name_plural);
 //	val = A_LAST;
 //      }
 //      if(val != A_LAST && val != A_NONE) {
-//	freelog(LOG_DEBUG, "%s tech goal (%d) %3d %s", pl.name, j, val, techs[j]);
+//	util.freelog(LOG_DEBUG, "%s tech goal (%d) %3d %s", pl.name, j, val, techs[j]);
 //	pl.goals.tech[j] = val;
 //      }
 //    }
-//    freelog(LOG_DEBUG, "%s %d tech goals", pl.name, j);
+//    util.freelog(LOG_DEBUG, "%s %d tech goals", pl.name, j);
 //    if(j==0) {
-//      freelog(LOG_VERBOSE, "No valid goal techs for %s", pl.name);
+//      util.freelog(LOG_VERBOSE, "No valid goal techs for %s", pl.name);
 //    }
 //    while( j < MAX_NUM_TECH_GOALS )
 //      pl.goals.tech[j++] = A_UNSET;
@@ -2461,27 +2461,27 @@ public class Ruleset{
 //
 //    sz_strlcpy(temp_name, secfile_lookup_str(file, "%s.wonder", sec[i]));
 //    val = find_improvement_by_name(temp_name);
-//    /* Below LOG_VERBOSE rather than LOG_ERROR so that can use single
+//    /* Below LOG_VERBOSE rather than Log.LOG_ERROR so that can use single
 //       nation ruleset file with variety of building ruleset files: */
 //    /* for any problems, leave as B_LAST */
 //    if(val == B_LAST) {
-//      freelog(LOG_VERBOSE, "Didn't match goal wonder \"%s\" for %s", temp_name, pl.name);
+//      util.freelog(LOG_VERBOSE, "Didn't match goal wonder \"%s\" for %s", temp_name, pl.name);
 //    } else if(!improvement_exists(val)) {
-//      freelog(LOG_VERBOSE, "Goal wonder \"%s\" for %s doesn't exist", temp_name, pl.name);
+//      util.freelog(LOG_VERBOSE, "Goal wonder \"%s\" for %s doesn't exist", temp_name, pl.name);
 //      val = B_LAST;
 //    } else if(!is_wonder(val)) {
-//      freelog(LOG_VERBOSE, "Goal wonder \"%s\" for %s not a wonder", temp_name, pl.name);
+//      util.freelog(LOG_VERBOSE, "Goal wonder \"%s\" for %s not a wonder", temp_name, pl.name);
 //      val = B_LAST;
 //    }
 //    pl.goals.wonder = val;
-//    freelog(LOG_DEBUG, "%s wonder goal %d %s", pl.name, val, temp_name);
+//    util.freelog(LOG_DEBUG, "%s wonder goal %d %s", pl.name, val, temp_name);
 //
 //    sz_strlcpy(temp_name, secfile_lookup_str(file, "%s.government", sec[i]));
 //    gov = find_government_by_name(temp_name);
 //    if(!gov) {
-//      /* LOG_VERBOSE rather than LOG_ERROR so that can use single nation
+//      /* LOG_VERBOSE rather than Log.LOG_ERROR so that can use single nation
 //	 ruleset file with variety of government ruleset files: */
-//      freelog(LOG_VERBOSE, "Didn't match goal government name \"%s\" for %s",
+//      util.freelog(LOG_VERBOSE, "Didn't match goal government name \"%s\" for %s",
 //	      temp_name, pl.name);
 //      val = game.government_when_anarchy;  /* flag value (no goal) (?) */
 //    } else {
@@ -2510,7 +2510,7 @@ public class Ruleset{
 //
 //  /* Calculate parent nations.  O(n^2) algorithm. */
 //  for (i = 0; i < game.nation_count; i++) {
-//    Nation_Type_id parents[game.nation_count];
+//    int parents[game.nation_count];
 //    int count = 0;
 //
 //    pl = get_nation_by_idx(i);
@@ -2574,7 +2574,7 @@ public class Ruleset{
 //  /* Specialist options */
 //  specialist_names = secfile_lookup_str_vec(file, &nval, "specialist.types");
 //  if (nval != SP_COUNT) {
-//    freelog(LOG_FATAL, "There must be exactly %d types of specialist.",
+//    util.freelog(LOG_FATAL, "There must be exactly %d types of specialist.",
 //	    SP_COUNT);
 //    exit(EXIT_FAILURE);
 //  }
@@ -2601,11 +2601,11 @@ public class Ruleset{
 //    secfile_lookup_int_default(file, 0, "specialist.forced_gold");
 //  if (game.rgame.forced_science + game.rgame.forced_luxury
 //      + game.rgame.forced_gold != 100) {
-//    freelog(LOG_FATAL, "Forced taxes do not add up in ruleset!");
+//    util.freelog(LOG_FATAL, "Forced taxes do not add up in ruleset!");
 //    exit(EXIT_FAILURE);
 //  }
 //  if (game.rgame.specialists[SP_ELVIS].min_size > 0) {
-//    freelog(LOG_FATAL, "Elvises must be available without a "
+//    util.freelog(LOG_FATAL, "Elvises must be available without a "
 //	    "city size restriction!");
 //    exit(EXIT_FAILURE);
 //  }
@@ -2640,7 +2640,7 @@ public class Ruleset{
 //    } else {
 //      city_styles[i].replaced_by = get_style_by_name(replacement);
 //      if(city_styles[i].replaced_by == -1) {
-//        freelog(LOG_FATAL, "Style %s replacement %s not found",
+//        util.freelog(LOG_FATAL, "Style %s replacement %s not found",
 //                city_styles[i].name, replacement);
 //        exit(EXIT_FAILURE);
 //      }
@@ -2680,7 +2680,7 @@ public class Ruleset{
 //    game.rgame.min_dist_bw_cities =
 //	secfile_lookup_int(&file, "civstyle.min_dist_bw_cities");
 //    if (game.rgame.min_dist_bw_cities < 1) {
-//      freelog(LOG_ERROR, "Bad value %i for min_dist_bw_cities. Using 2.",
+//      util.freelog(Log.LOG_ERROR, "Bad value %i for min_dist_bw_cities. Using 2.",
 //	      game.rgame.min_dist_bw_cities);
 //      game.rgame.min_dist_bw_cities = 2;
 //    }
@@ -2697,7 +2697,7 @@ public class Ruleset{
 //  } else if (mystrcasecmp(sval, "Frighten") == 0) {
 //    game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
 //  } else {
-//    freelog(LOG_ERROR, "Bad value %s for hut_overflight. Using "
+//    util.freelog(Log.LOG_ERROR, "Bad value %s for hut_overflight. Using "
 //            "\"Frighten\".", sval);
 //    game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
 //  }
@@ -2711,7 +2711,7 @@ public class Ruleset{
 //  } else if (mystrcasecmp(sval, "Fallout") == 0) {
 //    game.rgame.nuke_contamination = CONTAMINATION_FALLOUT;
 //  } else {
-//    freelog(LOG_ERROR, "Bad value %s for nuke_contamination. Using "
+//    util.freelog(Log.LOG_ERROR, "Bad value %s for nuke_contamination. Using "
 //            "\"Pollution\".", sval);
 //    game.rgame.nuke_contamination = CONTAMINATION_POLLUTION;
 //  }
@@ -2719,12 +2719,12 @@ public class Ruleset{
 //  food_ini = secfile_lookup_int_vec(&file, &game.rgame.granary_num_inis, 
 //				    "civstyle.granary_food_ini");
 //  if (game.rgame.granary_num_inis > MAX_GRANARY_INIS) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    "Too many granary_food_ini entries; %d is the maximum!",
 //	    MAX_GRANARY_INIS);
 //    exit(EXIT_FAILURE);
 //  } else if (game.rgame.granary_num_inis == 0) {
-//    freelog(LOG_ERROR, "No values for granary_food_ini. Using 1.");
+//    util.freelog(Log.LOG_ERROR, "No values for granary_food_ini. Using 1.");
 //    game.rgame.granary_num_inis = 1;
 //    game.rgame.granary_food_ini[0] = 1;
 //  } else {
@@ -2738,7 +2738,7 @@ public class Ruleset{
 //	} else {
 //	  food_ini[i] = food_ini[i - 1];
 //	}
-//	freelog(LOG_ERROR, "Bad value for granary_food_ini[%i]. Using %i.",
+//	util.freelog(Log.LOG_ERROR, "Bad value for granary_food_ini[%i]. Using %i.",
 //		i, food_ini[i]);
 //      }
 //      game.rgame.granary_food_ini[i] = food_ini[i];
@@ -2749,7 +2749,7 @@ public class Ruleset{
 //  game.rgame.granary_food_inc =
 //    secfile_lookup_int(&file, "civstyle.granary_food_inc");
 //  if (game.rgame.granary_food_inc < 0) {
-//    freelog(LOG_ERROR, "Bad value %i for granary_food_inc. Using 100.",
+//    util.freelog(Log.LOG_ERROR, "Bad value %i for granary_food_inc. Using 100.",
 //	    game.rgame.granary_food_inc);
 //    game.rgame.granary_food_inc = 100;
 //  }
@@ -2757,7 +2757,7 @@ public class Ruleset{
 //  game.rgame.tech_cost_style =
 //      secfile_lookup_int(&file, "civstyle.tech_cost_style");
 //  if (game.rgame.tech_cost_style < 0 || game.rgame.tech_cost_style > 2) {
-//    freelog(LOG_ERROR, "Bad value %i for tech_cost_style. Using 0.",
+//    util.freelog(Log.LOG_ERROR, "Bad value %i for tech_cost_style. Using 0.",
 //	    game.rgame.tech_cost_style);
 //    game.rgame.tech_cost_style = 0;
 //  }
@@ -2767,15 +2767,15 @@ public class Ruleset{
 //  game.rgame.tech_leakage =
 //      secfile_lookup_int(&file, "civstyle.tech_leakage");
 //  if (game.rgame.tech_leakage < 0 || game.rgame.tech_leakage > 3) {
-//    freelog(LOG_ERROR, "Bad value %i for tech_leakage. Using 0.",
+//    util.freelog(Log.LOG_ERROR, "Bad value %i for tech_leakage. Using 0.",
 //	    game.rgame.tech_leakage);
 //    game.rgame.tech_leakage = 0;
 //  }
 //
 //  if (game.rgame.tech_cost_style == 0 && game.rgame.tech_leakage != 0) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Only tech_leakage 0 supported with tech_cost_style 0.");
-//    freelog(LOG_ERROR, "Switching to tech_leakage 0.");
+//    util.freelog(Log.LOG_ERROR, "Switching to tech_leakage 0.");
 //    game.rgame.tech_leakage = 0;
 //  }
 //    
@@ -3227,7 +3227,7 @@ public class Ruleset{
 //  struct section_file techfile, unitfile, buildfile, govfile, terrfile;
 //  struct section_file cityfile, nationfile;
 //
-//  freelog(Log.LOG_NORMAL, "Loading rulesets");
+//  util.freelog(Log.LOG_NORMAL, "Loading rulesets");
 //
 //  openload_ruleset_file(&techfile, "techs");
 //  load_tech_names(&techfile);

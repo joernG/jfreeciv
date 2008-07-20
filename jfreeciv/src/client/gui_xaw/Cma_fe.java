@@ -450,7 +450,7 @@ public class Cma_fe{
 //  char buf[256]; 
 //
 //  if (ret.list_index != XAW_LIST_NONE && cmafec_preset_num()) {
-//    my_snprintf(buf, sizeof(buf), 
+//    buf = util.my_snprintf( 
 //                "Do you really want to remove %s?",
 //                cmafec_preset_get_descr(ret.list_index));
 //
@@ -697,19 +697,19 @@ public class Cma_fe{
 //  int i;
 //
 //  for (i = 0; i < NUM_STATS; i++) {
-//    my_snprintf(buf, sizeof(buf), "%-9s%3d",
+//    buf = util.my_snprintf( "%-9s%3d",
 //                cm_get_stat_name(i),
 //                minimal_surplus[i]);
 //    xaw_set_label(stat_surplus_label[i], buf);
 //  }
 //
 //  for (i = 0; i < NUM_STATS; i++) { 
-//    my_snprintf(buf, sizeof(buf), "%-9s%3d",
+//    buf = util.my_snprintf( "%-9s%3d",
 //                cm_get_stat_name(i),
 //                factors[i]);
 //    xaw_set_label(stat_factor_label[i], buf);
 //  }
-//  my_snprintf(buf, sizeof(buf), "%-9s%3d",
+//  buf = util.my_snprintf( "%-9s%3d",
 //              "Celebrate",
 //              factors[NUM_STATS]);
 //  xaw_set_label(stat_factor_label[NUM_STATS], buf);

@@ -231,7 +231,7 @@ public class Inputfile{
 //  if (!fp) {
 //    return null;
 //  }
-//  freelog(LOG_DEBUG, "inputfile: opened \"%s\" ok", filename);
+//  util.freelog(LOG_DEBUG, "inputfile: opened \"%s\" ok", filename);
 //  inf = inf_from_stream(fp, datafn);
 //  inf.filename = mystrdup(filename);
 //  return inf;
@@ -253,7 +253,7 @@ public class Inputfile{
 //  inf.fp = stream;
 //  inf.datafn = datafn;
 //
-//  freelog(LOG_DEBUG, "inputfile: opened \"%s\" ok", inf_filename(inf));
+//  util.freelog(LOG_DEBUG, "inputfile: opened \"%s\" ok", inf_filename(inf));
 //  return inf;
 //}
 //
@@ -268,16 +268,16 @@ public class Inputfile{
 //{
 //  assert_sanity(inf);
 //
-//  freelog(LOG_DEBUG, "inputfile: sub-closing \"%s\"", inf_filename(inf));
+//  util.freelog(LOG_DEBUG, "inputfile: sub-closing \"%s\"", inf_filename(inf));
 //
 //  if (fz_ferror(inf.fp) != 0) {
-//    freelog(LOG_ERROR, "Error before closing %s: %s", inf_filename(inf),
+//    util.freelog(Log.LOG_ERROR, "Error before closing %s: %s", inf_filename(inf),
 //	    fz_strerror(inf.fp));
 //    fz_fclose(inf.fp);
 //    inf.fp = null;
 //  }
 //  else if (fz_fclose(inf.fp) != 0) {
-//    freelog(LOG_ERROR, "Error closing %s", inf_filename(inf));
+//    util.freelog(Log.LOG_ERROR, "Error closing %s", inf_filename(inf));
 //  }
 //  if (inf.filename) {
 //    free(inf.filename);
@@ -292,7 +292,7 @@ public class Inputfile{
 //  init_zeros(inf);
 //  inf.magic = ~INF_MAGIC;
 //
-//  freelog(LOG_DEBUG, "inputfile: sub-closed ok");
+//  util.freelog(LOG_DEBUG, "inputfile: sub-closed ok");
 //}
 //
 
@@ -305,13 +305,13 @@ public class Inputfile{
 //{
 //  assert_sanity(inf);
 //
-//  freelog(LOG_DEBUG, "inputfile: closing \"%s\"", inf_filename(inf));
+//  util.freelog(LOG_DEBUG, "inputfile: closing \"%s\"", inf_filename(inf));
 //  if (inf.included_from) {
 //    inf_close(inf.included_from);
 //  }
 //  inf_close_partial(inf);
 //  free(inf);
-//  freelog(LOG_DEBUG, "inputfile: closed ok");
+//  util.freelog(LOG_DEBUG, "inputfile: closed ok");
 //}
 //
 
@@ -377,7 +377,7 @@ public class Inputfile{
 //  while (*c != '\0' && my_isspace(*c)) c++;
 //
 //  if (*c != '\"') {
-//    inf_log(inf, LOG_ERROR, 
+//    inf_log(inf, Log.LOG_ERROR, 
 //            "Did not find opening doublequote for '*include' line");
 //    return false;
 //  }
@@ -387,7 +387,7 @@ public class Inputfile{
 //  bare_name = c;
 //  while (*c != '\0' && *c != '\"') c++;
 //  if (*c != '\"') {
-//    inf_log(inf, LOG_ERROR, 
+//    inf_log(inf, Log.LOG_ERROR, 
 //            "Did not find closing doublequote for '*include' line");
 //    return false;
 //  }
@@ -397,14 +397,14 @@ public class Inputfile{
 //  /* check rest of line is well-formed: */
 //  while (*c != '\0' && my_isspace(*c) && !is_comment(*c)) c++;
 //  if (!(*c=='\0' || is_comment(*c))) {
-//    inf_log(inf, LOG_ERROR, "Junk after filename for '*include' line");
+//    inf_log(inf, Log.LOG_ERROR, "Junk after filename for '*include' line");
 //    return false;
 //  }
 //  inf.cur_line_pos = inf.cur_line.n-1;
 //
 //  full_name = inf.datafn(bare_name);
 //  if (!full_name) {
-//    freelog(LOG_ERROR, "Could not find included file \"%s\"", bare_name);
+//    util.freelog(Log.LOG_ERROR, "Could not find included file \"%s\"", bare_name);
 //    return false;
 //  }
 //
@@ -414,7 +414,7 @@ public class Inputfile{
 //    inputfile inc = inf;
 //    do {
 //      if (inc.filename && full_name.equals(inc.filename)) {
-//        freelog(LOG_ERROR, 
+//        util.freelog(Log.LOG_ERROR, 
 //                "Recursion trap on '*include' for \"%s\"", full_name);
 //        return false;
 //      }
@@ -482,7 +482,7 @@ public class Inputfile{
 //      if (inf.in_string) {
 //	/* Note: Don't allow multi-line strings to cross "include"
 //	   boundaries */
-//	inf_log(inf, LOG_ERROR, "Multi-line string went to end-of-file");
+//	inf_log(inf, Log.LOG_ERROR, "Multi-line string went to end-of-file");
 //        return false;
 //      }
 //      if (inf.included_from) {
@@ -506,7 +506,7 @@ public class Inputfile{
 //      break;
 //    }
 //    if (line.n != line.n_alloc) {
-//      freelog(LOG_VERBOSE, "inputfile: expect missing newline at EOF");
+//      util.freelog(LOG_VERBOSE, "inputfile: expect missing newline at EOF");
 //    }
 //    astr_minsize(line, line.n*2);
 //  }
@@ -547,24 +547,24 @@ public class Inputfile{
 //  assert_sanity(inf);
 //
 //  if (message) {
-//    freelog(loglevel, "%s", message);
+//    util.freelog(loglevel, "%s", message);
 //  }
-//  freelog(loglevel, "  file \"%s\", line %d, pos %d%s",
+//  util.freelog(loglevel, "  file \"%s\", line %d, pos %d%s",
 //	  inf_filename(inf), inf.line_num, inf.cur_line_pos,
 //	  (inf.at_eof ? ", EOF" : ""));
 //  if (inf.cur_line.str && inf.cur_line.n > 0) {
-//    freelog(loglevel, "  looking at: '%s'",
+//    util.freelog(loglevel, "  looking at: '%s'",
 //	    inf.cur_line.str+inf.cur_line_pos);
 //  }
 //  if (inf.copy_line.str && inf.copy_line.n > 0) {
-//    freelog(loglevel, "  original line: '%s'", inf.copy_line.str);
+//    util.freelog(loglevel, "  original line: '%s'", inf.copy_line.str);
 //  }
 //  if (inf.in_string) {
-//    freelog(loglevel, "  processing string starting at line %d",
+//    util.freelog(loglevel, "  processing string starting at line %d",
 //	    inf.string_start_line);
 //  }
 //  while ((inf=inf.included_from)) {    /* local pointer assignment */
-//    freelog(loglevel, "  included from file \"%s\", line %d",
+//    util.freelog(loglevel, "  included from file \"%s\", line %d",
 //	    inf_filename(inf), inf.line_num);
 //  }
 //}
@@ -595,7 +595,7 @@ public class Inputfile{
 //  func = tok_tab[type].func;
 //  
 //  if (!func) {
-//    freelog(Log.LOG_NORMAL, "token type %d (%s) not supported yet", type, name);
+//    util.freelog(Log.LOG_NORMAL, "token type %d (%s) not supported yet", type, name);
 //    c = null;
 //  } else {
 //    if (!have_line(inf))
@@ -608,10 +608,10 @@ public class Inputfile{
 //  }
 //  if (c) {
 //    if (INF_DEBUG_FOUND) {
-//      freelog(LOG_DEBUG, "inputfile: found %s '%s'", name, inf.token.str);
+//      util.freelog(LOG_DEBUG, "inputfile: found %s '%s'", name, inf.token.str);
 //    }
 //  } else if (required) {
-//    freelog(LOG_FATAL, "Did not find token %s in %s line %d", 
+//    util.freelog(LOG_FATAL, "Did not find token %s in %s line %d", 
 //            name, inf.filename, inf.line_num);
 //    exit(EXIT_FAILURE);
 //  }
@@ -877,7 +877,7 @@ public class Inputfile{
 //    
 //    if (!read_a_line(inf)) {
 //      /* shouldn't happen */
-//      inf_log(inf, LOG_ERROR, 
+//      inf_log(inf, Log.LOG_ERROR, 
 //              "Bad return for multi-line string from read_a_line");
 //      return null;
 //    }

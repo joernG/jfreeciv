@@ -203,7 +203,7 @@ public class Connectdlg{
 //  ihost=XtVaCreateManagedWidget("chosti", asciiTextWidgetClass, form, 
 //			  XtNstring, server_host, null);
 //
-//  my_snprintf(buf, sizeof(buf), "%d", server_port);
+//  buf = util.my_snprintf( "%d", server_port);
 //  
 //  I_L(XtVaCreateManagedWidget("cportl", labelWidgetClass, form, null));
 //  iport=XtVaCreateManagedWidget("cporti", asciiTextWidgetClass, form, 
@@ -516,7 +516,7 @@ public class Connectdlg{
 //
 //  server_list_iterate(*server_list,pserver) {
 //    if (pserver == null) continue;
-//    my_snprintf(line, sizeof(line), "%-35s %-5s %-11s %-11s %2s   %s",
+//    line = util.my_snprintf( "%-35s %-5s %-11s %-11s %2s   %s",
 //		pserver.host, pserver.port, pserver.version,
 //		_(pserver.state), pserver.nplayers, pserver.message);
 //    if (*list) free(*list);
@@ -545,7 +545,7 @@ public class Connectdlg{
 //  count++;
 //
 //  if (count >= MAX_AUTOCONNECT_ATTEMPTS) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Failed to contact server \"%s\" at port "
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, user_name, count);
@@ -565,7 +565,7 @@ public class Connectdlg{
 //
 //    /* All other errors are fatal */
 //  default:
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, errbuf);
@@ -582,7 +582,7 @@ public class Connectdlg{
 //  char buf[512];
 //  int outcome;
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      _("Auto-connecting to server \"%s\" at port %d "
 //		"as \"%s\" every %d.%d second(s) for %d times"),
 //	      server_host, server_port, user_name,
@@ -591,7 +591,7 @@ public class Connectdlg{
 //  append_output_window(buf);
 //  outcome = get_server_address(server_host, server_port, buf, sizeof(buf));
 //  if (outcome < 0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);

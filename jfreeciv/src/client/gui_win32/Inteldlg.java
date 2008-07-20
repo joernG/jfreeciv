@@ -93,46 +93,46 @@ public class Inteldlg{
 //					    null);
 //  vbox=fcwin_vbox_new(intel_dialog,false);
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //              "Intelligence Information for the %s Empire", 
 //              get_nation_name(p.nation));
 //  fcwin_box_add_static(vbox,buf,0,SS_LEFT,false,false,5);
 //  hbox=fcwin_hbox_new(intel_dialog,false);
 //  
-//  my_snprintf(buf, sizeof(buf), "Ruler: %s %s", 
+//  buf = util.my_snprintf( "Ruler: %s %s", 
 //              get_ruler_title(p.government, p.is_male, p.nation), p.name);
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //
-//  my_snprintf(buf, sizeof(buf), "Government: %s",  
+//  buf = util.my_snprintf( "Government: %s",  
 //	      get_government_name(p.government));
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //  fcwin_box_add_box(vbox,hbox,false,false,5);
 //  
 //  hbox=fcwin_hbox_new(intel_dialog,false);
 //  
-//  my_snprintf(buf, sizeof(buf), "Gold: %d", p.economic.gold);
+//  buf = util.my_snprintf( "Gold: %d", p.economic.gold);
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //  
-//  my_snprintf(buf, sizeof(buf), "Tax: %d%%", p.economic.tax);
+//  buf = util.my_snprintf( "Tax: %d%%", p.economic.tax);
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //  
-//  my_snprintf(buf, sizeof(buf), "Science: %d%%", p.economic.science);
+//  buf = util.my_snprintf( "Science: %d%%", p.economic.science);
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //  
-//  my_snprintf(buf, sizeof(buf), "Luxury: %d%%", p.economic.luxury);
+//  buf = util.my_snprintf( "Luxury: %d%%", p.economic.luxury);
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //  
 //  fcwin_box_add_box(vbox,hbox,false,false,5);
 //  
 //  hbox=fcwin_hbox_new(intel_dialog,false);
 //   
-//  my_snprintf(buf, sizeof(buf), "Researching: %s(%d/%d)",
+//  buf = util.my_snprintf( "Researching: %s(%d/%d)",
 //	      get_tech_name(p, p.research.researching),
 //	      p.research.bulbs_researched, total_bulbs_required(p));
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //  
-//  pcity = find_palace(p);
-//  my_snprintf(buf, sizeof(buf), "Capital: %s",
+//  pcity = p.find_palace();
+//  buf = util.my_snprintf( "Capital: %s",
 //              (!pcity)?"(Unknown)":pcity.name);
 //  fcwin_box_add_static(hbox,buf,0,SS_CENTER,true,true,10);
 //  

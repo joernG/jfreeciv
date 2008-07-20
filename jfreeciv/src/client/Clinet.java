@@ -128,7 +128,7 @@ public class Clinet{
 //  /* If we lost connection to the internal server - kill him */
 //  client_kill_server(true);
 //  append_output_window("Lost connection to server!");
-//  freelog(Log.LOG_NORMAL, "lost connection to server");
+//  util.freelog(Log.LOG_NORMAL, "lost connection to server");
 //}
 //
 ///**************************************************************************
@@ -309,11 +309,11 @@ public class Clinet{
 //      if (errno == EINTR) {
 //	/* EINTR can happen sometimes, especially when compiling with -pg.
 //	 * Generally we just want to run select again. */
-//	freelog(LOG_DEBUG, "select() returned EINTR");
+//	util.freelog(LOG_DEBUG, "select() returned EINTR");
 //	continue;
 //      }
 //
-//      freelog(Log.LOG_NORMAL, "error in select() return=%d errno=%d (%s)",
+//      util.freelog(Log.LOG_NORMAL, "error in select() return=%d errno=%d (%s)",
 //	      n, errno, mystrerror());
 //      return -1;
 //    }
@@ -376,7 +376,7 @@ public class Clinet{
 //  assert(expected_request_id);
 //  assert(fd == aconnection.sock);
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "input_from_server_till_request_got_processed("
 //	  "expected_request_id=%d)", expected_request_id);
 //
@@ -398,12 +398,12 @@ public class Clinet{
 //	free(packet);
 //
 //	if (type == PACKET_PROCESSING_FINISHED) {
-//	  freelog(LOG_DEBUG, "ifstrgp: expect=%d, seen=%d",
+//	  util.freelog(LOG_DEBUG, "ifstrgp: expect=%d, seen=%d",
 //		  expected_request_id,
 //		  aconnection.client.last_processed_request_id_seen);
 //	  if (aconnection.client.last_processed_request_id_seen >=
 //	      expected_request_id) {
-//	    freelog(LOG_DEBUG, "ifstrgp: got it; returning");
+//	    util.freelog(LOG_DEBUG, "ifstrgp: got it; returning");
 //	    goto out;
 //	  }
 //	}
@@ -480,7 +480,7 @@ public class Clinet{
 //	else
 //	  ptype = sysinfo.wProcessorLevel;
 //	
-//	my_snprintf(cpuname, sizeof(cpuname), "i%d86", ptype);
+//	cpuname = util.my_snprintf( "i%d86", ptype);
 //      }
 //      break;
 //
@@ -504,7 +504,7 @@ public class Clinet{
 //      sz_strlcpy(cpuname, "unknown");
 //      break;
 //  }
-//  my_snprintf(uname_buf, sizeof(uname_buf),
+//  uname_buf = util.my_snprintf(
 //	      "%s %ld.%ld [%s]", osname, osvi.dwMajorVersion, osvi.dwMinorVersion,
 //	      cpuname);
 //  return uname_buf;
@@ -633,7 +633,7 @@ public class Clinet{
 //
 //#ifdef HAVE_UNAME
 //  uname(&un);
-//  my_snprintf(machine_string,sizeof(machine_string),
+//  machine_string = util.my_snprintf(
 //              "%s %s [%s]",
 //              un.sysname,
 //              un.release,
@@ -644,14 +644,14 @@ public class Clinet{
 //#ifdef WIN32_NATIVE
 //  sz_strlcpy(machine_string,win_uname());
 //#else
-//  my_snprintf(machine_string,sizeof(machine_string),
+//  machine_string = util.my_snprintf(
 //              "unknown unknown [unknown]");
 //#endif
 //#endif /* HAVE_UNAME */
 //
 //  capstr = my_url_encode(our_capability);
 //
-//  my_snprintf(str, sizeof(str),
+//  str = util.my_snprintf(
 //    "POST %s HTTP/1.1\r\n"
 //    "Host: %s:%d\r\n"
 //    "User-Agent: Freeciv/%s %s %s\r\n"
@@ -739,13 +739,13 @@ public class Clinet{
 //
 //  /* Create a socket for broadcasting to servers. */
 //  if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-//    freelog(LOG_ERROR, "socket failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "socket failed: %s", mystrerror());
 //    return 0;
 //  }
 //
 //  if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR,
 //                 (char *)&opt, sizeof(opt)) == -1) {
-//    freelog(LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
 //  }
 //
 //  /* Set the UDP Multicast group IP address. */
@@ -759,13 +759,13 @@ public class Clinet{
 //  ttl = SERVER_LAN_TTL;
 //  if (setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, (final char*)&ttl, 
 //                 sizeof(ttl))) {
-//    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return 0;
 //  }
 //
 //  if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (final char*)&opt, 
 //                 sizeof(opt))) {
-//    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return 0;
 //  }
 //
@@ -776,17 +776,17 @@ public class Clinet{
 //
 //  if (sendto(sock, buffer, size, 0, &addr.sockaddr,
 //      sizeof(addr)) < 0) {
-//    freelog(LOG_ERROR, "sendto failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "sendto failed: %s", mystrerror());
 //    return 0;
 //  } else {
-//    freelog(LOG_DEBUG, ("Sending request for server announcement on LAN."));
+//    util.freelog(LOG_DEBUG, ("Sending request for server announcement on LAN."));
 //  }
 //
 //  my_closesocket(sock);
 //
 //  /* Create a socket for listening for server packets. */
 //  if ((socklan = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-//    freelog(LOG_ERROR, "socket failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "socket failed: %s", mystrerror());
 //    return 0;
 //  }
 //
@@ -794,7 +794,7 @@ public class Clinet{
 //
 //  if (setsockopt(socklan, SOL_SOCKET, SO_REUSEADDR,
 //                 (char *)&opt, sizeof(opt)) == -1) {
-//    freelog(LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
 //  }
 //                                                                               
 //  memset(&addr, 0, sizeof(addr));
@@ -803,7 +803,7 @@ public class Clinet{
 //  addr.sockaddr_in.sin_port = htons(SERVER_LAN_PORT + 1);
 //
 //  if (bind(socklan, &addr.sockaddr, sizeof(addr)) < 0) {
-//    freelog(LOG_ERROR, "bind failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "bind failed: %s", mystrerror());
 //    return 0;
 //  }
 //
@@ -811,7 +811,7 @@ public class Clinet{
 //  mreq.imr_interface.s_addr = htonl(INADDR_ANY);
 //  if (setsockopt(socklan, IPPROTO_IP, IP_ADD_MEMBERSHIP, 
 //                 (final char*)&mreq, sizeof(mreq)) < 0) {
-//    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return 0;
 //  }
 //
@@ -857,7 +857,7 @@ public class Clinet{
 //
 //  while (select(socklan + 1, &readfs, null, &exceptfs, &tv) == -1) {
 //    if (errno != EINTR) {
-//      freelog(LOG_ERROR, "select failed: %s", mystrerror());
+//      util.freelog(Log.LOG_ERROR, "select failed: %s", mystrerror());
 //      return lan_servers;
 //    }
 //    /* EINTR can happen sometimes, especially when compiling with -pg.
@@ -901,7 +901,7 @@ public class Clinet{
 //      } 
 //    } }
 //
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //            ("Received a valid announcement from a server on the LAN."));
 //    
 //    pserver =  (struct server*)fc_malloc(sizeof(struct server));

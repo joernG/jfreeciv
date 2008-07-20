@@ -181,9 +181,9 @@ public class Inteldlg{
 //						pdialog.intel_dialog_shell,
 //						null);
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "Intelligence Information for the %s Empire",
-//	      get_nation_name(pdialog.pplayer.nation));
+//	      Nation.get_nation_name(pdialog.pplayer.nation));
 //
 //  pdialog.intel_label = I_L(XtVaCreateManagedWidget("inteltitlelabel",
 //						     labelWidgetClass,
@@ -191,7 +191,7 @@ public class Inteldlg{
 //						     XtNlabel, buf,
 //						     null));
 //
-//  my_snprintf(buf, sizeof(buf), "Ruler: %s %s",
+//  buf = util.my_snprintf( "Ruler: %s %s",
 //	      get_ruler_title(pdialog.pplayer.government,
 //			      pdialog.pplayer.is_male,
 //			      pdialog.pplayer.nation),
@@ -202,7 +202,7 @@ public class Inteldlg{
 //			  XtNlabel, buf,
 //			  null);
 //
-//  my_snprintf(buf, sizeof(buf), "Government: %s",
+//  buf = util.my_snprintf( "Government: %s",
 //	      get_government_name(pdialog.pplayer.government));
 //  XtVaCreateManagedWidget("intelgovlabel",
 //			  labelWidgetClass,
@@ -210,7 +210,7 @@ public class Inteldlg{
 //			  XtNlabel, buf,
 //			  null);
 //
-//  my_snprintf(buf, sizeof(buf), "Gold: %d",
+//  buf = util.my_snprintf( "Gold: %d",
 //	      pdialog.pplayer.economic.gold);
 //  XtVaCreateManagedWidget("intelgoldlabel",
 //			  labelWidgetClass,
@@ -218,7 +218,7 @@ public class Inteldlg{
 //			  XtNlabel, buf,
 //			  null);
 //
-//  my_snprintf(buf, sizeof(buf), "Tax: %d%%",
+//  buf = util.my_snprintf( "Tax: %d%%",
 //	      pdialog.pplayer.economic.tax);
 //  XtVaCreateManagedWidget("inteltaxlabel",
 //			  labelWidgetClass,
@@ -226,7 +226,7 @@ public class Inteldlg{
 //			  XtNlabel, buf,
 //			  null);
 //
-//  my_snprintf(buf, sizeof(buf), "Science: %d%%",
+//  buf = util.my_snprintf( "Science: %d%%",
 //	      pdialog.pplayer.economic.science);
 //  XtVaCreateManagedWidget("intelscilabel",
 //			  labelWidgetClass,
@@ -234,7 +234,7 @@ public class Inteldlg{
 //			  XtNlabel, buf,
 //			  null);
 //
-//  my_snprintf(buf, sizeof(buf), "Luxury: %d%%",
+//  buf = util.my_snprintf( "Luxury: %d%%",
 //	      pdialog.pplayer.economic.luxury);
 //  XtVaCreateManagedWidget("intelluxlabel",
 //			  labelWidgetClass,
@@ -243,12 +243,12 @@ public class Inteldlg{
 //			  null);
 //
 //  if (pdialog.pplayer.research.researching == A_UNSET) {
-//    my_snprintf(buf, sizeof(buf), "Researching: %s(%d/%d)",
+//    buf = util.my_snprintf( "Researching: %s(%d/%d)",
 //		advances[A_NONE].name,
 //		pdialog.pplayer.research.bulbs_researched,
 //		total_bulbs_required(pdialog.pplayer));
 //  } else {
-//    my_snprintf(buf, sizeof(buf), "Researching: %s(%d/%d)",
+//    buf = util.my_snprintf( "Researching: %s(%d/%d)",
 //		get_tech_name(pdialog.pplayer,
 //			      pdialog.pplayer.research.researching),
 //		pdialog.pplayer.research.bulbs_researched,
@@ -261,8 +261,8 @@ public class Inteldlg{
 //			  XtNlabel, buf,
 //			  null);
 //
-//  pcity = find_palace(pdialog.pplayer);
-//  my_snprintf(buf, sizeof(buf), "Capital: %s",
+//  pcity = pdialog.pplayer.find_palace();
+//  buf = util.my_snprintf( "Capital: %s",
 //	      (!pcity)?"(Unknown)":pcity.name);
 //  XtVaCreateManagedWidget("intelcapitallabel",
 //			  labelWidgetClass,
@@ -420,9 +420,9 @@ public class Inteldlg{
 //			    pdialog.intel_diplo_dialog_shell,
 //			    null);
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "Intelligence Diplomacy Information for the %s Empire",
-//	      get_nation_name(pdialog.pplayer.nation));
+//	      Nation.get_nation_name(pdialog.pplayer.nation));
 //
 //  pdialog.intel_diplo_label =
 //    I_L(XtVaCreateManagedWidget("inteldiplolabel",
@@ -431,7 +431,7 @@ public class Inteldlg{
 //				XtNlabel, buf,
 //				null));
 //   
-//  my_snprintf(buf, sizeof(buf), "Ruler: %s %s", 
+//  buf = util.my_snprintf( "Ruler: %s %s", 
 //	      get_ruler_title(pdialog.pplayer.government,
 //			      pdialog.pplayer.is_male,
 //			      pdialog.pplayer.nation),
@@ -488,7 +488,7 @@ public class Inteldlg{
 //      my_snprintf(namelist_text[i], sizeof(namelist_text[i]),
 //		  "%-32s %-16s %-16s",
 //		  other.name,
-//		  get_nation_name(other.nation),
+//		  Nation.get_nation_name(other.nation),
 //		  diplstate_text(state.type));
 //      namelist_ptrs[i] = namelist_text[i];
 //      i++;

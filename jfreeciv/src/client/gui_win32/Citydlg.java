@@ -268,7 +268,7 @@ public class Citydlg{
 //    strings[1] = buf;
 //
 //    /* This takes effects (like Adam Smith's) into account. */
-//    my_snprintf(buf, sizeof(buf), "%d",
+//    buf = util.my_snprintf( "%d",
 //		improvement_upkeep(pdialog.pcity, id));
 //   
 //    row=fcwin_listview_add_row(pdialog.buildings_list,
@@ -278,7 +278,7 @@ public class Citydlg{
 //  }
 //  lvc.mask=LVCF_TEXT;
 //  lvc.pszText=buf;
-//  my_snprintf(buf, sizeof(buf), "Upkeep (Total: %d)", total);
+//  buf = util.my_snprintf( "Upkeep (Total: %d)", total);
 //  ListView_SetColumn(pdialog.buildings_list,1,&lvc);
 //  ListView_SetColumnWidth(pdialog.buildings_list,0,LVSCW_AUTOSIZE);
 //  ListView_SetColumnWidth(pdialog.buildings_list,1,LVSCW_AUTOSIZE_USEHEADER);
@@ -420,7 +420,7 @@ public class Citydlg{
 //    descr = get_impr_name_ex(pcity, pcity.currently_building);
 //  }
 //
-//  my_snprintf(buf2, sizeof(buf2), "%s\r\n%s", descr, buf);
+//  buf2 = util.my_snprintf( "%s\r\n%s", descr, buf);
 //  SetWindowText(pdialog.build_area, buf2);
 //  SetWindowText(pdialog.build_area, buf2);
 //  resize_city_dialog(pdialog);
@@ -918,7 +918,7 @@ public class Citydlg{
 //  value=city_buy_cost(pdialog.pcity);
 // 
 //  if(game.player_ptr.economic.gold>=value) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //            "Buy %s for %d gold?\nTreasury contains %d gold.",
 //            name, value, game.player_ptr.economic.gold);
 // 
@@ -927,7 +927,7 @@ public class Citydlg{
 //                         "_No", buy_callback_no, 0, 0);
 //  }
 //  else {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //            "%s costs %d gold.\nTreasury contains %d gold.",
 //            name, value, game.player_ptr.economic.gold);
 // 
@@ -972,7 +972,7 @@ public class Citydlg{
 //  }
 //  
 //  pdialog.sell_id = pdialog.id_selected;
-//  my_snprintf(buf, sizeof(buf), "Sell %s for %d gold?",
+//  buf = util.my_snprintf( "Sell %s for %d gold?",
 //	      get_impr_name_ex(pdialog.pcity, pdialog.id_selected),
 //	      impr_sell_gold(pdialog.id_selected));
 //  
@@ -1273,9 +1273,9 @@ public class Citydlg{
 //      total += pdialog.pcity.trade_value[i];
 //
 //      if ((pcity = find_city_by_id(pdialog.pcity.trade[i]))) {
-//        my_snprintf(cityname, sizeof(cityname), "%s", pcity.name);
+//        cityname = util.my_snprintf( "%s", pcity.name);
 //      } else {
-//        my_snprintf(cityname, sizeof(cityname), "%s", "Unknown");
+//        cityname = util.my_snprintf( "%s", "Unknown");
 //      }
 //      my_snprintf(buf + buf.length(), sizeof(buf) - buf.length(),
 //                  "Trade with %s gives %d trade.\n",

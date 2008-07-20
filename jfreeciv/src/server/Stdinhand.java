@@ -33,7 +33,7 @@ public class Stdinhand{
 //#include "console.h"
 //#include "diplhand.h"
 //#include "gamehand.h"
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "mapgen.h"
 //#include "maphand.h"
 //#include "meta.h"
@@ -264,7 +264,7 @@ public class Stdinhand{
 //**************************************************************************/
 //static enum cmdlevel_id access_level(enum command_id cmd)
 //{
-//  if (server_state == server_states.PRE_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.PRE_GAME_STATE) {
 //    return commands[cmd].pregame_level;
 //  } else {
 //    return commands[cmd].game_level;
@@ -457,7 +457,7 @@ public class Stdinhand{
 //    cmd_reply(cmd, caller, C_FAIL,
 //	      "Unexpected match_result %d (%s) for '%s'.",
 //	      match_result, _(m_pre_description(match_result)), name);
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Unexpected match_result %d (%s) for '%s'.",
 //	    match_result, m_pre_description(match_result), name);
 //  }
@@ -492,7 +492,7 @@ public class Stdinhand{
 //    cmd_reply(cmd, caller, C_FAIL,
 //	      "Unexpected match_result %d (%s) for '%s'.",
 //	      match_result, _(m_pre_description(match_result)), name);
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Unexpected match_result %d (%s) for '%s'.",
 //	    match_result, m_pre_description(match_result), name);
 //  }
@@ -749,7 +749,7 @@ public class Stdinhand{
 //**************************************************************************/
 //static boolean save_command(connection caller, char *arg, boolean check)
 //{
-//  if (server_state==SELECT_RACES_STATE) {
+//  if (Srv_main.server_state==SELECT_RACES_STATE) {
 //    cmd_reply(CMD_SAVE, caller, C_SYNTAX,
 //	      "The game cannot be saved before it is started.");
 //    return false;
@@ -786,7 +786,7 @@ public class Stdinhand{
 //    cancel_all_meetings(pplayer);
 //    /* The following is sometimes necessary to avoid using
 //       uninitialized data... */
-//    if (server_state == RUN_GAME_STATE)
+//    if (Srv_main.server_state == RUN_GAME_STATE)
 //      assess_danger_player(pplayer);
 //  } else {
 //    cmd_reply(CMD_AITOGGLE, caller, C_OK,
@@ -801,9 +801,9 @@ public class Stdinhand{
 //    cancel_all_meetings(pplayer);
 //  }
 //
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    send_player_info(pplayer, null);
-//    gamelog(GAMELOG_PLAYER, pplayer);
+//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
 //  }
 //}
 //
@@ -851,7 +851,7 @@ public class Stdinhand{
 //  player pplayer;
 //  PlayerNameStatus PNameStatus;
 //   
-//  if (server_state!=server_states.PRE_GAME_STATE)
+//  if (Srv_main.server_state!=server_states.PRE_GAME_STATE)
 //  {
 //    cmd_reply(CMD_CREATE, caller, C_SYNTAX,
 //	      "Can't add AI players once the game has begun.");
@@ -943,8 +943,8 @@ public class Stdinhand{
 //    return false;
 //  }
 //
-//  if (!(game.is_new_game && (server_state==server_states.PRE_GAME_STATE ||
-//			     server_state==SELECT_RACES_STATE))) {
+//  if (!(game.is_new_game && (Srv_main.server_state==server_states.PRE_GAME_STATE ||
+//			     Srv_main.server_state==SELECT_RACES_STATE))) {
 //    cmd_reply(CMD_REMOVE, caller, C_FAIL,
 //	      "Players cannot be removed once the game has started.");
 //    return false;
@@ -971,7 +971,7 @@ public class Stdinhand{
 //  FILE *script_file;
 //  char real_filename[1024];
 //
-//  freelog(Log.LOG_NORMAL, "Loading script file: %s", script_filename);
+//  util.freelog(Log.LOG_NORMAL, "Loading script file: %s", script_filename);
 //  
 //  interpret_tilde(real_filename, sizeof(real_filename), script_filename);
 // 
@@ -986,7 +986,7 @@ public class Stdinhand{
 //  } else {
 //    cmd_reply(CMD_READ_SCRIPT, caller, C_FAIL,
 //	"Cannot read command line scriptfile '%s'.", real_filename);
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	"Could not read script file '%s'.", real_filename);
 //    return false;
 //  }
@@ -1081,7 +1081,7 @@ public class Stdinhand{
 //    fclose(script_file);
 //
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	"Could not write script file '%s'.", real_filename);
 //  }
 //}
@@ -1578,7 +1578,7 @@ public class Stdinhand{
 //      cmd_reply(CMD_EXPLAIN, caller, C_FAIL, "Ambiguous option name.");
 //      return false;
 //    } else {
-//      freelog(LOG_ERROR, "Unexpected case %d in %s line %d",
+//      util.freelog(Log.LOG_ERROR, "Unexpected case %d in %s line %d",
 //	      cmd, __FILE__, __LINE__);
 //      return false;
 //    }
@@ -1615,7 +1615,7 @@ public class Stdinhand{
 //  final String caption;
 //
 //  buffer[0] = '\0';
-//  my_snprintf(title, sizeof(title), "%-20svalue  (min , max)", "Option");
+//  title = util.my_snprintf( "%-20svalue  (min , max)", "Option");
 //  caption = (which == 1) ?
 //    "Server Options (initial)" :
 //    "Server Options (ongoing)";
@@ -1659,7 +1659,7 @@ public class Stdinhand{
 //    }
 //    cat_snprintf(buffer, sizeof(buffer), "\n");
 //  }
-//  freelog(LOG_DEBUG, "report_server_options buffer len %d", i);
+//  util.freelog(LOG_DEBUG, "report_server_options buffer len %d", i);
 //  page_conn(dest, caption, title, buffer);
 //}
 //
@@ -1676,7 +1676,7 @@ public class Stdinhand{
 //  int i, s = 0;
 //
 //  if (dest.access_level == ALLOW_NONE
-//      || (which == 1 && server_state > server_states.PRE_GAME_STATE)) {
+//      || (which == 1 && Srv_main.server_state > server_states.PRE_GAME_STATE)) {
 //    report_server_options(&dest.self, which);
 //    return;
 //  }
@@ -1942,7 +1942,7 @@ public class Stdinhand{
 //  cmd_reply_show("+ means you may change the option");
 //  cmd_reply_show("= means the option is on its default value");
 //  cmd_reply_show(horiz_line);
-//  len1 = my_snprintf(buf, sizeof(buf),
+//  len1 = buf = util.my_snprintf(
 //	"%-*s value   (min,max)      ", OPTION_NAME_SPACE, "Option");
 //  if (len1 == -1)
 //    len1 = sizeof(buf) -1;
@@ -1964,7 +1964,7 @@ public class Stdinhand{
 //      if (level == SSET_ALL || op.level == level || cmd >= 0) {
 //        switch (op.type) {
 //        case SSET_BOOL:
-//	  len = my_snprintf(buf, sizeof(buf),
+//	  len = buf = util.my_snprintf(
 //			    "%-*s %c%c%-5d (0,1)", OPTION_NAME_SPACE, op.name,
 //			    may_set_option_now(caller, i) ? '+' : ' ',
 //			    ((*op.bool_value == op.bool_default_value) ?
@@ -1972,7 +1972,7 @@ public class Stdinhand{
 //	  break;
 //
 //        case SSET_INT:
-//	  len = my_snprintf(buf, sizeof(buf),
+//	  len = buf = util.my_snprintf(
 //			    "%-*s %c%c%-5d (%d,%d)", OPTION_NAME_SPACE,
 //			    op.name, may_set_option_now(caller,
 //						         i) ? '+' : ' ',
@@ -1983,7 +1983,7 @@ public class Stdinhand{
 //	  break;
 //
 //        case SSET_STRING:
-//	  len = my_snprintf(buf, sizeof(buf),
+//	  len = buf = util.my_snprintf(
 //			    "%-*s %c%c\"%s\"", OPTION_NAME_SPACE, op.name,
 //			    may_set_option_now(caller, i) ? '+' : ' ',
 //			    ((strcmp(op.string_value,
@@ -2052,7 +2052,7 @@ public class Stdinhand{
 //  int ntokens = 0, i;
 //  boolean res = false;
 //
-//  if (server_state != server_states.PRE_GAME_STATE || !game.is_new_game) {
+//  if (Srv_main.server_state != server_states.PRE_GAME_STATE || !game.is_new_game) {
 //    cmd_reply(CMD_TEAM, caller, C_SYNTAX,
 //              "Cannot change teams once game has begun.");
 //    return false;
@@ -2229,7 +2229,7 @@ public class Stdinhand{
 //			"<player> | city <x> <y> | units <x> <y> | "
 //			"unit <id>>.");
 //
-//  if (server_state != RUN_GAME_STATE) {
+//  if (Srv_main.server_state != RUN_GAME_STATE) {
 //    cmd_reply(CMD_DEBUG, caller, C_SYNTAX,
 //              "Can only use this command once game has begun.");
 //    return false;
@@ -2437,7 +2437,7 @@ public class Stdinhand{
 //        return false;
 //      } else if (!check) {
 //	*(op.bool_value) = b_val;
-//	my_snprintf(buffer, sizeof(buffer),
+//	buffer = util.my_snprintf(
 //		    "Option: %s has been set to %d.", op.name,
 //		    *(op.bool_value) ? 1 : 0);
 //	do_update = true;
@@ -2463,7 +2463,7 @@ public class Stdinhand{
 //        return false;
 //      } else if (!check) {
 //	*(op.int_value) = val;
-//	my_snprintf(buffer, sizeof(buffer),
+//	buffer = util.my_snprintf(
 //		    "Option: %s has been set to %d.", op.name,
 //		    *(op.int_value));
 //	do_update = true;
@@ -2485,7 +2485,7 @@ public class Stdinhand{
 //        return false;
 //      } else if (!check) {
 //	strcpy(op.string_value, arg);
-//	my_snprintf(buffer, sizeof(buffer),
+//	buffer = util.my_snprintf(
 //		    _("Option: %s has been set to \"%s\"."), op.name,
 //		    op.string_value);
 //	do_update = true;
@@ -2505,7 +2505,7 @@ public class Stdinhand{
 //     * before RUN_GAME_STATE, triggers a popdown_races_dialog() call
 //     * in client/packhand.c#handle_game_info() 
 //     */
-//    if (server_state == RUN_GAME_STATE) {
+//    if (Srv_main.server_state == RUN_GAME_STATE) {
 //      send_game_info(null);
 //    }
 //  }
@@ -2610,8 +2610,8 @@ public class Stdinhand{
 //{
 //  int i = 0, ntokens = 0;
 //  char buf[MAX_LEN_CONSOLE_LINE], *arg[2], msg[MAX_LEN_MSG];  
-//  boolean is_newgame = (server_state == server_states.PRE_GAME_STATE || 
-//                     server_state == SELECT_RACES_STATE) && game.is_new_game;
+//  boolean is_newgame = (Srv_main.server_state == server_states.PRE_GAME_STATE || 
+//                     Srv_main.server_state == SELECT_RACES_STATE) && game.is_new_game;
 //  
 //  enum m_pre_result result;
 //  connection pconn = null;
@@ -2685,7 +2685,7 @@ public class Stdinhand{
 //
 //      pplayer = &game.players[game.nplayers];
 //      server_player_init(pplayer, 
-//                         (server_state == RUN_GAME_STATE) || !game.is_new_game);
+//                         (Srv_main.server_state == RUN_GAME_STATE) || !game.is_new_game);
 //      sz_strlcpy(pplayer.name, OBSERVER_NAME);
 //      sz_strlcpy(pplayer.username, ANON_USER_NAME);
 //
@@ -2697,7 +2697,7 @@ public class Stdinhand{
 //      pplayer.is_alive = false;
 //      pplayer.was_created = false;
 //
-//      if ((server_state == RUN_GAME_STATE) || !game.is_new_game) {
+//      if ((Srv_main.server_state == RUN_GAME_STATE) || !game.is_new_game) {
 //        pplayer.nation = OBSERVER_NATION;
 //        init_tech(pplayer);
 //	give_initial_techs(pplayer);
@@ -2745,7 +2745,7 @@ public class Stdinhand{
 //  }
 //
 //  /* if we want to switch players, reset the client */
-//  if (pconn.player && server_state == RUN_GAME_STATE) {
+//  if (pconn.player && Srv_main.server_state == RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //    send_conn_info(&game.est_connections,  &pconn.self);
 //  }
@@ -2776,7 +2776,7 @@ public class Stdinhand{
 //  attach_connection_to_player(pconn, pplayer);
 //  send_conn_info(&pconn.self, &game.est_connections);
 //
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    send_packet_freeze_hint(pconn);
 //    send_rulesets(&pconn.self);
 //    send_all_info(&pconn.self);
@@ -2811,8 +2811,8 @@ public class Stdinhand{
 //{
 //  int i = 0, ntokens = 0;
 //  char buf[MAX_LEN_CONSOLE_LINE], *arg[2], msg[MAX_LEN_MSG];
-//  boolean is_newgame = (server_state == server_states.PRE_GAME_STATE || 
-//                     server_state == SELECT_RACES_STATE) && game.is_new_game;
+//  boolean is_newgame = (Srv_main.server_state == server_states.PRE_GAME_STATE || 
+//                     Srv_main.server_state == SELECT_RACES_STATE) && game.is_new_game;
 //
 //  enum m_pre_result match_result;
 //  connection pconn = null;
@@ -2888,7 +2888,7 @@ public class Stdinhand{
 //  }
 //
 //  /* if we want to switch players, reset the client if the game is running */
-//  if (pconn.player && server_state == RUN_GAME_STATE) {
+//  if (pconn.player && Srv_main.server_state == RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //    send_player_info_c(null, &pconn.self);
 //    send_conn_info(&game.est_connections,  &pconn.self);
@@ -2898,7 +2898,7 @@ public class Stdinhand{
 //   * forcibly detach the user from the player. */
 //  for (conn aconn : pplayer.connections.data) {
 //    if (!aconn.observer) {
-//      if (server_state == RUN_GAME_STATE) {
+//      if (Srv_main.server_state == RUN_GAME_STATE) {
 //        send_game_state(&aconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //      }
 //      notify_conn(&aconn.self, "being detached from %s.", pplayer.name);
@@ -2937,7 +2937,7 @@ public class Stdinhand{
 //    sz_strlcpy(pplayer.name, pconn.username);
 //  }
 //
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    send_packet_freeze_hint(pconn);
 //    send_rulesets(&pconn.self);
 //    send_all_info(&pconn.self);
@@ -2954,8 +2954,8 @@ public class Stdinhand{
 //  }
 //
 //  /* yes this has to go after the toggle check */
-//  if (server_state == RUN_GAME_STATE) {
-//    gamelog(GAMELOG_PLAYER, pplayer);
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
 //  }
 //
 //  cmd_reply(CMD_TAKE, caller, C_OK, "%s now controls %s (%s, %s)", 
@@ -2983,8 +2983,8 @@ public class Stdinhand{
 //  enum m_pre_result match_result;
 //  connection pconn = null;
 //  player pplayer = null;
-//  boolean is_newgame = (server_state == server_states.PRE_GAME_STATE || 
-//                     server_state == SELECT_RACES_STATE) && game.is_new_game;
+//  boolean is_newgame = (Srv_main.server_state == server_states.PRE_GAME_STATE || 
+//                     Srv_main.server_state == SELECT_RACES_STATE) && game.is_new_game;
 //  boolean one_obs_among_many = false, res = false;
 //
 //  sz_strlcpy(buf, str);
@@ -3037,7 +3037,7 @@ public class Stdinhand{
 //  }
 //
 //  /* if we want to detach while the game is running, reset the client */
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //    send_game_info(&pconn.self);
 //    send_player_info_c(null, &pconn.self);
@@ -3081,8 +3081,8 @@ public class Stdinhand{
 //    }
 //  }
 //
-//  if (server_state == RUN_GAME_STATE) {
-//    gamelog(GAMELOG_PLAYER, pplayer);
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
 //  }
 //
 //  end:;
@@ -3119,7 +3119,7 @@ public class Stdinhand{
 //      sz_strlcpy(packet.name[i], pplayer.name);
 //      sz_strlcpy(packet.username[i], pplayer.username);
 //      if (game.nation_count) {
-//	sz_strlcpy(packet.nation_name[i], get_nation_name(pplayer.nation));
+//	sz_strlcpy(packet.nation_name[i], Nation.get_nation_name(pplayer.nation));
 //	sz_strlcpy(packet.nation_flag[i],
 //	    get_nation_by_plr(pplayer).flag_graphic_str);
 //      } else { /* No nations picked */
@@ -3158,7 +3158,7 @@ public class Stdinhand{
 //    return false;
 //  }
 //
-//  if (server_state != server_states.PRE_GAME_STATE) {
+//  if (Srv_main.server_state != server_states.PRE_GAME_STATE) {
 //    cmd_reply(CMD_LOAD, caller, C_FAIL, _("Can't load a game while another "
 //                                          "is running."));
 //    send_load_game_info(false);
@@ -3191,7 +3191,7 @@ public class Stdinhand{
 //  section_file_check_unused(&file, arg);
 //  section_file_free(&file);
 //
-//  freelog(LOG_VERBOSE, "Load time: %g seconds (%g apparent)",
+//  util.freelog(LOG_VERBOSE, "Load time: %g seconds (%g apparent)",
 //          read_timer_seconds_free(loadtimer),
 //          read_timer_seconds_free(uloadtimer));
 //
@@ -3228,7 +3228,7 @@ public class Stdinhand{
 //             _("Current ruleset directory is \"%s\""), game.rulesetdir);
 //    return false;
 //  }
-//  my_snprintf(filename, sizeof(filename), "%s", str);
+//  filename = util.my_snprintf( "%s", str);
 //  pfilename = datafilename(filename);
 //  if (!pfilename) {
 //    cmd_reply(CMD_RULESETDIR, caller, C_SYNTAX,
@@ -3253,7 +3253,7 @@ public class Stdinhand{
 //  int i;
 //  boolean in_single_quotes = false, in_double_quotes = false;
 //
-//  freelog(LOG_DEBUG,"cut_comment(str='%s')",str);
+//  util.freelog(LOG_DEBUG,"cut_comment(str='%s')",str);
 //
 //  for (i = 0; i < str.length(); i++) {
 //    if (str[i] == '"' && !in_single_quotes) {
@@ -3266,7 +3266,7 @@ public class Stdinhand{
 //      break;
 //    }
 //  }
-//  freelog(LOG_DEBUG,"cut_comment: returning '%s'",str);
+//  util.freelog(LOG_DEBUG,"cut_comment: returning '%s'",str);
 //}
 //
 ///**************************************************************************
@@ -3276,8 +3276,8 @@ public class Stdinhand{
 //{
 //  if (!check) {
 //    cmd_reply(CMD_QUIT, caller, C_OK, "Goodbye.");
-//    gamelog(GAMELOG_JUDGE, GL_NONE);
-//    gamelog(GAMELOG_END);
+//    Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, GL_NONE);
+//    Gamelog.gamelog(GAMELOG_END);
 //    server_quit();
 //  }
 //  return true;
@@ -3484,7 +3484,7 @@ public class Stdinhand{
 //  case CMD_RULESETDIR:
 //    return set_rulesetdir(caller, arg, check);
 //  case CMD_SCORE:
-//    if (server_state == RUN_GAME_STATE || server_state == GAME_OVER_STATE) {
+//    if (Srv_main.server_state == RUN_GAME_STATE || Srv_main.server_state == server_states.GAME_OVER_STATE) {
 //      if (!check) {
 //        report_progress_scores();
 //      }
@@ -3521,7 +3521,7 @@ public class Stdinhand{
 //  case CMD_UNRECOGNIZED:
 //  case CMD_AMBIGUOUS:
 //  default:
-//    freelog(LOG_FATAL, "bug in civserver: impossible command recognized; bye!");
+//    util.freelog(LOG_FATAL, "bug in civserver: impossible command recognized; bye!");
 //    assert(0);
 //  }
 //  return false; /* should NEVER happen but we need to satisfy some compilers */
@@ -3532,7 +3532,7 @@ public class Stdinhand{
 //**************************************************************************/
 //static boolean end_command(connection caller, char *str, boolean check)
 //{
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    char *arg[MAX_NUM_PLAYERS];
 //    int ntokens = 0, i;
 //    enum m_pre_result plr_result;
@@ -3568,7 +3568,7 @@ public class Stdinhand{
 //               find_player_by_name_prefix(arg[i], &plr_result).player_no);
 //      }
 //    }
-//    server_state = GAME_OVER_STATE;
+//    Srv_main.server_state = server_states.GAME_OVER_STATE;
 //    force_end_of_sniff = true;
 //    cmd_reply(CMD_END_GAME, caller, C_OK,
 //              _("Ending the game. The server will restart once all clients "
@@ -3591,7 +3591,7 @@ public class Stdinhand{
 //**************************************************************************/
 //static boolean start_command(connection caller, char *name, boolean check)
 //{
-//  switch (server_state) {
+//  switch (Srv_main.server_state) {
 //  case server_states.PRE_GAME_STATE:
 //    /* Sanity check scenario */
 //    if (game.is_new_game && !check) {
@@ -3601,7 +3601,7 @@ public class Stdinhand{
 //	 * to increase the number of players beyond the number supported by
 //	 * the scenario.  The solution is a hack: cut the extra players
 //	 * when the game starts. */
-//	freelog(LOG_VERBOSE, "Reduced maxplayers from %i to %i to fit "
+//	util.freelog(LOG_VERBOSE, "Reduced maxplayers from %i to %i to fit "
 //	        "to the number of start positions.",
 //		game.max_players, map.num_start_positions);
 //	game.max_players = map.num_start_positions;
@@ -3616,7 +3616,7 @@ public class Stdinhand{
 //	  server_remove_player(get_player(game.max_players));
 //        }
 //
-//	freelog(LOG_VERBOSE,
+//	util.freelog(LOG_VERBOSE,
 //		"Had to cut down the number of players to the "
 //		"number of map start positions, there must be "
 //		"something wrong with the savegame or you "
@@ -3668,7 +3668,7 @@ public class Stdinhand{
 //      start_game();
 //      return true;
 //    }
-//  case GAME_OVER_STATE:
+//  case server_states.GAME_OVER_STATE:
 //    /* TRANS: given when /start is invoked during gameover. */
 //    cmd_reply(CMD_START_GAME, caller, C_FAIL,
 //              _("Cannot start the game: the game is waiting for all clients "
@@ -3776,7 +3776,7 @@ public class Stdinhand{
 //    size_t synlen = syn.length();
 //    char prefix[40];
 //
-//    my_snprintf(prefix, sizeof(prefix), "%*s", (int) synlen, " ");
+//    prefix = util.my_snprintf( "%*s", (int) synlen, " ");
 //    cmd_reply_prefix(help_cmd, caller, Erfc_status.C_COMMENT, prefix,
 //		     "%s%s", syn, _(cmd.synopsis));
 //  }
@@ -3919,7 +3919,7 @@ public class Stdinhand{
 //  }
 //  
 //  /* should have finished by now */
-//  freelog(LOG_ERROR, "Bug in show_help!");
+//  util.freelog(Log.LOG_ERROR, "Bug in show_help!");
 //  return false;
 //}
 //
@@ -3968,7 +3968,7 @@ public class Stdinhand{
 //  default:
 //    cmd_reply(CMD_LIST, caller, C_FAIL,
 //	      "Internal error: ind %d in show_list", ind);
-//    freelog(LOG_ERROR, "Internal error: ind %d in show_list", ind);
+//    util.freelog(Log.LOG_ERROR, "Internal error: ind %d in show_list", ind);
 //    return false;
 //  }
 //}
@@ -4003,7 +4003,7 @@ public class Stdinhand{
 //      buf2[0] = '\0';
 //      if (strlen(pplayer.username) > 0
 //	  && strcmp(pplayer.username, "nouser") != 0) {
-//	my_snprintf(buf2, sizeof(buf2), "user %s, ", pplayer.username);
+//	buf2 = util.my_snprintf( "user %s, ", pplayer.username);
 //      }
 //      
 //      if (is_barbarian(pplayer)) {
@@ -4022,20 +4022,20 @@ public class Stdinhand{
 //      }
 //      if (!game.is_new_game) {
 //	cat_snprintf(buf2, sizeof(buf2), ", nation %s",
-//		     get_nation_name_plural(pplayer.nation));
+//		     Nation.Nation.get_nation_name_plural(pplayer.nation));
 //      }
 //      if (pplayer.team != TEAM_NONE) {
 //        cat_snprintf(buf2, sizeof(buf2), ", team %s",
 //                     team_get_by_id(pplayer.team).name);
 //      }
-//      if (server_state == server_states.PRE_GAME_STATE && pplayer.is_connected) {
+//      if (Srv_main.server_state == server_states.PRE_GAME_STATE && pplayer.is_connected) {
 //	if (pplayer.is_started) {
 //	  cat_snprintf(buf2, sizeof(buf2), ", ready");
 //	} else {
 //	  cat_snprintf(buf2, sizeof(buf2), ", not ready");
 //	}
 //      }
-//      my_snprintf(buf, sizeof(buf), "%s (%s)", pplayer.name, buf2);
+//      buf = util.my_snprintf( "%s (%s)", pplayer.name, buf2);
 //      
 //      n = conn_list_size(&pplayer.connections);
 //      if (n > 0) {
@@ -4050,7 +4050,7 @@ public class Stdinhand{
 //	   * connections on the lists.  We skip them. */
 //	  continue;
 //	}
-//	my_snprintf(buf, sizeof(buf),
+//	buf = util.my_snprintf(
 //		    "  %s from %s (command access level %s), bufsize=%dkb",
 //		    pconn.username, pconn.addr, 
 //		    cmdlevel_name(pconn.access_level),
@@ -4547,7 +4547,7 @@ public class Stdinhand{
 //    /* These can always be changed: */
 //    return true;
 //  default:
-//    freelog(LOG_ERROR, "Unexpected case %d in %s line %d",
+//    util.freelog(Log.LOG_ERROR, "Unexpected case %d in %s line %d",
 //            op.sclass, __FILE__, __LINE__);
 //    return false;
 //  }

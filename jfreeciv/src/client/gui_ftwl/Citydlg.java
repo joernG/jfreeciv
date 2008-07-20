@@ -29,7 +29,7 @@ public class Citydlg{
 //**************************************************************************/
 //void popup_city_dialog(city pcity, boolean make_modal)
 //{
-//  freelog(Log.LOG_NORMAL, "popup_city_dialog('%s')", pcity.name);
+//  util.freelog(Log.LOG_NORMAL, "popup_city_dialog('%s')", pcity.name);
 //  /* PORTME */
 //}
 //

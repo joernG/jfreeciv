@@ -439,7 +439,7 @@ public class Citydlg{
 //  pUType = get_unit_type(pUnit.type);
 //
 //  /* ----- */
-//  my_snprintf(cBuf, sizeof(cBuf), "%s :", "Unit Commands");
+//  cBuf = util.my_snprintf( "%s :", "Unit Commands");
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  pWindow = create_window(pWindow.dst, pStr, 1, 1, 0);
@@ -452,7 +452,7 @@ public class Citydlg{
 //  pCityDlg.pEndCityMenuWidgetList = pWindow;
 //  /* ----- */
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "%s", unit_description(pUnit));
+//  cBuf = util.my_snprintf( "%s", unit_description(pUnit));
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //  pBuf = create_iconlabel(GET_SURF(get_unit_type(pUnit.type).sprite),
@@ -714,7 +714,7 @@ public class Citydlg{
 //        
 //    pUType = get_unit_type(pUnit.type);
 //    pHome_City = find_city_by_id(pUnit.homecity);
-//    my_snprintf(cBuf, sizeof(cBuf), "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
+//    cBuf = util.my_snprintf( "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
 //		pUType.name, pUType.attack_strength,
 //		pUType.defense_strength, pUType.move_rate / SINGLE_MOVE,
 //                (pUnit.veteran ? "\nveteran" : ""),
@@ -949,7 +949,7 @@ public class Citydlg{
 //  SDL_String16 *pStr;
 //  char cBuf[80];
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "%s\n%s" , "Auto attack vs", "land units");
+//  cBuf = util.my_snprintf( "%s\n%s" , "Auto attack vs", "land units");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.fgcol = *get_game_colorRGB(COLOR_STD_WHITE);
 //  pStr.style |= TTF_STYLE_BOLD;
@@ -965,7 +965,7 @@ public class Citydlg{
 //  pCityDlg.pPanel.pEndWidgetList = pBuf;
 //  /* ---- */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "%s\n%s" , "Auto attack vs", "sea units");
+//  cBuf = util.my_snprintf( "%s\n%s" , "Auto attack vs", "sea units");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  pStr.fgcol = *get_game_colorRGB(COLOR_STD_WHITE);
@@ -979,7 +979,7 @@ public class Citydlg{
 //  pBuf.size.y = pBuf.next.size.y + pBuf.next.size.h;
 //  /* ----- */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "%s\n%s" , "Auto attack vs", "heli units");
+//  cBuf = util.my_snprintf( "%s\n%s" , "Auto attack vs", "heli units");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  pStr.fgcol = *get_game_colorRGB(COLOR_STD_WHITE);
@@ -993,7 +993,7 @@ public class Citydlg{
 //  pBuf.size.y = pBuf.next.size.y + pBuf.next.size.h;
 //  /* ----- */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "%s\n%s" , "Auto attack vs", "air units");
+//  cBuf = util.my_snprintf( "%s\n%s" , "Auto attack vs", "air units");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  pStr.fgcol = *get_game_colorRGB(COLOR_STD_WHITE);
@@ -1008,7 +1008,7 @@ public class Citydlg{
 //  pBuf.size.y = pBuf.next.size.y + pBuf.next.size.h;
 //  /* ----- */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //	      "Disband if build\nsettler at size 1");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= TTF_STYLE_BOLD;
@@ -1024,7 +1024,7 @@ public class Citydlg{
 //  pBuf.size.y = pBuf.next.size.y + pBuf.next.size.h;
 //  /* ----- */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "%s :", "New citizens are");
+//  cBuf = util.my_snprintf( "%s :", "New citizens are");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= SF_CENTER;
 //  change_ptsize16(pStr, 13);
@@ -1205,18 +1205,18 @@ public class Citydlg{
 //  value = city_buy_cost(pCity);
 //  if(!pCity.did_buy) {
 //    if (game.player_ptr.economic.gold >= value) {
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //		_("Buy %s for %d gold?\n"
 //		  "Treasury contains %d gold."),
 //		name, value, game.player_ptr.economic.gold);
 //    } else {
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //		_("%s costs %d gold.\n"
 //		  "Treasury contains %d gold."),
 //		name, value, game.player_ptr.economic.gold);
 //    }
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //		"Sorry, You have already bought here in this turn");
 //  }
 //
@@ -1443,7 +1443,7 @@ public class Citydlg{
 //
 //  id = MAX_ID - 3000 - pImpr.ID;
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Sell %s for %d gold?",
+//  cBuf = util.my_snprintf( "Sell %s for %d gold?",
 //	      get_impr_name_ex(pCityDlg.pCity, id),
 //	      impr_sell_gold(id));
 //
@@ -1670,7 +1670,7 @@ public class Citydlg{
 //    *city_x = canvas_x / SCALLED_TILE_WIDTH;
 //    *city_y = canvas_y / SCALLED_TILE_HEIGHT;
 //  }
-//  freelog(LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
+//  util.freelog(LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
 //  return is_valid_city_coords(*city_x, *city_y);
@@ -1712,7 +1712,7 @@ public class Citydlg{
 //    *pRow = result;
 //  }
 //  
-//  freelog(LOG_DEBUG, "get_citymap_cr(pos=(%d,%d))=(%d,%d)",
+//  util.freelog(LOG_DEBUG, "get_citymap_cr(pos=(%d,%d))=(%d,%d)",
 //	  map_x, map_y, *pCol, *pRow);
 //  
 //  return is_valid_city_coords(*pCol, *pRow);
@@ -2029,7 +2029,7 @@ public class Citydlg{
 //  SDL_Surface *pSurf;
 //  SDL_Rect dest;
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Options panel");
+//  cBuf = util.my_snprintf( "Options panel");
 //
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.fgcol.r = 238;
@@ -2076,7 +2076,7 @@ public class Citydlg{
 //
 //  size = pList.foo_list_size();
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Unit maintenance panel (%d %s)",
+//  cBuf = util.my_snprintf( "Unit maintenance panel (%d %s)",
 //	      size, PL_("unit", "units", size));
 //
 //  pStr = create_str16_from_char(cBuf, 10);
@@ -2137,7 +2137,7 @@ public class Citydlg{
 //
 //  size = pList.foo_list_size();
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Garrison Panel (%d %s)",
+//  cBuf = util.my_snprintf( "Garrison Panel (%d %s)",
 //	      size, PL_("unit", "units", size));
 //
 //  pStr = create_str16_from_char(cBuf, 10);
@@ -2189,7 +2189,7 @@ public class Citydlg{
 //  SDL_Surface *pSurf = null;
 //  SDL_Rect dest;
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Info Panel");
+//  cBuf = util.my_snprintf( "Info Panel");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.fgcol.r = 238;
 //  pStr.fgcol.g = 156;
@@ -2214,7 +2214,7 @@ public class Citydlg{
 //  pStr.fgcol.b = 60;
 //
 //  if (pCity.pollution) {
-//    my_snprintf(cBuf, sizeof(cBuf), "Pollution : %d",
+//    cBuf = util.my_snprintf( "Pollution : %d",
 //		pCity.pollution);
 //
 //    copy_chars_to_string16(pStr, cBuf);
@@ -2242,7 +2242,7 @@ public class Citydlg{
 //    dest.y += pIcons.pPollution.h + 30;
 //
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf), "Pollution : none");
+//    cBuf = util.my_snprintf( "Pollution : none");
 //
 //    copy_chars_to_string16(pStr, cBuf);
 //
@@ -2255,7 +2255,7 @@ public class Citydlg{
 //    FREESURFACE(pSurf);
 //  }
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Trade routes : ");
+//  cBuf = util.my_snprintf( "Trade routes : ");
 //
 //  copy_chars_to_string16(pStr, cBuf);
 //
@@ -2276,10 +2276,10 @@ public class Citydlg{
 //      step += pCity.trade_value[i];
 //
 //      if ((pTradeCity = find_city_by_id(pCity.trade[i]))) {
-//	my_snprintf(cBuf, sizeof(cBuf), "%s : +%d", pTradeCity.name,
+//	cBuf = util.my_snprintf( "%s : +%d", pTradeCity.name,
 //		    pCity.trade_value[i]);
 //      } else {
-//	my_snprintf(cBuf, sizeof(cBuf), "%s : +%d", "Unknown",
+//	cBuf = util.my_snprintf( "%s : +%d", "Unknown",
 //		    pCity.trade_value[i]);
 //      }
 //
@@ -2304,7 +2304,7 @@ public class Citydlg{
 //  }
 //
 //  if (step) {
-//    my_snprintf(cBuf, sizeof(cBuf), "Trade : +%d", step);
+//    cBuf = util.my_snprintf( "Trade : +%d", step);
 //
 //    copy_chars_to_string16(pStr, cBuf);
 //    pSurf = create_text_surf_from_str16(pStr);
@@ -2316,7 +2316,7 @@ public class Citydlg{
 //
 //    FREESURFACE(pSurf);
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf), "none");
+//    cBuf = util.my_snprintf( "none");
 //
 //    copy_chars_to_string16(pStr, cBuf);
 //
@@ -2348,7 +2348,7 @@ public class Citydlg{
 //  SDL_Surface *pSurf = null;
 //  SDL_Rect dest;
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Happiness panel");
+//  cBuf = util.my_snprintf( "Happiness panel");
 //
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.fgcol.r = 238;
@@ -2684,7 +2684,7 @@ public class Citydlg{
 //  			    pCity, is_worker_here);
 //
 //  /* ================================================================= */
-//  my_snprintf(cBuf, sizeof(cBuf), "City map");
+//  cBuf = util.my_snprintf( "City map");
 //
 //  pStr = create_str16_from_char(cBuf, 11);
 //  pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_GOLD);
@@ -2699,7 +2699,7 @@ public class Citydlg{
 //
 //  FREESURFACE(pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "Citizens");
+//  cBuf = util.my_snprintf( "Citizens");
 //
 //  copy_chars_to_string16(pStr, cBuf);
 //  pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_LUX);
@@ -2713,7 +2713,7 @@ public class Citydlg{
 //
 //  FREESURFACE(pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf), "City Improvements");
+//  cBuf = util.my_snprintf( "City Improvements");
 //
 //  copy_chars_to_string16(pStr, cBuf);
 //  pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_GOLD);
@@ -2728,7 +2728,7 @@ public class Citydlg{
 //  FREESURFACE(pBuf);
 //  /* ================================================================= */
 //  /* food label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Food : %d per turn",
+//  cBuf = util.my_snprintf( "Food : %d per turn",
 //	      pCity.food_prod);
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -2764,7 +2764,7 @@ public class Citydlg{
 //    dest.x += step;
 //  }
 //
-//  my_snprintf(cBuf, sizeof(cBuf), Q"?food:Surplus : %d",
+//  cBuf = util.my_snprintf( Q"?food:Surplus : %d",
 //					      pCity.food_surplus);
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -2812,7 +2812,7 @@ public class Citydlg{
 //  }
 //  /* ================================================================= */
 //  /* productions label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Production : %d (%d) per turn",
+//  cBuf = util.my_snprintf( "Production : %d (%d) per turn",
 //	      pCity.shield_surplus ,
 //		  pCity.shield_prod + pCity.shield_waste);
 //
@@ -2858,7 +2858,7 @@ public class Citydlg{
 //  }
 //
 //  /* support shields label */
-//  my_snprintf(cBuf, sizeof(cBuf), Q"?production:Support : %d",
+//  cBuf = util.my_snprintf( Q"?production:Support : %d",
 //	  pCity.shield_prod + pCity.shield_waste - pCity.shield_surplus);
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -2895,7 +2895,7 @@ public class Citydlg{
 //  /* ================================================================= */
 //
 //  /* trade label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Trade : %d per turn",
+//  cBuf = util.my_snprintf( "Trade : %d per turn",
 //	      pCity.trade_prod);
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -2929,7 +2929,7 @@ public class Citydlg{
 //  }
 //
 //  /* corruption label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Corruption : %d", pCity.corruption);
+//  cBuf = util.my_snprintf( "Corruption : %d", pCity.corruption);
 //
 //  copy_chars_to_string16(pStr, cBuf);
 //  pStr.fgcol.r = 0;
@@ -2967,7 +2967,7 @@ public class Citydlg{
 //  }
 //  /* ================================================================= */
 //  /* gold label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Gold: %d (%d) per turn",
+//  cBuf = util.my_snprintf( "Gold: %d (%d) per turn",
 //	      city_gold_surplus(pCity, pcity.tax_total), pCity.tax_total);
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -3014,7 +3014,7 @@ public class Citydlg{
 //  }
 //
 //  /* upkeep label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Upkeep : %d", pCity.tax_total -
+//  cBuf = util.my_snprintf( "Upkeep : %d", pCity.tax_total -
 //	      city_gold_surplus(pCity, pcity.tax_total));
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -3053,7 +3053,7 @@ public class Citydlg{
 //  }
 //  /* ================================================================= */
 //  /* science label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Science: %d per turn",
+//  cBuf = util.my_snprintf( "Science: %d per turn",
 //	      pCity.science_total);
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -3093,7 +3093,7 @@ public class Citydlg{
 //  }
 //  /* ================================================================= */
 //  /* luxury label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Luxury: %d per turn",
+//  cBuf = util.my_snprintf( "Luxury: %d per turn",
 //	      pCity.luxury_total);
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -3131,16 +3131,16 @@ public class Citydlg{
 //  /* turns to grow label */
 //  count = city_turns_to_grow(pCity);
 //  if (count == 0) {
-//    my_snprintf(cBuf, sizeof(cBuf), "City growth : blocked");
+//    cBuf = util.my_snprintf( "City growth : blocked");
 //  } else if (count == FC_INFINITY) {
-//    my_snprintf(cBuf, sizeof(cBuf), "City growth : never");
+//    cBuf = util.my_snprintf( "City growth : never");
 //  } else if (count < 0) {
 //    /* turns until famine */
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //		"City shrinks : %d %s", abs(count),
 //		PL_("turn", "turns", abs(count)));
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //		"City growth : %d %s", count,
 //		PL_("turn", "turns", count));
 //  }
@@ -3445,14 +3445,14 @@ public class Citydlg{
 //      count = city_turns_to_build(pCity,
 //    	pCity.currently_building, pCity.is_building_unit, true);
 //      if (count == 999) {
-//        my_snprintf(cBuf, sizeof(cBuf), "(%d/%d) %s!",
+//        cBuf = util.my_snprintf( "(%d/%d) %s!",
 //		  		pCity.shield_stock, cost,  "blocked");
 //      } else {
-//        my_snprintf(cBuf, sizeof(cBuf), "(%d/%d) %d %s",
+//        cBuf = util.my_snprintf( "(%d/%d) %d %s",
 //	    pCity.shield_stock, cost, count, PL_("turn", "turns", count));
 //     }
 //   } else {
-//     my_snprintf(cBuf, sizeof(cBuf), "(%d/%d) %s!",
+//     cBuf = util.my_snprintf( "(%d/%d) %s!",
 //		    		pCity.shield_stock, cost, "finished");
 //   }
 //
@@ -3727,7 +3727,7 @@ public class Citydlg{
 //{
 //  char cBuf[512];
 //
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //	      "City of %s (Population %s citizens)", pCity.name,
 //	      population_to_text(city_population(pCity)));
 //

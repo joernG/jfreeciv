@@ -88,32 +88,32 @@ public class Gamedlgs{
 //
 //  maxrate = get_government_max_rate(game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */
-//  tax = MIN(tax, maxrate);
-//  lux = MIN(lux, maxrate);
-//  sci = MIN(sci, maxrate);
+//  tax = Math.min(tax, maxrate);
+//  lux = Math.min(lux, maxrate);
+//  sci = Math.min(sci, maxrate);
 //
 //  if (tax + sci + lux != 100)
 //  {
 //    if ((tax != rates_tax_value))
 //    {
 //      if (!lux_lock)
-//	lux = MIN(MAX(100 - tax - sci, 0), maxrate);
+//	lux = Math.min(MAX(100 - tax - sci, 0), maxrate);
 //      if (!sci_lock)
-//	sci = MIN(MAX(100 - tax - lux, 0), maxrate);
+//	sci = Math.min(MAX(100 - tax - lux, 0), maxrate);
 //    }
 //    else if ((lux != rates_lux_value))
 //    {
 //      if (!tax_lock)
-//	tax = MIN(MAX(100 - lux - sci, 0), maxrate);
+//	tax = Math.min(MAX(100 - lux - sci, 0), maxrate);
 //      if (!sci_lock)
-//	sci = MIN(MAX(100 - lux - tax, 0), maxrate);
+//	sci = Math.min(MAX(100 - lux - tax, 0), maxrate);
 //    }
 //    else if ((sci != rates_sci_value))
 //    {
 //      if (!lux_lock)
-//	lux = MIN(MAX(100 - tax - sci, 0), maxrate);
+//	lux = Math.min(MAX(100 - tax - sci, 0), maxrate);
 //      if (!tax_lock)
-//	tax = MIN(MAX(100 - lux - sci, 0), maxrate);
+//	tax = Math.min(MAX(100 - lux - sci, 0), maxrate);
 //    }
 //
 //    if (tax + sci + lux != 100)
@@ -168,7 +168,7 @@ public class Gamedlgs{
 //    int tax_value;
 //
 //    tax_value = 10 * percent;
-//    tax_value = MIN(tax_value, 100);
+//    tax_value = Math.min(tax_value, 100);
 //    rates_set_values(tax_value, 1, rates_lux_value, 0, rates_sci_value, 0);
 //  }
 //  else if (o == rates_luxury_slider)
@@ -176,7 +176,7 @@ public class Gamedlgs{
 //    int lux_value;
 //
 //    lux_value = 10 * percent;
-//    lux_value = MIN(lux_value, 100);
+//    lux_value = Math.min(lux_value, 100);
 //    rates_set_values(rates_tax_value, 0, lux_value, 1, rates_sci_value, 0);
 //  }
 //  else if (o == rates_science_slider)
@@ -184,7 +184,7 @@ public class Gamedlgs{
 //    int sci_value;
 //
 //    sci_value = 10 * percent;
-//    sci_value = MIN(sci_value, 100);
+//    sci_value = Math.min(sci_value, 100);
 //    rates_set_values(rates_tax_value, 0, rates_lux_value, 0, sci_value, 1);
 //  }
 //}

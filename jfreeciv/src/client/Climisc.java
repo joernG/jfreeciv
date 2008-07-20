@@ -75,7 +75,7 @@ public class Climisc{
 //  int hc = punit.homecity;
 //  unit ufocus = get_unit_in_focus();
 //
-//  freelog(LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
+//  util.freelog(LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
 //	  punit.id, get_nation_name(unit_owner(punit).nation),
 //	  unit_name(punit.type), TILE_XY(punit.tile), hc);
 //
@@ -104,7 +104,7 @@ public class Climisc{
 //    }
 //
 //    refresh_city_dialog(pcity);
-//    freelog(LOG_DEBUG, "map city %s, %s, (%d %d)", pcity.name,
+//    util.freelog(LOG_DEBUG, "map city %s, %s, (%d %d)", pcity.name,
 //	    get_nation_name(city_owner(pcity).nation),
 //	    TILE_XY(pcity.tile));
 //  }
@@ -112,7 +112,7 @@ public class Climisc{
 //  pcity = player_find_city_by_id(game.player_ptr, hc);
 //  if (pcity) {
 //    refresh_city_dialog(pcity);
-//    freelog(LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
+//    util.freelog(LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
 //	    get_nation_name(city_owner(pcity).nation),
 //	    TILE_XY(pcity.tile));
 //  }
@@ -128,7 +128,7 @@ public class Climisc{
 //  boolean effect_update;
 //  tile ptile = pcity.tile;
 //
-//  freelog(LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
+//  util.freelog(LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
 //	  get_nation_name(city_owner(pcity).nation), TILE_XY(ptile));
 //
 //  /* Explicitly remove all improvements, to properly remove any global effects
@@ -161,7 +161,7 @@ public class Climisc{
 //  char buf[512];
 //  int last_request_id = 0;
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "Game: Changing production of every %s into %s.",
 //	      fr_is_unit ? get_unit_type(fr_id).name :
 //	      get_improvement_name(fr_id),
@@ -245,32 +245,32 @@ public class Climisc{
 //  switch(pclause.type) {
 //  case CLAUSE_ADVANCE:
 //    my_snprintf(buf, bufsiz, "The %s give %s",
-//		get_nation_name_plural(pclause.from.nation),
+//		Nation.get_nation_name_plural(pclause.from.nation),
 //		get_tech_name(game.player_ptr, pclause.value));
 //    break;
 //  case CLAUSE_CITY:
 //    pcity = find_city_by_id(pclause.value);
 //    if (pcity) {
 //      my_snprintf(buf, bufsiz, "The %s give %s",
-//                  get_nation_name_plural(pclause.from.nation),
+//                  Nation.get_nation_name_plural(pclause.from.nation),
 //		  pcity.name);
 //    } else {
 //      my_snprintf(buf, bufsiz,"The %s give unknown city.",
-//                  get_nation_name_plural(pclause.from.nation));
+//                  Nation.get_nation_name_plural(pclause.from.nation));
 //    }
 //    break;
 //  case CLAUSE_GOLD:
 //    my_snprintf(buf, bufsiz, "The %s give %d gold",
-//		get_nation_name_plural(pclause.from.nation),
+//		Nation.get_nation_name_plural(pclause.from.nation),
 //		pclause.value);
 //    break;
 //  case CLAUSE_MAP:
 //    my_snprintf(buf, bufsiz, "The %s give their worldmap",
-//		get_nation_name_plural(pclause.from.nation));
+//		Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  case CLAUSE_SEAMAP:
 //    my_snprintf(buf, bufsiz, "The %s give their seamap",
-//		get_nation_name_plural(pclause.from.nation));
+//		Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  case CLAUSE_CEASEFIRE:
 //    my_snprintf(buf, bufsiz, "The parties agree on a cease-fire");
@@ -283,11 +283,11 @@ public class Climisc{
 //    break;
 //  case CLAUSE_VISION:
 //    my_snprintf(buf, bufsiz, "The %s gives shared vision",
-//		get_nation_name_plural(pclause.from.nation));
+//		Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  case CLAUSE_EMBASSY:
 //    my_snprintf(buf, bufsiz, "The %s gives an embassy",
-//                get_nation_name_plural(pclause.from.nation));
+//                Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  default:
 //    assert(false);
@@ -318,7 +318,7 @@ public class Climisc{
 //      (game.heating < (NUM_TILES_PROGRESS / 2))) {
 //    index = MAX(0, game.heating);
 //  } else {
-//    index = MIN(NUM_TILES_PROGRESS,
+//    index = Math.min(NUM_TILES_PROGRESS,
 //		(MAX(0, 4 + game.globalwarming) / 5) +
 //		((NUM_TILES_PROGRESS / 2) - 1));
 //  }
@@ -335,7 +335,7 @@ public class Climisc{
 //      (game.cooling < (NUM_TILES_PROGRESS / 2))) {
 //    index = MAX(0, game.cooling);
 //  } else {
-//    index = MIN(NUM_TILES_PROGRESS,
+//    index = Math.min(NUM_TILES_PROGRESS,
 //		(MAX(0, 4 + game.nuclearwinter) / 5) +
 //		((NUM_TILES_PROGRESS / 2) - 1));
 //  }
@@ -358,7 +358,7 @@ public class Climisc{
 //  can_slide = false;
 //  if ((punit = get_unit_in_focus())) {
 //    center_tile_mapcanvas(punit.tile);
-//  } else if ((pcity = find_palace(game.player_ptr))) {
+//  } else if ((pcity = game.player_ptr.find_palace())) {
 //    /* Else focus on the capital. */
 //    center_tile_mapcanvas(pcity.tile);
 //  } else if (city_list_size(&game.player_ptr.cities) > 0) {
@@ -596,9 +596,9 @@ public class Climisc{
 //
 //    if (show_cost) {
 //      if (cost < 0) {
-//	my_snprintf(pitem.descr, sizeof(pitem.descr), "%s (XX)", name);
+//	pitem.descr = util.my_snprintf( "%s (XX)", name);
 //      } else {
-//	my_snprintf(pitem.descr, sizeof(pitem.descr), "%s (%d)", name, cost);
+//	pitem.descr = util.my_snprintf( "%s (%d)", name, cost);
 //      }
 //    } else {
 //      () mystrlcpy(pitem.descr, name, sizeof(pitem.descr));
@@ -856,7 +856,7 @@ public class Climisc{
 //  
 //  if (event >= E_LAST)  {
 //    /* Server may have added a new event; leave as MW_OUTPUT */
-//    freelog(Log.LOG_NORMAL, "Unknown event type %d!", event);
+//    util.freelog(Log.LOG_NORMAL, "Unknown event type %d!", event);
 //  } else if (event >= 0)  {
 //    where = messages_where[event];
 //  }
@@ -918,7 +918,7 @@ public class Climisc{
 //**************************************************************************/
 //void reports_freeze()
 //{
-//  freelog(LOG_DEBUG, "reports_freeze");
+//  util.freelog(LOG_DEBUG, "reports_freeze");
 //
 //  meswin_freeze();
 //  plrdlg_freeze();
@@ -943,7 +943,7 @@ public class Climisc{
 //**************************************************************************/
 //void reports_thaw()
 //{
-//  freelog(LOG_DEBUG, "reports_thaw");
+//  util.freelog(LOG_DEBUG, "reports_thaw");
 //
 //  meswin_thaw();
 //  plrdlg_thaw();
@@ -1020,7 +1020,7 @@ public class Climisc{
 //    char buf[512];
 //
 //    assert(!pcity.is_building_unit);
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Game: You don't buy %s in %s!",
 //		improvement_types[pcity.currently_building].name,
 //		pcity.name);
@@ -1040,7 +1040,7 @@ public class Climisc{
 //      name = get_impr_name_ex(pcity, pcity.currently_building);
 //    }
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Game: %s costs %d gold and you only have %d gold.",
 //		name, value, game.player_ptr.economic.gold);
 //    append_output_window(buf);

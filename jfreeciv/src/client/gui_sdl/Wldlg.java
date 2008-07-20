@@ -993,7 +993,7 @@ public class Wldlg{
 //  if (!pEditor.is_building_unit
 //     && pEditor.currently_building == B_CAPITAL)
 //  {
-//     my_snprintf(cBuf, sizeof(cBuf),
+//     cBuf = util.my_snprintf(
 //      	"%s\n%d gold per turn", name, MAX(0, pEditor.pCity.shield_surplus));
 //  } else {
 //    if(stock < cost) {
@@ -1001,13 +1001,13 @@ public class Wldlg{
 //    	pEditor.currently_building, pEditor.is_building_unit, true);
 //      if(turns == 999)
 //      {
-//        my_snprintf(cBuf, sizeof(cBuf), "%s\nblocked!", name);
+//        cBuf = util.my_snprintf( "%s\nblocked!", name);
 //      } else {
-//        my_snprintf(cBuf, sizeof(cBuf), "%s\n%d %s",
+//        cBuf = util.my_snprintf( "%s\n%d %s",
 //		    name, turns, PL_("turn", "turns", turns));
 //      }
 //    } else {
-//      my_snprintf(cBuf, sizeof(cBuf), "%s\nfinished!", name);
+//      cBuf = util.my_snprintf( "%s\nfinished!", name);
 //    }
 //  }
 //  copy_chars_to_string16(pEditor.pProduction_Name.string16, cBuf);
@@ -1036,7 +1036,7 @@ public class Wldlg{
 //  pEditor.pProduction_Progres.theme =
 //		  get_progress_icon(stock, cost, &cost);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "%d%%" , cost);
+//  cBuf = util.my_snprintf( "%d%%" , cost);
 //  copy_chars_to_string16(pEditor.pProduction_Progres.string16, cBuf);
 //  redraw_label(pEditor.pProduction_Progres);
 //  sdl_dirty_rect(pEditor.pProduction_Progres.size);
@@ -1049,7 +1049,7 @@ public class Wldlg{
 //  char cBuf[64];
 //  SDL_Rect area;
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "( %d elements )",
+//  cBuf = util.my_snprintf( "( %d elements )",
 //  				worklist_length(pEditor.pCopy_WorkList));
 //  copy_chars_to_string16(pEditor.pWorkList_Counter.string16, cBuf);
 //
@@ -1145,9 +1145,9 @@ public class Wldlg{
 //  
 //  /* ---------------- */
 //  if(pCity) {
-//    my_snprintf(cBuf, sizeof(cBuf), "Worklist of\n%s", pCity.name);
+//    cBuf = util.my_snprintf( "Worklist of\n%s", pCity.name);
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf), "%s", pWorkList.name);
+//    cBuf = util.my_snprintf( "%s", pWorkList.name);
 //  }
 //    
 //  pStr = create_str16_from_char(cBuf, 12);
@@ -1159,7 +1159,7 @@ public class Wldlg{
 //  /* --------------------------- */
 //  
 //  count = worklist_length(pWorkList);
-//  my_snprintf(cBuf, sizeof(cBuf), "( %d elements )", count);
+//  cBuf = util.my_snprintf( "( %d elements )", count);
 //  count = 0;
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pBuf = create_iconlabel(null, pDest, pStr, WF_DRAW_THEME_TRANSPARENT);
@@ -1176,7 +1176,7 @@ public class Wldlg{
 //    
 //    if (!pCity.is_building_unit && pCity.currently_building == B_CAPITAL)
 //    {
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //      	"%s\n%d gold per turn", name, MAX(0, pCity.shield_surplus));
 //    } else {
 //      if(pCity.shield_stock < count) {
@@ -1184,13 +1184,13 @@ public class Wldlg{
 //    	  pCity.currently_building, pCity.is_building_unit, true);
 //        if(turns == 999)
 //        {
-//          my_snprintf(cBuf, sizeof(cBuf), "%s\nblocked!", name);
+//          cBuf = util.my_snprintf( "%s\nblocked!", name);
 //        } else {
-//          my_snprintf(cBuf, sizeof(cBuf), "%s\n%d %s",
+//          cBuf = util.my_snprintf( "%s\n%d %s",
 //		    name, turns, PL_("turn", "turns", turns));
 //        }
 //      } else {
-//        my_snprintf(cBuf, sizeof(cBuf), "%s\nfinished!", name);
+//        cBuf = util.my_snprintf( "%s\nfinished!", name);
 //      }
 //    }
 //    pStr = create_str16_from_char(cBuf, 10);
@@ -1202,7 +1202,7 @@ public class Wldlg{
 //    
 //    pIcon = get_progress_icon(pCity.shield_stock, count, &turns);
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "%d%%" , turns);
+//    cBuf = util.my_snprintf( "%d%%" , turns);
 //    pStr = create_str16_from_char(cBuf, 12);
 //    pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //    
@@ -1412,7 +1412,7 @@ public class Wldlg{
 //      
 //      pIcon = crop_rect_from_surface(pMain, null);
 //      
-//      my_snprintf(cBuf, sizeof(cBuf), "%s", pImpr.name);
+//      cBuf = util.my_snprintf( "%s", pImpr.name);
 //      copy_chars_to_string16(pStr, cBuf);
 //      pStr.style |= TTF_STYLE_BOLD;
 //      pText_Name = create_text_surf_smaller_that_w(pStr, pIcon.w - 4);
@@ -1438,28 +1438,28 @@ public class Wldlg{
 //            
 //          if (turns == FC_INFINITY) {
 //	    if(state) {
-//              my_snprintf(cBuf, sizeof(cBuf), "(%s)\n%d/%d %s\n%s",
+//              cBuf = util.my_snprintf( "(%s)\n%d/%d %s\n%s",
 //			  state, pCity.shield_stock,
 //			  impr_build_shield_cost(imp),
 //			  PL_("shield", "shields",
 //			      impr_build_shield_cost(imp)),
 //			  "never");
 //	    } else {
-//	      my_snprintf(cBuf, sizeof(cBuf), "%d/%d %s\n%s",
+//	      cBuf = util.my_snprintf( "%d/%d %s\n%s",
 //			  pCity.shield_stock, impr_build_shield_cost(imp),
 //			  PL_("shield","shields",
 //			      impr_build_shield_cost(imp)), "never");
 //	    }	  
 //          } else {
 //            if (state) {
-//	      my_snprintf(cBuf, sizeof(cBuf), "(%s)\n%d/%d %s\n%d %s",
+//	      cBuf = util.my_snprintf( "(%s)\n%d/%d %s\n%d %s",
 //			  state, pCity.shield_stock,
 //			  impr_build_shield_cost(imp),
 //			  PL_("shield","shields",
 //			      impr_build_shield_cost(imp)),
 //			  turns, PL_("turn", "turns", turns));
 //            } else {
-//	      my_snprintf(cBuf, sizeof(cBuf), "%d/%d %s\n%d %s",
+//	      cBuf = util.my_snprintf( "%d/%d %s\n%d %s",
 //			  pCity.shield_stock, impr_build_shield_cost(imp),
 //			  PL_("shield","shields",
 //			      impr_build_shield_cost(imp)),
@@ -1468,25 +1468,25 @@ public class Wldlg{
 //          }
 //        } else {
 //          /* capitalization */
-//          my_snprintf(cBuf, sizeof(cBuf), "%d gold per turn",
+//          cBuf = util.my_snprintf( "%d gold per turn",
 //		    MAX(0, pCity.shield_surplus));
 //        }
 //      } else {
 //        /* non city mode */
 //        if(imp != B_CAPITAL) {
 //          if(state) {
-//            my_snprintf(cBuf, sizeof(cBuf), "(%s)\n%d %s",
+//            cBuf = util.my_snprintf( "(%s)\n%d %s",
 //			state, impr_build_shield_cost(imp),
 //			PL_("shield","shields",
 //			    impr_build_shield_cost(imp)));
 //          } else {
-//	    my_snprintf(cBuf, sizeof(cBuf), "%d %s",
+//	    cBuf = util.my_snprintf( "%d %s",
 //			impr_build_shield_cost(imp),
 //			PL_("shield","shields",
 //			    impr_build_shield_cost(imp)));
 //          }
 //        } else {
-//          my_snprintf(cBuf, sizeof(cBuf), "shields into gold");
+//          cBuf = util.my_snprintf( "shields into gold");
 //        }
 //      }
 //  
@@ -1552,7 +1552,7 @@ public class Wldlg{
 //	
 //      pIcon = crop_rect_from_surface(pMain, null);
 //      
-//      my_snprintf(cBuf, sizeof(cBuf), "%s", pUnit.name);
+//      cBuf = util.my_snprintf( "%s", pUnit.name);
 //  
 //      copy_chars_to_string16(pStr, cBuf);
 //      pStr.style |= TTF_STYLE_BOLD;
@@ -1562,14 +1562,14 @@ public class Wldlg{
 //      if (pCity) {
 //        turns = city_turns_to_build(pCity, un, true, true);
 //        if (turns == FC_INFINITY) {
-//          my_snprintf(cBuf, sizeof(cBuf),
+//          cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d/%d %s\nnever",
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / SINGLE_MOVE,
 //		    pCity.shield_stock, unit_build_shield_cost(un),
 //	  	    PL_("shield","shields", unit_build_shield_cost(un)));
 //        } else {
-//          my_snprintf(cBuf, sizeof(cBuf),
+//          cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d/%d %s\n%d %s",
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / SINGLE_MOVE,
@@ -1578,7 +1578,7 @@ public class Wldlg{
 //		    turns, PL_("turn", "turns", turns));
 //        }
 //      } else {
-//        my_snprintf(cBuf, sizeof(cBuf),
+//        cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d %s",
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / SINGLE_MOVE,

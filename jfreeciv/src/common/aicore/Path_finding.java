@@ -149,10 +149,10 @@ public class Path_finding{
 //  case TM_NONE:
 //    break;
 //  case TM_CAPPED:
-//    cost = MIN(cost, pf_map.params.move_rate);
+//    cost = Math.min(cost, pf_map.params.move_rate);
 //    break;
 //  case TM_WORST_TIME:
-//    cost = MIN(cost, pf_map.params.move_rate);
+//    cost = Math.min(cost, pf_map.params.move_rate);
 //    {
 //      int moves_left
 //	  = get_moves_left(pf_map, pf_map.lattice[pf_map.tile.index].cost);
@@ -704,15 +704,15 @@ public class Path_finding{
 //  int i;
 //
 //  if (path) {
-//    freelog(log_level, "PF: path (at %p) consists of %d positions:", path,
+//    util.freelog(log_level, "PF: path (at %p) consists of %d positions:", path,
 //	    path.length);
 //  } else {
-//    freelog(log_level, "PF: path is null");
+//    util.freelog(log_level, "PF: path is null");
 //    return;
 //  }
 //
 //  for (i = 0; i < path.length; i++) {
-//    freelog(log_level,
+//    util.freelog(log_level,
 //	    "PF:   %2d/%2d: (%2d,%2d) dir=%-2s cost=%2d (%2d, %d) EC=%d",
 //	    i + 1, path.length,
 //	    path.positions[i].tile.x,
@@ -751,7 +751,7 @@ public class Path_finding{
 //    d_node.is_dangerous =
 //	params.is_pos_dangerous(ptile, node.node_known_type, params);
 //  } else {
-//    freelog(LOG_ERROR, "PF: init_danger_node called without"
+//    util.freelog(Log.LOG_ERROR, "PF: init_danger_node called without"
 //	    "is_pos_dangerous callback");
 //  }
 //
@@ -824,7 +824,7 @@ public class Path_finding{
 //    return PF_IMPOSSIBLE_MC;
 //  }
 //
-//  cost = MIN(cost, pf_map.params.move_rate);
+//  cost = Math.min(cost, pf_map.params.move_rate);
 //
 //  if (pf_map.params.turn_mode == TM_BEST_TIME) {
 //    if (to_danger && cost >= moves_left) {
@@ -1027,12 +1027,12 @@ public class Path_finding{
 //
 //  if (pf_map.status[pf_map.tile.index] == NS_WAITING) {
 //    /* We've already returned this node once, skip it */
-//    freelog(LOG_DEBUG, "Considering waiting at (%d, %d)",
+//    util.freelog(LOG_DEBUG, "Considering waiting at (%d, %d)",
 //	    pf_map.tile.x, pf_map.tile.y);
 //    return danger_iterate_map(pf_map);
 //  } else if (pf_map.d_lattice[index].is_dangerous) {
 //    /* We don't return dangerous tiles */
-//    freelog(LOG_DEBUG, "Reached dangerous tile (%d, %d)",
+//    util.freelog(LOG_DEBUG, "Reached dangerous tile (%d, %d)",
 //	    pf_map.tile.x, pf_map.tile.y);
 //    return danger_iterate_map(pf_map);
 //  } else {

@@ -244,9 +244,9 @@ public class Mapview{
 //{
 //  int xtile, ytile;
 //
-//  freelog(Log.LOG_NORMAL, "press (%d,%d)", pos.x, pos.y);
+//  util.freelog(Log.LOG_NORMAL, "press (%d,%d)", pos.x, pos.y);
 //  overview_to_map_pos(&xtile,&ytile,pos.x,pos.y);
-//  freelog(Log.LOG_NORMAL, " -. (%d,%d)", xtile, ytile);
+//  util.freelog(Log.LOG_NORMAL, " -. (%d,%d)", xtile, ytile);
 //  if (can_client_change_view() && button == 3) {
 //    center_tile_mapcanvas(map_pos_to_tile(xtile, ytile));
 //  }
@@ -299,7 +299,7 @@ public class Mapview{
 //  struct ct_point src_pos = { src_x, src_y };
 //  struct ct_point dest_pos = { dest_x, dest_y };
 //
-//  freelog(LOG_DEBUG, "canvas_copy(src=%p,dest=%p)",src,dest);
+//  util.freelog(LOG_DEBUG, "canvas_copy(src=%p,dest=%p)",src,dest);
 //
 //  be_copy_osda_to_osda(dest.osda, src.osda, &size, &dest_pos, &src_pos, 0);
 //  if (dest.widget) {
@@ -317,7 +317,7 @@ public class Mapview{
 //
 //  struct ct_rect rect;
 //
-//  freelog(Log.LOG_NORMAL, "refresh_overview_canvas()");
+//  util.freelog(Log.LOG_NORMAL, "refresh_overview_canvas()");
 //  whole_map_iterate(x, y) {
 //    overview_update_tile0(x, y);
 //  } whole_map_iterate_end;
@@ -351,7 +351,7 @@ public class Mapview{
 //
 //#if 0
 //  /* try to trace that hard-to-find assert that we sometimes get */
-//  freelog(Log.LOG_NORMAL, "show_city_desc(%s) pcx=%d.%d (%d) pcy=%d.%d (%d)", pcity.name,
+//  util.freelog(Log.LOG_NORMAL, "show_city_desc(%s) pcx=%d.%d (%d) pcy=%d.%d (%d)", pcity.name,
 //          canvas_x, canvas_x+NORMAL_TILE_WIDTH / 2, all_rect.width,
 //          canvas_y, canvas_y+NORMAL_TILE_HEIGHT, all_rect.height);
 //#endif
@@ -434,7 +434,7 @@ public class Mapview{
 //  struct ct_point src_pos = { offset_x, offset_y };
 //  struct ct_size size = { width, height };
 //
-//  freelog(LOG_DEBUG, "gui_put_sprite canvas=%p",pcanvas);
+//  util.freelog(LOG_DEBUG, "gui_put_sprite canvas=%p",pcanvas);
 //  be_draw_sprite(osda, BE_OPAQUE, sprite, &size, &dest_pos, &src_pos);
 //  if (pcanvas.widget) {
 //    sw_window_canvas_background_region_needs_repaint(pcanvas.widget,
@@ -451,7 +451,7 @@ public class Mapview{
 //{
 //  struct ct_size size;
 //
-//  freelog(LOG_DEBUG, "gui_put_sprite_full");
+//  util.freelog(LOG_DEBUG, "gui_put_sprite_full");
 //  be_sprite_get_size(&size, sprite);
 //  canvas_put_sprite(pcanvas, canvas_x, canvas_y,
 //		    sprite, 0, 0, size.width, size.height);
@@ -466,7 +466,7 @@ public class Mapview{
 //{
 //  struct ct_rect rect = { canvas_x, canvas_y, width, height };
 //
-//  freelog(LOG_DEBUG, "gui_put_rectangle(...)");
+//  util.freelog(LOG_DEBUG, "gui_put_rectangle(...)");
 //  be_draw_region(pcanvas.osda,
 //		 BE_OPAQUE, &rect, enum_color_to_be_color(color));
 //  if (pcanvas.widget) {
@@ -488,7 +488,7 @@ public class Mapview{
 //
 //  ct_rect_fill_on_2_points(&rect,&start,&end);
 //
-//  freelog(LOG_DEBUG, "gui_put_line(...)");
+//  util.freelog(LOG_DEBUG, "gui_put_line(...)");
 //
 //  if (ltype == LINE_NORMAL) {
 //    be_draw_line(pcanvas.osda, BE_OPAQUE, &start, &end, 1, false,
@@ -517,7 +517,7 @@ public class Mapview{
 //  struct ct_size size = { pixel_width, pixel_height };
 //  struct ct_point pos = { canvas_x, canvas_y };
 //
-//  freelog(LOG_DEBUG,"flush_mapcanvas=%s",ct_rect_to_string(&rect));
+//  util.freelog(LOG_DEBUG,"flush_mapcanvas=%s",ct_rect_to_string(&rect));
 //  be_copy_osda_to_osda(sw_window_get_canvas_background(mapview_canvas_window),
 //		       mapview_canvas.store.osda, &size, &pos, &pos, 0);
 //  sw_window_canvas_background_region_needs_repaint(mapview_canvas_window,
@@ -533,7 +533,7 @@ public class Mapview{
 //{
 //  struct ct_rect rect = { canvas_x, canvas_y, pixel_width, pixel_height };
 //
-//  //freelog(Log.LOG_NORMAL, "dirty_rect(...)");
+//  //util.freelog(Log.LOG_NORMAL, "dirty_rect(...)");
 //  sw_window_canvas_background_region_needs_repaint(mapview_canvas_window, &rect);
 //}
 //
@@ -546,7 +546,7 @@ public class Mapview{
 //
 //  sw_widget_get_bounds(mapview_canvas_window, &rect);
 //
-//  //freelog(Log.LOG_NORMAL, "dirty_all(...)");
+//  //util.freelog(Log.LOG_NORMAL, "dirty_all(...)");
 //  sw_window_canvas_background_region_needs_repaint(mapview_canvas_window, &rect);
 //  /* PORTME */
 //}
@@ -583,7 +583,7 @@ public class Mapview{
 //**************************************************************************/
 //void prepare_show_city_descriptions()
 //{
-//  freelog(LOG_DEBUG, "prepare_show_city_descriptions");
+//  util.freelog(LOG_DEBUG, "prepare_show_city_descriptions");
 //  
 //  for (widget widget : city_descr_windows.data) {
 //    widget_list_unlink(&city_descr_windows, widget);
@@ -903,7 +903,7 @@ public class Mapview{
 //			  enum be_mouse_button button)
 //{
 //  get_mapview_scroll_pos(&starting_map_position_x,&starting_map_position_y);
-//  freelog(LOG_DEBUG, "drag start (%d,%d)", starting_map_position_x,
+//  util.freelog(LOG_DEBUG, "drag start (%d,%d)", starting_map_position_x,
 //	  starting_map_position_y);
 //  clear_timer_start(drag_timer);
 //}
@@ -931,7 +931,7 @@ public class Mapview{
 //    int new_x = starting_map_position_x - dx * factorx;
 //    int new_y = starting_map_position_y - dy * factory;
 //
-//    freelog(LOG_DEBUG, "drag map canvas (%d,%d) . (%d,%d)", dx,
+//    util.freelog(LOG_DEBUG, "drag map canvas (%d,%d) . (%d,%d)", dx,
 //	    dy, new_x, new_y);
 //    set_mapview_scroll_pos(new_x, new_y);
 //    flush_dirty();
@@ -947,7 +947,7 @@ public class Mapview{
 //{
 //  char *action = (char *) data;
 //
-//  freelog(Log.LOG_NORMAL, "action '%s' requested", action);
+//  util.freelog(Log.LOG_NORMAL, "action '%s' requested", action);
 //}
 //
 ///**************************************************************************
@@ -996,7 +996,7 @@ public class Mapview{
 //    boolean found = false;
 //
 //    if (sscanf(action, "move_unit(%20[^)])", dir_str) != 1) {
-//      freelog(LOG_ERROR, "move_unit command misformed");
+//      util.freelog(Log.LOG_ERROR, "move_unit command misformed");
 //      return;
 //    }
 //
@@ -1009,7 +1009,7 @@ public class Mapview{
 //    }
 //
 //    if (!found) {
-//      freelog(LOG_ERROR, "move_unit direction unknown");
+//      util.freelog(Log.LOG_ERROR, "move_unit direction unknown");
 //      return;
 //    }
 //    key_unit_move(dir);
@@ -1021,11 +1021,11 @@ public class Mapview{
 //
 //    if (sscanf(action, "scroll(%20[^,],%20[^,],%20[^)])", dir, fact,
 //	       gran) != 3) {
-//      freelog(LOG_ERROR, "scroll command misformed");
+//      util.freelog(Log.LOG_ERROR, "scroll command misformed");
 //      return;
 //    }
 //    if (!is_float(fact,&factor)) {
-//      freelog(LOG_ERROR, "scroll: factor '%s' isn't a float",fact);
+//      util.freelog(Log.LOG_ERROR, "scroll: factor '%s' isn't a float",fact);
 //      return;
 //    }
 //
@@ -1040,7 +1040,7 @@ public class Mapview{
 //    } else if (strcmp(dir, "down") == 0) {
 //      right = false;
 //    } else {
-//      freelog(LOG_ERROR, "scroll: direction unknown");
+//      util.freelog(Log.LOG_ERROR, "scroll: direction unknown");
 //      return;
 //    }
 //
@@ -1064,7 +1064,7 @@ public class Mapview{
 //	base = size.height;
 //      }
 //    } else {
-//      freelog(LOG_ERROR, "scroll: granularity unknown");
+//      util.freelog(Log.LOG_ERROR, "scroll: granularity unknown");
 //      return;
 //    }
 //
@@ -1084,7 +1084,7 @@ public class Mapview{
 //      redraw_selection_rectangle();
 //    }
 //  } else {
-//    freelog(Log.LOG_NORMAL, "action '%s' requested", action);
+//    util.freelog(Log.LOG_NORMAL, "action '%s' requested", action);
 //  }
 //}
 //
@@ -1201,23 +1201,23 @@ public class Mapview{
 //  }
 //
 //  if (strcmp(id, "year") == 0) {
-//    return textyear(game.year);
+//    return Shared.textyear(game.year);
 //  } else if (strcmp(id, "gold") == 0) {
-//    my_snprintf(buffer, sizeof(buffer),
+//    buffer = util.my_snprintf(
 //		"%d", game.player_ptr.economic.gold);
 //    return buffer;
 //  } else if (strcmp(id, "nation_name") == 0) {
-//      return get_nation_name_plural(game.player_ptr.nation);
+//      return Nation.get_nation_name_plural(game.player_ptr.nation);
 //  } else if (strcmp(id, "population") == 0) {
 //      return population_to_text(civ_population(game.player_ptr));
 //  } else if (strcmp(id, "general") == 0) {
-//      my_snprintf(buffer, sizeof(buffer),
+//      buffer = util.my_snprintf(
 //		  _("Population: %s\n"
 //		"Year: %s\n"
 //		"Gold %d\n"
 //		"Tax: %d Lux: %d Sci: %d"),
 //	      population_to_text(civ_population(game.player_ptr)),
-//	      textyear(game.year), game.player_ptr.economic.gold,
+//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
 //	      game.player_ptr.economic.tax,
 //	      game.player_ptr.economic.luxury,
 //	      game.player_ptr.economic.science);
@@ -1225,13 +1225,13 @@ public class Mapview{
 //  } else if (strcmp(id, "focus_item") == 0) {
 //      return tile_list.item[tile_list.selected].info_text;
 //#if 0      
-//      my_snprintf(buffer, sizeof(buffer),
+//      buffer = util.my_snprintf(
 //		  _("Population: %s "
 //		"Year: %s "
 //		"Gold %d "
 //		"Tax: %d Lux: %d Sci: %d"),
 //	      population_to_text(civ_population(game.player_ptr)),
-//	      textyear(game.year), game.player_ptr.economic.gold,
+//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
 //	      game.player_ptr.economic.tax,
 //	      game.player_ptr.economic.luxury,
 //	      game.player_ptr.economic.science);

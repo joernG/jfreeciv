@@ -1224,7 +1224,7 @@ public class Aiunit{
 //    /* We are a boat: time to sail */
 //    return (WARMAP_SEACOST(acity.tile) + speed - 1) / speed;
 //  default: 
-//    freelog(LOG_ERROR, "ERROR: Unsupported move_type in time_to_enemy_city");
+//    util.freelog(Log.LOG_ERROR, "ERROR: Unsupported move_type in time_to_enemy_city");
 //    /* Return something prohibitive */
 //    return 999;
 //  }
@@ -1252,7 +1252,7 @@ public class Aiunit{
 //  default:
 //    /* Compiler warning */
 //    dist = 0; 
-//    freelog(LOG_ERROR, "ERROR: Unsupported unit_type in time_to_enemy_city");
+//    util.freelog(Log.LOG_ERROR, "ERROR: Unsupported unit_type in time_to_enemy_city");
 //    /* Return something prohibitive */
 //    return 999;
 //  }
@@ -1435,7 +1435,7 @@ public class Aiunit{
 //    move_rate *= 3;
 //  }
 //
-//  maxd = MIN(6, move_rate) * THRESHOLD + 1;
+//  maxd = Math.min(6, move_rate) * THRESHOLD + 1;
 //
 //  bcost = unit_build_shield_cost(punit.type);
 //  bcost_bal = build_cost_balanced(punit.type);
@@ -1988,7 +1988,7 @@ public class Aiunit{
 //    if (safe) {
 //      UNIT_LOG(LOGLEVEL_RECOVERY, punit, "going to %s to recover", safe.name);
 //      if (!ai_unit_goto(punit, safe.tile)) {
-//        freelog(LOGLEVEL_RECOVERY, "died trying to hide and recover");
+//        util.freelog(LOGLEVEL_RECOVERY, "died trying to hide and recover");
 //        return;
 //      }
 //    } else {
@@ -2141,7 +2141,7 @@ public class Aiunit{
 //    }
 //    if( !is_military_unit(punit)
 //	&& !unit_has_role(punit.type, L_BARBARIAN_LEADER)) {
-//      freelog(LOG_VERBOSE, "Barbarians picked up non-military unit.");
+//      util.freelog(LOG_VERBOSE, "Barbarians picked up non-military unit.");
 //      return;
 //    }
 //  }
@@ -2328,7 +2328,7 @@ public class Aiunit{
 //	   need to reach it */
 //	dist = WARMAP_COST(aunit.tile) - unit_move_rate(aunit);
 //	if (dist < mindist) {
-//	  freelog(LOG_DEBUG, "Barbarian leader: closest enemy is %s at %d, %d, dist %d",
+//	  util.freelog(LOG_DEBUG, "Barbarian leader: closest enemy is %s at %d, %d, dist %d",
 //                  unit_name(aunit.type), aunit.tile.x,
 //		  aunit.tile.y, dist);
 //	  mindist = dist;
@@ -2365,7 +2365,7 @@ public class Aiunit{
 //      if (WARMAP_COST(near_tile) > safest
 //	  && could_unit_move_to_tile(leader, near_tile) == 1) {
 //	safest = WARMAP_COST(near_tile);
-//	freelog(LOG_DEBUG,
+//	util.freelog(LOG_DEBUG,
 //		"Barbarian leader: safest is %d, %d, safeness %d",
 //		near_tile.x, near_tile.y, safest);
 //	safest_tile = near_tile;

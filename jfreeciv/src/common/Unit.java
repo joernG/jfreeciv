@@ -55,7 +55,7 @@ public class Unit{
 //			}
 //
 //			if (move_rate < 2 * SINGLE_MOVE) {
-//				move_rate = MIN(2 * SINGLE_MOVE, base_move_rate);
+//				move_rate = Math.min(2 * SINGLE_MOVE, base_move_rate);
 //			}
 //			break;
 //
@@ -1004,7 +1004,7 @@ public class Unit{
 //  case ACTIVITY_UNKNOWN:
 //    break;
 //  }
-//  freelog(LOG_ERROR,
+//  util.freelog(Log.LOG_ERROR,
 //	  "Unknown activity %d in can_unit_do_activity_targeted_at()",
 //	  activity);
 //  return false;
@@ -1079,33 +1079,33 @@ public class Unit{
 //       f=((punit.fuel)-1);
 //      if ((punit.moves_left % SINGLE_MOVE) != 0) {
 //	 if(punit.moves_left/SINGLE_MOVE>0) {
-//	   my_snprintf(text, sizeof(text), "%s: (%d)%d %d/%d", moves_str,
+//	   text = util.my_snprintf( "%s: (%d)%d %d/%d", moves_str,
 //		       ((rate*f)+(punit.moves_left/SINGLE_MOVE)),
 //		       punit.moves_left/SINGLE_MOVE, punit.moves_left%SINGLE_MOVE,
 //		       SINGLE_MOVE);
 //	 } else {
-//	   my_snprintf(text, sizeof(text), "%s: (%d)%d/%d", moves_str,
+//	   text = util.my_snprintf( "%s: (%d)%d/%d", moves_str,
 //		       ((rate*f)+(punit.moves_left/SINGLE_MOVE)),
 //		       punit.moves_left%SINGLE_MOVE, SINGLE_MOVE);
 //	 }
 //       } else {
-//	 my_snprintf(text, sizeof(text), "%s: (%d)%d", moves_str,
+//	 text = util.my_snprintf( "%s: (%d)%d", moves_str,
 //		     rate*f+punit.moves_left/SINGLE_MOVE,
 //		     punit.moves_left/SINGLE_MOVE);
 //       }
 //     } else {
 //      if ((punit.moves_left % SINGLE_MOVE) != 0) {
 //	 if(punit.moves_left/SINGLE_MOVE>0) {
-//	   my_snprintf(text, sizeof(text), "%s: %d %d/%d", moves_str,
+//	   text = util.my_snprintf( "%s: %d %d/%d", moves_str,
 //		       punit.moves_left/SINGLE_MOVE, punit.moves_left%SINGLE_MOVE,
 //		       SINGLE_MOVE);
 //	 } else {
-//	   my_snprintf(text, sizeof(text),
+//	   text = util.my_snprintf(
 //		       "%s: %d/%d", moves_str, punit.moves_left%SINGLE_MOVE,
 //		       SINGLE_MOVE);
 //	 }
 //       } else {
-//	 my_snprintf(text, sizeof(text),
+//	 text = util.my_snprintf(
 //		     "%s: %d", moves_str, punit.moves_left/SINGLE_MOVE);
 //       }
 //     }
@@ -1129,7 +1129,7 @@ public class Unit{
 //     if(punit.activity_target == S_NO_SPECIAL) {
 //       return get_activity_text (punit.activity);
 //     } else {
-//       my_snprintf(text, sizeof(text), "%s: %s",
+//       text = util.my_snprintf( "%s: %s",
 //		   get_activity_text (punit.activity),
 //		   map_get_infrastructure_text(punit.activity_target));
 //       return (text);
@@ -1283,7 +1283,7 @@ public class Unit{
 //
 //  /* Any extra missile spaces are useless to air units, but if there aren't
 //   * enough missile spaces the missles must take up airunit capacity. */
-//  return airall + MIN(misonly, 0);
+//  return airall + Math.min(misonly, 0);
 //}
 //
 ///**************************************************************************

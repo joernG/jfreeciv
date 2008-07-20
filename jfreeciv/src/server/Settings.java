@@ -22,7 +22,7 @@ public class Settings{
 //
 //#include "map.h"
 //
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "report.h"
 //#include "settings.h"
 //#include "stdinhand.h"
@@ -1012,7 +1012,7 @@ public class Settings{
 //	      "can be used to create power graphs after the game."), null,
 //	   GAME_DEFAULT_SCORELOG)
 //
-//  GEN_INT("gamelog", gamelog_level,
+//  GEN_INT("Gamelog.gamelog", gamelog_level,
 //	  SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_SERVER_ONLY,
 //	  N"Detail level for logging game events",
 //	  N_("Only applies if the game log feature is enabled "

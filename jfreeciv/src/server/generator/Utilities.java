@@ -120,7 +120,7 @@ public class Utilities{
 //      maxval = int_map[ptile.index];
 //    } else {
 //      maxval = MAX(maxval, int_map[ptile.index]);
-//      minval = MIN(minval, int_map[ptile.index]);
+//      minval = Math.min(minval, int_map[ptile.index]);
 //    }
 //    first = false;
 //    total++;

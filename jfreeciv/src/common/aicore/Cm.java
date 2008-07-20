@@ -1133,7 +1133,7 @@ public class Cm{
 //    lattice.p[i].lattice_index = i;
 //  }
 //
-//  freelog(LOG_LATTICE, "sorted lattice:");
+//  util.freelog(LOG_LATTICE, "sorted lattice:");
 //  print_lattice(LOG_LATTICE, lattice);
 //}
 //
@@ -1330,11 +1330,11 @@ public class Cm{
 //    }
 //    if (!choice_is_promising(state, newchoice)) {
 //      /* heuristic says we can't beat the best going this way */
-//      freelog(LOG_PRUNE_BRANCH, "--- pruning branch ---");
+//      util.freelog(LOG_PRUNE_BRANCH, "--- pruning branch ---");
 //      print_partial_solution(LOG_PRUNE_BRANCH, &state.current, state);
 //      print_tile_type(LOG_PRUNE_BRANCH, tile_type_get(state, newchoice),
 //          " + worker on ");
-//      freelog(LOG_PRUNE_BRANCH, "--- branch pruned ---");
+//      util.freelog(LOG_PRUNE_BRANCH, "--- branch pruned ---");
 //      continue;
 //    }
 //    break;
@@ -1527,7 +1527,7 @@ public class Cm{
 //
 //  for (stat = 0; stat < NUM_STATS; stat++) {
 //    if (production[stat] < state.min_production[stat]) {
-//      freelog(LOG_PRUNE_BRANCH, "--- pruning: insufficient %s (%d < %d)",
+//      util.freelog(LOG_PRUNE_BRANCH, "--- pruning: insufficient %s (%d < %d)",
 //	      cm_get_stat_name(stat), production[stat],
 //	      state.min_production[stat]);
 //      return false;
@@ -1539,7 +1539,7 @@ public class Cm{
 //    }
 //  }
 //  if (!beats_best) {
-//    freelog(LOG_PRUNE_BRANCH, "--- pruning: best is better in all ways");
+//    util.freelog(LOG_PRUNE_BRANCH, "--- pruning: best is better in all ways");
 //  }
 //  return beats_best;
 //}
@@ -1675,7 +1675,7 @@ public class Cm{
 //
 //    print_partial_solution(LOG_REACHED_LEAF, &state.current, state);
 //    if (fitness_better(value, state.best_value)) {
-//      freelog(LOG_BETTER_LEAF, ". replaces previous best");
+//      util.freelog(LOG_BETTER_LEAF, ". replaces previous best");
 //      copy_partial_solution(&state.best, &state.current, state);
 //      state.best_value = value;
 //    }
@@ -1709,7 +1709,7 @@ public class Cm{
 //  enum cm_stat stat;
 //  cm_state state = fc_malloc(sizeof(*state));
 //
-//  freelog(LOG_CM_STATE, "creating cm_state for %s (size %d)",
+//  util.freelog(LOG_CM_STATE, "creating cm_state for %s (size %d)",
 //	  pcity.name, pcity.size);
 //
 //  /* copy the arguments */
@@ -2032,7 +2032,7 @@ public class Cm{
 //  char prodstr[256];
 //
 //  snprint_production(prodstr, sizeof(prodstr), ptype.production);
-//  freelog(loglevel, "%s%s fitness %g depth %d, idx %d; %d tiles", prefix,
+//  util.freelog(loglevel, "%s%s fitness %g depth %d, idx %d; %d tiles", prefix,
 //	  prodstr, ptype.estimated_fitness, ptype.lattice_depth,
 //	  ptype.lattice_index, tile_type_num_tiles(ptype));
 //}
@@ -2043,7 +2043,7 @@ public class Cm{
 //static void print_lattice(int loglevel,
 //			  final tile_type_vector lattice)
 //{
-//  freelog(loglevel, "lattice has %u terrain types", (unsigned)lattice.size);
+//  util.freelog(loglevel, "lattice has %u terrain types", (unsigned)lattice.size);
 //  tile_type_vector_iterate(lattice, ptype) {
 //    print_tile_type(loglevel, ptype, "  ");
 //  } tile_type_vector_iterate_end;
@@ -2061,15 +2061,15 @@ public class Cm{
 //  char buf[256];
 //
 //  if(soln.idle != 0) {
-//    freelog(loglevel, "** partial solution has %d idle workers", soln.idle);
+//    util.freelog(loglevel, "** partial solution has %d idle workers", soln.idle);
 //  } else {
-//    freelog(loglevel, "** completed solution:");
+//    util.freelog(loglevel, "** completed solution:");
 //  }
 //
 //  snprint_production(buf, sizeof(buf), soln.production);
-//  freelog(loglevel, "production: %s", buf);
+//  util.freelog(loglevel, "production: %s", buf);
 //
-//  freelog(loglevel, "tiles used:");
+//  util.freelog(loglevel, "tiles used:");
 //  for (i = 0; i < num_types(state); i++) {
 //    if (soln.worker_counts[i] != 0) {
 //      snprintf(buf, sizeof(buf),
@@ -2084,7 +2084,7 @@ public class Cm{
 //    }
 //  }
 //
-//  freelog(loglevel, "tiles available:");
+//  util.freelog(loglevel, "tiles available:");
 //  for (i = last_type; i < num_types(state); i++) {
 //    final cm_tile_type ptype = tile_type_get(state, i);
 //
@@ -2115,7 +2115,7 @@ public class Cm{
 //
 //  applies = counts.apply_count;
 //
-//  freelog(LOG_TIME_STATS,
+//  util.freelog(LOG_TIME_STATS,
 //      "CM-%s: overall=%fs queries=%d %fms / query, %d applies",
 //      counts.name, s, queries, ms / q, applies);
 //}
@@ -2126,30 +2126,30 @@ public class Cm{
 //****************************************************************************/
 //void cm_print_city(final city pcity)
 //{
-//  freelog(Log.LOG_NORMAL, "print_city(city='%s'(id=%d))",
+//  util.freelog(Log.LOG_NORMAL, "print_city(city='%s'(id=%d))",
 //          pcity.name, pcity.id);
-//  freelog(Log.LOG_NORMAL,
+//  util.freelog(Log.LOG_NORMAL,
 //          "  size=%d, entertainers=%d, scientists=%d, taxmen=%d",
 //          pcity.size, pcity.specialists[SP_ELVIS],
 //          pcity.specialists[SP_SCIENTIST],
 //          pcity.specialists[SP_TAXMAN]);
-//  freelog(Log.LOG_NORMAL, "  workers at:");
+//  util.freelog(Log.LOG_NORMAL, "  workers at:");
 //  my_city_map_iterate(pcity, x, y) {
 //    if (pcity.city_map[x][y] == C_TILE_WORKER) {
-//      freelog(Log.LOG_NORMAL, "    (%2d,%2d)", x, y);
+//      util.freelog(Log.LOG_NORMAL, "    (%2d,%2d)", x, y);
 //    }
 //  } my_city_map_iterate_end;
 //
-//  freelog(Log.LOG_NORMAL, "  food    = %3d (%+3d)",
+//  util.freelog(Log.LOG_NORMAL, "  food    = %3d (%+3d)",
 //          pcity.food_prod, pcity.food_surplus);
-//  freelog(Log.LOG_NORMAL, "  shield  = %3d (%+3d)",
+//  util.freelog(Log.LOG_NORMAL, "  shield  = %3d (%+3d)",
 //          pcity.shield_prod, pcity.shield_surplus);
-//  freelog(Log.LOG_NORMAL, "  trade   = %3d", pcity.trade_prod);
+//  util.freelog(Log.LOG_NORMAL, "  trade   = %3d", pcity.trade_prod);
 //
-//  freelog(Log.LOG_NORMAL, "  gold    = %3d (%+3d)", pcity.tax_total,
+//  util.freelog(Log.LOG_NORMAL, "  gold    = %3d (%+3d)", pcity.tax_total,
 //          city_gold_surplus(pcity, pcity.tax_total));
-//  freelog(Log.LOG_NORMAL, "  luxury  = %3d", pcity.luxury_total);
-//  freelog(Log.LOG_NORMAL, "  science = %3d", pcity.science_total);
+//  util.freelog(Log.LOG_NORMAL, "  luxury  = %3d", pcity.luxury_total);
+//  util.freelog(Log.LOG_NORMAL, "  science = %3d", pcity.science_total);
 //}
 //
 //
@@ -2160,15 +2160,15 @@ public class Cm{
 //		     final cm_result result)
 //{
 //  int y, i, worker = cm_count_worker(pcity, result);
-//  freelog(Log.LOG_NORMAL, "print_result(result=%p)", result);
-//  freelog(Log.LOG_NORMAL,
+//  util.freelog(Log.LOG_NORMAL, "print_result(result=%p)", result);
+//  util.freelog(Log.LOG_NORMAL,
 //      "print_result:  found_a_valid=%d disorder=%d happy=%d",
 //      result.found_a_valid, result.disorder, result.happy);
 //
-//  freelog(Log.LOG_NORMAL, "print_result:  workers at:");
+//  util.freelog(Log.LOG_NORMAL, "print_result:  workers at:");
 //  my_city_map_iterate(pcity, x, y) {
 //    if (result.worker_positions_used[x][y]) {
-//      freelog(Log.LOG_NORMAL, "print_result:    (%2d,%2d)", x, y);
+//      util.freelog(Log.LOG_NORMAL, "print_result:    (%2d,%2d)", x, y);
 //    }
 //  } my_city_map_iterate_end;
 //
@@ -2189,14 +2189,14 @@ public class Cm{
 //        line[x] = '.';
 //      }
 //    }
-//    freelog(Log.LOG_NORMAL, "print_result: %s", line);
+//    util.freelog(Log.LOG_NORMAL, "print_result: %s", line);
 //  }
-//  freelog(Log.LOG_NORMAL,
+//  util.freelog(Log.LOG_NORMAL,
 //      "print_result:  people: (workers/specialists) %d/%s",
 //      worker, specialists_string(result.specialists));
 //
 //  for (i = 0; i < NUM_STATS; i++) {
-//    freelog(Log.LOG_NORMAL, "print_result:  %10s surplus=%d",
+//    util.freelog(Log.LOG_NORMAL, "print_result:  %10s surplus=%d",
 //        cm_get_stat_name(i), result.surplus[i]);
 //  }
 //}

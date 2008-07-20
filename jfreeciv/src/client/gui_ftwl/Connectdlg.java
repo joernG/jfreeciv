@@ -90,7 +90,7 @@ public class Connectdlg{
 //  if (strcmp(id, "port") == 0) {
 //    static char buf[10];
 //
-//    my_snprintf(buf, sizeof(buf), "%d", server_port);
+//    buf = util.my_snprintf( "%d", server_port);
 //    return buf;
 //  } else if (strcmp(id, "username") == 0) {
 //    return user_name;
@@ -171,13 +171,13 @@ public class Connectdlg{
 //  char buf[512];
 //  int outcome;
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      _("Auto-connecting to server \"%s\" at port %d as \"%s\""),
 //	      server_host, server_port, user_name);
 //  append_output_window(buf);
 //  outcome = get_server_address(server_host, server_port, buf, sizeof(buf));
 //  if (outcome < 0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);
@@ -204,7 +204,7 @@ public class Connectdlg{
 //  /* abort if after 10 seconds the server couldn't be reached */
 //
 //  if (AUTOCONNECT_INTERVAL * count >= 10000) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Failed to contact server \"%s\" at port "
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, user_name, count);
@@ -221,7 +221,7 @@ public class Connectdlg{
 //    return;
 //  default:
 //    /* All other errors are fatal */
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, errbuf);

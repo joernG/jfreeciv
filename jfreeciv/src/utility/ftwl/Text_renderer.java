@@ -183,7 +183,7 @@ public class Text_renderer{
 //
 //	glyph_index = FT_Get_Char_Index(face, c);
 //	if (glyph_index == 0) {
-//	  freelog(LOG_ERROR, "can't find glyph for %d '%c'", c, c);
+//	  util.freelog(Log.LOG_ERROR, "can't find glyph for %d '%c'", c, c);
 //	  assert(0);
 //	}
 //
@@ -194,7 +194,7 @@ public class Text_renderer{
 //			 ft_kerning_default, &delta);
 //	  pen.x += delta.x >> 6;
 //	  if (0 && delta.x)
-//	    freelog(Log.LOG_NORMAL, "kerning between %c and %c is %ld in '%s'\n",
+//	    util.freelog(Log.LOG_NORMAL, "kerning between %c and %c is %ld in '%s'\n",
 //		    text[i - 1], c, delta.x >> 6, text);
 //	}
 //
@@ -207,7 +207,7 @@ public class Text_renderer{
 //			    anti_alias ? ft_render_mode_normal :
 //			    ft_render_mode_mono);
 //	if (error) {
-//	  freelog(LOG_ERROR, "can't render glyph for %d '%c': error=0x%x", c,
+//	  util.freelog(Log.LOG_ERROR, "can't render glyph for %d '%c': error=0x%x", c,
 //		  c, error);
 //	  assert(0);
 //	}

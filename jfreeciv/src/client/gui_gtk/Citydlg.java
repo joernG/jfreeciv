@@ -1619,7 +1619,7 @@ public class Citydlg{
 //  char buf[512];
 //  char *now;
 //
-//  my_snprintf(buf, sizeof(buf), "%s - %s citizens",
+//  buf = util.my_snprintf( "%s - %s citizens",
 //	      pdialog.pcity.name,
 //	      population_to_text(city_population(pdialog.pcity)));
 //
@@ -1654,7 +1654,7 @@ public class Citydlg{
 //  /* SMALL_TILE_WIDTH pixels.                                              */
 //
 //  if (pcity.size > 1) {
-//    width = MIN(SMALL_TILE_WIDTH,
+//    width = Math.min(SMALL_TILE_WIDTH,
 //		((NUM_CITIZENS_SHOWN - 1) * SMALL_TILE_WIDTH) /
 //		(pcity.size - 1));
 //  } else {
@@ -1810,7 +1810,7 @@ public class Citydlg{
 //    pct = 1.0;
 //  }
 //  
-//  my_snprintf(buf2, sizeof(buf2), "%s%s", descr,
+//  buf2 = util.my_snprintf( "%s%s", descr,
 //	      worklist_is_empty(&pcity.worklist) ? "" : " (worklist)");
 //  gtk_frame_set_label(GTK_FRAME
 //		      (pdialog.overview.currently_building_frame), buf2);
@@ -1867,7 +1867,7 @@ public class Citydlg{
 //    strings[1] = buf;
 //
 //    /* This takes effects (like Adam Smith's) into account. */
-//    my_snprintf(buf, sizeof(buf), "%d",
+//    buf = util.my_snprintf( "%d",
 //		improvement_upkeep(pdialog.pcity, id));
 //
 //    row = gtk_clist_append(GTK_CLIST(pdialog.overview.improvement_list),
@@ -1879,7 +1879,7 @@ public class Citydlg{
 //  }
 //  gtk_clist_thaw(GTK_CLIST(pdialog.overview.improvement_list));
 //
-//  my_snprintf(buf, sizeof(buf), "Upkeep (Total: %d)", total);
+//  buf = util.my_snprintf( "Upkeep (Total: %d)", total);
 //  gtk_clist_set_column_title(GTK_CLIST(pdialog.overview.improvement_list),
 //			     1, buf);
 //
@@ -2031,7 +2031,7 @@ public class Citydlg{
 //    gtk_widget_set_sensitive(pdialog.unit.supported_unit_boxes[i], false);
 //  }
 //
-//  my_snprintf(buf, sizeof(buf), "Supported units (%d)",
+//  buf = util.my_snprintf( "Supported units (%d)",
 //	      num_supported_units_in_city(pdialog.pcity));
 //  gtk_frame_set_label(GTK_FRAME(pdialog.overview.supported_units_frame),
 //		      buf);
@@ -2169,7 +2169,7 @@ public class Citydlg{
 //    gtk_widget_set_sensitive(pdialog.unit.present_unit_boxes[i], false);
 //  }
 //
-//  my_snprintf(buf, sizeof(buf), "Present units (%d)",
+//  buf = util.my_snprintf( "Present units (%d)",
 //	      num_present_units_in_city(pdialog.pcity));
 //  gtk_frame_set_label(GTK_FRAME(pdialog.overview.present_units_frame),
 //		      buf);
@@ -2194,9 +2194,9 @@ public class Citydlg{
 //      total += pdialog.pcity.trade_value[i];
 //
 //      if ((pcity = find_city_by_id(pdialog.pcity.trade[i]))) {
-//	my_snprintf(cityname, sizeof(cityname), "%s", pcity.name);
+//	cityname = util.my_snprintf( "%s", pcity.name);
 //      } else {
-//	my_snprintf(cityname, sizeof(cityname), "%s", "Unknown");
+//	cityname = util.my_snprintf( "%s", "Unknown");
 //      }
 //      my_snprintf(buf + buf.length(), sizeof(buf) - buf.length(),
 //		  "Trade with %s gives %d trade.\n",
@@ -2640,7 +2640,7 @@ public class Citydlg{
 //  if (ev.x > (pcity.size - 1) * pdialog.cwidth + SMALL_TILE_WIDTH)
 //    return;			/* no citizen that far to the right */
 //
-//  citnum = MIN(pcity.size - 1, ev.x / pdialog.cwidth);
+//  citnum = Math.min(pcity.size - 1, ev.x / pdialog.cwidth);
 //
 //  city_rotate_specialist(pcity, citnum);
 //}
@@ -2659,11 +2659,11 @@ public class Citydlg{
 //
 //      gdk_window_get_geometry(pdialog.overview.map_canvas.window, &x, &y,
 //			      &width, &height, &depth);
-//      freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
+//      util.freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
 //
 //      gdk_window_get_geometry(pdialog.overview.map_canvas_pixmap.window,
 //			      &x, &y, &width, &height, &depth);
-//      freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
+//      util.freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
 //    }
 //#endif
 //    if (pdialog.overview.map_canvas == w
@@ -2747,7 +2747,7 @@ public class Citydlg{
 //  value = city_buy_cost(pdialog.pcity);
 //
 //  if (game.player_ptr.economic.gold >= value) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Buy %s for %d gold?\nTreasury contains %d gold.",
 //		name, value, game.player_ptr.economic.gold);
 //
@@ -2757,7 +2757,7 @@ public class Citydlg{
 //			     "_Yes", buy_callback_yes, pdialog,
 //			     "_No", null, pdialog, 0);
 //  } else {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"%s costs %d gold.\nTreasury contains %d gold.",
 //		name, value, game.player_ptr.economic.gold);
 //
@@ -3006,7 +3006,7 @@ public class Citydlg{
 //    return;
 //
 //  pdialog.sell_id = id;
-//  my_snprintf(buf, sizeof(buf), "Sell %s for %d gold?",
+//  buf = util.my_snprintf( "Sell %s for %d gold?",
 //	      get_impr_name_ex(pdialog.pcity, id), impr_sell_gold(id));
 //
 //  pdialog.sell_shell = popup_message_dialog(pdialog.shell,
@@ -3061,7 +3061,7 @@ public class Citydlg{
 //
 //    if (!is_wonder(id)) {
 //      char buf[64];
-//      my_snprintf(buf, sizeof(buf), "Sell (worth %d gold)",
+//      buf = util.my_snprintf( "Sell (worth %d gold)",
 //		  impr_sell_gold(id));
 //      gtk_set_label(GTK_BUTTON(pdialog.overview.sell_command).child,
 //		    buf);

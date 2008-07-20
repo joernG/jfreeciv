@@ -280,10 +280,10 @@ public class Airgoto{
 //      /* Total turns to get from the start to the pto refuelling point */
 //      int total_turns = pfrom.turns + turns_used;
 //
-//      freelog(LOG_DEBUG, "Considering: (%i,%i).(%i,%i), in (%d %d)",
+//      util.freelog(LOG_DEBUG, "Considering: (%i,%i).(%i,%i), in (%d %d)",
 //              pfrom.tile.x, pfrom.tile.y, pto.tile.x, pto.tile.y, 
 //              total_turns, moves_left);
-//      freelog(LOG_DEBUG, "\t\t compared to (%d %d)", 
+//      util.freelog(LOG_DEBUG, "\t\t compared to (%d %d)", 
 //              pto.turns, pto.moves_left);
 //
 //      if ( (pto.turns > total_turns) 
@@ -291,7 +291,7 @@ public class Airgoto{
 //               && (moves_left > pto.moves_left)) ) {
 //        /* Found a new refuelling point or at least a new route */
 //        if (pto.listed == RLS_ALREADY_NOT) {
-//          freelog(LOG_ERROR, "Found a shorter route to a node: (%i,%i)", 
+//          util.freelog(Log.LOG_ERROR, "Found a shorter route to a node: (%i,%i)", 
 //                  pto.tile.x, pto.tile.y);
 //          assert(false);
 //        }
@@ -304,7 +304,7 @@ public class Airgoto{
 //	pq_insert(rp_list, k, queue_priority_function(pto));
 //        pto.listed = RLS_YES;
 //        
-//        freelog(LOG_DEBUG, "Recorded (%i,%i) from (%i,%i) in (%d %d)", 
+//        util.freelog(LOG_DEBUG, "Recorded (%i,%i) from (%i,%i) in (%d %d)", 
 //                pto.tile.x, pto.tile.y, pfrom.tile.x, pfrom.tile.y, 
 //                total_turns, moves_left);
 //      }
@@ -361,7 +361,7 @@ public class Airgoto{
 //  boolean reached_goal = false;
 //
 //  while((next_point = refuel_iterate_next(my_list)) != null) {
-//    freelog(LOG_DEBUG, "Next point (%d, %d), priority %d", 
+//    util.freelog(LOG_DEBUG, "Next point (%d, %d), priority %d", 
 //            next_point.tile.x, next_point.tile.y,
 //            queue_priority_function(next_point));
 //    if (next_point . type == FUEL_GOAL) {
@@ -376,13 +376,13 @@ public class Airgoto{
 //    refuel backtrack = next_point;
 //    while (backtrack.coming_from.type != FUEL_START) {
 //      backtrack = backtrack.coming_from;
-//      freelog(LOG_DEBUG, "(%i,%i) .",
+//      util.freelog(LOG_DEBUG, "(%i,%i) .",
 //	      backtrack.tile.x, backtrack.tile.y);
 //    }
-//    freelog(LOG_DEBUG, "Found a route!");
+//    util.freelog(LOG_DEBUG, "Found a route!");
 //    *dest_tile = backtrack.tile;
 //  } else {
-//    freelog(LOG_DEBUG, "Didn't find a route...");
+//    util.freelog(LOG_DEBUG, "Didn't find a route...");
 //  }
 //  refuel_iterate_end(my_list);
 //

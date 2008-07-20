@@ -266,26 +266,26 @@ public class Connection{
 //	int didget;
 
 //	if (!buffer_ensure_free_extra_space(buffer, MAX_LEN_PACKET)) {
-//	freelog(LOG_ERROR, "can't grow buffer");
+//	util.freelog(Log.LOG_ERROR, "can't grow buffer");
 //	return -1;
 //	}
 
-//	freelog(LOG_DEBUG, "try reading %d bytes", buffer.nsize - buffer.ndata);
+//	util.freelog(LOG_DEBUG, "try reading %d bytes", buffer.nsize - buffer.ndata);
 //	didget = my_readsocket(sock, (char *) (buffer.data + buffer.ndata),
 //	buffer.nsize - buffer.ndata);
 
 //	if (didget > 0) {
 //	buffer.ndata+=didget;
-//	freelog(LOG_DEBUG, "didget:%d", didget);
+//	util.freelog(LOG_DEBUG, "didget:%d", didget);
 //	return didget;
 //	}
 //	else if (didget == 0) {
-//	freelog(LOG_DEBUG, "EOF on socket read");
+//	util.freelog(LOG_DEBUG, "EOF on socket read");
 //	return -1;
 //	}
 //	#ifdef NONBLOCKING_SOCKETS
 //	else if (errno == EWOULDBLOCK || errno == EAGAIN) {
-//	freelog(LOG_DEBUG, "EGAIN on socket read");
+//	util.freelog(LOG_DEBUG, "EGAIN on socket read");
 //	return 0;
 //	}
 //	#endif
@@ -345,8 +345,8 @@ public class Connection{
 //	}
 
 //	if (FD_ISSET(pc.sock, &writefs)) {
-//	nblock=MIN(buf.ndata-start, MAX_LEN_PACKET);
-//	freelog(LOG_DEBUG,"trying to write %d limit=%d",nblock,limit);
+//	nblock=Math.min(buf.ndata-start, MAX_LEN_PACKET);
+//	util.freelog(LOG_DEBUG,"trying to write %d limit=%d",nblock,limit);
 //	if((nput=my_writesocket(pc.sock, 
 //	(final String)buf.data+start, nblock)) == -1) {
 //	#ifdef NONBLOCKING_SOCKETS
@@ -427,7 +427,7 @@ public class Connection{
 
 //	buf = pc.send_buffer;
 
-//	freelog(LOG_DEBUG, "add %d bytes to %d (space=%d)", len, buf.ndata,
+//	util.freelog(LOG_DEBUG, "add %d bytes to %d (space=%d)", len, buf.ndata,
 //	buf.nsize);
 //	if (!buffer_ensure_free_extra_space(buf, len)) {
 //	if (delayed_disconnect > 0) {
@@ -458,7 +458,7 @@ public class Connection{
 //	if(pc.send_buffer.do_buffer_sends > 0) {
 //	flush_connection_send_buffer_packets(pc);
 //	if (!add_connection_data(pc, data, len)) {
-//	freelog(LOG_ERROR, "cut connection %s due to huge send buffer (1)",
+//	util.freelog(Log.LOG_ERROR, "cut connection %s due to huge send buffer (1)",
 //	conn_description(pc));
 //	}
 //	flush_connection_send_buffer_packets(pc);
@@ -466,7 +466,7 @@ public class Connection{
 //	else {
 //	flush_connection_send_buffer_all(pc);
 //	if (!add_connection_data(pc, data, len)) {
-//	freelog(LOG_ERROR, "cut connection %s due to huge send buffer (2)",
+//	util.freelog(Log.LOG_ERROR, "cut connection %s due to huge send buffer (2)",
 //	conn_description(pc));
 //	}
 //	flush_connection_send_buffer_all(pc);
@@ -494,7 +494,7 @@ public class Connection{
 //	if (pc && pc.used) {
 //	pc.send_buffer.do_buffer_sends--;
 //	if (pc.send_buffer.do_buffer_sends < 0) {
-//	freelog(LOG_ERROR, "Too many calls to unbuffer %s!", pc.username);
+//	util.freelog(Log.LOG_ERROR, "Too many calls to unbuffer %s!", pc.username);
 //	pc.send_buffer.do_buffer_sends = 0;
 //	}
 //	if(pc.send_buffer.do_buffer_sends == 0)
@@ -620,7 +620,7 @@ public class Connection{
 //	buffer[0] = '\0';
 
 //	if (*pconn.username != '\0') {
-//	my_snprintf(buffer, sizeof(buffer), "%s from %s",
+//	buffer = util.my_snprintf( "%s from %s",
 //	pconn.username, pconn.addr); 
 //	} else {
 //	sz_strlcpy(buffer, "server");
@@ -648,7 +648,7 @@ public class Connection{
 //	int result = old_request_id + 1;
 
 //	if ((result & 0xffff) == 0) {
-//	freelog(Log.LOG_NORMAL,
+//	util.freelog(Log.LOG_NORMAL,
 //	"INFORMATION: request_id has wrapped around; "
 //	"setting from %d to 2", result);
 //	result = 2;
@@ -747,7 +747,7 @@ public class Connection{
 //	void connection_common_close(connection pconn)
 //	{
 //	if (!pconn.used) {
-//	freelog(LOG_ERROR, "WARNING: Trying to close already closed connection");
+//	util.freelog(Log.LOG_ERROR, "WARNING: Trying to close already closed connection");
 //	} else {
 //	my_closesocket(pconn.sock);
 //	pconn.used = false;

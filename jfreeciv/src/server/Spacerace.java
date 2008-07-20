@@ -1,19 +1,26 @@
 package server;
+import static server.spaceace.player_spaceship.*;
+import static common.Game.*;
+import static server.Plrhand.*;
+import port.util;
+import common.Connection;
+import common.Nation;
+import common.Spaceship;
+import common.event_type;
+import common.game.server_states;
+import common.packet_gen.packet_spaceship_info;
+import common.packets.spaceship_place_type;
+import common.play_spaceship.spaceship_state;
+import common.player.player;
+
+import server.gamelog.EEndGameState;
+import server.gamelog.EGamelog;
+import server.spaceace.player_spaceship;
+import utility.Log;
+import utility.Shared;
+import utility.Speclists;
 
 public class Spacerace{
-//#include "events.h"
-//#include "fcintl.h"
-//#include "game.h"
-//#include "log.h"
-//#include "packets.h"
-//#include "shared.h"
-//#include "spaceship.h"
-//
-//#include "gamelog.h"
-//#include "plrhand.h"
-//#include "srv_main.h"
-//
-//#include "spacerace.h"
 
 
 	/***************************************************************************
@@ -32,15 +39,15 @@ public class Spacerace{
 		int life_support=0;
 		int solar_panels=0;
 
-		assert(ship.structurals <= NUM_SS_STRUCTURALS);
-		assert(ship.components <= NUM_SS_COMPONENTS);
-		assert(ship.modules <= NUM_SS_MODULES);
+		assert(ship.structurals <= player_spaceship.NUM_SS_STRUCTURALS);
+		assert(ship.components <= player_spaceship.NUM_SS_COMPONENTS);
+		assert(ship.modules <= player_spaceship.NUM_SS_MODULES);
 
 		ship.mass = 0;
 		ship.support_rate = ship.energy_rate =
-			ship.success_rate = ship.travel_time = 0.0;
+			ship.success_rate = ship.travel_time = (float) 0.0;
 
-		for(i=0; i<NUM_SS_STRUCTURALS; i++) {
+		for(i=0; i<player_spaceship.NUM_SS_STRUCTURALS; i++) {
 			if (ship.structure[i]) {
 				ship.mass += (i<6) ? 200 : 100;
 				/*
@@ -50,19 +57,19 @@ public class Spacerace{
 			}
 		}
 		for(i=0; i<ship.fuel; i++) {
-			if (ship.structure[components_info[i*2].required]) fuel++;
+			if (ship.structure[Spaceship.components_info[i*2].required]) fuel++;
 		}
 		for(i=0; i<ship.propulsion; i++) {
-			if (ship.structure[components_info[i*2+1].required]) propulsion++;
+			if (ship.structure[Spaceship.components_info[i*2+1].required]) propulsion++;
 		}
 		for(i=0; i<ship.habitation; i++) {
-			if (ship.structure[modules_info[i*3].required]) habitation++;
+			if (ship.structure[Spaceship.modules_info[i*3].required]) habitation++;
 		}
 		for(i=0; i<ship.life_support; i++) {
-			if (ship.structure[modules_info[i*3+1].required]) life_support++;
+			if (ship.structure[Spaceship.modules_info[i*3+1].required]) life_support++;
 		}
 		for(i=0; i<ship.solar_panels; i++) {
-			if (ship.structure[modules_info[i*3+2].required]) solar_panels++;
+			if (ship.structure[Spaceship.modules_info[i*3+2].required]) solar_panels++;
 		}
 
 		ship.mass += 1600 * (habitation + life_support)
@@ -71,14 +78,14 @@ public class Spacerace{
 		ship.population = habitation * 10000;
 
 		if (habitation > 0) {
-			ship.support_rate = life_support / (double) habitation;
+			ship.support_rate = (float) (life_support / (double) habitation);
 		}
 		if (life_support + habitation > 0) {
-			ship.energy_rate = 2.0 * solar_panels / (double)(life_support+habitation);
+			ship.energy_rate = (float) (2.0 * solar_panels / (double)(life_support+habitation));
 		}
 		if (fuel>0 && propulsion>0) {
 			ship.success_rate =
-				MIN(ship.support_rate, 1.0) * MIN(ship.energy_rate, 1.0);
+				(float) (Math.min(ship.support_rate, 1.0) * Math.min(ship.energy_rate, 1.0));
 		}
 
 		/*
@@ -88,8 +95,7 @@ public class Spacerace{
 		 * relevant. --dwp
 		 */
 
-		ship.travel_time = ship.mass
-		/ (200.0 * MIN(propulsion,fuel) + 20.0);
+		ship.travel_time = (float) (ship.mass / (200.0 * Math.min(propulsion,fuel) + 20.0));
 
 	}
 
@@ -102,15 +108,15 @@ public class Spacerace{
 	{
 		int j;
 
-		if (!dest) dest = &game.game_connections;
+		if (null==dest) dest = game.game_connections;
 
 		for(player pplayer: game.players){
-			if (!src || pplayer == src) {
-				struct packet_spaceship_info info;
-				player_spaceship ship = &pplayer.spaceship;
+			if (null==src || pplayer == src) {
+				packet_spaceship_info info = new packet_spaceship_info();
+				player_spaceship ship = pplayer.spaceship;
 
 				info.player_num = pplayer.player_no;
-				info.sship_state = ship.state;
+				info.sship_state = ship.state.ordinal();
 				info.structurals = ship.structurals;
 				info.components = ship.components;
 				info.modules = ship.modules;
@@ -127,12 +133,12 @@ public class Spacerace{
 				info.success_rate = ship.success_rate;
 				info.travel_time = ship.travel_time;
 
-				for(j=0; j<NUM_SS_STRUCTURALS; j++) {
+				for(j=0; j<player_spaceship.NUM_SS_STRUCTURALS; j++) {
 					info.structure[j] = ship.structure[j] ? '1' : '0';
 				}
 				info.structure[j] = '\0';
 
-				lsend_packet_spaceship_info(dest, &info);
+				info.lsend_packet_spaceship_info(dest);
 			}
 		}
 	}
@@ -142,34 +148,34 @@ public class Spacerace{
 	 **************************************************************************/
 	void handle_spaceship_launch(player pplayer)
 	{
-		player_spaceship ship = &pplayer.spaceship;
+		player_spaceship ship = pplayer.spaceship;
 		int arrival;
 
-		if (!find_palace(pplayer)) {
+		if (null==pplayer.find_palace()) {
 			notify_player(pplayer,
-					_("Game: You need to have a capital in order to launch "
+					("Game: You need to have a capital in order to launch "+
 					"your spaceship."));
 			return;
 		}
-		if (ship.state >= SSHIP_LAUNCHED) {
+		if (ship.state.ordinal() >= spaceship_state.SSHIP_LAUNCHED.ordinal()) {
 			notify_player(pplayer, "Game: Your spaceship is already launched!");
 			return;
 		}
-		if (ship.state != SSHIP_STARTED
+		if (ship.state != spaceship_state.SSHIP_STARTED
 				|| ship.success_rate == 0.0) {
 			notify_player(pplayer, "Game: Your spaceship can't be launched yet!");
 			return;
 		}
 
-		ship.state = SSHIP_LAUNCHED;
+		ship.state = spaceship_state.SSHIP_LAUNCHED;
 		ship.launch_year = game.year;
 		arrival = ship.launch_year + (int) ship.travel_time;
 
-		notify_player_ex(null, null, E_SPACESHIP,
-				_("Game: The %s have launched a spaceship!  "
+		notify_player_ex(null, null, event_type.E_SPACESHIP,
+				("Game: The %s have launched a spaceship!  "+
 				"It is estimated to arrive on Alpha Centauri in %s."),
-				get_nation_name_plural(pplayer.nation),
-				textyear(arrival));
+				Nation.get_nation_name_plural(pplayer.nation),
+				Shared.textyear(arrival));
 
 		send_spaceship_info(pplayer, null);
 	}
@@ -178,31 +184,31 @@ public class Spacerace{
 	 * ...
 	 **************************************************************************/
 	void handle_spaceship_place(player pplayer,
-			enum spaceship_place_type type, int num)
+			spaceship_place_type type, int num)
 	{
-		player_spaceship ship = &pplayer.spaceship;
+		player_spaceship ship = pplayer.spaceship;
 
-		if (ship.state == SSHIP_NONE) {
-			notify_player(pplayer, _("Game: Spaceship action received,"
+		if (ship.state == spaceship_state.SSHIP_NONE) {
+			notify_player(pplayer, ("Game: Spaceship action received,"+
 			" but you don't have a spaceship!"));
 			return;
 		}
-		if (ship.state >= SSHIP_LAUNCHED) {
-			notify_player(pplayer, _("Game: You can't modify your"
+		if (ship.state.ordinal() >= spaceship_state.SSHIP_LAUNCHED.ordinal()) {
+			notify_player(pplayer, ("Game: You can't modify your"+
 			" spaceship after launch!"));
 			return;
 		}
-		if (type == SSHIP_PLACE_STRUCTURAL) {
-			if (num<0 || num>=NUM_SS_STRUCTURALS || ship.structure[num]) {
+		if (type == spaceship_place_type.SSHIP_PLACE_STRUCTURAL) {
+			if (num<0 || num>=player_spaceship.NUM_SS_STRUCTURALS || ship.structure[num]) {
 				return;
 			}
-			if (num_spaceship_structurals_placed(ship) >= ship.structurals) {
-				notify_player(pplayer, _("Game: You don't have any unplaced"
+			if (ship.num_spaceship_structurals_placed() >= ship.structurals) {
+				notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Structurals!"));
 				return;
 			}
-			if (num!=0 && !ship.structure[structurals_info[num].required]) {
-				notify_player(pplayer, _("Game: That Space Structural"
+			if (num!=0 && !ship.structure[Spaceship.structurals_info[num].required]) {
+				notify_player(pplayer, ("Game: That Space Structural"+
 				" would not be connected!"));
 				return;
 			}
@@ -211,17 +217,17 @@ public class Spacerace{
 			send_spaceship_info(pplayer, null);
 			return;
 		}
-		if (type == SSHIP_PLACE_FUEL) {
+		if (type == spaceship_place_type.SSHIP_PLACE_FUEL) {
 			if (ship.fuel != num-1) {
 				return;
 			}
 			if (ship.fuel + ship.propulsion >= ship.components) {
-				notify_player(pplayer, _("Game: You don't have any unplaced"
+				notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Components!"));
 				return;
 			}
-			if (num > NUM_SS_COMPONENTS/2) {
-				notify_player(pplayer, _("Game: Your spaceship already has"
+			if (num > player_spaceship.NUM_SS_COMPONENTS/2) {
+				notify_player(pplayer, ("Game: Your spaceship already has"+
 				" the maximum number of Fuel Components!"));
 				return;
 			}
@@ -230,17 +236,17 @@ public class Spacerace{
 			send_spaceship_info(pplayer, null);
 			return;
 		}
-		if (type == SSHIP_PLACE_PROPULSION) {
+		if (type == spaceship_place_type.SSHIP_PLACE_PROPULSION) {
 			if (ship.propulsion != num-1) {
 				return;
 			}
 			if (ship.fuel + ship.propulsion >= ship.components) {
-				notify_player(pplayer, _("Game: You don't have any unplaced"
+				notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Components!"));
 				return;
 			}
-			if (num > NUM_SS_COMPONENTS/2) {
-				notify_player(pplayer, _("Game: Your spaceship already has the"
+			if (num > player_spaceship.NUM_SS_COMPONENTS/2) {
+				notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Propulsion Components!"));
 				return;
 			}
@@ -249,18 +255,18 @@ public class Spacerace{
 			send_spaceship_info(pplayer, null);
 			return;
 		}
-		if (type == SSHIP_PLACE_HABITATION) {
+		if (type == spaceship_place_type.SSHIP_PLACE_HABITATION) {
 			if (ship.habitation != num-1) {
 				return;
 			}
 			if (ship.habitation + ship.life_support + ship.solar_panels
 					>= ship.modules) {
-				notify_player(pplayer, _("Game: You don't have any unplaced"
+				notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Modules!"));
 				return;
 			}
-			if (num > NUM_SS_MODULES/3) {
-				notify_player(pplayer, _("Game: Your spaceship already has the"
+			if (num > player_spaceship.NUM_SS_MODULES/3) {
+				notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Habitation Modules!"));
 				return;
 			}
@@ -269,18 +275,18 @@ public class Spacerace{
 			send_spaceship_info(pplayer, null);
 			return;
 		}
-		if (type == SSHIP_PLACE_LIFE_SUPPORT) {
+		if (type == spaceship_place_type.SSHIP_PLACE_HABITATION) {
 			if (ship.life_support != num-1) {
 				return;
 			}
 			if (ship.habitation + ship.life_support + ship.solar_panels
 					>= ship.modules) {
-				notify_player(pplayer, _("Game: You don't have any unplaced"
+				notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Modules!"));
 				return;
 			}
-			if (num > NUM_SS_MODULES/3) {
-				notify_player(pplayer, _("Game: Your spaceship already has the"
+			if (num > player_spaceship.NUM_SS_MODULES/3) {
+				notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Life Support Modules!"));
 				return;
 			}
@@ -289,18 +295,18 @@ public class Spacerace{
 			send_spaceship_info(pplayer, null);
 			return;
 		}
-		if (type == SSHIP_PLACE_SOLAR_PANELS) {
+		if (type == spaceship_place_type.SSHIP_PLACE_HABITATION) {
 			if (ship.solar_panels != num-1) {
 				return;
 			}
 			if (ship.habitation + ship.life_support + ship.solar_panels
 					>= ship.modules) {
-				notify_player(pplayer, _("Game: You don't have any unplaced"
+				notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Modules!"));
 				return;
 			}
-			if (num > NUM_SS_MODULES/3) {
-				notify_player(pplayer, _("Game: Your spaceship already has the"
+			if (num > player_spaceship.NUM_SS_MODULES/3) {
+				notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Solar Panel Modules!"));
 				return;
 			}
@@ -309,20 +315,22 @@ public class Spacerace{
 			send_spaceship_info(pplayer, null);
 			return;
 		}
-		freelog(LOG_ERROR, "Received unknown spaceship place type %d from %s",
+		util.freelog(Log.LOG_ERROR, "Received unknown spaceship place type %d from %s",
 				type, pplayer.name);
 	}
+
+
 
 	/***************************************************************************
 	 * ...
 	 **************************************************************************/
 	void spaceship_lost(player pplayer)
 	{
-		notify_player_ex(null, null, E_SPACESHIP,
-				_("Game: Without guidance from the capital, the %s "
+		notify_player_ex(null, null, event_type.E_SPACESHIP,
+				("Game: Without guidance from the capital, the %s "+
 				"spaceship is lost!"),
-				get_nation_name(pplayer.nation));
-		spaceship_init(&pplayer.spaceship);
+				Nation.get_nation_name(pplayer.nation));
+		pplayer.spaceship.init();
 		send_spaceship_info(pplayer, null);
 	}
 
@@ -334,26 +342,26 @@ public class Spacerace{
 		double arrival, best_arrival = 0.0;
 		player best_pplayer = null;
 
-		shuffled_for(player pplayer: game.players){
-			player_spaceship ship = &pplayer.spaceship;
+		for(player pplayer: game.players){
+			player_spaceship ship = pplayer.spaceship;
 
-			if (ship.state == SSHIP_LAUNCHED) {
+			if (ship.state == spaceship_state.SSHIP_LAUNCHED) {
 				arrival = ship.launch_year + ship.travel_time;
 				if (game.year >= (int)arrival
-						&& (!best_pplayer || arrival < best_arrival)) {
+						&& (null==best_pplayer || arrival < best_arrival)) {
 					best_arrival = arrival;
 					best_pplayer = pplayer;
 				}
 			}
-		} shuffled_players_iterate_end;
-		if (best_pplayer) {
-			best_pplayer.spaceship.state = SSHIP_ARRIVED;
-			server_state = GAME_OVER_STATE;
-			notify_player_ex(null, null, E_SPACESHIP,
-					_("Game: The %s spaceship has arrived "
+		} 
+		if (best_pplayer!=null) {
+			best_pplayer.spaceship.state = spaceship_state.SSHIP_ARRIVED;
+			Srv_main.server_state = server_states.GAME_OVER_STATE;
+			notify_player_ex(null, null, event_type.E_SPACESHIP,
+					("Game: The %s spaceship has arrived "+
 					"at Alpha Centauri."),
-					get_nation_name(best_pplayer.nation));
-			gamelog(GAMELOG_JUDGE, GL_LONEWIN, best_pplayer);
+					Nation.get_nation_name(best_pplayer.nation));
+			Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, EEndGameState.GL_LONEWIN, best_pplayer);
 		}
 	}
 }

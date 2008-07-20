@@ -136,7 +136,7 @@ public class Graphics{
 //  radar_gfx_sprite = load_gfxfile(minimap_intro_filename);
 //  tot=radar_gfx_sprite.width;
 //
-//  my_snprintf(s, sizeof(s), "%d.%d.%d%s",
+//  s = util.my_snprintf( "%d.%d.%d%s",
 //	      MAJOR_VERSION, MINOR_VERSION,
 //	      PATCH_VERSION, VERSION_LABEL);
 //  pango_layout_set_text(layout, s, -1);
@@ -343,7 +343,7 @@ public class Graphics{
 //  int	     w, h;
 //
 //  if (!(im = gdk_pixbuf_new_from_file(filename, null))) {
-//    freelog(LOG_FATAL, "Failed reading graphics file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed reading graphics file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //

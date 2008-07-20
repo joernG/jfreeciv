@@ -186,7 +186,7 @@ public class Graphics{
 //  }
 //  
 //  if ((pBuf = IMG_Load(pFname)) == null) {
-//    freelog(LOG_ERROR, "load_surf: Failed to load graphic file %s!",
+//    util.freelog(Log.LOG_ERROR, "load_surf: Failed to load graphic file %s!",
 //	    pFname);
 //    return null;
 //  }
@@ -194,7 +194,7 @@ public class Graphics{
 //  if(Main.screen) {
 //    SDL_Surface *pNew_sur;
 //    if ((pNew_sur = SDL_DisplayFormat(pBuf)) == null) {
-//      freelog(LOG_ERROR, _("load_surf: Unable to convert file %s "
+//      util.freelog(Log.LOG_ERROR, _("load_surf: Unable to convert file %s "
 //			 "into screen's format!"), pFname);
 //    } else {
 //      FREESURFACE(pBuf);
@@ -216,13 +216,13 @@ public class Graphics{
 //  SDL_PixelFormat *pSpf = SDL_GetVideoSurface().format;
 //
 //  if ((pBuf = IMG_Load(pFname)) == null) {
-//    freelog(LOG_ERROR, _("load_surf_with_flags: "
+//    util.freelog(Log.LOG_ERROR, _("load_surf_with_flags: "
 //                         "Unable to load file %s."), pFname);
 //    return null;
 //  }
 //
 //  if ((pNew_sur = SDL_ConvertSurface(pBuf, pSpf, iFlags)) == null) {
-//    freelog(LOG_ERROR, _("Unable to convert image from file %s "
+//    util.freelog(Log.LOG_ERROR, _("Unable to convert image from file %s "
 //			 "into format %d."), pFname, iFlags);
 //    return pBuf;
 //  }
@@ -247,7 +247,7 @@ public class Graphics{
 //					    pSpf.Bmask, pSpf.Amask);
 //
 //  if (!pSurf) {
-//    freelog(LOG_ERROR, _("Unable to create Sprite (Surface) of size "
+//    util.freelog(Log.LOG_ERROR, _("Unable to create Sprite (Surface) of size "
 //			 "%d x %d %d Bits in format %d"), iWidth, 
 //	    			iHeight, pSpf.BitsPerPixel, iFlags);
 //    return null;
@@ -847,7 +847,7 @@ public class Graphics{
 //    error = (SDL_Init(iFlags) < 0);
 //  }
 //  if (error) {
-//    freelog(LOG_FATAL, "Unable to initialize SDL library: %s",
+//    util.freelog(LOG_FATAL, "Unable to initialize SDL library: %s",
 //	    SDL_GetError());
 //    exit(1);
 //  }
@@ -856,7 +856,7 @@ public class Graphics{
 //
 //  /* Initialize the TTF library */
 //  if (TTF_Init() < 0) {
-//    freelog(LOG_FATAL, "Unable to initialize  SDL_ttf library: %s",
+//    util.freelog(LOG_FATAL, "Unable to initialize  SDL_ttf library: %s",
 //	    						SDL_GetError());
 //    exit(2);
 //  }
@@ -894,17 +894,17 @@ public class Graphics{
 //
 //  /* Check to see if a particular video mode is supported */
 //  if ((iDepth = SDL_VideoModeOK(iWidth, iHeight, iDepth, iFlags)) == 0) {
-//    freelog(LOG_ERROR, _("No available mode for this resolution "
+//    util.freelog(Log.LOG_ERROR, _("No available mode for this resolution "
 //			 ": %d x %d %d bpp"), iWidth, iHeight, iDepth);
 //
-//    freelog(LOG_DEBUG, _("Setting default resolution to : "
+//    util.freelog(LOG_DEBUG, _("Setting default resolution to : "
 //    					"640 x 480 16 bpp SW"));
 //
 //    Main.screen = SDL_SetVideoMode(640, 480, 16, SDL_SWSURFACE);
 //  } else /* set video mode */
 //    if ((Main.screen = SDL_SetVideoMode(iWidth, iHeight,
 //					iDepth, iFlags)) == null) {
-//    freelog(LOG_ERROR, _("Unable to set this resolution: "
+//    util.freelog(Log.LOG_ERROR, _("Unable to set this resolution: "
 //			 "%d x %d %d bpp %s"),
 //	    		iWidth, iHeight, iDepth, SDL_GetError());
 //
@@ -912,7 +912,7 @@ public class Graphics{
 //  }
 //
 //
-//  freelog(LOG_DEBUG, "Setting resolution to: %d x %d %d bpp",
+//  util.freelog(LOG_DEBUG, "Setting resolution to: %d x %d %d bpp",
 //	  					iWidth, iHeight, iDepth);
 //
 //  mapview_canvas.width = iWidth;
@@ -3710,7 +3710,7 @@ public class Graphics{
 //  SDL_Surface *pBuf = null;
 //
 //  if ((pBuf = IMG_Load(filename)) == null) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "load_surf: Unable to load graphic file %s!",
 //	    filename);
 //    return null;		/* Should I use abotr() ? */
@@ -3722,12 +3722,12 @@ public class Graphics{
 //
 //  if (correct_black(pBuf)) {
 //    pNew = pBuf;
-//    freelog(LOG_DEBUG, "%s load with own %d bpp format !", filename,
+//    util.freelog(LOG_DEBUG, "%s load with own %d bpp format !", filename,
 //	    pNew.format.BitsPerPixel);
 //  } else {
 //    Uint32 color;
 //    
-//    freelog(LOG_DEBUG, "%s (%d bpp) load with screen (%d bpp) format !",
+//    util.freelog(LOG_DEBUG, "%s (%d bpp) load with screen (%d bpp) format !",
 //	    filename, pBuf.format.BitsPerPixel,
 //	    Main.screen.format.BitsPerPixel);
 //

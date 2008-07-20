@@ -118,7 +118,7 @@ public class Spaceshipdlg{
 //
 //  if (game.spacerace
 //      && pplayer.player_no == game.player_idx
-//      && pship.state == SSHIP_STARTED
+//      && pship.state == spaceship_state.SSHIP_STARTED
 //      && pship.success_rate > 0)
 //  {
 //    set(pdialog.launch_button, MUIA_Disabled, false);
@@ -262,12 +262,12 @@ public class Spaceshipdlg{
 //  char buf[512], arrival[16] = "-   ";
 //  player_spaceship pship = &(pdialog.pplayer.spaceship);
 //
-//  if (pship.state == SSHIP_LAUNCHED)
+//  if (pship.state == spaceship_state.SSHIP_LAUNCHED)
 //  {
-//    sz_strlcpy(arrival, textyear((int) (pship.launch_year
+//    sz_strlcpy(arrival, Shared.textyear((int) (pship.launch_year
 //				    + (int) pship.travel_time)));
 //  }
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	  _("%5d\n"
 //	  "%5d %%\n"
 //	  "%5d %%\n"

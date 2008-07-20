@@ -146,7 +146,7 @@ public class Support{
 //  error = GetLastError();
 //  if (!FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 //		     null, error, 0, buf, sizeof(buf), null)) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"error %ld (failed FormatMessage)", error);
 //  }
 //  return buf;
@@ -156,7 +156,7 @@ public class Support{
 //#else
 //  static char buf[64];
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "error %d (compiled without strerror)", errno);
 //  return buf;
 //#endif
@@ -353,7 +353,7 @@ public class Support{
 //  return r;
 //#else
 //  {
-//    /* Don't use fc_malloc() or freelog() here, since they may call
+//    /* Don't use fc_malloc() or util.freelog() here, since they may call
 //       my_vsnprintf() if it fails.  */
 // 
 //    static char *buf;

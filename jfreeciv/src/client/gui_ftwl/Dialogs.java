@@ -39,7 +39,7 @@ public class Dialogs{
 //static sw_widget nations_list;
 //static sw_widget leaders_list;
 //static sw_widget leaders_sex_list;
-//static Nation_Type_id selected_nation;
+//static int selected_nation;
 //#endif
 //
 ///**************************************************************************
@@ -123,7 +123,7 @@ public class Dialogs{
 //
 //  selected_nation = row;
 //
-//  freelog(LOG_DEBUG, "selcted %s\n", nation.name);
+//  util.freelog(LOG_DEBUG, "selcted %s\n", nation.name);
 //  sw_list_clear(leaders_list);
 //
 //  for (i = 0; i < leader_count; i++) {

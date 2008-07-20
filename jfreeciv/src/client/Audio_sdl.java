@@ -59,11 +59,11 @@ public class Audio_sdl{
 //    /* load music file */
 //    mus = Mix_LoadMUS(fullpath);
 //    if (mus == null) {
-//      freelog(LOG_FATAL, "Can't open file '%s'", fullpath);
+//      util.freelog(LOG_FATAL, "Can't open file '%s'", fullpath);
 //    }
 //
 //    Mix_PlayMusic(mus, -1);	/* -1 means loop forever */
-//    freelog(LOG_VERBOSE, "Playing file %s on music channel", fullpath);
+//    util.freelog(LOG_VERBOSE, "Playing file %s on music channel", fullpath);
 //    /* in case we did a my_stop() recently; add volume controls later */
 //    Mix_VolumeMusic(MIX_MAX_VOLUME);
 //
@@ -72,7 +72,7 @@ public class Audio_sdl{
 //    /* see if we can cache on this one */
 //    for (j = 0; j < MIX_CHANNELS; j++) {
 //      if (samples[j].tag && (strcmp(samples[j].tag, tag) == 0)) {
-//	freelog(LOG_DEBUG, "Playing file %s from cache (slot %d)", fullpath,
+//	util.freelog(LOG_DEBUG, "Playing file %s from cache (slot %d)", fullpath,
 //		j);
 //	i = Mix_PlayChannel(-1, samples[j].wave, 0);
 //	return true;
@@ -82,18 +82,18 @@ public class Audio_sdl{
 //    /* load wave */
 //    wave = Mix_LoadWAV(fullpath);
 //    if (wave == null) {
-//      freelog(LOG_ERROR, "Can't open file '%s'", fullpath);
+//      util.freelog(Log.LOG_ERROR, "Can't open file '%s'", fullpath);
 //    }
 //
 //    /* play sound sample on first available channel, returns -1 if no
 //       channel found */
 //    i = Mix_PlayChannel(-1, wave, 0);
 //    if (i < 0) {
-//      freelog(LOG_VERBOSE, "No available sound channel to play %s.", tag);
+//      util.freelog(LOG_VERBOSE, "No available sound channel to play %s.", tag);
 //      Mix_FreeChunk(wave);
 //      return false;
 //    }
-//    freelog(LOG_VERBOSE, "Playing file %s on channel %d", fullpath, i);
+//    util.freelog(LOG_VERBOSE, "Playing file %s on channel %d", fullpath, i);
 //    /* free previous sample on this channel. it will by definition no
 //       longer be playing by the time we get here */
 //    if (samples[i].wave) {
@@ -198,7 +198,7 @@ public class Audio_sdl{
 //  }
 //
 //  if (Mix_OpenAudio(audio_rate, audio_format, audio_channels, 4096) < 0) {
-//    freelog(LOG_ERROR, "Error calling Mix_OpenAudio");
+//    util.freelog(Log.LOG_ERROR, "Error calling Mix_OpenAudio");
 //    /* try something else */
 //    quit_sdl_audio();
 //    return false;

@@ -414,7 +414,7 @@ public class Advdiplomacy{
 //    } else if (give) {
 //      /* AI must be crazy to trade away its cities */
 //      worth -= city_gold_worth(offer);
-//      if (is_capital(offer)) {
+//      if (offer。is_capital()) {
 //        worth = -BIG_NUMBER; /* Never! Ever! */
 //      } else {
 //        worth *= 15;
@@ -590,7 +590,7 @@ public class Advdiplomacy{
 //  if (total_balance > 0 && gift) {
 //    int i = total_balance / ((city_list_size(&pplayer.cities) * 50) + 1);
 //
-//    i = MIN(i, ai.diplomacy.love_incr * 150) * 10;
+//    i = Math.min(i, ai.diplomacy.love_incr * 150) * 10;
 //    pplayer.ai.love[aplayer.player_no] += i;
 //    PLAYER_LOG(LOG_DIPL2, pplayer, ai, "%s's gift to %s increased love by %d",
 //            aplayer.name, pplayer.name, i);
@@ -635,7 +635,7 @@ public class Advdiplomacy{
 //                     pplayer.research.techs_researched, 0);
 //
 //  /* Spacerace loss we will not allow! */
-//  if (ship.state >= SSHIP_STARTED) {
+//  if (ship.state >= spaceship_state.SSHIP_STARTED) {
 //    /* add potential */
 //    kill_desire += city_list_size(&aplayer.cities);
 //  }
@@ -693,7 +693,7 @@ public class Advdiplomacy{
 //                                 int value)
 //{
 //  if (!could_meet_with_player(pplayer, aplayer)) {
-//    freelog(LOG_DIPL2, "%s tries to do diplomacy to %s without contact",
+//    util.freelog(LOG_DIPL2, "%s tries to do diplomacy to %s without contact",
 //            pplayer.name, aplayer.name);
 //    return;
 //  }
@@ -763,7 +763,7 @@ public class Advdiplomacy{
 //    /* Reduce love by number of units in our territory.
 //     * AI is so naive, that we have to count it even if players are allied */
 //    pplayer.ai.love[aplayer.player_no] -=
-//      MIN(player_in_territory(pplayer, aplayer) * (MAX_AI_LOVE / 100),
+//      Math.min(player_in_territory(pplayer, aplayer) * (MAX_AI_LOVE / 100),
 //          pplayers_allied(aplayer, pplayer) ? 
 //	    ai.diplomacy.love_incr - 1 : (MAX_AI_LOVE / 2));
 // 
@@ -780,7 +780,7 @@ public class Advdiplomacy{
 //    /* ai love should always be in range [-MAX_AI_LOVE..MAX_AI_LOVE] */
 //    pplayer.ai.love[aplayer.player_no] = 
 //      MAX(-MAX_AI_LOVE,
-//          MIN(MAX_AI_LOVE, pplayer.ai.love[aplayer.player_no]));
+//          Math.min(MAX_AI_LOVE, pplayer.ai.love[aplayer.player_no]));
 //  }
 //
 //  /* Stop war against a dead player */
@@ -797,7 +797,7 @@ public class Advdiplomacy{
 //
 //  /* Can we win by space race? */
 //  if (ai.diplomacy.spacerace_leader == pplayer) {
-//    freelog(LOG_DIPL2, "%s going for space race victory!", pplayer.name);
+//    util.freelog(LOG_DIPL2, "%s going for space race victory!", pplayer.name);
 //    ai.diplomacy.strategy = WIN_SPACE; /* Yes! */
 //  } else {
 //    if (ai.diplomacy.strategy == WIN_SPACE) {
@@ -990,11 +990,11 @@ public class Advdiplomacy{
 //
 //      if (!aplayer.is_alive || aplayer == pplayer
 //          || players_on_same_team(pplayer, aplayer)
-//          || ship.state == SSHIP_NONE) {
+//          || ship.state == spaceship_state.SSHIP_NONE) {
 //        continue;
 //      }
 //      /* A spaceship victory is always one single player's or team's victory */
-//      if (aplayer.spaceship.state == SSHIP_LAUNCHED
+//      if (aplayer.spaceship.state == spaceship_state.SSHIP_LAUNCHED
 //          && ai.diplomacy.spacerace_leader == aplayer
 //          && pplayers_allied(pplayer, aplayer)) {
 //        notify(aplayer, _("*%s (AI)* Your attempt to conquer space for "
@@ -1007,7 +1007,7 @@ public class Advdiplomacy{
 //        }
 //        /* Never forgive this */
 //        pplayer.ai.love[aplayer.player_no] = -(BIG_NUMBER);
-//      } else if (ship.state == SSHIP_STARTED 
+//      } else if (ship.state == spaceship_state.SSHIP_STARTED 
 //		 && adip.warned_about_space == 0) {
 //        adip.warned_about_space = 10 + myrand(6);
 //        notify(aplayer, _("*%s (AI)* Your attempt to unilaterally "
@@ -1015,7 +1015,7 @@ public class Advdiplomacy{
 //        notify(aplayer, _("*%s (AI)* If you do not stop finalructing your "
 //               "spaceship, I may be forced to take action!"), pplayer.name);
 //      }
-//      if (aplayer.spaceship.state == SSHIP_LAUNCHED
+//      if (aplayer.spaceship.state == spaceship_state.SSHIP_LAUNCHED
 //          && aplayer == ai.diplomacy.spacerace_leader) {
 //        /* This means war!!! */
 //        ai.diplomacy.timer = 0; /* Force reevaluation next turn */
@@ -1173,7 +1173,7 @@ public class Advdiplomacy{
 //	  handle_diplomacy_cancel_pact(pplayer, aplayer.player_no,
 //				       CLAUSE_ALLIANCE);
 //          pplayer.ai.love[aplayer.player_no] = 
-//                                 MIN(pplayer.ai.love[aplayer.player_no], 0);
+//                                 Math.min(pplayer.ai.love[aplayer.player_no], 0);
 //          if (gives_shared_vision(pplayer, aplayer)) {
 //            remove_shared_vision(pplayer, aplayer);
 //          }

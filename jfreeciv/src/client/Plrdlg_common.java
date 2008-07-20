@@ -136,7 +136,7 @@ public class Plrdlg_common{
 //  } else {
 //    pds = pplayer_get_diplstate(game.player_ptr, player);
 //    if (pds.type == DS_CEASEFIRE) {
-//      my_snprintf(buf, sizeof(buf), "%s (%d)",
+//      buf = util.my_snprintf( "%s (%d)",
 //		  diplstate_text(pds.type), pds.turns_left);
 //      return buf;
 //    } else {
@@ -214,7 +214,7 @@ public class Plrdlg_common{
 //  } else {
 //    idle = 0;
 //  }
-//  my_snprintf(buf, sizeof(buf), "%d", idle);
+//  buf = util.my_snprintf( "%d", idle);
 //  return buf;
 //}
 //

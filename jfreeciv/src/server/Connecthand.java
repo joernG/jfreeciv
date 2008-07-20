@@ -34,7 +34,7 @@ public class Connecthand{
 //#include "auth.h"
 //#include "diplhand.h"
 //#include "gamehand.h"
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "maphand.h"
 //#include "meta.h"
 //#include "plrhand.h"
@@ -65,7 +65,7 @@ public class Connecthand{
 //  /* send off login_replay packet */
 //  packet.you_can_join = true;
 //  sz_strlcpy(packet.capability, our_capability);
-//  my_snprintf(packet.message, sizeof(packet.message), "%s Welcome",
+//  packet.message = util.my_snprintf( "%s Welcome",
 //              pconn.username);
 //  sz_strlcpy(packet.challenge_file, new_challenge_filename(pconn));
 //  packet.conn_id = pconn.id;
@@ -88,7 +88,7 @@ public class Connecthand{
 //   * message option for the client with event */
 //
 //  /* notify the console and other established connections that you're here */
-//  freelog(Log.LOG_NORMAL, "%s has connected from %s.",
+//  util.freelog(Log.LOG_NORMAL, "%s has connected from %s.",
 //          pconn.username, pconn.addr);
 //  for (conn aconn : game.est_connections.data) {
 //    if (aconn != pconn) {
@@ -101,7 +101,7 @@ public class Connecthand{
 //  if ((pplayer = find_player_by_user(pconn.username))) {
 //    attach_connection_to_player(pconn, pplayer);
 //
-//    if (server_state == RUN_GAME_STATE) {
+//    if (Srv_main.server_state == RUN_GAME_STATE) {
 //      /* Player and other info is only updated when the game is running.
 //       * See the comment in lost_connection_to_client(). */
 //      send_packet_freeze_hint(pconn);
@@ -121,12 +121,12 @@ public class Connecthand{
 //      toggle_ai_player_direct(null, pplayer);
 //    }
 //
-//    gamelog(GAMELOG_PLAYER, pplayer);
+//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
 //
-//  } else if (server_state == server_states.PRE_GAME_STATE && game.is_new_game) {
+//  } else if (Srv_main.server_state == server_states.PRE_GAME_STATE && game.is_new_game) {
 //    if (!attach_connection_to_player(pconn, null)) {
 //      notify_conn(dest, "Couldn't attach your connection to new player.");
-//      freelog(LOG_VERBOSE, "%s is not attached to a player", pconn.username);
+//      util.freelog(LOG_VERBOSE, "%s is not attached to a player", pconn.username);
 //    } else {
 //      sz_strlcpy(pconn.player.name, pconn.username);
 //    }
@@ -146,7 +146,7 @@ public class Connecthand{
 //  }
 //
 //  /* if need be, tell who we're waiting on to end the game turn */
-//  if (server_state == RUN_GAME_STATE && game.turnblock) {
+//  if (Srv_main.server_state == RUN_GAME_STATE && game.turnblock) {
 //    for(player cplayer: game.players){
 //      if (cplayer.is_alive
 //          && !cplayer.ai.control
@@ -160,7 +160,7 @@ public class Connecthand{
 //  }
 //
 //  /* if the game is running, players can just view the Players menu? --dwp */
-//  if (server_state != RUN_GAME_STATE) {
+//  if (Srv_main.server_state != RUN_GAME_STATE) {
 //    show_players(pconn);
 //  }
 //
@@ -186,7 +186,7 @@ public class Connecthand{
 //  packet.challenge_file[0] = '\0';
 //  packet.conn_id = -1;
 //  send_packet_server_join_reply(pconn, &packet);
-//  freelog(Log.LOG_NORMAL, "Client rejected: %s.", conn_description(pconn));
+//  util.freelog(Log.LOG_NORMAL, "Client rejected: %s.", conn_description(pconn));
 //  flush_connection_send_buffer_all(pconn);
 //}
 //
@@ -199,20 +199,20 @@ public class Connecthand{
 //{
 //  char msg[MAX_LEN_MSG];
 //  
-//  freelog(Log.LOG_NORMAL, "Connection request from %s from %s",
+//  util.freelog(Log.LOG_NORMAL, "Connection request from %s from %s",
 //          req.username, pconn.addr);
 //  
 //  /* print server and client capabilities to console */
-//  freelog(Log.LOG_NORMAL, "%s has client version %d.%d.%d%s",
+//  util.freelog(Log.LOG_NORMAL, "%s has client version %d.%d.%d%s",
 //          pconn.username, req.major_version, req.minor_version,
 //          req.patch_version, req.version_label);
-//  freelog(LOG_VERBOSE, "Client caps: %s", req.capability);
-//  freelog(LOG_VERBOSE, "Server caps: %s", our_capability);
+//  util.freelog(LOG_VERBOSE, "Client caps: %s", req.capability);
+//  util.freelog(LOG_VERBOSE, "Server caps: %s", our_capability);
 //  sz_strlcpy(pconn.capability, req.capability);
 //  
 //  /* Make sure the server has every capability the client needs */
 //  if (!has_capabilities(our_capability, req.capability)) {
-//    my_snprintf(msg, sizeof(msg),
+//    msg = util.my_snprintf(
 //                _("The client is missing a capability that this server needs.\n"
 //                   "Server version: %d.%d.%d%s Client version: %d.%d.%d%s."
 //                   "  Upgrading may help!"),
@@ -220,14 +220,14 @@ public class Connecthand{
 //                req.major_version, req.minor_version,
 //                req.patch_version, req.version_label);
 //    reject_new_connection(msg, pconn);
-//    freelog(Log.LOG_NORMAL, "%s was rejected: Mismatched capabilities.",
+//    util.freelog(Log.LOG_NORMAL, "%s was rejected: Mismatched capabilities.",
 //            req.username);
 //    return false;
 //  }
 //
 //  /* Make sure the client has every capability the server needs */
 //  if (!has_capabilities(req.capability, our_capability)) {
-//    my_snprintf(msg, sizeof(msg),
+//    msg = util.my_snprintf(
 //                _("The server is missing a capability that the client needs.\n"
 //                   "Server version: %d.%d.%d%s Client version: %d.%d.%d%s."
 //                   "  Upgrading may help!"),
@@ -235,7 +235,7 @@ public class Connecthand{
 //                req.major_version, req.minor_version,
 //                req.patch_version, req.version_label);
 //    reject_new_connection(msg, pconn);
-//    freelog(Log.LOG_NORMAL, "%s was rejected: Mismatched capabilities.",
+//    util.freelog(Log.LOG_NORMAL, "%s was rejected: Mismatched capabilities.",
 //            req.username);
 //    return false;
 //  }
@@ -244,9 +244,9 @@ public class Connecthand{
 //
 //  /* Name-sanity check: could add more checks? */
 //  if (!is_valid_username(req.username)) {
-//    my_snprintf(msg, sizeof(msg), "Invalid username '%s'", req.username);
+//    msg = util.my_snprintf( "Invalid username '%s'", req.username);
 //    reject_new_connection(msg, pconn);
-//    freelog(Log.LOG_NORMAL, "%s was rejected: Invalid name [%s].",
+//    util.freelog(Log.LOG_NORMAL, "%s was rejected: Invalid name [%s].",
 //            req.username, pconn.addr);
 //    return false;
 //  } 
@@ -254,10 +254,10 @@ public class Connecthand{
 //  /* don't allow duplicate logins */
 //  for (conn aconn : game.all_connections.data) {
 //    if (mystrcasecmp(req.username, aconn.username) == 0) { 
-//      my_snprintf(msg, sizeof(msg), "'%s' already connected.", 
+//      msg = util.my_snprintf( "'%s' already connected.", 
 //                  req.username);
 //      reject_new_connection(msg, pconn);
-//      freelog(Log.LOG_NORMAL, "%s was rejected: Duplicate login name [%s].",
+//      util.freelog(Log.LOG_NORMAL, "%s was rejected: Duplicate login name [%s].",
 //              req.username, pconn.addr);
 //      return false;
 //    }
@@ -285,7 +285,7 @@ public class Connecthand{
 //  player pplayer = pconn.player;
 //  final String desc = conn_description(pconn);
 //
-//  freelog(Log.LOG_NORMAL, "Lost connection: %s.", desc);
+//  util.freelog(Log.LOG_NORMAL, "Lost connection: %s.", desc);
 //  
 //  /* _Must_ avoid sending to pconn, in case pconn connection is
 //   * really lost (as opposed to server shutting it down) which would
@@ -303,7 +303,7 @@ public class Connecthand{
 //  unattach_connection_from_player(pconn);
 //
 //  send_conn_info_remove(&pconn.self, &game.est_connections);
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    /* Player info is only updated when the game is running; this must be
 //     * done consistently or the client will end up with inconsistent errors.
 //     * At other times, the conn info (send_conn_info) is used by the client
@@ -324,8 +324,8 @@ public class Connecthand{
 //  if (game.is_new_game
 //      && !pplayer.is_connected /* eg multiple controllers */
 //      && !pplayer.ai.control    /* eg created AI player */
-//      && (server_state == server_states.PRE_GAME_STATE 
-//          || server_state == SELECT_RACES_STATE)) {
+//      && (Srv_main.server_state == server_states.PRE_GAME_STATE 
+//          || Srv_main.server_state == SELECT_RACES_STATE)) {
 //    server_remove_player(pplayer);
 //  } else {
 //    if (game.auto_ai_toggle
@@ -334,7 +334,7 @@ public class Connecthand{
 //      toggle_ai_player_direct(null, pplayer);
 //    }
 //
-//    gamelog(GAMELOG_PLAYER, pplayer);
+//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
 //
 //    check_for_full_turn_done();
 //  }

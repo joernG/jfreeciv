@@ -271,7 +271,7 @@ public class Connectdlg{
 //  /* abort if after 10 seconds the server couldn't be reached */
 //
 //  if (AUTOCONNECT_INTERVAL * count >= 10000) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Failed to contact server \"%s\" at port "
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, connect_name, count);
@@ -285,7 +285,7 @@ public class Connectdlg{
 //     /*PORTME*/ schedule_timer
 //	(AUTOCONNECT_INTERVAL, try_to_autoconnect, null);
 //  default:			/* All other errors are fatal */
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, connect_name, errbuf);
@@ -306,7 +306,7 @@ public class Connectdlg{
 //  char buf[512];
 //  int outcome;
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      _("Auto-connecting to server \"%s\" at port %d "
 //		"as \"%s\" every %d.%d second(s) for %d times"),
 //	      server_host, server_port, user_name,
@@ -316,7 +316,7 @@ public class Connectdlg{
 //
 //  outcome = get_server_address(server_host, server_port, buf, sizeof(buf));
 //  if (outcome < 0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);

@@ -76,7 +76,7 @@ public class Gamehand{
 //  if (map_has_special(ptile, S_HUT)) {
 //    map_clear_special(ptile, S_HUT);
 //    update_tile_knowledge(ptile);
-//    freelog(LOG_VERBOSE, "Removed hut on start position for %s",
+//    util.freelog(LOG_VERBOSE, "Removed hut on start position for %s",
 //	    pplayer.name);
 //  }
 //
@@ -130,7 +130,7 @@ public class Gamehand{
 //
 //    /* We cannot currently handle sea units as start units. */
 //    if (unit_types[utype].move_type == SEA_MOVING) {
-//      freelog(LOG_ERROR, _("Sea moving start units are not yet supported, "
+//      util.freelog(Log.LOG_ERROR, _("Sea moving start units are not yet supported, "
 //                           "%s not created."), unit_types[utype].name);
 //      notify_player(pplayer, _("Sea moving start units are not yet supported. "
 //                               "Nobody gets %s."), unit_types[utype].name);
@@ -157,28 +157,28 @@ public class Gamehand{
 //   * desired players. */
 //
 //  /* First set up some data fields. */
-//  freelog(LOG_VERBOSE, "Placing players at start positions.");
+//  util.freelog(LOG_VERBOSE, "Placing players at start positions.");
 //  for (i = 0; i < map.num_start_positions; i++) {
-//    Nation_Type_id n = map.start_positions[i].nation;
+//    int n = map.start_positions[i].nation;
 //
 //    pos_used[i] = false;
-//    freelog(LOG_VERBOSE, "%3d : (%2d,%2d) : %d : %s",
+//    util.freelog(LOG_VERBOSE, "%3d : (%2d,%2d) : %d : %s",
 //	    i, map.start_positions[i].tile.x,
 //	    map.start_positions[i].tile.y,
-//	    n, (n >= 0 ? get_nation_name(n) : ""));
+//	    n, (n >= 0 ? Nation.get_nation_name(n) : ""));
 //  }
 //  for(player pplayer: game.players){
 //    start_pos[pplayer.player_no] = NO_START_POS;
 //  }
 //
 //  /* Second, assign a nation to a start position for that nation. */
-//  freelog(LOG_VERBOSE, "Assigning matching nations.");
+//  util.freelog(LOG_VERBOSE, "Assigning matching nations.");
 //  for(player pplayer: game.players){
 //    for (i = 0; i < map.num_start_positions; i++) {
 //      assert(pplayer.nation != NO_NATION_SELECTED);
 //      if (pplayer.nation == map.start_positions[i].nation) {
-//	freelog(LOG_VERBOSE, "Start_pos %d matches player %d (%s).",
-//		i, pplayer.player_no, get_nation_name(pplayer.nation));
+//	util.freelog(LOG_VERBOSE, "Start_pos %d matches player %d (%s).",
+//		i, pplayer.player_no, Nation.get_nation_name(pplayer.nation));
 //	start_pos[pplayer.player_no] = i;
 //	pos_used[i] = true;
 //	num_used++;
@@ -187,7 +187,7 @@ public class Gamehand{
 //  }
 //
 //  /* Third, assign players randomly to the remaining start positions. */
-//  freelog(LOG_VERBOSE, "Assigning random nations.");
+//  util.freelog(LOG_VERBOSE, "Assigning random nations.");
 //  for(player pplayer: game.players){
 //    if (start_pos[pplayer.player_no] == NO_START_POS) {
 //      int which = myrand(map.num_start_positions - num_used);
@@ -195,9 +195,9 @@ public class Gamehand{
 //      for (i = 0; i < map.num_start_positions; i++) {
 //	if (!pos_used[i]) {
 //	  if (which == 0) {
-//	    freelog(LOG_VERBOSE,
+//	    util.freelog(LOG_VERBOSE,
 //		    "Randomly assigning player %d (%s) to pos %d.",
-//		    pplayer.player_no, get_nation_name(pplayer.nation), i);
+//		    pplayer.player_no, Nation.get_nation_name(pplayer.nation), i);
 //	    start_pos[pplayer.player_no] = i;
 //	    pos_used[i] = true;
 //	    num_used++;
@@ -284,7 +284,7 @@ public class Gamehand{
 //
 //  /* Hmm, clients could add this themselves based on above packet? */
 //  notify_conn_ex(&game.game_connections, null, E_NEXT_YEAR, "Year: %s",
-//		 textyear(year));
+//		 Shared.textyear(year));
 //}
 //
 //
@@ -386,7 +386,7 @@ public class Gamehand{
 //      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
 //		     _("The turn timeout has exceeded its maximum value, "
 //		       "fixing at its maximum"));
-//      freelog(LOG_DEBUG, "game.timeout exceeded maximum value");
+//      util.freelog(LOG_DEBUG, "game.timeout exceeded maximum value");
 //      game.timeout = GAME_MAX_TIMEOUT;
 //      game.timeoutint = 0;
 //      game.timeoutinc = 0;
@@ -394,14 +394,14 @@ public class Gamehand{
 //      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
 //		     _("The turn timeout is smaller than zero, "
 //		       "fixing at zero."));
-//      freelog(LOG_DEBUG, "game.timeout less than zero");
+//      util.freelog(LOG_DEBUG, "game.timeout less than zero");
 //      game.timeout = 0;
 //    }
 //  } else {
 //    game.timeoutcounter++;
 //  }
 //
-//  freelog(LOG_DEBUG, "timeout=%d, inc=%d incmult=%d\n   "
+//  util.freelog(LOG_DEBUG, "timeout=%d, inc=%d incmult=%d\n   "
 //	  "int=%d, intinc=%d, turns till next=%d",
 //	  game.timeout, game.timeoutinc, game.timeoutincmult,
 //	  game.timeoutint, game.timeoutintinc,
@@ -441,7 +441,7 @@ public class Gamehand{
 //{
 //  static char filename[MAX_LEN_PATH];
 //
-//  my_snprintf(filename, sizeof(filename), "%s_%d_%d",
+//  filename = util.my_snprintf( "%s_%d_%d",
 //      CHALLENGE_ROOT, srvarg.port, pc.id);
 //
 //  return filename;
@@ -498,7 +498,7 @@ public class Gamehand{
 //  }
 //
 //  if (!token) {
-//    freelog(LOG_DEBUG, "Failed to read authentication token");
+//    util.freelog(LOG_DEBUG, "Failed to read authentication token");
 //  }
 //
 //  if (you_have_hack) {

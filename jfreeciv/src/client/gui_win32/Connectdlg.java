@@ -197,11 +197,11 @@ public class Connectdlg{
 //  if (packet.load_successful && packet.nplayers == 0) {
 //    char message[MAX_LEN_MSG];
 //
-//    my_snprintf(message, sizeof(message), "/create %s", user_name);
+//    message = util.my_snprintf( "/create %s", user_name);
 //    send_chat(message);
-//    my_snprintf(message, sizeof(message), "/ai %s", user_name);
+//    message = util.my_snprintf( "/ai %s", user_name);
 //    send_chat(message);
-//    my_snprintf(message, sizeof(message), "/take %s", user_name);
+//    message = util.my_snprintf( "/take %s", user_name);
 //    send_chat(message);
 //
 //    /* create a false entry */
@@ -664,7 +664,7 @@ public class Connectdlg{
 //  count++;
 //
 //  if (count >= MAX_AUTOCONNECT_ATTEMPTS) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //            _("Failed to contact server \"%s\" at port "
 //              "%d as \"%s\" after %d attempts"),
 //            server_host, server_port, user_name, count);
@@ -680,7 +680,7 @@ public class Connectdlg{
 //    return true;                /* Keep calling this function */
 //#endif
 //  default:                      /* All other errors are fatal */
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //            _("Error contacting server \"%s\" at port %d "
 //              "as \"%s\":\n %s\n"),
 //            server_host, server_port, user_name, errbuf);
@@ -710,7 +710,7 @@ public class Connectdlg{
 //{
 //  char buf[512];
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //              _("Auto-connecting to server \"%s\" at port %d "
 //                "as \"%s\" every %d.%d second(s) for %d times"),
 //              server_host, server_port, user_name,
@@ -718,7 +718,7 @@ public class Connectdlg{
 //              MAX_AUTOCONNECT_ATTEMPTS);
 //  append_output_window(buf);
 //  if (get_server_address(server_host, server_port, buf, sizeof(buf)) < 0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //            _("Error contacting server \"%s\" at port %d "
 //              "as \"%s\":\n %s\n"),
 //            server_host, server_port, user_name, buf);
@@ -795,7 +795,7 @@ public class Connectdlg{
 //
 //      current_filename = mystrdup(ofn.lpstrFile);
 //
-//      my_snprintf(cmd, sizeof(cmd), "/load %s", ofn.lpstrFile);
+//      cmd = util.my_snprintf( "/load %s", ofn.lpstrFile);
 //      send_chat(cmd);
 //    } else {
 //      SetCurrentDirectory(dirname);
@@ -834,7 +834,7 @@ public class Connectdlg{
 //  aiskill = ComboBox_GetCurSel(GetDlgItem(newgame_dlg,
 //					  ID_NEWGAMEDLG_AISKILL));
 //
-//  my_snprintf(buf, sizeof(buf), "/%s", skill_level_names[aiskill]);
+//  buf = util.my_snprintf( "/%s", skill_level_names[aiskill]);
 //  send_chat(buf);
 //
 //#if 0 
@@ -843,7 +843,7 @@ public class Connectdlg{
 //  Edit_GetText(GetDlgItem(newgame_dlg, ID_NEWGAMEDLG_AIFILL), buf, 512);
 //  aifill = atoi(buf);
 //
-//  my_snprintf(aifill_str, sizeof(aifill_str), "/set aifill %d", aifill);
+//  aifill_str = util.my_snprintf( "/set aifill %d", aifill);
 //  send_chat(aifill_str);
 //
 //  send_chat("/start");
@@ -1088,7 +1088,7 @@ public class Connectdlg{
 //		     true, true, 10);
 //  fcwin_box_add_edit(vbox, server_host, 40, ID_CONNECTDLG_HOST, 0,
 //		     true, true, 10);
-//  my_snprintf(buf, sizeof(buf), "%d", server_port);
+//  buf = util.my_snprintf( "%d", server_port);
 //  fcwin_box_add_edit(vbox, buf, 8, ID_CONNECTDLG_PORT, 0, true, true, 15);
 //
 //  fcwin_box_add_box(hbox, vbox, true, true, 5);

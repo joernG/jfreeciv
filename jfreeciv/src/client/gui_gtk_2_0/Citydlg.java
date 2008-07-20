@@ -1249,7 +1249,7 @@ public class Citydlg{
 //  char buf[512];
 //  final gchar *now;
 //
-//  my_snprintf(buf, sizeof(buf), "<b>%s</b> - %s citizens",
+//  buf = util.my_snprintf( "<b>%s</b> - %s citizens",
 //	      pdialog.pcity.name,
 //	      population_to_text(city_population(pdialog.pcity)));
 //
@@ -1283,7 +1283,7 @@ public class Citydlg{
 //  /* SMALL_TILE_WIDTH pixels.                                              */
 //
 //  if (pcity.size > 1) {
-//    width = MIN(SMALL_TILE_WIDTH,
+//    width = Math.min(SMALL_TILE_WIDTH,
 //		((NUM_CITIZENS_SHOWN - 1) * SMALL_TILE_WIDTH) /
 //		(pcity.size - 1));
 //  } else {
@@ -1443,7 +1443,7 @@ public class Citydlg{
 //    pct = 1.0;
 //  }
 //  
-//  my_snprintf(buf2, sizeof(buf2), "%s%s: %s", descr,
+//  buf2 = util.my_snprintf( "%s%s: %s", descr,
 //	      worklist_is_empty(&pcity.worklist) ? "" : " (+)",
 //	      buf);
 //  gtk_progress_bar_set_text(
@@ -1615,7 +1615,7 @@ public class Citydlg{
 //  gtk_tooltips_enable(pdialog.tips);
 //
 //
-//  my_snprintf(buf, sizeof(buf), "Supported units %d", n);
+//  buf = util.my_snprintf( "Supported units %d", n);
 //  gtk_frame_set_label(GTK_FRAME(pdialog.overview.supported_units_frame), buf);
 //}
 //
@@ -1725,7 +1725,7 @@ public class Citydlg{
 //  gtk_tooltips_enable(pdialog.tips);
 //
 //
-//  my_snprintf(buf, sizeof(buf), "Present units %d", n);
+//  buf = util.my_snprintf( "Present units %d", n);
 //  gtk_frame_set_label(GTK_FRAME(pdialog.overview.present_units_frame), buf);
 //}
 //
@@ -1747,9 +1747,9 @@ public class Citydlg{
 //      total += pdialog.pcity.trade_value[i];
 //
 //      if ((pcity = find_city_by_id(pdialog.pcity.trade[i]))) {
-//	my_snprintf(cityname, sizeof(cityname), "%s", pcity.name);
+//	cityname = util.my_snprintf( "%s", pcity.name);
 //      } else {
-//	my_snprintf(cityname, sizeof(cityname), "%s", "Unknown");
+//	cityname = util.my_snprintf( "%s", "Unknown");
 //      }
 //      my_snprintf(buf + buf.length(), sizeof(buf) - buf.length(),
 //		  "Trade with %s gives %d trade.\n",
@@ -2258,7 +2258,7 @@ public class Citydlg{
 //  if (ev.x > (pcity.size - 1) * pdialog.cwidth + SMALL_TILE_WIDTH)
 //    return false;		/* no citizen that far to the right */
 //
-//  citnum = MIN(pcity.size - 1, ev.x / pdialog.cwidth);
+//  citnum = Math.min(pcity.size - 1, ev.x / pdialog.cwidth);
 //
 //  city_rotate_specialist(pcity, citnum);
 //
@@ -2283,11 +2283,11 @@ public class Citydlg{
 //
 //      gdk_window_get_geometry(pdialog.overview.map_canvas.window, &x, &y,
 //			      &width, &height, &depth);
-//      freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
+//      util.freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
 //
 //      gdk_window_get_geometry(pdialog.overview.map_canvas_pixmap.window,
 //			      &x, &y, &width, &height, &depth);
-//      freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
+//      util.freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
 //    }
 //#endif
 //    if (pdialog.overview.map_canvas == w

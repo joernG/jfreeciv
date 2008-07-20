@@ -731,7 +731,7 @@ public class Cityrep{
 //  g_value_unset(&value);
 //
 //  sp = &city_report_specs[n];
-//  my_snprintf(buf, sizeof(buf), "%*s", NEG_VAL(sp.width), (sp.func)(pcity));
+//  buf = util.my_snprintf( "%*s", NEG_VAL(sp.width), (sp.func)(pcity));
 //
 //  g_value_init(&value, G_TYPE_STRING);
 //  g_value_set_string(&value, buf);
@@ -763,8 +763,8 @@ public class Cityrep{
 //  g_value_unset(&value);
 //
 //  sp = &city_report_specs[n];
-//  my_snprintf(buf1, sizeof(buf1), "%*s",NEG_VAL(sp.width),(sp.func)(pcity1));
-//  my_snprintf(buf2, sizeof(buf2), "%*s",NEG_VAL(sp.width),(sp.func)(pcity2));
+//  buf1 = util.my_snprintf( "%*s",NEG_VAL(sp.width),(sp.func)(pcity1));
+//  buf2 = util.my_snprintf( "%*s",NEG_VAL(sp.width),(sp.func)(pcity2));
 //
 //  return cityrepfield_compare(buf1, buf2);
 //}

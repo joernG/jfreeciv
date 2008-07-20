@@ -78,7 +78,7 @@ public class Optiondlg{
 //		    XtNlabel, *(o.p_bool_value) ? "Yes" : "No", null);
 //      break;
 //    case COT_INT:
-//      my_snprintf(valstr, sizeof(valstr), "%d", *(o.p_int_value));
+//      valstr = util.my_snprintf( "%d", *(o.p_int_value));
 //      XtVaSetValues((Widget) o.p_gui_data, XtNstring, valstr, null);
 //      break;
 //    case COT_STR:

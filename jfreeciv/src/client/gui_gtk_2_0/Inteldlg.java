@@ -291,7 +291,7 @@ public class Inteldlg{
 //    int i;
 //
 //    /* window title. */
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //	"Foreign Intelligence: %s Empire", get_nation_name(p.nation));
 //    gtk_window_set_title(GTK_WINDOW(pdialog.shell), buf);
 //
@@ -349,35 +349,35 @@ public class Inteldlg{
 //
 //	switch (i) {
 //	  case LABEL_RULER:
-//	    my_snprintf(buf, sizeof(buf), "%s %s", 
+//	    buf = util.my_snprintf( "%s %s", 
 //		get_ruler_title(p.government, p.is_male, p.nation), p.name);
 //	    break;
 //	  case LABEL_GOVERNMENT:
 //	    sz_strlcpy(buf, get_government_name(p.government));
 //	    break;
 //	  case LABEL_CAPITAL:
-//	    pcity = find_palace(p);
+//	    pcity = p.find_palace();
 //	    sz_strlcpy(buf, (!pcity) ? "(Unknown)" : pcity.name);
 //	    break;
 //	  case LABEL_GOLD:
-//	    my_snprintf(buf, sizeof(buf), "%d", p.economic.gold);
+//	    buf = util.my_snprintf( "%d", p.economic.gold);
 //	    break;
 //	  case LABEL_TAX:
-//	    my_snprintf(buf, sizeof(buf), "%d%%", p.economic.tax);
+//	    buf = util.my_snprintf( "%d%%", p.economic.tax);
 //	    break;
 //	  case LABEL_SCIENCE:
-//	    my_snprintf(buf, sizeof(buf), "%d%%", p.economic.science);
+//	    buf = util.my_snprintf( "%d%%", p.economic.science);
 //	    break;
 //	  case LABEL_LUXURY:
-//	    my_snprintf(buf, sizeof(buf), "%d%%", p.economic.luxury);
+//	    buf = util.my_snprintf( "%d%%", p.economic.luxury);
 //	    break;
 //	  case LABEL_RESEARCHING:
 //	    if (p.research.researching != A_NOINFO) {
-//	      my_snprintf(buf, sizeof(buf), "%s(%d/%d)",
+//	      buf = util.my_snprintf( "%s(%d/%d)",
 //		  get_tech_name(p, p.research.researching),
 //		  p.research.bulbs_researched, total_bulbs_required(p));
 //	    } else {
-//	      my_snprintf(buf, sizeof(buf), "(Unknown)");
+//	      buf = util.my_snprintf( "(Unknown)");
 //	    }
 //	    break;
 //	  default:

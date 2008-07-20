@@ -545,7 +545,7 @@ public class Effects{
 //  }
 //
 //  if (problem) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
 //	    "for building %s: bad effect requirement data '%s'",
 //	    get_improvement_name(source), req_value);
@@ -793,7 +793,7 @@ public class Effects{
 //  if (is_wonder(building)) {
 //    return (game.global_wonders[building] != 0) ? 1 : 0;
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
 //	    "World-ranged effects are only supported for wonders.");
 //    return 0;
@@ -808,7 +808,7 @@ public class Effects{
 //  if (is_wonder(id)) {
 //    return find_city_by_id(game.global_wonders[id]) ? 1 : 0;
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
 //	    "World-ranged effects are only supported for wonders.");
 //    return 0;
@@ -828,7 +828,7 @@ public class Effects{
 //      return 0;
 //    }
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
 //	    "Player-ranged effects are only supported for wonders.");
 //    return 0;
@@ -849,7 +849,7 @@ public class Effects{
 //      return 1;
 //    }
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
 //	    "Island-ranged effects are only supported for wonders.");
 //  }
@@ -923,7 +923,7 @@ public class Effects{
 //      return num_world_buildings_total(source);
 //    } else {
 //      /* There is no sources cache for this. */
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      /* TRANS: Obscure ruleset error. */
 //	      "Surviving effects are only supported at world range.");
 //      return 0;

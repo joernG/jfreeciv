@@ -130,7 +130,7 @@ public class Gotodlg{
 //	continue;
 //      }
 //      
-//      my_snprintf(cBuf, sizeof(cBuf), "%s (%d)", pCity.name, pCity.size);
+//      cBuf = util.my_snprintf( "%s (%d)", pCity.name, pCity.size);
 //      
 //      pStr = create_str16_from_char(cBuf, 12);
 //      pStr.style |= TTF_STYLE_BOLD;

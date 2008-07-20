@@ -120,7 +120,7 @@ public class Mapview{
 //
 //  label = gtk_frame_get_label_widget(GTK_FRAME(main_frame_civ_name));
 //  gtk_label_set_text(GTK_LABEL(label),
-//		     get_nation_name(game.player_ptr.nation));
+//		     Nation.get_nation_name(game.player_ptr.nation));
 //
 //  gtk_label_set_text(GTK_LABEL(main_label_info), get_info_label_text());
 //
@@ -704,8 +704,8 @@ public class Mapview{
 //  gdk_draw_drawable(pixmap, civ_gc, ssprite.pixmap,
 //		    offset_x, offset_y,
 //		    pixmap_x + offset_x, pixmap_y + offset_y,
-//		    MIN(width, MAX(0, ssprite.width - offset_x)),
-//		    MIN(height, MAX(0, ssprite.height - offset_y)));
+//		    Math.min(width, MAX(0, ssprite.width - offset_x)),
+//		    Math.min(height, MAX(0, ssprite.height - offset_y)));
 //
 //  gdk_gc_set_clip_mask(civ_gc, null);
 //}
@@ -744,10 +744,10 @@ public class Mapview{
 //	src = sprite_get_pixbuf(sprite);
 //	dst = pcanvas.v.pixbuf;
 //	gdk_pixbuf_composite(src, dst, canvas_x, canvas_y,
-//	    MIN(width,
-//	      MIN(gdk_pixbuf_get_width(dst), gdk_pixbuf_get_width(src))),
-//	    MIN(height,
-//	      MIN(gdk_pixbuf_get_height(dst), gdk_pixbuf_get_height(src))),
+//	    Math.min(width,
+//	      Math.min(gdk_pixbuf_get_width(dst), gdk_pixbuf_get_width(src))),
+//	    Math.min(height,
+//	      Math.min(gdk_pixbuf_get_height(dst), gdk_pixbuf_get_height(src))),
 //	    canvas_x - offset_x, canvas_y - offset_y,
 //	    1.0, 1.0, GDK_INTERP_NEAREST, 255);
 //      }
@@ -945,7 +945,7 @@ public class Mapview{
 //  if (fog && better_fog && !ssprite.fogged) {
 //    fog_sprite(ssprite);
 //    if (!ssprite.fogged) {
-//      freelog(Log.LOG_NORMAL,
+//      util.freelog(Log.LOG_NORMAL,
 //	      "Better fog will only work in truecolor.  Disabling it");
 //      better_fog = false;
 //    }

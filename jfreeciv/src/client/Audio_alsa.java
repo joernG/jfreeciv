@@ -130,7 +130,7 @@ public class Audio_alsa{
 //    return -1;
 //  }
 //  if (rrate != (unsigned) file_rate) {
-//    freelog(LOG_VERBOSE, "ALSA: asked for rate %u, got %u",
+//    util.freelog(LOG_VERBOSE, "ALSA: asked for rate %u, got %u",
 //            (unsigned) file_rate, rrate);
 //  }
 //  snd_pcm_hw_params_set_period_time_near(sound_handle, hwparams,
@@ -151,13 +151,13 @@ public class Audio_alsa{
 //  if (e == -EPIPE) {
 //    e = snd_pcm_prepare(sound_handle);
 //    if (e < 0) {
-//      freelog(LOG_ERROR, "ALSA: Cannot recover from underrun: %s",
+//      util.freelog(Log.LOG_ERROR, "ALSA: Cannot recover from underrun: %s",
 //              snd_strerror(e));
 //    } else {
 //      return 0;
 //    }
 //  } else if (e < 0) {
-//    freelog(LOG_ERROR, "ALSA: %s: %s", s, snd_strerror(e));
+//    util.freelog(Log.LOG_ERROR, "ALSA: %s: %s", s, snd_strerror(e));
 //  }
 //  return e;
 //}
@@ -192,14 +192,14 @@ public class Audio_alsa{
 //        || area[1].step != 32
 //        || area[0].addr != area[1].addr) {
 //      snd_pcm_mmap_commit (sound_handle, offset, 0);
-//      freelog(LOG_ERROR, "ALSA: unexpected area parameters");
+//      util.freelog(Log.LOG_ERROR, "ALSA: unexpected area parameters");
 //      return -1;
 //    }
 //
 //    if (afReadFrames(file_handle, AF_DEFAULT_TRACK,
 //                     ADD_TO_POINTER(area.addr, + 4 * offset), frames) < 0 )  {
 //      snd_pcm_mmap_commit(sound_handle, offset, 0);
-//      freelog(LOG_ERROR, "ALSA: cannot read frames");
+//      util.freelog(Log.LOG_ERROR, "ALSA: cannot read frames");
 //      break;
 //    }
 //
@@ -284,7 +284,7 @@ public class Audio_alsa{
 //
 //  new_handle = afOpenFile(fullpath, "r", 0);
 //  if (new_handle == AF_NULL_FILEHANDLE)  {
-//    freelog(LOG_ERROR, "ALSA: cannot open %s", fullpath);
+//    util.freelog(Log.LOG_ERROR, "ALSA: cannot open %s", fullpath);
 //    return false;
 //  }
 //
@@ -293,7 +293,7 @@ public class Audio_alsa{
 //  afSetVirtualChannels(new_handle, AF_DEFAULT_TRACK, 2);
 //  new_rate = afGetRate(new_handle, AF_DEFAULT_TRACK);
 //  new_fcount = afGetFrameCount(new_handle, AF_DEFAULT_TRACK);
-//  freelog(LOG_VERBOSE, "ALSA: %s: rate %f, %d frames", fullpath,
+//  util.freelog(LOG_VERBOSE, "ALSA: %s: rate %f, %d frames", fullpath,
 //          new_rate, (int) new_fcount);
 //
 //  snd_pcm_drop_free(sound_handle);
@@ -307,7 +307,7 @@ public class Audio_alsa{
 //  file_repeat = repeat;
 //
 //  if (set_hw_params() < 0) {
-//    freelog (LOG_ERROR, "ALSA: bad format in %s", fullpath);
+//    util.freelog (Log.LOG_ERROR, "ALSA: bad format in %s", fullpath);
 //    return false;
 //  }
 //
@@ -334,7 +334,7 @@ public class Audio_alsa{
 //
 //  if (snd_async_add_pcm_handler(&ah, sound_handle, play_callback, &ah)
 //      < 0 )  {
-//    freelog(LOG_ERROR, "ALSA: cannot set callback handler");
+//    util.freelog(Log.LOG_ERROR, "ALSA: cannot set callback handler");
 //    return false;
 //  }
 //

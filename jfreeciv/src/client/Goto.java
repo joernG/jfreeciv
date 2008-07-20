@@ -139,23 +139,23 @@ public class Goto{
 //  tile old_tile = p.start_tile;
 //  int i, start_index = 0;
 //
-//  freelog(LOG_DEBUG, "update_last_part(%d,%d) old (%d,%d)-(%d,%d)",
+//  util.freelog(LOG_DEBUG, "update_last_part(%d,%d) old (%d,%d)-(%d,%d)",
 //          TILE_XY(ptile), TILE_XY(p.start_tile), TILE_XY(p.end_tile));
 //  new_path = pf_get_path(p.map, ptile);
 //
 //  if (!new_path) {
-//    freelog(PATH_LOG_LEVEL, "  no path found");
+//    util.freelog(PATH_LOG_LEVEL, "  no path found");
 //    reset_last_part();
 //    return;
 //  }
 //
-//  freelog(PATH_LOG_LEVEL, "  path found:");
+//  util.freelog(PATH_LOG_LEVEL, "  path found:");
 //  pf_print_path(PATH_LOG_LEVEL, new_path);
 //
 //  if (p.path) {
 //    /* We had a path drawn already.  Determine how much of it we can reuse
 //     * in drawing the new path. */
-//    for (i = 0; i < MIN(new_path.length, p.path.length) - 1; i++) {
+//    for (i = 0; i < Math.min(new_path.length, p.path.length) - 1; i++) {
 //      pf_position a = &p.path.positions[i];
 //      pf_position b = &new_path.positions[i];
 //
@@ -206,7 +206,7 @@ public class Goto{
 //    if (connect_initial > 0) {
 //      p.time += connect_initial;
 //    }
-//    freelog(PATH_LOG_LEVEL, "To (%d,%d) MC: %d, connect_initial: %d",
+//    util.freelog(PATH_LOG_LEVEL, "To (%d,%d) MC: %d, connect_initial: %d",
 //            TILE_XY(ptile), moves, connect_initial);
 //
 //  } else {
@@ -511,7 +511,7 @@ public class Goto{
 //    move_cost = MOVE_COST_RAIL;
 //  }
 //
-//  move_cost = MIN(move_cost, param.move_rate);
+//  move_cost = Math.min(move_cost, param.move_rate);
 //  total_cost = src_cost;
 //  moves_left = param.move_rate - (src_cost % param.move_rate);
 //  if (moves_left < move_cost) {
@@ -602,7 +602,7 @@ public class Goto{
 //
 //  /* Ok, the move is possible.  What are the costs? */
 //
-//  move_cost = MIN(move_cost, param.move_rate);
+//  move_cost = Math.min(move_cost, param.move_rate);
 //  total_cost = src_cost;
 //  moves_left = param.move_rate - (src_cost % param.move_rate);
 //  if (moves_left < move_cost) {
@@ -805,7 +805,7 @@ public class Goto{
 //  }
 //
 //  /* Clear the orders by sending an empty orders path. */
-//  freelog(PACKET_LOG_LEVEL, "Clearing orders for unit %d.", punit.id);
+//  util.freelog(PACKET_LOG_LEVEL, "Clearing orders for unit %d.", punit.id);
 //  p.unit_id = punit.id;
 //  p.repeat = p.vigilant = false;
 //  p.length = 0;
@@ -829,14 +829,14 @@ public class Goto{
 //  p.repeat = repeat;
 //  p.vigilant = vigilant;
 //
-//  freelog(PACKET_LOG_LEVEL, "Orders for unit %d:", punit.id);
+//  util.freelog(PACKET_LOG_LEVEL, "Orders for unit %d:", punit.id);
 //
 //  /* We skip the start position. */
 //  p.length = path.length - 1;
 //  assert(p.length < MAX_LEN_ROUTE);
 //  old_tile = path.positions[0].tile;
 //
-//  freelog(PACKET_LOG_LEVEL, "  Repeat: %d.  Vigilant: %d.  Length: %d",
+//  util.freelog(PACKET_LOG_LEVEL, "  Repeat: %d.  Vigilant: %d.  Length: %d",
 //	  p.repeat, p.vigilant, p.length);
 //
 //  /* If the path has n positions it takes n-1 steps. */
@@ -846,13 +846,13 @@ public class Goto{
 //    if (same_pos(new_tile, old_tile)) {
 //      p.orders[i] = ORDER_FULL_MP;
 //      p.dir[i] = -1;
-//      freelog(PACKET_LOG_LEVEL, "  packet[%d] = wait: %d,%d",
+//      util.freelog(PACKET_LOG_LEVEL, "  packet[%d] = wait: %d,%d",
 //	      i, TILE_XY(old_tile));
 //    } else {
 //      p.orders[i] = ORDER_MOVE;
 //      p.dir[i] = get_direction_for_step(old_tile, new_tile);
 //      p.activity[i] = ACTIVITY_LAST;
-//      freelog(PACKET_LOG_LEVEL, "  packet[%d] = move %s: %d,%d => %d,%d",
+//      util.freelog(PACKET_LOG_LEVEL, "  packet[%d] = move %s: %d,%d => %d,%d",
 // 	      i, dir_get_name(p.dir[i]),
 //	      TILE_XY(old_tile), TILE_XY(new_tile));
 //      p.activity[i] = ACTIVITY_LAST;
@@ -1047,7 +1047,7 @@ public class Goto{
 //{
 //  unsigned char *count = get_drawn_char(src_tile, dir);
 //
-//  freelog(LOG_DEBUG, "increment_drawn(src=(%d,%d) dir=%s)",
+//  util.freelog(LOG_DEBUG, "increment_drawn(src=(%d,%d) dir=%s)",
 //          TILE_XY(src_tile), dir_get_name(dir));
 //
 //  if (*count < 255) {
@@ -1070,7 +1070,7 @@ public class Goto{
 //{
 //  unsigned char *count = get_drawn_char(src_tile, dir);
 //
-//  freelog(LOG_DEBUG, "decrement_drawn(src=(%d,%d) dir=%s)",
+//  util.freelog(LOG_DEBUG, "decrement_drawn(src=(%d,%d) dir=%s)",
 //          TILE_XY(src_tile), dir_get_name(dir));
 //
 //  if (*count > 0) {

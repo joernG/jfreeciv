@@ -22,7 +22,7 @@ public class Option {
 //				break;
 //			} else if ((option = get_option("--log", argv, &inx, argc)))
 //				server.srvarg.log_filename = option;
-//			else if ((option = get_option("--gamelog", argv, &inx, argc)))
+//			else if ((option = get_option("--Gamelog.gamelog", argv, &inx, argc)))
 //				server.srvarg.gamelog_filename = option;
 //			else if (is_option("--nometa", argv[inx])) {
 //				fc_fprintf(stderr, ("Warning: the %s option is obsolete. "

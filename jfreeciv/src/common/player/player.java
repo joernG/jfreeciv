@@ -5,6 +5,7 @@ import common.Connection;
 import common.city.city;
 import common.unit.unit;
 
+import server.spaceace.player_spaceship;
 import utility.Speclists;
 
 public class player {
@@ -22,6 +23,7 @@ public class player {
 	  public int government;
 	  public int target_government;
 //	  Nation_Type_id nation;
+	  public int nation;
 //	  Team_Type_id team;
 	  public boolean is_started; /* Did the player click "start" yet? */
 	  public boolean turn_done;
@@ -44,7 +46,7 @@ public class player {
 //	  struct player_score score;
 //	  struct player_economic economic;
 //	  struct player_research research;
-//	  struct player_spaceship spaceship;
+	  public player_spaceship spaceship;
 	  public int future_tech;
 	  public player_ai ai;
 	  public boolean was_created;                    /* if the player was /created */
@@ -70,4 +72,18 @@ public class player {
 //	  public boolean debug;
 //	};
 //
+	  /***************************************************************************
+	   * Locate the city where the players palace is located, (null Otherwise)
+	   **************************************************************************/
+	  public city find_palace()
+	  {
+		  for (city pcity : cities.data) {
+			  if (pcity.is_capital()) {
+				  return pcity;
+			  }
+		  } 
+		  return null;
+	  }
+
+
 }

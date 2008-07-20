@@ -60,3 +60,6 @@ players_iterate\(([a-zA-Z0-9\_]+)\)\s*\{                                      pl
     }
 strcmp\(\s*([a-zA-Z0-9\_\.]+)\s*\,\s*([a-zA-Z0-9\_\.]+)\s*\)\s*\=\=\s*0                               strcmp(pdest.name, ANON_PLAYER_NAME) == 0
 $1.equals($2)
+
+my_snprintf\s*\(\s*([a-zA-Z0-9\_\.]+)\s*\,\s*sizeof\([^\)]+\)
+    $1 = port.my_snprintf(

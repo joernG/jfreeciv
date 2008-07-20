@@ -260,8 +260,8 @@ public class Widget_list{
 //  sw_widget window = widget.data.list.window;
 //
 //  ensure_valid_layout(widget);
-//  size.width = MIN(window.inner_bounds.width, widget.inner_bounds.width);
-//  size.height = MIN(window.inner_bounds.height,widget.inner_bounds.height);
+//  size.width = Math.min(window.inner_bounds.width, widget.inner_bounds.width);
+//  size.height = Math.min(window.inner_bounds.height,widget.inner_bounds.height);
 //
 //  src_pos = widget.data.list.offset;
 //

@@ -43,39 +43,39 @@ public class Advspace{
 //		       + ship.solar_panels)) {
 //    
 //    type =
-//      (ship.habitation==0)   ? SSHIP_PLACE_HABITATION :
-//      (ship.life_support==0) ? SSHIP_PLACE_LIFE_SUPPORT :
-//      (ship.solar_panels==0) ? SSHIP_PLACE_SOLAR_PANELS :
+//      (ship.habitation==0)   ? spaceship_place_type.SSHIP_PLACE_HABITATION :
+//      (ship.life_support==0) ? spaceship_place_type.SSHIP_PLACE_HABITATION :
+//      (ship.solar_panels==0) ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      ((ship.habitation < ship.life_support)
 //       && (ship.solar_panels*2 >= ship.habitation + ship.life_support + 1))
-//                              ? SSHIP_PLACE_HABITATION :
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      (ship.solar_panels*2 < ship.habitation + ship.life_support)
-//                              ? SSHIP_PLACE_SOLAR_PANELS :
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      (ship.life_support<ship.habitation)
-//                              ? SSHIP_PLACE_LIFE_SUPPORT :
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      ((ship.life_support <= ship.habitation)
 //       && (ship.solar_panels*2 >= ship.habitation + ship.life_support + 1))
-//                              ? SSHIP_PLACE_LIFE_SUPPORT :
-//                                SSHIP_PLACE_SOLAR_PANELS;
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
+//                                spaceship_place_type.SSHIP_PLACE_HABITATION;
 //
-//    if (type == SSHIP_PLACE_HABITATION) {
+//    if (type == spaceship_place_type.SSHIP_PLACE_HABITATION) {
 //      num = ship.habitation + 1;
-//    } else if(type == SSHIP_PLACE_LIFE_SUPPORT) {
+//    } else if(type == spaceship_place_type.SSHIP_PLACE_HABITATION) {
 //      num = ship.life_support + 1;
 //    } else {
 //      num = ship.solar_panels + 1;
 //    }
-//    assert(num <= NUM_SS_MODULES / 3);
+//    assert(num <= player_spaceship.NUM_SS_MODULES / 3);
 //
 //    handle_spaceship_place(pplayer, type, num);
 //    retval = true;
 //  }
 //  while (ship.components > ship.fuel + ship.propulsion) {
 //    if (ship.fuel <= ship.propulsion) {
-//      type = SSHIP_PLACE_FUEL;
+//      type = spaceship_place_type.SSHIP_PLACE_FUEL;
 //      num = ship.fuel + 1;
 //    } else {
-//      type = SSHIP_PLACE_PROPULSION;
+//      type = spaceship_place_type.SSHIP_PLACE_PROPULSION;
 //      num = ship.propulsion + 1;
 //    }
 //    handle_spaceship_place(pplayer, type, num);
@@ -91,46 +91,46 @@ public class Advspace{
 //    
 //    if (!ship.structure[0]) {
 //      /* if we don't have the first structural, place that! */
-//      type = SSHIP_PLACE_STRUCTURAL;
+//      type = spaceship_place_type.SSHIP_PLACE_STRUCTURAL;
 //      num = 0;
 //      handle_spaceship_place(pplayer, type, num);
 //    }
 //    
 //    if (ship.habitation >= 1
-//	&& !ship.structure[modules_info[0].required]) {
-//      req = modules_info[0].required;
+//	&& !ship.structure[Spaceship.modules_info[0].required]) {
+//      req = Spaceship.modules_info[0].required;
 //    } else if (ship.life_support >= 1
-//	       && !ship.structure[modules_info[1].required]) {
-//      req = modules_info[1].required;
+//	       && !ship.structure[Spaceship.modules_info[1].required]) {
+//      req = Spaceship.modules_info[1].required;
 //    } else if (ship.solar_panels >= 1
-//	       && !ship.structure[modules_info[2].required]) {
-//      req = modules_info[2].required;
+//	       && !ship.structure[Spaceship.modules_info[2].required]) {
+//      req = Spaceship.modules_info[2].required;
 //    } else {
 //      int i;
-//      for(i=0; i<NUM_SS_COMPONENTS; i++) {
+//      for(i=0; i<player_spaceship.NUM_SS_COMPONENTS; i++) {
 //	if ((i%2==0 && ship.fuel > (i/2))
 //	    || (i%2==1 && ship.propulsion > (i/2))) {
-//	  if (!ship.structure[components_info[i].required]) {
-//	    req = components_info[i].required;
+//	  if (!ship.structure[Spaceship.components_info[i].required]) {
+//	    req = Spaceship.components_info[i].required;
 //	    break;
 //	  }
 //	}
 //      }
 //    }
 //    if (req == -1) {
-//      for(i=0; i<NUM_SS_MODULES; i++) {
+//      for(i=0; i<player_spaceship.NUM_SS_MODULES; i++) {
 //	if ((i%3==0 && ship.habitation > (i/3))
 //	    || (i%3==1 && ship.life_support > (i/3))
 //	    || (i%3==2 && ship.solar_panels > (i/3))) {
-//	  if (!ship.structure[modules_info[i].required]) {
-//	    req = modules_info[i].required;
+//	  if (!ship.structure[Spaceship.modules_info[i].required]) {
+//	    req = Spaceship.modules_info[i].required;
 //	    break;
 //	  }
 //	}
 //      }
 //    }
 //    if (req == -1) {
-//      for(i=0; i<NUM_SS_STRUCTURALS; i++) {
+//      for(i=0; i<player_spaceship.NUM_SS_STRUCTURALS; i++) {
 //	if (!ship.structure[i]) {
 //	  req = i;
 //	  break;
@@ -145,10 +145,10 @@ public class Advspace{
 //       This loop should bottom out, because everything leads back to s0,
 //       and we made sure above that we do s0 first.
 //     */
-//    while(!ship.structure[structurals_info[req].required]) {
-//      req = structurals_info[req].required;
+//    while(!ship.structure[Spaceship.structurals_info[req].required]) {
+//      req = Spaceship.structurals_info[req].required;
 //    }
-//    type = SSHIP_PLACE_STRUCTURAL;
+//    type = spaceship_place_type.SSHIP_PLACE_STRUCTURAL;
 //    num = req;
 //    handle_spaceship_place(pplayer, type, num);
 //    retval = true;

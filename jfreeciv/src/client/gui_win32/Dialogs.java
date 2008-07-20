@@ -747,7 +747,7 @@ public class Dialogs{
 //      city pcity;
 //      unit_select_ids[i]=punit.id;
 //      pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
-//      my_snprintf(buffer, sizeof(buffer), "%s(%s)\n%s",
+//      buffer = util.my_snprintf( "%s(%s)\n%s",
 //		  punittemp.name,
 //		  pcity ? pcity.name : "",
 //		  unit_activity_text(punit));
@@ -775,7 +775,7 @@ public class Dialogs{
 //      unit_type punittemp=unit_type(punit);
 //      city pcity;
 //      pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
-//      my_snprintf(buffer, sizeof(buffer), "%s(%s)\n%s",
+//      buffer = util.my_snprintf( "%s(%s)\n%s",
 //		  punittemp.name,
 //		  pcity ? pcity.name : "",
 //		  unit_activity_text(punit));
@@ -859,13 +859,13 @@ public class Dialogs{
 //  }
 //
 //  for (i = 0; i < game.playable_nation_count; i++) {
-//    Nation_Type_id nation = i;
+//    int nation = i;
 //
 //    if (!nations_used[i]) {
 //      continue;
 //    }
 //
-//    freelog(LOG_DEBUG, "  [%d]: %d", i, nation);
+//    util.freelog(LOG_DEBUG, "  [%d]: %d", i, nation);
 //
 //    EnableWindow(GetDlgItem(races_dlg, ID_RACESDLG_NATION_BASE + nation),
 //		 false);
@@ -967,7 +967,7 @@ public class Dialogs{
 //  char buf[128];
 //  boolean can_establish, can_trade;
 //  
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //              "Your caravan from %s reaches the city of %s.\nWhat now?",
 //              phomecity.name, pdestcity.name);
 // 
@@ -1289,7 +1289,7 @@ public class Dialogs{
 //                         "This unit cannot be bribed!",
 //                         diplomat_bribe_no_callback, 0, 0);
 //  } else if(game.player_ptr.economic.gold>=punit.bribe_cost) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "Bribe unit for %d gold?\nTreasury contains %d gold.", 
 //                punit.bribe_cost, game.player_ptr.economic.gold);
 //    popup_message_dialog(root_window, /*"diplomatbribedialog"*/_("Bribe Enemy Unit"
@@ -1297,7 +1297,7 @@ public class Dialogs{
 //                        "_Yes", diplomat_bribe_yes_callback, 0,
 //                        "_No", diplomat_bribe_no_callback, 0, 0);
 //  } else {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                _("Bribing the unit costs %d gold.\n"
 //                  "Treasury contains %d gold."), 
 //                punit.bribe_cost, game.player_ptr.economic.gold);
@@ -1468,12 +1468,12 @@ public class Dialogs{
 //  char buf[128];
 //
 //  if (pcity.incite_revolt_cost == INCITE_IMPOSSIBLE_COST) {
-//    my_snprintf(buf, sizeof(buf), "You can't incite a revolt in %s.",
+//    buf = util.my_snprintf( "You can't incite a revolt in %s.",
 //		pcity.name);
 //    popup_message_dialog(root_window, "City can't be incited!", buf,
 //			 "Darn", diplomat_incite_no_callback, 0, 0);
 //  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Incite a revolt for %d gold?\nTreasury contains %d gold.", 
 //		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //   diplomat_target_id = pcity.id;
@@ -1481,7 +1481,7 @@ public class Dialogs{
 //		       "_Yes", diplomat_incite_yes_callback, 0,
 //		       "_No", diplomat_incite_no_callback, 0, 0);
 //  } else {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		_("Inciting a revolt costs %d gold.\n"
 //		  "Treasury contains %d gold."), 
 //		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
@@ -1520,7 +1520,7 @@ public class Dialogs{
 //    /* Spy/Diplomat acting against a city */
 //
 //    diplomat_target_id=pcity.id;
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Your %s has arrived at %s.\nWhat is your command?",
 //		unit_name(punit.type), pcity.name);
 //

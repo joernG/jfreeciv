@@ -22,7 +22,7 @@ public class Unithand{
 //#include "citytools.h"
 //#include "cityturn.h"
 //#include "diplomats.h"
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "gotohand.h"
 //#include "maphand.h"
 //#include "plrhand.h"
@@ -402,7 +402,7 @@ public class Unithand{
 //    break;
 //  default:
 //    /* Shouldn't happen */
-//    freelog(LOG_ERROR, "Cannot add %s to %s for unknown reason",
+//    util.freelog(Log.LOG_ERROR, "Cannot add %s to %s for unknown reason",
 //	    unit_name, pcity.name);
 //    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: Can't add %s to %s.",
@@ -627,7 +627,7 @@ public class Unithand{
 //  city pcity = map_get_city(ptile);
 //  int old_unit_vet;
 //
-//  freelog(LOG_DEBUG, "Start bombard: %s's %s to %d, %d.",
+//  util.freelog(LOG_DEBUG, "Start bombard: %s's %s to %d, %d.",
 //	  pplayer.name, unit_type(punit).name, TILE_XY(ptile));
 //
 //  for (unit pdefender : ptile.units.data) {
@@ -695,7 +695,7 @@ public class Unithand{
 //  tile def_tile = pdefender.tile;
 //  int old_unit_vet, old_defender_vet, vet;
 //
-//  freelog(LOG_DEBUG, "Start attack: %s's %s against %s's %s.",
+//  util.freelog(LOG_DEBUG, "Start attack: %s's %s against %s's %s.",
 //	  pplayer.name, unit_type(punit).name, 
 //	  unit_owner(pdefender).name,
 //	  unit_type(pdefender).name);
@@ -778,7 +778,7 @@ public class Unithand{
 //  
 //  if (punit == plooser) {
 //    /* The attacker lost */
-//    freelog(LOG_DEBUG, "Attacker lost: %s's %s against %s's %s.",
+//    util.freelog(LOG_DEBUG, "Attacker lost: %s's %s against %s's %s.",
 //	    pplayer.name, unit_type(punit).name,
 //	    unit_owner(pdefender).name, unit_type(pdefender).name);
 //
@@ -813,7 +813,7 @@ public class Unithand{
 //    wipe_unit(plooser);
 //  } else {
 //    /* The defender lost, the attacker punit lives! */
-//    freelog(LOG_DEBUG, "Defender lost: %s's %s against %s's %s.",
+//    util.freelog(LOG_DEBUG, "Defender lost: %s's %s against %s's %s.",
 //	    pplayer.name, unit_type(punit).name,
 //	    unit_owner(pdefender).name, unit_type(pdefender).name);
 //
@@ -946,7 +946,7 @@ public class Unithand{
 //
 //  /* this occurs often during lag, and to the AI due to some quirks -- Syela */
 //  if (!is_tiles_adjacent(punit.tile, pdesttile)) {
-//    freelog(LOG_DEBUG, "tiles not adjacent in move request");
+//    util.freelog(LOG_DEBUG, "tiles not adjacent in move request");
 //    return false;
 //  }
 //
@@ -1653,10 +1653,10 @@ public class Unithand{
 //  }
 //
 //#ifdef DEBUG
-//  freelog(LOG_DEBUG, "Orders for unit %d: length:%d",
+//  util.freelog(LOG_DEBUG, "Orders for unit %d: length:%d",
 //	  packet.unit_id, packet.length);
 //  for (i = 0; i < packet.length; i++) {
-//    freelog(LOG_DEBUG, "  %d,%s", packet.orders[i],
+//    util.freelog(LOG_DEBUG, "  %d,%s", packet.orders[i],
 //	    dir_get_name(packet.dir[i]));
 //  }
 //#endif

@@ -40,7 +40,7 @@ public class Citytools{
 //
 //#include "barbarian.h"
 //#include "cityturn.h"
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "maphand.h"
 //#include "plrhand.h"
 //#include "sanitycheck.h"
@@ -305,7 +305,7 @@ public class Citytools{
 //      if (error_buf) {
 //	my_snprintf(error_buf, bufsz, _("Can't use %s as a city name. It is "
 //					"reserved for %s."),
-//		    city_name, get_nation_name_plural(pother.nation));
+//		    city_name, Nation.get_nation_name_plural(pother.nation));
 //      }
 //      return false;
 //    }
@@ -346,7 +346,7 @@ public class Citytools{
 //{
 //  int i = 0, j;
 //  boolean nations_selected[game.nation_count];
-//  Nation_Type_id nation_list[game.nation_count], n;
+//  int nation_list[game.nation_count], n;
 //  int queue_size;
 //
 //  static final int num_tiles = MAP_MAX_WIDTH * MAP_MAX_HEIGHT; 
@@ -372,7 +372,7 @@ public class Citytools{
 //   * New nations are just added onto the end.
 //   */
 //
-//  freelog(LOG_VERBOSE, "Suggesting city name for %s at (%d,%d)",
+//  util.freelog(LOG_VERBOSE, "Suggesting city name for %s at (%d,%d)",
 //	  pplayer.name, ptile.x, ptile.y);
 //  
 //  memset(nations_selected, 0, sizeof(nations_selected));
@@ -389,7 +389,7 @@ public class Citytools{
 //      {
 //	/* Pick a random nation from the queue. */
 //	final int which = i + myrand(queue_size - i);
-//	final Nation_Type_id tmp = nation_list[i];
+//	final int tmp = nation_list[i];
 //
 //	nation_list[i] = nation_list[which];
 //	nation_list[which] = tmp;
@@ -398,7 +398,7 @@ public class Citytools{
 //      nation = get_nation_by_idx(nation_list[i]);
 //      name = search_for_city_name(ptile, nation.city_names, pplayer);
 //
-//      freelog(LOG_DEBUG, "Looking through %s.", nation.name);
+//      util.freelog(LOG_DEBUG, "Looking through %s.", nation.name);
 //
 //      if (name) {
 //	return name;
@@ -411,7 +411,7 @@ public class Citytools{
 //	  nation_list[queue_size] = n;
 //	  nations_selected[n] = true;
 //	  queue_size++;
-//	  freelog(LOG_DEBUG, "Parent %s.", get_nation_by_idx(n).name);
+//	  util.freelog(LOG_DEBUG, "Parent %s.", get_nation_by_idx(n).name);
 //	}
 //      }
 //
@@ -422,7 +422,7 @@ public class Citytools{
 //	  nation_list[queue_size] = n;
 //	  nations_selected[n] = true;
 //	  queue_size++;
-//	  freelog(LOG_DEBUG, "Child %s.", get_nation_by_idx(n).name);
+//	  util.freelog(LOG_DEBUG, "Child %s.", get_nation_by_idx(n).name);
 //	}
 //      }
 //    }
@@ -433,7 +433,7 @@ public class Citytools{
 //	nation_list[queue_size] = n;
 //	nations_selected[n] = true;
 //	queue_size++;
-//	freelog(LOG_DEBUG, "Misc nation %s.", get_nation_by_idx(n).name);
+//	util.freelog(LOG_DEBUG, "Misc nation %s.", get_nation_by_idx(n).name);
 //      }
 //    }
 //  }
@@ -552,7 +552,7 @@ public class Citytools{
 //  player to_player = city_owner(tocity);
 //
 //  if (from_player == to_player) {
-//    freelog(LOG_VERBOSE, "Changed homecity of %s's %s to %s",
+//    util.freelog(LOG_VERBOSE, "Changed homecity of %s's %s to %s",
 //	    from_player.name, unit_name(punit.type), tocity.name);
 //    if (verbose) {
 //      notify_player(from_player, "Game: Changed homecity of %s to %s.",
@@ -561,7 +561,7 @@ public class Citytools{
 //  } else {
 //    city in_city = map_get_city(punit.tile);
 //    if (in_city) {
-//      freelog(LOG_VERBOSE, "Transfered %s in %s from %s to %s",
+//      util.freelog(LOG_VERBOSE, "Transfered %s in %s from %s to %s",
 //	      unit_name(punit.type), in_city.name,
 //	      from_player.name, to_player.name);
 //      if (verbose) {
@@ -570,7 +570,7 @@ public class Citytools{
 //		      from_player.name, to_player.name);
 //      }
 //    } else {
-//      freelog(LOG_VERBOSE, "Transfered %s from %s to %s",
+//      util.freelog(LOG_VERBOSE, "Transfered %s from %s to %s",
 //	      unit_name(punit.type),
 //	      from_player.name, to_player.name);
 //      if (verbose) {
@@ -647,7 +647,7 @@ public class Citytools{
 //    } else {
 //      /* The unit is lost.  Call notify_player (in all other cases it is
 //       * called autmatically). */
-//      freelog(LOG_VERBOSE, "Lost %s's %s at (%d,%d) when %s was lost.",
+//      util.freelog(LOG_VERBOSE, "Lost %s's %s at (%d,%d) when %s was lost.",
 //	      unit_owner(vunit).name, unit_name(vunit.type),
 //	      vunit.tile.x, vunit.tile.y, pcity.name);
 //      if (verbose) {
@@ -760,7 +760,7 @@ public class Citytools{
 //    return;
 //  }
 //
-//  assert(find_palace(pplayer) == null);
+//  assert(pplayer.find_palace() == null);
 //
 //  pnew_capital = city_list_get(&pplayer.cities, myrand(size));
 //
@@ -953,7 +953,7 @@ public class Citytools{
 //  int x_itr, y_itr;
 //  nation_type nation = get_nation_by_plr(pplayer);
 //
-//  freelog(LOG_DEBUG, "Creating city %s", name);
+//  util.freelog(LOG_DEBUG, "Creating city %s", name);
 //
 //  if (terrain_control.may_road) {
 //    map_set_special(ptile, S_ROAD);
@@ -1066,7 +1066,7 @@ public class Citytools{
 //  } }
 //  sanity_check_city(pcity);
 //
-//  gamelog(GAMELOG_FOUNDCITY, pcity);
+//  Gamelog.gamelog(GAMELOG_FOUNDCITY, pcity);
 //}
 //
 ///**************************************************************************
@@ -1095,7 +1095,7 @@ public class Citytools{
 //	&& city_owner(new_home_city) == pplayer) {
 //      /* unit is in another city: make that the new homecity,
 //	 unless that city is actually the same city (happens if disbanding) */
-//      freelog(LOG_VERBOSE, "Changed homecity of %s in %s",
+//      util.freelog(LOG_VERBOSE, "Changed homecity of %s in %s",
 //	      unit_name(punit.type), new_home_city.name);
 //      notify_player(pplayer, "Game: Changed homecity of %s in %s.",
 //		    unit_name(punit.type), new_home_city.name);
@@ -1223,13 +1223,13 @@ public class Citytools{
 //     - Kris Bubendorfer
 //     Also check spaceships --dwp
 //  */
-//  if (is_capital(pcity)
-//      && (cplayer.spaceship.state == SSHIP_STARTED
-//          || cplayer.spaceship.state == SSHIP_LAUNCHED)) {
+//  if (pcity.is_capital()
+//      && (cplayer.spaceship.state == spaceship_state.SSHIP_STARTED
+//          || cplayer.spaceship.state == spaceship_state.SSHIP_LAUNCHED)) {
 //    spaceship_lost(cplayer);
 //  }
 //  
-//  if (is_capital(pcity)
+//  if (pcity.is_capital()
 //      && city_list_size(&cplayer.cities) >= game.civilwarsize
 //      && game.nplayers < game.playable_nation_count
 //      && game.civilwarsize < GAME_MAX_CIVILWARSIZE
@@ -1248,7 +1248,7 @@ public class Citytools{
 //    notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
 //		     "Game: %s has been destroyed by %s.", 
 //		     pcity.name, pplayer.name);
-//    gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "destroyed");
+//    Gamelog.gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "destroyed");
 //    remove_city(pcity);
 //    if (do_civil_war) {
 //      civil_war(cplayer);
@@ -1270,7 +1270,7 @@ public class Citytools{
 //		     _("Game: %s conquered %s and looted %d gold"
 //		       " from the city."),
 //		     pplayer.name, pcity.name, coins);
-//    gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "conquered");
+//    Gamelog.gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "conquered");
 //  } else {
 //    notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT, 
 //		     _("Game: You have liberated %s!"
@@ -1282,7 +1282,7 @@ public class Citytools{
 //		       " from the city."),
 //		     pplayer.name, pcity.name, coins);
 //
-//    gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "liberated");
+//    Gamelog.gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "liberated");
 //  }
 //
 //  get_a_tech(pplayer, cplayer);
@@ -1334,7 +1334,7 @@ public class Citytools{
 //
 //  packet.size = pdcity.size;
 //
-//  if (pcity && pcity.id == pdcity.id && is_capital(pcity)) {
+//  if (pcity && pcity.id == pdcity.id && pcity.is_capital()) {
 //    packet.capital = true;
 //  } else {
 //    packet.capital = false;
@@ -1467,7 +1467,7 @@ public class Citytools{
 //{
 //  assert(pcity != null);
 //
-//  if (server_state != RUN_GAME_STATE && server_state != GAME_OVER_STATE)
+//  if (Srv_main.server_state != RUN_GAME_STATE && Srv_main.server_state != server_states.GAME_OVER_STATE)
 //    return;
 //
 //  if (dest == city_owner(pcity) && nocity_send)
@@ -1676,7 +1676,7 @@ public class Citytools{
 //    plrtile.city.id = pcity.id;
 //  }
 //  if (pdcity.id != pcity.id) {
-//    freelog(LOG_ERROR, "Trying to update old city (wrong ID)"
+//    util.freelog(Log.LOG_ERROR, "Trying to update old city (wrong ID)"
 //	    " at %i,%i for player %s",
 //	    pcity.tile.x, pcity.tile.y, pplayer.name);
 //    pdcity.id = pcity.id;   /* ?? */
@@ -1793,12 +1793,12 @@ public class Citytools{
 //void building_lost(city pcity, Impr_Type_id id)
 //{
 //  player owner = city_owner(pcity);
-//  boolean was_capital = is_capital(pcity);
+//  boolean was_capital = pcity.is_capital();
 //
 //  city_remove_improvement(pcity,id);
-//  if ((was_capital && !is_capital(pcity))
-//      && (owner.spaceship.state == SSHIP_STARTED
-//	  || owner.spaceship.state == SSHIP_LAUNCHED)) {
+//  if ((was_capital && !pcity.is_capital())
+//      && (owner.spaceship.state == spaceship_state.SSHIP_STARTED
+//	  || owner.spaceship.state == spaceship_state.SSHIP_LAUNCHED)) {
 //    /* If the capital was lost (by destruction of the palace) production on
 //     * the spaceship is lost. */
 //    spaceship_lost(owner);
@@ -1829,7 +1829,7 @@ public class Citytools{
 //       */
 //    notify_player_ex(null, pcity.tile, E_WONDER_STOPPED,
 //		     "Game: The %s have stopped building The %s in %s.",
-//		     get_nation_name_plural(pplayer.nation),
+//		     Nation.get_nation_name_plural(pplayer.nation),
 //		     get_impr_name_ex(pcity, pcity.currently_building),
 //		     pcity.name);
 //  }
@@ -1876,7 +1876,7 @@ public class Citytools{
 //  if (!pcity.is_building_unit && is_wonder(pcity.currently_building)) {
 //    notify_player_ex(null, pcity.tile, E_WONDER_STARTED,
 //		     "Game: The %s have started building The %s in %s.",
-//		     get_nation_name_plural(pplayer.nation),
+//		     Nation.get_nation_name_plural(pplayer.nation),
 //		     get_impr_name_ex(pcity, pcity.currently_building),
 //		     pcity.name);
 //  }

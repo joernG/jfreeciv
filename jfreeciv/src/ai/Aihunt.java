@@ -154,7 +154,7 @@ public class Aihunt{
 //     * enemy transports are protected by anti-missile technology. 
 //     * In this case, want nuclear much more! */
 //    desire = (ut.hp
-//              * MIN(ut.attack_strength, 30) /* nuke fix */
+//              * Math.min(ut.attack_strength, 30) /* nuke fix */
 //              * ut.firepower
 //              * ut.move_rate) / UNITTYPE_COSTS(ut) + 1;
 //

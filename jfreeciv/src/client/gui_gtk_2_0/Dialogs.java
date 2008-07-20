@@ -814,7 +814,7 @@ public class Dialogs{
 //    /* Spy/Diplomat acting against a city */
 //
 //    diplomat_target_id = pcity.id;
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Your %s has arrived at %s.\nWhat is your command?",
 //		unit_name(punit.type), pcity.name);
 //
@@ -958,7 +958,7 @@ public class Dialogs{
 //  char buf[128];
 //  boolean can_establish, can_trade;
 //  
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "Your caravan from %s reaches the city of %s.\nWhat now?",
 //	      phomecity.name, pdestcity.name);
 //  
@@ -1113,7 +1113,7 @@ public class Dialogs{
 //  char button_name[512];
 //  GtkWidget *b;
 //
-//  my_snprintf(button_name, sizeof(button_name), "button%d", button);
+//  button_name = util.my_snprintf( "button%d", button);
 //
 //  b = g_object_get_data(G_OBJECT(shl), button_name);
 //  gtk_widget_set_sensitive(b, state);
@@ -1184,7 +1184,7 @@ public class Dialogs{
 //  nbuttons = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dshell), "nbuttons"));
 //  g_object_set_data(G_OBJECT(dshell), "nbuttons", GINT_TO_POINTER(nbuttons+1));
 //
-//  my_snprintf(name, sizeof(name), "button%d", nbuttons);
+//  name = util.my_snprintf( "button%d", nbuttons);
 //
 //  button = gtk_button_new_from_stock(label);
 //  gtk_container_add(GTK_CONTAINER(bbox), button);

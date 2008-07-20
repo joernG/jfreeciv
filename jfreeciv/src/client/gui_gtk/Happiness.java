@@ -162,7 +162,7 @@ public class Happiness{
 //  struct citizen_type citizens[MAX_CITY_SIZE];
 //  int num_citizens = pcity.size;
 //  int pix_width = HAPPINESS_PIX_WIDTH * SMALL_TILE_WIDTH;
-//  int offset = MIN(SMALL_TILE_WIDTH, pix_width / num_citizens);
+//  int offset = Math.min(SMALL_TILE_WIDTH, pix_width / num_citizens);
 //  int true_pix_width = (num_citizens - 1) * offset + SMALL_TILE_WIDTH;
 //
 //  GdkPixmap *happiness_pixmap = gdk_pixmap_new(root_window, true_pix_width,

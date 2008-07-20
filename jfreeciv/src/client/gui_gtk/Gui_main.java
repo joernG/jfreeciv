@@ -1002,7 +1002,7 @@ public class Gui_main{
 //    unit_ids[idx] = punit ? punit.id : 0;
 //  }
 //
-//  if (get_client_state() == CLIENT_GAME_OVER_STATE) {
+//  if (get_client_state() == CLIENT_server_states.GAME_OVER_STATE) {
 //    gtk_pixcomm_clear(GTK_PIXCOMM(w), true);
 //    return;
 //  }
@@ -1089,11 +1089,11 @@ public class Gui_main{
 //    GtkWidget *p;
 //    char buf[512];
 //    
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //	    _("%s People\nYear: %s Turn: %d\nGold: %d\nNet Income: %d\n"
 //	      "Tax:%d Lux:%d Sci:%d\nResearching %s: %d/%d\nGovernment: %s"),
 //	    population_to_text(civ_population(game.player_ptr)),
-//	    textyear(game.year), game.turn,
+//	    Shared.textyear(game.year), game.turn,
 //	    game.player_ptr.economic.gold,
 //	    player_get_expected_income(game.player_ptr),
 //	    game.player_ptr.economic.tax,
@@ -1156,7 +1156,7 @@ public class Gui_main{
 //  if (previous_state == socket_writable)
 //    return;
 //
-//  freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
+//  util.freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
 //  gdk_input_remove(gdk_input_id);
 //  gdk_input_id = gdk_input_add(aconnection.sock, GDK_INPUT_READ 
 //                               | (socket_writable ? GDK_INPUT_WRITE : 0)

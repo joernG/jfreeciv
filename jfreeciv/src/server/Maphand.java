@@ -175,7 +175,7 @@ public class Maphand{
 //
 //  recalculate_lake_surrounders();
 //
-//  freelog(LOG_VERBOSE, "Map has %d continents and %d oceans", 
+//  util.freelog(LOG_VERBOSE, "Map has %d continents and %d oceans", 
 //	  map.num_continents, map.num_oceans);
 //}
 //
@@ -207,7 +207,7 @@ public class Maphand{
 //{
 //  int k;
 //
-//  freelog(LOG_VERBOSE, "Global warming: %d", game.heating);
+//  util.freelog(LOG_VERBOSE, "Global warming: %d", game.heating);
 //
 //  k = map_num_tiles();
 //  while(effect > 0 && (k--) > 0) {
@@ -249,7 +249,7 @@ public class Maphand{
 //{
 //  int k;
 //
-//  freelog(LOG_VERBOSE, "Nuclear winter: %d", game.cooling);
+//  util.freelog(LOG_VERBOSE, "Nuclear winter: %d", game.cooling);
 //
 //  k = map_num_tiles();
 //  while(effect > 0 && (k--) > 0) {
@@ -636,7 +636,7 @@ public class Maphand{
 //  city pcity;
 //  boolean old_known = map_is_known(ptile, pplayer);
 //
-//  freelog(LOG_DEBUG, "really unfogging %d,%d\n", TILE_XY(ptile));
+//  util.freelog(LOG_DEBUG, "really unfogging %d,%d\n", TILE_XY(ptile));
 //
 //  map_set_known(ptile, pplayer);
 //
@@ -711,7 +711,7 @@ public class Maphand{
 //**************************************************************************/
 //static void really_fog_area(player pplayer, tile ptile)
 //{
-//  freelog(LOG_DEBUG, "Fogging %i,%i. Previous fog: %i.",
+//  util.freelog(LOG_DEBUG, "Fogging %i,%i. Previous fog: %i.",
 //	  TILE_XY(ptile), map_get_seen(ptile, pplayer));
 // 
 //  assert(map_get_seen(ptile, pplayer) == 0);
@@ -775,7 +775,7 @@ public class Maphand{
 //void map_fog_city_area(city pcity)
 //{
 //  if (!pcity) {
-//    freelog(LOG_ERROR, "Attempting to fog non-existent city");
+//    util.freelog(Log.LOG_ERROR, "Attempting to fog non-existent city");
 //    return;
 //  }
 //
@@ -788,7 +788,7 @@ public class Maphand{
 //void map_unfog_city_area(city pcity)
 //{
 //  if (!pcity) {
-//    freelog(LOG_ERROR, "Attempting to unfog non-existent city");
+//    util.freelog(Log.LOG_ERROR, "Attempting to unfog non-existent city");
 //    return;
 //  }
 //
@@ -814,7 +814,7 @@ public class Maphand{
 //**************************************************************************/
 //void map_unfog_pseudo_city_area(player pplayer, tile ptile)
 //{
-//  freelog(LOG_DEBUG, "Unfogging city area at %i,%i", TILE_XY(ptile));
+//  util.freelog(LOG_DEBUG, "Unfogging city area at %i,%i", TILE_XY(ptile));
 //
 //  buffer_shared_vision(pplayer);
 //  map_city_radius_iterate(ptile, tile1) {
@@ -832,7 +832,7 @@ public class Maphand{
 //**************************************************************************/
 //void map_fog_pseudo_city_area(player pplayer, tile ptile)
 //{
-//  freelog(LOG_DEBUG, "Fogging city area at %i,%i", TILE_XY(ptile));
+//  util.freelog(LOG_DEBUG, "Fogging city area at %i,%i", TILE_XY(ptile));
 //
 //  buffer_shared_vision(pplayer);
 //  map_city_radius_iterate(ptile, tile1) {
@@ -853,7 +853,7 @@ public class Maphand{
 //  tile ptile = punit.tile;
 //  player pplayer = unit_owner(punit);
 //
-//  freelog(LOG_DEBUG, "Removing unit sight points at  %i,%i",
+//  util.freelog(LOG_DEBUG, "Removing unit sight points at  %i,%i",
 //	  TILE_XY(punit.tile));
 //
 //  if (map_has_special(punit.tile, S_FORTRESS)
@@ -872,7 +872,7 @@ public class Maphand{
 //  city pcity;
 //  boolean old_known = map_is_known(ptile, pplayer);
 //
-//  freelog(LOG_DEBUG, "Showing %i,%i", TILE_XY(ptile));
+//  util.freelog(LOG_DEBUG, "Showing %i,%i", TILE_XY(ptile));
 //
 //  if (!map_is_known_and_seen(ptile, pplayer)) {
 //    map_set_known(ptile, pplayer);
@@ -965,7 +965,7 @@ public class Maphand{
 //void map_change_seen(tile ptile, player pplayer, int change)
 //{
 //  map_get_player_tile(ptile, pplayer).seen += change;
-//  freelog(LOG_DEBUG, "%d,%d, p: %d, change %d, result %d\n", TILE_XY(ptile),
+//  util.freelog(LOG_DEBUG, "%d,%d, p: %d, change %d, result %d\n", TILE_XY(ptile),
 //	  pplayer.player_no, change, map_get_player_tile(ptile,
 //							 pplayer).seen);
 //}
@@ -1288,7 +1288,7 @@ public class Maphand{
 //  int save_vision[MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS];
 //  if (pfrom == pto) return;
 //  if (gives_shared_vision(pfrom, pto)) {
-//    freelog(LOG_ERROR, "Trying to give shared vision from %s to %s, "
+//    util.freelog(Log.LOG_ERROR, "Trying to give shared vision from %s to %s, "
 //	    "but that vision is already given!",
 //	    pfrom.name, pto.name);
 //    return;
@@ -1300,7 +1300,7 @@ public class Maphand{
 //
 //  pfrom.gives_shared_vision |= 1<<pto.player_no;
 //  create_vision_dependencies();
-//  freelog(LOG_DEBUG, "giving shared vision from %s to %s\n",
+//  util.freelog(LOG_DEBUG, "giving shared vision from %s to %s\n",
 //	  pfrom.name, pto.name);
 //
 //  for(player pplayer: game.players){
@@ -1308,7 +1308,7 @@ public class Maphand{
 //    for(player pplayer2: game.players){
 //      if (really_gives_vision(pplayer, pplayer2)
 //	  && !TEST_BIT(save_vision[pplayer.player_no], pplayer2.player_no)) {
-//	freelog(LOG_DEBUG, "really giving shared vision from %s to %s\n",
+//	util.freelog(LOG_DEBUG, "really giving shared vision from %s to %s\n",
 //	       pplayer.name, pplayer2.name);
 //	whole_map_iterate(ptile) {
 //	  int change = map_get_own_seen(ptile, pplayer);
@@ -1329,7 +1329,7 @@ public class Maphand{
 //    unbuffer_shared_vision(pplayer);
 //  }
 //
-//  if (server_state == RUN_GAME_STATE)
+//  if (Srv_main.server_state == RUN_GAME_STATE)
 //    send_player_info(pfrom, null);
 //}
 //
@@ -1341,7 +1341,7 @@ public class Maphand{
 //  int save_vision[MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS];
 //  assert(pfrom != pto);
 //  if (!gives_shared_vision(pfrom, pto)) {
-//    freelog(LOG_ERROR, "Tried removing the shared vision from %s to %s, "
+//    util.freelog(Log.LOG_ERROR, "Tried removing the shared vision from %s to %s, "
 //	    "but it did not exist in the first place!",
 //	    pfrom.name, pto.name);
 //    return;
@@ -1351,7 +1351,7 @@ public class Maphand{
 //    save_vision[pplayer.player_no] = pplayer.really_gives_vision;
 //  }
 //
-//  freelog(LOG_DEBUG, "removing shared vision from %s to %s\n",
+//  util.freelog(LOG_DEBUG, "removing shared vision from %s to %s\n",
 //	 pfrom.name, pto.name);
 //
 //  pfrom.gives_shared_vision &= ~(1<<pto.player_no);
@@ -1362,7 +1362,7 @@ public class Maphand{
 //    for(player pplayer2: game.players){
 //      if (!really_gives_vision(pplayer, pplayer2)
 //	  && TEST_BIT(save_vision[pplayer.player_no], pplayer2.player_no)) {
-//	freelog(LOG_DEBUG, "really removing shared vision from %s to %s\n",
+//	util.freelog(LOG_DEBUG, "really removing shared vision from %s to %s\n",
 //	       pplayer.name, pplayer2.name);
 //	whole_map_iterate(ptile) {
 //	  int change = map_get_own_seen(ptile, pplayer);
@@ -1377,7 +1377,7 @@ public class Maphand{
 //    unbuffer_shared_vision(pplayer);
 //  }
 //
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    send_player_info(pfrom, null);
 //  }
 //}

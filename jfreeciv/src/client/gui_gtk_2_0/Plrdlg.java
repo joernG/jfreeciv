@@ -147,7 +147,7 @@ public class Plrdlg{
 //    gtk_tree_model_get(model, &it, ncolumns - 1, &plrno, -1);
 //    plr = get_player(plrno);
 //  
-//    if (plr.spaceship.state != SSHIP_NONE) {
+//    if (plr.spaceship.state != spaceship_state.SSHIP_NONE) {
 //      gtk_widget_set_sensitive(players_sship_command, true);
 //    } else {
 //      gtk_widget_set_sensitive(players_sship_command, false);
@@ -743,7 +743,7 @@ public class Plrdlg{
 //
 //    gtk_tree_model_get(model, &it, ncolumns - 1, &plrno, -1);
 //
-//    my_snprintf(buf, sizeof(buf), "/aitoggle %s", get_player(plrno).name);
+//    buf = util.my_snprintf( "/aitoggle %s", get_player(plrno).name);
 //    send_chat(buf);
 //  }
 //}
@@ -762,7 +762,7 @@ public class Plrdlg{
 //
 //    gtk_tree_model_get(model, &it, ncolumns - 1, &plrno, -1);
 //
-//    my_snprintf(buf, sizeof(buf), "/%s %s",
+//    buf = util.my_snprintf( "/%s %s",
 //	skill_level_names[GPOINTER_TO_UINT(data)],
 //	get_player(plrno).name);
 //    send_chat(buf);

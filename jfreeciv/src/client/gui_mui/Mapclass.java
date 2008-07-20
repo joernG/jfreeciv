@@ -102,7 +102,7 @@ public class Mapclass{
 //    if (obj)
 //    {
 //      Object *text_obj;
-//      my_snprintf(s, sizeof(s), "Terrain: %s", map_get_tile_info_text(xtile, ytile));
+//      s = util.my_snprintf( "Terrain: %s", map_get_tile_info_text(xtile, ytile));
 //      text_obj = TextObject, MUIA_Text_Contents, s, End;
 //      DoMethod(group, OM_ADDMEMBER, text_obj);
 //
@@ -114,7 +114,7 @@ public class Mapclass{
 //
 //      if ((pcity = map_get_city(xtile, ytile)))
 //      {
-//	my_snprintf(s, sizeof(s), "City: %s(%s)", pcity.name,
+//	s = util.my_snprintf( "City: %s(%s)", pcity.name,
 //		    get_nation_name(city_owner(pcity).nation));
 //	text_obj = TextObject, MUIA_Text_Contents, s, End;
 //
@@ -146,9 +146,9 @@ public class Mapclass{
 //	  city pcity;
 //	  pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
 //	  if (pcity)
-//	    my_snprintf(cn, sizeof(cn), "/%s", pcity.name);
+//	    cn = util.my_snprintf( "/%s", pcity.name);
 //	}
-//	my_snprintf(s, sizeof(s), "Unit: %s(%s%s)", ptype.name,
+//	s = util.my_snprintf( "Unit: %s(%s%s)", ptype.name,
 //		    get_nation_name(unit_owner(punit).nation), cn);
 //
 //	text_obj = TextObject, MUIA_Text_Contents, s, End;
@@ -158,9 +158,9 @@ public class Mapclass{
 //	{
 //	  char uc[64] = "";
 //	  if (unit_list_size(&ptile.units) >= 2)
-//	    my_snprintf(uc, sizeof(uc), "  (%d more)", unit_list_size(&ptile.units) - 1);
+//	    uc = util.my_snprintf( "  (%d more)", unit_list_size(&ptile.units) - 1);
 //
-//	  my_snprintf(s, sizeof(s), "A:%d D:%d FP:%d HP:%d/%d%s%s", ptype.attack_strength,
+//	  s = util.my_snprintf( "A:%d D:%d FP:%d HP:%d/%d%s%s", ptype.attack_strength,
 //		  ptype.defense_strength, ptype.firepower, punit.hp,
 //		  ptype.hp, punit.veteran ? " V" : "", uc);
 //
@@ -172,7 +172,7 @@ public class Mapclass{
 //	}
 //	else
 //	{
-//	  my_snprintf(s, sizeof(s), "A:%d D:%d FP:%d HP:%d0%%", ptype.attack_strength,
+//	  s = util.my_snprintf( "A:%d D:%d FP:%d HP:%d0%%", ptype.attack_strength,
 //		  ptype.defense_strength, ptype.firepower,
 //		  (punit.hp * 100 / ptype.hp + 9) / 10);
 //	}
@@ -535,8 +535,8 @@ public class Mapclass{
 //  diff_y = old_canvas_y - new_canvas_y;
 //  w = UNIT_TILE_WIDTH + abs(diff_x);
 //  h = UNIT_TILE_HEIGHT + abs(diff_y);
-//  this_x = MIN(old_canvas_x,new_canvas_x);
-//  this_y = MIN(old_canvas_y,new_canvas_y);
+//  this_x = Math.min(old_canvas_x,new_canvas_x);
+//  this_y = Math.min(old_canvas_y,new_canvas_y);
 //
 //  if (this_x < 0)
 //  {
@@ -579,8 +579,8 @@ public class Mapclass{
 //
 //    get_canvas_xy(data.explode_unit.x, data.explode_unit.y, &canvas_x, &canvas_y);
 //
-//    w = MAX(0,MIN(NORMAL_TILE_WIDTH, _mwidth(o)-canvas_x));
-//    h = MAX(0,MIN(NORMAL_TILE_HEIGHT, _mheight(o)-canvas_y));
+//    w = MAX(0,Math.min(NORMAL_TILE_WIDTH, _mwidth(o)-canvas_x));
+//    h = MAX(0,Math.min(NORMAL_TILE_HEIGHT, _mheight(o)-canvas_y));
 //
 //    anim_timer = renew_timer_start(anim_timer, TIMER_USER, TIMER_ACTIVE);
 //
@@ -1633,11 +1633,11 @@ public class Mapclass{
 //	focus = get_unit_in_focus();
 //
 //	if (pcity)
-//	  my_snprintf(title, sizeof(title), "City %s", pcity.name);
+//	  title = util.my_snprintf( "City %s", pcity.name);
 //	else if (punit)
-//	  my_snprintf(title, sizeof(title), "Unit %s", unit_name(punit.type));
+//	  title = util.my_snprintf( "Unit %s", unit_name(punit.type));
 //	else
-//	  my_snprintf(title, sizeof(title), "Tile %s", map_get_tile_info_text(x, y));
+//	  title = util.my_snprintf( "Tile %s", map_get_tile_info_text(x, y));
 //
 //	context_menu = MenustripObject,
 //	  Child, menu_title = MenuObjectT(title),
@@ -2381,15 +2381,15 @@ public class Mapclass{
 //    SetAPen(rp, 1);		/* black */
 //    RectFill(rp, _mleft(o), _mtop(o), _mright(o), _mbottom(o));
 //
-//    for (i = 0; i < NUM_SS_MODULES; i++)
+//    for (i = 0; i < player_spaceship.NUM_SS_MODULES; i++)
 //    {
 //      j = i / 3;
 //      k = i % 3;
 //      if ((k == 0 && j >= ship.habitation) || (k == 1 && j >= ship.life_support) || (k == 2 && j >= ship.solar_panels))
 //	continue;
 //
-//      x = modules_info[i].x * sprite.width / 4 - sprite.width / 2;
-//      y = modules_info[i].y * sprite.height / 4 - sprite.height / 2;
+//      x = Spaceship.modules_info[i].x * sprite.width / 4 - sprite.width / 2;
+//      y = Spaceship.modules_info[i].y * sprite.height / 4 - sprite.height / 2;
 //
 //      sprite = (k == 0 ? sprites.spaceship.habitation :
 //		k == 1 ? sprites.spaceship.life_support :
@@ -2398,15 +2398,15 @@ public class Mapclass{
 //      put_sprite_overlay(rp, sprite, _mleft(o) + x, _mtop(o) + y);
 //    }
 //
-//    for (i = 0; i < NUM_SS_COMPONENTS; i++)
+//    for (i = 0; i < player_spaceship.NUM_SS_COMPONENTS; i++)
 //    {
 //      j = i / 2;
 //      k = i % 2;
 //      if ((k == 0 && j >= ship.fuel) || (k == 1 && j >= ship.propulsion))
 //	continue;
 //
-//      x = components_info[i].x * sprite.width / 4 - sprite.width / 2;
-//      y = components_info[i].y * sprite.height / 4 - sprite.height / 2;
+//      x = Spaceship.components_info[i].x * sprite.width / 4 - sprite.width / 2;
+//      y = Spaceship.components_info[i].y * sprite.height / 4 - sprite.height / 2;
 //
 //      sprite = (k == 0) ? sprites.spaceship.fuel : sprites.spaceship.propulsion;
 //
@@ -2415,12 +2415,12 @@ public class Mapclass{
 //
 //    sprite = sprites.spaceship.structural;
 //
-//    for (i = 0; i < NUM_SS_STRUCTURALS; i++)
+//    for (i = 0; i < player_spaceship.NUM_SS_STRUCTURALS; i++)
 //    {
 //      if (!ship.structure[i])
 //	continue;
-//      x = structurals_info[i].x * sprite.width / 4 - sprite.width / 2;
-//      y = structurals_info[i].y * sprite.height / 4 - sprite.height / 2;
+//      x = Spaceship.structurals_info[i].x * sprite.width / 4 - sprite.width / 2;
+//      y = Spaceship.structurals_info[i].y * sprite.height / 4 - sprite.height / 2;
 //
 //      put_sprite_overlay(rp, sprite, _mleft(o) + x, _mtop(o) + y);
 //    }

@@ -572,7 +572,7 @@ public class Cma_fe{
 //  if (poscur < posmin) poscur = posmin;
 //  if (poscur > posmax) poscur = posmax;
 //  ScrollBar_SetPos(winctl, poscur, true);
-//  my_snprintf(buf, sizeof(buf), "%d", poscur);
+//  buf = util.my_snprintf( "%d", poscur);
 //  SetWindowText(GetNextSibling(winctl), buf);
 //
 //}

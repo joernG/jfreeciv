@@ -49,7 +49,7 @@ public class Civserver {
 //			#endif
 			fc_fprintf(System.err, " -f, --file FILE\tLoad saved game FILE\n");
 			fc_fprintf(System.err,
-			" -g, --gamelog FILE\tUse FILE as game logfile\n");
+			" -g, --Gamelog.gamelog FILE\tUse FILE as game logfile\n");
 			fc_fprintf(System.err,
 			" -h, --help\t\tPrint a summary of the options\n");
 			fc_fprintf(System.err, " -l, --log FILE\tUse FILE as logfile\n");

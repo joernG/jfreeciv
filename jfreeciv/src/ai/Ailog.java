@@ -46,7 +46,7 @@ public class Ailog{
 //  char buffer[500];
 //  char buffer2[500];
 //  va_list ap;
-//  int minlevel = MIN(LOGLEVEL_CITY, level);
+//  int minlevel = Math.min(LOGLEVEL_CITY, level);
 //
 //  if (pplayer.debug) {
 //    minlevel = Log.LOG_NORMAL;
@@ -55,12 +55,12 @@ public class Ailog{
 //  }
 //
 //  if (ai.diplomacy.target) {
-//    my_snprintf(targetbuffer, sizeof(targetbuffer), "[ti%d co%d lo%d %s] ",
+//    targetbuffer = util.my_snprintf( "[ti%d co%d lo%d %s] ",
 //                ai.diplomacy.timer, ai.diplomacy.countdown,
 //                pplayer.ai.love[ai.diplomacy.target.player_no],
 //                ai.diplomacy.target.name);
 //  }
-//  my_snprintf(buffer, sizeof(buffer), "%s %s%s%s ", pplayer.name,
+//  buffer = util.my_snprintf( "%s %s%s%s ", pplayer.name,
 //              ai.diplomacy.target ? targetbuffer : "",
 //              ai.diplomacy.spacerace_leader &&
 //              ai.diplomacy.spacerace_leader.player_no == pplayer.player_no ? 
@@ -76,7 +76,7 @@ public class Ailog{
 //  if (pplayer.debug) {
 //    notify_conn(&game.est_connections, buffer);
 //  }
-//  freelog(minlevel, buffer);
+//  util.freelog(minlevel, buffer);
 //}
 //
 ///**************************************************************************
@@ -88,7 +88,7 @@ public class Ailog{
 //  char buffer[500];
 //  char buffer2[500];
 //  va_list ap;
-//  int minlevel = MIN(LOGLEVEL_CITY, level);
+//  int minlevel = Math.min(LOGLEVEL_CITY, level);
 //
 //  if (pcity.debug) {
 //    minlevel = Log.LOG_NORMAL;
@@ -96,7 +96,7 @@ public class Ailog{
 //    return;
 //  }
 //
-//  my_snprintf(buffer, sizeof(buffer), "%s's %s(%d,%d) [s%d d%d u%d g%d] ",
+//  buffer = util.my_snprintf( "%s's %s(%d,%d) [s%d d%d u%d g%d] ",
 //              city_owner(pcity).name, pcity.name,
 //              pcity.tile.x, pcity.tile.y, pcity.size,
 //              pcity.ai.danger, pcity.ai.urgency,
@@ -110,7 +110,7 @@ public class Ailog{
 //  if (pcity.debug) {
 //    notify_conn(&game.est_connections, buffer);
 //  }
-//  freelog(minlevel, buffer);
+//  util.freelog(minlevel, buffer);
 //}
 //
 ///**************************************************************************
@@ -124,7 +124,7 @@ public class Ailog{
 //  char buffer[500];
 //  char buffer2[500];
 //  va_list ap;
-//  int minlevel = MIN(LOGLEVEL_UNIT, level);
+//  int minlevel = Math.min(LOGLEVEL_UNIT, level);
 //  int gx, gy;
 //  boolean messwin = false; /* output to message window */
 //
@@ -152,7 +152,7 @@ public class Ailog{
 //    gx = gy = -1;
 //  }
 //  
-//  my_snprintf(buffer, sizeof(buffer), "%s's %s[%d] (%d,%d).(%d,%d){%d,%d} ",
+//  buffer = util.my_snprintf( "%s's %s[%d] (%d,%d).(%d,%d){%d,%d} ",
 //              unit_owner(punit).name, unit_type(punit).name,
 //              punit.id, punit.tile.x, punit.tile.y,
 //	      gx, gy,
@@ -166,7 +166,7 @@ public class Ailog{
 //  if (punit.debug || messwin) {
 //    notify_conn(&game.est_connections, buffer);
 //  }
-//  freelog(minlevel, buffer);
+//  util.freelog(minlevel, buffer);
 //}
 //
 ///**************************************************************************
@@ -177,7 +177,7 @@ public class Ailog{
 //void BODYGUARD_LOG(int level, unit punit, final String msg)
 //{
 //  char buffer[500];
-//  int minlevel = MIN(LOGLEVEL_BODYGUARD, level);
+//  int minlevel = Math.min(LOGLEVEL_BODYGUARD, level);
 //  unit pcharge;
 //  city pcity;
 //  int id = -1;
@@ -201,7 +201,7 @@ public class Ailog{
 //    id = pcity.id;
 //    s = pcity.name;
 //  }
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //              "%s's bodyguard %s[%d] (%d,%d){%s:%d@%d,%d} ",
 //              unit_owner(punit).name, unit_type(punit).name,
 //              punit.id, punit.tile.x, punit.tile.y,
@@ -210,6 +210,6 @@ public class Ailog{
 //  if (punit.debug) {
 //    notify_conn(&game.est_connections, buffer);
 //  }
-//  freelog(minlevel, buffer);
+//  util.freelog(minlevel, buffer);
 //}
 }

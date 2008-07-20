@@ -39,13 +39,13 @@ public class Mapview{
 //  /* PORTME */
 //  char buffer[512];
 //
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //	      _("Population: %s\n"
 //		"Year: %s\n"
 //		"Gold %d\n"
 //		"Tax: %d Lux: %d Sci: %d"),
 //	      population_to_text(civ_population(game.player_ptr)),
-//	      textyear(game.year), game.player_ptr.economic.gold,
+//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
 //	      game.player_ptr.economic.tax,
 //	      game.player_ptr.economic.luxury,
 //	      game.player_ptr.economic.science);

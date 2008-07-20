@@ -181,7 +181,7 @@ public class City{
 //
 //#ifdef DEBUG
 //  for (i = 0; i < CITY_TILES; i++) {
-//    freelog(LOG_DEBUG, "%2d : (%2d,%2d) : %d", i,
+//    util.freelog(LOG_DEBUG, "%2d : (%2d,%2d) : %d", i,
 //	    array[i].dx + CITY_MAP_RADIUS, array[i].dy + CITY_MAP_RADIUS,
 //	    array[i].dist);
 //  }
@@ -263,7 +263,7 @@ public class City{
 //  }
 //  
 //  if (state) {
-//    my_snprintf(buffer, sizeof(buffer), "%s(%s)",
+//    buffer = util.my_snprintf( "%s(%s)",
 //		get_improvement_name(id), state); 
 //    return buffer;
 //  } else {
@@ -1056,16 +1056,6 @@ public class City{
 //
 //  return tax_total - cost;
 //}
-//
-///**************************************************************************
-//  Return true iff this city is its nation's capital.  The capital city is
-//  special-cased in a number of ways.
-//**************************************************************************/
-//boolean is_capital(final city pcity)
-//{
-//  return (get_city_bonus(pcity, EFT_CAPITAL_CITY) != 0);
-//}
-//
 ///**************************************************************************
 // Whether a city has its own City Walls, or the same effect via a wonder.
 //**************************************************************************/
@@ -1337,7 +1327,7 @@ public class City{
 //    /* Surplus shields from the previous production won't be penalized if
 //     * you change production on the very next turn.  But you can only use
 //     * up to the city's surplus amount of shields in this way. */
-//    unpenalized_shields = MIN(pcity.last_turns_shield_surplus,
+//    unpenalized_shields = Math.min(pcity.last_turns_shield_surplus,
 //			      pcity.before_change_shields);
 //    penalized_shields = pcity.before_change_shields - unpenalized_shields;
 //  } else {
@@ -1731,14 +1721,14 @@ public class City{
 //  int content = content_citizens(city_owner(pcity));
 //
 //  /* Create content citizens. Take specialists from their ranks. */
-//  pcity.ppl_content[0] = MAX(0, MIN(pcity.size, content) - specialists);
+//  pcity.ppl_content[0] = MAX(0, Math.min(pcity.size, content) - specialists);
 //
 //  /* Create angry citizens only if we have a negative number of possible
 //   * content citizens. This happens when empires grow really big. */
 //  if (game.angrycitizen == false) {
 //    pcity.ppl_angry[0] = 0;
 //  } else {
-//    pcity.ppl_angry[0] = MIN(MAX(0, -content), pcity.size - specialists);
+//    pcity.ppl_angry[0] = Math.min(MAX(0, -content), pcity.size - specialists);
 //  }
 //
 //  /* Create unhappy citizens. In the beginning, all who are not content,
@@ -1901,10 +1891,10 @@ public class City{
 //static inline void unhappy_city_check(city pcity)
 //{
 //  if (city_unhappy(pcity)) {
-//    pcity.food_surplus = MIN(0, pcity.food_surplus);
+//    pcity.food_surplus = Math.min(0, pcity.food_surplus);
 //    pcity.tax_total = 0;
 //    pcity.science_total = 0;
-//    pcity.shield_surplus = MIN(0, pcity.shield_surplus);
+//    pcity.shield_surplus = Math.min(0, pcity.shield_surplus);
 //  }
 //}
 //
@@ -2186,7 +2176,7 @@ public class City{
 //  int dist;
 //  unsigned int val;
 //  int trade_penalty;
-//  int notradesize = MIN(game.notradesize, game.fulltradesize);
+//  int notradesize = Math.min(game.notradesize, game.fulltradesize);
 //  int fulltradesize = MAX(game.notradesize, game.fulltradesize);
 //
 //  if (pcity.size <= notradesize) {
@@ -2209,7 +2199,7 @@ public class City{
 //      dist = g.corruption_max_distance_cap;
 //    else {
 //      int tmp = real_map_distance(capital.tile, pcity.tile);
-//      dist = MIN(g.corruption_max_distance_cap, tmp);
+//      dist = Math.min(g.corruption_max_distance_cap, tmp);
 //    }
 //  }
 //  dist =
@@ -2246,7 +2236,7 @@ public class City{
 //      dist = g.waste_max_distance_cap;
 //    } else {
 //      int tmp = real_map_distance(capital.tile, pcity.tile);
-//      dist = MIN(g.waste_max_distance_cap, tmp);
+//      dist = Math.min(g.waste_max_distance_cap, tmp);
 //    }
 //  }
 //  dist = dist * g.waste_distance_factor + g.extra_waste_distance;
@@ -2328,7 +2318,7 @@ public class City{
 //{
 //  player pplayer = city_owner(pcity);
 //  
-//  freelog(LOG_DEBUG,"Improvement %s removed from city %s",
+//  util.freelog(LOG_DEBUG,"Improvement %s removed from city %s",
 //          improvement_types[impr].name, pcity.name);
 //  
 //  mark_improvement(pcity, impr, I_NONE);

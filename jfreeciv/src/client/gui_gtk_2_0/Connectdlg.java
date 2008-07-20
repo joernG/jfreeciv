@@ -82,7 +82,7 @@ public class Connectdlg{
 //    } else {
 //      char message[MAX_LEN_MSG];
 //
-//      my_snprintf(message, sizeof(message), "/load %s", filename);
+//      message = util.my_snprintf( "/load %s", filename);
 //      send_chat(message);
 //    }
 //
@@ -136,7 +136,7 @@ public class Connectdlg{
 //  count++;
 //
 //  if (count >= MAX_AUTOCONNECT_ATTEMPTS) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Failed to contact server \"%s\" at port "
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, user_name, count);
@@ -151,7 +151,7 @@ public class Connectdlg{
 //  /* See PR#4042 for more info on issues with try_to_connect() and errno. */
 //  case ECONNREFUSED:		/* Server not available (yet) */
 //    if (!warning_shown) {
-//      freelog(Log.LOG_NORMAL, _("Connection to server refused. "
+//      util.freelog(Log.LOG_NORMAL, _("Connection to server refused. "
 //			    "Please start the server."));
 //      append_output_window(_("Connection to server refused. "
 //			     "Please start the server."));
@@ -160,7 +160,7 @@ public class Connectdlg{
 //    return true;		/*  Tells GTK to keep calling this function */
 //#endif
 //  default:			/* All other errors are fatal */
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, errbuf);
@@ -180,7 +180,7 @@ public class Connectdlg{
 //{
 //  char buf[512];
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      _("Auto-connecting to server \"%s\" at port %d "
 //		"as \"%s\" every %f second(s) for %d times"),
 //	      server_host, server_port, user_name,
@@ -189,7 +189,7 @@ public class Connectdlg{
 //  append_output_window(buf);
 //
 //  if (get_server_address(server_host, server_port, buf, sizeof(buf)) < 0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);

@@ -84,24 +84,24 @@ public class Be_common_24_sprite{
 //
 //  fp = fopen(filename, "rb");
 //  if (!fp) {
-//    freelog(LOG_FATAL, "Failed reading PNG file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed reading PNG file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  pngp = png_create_read_struct(PNG_LIBPNG_VER_STRING, null, null, null);
 //  if (!pngp) {
-//    freelog(LOG_FATAL, "Failed creating PNG struct");
+//    util.freelog(LOG_FATAL, "Failed creating PNG struct");
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  infop = png_create_info_struct(pngp);
 //  if (!infop) {
-//    freelog(LOG_FATAL, "Failed creating PNG struct");
+//    util.freelog(LOG_FATAL, "Failed creating PNG struct");
 //    exit(EXIT_FAILURE);
 //  }
 //  
 //  if (setjmp(pngp.jmpbuf)) {
-//    freelog(LOG_FATAL, "Failed while reading PNG file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed while reading PNG file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -111,7 +111,7 @@ public class Be_common_24_sprite{
 //  width = png_get_image_width(pngp, infop);
 //  height = png_get_image_height(pngp, infop);
 //
-//  freelog(Log.LOG_NORMAL, "reading '%s' (%ldx%ld) bit depth=%d color_type=%d",
+//  util.freelog(Log.LOG_NORMAL, "reading '%s' (%ldx%ld) bit depth=%d color_type=%d",
 //	  filename, width, height, png_get_bit_depth(pngp, infop),
 //	  png_get_color_type(pngp, infop));
 //

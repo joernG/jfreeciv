@@ -34,7 +34,7 @@ public class civ_map {
 //		  /* Only used by server. */
 //		  struct start_position {
 //		    struct tile *tile;
-//		    Nation_Type_id nation; /* May be NO_NATION_SELECTED. */
+//		    int nation; /* May be NO_NATION_SELECTED. */
 //		  } *start_positions;	/* allocated at runtime */
 //		};
 

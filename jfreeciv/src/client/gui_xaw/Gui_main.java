@@ -304,8 +304,8 @@ public class Gui_main{
 //  XSetErrorHandler(myerr);*/
 //
 //  if(appResources.version==null)  {
-//    freelog(LOG_FATAL, "No version number in resources.");
-//    freelog(LOG_FATAL, _("You probably have an old (circa V1.0)"
+//    util.freelog(LOG_FATAL, "No version number in resources.");
+//    util.freelog(LOG_FATAL, _("You probably have an old (circa V1.0)"
 //			 " Freeciv resource file somewhere."));
 //    exit(EXIT_FAILURE);
 //  }
@@ -313,16 +313,16 @@ public class Gui_main{
 //  /* TODO: Use capabilities here instead of version numbers */
 //  if (0 != strncmp(appResources.version, VERSION_STRING,
 //		   appResources.version.length())) {
-//    freelog(LOG_FATAL, "Game version does not match Resource version.");
-//    freelog(LOG_FATAL, "Game version: %s - Resource version: %s", 
+//    util.freelog(LOG_FATAL, "Game version does not match Resource version.");
+//    util.freelog(LOG_FATAL, "Game version: %s - Resource version: %s", 
 //	    VERSION_STRING, appResources.version);
-//    freelog(LOG_FATAL, _("You might have an old Freeciv resourcefile"
+//    util.freelog(LOG_FATAL, _("You might have an old Freeciv resourcefile"
 //			 " in /usr/lib/X11/app-defaults"));
 //    exit(EXIT_FAILURE);
 //  }
 //  
 //  if(!appResources.gotAppDefFile) {
-//    freelog(Log.LOG_NORMAL, "Using fallback resources - which is OK");
+//    util.freelog(Log.LOG_NORMAL, "Using fallback resources - which is OK");
 //  }
 //
 //  display = XtDisplay(toplevel);
@@ -333,7 +333,7 @@ public class Gui_main{
 //  display_color_type=get_visual(); 
 //  
 //  if(display_color_type!=COLOR_DISPLAY) {
-//    freelog(LOG_FATAL, "Only color displays are supported for now...");
+//    util.freelog(LOG_FATAL, "Only color displays are supported for now...");
 //    /*    exit(EXIT_FAILURE); */
 //  }
 //  
@@ -365,12 +365,12 @@ public class Gui_main{
 //	&missing_charset_count_return,
 //	&def_string_return);
 //    if(!main_font_set) {
-//      freelog(LOG_FATAL, "Unable to open fontset: %s",
+//      util.freelog(LOG_FATAL, "Unable to open fontset: %s",
 //	  city_names_font);
 //      exit(EXIT_FAILURE);
 //    }
 //    for(i = 0; i < missing_charset_count_return; i++) {
-//      freelog(LOG_ERROR, "Font for charset %s is lacking",
+//      util.freelog(Log.LOG_ERROR, "Font for charset %s is lacking",
 //	  missing_charset_list_return[i]);
 //    }
 //    values.foreground = colors_standard[COLOR_STD_WHITE];
@@ -384,12 +384,12 @@ public class Gui_main{
 //	&missing_charset_count_return,
 //	&def_string_return);
 //    if(!prod_font_set) {
-//      freelog(LOG_FATAL, "Unable to open fontset: %s",
+//      util.freelog(LOG_FATAL, "Unable to open fontset: %s",
 //	  city_productions_font_name);
 //      exit(EXIT_FAILURE);
 //    }
 //    for(i = 0; i < missing_charset_count_return; i++) {
-//      freelog(LOG_ERROR, "Font for charset %s is lacking",
+//      util.freelog(Log.LOG_ERROR, "Font for charset %s is lacking",
 //	  missing_charset_list_return[i]);
 //    }
 //    values.foreground = colors_standard[COLOR_STD_WHITE];
@@ -428,7 +428,7 @@ public class Gui_main{
 //  
 //  /* 135 below is rough value (could be more intelligent) --dwp */
 //  num_units_below = 135 / UNIT_TILE_WIDTH;
-//  num_units_below = MIN(num_units_below,MAX_NUM_UNITS_BELOW);
+//  num_units_below = Math.min(num_units_below,MAX_NUM_UNITS_BELOW);
 //  num_units_below = MAX(num_units_below,1);
 //  
 //  /* do setup_widgets before loading the rest of graphics to ensure that
@@ -631,7 +631,7 @@ public class Gui_main{
 //
 //  for(i=0; i<num_units_below; i++) {
 //    char unit_below_name[32];
-//    my_snprintf(unit_below_name, sizeof(unit_below_name),
+//    unit_below_name = util.my_snprintf(
 //		"unitbelowcanvas%ld", i);
 //    unit_below_canvas[i] = XtVaCreateManagedWidget(unit_below_name,
 //						   pixcommWidgetClass,
@@ -708,7 +708,7 @@ public class Gui_main{
 //    Dimension w, h;
 //    char buf[512];
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		_("%s People\n"
 //		  "Year: %s Turn: %d\n"
 //		  "Gold: %d\n"
@@ -717,7 +717,7 @@ public class Gui_main{
 //		  "Researching %s: %d/%d\n"
 //		  "Government: %s"),
 //		population_to_text(civ_population(game.player_ptr)),
-//		textyear(game.year), game.turn,
+//		Shared.textyear(game.year), game.turn,
 //		game.player_ptr.economic.gold,
 //		player_get_expected_income(game.player_ptr),
 //		game.player_ptr.economic.tax,
@@ -785,7 +785,7 @@ public class Gui_main{
 //
 //  if (previous_state == socket_writable)
 //    return;
-//  freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
+//  util.freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
 //  XtRemoveInput(x_input_id);
 //  x_input_id = XtAppAddInput(app_context, aconnection.sock,
 //			     (XtPointer) (XtInputReadMask |

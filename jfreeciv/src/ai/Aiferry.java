@@ -98,13 +98,13 @@ public class Aiferry{
 //  ai_data ai = ai_data_get(pplayer);
 //  int n = 1;
 //
-//  freelog(Log.LOG_NORMAL, "Boat stats for %s[%d]", 
+//  util.freelog(Log.LOG_NORMAL, "Boat stats for %s[%d]", 
 //	  pplayer.name, pplayer.player_no);
-//  freelog(Log.LOG_NORMAL, "Registered: %d free out of total %d",
+//  util.freelog(Log.LOG_NORMAL, "Registered: %d free out of total %d",
 //	  ai.stats.available_boats, ai.stats.boats);
 //  for (unit punit : pplayer.units.data) {
 //    if (is_sailing_unit(punit) && is_ground_units_transport(punit)) {
-//      freelog(Log.LOG_NORMAL, "#%d. %s[%d], psngr=%d", 
+//      util.freelog(Log.LOG_NORMAL, "#%d. %s[%d], psngr=%d", 
 //	      n, unit_type(punit).name, punit.id, punit.ai.passenger);
 //      n++;
 //    }
@@ -204,7 +204,7 @@ public class Aiferry{
 //  } }
 //
 //  if (boats != ai.stats.available_boats) {
-//    freelog(LOG_ERROR, "Player[%d] in turn %d: boats miscounted.",
+//    util.freelog(Log.LOG_ERROR, "Player[%d] in turn %d: boats miscounted.",
 //	    pplayer.player_no, game.turn);
 //    aiferry_print_stats(pplayer);
 //  }

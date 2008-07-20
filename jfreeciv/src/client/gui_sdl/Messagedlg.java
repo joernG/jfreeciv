@@ -35,6 +35,6 @@ public class Messagedlg{
 //**************************************************************************/
 //void popup_messageopt_dialog()
 //{
-//  freelog(LOG_DEBUG, "popup_messageopt_dialog : PORT ME");
+//  util.freelog(LOG_DEBUG, "popup_messageopt_dialog : PORT ME");
 //}
 }

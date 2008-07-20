@@ -315,10 +315,10 @@ public class Registry{
 //    for (entry pentry : psection.entries.data) {
 //      if (pentry.used == 0) {
 //	if (any == 0 && filename) {
-//	  freelog(LOG_VERBOSE, "Unused entries in file %s:", filename);
+//	  util.freelog(LOG_VERBOSE, "Unused entries in file %s:", filename);
 //	  any = 1;
 //	}
-//	freelog(LOG_VERBOSE, "  unused entry: %s.%s",
+//	util.freelog(LOG_VERBOSE, "  unused entry: %s.%s",
 //		psection.name, pentry.name);
 //      }
 //    }
@@ -344,15 +344,15 @@ public class Registry{
 //    pentry.svalue = minstrdup(sb, tok+1);
 //    pentry.ivalue = 0;
 //    if (SECF_DEBUG_ENTRIES) {
-//      freelog(LOG_DEBUG, "entry %s '%s'", name, pentry.svalue);
+//      util.freelog(LOG_DEBUG, "entry %s '%s'", name, pentry.svalue);
 //    }
 //  } else {
 //    pentry.svalue = null;
 //    if (sscanf(tok, "%d", &pentry.ivalue) != 1) {
-//      freelog(LOG_ERROR, "'%s' isn't an integer", tok);
+//      util.freelog(Log.LOG_ERROR, "'%s' isn't an integer", tok);
 //    }
 //    if (SECF_DEBUG_ENTRIES) {
-//      freelog(LOG_DEBUG, "entry %s %d", name, pentry.ivalue);
+//      util.freelog(LOG_DEBUG, "entry %s %d", name, pentry.ivalue);
 //    }
 //  }
 //  pentry.used = false;
@@ -413,9 +413,9 @@ public class Registry{
 //  sb = sf.sb;
 //
 //  if (filename) {
-//    freelog(LOG_VERBOSE, "Reading registry from \"%s\"", filename);
+//    util.freelog(LOG_VERBOSE, "Reading registry from \"%s\"", filename);
 //  } else {
-//    freelog(LOG_VERBOSE, "Reading registry");
+//    util.freelog(LOG_VERBOSE, "Reading registry");
 //  }
 //
 //  while(!inf_at_eof(inf)) {
@@ -428,7 +428,7 @@ public class Registry{
 //    tok = inf_token(inf, INF_TOK_SECTION_NAME);
 //    if (tok) {
 //      if (table_state) {
-//	inf_log(inf, LOG_ERROR, "new section during table");
+//	inf_log(inf, Log.LOG_ERROR, "new section during table");
 //        return false;
 //      }
 //      /* Check if we already have a section with this name.
@@ -447,12 +447,12 @@ public class Registry{
 //      continue;
 //    }
 //    if (!psection) {
-//      inf_log(inf, LOG_ERROR, "data before first section");
+//      inf_log(inf, Log.LOG_ERROR, "data before first section");
 //      return false;
 //    }
 //    if (inf_token(inf, INF_TOK_TABLE_END)) {
 //      if (!table_state) {
-//	inf_log(inf, LOG_ERROR, "misplaced \"}\"");
+//	inf_log(inf, Log.LOG_ERROR, "misplaced \"}\"");
 //        return false;
 //      }
 //      () inf_token_required(inf, INF_TOK_EOL);
@@ -511,7 +511,7 @@ public class Registry{
 //          return false;
 //        }
 //	if( tok[0] != '\"' ) {
-//	  inf_log(inf, LOG_ERROR, "table column header non-string");
+//	  inf_log(inf, Log.LOG_ERROR, "table column header non-string");
 //          return false;
 //	}
 //	{ 	/* expand columns: */
@@ -559,9 +559,9 @@ public class Registry{
 //  
 //  if (table_state) {
 //    if (filename) {
-//      freelog(LOG_FATAL, "finished registry %s before end of table\n", filename);
+//      util.freelog(LOG_FATAL, "finished registry %s before end of table\n", filename);
 //    } else {
-//      freelog(LOG_FATAL, "finished registry before end of table\n");
+//      util.freelog(LOG_FATAL, "finished registry before end of table\n");
 //    }
 //    exit(EXIT_FAILURE);
 //  }
@@ -729,7 +729,7 @@ public class Registry{
 //	  pentry = ITERATOR_PTR(ent_iter);
 //	  col_pentry = ITERATOR_PTR(col_iter);
 //
-//	  my_snprintf(expect, sizeof(expect), "%s%d.%s",
+//	  expect = util.my_snprintf( "%s%d.%s",
 //		      base, irow, col_pentry.name+offset);
 //
 //	  /* break out of tabular if doesn't match: */
@@ -744,7 +744,7 @@ public class Registry{
 //	       * FIXME: If the first row is missing some entries that the
 //	       * second or later row has, then we'll drop out of tabular
 //	       * format without an error message. */
-//	      freelog(LOG_ERROR,
+//	      util.freelog(Log.LOG_ERROR,
 //		      "In file %s, there is no entry in the registry for \n"
 //		      "%s (or the entries are out of order. This means a \n"
 //		      "less efficient non-tabular format will be used. To\n"
@@ -805,13 +805,13 @@ public class Registry{
 //  () moutstr(null);		/* free internal buffer */
 //
 //  if (fz_ferror(fs) != 0) {
-//    freelog(LOG_ERROR, "Error before closing %s: %s", real_filename,
+//    util.freelog(Log.LOG_ERROR, "Error before closing %s: %s", real_filename,
 //	    fz_strerror(fs));
 //    fz_fclose(fs);
 //    return false;
 //  }
 //  if (fz_fclose(fs) != 0) {
-//    freelog(LOG_ERROR, "Error closing %s", real_filename);
+//    util.freelog(Log.LOG_ERROR, "Error closing %s", real_filename);
 //    return false;
 //  }
 //
@@ -832,13 +832,13 @@ public class Registry{
 //  va_end(ap);
 //
 //  if(!(pentry=section_file_lookup_internal(my_section_file, buf))) {
-//    freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
+//    util.freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if(!pentry.svalue) {
-//    freelog(LOG_FATAL, "sectionfile %s entry '%s' doesn't contain a string",
+//    util.freelog(LOG_FATAL, "sectionfile %s entry '%s' doesn't contain a string",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
@@ -864,7 +864,7 @@ public class Registry{
 //  va_end(ap);
 //
 //  if(!(pentry=section_file_lookup_internal(my_section_file, buf))) {
-//    freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
+//    util.freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
@@ -941,7 +941,7 @@ public class Registry{
 //  pentry=section_file_insert_internal(my_section_file, buf);
 //
 //  if (val != true && val != false) {
-//    freelog(LOG_ERROR, "Trying to insert a non-boolean (%d) at key %s",
+//    util.freelog(Log.LOG_ERROR, "Trying to insert a non-boolean (%d) at key %s",
 //	    (int) val, buf);
 //    val = true;
 //  }
@@ -1047,13 +1047,13 @@ public class Registry{
 //  va_end(ap);
 //
 //  if(!(pentry=section_file_lookup_internal(my_section_file, buf))) {
-//    freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
+//    util.freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if(pentry.svalue) {
-//    freelog(LOG_FATAL, "sectionfile %s entry '%s' doesn't contain an integer",
+//    util.freelog(LOG_FATAL, "sectionfile %s entry '%s' doesn't contain an integer",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1081,7 +1081,7 @@ public class Registry{
 //    return def;
 //  }
 //  if(pentry.svalue) {
-//    freelog(LOG_FATAL, "sectionfile %s contains a '%s', but string not integer",
+//    util.freelog(LOG_FATAL, "sectionfile %s contains a '%s', but string not integer",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1103,19 +1103,19 @@ public class Registry{
 //  va_end(ap);
 //
 //  if(!(pentry=section_file_lookup_internal(my_section_file, buf))) {
-//    freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
+//    util.freelog(LOG_FATAL, "sectionfile %s doesn't contain a '%s' entry",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if(pentry.svalue) {
-//    freelog(LOG_FATAL, "sectionfile %s entry '%s' doesn't contain an integer",
+//    util.freelog(LOG_FATAL, "sectionfile %s entry '%s' doesn't contain an integer",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if (pentry.ivalue != 0 && pentry.ivalue != 1) {
-//    freelog(LOG_ERROR, "Value read for key %s isn't boolean: %d", buf,
+//    util.freelog(Log.LOG_ERROR, "Value read for key %s isn't boolean: %d", buf,
 //	    pentry.ivalue);
 //    pentry.ivalue = 1;
 //  }
@@ -1143,13 +1143,13 @@ public class Registry{
 //    return def;
 //  }
 //  if(pentry.svalue) {
-//    freelog(LOG_FATAL, "sectionfile %s contains a '%s', but string not integer",
+//    util.freelog(LOG_FATAL, "sectionfile %s contains a '%s', but string not integer",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if (pentry.ivalue != 0 && pentry.ivalue != 1) {
-//    freelog(LOG_ERROR, "Value read for key %s isn't boolean: %d", buf,
+//    util.freelog(Log.LOG_ERROR, "Value read for key %s isn't boolean: %d", buf,
 //	    pentry.ivalue);
 //    pentry.ivalue = 1;
 //  }
@@ -1177,7 +1177,7 @@ public class Registry{
 //  }
 //
 //  if(!pentry.svalue) {
-//    freelog(LOG_FATAL, "sectionfile %s contains a '%s', but integer not string",
+//    util.freelog(LOG_FATAL, "sectionfile %s contains a '%s', but integer not string",
 //	    secfile_filename(my_section_file), buf);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1217,7 +1217,7 @@ public class Registry{
 //  entry result;
 //  section psection;
 //
-//  /* freelog(LOG_DEBUG, "looking up: %s", fullpath); */
+//  /* util.freelog(LOG_DEBUG, "looking up: %s", fullpath); */
 //  
 //  /* treat "sec.foo,0" as "sec.foo": */
 //  len = fullpath.length();
@@ -1243,7 +1243,7 @@ public class Registry{
 //  }
 //
 //  () mystrlcpy(sec_name, fullpath,
-//		   MIN(pdelim - fullpath + 1, sizeof(sec_name)));
+//		   Math.min(pdelim - fullpath + 1, sizeof(sec_name)));
 //  sz_strlcpy(ent_name, pdelim+1);
 //
 //  psection = find_section_by_name(my_section_file, sec_name);
@@ -1278,18 +1278,18 @@ public class Registry{
 //  sbuffer sb = my_section_file.sb;
 //
 //  if(!(pdelim=strchr(fullpath, '.'))) { /* d dont like strtok */
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    "Insertion fullpath \"%s\" missing '.' for sectionfile %s",
 //	    fullpath, secfile_filename(my_section_file));
 //    exit(EXIT_FAILURE);
 //  }
 //  () mystrlcpy(sec_name, fullpath,
-//		   MIN(pdelim - fullpath + 1, sizeof(sec_name)));
+//		   Math.min(pdelim - fullpath + 1, sizeof(sec_name)));
 //  sz_strlcpy(ent_name, pdelim+1);
 //  my_section_file.num_entries++;
 //  
 //  if(sec_name.length()==0 || ent_name.length()==0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    "Insertion fullpath \"%s\" missing %s for sectionfile %s",
 //	    fullpath, (sec_name.length()==0 ? "section" : "entry"),
 //	    secfile_filename(my_section_file));
@@ -1334,12 +1334,12 @@ public class Registry{
 //static void secfilehash_check(section_file file)
 //{
 //  if (!secfilehash_hashash(file)) {
-//    freelog(LOG_FATAL, "sectionfile %s hash operation before setup",
+//    util.freelog(LOG_FATAL, "sectionfile %s hash operation before setup",
 //	    secfile_filename(file));
 //    exit(EXIT_FAILURE);
 //  }
 //  if (file.num_entries != file.hashd.num_entries_hashbuild) {
-//    freelog(LOG_FATAL, "sectionfile %s has more entries than when hash built",
+//    util.freelog(LOG_FATAL, "sectionfile %s has more entries than when hash built",
 //	    secfile_filename(file));
 //    exit(EXIT_FAILURE);
 //  }
@@ -1367,7 +1367,7 @@ public class Registry{
 //	 lookup will never find it to mark it as used).
 //      */
 //    } else {
-//      freelog(LOG_FATAL, "Tried to insert same value twice: %s (sectionfile %s)",
+//      util.freelog(LOG_FATAL, "Tried to insert same value twice: %s (sectionfile %s)",
 //	      key, secfile_filename(file));
 //      exit(EXIT_FAILURE);
 //    }
@@ -1396,7 +1396,7 @@ public class Registry{
 //  
 //  section_list_iterate(*file.sections, psection) {
 //    for (entry pentry : psection.entries.data) {
-//      my_snprintf(buf, sizeof(buf), "%s.%s", psection.name, pentry.name);
+//      buf = util.my_snprintf( "%s.%s", psection.name, pentry.name);
 //      secfilehash_insert(file, buf, pentry);
 //    }
 //    }
@@ -1404,7 +1404,7 @@ public class Registry{
 //  }
 //  
 //  if (hashd.allow_duplicates) {
-//    freelog(LOG_DEBUG, "Hash duplicates during build: %d",
+//    util.freelog(LOG_DEBUG, "Hash duplicates during build: %d",
 //	    hashd.num_duplicates);
 //  }
 //}
@@ -1557,7 +1557,7 @@ public class Registry{
 //  char *c, *dest;
 //
 //  if (!str) {
-//    freelog(LOG_DEBUG, "moutstr alloc was %d", nalloc);
+//    util.freelog(LOG_DEBUG, "moutstr alloc was %d", nalloc);
 //    free(buf);
 //    buf = null;
 //    nalloc = 0;

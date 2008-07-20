@@ -153,20 +153,20 @@ public class Meta{
 //  }
 //
 //  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-//    freelog(LOG_ERROR, "Metaserver: can't open stream socket: %s",
+//    util.freelog(Log.LOG_ERROR, "Metaserver: can't open stream socket: %s",
 //	    mystrerror());
 //    metaserver_failed();
 //    return false;
 //  }
 //
 //  if (connect(sock, (sockaddr ) &meta_addr, sizeof(meta_addr)) == -1) {
-//    freelog(LOG_ERROR, "Metaserver: connect failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "Metaserver: connect failed: %s", mystrerror());
 //    metaserver_failed();
 //    my_closesocket(sock);
 //    return false;
 //  }
 //
-//  switch(server_state) {
+//  switch(Srv_main.server_state) {
 //  case server_states.PRE_GAME_STATE:
 //    sz_strlcpy(state, "Pregame");
 //    break;
@@ -176,7 +176,7 @@ public class Meta{
 //  case RUN_GAME_STATE:
 //    sz_strlcpy(state, "Running");
 //    break;
-//  case GAME_OVER_STATE:
+//  case server_states.GAME_OVER_STATE:
 //    sz_strlcpy(state, "Game Ended");
 //    break;
 //  default:
@@ -251,7 +251,7 @@ public class Meta{
 //
 //        my_snprintf(s, rest, "pln[]=%s&",
 //                    my_url_encode(plr.nation != NO_NATION_SELECTED 
-//                                  ? get_nation_name_plural(plr.nation)
+//                                  ? Nation.get_nation_name_plural(plr.nation)
 //                                  : "none"));
 //        s = end_of_strn(s, &rest);
 //
@@ -327,7 +327,7 @@ public class Meta{
 //    s = end_of_strn(s, &rest);
 //  }
 //
-//  n = my_snprintf(msg, sizeof(msg),
+//  n = msg = util.my_snprintf(
 //    "POST %s HTTP/1.1\r\n"
 //    "Host: %s:%d\r\n"
 //    "Content-Type: application/x-www-form-urlencoded; charset=\"utf-8\"\r\n"
@@ -375,7 +375,7 @@ public class Meta{
 //  metaserver_path = mystrdup(path);
 //
 //  if (!net_lookup_service(metaname, metaport, &meta_addr)) {
-//    freelog(LOG_ERROR, "Metaserver: bad address: [%s:%d].",
+//    util.freelog(Log.LOG_ERROR, "Metaserver: bad address: [%s:%d].",
 //            metaname, metaport);
 //    metaserver_failed();
 //    return;

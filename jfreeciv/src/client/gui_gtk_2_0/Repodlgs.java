@@ -294,7 +294,7 @@ public class Repodlgs{
 //
 //    gtk_widget_set_sensitive(science_change_menu_button,
 //			     can_client_issue_orders());
-//    my_snprintf(text, sizeof(text), "%d/%d",
+//    text = util.my_snprintf( "%d/%d",
 //		game.player_ptr.research.bulbs_researched,
 //		total_bulbs_required(game.player_ptr));
 //    pct=CLAMP((gdouble) game.player_ptr.research.bulbs_researched /
@@ -327,7 +327,7 @@ public class Repodlgs{
 //  }
 //  else {  
 //    int steps = num_unknown_techs_for_goal(game.player_ptr, to);
-//    my_snprintf(text, sizeof(text),
+//    text = util.my_snprintf(
 //		PL_("(%d step)", "(%d steps)", steps), steps);
 //    gtk_label_set_text(GTK_LABEL(science_goal_label), text);
 //
@@ -373,7 +373,7 @@ public class Repodlgs{
 //  if (!is_future_tech(a)) {
 //    a_str = get_tech_name(game.player_ptr, a);
 //  } else {
-//    my_snprintf(text_a,sizeof(text_a), "Future Tech. %d",
+//    text_a = util.my_snprintf( "Future Tech. %d",
 //		a - game.num_tech_types);
 //    a_str=text_a;
 //  }
@@ -381,7 +381,7 @@ public class Repodlgs{
 //  if(!is_future_tech(b)) {
 //    b_str = get_tech_name(game.player_ptr, b);
 //  } else {
-//    my_snprintf(text_b,sizeof(text_b), "Future Tech. %d",
+//    text_b = util.my_snprintf( "Future Tech. %d",
 //		b - game.num_tech_types);
 //    b_str=text_b;
 //  }
@@ -445,7 +445,7 @@ public class Repodlgs{
 //  gtk_widget_set_sensitive(science_change_menu_button,
 //			   can_client_issue_orders());
 //
-//  my_snprintf(text, sizeof(text), "%d/%d",
+//  text = util.my_snprintf( "%d/%d",
 //	      game.player_ptr.research.bulbs_researched,
 //	      total_bulbs_required(game.player_ptr));
 //
@@ -494,7 +494,7 @@ public class Repodlgs{
 //      data = get_tech_name(game.player_ptr,
 //			GPOINTER_TO_INT(g_list_nth_data(sorting_list, i)));
 //    } else {
-//      my_snprintf(text, sizeof(text), "Future Tech. %d",
+//      text = util.my_snprintf( "Future Tech. %d",
 //		  GPOINTER_TO_INT(g_list_nth_data(sorting_list, i))
 //		  - game.num_tech_types);
 //      data=text;
@@ -523,7 +523,7 @@ public class Repodlgs{
 //  
 //  steps = num_unknown_techs_for_goal(game.player_ptr,
 //				     game.player_ptr.ai.tech_goal);
-//  my_snprintf(text, sizeof(text), PL_("(%d step)", "(%d steps)", steps),
+//  text = util.my_snprintf( PL_("(%d step)", "(%d steps)", steps),
 //	      steps);
 //  gtk_label_set_text(GTK_LABEL(science_goal_label), text);
 //
@@ -568,7 +568,7 @@ public class Repodlgs{
 //    gtk_box_pack_start(GTK_BOX(hbox), label, true, true, 0);
 //    gtk_size_group_add_widget(group1, label);
 //
-//    my_snprintf(text, sizeof(text), "%d",
+//    text = util.my_snprintf( "%d",
 //	num_unknown_techs_for_goal(game.player_ptr, tech));
 //
 //    label = gtk_label_new(text);
@@ -879,7 +879,7 @@ public class Repodlgs{
 //      economy_row_type[i + nbr_impr].type = entries_units[i].type;
 //    }
 //
-//    my_snprintf(economy_total, sizeof(economy_total),
+//    economy_total = util.my_snprintf(
 //		"Income: %d    Total Costs: %d", tax, total); 
 //    gtk_label_set_text(GTK_LABEL(economy_label2), economy_total);
 //  }  
@@ -1497,7 +1497,7 @@ public class Repodlgs{
 //    if (settable_options[i].extra_help[0] != '\0') {
 //      char buf[4096];
 //
-//      my_snprintf(buf, sizeof(buf), "%s\n\n%s",
+//      buf = util.my_snprintf( "%s\n\n%s",
 //		  settable_options[i].name,
 //		  _(settable_options[i].extra_help));
 //      gtk_tooltips_set_tip(tips, ebox, buf, null);

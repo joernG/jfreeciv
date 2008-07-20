@@ -353,7 +353,7 @@ public class Startpos{
 //  for (k = 1; k <= map.num_continents; k++) {
 //    sum += islands[islands_index[k]].starters;
 //    if (islands[islands_index[k]].starters != 0) {
-//      freelog(LOG_VERBOSE, "starters on isle %i", k);
+//      util.freelog(LOG_VERBOSE, "starters on isle %i", k);
 //    }
 //  }
 //  assert(game.nplayers <= data.count + sum);
@@ -367,7 +367,7 @@ public class Startpos{
 //      islands[islands_index[(int) map_get_continent(ptile)]].starters--;
 //      map.start_positions[data.count].tile = ptile;
 //      map.start_positions[data.count].nation = NO_NATION_SELECTED;
-//      freelog(LOG_DEBUG,
+//      util.freelog(LOG_DEBUG,
 //	      "Adding %d,%d as starting position %d, %d goodies on islands.",
 //	      TILE_XY(ptile), data.count,
 //	      islands[islands_index[(int) map_get_continent(ptile)]].goodies);
@@ -376,7 +376,7 @@ public class Startpos{
 //    } else {
 //      data.min_value *= 0.9;
 //      if (data.min_value <= 10) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //	        _("The server appears to have gotten into an infinite loop "
 //	          "in the allocation of starting positions.\n"
 //	          "Maybe the numbers of players/ia is too much for this map.\n"

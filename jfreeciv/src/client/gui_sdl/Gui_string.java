@@ -145,7 +145,7 @@ public class Gui_string{
 //  }
 //  
 //  if ((str.font = load_font(str.ptsize)) == null) {
-//    freelog(LOG_ERROR, "Error in create_string16: Aborting ...");
+//    util.freelog(Log.LOG_ERROR, "Error in create_string16: Aborting ...");
 //    FREE(str);
 //    return str;
 //  }
@@ -208,7 +208,7 @@ public class Gui_string{
 //  }
 //  
 //  if (SDL_BlitSurface(pText, null, pDest, &dst_rect) < 0) {
-//    freelog(LOG_ERROR, "Couldn't blit text to display: %s",
+//    util.freelog(Log.LOG_ERROR, "Couldn't blit text to display: %s",
 //	    SDL_GetError());
 //    FREESURFACE(pText);
 //    return -1;
@@ -245,7 +245,7 @@ public class Gui_string{
 //				    pString.text, pString.fgcol);
 //
 //    if ((pText = SDL_DisplayFormat(pTmp)) == null) {
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      _("Error in SDL_create_str16_surf: Couldn't convert text "
 //		"to display format: %s"), SDL_GetError());
 //      pText = pTmp;
@@ -266,10 +266,10 @@ public class Gui_string{
 //    break;
 //  }
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  _("SDL_create_str16_surf: Font is generally %d big, and "
 //	    "string is %hd big"), TTF_FontHeight(pString.font), pText.h);
-//  freelog(LOG_DEBUG, "SDL_create_str16_surf: String is %d lenght",
+//  util.freelog(LOG_DEBUG, "SDL_create_str16_surf: String is %d lenght",
 //	  pText.w);
 //
 //
@@ -564,7 +564,7 @@ public class Gui_string{
 //  }
 //  
 //  if ((pBuf = load_font(new_ptsize)) == null) {
-//    freelog(LOG_ERROR, "Error in change_ptsize: Change ptsize failed");
+//    util.freelog(Log.LOG_ERROR, "Error in change_ptsize: Change ptsize failed");
 //    return;
 //  }
 //
@@ -606,7 +606,7 @@ public class Gui_string{
 //  
 //  /* Load Font */
 //  if ((font_tmp = TTF_OpenFont(pFont_with_FullPath, ptsize)) == null) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Error in load_font: Couldn't load %d pt font from %s: %s",
 //	    ptsize, pFont_with_FullPath, SDL_GetError());
 //    return font_tmp;
@@ -646,7 +646,7 @@ public class Gui_string{
 //  TTF_Font_Chain Font_TAB_TMP = Font_TAB;
 //
 //  if (Sizeof_Font_TAB == 0) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	 "Error in unload_font: Trying unload from empty Font ARRAY");
 //    return;
 //  }
@@ -660,7 +660,7 @@ public class Gui_string{
 //  }
 //
 //  if (index == Sizeof_Font_TAB) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    _("Error in unload_font: Trying unload Font which is "
 //	      "not include in Font ARRAY"));
 //    return;

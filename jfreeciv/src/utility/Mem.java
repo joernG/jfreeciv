@@ -58,7 +58,7 @@ public class Mem{
 //   * preventing a large number of smaller allocations. */
 //
 //  if (size == 0) {
-//    freelog(LOG_VERBOSE, "Warning: %s with size %lu at line %d of %s",
+//    util.freelog(LOG_VERBOSE, "Warning: %s with size %lu at line %d of %s",
 //	    called_as, (unsigned long)size, line, file);
 //  }
 //}

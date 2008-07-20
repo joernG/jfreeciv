@@ -284,7 +284,7 @@ public class Diplodlg{
 //    }
 //
 //    for (city pcity : plr0.cities.data) {
-//      if (!is_capital(pcity)) {
+//      if (!pcity.is_capital()) {
 //	city_list_ptrs[i] = pcity;
 //	i++;
 //      }
@@ -514,7 +514,7 @@ public class Diplodlg{
 //
 //  label = gtk_label_new(null);
 //  gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.5);
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "<span size=\"large\" weight=\"bold\">%s</span>",
 //	      get_nation_name(plr0.nation));
 //  gtk_label_set_markup(GTK_LABEL(label), buf);
@@ -570,7 +570,7 @@ public class Diplodlg{
 //
 //  label = gtk_label_new(null);
 //  gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.5);
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "<span size=\"large\" weight=\"bold\">%s</span>",
 //	      get_nation_name(plr1.nation));
 //  gtk_label_set_markup(GTK_LABEL(label), buf);

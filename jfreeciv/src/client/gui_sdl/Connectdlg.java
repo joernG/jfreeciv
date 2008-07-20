@@ -210,7 +210,7 @@ public class Connectdlg{
 //  close_connection_dialog();
 //  popdown_meswin_dialog();
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "Creating Server List...");
+//  cBuf = util.my_snprintf( "Creating Server List...");
 //  pStr = create_str16_from_char(cBuf, 16);
 //  pStr.style = TTF_STYLE_BOLD;
 //  pStr.render = 3;
@@ -269,7 +269,7 @@ public class Connectdlg{
 //  
 //  server_list_iterate(*pServer_list,pServer) {
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "%s Port %s Ver: %s %s %s %s\n%s",
+//    cBuf = util.my_snprintf( "%s Port %s Ver: %s %s %s %s\n%s",
 //    	pServer.name, pServer.port, pServer.version, _(pServer.status),
 //    		"Players", pServer.players, pServer.metastring);
 //
@@ -491,7 +491,7 @@ public class Connectdlg{
 //  add_to_gui_list(ID_SERVER_NAME_EDIT, pBuf);
 //
 //  /* ------------------------------ */
-//  my_snprintf(pCharPort, sizeof(pCharPort), "%d", server_port);
+//  pCharPort = util.my_snprintf( "%d", server_port);
 //  
 //  pBuf = create_edit_from_chars(null, pDest, pCharPort, 14, 210,
 //					 WF_DRAW_THEME_TRANSPARENT);
@@ -1165,7 +1165,7 @@ public class Connectdlg{
 //  count++;
 //
 //  if (count >= MAX_AUTOCONNECT_ATTEMPTS) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Failed to contact server \"%s\" at port "
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, user_name, count);
@@ -1176,7 +1176,7 @@ public class Connectdlg{
 //  if(try_to_connect(user_name, errbuf, sizeof(errbuf))) {
 //    /* Server not available (yet) */
 //    if (!warning_shown) {
-//      freelog(Log.LOG_NORMAL, _("Connection to server refused. "
+//      util.freelog(Log.LOG_NORMAL, _("Connection to server refused. "
 //			    "Please start the server."));
 //      append_output_window(_("Connection to server refused. "
 //			     "Please start the server."));
@@ -1200,7 +1200,7 @@ public class Connectdlg{
 //{
 //  char buf[512];
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      _("Auto-connecting to server \"%s\" at port %d "
 //		"as \"%s\" every %d.%d second(s) for %d times"),
 //	      server_host, server_port, user_name,
@@ -1209,7 +1209,7 @@ public class Connectdlg{
 //  append_output_window(buf);
 //
 //  if (get_server_address(server_host, server_port, buf, sizeof(buf)) < 0) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    _("Error contacting server \"%s\" at port %d "
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);

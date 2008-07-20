@@ -288,7 +288,7 @@ public class Diplodlg{
 //  }
 //
 //  for (city pcity : plr0.cities.data) {
-//    if (!is_capital(pcity)) {
+//    if (!pcity.is_capital()) {
 //      city_list_ptrs[i] = pcity;
 //      i++;
 //    }
@@ -356,16 +356,16 @@ public class Diplodlg{
 //					       pdialog.dip_main_form, 
 //					       null);
 //  
-//  my_snprintf(buf, sizeof(buf), "The %s offerings",
-//	      get_nation_name(plr0.nation));
+//  buf = util.my_snprintf( "The %s offerings",
+//	      Nation.get_nation_name(plr0.nation));
 //  pdialog.dip_headline0=XtVaCreateManagedWidget("dipheadline0", 
 //						 labelWidgetClass, 
 //						 pdialog.dip_form0, 
 //						 XtNlabel, buf,
 //						 null);   
 //
-//  my_snprintf(buf, sizeof(buf), "The %s offerings",
-//	      get_nation_name(plr1.nation));
+//  buf = util.my_snprintf( "The %s offerings",
+//	      Nation.get_nation_name(plr1.nation));
 //  pdialog.dip_headline1=XtVaCreateManagedWidget("dipheadline1", 
 //						 labelWidgetClass, 
 //						 pdialog.dip_form1, 
@@ -478,14 +478,14 @@ public class Diplodlg{
 //						   pdialog.dip_form1,
 //						   null);
 //  
-//  my_snprintf(buf, sizeof(buf), "Gold(max %d)", plr0.economic.gold);
+//  buf = util.my_snprintf( "Gold(max %d)", plr0.economic.gold);
 //  pdialog.dip_gold_label0=XtVaCreateManagedWidget("dipgoldlabel0", 
 //						   labelWidgetClass,
 //						   pdialog.dip_form0,
 //						   XtNlabel, buf,
 //						   null);
 //
-//  my_snprintf(buf, sizeof(buf), "Gold(max %d)", plr1.economic.gold);
+//  buf = util.my_snprintf( "Gold(max %d)", plr1.economic.gold);
 //  pdialog.dip_gold_label1=XtVaCreateManagedWidget("dipgoldlabel1", 
 //						   labelWidgetClass,
 //						   pdialog.dip_form1,
@@ -537,14 +537,14 @@ public class Diplodlg{
 //  XtAddCallback(entry, XtNcallback, diplomacy_dialog_alliance_callback,
 //		(XtPointer)pdialog);
 //  
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      _("This Eternal Treaty\n"
 //		 "marks the results of the diplomatic work between\n"
 //		 "The %s %s %s\nand\nThe %s %s %s"),
-//	  get_nation_name(plr0.nation),
+//	  Nation.get_nation_name(plr0.nation),
 //	  get_ruler_title(plr0.government, plr0.is_male, plr0.nation),
 //	  plr0.name,
-//	  get_nation_name(plr1.nation),
+//	  Nation.get_nation_name(plr1.nation),
 //	  get_ruler_title(plr1.government, plr1.is_male, plr1.nation),
 //	  plr1.name);
 //  
@@ -578,7 +578,7 @@ public class Diplodlg{
 //  XtVaSetValues(pdialog.dip_view, XtNwidth, width, null); 
 //  XtVaSetValues(pdialog.dip_clauselist, XtNwidth, width, null); 
 //
-//  my_snprintf(buf, sizeof(buf), "%s view:", get_nation_name(plr0.nation));
+//  buf = util.my_snprintf( "%s view:", Nation.get_nation_name(plr0.nation));
 //  pdialog.dip_acceptlabel0=XtVaCreateManagedWidget("dipacceptlabel0",
 //						    labelWidgetClass, 
 //						    pdialog.dip_formm, 
@@ -589,7 +589,7 @@ public class Diplodlg{
 //						    pdialog.dip_formm, 
 //						    XtNbitmap, get_thumb_pixmap(0),
 //						    null);
-//  my_snprintf(buf, sizeof(buf), "%s view:", get_nation_name(plr1.nation));
+//  buf = util.my_snprintf( "%s view:", Nation.get_nation_name(plr1.nation));
 //  pdialog.dip_acceptlabel1=XtVaCreateManagedWidget("dipacceptlabel1",
 //						    labelWidgetClass, 
 //						    pdialog.dip_formm, 

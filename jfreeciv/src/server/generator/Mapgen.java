@@ -554,7 +554,7 @@ public class Mapgen{
 //*********************************************************************/
 //static void river_blockmark(tile ptile)
 //{
-//  freelog(LOG_DEBUG, "Blockmarking (%d, %d) and adjacent tiles.",
+//  util.freelog(LOG_DEBUG, "Blockmarking (%d, %d) and adjacent tiles.",
 //	  ptile.x, ptile.y);
 //
 //  rmap(ptile) |= (1u << RS_BLOCKED);
@@ -686,7 +686,7 @@ public class Mapgen{
 //  while (true) {
 //    /* Mark the current tile as river. */
 //    rmap(ptile) |= (1u << RS_RIVER);
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //	    "The tile at (%d, %d) has been marked as river in river_map.\n",
 //	    ptile.x, ptile.y);
 //
@@ -697,13 +697,13 @@ public class Mapgen{
 //        || (map_get_terrain(ptile) == T_ARCTIC 
 //	    && map_colatitude(ptile) < 0.8 * COLD_LEVEL)) { 
 //
-//      freelog(LOG_DEBUG,
+//      util.freelog(LOG_DEBUG,
 //	      "The river ended at (%d, %d).\n", ptile.x, ptile.y);
 //      return true;
 //    }
 //
 //    /* Else choose a direction to continue the river. */
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //	    "The river did not end at (%d, %d). Evaluating directions...\n",
 //	    ptile.x, ptile.y);
 //
@@ -724,7 +724,7 @@ public class Mapgen{
 //	  if (best_val == -1) {
 //	    best_val = rd_comparison_val[dir];
 //	  } else {
-//	    best_val = MIN(rd_comparison_val[dir], best_val);
+//	    best_val = Math.min(rd_comparison_val[dir], best_val);
 //	  }
 //	}
 //      } cardinal_adjc_dir_iterate_end;
@@ -759,10 +759,10 @@ public class Mapgen{
 //    }
 //
 //    /* One or more valid directions: choose randomly. */
-//    freelog(LOG_DEBUG, "mapgen.c: Had to let the random number"
+//    util.freelog(LOG_DEBUG, "mapgen.c: Had to let the random number"
 //	    " generator select a direction for a river.");
 //    direction = myrand(num_valid_directions);
-//    freelog(LOG_DEBUG, "mapgen.c: direction: %d", direction);
+//    util.freelog(LOG_DEBUG, "mapgen.c: direction: %d", direction);
 //
 //    /* Find the direction that the random number generator selected. */
 //    cardinal_adjc_dir_iterate(ptile, tile1, dir) {
@@ -872,7 +872,7 @@ public class Mapgen{
 //	river_map[i] = 0;
 //      }
 //
-//      freelog(LOG_DEBUG,
+//      util.freelog(LOG_DEBUG,
 //	      "Found a suitable starting tile for a river at (%d, %d)."
 //	      " Starting to make it.",
 //	      ptile.x, ptile.y);
@@ -891,18 +891,18 @@ public class Mapgen{
 //	    map_set_special(tile1, S_RIVER);
 //	    current_riverlength++;
 //	    map_set_placed(tile1);
-//	    freelog(LOG_DEBUG, "Applied a river to (%d, %d).",
+//	    util.freelog(LOG_DEBUG, "Applied a river to (%d, %d).",
 //		    tile1.x, tile1.y);
 //	  }
 //	} whole_map_iterate_end;
 //      }
 //      else {
-//	freelog(LOG_DEBUG,
+//	util.freelog(LOG_DEBUG,
 //		"mapgen.c: A river failed. It might have gotten stuck in a helix.");
 //      }
 //    } /* end if; */
 //    iteration_counter++;
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //	    "current_riverlength: %d; desirable_riverlength: %d; iteration_counter: %d",
 //	    current_riverlength, desirable_riverlength, iteration_counter);
 //  } /* end while; */
@@ -1010,7 +1010,7 @@ public class Mapgen{
 //  } whole_map_iterate_end;
 //
 //  terrain_type_iterate(t) {
-//    freelog(loglevel, "%20s : %4d %d%%  ",
+//    util.freelog(loglevel, "%20s : %4d %d%%  ",
 //	    get_terrain_name(t), terrain_count[t],
 //	    (terrain_count[t] * 100 + 50) / total);
 //  } terrain_type_iterate_end;
@@ -1484,7 +1484,7 @@ public class Mapgen{
 //
 //	checkmass--; 
 //	if (checkmass <= 0) {
-//	  freelog(LOG_ERROR, "mapgen.c: mass doesn't sum up.");
+//	  util.freelog(Log.LOG_ERROR, "mapgen.c: mass doesn't sum up.");
 //	  return i != 0;
 //	}
 //
@@ -1572,7 +1572,7 @@ public class Mapgen{
 //    }
 //  }
 //  if (tries<=0) {
-//    freelog(LOG_ERROR, "create_island ended early with %d/%d.",
+//    util.freelog(Log.LOG_ERROR, "create_island ended early with %d/%d.",
 //	    islemass-i, islemass);
 //  }
 //  
@@ -1611,7 +1611,7 @@ public class Mapgen{
 //
 //    /* caveat: this should really be sent to all players */
 //    if (pstate.totalmass > 3000)
-//      freelog(Log.LOG_NORMAL, "High landmass - this may take a few seconds.");
+//      util.freelog(Log.LOG_NORMAL, "High landmass - this may take a few seconds.");
 //
 //    i = river_pct + mountain_pct + desert_pct + forest_pct + swamp_pct;
 //    i = (i <= 90) ? 100 : i * 11 / 10;
@@ -1651,7 +1651,7 @@ public class Mapgen{
 //      return false;
 //    }
 //    assert(starters >= 0);
-//    freelog(LOG_VERBOSE, "island %i", pstate.isleindex);
+//    util.freelog(LOG_VERBOSE, "island %i", pstate.isleindex);
 //
 //    /* keep trying to place an island, and decrease the size of
 //     * the island we're trying to create until we succeed.
@@ -1670,7 +1670,7 @@ public class Mapgen{
 //      balance = 0;
 //    }
 //
-//    freelog(LOG_VERBOSE, "ini=%d, plc=%d, bal=%ld, tot=%ld",
+//    util.freelog(LOG_VERBOSE, "ini=%d, plc=%d, bal=%ld, tot=%ld",
 //	    islemass, i, balance, checkmass);
 //
 //    i *= tilefactor;
@@ -1789,7 +1789,7 @@ public class Mapgen{
 //	 * Note that the big islands can get very small if necessary, and
 //	 * the smaller islands will not exist if we can't place them 
 //         * easily. */
-//	freelog(LOG_VERBOSE,
+//	util.freelog(LOG_VERBOSE,
 //		"Island too small, trying again with all smaller islands.\n");
 //	midfrac += bigfrac * 0.01;
 //	smallfrac += bigfrac * 0.04;
@@ -1802,7 +1802,7 @@ public class Mapgen{
 //
 //  if (bigfrac <= midfrac) {
 //    /* We could never make adequately big islands. */
-//    freelog(Log.LOG_NORMAL, "Falling back to generator %d.", 1);
+//    util.freelog(Log.LOG_NORMAL, "Falling back to generator %d.", 1);
 //    map.generator = 1;
 //
 //    /* init world created this map, destroy it before abort */
@@ -1827,7 +1827,7 @@ public class Mapgen{
 //  height_map = null;
 //
 //  if (checkmass > map.xsize + map.ysize + totalweight) {
-//    freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
+//    util.freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
 //  }
 //}
 //
@@ -1872,7 +1872,7 @@ public class Mapgen{
 //  }
 //
 //  if (map.xsize < 40 || map.ysize < 40 || map.landpercent > 80) { 
-//    freelog(Log.LOG_NORMAL, "Falling back to generator %d.", 2); 
+//    util.freelog(Log.LOG_NORMAL, "Falling back to generator %d.", 2); 
 //    map.generator = 2;
 //    return; 
 //  }
@@ -1892,7 +1892,7 @@ public class Mapgen{
 //  }
 //
 //  if (j == 500){
-//    freelog(Log.LOG_NORMAL, "Generator 3 didn't place all big islands.");
+//    util.freelog(Log.LOG_NORMAL, "Generator 3 didn't place all big islands.");
 //  }
 //  
 //  islandmass= (islandmass * 11)/8;
@@ -1922,9 +1922,9 @@ public class Mapgen{
 //  height_map = null;
 //    
 //  if (j == 1500) {
-//    freelog(Log.LOG_NORMAL, "Generator 3 left %li landmass unplaced.", checkmass);
+//    util.freelog(Log.LOG_NORMAL, "Generator 3 left %li landmass unplaced.", checkmass);
 //  } else if (checkmass > map.xsize + map.ysize) {
-//    freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
+//    util.freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
 //  }
 //}
 //
@@ -1990,7 +1990,7 @@ public class Mapgen{
 //  height_map = null;
 //
 //  if (checkmass > map.xsize + map.ysize + totalweight) {
-//    freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
+//    util.freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
 //  }
 //}
 //

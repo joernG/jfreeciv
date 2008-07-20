@@ -36,7 +36,7 @@ public class Aisupport{
 //{
 //  player best = null;
 //  int best_arrival = FC_INFINITY;
-//  enum spaceship_state best_state = SSHIP_NONE;
+//  enum spaceship_state best_state = spaceship_state.SSHIP_NONE;
 //
 //  if (game.spacerace == false) {
 //    return null;
@@ -47,15 +47,15 @@ public class Aisupport{
 //    int arrival = (int) ship.travel_time + ship.launch_year;
 //
 //    if (!pplayer.is_alive || is_barbarian(pplayer)
-//        || ship.state == SSHIP_NONE) {
+//        || ship.state == spaceship_state.SSHIP_NONE) {
 //      continue;
 //    }
 //
-//    if (ship.state != SSHIP_LAUNCHED
+//    if (ship.state != spaceship_state.SSHIP_LAUNCHED
 //        && ship.state > best_state) {
 //      best_state = ship.state;
 //      best = pplayer;
-//    } else if (ship.state == SSHIP_LAUNCHED
+//    } else if (ship.state == spaceship_state.SSHIP_LAUNCHED
 //               && arrival < best_arrival) {
 //      best_state = ship.state;
 //      best_arrival = arrival;

@@ -14,7 +14,7 @@ public class Idex{
 //   Note id values should probably be unsigned int: here leave as plain int
 //   so can use pointers to pcity.id etc.
 //
-//   On probable errors, print LOG_ERROR messages and persevere,
+//   On probable errors, print Log.LOG_ERROR messages and persevere,
 //   unless IDEX_DIE set.
 //***************************************************************************/
 //#include "city.h"
@@ -28,7 +28,7 @@ public class Idex{
 //#ifndef IDEX_DIE
 //public static final int IDEX_DIE = false;
 //#endif
-//#define LOG_IDEX_ERR (IDEX_DIE ? LOG_FATAL : LOG_ERROR)
+//#define LOG_IDEX_ERR (IDEX_DIE ? LOG_FATAL : Log.LOG_ERROR)
 //
 //
 ///* "Global" data: */
@@ -69,7 +69,7 @@ public class Idex{
 //    hash_replace(idex_city_hash, &pcity.id, pcity);
 //  if (old) {
 //    /* error */
-//    freelog(LOG_IDEX_ERR, "IDEX: city collision: new %d %p %s, old %d %p %s",
+//    util.freelog(LOG_IDEX_ERR, "IDEX: city collision: new %d %p %s, old %d %p %s",
 //	    pcity.id, (void*)pcity, pcity.name,
 //	    old.id, (void*)old, old.name);
 //    if (IDEX_DIE) {
@@ -88,7 +88,7 @@ public class Idex{
 //    hash_replace(idex_unit_hash, &punit.id, punit);
 //  if (old) {
 //    /* error */
-//    freelog(LOG_IDEX_ERR, "IDEX: unit collision: new %d %p %s, old %d %p %s",
+//    util.freelog(LOG_IDEX_ERR, "IDEX: unit collision: new %d %p %s, old %d %p %s",
 //	    punit.id, (void*)punit, unit_name(punit.type),
 //	    old.id, (void*)old, unit_name(old.type));
 //    if (IDEX_DIE) {
@@ -107,14 +107,14 @@ public class Idex{
 //    hash_delete_entry(idex_city_hash, &pcity.id);
 //  if (!old) {
 //    /* error */
-//    freelog(LOG_IDEX_ERR, "IDEX: city unreg missing: %d %p %s",
+//    util.freelog(LOG_IDEX_ERR, "IDEX: city unreg missing: %d %p %s",
 //	    pcity.id, (void*)pcity, pcity.name);
 //    if (IDEX_DIE) {
 //      die("byebye");
 //    }
 //  } else if (old != pcity) {
 //    /* error */
-//    freelog(LOG_IDEX_ERR,
+//    util.freelog(LOG_IDEX_ERR,
 //	    "IDEX: city unreg mismatch: unreg %d %p %s, old %d %p %s",
 //	    pcity.id, (void*)pcity, pcity.name,
 //	    old.id, (void*)old, old.name);
@@ -134,14 +134,14 @@ public class Idex{
 //    hash_delete_entry(idex_unit_hash, &punit.id);
 //  if (!old) {
 //    /* error */
-//    freelog(LOG_IDEX_ERR, "IDEX: unit unreg missing: %d %p %s",
+//    util.freelog(LOG_IDEX_ERR, "IDEX: unit unreg missing: %d %p %s",
 //	    punit.id, (void*)punit, unit_name(punit.type));
 //    if (IDEX_DIE) {
 //      die("byebye");
 //    }
 //  } else if (old != punit) {
 //    /* error */
-//    freelog(LOG_IDEX_ERR,
+//    util.freelog(LOG_IDEX_ERR,
 //	    "IDEX: unit unreg mismatch: unreg %d %p %s, old %d %p %s",
 //	    punit.id, (void*)punit, unit_name(punit.type),
 //	    old.id, (void*)old, unit_name(old.type));

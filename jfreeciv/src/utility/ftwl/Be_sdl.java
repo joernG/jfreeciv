@@ -55,18 +55,18 @@ public class Be_sdl{
 //  putenv((char *) "SDL_VIDEO_CENTERED=yes");
 //
 //  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE) < 0) {
-//    freelog(LOG_FATAL, "Unable to initialize SDL library: %s",
+//    util.freelog(LOG_FATAL, "Unable to initialize SDL library: %s",
 //	    SDL_GetError());
 //    exit(1);
 //  }
 //  atexit(SDL_Quit);
 //
-//  freelog(Log.LOG_NORMAL, "Using Video Output: %s",
+//  util.freelog(Log.LOG_NORMAL, "Using Video Output: %s",
 //	  SDL_VideoDriverName(device, sizeof(device)));
 //  {
 //    final SDL_VideoInfo *info = SDL_GetVideoInfo();
-//    freelog(Log.LOG_NORMAL, "Video memory of driver: %dkb", info.video_mem);
-//    freelog(Log.LOG_NORMAL, "Preferred depth: %d bits per pixel",
+//    util.freelog(Log.LOG_NORMAL, "Video memory of driver: %dkb", info.video_mem);
+//    util.freelog(Log.LOG_NORMAL, "Preferred depth: %d bits per pixel",
 //	    info.vfmt.BitsPerPixel);
 //  }
 //
@@ -94,16 +94,16 @@ public class Be_sdl{
 //  screen =
 //      SDL_SetVideoMode(screen_size.width, screen_size.height, 0, flags);
 //  if (screen == null) {
-//    freelog(LOG_FATAL, "Can't set video mode: %s", SDL_GetError());
+//    util.freelog(LOG_FATAL, "Can't set video mode: %s", SDL_GetError());
 //    exit(1);
 //  }
 //
-//  freelog(Log.LOG_NORMAL, "Got a screen with size (%dx%d) and %d bits per pixel",
+//  util.freelog(Log.LOG_NORMAL, "Got a screen with size (%dx%d) and %d bits per pixel",
 //	  screen.w, screen.h, screen.format.BitsPerPixel);
-//  freelog(Log.LOG_NORMAL, "  format: red=0x%x green=0x%x blue=0x%x mask=0x%x",
+//  util.freelog(Log.LOG_NORMAL, "  format: red=0x%x green=0x%x blue=0x%x mask=0x%x",
 //	  screen.format.Rmask, screen.format.Gmask,
 //	  screen.format.Bmask, screen.format.Amask);
-//  freelog(Log.LOG_NORMAL, "  format: bits-per-pixel=%d bytes-per-pixel=%d",
+//  util.freelog(Log.LOG_NORMAL, "  format: bits-per-pixel=%d bytes-per-pixel=%d",
 //	  screen.format.BitsPerPixel, screen.format.BytesPerPixel);
 //  SDL_EnableUNICODE(1);
 //}

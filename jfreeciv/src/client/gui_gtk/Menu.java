@@ -861,12 +861,12 @@ public class Menu{
 //  strcpy(in.str, path);
 //  astr_minsize(&out, 1);
 //  out.str[0] = '\0';
-//  freelog(LOG_DEBUG, "trans: %s", in.str);
+//  util.freelog(LOG_DEBUG, "trans: %s", in.str);
 //
 //  s = in.str;
 //  while ((tok=strtok(s, "/"))) {
 //    len = tok.length();
-//    freelog(LOG_DEBUG, "tok \"%s\", len %d", tok, len);
+//    util.freelog(LOG_DEBUG, "tok \"%s\", len %d", tok, len);
 //    if (len && tok[0] == '<' && tok[len-1] == '>') {
 //      t = tok;
 //    } else {
@@ -879,7 +879,7 @@ public class Menu{
 //    }
 //    astr_minsize(&out, out.n + len);
 //    strcat(out.str, t);
-//    freelog(LOG_DEBUG, "t \"%s\", len %d, out \"%s\"", t, len, out.str);
+//    util.freelog(LOG_DEBUG, "t \"%s\", len %d, out \"%s\"", t, len, out.str);
 //    s = null;
 //  }
 //  res = out.str;
@@ -938,7 +938,7 @@ public class Menu{
 //  path = translate_menu_path(path, true);
 //  
 //  if(!(item=gtk_item_factory_get_widget(item_factory, path))) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Can't set sensitivity for non-existent menu %s.", path);
 //    return;
 //  }
@@ -958,7 +958,7 @@ public class Menu{
 //  path = translate_menu_path(path, true);
 //
 //  if (!(item = gtk_item_factory_get_widget(item_factory, path))) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Can't set active for non-existent menu %s.", path);
 //    return;
 //  }
@@ -979,7 +979,7 @@ public class Menu{
 //  path = translate_menu_path(path, true);
 //  
 //  if(!(item=gtk_item_factory_get_widget(item_factory, path))) {
-//    freelog(LOG_ERROR, "Can't show non-existent menu %s.", path);
+//    util.freelog(Log.LOG_ERROR, "Can't show non-existent menu %s.", path);
 //    return;
 //  }
 //
@@ -1003,7 +1003,7 @@ public class Menu{
 //  path = translate_menu_path(path, true);
 //  
 //  if(!(item=gtk_item_factory_get_widget(item_factory, path))) {
-//    freelog(LOG_ERROR, "Can't rename non-existent menu %s.", path);
+//    util.freelog(Log.LOG_ERROR, "Can't rename non-existent menu %s.", path);
 //    return;
 //  }
 //
@@ -1088,7 +1088,7 @@ public class Menu{
 //			can_client_issue_orders());
 //
 //    menus_set_sensitive("<main>/_Reports/S_paceship",
-//			(game.player_ptr.spaceship.state!=SSHIP_NONE));
+//			(game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
 //
 //    menus_set_active("<main>/_View/Map _Grid", draw_map_grid);
 //    menus_set_sensitive("<main>/_View/National _Borders", game.borders > 0);
@@ -1224,7 +1224,7 @@ public class Menu{
 //      tinfo = get_tile_type(ttype);
 //      if (tinfo.irrigation_result != T_NONE
 //	  && tinfo.irrigation_result != ttype) {
-//	my_snprintf(irrtext, sizeof(irrtext), irrfmt,
+//	irrtext = util.my_snprintf( irrfmt,
 //		    (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //      } else if (map_has_special(punit.tile, S_IRRIGATION)
 //		 && player_knows_techs_with_flag(game.player_ptr,
@@ -1233,12 +1233,12 @@ public class Menu{
 //      }
 //      if (tinfo.mining_result != T_NONE
 //	  && tinfo.mining_result != ttype) {
-//	my_snprintf(mintext, sizeof(mintext), minfmt,
+//	mintext = util.my_snprintf( minfmt,
 //		    (get_tile_type(tinfo.mining_result)).terrain_name);
 //      }
 //      if (tinfo.transform_result != T_NONE
 //	  && tinfo.transform_result != ttype) {
-//	my_snprintf(transtext, sizeof(transtext), transfmt,
+//	transtext = util.my_snprintf( transfmt,
 //		    (get_tile_type(tinfo.transform_result)).terrain_name);
 //      }
 //

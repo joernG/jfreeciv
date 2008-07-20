@@ -940,14 +940,14 @@ public class Menu{
 //    strcpy(in.str, path);
 //    astr_minsize(&out, 1);
 //    out.str[0] = '\0';
-//    freelog(LOG_DEBUG, "trans: %s", in.str);
+//    util.freelog(LOG_DEBUG, "trans: %s", in.str);
 //
 //    tok = in.str;
 //    do {
 //      next = menu_path_tok(tok);
 //
 //      len = tok.length();
-//      freelog(LOG_DEBUG, "tok \"%s\", len %d", tok, len);
+//      util.freelog(LOG_DEBUG, "tok \"%s\", len %d", tok, len);
 //      if (len == 0 || (tok[0] == '<' && tok[len-1] == '>')) {
 //	t = tok;
 //      } else {
@@ -960,7 +960,7 @@ public class Menu{
 //      }
 //      astr_minsize(&out, out.n + len);
 //      strcat(out.str, t);
-//      freelog(LOG_DEBUG, "t \"%s\", len %d, out \"%s\"", t, len, out.str);
+//      util.freelog(LOG_DEBUG, "t \"%s\", len %d, out \"%s\"", t, len, out.str);
 //      tok = next+1;
 //    } while (next);
 //    res = out.str;
@@ -1026,7 +1026,7 @@ public class Menu{
 //  path = menu_path_remove_uline(path);
 //
 //  if(!(item = gtk_item_factory_get_item(item_factory, path))) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Can't set sensitivity for non-existent menu %s.", path);
 //    return;
 //  }
@@ -1044,7 +1044,7 @@ public class Menu{
 //  path = menu_path_remove_uline(path);
 //
 //  if (!(item = gtk_item_factory_get_item(item_factory, path))) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Can't set active for non-existent menu %s.", path);
 //    return;
 //  }
@@ -1063,7 +1063,7 @@ public class Menu{
 //  path = menu_path_remove_uline(path);
 //  
 //  if(!(item = gtk_item_factory_get_item(item_factory, path))) {
-//    freelog(LOG_ERROR, "Can't show non-existent menu %s.", path);
+//    util.freelog(Log.LOG_ERROR, "Can't show non-existent menu %s.", path);
 //    return;
 //  }
 //
@@ -1085,7 +1085,7 @@ public class Menu{
 //  path = menu_path_remove_uline(path);
 //
 //  if(!(item = gtk_item_factory_get_item(item_factory, path))) {
-//    freelog(LOG_ERROR, "Can't rename non-existent menu %s.", path);
+//    util.freelog(Log.LOG_ERROR, "Can't rename non-existent menu %s.", path);
 //    return;
 //  }
 //
@@ -1199,7 +1199,7 @@ public class Menu{
 //          Sprite gsprite;
 //	  char buf[256];
 //
-//	  my_snprintf(buf, sizeof(buf), "%s...", g.name);
+//	  buf = util.my_snprintf( "%s...", g.name);
 //          item = gtk_image_menu_item_new_with_label(buf);
 //
 //	  if ((gsprite = g.sprite)) {
@@ -1235,7 +1235,7 @@ public class Menu{
 //			can_client_issue_orders());
 //
 //    menus_set_sensitive("<main>/_Reports/S_paceship",
-//			(game.player_ptr.spaceship.state!=SSHIP_NONE));
+//			(game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
 //
 //    menus_set_active("<main>/_View/Map _Grid", draw_map_grid);
 //    menus_set_sensitive("<main>/_View/National _Borders", game.borders > 0);
@@ -1371,7 +1371,7 @@ public class Menu{
 //      tinfo = get_tile_type(ttype);
 //      if (tinfo.irrigation_result != T_NONE
 //	  && tinfo.irrigation_result != ttype) {
-//	my_snprintf(irrtext, sizeof(irrtext), irrfmt,
+//	irrtext = util.my_snprintf( irrfmt,
 //		    get_tile_change_menu_text(punit.tile,
 //					      ACTIVITY_IRRIGATE));
 //      } else if (map_has_special(punit.tile, S_IRRIGATION)
@@ -1381,12 +1381,12 @@ public class Menu{
 //      }
 //      if (tinfo.mining_result != T_NONE
 //	  && tinfo.mining_result != ttype) {
-//	my_snprintf(mintext, sizeof(mintext), minfmt,
+//	mintext = util.my_snprintf( minfmt,
 //		    get_tile_change_menu_text(punit.tile, ACTIVITY_MINE));
 //      }
 //      if (tinfo.transform_result != T_NONE
 //	  && tinfo.transform_result != ttype) {
-//	my_snprintf(transtext, sizeof(transtext), transfmt,
+//	transtext = util.my_snprintf( transfmt,
 //		    get_tile_change_menu_text(punit.tile,
 //					      ACTIVITY_TRANSFORM));
 //      }

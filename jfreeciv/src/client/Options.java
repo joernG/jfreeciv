@@ -309,7 +309,7 @@ public class Options{
 //  if (events[event_to_index[event]].event == event) {
 //    return events[event_to_index[event]].descr;
 //  }
-//  freelog(LOG_ERROR, "unknown event %d", event);
+//  util.freelog(Log.LOG_ERROR, "unknown event %d", event);
 //  return "UNKNOWN EVENT";
 //}
 //
@@ -366,7 +366,7 @@ public class Options{
 //    for (j = 0; j < strlen(events[i].tag_name); j++) {
 //      events[i].tag_name[j] = my_tolower(events[i].tag_name[j]);
 //    }
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //	    "event[%d]=%d: name='%s' / '%s'\n\tdescr_orig='%s'\n\tdescr='%s'",
 //	    i, events[i].event, events[i].enum_name, events[i].tag_name,
 //	    events[i].descr_orig, events[i].descr);
@@ -413,7 +413,7 @@ public class Options{
 //    mystrlcpy(name_buffer,OPTION_FILE_NAME,sizeof(name_buffer));
 //#endif
 //  }
-//  freelog(LOG_VERBOSE, "settings file is %s", name_buffer);
+//  util.freelog(LOG_VERBOSE, "settings file is %s", name_buffer);
 //  return name_buffer;
 //}
 //  
@@ -623,10 +623,10 @@ public class Options{
 //
 //  /* save to disk */
 //  if (!section_file_save(&sf, name, 0)) {
-//    my_snprintf(output_buffer, sizeof(output_buffer),
+//    output_buffer = util.my_snprintf(
 //		"Save failed, cannot write to file %s", name);
 //  } else {
-//    my_snprintf(output_buffer, sizeof(output_buffer),
+//    output_buffer = util.my_snprintf(
 //		"Saved settings to file %s", name);
 //  }
 //
@@ -697,7 +697,7 @@ public class Options{
 //  if (events[event_to_index[event]].event == event) {
 //    return events[event_to_index[event]].tag_name;
 //  }
-//  freelog(LOG_ERROR, "unknown event %d", event);
+//  util.freelog(Log.LOG_ERROR, "unknown event %d", event);
 //  return null;
 //}
 //

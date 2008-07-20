@@ -462,7 +462,7 @@ public class Score{
 //
 //  /* How much should a spaceship be worth?
 //   * This gives 100 points per 10,000 citizens. */
-//  if (pplayer.spaceship.state == SSHIP_ARRIVED) {
+//  if (pplayer.spaceship.state == spaceship_state.SSHIP_ARRIVED) {
 //    pplayer.score.spaceship += (int)(100 * pplayer.spaceship.habitation
 //				      * pplayer.spaceship.success_rate);
 //  }
@@ -528,7 +528,7 @@ public class Score{
 //  }
 //
 //  /* put this file in the same place we put savegames */
-//  my_snprintf(filename, sizeof(filename),
+//  filename = util.my_snprintf(
 //              "%s%+05d.int.ppm", game.save_name, game.year);
 //
 //  /* Ensure the saves directory exists. */
@@ -544,7 +544,7 @@ public class Score{
 //  fp = fopen(filename, "w");
 //
 //  if (!fp) {
-//    freelog(LOG_ERROR, "couldn't open file ppm save: %s\n", filename);
+//    util.freelog(Log.LOG_ERROR, "couldn't open file ppm save: %s\n", filename);
 //    return;
 //  }
 //

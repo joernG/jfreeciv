@@ -158,7 +158,7 @@ public class Agents{
 //  call_list_insert(&agents.calls, pcall2);
 //
 //  if (DEBUG_TODO_LISTS) {
-//    freelog(Log.LOG_NORMAL, "A: adding call");
+//    util.freelog(Log.LOG_NORMAL, "A: adding call");
 //  }
 //
 //  update_turn_done_button_state();
@@ -194,7 +194,7 @@ public class Agents{
 //  call_list_unlink(&agents.calls, result);
 //
 //  if (DEBUG_TODO_LISTS) {
-//    freelog(Log.LOG_NORMAL, "A: removed call");
+//    util.freelog(Log.LOG_NORMAL, "A: removed call");
 //  }
 //  return result;
 //}
@@ -264,7 +264,7 @@ public class Agents{
 //    initialized = true;
 //  }
 //  if (DEBUG_FREEZE) {
-//    freelog(Log.LOG_NORMAL, "A: freeze() current level=%d", frozen_level);
+//    util.freelog(Log.LOG_NORMAL, "A: freeze() current level=%d", frozen_level);
 //  }
 //  frozen_level++;
 //}
@@ -276,7 +276,7 @@ public class Agents{
 //static void thaw()
 //{
 //  if (DEBUG_FREEZE) {
-//    freelog(Log.LOG_NORMAL, "A: thaw() current level=%d", frozen_level);
+//    util.freelog(Log.LOG_NORMAL, "A: thaw() current level=%d", frozen_level);
 //  }
 //  frozen_level--;
 //  assert(frozen_level >= 0);
@@ -313,7 +313,7 @@ public class Agents{
 //      aconnection.client.request_id_of_currently_handled_packet &&
 //      agent.last_outstanding_request_id >=
 //      aconnection.client.request_id_of_currently_handled_packet) {
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //	    "A:%s: ignoring packet; outstanding [%d..%d] got=%d",
 //	    agent.agent.name,
 //	    agent.first_outstanding_request_id,
@@ -329,7 +329,7 @@ public class Agents{
 //***********************************************************************/
 //static void print_stats(my_agent agent)
 //{
-//  freelog(PRINT_STATS_LOGLEVEL,
+//  util.freelog(PRINT_STATS_LOGLEVEL,
 //	  "A:%s: waited %fs in total for network; "
 //	  "requests=%d; waited %d times",
 //	  agent.agent.name,
@@ -408,7 +408,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_disconnect()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_disconnect()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_disconnect()");
 //  initialized = false;
 //}
 //
@@ -417,7 +417,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_processing_started()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_processing_started()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_processing_started()");
 //  freeze();
 //}
 //
@@ -426,7 +426,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_processing_finished()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_processing_finished()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_processing_finished()");
 //  thaw();
 //}
 //
@@ -435,7 +435,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_freeze_hint()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_freeze_hint()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_freeze_hint()");
 //  freeze();
 //}
 //
@@ -444,7 +444,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_thaw_hint()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_thaw_hint()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_thaw_hint()");
 //  thaw();
 //}
 //
@@ -453,7 +453,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_game_joined()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_game_joined()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_game_joined()");
 //}
 //
 ///***********************************************************************
@@ -461,7 +461,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_game_start()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_game_start()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_game_start()");
 //  call_handle_methods();
 //}
 //
@@ -470,7 +470,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_before_new_turn()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_before_new_turn()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_before_new_turn()");
 //}
 //
 ///***********************************************************************
@@ -478,7 +478,7 @@ public class Agents{
 //***********************************************************************/
 //void agents_start_turn()
 //{
-//  freelog(META_CALLBACKS_LOGLEVEL, "agents_start_turn()");
+//  util.freelog(META_CALLBACKS_LOGLEVEL, "agents_start_turn()");
 //}
 //
 ///***********************************************************************
@@ -517,7 +517,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "A: agents_unit_changed(unit=%d) type=%s pos=(%d,%d) owner=%s",
 //	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
 //	  unit_owner(punit).name);
@@ -543,7 +543,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "A: agents_new_unit(unit=%d) type=%s pos=(%d,%d) owner=%s",
 //	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
 //	  unit_owner(punit).name);
@@ -570,7 +570,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "A: agents_remove_unit(unit=%d) type=%s pos=(%d,%d) owner=%s",
 //	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
 //	  unit_owner(punit).name);
@@ -597,7 +597,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG, "A: agents_city_changed(city='%s'(%d)) owner=%s",
+//  util.freelog(LOG_DEBUG, "A: agents_city_changed(city='%s'(%d)) owner=%s",
 //	  pcity.name, pcity.id, city_owner(pcity).name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
@@ -622,7 +622,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "A: agents_city_new(city='%s'(%d)) pos=(%d,%d) owner=%s",
 //	  pcity.name, pcity.id, TILE_XY(pcity.tile),
 //	  city_owner(pcity).name);
@@ -649,7 +649,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "A: agents_city_remove(city='%s'(%d)) pos=(%d,%d) owner=%s",
 //	  pcity.name, pcity.id, TILE_XY(pcity.tile),
 //	  city_owner(pcity).name);
@@ -677,7 +677,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG, "A: agents_tile_remove(tile=(%d, %d))", TILE_XY(ptile));
+//  util.freelog(LOG_DEBUG, "A: agents_tile_remove(tile=(%d, %d))", TILE_XY(ptile));
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -701,7 +701,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG, "A: agents_tile_changed(tile=(%d, %d))", TILE_XY(ptile));
+//  util.freelog(LOG_DEBUG, "A: agents_tile_changed(tile=(%d, %d))", TILE_XY(ptile));
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -725,7 +725,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG, "A: agents_tile_new(tile=(%d, %d))", TILE_XY(ptile));
+//  util.freelog(LOG_DEBUG, "A: agents_tile_new(tile=(%d, %d))", TILE_XY(ptile));
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -751,7 +751,7 @@ public class Agents{
 //  my_agent agent = find_agent_by_name(agent_name);
 //
 //  if (DEBUG_REQUEST_IDS) {
-//    freelog(Log.LOG_NORMAL, "A:%s: wait_for_request(ids=[%d..%d])",
+//    util.freelog(Log.LOG_NORMAL, "A:%s: wait_for_request(ids=[%d..%d])",
 //	    agent.agent.name, first_request_id, last_request_id);
 //  }
 //
@@ -770,7 +770,7 @@ public class Agents{
 //      (1 + (last_request_id - first_request_id));
 //
 //  if (DEBUG_REQUEST_IDS) {
-//    freelog(Log.LOG_NORMAL, "A:%s: wait_for_request: ids=[%d..%d]; got it",
+//    util.freelog(Log.LOG_NORMAL, "A:%s: wait_for_request: ids=[%d..%d]; got it",
 //	    agent.agent.name, first_request_id, last_request_id);
 //  }
 //

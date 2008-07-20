@@ -105,7 +105,7 @@ public class Citydlg{
 //  static char buffer[50];
 //
 //  if (surplus == 0) {
-//    my_snprintf(buffer, sizeof(buffer), "never");
+//    buffer = util.my_snprintf( "never");
 //    return buffer;
 //  }
 //
@@ -125,7 +125,7 @@ public class Citydlg{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  my_snprintf(buffer, sizeof(buffer), PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -140,7 +140,7 @@ public class Citydlg{
 //  static char buffer[50];
 //
 //  if (surplus <= 0) {
-//    my_snprintf(buffer, sizeof(buffer), "never");
+//    buffer = util.my_snprintf( "never");
 //    return buffer;
 //  }
 //
@@ -149,7 +149,7 @@ public class Citydlg{
 //    cost = unit_build_shield_cost(pcity.currently_building);
 //  } else {
 //    if (pcity.currently_building == B_CAPITAL) {
-//      my_snprintf(buffer, sizeof(buffer),
+//      buffer = util.my_snprintf(
 //		  get_improvement_type(pcity.currently_building).name);
 //      return buffer;
 //    }
@@ -169,7 +169,7 @@ public class Citydlg{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  my_snprintf(buffer, sizeof(buffer), PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -572,18 +572,18 @@ public class Citydlg{
 //	    unit_type ptype;
 //	    ptype = get_unit_type(which);
 //	    if (ptype.fuel > 0)
-//	      my_snprintf(info, sizeof(info), "%d/%d/%d(%d)", ptype.attack_strength,
+//	      info = util.my_snprintf( "%d/%d/%d(%d)", ptype.attack_strength,
 //		      ptype.defense_strength,
 //		ptype.move_rate / 3, (ptype.move_rate / 3) * ptype.fuel);
 //	    else
-//	      my_snprintf(info, sizeof(info), "%d/%d/%d", ptype.attack_strength,
+//	      info = util.my_snprintf( "%d/%d/%d", ptype.attack_strength,
 //		      ptype.defense_strength, ptype.move_rate / 3);
 //
 //	  }
 //
-//	  my_snprintf(cost, sizeof(cost),
+//	  cost = util.my_snprintf(
 //		      "%d", unit_build_shield_cost(which));
-//	  my_snprintf(rounds, sizeof(rounds), "%d",
+//	  rounds = util.my_snprintf( "%d",
 //		      city_turns_to_build(pcity, which, true, true));
 //	}
 //      }
@@ -615,8 +615,8 @@ public class Citydlg{
 //
 //      if (which != B_CAPITAL)
 //      {
-//	my_snprintf(cost, sizeof(cost), "%d", impr_build_shield_cost(which));
-//	my_snprintf(rounds, sizeof(rounds), "%d",
+//	cost = util.my_snprintf( "%d", impr_build_shield_cost(which));
+//	rounds = util.my_snprintf( "%d",
 //		    city_turns_to_build(pcity, which, false, true));
 //      }
 //      else
@@ -655,8 +655,8 @@ public class Citydlg{
 //  {
 //    city_dialog pdialog = (city_dialog ) hook.h_Data;
 //    which--;
-//    my_snprintf(name, sizeof(name), "%s", get_impr_name_ex(pdialog.pcity, which));
-//    my_snprintf(cost, sizeof(cost), "%d", improvement_upkeep(pdialog.pcity, which));
+//    name = util.my_snprintf( "%s", get_impr_name_ex(pdialog.pcity, which));
+//    cost = util.my_snprintf( "%d", improvement_upkeep(pdialog.pcity, which));
 //    *array++ = name;
 //    *array = cost;
 //  }
@@ -960,7 +960,7 @@ public class Citydlg{
 //
 //  if (game.player_ptr.economic.gold >= value)
 //  {
-//    my_snprintf(buf, sizeof(buf), "Buy %s for %d gold?\nTreasury contains %d gold.",
+//    buf = util.my_snprintf( "Buy %s for %d gold?\nTreasury contains %d gold.",
 //	    name, value, game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(pdialog.wnd, "Buy It!", buf,
@@ -970,7 +970,7 @@ public class Citydlg{
 //  }
 //  else
 //  {
-//    my_snprintf(buf, sizeof(buf), "%s costs %d gold.\nTreasury contains %d gold.",
+//    buf = util.my_snprintf( "%s costs %d gold.\nTreasury contains %d gold.",
 //	    name, value, game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(pdialog.wnd, "Buy It!", buf,
@@ -998,7 +998,7 @@ public class Citydlg{
 //    if (is_wonder(i))
 //      return;
 //
-//    my_snprintf(buf, sizeof(buf), "Sell %s for %d gold?",
+//    buf = util.my_snprintf( "Sell %s for %d gold?",
 //		get_impr_name_ex(pdialog.pcity, i), impr_sell_gold(i));
 //
 //    pdialog.sell_id = i;
@@ -1775,9 +1775,9 @@ public class Citydlg{
 //  }
 //
 //  if (!worklist_is_empty(&pcity.worklist)) {
-//    my_snprintf(buf2, sizeof(buf2), "%s (%s) (worklist)", buf, descr);
+//    buf2 = util.my_snprintf( "%s (%s) (worklist)", buf, descr);
 //  } else {
-//    my_snprintf(buf2, sizeof(buf2), "%s (%s)", buf, descr);
+//    buf2 = util.my_snprintf( "%s (%s)", buf, descr);
 //  }
 //  
 //  DoMethod(pdialog.prod_gauge, MUIM_MyGauge_SetGauge,
@@ -1828,7 +1828,7 @@ public class Citydlg{
 //    settext(info.growth_text, "never");
 //  } else {
 //    char buf[64];
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		PL_("%d turn", "%d turns", granaryturns), granaryturns);
 //    settext(info.growth_text,buf);
 //  }
@@ -2038,9 +2038,9 @@ public class Citydlg{
 //      total += pdialog.pcity.trade_value[i];
 //
 //      if ((pcity = find_city_by_id(pdialog.pcity.trade[i]))) {
-//	my_snprintf(cityname, sizeof(cityname), "%s", pcity.name);
+//	cityname = util.my_snprintf( "%s", pcity.name);
 //      } else {
-//	my_snprintf(cityname, sizeof(cityname), "%s", "Unknown");
+//	cityname = util.my_snprintf( "%s", "Unknown");
 //      }
 //      my_snprintf(buf + buf.length(), sizeof(buf) - buf.length(),
 //		  "Trade with %s gives %d trade.\n",

@@ -440,7 +440,7 @@ public class Gui_stuff{
 //      g_signal_connect_swapped(button, "clicked",
 //	  G_CALLBACK(gui_dialog_destroy), dlg);
 //
-//      my_snprintf(buf, sizeof(buf), "Close Tab:\n%s", "Ctrl+W");
+//      buf = util.my_snprintf( "Close Tab:\n%s", "Ctrl+W");
 //      gtk_tooltips_set_tip(main_tips, button, buf, "");
 //
 //      image = gtk_image_new_from_stock(GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);

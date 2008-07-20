@@ -251,7 +251,7 @@ public class Cma_fec{
 //  static char buffer[50];
 //
 //  if (surplus == 0) {
-//    my_snprintf(buffer, sizeof(buffer), "never");
+//    buffer = util.my_snprintf( "never");
 //    return buffer;
 //  }
 //
@@ -271,7 +271,7 @@ public class Cma_fec{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  my_snprintf(buffer, sizeof(buffer), PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -285,7 +285,7 @@ public class Cma_fec{
 //  static char buffer[50];
 //
 //  if (surplus <= 0) {
-//    my_snprintf(buffer, sizeof(buffer), "never");
+//    buffer = util.my_snprintf( "never");
 //    return buffer;
 //  }
 //
@@ -294,7 +294,7 @@ public class Cma_fec{
 //    cost = unit_build_shield_cost(pcity.currently_building);
 //  } else {
 //    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
-//      my_snprintf(buffer, sizeof(buffer),
+//      buffer = util.my_snprintf(
 //		  get_improvement_type(pcity.currently_building).name);
 //      return buffer;
 //    }
@@ -314,7 +314,7 @@ public class Cma_fec{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  my_snprintf(buffer, sizeof(buffer), PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -353,7 +353,7 @@ public class Cma_fec{
 //		cmafec_get_short_descr(parameter));
 //  }
 //
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //	      _("Name: %s\n"
 //		"Food:       %10s Gold:    %10s\n"
 //		"Production: %10s Luxury:  %10s\n"
@@ -365,7 +365,7 @@ public class Cma_fec{
 //	      buf[9], buf[FOOD], buf[GOLD], buf[SHIELD], buf[LUXURY],
 //	      buf[TRADE], buf[SCIENCE], buf[6], buf[7], buf[8]);
 //
-//  freelog(LOG_DEBUG, "\n%s", buffer);
+//  util.freelog(LOG_DEBUG, "\n%s", buffer);
 //  return buffer;
 //}
 //

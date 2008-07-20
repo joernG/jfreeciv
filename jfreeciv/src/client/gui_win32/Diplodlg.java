@@ -217,7 +217,7 @@ public class Diplodlg{
 //  }
 //  
 //  for (city pcity : plr0.cities.data) {
-//    if (!is_capital(pcity)) {
+//    if (!pcity.is_capital()) {
 //      city_list_ptrs[i] = pcity;
 //      i++;
 //    }
@@ -604,15 +604,15 @@ public class Diplodlg{
 //						FAKE_CHILD,
 //						pdialog);
 //  vbox=fcwin_vbox_new(pdialog.mainwin,false);
-//  my_snprintf(buf, sizeof(buf),
-//              "The %s offerings", get_nation_name(plr0.nation));
+//  buf = util.my_snprintf(
+//              "The %s offerings", Nation.get_nation_name(plr0.nation));
 //  fcwin_box_add_static(vbox,buf,0,SS_LEFT,false,false,5);
 //  fcwin_box_add_button(vbox,"Maps",ID_MAP0,0,false,false,5);
 //  fcwin_box_add_button(vbox,"Advances",ID_TECH0,0,false,false,5);
 //  fcwin_box_add_button(vbox,"Cities",ID_CITY0,0,false,false,5);
 //  fcwin_box_add_button(vbox,"Embassy", ID_EMBASSY0, 0, false, false, 5);
 //  
-//  my_snprintf(buf, sizeof(buf), "Gold(max %d)", plr0.economic.gold); 
+//  buf = util.my_snprintf( "Gold(max %d)", plr0.economic.gold); 
 //  pdialog.gold0_label=fcwin_box_add_static(vbox,buf,0,SS_LEFT,false,false,5);
 //  fcwin_box_add_edit(vbox,"",6,ID_GOLD0,ES_WANTRETURN | ES_MULTILINE | ES_AUTOVSCROLL,
 //		     false,false,5);
@@ -623,25 +623,25 @@ public class Diplodlg{
 //  fcwin_box_add_box(hbox,vbox,false,false,5);
 //  vbox=fcwin_vbox_new(pdialog.mainwin,false);
 //    
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      _("This Eternal Treaty\n"
 //		"marks the results of the diplomatic work between\n"
 //		"The %s %s %s\nand\nThe %s %s %s"),
-//	      get_nation_name(plr0.nation),
+//	      Nation.get_nation_name(plr0.nation),
 //	      get_ruler_title(plr0.government, plr0.is_male, plr0.nation),
 //	      plr0.name,
-//	      get_nation_name(plr1.nation),
+//	      Nation.get_nation_name(plr1.nation),
 //	      get_ruler_title(plr1.government, plr1.is_male, plr1.nation),
 //	      plr1.name);
 //  fcwin_box_add_static(vbox,buf,0,SS_CENTER,false,false,5);
 //  pdialog.list=fcwin_box_add_list(vbox,6,ID_LIST,WS_VSCROLL,true,true,5);
 //  hbox2=fcwin_hbox_new(pdialog.mainwin,false);
-//  my_snprintf(buf, sizeof(buf), "%s view:", get_nation_name(plr0.nation));
+//  buf = util.my_snprintf( "%s view:", Nation.get_nation_name(plr0.nation));
 //  fcwin_box_add_static(hbox2,buf,0,SS_LEFT,false,false,5);
 //  fcwin_box_add_generic(hbox2,thumb_minsize,thumb_setsize,null,
 //			&pdialog.thumb0_pos,false,false,5);
 //  
-//  my_snprintf(buf, sizeof(buf), "%s view:", get_nation_name(plr1.nation));
+//  buf = util.my_snprintf( "%s view:", Nation.get_nation_name(plr1.nation));
 //  fcwin_box_add_static(hbox2,buf,0,SS_LEFT,false,false,5);
 //  fcwin_box_add_generic(hbox2,thumb_minsize,thumb_setsize,null,
 //			&pdialog.thumb1_pos,false,false,5);
@@ -652,15 +652,15 @@ public class Diplodlg{
 //  fcwin_box_add_box(hbox,vbox,true,true,5);
 //  
 //  vbox=fcwin_vbox_new(pdialog.mainwin,false);
-//  my_snprintf(buf, sizeof(buf),
-//              "The %s offerings", get_nation_name(plr1.nation));
+//  buf = util.my_snprintf(
+//              "The %s offerings", Nation.get_nation_name(plr1.nation));
 //  fcwin_box_add_static(vbox,buf,0,SS_LEFT,false,false,5);
 //  fcwin_box_add_button(vbox,"Maps",ID_MAP1,0,false,false,5);
 //  fcwin_box_add_button(vbox,"Advances",ID_TECH1,0,false,false,5);
 //  fcwin_box_add_button(vbox,"Cities",ID_CITY1,0,false,false,5);
 //  fcwin_box_add_button(vbox,"Embassy", ID_EMBASSY1, 0, false, false, 5);
 //  
-//  my_snprintf(buf, sizeof(buf), "Gold(max %d)", plr1.economic.gold); 
+//  buf = util.my_snprintf( "Gold(max %d)", plr1.economic.gold); 
 //  pdialog.gold1_label=fcwin_box_add_static(vbox,buf,0,SS_LEFT,false,false,5);
 //  fcwin_box_add_edit(vbox, "", 6, ID_GOLD1, ES_WANTRETURN | ES_MULTILINE
 //		     | ES_AUTOVSCROLL, false, false, 5);

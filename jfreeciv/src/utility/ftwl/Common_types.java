@@ -308,8 +308,8 @@ public class Common_types{
 //*************************************************************************/
 //void ct_rect_intersect(ct_rect dest, final ct_rect src)
 //{
-//  int last_x = MIN(dest.x + dest.width, src.x + src.width);
-//  int last_y = MIN(dest.y + dest.height, src.y + src.height);
+//  int last_x = Math.min(dest.x + dest.width, src.x + src.width);
+//  int last_y = Math.min(dest.y + dest.height, src.y + src.height);
 //
 //  assert(ct_rect_valid(dest) && ct_rect_valid(src));
 //  dest.x = MAX(dest.x, src.x);
@@ -382,8 +382,8 @@ public class Common_types{
 //			      final ct_point point1,
 //			      final ct_point point2)
 //{
-//  rect.x = MIN(point1.x, point2.x);
-//  rect.y = MIN(point1.y, point2.y);
+//  rect.x = Math.min(point1.x, point2.x);
+//  rect.y = Math.min(point1.y, point2.y);
 //  rect.width = MAX(point1.x, point2.x) - rect.x+1;
 //  rect.height = MAX(point1.y, point2.y) - rect.y+1;
 //}

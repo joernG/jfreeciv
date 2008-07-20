@@ -109,7 +109,7 @@ public class Repodlgs{
 //     }
 //  } tech_type_iterate_end;
 //
-//  my_snprintf(text, sizeof(text), "%d/%d",
+//  text = util.my_snprintf( "%d/%d",
 //              game.player_ptr.research.bulbs_researched,
 //	      total_bulbs_required(game.player_ptr));
 //
@@ -181,7 +181,7 @@ public class Repodlgs{
 //
 //  steps = num_unknown_techs_for_goal(game.player_ptr,
 //                                     game.player_ptr.ai.tech_goal);
-//  my_snprintf(text, sizeof(text),
+//  text = util.my_snprintf(
 //	      PL_("(%d step)", "(%d steps)", steps), steps);
 //  SetWindowText(GetDlgItem(science_dlg,ID_SCIENCE_STEPS),text);
 //  fcwin_redo_layout(science_dlg);
@@ -221,7 +221,7 @@ public class Repodlgs{
 //		popup_help_dialog_typed(advances[to].name, HELP_TECH);
 //		science_dialog_update();
 //	      } else {
-//		my_snprintf(text, sizeof(text), "%d/%d",
+//		text = util.my_snprintf( "%d/%d",
 //			    game.player_ptr.research.bulbs_researched,
 //			    total_bulbs_required(game.player_ptr));
 //		SetWindowText(GetDlgItem(hWnd,ID_SCIENCE_PROG),text);
@@ -239,7 +239,7 @@ public class Repodlgs{
 //	      to = ComboBox_GetItemData(GetDlgItem(hWnd, ID_SCIENCE_GOAL),
 //					to);
 //	      steps = num_unknown_techs_for_goal(game.player_ptr, to);
-//	      my_snprintf(text, sizeof(text), 
+//	      text = util.my_snprintf( 
 //	                  PL_("(%d step)", "(%d steps)", steps),
 //			  steps);
 //	      SetWindowText(GetDlgItem(hWnd,ID_SCIENCE_STEPS), text);
@@ -346,16 +346,16 @@ public class Repodlgs{
 //  for (i = 0; i < entries_used; i++) {
 //    improvement_entry p = &entries[i];
 //
-//    my_snprintf(buf0, sizeof(buf0), "%s", get_improvement_name(p.type));
-//    my_snprintf(buf1, sizeof(buf1), "%5d", p.count);
-//    my_snprintf(buf2, sizeof(buf2), "%5d", p.cost);
-//    my_snprintf(buf3, sizeof(buf3), "%6d", p.total_cost);
+//    buf0 = util.my_snprintf( "%s", get_improvement_name(p.type));
+//    buf1 = util.my_snprintf( "%5d", p.count);
+//    buf2 = util.my_snprintf( "%5d", p.cost);
+//    buf3 = util.my_snprintf( "%6d", p.total_cost);
 //
 //    fcwin_listview_add_row(lv, i, 4, row);
 //
 //    economy_improvement_type[i] = p.type;
 //  }
-//  my_snprintf(economy_total, sizeof(economy_total),
+//  economy_total = util.my_snprintf(
 //	      "Income:%6d    Total Costs: %6d", tax, total);
 //  SetWindowText(GetDlgItem(economy_dlg,ID_TRADEREP_CASH),economy_total);
 //  ListView_SetColumnWidth(lv,0,LVSCW_AUTOSIZE);
@@ -563,7 +563,7 @@ public class Repodlgs{
 //	      if (!(unit_type_exists (ut1)))
 //		break;
 //	      ut2=can_upgrade_unittype(game.player_ptr,activeunits_type[sel]);
-//	      my_snprintf(buf, sizeof(buf),
+//	      buf = util.my_snprintf(
 //			  _("Upgrade as many %s to %s as possible for %d gold each?\n"
 //			    "Treasury contains %d gold."),
 //			  unit_types[ut1].name, unit_types[ut2].name,

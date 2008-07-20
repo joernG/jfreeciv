@@ -207,7 +207,7 @@ public class Gui_main{
 //		 DEFAULT_THEME);
 //      exit(EXIT_SUCCESS);
 //    } else if (is_option("--dump", argv[i])) {
-//      freelog(Log.LOG_NORMAL, "enabling screen dumper");
+//      util.freelog(Log.LOG_NORMAL, "enabling screen dumper");
 //      sw_set_dump_screen(true);
 //    } else if (is_option("--fullscreen", argv[i])) {
 //      fullscreen = true;
@@ -218,13 +218,13 @@ public class Gui_main{
 //      free(theme);
 //      theme = mystrdup(option);
 //    } else {
-//      freelog(LOG_ERROR, "unknown option '%s'", argv[i]);
+//      util.freelog(Log.LOG_ERROR, "unknown option '%s'", argv[i]);
 //    }
 //    i++;
 //  }
 //
 //  if (sscanf(resolution, "%dx%d", &res.width, &res.height) != 2) {
-//    freelog(LOG_ERROR, "The resolution '%s' doesn't parse", resolution);
+//    util.freelog(Log.LOG_ERROR, "The resolution '%s' doesn't parse", resolution);
 //  }
 //  free(resolution);
 //  

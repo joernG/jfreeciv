@@ -241,7 +241,7 @@ public class Dataio{
 //void dio_put_bool8(data_out dout, boolean value)
 //{
 //  if (value != true && value != false) {
-//    freelog(LOG_ERROR, "Trying to put a non-boolean: %d", (int) value);
+//    util.freelog(Log.LOG_ERROR, "Trying to put a non-boolean: %d", (int) value);
 //    value = false;
 //  }
 //
@@ -254,7 +254,7 @@ public class Dataio{
 //void dio_put_bool32(data_out dout, boolean value)
 //{
 //  if (value != true && value != false) {
-//    freelog(LOG_ERROR, "Trying to put a non-boolean: %d", (int) value);
+//    util.freelog(Log.LOG_ERROR, "Trying to put a non-boolean: %d", (int) value);
 //    value = false;
 //  }
 //
@@ -345,7 +345,7 @@ public class Dataio{
 //  size_t max = (unsigned short)(-1);
 //
 //  if (bits > max) {
-//    freelog(LOG_ERROR, "Bit string too long: %lu bits.", (unsigned long)bits);
+//    util.freelog(Log.LOG_ERROR, "Bit string too long: %lu bits.", (unsigned long)bits);
 //    assert(false);
 //    bits = max;
 //  }
@@ -463,7 +463,7 @@ public class Dataio{
 //  dio_get_uint8(din, &ival);
 //
 //  if (ival != 0 && ival != 1) {
-//    freelog(LOG_ERROR, "Received value isn't boolean: %d", ival);
+//    util.freelog(Log.LOG_ERROR, "Received value isn't boolean: %d", ival);
 //    ival = 1;
 //  }
 //
@@ -480,7 +480,7 @@ public class Dataio{
 //  dio_get_uint32(din, &ival);
 //
 //  if (ival != 0 && ival != 1) {
-//    freelog(LOG_ERROR, "Received value isn't boolean: %d", ival);
+//    util.freelog(Log.LOG_ERROR, "Received value isn't boolean: %d", ival);
 //    ival = 1;
 //  }
 //
@@ -591,7 +591,7 @@ public class Dataio{
 //
 //  dio_get_uint16(din, &npack);
 //  if (npack >= max_dest_size) {
-//      freelog(Log.LOG_NORMAL, "Have size for %lu, got %d",
+//      util.freelog(Log.LOG_NORMAL, "Have size for %lu, got %d",
 //              (unsigned long)max_dest_size, npack);
 //    din.bad_bit_string = true;
 //    dest[0] = '\0';

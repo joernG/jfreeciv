@@ -180,7 +180,7 @@ public class Government{
 //  if (best_match) {
 //    return male ? best_match.male_title : best_match.female_title;
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "get_ruler_title: found no title for government %d (%s) nation %d",
 //	    gov, g.name, nation);
 //    return male ? "Mr." : "Ms.";

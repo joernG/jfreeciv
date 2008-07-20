@@ -237,7 +237,7 @@ public class Plrdlg{
 //        idle = 0;
 //      }
 //      
-//      my_snprintf(cBuf, sizeof(cBuf), _("Name : %s\nNation : %s\nTeam : %s\n"
+//      cBuf = util.my_snprintf( _("Name : %s\nNation : %s\nTeam : %s\n"
 //      					"Reputation : %s\nEmbassy :%s\n"
 //    					"State : %s\nIdle : %d %s"),
 //                   pPlayer.name, get_nation_name(pPlayer.nation),
@@ -458,7 +458,7 @@ public class Plrdlg{
 //
 //  w = 500;
 //  h = 400;
-//  r = MIN(w,h);
+//  r = Math.min(w,h);
 //  r -= ((MAX(pBuf.size.w, pBuf.size.h) * 2) + WINDOW_TILE_HIGH + FRAME_WH);
 //  r /= 2;
 //  a = (2.0 * M_PI) / n;
@@ -668,11 +668,11 @@ public class Plrdlg{
 //      }
 //     
 //      if(pDS.type == DS_CEASEFIRE) {
-//	my_snprintf(cBuf, sizeof(cBuf), "%s(%s) - %d %s",
+//	cBuf = util.my_snprintf( "%s(%s) - %d %s",
 //                get_nation_name(pPlayer.nation), state,
 //		pDS.turns_left, PL_("turn", "turns", pDS.turns_left));
 //      } else {
-//	my_snprintf(cBuf, sizeof(cBuf), "%s(%s)",
+//	cBuf = util.my_snprintf( "%s(%s)",
 //                           get_nation_name(pPlayer.nation), state);
 //      }
 //      

@@ -351,7 +351,7 @@ public class Mapctrl_common{
 //      return;
 //    }
 //    if (!can_player_build_unit_direct(game.player_ptr, punit.type))  {
-//      my_snprintf(msg, sizeof(msg),
+//      msg = util.my_snprintf(
 //      "Game: You don't know how to build %s!",
 //        unit_types[punit.type].name);
 //      append_output_window(msg);
@@ -362,7 +362,7 @@ public class Mapctrl_common{
 //  }
 //  upgrade_canvas_clipboard();
 //
-//  my_snprintf(msg, sizeof(msg), "Game: Copy %s to clipboard.",
+//  msg = util.my_snprintf( "Game: Copy %s to clipboard.",
 //    clipboard_is_unit ? unit_types[clipboard].name :
 //    get_improvement_name(clipboard));
 //  append_output_window(msg);
@@ -587,7 +587,7 @@ public class Mapctrl_common{
 //    turn_done_state = false;
 //    is_turn_done_state_valid = true;
 //    set_turn_done_button_state(turn_done_state);
-//    freelog(LOG_DEBUG, "setting turn done button state init %d",
+//    util.freelog(LOG_DEBUG, "setting turn done button state init %d",
 //	    turn_done_state);
 //  }
 //
@@ -598,7 +598,7 @@ public class Mapctrl_common{
 //    return;
 //  }
 //
-//  freelog(LOG_DEBUG, "setting turn done button state from %d to %d",
+//  util.freelog(LOG_DEBUG, "setting turn done button state from %d to %d",
 //	  turn_done_state, new_state);
 //  turn_done_state = new_state;
 //
