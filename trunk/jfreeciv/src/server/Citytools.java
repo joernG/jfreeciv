@@ -294,12 +294,12 @@ public class Citytools{
 //  if (game.allowed_city_names == 3) {
 //    player pother = null;
 //
-//    players_iterate(player2) {
+//    for(player player2: game.players){
 //      if (player2 != pplayer && is_default_city_name(city_name, player2)) {
 //	pother = player2;
 //	break;
 //      }
-//    } players_iterate_end;
+//    }
 //
 //    if (pother != null) {
 //      if (error_buf) {
@@ -1167,11 +1167,11 @@ public class Citytools{
 //  game_remove_city(pcity);
 //  map_update_borders_city_destroyed(ptile);
 //
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    if (map_is_known_and_seen(ptile, other_player)) {
 //      reality_check_city(other_player, ptile);
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  map_fog_pseudo_city_area(pplayer, ptile);
 //
@@ -1358,7 +1358,7 @@ public class Citytools{
 //**************************************************************************/
 //void refresh_dumb_city(city pcity)
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (map_is_known_and_seen(pcity.tile, pplayer)
 //	|| player_has_traderoute_with_city(pplayer, pcity)) {
 //      if (update_dumb_city(pplayer, pcity)) {
@@ -1372,7 +1372,7 @@ public class Citytools{
 //	}
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Don't send to non-player observers since they don't have 'dumb city'
 //   * information. */
@@ -1393,7 +1393,7 @@ public class Citytools{
 //  struct packet_city_short_info sc_pack;
 //
 //  /* Send to everyone who can see the city. */
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (can_player_see_city_internals(pplayer, pcity)) {
 //      if (!nocity_send || pplayer != city_owner(pcity)) {
 //	update_dumb_city(powner, pcity);
@@ -1408,7 +1408,7 @@ public class Citytools{
 //	lsend_packet_city_short_info(&pplayer.connections, &sc_pack);
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* send to non-player observers:
 //   * should these only get dumb_city type info?
@@ -1661,7 +1661,7 @@ public class Citytools{
 // 
 //  if (pdcity
 //      && pdcity.id == pcity.id
-//      && strcmp(pdcity.name, pcity.name) == 0
+//      && pdcity.name.equals(pcity.name)
 //      && pdcity.size == pcity.size
 //      && pdcity.has_walls == city_got_citywalls(pcity)
 //      && pdcity.occupied == occupied
@@ -2065,13 +2065,13 @@ public class Citytools{
 //  if (nocity_send)
 //    return;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      /* sending will set synced to 1. */
 //      if (!pcity.synced)
 //	send_city_info(pplayer, pcity);
 //    } }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************

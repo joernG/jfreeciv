@@ -1,6 +1,14 @@
 package common.player;
 
 public class Player_H {
+	public static final int  PLAYER_DEFAULT_TAX_RATE =0;
+	public static final int  PLAYER_DEFAULT_SCIENCE_RATE =100;
+	public static final int  PLAYER_DEFAULT_LUXURY_RATE =0;
+
+	public static final String  ANON_PLAYER_NAME ="noname";
+	public static final String  ANON_USER_NAME = "Unassigned";
+	public static final String  OBSERVER_NAME	="Observer";
+
 //	enum handicap_type {
 		  public static  int H_NONE = 0;         /* No handicaps */
 		  public static  int H_DIPLOMAT = 1;     /* Can't build offensive diplomats */

@@ -571,7 +571,7 @@ public class Aitools{
 //  int best_dist = -1;
 //  Continent_id con = map_get_continent(ptile);
 //
-//  players_iterate(pplay) {
+//  for(player pplay: game.players){
 //    /* If "enemy" is set, only consider cities whose owner we're at
 //     * war with. */
 //    if (enemy && pplayer && !pplayers_at_war(pplayer, pplay)) {
@@ -591,7 +591,7 @@ public class Aitools{
 //        pc = pcity;
 //      }
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  return(pc);
 //}

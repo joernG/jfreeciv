@@ -6,25 +6,6 @@ import utility.Flog_callback_fn;
 import static utility.Log.*;
 
 public class Console {
-	// #ifdef HAVE_CONFIG_H
-	// #include <config.h>
-	// #endif
-
-	// #include <stdarg.h>
-	// #include <stdio.h>
-	// #include <string.h>
-
-	// #ifdef HAVE_LIBREADLINE
-	// #include <readline/readline.h>
-	// #endif
-
-	// #include "fciconv.h"
-	// #include "fcintl.h"
-	// #include "log.h"
-	// #include "support.h"
-
-	// #include "srv_main.h"
-
 	static boolean console_show_prompt = false;
 	static boolean console_prompt_is_showing = false;
 	static boolean console_rfcstyle = false;
@@ -110,7 +91,7 @@ public class Console {
 	/***************************************************************************
 	 * Write to console and add line-break, and show prompt if required.
 	 **************************************************************************/
-	void con_write(Erfc_status rfc_status, final String message) {
+	public static void con_write(Erfc_status rfc_status, final String message) {
 		// static char buf[MAX_LEN_CONSOLE_LINE];
 		// va_list args;
 		//
@@ -121,8 +102,11 @@ public class Console {
 
 		con_puts(rfc_status, buf);
 	}
+	public static void con_write(Erfc_status rfc_status, final String format, Object... message) {
+		con_write(rfc_status, String.format(format, message));
+	}
 
-	private static void con_write(int level, String format, Object... message) {
+	public static void con_write(int level, String format, Object... message) {
 		// TODO Auto-generated method stub
 		String buf = String.format(format, message);
 		con_puts(C_LOG_BASE, buf);

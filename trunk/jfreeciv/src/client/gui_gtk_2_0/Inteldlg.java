@@ -310,7 +310,7 @@ public class Inteldlg{
 //      diplstates[i] = it;
 //    }
 //
-//    players_iterate(other) {
+//    for(player other: game.players){
 //      final player_diplstate state;
 //      GtkTreeIter it;
 //      GValue v = { 0, };
@@ -325,7 +325,7 @@ public class Inteldlg{
 //      g_value_set_static_string(&v, other.name);
 //      gtk_tree_store_set_value(pdialog.diplstates, &it, 0, &v);
 //      g_value_unset(&v);
-//    } players_iterate_end;
+//    }
 //
 //    /* techs tab. */
 //    gtk_list_store_clear(pdialog.techs);

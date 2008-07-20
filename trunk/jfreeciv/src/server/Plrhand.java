@@ -108,11 +108,11 @@ public class Plrhand{
 //    }
 //  }
 //  else {
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      for (city pcity : pplayer.cities.data) {
 //	send_city_turn_notifications(&pplayer.connections, pcity);
 //      } }
-//    } players_iterate_end;
+//    }
 //  }
 //
 //  send_global_city_turn_notifications(dest);
@@ -172,7 +172,7 @@ public class Plrhand{
 //****************************************************************************/
 //void kill_dying_players()
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (pplayer.is_alive) {
 //      if (unit_list_size(&pplayer.units) == 0
 //	  && city_list_size(&pplayer.cities) == 0) {
@@ -182,7 +182,7 @@ public class Plrhand{
 //	kill_player(pplayer);
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -195,11 +195,11 @@ public class Plrhand{
 //  pplayer.is_alive = false;
 //
 //  /* Remove shared vision from dead player to friends. */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (gives_shared_vision(pplayer, aplayer)) {
 //      remove_shared_vision(pplayer, aplayer);
 //    }
-//  } players_iterate_end;
+//  }
 //    
 //  cancel_all_meetings(pplayer);
 //
@@ -265,10 +265,10 @@ public class Plrhand{
 //  boolean had_embassy[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
 //  city pcity;
 //
-//  players_iterate(aplr) {
+//  for(player aplr: game.players){
 //    had_embassy[aplr.player_no]
 //      = (get_player_bonus(aplr, EFT_HAVE_EMBASSIES) > 0);
-//  } players_iterate_end;
+//  }
 //
 //  /* This is a hack which makes buggy team research work somehow
 //     in 2.0 branch */
@@ -279,7 +279,7 @@ public class Plrhand{
 //	    get_tech_name(plr, tech_found), plr.name);
 //    freelog(LOG_ERROR, "Report this bug at <bugs@freeciv.org>\n"
 //            "Here is some info you should attach:");
-//    players_iterate(eplayer) {
+//    for(player eplayer: game.players){
 //      freelog(LOG_ERROR, 
 //              "Player %s(team %d): researching %s;\n bulbs_researched %d; "
 //	      "techs_researched: %d; bulbs_last_turn: %d; Researched %s? %s",
@@ -291,7 +291,7 @@ public class Plrhand{
 //	      eplayer.research.bulbs_last_turn,
 //	      get_tech_name(plr, tech_found),
 //	      get_invention(eplayer, tech_found) == TECH_KNOWN ? "yes" : "no");
-//    } players_iterate_end;
+//    }
 //  }
 //
 //  /* HACK: A_FUTURE doesn't "exist" and is thus not "available".  This may
@@ -461,14 +461,14 @@ public class Plrhand{
 //   * Send all player an updated info of the owner of the Marco Polo
 //   * Wonder if this wonder has become obsolete.
 //   */
-//  players_iterate(owner) {
+//  for(player owner: game.players){
 //    if (had_embassy[owner.player_no]
 //	&& get_player_bonus(owner, EFT_HAVE_EMBASSIES) == 0) {
-//      players_iterate(other_player) {
+//      for(player other_player: game.players){
 //	send_player_info(owner, other_player);
-//      } players_iterate_end;
+//      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Update Team */
 //  if (next_tech > A_NONE) {
@@ -476,7 +476,7 @@ public class Plrhand{
 //    return;
 //  }
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (plr != aplayer
 //        && players_on_same_team(aplayer, plr)
 //        && aplayer.is_alive
@@ -496,7 +496,7 @@ public class Plrhand{
 //      found_new_tech(aplayer, tech_found, was_discovery, saving_bulbs,
 //                     plr.research.researching);
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -549,15 +549,15 @@ public class Plrhand{
 //  /* count our research contribution this turn */
 //  plr.research.bulbs_last_turn += bulbs;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (pplayer == plr) {
 //      pplayer.research.bulbs_researched += bulbs;
-//    } else if (pplayer.diplstates[plr.player_no].type == DS_TEAM
+//    } else if (pplayer.diplstates[plr.player_no].type == diplstate_type.DS_TEAM
 //               && pplayer.is_alive) {
 //      /* Share with union partner(s). We'll get in return later. */
 //      pplayer.research.bulbs_researched += bulbs;
 //    }
-//  } players_iterate_end;
+//  }
 //  
 //  excessive_bulbs =
 //      (plr.research.bulbs_researched - total_bulbs_required(plr));
@@ -895,14 +895,14 @@ public class Plrhand{
 //  }
 //
 //  /* choose_tech and send update for all players on the team. */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (pplayer == aplayer
-//	|| (pplayer.diplstates[aplayer.player_no].type == DS_TEAM
+//	|| (pplayer.diplstates[aplayer.player_no].type == diplstate_type.DS_TEAM
 //	    && aplayer.is_alive)) {
 //      choose_tech(aplayer, tech);
 //      send_player_info(aplayer, aplayer);
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -930,14 +930,14 @@ public class Plrhand{
 //  send_player_info(pplayer, pplayer);
 //
 //  /* Notify Team members */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (pplayer != aplayer
-//        && pplayer.diplstates[aplayer.player_no].type == DS_TEAM
+//        && pplayer.diplstates[aplayer.player_no].type == diplstate_type.DS_TEAM
 //        && aplayer.is_alive
 //        && aplayer.ai.tech_goal != tech) {
 //      handle_player_tech_goal(aplayer, tech);
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -1251,7 +1251,7 @@ public class Plrhand{
 //    new_type = DS_NEUTRAL;
 //    reppenalty += GAME_MAX_REPUTATION/5;
 //    break;
-//  case DS_ALLIANCE:
+//  case diplstate_type.DS_ALLIANCE:
 //    new_type = DS_PEACE;
 //    reppenalty += GAME_MAX_REPUTATION/4;
 //    break;
@@ -1272,7 +1272,7 @@ public class Plrhand{
 //
 //  /* If the old state was alliance, the players' units can share tiles
 //     illegally, and we need to call resolve_unit_stacks() */
-//  if (old_type == DS_ALLIANCE) {
+//  if (old_type == diplstate_type.DS_ALLIANCE) {
 //    update_players_after_alliance_breakup(pplayer, pplayer2);
 //  }
 //
@@ -1317,7 +1317,7 @@ public class Plrhand{
 //  send_player_info(pplayer2, null);
 //
 //
-//  if (old_type == DS_ALLIANCE) {
+//  if (old_type == diplstate_type.DS_ALLIANCE) {
 //    /* Inform clients about units that have been hidden.  Units in cities
 //     * and transporters are visible to allies but not visible once the
 //     * alliance is broken.  We have to call this after resolve_unit_stacks
@@ -1351,7 +1351,7 @@ public class Plrhand{
 //		   diplstate_text(new_type));
 //
 //  /* Check fall-out of a war declaration. */
-//  players_iterate(other) {
+//  for(player other: game.players){
 //    if (other.is_alive && other != pplayer && other != pplayer2
 //        && new_type == diplstate_type.DS_WAR && pplayers_allied(pplayer2, other)
 //        && pplayers_allied(pplayer, other)) {
@@ -1379,7 +1379,7 @@ public class Plrhand{
 //        handle_diplomacy_cancel_pact(other, pplayer2.player_no, CLAUSE_ALLIANCE);
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //}
 
 	/**************************************************************************
@@ -1509,13 +1509,13 @@ public class Plrhand{
 //  genmsg.event = event_type.E_NOEVENT;
 //  genmsg.conn_id = -1;
 //
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    if (player_has_embassy(other_player, pplayer)
 //	&& exclude != other_player
 //        && pplayer != other_player) {
 //      lsend_packet_chat_msg(&other_player.connections, &genmsg);
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -1527,7 +1527,7 @@ public class Plrhand{
 //**************************************************************************/
 //void send_player_info_c(player src, Speclists<Connection> dest)
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if(!src || pplayer==src) {
 //      struct packet_player_info info;
 //
@@ -1547,7 +1547,7 @@ public class Plrhand{
 //        send_packet_player_info(pconn, &info);
 //      } }
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -1670,7 +1670,7 @@ public class Plrhand{
 //  /* Make absolutely sure - in case you lose your embassy! */
 //  if (info_level >= INFO_EMBASSY 
 //      || (receiver
-//	  && pplayer_get_diplstate(plr, receiver).type == DS_TEAM)) {
+//	  && pplayer_get_diplstate(plr, receiver).type == diplstate_type.DS_TEAM)) {
 //    packet.bulbs_last_turn = plr.research.bulbs_last_turn;
 //  } else {
 //    packet.bulbs_last_turn = 0;
@@ -1712,7 +1712,7 @@ public class Plrhand{
 //
 //  if (info_level >= INFO_FULL
 //      || (receiver
-//	  && plr.diplstates[receiver.player_no].type == DS_TEAM)) {
+//	  && plr.diplstates[receiver.player_no].type == diplstate_type.DS_TEAM)) {
 //    packet.tech_goal       = plr.ai.tech_goal;
 //  } else {
 //    packet.tech_goal       = A_UNSET;
@@ -1781,12 +1781,12 @@ public class Plrhand{
 //void server_remove_player(player pplayer)
 //{
 //  /* Not allowed after a game has started */
-//  if (!(game.is_new_game && (server_state==PRE_GAME_STATE ||
+//  if (!(game.is_new_game && (server_state==server_states.PRE_GAME_STATE ||
 //			     server_state==SELECT_RACES_STATE))) {
 //    die("You can't remove players after the game has started!");
 //  }
 //
-//  freelog(LOG_NORMAL, "Removing player %s.", pplayer.name);
+//  freelog(Log.LOG_NORMAL, "Removing player %s.", pplayer.name);
 //  notify_player(pplayer, "Game: You've been removed from the game!");
 //
 //  notify_conn(&game.est_connections,
@@ -1983,7 +1983,7 @@ public class Plrhand{
 //    nations_used[choices[i]] = 2; /* Preferred */
 //  }
 //
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    if (other_player.nation < game.playable_nation_count) {
 //      if (nations_used[other_player.nation] == 2) {
 //	pref_nations_avail--;
@@ -1991,7 +1991,7 @@ public class Plrhand{
 //      nations_used[other_player.nation] = 0; /* Unavailable */
 //      num_nations_avail--;
 //    } 
-//  } players_iterate_end;
+//  }
 //
 //  assert(num_nations_avail > 0);
 //  assert(pref_nations_avail >= 0);
@@ -2047,7 +2047,7 @@ public class Plrhand{
 //
 //  /* cplayer is not yet part of players_iterate which goes only
 //     to game.nplayers. */
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    /* Barbarians are at war with everybody */
 //    if (is_barbarian(other_player)) {
 //      cplayer.diplstates[other_player.player_no].type = diplstate_type.DS_WAR;
@@ -2118,12 +2118,12 @@ public class Plrhand{
 //
 //  /* give splitted player the embassies to his team mates back, if any */
 //  if (pplayer.team != TEAM_NONE) {
-//    players_iterate(pdest) {
+//    for(player pdest: game.players){
 //      if (pplayer.team == pdest.team
 //          && pplayer != pdest) {
 //        establish_embassy(pplayer, pdest);
 //      }
-//    } players_iterate_end;
+//    }
 //  }
 //
 //  player_limit_to_government_rates(pplayer);
@@ -2230,7 +2230,7 @@ public class Plrhand{
 //
 //  if (game.nplayers >= MAX_NUM_PLAYERS) {
 //    /* No space to make additional player */
-//    freelog(LOG_NORMAL, _("Could not throw %s into civil war - too many "
+//    freelog(Log.LOG_NORMAL, _("Could not throw %s into civil war - too many "
 //            "players"), pplayer.name);
 //    return;
 //  }

@@ -1386,8 +1386,8 @@ public class Diplomats{
 //    case DS_PEACE:
 //      punishment = GAME_MAX_REPUTATION/10;
 //      break;
-//    case DS_ALLIANCE:
-//    case DS_TEAM:
+//    case diplstate_type.DS_ALLIANCE:
+//    case diplstate_type.DS_TEAM:
 //      punishment = GAME_MAX_REPUTATION/5;
 //      break;
 //    case DS_LAST:

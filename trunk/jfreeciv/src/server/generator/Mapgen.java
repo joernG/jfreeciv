@@ -1611,7 +1611,7 @@ public class Mapgen{
 //
 //    /* caveat: this should really be sent to all players */
 //    if (pstate.totalmass > 3000)
-//      freelog(LOG_NORMAL, "High landmass - this may take a few seconds.");
+//      freelog(Log.LOG_NORMAL, "High landmass - this may take a few seconds.");
 //
 //    i = river_pct + mountain_pct + desert_pct + forest_pct + swamp_pct;
 //    i = (i <= 90) ? 100 : i * 11 / 10;
@@ -1802,7 +1802,7 @@ public class Mapgen{
 //
 //  if (bigfrac <= midfrac) {
 //    /* We could never make adequately big islands. */
-//    freelog(LOG_NORMAL, "Falling back to generator %d.", 1);
+//    freelog(Log.LOG_NORMAL, "Falling back to generator %d.", 1);
 //    map.generator = 1;
 //
 //    /* init world created this map, destroy it before abort */
@@ -1872,7 +1872,7 @@ public class Mapgen{
 //  }
 //
 //  if (map.xsize < 40 || map.ysize < 40 || map.landpercent > 80) { 
-//    freelog(LOG_NORMAL, "Falling back to generator %d.", 2); 
+//    freelog(Log.LOG_NORMAL, "Falling back to generator %d.", 2); 
 //    map.generator = 2;
 //    return; 
 //  }
@@ -1892,7 +1892,7 @@ public class Mapgen{
 //  }
 //
 //  if (j == 500){
-//    freelog(LOG_NORMAL, "Generator 3 didn't place all big islands.");
+//    freelog(Log.LOG_NORMAL, "Generator 3 didn't place all big islands.");
 //  }
 //  
 //  islandmass= (islandmass * 11)/8;
@@ -1922,7 +1922,7 @@ public class Mapgen{
 //  height_map = null;
 //    
 //  if (j == 1500) {
-//    freelog(LOG_NORMAL, "Generator 3 left %li landmass unplaced.", checkmass);
+//    freelog(Log.LOG_NORMAL, "Generator 3 left %li landmass unplaced.", checkmass);
 //  } else if (checkmass > map.xsize + map.ysize) {
 //    freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
 //  }

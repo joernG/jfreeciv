@@ -66,7 +66,7 @@ public class Sanitycheck{
 //static void check_fow()
 //{
 //  whole_map_iterate(ptile) {
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      player_tile plr_tile = map_get_player_tile(ptile, pplayer);
 //      /* underflow of unsigned int */
 //      assert(plr_tile.seen < 60000);
@@ -77,7 +77,7 @@ public class Sanitycheck{
 //      if (map_is_known(ptile, pplayer)) {
 //	assert(plr_tile.pending_seen == 0);
 //      }
-//    } players_iterate_end;
+//    }
 //  } whole_map_iterate_end;
 //}
 //
@@ -87,11 +87,11 @@ public class Sanitycheck{
 //static void check_misc()
 //{
 //  int nbarbs = 0;
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (is_barbarian(pplayer)) {
 //      nbarbs++;
 //    }
-//  } players_iterate_end;
+//  }
 //  assert(nbarbs == game.nbarbarians);
 //
 //  assert(game.nplayers <= MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
@@ -256,13 +256,13 @@ public class Sanitycheck{
 //**************************************************************************/
 //static void check_cities()
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      assert(city_owner(pcity) == pplayer);
 //
 //      sanity_check_city(pcity);
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  whole_map_iterate(ptile) {
 //    if (ptile.worked) {
@@ -288,7 +288,7 @@ public class Sanitycheck{
 //...
 //**************************************************************************/
 //static void check_units() {
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (unit punit : pplayer.units.data) {
 //      tile ptile = punit.tile;
 //      city pcity;
@@ -358,7 +358,7 @@ public class Sanitycheck{
 //      assert(get_transporter_occupancy(punit)
 //	     <= get_transporter_capacity(punit));
 //    } }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -368,7 +368,7 @@ public class Sanitycheck{
 //{
 //  int player_no;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    int found_palace = 0;
 //
 //    if (!pplayer.is_alive) {
@@ -384,14 +384,14 @@ public class Sanitycheck{
 //      assert(found_palace <= 1);
 //    } }
 //
-//    players_iterate(pplayer2) {
+//    for(player pplayer2: game.players){
 //      assert(pplayer.diplstates[pplayer2.player_no].type
 //	     == pplayer2.diplstates[pplayer.player_no].type);
 //      if (pplayer.diplstates[pplayer2.player_no].type == DS_CEASEFIRE) {
 //	assert(pplayer.diplstates[pplayer2.player_no].turns_left
 //	       == pplayer2.diplstates[pplayer.player_no].turns_left);
 //      }
-//    } players_iterate_end;
+//    }
 //
 //    if (pplayer.revolution_finishes == -1) {
 //      if (pplayer.government == game.government_when_anarchy) {
@@ -405,7 +405,7 @@ public class Sanitycheck{
 //      /* Things may vary in this case depending on when the sanity_check
 //       * call is made.  No better check is possible. */
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Sanity checks on living and dead players. */
 //  for (player_no = 0; player_no < ARRAY_SIZE(game.players); player_no++) {

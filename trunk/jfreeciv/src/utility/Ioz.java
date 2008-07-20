@@ -92,7 +92,7 @@ public class Ioz{
 //#ifndef HAVE_LIBZ
 //    /* In theory this shouldn't happen, but check anyway. */
 //    if (method == FZ_ZLIB) {
-//      freelog(LOG_NORMAL, "Not compiled with zlib support, reverting to plain.");
+//      freelog(Log.LOG_NORMAL, "Not compiled with zlib support, reverting to plain.");
 //      method = FZ_PLAIN;
 //    }
 //#endif

@@ -190,12 +190,12 @@ public class Packhand{
 //    append_output_window(msg);
 //    aconnection.id = 0;
 //    if (auto_connect) {
-//      freelog(LOG_NORMAL, "%s", msg);
+//      freelog(Log.LOG_NORMAL, "%s", msg);
 //    }
 //    gui_server_connect();
 //    set_client_page(PAGE_MAIN);
 //  }
-//  if (strcmp(s_capability, our_capability) == 0) {
+//  if (s_capability.equals(our_capability)) {
 //    return;
 //  }
 //  my_snprintf(msg, sizeof(msg),

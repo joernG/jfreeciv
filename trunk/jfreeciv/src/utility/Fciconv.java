@@ -1,47 +1,14 @@
 package utility;
 
 public class Fciconv{
-
-// Freeciv - Copyright (C) 2003-2004 - The Freeciv Project
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//#include <errno.h>
-//#include <stdio.h>
-//#include <string.h>
-//
-//#ifdef HAVE_ICONV
-//#include <iconv.h>
-//#endif
-//
-//#ifdef HAVE_LANGINFO_CODESET
-//#include <langinfo.h>
-//#endif
-//
-//#ifdef HAVE_LIBCHARSET
-//#include <libcharset.h>
-//#endif
-//
+	public static final String FC_DEFAULT_DATA_ENCODING = "UTF-8";
 //#include "fciconv.h"
 //#include "fcintl.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "support.h"
 //
-//static boolean is_init = false;
+static boolean is_init = false;
 //static char convert_buffer[4096];
 //
 //#ifdef HAVE_ICONV
@@ -53,16 +20,16 @@ public class Fciconv{
 //#  define data_encoding get_local_encoding()
 //#  define internal_encoding get_local_encoding()
 //#endif
-//
-///***************************************************************************
-//  Must be called during the initialization phase of server and client to
-//  initialize the character encodings to be used.
-//
-//  Pass an internal encoding of null to use the local encoding internally.
-//***************************************************************************/
-//void init_character_encodings(char *my_internal_encoding,
-//			      boolean my_use_transliteration)
-//{
+
+/***************************************************************************
+  Must be called during the initialization phase of server and client to
+  initialize the character encodings to be used.
+
+  Pass an internal encoding of null to use the local encoding internally.
+***************************************************************************/
+public static void init_character_encodings(String my_internal_encoding,
+			      boolean my_use_transliteration)
+{
 //#ifdef HAVE_ICONV
 //  if (my_use_transliteration) {
 //    transliteration_string = "//TRANSLIT";
@@ -133,9 +100,9 @@ public class Fciconv{
 //#  error No iconv present!
 //#endif
 //
-//  is_init = true;
-//}
-//
+  is_init = true;
+}
+
 ///***************************************************************************
 //  Return the data encoding (usually UTF-8).
 //***************************************************************************/

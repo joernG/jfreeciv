@@ -141,7 +141,7 @@ public class Shared{
 //***************************************************************/
 //boolean is_option(final String option_name,char *option)
 //{
-//  return (strcmp(option_name, option) == 0 ||
+//  return (option_name.equals(option) ||
 //	  strncmp(option_name + 1, option, 2) == 0);
 //}
 //
@@ -1148,17 +1148,17 @@ public class Shared{
 //    exit(EXIT_FAILURE);
 //  }
 //}
-//
-///***************************************************************************
-//  Setup for Native Language Support, if configured to use it.
-//  (Call this only once, or it may leak memory.)
-//***************************************************************************/
-//void init_nls()
-//{
-//  /* 
-//   * Setup the cached locale numeric formatting information. Defaults
-//   * are as appropriate for the US.
-//   */
+
+/***************************************************************************
+  Setup for Native Language Support, if configured to use it.
+  (Call this only once, or it may leak memory.)
+***************************************************************************/
+public static void init_nls()
+{
+  /* 
+   * Setup the cached locale numeric formatting information. Defaults
+   * are as appropriate for the US.
+   */
 //  grouping = mystrdup("\3");
 //  grouping_sep = mystrdup(",");
 //
@@ -1250,8 +1250,8 @@ public class Shared{
 //    grouping_sep = mystrdup(lc.thousands_sep);
 //  }
 //#endif
-//}
-//
+}
+
 ///***************************************************************************
 //  If we have root privileges, die with an error.
 //  (Eg, for security reasons.)
@@ -1301,7 +1301,7 @@ public class Shared{
 //  Given n names, with maximum length max_len_name, accessed by
 //  accessor_fn(0) to accessor_fn(n-1), look for matching prefix
 //  according to given comparison function.
-//  Returns type of match or fail, and for return <= M_PRE_AMBIGUOUS
+//  Returns type of match or fail, and for return <= m_pre_result.M_PRE_AMBIGUOUS
 //  sets *ind_result with matching index (or for ambiguous, first match).
 //  If max_len_name==0, treat as no maximum.
 //***************************************************************************/
@@ -1340,7 +1340,7 @@ public class Shared{
 //  if (nmatches == 1) {
 //    return M_PRE_ONLY;
 //  } else if (nmatches > 1) {
-//    return M_PRE_AMBIGUOUS;
+//    return m_pre_result.M_PRE_AMBIGUOUS;
 //  } else {
 //    return M_PRE_FAIL;
 //  }

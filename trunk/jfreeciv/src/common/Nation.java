@@ -1,29 +1,6 @@
 package common;
 
 public class Nation{
-
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-///**********************************************************************
-//   Functions for handling the nations and teams.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//
 //#include "fcintl.h"
 //#include "game.h"
 //#include "government.h"
@@ -343,11 +320,11 @@ public class Nation{
 //    return 0;
 //  }
 //  assert(pteam.id < MAX_NUM_TEAMS && pteam.id != TEAM_NONE);
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (pplayer.is_alive && pplayer.team == pteam.id) {
 //      count++;
 //    }
-//  } players_iterate_end;
+//  }
 //  return count;
 //}
 //
@@ -397,12 +374,12 @@ public class Nation{
 //  assert(pplayer.team < MAX_NUM_TEAMS && pplayer.team >= 0);
 //
 //  /* anyone else using my team? */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (aplayer.team == pplayer.team && aplayer != pplayer) {
 //      others = true;
 //      break;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* no other team members left? remove team! */
 //  if (!others) {
@@ -410,12 +387,12 @@ public class Nation{
 //  }
 //  pplayer.team = TEAM_NONE;
 //}
-//
-///***************************************************************
-//  Initializes team structure
-//***************************************************************/
-//void team_init()
-//{
+
+/***************************************************************
+  Initializes team structure
+***************************************************************/
+public static void team_init()
+{
 //  Team_Type_id i;
 //
 //  assert(TEAM_NONE < 0 || TEAM_NONE >= MAX_NUM_TEAMS);
@@ -425,5 +402,5 @@ public class Nation{
 //    teams[i].id = TEAM_NONE;
 //    teams[i].name[0] = '\0';
 //  }
-//}
+}
 }

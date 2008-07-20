@@ -322,7 +322,7 @@ public class Gui_main{
 //  }
 //  
 //  if(!appResources.gotAppDefFile) {
-//    freelog(LOG_NORMAL, "Using fallback resources - which is OK");
+//    freelog(Log.LOG_NORMAL, "Using fallback resources - which is OK");
 //  }
 //
 //  display = XtDisplay(toplevel);

@@ -332,7 +332,7 @@ public class Gui_text{
 //#endif
 //    add_line("tooltip for action %s isn't written yet",
 //	     action);
-//    freelog(LOG_NORMAL, "warning: get_unit_action_tooltip: unknown action %s",
+//    freelog(Log.LOG_NORMAL, "warning: get_unit_action_tooltip: unknown action %s",
 //	    action);
 //  }
 //  RETURN;
@@ -364,7 +364,7 @@ public class Gui_text{
 //				 pcity.is_building_unit, true));
 //  } else {
 //    add_line("tooltip for action %s isn't written yet", action);
-//    freelog(LOG_NORMAL,
+//    freelog(Log.LOG_NORMAL,
 //	    "warning: get_city_action_tooltip: unknown action %s", action);
 //  }
 //  RETURN;

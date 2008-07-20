@@ -114,7 +114,7 @@ public class Timing{
 //  static boolean first = true;
 //
 //  if (first) {
-//    freelog(LOG_NORMAL, "clock() returned -1, ignoring timer");
+//    freelog(Log.LOG_NORMAL, "clock() returned -1, ignoring timer");
 //    first = false;
 //  }
 //  t.use = TIMER_IGNORE;
@@ -130,7 +130,7 @@ public class Timing{
 //  static boolean first = true;
 //
 //  if (first) {
-//    freelog(LOG_NORMAL, "gettimeofday() returned -1, ignoring timer");
+//    freelog(Log.LOG_NORMAL, "gettimeofday() returned -1, ignoring timer");
 //    first = false;
 //  }
 //  t.use = TIMER_IGNORE;
@@ -145,7 +145,7 @@ public class Timing{
 //  static boolean first = true;
 //
 //  if (first) {
-//    freelog(LOG_NORMAL, "time() returned -1, ignoring timer");
+//    freelog(Log.LOG_NORMAL, "time() returned -1, ignoring timer");
 //    first = false;
 //  }
 //  t.use = TIMER_IGNORE;
@@ -388,7 +388,7 @@ public class Timing{
 //  {
 //      timer t = new_timer_start();
 //      ...do stuff...
-//      freelog(LOG_NORMAL, "That took %g seconds", read_timer_seconds_free(t));
+//      freelog(Log.LOG_NORMAL, "That took %g seconds", read_timer_seconds_free(t));
 //  }
 //  (BUT: make sure the _free call really happens!
 //  eg, freelog(LOG_DEBUG,...) might not actually evaluate its args.)

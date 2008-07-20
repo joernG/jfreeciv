@@ -61,12 +61,12 @@ public class Be_sdl{
 //  }
 //  atexit(SDL_Quit);
 //
-//  freelog(LOG_NORMAL, "Using Video Output: %s",
+//  freelog(Log.LOG_NORMAL, "Using Video Output: %s",
 //	  SDL_VideoDriverName(device, sizeof(device)));
 //  {
 //    final SDL_VideoInfo *info = SDL_GetVideoInfo();
-//    freelog(LOG_NORMAL, "Video memory of driver: %dkb", info.video_mem);
-//    freelog(LOG_NORMAL, "Preferred depth: %d bits per pixel",
+//    freelog(Log.LOG_NORMAL, "Video memory of driver: %dkb", info.video_mem);
+//    freelog(Log.LOG_NORMAL, "Preferred depth: %d bits per pixel",
 //	    info.vfmt.BitsPerPixel);
 //  }
 //
@@ -98,12 +98,12 @@ public class Be_sdl{
 //    exit(1);
 //  }
 //
-//  freelog(LOG_NORMAL, "Got a screen with size (%dx%d) and %d bits per pixel",
+//  freelog(Log.LOG_NORMAL, "Got a screen with size (%dx%d) and %d bits per pixel",
 //	  screen.w, screen.h, screen.format.BitsPerPixel);
-//  freelog(LOG_NORMAL, "  format: red=0x%x green=0x%x blue=0x%x mask=0x%x",
+//  freelog(Log.LOG_NORMAL, "  format: red=0x%x green=0x%x blue=0x%x mask=0x%x",
 //	  screen.format.Rmask, screen.format.Gmask,
 //	  screen.format.Bmask, screen.format.Amask);
-//  freelog(LOG_NORMAL, "  format: bits-per-pixel=%d bytes-per-pixel=%d",
+//  freelog(Log.LOG_NORMAL, "  format: bits-per-pixel=%d bytes-per-pixel=%d",
 //	  screen.format.BitsPerPixel, screen.format.BytesPerPixel);
 //  SDL_EnableUNICODE(1);
 //}

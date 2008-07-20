@@ -158,7 +158,7 @@ public class Agents{
 //  call_list_insert(&agents.calls, pcall2);
 //
 //  if (DEBUG_TODO_LISTS) {
-//    freelog(LOG_NORMAL, "A: adding call");
+//    freelog(Log.LOG_NORMAL, "A: adding call");
 //  }
 //
 //  update_turn_done_button_state();
@@ -194,7 +194,7 @@ public class Agents{
 //  call_list_unlink(&agents.calls, result);
 //
 //  if (DEBUG_TODO_LISTS) {
-//    freelog(LOG_NORMAL, "A: removed call");
+//    freelog(Log.LOG_NORMAL, "A: removed call");
 //  }
 //  return result;
 //}
@@ -264,7 +264,7 @@ public class Agents{
 //    initialized = true;
 //  }
 //  if (DEBUG_FREEZE) {
-//    freelog(LOG_NORMAL, "A: freeze() current level=%d", frozen_level);
+//    freelog(Log.LOG_NORMAL, "A: freeze() current level=%d", frozen_level);
 //  }
 //  frozen_level++;
 //}
@@ -276,7 +276,7 @@ public class Agents{
 //static void thaw()
 //{
 //  if (DEBUG_FREEZE) {
-//    freelog(LOG_NORMAL, "A: thaw() current level=%d", frozen_level);
+//    freelog(Log.LOG_NORMAL, "A: thaw() current level=%d", frozen_level);
 //  }
 //  frozen_level--;
 //  assert(frozen_level >= 0);
@@ -751,7 +751,7 @@ public class Agents{
 //  my_agent agent = find_agent_by_name(agent_name);
 //
 //  if (DEBUG_REQUEST_IDS) {
-//    freelog(LOG_NORMAL, "A:%s: wait_for_request(ids=[%d..%d])",
+//    freelog(Log.LOG_NORMAL, "A:%s: wait_for_request(ids=[%d..%d])",
 //	    agent.agent.name, first_request_id, last_request_id);
 //  }
 //
@@ -770,7 +770,7 @@ public class Agents{
 //      (1 + (last_request_id - first_request_id));
 //
 //  if (DEBUG_REQUEST_IDS) {
-//    freelog(LOG_NORMAL, "A:%s: wait_for_request: ids=[%d..%d]; got it",
+//    freelog(Log.LOG_NORMAL, "A:%s: wait_for_request: ids=[%d..%d]; got it",
 //	    agent.agent.name, first_request_id, last_request_id);
 //  }
 //

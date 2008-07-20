@@ -2126,30 +2126,30 @@ public class Cm{
 //****************************************************************************/
 //void cm_print_city(final city pcity)
 //{
-//  freelog(LOG_NORMAL, "print_city(city='%s'(id=%d))",
+//  freelog(Log.LOG_NORMAL, "print_city(city='%s'(id=%d))",
 //          pcity.name, pcity.id);
-//  freelog(LOG_NORMAL,
+//  freelog(Log.LOG_NORMAL,
 //          "  size=%d, entertainers=%d, scientists=%d, taxmen=%d",
 //          pcity.size, pcity.specialists[SP_ELVIS],
 //          pcity.specialists[SP_SCIENTIST],
 //          pcity.specialists[SP_TAXMAN]);
-//  freelog(LOG_NORMAL, "  workers at:");
+//  freelog(Log.LOG_NORMAL, "  workers at:");
 //  my_city_map_iterate(pcity, x, y) {
 //    if (pcity.city_map[x][y] == C_TILE_WORKER) {
-//      freelog(LOG_NORMAL, "    (%2d,%2d)", x, y);
+//      freelog(Log.LOG_NORMAL, "    (%2d,%2d)", x, y);
 //    }
 //  } my_city_map_iterate_end;
 //
-//  freelog(LOG_NORMAL, "  food    = %3d (%+3d)",
+//  freelog(Log.LOG_NORMAL, "  food    = %3d (%+3d)",
 //          pcity.food_prod, pcity.food_surplus);
-//  freelog(LOG_NORMAL, "  shield  = %3d (%+3d)",
+//  freelog(Log.LOG_NORMAL, "  shield  = %3d (%+3d)",
 //          pcity.shield_prod, pcity.shield_surplus);
-//  freelog(LOG_NORMAL, "  trade   = %3d", pcity.trade_prod);
+//  freelog(Log.LOG_NORMAL, "  trade   = %3d", pcity.trade_prod);
 //
-//  freelog(LOG_NORMAL, "  gold    = %3d (%+3d)", pcity.tax_total,
+//  freelog(Log.LOG_NORMAL, "  gold    = %3d (%+3d)", pcity.tax_total,
 //          city_gold_surplus(pcity, pcity.tax_total));
-//  freelog(LOG_NORMAL, "  luxury  = %3d", pcity.luxury_total);
-//  freelog(LOG_NORMAL, "  science = %3d", pcity.science_total);
+//  freelog(Log.LOG_NORMAL, "  luxury  = %3d", pcity.luxury_total);
+//  freelog(Log.LOG_NORMAL, "  science = %3d", pcity.science_total);
 //}
 //
 //
@@ -2160,15 +2160,15 @@ public class Cm{
 //		     final cm_result result)
 //{
 //  int y, i, worker = cm_count_worker(pcity, result);
-//  freelog(LOG_NORMAL, "print_result(result=%p)", result);
-//  freelog(LOG_NORMAL,
+//  freelog(Log.LOG_NORMAL, "print_result(result=%p)", result);
+//  freelog(Log.LOG_NORMAL,
 //      "print_result:  found_a_valid=%d disorder=%d happy=%d",
 //      result.found_a_valid, result.disorder, result.happy);
 //
-//  freelog(LOG_NORMAL, "print_result:  workers at:");
+//  freelog(Log.LOG_NORMAL, "print_result:  workers at:");
 //  my_city_map_iterate(pcity, x, y) {
 //    if (result.worker_positions_used[x][y]) {
-//      freelog(LOG_NORMAL, "print_result:    (%2d,%2d)", x, y);
+//      freelog(Log.LOG_NORMAL, "print_result:    (%2d,%2d)", x, y);
 //    }
 //  } my_city_map_iterate_end;
 //
@@ -2189,14 +2189,14 @@ public class Cm{
 //        line[x] = '.';
 //      }
 //    }
-//    freelog(LOG_NORMAL, "print_result: %s", line);
+//    freelog(Log.LOG_NORMAL, "print_result: %s", line);
 //  }
-//  freelog(LOG_NORMAL,
+//  freelog(Log.LOG_NORMAL,
 //      "print_result:  people: (workers/specialists) %d/%s",
 //      worker, specialists_string(result.specialists));
 //
 //  for (i = 0; i < NUM_STATS; i++) {
-//    freelog(LOG_NORMAL, "print_result:  %10s surplus=%d",
+//    freelog(Log.LOG_NORMAL, "print_result:  %10s surplus=%d",
 //        cm_get_stat_name(i), result.surplus[i]);
 //  }
 //}

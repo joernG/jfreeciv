@@ -480,7 +480,7 @@ public class Inteldlg{
 //
 //  if (pdialog.intel_diplo_dialog_shell) {
 //    i = 0;
-//    players_iterate(other) {
+//    for(player other: game.players){
 //      if (other == pdialog.pplayer) {
 //	continue;
 //      }
@@ -492,7 +492,7 @@ public class Inteldlg{
 //		  diplstate_text(state.type));
 //      namelist_ptrs[i] = namelist_text[i];
 //      i++;
-//    } players_iterate_end;
+//    }
 //
 //    XawListChange(pdialog.intel_diplo_list, namelist_ptrs, i, 0, true);
 //

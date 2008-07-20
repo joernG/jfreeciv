@@ -281,7 +281,7 @@ public class Plrdlg{
 //	    		get_game_color(COLOR_STD_GROUND, pPlayer1.dst));
 //	        }
 //              break;
-//	      case DS_ALLIANCE:
+//	      case diplstate_type.DS_ALLIANCE:
 //	        if (SDL_Client_Flags & CF_DRAW_PLAYERS_ALLIANCE_STATUS) {
 //	          putline(pPlayer1.dst, x0, y0, x1, y1,
 //	    		get_game_color(COLOR_STD_CITY_GOLD, pPlayer1.dst));
@@ -390,7 +390,7 @@ public class Plrdlg{
 //	pBuf.action = toggle_draw_pease_status_callback;
 //	pBuf.key = SDLK_p;
 //      break;
-//      case DS_ALLIANCE:
+//      case diplstate_type.DS_ALLIANCE:
 //	pBuf = create_checkbox(pWindow.dst,
 //		(SDL_Client_Flags & CF_DRAW_PLAYERS_ALLIANCE_STATUS),
 //      						WF_DRAW_THEME_TRANSPARENT);
@@ -495,7 +495,7 @@ public class Plrdlg{
 //        case DS_PEACE:
 //	  pStr.fgcol = *(get_game_colorRGB(COLOR_STD_GROUND));
 //        break;
-//	case DS_ALLIANCE:
+//	case diplstate_type.DS_ALLIANCE:
 //	  pStr.fgcol = *(get_game_colorRGB(COLOR_STD_CITY_GOLD));
 //	break;
 //        default:
@@ -703,7 +703,7 @@ public class Plrdlg{
 //	  pBuf.string16.fgcol = *(get_game_colorRGB(COLOR_STD_GROUND));
 //	  set_wstate(pBuf, FC_WS_NORMAL);
 //        break;
-//	case DS_ALLIANCE:
+//	case diplstate_type.DS_ALLIANCE:
 //	  pBuf.string16.fgcol = *(get_game_colorRGB(COLOR_STD_CITY_GOLD));
 //	  set_wstate(pBuf, FC_WS_NORMAL);
 //        break;

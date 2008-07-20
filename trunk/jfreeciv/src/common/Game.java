@@ -70,13 +70,13 @@ public class Game{
 //**************************************************************************/
 //city game_find_city_by_name(final String name)
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    city pcity = city_list_find_name(&pplayer.cities, name);
 //
 //    if (pcity) {
 //      return pcity;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  return null;
 //}
@@ -331,14 +331,14 @@ public class Game{
 //***************************************************************/
 //void initialize_globals()
 //{
-//  players_iterate(plr) {
+//  for(player plr: game.players){
 //    for (city pcity : plr.cities.data) {
 //      built_impr_iterate(pcity, i) {
 //	if (is_wonder(i))
 //	  game.global_wonders[i] = pcity.id;
 //      } built_impr_iterate_end;
 //    } }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///***************************************************************

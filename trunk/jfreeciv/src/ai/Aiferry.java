@@ -98,13 +98,13 @@ public class Aiferry{
 //  ai_data ai = ai_data_get(pplayer);
 //  int n = 1;
 //
-//  freelog(LOG_NORMAL, "Boat stats for %s[%d]", 
+//  freelog(Log.LOG_NORMAL, "Boat stats for %s[%d]", 
 //	  pplayer.name, pplayer.player_no);
-//  freelog(LOG_NORMAL, "Registered: %d free out of total %d",
+//  freelog(Log.LOG_NORMAL, "Registered: %d free out of total %d",
 //	  ai.stats.available_boats, ai.stats.boats);
 //  for (unit punit : pplayer.units.data) {
 //    if (is_sailing_unit(punit) && is_ground_units_transport(punit)) {
-//      freelog(LOG_NORMAL, "#%d. %s[%d], psngr=%d", 
+//      freelog(Log.LOG_NORMAL, "#%d. %s[%d], psngr=%d", 
 //	      n, unit_type(punit).name, punit.id, punit.ai.passenger);
 //      n++;
 //    }

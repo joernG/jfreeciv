@@ -413,7 +413,7 @@ public class Inputfile{
 //  {
 //    inputfile inc = inf;
 //    do {
-//      if (inc.filename && strcmp(full_name, inc.filename)==0) {
+//      if (inc.filename && full_name.equals(inc.filename)) {
 //        freelog(LOG_ERROR, 
 //                "Recursion trap on '*include' for \"%s\"", full_name);
 //        return false;
@@ -574,7 +574,7 @@ public class Inputfile{
 //***********************************************************************/
 //static void inf_warn(inputfile inf, final String message)
 //{
-//  inf_log(inf, LOG_NORMAL, message);
+//  inf_log(inf, Log.LOG_NORMAL, message);
 //}
 //
 
@@ -595,7 +595,7 @@ public class Inputfile{
 //  func = tok_tab[type].func;
 //  
 //  if (!func) {
-//    freelog(LOG_NORMAL, "token type %d (%s) not supported yet", type, name);
+//    freelog(Log.LOG_NORMAL, "token type %d (%s) not supported yet", type, name);
 //    c = null;
 //  } else {
 //    if (!have_line(inf))

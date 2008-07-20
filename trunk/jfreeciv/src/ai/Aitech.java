@@ -273,13 +273,13 @@ public class Aitech{
 //  int penalty = (pplayer.got_tech ? 0 : pplayer.research.bulbs_researched);
 //
 //  /* If there are humans in our team, they will choose the techs */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    final player_diplstate ds = pplayer_get_diplstate(pplayer, aplayer);
 //
-//    if (ds.type == DS_TEAM) {
+//    if (ds.type == diplstate_type.DS_TEAM) {
 //      return;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  ai_use_gov_tech_hint(pplayer);
 //

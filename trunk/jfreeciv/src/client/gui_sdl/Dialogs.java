@@ -222,7 +222,7 @@ public class Dialogs{
 //void popup_notify_goto_dialog(final String headline, final String lines,
 //			      int x, int y)
 //{
-//  freelog(LOG_NORMAL, "popup_notify_goto_dialog : PORT ME\n \
+//  freelog(Log.LOG_NORMAL, "popup_notify_goto_dialog : PORT ME\n \
 //  			a: %s\nb: %s",headline, lines );
 //}
 //

@@ -425,7 +425,7 @@ public class Plrdlg{
 //
 //    gtk_clist_freeze(GTK_CLIST(players_list));
 //
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      int i = pplayer.player_no;
 //
 //      /* skip barbarians */
@@ -470,8 +470,8 @@ public class Plrdlg{
 //      case diplstate_type.DS_WAR:
 //	state_col = colors_standard[COLOR_STD_RED];
 //	break;
-//      case DS_ALLIANCE:
-//      case DS_TEAM:
+//      case diplstate_type.DS_ALLIANCE:
+//      case diplstate_type.DS_TEAM:
 //	state_col = colors_standard[COLOR_STD_GROUND];
 //	break;
 //      default:
@@ -498,7 +498,7 @@ public class Plrdlg{
 //
 //    gtk_clist_thaw(GTK_CLIST(players_list));
 //    gtk_widget_show_all(players_list);
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************

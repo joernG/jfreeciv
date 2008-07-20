@@ -142,7 +142,7 @@ public class Sernet{
 //   * the preprocessor check has to come inside the function body.  But
 //   * perhaps we want to do this even when SOCKET_ZERO_ISNT_STDIN? */
 //#ifndef SOCKET_ZERO_ISNT_STDIN
-//  freelog(LOG_NORMAL, "Server cannot read standard input. Ignoring input.");
+//  freelog(Log.LOG_NORMAL, "Server cannot read standard input. Ignoring input.");
 //  no_input = true;
 //#endif
 //}
@@ -226,7 +226,7 @@ public class Sernet{
 //  }
 //
 //  /* Remove the game connection lists and make sure they are empty. */
-//  assert(conn_list_size(&game.all_connections) == 0);
+//  assert(game.all_connections.foo_list_size() == 0);
 //  conn_list_unlink_all(&game.all_connections);
 //  assert(conn_list_size(&game.est_connections) == 0);
 //  conn_list_unlink_all(&game.est_connections);
@@ -307,7 +307,7 @@ public class Sernet{
 //      connection pconn = &connections[i];
 //      if(pconn.used) {
 //        if(FD_ISSET(pconn.sock, &exceptfs)) {
-//	  freelog(LOG_NORMAL, "cut connection %s due to exception data",
+//	  freelog(Log.LOG_NORMAL, "cut connection %s due to exception data",
 //		  conn_description(pconn));
 //	  close_socket_callback(pconn);
 //        } else {
@@ -317,7 +317,7 @@ public class Sernet{
 //	    } else {
 //	      if(game.tcptimeout != 0 && pconn.last_write != 0
 //		 && (time(null)>pconn.last_write + game.tcptimeout)) {
-//	        freelog(LOG_NORMAL, "cut connection %s due to lagging player",
+//	        freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
 //			conn_description(pconn));
 //		close_socket_callback(pconn);
 //	      }
@@ -400,7 +400,7 @@ public class Sernet{
 //    get_lanserver_announcement();
 //
 //    /* end server if no players for 'srvarg.quitidle' seconds */
-//    if (srvarg.quitidle != 0 && server_state != PRE_GAME_STATE) {
+//    if (srvarg.quitidle != 0 && server_state != server_states.PRE_GAME_STATE) {
 //      static time_t last_noplayers;
 //      if(conn_list_size(&game.est_connections) == 0) {
 //	if (last_noplayers != 0) {
@@ -409,7 +409,7 @@ public class Sernet{
 //	      save_game_auto();
 //	    }
 //	    set_meta_message_string("restarting for lack of players");
-//	    freelog(LOG_NORMAL, get_meta_message_string());
+//	    freelog(Log.LOG_NORMAL, get_meta_message_string());
 //	    () send_server_info_to_metaserver(META_INFO);
 //
 //            server_state = GAME_OVER_STATE;
@@ -432,7 +432,7 @@ public class Sernet{
 //		      "restarting in %d seconds for lack of players",
 //		      srvarg.quitidle);
 //          set_meta_message_string((final String)buf);
-//	  freelog(LOG_NORMAL, get_meta_message_string());
+//	  freelog(Log.LOG_NORMAL, get_meta_message_string());
 //	  () send_server_info_to_metaserver(META_INFO);
 //	}
 //      } else {
@@ -452,11 +452,11 @@ public class Sernet{
 //	     > game.pingtimeout) || pconn.ping_time > game.pingtimeout) {
 //	  /* cut mute players, except for hack-level ones */
 //	  if (pconn.access_level == ALLOW_HACK) {
-//	    freelog(LOG_NORMAL,
+//	    freelog(Log.LOG_NORMAL,
 //		    "ignoring ping timeout to hack-level connection %s",
 //		    conn_description(pconn));
 //	  } else {
-//	    freelog(LOG_NORMAL, "cut connection %s due to ping timeout",
+//	    freelog(Log.LOG_NORMAL, "cut connection %s due to ping timeout",
 //		    conn_description(pconn));
 //	    close_socket_callback(pconn);
 //	  }
@@ -475,7 +475,7 @@ public class Sernet{
 //    } conn_list_iterate_end
 //
 //    /* Don't wait if timeout == -1 (i.e. on auto games) */
-//    if (server_state != PRE_GAME_STATE && game.timeout == -1) {
+//    if (server_state != server_states.PRE_GAME_STATE && game.timeout == -1) {
 //      () send_server_info_to_metaserver(META_REFRESH);
 //      return 0;
 //    }
@@ -652,7 +652,7 @@ public class Sernet{
 //		  us = (end.tv_sec - start.tv_sec) * 1000000 +
 //		      end.tv_usec - start.tv_usec;
 //
-//		  freelog(LOG_NORMAL,
+//		  freelog(Log.LOG_NORMAL,
 //			  "processed request %d in %ld.%03ldms",
 //			  pconn.server.last_request_id_seen, us / 1000,
 //			  us % 1000);
@@ -676,7 +676,7 @@ public class Sernet{
 //	  } else {
 //	    if(game.tcptimeout != 0 && pconn.last_write != 0
 //	       && (time(null)>pconn.last_write + game.tcptimeout)) {
-//	      freelog(LOG_NORMAL, "cut connection %s due to lagging player",
+//	      freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
 //		      conn_description(pconn));
 //	      close_socket_callback(pconn);
 //	    }
@@ -947,7 +947,7 @@ public class Sernet{
 //  timer timer;
 //
 //  if (pconn.server.ping_timers.foo_list_size() == 0) {
-//    freelog(LOG_NORMAL, "got unexpected pong from %s",
+//    freelog(Log.LOG_NORMAL, "got unexpected pong from %s",
 //	    conn_description(pconn));
 //    return;
 //  }
@@ -1095,7 +1095,7 @@ public class Sernet{
 //              MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, VERSION_LABEL);
 //
 //  switch (server_state) {
-//  case PRE_GAME_STATE:
+//  case server_states.PRE_GAME_STATE:
 //    my_snprintf(status, sizeof(status), "Pregame");
 //    break;
 //  case RUN_GAME_STATE:

@@ -1176,7 +1176,7 @@ public class Connectdlg{
 //  if(try_to_connect(user_name, errbuf, sizeof(errbuf))) {
 //    /* Server not available (yet) */
 //    if (!warning_shown) {
-//      freelog(LOG_NORMAL, _("Connection to server refused. "
+//      freelog(Log.LOG_NORMAL, _("Connection to server refused. "
 //			    "Please start the server."));
 //      append_output_window(_("Connection to server refused. "
 //			     "Please start the server."));

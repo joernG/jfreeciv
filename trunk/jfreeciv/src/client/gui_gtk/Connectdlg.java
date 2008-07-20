@@ -652,7 +652,7 @@ public class Connectdlg{
 //  /* See PR#4042 for more info on issues with try_to_connect() and errno. */
 //  case ECONNREFUSED:		/* Server not available (yet) */
 //    if (!warning_shown) {
-//      freelog(LOG_NORMAL, _("Connection to server refused. "
+//      freelog(Log.LOG_NORMAL, _("Connection to server refused. "
 //			    "Please start the server."));
 //      append_output_window(_("Connection to server refused. "
 //			     "Please start the server."));

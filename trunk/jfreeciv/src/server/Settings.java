@@ -56,11 +56,11 @@ public class Settings{
 //    return true;
 //  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (!pplayer.ai.control && !pplayer.is_connected) {
 //      toggle_ai_player_direct(null, pplayer);
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  return true;
 //}

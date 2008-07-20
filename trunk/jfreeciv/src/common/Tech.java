@@ -451,13 +451,13 @@ public class Tech{
 //    {
 //      int players = 0, players_with_tech_and_embassy = 0;
 //
-//      players_iterate(other) {
+//      for(player other: game.players){
 //	players++;
 //	if (get_invention(other, tech) == TECH_KNOWN
 //	    && player_has_embassy(pplayer, other)) {
 //	  players_with_tech_and_embassy++;
 //	}
-//      } players_iterate_end;
+//      }
 //
 //      cost = ((players - players_with_tech_and_embassy) * cost) / players;
 //    }
@@ -467,12 +467,12 @@ public class Tech{
 //    {
 //      int players = 0, players_with_tech = 0;
 //
-//      players_iterate(other) {
+//      for(player other: game.players){
 //	players++;
 //	if (get_invention(other, tech) == TECH_KNOWN) {
 //	  players_with_tech++;
 //	}
-//      } players_iterate_end;
+//      }
 //
 //      cost = ((players - players_with_tech) * cost) / players;
 //    }
@@ -482,7 +482,7 @@ public class Tech{
 //    {
 //      int players = 0, players_with_tech = 0;
 //
-//      players_iterate(other) {
+//      for(player other: game.players){
 //	if (is_barbarian(other)) {
 //	  continue;
 //	}
@@ -490,7 +490,7 @@ public class Tech{
 //	if (get_invention(other, tech) == TECH_KNOWN) {
 //	  players_with_tech++;
 //	}
-//      } players_iterate_end;
+//      }
 //
 //      cost = ((players - players_with_tech) * cost) / players;
 //    }

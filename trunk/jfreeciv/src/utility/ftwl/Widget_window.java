@@ -387,7 +387,7 @@ public class Widget_window{
 //
 //    counter++;
 //
-//    freelog(LOG_NORMAL, "flush to screen %d",counter);
+//    freelog(Log.LOG_NORMAL, "flush to screen %d",counter);
 //
 //    sprintf(b, "screen-%04d.ppm", counter);
 //    be_write_osda_to_file(whole_osda, b);

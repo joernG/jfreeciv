@@ -188,7 +188,7 @@ public class Aidata{
 //  ai.threats.ocean     = fc_calloc(ai.num_oceans + 1, sizeof(boolean));
 //  ai.threats.igwall    = false;
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (!is_player_dangerous(pplayer, aplayer)) {
 //      continue;
 //    }
@@ -258,7 +258,7 @@ public class Aidata{
 //        ai.threats.nuclear = 1;
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Increase from fear to terror if opponent actually has nukes */
 //  if (danger_of_nukes) ai.threats.nuclear++; /* sum of both fears */
@@ -361,7 +361,7 @@ public class Aidata{
 //      ally_strongest = aplayer;
 //    }
 //
-//    players_iterate(check_pl) {
+//    for(player check_pl: game.players){
 //      if (check_pl == pplayer
 //          || check_pl == aplayer
 //          || !check_pl.is_alive) {
@@ -379,7 +379,7 @@ public class Aidata{
 //          && pplayers_allied(pplayer, check_pl)) {
 //        ai.diplomacy.player_intel[i].is_allied_with_ally = check_pl;
 //      }
-//    } players_iterate_end;
+//    }
 //  }
 //  if (ally_strongest != ai.diplomacy.alliance_leader) {
 //    ai.diplomacy.alliance_leader = ally_strongest;
@@ -387,12 +387,12 @@ public class Aidata{
 //  ai.diplomacy.spacerace_leader = player_leading_spacerace();
 //  
 //  ai.diplomacy.production_leader = null;
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (ai.diplomacy.production_leader == null
 //        || ai.diplomacy.production_leader.score.mfg < aplayer.score.mfg) {
 //      ai.diplomacy.production_leader = aplayer;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /*** Priorities ***/
 //
@@ -424,7 +424,7 @@ public class Aidata{
 //   * are not tracking, start tracking by setting cur_pos. If we are, 
 //   * fill prev_pos with previous cur_pos. This way we get the 
 //   * necessary coordinates to calculate a probably trajectory. */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (!aplayer.is_alive || aplayer == pplayer) {
 //      continue;
 //    }
@@ -439,7 +439,7 @@ public class Aidata{
 //      }
 //      *punit.ai.cur_pos = punit.tile;
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  count_my_units(pplayer);
 //}

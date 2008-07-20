@@ -469,17 +469,17 @@ public class Text{
 //  INIT;
 //
 //  /* Sum up science */
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(plr, pplayer).type;
 //
 //    if (plr == pplayer) {
 //      for (city pcity : pplayer.cities.data) {
 //        ours += pcity.science_total;
 //      } }
-//    } else if (ds == DS_TEAM) {
+//    } else if (ds == diplstate_type.DS_TEAM) {
 //      theirs += pplayer.research.bulbs_last_turn;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  if (ours == 0 && theirs == 0) {
 //    add("Progress: no research");

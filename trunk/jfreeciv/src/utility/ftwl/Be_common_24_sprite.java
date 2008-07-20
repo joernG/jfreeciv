@@ -111,7 +111,7 @@ public class Be_common_24_sprite{
 //  width = png_get_image_width(pngp, infop);
 //  height = png_get_image_height(pngp, infop);
 //
-//  freelog(LOG_NORMAL, "reading '%s' (%ldx%ld) bit depth=%d color_type=%d",
+//  freelog(Log.LOG_NORMAL, "reading '%s' (%ldx%ld) bit depth=%d color_type=%d",
 //	  filename, width, height, png_get_bit_depth(pngp, infop),
 //	  png_get_color_type(pngp, infop));
 //

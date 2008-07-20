@@ -390,7 +390,7 @@ public class Diplhand{
 //	  city pcity = find_city_by_id(pclause.value);
 //
 //	  if (!pcity) {
-//	    freelog(LOG_NORMAL,
+//	    freelog(Log.LOG_NORMAL,
 //		    "Treaty city id %d not found - skipping clause.",
 //		    pclause.value);
 //	    break;
@@ -421,7 +421,7 @@ public class Diplhand{
 //			 "Game: You agree on a cease-fire with %s.",
 //			 pgiver.name);
 //        gamelog(GAMELOG_TREATY, GL_CEASEFIRE, pgiver, pdest);
-//	if (old_diplstate == DS_ALLIANCE) {
+//	if (old_diplstate == diplstate_type.DS_ALLIANCE) {
 //	  update_players_after_alliance_breakup(pgiver, pdest);
 //	}
 //	check_city_workers(pplayer);
@@ -437,15 +437,15 @@ public class Diplhand{
 //			 "Game: You agree on a peace treaty with %s.",
 //			 pgiver.name);
 //        gamelog(GAMELOG_TREATY, GL_PEACE, pgiver, pdest);
-//	if (old_diplstate == DS_ALLIANCE) {
+//	if (old_diplstate == diplstate_type.DS_ALLIANCE) {
 //	  update_players_after_alliance_breakup(pgiver, pdest);
 //	}
 //	check_city_workers(pplayer);
 //	check_city_workers(pother);
 //	break;
 //      case CLAUSE_ALLIANCE:
-//	pgiver.diplstates[pdest.player_no].type=DS_ALLIANCE;
-//	pdest.diplstates[pgiver.player_no].type=DS_ALLIANCE;
+//	pgiver.diplstates[pdest.player_no].type=diplstate_type.DS_ALLIANCE;
+//	pdest.diplstates[pgiver.player_no].type=diplstate_type.DS_ALLIANCE;
 //	notify_player_ex(pgiver, null, E_TREATY_ALLIANCE,
 //			 "Game: You agree on an alliance with %s.",
 //			 pdest.name);
@@ -679,7 +679,7 @@ public class Diplhand{
 //  if (!pplayer) {
 //    return;
 //  }
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    Treaty ptreaty = find_treaty(pplayer, other_player);
 //
 //    if (ptreaty) {
@@ -692,7 +692,7 @@ public class Diplhand{
 //					     pclause.from.player_no);
 //      } }
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -700,10 +700,10 @@ public class Diplhand{
 //**************************************************************************/
 //void cancel_all_meetings(player pplayer)
 //{
-//  players_iterate(pplayer2) {
+//  for(player pplayer2: game.players){
 //    if (find_treaty(pplayer, pplayer2)) {
 //      really_diplomacy_cancel_meeting(pplayer, pplayer2);
 //    }
-//  } players_iterate_end;
+//  }
 //}
 }

@@ -373,7 +373,7 @@ public class Registry{
 //   * a hash on section names to speed it up.
 //   */
 //  section_list_iterate_rev(*sf.sections, psection) {
-//    if (strcmp(psection.name, name) == 0) {
+//    if (psection.name.equals(name)) {
 //      return psection;
 //    }
 //  } section_list_iterate_rev_end;
@@ -1249,7 +1249,7 @@ public class Registry{
 //  psection = find_section_by_name(my_section_file, sec_name);
 //  if (psection) {
 //    for (entry pentry : psection.entries.data) {
-//      if (strcmp(pentry.name, ent_name) == 0) {
+//      if (pentry.name.equals(ent_name)) {
 //	result = pentry;
 //	result.used++;
 //	return result;

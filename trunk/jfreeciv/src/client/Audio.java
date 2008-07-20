@@ -193,7 +193,7 @@ public class Audio{
 //    return mystrdup(dname);
 //  }
 //
-//  if (strcmp(soundset_name, soundset_default) == 0) {
+//  if (soundset_name.equals(soundset_default)) {
 //    /* avoid endless recursion */
 //    return null;
 //  }
@@ -221,13 +221,13 @@ public class Audio{
 //  }
 //  if (num_plugins_used == 1) {
 //    /* We only have the dummy plugin, skip the code but issue an advertise */
-//    freelog(LOG_NORMAL, _("No real audio plugin present, "
+//    freelog(Log.LOG_NORMAL, _("No real audio plugin present, "
 //      "proceeding with sound support disabled"));
-//    freelog(LOG_NORMAL,
+//    freelog(Log.LOG_NORMAL,
 //      "For sound support, install either esound or SDL_mixer");
-//    freelog(LOG_NORMAL, 
+//    freelog(Log.LOG_NORMAL, 
 //      "Esound: http://www.tux.org/~ricdude/EsounD.html");
-//    freelog(LOG_NORMAL, _("SDL_mixer: http://www.libsdl.org/"
+//    freelog(Log.LOG_NORMAL, _("SDL_mixer: http://www.libsdl.org/"
 //      "projects/SDL_mixer/index.html"));
 //    tagfile = null;
 //    return;
@@ -275,7 +275,7 @@ public class Audio{
 //
 //  if (prefered_plugin_name[0] != '\0') {
 //    if (!audio_select_plugin(prefered_plugin_name))
-//      freelog(LOG_NORMAL, "Proceeding with sound support disabled");
+//      freelog(Log.LOG_NORMAL, "Proceeding with sound support disabled");
 //    return;
 //  }
 //
@@ -298,7 +298,7 @@ public class Audio{
 //    "No real audio subsystem managed to initialize!");
 //  freelog(LOG_ERROR,
 //    "Perhaps there is some misconfigurationg or bad permissions");
-//  freelog(LOG_NORMAL, "Proceeding with sound support disabled");
+//  freelog(Log.LOG_NORMAL, "Proceeding with sound support disabled");
 //}
 //
 ///**************************************************************************

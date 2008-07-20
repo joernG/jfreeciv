@@ -303,7 +303,7 @@ public class Widget{
 //    return;
 //  }
 //
-//  freelog(LOG_NORMAL, "handle destroy");
+//  freelog(Log.LOG_NORMAL, "handle destroy");
 //  for (widget pwidget : deferred_destroyed_widgets.data) {
 //    if ((pwidget.tooltip && pwidget.tooltip_shown)
 //	|| dragged_widget == pwidget || selected_widget == pwidget

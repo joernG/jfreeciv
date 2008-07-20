@@ -49,7 +49,7 @@ public class Ailog{
 //  int minlevel = MIN(LOGLEVEL_CITY, level);
 //
 //  if (pplayer.debug) {
-//    minlevel = LOG_NORMAL;
+//    minlevel = Log.LOG_NORMAL;
 //  } else if (minlevel > fc_log_level) {
 //    return;
 //  }
@@ -91,7 +91,7 @@ public class Ailog{
 //  int minlevel = MIN(LOGLEVEL_CITY, level);
 //
 //  if (pcity.debug) {
-//    minlevel = LOG_NORMAL;
+//    minlevel = Log.LOG_NORMAL;
 //  } else if (minlevel > fc_log_level) {
 //    return;
 //  }
@@ -129,14 +129,14 @@ public class Ailog{
 //  boolean messwin = false; /* output to message window */
 //
 //  if (punit.debug) {
-//    minlevel = LOG_NORMAL;
+//    minlevel = Log.LOG_NORMAL;
 //  } else {
 //    /* Are we a virtual unit evaluated in a debug city?. */
 //    if (punit.id == 0) {
 //      city pcity = map_get_city(punit.tile);
 //
 //      if (pcity && pcity.debug) {
-//        minlevel = LOG_NORMAL;
+//        minlevel = Log.LOG_NORMAL;
 //        messwin = true;
 //      }
 //    }
@@ -185,7 +185,7 @@ public class Ailog{
 //  final String s = "none";
 //
 //  if (punit.debug) {
-//    minlevel = LOG_NORMAL;
+//    minlevel = Log.LOG_NORMAL;
 //  } else if (minlevel > fc_log_level) {
 //    return;
 //  }
