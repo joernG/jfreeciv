@@ -1374,7 +1374,7 @@ public class Aiunit{
 //   */
 //
 //  /* First calculate in nearby units */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    /* See comment below in next usage of HOSTILE_PLAYER. */
 //    if ((punit.id == 0 && !HOSTILE_PLAYER(pplayer, ai, aplayer))
 //        || (punit.id != 0 && !pplayers_at_war(pplayer, aplayer))) {
@@ -1385,7 +1385,7 @@ public class Aiunit{
 //                                    &acity.ai.attack, &acity.ai.bcost);
 //      acity.ai.invasion = 0;
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  /* Second, calculate in units on their way there, and mark targets for
 //   * invasion */
@@ -1465,7 +1465,7 @@ public class Aiunit{
 //    harbor = true;
 //  }
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    /* For the virtual unit case, which is when we are called to evaluate
 //     * which units to build, we want to calculate in danger and which
 //     * players we want to make war with in the future. We do _not_ want
@@ -1696,7 +1696,7 @@ public class Aiunit{
 //	*dest_tile = aunit.tile;
 //      }
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  return(best);
 //}
@@ -1720,7 +1720,7 @@ public class Aiunit{
 //  CHECK_UNIT(punit);
 //
 //  generate_warmap(map_get_city(punit.tile), punit);
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (pplayers_allied(pplayer,aplayer)) {
 //      for (city pcity : aplayer.cities.data) {
 //        if (ground) {
@@ -1740,7 +1740,7 @@ public class Aiunit{
 //        }
 //      } }
 //    }
-//  } players_iterate_end;
+//  }
 //  if (best > 6 * THRESHOLD) {
 //    return null;
 //  }
@@ -1917,7 +1917,7 @@ public class Aiunit{
 //    } else {
 //       /* A caravan without a home?  Kinda strange, but it might happen.  */
 //       pcity=player_find_city_by_id(pplayer, punit.homecity);
-//       players_iterate(aplayer) {
+//       for(player aplayer: game.players){
 //         if (HOSTILE_PLAYER(pplayer, ai, aplayer)) {
 //           continue;
 //         }
@@ -1936,7 +1936,7 @@ public class Aiunit{
 //             }
 //           }
 //         } }
-//       } players_iterate_end;
+//       }
 //       pcity = player_find_city_by_id(pplayer, best_city);
 //
 //       if (pcity) {
@@ -2319,7 +2319,7 @@ public class Aiunit{
 //  mindist = 1000000;
 //  closest_unit = null;
 //
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    for (unit aunit : other_player.units.data) {
 //      if (is_military_unit(aunit)
 //	  && is_ground_unit(aunit)
@@ -2336,7 +2336,7 @@ public class Aiunit{
 //	}
 //      }
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  /* Disappearance - 33% chance on coast, when older than barbarian life span */
 //  if (is_ocean_near_tile(leader.tile) && leader.fuel == 0) {

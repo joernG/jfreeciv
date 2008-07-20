@@ -945,7 +945,7 @@ public class Mapview{
 //  if (fog && better_fog && !ssprite.fogged) {
 //    fog_sprite(ssprite);
 //    if (!ssprite.fogged) {
-//      freelog(LOG_NORMAL,
+//      freelog(Log.LOG_NORMAL,
 //	      "Better fog will only work in truecolor.  Disabling it");
 //      better_fog = false;
 //    }

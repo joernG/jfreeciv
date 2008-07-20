@@ -168,7 +168,7 @@ public class Report{
 //  char title[1024];
 //  struct player_score_entry size[game.nplayers];
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (pplayer.is_alive && !is_barbarian(pplayer)) {
 //      switch(which_news) {
 //      case HISTORIAN_RICHEST:
@@ -192,7 +192,7 @@ public class Report{
 //      size[j].player = pplayer;
 //      j++;
 //    } /* else the player is dead or barbarian */
-//  } players_iterate_end;
+//  }
 //
 //  qsort(size, j, sizeof(struct player_score_entry), secompare);
 //  buffer[0] = '\0';
@@ -243,7 +243,7 @@ public class Report{
 //    size[i].city = null;
 //  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      int value_of_pcity = pcity.size + nr_wonders(pcity) * WONDER_FACTOR;
 //
@@ -254,7 +254,7 @@ public class Report{
 //	      secompare);
 //      }
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  buffer[0] = '\0';
 //  for (i = 0; i < NUM_BEST_CITIES; i++) {
@@ -312,7 +312,7 @@ public class Report{
 //
 //  impr_type_iterate(i) {
 //    if (is_wonder(i)) {
-//      players_iterate(pplayer) {
+//      for(player pplayer: game.players){
 //	for (city pcity : pplayer.cities.data) {
 //	  if (pcity.currently_building == i && !pcity.is_building_unit) {
 //	    cat_snprintf(buffer, sizeof(buffer),
@@ -321,7 +321,7 @@ public class Report{
 //			 get_nation_name(pplayer.nation));
 //	  }
 //	} }
-//      } players_iterate_end;
+//      }
 //    }
 //  } impr_type_iterate_end;
 //
@@ -617,7 +617,7 @@ public class Report{
 //    int basis = prow.get_value(pplayer);
 //    int place = 1;
 //
-//    players_iterate(other) {
+//    for(player other: game.players){
 //      if (other.is_alive && !is_barbarian(other) &&
 //	  ((prow.greater_values_are_better
 //	    && prow.get_value(other) > basis)
@@ -625,7 +625,7 @@ public class Report{
 //	       && prow.get_value(other) < basis))) {
 //	place++;
 //      }
-//    } players_iterate_end;
+//    }
 //
 //    cat_snprintf(outptr, out_size, " %6s", number_to_ordinal_string(place));
 //  }
@@ -634,7 +634,7 @@ public class Report{
 //    player best_player = pplayer;
 //    int best_value = prow.get_value(pplayer);
 //
-//    players_iterate(other) {
+//    for(player other: game.players){
 //      if (other.is_alive && !is_barbarian(other)) {
 //	int value = prow.get_value(other);
 //
@@ -644,7 +644,7 @@ public class Report{
 //	  best_value = value;
 //	}
 //      }
-//    } players_iterate_end;
+//    }
 //
 //    if(player_has_embassy(pplayer, best_player) && (pplayer != best_player)) {
 //      cat_snprintf(outptr, out_size, "   %s: %s",
@@ -1000,7 +1000,7 @@ public class Report{
 //    }
 //  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (GOOD_PLAYER(pplayer)
 //	&& strlen(player_names[pplayer.player_no]) == 0) {
 //      fprintf(fp, "addplayer %d %d %s\n", game.turn, pplayer.player_no,
@@ -1008,9 +1008,9 @@ public class Report{
 //      mystrlcpy(player_name_ptrs[pplayer.player_no], pplayer.name,
 //		MAX_LEN_NAME);
 //    }
-//  } players_iterate_end;
+//  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (GOOD_PLAYER(pplayer)
 //	&& strcmp(player_names[pplayer.player_no], pplayer.name) != 0) {
 //      fprintf(fp, "delplayer %d %d\n", game.turn - 1, pplayer.player_no);
@@ -1019,17 +1019,17 @@ public class Report{
 //      mystrlcpy(player_names[pplayer.player_no], pplayer.name,
 //		MAX_LEN_NAME);
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  for (i = 0; i<ARRAY_SIZE(score_tags); i++) {
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      if (!GOOD_PLAYER(pplayer)) {
 //	continue;
 //      }
 //
 //      fprintf(fp, "data %d %d %d %d\n", game.turn, i, pplayer.player_no,
 //	      score_tags[i].get_value(pplayer));
-//    } players_iterate_end;
+//    }
 //  }
 //
 //  fflush(fp);
@@ -1089,13 +1089,13 @@ public class Report{
 //  char buffer[4096];
 //  struct player_score_entry size[game.nplayers];
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (!is_barbarian(pplayer)) {
 //      size[j].value = get_civ_score(pplayer);
 //      size[j].player = pplayer;
 //      j++;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  qsort(size, j, sizeof(struct player_score_entry), secompare);
 //  buffer[0] = '\0';
@@ -1123,13 +1123,13 @@ public class Report{
 //  struct player_score_entry size[game.nplayers];
 //  struct packet_endgame_report packet;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (!is_barbarian(pplayer)) {
 //      size[j].value = get_civ_score(pplayer);
 //      size[j].player = pplayer;
 //      j++;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  qsort(size, j, sizeof(struct player_score_entry), secompare);
 //

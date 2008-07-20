@@ -182,7 +182,7 @@ public class Civclient{
 //  audio_init();
 //
 //  /* default argument values are set in options.c */
-//  loglevel=LOG_NORMAL;
+//  loglevel=Log.LOG_NORMAL;
 //
 //  i = 1;
 //
@@ -530,7 +530,7 @@ public class Civclient{
 //    gui_server_connect();
 //    if (auto_connect) {
 //      if (connect_error) {
-//	freelog(LOG_NORMAL,
+//	freelog(Log.LOG_NORMAL,
 //		"There was an error while auto connecting; aborting.");
 //	exit(EXIT_FAILURE);
 //      } else {
@@ -573,7 +573,7 @@ public class Civclient{
 //**************************************************************************/
 //void client_remove_all_cli_conn()
 //{
-//  while (conn_list_size(&game.all_connections) > 0) {
+//  while (game.all_connections.foo_list_size() > 0) {
 //    connection pconn = conn_list_get(&game.all_connections, 0);
 //    client_remove_cli_conn(pconn);
 //  }
@@ -623,7 +623,7 @@ public class Civclient{
 //      !game.player_ptr.turn_done) {
 //    int is_waiting = 0, is_moving = 0;
 //
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      if (pplayer.is_alive && pplayer.is_connected) {
 //	if (pplayer.turn_done) {
 //	  is_waiting++;
@@ -631,7 +631,7 @@ public class Civclient{
 //	  is_moving++;
 //	}
 //      }
-//    } players_iterate_end;
+//    }
 //
 //    if (is_moving == 1 && is_waiting > 0) {
 //      update_turn_done_button(false);	/* stress the slow player! */

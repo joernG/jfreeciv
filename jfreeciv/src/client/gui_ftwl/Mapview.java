@@ -244,9 +244,9 @@ public class Mapview{
 //{
 //  int xtile, ytile;
 //
-//  freelog(LOG_NORMAL, "press (%d,%d)", pos.x, pos.y);
+//  freelog(Log.LOG_NORMAL, "press (%d,%d)", pos.x, pos.y);
 //  overview_to_map_pos(&xtile,&ytile,pos.x,pos.y);
-//  freelog(LOG_NORMAL, " -. (%d,%d)", xtile, ytile);
+//  freelog(Log.LOG_NORMAL, " -. (%d,%d)", xtile, ytile);
 //  if (can_client_change_view() && button == 3) {
 //    center_tile_mapcanvas(map_pos_to_tile(xtile, ytile));
 //  }
@@ -317,7 +317,7 @@ public class Mapview{
 //
 //  struct ct_rect rect;
 //
-//  freelog(LOG_NORMAL, "refresh_overview_canvas()");
+//  freelog(Log.LOG_NORMAL, "refresh_overview_canvas()");
 //  whole_map_iterate(x, y) {
 //    overview_update_tile0(x, y);
 //  } whole_map_iterate_end;
@@ -351,7 +351,7 @@ public class Mapview{
 //
 //#if 0
 //  /* try to trace that hard-to-find assert that we sometimes get */
-//  freelog(LOG_NORMAL, "show_city_desc(%s) pcx=%d.%d (%d) pcy=%d.%d (%d)", pcity.name,
+//  freelog(Log.LOG_NORMAL, "show_city_desc(%s) pcx=%d.%d (%d) pcy=%d.%d (%d)", pcity.name,
 //          canvas_x, canvas_x+NORMAL_TILE_WIDTH / 2, all_rect.width,
 //          canvas_y, canvas_y+NORMAL_TILE_HEIGHT, all_rect.height);
 //#endif
@@ -533,7 +533,7 @@ public class Mapview{
 //{
 //  struct ct_rect rect = { canvas_x, canvas_y, pixel_width, pixel_height };
 //
-//  //freelog(LOG_NORMAL, "dirty_rect(...)");
+//  //freelog(Log.LOG_NORMAL, "dirty_rect(...)");
 //  sw_window_canvas_background_region_needs_repaint(mapview_canvas_window, &rect);
 //}
 //
@@ -546,7 +546,7 @@ public class Mapview{
 //
 //  sw_widget_get_bounds(mapview_canvas_window, &rect);
 //
-//  //freelog(LOG_NORMAL, "dirty_all(...)");
+//  //freelog(Log.LOG_NORMAL, "dirty_all(...)");
 //  sw_window_canvas_background_region_needs_repaint(mapview_canvas_window, &rect);
 //  /* PORTME */
 //}
@@ -947,7 +947,7 @@ public class Mapview{
 //{
 //  char *action = (char *) data;
 //
-//  freelog(LOG_NORMAL, "action '%s' requested", action);
+//  freelog(Log.LOG_NORMAL, "action '%s' requested", action);
 //}
 //
 ///**************************************************************************
@@ -1084,7 +1084,7 @@ public class Mapview{
 //      redraw_selection_rectangle();
 //    }
 //  } else {
-//    freelog(LOG_NORMAL, "action '%s' requested", action);
+//    freelog(Log.LOG_NORMAL, "action '%s' requested", action);
 //  }
 //}
 //

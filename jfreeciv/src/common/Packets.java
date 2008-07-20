@@ -284,11 +284,11 @@ public class Packets{
 //		packets_stats[i].size / packets_stats[i].counter,
 //		get_packet_name(i),i);
 //      }
-//      freelog(LOG_NORMAL,
+//      freelog(Log.LOG_NORMAL,
 //	      "turn=%d; transmitted %d bytes in %d packets;average size "
 //	      "per packet %d bytes", game.turn, sum, packet_counter,
 //	      sum / packet_counter);
-//      freelog(LOG_NORMAL, "turn=%d; transmitted %d bytes", game.turn,
+//      freelog(Log.LOG_NORMAL, "turn=%d; transmitted %d bytes", game.turn,
 //	      pc.statistics.bytes_send);
 //    }    
 //    if (clear) {
@@ -485,19 +485,19 @@ public class Packets{
 //	|| (!is_server && (packet_counter % 1000 == 0))) {
 //      int i, sum = 0;
 //
-//      freelog(LOG_NORMAL, "Received packets:");
+//      freelog(Log.LOG_NORMAL, "Received packets:");
 //      for (i = 0; i < PACKET_LAST; i++) {
 //	if (packets_stats[i].counter == 0)
 //	  continue;
 //	sum += packets_stats[i].size;
-//	freelog(LOG_NORMAL,
+//	freelog(Log.LOG_NORMAL,
 //		"  [%-25.25s %3d]: %6d packets; %8d bytes total; "
 //		"%5d bytes/packet average",
 //		get_packet_name(i), i, packets_stats[i].counter,
 //		packets_stats[i].size,
 //		packets_stats[i].size / packets_stats[i].counter);
 //      }
-//      freelog(LOG_NORMAL,
+//      freelog(Log.LOG_NORMAL,
 //	      "received %d bytes in %d packets;average size "
 //	      "per packet %d bytes",
 //	      sum, packet_counter, sum / packet_counter);

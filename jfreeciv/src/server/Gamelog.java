@@ -501,11 +501,11 @@ public class Gamelog{
 //
 //    my_snprintf(buf, sizeof(buf), "<id>%d</id><name>%s</name>",
 //                                  pteam.id, pteam.name);
-//    players_iterate(aplayer) {
+//    for(player aplayer: game.players){
 //      if (aplayer.team == pteam.id) {
 //        cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //      }
-//    } players_iterate_end;
+//    }
 //    gamelog_put_prefix(buf, sizeof(buf), "team");
 //    break;
 //  case GAMELOG_BEGIN:
@@ -538,21 +538,21 @@ public class Gamelog{
 //      break;
 //    case GL_ALLIEDWIN:
 //      my_snprintf(buf, sizeof(buf), "<type>%s</type>", endgame_strings[num]);
-//      players_iterate(aplayer) {
+//      for(player aplayer: game.players){
 //        if (aplayer.is_alive) {
 //          cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //        }
-//      } players_iterate_end;
+//      }
 //      my_snprintf(msg, sizeof(msg), "Game ended in allied victory");
 //      break;
 //    case GL_TEAMWIN:
 //      pteam = va_arg(args, team );
 //      my_snprintf(buf, sizeof(buf), "<type>%s</type>", endgame_strings[num]);
-//      players_iterate(aplayer) {
+//      for(player aplayer: game.players){
 //        if (aplayer.team == pteam.id) {
 //          cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //        }
-//      } players_iterate_end;
+//      }
 //      my_snprintf(msg, sizeof(msg), "Team victory to %s", pteam.name);
 //      break;
 //    default:
@@ -621,7 +621,7 @@ public class Gamelog{
 //  player highest_plr = null;
 //  struct player_score_entry size[game.nplayers], rank[game.nplayers];
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (!is_barbarian(pplayer)) {
 //      rank[count].value = get_civ_score(pplayer);
 //      rank[count].idx = pplayer.player_no;
@@ -633,11 +633,11 @@ public class Gamelog{
 //      }
 //      count++;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Draws and team victories */
 //  count = 0;
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (!is_barbarian(pplayer)) {
 //      if ((BV_ISSET_ANY(srvarg.draw)
 //           && BV_ISSET(srvarg.draw, pplayer.player_no))
@@ -647,7 +647,7 @@ public class Gamelog{
 //      }
 //      count++;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  buffer[0] = '\0';
 //  qsort(rank, count, sizeof(struct player_score_entry), secompare1);

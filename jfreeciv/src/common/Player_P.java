@@ -1,7 +1,9 @@
 package common;
 
+import static common.Game.*;
 import static common.player.player_ai.*;
 import static utility.shared.Shared_H.*;
+import utility.shared.m_pre_result;
 
 import common.city.city;
 import common.map.tile;
@@ -38,7 +40,7 @@ public class Player_P{
 //***************************************************************/
 //boolean pplayer_can_ally(player p1, player p2)
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(p1, pplayer).type;
 //    if (pplayer != p1
 //        && pplayer != p2
@@ -47,7 +49,7 @@ public class Player_P{
 //        && pplayer.is_alive) {
 //      return false;
 //    }
-//  } players_iterate_end;
+//  }
 //  return true;
 //}
 //
@@ -165,53 +167,53 @@ public class Player_P{
 //***************************************************************/
 //player find_player_by_name(final String name)
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (mystrcasecmp(name, pplayer.name) == 0) {
 //      return pplayer;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  return null;
 //}
+
+	/***************************************************************************
+	 * Find player by name, allowing unambigous prefix (ie abbreviation).
+	 * Returns null if could not match, or if ambiguous or other problem, and
+	 * fills *result with characterisation of match/non-match (see shared.[ch])
+	 **************************************************************************/
+	static final String pname_accessor(int i) {
+		return game.players[i].name;
+	}
+
+	/***************************************************************************
+	 * Find player by its name prefix
+	 **************************************************************************/
+	public static player find_player_by_name_prefix(final String name,
+			m_pre_result result)
+	{
+		int ind;
+
+//		*result = match_prefix(pname_accessor, game.nplayers, MAX_LEN_NAME-1,
+//				mystrncasecmp, name, &ind);
 //
-///***************************************************************
-//  Find player by name, allowing unambigous prefix (ie abbreviation).
-//  Returns null if could not match, or if ambiguous or other
-//  problem, and fills *result with characterisation of match/non-match
-//  (see shared.[ch])
-//***************************************************************/
-//static final String pname_accessor(int i) {
-//  return game.players[i].name;
-//}
-//
-///***************************************************************
-//Find player by its name prefix
-//***************************************************************/
-//player find_player_by_name_prefix(final String name,
-//					  enum m_pre_result *result)
-//{
-//  int ind;
-//
-//  *result = match_prefix(pname_accessor, game.nplayers, MAX_LEN_NAME-1,
-//			 mystrncasecmp, name, &ind);
-//
-//  if (*result < M_PRE_AMBIGUOUS) {
-//    return get_player(ind);
-//  } else {
-//    return null;
-//  }
-//}
-//
+//		if (*result < m_pre_result.M_PRE_AMBIGUOUS) {
+//			return get_player(ind);
+//		} else {
+//			return null;
+//		}
+		return null;
+	}
+
 ///***************************************************************
 //Find player by its user name (not player/leader name)
 //***************************************************************/
 //player find_player_by_user(final String name)
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (mystrcasecmp(name, pplayer.username) == 0) {
 //      return pplayer;
 //    }
-//  } players_iterate_end;
+//  }
 //  
 //  return null;
 //}
@@ -630,23 +632,23 @@ public class Player_P{
 		return ds == diplstate_type.DS_WAR || ds == diplstate_type.DS_NO_CONTACT;
 	}
 
-///***************************************************************
-//  Returns true iff players are allied.
-//***************************************************************/
-//boolean pplayers_allied(final player pplayer,
-//                     final player pplayer2)
-//{
-//  enum diplstate_type ds = pplayer_get_diplstate(pplayer, pplayer2).type;
-//  if (pplayer == pplayer2) {
-//    return true;
-//  }
-//  if (is_barbarian(pplayer) || is_barbarian(pplayer2)) {
-//    return false;
-//  }
-//  return (ds == DS_ALLIANCE || ds == DS_TEAM);
-//}
-//
-///***************************************************************
+	/***************************************************************************
+	 * Returns true iff players are allied.
+	 **************************************************************************/
+	public static boolean pplayers_allied(final player pplayer,
+			final player pplayer2)
+	{
+		diplstate_type ds = pplayer_get_diplstate(pplayer, pplayer2).type;
+		if (pplayer == pplayer2) {
+			return true;
+		}
+		if (is_barbarian(pplayer) || is_barbarian(pplayer2)) {
+			return false;
+		}
+		return (ds == diplstate_type.DS_ALLIANCE || ds == diplstate_type.DS_TEAM);
+	}
+
+// /***************************************************************
 //  Returns true iff players are allied or at peace.
 //***************************************************************/
 //boolean pplayers_in_peace(final player pplayer,
@@ -660,7 +662,7 @@ public class Player_P{
 //  if (is_barbarian(pplayer) || is_barbarian(pplayer2)) {
 //    return false;
 //  }
-//  return (ds == DS_PEACE || ds == DS_ALLIANCE || ds == DS_TEAM);
+//  return (ds == DS_PEACE || ds == diplstate_type.DS_ALLIANCE || ds == diplstate_type.DS_TEAM);
 //}
 //
 ///***************************************************************

@@ -775,11 +775,11 @@ public class Be_common_24{
 //  tmp[3] = get_mask(draw_type);
 //
 //  /*
-//    freelog(LOG_NORMAL,"draw_region(): actual=%s",ct_rect_to_string(&actual));
-//    freelog(LOG_NORMAL,"  bounds=%s",ct_rect_to_string(&bounds));
+//    freelog(Log.LOG_NORMAL,"draw_region(): actual=%s",ct_rect_to_string(&actual));
+//    freelog(Log.LOG_NORMAL,"  bounds=%s",ct_rect_to_string(&bounds));
 //  */
 //  ct_clip_rect(&actual, &bounds);
-//  /* freelog(LOG_NORMAL,"  actual=%s",ct_rect_to_string(&actual)); */
+//  /* freelog(Log.LOG_NORMAL,"  actual=%s",ct_rect_to_string(&actual)); */
 //
 //  width = actual.width;
 //  for (y = actual.y; y < actual.y + actual.height; y++) {

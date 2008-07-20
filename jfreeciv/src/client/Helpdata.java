@@ -423,7 +423,7 @@ public class Helpdata{
 //    while (*p == ' ') {
 //      p++;
 //    }
-//    if(strcmp(name, p)==0 && (htype==HELP_ANY || htype==ptmp.type)) {
+//    if(name.equals(p) && (htype==HELP_ANY || htype==ptmp.type)) {
 //      pitem = ptmp;
 //      break;
 //    }

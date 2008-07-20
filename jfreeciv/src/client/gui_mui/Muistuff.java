@@ -162,7 +162,7 @@ public class Muistuff{
 //  STRPTR oldtext = (STRPTR) xget(obj, MUIA_Text_Contents);
 //  if (oldtext && text)
 //  {
-//    if (strcmp(oldtext, text) == 0)
+//    if (oldtext.equals(text))
 //      return;
 //  }
 //

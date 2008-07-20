@@ -591,7 +591,7 @@ public class Dataio{
 //
 //  dio_get_uint16(din, &npack);
 //  if (npack >= max_dest_size) {
-//      freelog(LOG_NORMAL, "Have size for %lu, got %d",
+//      freelog(Log.LOG_NORMAL, "Have size for %lu, got %d",
 //              (unsigned long)max_dest_size, npack);
 //    din.bad_bit_string = true;
 //    dest[0] = '\0';

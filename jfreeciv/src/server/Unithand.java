@@ -558,7 +558,7 @@ public class Unithand{
 //		     UNIT_INFO_IDENTITY, 0);
 //  package_short_unit(pdefender, &unit_def_short_packet, false,
 //		     UNIT_INFO_IDENTITY, 0);
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    if (map_is_known_and_seen(pattacker.tile, other_player)
 //	|| map_is_known_and_seen(pdefender.tile, other_player)) {
 //      if (!can_player_see_unit(other_player, pattacker)) {
@@ -573,7 +573,7 @@ public class Unithand{
 //				     &unit_def_short_packet);
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -590,7 +590,7 @@ public class Unithand{
 //  combat.defender_hp=pdefender.hp;
 //  combat.make_winner_veteran=veteran;
 //
-//  players_iterate(other_player) {
+//  for(player other_player: game.players){
 //    if (map_is_known_and_seen(pattacker.tile, other_player)
 //	|| map_is_known_and_seen(pdefender.tile, other_player)) {
 //      lsend_packet_unit_combat_info(&other_player.connections, &combat);
@@ -606,7 +606,7 @@ public class Unithand{
 //	unit_goes_out_of_sight(other_player, pdefender);
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Send combat info to non-player observers as well.  They already know
 //   * about the unit so no unit_info is needed. */

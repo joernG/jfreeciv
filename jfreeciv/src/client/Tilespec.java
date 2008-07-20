@@ -317,7 +317,7 @@ public class Tilespec{
 //    return mystrdup(dname);
 //  }
 //
-//  if (strcmp(tileset_name, tileset_default) == 0) {
+//  if (tileset_name.equals(tileset_default)) {
 //    freelog(LOG_FATAL, "No usable default tileset found, aborting!");
 //    exit(EXIT_FAILURE);
 //  }
@@ -413,7 +413,7 @@ public class Tilespec{
 //  tile center_tile;
 //  enum client_states state = get_client_state();
 //
-//  freelog(LOG_NORMAL, "Loading tileset %s.", tileset_name);
+//  freelog(Log.LOG_NORMAL, "Loading tileset %s.", tileset_name);
 //
 //  /* Step 0:  Record old data.
 //   *
@@ -1027,7 +1027,7 @@ public class Tilespec{
 //    }
 //
 //    if (!hash_insert(terrain_hash, terr.name, terr)) {
-//      freelog(LOG_NORMAL, "warning: duplicate terrain entry %s.",
+//      freelog(Log.LOG_NORMAL, "warning: duplicate terrain entry %s.",
 //	      terrains[i]);
 //      section_file_free(file);
 //      free(fname);
@@ -1188,7 +1188,7 @@ public class Tilespec{
 //    }
 //    sprites.specialist[i].count = j;
 //    if (j == 0) {
-//      freelog(LOG_NORMAL, "No graphics for specialist %s.", name);
+//      freelog(Log.LOG_NORMAL, "No graphics for specialist %s.", name);
 //      exit(EXIT_FAILURE);
 //    }
 //  } specialist_type_iterate_end;
@@ -1220,7 +1220,7 @@ public class Tilespec{
 //    }
 //    sprites.citizen[i].count = j;
 //    if (j == 0) {
-//      freelog(LOG_NORMAL, "No graphics for citizen %s.", name);
+//      freelog(Log.LOG_NORMAL, "No graphics for citizen %s.", name);
 //      exit(EXIT_FAILURE);
 //    }
 //  }
@@ -2862,7 +2862,7 @@ public class Tilespec{
 //    if (sp) {
 //      sprites.city.tile[style][city_styles[style].tiles_num] = sp;
 //    } else {
-//      freelog(LOG_NORMAL, "Warning: no wall tile for graphic %s", graphics);
+//      freelog(Log.LOG_NORMAL, "Warning: no wall tile for graphic %s", graphics);
 //    }
 //  }
 //
@@ -2872,7 +2872,7 @@ public class Tilespec{
 //  if (sp) {
 //    sprites.city.tile[style][city_styles[style].tiles_num+1] = sp;
 //  } else {
-//    freelog(LOG_NORMAL, "Warning: no occupied tile for graphic %s", graphics);
+//    freelog(Log.LOG_NORMAL, "Warning: no occupied tile for graphic %s", graphics);
 //  }
 //}
 //
@@ -2886,7 +2886,7 @@ public class Tilespec{
 //
 //  if (city_styles[style].tiles_num == 0) {
 //    /* no tiles found, try alternate */
-//    freelog(LOG_NORMAL, "No tiles for %s style, trying alternate %s style",
+//    freelog(Log.LOG_NORMAL, "No tiles for %s style, trying alternate %s style",
 //            city_styles[style].graphic, city_styles[style].graphic_alt);
 //
 //    tilespec_setup_style_tile(style, city_styles[style].graphic_alt);
@@ -2895,7 +2895,7 @@ public class Tilespec{
 //  if (city_styles[style].tiles_num == 0) {
 //      /* no alternate, use default */
 //
-//    freelog(LOG_NORMAL,
+//    freelog(Log.LOG_NORMAL,
 //	    "No tiles for alternate %s style, using default tiles",
 //            city_styles[style].graphic_alt);
 //

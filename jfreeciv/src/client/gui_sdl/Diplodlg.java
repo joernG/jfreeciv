@@ -489,7 +489,7 @@ public class Diplodlg{
 //  height = 0;
 //  
 //  /* Pacts. */
-//  if (game.player_ptr == pPlayer0 && type != DS_ALLIANCE) {
+//  if (game.player_ptr == pPlayer0 && type != diplstate_type.DS_ALLIANCE) {
 //    
 //    pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //			  "Pacts", 12, WF_DRAW_THEME_TRANSPARENT);

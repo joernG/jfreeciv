@@ -1324,7 +1324,7 @@ public class Settlers{
 //    ptile.assigned = 0;
 //  } whole_map_iterate_end;
 //
-//  shuffled_players_iterate(pplayer) {
+//  shuffled_for(player pplayer: game.players){
 //    assign_settlers_player(pplayer);
 //  } shuffled_players_iterate_end;
 //}
@@ -1388,9 +1388,9 @@ public class Settlers{
 //{
 //  memset(territory, 0, map.xsize * map.ysize * sizeof(*territory));
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    assign_territory_player(pplayer);
-//  } players_iterate_end;
+//  }
 //  /* An actual territorial assessment a la AI algorithms for go might be
 //   * appropriate here.  I'm not sure it's necessary, so it's not here yet.
 //   *  -- Syela
@@ -1402,13 +1402,13 @@ public class Settlers{
 //**************************************************************************/
 //static void recount_enemy_masks()
 //{
-//  players_iterate(player1) {
+//  for(player player1: game.players){
 //    BV_CLR_ALL(enemies[player1.player_no]);
-//    players_iterate(player2) {
+//    for(player player2: game.players){
 //      if (!pplayers_allied(player1, player2))
 //        BV_SET(enemies[player1.player_no], player2.player_no);
-//    } players_iterate_end;
-//  } players_iterate_end;
+//    }
+//  }
 //}
 //
 ///**************************************************************************

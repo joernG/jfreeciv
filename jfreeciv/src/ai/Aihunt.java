@@ -268,7 +268,7 @@ public class Aihunt{
 //  assert(!is_barbarian(pplayer));
 //  assert(pplayer.is_alive);
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (!aplayer.is_alive || !is_player_dangerous(pplayer, aplayer)) {
 //      continue;
 //    }
@@ -343,7 +343,7 @@ public class Aihunt{
 //        best_id = target.id;
 //      }
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  punit.ai.target = best_id;
 //  if (best_val < MORT) {

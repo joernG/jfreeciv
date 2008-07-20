@@ -280,7 +280,7 @@ public class Pages{
 //	0, row[0], 1, row[1], 2, row[2],
 //	3, row[3], 4, row[4], 5, row[5], -1);
 //
-//    if (strcmp(host, pserver.host) == 0 && strcmp(port, pserver.port) == 0) {
+//    if (host.equals(pserver.host) && port.equals(pserver.port)) {
 //      gtk_tree_selection_select_iter(selection, &it);
 //    }
 //  } }

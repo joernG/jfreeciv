@@ -168,13 +168,13 @@ public class Score{
 //  nbytes = 2 * map.xsize * map.ysize * sizeof(*pcmap.edges);
 //  pcmap.edges = fc_malloc(nbytes);
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      map_city_radius_iterate(pcity.tile, tile1) {
 //	pcmap.claims[tile1.index].cities |= (1u << pcity.owner);
 //      } map_city_radius_iterate_end;
 //    } }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************

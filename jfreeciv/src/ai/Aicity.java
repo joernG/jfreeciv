@@ -482,7 +482,7 @@ public class Aicity{
 //	          amount * 4;
 //            break;
 //	  case EFT_GAIN_AI_LOVE:
-//            players_iterate(aplayer) {
+//            for(player aplayer: game.players){
 //              if (aplayer.ai.control) {
 //                if (ai_handicap(pplayer, H_DEFENSIVE)) {
 //                  v += amount / 10;
@@ -490,7 +490,7 @@ public class Aicity{
 //                  v += amount / 20;
 //                }
 //              }
-//            } players_iterate_end;
+//            }
 //            break;
 //	  case EFT_LAST:
 //	    freelog(LOG_ERROR, "Bad effect type.");

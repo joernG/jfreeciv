@@ -311,7 +311,7 @@ public class Cityturn{
 //  if (!dest)
 //    dest = &game.all_connections;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      /* can_player_build_improvement() checks whether wonder is build
 //	 elsewhere (or destroyed) */
@@ -327,7 +327,7 @@ public class Cityturn{
 //		       pcity.name);
 //      }
 //    } }
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************

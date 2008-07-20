@@ -317,9 +317,9 @@ public class Cma_core{
 //    cm_clear_cache(pcity);
 //
 //    if (SHOW_APPLY_RESULT_ON_SERVER_ERRORS) {
-//      freelog(LOG_NORMAL, "expected");
+//      freelog(Log.LOG_NORMAL, "expected");
 //      cm_print_result(pcity, result);
-//      freelog(LOG_NORMAL, "got");
+//      freelog(Log.LOG_NORMAL, "got");
 //      cm_print_result(pcity, &current_state);
 //    }
 //  }
@@ -327,21 +327,21 @@ public class Cma_core{
 //}
 //
 ///****************************************************************************
-// Prints the data of the stats struct via freelog(LOG_NORMAL,...).
+// Prints the data of the stats struct via freelog(Log.LOG_NORMAL,...).
 //*****************************************************************************/
 //static void report_stats()
 //{
 //#if SHOW_TIME_STATS
 //  int total, per_mill;
 //
-//  freelog(LOG_NORMAL, "CMA: overall=%fs queries=%d %fms / query",
+//  freelog(Log.LOG_NORMAL, "CMA: overall=%fs queries=%d %fms / query",
 //	  read_timer_seconds(stats.wall_timer), stats.queries,
 //	  (1000.0 * read_timer_seconds(stats.wall_timer)) /
 //	  ((double) stats.queries));
 //  total = stats.apply_result_ignored + stats.apply_result_applied;
 //  per_mill = (stats.apply_result_ignored * 1000) / (total ? total : 1);
 //
-//  freelog(LOG_NORMAL,
+//  freelog(Log.LOG_NORMAL,
 //	  "CMA: apply_result: ignored=%2d.%d%% (%d) "
 //	  "applied=%2d.%d%% (%d) total=%d",
 //	  per_mill / 10, per_mill % 10, stats.apply_result_ignored,

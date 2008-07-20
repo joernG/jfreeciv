@@ -2367,7 +2367,7 @@ public class Ruleset{
 //	       secfile_lookup_str_default(file, "-", "%s.city_style", sec[i]));
 //    pl.city_style = get_style_by_name(temp_name);
 //    if (pl.city_style == -1) {
-//      freelog(LOG_NORMAL,
+//      freelog(Log.LOG_NORMAL,
 //	      "Nation %s: city style %s is unknown, using default.", 
 //	      pl.name_plural, temp_name);
 //      pl.city_style = 0;
@@ -3227,7 +3227,7 @@ public class Ruleset{
 //  struct section_file techfile, unitfile, buildfile, govfile, terrfile;
 //  struct section_file cityfile, nationfile;
 //
-//  freelog(LOG_NORMAL, "Loading rulesets");
+//  freelog(Log.LOG_NORMAL, "Loading rulesets");
 //
 //  openload_ruleset_file(&techfile, "techs");
 //  load_tech_names(&techfile);

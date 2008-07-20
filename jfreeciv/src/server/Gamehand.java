@@ -167,13 +167,13 @@ public class Gamehand{
 //	    map.start_positions[i].tile.y,
 //	    n, (n >= 0 ? get_nation_name(n) : ""));
 //  }
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    start_pos[pplayer.player_no] = NO_START_POS;
-//  } players_iterate_end;
+//  }
 //
 //  /* Second, assign a nation to a start position for that nation. */
 //  freelog(LOG_VERBOSE, "Assigning matching nations.");
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (i = 0; i < map.num_start_positions; i++) {
 //      assert(pplayer.nation != NO_NATION_SELECTED);
 //      if (pplayer.nation == map.start_positions[i].nation) {
@@ -184,11 +184,11 @@ public class Gamehand{
 //	num_used++;
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Third, assign players randomly to the remaining start positions. */
 //  freelog(LOG_VERBOSE, "Assigning random nations.");
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (start_pos[pplayer.player_no] == NO_START_POS) {
 //      int which = myrand(map.num_start_positions - num_used);
 //
@@ -208,10 +208,10 @@ public class Gamehand{
 //      }
 //    }
 //    assert(start_pos[pplayer.player_no] != NO_START_POS);
-//  } players_iterate_end;
+//  }
 //
 //  /* Loop over all players, creating their initial units... */
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    struct start_position pos
 //      = map.start_positions[start_pos[pplayer.player_no]];
 //
@@ -222,10 +222,10 @@ public class Gamehand{
 //
 //    /* Place the first unit. */
 //    place_starting_unit(pos.tile, pplayer, game.start_units[0]);
-//  } players_iterate_end;
+//  }
 //
 //  /* Place all other units. */
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    int i, x, y;
 //    tile ptile;
 //    struct start_position p
@@ -249,7 +249,7 @@ public class Gamehand{
 //      /* Create the unit of an appropriate type. */
 //      place_starting_unit(ptile, pplayer, game.start_units[i]);
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Initialise list of improvements with world-wide equiv_range */
 //  improvement_status_init(game.improvements, ARRAY_SIZE(game.improvements));
@@ -493,7 +493,7 @@ public class Gamehand{
 //
 //  if (section_file_load_nodup(&file, get_challenge_fullname(pc))) {
 //    token = secfile_lookup_str_default(&file, null, "challenge.token");
-//    you_have_hack = (token && strcmp(token, packet.token) == 0);
+//    you_have_hack = (token && token.equals(packet.token));
 //    section_file_free(&file);
 //  }
 //

@@ -1,48 +1,11 @@
 package server;
 
 public class Meta{
+	public static final boolean DEFAULT_META_SERVER_NO_SEND = true;
+	public static final String DEFAULT_META_SERVER_ADDR = "http://meta.freeciv.org/metaserver.phtml";
+	public static final int METASERVER_REFRESH_INTERVAL =  (3*60);
+	public static final int METASERVER_MIN_UPDATE_INTERVAL = 7;
 
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <ctype.h>
-//#include <errno.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//
-//#ifdef HAVE_NETINET_IN_H
-//#include <netinet/in.h>
-//#endif
-//#ifdef HAVE_SYS_SOCKET_H
-//#include <sys/socket.h>
-//#endif
-//#ifdef HAVE_SYS_TYPES_H
-//#include <sys/types.h>
-//#endif
-//#ifdef HAVE_UNISTD_H
-//#include <unistd.h>
-//#endif
-//#ifdef HAVE_ARPA_INET_H
-//#include <arpa/inet.h>
-//#endif
-//#ifdef HAVE_WINSOCK
-//#include <winsock.h>
-//#endif
-//
 //#include "capstr.h"
 //#include "connection.h"
 //#include "dataio.h"
@@ -204,7 +167,7 @@ public class Meta{
 //  }
 //
 //  switch(server_state) {
-//  case PRE_GAME_STATE:
+//  case server_states.PRE_GAME_STATE:
 //    sz_strlcpy(state, "Pregame");
 //    break;
 //  case SELECT_RACES_STATE:
@@ -262,7 +225,7 @@ public class Meta{
 //    } else {
 //      n = 0; /* a counter for players_available */
 //
-//      players_iterate(plr) {
+//      for(player plr: game.players){
 //        boolean is_player_available = true;
 //        char type[15];
 //        connection pconn = find_conn_by_user(plr.username);
@@ -318,7 +281,7 @@ public class Meta{
 //        if (is_player_available) {
 //          n++;
 //        }
-//      } players_iterate_end;
+//      }
 //
 //      /* send the number of available players. */
 //      my_snprintf(s, rest, "available=%d&", n);

@@ -464,7 +464,7 @@ public class Advmilitary{
 //    if (unit_flag(punit, F_PIKEMEN)) pikemen = true;
 //  } }
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (!is_player_dangerous(city_owner(pcity), aplayer)) {
 //      continue;
 //    }
@@ -535,7 +535,7 @@ public class Advmilitary{
 //        }
 //      }
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  if (igwall_threat == 0) {
 //    pcity.ai.wallvalue = 90;

@@ -207,7 +207,7 @@ public class Gui_main{
 //		 DEFAULT_THEME);
 //      exit(EXIT_SUCCESS);
 //    } else if (is_option("--dump", argv[i])) {
-//      freelog(LOG_NORMAL, "enabling screen dumper");
+//      freelog(Log.LOG_NORMAL, "enabling screen dumper");
 //      sw_set_dump_screen(true);
 //    } else if (is_option("--fullscreen", argv[i])) {
 //      fullscreen = true;

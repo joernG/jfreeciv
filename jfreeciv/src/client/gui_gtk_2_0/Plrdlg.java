@@ -565,8 +565,8 @@ public class Plrdlg{
 //     weight = PANGO_WEIGHT_NORMAL;
 //     style = PANGO_STYLE_ITALIC;
 //     break;
-//   case DS_ALLIANCE:
-//   case DS_TEAM:
+//   case diplstate_type.DS_ALLIANCE:
+//   case diplstate_type.DS_TEAM:
 //     weight = PANGO_WEIGHT_BOLD;
 //     style = PANGO_STYLE_NORMAL;
 //     break;
@@ -621,7 +621,7 @@ public class Plrdlg{
 //      } while (more);
 //    }
 //
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      /* skip barbarians */
 //      if (!is_barbarian(pplayer)) {
 //	if (!exists[pplayer.player_no]) {
@@ -634,7 +634,7 @@ public class Plrdlg{
 //	  build_row(&it, pplayer.player_no);
 //	}
 //      }
-//    } players_iterate_end;
+//    }
 //
 //    update_players_menu();
 //    update_views();

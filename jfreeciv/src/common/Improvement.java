@@ -477,7 +477,7 @@ public class Improvement{
 //{
 //  int i;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    pplayer.island_improv = fc_realloc(pplayer.island_improv,
 //                                        (map.num_continents + 1)
 //                                        * game.num_impr_types
@@ -503,7 +503,7 @@ public class Improvement{
 //        improvs[id] = pcity.improvements[id];
 //      } built_impr_iterate_end;
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  improvements_update_redundant(null, null, 0, IR_WORLD);  
 //}   
@@ -523,7 +523,7 @@ public class Improvement{
 //{   
 //  boolean did_mark = false;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      built_impr_iterate(pcity, i) {
 //        if (improvement_obsolete(pplayer, i)) {
@@ -534,7 +534,7 @@ public class Improvement{
 //        }
 //      } built_impr_iterate_end;
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  /* Ideally, we could track at what max range and for which players, but
 //   * that's overoptimizing by a bit */
@@ -590,11 +590,11 @@ public class Improvement{
 //    CHECK_CITY_IMPR(pcity);
 //    break;
 //  case IR_WORLD:
-//    players_iterate(plr) {
+//    for(player plr: game.players){
 //      for (city pcity2 : plr.cities.data) {
 //        CHECK_CITY_IMPR(pcity2);
 //      } }
-//    } players_iterate_end;
+//    }
 //    break;
 //  case IR_PLAYER:
 //    assert(pplayer != null);

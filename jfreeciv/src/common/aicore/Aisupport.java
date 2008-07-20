@@ -42,7 +42,7 @@ public class Aisupport{
 //    return null;
 //  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    player_spaceship ship = &pplayer.spaceship;
 //    int arrival = (int) ship.travel_time + ship.launch_year;
 //
@@ -61,7 +61,7 @@ public class Aisupport{
 //      best_arrival = arrival;
 //      best = pplayer;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  return best;
 //}

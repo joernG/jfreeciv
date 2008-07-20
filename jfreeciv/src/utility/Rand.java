@@ -187,7 +187,7 @@ public class Rand{
 //
 ///*************************************************************************
 //  Test one aspect of randomness, using n numbers.
-//  Reports results to LOG_NORMAL; with good randomness, behaviourchange
+//  Reports results to Log.LOG_NORMAL; with good randomness, behaviourchange
 //  and behavioursame should be about the same size.
 //  Tests current random state; saves and restores state, so can call
 //  without interrupting current sequence.
@@ -217,7 +217,7 @@ public class Rand{
 //    }
 //    old_value = new_value;
 //  }
-//  freelog(LOG_NORMAL, "test_random1(%d) same: %d, change: %d",
+//  freelog(Log.LOG_NORMAL, "test_random1(%d) same: %d, change: %d",
 //	  n, behavioursame, behaviourchange);
 //
 //  /* restore state: */

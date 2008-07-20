@@ -90,7 +90,7 @@ public class Barbarian{
 //  int newplayer = game.nplayers;
 //  player barbarians;
 //
-//  players_iterate(barbarians) {
+//  for(player barbarians: game.players){
 //    if ((land && is_land_barbarian(barbarians))
 //        || (!land && is_sea_barbarian(barbarians))) {
 //      if (!barbarians.is_alive) {
@@ -107,7 +107,7 @@ public class Barbarian{
 //      barbarians.economic.gold += 100;  /* New leader, new money */
 //      return barbarians;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  if (newplayer >= MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS) {
 //    die("Too many players in server/barbarian.c");
@@ -148,12 +148,12 @@ public class Barbarian{
 //  give_initial_techs(barbarians);
 //
 //  /* Ensure that we are at war with everyone else */
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (pplayer != barbarians) {
 //      pplayer.diplstates[barbarians.player_no].type = diplstate_type.DS_WAR;
 //      barbarians.diplstates[pplayer.player_no].type = diplstate_type.DS_WAR;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  freelog(LOG_VERBOSE, "Created barbarian %s, player %d",
 //          barbarians.name, barbarians.player_no);

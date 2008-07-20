@@ -54,4 +54,9 @@ square_iterate_end
     square_dxy_iterate_end
 ([a-zA-Z\_0-9]+)\s*\=\s*([\d]+)\,?
     public static int $1 = $2;
-    
+players_iterate\(([a-zA-Z0-9\_]+)\)\s*\{                                      players_iterate(aplayer) {
+    for(player $1: game.players){
+\}\s*players_iterate_end\;   
+    }
+strcmp\(\s*([a-zA-Z0-9\_\.]+)\s*\,\s*([a-zA-Z0-9\_\.]+)\s*\)\s*\=\=\s*0                               strcmp(pdest.name, ANON_PLAYER_NAME) == 0
+$1.equals($2)

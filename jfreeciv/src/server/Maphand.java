@@ -335,10 +335,10 @@ public class Maphand{
 //**************************************************************************/
 //static void buffer_shared_vision(player pplayer)
 //{
-//  players_iterate(pplayer2) {
+//  for(player pplayer2: game.players){
 //    if (really_gives_vision(pplayer, pplayer2))
 //      conn_list_do_buffer(&pplayer2.connections);
-//  } players_iterate_end;
+//  }
 //  conn_list_do_buffer(&pplayer.connections);
 //}
 //
@@ -347,10 +347,10 @@ public class Maphand{
 //**************************************************************************/
 //static void unbuffer_shared_vision(player pplayer)
 //{
-//  players_iterate(pplayer2) {
+//  for(player pplayer2: game.players){
 //    if (really_gives_vision(pplayer, pplayer2))
 //      conn_list_do_unbuffer(&pplayer2.connections);
-//  } players_iterate_end;
+//  }
 //  conn_list_do_unbuffer(&pplayer.connections);
 //}
 //
@@ -617,12 +617,12 @@ public class Maphand{
 //    for (unit phidden_unit : tile1.units.data) {
 //      if (phidden_unit.transported_by == -1
 //	  && is_hiding_unit(phidden_unit)) {
-//	players_iterate(pplayer2) {
+//	for(player pplayer2: game.players){
 //	  if ((pplayer2 == pplayer || really_gives_vision(pplayer, pplayer2))
 //	      && !can_player_see_unit(pplayer2, phidden_unit)) {
 //	    unit_goes_out_of_sight(pplayer2, phidden_unit);
 //	  }
-//	} players_iterate_end;
+//	}
 //      }
 //    } }
 //  } adjc_iterate_end;
@@ -689,7 +689,7 @@ public class Maphand{
 //    }
 //
 //    /* players (s)he gives shared vision */
-//    players_iterate(pplayer2) {
+//    for(player pplayer2: game.players){
 //      if (!really_gives_vision(pplayer, pplayer2)) {
 //	continue;
 //      }
@@ -699,7 +699,7 @@ public class Maphand{
 //	really_unfog_area(pplayer2, tile1);
 //      }
 //      reveal_pending_seen(pplayer2, tile1, 0);
-//    } players_iterate_end;
+//    }
 //  } square_iterate_end;
 //
 //  reveal_pending_seen(pplayer, ptile, len);
@@ -740,14 +740,14 @@ public class Maphand{
 //      }
 //
 //      /* players (s)he gives shared vision */
-//      players_iterate(pplayer2) {
+//      for(player pplayer2: game.players){
 //	if (!really_gives_vision(pplayer, pplayer2)) {
 //	  continue;
 //	}
 //	if (map_get_seen(tile1, pplayer2) == 0) {
 //	  really_fog_area(pplayer2, tile1);
 //	}
-//      } players_iterate_end;
+//      }
 //    } else {
 //      decrement_pending_seen(pplayer, tile1);
 //    }
@@ -803,10 +803,10 @@ public class Maphand{
 //  map_change_seen(ptile, pplayer, change);
 //  map_change_own_seen(ptile, pplayer, change);
 //
-//  players_iterate(pplayer2) {
+//  for(player pplayer2: game.players){
 //    if (really_gives_vision(pplayer, pplayer2))
 //      map_change_seen(ptile, pplayer2, change);
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -922,12 +922,12 @@ public class Maphand{
 //    really_show_area(pplayer, tile1);
 //
 //    /* players (s)he gives shared vision */
-//    players_iterate(pplayer2) {
+//    for(player pplayer2: game.players){
 //      if (really_gives_vision(pplayer, pplayer2)) {
 //	really_show_area(pplayer2, tile1);
 //	reveal_pending_seen(pplayer2, tile1, 0);
 //      }
-//    } players_iterate_end;
+//    }
 //  } square_iterate_end;
 //
 //  reveal_pending_seen(pplayer, ptile, len);
@@ -1032,9 +1032,9 @@ public class Maphand{
 //**************************************************************************/
 //void show_map_to_all()
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    map_know_and_see_all(pplayer);
-//  } players_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -1138,13 +1138,13 @@ public class Maphand{
 //void update_tile_knowledge(tile ptile)
 //{
 //  /* Players */
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (map_is_known_and_seen(ptile, pplayer)) {
 //      if (update_player_tile_knowledge(pplayer, ptile)) {
 //        send_tile_info(&pplayer.connections, ptile);
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Global observers */
 //  for (conn pconn : game.game_connections.data) {
@@ -1237,11 +1237,11 @@ public class Maphand{
 //{
 //  really_give_tile_info_from_player_to_player(pfrom, pdest, ptile);
 //
-//  players_iterate(pplayer2) {
+//  for(player pplayer2: game.players){
 //    if (!really_gives_vision(pdest, pplayer2))
 //      continue;
 //    really_give_tile_info_from_player_to_player(pfrom, pplayer2, ptile);
-//  } players_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -1253,30 +1253,30 @@ public class Maphand{
 //{
 //  int added;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    pplayer.really_gives_vision = pplayer.gives_shared_vision;
-//  } players_iterate_end;
+//  }
 //
 //  /* In words: This terminates when it has run a round without adding
 //     a dependency. One loop only propagates dependencies one level deep,
 //     which is why we keep doing it as long as changes occur. */
 //  do {
 //    added = 0;
-//    players_iterate(pplayer) {
-//      players_iterate(pplayer2) {
+//    for(player pplayer: game.players){
+//      for(player pplayer2: game.players){
 //	if (really_gives_vision(pplayer, pplayer2)
 //	    && pplayer != pplayer2) {
-//	  players_iterate(pplayer3) {
+//	  for(player pplayer3: game.players){
 //	    if (really_gives_vision(pplayer2, pplayer3)
 //		&& !really_gives_vision(pplayer, pplayer3)
 //		&& pplayer != pplayer3) {
 //	      pplayer.really_gives_vision |= (1<<pplayer3.player_no);
 //	      added++;
 //	    }
-//	  } players_iterate_end;
+//	  }
 //	}
-//      } players_iterate_end;
-//    } players_iterate_end;
+//      }
+//    }
 //  } while (added > 0);
 //}
 //
@@ -1294,18 +1294,18 @@ public class Maphand{
 //    return;
 //  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    save_vision[pplayer.player_no] = pplayer.really_gives_vision;
-//  } players_iterate_end;
+//  }
 //
 //  pfrom.gives_shared_vision |= 1<<pto.player_no;
 //  create_vision_dependencies();
 //  freelog(LOG_DEBUG, "giving shared vision from %s to %s\n",
 //	  pfrom.name, pto.name);
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    buffer_shared_vision(pplayer);
-//    players_iterate(pplayer2) {
+//    for(player pplayer2: game.players){
 //      if (really_gives_vision(pplayer, pplayer2)
 //	  && !TEST_BIT(save_vision[pplayer.player_no], pplayer2.player_no)) {
 //	freelog(LOG_DEBUG, "really giving shared vision from %s to %s\n",
@@ -1325,9 +1325,9 @@ public class Maphand{
 //	   knowledge of */
 //	give_map_from_player_to_player(pplayer, pplayer2);
 //      }
-//    } players_iterate_end;
+//    }
 //    unbuffer_shared_vision(pplayer);
-//  } players_iterate_end;
+//  }
 //
 //  if (server_state == RUN_GAME_STATE)
 //    send_player_info(pfrom, null);
@@ -1347,9 +1347,9 @@ public class Maphand{
 //    return;
 //  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    save_vision[pplayer.player_no] = pplayer.really_gives_vision;
-//  } players_iterate_end;
+//  }
 //
 //  freelog(LOG_DEBUG, "removing shared vision from %s to %s\n",
 //	 pfrom.name, pto.name);
@@ -1357,9 +1357,9 @@ public class Maphand{
 //  pfrom.gives_shared_vision &= ~(1<<pto.player_no);
 //  create_vision_dependencies();
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    buffer_shared_vision(pplayer);
-//    players_iterate(pplayer2) {
+//    for(player pplayer2: game.players){
 //      if (!really_gives_vision(pplayer, pplayer2)
 //	  && TEST_BIT(save_vision[pplayer.player_no], pplayer2.player_no)) {
 //	freelog(LOG_DEBUG, "really removing shared vision from %s to %s\n",
@@ -1373,9 +1373,9 @@ public class Maphand{
 //	  }
 //	} whole_map_iterate_end;
 //      }
-//    } players_iterate_end;
+//    }
 //    unbuffer_shared_vision(pplayer);
-//  } players_iterate_end;
+//  }
 //
 //  if (server_state == RUN_GAME_STATE) {
 //    send_player_info(pfrom, null);
@@ -1418,9 +1418,9 @@ public class Maphand{
 //*************************************************************************/
 //void enable_fog_of_war()
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    enable_fog_of_war_player(pplayer);
-//  } players_iterate_end;
+//  }
 //}
 //
 ///*************************************************************************
@@ -1442,9 +1442,9 @@ public class Maphand{
 //*************************************************************************/
 //void disable_fog_of_war()
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    disable_fog_of_war_player(pplayer);
-//  } players_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************

@@ -602,7 +602,7 @@ public class Gui_main{
 //      case SDL_KEYDOWN:
 //	switch(Main.event.key.keysym.sym) {
 //	  case SDLK_PRINT:
-//	    freelog(LOG_NORMAL, "Make screenshot nr. %d", schot_nr);
+//	    freelog(Log.LOG_NORMAL, "Make screenshot nr. %d", schot_nr);
 //	    my_snprintf(schot, sizeof(schot), "schot0%d.bmp", schot_nr++);
 //	    SDL_SaveBMP(Main.screen, schot);
 //	  break;
@@ -714,7 +714,7 @@ public class Gui_main{
 //  
 //  init_sdl(iSDL_Flags);
 //  
-//  freelog(LOG_NORMAL, "Using Video Output: %s",
+//  freelog(Log.LOG_NORMAL, "Using Video Output: %s",
 //	  SDL_VideoDriverName(device, sizeof(device)));
 //  
 //  /* create splash screen */  

@@ -143,18 +143,18 @@ public class Advdiplomacy{
 //  if (pplayer.team != TEAM_NONE && pplayer.team == aplayer.team) {
 //    return true;
 //  }
-//  players_iterate(eplayer) {
+//  for(player eplayer: game.players){
 //    if (eplayer == pplayer || eplayer == aplayer || !eplayer.is_alive) {
 //      continue;
 //    }
 //    if (gives_shared_vision(aplayer, eplayer)) {
 //      enum diplstate_type ds = pplayer_get_diplstate(pplayer, eplayer).type;
 //
-//      if (ds != diplstate_type.DS_NO_CONTACT && ds != DS_ALLIANCE) {
+//      if (ds != diplstate_type.DS_NO_CONTACT && ds != diplstate_type.DS_ALLIANCE) {
 //        return false;
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //  return true;
 //}
 //
@@ -218,7 +218,7 @@ public class Advdiplomacy{
 //    }
 //
 //    /* Calculate in tech leak to our opponents, guess 50% chance */
-//    players_iterate(eplayer) {
+//    for(player eplayer: game.players){
 //      if (eplayer == aplayer
 //          || eplayer == pplayer
 //          || !eplayer.is_alive
@@ -236,7 +236,7 @@ public class Advdiplomacy{
 //        /* We can enrichen our side with this tech */
 //        worth += ai_goldequiv_tech(eplayer, pclause.value) / 4;
 //      }
-//    } players_iterate_end;
+//    }
 //  break;
 //
 //  case CLAUSE_ALLIANCE:
@@ -647,7 +647,7 @@ public class Advdiplomacy{
 //  /* Modify by which treaties we would have to break, and what
 //   * excuses we have to do so. FIXME: We only consider immediate
 //   * allies, but we might trigger a wider chain reaction. */
-//  players_iterate(eplayer) {
+//  for(player eplayer: game.players){
 //    boolean cancel_excuse =
 //	pplayer.diplstates[eplayer.player_no].has_reason_to_cancel != 0;
 //    enum diplstate_type ds = pplayer_get_diplstate(pplayer, eplayer).type;
@@ -664,11 +664,11 @@ public class Advdiplomacy{
 //        kill_desire -= kill_desire / 7; /* 15% off */
 //      } else if (ds == DS_PEACE) {
 //        kill_desire -= kill_desire / 5; /* 20% off */
-//      } else if (ds == DS_ALLIANCE) {
+//      } else if (ds == diplstate_type.DS_ALLIANCE) {
 //        kill_desire -= kill_desire / 3; /* 33% off here, more later */
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Modify by love. Increase the divisor to make ai go to war earlier */
 //  kill_desire -= MAX(0, kill_desire 
@@ -723,7 +723,7 @@ public class Advdiplomacy{
 //
 //  /* Time to make love. If we've been wronged, hold off that love
 //   * for a while. Also, cool our head each turn with love_coeff. */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    int a = aplayer.player_no;
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[a];
 //
@@ -781,7 +781,7 @@ public class Advdiplomacy{
 //    pplayer.ai.love[aplayer.player_no] = 
 //      MAX(-MAX_AI_LOVE,
 //          MIN(MAX_AI_LOVE, pplayer.ai.love[aplayer.player_no]));
-//  } players_iterate_end;
+//  }
 //
 //  /* Stop war against a dead player */
 //  if (ai.diplomacy.target && !ai.diplomacy.target.is_alive) {
@@ -815,13 +815,13 @@ public class Advdiplomacy{
 //  }
 //
 //  /* Calculate average distances to other players' empires. */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    ai.diplomacy.player_intel[aplayer.player_no].distance = 
 //          player_distance_to_player(pplayer, aplayer);
-//  } players_iterate_end;
+//  }
 //
 //  /* Calculate our desires, and find desired war target */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(pplayer, aplayer).type;
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[aplayer.player_no];
 //
@@ -860,7 +860,7 @@ public class Advdiplomacy{
 //      target = aplayer;
 //      best_desire = war_desire[aplayer.player_no];
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  if (!target) {
 //    PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Found no target.");
@@ -884,9 +884,9 @@ public class Advdiplomacy{
 //    }
 //    /* Don't reevaluate too often. */
 //    ai.diplomacy.timer = myrand(6) + 6 + ai.diplomacy.countdown;
-//    players_iterate(aplayer) {
+//    for(player aplayer: game.players){
 //      ai.diplomacy.player_intel[aplayer.player_no].ally_patience = 0;
-//    } players_iterate_end;
+//    }
 //  }
 //}
 //
@@ -968,7 +968,7 @@ public class Advdiplomacy{
 //
 //  /*** If we are greviously insulted, go to war immediately. ***/
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (ai.diplomacy.acceptable_reputation > aplayer.reputation
 //        && pplayer.ai.love[aplayer.player_no] < 0
 //        && pplayer.diplstates[aplayer.player_no].has_reason_to_cancel >= 2) {
@@ -978,12 +978,12 @@ public class Advdiplomacy{
 //             "means WAR!"), pplayer.name);
 //      ai_go_to_war(pplayer, ai, aplayer);
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /*** Stop other players from winning by space race ***/
 //
 //  if (ai.diplomacy.strategy != WIN_SPACE) {
-//    players_iterate(aplayer) {
+//    for(player aplayer: game.players){
 //      ai_dip_intel adip =
 //                         &ai.diplomacy.player_intel[aplayer.player_no];
 //      player_spaceship ship = &aplayer.spaceship;
@@ -1020,7 +1020,7 @@ public class Advdiplomacy{
 //        /* This means war!!! */
 //        ai.diplomacy.timer = 0; /* Force reevaluation next turn */
 //      }
-//    } players_iterate_end;
+//    }
 //  }
 //
 //  /*** Declare war - against target ***/
@@ -1054,7 +1054,7 @@ public class Advdiplomacy{
 //
 //  /*** Declare war - against enemies of allies ***/
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[aplayer.player_no];
 //
 //    if (aplayer.is_alive
@@ -1067,11 +1067,11 @@ public class Advdiplomacy{
 //			"your last mistake!"), pplayer.name);
 //      ai_go_to_war(pplayer, ai, aplayer);
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /*** Opportunism, Inc. Try to make peace with everyone else ***/
 //
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(pplayer, aplayer).type;
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[aplayer.player_no];
 //    struct Clause clause;
@@ -1125,10 +1125,10 @@ public class Advdiplomacy{
 //    }
 //
 //    switch (ds) {
-//    case DS_TEAM:
+//    case diplstate_type.DS_TEAM:
 //      ai_share(pplayer, aplayer);
 //      break;
-//    case DS_ALLIANCE:
+//    case diplstate_type.DS_ALLIANCE:
 //      if (players_on_same_team(pplayer, aplayer)
 //          || (target && (!pplayers_at_war(pplayer, target)
 //              || pplayers_at_war(aplayer, target)))) {
@@ -1229,6 +1229,6 @@ public class Advdiplomacy{
 //      die("Unknown pact type");
 //      break;
 //    }
-//  } players_iterate_end;
+//  }
 //}
 }

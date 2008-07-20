@@ -128,7 +128,7 @@ public class Clinet{
 //  /* If we lost connection to the internal server - kill him */
 //  client_kill_server(true);
 //  append_output_window("Lost connection to server!");
-//  freelog(LOG_NORMAL, "lost connection to server");
+//  freelog(Log.LOG_NORMAL, "lost connection to server");
 //}
 //
 ///**************************************************************************
@@ -313,7 +313,7 @@ public class Clinet{
 //	continue;
 //      }
 //
-//      freelog(LOG_NORMAL, "error in select() return=%d errno=%d (%s)",
+//      freelog(Log.LOG_NORMAL, "error in select() return=%d errno=%d (%s)",
 //	      n, errno, mystrerror());
 //      return -1;
 //    }

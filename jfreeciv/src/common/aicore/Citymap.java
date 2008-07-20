@@ -68,7 +68,7 @@ public class Citymap{
 //  citymap = fc_realloc(citymap, MAX_MAP_INDEX * sizeof(*citymap));
 //  memset(citymap, 0, MAX_MAP_INDEX * sizeof(*citymap));
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      map_city_radius_iterate(pcity.tile, ptile) {
 //        if (ptile.worked) {
@@ -78,7 +78,7 @@ public class Citymap{
 //        }
 //      } map_city_radius_iterate_end;
 //    } }
-//  } players_iterate_end;
+//  }
 //  for (unit punit : pplayer.units.data) {
 //    if (unit_flag(punit, F_CITIES)
 //        && punit.ai.ai_role == AIUNIT_BUILD_CITY) {

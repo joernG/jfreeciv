@@ -166,7 +166,7 @@ public class Gui_stuff{
 //  char classname[80];
 //  fcwin_win_data win_data; 
 //  GetClassName(win, classname, sizeof(classname));
-//  if (strcmp(classname, CLASSNAME)==0) {
+//  if (classname.equals(CLASSNAME)) {
 //    win_data=(fcwin_win_data )
 //      GetWindowLong(win, GWL_USERDATA);
 //    if (win_data) {

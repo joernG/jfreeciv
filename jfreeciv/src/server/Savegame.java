@@ -513,7 +513,7 @@ public class Savegame{
 //      
 //      nation_id = find_nation_by_name_orig(nation);
 //      if (nation_id == NO_NATION_SELECTED) {
-//	freelog(LOG_NORMAL,
+//	freelog(Log.LOG_NORMAL,
 //	        "Warning: Unknown nation %s for starting position no %d",
 //		nation,
 //		i);
@@ -1898,7 +1898,7 @@ public class Savegame{
 //			   "player%d.diplstate%d.contact_turns_left", plrno, i);
 //  }
 //  /* Sanity check alliances, prevent allied-with-ally-of-enemy */
-//  players_iterate(aplayer) {
+//  for(player aplayer: game.players){
 //    if (plr.is_alive
 //        && aplayer.is_alive
 //        && pplayers_allied(plr, aplayer)
@@ -1909,7 +1909,7 @@ public class Savegame{
 //      plr.diplstates[aplayer.player_no].type = DS_PEACE;
 //      aplayer.diplstates[plr.player_no].type = DS_PEACE;
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  { /* spacerace */
 //    player_spaceship ship = &plr.spaceship;
@@ -2226,7 +2226,7 @@ public class Savegame{
 //      strcat(quoted, current);
 //    }
 //    if (quoted_length != quoted.length()) {
-//      freelog(LOG_NORMAL, "quoted_length=%lu quoted=%lu",
+//      freelog(Log.LOG_NORMAL, "quoted_length=%lu quoted=%lu",
 //	      (unsigned long) quoted_length,
 //	      (unsigned long) quoted.length());
 //      assert(0);
@@ -2956,7 +2956,7 @@ public class Savegame{
 //{
 //  int j;
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    /* to avoid junk values for unsupported units: */
 //    for (unit punit : pplayer.units.data) {
 //      punit.ord_city = 0;
@@ -2967,7 +2967,7 @@ public class Savegame{
 //	punit.ord_city = j++;
 //      } }
 //    } }
-//  } players_iterate_end;
+//  }
 //
 //  whole_map_iterate(ptile) {
 //    j = 0;
@@ -2983,12 +2983,12 @@ public class Savegame{
 //***************************************************************/
 //static void apply_unit_ordering()
 //{
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      unit_list_sort_ord_city(&pcity.units_supported);
 //    }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  whole_map_iterate(ptile) {
 //    unit_list_sort_ord_map(&ptile.units);
@@ -3268,7 +3268,7 @@ public class Savegame{
 //#define T(x) \
 //      str2 = secfile_lookup_str_default(file, "default", x); \
 //      if (strcmp(str, str2) != 0) { \
-//	freelog(LOG_NORMAL, _("Warning: Different rulesetdirs " \
+//	freelog(Log.LOG_NORMAL, _("Warning: Different rulesetdirs " \
 //			      "('%s' and '%s') are no longer supported. " \
 //			      "Using '%s'."), \
 //			      str, str2, str); \
@@ -3366,12 +3366,12 @@ public class Savegame{
 //	map.xsize = secfile_lookup_int(file, "map.width");
 //	map.ysize = secfile_lookup_int(file, "map.height");
 //      } else {
-//	/* old versions saved with these names in PRE_GAME_STATE: */
+//	/* old versions saved with these names in server_states.PRE_GAME_STATE: */
 //	map.xsize = secfile_lookup_int(file, "map.xsize");
 //	map.ysize = secfile_lookup_int(file, "map.ysize");
 //      }
 //
-//      if (tmp_server_state==PRE_GAME_STATE && map.generator == 0) {
+//      if (tmp_server_state==server_states.PRE_GAME_STATE && map.generator == 0) {
 //	/* generator 0 = map done with map editor */
 //	/* aka a "scenario" */
 //        if (has_capability("specials",savefile_options)) {
@@ -3389,7 +3389,7 @@ public class Savegame{
 //	return;
 //      }
 //    }
-//    if(tmp_server_state==PRE_GAME_STATE) {
+//    if(tmp_server_state==server_states.PRE_GAME_STATE) {
 //      return;
 //    }
 //  }
@@ -3496,11 +3496,11 @@ public class Savegame{
 //    /* We do this here since if the did it in player_load, player 1
 //       would try to unfog (unloaded) player 2's map when player 1's units
 //       were loaded */
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      pplayer.really_gives_vision = 0;
 //      pplayer.gives_shared_vision = 0;
-//    } players_iterate_end;
-//    players_iterate(pplayer) {
+//    }
+//    for(player pplayer: game.players){
 //      char *vision;
 //      int plrno = pplayer.player_no;
 //
@@ -3508,13 +3508,13 @@ public class Savegame{
 //					  "player%d.gives_shared_vision",
 //					  plrno);
 //      if (vision) {
-//	players_iterate(pplayer2) {
+//	for(player pplayer2: game.players){
 //	  if (vision[pplayer2.player_no] == '1') {
 //	    give_shared_vision(pplayer, pplayer2);
 //	  }
-//	} players_iterate_end;
+//	}
 //      }
-//    } players_iterate_end;
+//    }
 //
 //    initialize_globals();
 //    apply_unit_ordering();
@@ -3523,7 +3523,7 @@ public class Savegame{
 //    map_calculate_borders();
 //
 //    /* Make sure everything is consistent. */
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      for (unit punit : pplayer.units.data) {
 //	if (!can_unit_continue_current_activity(punit)) {
 //	  freelog(LOG_ERROR, "ERROR: Unit doing illegal activity in savegame!");
@@ -3534,7 +3534,7 @@ public class Savegame{
 //      for (city pcity : pplayer.cities.data) {
 //	check_city(pcity);
 //      } }
-//    } players_iterate_end;
+//    }
 //  } else {
 //    game.nplayers = 0;
 //  }
@@ -3563,7 +3563,7 @@ public class Savegame{
 //  game.player_ptr=&game.players[0];  
 //
 //  /* Fix ferrying sanity */
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    for (unit punit : pplayer.units.data) {
 //      unit ferry = find_unit_by_id(punit.transported_by);
 //
@@ -3574,20 +3574,20 @@ public class Savegame{
 //        bounce_unit(punit, true);
 //      }
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  /* Fix stacking issues.  We don't rely on the savegame preserving
 //   * alliance invariants (old savegames often did not) so if there are any
 //   * unallied units on the same tile we just bounce them. */
-//  players_iterate(pplayer) {
-//    players_iterate(aplayer) {
+//  for(player pplayer: game.players){
+//    for(player aplayer: game.players){
 //      resolve_unit_stacks(pplayer, aplayer, true);
-//    } players_iterate_end;
-//  } players_iterate_end;
+//    }
+//  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    calc_civ_score(pplayer);
-//  } players_iterate_end;
+//  }
 //
 //  return;
 //}
@@ -3740,7 +3740,7 @@ public class Savegame{
 //    /* Now always save these, so the server options reflect the
 //     * actual values used at the start of the game.
 //     * The first two used to be saved as "map.xsize" and "map.ysize"
-//     * when PRE_GAME_STATE, but I'm standardizing on width,height --dwp
+//     * when server_states.PRE_GAME_STATE, but I'm standardizing on width,height --dwp
 //     */
 //    secfile_insert_int(file, map.topology_id, "map.topology_id");
 //    secfile_insert_int(file, map.size, "map.size");
@@ -3794,7 +3794,7 @@ public class Savegame{
 //    map_save(file);
 //  }
 //  
-//  if ((server_state == PRE_GAME_STATE) && game.is_new_game) {
+//  if ((server_state == server_states.PRE_GAME_STATE) && game.is_new_game) {
 //    return; /* want to save scenarios as well */
 //  }
 //
@@ -3829,9 +3829,9 @@ public class Savegame{
 //
 //    calc_unit_ordering();
 //
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      player_save(pplayer, pplayer.player_no, file);
-//    } players_iterate_end;
+//    }
 //
 //    for (i = 0; i < game.nplayers; i++) {
 //      secfile_insert_int(file, shuffled_player(i).player_no,

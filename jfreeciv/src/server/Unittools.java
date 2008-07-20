@@ -1538,11 +1538,11 @@ public class Unittools{
 //    ai_unit_new_role(punit, AIUNIT_NONE, null);
 //  }
 //
-//  players_iterate(pplayer) {
+//  for(player pplayer: game.players){
 //    if (map_is_known_and_seen(unit_tile, pplayer)) {
 //      dlsend_packet_unit_remove(&pplayer.connections, punit.id);
 //    }
-//  } players_iterate_end;
+//  }
 //
 //  remove_unit_sight_points(punit);
 //
@@ -2800,7 +2800,7 @@ public class Unittools{
 //
 //  /* Remove hidden units (like submarines) which aren't seen anymore. */
 //  square_iterate(psrctile, 1, tile1) {
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      /* We're only concerned with known, unfogged tiles which may contain
 //       * hidden units that are no longer visible.  These units will not
 //       * have been handled by the fog code, above. */
@@ -2811,7 +2811,7 @@ public class Unittools{
 //	  }
 //        } }
 //      }
-//    } players_iterate_end;
+//    }
 //  } square_iterate_end;
 //
 //  handle_unit_move_consequences(punit, psrctile, pdesttile);

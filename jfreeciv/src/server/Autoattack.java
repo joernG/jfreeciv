@@ -1,24 +1,37 @@
 package server;
 
-import static utility.Log.*;
-import static common.Unittype_P.*;
-import static common.Unit.*;
-import static common.City.*;
-import static common.city.City_H.*;
-import static common.Map.*;
-import static common.Game.*;
-import static common.map.Map_H.*;
-import static common.Combat.*;
-import static server.Gotohand.*;
-import static common.player.Player_H.*;
-import static common.Player_P.*;
-import static server.Unithand.*;
-import static server.Plrhand.*;
-import static server.Unittools.*;
-
+import static common.City.is_city_option_set;
+import static common.Combat.can_unit_attack_all_at_tile;
+import static common.Combat.get_defender;
+import static common.Game.find_unit_by_id;
+import static common.Map.map;
+import static common.Map.map_get_city;
+import static common.Map.normalize_map_pos;
+import static common.Map.same_pos;
+import static common.Player_P.ai_handicap;
+import static common.Player_P.can_player_see_unit;
+import static common.Unit.get_transporter_capacity;
+import static common.Unit.is_enemy_unit_tile;
+import static common.Unit.is_military_unit;
+import static common.Unit.set_unit_activity;
+import static common.Unit.unit_list_find;
+import static common.Unit.unit_move_rate;
+import static common.Unit.unit_owner;
+import static common.Unittype_P.get_unit_name;
+import static common.Unittype_P.unit_flag;
+import static common.Unittype_P.unit_name;
+import static common.Unittype_P.unit_type;
+import static common.city.City_H.CITYOPT_AUTOATTACK_BITS;
+import static common.map.Map_H.map_pos_to_index;
+import static common.player.Player_H.H_TARGETS;
+import static server.Gotohand.calculate_move_cost;
+import static server.Plrhand.notify_player_ex;
+import static server.Unithand.handle_unit_activity_request;
+import static server.Unittools.send_unit_info;
+import static utility.Log.LOG_DEBUG;
+import static utility.Log.freelog;
 import utility.Speclists;
 
-import common.Map;
 import common.event_type;
 import common.city.city;
 import common.city.city_options;
@@ -278,7 +291,7 @@ public class Autoattack {
 		// t = renew_timer_start(t, TIMER_CPU, TIMER_DEBUG);
 		//
 		// /* re-use shuffle order from civserver.c */
-		// shuffled_players_iterate(pplayer) {
+		// shuffled_for(player pplayer: game.players){
 		// auto_attack_player(pplayer);
 		// } shuffled_players_iterate_end;
 		// if (timer_in_use(t)) {

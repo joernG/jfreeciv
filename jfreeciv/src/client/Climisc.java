@@ -856,7 +856,7 @@ public class Climisc{
 //  
 //  if (event >= E_LAST)  {
 //    /* Server may have added a new event; leave as MW_OUTPUT */
-//    freelog(LOG_NORMAL, "Unknown event type %d!", event);
+//    freelog(Log.LOG_NORMAL, "Unknown event type %d!", event);
 //  } else if (event >= 0)  {
 //    where = messages_where[event];
 //  }
@@ -987,7 +987,7 @@ public class Climisc{
 //  } else {
 //    pcity_near = null;
 //    pcity_near_dist = -1;
-//    players_iterate(pplayer) {
+//    for(player pplayer: game.players){
 //      for (city pcity_current : pplayer.cities.data) {
 //        int dist = sq_map_distance(pcity_current.tile, punit.tile);
 //        if (pcity_near_dist == -1 || dist < pcity_near_dist
@@ -997,7 +997,7 @@ public class Climisc{
 //          pcity_near_dist = dist;
 //        }
 //      } }
-//    } players_iterate_end;
+//    }
 //  }
 //
 //  if (sq_dist) {
