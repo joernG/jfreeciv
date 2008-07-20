@@ -34,7 +34,7 @@ public class Diplhand{
 //
 //#include "citytools.h"
 //#include "cityturn.h"
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "maphand.h"
 //#include "plrhand.h"
 //#include "settlers.h"
@@ -127,7 +127,7 @@ public class Diplhand{
 //	switch(pclause.type) {
 //	case CLAUSE_EMBASSY:
 //          if (player_has_embassy(pother, pplayer)) {
-//            freelog(LOG_ERROR, "%s tried to give embassy to %s, who already "
+//            util.freelog(Log.LOG_ERROR, "%s tried to give embassy to %s, who already "
 //                    "has an embassy", pplayer.name, pother.name);
 //            return;
 //          }
@@ -136,21 +136,21 @@ public class Diplhand{
 //          if (!tech_is_available(pother, pclause.value)) {
 //	    /* It is impossible to give a technology to a civilization that
 //	     * can never possess it (the client should enforce this). */
-//	    freelog(LOG_ERROR, "Treaty: The %s can't have tech %s",
-//                    get_nation_name_plural(pother.nation),
+//	    util.freelog(Log.LOG_ERROR, "Treaty: The %s can't have tech %s",
+//                    Nation.get_nation_name_plural(pother.nation),
 //		    get_tech_name(pplayer, pclause.value));
 //	    notify_player(pplayer,
 //                          "Game: The %s can't accept %s.",
-//                          get_nation_name_plural(pother.nation),
+//                          Nation.get_nation_name_plural(pother.nation),
 //			  get_tech_name(pplayer, pclause.value));
 //	    return;
 //          }
 //	  if (get_invention(pplayer, pclause.value) != TECH_KNOWN) {
-//	    freelog(LOG_ERROR,
+//	    util.freelog(Log.LOG_ERROR,
 //                    "The %s don't know tech %s, but try to give it to the %s.",
-//		    get_nation_name_plural(pplayer.nation),
+//		    Nation.get_nation_name_plural(pplayer.nation),
 //		    get_tech_name(pplayer, pclause.value),
-//		    get_nation_name_plural(pother.nation));
+//		    Nation.get_nation_name_plural(pother.nation));
 //	    notify_player(pplayer,
 //			  "Game: You don't have tech %s, you can't accept treaty.",
 //			  get_tech_name(pplayer, pclause.value));
@@ -171,7 +171,7 @@ public class Diplhand{
 //			  pcity.name);
 //	    return;
 //	  }
-//	  if (is_capital(pcity)) {
+//	  if (pcity.is_capital()) {
 //	    notify_player(pplayer,
 //			  _("Game: Your capital (%s) is requested, "
 //			    "you can't accept treaty."),
@@ -253,27 +253,27 @@ public class Diplhand{
 //	    notify_player(pplayer,
 //			  _("Game: One of the cities %s is giving away is destroyed! "
 //			    "Treaty canceled!"),
-//			  get_nation_name_plural(pother.nation));
+//			  Nation.get_nation_name_plural(pother.nation));
 //	    notify_player(pother,
 //			  _("Game: One of the cities %s is giving away is destroyed! "
 //			    "Treaty canceled!"),
-//			  get_nation_name_plural(pother.nation));
+//			  Nation.get_nation_name_plural(pother.nation));
 //	    goto cleanup;
 //	  }
 //	  if (pcity.owner != pother.player_no) {
 //	    notify_player(pplayer,
 //			  _("Game: The %s no longer control %s! "
 //			    "Treaty canceled!"),
-//			  get_nation_name_plural(pother.nation),
+//			  Nation.get_nation_name_plural(pother.nation),
 //			  pcity.name);
 //	    notify_player(pother,
 //			  _("Game: The %s no longer control %s! "
 //			    "Treaty canceled!"),
-//			  get_nation_name_plural(pother.nation),
+//			  Nation.get_nation_name_plural(pother.nation),
 //			  pcity.name);
 //	    goto cleanup;
 //	  }
-//	  if (is_capital(pcity)) {
+//	  if (pcity.is_capital()) {
 //	    notify_player(pother,
 //			  _("Game: Your capital (%s) is requested, "
 //			    "you can't accept treaty."), pcity.name);
@@ -301,11 +301,11 @@ public class Diplhand{
 //	    notify_player(pplayer,
 //			  _("Game: The %s don't have the promised amount "
 //			    "of gold! Treaty canceled!"),
-//			  get_nation_name_plural(pother.nation));
+//			  Nation.get_nation_name_plural(pother.nation));
 //	    notify_player(pother,
 //			  _("Game: The %s don't have the promised amount "
 //			    "of gold! Treaty canceled!"),
-//			  get_nation_name_plural(pother.nation));
+//			  Nation.get_nation_name_plural(pother.nation));
 //	    goto cleanup;
 //	  }
 //	  break;
@@ -337,18 +337,18 @@ public class Diplhand{
 //        notify_player_ex(pdest, null, E_TREATY_SHARED_VISION,
 //                         "Game: %s allowed you to create an embassy!",
 //                         pgiver.name);
-//        gamelog(GAMELOG_TREATY, GL_EMBASSY, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_EMBASSY, pgiver, pdest);
 //        break;
 //      case CLAUSE_ADVANCE:
 //        /* It is possible that two players open the diplomacy dialog
 //         * and try to give us the same tech at the same time. This
 //         * should be handled discreetly instead of giving a core dump. */
 //        if (get_invention(pdest, pclause.value) == TECH_KNOWN) {
-//	  freelog(LOG_VERBOSE,
+//	  util.freelog(LOG_VERBOSE,
 //                  "The %s already know tech %s, that %s want to give them.",
-//		  get_nation_name_plural(pdest.nation),
+//		  Nation.get_nation_name_plural(pdest.nation),
 //		  get_tech_name(pplayer, pclause.value),
-//		  get_nation_name_plural(pgiver.nation));
+//		  Nation.get_nation_name_plural(pgiver.nation));
 //          break;
 //        }
 //	notify_player_ex(pdest, null, E_TECH_GAIN,
@@ -357,12 +357,12 @@ public class Diplhand{
 //
 //	notify_embassies(pdest, pgiver,
 //			 "Game: The %s have acquired %s from the %s.",
-//			 get_nation_name_plural(pdest.nation),
+//			 Nation.get_nation_name_plural(pdest.nation),
 //			 get_tech_name(pdest, pclause.value),
-//			 get_nation_name_plural(pgiver.nation));
+//			 Nation.get_nation_name_plural(pgiver.nation));
 //
-//        gamelog(GAMELOG_TECH, pdest, pgiver, pclause.value, "acquire");
-//        gamelog(GAMELOG_TREATY, GL_TECH, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TECH, pdest, pgiver, pclause.value, "acquire");
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_TECH, pgiver, pdest);
 //	do_dipl_cost(pdest);
 //
 //	found_new_tech(pdest, pclause.value, false, true, A_NONE);
@@ -371,26 +371,26 @@ public class Diplhand{
 //	notify_player(pdest, "Game: You get %d gold.", pclause.value);
 //	pgiver.economic.gold -= pclause.value;
 //	pdest.economic.gold += pclause.value;
-//        gamelog(GAMELOG_TREATY, GL_GOLD, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_GOLD, pgiver, pdest);
 //	break;
 //      case CLAUSE_MAP:
 //	give_map_from_player_to_player(pgiver, pdest);
 //	notify_player(pdest, "Game: You receive %s's worldmap.",
 //		      pgiver.name);
-//        gamelog(GAMELOG_TREATY, GL_MAP, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_MAP, pgiver, pdest);
 //	break;
 //      case CLAUSE_SEAMAP:
 //	give_seamap_from_player_to_player(pgiver, pdest);
 //	notify_player(pdest, "Game: You receive %s's seamap.",
 //		      pgiver.name);
-//        gamelog(GAMELOG_TREATY, GL_SEAMAP, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_SEAMAP, pgiver, pdest);
 //	break;
 //      case CLAUSE_CITY:
 //	{
 //	  city pcity = find_city_by_id(pclause.value);
 //
 //	  if (!pcity) {
-//	    freelog(Log.LOG_NORMAL,
+//	    util.freelog(Log.LOG_NORMAL,
 //		    "Treaty city id %d not found - skipping clause.",
 //		    pclause.value);
 //	    break;
@@ -404,8 +404,8 @@ public class Diplhand{
 //			   "Game: You give city of %s to %s.",
 //			   pcity.name, pdest.name);
 //
-//          gamelog(GAMELOG_LOSECITY, pgiver, pdest, pcity, "acquired");
-//          gamelog(GAMELOG_TREATY, GL_CITY, pgiver, pdest, pcity);
+//          Gamelog.gamelog(GAMELOG_LOSECITY, pgiver, pdest, pcity, "acquired");
+//          Gamelog.gamelog(GAMELOG_TREATY, GL_CITY, pgiver, pdest, pcity);
 //	  transfer_city(pdest, pcity, -1, true, true, false);
 //	  break;
 //	}
@@ -420,7 +420,7 @@ public class Diplhand{
 //	notify_player_ex(pdest, null, E_TREATY_CEASEFIRE,
 //			 "Game: You agree on a cease-fire with %s.",
 //			 pgiver.name);
-//        gamelog(GAMELOG_TREATY, GL_CEASEFIRE, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_CEASEFIRE, pgiver, pdest);
 //	if (old_diplstate == diplstate_type.DS_ALLIANCE) {
 //	  update_players_after_alliance_breakup(pgiver, pdest);
 //	}
@@ -436,7 +436,7 @@ public class Diplhand{
 //	notify_player_ex(pdest, null, E_TREATY_PEACE,
 //			 "Game: You agree on a peace treaty with %s.",
 //			 pgiver.name);
-//        gamelog(GAMELOG_TREATY, GL_PEACE, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_PEACE, pgiver, pdest);
 //	if (old_diplstate == diplstate_type.DS_ALLIANCE) {
 //	  update_players_after_alliance_breakup(pgiver, pdest);
 //	}
@@ -453,7 +453,7 @@ public class Diplhand{
 //			 "Game: You agree on an alliance with %s.",
 //			 pgiver.name);
 //
-//        gamelog(GAMELOG_TREATY, GL_ALLIANCE, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_ALLIANCE, pgiver, pdest);
 //	check_city_workers(pplayer);
 //	check_city_workers(pother);
 //	break;
@@ -465,11 +465,11 @@ public class Diplhand{
 //	notify_player_ex(pdest, null, E_TREATY_SHARED_VISION,
 //			 "Game: %s gives you shared vision.",
 //			 pgiver.name);
-//        gamelog(GAMELOG_TREATY, GL_VISION, pgiver, pdest);
+//        Gamelog.gamelog(GAMELOG_TREATY, GL_VISION, pgiver, pdest);
 //	break;
 //      case CLAUSE_LAST:
 //      case CLAUSE_UNUSED:
-//        freelog(LOG_ERROR, "Received bad clause type");
+//        util.freelog(Log.LOG_ERROR, "Received bad clause type");
 //        break;
 //      }
 //

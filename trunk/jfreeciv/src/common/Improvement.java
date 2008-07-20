@@ -386,25 +386,25 @@ public class Improvement{
 //   * no other effects. */
 //  if (building_has_effect(id, EFT_SS_STRUCTURAL)) {
 //    space_part = true;
-//    if (p.spaceship.structurals >= NUM_SS_STRUCTURALS) {
+//    if (p.spaceship.structurals >= player_spaceship.NUM_SS_STRUCTURALS) {
 //      return false;
 //    }
 //  }
 //  if (building_has_effect(id, EFT_SS_COMPONENT)) {
 //    space_part = true;
-//    if (p.spaceship.components >= NUM_SS_COMPONENTS) {
+//    if (p.spaceship.components >= player_spaceship.NUM_SS_COMPONENTS) {
 //      return false;
 //    }
 //  }
 //  if (building_has_effect(id, EFT_SS_MODULE)) {
 //    space_part = true;
-//    if (p.spaceship.modules >= NUM_SS_MODULES) {
+//    if (p.spaceship.modules >= player_spaceship.NUM_SS_MODULES) {
 //      return false;
 //    }
 //  }
 //  if (space_part &&
 //      (!get_player_bonus(p, EFT_ENABLE_SPACE) > 0
-//       || p.spaceship.state >= SSHIP_LAUNCHED)) {
+//       || p.spaceship.state >= spaceship_state.SSHIP_LAUNCHED)) {
 //    return false;
 //  }
 //
@@ -527,7 +527,7 @@ public class Improvement{
 //    for (city pcity : pplayer.cities.data) {
 //      built_impr_iterate(pcity, i) {
 //        if (improvement_obsolete(pplayer, i)) {
-//          freelog(LOG_DEBUG,"%s in %s is obsolete",
+//          util.freelog(LOG_DEBUG,"%s in %s is obsolete",
 //                  improvement_types[i].name, pcity.name);
 //          mark_improvement(pcity, i, I_OBSOLETE);
 //          did_mark = true;
@@ -571,11 +571,11 @@ public class Improvement{
 //    }                                                                        \
 //                                                                             \
 //    if (improvement_redundant(city_owner(_pcity), (_pcity), i, false)) {     \
-//      freelog(LOG_DEBUG,"%s in %s is redundant",                             \
+//      util.freelog(LOG_DEBUG,"%s in %s is redundant",                             \
 //              improvement_types[i].name, (_pcity).name);                    \
 //      mark_improvement((_pcity), i, I_REDUNDANT);                            \
 //    } else {                                                                 \
-//      freelog(LOG_DEBUG,"%s in %s is active!",                               \
+//      util.freelog(LOG_DEBUG,"%s in %s is active!",                               \
 //             improvement_types[i].name, (_pcity).name);                     \
 //      mark_improvement((_pcity), i, I_ACTIVE);                               \
 //    }                                                                        \

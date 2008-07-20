@@ -1414,7 +1414,7 @@ public class Citydlg{
 //
 //  pdialog=(city_dialog )client_data;
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "These trade routes have been established with %s:\n",
 //	      pdialog.pcity.name);
 //  bptr = end_of_strn(bptr, &nleft);
@@ -1781,7 +1781,7 @@ public class Citydlg{
 //  char buf[512];
 //  String now;
 //  
-//  my_snprintf(buf, sizeof(buf), "%s - %s citizens  CMA: %s",
+//  buf = util.my_snprintf( "%s - %s citizens  CMA: %s",
 //	      pdialog.pcity.name,
 //	      population_to_text(city_population(pdialog.pcity)),
 //                   cmafec_get_short_descr_of_city(pdialog.pcity));
@@ -1899,7 +1899,7 @@ public class Citydlg{
 //  value=city_buy_cost(pdialog.pcity);
 // 
 //  if(game.player_ptr.economic.gold>=value) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Buy %s for %d gold?\nTreasury contains %d gold.", 
 //		name, value, game.player_ptr.economic.gold);
 //    popup_message_dialog(pdialog.shell, "buydialog", buf,
@@ -1908,7 +1908,7 @@ public class Citydlg{
 //			 null);
 //  }
 //  else {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"%s costs %d gold.\nTreasury contains %d gold.", 
 //		name, value, game.player_ptr.economic.gold);
 //    popup_message_dialog(pdialog.shell, "buynodialog", buf,
@@ -2296,7 +2296,7 @@ public class Citydlg{
 //	}
 //
 //	pdialog.sell_id = i;
-//	my_snprintf(buf, sizeof(buf), "Sell %s for %d gold?",
+//	buf = util.my_snprintf( "Sell %s for %d gold?",
 //		    get_impr_name_ex(pdialog.pcity, i),
 //		    impr_sell_gold(i));
 //

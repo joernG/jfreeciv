@@ -459,7 +459,7 @@ public class Chatline{
 //  
 //  {  
 //    char cBuf[256];   
-//    my_snprintf(cBuf, sizeof(cBuf), "Total users logged in : %d", n);
+//    cBuf = util.my_snprintf( "Total users logged in : %d", n);
 //    pStr = create_str16_from_char(cBuf, 12);
 //  }
 //  

@@ -118,7 +118,7 @@ public class Spaceshipdlg{
 //
 //  if(game.spacerace
 //     && pplayer.player_no == game.player_idx
-//     && pship.state == SSHIP_STARTED
+//     && pship.state == spaceship_state.SSHIP_STARTED
 //     && pship.success_rate > 0.0) {
 //    gtk_widget_set_sensitive(pdialog.launch_command, true);
 //  } else {
@@ -273,7 +273,7 @@ public class Spaceshipdlg{
 //  gdk_draw_rectangle(pdialog.image_canvas.window, fill_bg_gc, true,
 //		0, 0, sprite.width * 7, sprite.height * 7);
 //
-//  for (i=0; i < NUM_SS_MODULES; i++) {
+//  for (i=0; i < player_spaceship.NUM_SS_MODULES; i++) {
 //    j = i/3;
 //    k = i%3;
 //    if ((k==0 && j >= ship.habitation)
@@ -281,8 +281,8 @@ public class Spaceshipdlg{
 //	|| (k==2 && j >= ship.solar_panels)) {
 //      continue;
 //    }
-//    x = modules_info[i].x * sprite.width  / 4 - sprite.width / 2;
-//    y = modules_info[i].y * sprite.height / 4 - sprite.height / 2;
+//    x = Spaceship.modules_info[i].x * sprite.width  / 4 - sprite.width / 2;
+//    y = Spaceship.modules_info[i].y * sprite.height / 4 - sprite.height / 2;
 //
 //    sprite = (k==0 ? sprites.spaceship.habitation :
 //	      k==1 ? sprites.spaceship.life_support :
@@ -296,15 +296,15 @@ public class Spaceshipdlg{
 //    gdk_gc_set_clip_mask(civ_gc,null);
 //  }
 //
-//  for (i=0; i < NUM_SS_COMPONENTS; i++) {
+//  for (i=0; i < player_spaceship.NUM_SS_COMPONENTS; i++) {
 //    j = i/2;
 //    k = i%2;
 //    if ((k==0 && j >= ship.fuel)
 //	|| (k==1 && j >= ship.propulsion)) {
 //      continue;
 //    }
-//    x = components_info[i].x * sprite.width  / 4 - sprite.width / 2;
-//    y = components_info[i].y * sprite.height / 4 - sprite.height / 2;
+//    x = Spaceship.components_info[i].x * sprite.width  / 4 - sprite.width / 2;
+//    y = Spaceship.components_info[i].y * sprite.height / 4 - sprite.height / 2;
 //
 //    sprite = (k==0) ? sprites.spaceship.fuel : sprites.spaceship.propulsion;
 //
@@ -319,11 +319,11 @@ public class Spaceshipdlg{
 //
 //  sprite = sprites.spaceship.structural;
 //
-//  for (i=0; i < NUM_SS_STRUCTURALS; i++) {
+//  for (i=0; i < player_spaceship.NUM_SS_STRUCTURALS; i++) {
 //    if (!ship.structure[i])
 //      continue;
-//    x = structurals_info[i].x * sprite.width  / 4 - sprite.width / 2;
-//    y = structurals_info[i].y * sprite.height / 4 - sprite.height / 2;
+//    x = Spaceship.structurals_info[i].x * sprite.width  / 4 - sprite.width / 2;
+//    y = Spaceship.structurals_info[i].y * sprite.height / 4 - sprite.height / 2;
 //
 //    gdk_gc_set_clip_origin(civ_gc, x, y);
 //    gdk_gc_set_clip_mask(civ_gc, sprite.mask);

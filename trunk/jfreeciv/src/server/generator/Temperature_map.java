@@ -96,7 +96,7 @@ public class Temperature_map{
 //	  / (hmap_max_level - hmap_shore_level); 
 //      /* near ocean temperature can be 15 % more "temperate" */
 //      float temperate = 0.15 * (map.temperature / 100 - t / MAX_COLATITUDE) * 
-//	  2 * MIN (50 ,count_ocean_near_tile(ptile, false, true)) /
+//	  2 * Math.min (50 ,count_ocean_near_tile(ptile, false, true)) /
 //	  100;
 //      
 //      tmap(ptile) =  t * (1.0 + temperate) * (1.0 + height);

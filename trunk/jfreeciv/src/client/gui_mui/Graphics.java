@@ -709,8 +709,8 @@ public class Graphics{
 //
 //  if (bmap && mask)
 //  {
-//    int w = MIN(width,sprite.width);
-//    int h = MIN(height,sprite.height);
+//    int w = Math.min(width,sprite.width);
+//    int h = Math.min(height,sprite.height);
 //
 //    if (w > 0 && h > 0)
 //    {
@@ -765,8 +765,8 @@ public class Graphics{
 //
 //  if (mask)
 //  {
-//    int w = MIN(width,sprite.width);
-//    int h = MIN(height,sprite.height);
+//    int w = Math.min(width,sprite.width);
+//    int h = Math.min(height,sprite.height);
 //
 //    if (w > 0 && h > 0)
 //    {
@@ -1097,8 +1097,8 @@ public class Graphics{
 //  put_sprite_overlay_total(rp, ssprite,
 //                           canvas_x + offset_x, canvas_y + offset_y, 
 //                           offset_x, offset_y,
-//                           MIN(width, MAX(0, ssprite.width-offset_x)),
-//                           MIN(height, MAX(0, ssprite.height-offset_y)));
+//                           Math.min(width, MAX(0, ssprite.width-offset_x)),
+//                           Math.min(height, MAX(0, ssprite.height-offset_y)));
 //
 //  /* I imagine this could be done more efficiently. Some pixels We first
 //     draw from the sprite, and then draw black afterwards. It would be much
@@ -1327,7 +1327,7 @@ public class Graphics{
 //      put_overlay_tile_draw(rp, canvas_x, canvas_y, tile_sprs[i],
 //			    offset_x, offset_y, width, height, fog);
 //    else
-//      freelog(LOG_ERROR, "sprite is null");
+//      util.freelog(Log.LOG_ERROR, "sprite is null");
 //  }
 //
 //  /*** Map grid ***/
@@ -1441,10 +1441,10 @@ public class Graphics{
 //  int dest_x = 0, dest_y = 0;
 //
 //  if (!tile_visible_mapcanvas(x, y)) {
-//    freelog(LOG_DEBUG, "dropping %d,%d", x, y);
+//    util.freelog(LOG_DEBUG, "dropping %d,%d", x, y);
 //    return;
 //  }
-//  freelog(LOG_DEBUG, "putting %d,%d draw %x", x, y, draw);
+//  util.freelog(LOG_DEBUG, "putting %d,%d draw %x", x, y, draw);
 //
 //  width = (draw & D_TMB_L) && (draw & D_TMB_R) ? NORMAL_TILE_WIDTH : NORMAL_TILE_WIDTH/2;
 //  if (!(draw & D_TMB_L))

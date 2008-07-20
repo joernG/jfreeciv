@@ -1057,7 +1057,7 @@ public class Menu{
 //
 //
 //    my_enable_menu(menu, IDM_REPORTS_SPACESHIP, 
-//		   (game.player_ptr.spaceship.state!=SSHIP_NONE));
+//		   (game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
 //
 //    my_check_menu(menu, IDM_VIEW_MAP_GRID, draw_map_grid);
 //    my_enable_menu(menu, IDM_VIEW_NATIONAL_BORDERS, game.borders > 0);
@@ -1203,7 +1203,7 @@ public class Menu{
 //      tinfo = get_tile_type(ttype);
 //      if (tinfo.irrigation_result != T_NONE
 //	  && tinfo.irrigation_result != ttype) {
-//	my_snprintf(irrtext, sizeof(irrtext), irrfmt,
+//	irrtext = util.my_snprintf( irrfmt,
 //		    (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //	sz_strlcat(irrtext, "\tI");
 //      } else if (map_has_special(punit.tile, S_IRRIGATION)
@@ -1213,13 +1213,13 @@ public class Menu{
 //      }
 //      if (tinfo.mining_result != T_NONE
 //	  && tinfo.mining_result != ttype) {
-//	my_snprintf(mintext, sizeof(mintext), minfmt,
+//	mintext = util.my_snprintf( minfmt,
 //		    (get_tile_type(tinfo.mining_result)).terrain_name);
 //	sz_strlcat(mintext, "\tM");
 //      }
 //      if (tinfo.transform_result != T_NONE
 //	  && tinfo.transform_result != ttype) {
-//	my_snprintf(transtext, sizeof(transtext), transfmt,
+//	transtext = util.my_snprintf( transfmt,
 //		    (get_tile_type(tinfo.transform_result)).terrain_name);
 //	sz_strlcat(transtext, "\tO");
 //      }

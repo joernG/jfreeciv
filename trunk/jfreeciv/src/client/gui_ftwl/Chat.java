@@ -245,7 +245,7 @@ public class Chat{
 //  enum color_std color=COLOR_STD_BLACK;
 //  player pplayer=null;
 //
-//  freelog(Log.LOG_NORMAL,"ogg_add(%d,%s)",conn_id, astring);
+//  util.freelog(Log.LOG_NORMAL,"ogg_add(%d,%s)",conn_id, astring);
 //
 //  if (output.window) {
 //    sw_window_resize(output.window, output.outer_bounds.width,
@@ -259,7 +259,7 @@ public class Chat{
 //    color = player_color(pplayer);
 //  }
 //
-//  freelog(Log.LOG_NORMAL, "id=%d conn=%p player=%s", conn_id, conn,
+//  util.freelog(Log.LOG_NORMAL, "id=%d conn=%p player=%s", conn_id, conn,
 //	  pplayer ? pplayer.name : "none");
 //  
 //  string =

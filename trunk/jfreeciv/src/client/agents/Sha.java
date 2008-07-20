@@ -42,7 +42,7 @@ public class Sha{
 //**************************************************************************/
 //static void sha_tile_update(tile ptile)
 //{
-//  freelog(LOG_DEBUG, "sha got tile: %d ~= (%d, %d)",
+//  util.freelog(LOG_DEBUG, "sha got tile: %d ~= (%d, %d)",
 //	  ptile.index, TILE_XY(ptile));
 //
 //#if 0
@@ -58,7 +58,7 @@ public class Sha{
 //  unit punit = find_unit_by_id(id);
 //  unit pold_unit = unit_list_find(&previous_units, id);
 //
-//  freelog(LOG_DEBUG, "sha got unit: %d", id);
+//  util.freelog(LOG_DEBUG, "sha got unit: %d", id);
 //
 //  assert(pold_unit);
 //  *pold_unit = *punit;
@@ -73,7 +73,7 @@ public class Sha{
 //  unit pold_unit = create_unit_virtual(get_player(punit.owner),
 //					       null, 0, 0);
 //
-//  freelog(LOG_DEBUG, "sha got unit: %d", id);
+//  util.freelog(LOG_DEBUG, "sha got unit: %d", id);
 //
 //  *pold_unit = *punit;
 //  unit_list_insert(&previous_units, pold_unit);
@@ -86,7 +86,7 @@ public class Sha{
 //{
 //  unit pold_unit = unit_list_find(&previous_units, id);;
 //
-//  freelog(LOG_DEBUG, "sha got unit: %d", id);
+//  util.freelog(LOG_DEBUG, "sha got unit: %d", id);
 //
 //  assert(pold_unit);
 //  unit_list_unlink(&previous_units, pold_unit);

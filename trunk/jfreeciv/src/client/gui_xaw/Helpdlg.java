@@ -283,7 +283,7 @@ public class Helpdlg{
 //     return;
 //  }
 //  
-//  my_snprintf(label, sizeof(label),
+//  label = util.my_snprintf(
 //	      "%s:%d", advances[tech].name,
 //	      num_unknown_techs_for_goal(game.player_ptr, tech));
 //

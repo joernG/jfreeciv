@@ -63,32 +63,32 @@ public class Ratesdlg{
 //  
 //  maxrate=get_government_max_rate(game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */     
-//  tax=MIN(tax, maxrate);
-//  lux=MIN(lux, maxrate);
-//  sci=MIN(sci, maxrate);
+//  tax=Math.min(tax, maxrate);
+//  lux=Math.min(lux, maxrate);
+//  sci=Math.min(sci, maxrate);
 //  
 //  if(tax+sci+lux!=100)
 //    {                     
 //      if((tax!=rates_tax_value))
 //	{
 //	  if(!lux_lock)
-//	    lux=MIN(MAX(100-tax-sci, 0), maxrate);
+//	    lux=Math.min(MAX(100-tax-sci, 0), maxrate);
 //	  if(!sci_lock)
-//	    sci=MIN(MAX(100-tax-lux, 0), maxrate);
+//	    sci=Math.min(MAX(100-tax-lux, 0), maxrate);
 //	}
 //      else if((lux!=rates_lux_value))
 //	{
 //	  if(!tax_lock)
-//	    tax=MIN(MAX(100-lux-sci, 0), maxrate);
+//	    tax=Math.min(MAX(100-lux-sci, 0), maxrate);
 //	  if(!sci_lock)
-//	    sci=MIN(MAX(100-lux-tax, 0), maxrate);
+//	    sci=Math.min(MAX(100-lux-tax, 0), maxrate);
 //	}
 //      else if((sci!=rates_sci_value))
 //	{
 //	  if(!lux_lock)
-//	    lux=MIN(MAX(100-tax-sci, 0), maxrate);
+//	    lux=Math.min(MAX(100-tax-sci, 0), maxrate);
 //	  if(!tax_lock)
-//	    tax=MIN(MAX(100-lux-sci, 0), maxrate);
+//	    tax=Math.min(MAX(100-lux-sci, 0), maxrate);
 //	}
 //      
 //      if(tax+sci+lux!=100) {
@@ -110,7 +110,7 @@ public class Ratesdlg{
 //  if (tax!=rates_tax_value)
 //    {
 //      scroll=GetDlgItem(ratesdlg,ID_RATES_TAX);
-//      my_snprintf(buf, sizeof(buf), "%3d%%", tax); 
+//      buf = util.my_snprintf( "%3d%%", tax); 
 //      SetWindowText(GetNextSibling(scroll),buf);
 //      
 //      if (!no_tax_scroll)
@@ -123,7 +123,7 @@ public class Ratesdlg{
 //  if (lux!=rates_lux_value)
 //    {
 //      scroll=GetDlgItem(ratesdlg,ID_RATES_LUXURY);
-//      my_snprintf(buf, sizeof(buf), "%3d%%", lux); 
+//      buf = util.my_snprintf( "%3d%%", lux); 
 //      SetWindowText(GetNextSibling(scroll),buf);
 //      
 //      if (!no_lux_scroll)
@@ -136,7 +136,7 @@ public class Ratesdlg{
 //  if (sci!=rates_sci_value)
 //    {
 //      scroll=GetDlgItem(ratesdlg,ID_RATES_SCIENCE);
-//      my_snprintf(buf, sizeof(buf), "%3d%%", sci); 
+//      buf = util.my_snprintf( "%3d%%", sci); 
 //      SetWindowText(GetNextSibling(scroll),buf);
 //      
 //      if (!no_sci_scroll)
@@ -174,7 +174,7 @@ public class Ratesdlg{
 //      int tax_value;
 //      
 //      tax_value=10*pos;
-//      tax_value=MIN(tax_value, 100);
+//      tax_value=Math.min(tax_value, 100);
 //      rates_set_values(tax_value,0, rates_lux_value,0, rates_sci_value,0);  
 //    }
 //  else if (id==ID_RATES_LUXURY)
@@ -182,7 +182,7 @@ public class Ratesdlg{
 //      int lux_value;
 //      
 //      lux_value=10*pos;
-//      lux_value=MIN(lux_value, 100);
+//      lux_value=Math.min(lux_value, 100);
 //      rates_set_values(rates_tax_value,0, lux_value,0, rates_sci_value,0);        
 //    }
 //  else
@@ -190,7 +190,7 @@ public class Ratesdlg{
 //      int sci_value;
 //      
 //      sci_value=10*pos;
-//      sci_value=MIN(sci_value, 100);
+//      sci_value=Math.min(sci_value, 100);
 //      rates_set_values(rates_tax_value,0, rates_lux_value,0, sci_value,0);        
 //    }
 //}
@@ -331,7 +331,7 @@ public class Ratesdlg{
 //    fcwin_box_add_button(hbox,"Cancel",IDCANCEL,0,true,true,20);
 //    fcwin_box_add_box(vbox,hbox,true,true,10);
 //  
-//    my_snprintf(buf, sizeof(buf), "%s max rate: %d%%",
+//    buf = util.my_snprintf( "%s max rate: %d%%",
 //		get_government_name(game.player_ptr.government),
 //		get_government_max_rate(game.player_ptr.government)); 
 //    SetWindowText(GetDlgItem(ratesdlg,ID_RATES_MAX),buf);

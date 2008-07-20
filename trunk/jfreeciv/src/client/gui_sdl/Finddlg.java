@@ -158,7 +158,7 @@ public class Finddlg{
 //  for(i=0; i<game.nplayers; i++) {
 //    city_list_iterate(game.players[i].cities, pCity) {
 //    
-//      my_snprintf(cBuf , sizeof(cBuf), "%s (%d)",pCity.name, pCity.size);
+//      cBuf = util.my_snprintf( "%s (%d)",pCity.name, pCity.size);
 //      
 //      pStr = create_str16_from_char(cBuf , 10);
 //      pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);

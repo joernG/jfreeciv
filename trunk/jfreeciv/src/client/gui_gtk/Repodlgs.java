@@ -176,7 +176,7 @@ public class Repodlgs{
 //
 //  gtk_window_set_title (GTK_WINDOW(science_dialog_shell), "Science");
 //
-//  my_snprintf(text, sizeof(text), "no text set yet");
+//  text = util.my_snprintf( "no text set yet");
 //  science_label = gtk_label_new(text);
 //
 //  gtk_box_pack_start( GTK_BOX( GTK_DIALOG(science_dialog_shell).vbox ),
@@ -274,7 +274,7 @@ public class Repodlgs{
 //
 //    gtk_widget_set_sensitive(science_change_menu_button,
 //			     can_client_issue_orders());
-//    my_snprintf(text, sizeof(text), "%d/%d",
+//    text = util.my_snprintf( "%d/%d",
 //		game.player_ptr.research.bulbs_researched,
 //		total_bulbs_required(game.player_ptr));
 //    pct=CLAMP((gfloat) game.player_ptr.research.bulbs_researched /
@@ -304,7 +304,7 @@ public class Repodlgs{
 //    int steps = num_unknown_techs_for_goal(game.player_ptr, to);
 //    char text[512];
 //
-//    my_snprintf(text, sizeof(text),
+//    text = util.my_snprintf(
 //		PL_("(%d step)", "(%d steps)", steps), steps);
 //    gtk_set_label(science_goal_label,text);
 //
@@ -351,7 +351,7 @@ public class Repodlgs{
 //  if (!is_future_tech(a)) {
 //    a_str=advances[a].name;
 //  } else {
-//    my_snprintf(text_a,sizeof(text_a), "Future Tech. %d",
+//    text_a = util.my_snprintf( "Future Tech. %d",
 //		a - game.num_tech_types);
 //    a_str=text_a;
 //  }
@@ -359,7 +359,7 @@ public class Repodlgs{
 //  if(!is_future_tech(b)) {
 //    b_str=advances[b].name;
 //  } else {
-//    my_snprintf(text_b,sizeof(text_b), "Future Tech. %d",
+//    text_b = util.my_snprintf( "Future Tech. %d",
 //		b - game.num_tech_types);
 //    b_str=text_b;
 //  }
@@ -416,7 +416,7 @@ public class Repodlgs{
 //  gtk_widget_destroy(popupmenu);
 //  popupmenu = gtk_menu_new();
 //
-//  my_snprintf(text, sizeof(text), "%d/%d",
+//  text = util.my_snprintf( "%d/%d",
 //	      game.player_ptr.research.bulbs_researched,
 //	      total_bulbs_required(game.player_ptr));
 //
@@ -460,7 +460,7 @@ public class Repodlgs{
 //	game.num_tech_types) {
 //      data=advances[GPOINTER_TO_INT(g_list_nth_data(sorting_list, i))].name;
 //    } else {
-//      my_snprintf(text, sizeof(text), "Future Tech. %d",
+//      text = util.my_snprintf( "Future Tech. %d",
 //		  GPOINTER_TO_INT(g_list_nth_data(sorting_list, i))
 //		  - game.num_tech_types);
 //      data=text;
@@ -490,7 +490,7 @@ public class Repodlgs{
 //  
 //  steps = num_unknown_techs_for_goal(game.player_ptr,
 //				     game.player_ptr.ai.tech_goal);
-//  my_snprintf(text, sizeof(text), PL_("(%d step)", "(%d steps)", steps),
+//  text = util.my_snprintf( PL_("(%d step)", "(%d steps)", steps),
 //	      steps);
 //  gtk_set_label(science_goal_label,text);
 //
@@ -757,10 +757,10 @@ public class Repodlgs{
 //    for (i = 0; i < entries_used; i++) {
 //      improvement_entry p = &entries[i];
 //
-//      my_snprintf(buf0, sizeof(buf0), "%-20s", get_improvement_name(p.type));
-//      my_snprintf(buf1, sizeof(buf1), "%5d", p.count);
-//      my_snprintf(buf2, sizeof(buf2), "%5d", p.cost);
-//      my_snprintf(buf3, sizeof(buf3), "%6d", p.total_cost);
+//      buf0 = util.my_snprintf( "%-20s", get_improvement_name(p.type));
+//      buf1 = util.my_snprintf( "%5d", p.count);
+//      buf2 = util.my_snprintf( "%5d", p.cost);
+//      buf3 = util.my_snprintf( "%6d", p.total_cost);
 //
 //      gtk_clist_append(GTK_CLIST(economy_list), row);
 //
@@ -773,11 +773,11 @@ public class Repodlgs{
 //    get_economy_report_units_data(entries_units, &entries_used, &total);
 //
 //    for (i = 0; i < entries_used; i++) {
-//      my_snprintf(buf0, sizeof(buf0), "%-20s",
+//      buf0 = util.my_snprintf( "%-20s",
 //		  unit_name(entries_units[i].type));
-//      my_snprintf(buf1, sizeof(buf1), "%5d", entries_units[i].count);
-//      my_snprintf(buf2, sizeof(buf2), "%5d", entries_units[i].cost);
-//      my_snprintf(buf3, sizeof(buf3), "%6d", entries_units[i].total_cost);
+//      buf1 = util.my_snprintf( "%5d", entries_units[i].count);
+//      buf2 = util.my_snprintf( "%5d", entries_units[i].cost);
+//      buf3 = util.my_snprintf( "%6d", entries_units[i].total_cost);
 //
 //      gtk_clist_append(GTK_CLIST(economy_list), row);
 //
@@ -786,7 +786,7 @@ public class Repodlgs{
 //      
 //    }
 //
-//    my_snprintf(economy_total, sizeof(economy_total),
+//    economy_total = util.my_snprintf(
 //		"Income:%6d    Total Costs: %6d", tax, total); 
 //    gtk_set_label(economy_label2, economy_total); 
 //
@@ -959,7 +959,7 @@ public class Repodlgs{
 //
 //  ut2 = can_upgrade_unittype(game.player_ptr, activeunits_type[row]);
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	  _("Upgrade as many %s to %s as possible for %d gold each?\n"
 //	    "Treasury contains %d gold."),
 //	  unit_types[ut1].name, unit_types[ut2].name,
@@ -1062,7 +1062,7 @@ public class Repodlgs{
 //    } unit_type_iterate_end;
 //
 //    /* horrible kluge, but I can't get gtk_label_set_justify() to work --jjm */
-//    my_snprintf(activeunits_total, sizeof(activeunits_total),
+//    activeunits_total = util.my_snprintf(
 //	    "Totals:                     %s%9d%s%9d%s%9d%s%9d%s%9d",
 //	    "        ", unittotals.building_count,
 //	    " ", unittotals.active_count,

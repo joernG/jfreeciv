@@ -110,9 +110,9 @@ public class Game{
 //{
 //  city pcity;
 //
-//  freelog(LOG_DEBUG, "game_remove_unit %d", punit.id);
-//  freelog(LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
-//	  punit.id, get_nation_name(unit_owner(punit).nation),
+//  util.freelog(LOG_DEBUG, "game_remove_unit %d", punit.id);
+//  util.freelog(LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
+//	  punit.id, Nation.get_nation_name(unit_owner(punit).nation),
 //	  unit_name(punit.type), punit.tile.x, punit.tile.y,
 //	  punit.homecity);
 //
@@ -122,8 +122,8 @@ public class Game{
 //  }
 //
 //  if (pcity) {
-//    freelog(LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
-//	    get_nation_name(city_owner(pcity).nation), pcity.tile.x,
+//    util.freelog(LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
+//	    Nation.get_nation_name(city_owner(pcity).nation), pcity.tile.x,
 //	    pcity.tile.y);
 //  }
 //
@@ -143,9 +143,9 @@ public class Game{
 //**************************************************************************/
 //void game_remove_city(city pcity)
 //{
-//  freelog(LOG_DEBUG, "game_remove_city %d", pcity.id);
-//  freelog(LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
-//	   get_nation_name(city_owner(pcity).nation), pcity.tile.x,
+//  util.freelog(LOG_DEBUG, "game_remove_city %d", pcity.id);
+//  util.freelog(LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
+//	   Nation.get_nation_name(city_owner(pcity).nation), pcity.tile.x,
 //	  pcity.tile.y);
 //
 //  city_map_checked_iterate(pcity.tile, x, y, map_tile) {

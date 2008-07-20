@@ -142,7 +142,7 @@ public class Sernet{
 //   * the preprocessor check has to come inside the function body.  But
 //   * perhaps we want to do this even when SOCKET_ZERO_ISNT_STDIN? */
 //#ifndef SOCKET_ZERO_ISNT_STDIN
-//  freelog(Log.LOG_NORMAL, "Server cannot read standard input. Ignoring input.");
+//  util.freelog(Log.LOG_NORMAL, "Server cannot read standard input. Ignoring input.");
 //  no_input = true;
 //#endif
 //}
@@ -307,7 +307,7 @@ public class Sernet{
 //      connection pconn = &connections[i];
 //      if(pconn.used) {
 //        if(FD_ISSET(pconn.sock, &exceptfs)) {
-//	  freelog(Log.LOG_NORMAL, "cut connection %s due to exception data",
+//	  util.freelog(Log.LOG_NORMAL, "cut connection %s due to exception data",
 //		  conn_description(pconn));
 //	  close_socket_callback(pconn);
 //        } else {
@@ -317,7 +317,7 @@ public class Sernet{
 //	    } else {
 //	      if(game.tcptimeout != 0 && pconn.last_write != 0
 //		 && (time(null)>pconn.last_write + game.tcptimeout)) {
-//	        freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
+//	        util.freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
 //			conn_description(pconn));
 //		close_socket_callback(pconn);
 //	      }
@@ -381,7 +381,7 @@ public class Sernet{
 //#endif /* HAVE_LIBREADLINE */
 //
 //  if(year!=game.year) {
-//    if (server_state == RUN_GAME_STATE) year=game.year;
+//    if (Srv_main.server_state == RUN_GAME_STATE) year=game.year;
 //  }
 //  if (game.timeout == 0) {
 //    /* Just in case someone sets timeout we keep game.turn_start updated */
@@ -400,7 +400,7 @@ public class Sernet{
 //    get_lanserver_announcement();
 //
 //    /* end server if no players for 'srvarg.quitidle' seconds */
-//    if (srvarg.quitidle != 0 && server_state != server_states.PRE_GAME_STATE) {
+//    if (srvarg.quitidle != 0 && Srv_main.server_state != server_states.PRE_GAME_STATE) {
 //      static time_t last_noplayers;
 //      if(conn_list_size(&game.est_connections) == 0) {
 //	if (last_noplayers != 0) {
@@ -409,10 +409,10 @@ public class Sernet{
 //	      save_game_auto();
 //	    }
 //	    set_meta_message_string("restarting for lack of players");
-//	    freelog(Log.LOG_NORMAL, get_meta_message_string());
+//	    util.freelog(Log.LOG_NORMAL, get_meta_message_string());
 //	    () send_server_info_to_metaserver(META_INFO);
 //
-//            server_state = GAME_OVER_STATE;
+//            Srv_main.server_state = server_states.GAME_OVER_STATE;
 //            force_end_of_sniff = true;
 //            for (conn pconn : game.est_connections.data) {
 //              lost_connection_to_client(pconn);
@@ -428,11 +428,11 @@ public class Sernet{
 //          char buf[256];
 //	  last_noplayers = time(null);
 //	  
-//	  my_snprintf(buf, sizeof(buf),
+//	  buf = util.my_snprintf(
 //		      "restarting in %d seconds for lack of players",
 //		      srvarg.quitidle);
 //          set_meta_message_string((final String)buf);
-//	  freelog(Log.LOG_NORMAL, get_meta_message_string());
+//	  util.freelog(Log.LOG_NORMAL, get_meta_message_string());
 //	  () send_server_info_to_metaserver(META_INFO);
 //	}
 //      } else {
@@ -452,11 +452,11 @@ public class Sernet{
 //	     > game.pingtimeout) || pconn.ping_time > game.pingtimeout) {
 //	  /* cut mute players, except for hack-level ones */
 //	  if (pconn.access_level == ALLOW_HACK) {
-//	    freelog(Log.LOG_NORMAL,
+//	    util.freelog(Log.LOG_NORMAL,
 //		    "ignoring ping timeout to hack-level connection %s",
 //		    conn_description(pconn));
 //	  } else {
-//	    freelog(Log.LOG_NORMAL, "cut connection %s due to ping timeout",
+//	    util.freelog(Log.LOG_NORMAL, "cut connection %s due to ping timeout",
 //		    conn_description(pconn));
 //	    close_socket_callback(pconn);
 //	  }
@@ -475,7 +475,7 @@ public class Sernet{
 //    } conn_list_iterate_end
 //
 //    /* Don't wait if timeout == -1 (i.e. on auto games) */
-//    if (server_state != server_states.PRE_GAME_STATE && game.timeout == -1) {
+//    if (Srv_main.server_state != server_states.PRE_GAME_STATE && game.timeout == -1) {
 //      () send_server_info_to_metaserver(META_REFRESH);
 //      return 0;
 //    }
@@ -517,7 +517,7 @@ public class Sernet{
 //      () send_server_info_to_metaserver(META_REFRESH);
 //      if(game.timeout != 0
 //	&& (time(null)>game.turn_start + game.timeout)
-//	&& (server_state == RUN_GAME_STATE)){
+//	&& (Srv_main.server_state == RUN_GAME_STATE)){
 //	con_prompt_off();
 //	return 0;
 //      }
@@ -551,15 +551,15 @@ public class Sernet{
 //      continue;
 //    }
 //    if(FD_ISSET(sock, &readfs)) {	     /* new players connects */
-//      freelog(LOG_VERBOSE, "got new connection");
+//      util.freelog(LOG_VERBOSE, "got new connection");
 //      if(server_accept_connection(sock)==-1) {
-//	freelog(LOG_ERROR, "failed accepting connection");
+//	util.freelog(Log.LOG_ERROR, "failed accepting connection");
 //      }
 //    }
 //    for(i=0; i<MAX_NUM_CONNECTIONS; i++) {   /* check for freaky players */
 //      connection pconn = &connections[i];
 //      if(pconn.used && FD_ISSET(pconn.sock, &exceptfs)) {
-// 	freelog(LOG_ERROR, "cut connection %s due to exception data",
+// 	util.freelog(Log.LOG_ERROR, "cut connection %s due to exception data",
 //		conn_description(pconn));
 //	close_socket_callback(pconn);
 //      }
@@ -652,7 +652,7 @@ public class Sernet{
 //		  us = (end.tv_sec - start.tv_sec) * 1000000 +
 //		      end.tv_usec - start.tv_usec;
 //
-//		  freelog(Log.LOG_NORMAL,
+//		  util.freelog(Log.LOG_NORMAL,
 //			  "processed request %d in %ld.%03ldms",
 //			  pconn.server.last_request_id_seen, us / 1000,
 //			  us % 1000);
@@ -676,7 +676,7 @@ public class Sernet{
 //	  } else {
 //	    if(game.tcptimeout != 0 && pconn.last_write != 0
 //	       && (time(null)>pconn.last_write + game.tcptimeout)) {
-//	      freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
+//	      util.freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
 //		      conn_description(pconn));
 //	      close_socket_callback(pconn);
 //	    }
@@ -709,7 +709,7 @@ public class Sernet{
 //
 //  for(;;) {
 //    if (i==(unsigned short)-1) i++;              /* don't use 0 */
-//    my_snprintf(name, sizeof(name), "c%u", (unsigned int)++i);
+//    name = util.my_snprintf( "c%u", (unsigned int)++i);
 //    if (!find_player_by_name(name)
 //	&& !find_player_by_user(name)
 //	&& !find_conn_by_id(i)
@@ -744,7 +744,7 @@ public class Sernet{
 //  fromlen = sizeof(fromend);
 //
 //  if ((new_sock = accept(sockfd, &fromend.sockaddr, &fromlen)) == -1) {
-//    freelog(LOG_ERROR, "accept failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "accept failed: %s", mystrerror());
 //    return -1;
 //  }
 //
@@ -786,14 +786,14 @@ public class Sernet{
 //
 //      conn_list_insert_back(&game.all_connections, pconn);
 //  
-//      freelog(LOG_VERBOSE, "connection (%s) from %s (%s)", 
+//      util.freelog(LOG_VERBOSE, "connection (%s) from %s (%s)", 
 //              pconn.username, pconn.addr, pconn.server.ipaddr);
 //      ping_connection(pconn);
 //      return 0;
 //    }
 //  }
 //
-//  freelog(LOG_ERROR, "maximum number of connections reached");
+//  util.freelog(Log.LOG_ERROR, "maximum number of connections reached");
 //  return -1;
 //}
 //
@@ -818,33 +818,33 @@ public class Sernet{
 //  opt=1; 
 //  if(setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, 
 //		(char *)&opt, sizeof(opt)) == -1) {
-//    freelog(LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
 //  }
 //
 //  if (!net_lookup_service(srvarg.bind_addr, srvarg.port, &src)) {
-//    freelog(LOG_ERROR, "Server: bad address: [%s:%d].",
+//    util.freelog(Log.LOG_ERROR, "Server: bad address: [%s:%d].",
 //	    srvarg.bind_addr, srvarg.port);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if(bind(sock, &src.sockaddr, sizeof (src)) == -1) {
-//    freelog(LOG_FATAL, "bind failed: %s", mystrerror());
+//    util.freelog(LOG_FATAL, "bind failed: %s", mystrerror());
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if(listen(sock, MAX_NUM_CONNECTIONS) == -1) {
-//    freelog(LOG_FATAL, "listen failed: %s", mystrerror());
+//    util.freelog(LOG_FATAL, "listen failed: %s", mystrerror());
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  /* Create socket for server LAN announcements */
 //  if ((socklan = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-//     freelog(LOG_ERROR, "socket failed: %s", mystrerror());
+//     util.freelog(Log.LOG_ERROR, "socket failed: %s", mystrerror());
 //  }
 //
 //  if (setsockopt(socklan, SOL_SOCKET, SO_REUSEADDR,
 //                 (char *)&opt, sizeof(opt)) == -1) {
-//    freelog(LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
 //  }
 //
 //  my_nonblock(socklan);
@@ -857,7 +857,7 @@ public class Sernet{
 //  addr.sockaddr_in.sin_port = htons(SERVER_LAN_PORT);
 //
 //  if (bind(socklan, &addr.sockaddr, sizeof(addr)) < 0) {
-//    freelog(LOG_ERROR, "bind failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "bind failed: %s", mystrerror());
 //  }
 //
 //  mreq.imr_multiaddr.s_addr = inet_addr(group);
@@ -865,7 +865,7 @@ public class Sernet{
 //
 //  if (setsockopt(socklan, IPPROTO_IP, IP_ADD_MEMBERSHIP,
 //                 (final char*)&mreq, sizeof(mreq)) < 0) {
-//    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //  }
 //
 //  close_socket_set_callback(close_socket_callback);
@@ -908,7 +908,7 @@ public class Sernet{
 //{
 //  assert(request_id);
 //  assert(pconn.server.currently_processed_request_id == 0);
-//  freelog(LOG_DEBUG, "start processing packet %d from connection %d",
+//  util.freelog(LOG_DEBUG, "start processing packet %d from connection %d",
 //	  request_id, pconn.id);
 //  send_packet_processing_started(pconn);
 //  pconn.server.currently_processed_request_id = request_id;
@@ -920,7 +920,7 @@ public class Sernet{
 //static void finish_processing_request(connection pconn)
 //{
 //  assert(pconn.server.currently_processed_request_id);
-//  freelog(LOG_DEBUG, "finish processing packet %d from connection %d",
+//  util.freelog(LOG_DEBUG, "finish processing packet %d from connection %d",
 //	  pconn.server.currently_processed_request_id, pconn.id);
 //  send_packet_processing_finished(pconn);
 //  pconn.server.currently_processed_request_id = 0;
@@ -931,7 +931,7 @@ public class Sernet{
 //**************************************************************************/
 //static void ping_connection(connection pconn)
 //{
-//  freelog(LOG_DEBUG, "sending ping to %s (open=%d)",
+//  util.freelog(LOG_DEBUG, "sending ping to %s (open=%d)",
 //	  conn_description(pconn),
 //	  pconn.server.ping_timers.foo_list_size());
 //  timer_list_insert_back(pconn.server.ping_timers,
@@ -947,7 +947,7 @@ public class Sernet{
 //  timer timer;
 //
 //  if (pconn.server.ping_timers.foo_list_size() == 0) {
-//    freelog(Log.LOG_NORMAL, "got unexpected pong from %s",
+//    util.freelog(Log.LOG_NORMAL, "got unexpected pong from %s",
 //	    conn_description(pconn));
 //    return;
 //  }
@@ -955,7 +955,7 @@ public class Sernet{
 //  timer = timer_list_get(pconn.server.ping_timers, 0);
 //  timer_list_unlink(pconn.server.ping_timers, timer);
 //  pconn.ping_time = read_timer_seconds_free(timer);
-//  freelog(LOG_DEBUG, "got pong from %s (open=%d); ping time = %fs",
+//  util.freelog(LOG_DEBUG, "got pong from %s (open=%d); ping time = %fs",
 //	  conn_description(pconn),
 //	  pconn.server.ping_timers.foo_list_size(), pconn.ping_time);
 //}
@@ -977,7 +977,7 @@ public class Sernet{
 //  } }
 //
 //  packet.connections = i;
-//  packet.old_connections = MIN(i, MAX_NUM_PLAYERS);
+//  packet.old_connections = Math.min(i, MAX_NUM_PLAYERS);
 //
 //  i = 0;
 //  for (conn pconn : game.game_connections.data) {
@@ -1018,7 +1018,7 @@ public class Sernet{
 //
 //  while (select(socklan + 1, &readfs, null, &exceptfs, &tv) == -1) {
 //    if (errno != EINTR) {
-//      freelog(LOG_ERROR, "select failed: %s", mystrerror());
+//      util.freelog(Log.LOG_ERROR, "select failed: %s", mystrerror());
 //      return;
 //    }
 //    /* EINTR can happen sometimes, especially when compiling with -pg.
@@ -1030,10 +1030,10 @@ public class Sernet{
 //      dio_input_init(&din, msgbuf, 1);
 //      dio_get_uint8(&din, &type);
 //      if (type == SERVER_LAN_VERSION) {
-//        freelog(LOG_DEBUG, "Received request for server LAN announcement.");
+//        util.freelog(LOG_DEBUG, "Received request for server LAN announcement.");
 //        send_lanserver_response();
 //      } else {
-//        freelog(LOG_DEBUG,
+//        util.freelog(LOG_DEBUG,
 //                "Received invalid request for server LAN announcement.");
 //      }
 //    }
@@ -1061,7 +1061,7 @@ public class Sernet{
 //
 //  /* Create a socket to broadcast to client. */
 //  if ((socksend = socket(AF_INET,SOCK_DGRAM, 0)) < 0) {
-//    freelog(LOG_ERROR, "socket failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "socket failed: %s", mystrerror());
 //    return;
 //  }
 //
@@ -1076,13 +1076,13 @@ public class Sernet{
 //  ttl = SERVER_LAN_TTL;
 //  if (setsockopt(socksend, IPPROTO_IP, IP_MULTICAST_TTL, 
 //                 (final char*)&ttl, sizeof(ttl))) {
-//    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return;
 //  }
 //
 //  if (setsockopt(socksend, SOL_SOCKET, SO_BROADCAST, 
 //                 (final char*)&setting, sizeof(setting))) {
-//    freelog(LOG_ERROR, "setsockopt failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "setsockopt failed: %s", mystrerror());
 //    return;
 //  }
 //
@@ -1091,26 +1091,26 @@ public class Sernet{
 //    sz_strlcpy(hostname, "none");
 //  }
 //
-//  my_snprintf(version, sizeof(version), "%d.%d.%d%s",
+//  version = util.my_snprintf( "%d.%d.%d%s",
 //              MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, VERSION_LABEL);
 //
-//  switch (server_state) {
+//  switch (Srv_main.server_state) {
 //  case server_states.PRE_GAME_STATE:
-//    my_snprintf(status, sizeof(status), "Pregame");
+//    status = util.my_snprintf( "Pregame");
 //    break;
 //  case RUN_GAME_STATE:
-//    my_snprintf(status, sizeof(status), "Running");
+//    status = util.my_snprintf( "Running");
 //    break;
-//  case GAME_OVER_STATE:
-//    my_snprintf(status, sizeof(status), "Game over");
+//  case server_states.GAME_OVER_STATE:
+//    status = util.my_snprintf( "Game over");
 //    break;
 //  default:
-//    my_snprintf(status, sizeof(status), "Waiting");
+//    status = util.my_snprintf( "Waiting");
 //  }
 //
-//   my_snprintf(players, sizeof(players), "%d",
+//   players = util.my_snprintf( "%d",
 //               get_num_human_and_ai_players());
-//   my_snprintf(port, sizeof(port), "%d",
+//   port = util.my_snprintf( "%d",
 //              srvarg.port );
 //
 //  dio_output_init(&dout, buffer, sizeof(buffer));
@@ -1126,7 +1126,7 @@ public class Sernet{
 //  /* Sending packet to client with the information gathered above. */
 //  if (sendto(socksend, buffer,  size, 0, &addr.sockaddr,
 //      sizeof(addr)) < 0) {
-//    freelog(LOG_ERROR, "sendto failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "sendto failed: %s", mystrerror());
 //    return;
 //  }
 //

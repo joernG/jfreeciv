@@ -159,13 +159,13 @@ public class Mapview{
 //{
 //  char buffer[512]; int d;
 //  
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //	      _("%s People\n"
 //		"Year: %s\n"
 //		"Gold: %d\n"
 //		"Tax:%d Lux:%d Sci:%d"),
 //	  population_to_text(civ_population(game.player_ptr)),
-//	  textyear(game.year),
+//	  Shared.textyear(game.year),
 //	  game.player_ptr.economic.gold,
 //	  game.player_ptr.economic.tax,
 //	  game.player_ptr.economic.luxury,
@@ -205,7 +205,7 @@ public class Mapview{
 //{
 //  if(punit) {
 //    char buffer[512];
-//    my_snprintf(buffer, sizeof(buffer), "%s\n%s",
+//    buffer = util.my_snprintf( "%s\n%s",
 //		get_unit_info_label_text1(punit),
 //		get_unit_info_label_text2(punit));
 //    xaw_set_label(unit_info_label, buffer);

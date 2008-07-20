@@ -241,7 +241,7 @@ public class Connectdlg_common{
 //    /* inside the child */
 //
 //    /* Set up the command-line parameters. */
-//    my_snprintf(port_buf, sizeof(port_buf), "%d", internal_server_port);
+//    port_buf = util.my_snprintf( "%d", internal_server_port);
 //    argv[argc++] = "civserver";
 //    argv[argc++] = "-p";
 //    argv[argc++] = port_buf;
@@ -319,19 +319,19 @@ public class Connectdlg_common{
 //  scriptcmdline[0] = 0;
 //
 //  if (logfile) {
-//    my_snprintf(logcmdline, sizeof(logcmdline), " --debug 3 --log %s",
+//    logcmdline = util.my_snprintf( " --debug 3 --log %s",
 //		logfile);
 //  }
 //  if (scriptfile) {
-//    my_snprintf(scriptcmdline, sizeof(scriptcmdline),  " --read %s",
+//    scriptcmdline = util.my_snprintf(  " --read %s",
 //		scriptfile);
 //  }
 //
-//  my_snprintf(options, sizeof(options), "-p %d -q 1 -e%s%s",
+//  options = util.my_snprintf( "-p %d -q 1 -e%s%s",
 //	      internal_server_port, logcmdline, scriptcmdline);
-//  my_snprintf(cmdline1, sizeof(cmdline1), "./ser %s", options);
-//  my_snprintf(cmdline2, sizeof(cmdline2), "./server/civserver %s", options);
-//  my_snprintf(cmdline3, sizeof(cmdline3), "civserver %s", options);
+//  cmdline1 = util.my_snprintf( "./ser %s", options);
+//  cmdline2 = util.my_snprintf( "./server/civserver %s", options);
+//  cmdline3 = util.my_snprintf( "civserver %s", options);
 //
 //  if (!CreateProcess(null, cmdline1, null, null, true,
 //		     DETACHED_PROCESS | NORMAL_PRIORITY_CLASS,
@@ -395,7 +395,7 @@ public class Connectdlg_common{
 //   * has sufficient permissions to do so (it doesn't have HACK access yet) it
 //   * is safe enough.  Note that if you load a savegame the topology will be
 //   * set but then overwritten during the load. */
-//  my_snprintf(buf, sizeof(buf), "/set topology %d",
+//  buf = util.my_snprintf( "/set topology %d",
 //	      (TF_WRAPX
 //	       | ((is_isometric && hex_height == 0) ? TF_ISO : 0)
 //	       | ((hex_width != 0 || hex_height != 0) ? TF_HEX : 0)));
@@ -468,7 +468,7 @@ public class Connectdlg_common{
 //      section_file_init(&file);
 //      secfile_insert_str(&file, req.token, "challenge.token");
 //      if (!section_file_save(&file, challenge_fullname, 0)) {
-//	freelog(LOG_ERROR, "Couldn't write token to temporary file: %s",
+//	util.freelog(Log.LOG_ERROR, "Couldn't write token to temporary file: %s",
 //	    challenge_fullname);
 //      }
 //      section_file_free(&file);
@@ -488,7 +488,7 @@ public class Connectdlg_common{
 //    /* remove challenge file */
 //    if (challenge_fullname[0] != '\0') {
 //      if (remove(challenge_fullname) == -1) {
-//	freelog(LOG_ERROR, "Couldn't remove temporary file: %s",
+//	util.freelog(Log.LOG_ERROR, "Couldn't remove temporary file: %s",
 //	    challenge_fullname);
 //      }
 //      challenge_fullname[0] = '\0';
@@ -516,7 +516,7 @@ public class Connectdlg_common{
 //
 //  send_chat("/set timeout 0");
 //  send_chat("/set autotoggle 1");
-//  my_snprintf(buf, sizeof(buf), "/take \"%s\" \"%s\"",
+//  buf = util.my_snprintf( "/take \"%s\" \"%s\"",
 //      	      user_name, player_name);
 //  send_chat(buf);
 //  send_chat("/start");

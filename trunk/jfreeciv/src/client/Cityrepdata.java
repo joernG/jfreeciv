@@ -51,14 +51,14 @@ public class Cityrepdata{
 //static final String cr_entry_size(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.size);
+//  buf = util.my_snprintf( "%2d", pcity.size);
 //  return buf;
 //}
 //
 //static final String cr_entry_hstate_concise(final city pcity)
 //{
 //  static char buf[4];
-//  my_snprintf(buf, sizeof(buf), "%s", (city_celebrating(pcity) ? "*" :
+//  buf = util.my_snprintf( "%s", (city_celebrating(pcity) ? "*" :
 //				       (city_unhappy(pcity) ? "X" : " ")));
 //  return buf;
 //}
@@ -66,7 +66,7 @@ public class Cityrepdata{
 //static final String cr_entry_hstate_verbose(final city pcity)
 //{
 //  static char buf[16];
-//  my_snprintf(buf, sizeof(buf), "%s",
+//  buf = util.my_snprintf( "%s",
 //	      (city_celebrating(pcity) ? Q"?city_state:Rapture" :
 //	       (city_unhappy(pcity) ? Q"?city_state:Disorder" :
 //		Q"?city_state:Peace")));
@@ -76,7 +76,7 @@ public class Cityrepdata{
 //static final String cr_entry_workers(final city pcity)
 //{
 //  static char buf[32];
-//  my_snprintf(buf, sizeof(buf), "%d/%d/%d/%d", pcity.ppl_happy[4],
+//  buf = util.my_snprintf( "%d/%d/%d/%d", pcity.ppl_happy[4],
 //	      pcity.ppl_content[4], pcity.ppl_unhappy[4],
 //	      pcity.ppl_angry[4]);
 //  return buf;
@@ -85,28 +85,28 @@ public class Cityrepdata{
 //static final String cr_entry_happy(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_happy[4]);
+//  buf = util.my_snprintf( "%2d", pcity.ppl_happy[4]);
 //  return buf;
 //}
 //
 //static final String cr_entry_content(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_content[4]);
+//  buf = util.my_snprintf( "%2d", pcity.ppl_content[4]);
 //  return buf;
 //}
 //
 //static final String cr_entry_unhappy(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_unhappy[4]);
+//  buf = util.my_snprintf( "%2d", pcity.ppl_unhappy[4]);
 //  return buf;
 //}
 //
 //static final String cr_entry_angry(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.ppl_angry[4]);
+//  buf = util.my_snprintf( "%2d", pcity.ppl_angry[4]);
 //  return buf;
 //}
 //
@@ -118,21 +118,21 @@ public class Cityrepdata{
 //static final String cr_entry_entertainers(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.specialists[SP_ELVIS]);
+//  buf = util.my_snprintf( "%2d", pcity.specialists[SP_ELVIS]);
 //  return buf;
 //}
 //
 //static final String cr_entry_scientists(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.specialists[SP_SCIENTIST]);
+//  buf = util.my_snprintf( "%2d", pcity.specialists[SP_SCIENTIST]);
 //  return buf;
 //}
 //
 //static final String cr_entry_taxmen(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%2d", pcity.specialists[SP_TAXMAN]);
+//  buf = util.my_snprintf( "%2d", pcity.specialists[SP_TAXMAN]);
 //  return buf;
 //}
 //
@@ -209,7 +209,7 @@ public class Cityrepdata{
 //    num_supported++;
 //  } }
 //
-//  my_snprintf(buf, sizeof(buf), "%2d", num_supported);
+//  buf = util.my_snprintf( "%2d", num_supported);
 //
 //  return buf;
 //}
@@ -223,7 +223,7 @@ public class Cityrepdata{
 //    num_present++;
 //  } }
 //
-//  my_snprintf(buf, sizeof(buf), "%2d", num_present);
+//  buf = util.my_snprintf( "%2d", num_present);
 //
 //  return buf;
 //}
@@ -231,7 +231,7 @@ public class Cityrepdata{
 //static final String cr_entry_resources(final city pcity)
 //{
 //  static char buf[32];
-//  my_snprintf(buf, sizeof(buf), "%d/%d/%d",
+//  buf = util.my_snprintf( "%d/%d/%d",
 //	      pcity.food_surplus, 
 //	      pcity.shield_surplus, 
 //	      pcity.trade_prod);
@@ -241,7 +241,7 @@ public class Cityrepdata{
 //static final String cr_entry_foodplus(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d",
+//  buf = util.my_snprintf( "%3d",
 //	      pcity.food_surplus);
 //  return buf;
 //}
@@ -249,7 +249,7 @@ public class Cityrepdata{
 //static final String cr_entry_prodplus(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d",
+//  buf = util.my_snprintf( "%3d",
 //	      pcity.shield_surplus);
 //  return buf;
 //}
@@ -257,7 +257,7 @@ public class Cityrepdata{
 //static final String cr_entry_tradeplus(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d",
+//  buf = util.my_snprintf( "%3d",
 //	      pcity.trade_prod);
 //  return buf;
 //}
@@ -268,7 +268,7 @@ public class Cityrepdata{
 //  int goldie;
 //
 //  goldie = city_gold_surplus(pcity, pcity.tax_total);
-//  my_snprintf(buf, sizeof(buf), "%s%d/%d/%d",
+//  buf = util.my_snprintf( "%s%d/%d/%d",
 //	      (goldie < 0) ? "-" : (goldie > 0) ? "+" : "",
 //	      (goldie < 0) ? (-goldie) : goldie,
 //	      pcity.luxury_total,
@@ -281,9 +281,9 @@ public class Cityrepdata{
 //  static char buf[8];
 //  int income = city_gold_surplus(pcity, pcity.tax_total);
 //  if (income > 0) {
-//    my_snprintf(buf, sizeof(buf), "+%d", income);
+//    buf = util.my_snprintf( "+%d", income);
 //  } else {
-//    my_snprintf(buf, sizeof(buf), "%3d", city_gold_surplus(pcity, pcity.tax_total));
+//    buf = util.my_snprintf( "%3d", city_gold_surplus(pcity, pcity.tax_total));
 //  }
 //  return buf;
 //}
@@ -291,7 +291,7 @@ public class Cityrepdata{
 //static final String cr_entry_luxury(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d",
+//  buf = util.my_snprintf( "%3d",
 //	      pcity.luxury_total);
 //  return buf;
 //}
@@ -299,7 +299,7 @@ public class Cityrepdata{
 //static final String cr_entry_science(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d",
+//  buf = util.my_snprintf( "%3d",
 //	      pcity.science_total);
 //  return buf;
 //}
@@ -307,7 +307,7 @@ public class Cityrepdata{
 //static final String cr_entry_food(final city pcity)
 //{
 //  static char buf[32];
-//  my_snprintf(buf, sizeof(buf), "%d/%d",
+//  buf = util.my_snprintf( "%d/%d",
 //	      pcity.food_stock,
 //	      city_granary_size(pcity.size) );
 //  return buf;
@@ -319,10 +319,10 @@ public class Cityrepdata{
 //  int turns = city_turns_to_grow(pcity);
 //  if (turns == FC_INFINITY) {
 //    /* 'never' wouldn't be easily translatable here. */
-//    my_snprintf(buf, sizeof(buf), "-");
+//    buf = util.my_snprintf( "-");
 //  } else {
 //    /* Shrinking cities get a negative value. */
-//    my_snprintf(buf, sizeof(buf), "%4d", turns);
+//    buf = util.my_snprintf( "%4d", turns);
 //  }
 //  return buf;
 //}
@@ -330,14 +330,14 @@ public class Cityrepdata{
 //static final String cr_entry_pollution(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d", pcity.pollution);
+//  buf = util.my_snprintf( "%3d", pcity.pollution);
 //  return buf;
 //}
 //
 //static final String cr_entry_num_trade(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%d", city_num_trade_routes(pcity));
+//  buf = util.my_snprintf( "%d", city_num_trade_routes(pcity));
 //  return buf;
 //}
 //
@@ -349,7 +349,7 @@ public class Cityrepdata{
 //    concise_city_production ? "*" : "(worklist)";
 //	
 //  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
-//    my_snprintf(buf, sizeof(buf), "%s (%d/X/X/X)%s",
+//    buf = util.my_snprintf( "%s (%d/X/X/X)%s",
 //		get_impr_name_ex(pcity, pcity.currently_building),
 //		MAX(0, pcity.shield_surplus), from_worklist);
 //  } else {
@@ -360,9 +360,9 @@ public class Cityrepdata{
 //    int cost;
 //
 //    if (turns < 999) {
-//      my_snprintf(time, sizeof(time), "%d", turns);
+//      time = util.my_snprintf( "%d", turns);
 //    } else {
-//      my_snprintf(time, sizeof(time), "-");
+//      time = util.my_snprintf( "-");
 //    }
 //
 //    if(pcity.is_building_unit) {
@@ -373,7 +373,7 @@ public class Cityrepdata{
 //      cost = impr_build_shield_cost(pcity.currently_building);
 //    }
 //
-//    my_snprintf(buf, sizeof(buf), "%s (%d/%d/%s/%d)%s", name,
+//    buf = util.my_snprintf( "%s (%d/%d/%s/%d)%s", name,
 //		pcity.shield_stock, cost, time, city_buy_cost(pcity),
 //		from_worklist);
 //  }
@@ -384,14 +384,14 @@ public class Cityrepdata{
 //static final String cr_entry_corruption(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d", pcity.corruption);
+//  buf = util.my_snprintf( "%3d", pcity.corruption);
 //  return buf;
 //}
 //
 //static final String cr_entry_waste(final city pcity)
 //{
 //  static char buf[8];
-//  my_snprintf(buf, sizeof(buf), "%3d", pcity.shield_waste);
+//  buf = util.my_snprintf( "%3d", pcity.shield_waste);
 //  return buf;
 //}
 //

@@ -123,26 +123,26 @@ public class Audio{
 //  }
 //
 //  if (found && i != selected_plugin) {
-//    freelog(LOG_DEBUG, "Shutting down %s", plugins[selected_plugin].name);
+//    util.freelog(LOG_DEBUG, "Shutting down %s", plugins[selected_plugin].name);
 //    plugins[selected_plugin].stop();
 //    plugins[selected_plugin].wait();
 //    plugins[selected_plugin].shutdown();
 //  }
 //
 //  if (!found) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    "Plugin '%s' isn't available. Available are %s", name,
 //	    audio_get_all_plugin_names());
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  if (!plugins[i].init()) {
-//    freelog(LOG_ERROR, "Plugin %s found but can't be initialized.", name);
+//    util.freelog(Log.LOG_ERROR, "Plugin %s found but can't be initialized.", name);
 //    return false;
 //  }
 //
 //  selected_plugin = i;
-//  freelog(LOG_VERBOSE, "Plugin '%s' is now selected",
+//  util.freelog(LOG_VERBOSE, "Plugin '%s' is now selected",
 //	  plugins[selected_plugin].name);
 //  return true;
 //}
@@ -198,7 +198,7 @@ public class Audio{
 //    return null;
 //  }
 //
-//  freelog(LOG_ERROR, _("Couldn't find soundset \"%s\" trying \"%s\"."),
+//  util.freelog(Log.LOG_ERROR, _("Couldn't find soundset \"%s\" trying \"%s\"."),
 //	  soundset_name, soundset_default);
 //  return soundspec_fullname(soundset_default);
 //}
@@ -215,57 +215,57 @@ public class Audio{
 //
 //  if (strcmp(prefered_plugin_name, "none") == 0) {
 //    /* We explicitly choose none plugin, silently skip the code below */
-//    freelog(LOG_VERBOSE, "Proceeding with sound support disabled");
+//    util.freelog(LOG_VERBOSE, "Proceeding with sound support disabled");
 //    tagfile = null;
 //    return;
 //  }
 //  if (num_plugins_used == 1) {
 //    /* We only have the dummy plugin, skip the code but issue an advertise */
-//    freelog(Log.LOG_NORMAL, _("No real audio plugin present, "
+//    util.freelog(Log.LOG_NORMAL, _("No real audio plugin present, "
 //      "proceeding with sound support disabled"));
-//    freelog(Log.LOG_NORMAL,
+//    util.freelog(Log.LOG_NORMAL,
 //      "For sound support, install either esound or SDL_mixer");
-//    freelog(Log.LOG_NORMAL, 
+//    util.freelog(Log.LOG_NORMAL, 
 //      "Esound: http://www.tux.org/~ricdude/EsounD.html");
-//    freelog(Log.LOG_NORMAL, _("SDL_mixer: http://www.libsdl.org/"
+//    util.freelog(Log.LOG_NORMAL, _("SDL_mixer: http://www.libsdl.org/"
 //      "projects/SDL_mixer/index.html"));
 //    tagfile = null;
 //    return;
 //  }
 //  if (!spec_name) {
-//    freelog(LOG_FATAL, "No sound spec-file given!");
+//    util.freelog(LOG_FATAL, "No sound spec-file given!");
 //    exit(EXIT_FAILURE);
 //  }
-//  freelog(LOG_VERBOSE, "Initializing sound using %s...", spec_name);
+//  util.freelog(LOG_VERBOSE, "Initializing sound using %s...", spec_name);
 //  filename = soundspec_fullname(spec_name);
 //  if (!filename) {
-//    freelog(LOG_ERROR, _("Cannot find sound spec-file \"%s\"."), spec_name);
-//    freelog(LOG_ERROR, "To get sound you need to download a sound set!");
-//    freelog(LOG_ERROR, "Get sound sets from <%s>.",
+//    util.freelog(Log.LOG_ERROR, _("Cannot find sound spec-file \"%s\"."), spec_name);
+//    util.freelog(Log.LOG_ERROR, "To get sound you need to download a sound set!");
+//    util.freelog(Log.LOG_ERROR, "Get sound sets from <%s>.",
 //	    "ftp://ftp.freeciv.org/freeciv/contrib/sounds/sets");
-//    freelog(LOG_ERROR, "Will continue with disabled sounds.");
+//    util.freelog(Log.LOG_ERROR, "Will continue with disabled sounds.");
 //    tagfile = null;
 //    return;
 //  }
 //  if (!section_file_load(tagfile, filename)) {
-//    freelog(LOG_FATAL, "Could not load sound spec-file: %s", filename);
+//    util.freelog(LOG_FATAL, "Could not load sound spec-file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  file_capstr = secfile_lookup_str(tagfile, "soundspec.options");
 //  if (!has_capabilities(us_capstr, file_capstr)) {
-//    freelog(LOG_FATAL, "sound spec-file appears incompatible:");
-//    freelog(LOG_FATAL, _("file: \"%s\""), filename);
-//    freelog(LOG_FATAL, "file options: %s", file_capstr);
-//    freelog(LOG_FATAL, "supported options: %s", us_capstr);
+//    util.freelog(LOG_FATAL, "sound spec-file appears incompatible:");
+//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, "file options: %s", file_capstr);
+//    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!has_capabilities(file_capstr, us_capstr)) {
-//    freelog(LOG_FATAL, _("sound spec-file claims required option(s)"
+//    util.freelog(LOG_FATAL, _("sound spec-file claims required option(s)"
 //			 " which we don't support:"));
-//    freelog(LOG_FATAL, _("file: \"%s\""), filename);
-//    freelog(LOG_FATAL, "file options: %s", file_capstr);
-//    freelog(LOG_FATAL, "supported options: %s", us_capstr);
+//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, "file options: %s", file_capstr);
+//    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -275,7 +275,7 @@ public class Audio{
 //
 //  if (prefered_plugin_name[0] != '\0') {
 //    if (!audio_select_plugin(prefered_plugin_name))
-//      freelog(Log.LOG_NORMAL, "Proceeding with sound support disabled");
+//      util.freelog(Log.LOG_NORMAL, "Proceeding with sound support disabled");
 //    return;
 //  }
 //
@@ -294,11 +294,11 @@ public class Audio{
 //#ifdef AMIGA
 //  if (audio_select_plugin("amiga")) return;
 //#endif
-//  freelog(LOG_ERROR,
+//  util.freelog(Log.LOG_ERROR,
 //    "No real audio subsystem managed to initialize!");
-//  freelog(LOG_ERROR,
+//  util.freelog(Log.LOG_ERROR,
 //    "Perhaps there is some misconfigurationg or bad permissions");
-//  freelog(Log.LOG_NORMAL, "Proceeding with sound support disabled");
+//  util.freelog(Log.LOG_NORMAL, "Proceeding with sound support disabled");
 //}
 //
 ///**************************************************************************
@@ -315,12 +315,12 @@ public class Audio{
 //  if (tagfile) {
 //    soundfile = secfile_lookup_str_default(tagfile, "-", "files.%s", tag);
 //    if (strcmp(soundfile, "-") == 0) {
-//      freelog(LOG_VERBOSE, "No sound file for tag %s (file %s)", tag,
+//      util.freelog(LOG_VERBOSE, "No sound file for tag %s (file %s)", tag,
 //	      soundfile);
 //    } else {
 //      fullpath = datafilename(soundfile);
 //      if (!fullpath) {
-//	freelog(LOG_ERROR, "Cannot find audio file %s", soundfile);
+//	util.freelog(Log.LOG_ERROR, "Cannot find audio file %s", soundfile);
 //      }
 //    }
 //  }
@@ -337,11 +337,11 @@ public class Audio{
 //
 //  assert(tag != null);
 //
-//  freelog(LOG_DEBUG, "audio_play_sound('%s', '%s')", tag, pretty_alt_tag);
+//  util.freelog(LOG_DEBUG, "audio_play_sound('%s', '%s')", tag, pretty_alt_tag);
 //
 //  /* try playing primary tag first, if not go to alternative tag */
 //  if (!audio_play_tag(tag, false) && !audio_play_tag(alt_tag, false)) {
-//    freelog(LOG_VERBOSE, "Neither of tags %s or %s found", tag,
+//    util.freelog(LOG_VERBOSE, "Neither of tags %s or %s found", tag,
 //	    pretty_alt_tag);
 //  }
 //}
@@ -355,11 +355,11 @@ public class Audio{
 //
 //  assert(tag != null);
 //
-//  freelog(LOG_DEBUG, "audio_play_music('%s', '%s')", tag, pretty_alt_tag);
+//  util.freelog(LOG_DEBUG, "audio_play_music('%s', '%s')", tag, pretty_alt_tag);
 //
 //  /* try playing primary tag first, if not go to alternative tag */
 //  if (!audio_play_tag(tag, true) && !audio_play_tag(alt_tag, true)) {
-//    freelog(LOG_VERBOSE, "Neither of tags %s or %s found", tag,
+//    util.freelog(LOG_VERBOSE, "Neither of tags %s or %s found", tag,
 //	    pretty_alt_tag);
 //  }
 //}

@@ -39,7 +39,7 @@ public class Cityturn{
 //#include "unit.h"
 //
 //#include "citytools.h"
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "maphand.h"
 //#include "plrhand.h"
 //#include "sanitycheck.h"
@@ -152,7 +152,7 @@ public class Cityturn{
 //{
 //  /* The caller had better check this! */
 //  if (!cmr.found_a_valid) {
-//    freelog(LOG_ERROR, "apply_cmresult_to_city() called with non-valid "
+//    util.freelog(Log.LOG_ERROR, "apply_cmresult_to_city() called with non-valid "
 //            "cm_result");
 //    assert(0);
 //    return;
@@ -251,10 +251,10 @@ public class Cityturn{
 //	/* Emergency management.  Get _some_ result.  This doesn't use
 //	 * cm_init_emergency_parameter so we can keep the factors from
 //	 * above. */
-//	cmp.minimal_surplus[FOOD] = MIN(cmp.minimal_surplus[FOOD],
-//					MIN(pcity.food_surplus, 0));
-//	cmp.minimal_surplus[SHIELD] = MIN(cmp.minimal_surplus[SHIELD],
-//					  MIN(pcity.shield_surplus, 0));
+//	cmp.minimal_surplus[FOOD] = Math.min(cmp.minimal_surplus[FOOD],
+//					Math.min(pcity.food_surplus, 0));
+//	cmp.minimal_surplus[SHIELD] = Math.min(cmp.minimal_surplus[SHIELD],
+//					  Math.min(pcity.shield_surplus, 0));
 //	cmp.require_happy = false;
 //	cmp.allow_disorder = true;
 //	cm_query_result(pcity, &cmp, &cmr);
@@ -276,10 +276,10 @@ public class Cityturn{
 //	/* Emergency management.  Get _some_ result.  This doesn't use
 //	 * cm_init_emergency_parameter so we can keep the factors from
 //	 * above. */
-//	cmp.minimal_surplus[FOOD] = MIN(cmp.minimal_surplus[FOOD],
-//					MIN(pcity.food_surplus, 0));
-//	cmp.minimal_surplus[SHIELD] = MIN(cmp.minimal_surplus[SHIELD],
-//					  MIN(pcity.shield_surplus, 0));
+//	cmp.minimal_surplus[FOOD] = Math.min(cmp.minimal_surplus[FOOD],
+//					Math.min(pcity.food_surplus, 0));
+//	cmp.minimal_surplus[SHIELD] = Math.min(cmp.minimal_surplus[SHIELD],
+//					  Math.min(pcity.shield_surplus, 0));
 //	cmp.require_happy = false;
 //	cmp.require_happy = false;
 //	cmp.allow_disorder = true;
@@ -499,7 +499,7 @@ public class Cityturn{
 //    new_food = (city_granary_size(pcity.size)
 //		* (100 * 100 - game.aqueductloss * (100 - savings_pct))
 //		/ (100 * 100));
-//    pcity.food_stock = MIN(pcity.food_stock, new_food);
+//    pcity.food_stock = Math.min(pcity.food_stock, new_food);
 //    return;
 //  }
 //
@@ -510,7 +510,7 @@ public class Cityturn{
 //  } else {
 //    new_food = city_granary_size(pcity.size) * savings_pct / 100;
 //  }
-//  pcity.food_stock = MIN(pcity.food_stock, new_food);
+//  pcity.food_stock = Math.min(pcity.food_stock, new_food);
 //
 //  /* If there is enough food, and the city is big enough,
 //   * make new citizens into scientists or taxmen -- Massimo */
@@ -572,7 +572,7 @@ public class Cityturn{
 //			 "Game: Famine feared in %s, %s lost!", 
 //			 pcity.name, unit_type(punit).name);
 // 
-//        gamelog(GAMELOG_UNITLOSS, punit, null, "famine");
+//        Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "famine");
 //        wipe_unit(punit);
 //
 //	pcity.food_stock = (city_granary_size(pcity.size)
@@ -964,13 +964,13 @@ public class Cityturn{
 //      game.global_wonders[pcity.currently_building] = pcity.id;
 //      notify_player_ex(null, pcity.tile, E_WONDER_BUILD,
 //		       "Game: The %s have finished building %s in %s.",
-//		       get_nation_name_plural(pplayer.nation),
+//		       Nation.get_nation_name_plural(pplayer.nation),
 //		       get_impr_name_ex(pcity, pcity.currently_building),
 //		       pcity.name);
 //      /* TODO: if wonders become just-another-building, remove this */
-//      gamelog(GAMELOG_WONDER, pcity);
+//      Gamelog.gamelog(GAMELOG_WONDER, pcity);
 //    } else {
-//      gamelog(GAMELOG_BUILD, pcity);
+//      Gamelog.gamelog(GAMELOG_BUILD, pcity);
 //    }
 //
 //    notify_player_ex(pplayer, pcity.tile, E_IMP_BUILD,
@@ -1001,17 +1001,17 @@ public class Cityturn{
 //
 //	notify_embassies(pplayer, null,
 //	    "Game: The %s have acquired %s from %s.",
-//	    get_nation_name_plural(pplayer.nation),
+//	    Nation.get_nation_name_plural(pplayer.nation),
 //	    get_tech_name(pplayer, tech),
 //	    improvement_types[pcity.currently_building].name);
 //      }
 //    }
-//    if (space_part && pplayer.spaceship.state == SSHIP_NONE) {
-//      notify_player_ex(null, pcity.tile, E_SPACESHIP,
+//    if (space_part && pplayer.spaceship.state == spaceship_state.SSHIP_NONE) {
+//      notify_player_ex(null, pcity.tile, event_type.E_SPACESHIP,
 //		       _("Game: The %s have started "
 //			 "building a spaceship!"),
-//		       get_nation_name_plural(pplayer.nation));
-//      pplayer.spaceship.state = SSHIP_STARTED;
+//		       Nation.get_nation_name_plural(pplayer.nation));
+//      pplayer.spaceship.state = spaceship_state.SSHIP_STARTED;
 //    }
 //    if (space_part) {
 //      send_spaceship_info(pplayer, null);
@@ -1025,9 +1025,9 @@ public class Cityturn{
 //     */
 //    if (!worklist_change_build_target(pplayer, pcity) && !space_part) {
 //      /* Fall back to the good old ways. */
-//      freelog(LOG_DEBUG, "Trying advisor_choose_build.");
+//      util.freelog(LOG_DEBUG, "Trying advisor_choose_build.");
 //      advisor_choose_build(pplayer, pcity);
-//      freelog(LOG_DEBUG, "Advisor_choose_build didn't kill us.");
+//      util.freelog(LOG_DEBUG, "Advisor_choose_build didn't kill us.");
 //    }
 //  }
 //
@@ -1049,7 +1049,7 @@ public class Cityturn{
 //    notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
 //        "Game: %s is building %s, which is no longer available.",
 //        pcity.name, unit_name(pcity.currently_building));
-//    freelog(LOG_VERBOSE, "%s's %s tried build %s, which is not available",
+//    util.freelog(LOG_VERBOSE, "%s's %s tried build %s, which is not available",
 //            pplayer.name, pcity.name, unit_name(pcity.currently_building));            
 //    return true;
 //  }
@@ -1099,7 +1099,7 @@ public class Cityturn{
 //		     pcity.name,
 //		     unit_types[pcity.currently_building].name);
 //
-//    gamelog(GAMELOG_BUILD, pcity);
+//    Gamelog.gamelog(GAMELOG_BUILD, pcity);
 //
 //    /* If there's something in the worklist, change the build
 //       target. If there's nothing there, worklist_change_build_target
@@ -1183,7 +1183,7 @@ public class Cityturn{
 //      }
 //      k--;
 //    }
-//    freelog(LOG_DEBUG, "pollution not placed: city: %s", pcity.name);
+//    util.freelog(LOG_DEBUG, "pollution not placed: city: %s", pcity.name);
 //  }
 //}
 //
@@ -1247,14 +1247,14 @@ public class Cityturn{
 //  capital = find_palace(city_owner(pcity));
 //  if (capital) {
 //    int tmp = map_distance(capital.tile, pcity.tile);
-//    dist = MIN(32, tmp);
+//    dist = Math.min(32, tmp);
 //  } else {
 //    /* No capital? Take max penalty! */
 //    dist = 32;
 //  }
 //  dist -= (dist * get_city_bonus(pcity, EFT_INCITE_DIST_PCT)) / 100;
 //  if (g.fixed_corruption_distance != 0) {
-//    dist = MIN(g.fixed_corruption_distance, dist);
+//    dist = Math.min(g.fixed_corruption_distance, dist);
 //  }
 //
 //  size = MAX(1, pcity.size
@@ -1286,7 +1286,7 @@ public class Cityturn{
 //  pcity.changed_from_id = pcity.currently_building;
 //  pcity.changed_from_is_unit = pcity.is_building_unit;
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "In %s, building %s.  Beg of Turn shields = %d",
 //	  pcity.name,
 //	  pcity.changed_from_is_unit ?
@@ -1429,7 +1429,7 @@ public class Cityturn{
 //		   /* TRANS: Settler production leads to disbanded city. */
 //		   "Game: %s is disbanded into %s.", 
 //		   pcity.name, unit_types[pcity.currently_building].name);
-//  gamelog(GAMELOG_DISBANDCITY, pcity);
+//  Gamelog.gamelog(GAMELOG_DISBANDCITY, pcity);
 //
 //  remove_city(pcity);
 //  return true;

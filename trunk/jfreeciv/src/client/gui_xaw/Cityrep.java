@@ -517,13 +517,13 @@ public class Cityrep{
 //    final String report_title;
 //
 //    n = city_list_size(&game.player_ptr.cities);
-//    freelog(LOG_DEBUG, "%d cities in report", n);
+//    util.freelog(LOG_DEBUG, "%d cities in report", n);
 //    if(n_alloc == 0 || n > n_alloc) {
 //      int j, n_prev = n_alloc;
 //      
 //      n_alloc *= 2;
 //      if (!n_alloc || n_alloc < n) n_alloc = n + 1;
-//      freelog(LOG_DEBUG, "city report n_alloc increased to %d", n_alloc);
+//      util.freelog(LOG_DEBUG, "city report n_alloc increased to %d", n_alloc);
 //      cities_in_list = fc_realloc(cities_in_list,
 //				  n_alloc*sizeof(*cities_in_list));
 //      city_list_text = fc_realloc(city_list_text, n_alloc*sizeof(char*));
@@ -697,7 +697,7 @@ public class Cityrep{
 //					     config_form, null));
 //
 //  for(i=1, spec=city_report_specs+i; i<NUM_CREPORT_COLS; i++, spec++) {
-//    my_snprintf(buf, sizeof(buf), "%-32s", spec.explanation);
+//    buf = util.my_snprintf( "%-32s", spec.explanation);
 //    above = (i==1)?config_label:config_optlabel;
 //
 //    config_optlabel = XtVaCreateManagedWidget("cityconfiglabel", 

@@ -228,15 +228,15 @@ public class Mapview{
 //  char buffer2[512];
 //  char buffer[512];
 //  HDC hdc;
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //	      "Population: %s\nYear: %s\nGold: %d\nTax: %d Lux: %d Sci: %d",
 //		population_to_text(civ_population(game.player_ptr)),
-//		textyear( game.year ),
+//		Shared.textyear( game.year ),
 //		game.player_ptr.economic.gold,
 //		game.player_ptr.economic.tax,
 //		game.player_ptr.economic.luxury,
 //		game.player_ptr.economic.science );      
-//  my_snprintf(buffer2,sizeof(buffer2),
+//  buffer2 = util.my_snprintf(
 //	      "%s\n%s",get_nation_name(game.player_ptr.nation),buffer);
 //  SetWindowText(infolabel_win,buffer2);
 //  do_mainwin_layout();
@@ -710,7 +710,7 @@ public class Mapview{
 //	RECT rc;
 //	draw_sprite(radar_gfx_sprite,hdc,overview_win_x,overview_win_y);
 //	SetBkMode(hdc,TRANSPARENT);
-//	my_snprintf(s, sizeof(s), "%d.%d.%d%s",
+//	s = util.my_snprintf( "%d.%d.%d%s",
 //		    MAJOR_VERSION, MINOR_VERSION,
 //		    PATCH_VERSION, VERSION_LABEL);
 //	DrawText(hdc, word_version(), strlen(word_version()), &rc, DT_CALCRECT);
@@ -806,7 +806,7 @@ public class Mapview{
 //  if (fog && better_fog && !ssprite.has_fog) {
 //    fog_sprite(ssprite);
 //    if (!ssprite.has_fog) {
-//      freelog(Log.LOG_NORMAL,
+//      util.freelog(Log.LOG_NORMAL,
 //	      "Better fog will only work in truecolor.  Disabling it");
 //      better_fog = false;
 //    }

@@ -143,7 +143,7 @@ public class Repodlgs{
 //{
 //  char buf[512];
 //  
-//  my_snprintf(buf, sizeof(buf), "%s%s", get_report_title(report_name),
+//  buf = util.my_snprintf( "%s%s", get_report_title(report_name),
 //	      additional);
 //
 //  return create_centered_string(buf);
@@ -208,13 +208,13 @@ public class Repodlgs{
 //  final String report_title;
 //  
 //  if (game.player_ptr.research.researching == A_UNSET) {
-//    my_snprintf(current_text, sizeof(current_text),
+//    current_text = util.my_snprintf(
 //		"Researching %s: %d/%d",
 //		advances[A_NONE].name,
 //		game.player_ptr.research.bulbs_researched,
 //		total_bulbs_required(game.player_ptr));
 //  } else {
-//    my_snprintf(current_text, sizeof(current_text),
+//    current_text = util.my_snprintf(
 //		"Researching %s: %d/%d",
 //		get_tech_name(game.player_ptr,
 //			      game.player_ptr.research.researching),
@@ -223,12 +223,12 @@ public class Repodlgs{
 //  }
 //
 //  if (game.player_ptr.ai.tech_goal == A_UNSET) {
-//    my_snprintf(goal_text, sizeof(goal_text),
+//    goal_text = util.my_snprintf(
 //		"Goal: %s (%d steps)",
 //		advances[A_NONE].name,
 //		0);
 //  } else {
-//    my_snprintf(goal_text, sizeof(goal_text),
+//    goal_text = util.my_snprintf(
 //		"Goal: %s (%d steps)",
 //		advances[game.player_ptr.ai.tech_goal].name,
 //		num_unknown_techs_for_goal(game.player_ptr,
@@ -254,7 +254,7 @@ public class Repodlgs{
 //					 formWidgetClass,
 //					 science_dialog_shell,
 //					 null);   
-//  my_snprintf(rate_text, sizeof(rate_text), "\ntext not set yet");
+//  rate_text = util.my_snprintf( "\ntext not set yet");
 //  report_title=get_report_title_plus("Science", rate_text);
 //  science_label = XtVaCreateManagedWidget("sciencelabel", 
 //					  labelWidgetClass, 
@@ -469,13 +469,13 @@ public class Repodlgs{
 //    free((void *) report_title);
 //
 //    if (game.player_ptr.research.researching == A_UNSET) {
-//      my_snprintf(text, sizeof(text),
+//      text = util.my_snprintf(
 //		  "Researching %s: %d/%d",
 //		  advances[A_NONE].name,
 //		  game.player_ptr.research.bulbs_researched,
 //		  total_bulbs_required(game.player_ptr));
 //    } else {
-//      my_snprintf(text, sizeof(text),
+//      text = util.my_snprintf(
 //		  "Researching %s: %d/%d",
 //		  get_tech_name(game.player_ptr,
 //				game.player_ptr.research.researching),
@@ -486,12 +486,12 @@ public class Repodlgs{
 //    xaw_set_label(science_current_label, text);
 //
 //    if (game.player_ptr.ai.tech_goal == A_UNSET) {
-//      my_snprintf(text, sizeof(text),
+//      text = util.my_snprintf(
 //		  "Goal: %s (%d steps)",
 //		  advances[A_NONE].name,
 //		  0);
 //    } else {
-//      my_snprintf(text, sizeof(text),
+//      text = util.my_snprintf(
 //		  "Goal: %s (%d steps)",
 //		  advances[game.player_ptr.ai.tech_goal].name,
 //		  num_unknown_techs_for_goal(game.player_ptr,
@@ -777,7 +777,7 @@ public class Repodlgs{
 //    }
 //    economy_list_names_ptrs[entries_used] = null;
 //
-//    my_snprintf(economy_total, sizeof(economy_total),
+//    economy_total = util.my_snprintf(
 //		"Income:%6d    Total Costs: %6d", tax, total); 
 //    xaw_set_label(economy_label2, economy_total); 
 //    
@@ -984,7 +984,7 @@ public class Repodlgs{
 //    ut2 = can_upgrade_unittype(game.player_ptr,
 //			       activeunits_type[ret.list_index]);
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //	    _("Upgrade as many %s to %s as possible for %d gold each?\n"
 //	      "Treasury contains %d gold."),
 //	    unit_types[ut1].name, unit_types[ut2].name,
@@ -1099,7 +1099,7 @@ public class Repodlgs{
 //      k=1;
 //    }
 //
-//    my_snprintf(activeunits_total, sizeof(activeunits_total),
+//    activeunits_total = util.my_snprintf(
 //	    "Totals:                     %9d%9d%9d%9d",
 //	    unittotals.building_count, unittotals.active_count,
 //	    unittotals.upkeep_shield, unittotals.upkeep_food);

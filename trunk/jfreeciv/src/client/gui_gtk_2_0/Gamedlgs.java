@@ -78,32 +78,32 @@ public class Gamedlgs{
 //
 //  maxrate=get_government_max_rate(game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */
-//  tax=MIN(tax, maxrate);
-//  lux=MIN(lux, maxrate);
-//  sci=MIN(sci, maxrate);
+//  tax=Math.min(tax, maxrate);
+//  lux=Math.min(lux, maxrate);
+//  sci=Math.min(sci, maxrate);
 //  
 //  if(tax+sci+lux!=100)
 //  {
 //    if((tax!=rates_tax_value))
 //    {
 //      if(!lux_lock)
-//	lux=MIN(MAX(100-tax-sci, 0), maxrate);
+//	lux=Math.min(MAX(100-tax-sci, 0), maxrate);
 //      if(!sci_lock)
-//	sci=MIN(MAX(100-tax-lux, 0), maxrate);
+//	sci=Math.min(MAX(100-tax-lux, 0), maxrate);
 //    }
 //    else if((lux!=rates_lux_value))
 //    {
 //      if(!tax_lock)
-//	tax=MIN(MAX(100-lux-sci, 0), maxrate);
+//	tax=Math.min(MAX(100-lux-sci, 0), maxrate);
 //      if(!sci_lock)
-//	sci=MIN(MAX(100-lux-tax, 0), maxrate);
+//	sci=Math.min(MAX(100-lux-tax, 0), maxrate);
 //    }
 //    else if((sci!=rates_sci_value))
 //    {
 //      if(!lux_lock)
-//	lux=MIN(MAX(100-tax-sci, 0), maxrate);
+//	lux=Math.min(MAX(100-tax-sci, 0), maxrate);
 //      if(!tax_lock)
-//	tax=MIN(MAX(100-lux-sci, 0), maxrate);
+//	tax=Math.min(MAX(100-lux-sci, 0), maxrate);
 //    }
 //    
 //    if(tax+sci+lux!=100) {
@@ -123,7 +123,7 @@ public class Gamedlgs{
 //  }
 //
 //  if(tax!=rates_tax_value) {
-//    my_snprintf(buf, sizeof(buf), "%3d%%", tax);
+//    buf = util.my_snprintf( "%3d%%", tax);
 //    if (strcmp(buf, GTK_LABEL(rates_tax_label).label) != 0)
 //	gtk_label_set_text(GTK_LABEL(rates_tax_label), buf);
 //    if(!no_tax_scroll)
@@ -136,7 +136,7 @@ public class Gamedlgs{
 //  }
 //
 //  if(lux!=rates_lux_value) {
-//    my_snprintf(buf, sizeof(buf), "%3d%%", lux);
+//    buf = util.my_snprintf( "%3d%%", lux);
 //    if (strcmp(buf, GTK_LABEL(rates_lux_label).label) != 0)
 //	gtk_label_set_text(GTK_LABEL(rates_lux_label), buf);
 //    if(!no_lux_scroll)
@@ -149,7 +149,7 @@ public class Gamedlgs{
 //  }
 //
 //  if(sci!=rates_sci_value) {
-//    my_snprintf(buf, sizeof(buf), "%3d%%", sci);
+//    buf = util.my_snprintf( "%3d%%", sci);
 //    if (strcmp(buf, GTK_LABEL(rates_sci_label).label) != 0)
 //	gtk_label_set_text(GTK_LABEL(rates_sci_label),buf);
 //    if(!no_sci_scroll)
@@ -174,21 +174,21 @@ public class Gamedlgs{
 //    int tax_value;
 //
 //    tax_value=10*percent;
-//    tax_value=MIN(tax_value, 100);
+//    tax_value=Math.min(tax_value, 100);
 //    rates_set_values(tax_value,1, rates_lux_value,0, rates_sci_value,0);
 //  }
 //  else if(adj==GTK_ADJUSTMENT(rates_lux_adj)) {
 //    int lux_value;
 //
 //    lux_value=10*percent;
-//    lux_value=MIN(lux_value, 100);
+//    lux_value=Math.min(lux_value, 100);
 //    rates_set_values(rates_tax_value,0, lux_value,1, rates_sci_value,0);
 //  }
 //  else {
 //    int sci_value;
 //
 //    sci_value=10*percent;
-//    sci_value=MIN(sci_value, 100);
+//    sci_value=Math.min(sci_value, 100);
 //    rates_set_values(rates_tax_value,0, rates_lux_value,0, sci_value,1);
 //  }
 //}
@@ -346,7 +346,7 @@ public class Gamedlgs{
 //  if (!rates_dialog_shell)
 //    rates_dialog_shell = create_rates_dialog();
 //
-//  my_snprintf(buf, sizeof(buf), "%s max rate: %d%%",
+//  buf = util.my_snprintf( "%s max rate: %d%%",
 //      get_government_name(game.player_ptr.government),
 //      get_government_max_rate(game.player_ptr.government));
 //  gtk_label_set_text(GTK_LABEL(rates_gov_label), buf);
@@ -516,7 +516,7 @@ public class Gamedlgs{
 //				   *(o.p_bool_value));
 //      break;
 //    case COT_INT:
-//      my_snprintf(valstr, sizeof(valstr), "%d", *(o.p_int_value));
+//      valstr = util.my_snprintf( "%d", *(o.p_int_value));
 //      gtk_entry_set_text(GTK_ENTRY(o.p_gui_data), valstr);
 //      break;
 //    case COT_STR:

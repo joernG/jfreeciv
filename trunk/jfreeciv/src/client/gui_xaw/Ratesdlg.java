@@ -92,7 +92,7 @@ public class Ratesdlg{
 //		    &x, &y);
 //  XtVaSetValues(rates_dialog_shell, XtNx, x, XtNy, y, null);
 //
-//  my_snprintf(buf, sizeof(buf), "%s max rate: %d%%",
+//  buf = util.my_snprintf( "%s max rate: %d%%",
 //	  get_government_name(game.player_ptr.government),
 //	  get_government_max_rate(game.player_ptr.government));
 //  xaw_set_label(rates_gov_label, buf);
@@ -259,28 +259,28 @@ public class Ratesdlg{
 //  
 //  maxrate=get_government_max_rate(game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */
-//  tax=MIN(tax, maxrate);
-//  lux=MIN(lux, maxrate);
-//  sci=MIN(sci, maxrate);
+//  tax=Math.min(tax, maxrate);
+//  lux=Math.min(lux, maxrate);
+//  sci=Math.min(sci, maxrate);
 //  
 //  if(tax+sci+lux!=100) {
 //    if(tax!=rates_tax_value) {
 //      if(!lux_lock)
-//	lux=MIN(MAX(100-tax-sci, 0), maxrate);
+//	lux=Math.min(MAX(100-tax-sci, 0), maxrate);
 //      if(!sci_lock)
-//	sci=MIN(MAX(100-tax-lux, 0), maxrate);
+//	sci=Math.min(MAX(100-tax-lux, 0), maxrate);
 //    }
 //    else if(lux!=rates_lux_value) {
 //      if(!tax_lock)
-//	tax=MIN(MAX(100-lux-sci, 0), maxrate);
+//	tax=Math.min(MAX(100-lux-sci, 0), maxrate);
 //      if(!sci_lock)
-//	sci=MIN(MAX(100-lux-tax, 0), maxrate);
+//	sci=Math.min(MAX(100-lux-tax, 0), maxrate);
 //    }
 //    else if(sci!=rates_sci_value) {
 //      if(!lux_lock)
-//	lux=MIN(MAX(100-tax-sci, 0), maxrate);
+//	lux=Math.min(MAX(100-tax-sci, 0), maxrate);
 //      if(!tax_lock)
-//	tax=MIN(MAX(100-lux-sci, 0), maxrate);
+//	tax=Math.min(MAX(100-lux-sci, 0), maxrate);
 //    }
 //    
 //    if(tax+sci+lux!=100) {
@@ -298,7 +298,7 @@ public class Ratesdlg{
 //  }
 //  
 //  if(tax!=rates_tax_value) {
-//    my_snprintf(buf, sizeof(buf), "Tax: %d%%", tax);
+//    buf = util.my_snprintf( "Tax: %d%%", tax);
 //    xaw_set_label(rates_tax_label, buf);
 //    if(!no_tax_scroll)
 //      XawScrollbarSetThumb(rates_tax_scroll, (tax/10)*1/11.0f, 1/11.0f);
@@ -306,7 +306,7 @@ public class Ratesdlg{
 //  }
 //
 //  if(lux!=rates_lux_value) {
-//    my_snprintf(buf, sizeof(buf), "Luxury: %d%%", lux);
+//    buf = util.my_snprintf( "Luxury: %d%%", lux);
 //    xaw_set_label(rates_lux_label, buf);
 //    if(!no_lux_scroll)
 //      XawScrollbarSetThumb(rates_lux_scroll, (lux/10)*1/11.0f, 1/11.0f);
@@ -314,7 +314,7 @@ public class Ratesdlg{
 //  }
 //
 //  if(sci!=rates_sci_value) {
-//    my_snprintf(buf, sizeof(buf), "Science: %d%%", sci);
+//    buf = util.my_snprintf( "Science: %d%%", sci);
 //    xaw_set_label(rates_sci_label, buf);
 //    if(!no_sci_scroll)
 //      XawScrollbarSetThumb(rates_sci_scroll, (sci/10)*1/11.0f, 1/11.0f);
@@ -335,19 +335,19 @@ public class Ratesdlg{
 //  if(w==rates_tax_scroll) {
 //    int tax_value;
 //    tax_value=10*(int)(11*percent);
-//    tax_value=MIN(tax_value, 100);
+//    tax_value=Math.min(tax_value, 100);
 //    rates_set_values(tax_value,1, rates_lux_value,0, rates_sci_value,0);
 //  }
 //  else if(w==rates_lux_scroll) {
 //    int lux_value;
 //    lux_value=10*(int)(11*percent);
-//    lux_value=MIN(lux_value, 100);
+//    lux_value=Math.min(lux_value, 100);
 //    rates_set_values(rates_tax_value,0, lux_value,1, rates_sci_value,0);
 //  }
 //  else {
 //    int sci_value;
 //    sci_value=10*(int)(11*percent);
-//    sci_value=MIN(sci_value, 100);
+//    sci_value=Math.min(sci_value, 100);
 //    rates_set_values(rates_tax_value,0, rates_lux_value,0, sci_value,1);
 //  }
 //
@@ -366,21 +366,21 @@ public class Ratesdlg{
 //    if(pos<0)
 //      val=MAX(rates_tax_value-10, 0);
 //    else
-//      val=MIN(rates_tax_value+10, 100);
+//      val=Math.min(rates_tax_value+10, 100);
 //    rates_set_values(val,0, rates_lux_value,0, rates_sci_value,0);
 //  }
 //  else if(w==rates_lux_scroll) {
 //    if(pos<0)
 //      val=MAX(rates_lux_value-10, 0);
 //    else
-//      val=MIN(rates_lux_value+10, 100);
+//      val=Math.min(rates_lux_value+10, 100);
 //    rates_set_values(rates_tax_value,0, val,0, rates_sci_value,0);
 //  }
 //  else {
 //    if(pos<0)
 //      val=MAX(rates_sci_value-10, 0);
 //    else
-//      val=MIN(rates_sci_value+10, 100);
+//      val=Math.min(rates_sci_value+10, 100);
 //    rates_set_values(rates_tax_value,0, rates_lux_value,0, val,0);
 //  }
 //}

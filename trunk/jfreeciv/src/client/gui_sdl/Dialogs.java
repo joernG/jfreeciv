@@ -222,7 +222,7 @@ public class Dialogs{
 //void popup_notify_goto_dialog(final String headline, final String lines,
 //			      int x, int y)
 //{
-//  freelog(Log.LOG_NORMAL, "popup_notify_goto_dialog : PORT ME\n \
+//  util.freelog(Log.LOG_NORMAL, "popup_notify_goto_dialog : PORT ME\n \
 //  			a: %s\nb: %s",headline, lines );
 //}
 //
@@ -423,20 +423,20 @@ public class Dialogs{
 //    value = unit_upgrade_price(game.player_ptr, ut1, ut2);
 //  
 //    if (game.player_ptr.economic.gold >= value) {
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //    	      _("Upgrade %s to %s for %d gold?\n"
 //                "Treasury contains %d gold."),
 //	  unit_types[ut1].name, unit_types[ut2].name,
 //	  value, game.player_ptr.economic.gold);
 //    } else {
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //          _("Upgrading %s to %s costs %d gold.\n"
 //            "Treasury contains %d gold."),
 //          unit_types[ut1].name, unit_types[ut2].name,
 //          value, game.player_ptr.economic.gold);
 //    }
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //        "Sorry: cannot upgrade %s.", unit_types[ut1].name);
 //  }
 //  
@@ -637,7 +637,7 @@ public class Dialogs{
 //  is_unit_move_blocked = true;  
 //  pUnit_Select_Dlg = MALLOC(sizeof(struct ADVANCED_DLG));
 //    
-//  my_snprintf(cBuf , sizeof(cBuf),"%s (%d)", "Unit selection" , n);
+//  cBuf = util.my_snprintf("%s (%d)", "Unit selection" , n);
 //  pStr = create_str16_from_char(cBuf , 12);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  
@@ -668,7 +668,7 @@ public class Dialogs{
 //    pUnitType = unit_type(pUnit);
 //        
 //    if(pUnit.owner == game.player_idx) {
-//      my_snprintf(cBuf , sizeof(cBuf), "Contact %s (%d / %d) %s(%d,%d,%d) %s",
+//      cBuf = util.my_snprintf( "Contact %s (%d / %d) %s(%d,%d,%d) %s",
 //            pUnit.veteran ? "Veteran" : "" ,
 //            pUnit.hp, pUnitType.hp,
 //            pUnitType.name,
@@ -679,7 +679,7 @@ public class Dialogs{
 //    } else {
 //      int att_chance, def_chance;
 //      
-//      my_snprintf(cBuf , sizeof(cBuf), "%s %s %s(A:%d D:%d M:%d FP:%d) HP:%d%%",
+//      cBuf = util.my_snprintf( "%s %s %s(A:%d D:%d M:%d FP:%d) HP:%d%%",
 //            get_nation_by_plr(unit_owner(pUnit)).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
@@ -814,7 +814,7 @@ public class Dialogs{
 //    bonus += terrain_control.fortress_defense_bonus;
 //  }
 //  
-//  my_snprintf(buffer, sizeof(buffer), "Terrain Defense Bonus: +%d%% ", bonus);
+//  buffer = util.my_snprintf( "Terrain Defense Bonus: +%d%% ", bonus);
 //  
 //  return buffer;
 //}
@@ -830,7 +830,7 @@ public class Dialogs{
 //  static char s[128];
 //  boolean first;
 //    
-//  my_snprintf(s, sizeof(s), "%s", tile_types[pTile.terrain].terrain_name);
+//  s = util.my_snprintf( "%s", tile_types[pTile.terrain].terrain_name);
 //  if((pTile.special & S_RIVER) == S_RIVER) {
 //    sz_strlcat(s, "/");
 //    sz_strlcat(s, get_special_name(S_RIVER));
@@ -894,7 +894,7 @@ public class Dialogs{
 //  pTerrain_Info_Dlg = MALLOC(sizeof(struct SMALL_DLG));
 //    
 //  /* ----------- */  
-//  my_snprintf(cBuf, sizeof(cBuf), "%s [%d,%d]", "Terrain Info", x , y);
+//  cBuf = util.my_snprintf( "%s [%d,%d]", "Terrain Info", x , y);
 //  
 //  pWindow = create_window(pDest, create_str16_from_char(cBuf , 12), 10, 10, 0);
 //  pWindow.string16.style |= TTF_STYLE_BOLD;
@@ -908,7 +908,7 @@ public class Dialogs{
 //  
 //  if(tile_get_known(x, y) >= TILE_KNOWN_FOGGED) {
 //  
-//    my_snprintf(cBuf, sizeof(cBuf), "Terrain: %s\nFood/Prod/Trade: %s\n%s",
+//    cBuf = util.my_snprintf( "Terrain: %s\nFood/Prod/Trade: %s\n%s",
 //		sdl_map_get_tile_info_text(pTile),
 //		map_get_tile_fpt_text(x, y),
 //    		sdl_get_tile_defense_info_text(pTile));
@@ -946,7 +946,7 @@ public class Dialogs{
 //        } else {
 //	  cat_snprintf(cBuf, sizeof(cBuf), "\nTerritory of the %s %s",
 //		diplo_nation_plural_adjectives[ds[pTile.owner.player_no].type],
-//		    	get_nation_name_plural(pTile.owner.nation));
+//		    	Nation.get_nation_name_plural(pTile.owner.nation));
 //        }
 //      } else {
 //        cat_snprintf(cBuf, sizeof(cBuf), "\nUnclaimed territory");
@@ -985,7 +985,7 @@ public class Dialogs{
 //  }
 //  else
 //  {
-//    my_snprintf(cBuf, sizeof(cBuf), "Terrain : UNKNOWN");
+//    cBuf = util.my_snprintf( "Terrain : UNKNOWN");
 //  }
 //  
 //   
@@ -1346,7 +1346,7 @@ public class Dialogs{
 //    h += pBuf.next.size.h;
 //    /* ------------------ */
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "Zoom to : %s", pCity.name );
+//    cBuf = util.my_snprintf( "Zoom to : %s", pCity.name );
 //    
 //    create_active_iconlabel(pBuf, pWindow.dst,
 //		    pStr, cBuf, zoom_to_city_callback);
@@ -1497,7 +1497,7 @@ public class Dialogs{
 //	}
 //        pUnitType = unit_type(pUnit);
 //        if(pUnit.owner == game.player_idx) {
-//          my_snprintf(cBuf, sizeof(cBuf),
+//          cBuf = util.my_snprintf(
 //            "Activate %s (%d / %d) %s (%d,%d,%d) %s",
 //            pUnit.veteran ? "Veteran" : "" ,
 //            pUnit.hp, pUnitType.hp,
@@ -1516,7 +1516,7 @@ public class Dialogs{
 //	} else {
 //	  int att_chance, def_chance;
 //	  
-//          my_snprintf(cBuf, sizeof(cBuf), "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
+//          cBuf = util.my_snprintf( "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
 //            get_nation_by_plr(unit_owner(pUnit)).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
@@ -1577,7 +1577,7 @@ public class Dialogs{
 //
 //      if (my_units > 1) {
 //	
-//	my_snprintf(cBuf, sizeof(cBuf), "%s (%d)", "Ready all", my_units);
+//	cBuf = util.my_snprintf( "%s (%d)", "Ready all", my_units);
 //	create_active_iconlabel(pBuf, pWindow.dst, pStr,
 //	       cBuf, adv_unit_select_all_callback);
 //        pBuf.data.unit = pAdvanced_Terrain_Dlg.pEndActiveWidgetList.data.unit;
@@ -1586,7 +1586,7 @@ public class Dialogs{
 //	DownAdd(pBuf, pLast);
 //	h += pBuf.size.h;
 //	
-//	my_snprintf(cBuf, sizeof(cBuf), "%s (%d)", "Sentry idle", my_units);
+//	cBuf = util.my_snprintf( "%s (%d)", "Sentry idle", my_units);
 //	create_active_iconlabel(pBuf, pWindow.dst, pStr,
 //	       cBuf, adv_unit_sentry_idle_callback);
 //        pBuf.data.unit = pAdvanced_Terrain_Dlg.pEndActiveWidgetList.data.unit;
@@ -1613,7 +1613,7 @@ public class Dialogs{
 //        if ((pCity && pCity.owner == game.player_idx) ||
 //	   (pUnit.owner == game.player_idx))
 //        {
-//          my_snprintf(cBuf, sizeof(cBuf),
+//          cBuf = util.my_snprintf(
 //            "Activate %s (%d / %d) %s (%d,%d,%d) %s",
 //            pUnit.veteran ? "Veteran" : "" ,
 //            pUnit.hp, pUnitType.hp,
@@ -1641,7 +1641,7 @@ public class Dialogs{
 //        } else {
 //	  int att_chance, def_chance;
 //	
-//          my_snprintf(cBuf, sizeof(cBuf), "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
+//          cBuf = util.my_snprintf( "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
 //            get_nation_by_plr(unit_owner(pUnit)).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
@@ -1671,7 +1671,7 @@ public class Dialogs{
 //        }
 //      }
 //      /* ---------------- */
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //            "View Civiliopedia entry for %s", pUnitType.name);
 //      create_active_iconlabel(pBuf, pWindow.dst, pStr,
 //	    cBuf, unit_help_callback);
@@ -1850,7 +1850,7 @@ public class Dialogs{
 //  is_unit_move_blocked = true;
 //  h = WINDOW_TILE_HIGH + 3 + FRAME_WH;
 //      
-//  my_snprintf(cBuf, sizeof(cBuf), "Your caravan has arrived at %s",
+//  cBuf = util.my_snprintf( "Your caravan has arrived at %s",
 //							  pDestcity.name);
 //  
 //  /* window */
@@ -1872,13 +1872,13 @@ public class Dialogs{
 //    int revenue = get_caravan_enter_city_trade_bonus(pHomecity, pDestcity);
 //    
 //    if (can_establish_trade_route(pHomecity, pDestcity)) {
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //      		"Establish Traderoute with %s ( %d R&G + %d trade )",
 //      		pHomecity.name, revenue,
 //      			trade_between_cities(pHomecity, pDestcity));
 //    } else {
 //      revenue = (revenue + 2) / 3;
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //		"Enter Marketplace ( %d R&G bonus )", revenue);
 //    }
 //    
@@ -3006,7 +3006,7 @@ public class Dialogs{
 //    exit = true;
 //    /* --------------- */
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "You can't incite a revolt in %s.",
+//    cBuf = util.my_snprintf( "You can't incite a revolt in %s.",
 //		pCity.name);
 //
 //    create_active_iconlabel(pBuf, pWindow.dst, pStr, cBuf, null);
@@ -3025,7 +3025,7 @@ public class Dialogs{
 //    h += pBuf.size.h;
 //    
 //  } else if (game.player_ptr.economic.gold >= pCity.incite_revolt_cost) {
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //		"Incite a revolt for %d gold?\nTreasury contains %d gold.", 
 //		pCity.incite_revolt_cost, game.player_ptr.economic.gold);
 //    
@@ -3073,7 +3073,7 @@ public class Dialogs{
 //    exit = true;
 //    /* --------------- */
 //
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //		_("Inciting a revolt costs %d gold.\n"
 //		  "Treasury contains %d gold."), 
 //		pCity.incite_revolt_cost, game.player_ptr.economic.gold);
@@ -3221,7 +3221,7 @@ public class Dialogs{
 //  pBribe_Dlg.pEndWidgetList = pWindow;
 //  
 //  if(game.player_ptr.economic.gold >= pUnit.bribe_cost) {
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //		"Bribe unit for %d gold?\nTreasury contains %d gold.", 
 //		pUnit.bribe_cost, game.player_ptr.economic.gold);
 //    
@@ -3267,7 +3267,7 @@ public class Dialogs{
 //    exit = true;
 //    /* --------------- */
 //
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //		_("Bribing the unit costs %d gold.\n"
 //		  "Treasury contains %d gold."), 
 //		pUnit.bribe_cost, game.player_ptr.economic.gold);
@@ -3664,7 +3664,7 @@ public class Dialogs{
 //static int next_name_callback(GUI pNext_Button);
 //static int prev_name_callback(GUI pPrev_Button);
 //static int change_sex_callback(GUI pSex);
-//static void select_random_leader(Nation_Type_id nation);
+//static void select_random_leader(int nation);
 //static void change_nation_label();
 //
 ///**************************************************************************
@@ -4041,7 +4041,7 @@ public class Dialogs{
 //  Selectes a leader and the appropriate sex. Updates the gui elements
 //  and the selected_* variables.
 //**************************************************************************/
-//static void select_random_leader(Nation_Type_id nation)
+//static void select_random_leader(int nation)
 //{
 //  int dim;
 //  NAT pSetup = (NAT )(pNationDlg.pEndWidgetList.data.ptr);
@@ -4446,13 +4446,13 @@ public class Dialogs{
 //void races_toggles_set_sensitive(boolean *nations_used)
 //{
 //  NAT pSetup = (NAT )(pNationDlg.pEndWidgetList.data.ptr);
-//  Nation_Type_id nation;
+//  int nation;
 //  boolean change = false;
 //  GUI pNat;
 //
 //  for (nation = 0; nation < game.playable_nation_count; nation++) {
 //    if (nations_used[nation]) {
-//      freelog(LOG_DEBUG,"  [%d]: %d = %s", nation, nations_used[nation],
+//      util.freelog(LOG_DEBUG,"  [%d]: %d = %s", nation, nations_used[nation],
 //	      get_nation_name(nation));
 //
 //      pNat = get_widget_pointer_form_main_list(MAX_ID - nation);

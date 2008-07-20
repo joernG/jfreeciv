@@ -139,7 +139,7 @@ public class Gotohand {
 	// our_array.tile[++(our_array.last_pos)] = ptile;
 	// if (cost > highest_cost)
 	// highest_cost = cost;
-	// freelog(LOG_DEBUG, "adding cost:%i at %i,%i", cost, ptile.x, ptile.y);
+	// util.freelog(LOG_DEBUG, "adding cost:%i at %i,%i", cost, ptile.x, ptile.y);
 	// }
 	//
 	// /**************************************************************************
@@ -150,7 +150,7 @@ public class Gotohand {
 	// mappos_array our_array;
 	// tile ptile;
 	//
-	// freelog(LOG_DEBUG, "trying get");
+	// util.freelog(LOG_DEBUG, "trying get");
 	// while (lowest_cost < MAXCOST) {
 	// if (lowest_cost > highest_cost)
 	// return false;
@@ -207,7 +207,7 @@ public class Gotohand {
 	// WARMAP_SEACOST(orig_tile) = 0;
 	// break;
 	// default:
-	// freelog(LOG_ERROR, "Bad move_type in init_warmap().");
+	// util.freelog(Log.LOG_ERROR, "Bad move_type in init_warmap().");
 	// }
 	// }
 	//
@@ -307,13 +307,13 @@ public class Gotohand {
 	// } else if (is_ocean(ptile.terrain)) {
 	// int base_cost = get_tile_type(map_get_terrain(tile1)).movement_cost *
 	// SINGLE_MOVE;
-	// move_cost = igter ? MOVE_COST_ROAD : MIN(base_cost,
+	// move_cost = igter ? MOVE_COST_ROAD : Math.min(base_cost,
 	// unit_move_rate(punit));
 	// } else if (igter)
 	// /* NOT c = 1 (Syela) [why not? - Thue] */
 	// move_cost = (ptile.move_cost[dir] != 0 ? SINGLE_MOVE : 0);
 	// else if (punit)
-	// move_cost = MIN(ptile.move_cost[dir], unit_move_rate(punit));
+	// move_cost = Math.min(ptile.move_cost[dir], unit_move_rate(punit));
 	// /* else c = ptile.move_cost[k];
 	// This led to a bad bug where a unit in a swamp was considered too far away
 	// */
@@ -351,7 +351,7 @@ public class Gotohand {
 	// } adjc_dir_iterate_end;
 	// }
 	//
-	// freelog(LOG_DEBUG, "Generated warmap for (%d,%d).",
+	// util.freelog(LOG_DEBUG, "Generated warmap for (%d,%d).",
 	// TILE_XY(orig_tile));
 	// }
 	//
@@ -364,7 +364,7 @@ public class Gotohand {
 	// **************************************************************************/
 	// void generate_warmap(city pcity, unit punit)
 	// {
-	// freelog(LOG_DEBUG, "Generating warmap, pcity = %s, punit = %s",
+	// util.freelog(LOG_DEBUG, "Generating warmap, pcity = %s, punit = %s",
 	// (pcity ? pcity.name : "null"),
 	// (punit ? unit_type(punit).name : "null"));
 	//
@@ -658,11 +658,11 @@ public class Gotohand {
 	// } else if (is_ocean(psrctile.terrain)) {
 	// int base_cost = get_tile_type(pdesttile.terrain).movement_cost *
 	// SINGLE_MOVE;
-	// move_cost = igter ? 1 : MIN(base_cost, unit_move_rate(punit));
+	// move_cost = igter ? 1 : Math.min(base_cost, unit_move_rate(punit));
 	// } else if (igter)
 	// move_cost = (psrctile.move_cost[dir] != 0 ? SINGLE_MOVE : 0);
 	// else
-	// move_cost = MIN(psrctile.move_cost[dir], unit_move_rate(punit));
+	// move_cost = Math.min(psrctile.move_cost[dir], unit_move_rate(punit));
 	//
 	// if (!pplayer.ai.control && !map_is_known(tile1, pplayer)) {
 	// /* Don't go into the unknown. 5*SINGLE_MOVE is an arbitrary deterrent. */
@@ -765,7 +765,7 @@ public class Gotohand {
 	// unit_type(punit).attack_strength ? 3 : 2)
 	// && enemies_at(punit, tile1)) {
 	// total_cost += unit_move_rate(punit);
-	// freelog(LOG_DEBUG, "%s#%d@(%d,%d) dissuaded from (%d,%d) . (%d,%d)",
+	// util.freelog(LOG_DEBUG, "%s#%d@(%d,%d) dissuaded from (%d,%d) . (%d,%d)",
 	// unit_type(punit).name, punit.id,
 	// TILE_XY(punit.tile), TILE_XY(tile1), TILE_XY(dest_tile));
 	// }
@@ -804,13 +804,13 @@ public class Gotohand {
 	// add_to_mapqueue(total_cost, tile1);
 	// BV_CLR_ALL(LOCAL_VECTOR(tile1));
 	// BV_SET(LOCAL_VECTOR(tile1), DIR_REVERSE(dir));
-	// freelog(LOG_DEBUG,
+	// util.freelog(LOG_DEBUG,
 	// "Candidate: %s from (%d, %d) to (%d, %d), cost %d",
 	// dir_get_name(dir), TILE_XY(ptile), TILE_XY(tile1),
 	// total_cost);
 	// } else if (warmap_cost[tile1.index] == total_cost) {
 	// BV_SET(LOCAL_VECTOR(tile1), DIR_REVERSE(dir));
-	// freelog(LOG_DEBUG,
+	// util.freelog(LOG_DEBUG,
 	// "Co-Candidate: %s from (%d, %d) to (%d, %d), cost %d",
 	// dir_get_name(dir), TILE_XY(ptile), TILE_XY(tile1),
 	// total_cost);
@@ -818,7 +818,7 @@ public class Gotohand {
 	// }
 	//
 	// if (same_pos(tile1, dest_tile) && maxcost > total_cost) {
-	// freelog(LOG_DEBUG, "Found path, cost = %d", total_cost);
+	// util.freelog(LOG_DEBUG, "Found path, cost = %d", total_cost);
 	// /* Make sure we stop searching when we have no hope of finding a shorter
 	// path */
 	// maxcost = total_cost + 1;
@@ -826,7 +826,7 @@ public class Gotohand {
 	// } adjc_dir_iterate_end;
 	// }
 	//
-	// freelog(LOG_DEBUG, "GOTO: (%d, %d) . (%d, %d), cost = %d",
+	// util.freelog(LOG_DEBUG, "GOTO: (%d, %d) . (%d, %d), cost = %d",
 	// TILE_XY(orig_tile), TILE_XY(dest_tile), maxcost - 1);
 	//
 	// if (maxcost == MAXCOST)
@@ -858,7 +858,7 @@ public class Gotohand {
 	// /* Mark it on the warmap */
 	// WARMAP_VECTOR(tile1) |= 1 << DIR_REVERSE(dir);
 	// BV_CLR(LOCAL_VECTOR(ptile), dir); /* avoid repetition */
-	// freelog(LOG_DEBUG, "PATH-SEGMENT: %s from (%d, %d) to (%d, %d)",
+	// util.freelog(LOG_DEBUG, "PATH-SEGMENT: %s from (%d, %d) to (%d, %d)",
 	// dir_get_name(DIR_REVERSE(dir)),
 	// TILE_XY(tile1), TILE_XY(ptile));
 	// }
@@ -1008,7 +1008,7 @@ public class Gotohand {
 	// base_move_cost = MOVE_COST_ROAD;
 	// }
 	//
-	// freelog(LOG_DEBUG, "%d@(%d,%d) evaluating (%d,%d)[%d/%d]", punit.id,
+	// util.freelog(LOG_DEBUG, "%d@(%d,%d) evaluating (%d,%d)[%d/%d]", punit.id,
 	// TILE_XY(punit.tile), TILE_XY(ptile),
 	// base_move_cost, punit.moves_left);
 	//
@@ -1084,7 +1084,7 @@ public class Gotohand {
 	// fitness[dir] = rating_of_ally * (num_of_allied_units /
 	// (num_of_allied_units + 1));
 	// } else {
-	// fitness[dir] = MIN(rating_of_unit * (num_of_allied_units + 1),
+	// fitness[dir] = Math.min(rating_of_unit * (num_of_allied_units + 1),
 	// rating_of_unit * rating_of_unit *
 	// (num_of_allied_units /
 	// MAX((num_of_allied_units + 1),
@@ -1179,7 +1179,7 @@ public class Gotohand {
 	// if (fitness[dir] != DONT_SELECT_ME_FITNESS
 	// && fitness[dir] > best_fitness) {
 	// best_fitness = fitness[dir];
-	// freelog(LOG_DEBUG, "New best = %d: dir=%d (%d, %d) . (%d, %d)",
+	// util.freelog(LOG_DEBUG, "New best = %d: dir=%d (%d, %d) . (%d, %d)",
 	// best_fitness, dir, TILE_XY(punit.tile), TILE_XY(ptile));
 	// }
 	// } adjc_dir_iterate_end;
@@ -1191,7 +1191,7 @@ public class Gotohand {
 	// * best_fitness==DONT_SELECT_ME_FITNESS, it'll end its turn right
 	// * there and could very well die. We'll try to rescue.
 	// */
-	// freelog(LOG_DEBUG,
+	// util.freelog(LOG_DEBUG,
 	// "%s's trireme in trouble at (%d,%d), looking for coast",
 	// pplayer.name, TILE_XY(punit.tile));
 	//
@@ -1199,13 +1199,13 @@ public class Gotohand {
 	// if (is_coast_seen(ptile, pplayer)) {
 	// fitness[dir] = 1;
 	// best_fitness = 1;
-	// freelog(LOG_DEBUG, "found coast");
+	// util.freelog(LOG_DEBUG, "found coast");
 	// }
 	// } adjc_dir_iterate_end;
 	// }
 	//
 	// if (best_fitness == DONT_SELECT_ME_FITNESS) {
-	// freelog(LOG_DEBUG, "find_a_direction: no good direction found");
+	// util.freelog(LOG_DEBUG, "find_a_direction: no good direction found");
 	// return -1;
 	// }
 	//
@@ -1216,7 +1216,7 @@ public class Gotohand {
 	// int dir = myrand(8);
 	//
 	// if (fitness[dir] == best_fitness) {
-	// freelog(LOG_DEBUG,
+	// util.freelog(LOG_DEBUG,
 	// "find_a_direction: returning dir=%d with fitness=%d", dir,
 	// fitness[dir]);
 	// return dir;
@@ -1338,7 +1338,7 @@ public class Gotohand {
 		// return GR_WAITING; /* out of fuel */
 		// }
 		// } else {
-		// freelog(LOG_VERBOSE, "Did not find an airroute for "
+		// util.freelog(LOG_VERBOSE, "Did not find an airroute for "
 		// "%s's %s at (%d, %d) . (%d, %d)",
 		// pplayer.name, unit_type(punit).name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
@@ -1364,13 +1364,13 @@ public class Gotohand {
 
 		// dir = find_a_direction(punit, restriction, waypoint_tile);
 		// if (dir < 0) {
-		// freelog(LOG_DEBUG, "%s#%d@(%d,%d) stalling so it won't be killed.",
+		// util.freelog(LOG_DEBUG, "%s#%d@(%d,%d) stalling so it won't be killed.",
 		// unit_type(punit).name, punit.id,
 		// TILE_XY(punit.tile));
 		// return GR_FAILED;
 		// }
 
-		// freelog(LOG_DEBUG, "Going %s", dir_get_name(dir));
+		// util.freelog(LOG_DEBUG, "Going %s", dir_get_name(dir));
 		// ptile = mapstep(punit.tile, dir);
 
 		// penemy = is_enemy_unit_tile(ptile, unit_owner(punit));
@@ -1409,10 +1409,10 @@ public class Gotohand {
 		// return GR_OUT_OF_MOVEPOINTS;
 		// }
 
-		// freelog(LOG_DEBUG, "Moving on.");
+		// util.freelog(LOG_DEBUG, "Moving on.");
 		// } while(!same_pos(ptile, waypoint_tile));
 		// } else {
-		// freelog(LOG_VERBOSE, "Did not find the shortest path for "
+		// util.freelog(LOG_VERBOSE, "Did not find the shortest path for "
 		// "%s's %s at (%d, %d) . (%d, %d)",
 		// pplayer.name, unit_type(punit).name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
@@ -1519,7 +1519,7 @@ public class Gotohand {
 	// tile ptile;
 	// int dist, total_distance = real_map_distance(src_tile, dest_tile);
 	//
-	// freelog(LOG_DEBUG,
+	// util.freelog(LOG_DEBUG,
 	// "air_can_move_between(moves=%d, src=(%i,%i), "
 	// "dest=(%i,%i), player=%s)", moves, TILE_XY(src_tile),
 	// TILE_XY(dest_tile), pplayer.name);
@@ -1574,7 +1574,7 @@ public class Gotohand {
 	//   * finding because planes always take 1 movement unit to move -
 	//   * which is not true of land units.
 	//   */
-	//  freelog(LOG_DEBUG,
+	//  util.freelog(LOG_DEBUG,
 	//	  "air_can_move_between: quick search didn't work. Lets try full.");
 	//
 	//  init_warmap(src_tile, AIR_MOVING);
@@ -1594,7 +1594,7 @@ public class Gotohand {
 	//       */
 	//      if (same_pos(tile1, dest_tile)) {
 	//	/* We're there! */
-	//	freelog(LOG_DEBUG, "air_can_move_between: movecost: %i",
+	//	util.freelog(LOG_DEBUG, "air_can_move_between: movecost: %i",
 	//		WARMAP_COST(ptile) + MOVE_COST_AIR);
 	//	/* The -MOVE_COST_AIR is because we haven't taken the final
 	//	   step yet. */
@@ -1616,7 +1616,7 @@ public class Gotohand {
 	//    } adjc_dir_iterate_end;
 	//  }
 	//
-	//  freelog(LOG_DEBUG, "air_can_move_between: no route found");
+	//  util.freelog(LOG_DEBUG, "air_can_move_between: no route found");
 	//  return -1;
 	//}
 }

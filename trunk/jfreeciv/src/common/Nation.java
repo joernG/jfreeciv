@@ -1,5 +1,7 @@
 package common;
 
+import utility.Log;
+
 public class Nation{
 //#include "fcintl.h"
 //#include "game.h"
@@ -20,15 +22,15 @@ public class Nation{
 //  If returning 0, prints log message with given loglevel
 //  quoting given func name, explaining problem.
 //***************************************************************/
-//static boolean bounds_check_nation_id(Nation_Type_id nid, int loglevel,
+//static boolean bounds_check_nation_id(int nid, int loglevel,
 //				  final String func_name)
 //{
 //  if (game.nation_count==0) {
-//    freelog(loglevel, "%s before nations setup", func_name);
+//    util.freelog(loglevel, "%s before nations setup", func_name);
 //    return false;
 //  }
 //  if (nid < 0 || nid >= game.nation_count) {
-//    freelog(loglevel, "Bad nation id %d (count %d) in %s",
+//    util.freelog(loglevel, "Bad nation id %d (count %d) in %s",
 //	    nid, game.nation_count, func_name);
 //    return false;
 //  }
@@ -38,7 +40,7 @@ public class Nation{
 ///***************************************************************
 //Find nation by (translated) name
 //***************************************************************/
-//Nation_Type_id find_nation_by_name(final String name)
+//int find_nation_by_name(final String name)
 //{
 //  int i;
 //
@@ -52,7 +54,7 @@ public class Nation{
 ///***************************************************************
 //Find nation by (untranslated) original name
 //***************************************************************/
-//Nation_Type_id find_nation_by_name_orig(final String name)
+//int find_nation_by_name_orig(final String name)
 //{
 //  int i;
 //
@@ -62,24 +64,24 @@ public class Nation{
 //
 //  return NO_NATION_SELECTED;
 //}
-//
-///***************************************************************
-//Returns (translated) name of the nation
-//***************************************************************/
-//final String get_nation_name(Nation_Type_id nation)
-//{
-//  if (!bounds_check_nation_id(nation, LOG_ERROR, "get_nation_name")) {
-//    return "";
-//  }
-//  return nations[nation].name;
-//}
-//
-///***************************************************************
+
+	/***************************************************************************
+	 * Returns (translated) name of the nation
+	 **************************************************************************/
+	public static final String get_nation_name(int nation) {
+//		if (!bounds_check_nation_id(nation, Log.LOG_ERROR, "get_nation_name")) {
+//			return "";
+//		}
+//		return nations[nation].name;
+		return ""; //TODO
+	}
+
+// /***************************************************************
 //Returns (untranslated) original name of the nation
 //***************************************************************/
-//final String get_nation_name_orig(Nation_Type_id nation)
+//final String get_nation_name_orig(int nation)
 //{
-//  if (!bounds_check_nation_id(nation, LOG_ERROR, "get_nation_name_orig")) {
+//  if (!bounds_check_nation_id(nation, Log.LOG_ERROR, "get_nation_name_orig")) {
 //    return "";
 //  }
 //  return nations[nation].name_orig;
@@ -89,7 +91,7 @@ public class Nation{
 //Returns pointer to the array of the nation leader names, and
 //sets dim to number of leaders.
 //***************************************************************/
-//leader get_nation_leaders(Nation_Type_id nation, int *dim)
+//leader get_nation_leaders(int nation, int *dim)
 //{
 //  if (!bounds_check_nation_id(nation, LOG_FATAL, "get_nation_leader_names")) {
 //    die("wrong nation %d", nation);
@@ -102,7 +104,7 @@ public class Nation{
 //  Returns pointer to the preferred set of nations that can fork from the
 //  nation.  The array is terminated by a NO_NATION_SELECTED value.
 //****************************************************************************/
-//Nation_Type_id* get_nation_civilwar(Nation_Type_id nation)
+//int* get_nation_civilwar(int nation)
 //{
 //  return nations[nation].civilwar_nations;
 //}
@@ -111,11 +113,11 @@ public class Nation{
 //Returns sex of given leader name. If names is not found,
 //return 1 (meaning male).
 //***************************************************************/
-//boolean get_nation_leader_sex(Nation_Type_id nation, final String name)
+//boolean get_nation_leader_sex(int nation, final String name)
 //{
 //  int i;
 //  
-//  if (!bounds_check_nation_id(nation, LOG_ERROR, "get_nation_leader_sex")) {
+//  if (!bounds_check_nation_id(nation, Log.LOG_ERROR, "get_nation_leader_sex")) {
 //    return false;
 //  }
 //  for (i = 0; i < nations[nation].leader_count; i++) {
@@ -129,11 +131,11 @@ public class Nation{
 ///***************************************************************
 //checks if given leader name exist for given nation.
 //***************************************************************/
-//boolean check_nation_leader_name(Nation_Type_id nation, final String name)
+//boolean check_nation_leader_name(int nation, final String name)
 //{
 //  int i;
 //  
-//  if (!bounds_check_nation_id(nation, LOG_ERROR, "check_nation_leader_name")) {
+//  if (!bounds_check_nation_id(nation, Log.LOG_ERROR, "check_nation_leader_name")) {
 //    return true;			/* ? */
 //  }
 //  for (i = 0; i < nations[nation].leader_count; i++) {
@@ -143,19 +145,19 @@ public class Nation{
 //  }
 //  return false;
 //}
-//
-///***************************************************************
-//Returns plural name of the nation.
-//***************************************************************/
-//final String get_nation_name_plural(Nation_Type_id nation)
-//{
-//  if (!bounds_check_nation_id(nation, LOG_ERROR, "get_nation_name_plural")) {
-//    return "";
-//  }
-//  return nations[nation].name_plural;
-//}
-//
-///***************************************************************
+
+	/***************************************************************************
+	 * Returns plural name of the nation.
+	 **************************************************************************/
+	public static String get_nation_name_plural(int nation) {
+//		if (!bounds_check_nation_id(nation, Log.LOG_ERROR, "get_nation_name_plural")) {
+//			return "";
+//		}
+//		return nations[nation].name_plural;
+		return null;
+	}
+
+// /***************************************************************
 //Returns pointer to a nation 
 //***************************************************************/
 //nation_type get_nation_by_plr(player plr)
@@ -170,7 +172,7 @@ public class Nation{
 ///***************************************************************
 //  ...
 //***************************************************************/
-//nation_type get_nation_by_idx(Nation_Type_id nation)
+//nation_type get_nation_by_idx(int nation)
 //{
 //  if (!bounds_check_nation_id(nation, LOG_FATAL, "get_nation_by_idx")) {
 //    die("wrong nation %d", nation);
@@ -190,7 +192,7 @@ public class Nation{
 ///***************************************************************
 // De-allocate resources associated with the given nation.
 //***************************************************************/
-//static void nation_free(Nation_Type_id nation)
+//static void nation_free(int nation)
 //{
 //  int i;
 //  nation_type p = get_nation_by_idx(nation);
@@ -232,7 +234,7 @@ public class Nation{
 //***************************************************************/
 //void nations_free()
 //{
-//  Nation_Type_id nation;
+//  int nation;
 //
 //  if (!nations) {
 //    return;
@@ -271,7 +273,7 @@ public class Nation{
 ///***************************************************************
 //Returns nation's city style
 //***************************************************************/
-//int get_nation_city_style(Nation_Type_id nation)
+//int get_nation_city_style(int nation)
 //{
 //  if (!bounds_check_nation_id(nation, LOG_FATAL, "get_nation_city_style")) {
 //    die("wrong nation %d", nation);

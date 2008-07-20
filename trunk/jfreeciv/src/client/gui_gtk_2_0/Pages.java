@@ -81,7 +81,7 @@ public class Pages{
 //    /* Send new game defaults. */
 //    send_chat("/set aifill 5");
 //
-//    my_snprintf(buf, sizeof(buf), "/%s", skill_level_names[0]);
+//    buf = util.my_snprintf( "/%s", skill_level_names[0]);
 //    send_chat(buf);
 //  }
 //}
@@ -132,7 +132,7 @@ public class Pages{
 //    layout = pango_layout_new(gdk_pango_context_get());
 //    pango_layout_set_font_description(layout, main_font);
 //
-//    my_snprintf(msgbuf, sizeof(msgbuf), "%s%s",
+//    msgbuf = util.my_snprintf( "%s%s",
 //	word_version(), VERSION_STRING);
 //    pango_layout_set_text(layout, msgbuf, -1);
 //
@@ -625,7 +625,7 @@ public class Pages{
 //
 //  gtk_entry_set_text(GTK_ENTRY(network_login), user_name);
 //  gtk_entry_set_text(GTK_ENTRY(network_host), server_host);
-//  my_snprintf(buf, sizeof(buf), "%d", server_port);
+//  buf = util.my_snprintf( "%d", server_port);
 //  gtk_entry_set_text(GTK_ENTRY(network_port), buf);
 //
 //  set_connection_state(LOGIN_TYPE);
@@ -885,7 +885,7 @@ public class Pages{
 //
 //  name = skill_level_names[GPOINTER_TO_UINT(data)];
 //
-//  my_snprintf(buf, sizeof(buf), "/%s", name);
+//  buf = util.my_snprintf( "/%s", name);
 //  send_chat(buf);
 //}
 //
@@ -896,7 +896,7 @@ public class Pages{
 //{
 //  char buf[512];
 //
-//  my_snprintf(buf, sizeof(buf), "/set aifill %d",
+//  buf = util.my_snprintf( "/set aifill %d",
 //      gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w)));
 //  send_chat(buf);
 //}
@@ -1099,7 +1099,7 @@ public class Pages{
 //  if (is_server_running()) {
 //    char message[MAX_LEN_MSG];
 //
-//    my_snprintf(message, sizeof(message), "/load %s", filename);
+//    message = util.my_snprintf( "/load %s", filename);
 //    send_chat(message);
 //  }
 //}
@@ -1256,7 +1256,7 @@ public class Pages{
 //  if (is_server_running()) {
 //    char message[MAX_LEN_MSG];
 //
-//    my_snprintf(message, sizeof(message), "/load %s", filename);
+//    message = util.my_snprintf( "/load %s", filename);
 //    send_chat(message);
 //  }
 //}
@@ -1468,11 +1468,11 @@ public class Pages{
 //    GtkTreeIter iter;
 //    char message[MAX_LEN_MSG];
 //
-//    my_snprintf(message, sizeof(message), "/create %s", user_name);
+//    message = util.my_snprintf( "/create %s", user_name);
 //    send_chat(message);
-//    my_snprintf(message, sizeof(message), "/ai %s", user_name);
+//    message = util.my_snprintf( "/ai %s", user_name);
 //    send_chat(message);
-//    my_snprintf(message, sizeof(message), "/take \"%s\"", user_name);
+//    message = util.my_snprintf( "/take \"%s\"", user_name);
 //    send_chat(message);
 //
 //    /* create a false entry */

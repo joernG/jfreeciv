@@ -148,21 +148,21 @@ public class Savegame{
 //    if (!_line || _line.length() != map.xsize) {                             \
 //      if (!_warning_printed) {                                              \
 //        /* TRANS: Error message. */                                         \
-//        freelog(LOG_ERROR, _("The save file contains incomplete "           \
+//        util.freelog(Log.LOG_ERROR, _("The save file contains incomplete "           \
 //                "map data.  This can happen with old saved "                \
 //                "games, or it may indicate an invalid saved "               \
 //                "game file.  Proceed at your own risk."));                  \
 //        if(!_line) {                                                        \
 //          /* TRANS: Error message. */                                       \
-//          freelog(LOG_ERROR, "Reason: line not found");                  \
+//          util.freelog(Log.LOG_ERROR, "Reason: line not found");                  \
 //        } else {                                                            \
 //          /* TRANS: Error message. */                                       \
-//          freelog(LOG_ERROR, _("Reason: line too short "                    \
+//          util.freelog(Log.LOG_ERROR, _("Reason: line too short "                    \
 //                  "(expected %d got %lu"), map.xsize,                       \
 //                  (unsigned long) _line.length());                           \
 //        }                                                                   \
 //        /* Do not translate.. */                                            \
-//        freelog(LOG_ERROR, "secfile_lookup_line='%s'",                      \
+//        util.freelog(Log.LOG_ERROR, "secfile_lookup_line='%s'",                      \
 //                #SECFILE_LOOKUP_LINE);                                      \
 //        _warning_printed = true;                                            \
 //      }                                                                     \
@@ -239,7 +239,7 @@ public class Savegame{
 //  } terrain_type_iterate_end;
 //
 //  /* TRANS: message for an obscure savegame error. */
-//  freelog(LOG_FATAL, "Unknown terrain identifier '%c' in savegame.", ch);
+//  util.freelog(LOG_FATAL, "Unknown terrain identifier '%c' in savegame.", ch);
 //  exit(EXIT_FAILURE);
 //}
 //
@@ -513,7 +513,7 @@ public class Savegame{
 //      
 //      nation_id = find_nation_by_name_orig(nation);
 //      if (nation_id == NO_NATION_SELECTED) {
-//	freelog(Log.LOG_NORMAL,
+//	util.freelog(Log.LOG_NORMAL,
 //	        "Warning: Unknown nation %s for starting position no %d",
 //		nation,
 //		i);
@@ -541,7 +541,7 @@ public class Savegame{
 //
 //  if (map.num_start_positions
 //      && map.num_start_positions < game.max_players) {
-//    freelog(LOG_VERBOSE,
+//    util.freelog(LOG_VERBOSE,
 //	    _("Number of starts (%d) are lower than max_players (%d),"
 //	      " lowering max_players."),
 // 	    map.num_start_positions, game.max_players);
@@ -935,19 +935,19 @@ public class Savegame{
 //{
 //  /* before 1.15.0 unit types used to be saved by id */
 //  if (id < 0) {
-//    freelog(LOG_ERROR, "Wrong unit type id value (%d)", id);
+//    util.freelog(Log.LOG_ERROR, "Wrong unit type id value (%d)", id);
 //    exit(EXIT_FAILURE);
 //  }
 //  /* Different rulesets had different unit names. */
 //  if (strcmp(game.rulesetdir, "civ1") == 0) {
 //    if (id >= ARRAY_SIZE(old_civ1_unit_types)) {
-//      freelog(LOG_ERROR, "Wrong unit type id value (%d)", id);
+//      util.freelog(Log.LOG_ERROR, "Wrong unit type id value (%d)", id);
 //      exit(EXIT_FAILURE);
 //    }
 //    return old_civ1_unit_types[id];
 //  } else {
 //    if (id >= ARRAY_SIZE(old_default_unit_types)) {
-//      freelog(LOG_ERROR, "Wrong unit type id value (%d)", id);
+//      util.freelog(Log.LOG_ERROR, "Wrong unit type id value (%d)", id);
 //      exit(EXIT_FAILURE);
 //    }
 //    return old_default_unit_types[id];
@@ -982,7 +982,7 @@ public class Savegame{
 //{
 //  /* before 1.15.0 improvement types used to be saved by id */
 //  if (id < 0 || id >= ARRAY_SIZE(old_impr_types)) {
-//    freelog(LOG_ERROR, "Wrong improvement type id value (%d)", id);
+//    util.freelog(Log.LOG_ERROR, "Wrong improvement type id value (%d)", id);
 //    exit(EXIT_FAILURE);
 //  }
 //  return old_impr_types[id];
@@ -1081,7 +1081,7 @@ public class Savegame{
 //  }
 //
 //  if (id < 0 || id >= ARRAY_SIZE(old_default_techs)) {
-//    freelog(LOG_ERROR, "Wrong tech type id value (%d)", id);
+//    util.freelog(Log.LOG_ERROR, "Wrong tech type id value (%d)", id);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -1138,7 +1138,7 @@ public class Savegame{
 //  final char* name;
 //  int id;
 //  
-//  my_snprintf(path_with_name, sizeof(path_with_name), 
+//  path_with_name = util.my_snprintf( 
 //              "%s_name", path);
 //	      
 //  name = secfile_lookup_str_default(file, null, path_with_name, plrno);
@@ -1163,7 +1163,7 @@ public class Savegame{
 //  
 //  id = find_tech_by_name_orig(name);
 //  if (id == A_LAST) {
-//    freelog(LOG_ERROR, "Unknown technology (%s)", name);
+//    util.freelog(Log.LOG_ERROR, "Unknown technology (%s)", name);
 //    exit(EXIT_FAILURE);    
 //  }
 //  return id;
@@ -1179,7 +1179,7 @@ public class Savegame{
 //  char path_with_name[128];
 //  final char* name;
 // 
-//  my_snprintf(path_with_name, sizeof(path_with_name), 
+//  path_with_name = util.my_snprintf( 
 //              "%s_name", path);
 //  
 //  switch (tech) {
@@ -1239,19 +1239,19 @@ public class Savegame{
 //{
 //  /* before 1.15.0 governments used to be saved by index */
 //  if (id < 0) {
-//    freelog(LOG_ERROR, "Wrong government type id value (%d)", id);
+//    util.freelog(Log.LOG_ERROR, "Wrong government type id value (%d)", id);
 //    exit(EXIT_FAILURE);
 //  }
 //  /* Different rulesets had different governments. */
 //  if (strcmp(game.rulesetdir, "civ2") == 0) {
 //    if (id >= ARRAY_SIZE(old_civ2_governments)) {
-//      freelog(LOG_ERROR, "Wrong government type id value (%d)", id);
+//      util.freelog(Log.LOG_ERROR, "Wrong government type id value (%d)", id);
 //      exit(EXIT_FAILURE);
 //    }
 //    return old_civ2_governments[id];
 //  } else {
 //    if (id >= ARRAY_SIZE(old_default_governments)) {
-//      freelog(LOG_ERROR, "Wrong government type id value (%d)", id);
+//      util.freelog(Log.LOG_ERROR, "Wrong government type id value (%d)", id);
 //      exit(EXIT_FAILURE);
 //    }
 //    return old_default_governments[id];
@@ -1303,7 +1303,7 @@ public class Savegame{
 //
 //	type = find_unit_type_by_name_orig(name);
 //	if (type == U_LAST) {
-//	  freelog(LOG_ERROR, "Unknown unit type '%s' in worklist",
+//	  util.freelog(Log.LOG_ERROR, "Unknown unit type '%s' in worklist",
 //		  name);
 //	  exit(EXIT_FAILURE);
 //	}
@@ -1318,7 +1318,7 @@ public class Savegame{
 //
 //	type = find_improvement_by_name_orig(name);
 //	if (type == B_LAST) {
-//	  freelog(LOG_ERROR, "Unknown improvement type '%s' in worklist",
+//	  util.freelog(Log.LOG_ERROR, "Unknown improvement type '%s' in worklist",
 //	           name);
 //	}
 //	pwl.wlids[i] = type;
@@ -1407,7 +1407,7 @@ public class Savegame{
 //      int t = secfile_lookup_int(file, "player%d.u%d.type",
 //                             plrno, i);
 //      if (t < 0) {
-//        freelog(LOG_ERROR, "Wrong player%d.u%d.type value (%d)",
+//        util.freelog(Log.LOG_ERROR, "Wrong player%d.u%d.type value (%d)",
 //	        plrno, i, t);
 //	exit(EXIT_FAILURE);
 //      }
@@ -1417,7 +1417,7 @@ public class Savegame{
 //    
 //    type = find_unit_type_by_name_orig(type_name);
 //    if (type == U_LAST) {
-//      freelog(LOG_ERROR, "Unknown unit type '%s' in player%d section",
+//      util.freelog(Log.LOG_ERROR, "Unknown unit type '%s' in player%d section",
 //              type_name, plrno);
 //      exit(EXIT_FAILURE);
 //    }
@@ -1539,7 +1539,7 @@ public class Savegame{
 //
 //	  if (orders_buf[j] == '\0' || dir_buf[j] == '\0'
 //	      || act_buf[j] == '\0') {
-//	    freelog(LOG_ERROR, "Savegame error: invalid unit orders.");
+//	    util.freelog(Log.LOG_ERROR, "Savegame error: invalid unit orders.");
 //	    free_unit_orders(punit);
 //	    break;
 //	  }
@@ -1659,7 +1659,7 @@ public class Savegame{
 //  }
 //  plr.nation = find_nation_by_name_orig(p);
 //  if (plr.nation == NO_NATION_SELECTED) {
-//    freelog(LOG_FATAL, "Nation %s (used by %s) isn't available.",
+//    util.freelog(LOG_FATAL, "Nation %s (used by %s) isn't available.",
 //	    p, plr.name);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1692,7 +1692,7 @@ public class Savegame{
 //  }
 //  gov = find_government_by_name_orig(name);
 //  if (gov == null) {
-//    freelog(LOG_ERROR, "Unsupported government found (%s)", name);
+//    util.freelog(Log.LOG_ERROR, "Unsupported government found (%s)", name);
 //    exit(EXIT_FAILURE);
 //  }
 //  plr.government = gov.index;
@@ -1727,7 +1727,7 @@ public class Savegame{
 //  }
 //  c_s = get_style_by_name_orig(p);
 //  if (c_s == -1) {
-//    freelog(LOG_ERROR, _("Unsupported city style found in player%d section. "
+//    util.freelog(Log.LOG_ERROR, _("Unsupported city style found in player%d section. "
 //                         "Changed to %s"), plrno, get_city_style_name(0));
 //    c_s = 0;
 //  }	
@@ -1903,7 +1903,7 @@ public class Savegame{
 //        && aplayer.is_alive
 //        && pplayers_allied(plr, aplayer)
 //        && !pplayer_can_ally(plr, aplayer)) {
-//      freelog(LOG_ERROR, _("Illegal alliance structure detected: "
+//      util.freelog(Log.LOG_ERROR, _("Illegal alliance structure detected: "
 //              "%s's alliance to %s reduced to peace treaty."),
 //              plr.name, aplayer.name);
 //      plr.diplstates[aplayer.player_no].type = DS_PEACE;
@@ -1916,11 +1916,11 @@ public class Savegame{
 //    char prefix[32];
 //    char *st;
 //    
-//    my_snprintf(prefix, sizeof(prefix), "player%d.spaceship", plrno);
-//    spaceship_init(ship);
+//    prefix = util.my_snprintf( "player%d.spaceship", plrno);
+//    ship.init();
 //    ship.state = secfile_lookup_int(file, "%s.state", prefix);
 //
-//    if (ship.state != SSHIP_NONE) {
+//    if (ship.state != spaceship_state.SSHIP_NONE) {
 //      ship.structurals = secfile_lookup_int(file, "%s.structurals", prefix);
 //      ship.components = secfile_lookup_int(file, "%s.components", prefix);
 //      ship.modules = secfile_lookup_int(file, "%s.modules", prefix);
@@ -1931,18 +1931,18 @@ public class Savegame{
 //      ship.solar_panels = secfile_lookup_int(file, "%s.solar_panels", prefix);
 //
 //      st = secfile_lookup_str(file, "%s.structure", prefix);
-//      for (i = 0; i < NUM_SS_STRUCTURALS; i++) {
+//      for (i = 0; i < player_spaceship.NUM_SS_STRUCTURALS; i++) {
 //	if (st[i] == '0') {
 //	  ship.structure[i] = false;
 //	} else if (st[i] == '1') {
 //	  ship.structure[i] = true;
 //	} else {
-//	  freelog(LOG_ERROR, "invalid spaceship structure '%c' %d", st[i],
+//	  util.freelog(Log.LOG_ERROR, "invalid spaceship structure '%c' %d", st[i],
 //		  st[i]);
 //	  ship.structure[i] = false;
 //	}
 //      }
-//      if (ship.state >= SSHIP_LAUNCHED) {
+//      if (ship.state >= spaceship_state.SSHIP_LAUNCHED) {
 //	ship.launch_year = secfile_lookup_int(file, "%s.launch_year", prefix);
 //      }
 //      spaceship_calc_derived(ship);
@@ -2122,7 +2122,7 @@ public class Savegame{
 //
 //	  if (ptile.worked) {
 //	    /* oops, inconsistent savegame; minimal fix: */
-//	    freelog(LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), "
+//	    util.freelog(LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), "
 //		    "converting to elvis", pcity.name, x, y);
 //	    pcity.specialists[SP_ELVIS]++;
 //	    set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
@@ -2218,7 +2218,7 @@ public class Savegame{
 //					 plrno, part_nr);
 //      if (!current)
 //	break;
-//      freelog(LOG_DEBUG, "quoted_length=%lu quoted=%lu current=%lu",
+//      util.freelog(LOG_DEBUG, "quoted_length=%lu quoted=%lu current=%lu",
 //	      (unsigned long) quoted_length,
 //	      (unsigned long) quoted.length(),
 //	      (unsigned long) current.length());
@@ -2226,7 +2226,7 @@ public class Savegame{
 //      strcat(quoted, current);
 //    }
 //    if (quoted_length != quoted.length()) {
-//      freelog(Log.LOG_NORMAL, "quoted_length=%lu quoted=%lu",
+//      util.freelog(Log.LOG_NORMAL, "quoted_length=%lu quoted=%lu",
 //	      (unsigned long) quoted_length,
 //	      (unsigned long) quoted.length());
 //      assert(0);
@@ -2571,12 +2571,12 @@ public class Savegame{
 //
 //  secfile_insert_int(file, ship.state, "player%d.spaceship.state", plrno);
 //
-//  if (ship.state != SSHIP_NONE) {
+//  if (ship.state != spaceship_state.SSHIP_NONE) {
 //    char prefix[32];
-//    char st[NUM_SS_STRUCTURALS+1];
+//    char st[player_spaceship.NUM_SS_STRUCTURALS+1];
 //    int i;
 //    
-//    my_snprintf(prefix, sizeof(prefix), "player%d.spaceship", plrno);
+//    prefix = util.my_snprintf( "player%d.spaceship", plrno);
 //
 //    secfile_insert_int(file, ship.structurals, "%s.structurals", prefix);
 //    secfile_insert_int(file, ship.components, "%s.components", prefix);
@@ -2587,12 +2587,12 @@ public class Savegame{
 //    secfile_insert_int(file, ship.life_support, "%s.life_support", prefix);
 //    secfile_insert_int(file, ship.solar_panels, "%s.solar_panels", prefix);
 //    
-//    for(i=0; i<NUM_SS_STRUCTURALS; i++) {
+//    for(i=0; i<player_spaceship.NUM_SS_STRUCTURALS; i++) {
 //      st[i] = (ship.structure[i]) ? '1' : '0';
 //    }
 //    st[i] = '\0';
 //    secfile_insert_str(file, st, "%s.structure", prefix);
-//    if (ship.state >= SSHIP_LAUNCHED) {
+//    if (ship.state >= spaceship_state.SSHIP_LAUNCHED) {
 //      secfile_insert_int(file, ship.launch_year, "%s.launch_year", prefix);
 //    }
 //  }
@@ -2930,7 +2930,7 @@ public class Savegame{
 //		       "player%d.attribute_v2_block_parts", plrno);
 //
 //    for (current_part_nr = 0; current_part_nr < parts; current_part_nr++) {
-//      size_t size_of_current_part = MIN(bytes_left, PART_SIZE);
+//      size_t size_of_current_part = Math.min(bytes_left, PART_SIZE);
 //
 //      assert(bytes_left);
 //
@@ -3006,7 +3006,7 @@ public class Savegame{
 //    case C_TILE_EMPTY:
 //      if (!res) {
 //	set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
-//	freelog(LOG_DEBUG, "unavailable tile marked as empty!");
+//	util.freelog(LOG_DEBUG, "unavailable tile marked as empty!");
 //      }
 //      break;
 //    case C_TILE_WORKER:
@@ -3015,7 +3015,7 @@ public class Savegame{
 //
 //	pcity.specialists[SP_ELVIS]++;
 //	set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
-//	freelog(LOG_DEBUG, "Worked tile was unavailable!");
+//	util.freelog(LOG_DEBUG, "Worked tile was unavailable!");
 //
 //	ptile = city_map_to_map(pcity, x, y);
 //
@@ -3029,7 +3029,7 @@ public class Savegame{
 //    case C_TILE_UNAVAILABLE:
 //      if (res) {
 //	set_worker_city(pcity, x, y, C_TILE_EMPTY);
-//	freelog(LOG_DEBUG, "Empty tile Marked as unavailable!");
+//	util.freelog(LOG_DEBUG, "Empty tile Marked as unavailable!");
 //      }
 //      break;
 //    }
@@ -3044,7 +3044,7 @@ public class Savegame{
 //void game_load(section_file file)
 //{
 //  int i, k, id;
-//  enum server_states tmp_server_state;
+//  enum server_states tmp_Srv_main.server_state;
 //  char *savefile_options;
 //  final String string;
 //  char** improvement_order = null;
@@ -3054,8 +3054,8 @@ public class Savegame{
 //  final char* name;
 //
 //  game.version = secfile_lookup_int_default(file, 0, "game.version");
-//  tmp_server_state = (enum server_states)
-//    secfile_lookup_int_default(file, RUN_GAME_STATE, "game.server_state");
+//  tmp_Srv_main.server_state = (enum server_states)
+//    secfile_lookup_int_default(file, RUN_GAME_STATE, "game.Srv_main.server_state");
 //
 //  savefile_options = secfile_lookup_str(file, "savefile.options");
 //  if (has_capability("improvement_order", savefile_options)) {
@@ -3069,7 +3069,7 @@ public class Savegame{
 //
 //  /* we require at least version 1.9.0 */
 //  if (10900 > game.version) {
-//    freelog(LOG_FATAL,
+//    util.freelog(LOG_FATAL,
 //	    "Savegame too old, at least version 1.9.0 required.");
 //    exit(EXIT_FAILURE);
 //  }
@@ -3259,7 +3259,7 @@ public class Savegame{
 //      if (strcmp("classic",
 //		 secfile_lookup_str_default(file, "default",
 //					    "game.ruleset.terrain")) == 0) {
-//	freelog(LOG_FATAL, _("The savegame uses the classic terrain "
+//	util.freelog(LOG_FATAL, _("The savegame uses the classic terrain "
 //			     "ruleset which is no longer supported."));
 //	exit(EXIT_FAILURE);
 //      }
@@ -3268,7 +3268,7 @@ public class Savegame{
 //#define T(x) \
 //      str2 = secfile_lookup_str_default(file, "default", x); \
 //      if (strcmp(str, str2) != 0) { \
-//	freelog(Log.LOG_NORMAL, _("Warning: Different rulesetdirs " \
+//	util.freelog(Log.LOG_NORMAL, _("Warning: Different rulesetdirs " \
 //			      "('%s' and '%s') are no longer supported. " \
 //			      "Using '%s'."), \
 //			      str, str2, str); \
@@ -3371,7 +3371,7 @@ public class Savegame{
 //	map.ysize = secfile_lookup_int(file, "map.ysize");
 //      }
 //
-//      if (tmp_server_state==server_states.PRE_GAME_STATE && map.generator == 0) {
+//      if (tmp_Srv_main.server_state==server_states.PRE_GAME_STATE && map.generator == 0) {
 //	/* generator 0 = map done with map editor */
 //	/* aka a "scenario" */
 //        if (has_capability("specials",savefile_options)) {
@@ -3389,7 +3389,7 @@ public class Savegame{
 //	return;
 //      }
 //    }
-//    if(tmp_server_state==server_states.PRE_GAME_STATE) {
+//    if(tmp_Srv_main.server_state==server_states.PRE_GAME_STATE) {
 //      return;
 //    }
 //  }
@@ -3405,7 +3405,7 @@ public class Savegame{
 //    rstate.x = secfile_lookup_int(file,"random.index_X");
 //    for(i=0;i<8;i++) {
 //      char name[20];
-//      my_snprintf(name, sizeof(name), "random.table%d",i);
+//      name = util.my_snprintf( "random.table%d",i);
 //      string=secfile_lookup_str(file,name);
 //      sscanf(string,"%8x %8x %8x %8x %8x %8x %8x", &rstate.v[7*i],
 //	     &rstate.v[7*i+1], &rstate.v[7*i+2], &rstate.v[7*i+3],
@@ -3420,7 +3420,7 @@ public class Savegame{
 //    /* We're loading a running game without a seed (which is okay, if it's
 //     * a scenario).  We need to generate the game seed now because it will
 //     * be needed later during the load. */
-//    if (tmp_server_state == RUN_GAME_STATE) {
+//    if (tmp_Srv_main.server_state == RUN_GAME_STATE) {
 //      init_game_seed();
 //    }
 //  }
@@ -3526,7 +3526,7 @@ public class Savegame{
 //    for(player pplayer: game.players){
 //      for (unit punit : pplayer.units.data) {
 //	if (!can_unit_continue_current_activity(punit)) {
-//	  freelog(LOG_ERROR, "ERROR: Unit doing illegal activity in savegame!");
+//	  util.freelog(Log.LOG_ERROR, "ERROR: Unit doing illegal activity in savegame!");
 //	  punit.activity = unit_activity.ACTIVITY_IDLE;
 //	}
 //      } }
@@ -3569,7 +3569,7 @@ public class Savegame{
 //
 //      if (is_ocean(map_get_terrain(punit.tile))
 //          && is_ground_unit(punit) && !ferry) {
-//        freelog(LOG_ERROR, "Removing %s's unferried %s in ocean at (%d, %d)",
+//        util.freelog(Log.LOG_ERROR, "Removing %s's unferried %s in ocean at (%d, %d)",
 //                pplayer.name, unit_name(punit.type), TILE_XY(punit.tile));
 //        bounce_unit(punit, true);
 //      }
@@ -3609,8 +3609,8 @@ public class Savegame{
 //   * started the first time), it should always be considered a running
 //   * game for savegame purposes:
 //   */
-//  secfile_insert_int(file, (int) (game.is_new_game ? server_state :
-//				  RUN_GAME_STATE), "game.server_state");
+//  secfile_insert_int(file, (int) (game.is_new_game ? Srv_main.server_state :
+//				  RUN_GAME_STATE), "game.Srv_main.server_state");
 //  
 //  secfile_insert_str(file, get_meta_patches_string(), "game.metapatches");
 //  secfile_insert_str(file, get_meta_topic_string(), "game.metatopic");
@@ -3776,8 +3776,8 @@ public class Savegame{
 //    for (i = 0; i < 8; i++) {
 //      char name[20], vec[100];
 //
-//      my_snprintf(name, sizeof(name), "random.table%d", i);
-//      my_snprintf(vec, sizeof(vec),
+//      name = util.my_snprintf( "random.table%d", i);
+//      vec = util.my_snprintf(
 //		  "%8x %8x %8x %8x %8x %8x %8x", rstate.v[7 * i],
 //		  rstate.v[7 * i + 1], rstate.v[7 * i + 2],
 //		  rstate.v[7 * i + 3], rstate.v[7 * i + 4],
@@ -3794,7 +3794,7 @@ public class Savegame{
 //    map_save(file);
 //  }
 //  
-//  if ((server_state == server_states.PRE_GAME_STATE) && game.is_new_game) {
+//  if ((Srv_main.server_state == server_states.PRE_GAME_STATE) && game.is_new_game) {
 //    return; /* want to save scenarios as well */
 //  }
 //

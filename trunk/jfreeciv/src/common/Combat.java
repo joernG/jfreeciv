@@ -564,7 +564,7 @@ public class Combat{
 //  if (unit_list_size(&ptile.units) > 0 && !bestdef) {
 //    unit punit = unit_list_get(&ptile.units, 0);
 //
-//    freelog(LOG_ERROR, "get_defender bug: %s's %s vs %s's %s (total %d"
+//    util.freelog(Log.LOG_ERROR, "get_defender bug: %s's %s vs %s's %s (total %d"
 //            " units) on %s at (%d,%d). ", unit_owner(attacker).name,
 //            unit_type(attacker).name, unit_owner(punit).name,
 //            unit_type(punit).name, unit_list_size(&ptile.units), 

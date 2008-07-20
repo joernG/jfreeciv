@@ -443,7 +443,7 @@ public class Dialogs{
 //			 "This unit cannot be bribed!",
 //			 dummy_close_callback, null, "Darn", null, 0, 0);
 //  } else if(game.player_ptr.economic.gold>=punit.bribe_cost) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Bribe unit for %d gold?\nTreasury contains %d gold.", 
 //		punit.bribe_cost, game.player_ptr.economic.gold);
 //    popup_message_dialog(top_vbox, "Bribe Enemy Unit", buf,
@@ -451,7 +451,7 @@ public class Dialogs{
 //			 "_Yes", diplomat_bribe_yes_callback, 0, 
 //			 "_No", null, 0, 0);
 //  } else {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		_("Bribing the unit costs %d gold.\n"
 //		  "Treasury contains %d gold."), 
 //		punit.bribe_cost, game.player_ptr.economic.gold);
@@ -622,7 +622,7 @@ public class Dialogs{
 //  spy_tech_shell = null;
 //  
 //  if(!steal_advance){
-//    freelog(LOG_ERROR, "Bug in spy steal tech code.");
+//    util.freelog(Log.LOG_ERROR, "Bug in spy steal tech code.");
 //    process_diplomat_arrival(null, 0);
 //    return;
 //  }
@@ -653,7 +653,7 @@ public class Dialogs{
 //  spy_sabotage_shell = null;
 //  
 //  if(!sabotage_improvement){
-//    freelog(LOG_ERROR, "Bug in spy sabotage code");
+//    util.freelog(Log.LOG_ERROR, "Bug in spy sabotage code");
 //    process_diplomat_arrival(null, 0);
 //    return;
 //  }
@@ -942,13 +942,13 @@ public class Dialogs{
 //  char buf[128];
 //
 //  if (pcity.incite_revolt_cost == INCITE_IMPOSSIBLE_COST) {
-//    my_snprintf(buf, sizeof(buf), "You can't incite a revolt in %s.",
+//    buf = util.my_snprintf( "You can't incite a revolt in %s.",
 //		pcity.name);
 //    popup_message_dialog(top_vbox, "City can't be incited!", buf,
 //			 diplomat_incite_close_callback, null,
 //			 "Darn", null, 0, 0);
 //  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Incite a revolt for %d gold?\nTreasury contains %d gold.", 
 //		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //   popup_message_dialog(top_vbox, "Incite a Revolt!", buf,
@@ -956,7 +956,7 @@ public class Dialogs{
 //		       "_Yes", diplomat_incite_yes_callback, 0,
 //		       "_No", null, 0, 0);
 //  } else {
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		_("Inciting a revolt costs %d gold.\n"
 //		  "Treasury contains %d gold."), 
 //		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
@@ -1013,7 +1013,7 @@ public class Dialogs{
 //    /* Spy/Diplomat acting against a city */
 //
 //    diplomat_target_id=pcity.id;
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Your %s has arrived at %s.\nWhat is your command?",
 //		unit_name(punit.type), pcity.name);
 //
@@ -1140,7 +1140,7 @@ public class Dialogs{
 //  char buf[128];
 //  boolean can_establish, can_trade;
 //  
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "Your caravan from %s reaches the city of %s.\nWhat now?",
 //	      phomecity.name, pdestcity.name);
 //  
@@ -1404,7 +1404,7 @@ public class Dialogs{
 //    button = gtk_accelbutton_new(buttons[i].text, accel);
 //    gtk_box_pack_start(GTK_BOX(vbox), button, true, false, 0);
 //
-//    my_snprintf(button_name, sizeof(button_name), "button%d", i);
+//    button_name = util.my_snprintf( "button%d", i);
 //    gtk_object_set_data(GTK_OBJECT(dshell), button_name, button);
 //
 //    gtk_object_set_data(GTK_OBJECT(button), "button", GINT_TO_POINTER(i));
@@ -1546,7 +1546,7 @@ public class Dialogs{
 //  gtk_window_set_title(GTK_WINDOW(unit_select_dialog_shell),
 //	"Unit selection" );
 //
-//  n = MIN(MAX_SELECT_UNITS, unit_list_size(&ptile.units));
+//  n = Math.min(MAX_SELECT_UNITS, unit_list_size(&ptile.units));
 //  r = number_of_rows(n);
 //
 //  table=gtk_table_new(r, number_of_columns(n), false);
@@ -1574,10 +1574,10 @@ public class Dialogs{
 //    pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
 //
 //    if (pcity) {
-//      my_snprintf(buffer, sizeof(buffer), "%s (%s)\n%s",
+//      buffer = util.my_snprintf( "%s (%s)\n%s",
 //		  punittemp.name, pcity.name, unit_activity_text(punit));
 //    } else {
-//      my_snprintf(buffer, sizeof(buffer), "%s\n%s",
+//      buffer = util.my_snprintf( "%s\n%s",
 //		  punittemp.name, unit_activity_text(punit));
 //    }
 //
@@ -1862,7 +1862,7 @@ public class Dialogs{
 //    GList *race_names = null;
 //    GSList *group = null;
 //
-//    freelog(LOG_DEBUG, "  %s[%d] has %d nations",
+//    util.freelog(LOG_DEBUG, "  %s[%d] has %d nations",
 //	    skip_intl_qualifier_prefix(class_names[class_id]), class_id,
 //	    nations_in_class);
 //    sorted_races_list[class_id] =
@@ -2187,7 +2187,7 @@ public class Dialogs{
 //**************************************************************************/
 //static void leader_name_callback(GtkWidget *w, gpointer data)
 //{
-//  Nation_Type_id nation = races_buttons_get_current();
+//  int nation = races_buttons_get_current();
 //  final String leader =
 //                  gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(leader_name).entry));
 //

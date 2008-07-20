@@ -114,7 +114,7 @@ public class Cma_fe{
 //    *(int *)pMotion.pScrollBar.data.ptr =
 //    		pMotion.base + (pMotion.pScrollBar.size.x - pMotion.min);
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", *(int *)pMotion.pScrollBar.data.ptr);
+//    cBuf = util.my_snprintf( "%d", *(int *)pMotion.pScrollBar.data.ptr);
 //    copy_chars_to_string16(pMotion.pScrollBar.next.string16, cBuf);
 //    
 //    /* redraw label */
@@ -606,7 +606,7 @@ public class Cma_fe{
 //    
 //    /* min label */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", *(int *)pBuf.prev.data.ptr);
+//    cBuf = util.my_snprintf( "%d", *(int *)pBuf.prev.data.ptr);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //        
 //    /* min scrollbar */
@@ -616,7 +616,7 @@ public class Cma_fe{
 //    
 //    /* factor label */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", *(int *)pBuf.prev.data.ptr);
+//    cBuf = util.my_snprintf( "%d", *(int *)pBuf.prev.data.ptr);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //    
 //    /* factor scrollbar*/
@@ -628,7 +628,7 @@ public class Cma_fe{
 //  
 //  /* happy factor label */
 //  pBuf = pBuf.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", *(int *)pBuf.prev.data.ptr);
+//  cBuf = util.my_snprintf( "%d", *(int *)pBuf.prev.data.ptr);
 //  copy_chars_to_string16(pBuf.string16, cBuf);
 //  
 //  /* happy factor scrollbar */
@@ -822,7 +822,7 @@ public class Cma_fe{
 //  
 //  /* --------------------------- */
 //    
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //	 "City of %s (Population %s citizens) : %s",
 //	  pCity.name, population_to_text(city_population(pCity)),
 //  					"Citizen Management Agent");

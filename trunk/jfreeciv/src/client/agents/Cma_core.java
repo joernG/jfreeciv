@@ -33,7 +33,7 @@ public class Cma_core{
 //#include "log.h"
 //#include "mem.h"
 //#include "packets.h"
-//#include "shared.h"		/* for MIN() */
+//#include "shared.h"		/* for Math.min() */
 //#include "support.h"
 //#include "timing.h"
 //
@@ -92,7 +92,7 @@ public class Cma_core{
 //
 //
 //#define T(x) if (result1.x != result2.x) { \
-//	freelog(RESULTS_ARE_EQUAL_LOG_LEVEL, #x); \
+//	util.freelog(RESULTS_ARE_EQUAL_LOG_LEVEL, #x); \
 //	return false; }
 //
 ///****************************************************************************
@@ -118,7 +118,7 @@ public class Cma_core{
 //  my_city_map_iterate(pcity, x, y) {
 //    if (result1.worker_positions_used[x][y] !=
 //	result2.worker_positions_used[x][y]) {
-//      freelog(RESULTS_ARE_EQUAL_LOG_LEVEL, "worker_positions_used");
+//      util.freelog(RESULTS_ARE_EQUAL_LOG_LEVEL, "worker_positions_used");
 //      return false;
 //    }
 //  } my_city_map_iterate_end;
@@ -212,7 +212,7 @@ public class Cma_core{
 //
 //  stats.apply_result_applied++;
 //
-//  freelog(APPLY_RESULT_LOG_LEVEL, "apply_result(city='%s'(%d))",
+//  util.freelog(APPLY_RESULT_LOG_LEVEL, "apply_result(city='%s'(%d))",
 //	  pcity.name, pcity.id);
 //
 //  connection_do_buffer(&aconnection);
@@ -229,7 +229,7 @@ public class Cma_core{
 //  my_city_map_iterate(pcity, x, y) {
 //    if ((pcity.city_map[x][y] == C_TILE_WORKER) &&
 //	!result.worker_positions_used[x][y]) {
-//      freelog(APPLY_RESULT_LOG_LEVEL, "Removing worker at %d,%d.", x, y);
+//      util.freelog(APPLY_RESULT_LOG_LEVEL, "Removing worker at %d,%d.", x, y);
 //      last_request_id = city_toggle_worker(pcity, x, y);
 //      if (first_request_id == 0) {
 //	first_request_id = last_request_id;
@@ -241,7 +241,7 @@ public class Cma_core{
 //  assert(SP_ELVIS == 0);
 //  for (sp = 1; sp < SP_COUNT; sp++) {
 //    for (i = 0; i < pcity.specialists[sp] - result.specialists[sp]; i++) {
-//      freelog(APPLY_RESULT_LOG_LEVEL, "Change specialist from %d to %d.",
+//      util.freelog(APPLY_RESULT_LOG_LEVEL, "Change specialist from %d to %d.",
 //	      sp, SP_ELVIS);
 //      last_request_id = city_change_specialist(pcity, sp, SP_ELVIS);
 //      if (first_request_id == 0) {
@@ -259,7 +259,7 @@ public class Cma_core{
 //    if (result.worker_positions_used[x][y] &&
 //	pcity.city_map[x][y] != C_TILE_WORKER) {
 //      assert(pcity.city_map[x][y] == C_TILE_EMPTY);
-//      freelog(APPLY_RESULT_LOG_LEVEL, "Putting worker at %d,%d.", x, y);
+//      util.freelog(APPLY_RESULT_LOG_LEVEL, "Putting worker at %d,%d.", x, y);
 //      last_request_id = city_toggle_worker(pcity, x, y);
 //      if (first_request_id == 0) {
 //	first_request_id = last_request_id;
@@ -272,7 +272,7 @@ public class Cma_core{
 //  assert(SP_ELVIS == 0);
 //  for (sp = 1; sp < SP_COUNT; sp++) {
 //    for (i = 0; i < result.specialists[sp] - pcity.specialists[sp]; i++) {
-//      freelog(APPLY_RESULT_LOG_LEVEL, "Changing specialist from %d to %d.",
+//      util.freelog(APPLY_RESULT_LOG_LEVEL, "Changing specialist from %d to %d.",
 //	      SP_ELVIS, sp);
 //      last_request_id = city_change_specialist(pcity, SP_ELVIS, sp);
 //      if (first_request_id == 0) {
@@ -310,16 +310,16 @@ public class Cma_core{
 //  /* Return. */
 //  get_current_as_result(pcity, &current_state);
 //
-//  freelog(APPLY_RESULT_LOG_LEVEL, "apply_result: return");
+//  util.freelog(APPLY_RESULT_LOG_LEVEL, "apply_result: return");
 //
 //  success = results_are_equal(pcity, result, &current_state);
 //  if (!success) {
 //    cm_clear_cache(pcity);
 //
 //    if (SHOW_APPLY_RESULT_ON_SERVER_ERRORS) {
-//      freelog(Log.LOG_NORMAL, "expected");
+//      util.freelog(Log.LOG_NORMAL, "expected");
 //      cm_print_result(pcity, result);
-//      freelog(Log.LOG_NORMAL, "got");
+//      util.freelog(Log.LOG_NORMAL, "got");
 //      cm_print_result(pcity, &current_state);
 //    }
 //  }
@@ -327,21 +327,21 @@ public class Cma_core{
 //}
 //
 ///****************************************************************************
-// Prints the data of the stats struct via freelog(Log.LOG_NORMAL,...).
+// Prints the data of the stats struct via util.freelog(Log.LOG_NORMAL,...).
 //*****************************************************************************/
 //static void report_stats()
 //{
 //#if SHOW_TIME_STATS
 //  int total, per_mill;
 //
-//  freelog(Log.LOG_NORMAL, "CMA: overall=%fs queries=%d %fms / query",
+//  util.freelog(Log.LOG_NORMAL, "CMA: overall=%fs queries=%d %fms / query",
 //	  read_timer_seconds(stats.wall_timer), stats.queries,
 //	  (1000.0 * read_timer_seconds(stats.wall_timer)) /
 //	  ((double) stats.queries));
 //  total = stats.apply_result_ignored + stats.apply_result_applied;
 //  per_mill = (stats.apply_result_ignored * 1000) / (total ? total : 1);
 //
-//  freelog(Log.LOG_NORMAL,
+//  util.freelog(Log.LOG_NORMAL,
 //	  "CMA: apply_result: ignored=%2d.%d%% (%d) "
 //	  "applied=%2d.%d%% (%d) total=%d",
 //	  per_mill / 10, per_mill % 10, stats.apply_result_ignored,
@@ -373,18 +373,18 @@ public class Cma_core{
 //  boolean handled;
 //  int i, city_id = pcity.id;
 //
-//  freelog(HANDLE_CITY_LOG_LEVEL,
+//  util.freelog(HANDLE_CITY_LOG_LEVEL,
 //	  "handle_city(city='%s'(%d) pos=(%d,%d) owner=%s)", pcity.name,
 //	  pcity.id, TILE_XY(pcity.tile), city_owner(pcity).name);
 //
-//  freelog(HANDLE_CITY_LOG_LEVEL2, "START handle city='%s'(%d)",
+//  util.freelog(HANDLE_CITY_LOG_LEVEL2, "START handle city='%s'(%d)",
 //	  pcity.name, pcity.id);
 //
 //  handled = false;
 //  for (i = 0; i < 5; i++) {
 //    struct cm_parameter parameter;
 //
-//    freelog(HANDLE_CITY_LOG_LEVEL2, "  try %d", i);
+//    util.freelog(HANDLE_CITY_LOG_LEVEL2, "  try %d", i);
 //
 //    if (!check_city(city_id, &parameter)) {
 //      handled = true;	
@@ -395,7 +395,7 @@ public class Cma_core{
 //
 //    cm_query_result(pcity, &parameter, &result);
 //    if (!result.found_a_valid) {
-//      freelog(HANDLE_CITY_LOG_LEVEL2, "  no valid found result");
+//      util.freelog(HANDLE_CITY_LOG_LEVEL2, "  no valid found result");
 //
 //      cma_release_city(pcity);
 //
@@ -406,7 +406,7 @@ public class Cma_core{
 //      break;
 //    } else {
 //      if (!apply_result_on_server(pcity, &result)) {
-//	freelog(HANDLE_CITY_LOG_LEVEL2, "  doesn't cleanly apply");
+//	util.freelog(HANDLE_CITY_LOG_LEVEL2, "  doesn't cleanly apply");
 //	if (check_city(city_id, null) && i == 0) {
 //	  create_event(pcity.tile, event_type.E_NOEVENT,
 //		       _("CMA: %s has changed and the calculated "
@@ -414,7 +414,7 @@ public class Cma_core{
 //		       pcity.name);
 //	}
 //      } else {
-//	freelog(HANDLE_CITY_LOG_LEVEL2, "  ok");
+//	util.freelog(HANDLE_CITY_LOG_LEVEL2, "  ok");
 //	/* Everything ok */
 //	handled = true;
 //	break;
@@ -426,7 +426,7 @@ public class Cma_core{
 //
 //  if (!handled) {
 //    assert(pcity != null);
-//    freelog(HANDLE_CITY_LOG_LEVEL2, "  not handled");
+//    util.freelog(HANDLE_CITY_LOG_LEVEL2, "  not handled");
 //
 //    create_event(pcity.tile, E_CITY_CMA_RELEASE,
 //		 _("CMA: %s has changed multiple times. This may be "
@@ -435,12 +435,12 @@ public class Cma_core{
 //
 //    cma_release_city(pcity);
 //
-//    freelog(LOG_ERROR, "CMA: %s has changed multiple times due to "
+//    util.freelog(Log.LOG_ERROR, "CMA: %s has changed multiple times due to "
 //            "an error in Freeciv. Please send a savegame that can reproduce "
 //            "this bug to <bugs@freeciv.org>. Thank you.", pcity.name);
 //  }
 //
-//  freelog(HANDLE_CITY_LOG_LEVEL2, "END handle city=(%d)", city_id);
+//  util.freelog(HANDLE_CITY_LOG_LEVEL2, "END handle city=(%d)", city_id);
 //}
 //
 ///****************************************************************************
@@ -481,9 +481,9 @@ public class Cma_core{
 //  struct agent self;
 //  timer timer = stats.wall_timer;
 //
-//  freelog(LOG_DEBUG, "sizeof(struct cm_result)=%d",
+//  util.freelog(LOG_DEBUG, "sizeof(struct cm_result)=%d",
 //	  (unsigned int) sizeof(struct cm_result));
-//  freelog(LOG_DEBUG, "sizeof(struct cm_parameter)=%d",
+//  util.freelog(LOG_DEBUG, "sizeof(struct cm_parameter)=%d",
 //	  (unsigned int) sizeof(struct cm_parameter));
 //
 //  /* reset cache counters */
@@ -519,7 +519,7 @@ public class Cma_core{
 //void cma_put_city_under_agent(city pcity,
 //			      final cm_parameter final parameter)
 //{
-//  freelog(LOG_DEBUG, "cma_put_city_under_agent(city='%s'(%d))",
+//  util.freelog(LOG_DEBUG, "cma_put_city_under_agent(city='%s'(%d))",
 //	  pcity.name, pcity.id);
 //
 //  assert(city_owner(pcity) == game.player_ptr);
@@ -528,7 +528,7 @@ public class Cma_core{
 //
 //  cause_a_city_changed_for_agent("CMA", pcity);
 //
-//  freelog(LOG_DEBUG, "cma_put_city_under_agent: return");
+//  util.freelog(LOG_DEBUG, "cma_put_city_under_agent: return");
 //}
 //
 ///****************************************************************************

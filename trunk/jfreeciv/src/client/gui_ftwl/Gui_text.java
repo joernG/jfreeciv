@@ -93,7 +93,7 @@ public class Gui_text{
 //     * overhead adds up quickly. */
 //    size_t new_size = MAX(new_len, *buffer_size * 2);
 //
-//    freelog(LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
+//    util.freelog(LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
 //	    (unsigned long)*buffer_size, (unsigned long)new_size, buf);
 //
 //    *buffer_size = new_size;
@@ -255,9 +255,9 @@ public class Gui_text{
 //  INIT;
 //
 //  if (shortcut_) {
-//    my_snprintf(shortcut, sizeof(shortcut), " (%s)", shortcut_);
+//    shortcut = util.my_snprintf( " (%s)", shortcut_);
 //  } else {
-//    my_snprintf(shortcut, sizeof(shortcut), "%s", "");
+//    shortcut = util.my_snprintf( "%s", "");
 //  }
 //
 //  if (strcmp(action, "unit_fortifying") == 0) {
@@ -310,19 +310,19 @@ public class Gui_text{
 //  tinfo = get_tile_type(ttype);
 //  if ((tinfo.irrigation_result != T_LAST)
 //      && (tinfo.irrigation_result != ttype)) {
-//    my_snprintf(irrtext, sizeof(irrtext), irrfmt,
+//    irrtext = util.my_snprintf( irrfmt,
 //		(get_tile_type(tinfo.irrigation_result)).terrain_name);
 //  } else if (map_has_special(punit.tile, S_IRRIGATION)
 //	     && player_knows_techs_with_flag(game.player_ptr, TF_FARMLAND)) {
 //    sz_strlcpy(irrtext, "Bu_ild Farmland");
 //  }
 //  if ((tinfo.mining_result != T_LAST) && (tinfo.mining_result != ttype)) {
-//    my_snprintf(mintext, sizeof(mintext), minfmt,
+//    mintext = util.my_snprintf( minfmt,
 //		(get_tile_type(tinfo.mining_result)).terrain_name);
 //  }
 //  if ((tinfo.transform_result != T_LAST)
 //      && (tinfo.transform_result != ttype)) {
-//    my_snprintf(transtext, sizeof(transtext), transfmt,
+//    transtext = util.my_snprintf( transfmt,
 //		(get_tile_type(tinfo.transform_result)).terrain_name);
 //  }
 //
@@ -332,7 +332,7 @@ public class Gui_text{
 //#endif
 //    add_line("tooltip for action %s isn't written yet",
 //	     action);
-//    freelog(Log.LOG_NORMAL, "warning: get_unit_action_tooltip: unknown action %s",
+//    util.freelog(Log.LOG_NORMAL, "warning: get_unit_action_tooltip: unknown action %s",
 //	    action);
 //  }
 //  RETURN;
@@ -364,7 +364,7 @@ public class Gui_text{
 //				 pcity.is_building_unit, true));
 //  } else {
 //    add_line("tooltip for action %s isn't written yet", action);
-//    freelog(Log.LOG_NORMAL,
+//    util.freelog(Log.LOG_NORMAL,
 //	    "warning: get_city_action_tooltip: unknown action %s", action);
 //  }
 //  RETURN;
@@ -442,7 +442,7 @@ public class Gui_text{
 //	  player_find_city_by_id(game.player_ptr, punit.homecity);
 //
 //      if (pcity){
-//	my_snprintf(tmp, sizeof(tmp), "/%s", pcity.name);
+//	tmp = util.my_snprintf( "/%s", pcity.name);
 //      }
 //    }
 //    add_line("Unit: %s(%s%s)", ptype.name,

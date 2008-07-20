@@ -22,7 +22,7 @@ public class Srv_main{
 	public static server_arguments srvarg;
 
 	/* server state information */
-server_states server_state = server_states.PRE_GAME_STATE;
+public static server_states server_state = server_states.PRE_GAME_STATE;
 boolean nocity_send = false;
 
 /* this global is checked deep down the netcode. 
@@ -117,7 +117,7 @@ public void srv_init()
 //  if (game.year > game.end_year) {
 //    notify_conn_ex(&game.est_connections, null, E_GAME_END, 
 //		   "Game ended in a draw as end year exceeded");
-//    gamelog(GAMELOG_JUDGE, GL_DRAW, 
+//    Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, GL_DRAW, 
 //            "Game ended in a draw as end year exceeded");
 //    return true;
 //  }
@@ -150,7 +150,7 @@ public void srv_init()
 //    if (team_count_members_alive(pteam.id) == alive) {
 //      notify_conn_ex(&game.est_connections, null, E_GAME_END,
 //		     "Team victory to %s", pteam.name);
-//      gamelog(GAMELOG_JUDGE, GL_TEAMWIN, pteam);
+//      Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, GL_TEAMWIN, pteam);
 //      return true;
 //    }
 //  } team_iterate_end;
@@ -159,12 +159,12 @@ public void srv_init()
 //  if (alive == 1) {
 //    notify_conn_ex(&game.est_connections, null, E_GAME_END,
 //		   "Game ended in victory for %s", victor.name);
-//    gamelog(GAMELOG_JUDGE, GL_LONEWIN, victor);
+//    Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, EEndGameState.GL_LONEWIN, victor);
 //    return true;
 //  } else if (alive == 0) {
 //    notify_conn_ex(&game.est_connections, null, E_GAME_END, 
 //		   "Game ended in a draw");
-//    gamelog(GAMELOG_JUDGE, GL_DRAW);
+//    Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, GL_DRAW);
 //    return true;
 //  }
 //
@@ -187,7 +187,7 @@ public void srv_init()
 //  if (all_allied) {
 //    notify_conn_ex(&game.est_connections, null, E_GAME_END, 
 //		   "Game ended in allied victory");
-//    gamelog(GAMELOG_JUDGE, GL_ALLIEDWIN);
+//    Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, GL_ALLIEDWIN);
 //    return true;
 //  }
 //
@@ -286,7 +286,7 @@ public void srv_init()
 //    }
 //  }
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "environmental_upset: cause=%-4d current=%-2d level=%-2d accum=%-2d",
 //	  cause, *current, *level, *accum);
 //}
@@ -321,7 +321,7 @@ public void srv_init()
 //  			_("Game: The cease-fire with %s has "
 //  			  "run out. You are now neutral towards the %s."),
 //			player2.name,
-//			get_nation_name_plural(player2.nation));
+//			Nation.Nation.get_nation_name_plural(player2.nation));
 //	  pdiplstate.type = DS_NEUTRAL;
 //	  check_city_workers(player1);
 //	  check_city_workers(player2);
@@ -330,7 +330,7 @@ public void srv_init()
 //        }
 //    }
 //    player1.reputation = 
-//      MIN((get_player_bonus(player1, EFT_REGEN_REPUTATION) * 
+//      Math.min((get_player_bonus(player1, EFT_REGEN_REPUTATION) * 
 //           GAME_MAX_REPUTATION / 1000) + 
 //	  player1.reputation + GAME_REPUTATION_INCR,
 //          GAME_MAX_REPUTATION);
@@ -368,7 +368,7 @@ public void srv_init()
 //**************************************************************************/
 //static void begin_turn(boolean is_new_turn)
 //{
-//  freelog(LOG_DEBUG, "Begin turn");
+//  util.freelog(LOG_DEBUG, "Begin turn");
 //
 //  if (is_new_turn) {
 //    /* We build scores at the beginning and end of every turn.  We have to
@@ -390,7 +390,7 @@ public void srv_init()
 //  }
 //
 //  if (is_new_turn) {
-//    freelog(LOG_DEBUG, "Shuffleplayers");
+//    util.freelog(LOG_DEBUG, "Shuffleplayers");
 //    shuffle_players();
 //  }
 //
@@ -403,12 +403,12 @@ public void srv_init()
 //**************************************************************************/
 //static void begin_phase(boolean is_new_phase)
 //{
-//  freelog(LOG_DEBUG, "Begin phase");
+//  util.freelog(LOG_DEBUG, "Begin phase");
 //
 //  conn_list_do_buffer(&game.game_connections);
 //
 //  for(player pplayer: game.players){
-//    freelog(LOG_DEBUG, "beginning player turn for #%d (%s)",
+//    util.freelog(LOG_DEBUG, "beginning player turn for #%d (%s)",
 //	    pplayer.player_no, pplayer.name);
 //    /* human players also need this for building advice */
 //    ai_data_turn_init(pplayer);
@@ -434,7 +434,7 @@ public void srv_init()
 //      }
 //    }
 //
-//    freelog(LOG_DEBUG, "Aistartturn");
+//    util.freelog(LOG_DEBUG, "Aistartturn");
 //    ai_start_turn();
 //  }
 //
@@ -449,7 +449,7 @@ public void srv_init()
 //**************************************************************************/
 //static void end_phase()
 //{
-//  freelog(LOG_DEBUG, "Endphase");
+//  util.freelog(LOG_DEBUG, "Endphase");
 // 
 //  /* 
 //   * This empties the client Messages window; put this before
@@ -504,7 +504,7 @@ public void srv_init()
 //  do_reveal_effects();
 //  do_have_embassies_effect();
 //
-//  freelog(LOG_DEBUG, "Auto-Attack phase");
+//  util.freelog(LOG_DEBUG, "Auto-Attack phase");
 //  auto_attack();
 //}
 //
@@ -513,12 +513,12 @@ public void srv_init()
 //**************************************************************************/
 //static void end_turn()
 //{
-//  freelog(LOG_DEBUG, "Endturn");
+//  util.freelog(LOG_DEBUG, "Endturn");
 //
 //  /* Output some ranking and AI debugging info here. */
 //  if (game.turn % 10 == 0) {
 //    for(player pplayer: game.players){
-//      gamelog(GAMELOG_INFO, pplayer);
+//      Gamelog.gamelog(GAMELOG_INFO, pplayer);
 //    }
 //  }
 //
@@ -528,7 +528,7 @@ public void srv_init()
 //    calc_civ_score(pplayer);
 //  }
 //
-//  freelog(LOG_DEBUG, "Season of native unrests");
+//  util.freelog(LOG_DEBUG, "Season of native unrests");
 //  summon_barbarians(); /* wild guess really, no idea where to put it, but
 //			  I want to give them chance to move their units */
 //
@@ -543,25 +543,25 @@ public void srv_init()
 //  stdinhand_turn();
 //  send_player_turn_notifications(null);
 //
-//  freelog(LOG_DEBUG, "Turn ended.");
+//  util.freelog(LOG_DEBUG, "Turn ended.");
 //  game.turn_start = time(null);
 //
-//  freelog(LOG_DEBUG, "Gamenextyear");
+//  util.freelog(LOG_DEBUG, "Gamenextyear");
 //  game_advance_year();
 //  after_game_advance_year();
 //
-//  freelog(LOG_DEBUG, "Updatetimeout");
+//  util.freelog(LOG_DEBUG, "Updatetimeout");
 //  update_timeout();
 //
 //  check_spaceship_arrivals();
 //
-//  freelog(LOG_DEBUG, "Sendplayerinfo");
+//  util.freelog(LOG_DEBUG, "Sendplayerinfo");
 //  send_player_info(null, null);
 //
-//  freelog(LOG_DEBUG, "Sendgameinfo");
+//  util.freelog(LOG_DEBUG, "Sendgameinfo");
 //  send_game_info(null);
 //
-//  freelog(LOG_DEBUG, "Sendyeartoclients");
+//  util.freelog(LOG_DEBUG, "Sendyeartoclients");
 //  send_year_to_clients(game.year);
 //}
 //
@@ -605,7 +605,7 @@ public void srv_init()
 //
 //  /* If orig_filename is null or empty, use "civgame<year>m". */
 //  if (filename[0] == '\0'){
-//    my_snprintf(filename, sizeof(filename),
+//    filename = util.my_snprintf(
 //	"%s%+05dm", game.save_name, game.year);
 //  }
 //  
@@ -644,7 +644,7 @@ public void srv_init()
 //
 //  section_file_free(&file);
 //
-//  freelog(LOG_VERBOSE, "Save time: %g seconds (%g apparent)",
+//  util.freelog(LOG_VERBOSE, "Save time: %g seconds (%g apparent)",
 //	  read_timer_seconds_free(timer_cpu),
 //	  read_timer_seconds_free(timer_user));
 //}
@@ -658,11 +658,11 @@ public void srv_init()
 //
 //  assert(game.save_name.length()<256);
 //  
-//  my_snprintf(filename, sizeof(filename),
+//  filename = util.my_snprintf(
 //	      "%s%+05d.sav", game.save_name, game.year);
 //  save_game(filename);
 //  save_ppm();
-//  gamelog(GAMELOG_STATUS);
+//  Gamelog.gamelog(GAMELOG_STATUS);
 //}
 //
 ///**************************************************************************
@@ -670,14 +670,14 @@ public void srv_init()
 //**************************************************************************/
 //void start_game()
 //{
-//  if(server_state!=server_states.PRE_GAME_STATE) {
+//  if(Srv_main.server_state!=server_states.PRE_GAME_STATE) {
 //    con_puts(C_SYNTAX, "The game is already running.");
 //    return;
 //  }
 //
 //  con_puts(C_OK, "Starting game.");
 //
-//  server_state=SELECT_RACES_STATE; /* loaded ??? */
+//  Srv_main.server_state=SELECT_RACES_STATE; /* loaded ??? */
 //  force_end_of_sniff = true;
 //}
 //
@@ -698,9 +698,9 @@ public void srv_init()
 //{
 //  Speclists<Connection> dest = &pconn.self;
 //  
-//  if (server_state != RUN_GAME_STATE && server_state != GAME_OVER_STATE
+//  if (Srv_main.server_state != RUN_GAME_STATE && Srv_main.server_state != server_states.GAME_OVER_STATE
 //      && type != REPORT_SERVER_OPTIONS1 && type != REPORT_SERVER_OPTIONS2) {
-//    freelog(LOG_ERROR, "Got a report request %d before game start", type);
+//    util.freelog(Log.LOG_ERROR, "Got a report request %d before game start", type);
 //    return;
 //  }
 //
@@ -784,7 +784,7 @@ public void srv_init()
 //    unsigned char buffer[4096];
 //    struct data_out dout;
 //
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Warning: rejecting old client %s", conn_description(pconn));
 //
 //    dio_output_init(&dout, buffer, sizeof(buffer));
@@ -833,7 +833,7 @@ public void srv_init()
 //  }
 //
 //  if (!pconn.established) {
-//    freelog(LOG_ERROR, "Received game packet from unaccepted connection %s",
+//    util.freelog(Log.LOG_ERROR, "Received game packet from unaccepted connection %s",
 //	    conn_description(pconn));
 //    return true;
 //  }
@@ -855,22 +855,22 @@ public void srv_init()
 //
 //  if(!pplayer) {
 //    /* don't support these yet */
-//    freelog(LOG_ERROR, "Received packet from non-player connection %s",
+//    util.freelog(Log.LOG_ERROR, "Received packet from non-player connection %s",
 // 	    conn_description(pconn));
 //    return true;
 //  }
 //
-//  if (server_state != RUN_GAME_STATE
+//  if (Srv_main.server_state != RUN_GAME_STATE
 //      && type != PACKET_NATION_SELECT_REQ
 //      && type != PACKET_CONN_PONG
 //      && type != PACKET_REPORT_REQ) {
-//    if (server_state == GAME_OVER_STATE) {
+//    if (Srv_main.server_state == server_states.GAME_OVER_STATE) {
 //      /* This can happen by accident, so we don't want to print
 //	 out lots of error messages. Ie, we use LOG_DEBUG. */
-//      freelog(LOG_DEBUG, "got a packet of type %d "
-//			  "in GAME_OVER_STATE", type);
+//      util.freelog(LOG_DEBUG, "got a packet of type %d "
+//			  "in server_states.GAME_OVER_STATE", type);
 //    } else {
-//      freelog(LOG_ERROR, "got a packet of type %d "
+//      util.freelog(Log.LOG_ERROR, "got a packet of type %d "
 //	                 "outside RUN_GAME_STATE", type);
 //    }
 //    return true;
@@ -880,7 +880,7 @@ public void srv_init()
 //
 //  if((!pplayer.is_alive || pconn.observer)
 //     && !(type == PACKET_REPORT_REQ || type == PACKET_CONN_PONG)) {
-//    freelog(LOG_ERROR, _("Got a packet of type %d from a "
+//    util.freelog(Log.LOG_ERROR, _("Got a packet of type %d from a "
 //			 "dead or observer player"), type);
 //    return true;
 //  }
@@ -889,11 +889,11 @@ public void srv_init()
 //  pplayer.current_conn = pconn;
 //
 //  if (!server_handle_packet(type, packet, pplayer, pconn)) {
-//    freelog(LOG_ERROR, "Received unknown packet %d from %s",
+//    util.freelog(Log.LOG_ERROR, "Received unknown packet %d from %s",
 //	    type, conn_description(pconn));
 //  }
 //
-//  if (server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    kill_dying_players();
 //  }
 //
@@ -929,7 +929,7 @@ public void srv_init()
 //  particular player.
 //**************************************************************************/
 //static boolean is_default_nation_name(final String name,
-//				   Nation_Type_id nation_id)
+//				   int nation_id)
 //{
 //  final nation_type nation = get_nation_by_idx(nation_id);
 //
@@ -949,7 +949,7 @@ public void srv_init()
 //  (a translated string to be sent to the client) if not.
 //**************************************************************************/
 //static boolean is_allowed_player_name(player pplayer,
-//				   Nation_Type_id nation,
+//				   int nation,
 //				   final String name,
 //				   char *error_buf, size_t bufsz)
 //{
@@ -1018,14 +1018,14 @@ public void srv_init()
 //...
 //**************************************************************************/
 //void handle_nation_select_req(player pplayer,
-//			      Nation_Type_id nation_no, boolean is_male,
+//			      int nation_no, boolean is_male,
 //			      char *name, int city_style)
 //{
 //  int nation_used_count;
 //  char message[1024];
 //
-//  if (server_state != SELECT_RACES_STATE) {
-//    freelog(LOG_ERROR, _("Trying to alloc nation outside "
+//  if (Srv_main.server_state != SELECT_RACES_STATE) {
+//    util.freelog(Log.LOG_ERROR, _("Trying to alloc nation outside "
 //			 "of SELECT_RACES_STATE!"));
 //    return;
 //  }  
@@ -1051,7 +1051,7 @@ public void srv_init()
 //
 //  notify_conn_ex(&game.game_connections, null, E_NATION_SELECTED,
 //		 "Game: %s is the %s ruler %s.", pplayer.username,
-//		 get_nation_name(nation_no), name);
+//		 Nation.get_nation_name(nation_no), name);
 //
 //  /* inform player his choice was ok */
 //  lsend_packet_nation_select_ok(&pplayer.connections);
@@ -1078,7 +1078,7 @@ public void srv_init()
 //  if( nation_used_count == game.playable_nation_count ) {   /* barb */
 //    for(player other_player: game.players){
 //      if (other_player.nation == NO_NATION_SELECTED) {
-//	freelog(Log.LOG_NORMAL, "No nations left: Removing player %s.",
+//	util.freelog(Log.LOG_NORMAL, "No nations left: Removing player %s.",
 //		other_player.name);
 //	notify_player(other_player,
 //		      "Game: Sorry, there are no nations left.");
@@ -1094,7 +1094,7 @@ public void srv_init()
 //static void send_select_nation(player pplayer)
 //{
 //  struct packet_nation_unavailable packet;
-//  Nation_Type_id nation;
+//  int nation;
 //
 //  lsend_packet_select_races(&pplayer.connections);
 //
@@ -1138,9 +1138,9 @@ public void srv_init()
 //  Select a random available nation.  If 'class' is non-null, then choose
 //  a nation from that class if possible.
 //**************************************************************************/
-//static Nation_Type_id select_random_nation(final char* class)
+//static int select_random_nation(final char* class)
 //{
-//  Nation_Type_id i, available[game.playable_nation_count];
+//  int i, available[game.playable_nation_count];
 //  int count = 0;
 //
 //  /* Determine which nations are available. */
@@ -1193,7 +1193,7 @@ public void srv_init()
 //**************************************************************************/
 //static void generate_ai_players()
 //{
-//  Nation_Type_id nation;
+//  int nation;
 //  char player_name[MAX_LEN_NAME];
 //  player pplayer;
 //  int i, old_nplayers;
@@ -1227,7 +1227,7 @@ public void srv_init()
 //
 //    nation = select_random_nation(common_class);
 //    if (nation == NO_NATION_SELECTED) {
-//      freelog(Log.LOG_NORMAL,
+//      util.freelog(Log.LOG_NORMAL,
 //	      "Ran out of nations.  AI controlled player %s not created.",
 //	      pplayer.name);
 //      server_remove_player(pplayer); 
@@ -1262,14 +1262,14 @@ public void srv_init()
 //
 //  if (game.playable_nation_count < game.aifill) {
 //    game.aifill = game.playable_nation_count;
-//    freelog(Log.LOG_NORMAL,
+//    util.freelog(Log.LOG_NORMAL,
 //	     "Nation count smaller than aifill; aifill reduced to %d.",
 //             game.playable_nation_count);
 //  }
 //
 //  if (game.max_players < game.aifill) {
 //    game.aifill = game.max_players;
-//    freelog(Log.LOG_NORMAL,
+//    util.freelog(Log.LOG_NORMAL,
 //	     "Maxplayers smaller than aifill; aifill reduced to %d.",
 //             game.max_players);
 //  }
@@ -1298,7 +1298,7 @@ public void srv_init()
 //    sz_strlcpy(pplayer.name, player_name);
 //    sz_strlcpy(pplayer.username, ANON_USER_NAME);
 //
-//    freelog(Log.LOG_NORMAL, "%s has been added as an AI-controlled player.",
+//    util.freelog(Log.LOG_NORMAL, "%s has been added as an AI-controlled player.",
 //            player_name);
 //    notify_conn(null,
 //		"Game: %s has been added as an AI-controlled player.",
@@ -1347,7 +1347,7 @@ public void srv_init()
 //     is found.
 // newname should point to a buffer of size at least MAX_LEN_NAME.
 //*************************************************************************/
-//void pick_ai_player_name(Nation_Type_id nation, char *newname) 
+//void pick_ai_player_name(int nation, char *newname) 
 //{
 //   int i, names_count;
 //   leader leaders;
@@ -1371,7 +1371,7 @@ public void srv_init()
 //   
 //   for(i=1; /**/; i++) {
 //     char tempname[50];
-//     my_snprintf(tempname, sizeof(tempname), "Player %d", i);
+//     tempname = util.my_snprintf( "Player %d", i);
 //     if (good_name(tempname, newname)) return;
 //   }
 //}
@@ -1379,7 +1379,7 @@ public void srv_init()
 ///*************************************************************************
 //  Simply mark the nation as unavailable.
 //*************************************************************************/
-//static void mark_nation_as_used (Nation_Type_id nation) 
+//static void mark_nation_as_used (int nation) 
 //{
 //  assert(nations_available[nation]);
 //  nations_available[nation] = false;
@@ -1389,19 +1389,19 @@ public void srv_init()
 //...
 //*************************************************************************/
 //static void announce_ai_player (player pplayer) {
-//   freelog(Log.LOG_NORMAL, "AI is controlling the %s ruled by %s.",
-//                    get_nation_name_plural(pplayer.nation),
+//   util.freelog(Log.LOG_NORMAL, "AI is controlling the %s ruled by %s.",
+//                    Nation.get_nation_name_plural(pplayer.nation),
 //                    pplayer.name);
 //
 //  for(player other_player: game.players){
 //    notify_player(other_player,
 //		  "Game: %s rules the %s.", pplayer.name,
-//		  get_nation_name_plural(pplayer.nation));
+//		  Nation.get_nation_name_plural(pplayer.nation));
 //  }
 //}
 //
 ///**************************************************************************
-//Play the game! Returns when server_state == GAME_OVER_STATE.
+//Play the game! Returns when Srv_main.server_state == server_states.GAME_OVER_STATE.
 //**************************************************************************/
 //static void main_loop()
 //{
@@ -1422,7 +1422,7 @@ public void srv_init()
 //   */
 //  lsend_packet_freeze_hint(&game.game_connections);
 //
-//  while(server_state==RUN_GAME_STATE) {
+//  while(Srv_main.server_state==RUN_GAME_STATE) {
 //    /* The beginning of a turn.
 //     *
 //     * We have to initialize data as well as do some actions.  However when
@@ -1440,7 +1440,7 @@ public void srv_init()
 //    lsend_packet_thaw_hint(&game.game_connections);
 //
 //    /* Before sniff (human player activites), report time to now: */
-//    freelog(LOG_VERBOSE, "End/start-turn server/ai activities: %g seconds",
+//    util.freelog(LOG_VERBOSE, "End/start-turn server/ai activities: %g seconds",
 //	    read_timer_seconds(eot_timer));
 //
 //    /* Do auto-saves just before starting sniff_packets(), so that
@@ -1454,7 +1454,7 @@ public void srv_init()
 //    }
 //    save_counter++;
 //    
-//    freelog(LOG_DEBUG, "sniffingpackets");
+//    util.freelog(LOG_DEBUG, "sniffingpackets");
 //    while (sniff_packets() == 1) {
 //      /* nothing */
 //    }
@@ -1473,13 +1473,13 @@ public void srv_init()
 //
 //    end_phase();
 //    end_turn();
-//    freelog(LOG_DEBUG, "Sendinfotometaserver");
+//    util.freelog(LOG_DEBUG, "Sendinfotometaserver");
 //    () send_server_info_to_metaserver(META_REFRESH);
 //
 //    conn_list_do_unbuffer(&game.game_connections);
 //
 //    if (is_game_over()) {
-//      server_state=GAME_OVER_STATE;
+//      Srv_main.server_state=server_states.GAME_OVER_STATE;
 //    }
 //  }
 //
@@ -1506,7 +1506,7 @@ public void srv_main()
 //  con_log_init(srvarg.log_filename, srvarg.loglevel);
 //  gamelog_init(srvarg.gamelog_filename);
 //  gamelog_set_level(GAMELOG_FULL);
-//  gamelog(GAMELOG_BEGIN);
+//  Gamelog.gamelog(GAMELOG_BEGIN);
 //  
 //#if IS_BETA_VERSION
 //  con_puts(Erfc_status.C_COMMENT, "");
@@ -1530,7 +1530,7 @@ public void srv_main()
 //  } 
 //
 //  if(!(srvarg.metaserver_no_send)) {
-//    freelog(Log.LOG_NORMAL, "Sending info to metaserver [%s]",
+//    util.freelog(Log.LOG_NORMAL, "Sending info to metaserver [%s]",
 //	    meta_addr_port());
 //    server_open_meta(); /* open socket for meta server */ 
 //  }
@@ -1538,7 +1538,7 @@ public void srv_main()
 //  () send_server_info_to_metaserver(META_INFO);
 //
 //  /* accept new players, wait for serverop to start..*/
-//  server_state = server_states.PRE_GAME_STATE;
+//  Srv_main.server_state = server_states.PRE_GAME_STATE;
 //
 //  /* load a script file */
 //  if (srvarg.script_filename
@@ -1550,18 +1550,18 @@ public void srv_main()
 //  while (true) {
 //    srv_loop();
 //
-//    send_game_state(&game.game_connections, CLIENT_GAME_OVER_STATE);
+//    send_game_state(&game.game_connections, CLIENT_server_states.GAME_OVER_STATE);
 //    report_final_scores();
 //    show_map_to_all();
 //    notify_conn(null, "Game: The game is over...");
-//    gamelog(GAMELOG_JUDGE, GL_NONE);
+//    Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, GL_NONE);
 //    send_server_info_to_metaserver(META_INFO);
 //    if (game.save_nturns > 0) {
 //      save_game_auto();
 //    }
-//    gamelog(GAMELOG_END);
+//    Gamelog.gamelog(GAMELOG_END);
 //
-//    /* Remain in GAME_OVER_STATE until players log out */
+//    /* Remain in server_states.GAME_OVER_STATE until players log out */
 //    while (conn_list_size(&game.est_connections) > 0) {
 //      () sniff_packets();
 //    }
@@ -1575,7 +1575,7 @@ public void srv_main()
 //    server_game_free();
 //    game_init();
 //    game.is_new_game = true;
-//    server_state = server_states.PRE_GAME_STATE;
+//    Srv_main.server_state = server_states.PRE_GAME_STATE;
 //  }
 
   /* Technically, we won't ever get here. We exit via server_quit. */
@@ -1589,8 +1589,8 @@ public void srv_main()
 //  int i;
 //  boolean start_nations;
 //
-//  freelog(Log.LOG_NORMAL, "Now accepting new client connections.");
-//  while(server_state == server_states.PRE_GAME_STATE) {
+//  util.freelog(Log.LOG_NORMAL, "Now accepting new client connections.");
+//  while(Srv_main.server_state == server_states.PRE_GAME_STATE) {
 //    sniff_packets(); /* Accepting commands. */
 //  }
 //
@@ -1648,18 +1648,18 @@ public void srv_main()
 //   * AI players may not yet have a nation; these will be selected
 //   * in generate_ai_players() later
 //   */
-//  server_state = RUN_GAME_STATE;
+//  Srv_main.server_state = RUN_GAME_STATE;
 //  for(player pplayer: game.players){
 //    ai_data_analyze_rulesets(pplayer);
 //    if (pplayer.is_observer) {
 //      pplayer.nation = OBSERVER_NATION;
 //    } else if (pplayer.nation == NO_NATION_SELECTED && !pplayer.ai.control) {
 //      send_select_nation(pplayer);
-//      server_state = SELECT_RACES_STATE;
+//      Srv_main.server_state = SELECT_RACES_STATE;
 //    }
 //  }
 //
-//  while(server_state == SELECT_RACES_STATE) {
+//  while(Srv_main.server_state == SELECT_RACES_STATE) {
 //    boolean flag = false;
 //
 //    sniff_packets();
@@ -1673,12 +1673,12 @@ public void srv_main()
 //
 //    if (!flag) {
 //      if (game.nplayers > 0) {
-//	server_state = RUN_GAME_STATE;
+//	Srv_main.server_state = RUN_GAME_STATE;
 //      } else {
 //	con_write(Erfc_status.C_COMMENT,
 //		  "Last player has disconnected: will need to restart.");
-//	server_state = server_states.PRE_GAME_STATE;
-//	while(server_state == server_states.PRE_GAME_STATE) {
+//	Srv_main.server_state = server_states.PRE_GAME_STATE;
+//	while(Srv_main.server_state == server_states.PRE_GAME_STATE) {
 //	  sniff_packets();
 //	}
 //	goto main_start_players;
@@ -1705,10 +1705,10 @@ public void srv_main()
 //    map_fractal_generate(true);
 //  }
 //
-//  gamelog(GAMELOG_MAP);
+//  Gamelog.gamelog(GAMELOG_MAP);
 //  /* start the game */
 //
-//  server_state = RUN_GAME_STATE;
+//  Srv_main.server_state = RUN_GAME_STATE;
 //  () send_server_info_to_metaserver(META_INFO);
 //
 //  if(game.is_new_game) {
@@ -1768,14 +1768,14 @@ public void srv_main()
 //   }
 //  }
 //
-//  /* tell the gamelog about the players */
+//  /* tell the Gamelog.gamelog about the players */
 //  for(player pplayer: game.players){
-//    gamelog(GAMELOG_PLAYER, pplayer);
+//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
 //  }
 //
-//  /* tell the gamelog who is whose team */
+//  /* tell the Gamelog.gamelog who is whose team */
 //  team_iterate(pteam) {
-//    gamelog(GAMELOG_TEAM, pteam);
+//    Gamelog.gamelog(GAMELOG_TEAM, pteam);
 //  } team_iterate_end;
 //
 //  initialize_move_costs(); /* this may be the wrong place to do this */

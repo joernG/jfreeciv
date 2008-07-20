@@ -175,7 +175,7 @@ public class Packhand{
 //  close_connection_dialog();
 //
 //  if (you_can_join) {
-//    freelog(LOG_VERBOSE, "join game accept:%s", message);
+//    util.freelog(LOG_VERBOSE, "join game accept:%s", message);
 //    aconnection.established = true;
 //    aconnection.id = conn_id;
 //    agents_game_joined();
@@ -185,12 +185,12 @@ public class Packhand{
 //    /* we could always use hack, verify we're local */ 
 //    send_client_wants_hack(challenge_file);
 //  } else {
-//    my_snprintf(msg, sizeof(msg),
+//    msg = util.my_snprintf(
 //		"You were rejected from the game: %s", message);
 //    append_output_window(msg);
 //    aconnection.id = 0;
 //    if (auto_connect) {
-//      freelog(Log.LOG_NORMAL, "%s", msg);
+//      util.freelog(Log.LOG_NORMAL, "%s", msg);
 //    }
 //    gui_server_connect();
 //    set_client_page(PAGE_MAIN);
@@ -198,10 +198,10 @@ public class Packhand{
 //  if (s_capability.equals(our_capability)) {
 //    return;
 //  }
-//  my_snprintf(msg, sizeof(msg),
+//  msg = util.my_snprintf(
 //	      "Client capability string: %s", our_capability);
 //  append_output_window(msg);
-//  my_snprintf(msg, sizeof(msg),
+//  msg = util.my_snprintf(
 //	      "Server capability string: %s", s_capability);
 //  append_output_window(msg);
 //}
@@ -387,7 +387,7 @@ public class Packhand{
 //    agents_game_start();
 //  }
 //
-//  if (get_client_state() == CLIENT_GAME_OVER_STATE) {
+//  if (get_client_state() == CLIENT_server_states.GAME_OVER_STATE) {
 //    refresh_overview_canvas();
 //
 //    update_info_label();
@@ -668,8 +668,8 @@ public class Packhand{
 //  }
 //
 //  if(is_new) {
-//    freelog(LOG_DEBUG, "New %s city %s id %d (%d %d)",
-//	    get_nation_name(city_owner(pcity).nation),
+//    util.freelog(LOG_DEBUG, "New %s city %s id %d (%d %d)",
+//	    Nation.get_nation_name(city_owner(pcity).nation),
 //	    pcity.name, pcity.id, TILE_XY(pcity.tile));
 //  }
 //
@@ -952,7 +952,7 @@ public class Packhand{
 //  unit punit;
 //
 //  if (packet.owner != game.player_idx ) {
-//    freelog(LOG_ERROR, "Got packet_unit_info for unit of %s.",
+//    util.freelog(Log.LOG_ERROR, "Got packet_unit_info for unit of %s.",
 //            game.players[packet.owner].name);
 //  }
 //
@@ -1247,8 +1247,8 @@ public class Packhand{
 //      unit_list_insert(&pcity.units_supported, punit);
 //    }
 //
-//    freelog(LOG_DEBUG, "New %s %s id %d (%d %d) hc %d %s", 
-//	    get_nation_name(unit_owner(punit).nation),
+//    util.freelog(LOG_DEBUG, "New %s %s id %d (%d %d) hc %d %s", 
+//	    Nation.get_nation_name(unit_owner(punit).nation),
 //	    unit_name(punit.type), TILE_XY(punit.tile), punit.id,
 //	    punit.homecity, (pcity ? pcity.name : "(unknown)"));
 //
@@ -1356,7 +1356,7 @@ public class Packhand{
 //  }
 //
 //  if (packet.owner == game.player_idx ) {
-//    freelog(LOG_ERROR, "Got packet_short_unit for own unit.");
+//    util.freelog(Log.LOG_ERROR, "Got packet_short_unit for own unit.");
 //  }
 //
 //  punit = unpackage_short_unit(packet);
@@ -1418,12 +1418,12 @@ public class Packhand{
 //     */
 //    game.palace_building = get_building_for_effect(EFT_CAPITAL_CITY);
 //    if (game.palace_building == B_LAST) {
-//      freelog(LOG_FATAL, "Cannot find any palace building");
+//      util.freelog(LOG_FATAL, "Cannot find any palace building");
 //    }
 //
 //    game.land_defend_building = get_building_for_effect(EFT_LAND_DEFEND);
 //    if (game.land_defend_building == B_LAST) {
-//      freelog(LOG_FATAL, "Cannot find any land defend building");
+//      util.freelog(LOG_FATAL, "Cannot find any land defend building");
 //    }
 //
 //    improvement_status_init(game.improvements,
@@ -1624,7 +1624,7 @@ public class Packhand{
 //  if(pplayer.ai.control!=pinfo.ai)  {
 //    pplayer.ai.control=pinfo.ai;
 //    if(pplayer==game.player_ptr)  {
-//      my_snprintf(msg, sizeof(msg), "AI Mode is now %s.",
+//      msg = util.my_snprintf( "AI Mode is now %s.",
 //		  game.player_ptr.ai.control?"ON":"OFF");
 //      append_output_window(msg);
 //    }
@@ -1679,16 +1679,16 @@ public class Packhand{
 //{
 //  connection pconn = find_conn_by_id(pinfo.id);
 //
-//  freelog(LOG_DEBUG, "conn_info id%d used%d est%d plr%d obs%d acc%d",
+//  util.freelog(LOG_DEBUG, "conn_info id%d used%d est%d plr%d obs%d acc%d",
 //	  pinfo.id, pinfo.used, pinfo.established, pinfo.player_num,
 //	  pinfo.observer, (int)pinfo.access_level);
-//  freelog(LOG_DEBUG, "conn_info \"%s\" \"%s\" \"%s\"",
+//  util.freelog(LOG_DEBUG, "conn_info \"%s\" \"%s\" \"%s\"",
 //	  pinfo.username, pinfo.addr, pinfo.capability);
 //  
 //  if (!pinfo.used) {
 //    /* Forget the connection */
 //    if (!pconn) {
-//      freelog(LOG_VERBOSE, "Server removed unknown connection %d", pinfo.id);
+//      util.freelog(LOG_VERBOSE, "Server removed unknown connection %d", pinfo.id);
 //      return;
 //    }
 //    client_remove_cli_conn(pconn);
@@ -1702,7 +1702,7 @@ public class Packhand{
 //       ? get_player(pinfo.player_num) : null);
 //    
 //    if (!pconn) {
-//      freelog(LOG_VERBOSE, "Server reports new connection %d %s",
+//      util.freelog(LOG_VERBOSE, "Server reports new connection %d %s",
 //	      pinfo.id, pinfo.username);
 //
 //      pconn = fc_calloc(1, sizeof(struct connection));
@@ -1716,7 +1716,7 @@ public class Packhand{
 //      conn_list_insert_back(&game.est_connections, pconn);
 //      conn_list_insert_back(&game.game_connections, pconn);
 //    } else {
-//      freelog(LOG_DEBUG, "Server reports updated connection %d %s",
+//      util.freelog(LOG_DEBUG, "Server reports updated connection %d %s",
 //	      pinfo.id, pinfo.username);
 //      if (pplayer != pconn.player) {
 //	if (pconn.player) {
@@ -1762,7 +1762,7 @@ public class Packhand{
 //    }
 //
 //    pconn.ping_time = packet.ping_time[i];
-//    freelog(LOG_DEBUG, "conn-id=%d, ping=%fs", pconn.id,
+//    util.freelog(LOG_DEBUG, "conn-id=%d, ping=%fs", pconn.id,
 //	    pconn.ping_time);
 //  }
 //  /* The old_ping_time data is ignored. */
@@ -1797,39 +1797,39 @@ public class Packhand{
 //     * others build habitation first (for score?)  (Thanks Massimo.)
 //     */
 //    type =
-//      (ship.habitation==0)   ? SSHIP_PLACE_HABITATION :
-//      (ship.life_support==0) ? SSHIP_PLACE_LIFE_SUPPORT :
-//      (ship.solar_panels==0) ? SSHIP_PLACE_SOLAR_PANELS :
+//      (ship.habitation==0)   ? spaceship_place_type.SSHIP_PLACE_HABITATION :
+//      (ship.life_support==0) ? spaceship_place_type.SSHIP_PLACE_HABITATION :
+//      (ship.solar_panels==0) ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      ((ship.habitation < ship.life_support)
 //       && (ship.solar_panels*2 >= ship.habitation + ship.life_support + 1))
-//                              ? SSHIP_PLACE_HABITATION :
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      (ship.solar_panels*2 < ship.habitation + ship.life_support)
-//                              ? SSHIP_PLACE_SOLAR_PANELS :
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      (ship.life_support<ship.habitation)
-//                              ? SSHIP_PLACE_LIFE_SUPPORT :
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
 //      ((ship.life_support <= ship.habitation)
 //       && (ship.solar_panels*2 >= ship.habitation + ship.life_support + 1))
-//                              ? SSHIP_PLACE_LIFE_SUPPORT :
-//                                SSHIP_PLACE_SOLAR_PANELS;
+//                              ? spaceship_place_type.SSHIP_PLACE_HABITATION :
+//                                spaceship_place_type.SSHIP_PLACE_HABITATION;
 //
-//    if (type == SSHIP_PLACE_HABITATION) {
+//    if (type == spaceship_place_type.SSHIP_PLACE_HABITATION) {
 //      num = ship.habitation + 1;
-//    } else if(type == SSHIP_PLACE_LIFE_SUPPORT) {
+//    } else if(type == spaceship_place_type.SSHIP_PLACE_HABITATION) {
 //      num = ship.life_support + 1;
 //    } else {
 //      num = ship.solar_panels + 1;
 //    }
-//    assert(num <= NUM_SS_MODULES / 3);
+//    assert(num <= player_spaceship.NUM_SS_MODULES / 3);
 //
 //    dsend_packet_spaceship_place(&aconnection, type, num);
 //    return true;
 //  }
 //  if (ship.components > ship.fuel + ship.propulsion) {
 //    if (ship.fuel <= ship.propulsion) {
-//      type = SSHIP_PLACE_FUEL;
+//      type = spaceship_place_type.SSHIP_PLACE_FUEL;
 //      num = ship.fuel + 1;
 //    } else {
-//      type = SSHIP_PLACE_PROPULSION;
+//      type = spaceship_place_type.SSHIP_PLACE_PROPULSION;
 //      num = ship.propulsion + 1;
 //    }
 //    dsend_packet_spaceship_place(&aconnection, type, num);
@@ -1845,47 +1845,47 @@ public class Packhand{
 //    
 //    if (!ship.structure[0]) {
 //      /* if we don't have the first structural, place that! */
-//      type = SSHIP_PLACE_STRUCTURAL;
+//      type = spaceship_place_type.SSHIP_PLACE_STRUCTURAL;
 //      num = 0;
 //      dsend_packet_spaceship_place(&aconnection, type, num);
 //      return true;
 //    }
 //    
 //    if (ship.habitation >= 1
-//	&& !ship.structure[modules_info[0].required]) {
-//      req = modules_info[0].required;
+//	&& !ship.structure[Spaceship.modules_info[0].required]) {
+//      req = Spaceship.modules_info[0].required;
 //    } else if (ship.life_support >= 1
-//	       && !ship.structure[modules_info[1].required]) {
-//      req = modules_info[1].required;
+//	       && !ship.structure[Spaceship.modules_info[1].required]) {
+//      req = Spaceship.modules_info[1].required;
 //    } else if (ship.solar_panels >= 1
-//	       && !ship.structure[modules_info[2].required]) {
-//      req = modules_info[2].required;
+//	       && !ship.structure[Spaceship.modules_info[2].required]) {
+//      req = Spaceship.modules_info[2].required;
 //    } else {
 //      int i;
-//      for(i=0; i<NUM_SS_COMPONENTS; i++) {
+//      for(i=0; i<player_spaceship.NUM_SS_COMPONENTS; i++) {
 //	if ((i%2==0 && ship.fuel > (i/2))
 //	    || (i%2==1 && ship.propulsion > (i/2))) {
-//	  if (!ship.structure[components_info[i].required]) {
-//	    req = components_info[i].required;
+//	  if (!ship.structure[Spaceship.components_info[i].required]) {
+//	    req = Spaceship.components_info[i].required;
 //	    break;
 //	  }
 //	}
 //      }
 //    }
 //    if (req == -1) {
-//      for(i=0; i<NUM_SS_MODULES; i++) {
+//      for(i=0; i<player_spaceship.NUM_SS_MODULES; i++) {
 //	if ((i%3==0 && ship.habitation > (i/3))
 //	    || (i%3==1 && ship.life_support > (i/3))
 //	    || (i%3==2 && ship.solar_panels > (i/3))) {
-//	  if (!ship.structure[modules_info[i].required]) {
-//	    req = modules_info[i].required;
+//	  if (!ship.structure[Spaceship.modules_info[i].required]) {
+//	    req = Spaceship.modules_info[i].required;
 //	    break;
 //	  }
 //	}
 //      }
 //    }
 //    if (req == -1) {
-//      for(i=0; i<NUM_SS_STRUCTURALS; i++) {
+//      for(i=0; i<player_spaceship.NUM_SS_STRUCTURALS; i++) {
 //	if (!ship.structure[i]) {
 //	  req = i;
 //	  break;
@@ -1900,10 +1900,10 @@ public class Packhand{
 //       This loop should bottom out, because everything leads back to s0,
 //       and we made sure above that we do s0 first.
 //     */
-//    while(!ship.structure[structurals_info[req].required]) {
-//      req = structurals_info[req].required;
+//    while(!ship.structure[Spaceship.structurals_info[req].required]) {
+//      req = Spaceship.structurals_info[req].required;
 //    }
-//    type = SSHIP_PLACE_STRUCTURAL;
+//    type = spaceship_place_type.SSHIP_PLACE_STRUCTURAL;
 //    num = req;
 //    dsend_packet_spaceship_place(&aconnection, type, num);
 //    return true;
@@ -1938,13 +1938,13 @@ public class Packhand{
 //  ship.success_rate = p.success_rate;
 //  ship.travel_time  = p.travel_time;
 //  
-//  for(i=0; i<NUM_SS_STRUCTURALS; i++) {
+//  for(i=0; i<player_spaceship.NUM_SS_STRUCTURALS; i++) {
 //    if (p.structure[i] == '0') {
 //      ship.structure[i] = false;
 //    } else if (p.structure[i] == '1') {
 //      ship.structure[i] = true;
 //    } else {
-//      freelog(LOG_ERROR, "invalid spaceship structure '%c' %d",
+//      util.freelog(Log.LOG_ERROR, "invalid spaceship structure '%c' %d",
 //	      p.structure[i], p.structure[i]);
 //      ship.structure[i] = false;
 //    }
@@ -2020,7 +2020,7 @@ public class Packhand{
 //    /* This is an error.  So first we log the error, then make an assertion.
 //     * But for NDEBUG clients we fix the error. */
 //    for (unit punit : ptile.units.data) {
-//      freelog(LOG_ERROR, "%p %s at (%d,%d) %s", punit,
+//      util.freelog(Log.LOG_ERROR, "%p %s at (%d,%d) %s", punit,
 //	      unit_type(punit).name, TILE_XY(punit.tile),
 //	      unit_owner(punit).name);
 //    } }
@@ -2110,7 +2110,7 @@ public class Packhand{
 //    set_client_state(CLIENT_WAITING_FOR_GAME_START_STATE);
 //    popdown_races_dialog();
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "got a select nation packet in an incompatible state");
 //  }
 //}
@@ -2120,7 +2120,7 @@ public class Packhand{
 ///**************************************************************************
 //  Mark a nation as unavailable, after we've entered the select-race state.
 //**************************************************************************/
-//void handle_nation_unavailable(Nation_Type_id nation)
+//void handle_nation_unavailable(int nation)
 //{
 //  if (get_client_state() == CLIENT_SELECT_RACE_STATE
 //      && nation >= 0 && nation < game.playable_nation_count) {
@@ -2129,7 +2129,7 @@ public class Packhand{
 //      races_toggles_set_sensitive(nations_used);
 //    }
 //  } else {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "got a select nation packet in an incompatible state");
 //  }
 //}
@@ -2185,7 +2185,7 @@ public class Packhand{
 //
 //  for(i=0; i<MAX_NUM_TECH_LIST; i++) {
 //    game.rtech.partisan_req[i]  = packet.rtech_partisan_req[i];
-//    freelog(LOG_DEBUG, "techl %d: %d", i, game.rtech.partisan_req[i]);
+//    util.freelog(LOG_DEBUG, "techl %d: %d", i, game.rtech.partisan_req[i]);
 //  }
 //
 //  game.government_when_anarchy = packet.government_when_anarchy;
@@ -2226,7 +2226,7 @@ public class Packhand{
 //  int i;
 //
 //  if(p.id < 0 || p.id >= game.num_unit_types || p.id >= U_LAST) {
-//    freelog(LOG_ERROR, "Received bad unit_type id %d in handle_ruleset_unit()",
+//    util.freelog(Log.LOG_ERROR, "Received bad unit_type id %d in handle_ruleset_unit()",
 //	    p.id);
 //    return;
 //  }
@@ -2285,7 +2285,7 @@ public class Packhand{
 //  advance a;
 //
 //  if(p.id < 0 || p.id >= game.num_tech_types || p.id >= A_LAST) {
-//    freelog(LOG_ERROR, "Received bad advance id %d in handle_ruleset_tech()",
+//    util.freelog(Log.LOG_ERROR, "Received bad advance id %d in handle_ruleset_tech()",
 //	    p.id);
 //    return;
 //  }
@@ -2315,7 +2315,7 @@ public class Packhand{
 //  int i;
 //
 //  if(p.id < 0 || p.id >= game.num_impr_types || p.id >= B_LAST) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Received bad building id %d in handle_ruleset_building()",
 //	    p.id);
 //    return;
@@ -2356,51 +2356,51 @@ public class Packhand{
 //    impr_type_iterate(id) {
 //      int inx;
 //      b = &improvement_types[id];
-//      freelog(LOG_DEBUG, "Impr: %s...",
+//      util.freelog(LOG_DEBUG, "Impr: %s...",
 //	      b.name);
-//      freelog(LOG_DEBUG, "  tech_req    %2d/%s",
+//      util.freelog(LOG_DEBUG, "  tech_req    %2d/%s",
 //	      b.tech_req,
 //	      (b.tech_req == A_LAST) ?
 //	      "Never" : get_tech_name(game.player_ptr, b.tech_req));
-//      freelog(LOG_DEBUG, "  bldg_req    %2d/%s",
+//      util.freelog(LOG_DEBUG, "  bldg_req    %2d/%s",
 //	      b.bldg_req,
 //	      (b.bldg_req == B_LAST) ?
 //	      "None" :
 //	      improvement_types[b.bldg_req].name);
-//      freelog(LOG_DEBUG, "  terr_gate...");
+//      util.freelog(LOG_DEBUG, "  terr_gate...");
 //      for (inx = 0; b.terr_gate[inx] != T_NONE; inx++) {
-//	freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(LOG_DEBUG, "    %2d/%s",
 //		b.terr_gate[inx], get_terrain_name(b.terr_gate[inx]));
 //      }
-//      freelog(LOG_DEBUG, "  spec_gate...");
+//      util.freelog(LOG_DEBUG, "  spec_gate...");
 //      for (inx = 0; b.spec_gate[inx] != S_NO_SPECIAL; inx++) {
-//	freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(LOG_DEBUG, "    %2d/%s",
 //		b.spec_gate[inx], get_special_name(b.spec_gate[inx]));
 //      }
-//      freelog(LOG_DEBUG, "  equiv_range %2d/%s",
+//      util.freelog(LOG_DEBUG, "  equiv_range %2d/%s",
 //	      b.equiv_range, effect_range_name(b.equiv_range));
-//      freelog(LOG_DEBUG, "  equiv_dupl...");
+//      util.freelog(LOG_DEBUG, "  equiv_dupl...");
 //      for (inx = 0; b.equiv_dupl[inx] != B_LAST; inx++) {
-//	freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(LOG_DEBUG, "    %2d/%s",
 //		b.equiv_dupl[inx], improvement_types[b.equiv_dupl[inx]].name);
 //      }
-//      freelog(LOG_DEBUG, "  equiv_repl...");
+//      util.freelog(LOG_DEBUG, "  equiv_repl...");
 //      for (inx = 0; b.equiv_repl[inx] != B_LAST; inx++) {
-//	freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(LOG_DEBUG, "    %2d/%s",
 //		b.equiv_repl[inx], improvement_types[b.equiv_repl[inx]].name);
 //      }
 //      if (tech_exists(b.obsolete_by)) {
-//	freelog(LOG_DEBUG, "  obsolete_by %2d/%s",
+//	util.freelog(LOG_DEBUG, "  obsolete_by %2d/%s",
 //		b.obsolete_by,
 //		get_tech_name(game.player_ptr, b.obsolete_by));
 //      } else {
-//	freelog(LOG_DEBUG, "  obsolete_by %2d/Never", b.obsolete_by);
+//	util.freelog(LOG_DEBUG, "  obsolete_by %2d/Never", b.obsolete_by);
 //      }
-//      freelog(LOG_DEBUG, "  is_wonder   %2d", b.is_wonder);
-//      freelog(LOG_DEBUG, "  build_cost %3d", b.build_cost);
-//      freelog(LOG_DEBUG, "  upkeep      %2d", b.upkeep);
-//      freelog(LOG_DEBUG, "  sabotage   %3d", b.sabotage);
-//      freelog(LOG_DEBUG, "  helptext    %s", b.helptext);
+//      util.freelog(LOG_DEBUG, "  is_wonder   %2d", b.is_wonder);
+//      util.freelog(LOG_DEBUG, "  build_cost %3d", b.build_cost);
+//      util.freelog(LOG_DEBUG, "  upkeep      %2d", b.upkeep);
+//      util.freelog(LOG_DEBUG, "  sabotage   %3d", b.sabotage);
+//      util.freelog(LOG_DEBUG, "  helptext    %s", b.helptext);
 //    } impr_type_iterate_end;
 //  }
 //#endif
@@ -2416,7 +2416,7 @@ public class Packhand{
 //  government gov;
 //
 //  if (p.id < 0 || p.id >= game.government_count) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Received bad government id %d in handle_ruleset_government",
 //	    p.id);
 //    return;
@@ -2494,12 +2494,12 @@ public class Packhand{
 //  government gov;
 //
 //  if(p.gov < 0 || p.gov >= game.government_count) {
-//    freelog(LOG_ERROR, "Received bad government num %d for title", p.gov);
+//    util.freelog(Log.LOG_ERROR, "Received bad government num %d for title", p.gov);
 //    return;
 //  }
 //  gov = &governments[p.gov];
 //  if(p.id < 0 || p.id >= gov.num_ruler_titles) {
-//    freelog(LOG_ERROR, "Received bad ruler title num %d for %s title",
+//    util.freelog(Log.LOG_ERROR, "Received bad ruler title num %d for %s title",
 //	    p.id, gov.name);
 //    return;
 //  }
@@ -2520,7 +2520,7 @@ public class Packhand{
 //  tile_type t;
 //
 //  if (p.id < T_FIRST || p.id >= T_COUNT) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Received bad terrain id %d in handle_ruleset_terrain",
 //	    p.id);
 //    return;
@@ -2595,7 +2595,7 @@ public class Packhand{
 //  nation_type pl;
 //
 //  if (p.id < 0 || p.id >= game.nation_count) {
-//    freelog(LOG_ERROR, "Received bad nation id %d in handle_ruleset_nation()",
+//    util.freelog(Log.LOG_ERROR, "Received bad nation id %d in handle_ruleset_nation()",
 //	    p.id);
 //    return;
 //  }
@@ -2640,7 +2640,7 @@ public class Packhand{
 //
 //  id = packet.style_id;
 //  if (id < 0 || id >= game.styles_count) {
-//    freelog(LOG_ERROR, "Received bad citystyle id %d in handle_ruleset_city()",
+//    util.freelog(Log.LOG_ERROR, "Received bad citystyle id %d in handle_ruleset_city()",
 //	    id);
 //    return;
 //  }
@@ -2817,7 +2817,7 @@ public class Packhand{
 //      get_next_request_id(aconnection.
 //			  client.last_processed_request_id_seen);
 //
-//  freelog(LOG_DEBUG, "start processing packet %d",
+//  util.freelog(LOG_DEBUG, "start processing packet %d",
 //	  aconnection.client.request_id_of_currently_handled_packet);
 //}
 //
@@ -2828,7 +2828,7 @@ public class Packhand{
 //{
 //  int i;
 //
-//  freelog(LOG_DEBUG, "finish processing packet %d",
+//  util.freelog(LOG_DEBUG, "finish processing packet %d",
 //	  aconnection.client.request_id_of_currently_handled_packet);
 //
 //  assert(aconnection.client.request_id_of_currently_handled_packet != 0);
@@ -2857,7 +2857,7 @@ public class Packhand{
 //				   int packet_type, int size)
 //{
 //  assert(pc == &aconnection);
-//  freelog(LOG_DEBUG, "incoming packet={type=%d, size=%d}", packet_type,
+//  util.freelog(LOG_DEBUG, "incoming packet={type=%d, size=%d}", packet_type,
 //	  size);
 //}
 //
@@ -2869,7 +2869,7 @@ public class Packhand{
 //				  int request_id)
 //{
 //  assert(pc == &aconnection);
-//  freelog(LOG_DEBUG, "outgoing packet={type=%d, size=%d, request_id=%d}",
+//  util.freelog(LOG_DEBUG, "outgoing packet={type=%d, size=%d, request_id=%d}",
 //	  packet_type, size, request_id);
 //
 //  assert(request_id);
@@ -2901,7 +2901,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_freeze_hint()
 //{
-//  freelog(LOG_DEBUG, "handle_freeze_hint");
+//  util.freelog(LOG_DEBUG, "handle_freeze_hint");
 //
 //  reports_freeze();
 //
@@ -2913,7 +2913,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_thaw_hint()
 //{
-//  freelog(LOG_DEBUG, "handle_thaw_hint");
+//  util.freelog(LOG_DEBUG, "handle_thaw_hint");
 //
 //  reports_thaw();
 //
@@ -2934,7 +2934,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_server_shutdown()
 //{
-//  freelog(LOG_VERBOSE, "server shutdown");
+//  util.freelog(LOG_VERBOSE, "server shutdown");
 //}
 //
 ///**************************************************************************

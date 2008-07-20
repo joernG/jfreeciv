@@ -77,7 +77,7 @@ public class Settlers{
 //			 city_name_suggestion(pplayer, ptile));
 //  pcity = map_get_city(ptile);
 //  if (!pcity) {
-//    freelog(LOG_ERROR, "%s: Failed to build city at (%d, %d)", 
+//    util.freelog(Log.LOG_ERROR, "%s: Failed to build city at (%d, %d)", 
 //            pplayer.name, TILE_XY(ptile));
 //    return false;
 //  }
@@ -806,7 +806,7 @@ public class Settlers{
 //  if (total_value > *best_value
 //      || (total_value == *best_value
 //	  && old_tile_value > *best_old_tile_value)) {
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //	    "Replacing (%d, %d) = %d with %s (%d, %d) = %d [d=%d b=%d]",
 //	    TILE_XY(*best_tile), *best_value, get_activity_text(act),
 //	    TILE_XY(ptile), total_value,
@@ -894,7 +894,7 @@ public class Settlers{
 //
 //  for (city pcity : pplayer.cities.data) {
 //#ifdef REALLY_DEBUG_THIS
-//    freelog(LOG_DEBUG, "Evaluating improvements for %s...", pcity.name);
+//    util.freelog(LOG_DEBUG, "Evaluating improvements for %s...", pcity.name);
 //#endif
 //    /* try to work near the city */
 //    city_map_checked_iterate(pcity.tile, i, j, ptile) {
@@ -996,7 +996,7 @@ public class Settlers{
 //	}
 //
 //#ifdef REALLY_DEBUG_THIS
-//	freelog(LOG_DEBUG,
+//	util.freelog(LOG_DEBUG,
 //		"(%d %d) I=%+-4d O=%+-4d M=%+-4d R=%+-4d RR=%+-4d P=%+-4d N=%+-4d",
 //		i, j,
 //		pcity.ai.irrigate[i][j], pcity.ai.transform[i][j],
@@ -1013,7 +1013,7 @@ public class Settlers{
 //    best_newv = 0; /* Bad Things happen without this line! :( -- Syela */
 //
 //  if (best_newv > 0) {
-//    freelog(LOG_DEBUG,
+//    util.freelog(LOG_DEBUG,
 //	    "Settler %d@(%d,%d) wants to %s at (%d,%d) with desire %d",
 //	    punit.id, TILE_XY(punit.tile), get_activity_text(*best_act),
 //	    TILE_XY(*best_tile), best_newv);
@@ -1070,7 +1070,7 @@ public class Settlers{
 //      }
 //      if (same_pos(punit.tile, ptile)) {
 //        if (!ai_do_build_city(pplayer, punit)) {
-//          UNIT_LOG(LOG_ERROR, punit, "could not make city on %s",
+//          UNIT_LOG(Log.LOG_ERROR, punit, "could not make city on %s",
 //                   map_get_tile_info_text(punit.tile));
 //          ai_unit_new_role(punit, AIUNIT_NONE, null);
 //        } else {
@@ -1255,7 +1255,7 @@ public class Settlers{
 //
 //  pplayer.ai.warmth = WARMING_FACTOR * (game.heating > game.warminglevel ? 2 : 1);
 //
-//  freelog(LOG_DEBUG, "Warmth = %d, game.globalwarming=%d",
+//  util.freelog(LOG_DEBUG, "Warmth = %d, game.globalwarming=%d",
 //	  pplayer.ai.warmth, game.globalwarming);
 //
 //  /* Auto-settle with a settler unit if it's under AI control (e.g. human
@@ -1267,7 +1267,7 @@ public class Settlers{
 //	&& (unit_flag(punit, F_SETTLERS)
 //	    || unit_flag(punit, F_CITIES))
 //	&& !unit_has_orders(punit)) {
-//      freelog(LOG_DEBUG, "%s's settler at (%d, %d) is ai controlled.",
+//      util.freelog(LOG_DEBUG, "%s's settler at (%d, %d) is ai controlled.",
 //	      pplayer.name, TILE_XY(punit.tile)); 
 //      if (punit.activity == ACTIVITY_SENTRY) {
 //	handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
@@ -1282,7 +1282,7 @@ public class Settlers{
 //  }
 //  }
 //  if (timer_in_use(t)) {
-//    freelog(LOG_VERBOSE, "%s's autosettlers consumed %g milliseconds.",
+//    util.freelog(LOG_VERBOSE, "%s's autosettlers consumed %g milliseconds.",
 // 	    pplayer.name, 1000.0*read_timer_seconds(t));
 //  }
 //}
@@ -1432,7 +1432,7 @@ public class Settlers{
 //  int unit_type = best_role_unit(pcity, F_CITIES); 
 //
 //  if (unit_type == U_LAST) {
-//    freelog(LOG_DEBUG, "No F_CITIES role unit available");
+//    util.freelog(LOG_DEBUG, "No F_CITIES role unit available");
 //    return;
 //  }
 //
@@ -1472,14 +1472,14 @@ public class Settlers{
 //  player pplayer = city_owner(pcity);
 //  unit virtualunit;
 //  int want;
-//  tile best_tile = null; /* May be accessed by freelog() calls. */
+//  tile best_tile = null; /* May be accessed by util.freelog() calls. */
 //  enum unit_activity best_act;
 //  tile ptile = pcity.tile;
 //  ai_data ai = ai_data_get(pplayer);
 //  int unit_type = best_role_unit(pcity, F_SETTLERS);
 //
 //  if (unit_type == U_LAST) {
-//    freelog(LOG_DEBUG, "No F_SETTLERS role unit available");
+//    util.freelog(LOG_DEBUG, "No F_SETTLERS role unit available");
 //    return;
 //  }
 //
@@ -1494,7 +1494,7 @@ public class Settlers{
 //   * the ruleset */
 //  want /= MAX(1, ai.stats.workers[ptile.continent]
 //                 / (ai.stats.cities[ptile.continent] + 1));
-//  want -= MIN(ai.stats.workers[ptile.continent], want);
+//  want -= Math.min(ai.stats.workers[ptile.continent], want);
 //
 //  CITY_LOG(LOG_DEBUG, pcity, "wants %s with want %d to do %s at (%d,%d), "
 //           "we have %d workers and %d cities on the continent",

@@ -1,28 +1,7 @@
 package server;
 
-public class Gamelog{
 
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <stdarg.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//
+public class Gamelog{
 //#include "fcintl.h"
 //#include "government.h"
 //#include "log.h"
@@ -32,7 +11,7 @@ public class Gamelog{
 //#include "srv_main.h"
 //#include "support.h"
 //
-//#include "gamelog.h"
+//#include "Gamelog.gamelog.h"
 //#include "stdinhand.h"
 //
 //int gamelog_level;		/* also accessed from stdinhand.c */
@@ -46,7 +25,7 @@ public class Gamelog{
 //
 //static void gamelog_status(char *buffer, int len);
 //
-///* must match the enum in gamelog.h */
+///* must match the enum in Gamelog.gamelog.h */
 //final String treaty_clause_strings[] = {
 //  "Embassy",
 //  "Tech",
@@ -61,7 +40,7 @@ public class Gamelog{
 //  "Shared Vision"
 //};
 //
-///* must match the enum in gamelog.h */
+///* must match the enum in Gamelog.gamelog.h */
 //final String endgame_strings[] = {
 //  "None",
 //  "Draw",
@@ -99,90 +78,90 @@ public class Gamelog{
 //{
 //  char buf2[5000];
 //
-//  my_snprintf(buf2, sizeof(buf2), "<%s y=\"%d\" t=\"%d\">%s</%s>", element,
+//  buf2 = util.my_snprintf( "<%s y=\"%d\" t=\"%d\">%s</%s>", element,
 //              game.year, game.turn, buf, element);
 //  
 //  mystrlcpy(buf, buf2, len);
 //}
-//
-///**************************************************************************
-// Does the heavy lifing. Note that this function takes variable arguments.
-// This means that you'd better know what you're doing when altering a gamelog
-// call.
-//
-// Following are the parameters to be passed given "level".
-// See the case statement for more information on what the parameters are for:
-//
-//  GAMELOG_BEGIN
-//    none.
-//  GAMELOG_END
-//    none.
-//  GAMELOG_JUDGE
-//    int
-//  GAMELOG_MAP
-//    none
-//  GAMELOG_PLAYER
-//    player 
-//  GAMELOG_TEAM
-//    team 
-//  GAMELOG_WONDER
-//    city 
-//  GAMELOG_FOUNDCITY
-//    city 
-//  GAMELOG_LOSECITY
-//    player 
-//    player 
-//    city 
-//    char *
-//  GAMELOG_DISBANDCITY
-//    city 
-//  GAMELOG_TECH
-//    player 
-//    player  (can be null)
-//    int
-//    char * (only present if second player is not null)
-//  GAMELOG_EMBASSY
-//    player 
-//    city 
-//  GAMELOG_GOVERNMENT
-//    player 
-//  GAMELOG_REVOLT
-//    player 
-//  GAMELOG_GENO
-//    player 
-//  GAMELOG_TREATY
-//    int
-//    player 
-//    player 
-//    city    (can be null, present only if int is GL_CITY)
-//  GAMELOG_DIPLSTATE
-//    player 
-//    player 
-//    int
-//  GAMELOG_STATUS
-//    none
-//  GAMELOG_FULL
-//    do not call this.
-//  GAMELOG_INFO
-//    player 
-//  GAMELOG_UNITLOSS
-//    unit 
-//    player  (can be null)
-//    char * (only present if player is null)
-//  GAMELOG_UNITGAMELOSS
-//    unit 
-//  GAMELOG_BUILD
-//    city 
-//  GAMELOG_RATECHANGE
-//    player 
-//  GAMELOG_EVERYTHING
-//     do not call this
-//  GAMELOG_DEBUG
-//     do not call this
-//
-//**************************************************************************/
-//void gamelog(int level, ...)
-//{
+
+	/**************************************************************************
+ Does the heavy lifing. Note that this function takes variable arguments.
+ This means that you'd better know what you're doing when altering a Gamelog.gamelog
+ call.
+
+ Following are the parameters to be passed given "level".
+ See the case statement for more information on what the parameters are for:
+
+  GAMELOG_BEGIN
+    none.
+  GAMELOG_END
+    none.
+  EGamelog.GAMELOG_JUDGE
+    int
+  GAMELOG_MAP
+    none
+  GAMELOG_PLAYER
+    player 
+  GAMELOG_TEAM
+    team 
+  GAMELOG_WONDER
+    city 
+  GAMELOG_FOUNDCITY
+    city 
+  GAMELOG_LOSECITY
+    player 
+    player 
+    city 
+    char *
+  GAMELOG_DISBANDCITY
+    city 
+  GAMELOG_TECH
+    player 
+    player  (can be null)
+    int
+    char * (only present if second player is not null)
+  GAMELOG_EMBASSY
+    player 
+    city 
+  GAMELOG_GOVERNMENT
+    player 
+  GAMELOG_REVOLT
+    player 
+  GAMELOG_GENO
+    player 
+  GAMELOG_TREATY
+    int
+    player 
+    player 
+    city    (can be null, present only if int is GL_CITY)
+  GAMELOG_DIPLSTATE
+    player 
+    player 
+    int
+  GAMELOG_STATUS
+    none
+  GAMELOG_FULL
+    do not call this.
+  GAMELOG_INFO
+    player 
+  GAMELOG_UNITLOSS
+    unit 
+    player  (can be null)
+    char * (only present if player is null)
+  GAMELOG_UNITGAMELOSS
+    unit 
+  GAMELOG_BUILD
+    city 
+  GAMELOG_RATECHANGE
+    player 
+  GAMELOG_EVERYTHING
+     do not call this
+  GAMELOG_DEBUG
+     do not call this
+
+	 **************************************************************************/
+	public static void gamelog(server.gamelog.EGamelog level, Object ...args)
+	{
 //  va_list args;
 //  char buf[4096] = "", msg[512] = "";
 //  char *word = null;
@@ -202,7 +181,7 @@ public class Gamelog{
 //
 //  fs = fopen(gamelog_filename, "a");
 //  if (!fs) {
-//    freelog(LOG_FATAL, _("Couldn't open gamelogfile \"%s\" for appending."), 
+//    util.freelog(LOG_FATAL, _("Couldn't open gamelogfile \"%s\" for appending."), 
 //	    gamelog_filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -213,29 +192,29 @@ public class Gamelog{
 //  case GAMELOG_GOVERNMENT:
 //    pplayer = va_arg(args, player );
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "<n>%d</n><name>%s</name><m>%s form a %s</m>",
 //                pplayer.player_no, get_government_name(pplayer.government),
-//                get_nation_name_plural(pplayer.nation),
+//                Nation.get_nation_name_plural(pplayer.nation),
 //                get_government_name(pplayer.government));
 //    gamelog_put_prefix(buf, sizeof(buf), "gov");
 //    break;
 //  case GAMELOG_REVOLT:
 //    pplayer = va_arg(args, player );
 //
-//    my_snprintf(buf, sizeof(buf), "<n>%d</n><m>%s</m>",
-//                pplayer.player_no, get_nation_name_plural(pplayer.nation));
+//    buf = util.my_snprintf( "<n>%d</n><m>%s</m>",
+//                pplayer.player_no, Nation.get_nation_name_plural(pplayer.nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "rev");
 //    break;
 //  case GAMELOG_FOUNDCITY:
 //    pcity = va_arg(args, city );
 //
-//    my_snprintf(buf, sizeof(buf), "<n>%d</n><name>%s</name>"
+//    buf = util.my_snprintf( "<n>%d</n><name>%s</name>"
 //                "<x>%d</x><y>%d</y><m>%s (%d,%d) founded by the %s</m>",
 //                city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
-//                get_nation_name_plural(city_owner(pcity).nation));
+//                Nation.get_nation_name_plural(city_owner(pcity).nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "cityf");
 //    break;
 //  case GAMELOG_LOSECITY:
@@ -244,25 +223,25 @@ public class Gamelog{
 //    pcity = va_arg(args, city );
 //    word = va_arg(args, char *);
 //
-//    my_snprintf(buf, sizeof(buf), "<n1>%d</n1><n2>%d</n2>"
+//    buf = util.my_snprintf( "<n1>%d</n1><n2>%d</n2>"
 //                "<name>%s</name><x>%d</x><y>%d</y>"
 //                "<m>%s (%s) (%d,%d) %s by %s</m>", 
 //                pplayer.player_no, pplayer2.player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
-//                pcity.name, get_nation_name_plural(pplayer.nation),
+//                pcity.name, Nation.get_nation_name_plural(pplayer.nation),
 //                pcity.tile.x, pcity.tile.y, word,
-//                get_nation_name_plural(pplayer2.nation));
+//                Nation.get_nation_name_plural(pplayer2.nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "cityl");
 //    break;
 //  case GAMELOG_DISBANDCITY:
 //    pcity = va_arg(args, city );
 //
-//    my_snprintf(buf, sizeof(buf), "<n>%d</n><name>%s</name>"
+//    buf = util.my_snprintf( "<n>%d</n><name>%s</name>"
 //                "<x>%d</x><y>%d</y><m>%s (%d, %d) disbanded by the %s</m>",
 //                city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
-//                get_nation_name_plural(city_owner(pcity).nation));
+//                Nation.get_nation_name_plural(city_owner(pcity).nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "cityd");
 //    break;
 //  case GAMELOG_TREATY:
@@ -312,21 +291,21 @@ public class Gamelog{
 //    }
 //
 //    if (pcity) {
-//      my_snprintf(buf, sizeof(buf),
+//      buf = util.my_snprintf(
 //                  "<n1>%d</n1><n2>%d</n2><city>%s</city><type>%s</type>",
 //                  pplayer.player_no, pplayer2.player_no, pcity.name,
 //                  treaty_clause_strings[num]);
 //      cat_snprintf(buf, sizeof(buf), msg, 
-//                  pcity.name, get_nation_name_plural(pplayer2.nation),
-//                  get_nation_name_plural(pplayer.nation));
+//                  pcity.name, Nation.get_nation_name_plural(pplayer2.nation),
+//                  Nation.get_nation_name_plural(pplayer.nation));
 //    } else {
-//      my_snprintf(buf, sizeof(buf),
+//      buf = util.my_snprintf(
 //                  "<n1>%d</n1><n2>%d</n2><type>%s</type>",
 //                  pplayer.player_no, pplayer2.player_no, 
 //                  treaty_clause_strings[num]);
 //      cat_snprintf(buf, sizeof(buf), msg,
-//                  get_nation_name_plural(pplayer.nation),
-//                  get_nation_name_plural(pplayer2.nation));
+//                  Nation.get_nation_name_plural(pplayer.nation),
+//                  Nation.get_nation_name_plural(pplayer2.nation));
 //    }
 //    gamelog_put_prefix(buf, sizeof(buf), "treaty");
 //    break;
@@ -335,13 +314,13 @@ public class Gamelog{
 //    pplayer2 = va_arg(args, player );
 //    num = va_arg(args, int);
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "<n1>%d</n1><n2>%d</n2><type>%s</type>",
 //                pplayer.player_no, pplayer2.player_no,  diplstate_text(num));
 //    cat_snprintf(buf, sizeof(buf),
 //                "<m>The diplomatic state between the %s and the %s is %s</m>",
-//                get_nation_name_plural(pplayer.nation),
-//                get_nation_name_plural(pplayer2.nation), diplstate_text(num));
+//                Nation.get_nation_name_plural(pplayer.nation),
+//                Nation.get_nation_name_plural(pplayer2.nation), diplstate_text(num));
 //    gamelog_put_prefix(buf, sizeof(buf), "dipl");
 //    break;
 //  case GAMELOG_TECH:
@@ -352,21 +331,21 @@ public class Gamelog{
 //    if (pplayer2) {
 //      word = va_arg(args, char *);
 //
-//      my_snprintf(buf, sizeof(buf),
+//      buf = util.my_snprintf(
 //                  "<n1>%d</n1><n2>%d</n2><name>%s</name>"
 //                  "<m>%s %s %s from the %s</m>",
 //                  pplayer.player_no, pplayer2.player_no,
 //                  get_tech_name(pplayer, (Tech_Type_id) num),
-//                  get_nation_name_plural(pplayer.nation), word,
+//                  Nation.get_nation_name_plural(pplayer.nation), word,
 //                  get_tech_name(pplayer, (Tech_Type_id) num),
-//                  get_nation_name_plural(pplayer2.nation));
+//                  Nation.get_nation_name_plural(pplayer2.nation));
 //    } else {
-//      my_snprintf(buf, sizeof(buf),
+//      buf = util.my_snprintf(
 //                  "<n1>%d</n1><name>%s</name>"
 //                  "<m>%s discover %s</m>",
 //                  pplayer.player_no,
 //                  get_tech_name(pplayer, (Tech_Type_id) num),
-//                  get_nation_name_plural(pplayer.nation),
+//                  Nation.get_nation_name_plural(pplayer.nation),
 //                  get_tech_name(pplayer, (Tech_Type_id) num));
 //    }
 //    gamelog_put_prefix(buf, sizeof(buf), "tech");
@@ -376,20 +355,20 @@ public class Gamelog{
 //    pplayer = va_arg(args, player );
 //
 //    if (pplayer) {
-//      my_snprintf(buf, sizeof(buf),
+//      buf = util.my_snprintf(
 //                  "<n1>%d</n1><n2>%d</n2><name>%s</name>"
 //                  "<m>%s lose %s to the %s</m>",
 //                  unit_owner(punit).player_no, pplayer.player_no,
 //                  unit_name(punit.type),
-//                  get_nation_name_plural(unit_owner(punit).nation),
+//                  Nation.get_nation_name_plural(unit_owner(punit).nation),
 //                  unit_name(punit.type),
-//                  get_nation_name_plural(pplayer.nation));
+//                  Nation.get_nation_name_plural(pplayer.nation));
 //    } else {
 //      word = va_arg(args, char *);
-//      my_snprintf(buf, sizeof(buf),
+//      buf = util.my_snprintf(
 //                  "<n1>%d</n1><name>%s</name><m>%s lose %s (%s)</m>",
 //                  unit_owner(punit).player_no, unit_name(punit.type),
-//                  get_nation_name_plural(unit_owner(punit).nation),
+//                  Nation.get_nation_name_plural(unit_owner(punit).nation),
 //                  unit_name(punit.type), word);
 //    }
 //    gamelog_put_prefix(buf, sizeof(buf), "unitl");
@@ -397,25 +376,25 @@ public class Gamelog{
 //  case GAMELOG_UNITGAMELOSS:
 //    punit = va_arg(args, unit );
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "<n>%d</n><name>%s</name>"
 //                "<m>%s lost a game loss unit and died</m>",
 //                unit_owner(punit).player_no, unit_name(punit.type),
-//                get_nation_name_plural(unit_owner(punit).nation));
+//                Nation.get_nation_name_plural(unit_owner(punit).nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "gamel");
 //    break;
 //  case GAMELOG_EMBASSY:
 //    pplayer = va_arg(args, player );
 //    pcity = va_arg(args, city );
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "<n1>%d</n1><n2>%d</n2><name>%s</name><x>%d</x><y>%d</y>"
 //                "<m>%s establish an embassy in %s (%s) (%d,%d)</m>",
 //                pplayer.player_no, city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
-//                get_nation_name_plural(pplayer.nation),
+//                Nation.get_nation_name_plural(pplayer.nation),
 //                pcity.name,
-//                get_nation_name_plural(city_owner(pcity).nation),
+//                Nation.get_nation_name_plural(city_owner(pcity).nation),
 //                pcity.tile.x, pcity.tile.y);
 //    gamelog_put_prefix(buf, sizeof(buf), "embassy");
 //    break;
@@ -423,7 +402,7 @@ public class Gamelog{
 //  case GAMELOG_WONDER:
 //    pcity = va_arg(args, city );
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "<n>%d</n><city>%s</city><u>%d</u>"
 //                "<w>%d</w><name>%s</name><m>%s build %s in %s</m>",
 //                city_owner(pcity).player_no, pcity.name,
@@ -433,7 +412,7 @@ public class Gamelog{
 //                pcity.is_building_unit ? 
 //                  unit_types[pcity.currently_building].name :
 //                  get_impr_name_ex(pcity, pcity.currently_building),
-//                get_nation_name_plural(city_owner(pcity).nation),
+//                Nation.get_nation_name_plural(city_owner(pcity).nation),
 //                pcity.is_building_unit ? 
 //                  unit_types[pcity.currently_building].name :
 //                  get_impr_name_ex(pcity, pcity.currently_building),
@@ -443,7 +422,7 @@ public class Gamelog{
 //  case GAMELOG_GENO:
 //    pplayer = va_arg(args, player );
 //
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "<n>%d</n><b>%d</b><m>%s civilization destroyed</m>",
 //                pplayer.player_no, is_barbarian(pplayer) ? 1 : 0,
 //                is_barbarian(pplayer) ? get_nation_name(pplayer.nation)
@@ -453,7 +432,7 @@ public class Gamelog{
 //  case GAMELOG_RATECHANGE:
 //    pplayer = va_arg(args, player );
 //
-//    my_snprintf(buf, sizeof(buf), 
+//    buf = util.my_snprintf( 
 //                "<n>%d</n><tax>%d</tax><lux>%d</lux><sci>%d</sci>",
 //                pplayer.player_no, pplayer.economic.tax, 
 //                pplayer.economic.luxury, pplayer.economic.science);
@@ -475,7 +454,7 @@ public class Gamelog{
 //        trade += pcity.trade_prod;
 //      } }
 //
-//      my_snprintf(buf, sizeof(buf), "<n>%d</n><cities>%d</cities>"
+//      buf = util.my_snprintf( "<n>%d</n><cities>%d</cities>"
 //                  "<pop>%d</pop><food>%d</food><prod>%d</prod>"
 //                  "<trade>%d</trade><settlers>%d</settlers><units>%d</units>",
 //                  pplayer.player_no, city_list_size(&pplayer.cities),
@@ -487,19 +466,19 @@ public class Gamelog{
 //  case GAMELOG_PLAYER:
 //    pplayer = va_arg(args, player );
 //
-//    my_snprintf(buf, sizeof(buf), "<n>%d</n><u>%s</u><c>%d</c>"
+//    buf = util.my_snprintf( "<n>%d</n><u>%s</u><c>%d</c>"
 //                "<ai>%s</ai><nat>%s</nat><l>%s</l>",
 //                pplayer.player_no, pplayer.username,
 //                pplayer.is_connected ? 1 : 0,
 //                pplayer.ai.control ? 
 //                  name_of_skill_level(pplayer.ai.skill_level) : "",
-//                get_nation_name_plural(pplayer.nation), pplayer.name);
+//                Nation.get_nation_name_plural(pplayer.nation), pplayer.name);
 //    gamelog_put_prefix(buf, sizeof(buf), "player");
 //    break;
 //  case GAMELOG_TEAM:
 //    pteam = va_arg(args, team );
 //
-//    my_snprintf(buf, sizeof(buf), "<id>%d</id><name>%s</name>",
+//    buf = util.my_snprintf( "<id>%d</id><name>%s</name>",
 //                                  pteam.id, pteam.name);
 //    for(player aplayer: game.players){
 //      if (aplayer.team == pteam.id) {
@@ -509,51 +488,51 @@ public class Gamelog{
 //    gamelog_put_prefix(buf, sizeof(buf), "team");
 //    break;
 //  case GAMELOG_BEGIN:
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-//                "<gamelog version=\"2.0\">");
+//                "<Gamelog.gamelog version=\"2.0\">");
 //    break; 
 //  case GAMELOG_END:
-//    my_snprintf(buf, sizeof(buf), "</gamelog>");
+//    buf = util.my_snprintf( "</Gamelog.gamelog>");
 //    break;
-//  case GAMELOG_JUDGE:
+//  case EGamelog.GAMELOG_JUDGE:
 //    num = va_arg(args, int);
 //
 //    switch(num) {
 //    case GL_NONE:
 //    case GL_DRAW:
-//      my_snprintf(buf, sizeof(buf), "<type>%s</type>", endgame_strings[num]);
+//      buf = util.my_snprintf( "<type>%s</type>", endgame_strings[num]);
 //      msg[0] = '\0';
 //      break;
-//    case GL_LONEWIN:
+//    case EEndGameState.GL_LONEWIN:
 //      pplayer = va_arg(args, player );
 //
-//      my_snprintf(buf, sizeof(buf), "<type>%s</type><n>%d</n>",
+//      buf = util.my_snprintf( "<type>%s</type><n>%d</n>",
 //                  endgame_strings[num], pplayer.player_no);
-//      my_snprintf(msg, sizeof(msg),
-//                  (pplayer.spaceship.state == SSHIP_ARRIVED)
+//      msg = util.my_snprintf(
+//                  (pplayer.spaceship.state == spaceship_state.SSHIP_ARRIVED)
 //                  ? "The %s spaceship has arrived at Alpha Centauri."
 //                  : "Game ended in victory for the %s",
-//                  get_nation_name_plural(pplayer.nation));
+//                  Nation.get_nation_name_plural(pplayer.nation));
 //      break;
 //    case GL_ALLIEDWIN:
-//      my_snprintf(buf, sizeof(buf), "<type>%s</type>", endgame_strings[num]);
+//      buf = util.my_snprintf( "<type>%s</type>", endgame_strings[num]);
 //      for(player aplayer: game.players){
 //        if (aplayer.is_alive) {
 //          cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //        }
 //      }
-//      my_snprintf(msg, sizeof(msg), "Game ended in allied victory");
+//      msg = util.my_snprintf( "Game ended in allied victory");
 //      break;
 //    case GL_TEAMWIN:
 //      pteam = va_arg(args, team );
-//      my_snprintf(buf, sizeof(buf), "<type>%s</type>", endgame_strings[num]);
+//      buf = util.my_snprintf( "<type>%s</type>", endgame_strings[num]);
 //      for(player aplayer: game.players){
 //        if (aplayer.team == pteam.id) {
 //          cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //        }
 //      }
-//      my_snprintf(msg, sizeof(msg), "Team victory to %s", pteam.name);
+//      msg = util.my_snprintf( "Team victory to %s", pteam.name);
 //      break;
 //    default:
 //      break;
@@ -600,8 +579,8 @@ public class Gamelog{
 //  fprintf(fs, "%s\n", buf);
 //  fflush(fs);
 //  fclose(fs);
-//}
-//
+}
+
 ///**************************************************************************
 //  ...
 //**************************************************************************/
@@ -612,7 +591,7 @@ public class Gamelog{
 //}
 //
 ///**************************************************************************
-//  Every time we save the game, we also output to the gamelog the score
+//  Every time we save the game, we also output to the Gamelog.gamelog the score
 //  and status info.
 //**************************************************************************/
 //static void gamelog_status(char *buffer, int len) {

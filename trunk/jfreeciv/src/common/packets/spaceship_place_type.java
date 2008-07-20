@@ -1,0 +1,9 @@
+package common.packets;
+public enum spaceship_place_type {
+  SSHIP_PLACE_STRUCTURAL,
+  SSHIP_PLACE_FUEL,
+  SSHIP_PLACE_PROPULSION,
+  SSHIP_PLACE_HABITATION,
+  SSHIP_PLACE_LIFE_SUPPORT,
+  SSHIP_PLACE_SOLAR_PANELS
+};

@@ -156,21 +156,21 @@ public class Cityrep{
 //    pCityRep = MALLOC(sizeof(struct ADVANCED_DLG));
 //  }
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "size");
+//  cBuf = util.my_snprintf( "size");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= SF_CENTER;
 //  pText1 = create_text_surf_from_str16(pStr);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "time\nto grow");
+//  cBuf = util.my_snprintf( "time\nto grow");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText2 = create_text_surf_from_str16(pStr);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "City Name");
+//  cBuf = util.my_snprintf( "City Name");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText3 = create_text_surf_from_str16(pStr);
 //  name_w = pText3.w + 6;
 //      
-//  my_snprintf(cBuf, sizeof(cBuf), "Production");
+//  cBuf = util.my_snprintf( "Production");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pStr.fgcol = color;
 //  pText4 = create_text_surf_from_str16(pStr);
@@ -281,7 +281,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);  
 //
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.size);
+//    cBuf = util.my_snprintf( "%d", pCity.size);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pBuf = create_iconlabel(null, pWindow.dst, pStr,
@@ -306,7 +306,7 @@ public class Cityrep{
 //    pBuf.action = popup_cma_from_city_report_callback;
 //        
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.food_prod - pCity.food_surplus);
+//    cBuf = util.my_snprintf( "%d", pCity.food_prod - pCity.food_surplus);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pStr.fgcol = *get_game_colorRGB(COLOR_STD_GROUND);
@@ -320,7 +320,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.food_surplus);
+//    cBuf = util.my_snprintf( "%d", pCity.food_surplus);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_FOOD_SURPLUS);
@@ -337,13 +337,13 @@ public class Cityrep{
 //    togrow = city_turns_to_grow(pCity);
 //    switch (togrow) {
 //      case 0:
-//        my_snprintf(cBuf, sizeof(cBuf), "#");
+//        cBuf = util.my_snprintf( "#");
 //      break;
 //      case FC_INFINITY:
-//        my_snprintf(cBuf, sizeof(cBuf), "--");
+//        cBuf = util.my_snprintf( "--");
 //      break;
 //      default:
-//        my_snprintf(cBuf, sizeof(cBuf), "%d", togrow);
+//        cBuf = util.my_snprintf( "%d", togrow);
 //      break;
 //    }
 //    
@@ -362,7 +362,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //   
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.trade_prod);
+//    cBuf = util.my_snprintf( "%d", pCity.trade_prod);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_TRADE);
@@ -376,7 +376,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //    
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.corruption);
+//    cBuf = util.my_snprintf( "%d", pCity.corruption);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pBuf = create_iconlabel(null, pWindow.dst, pStr,
@@ -389,7 +389,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //            
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", city_gold_surplus(pCity, pcity.tax_total));
+//    cBuf = util.my_snprintf( "%d", city_gold_surplus(pCity, pcity.tax_total));
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_GOLD);
@@ -403,7 +403,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //    
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.science_total);
+//    cBuf = util.my_snprintf( "%d", pCity.science_total);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_SCIENCE);
@@ -417,7 +417,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //    
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.luxury_total);
+//    cBuf = util.my_snprintf( "%d", pCity.luxury_total);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pStr.fgcol = *get_game_colorRGB(COLOR_STD_CITY_LUX);
@@ -431,7 +431,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //  
 //  /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d",
+//    cBuf = util.my_snprintf( "%d",
 //  			pCity.shield_prod + pCity.shield_waste);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
@@ -446,7 +446,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //  
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.shield_waste);
+//    cBuf = util.my_snprintf( "%d", pCity.shield_waste);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    pBuf = create_iconlabel(null, pWindow.dst, pStr,
@@ -459,7 +459,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //  
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d",
+//    cBuf = util.my_snprintf( "%d",
 //	  pCity.shield_prod + pCity.shield_waste - pCity.shield_surplus);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
@@ -474,7 +474,7 @@ public class Cityrep{
 //    add_to_gui_list(MAX_ID - pCity.id, pBuf);
 //  
 //    /* ----------- */
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.shield_surplus);
+//    cBuf = util.my_snprintf( "%d", pCity.shield_surplus);
 //    pStr = create_str16_from_char(cBuf, 10);
 //    pStr.style |= SF_CENTER;
 //    //pStr.forecol = *get_game_colorRGB(COLOR_STD_CITY_TRADE);
@@ -506,12 +506,12 @@ public class Cityrep{
 //      dst.x = pLogo.w - pIcons.pWorklist.w;
 //      dst.y = 0;
 //      SDL_BlitSurface(pIcons.pWorklist, null, pLogo, &dst);
-//      my_snprintf(cBuf, sizeof(cBuf), "%s\n(%d/%d)\n%s",
+//      cBuf = util.my_snprintf( "%s\n(%d/%d)\n%s",
 //      	pName, pCity.shield_stock, togrow,
 //		pCity.worklist.name[0] != '\0' ?
 //			      pCity.worklist.name : "worklist");
 //    } else {
-//      my_snprintf(cBuf, sizeof(cBuf), "%s\n(%d/%d)%s",
+//      cBuf = util.my_snprintf( "%s\n(%d/%d)%s",
 //      	pName, pCity.shield_stock, togrow,
 //	      pCity.shield_stock > togrow ? "\nfinshed": "" );
 //    }
@@ -524,9 +524,9 @@ public class Cityrep{
 //    	pCity.currently_building, pCity.is_building_unit, true);
 //    if(togrow == 999)
 //    {
-//      my_snprintf(cBuf, sizeof(cBuf), "%s", "never");
+//      cBuf = util.my_snprintf( "%s", "never");
 //    } else {
-//      my_snprintf(cBuf, sizeof(cBuf), "%d %s",
+//      cBuf = util.my_snprintf( "%d %s",
 //      			togrow, PL_("turn", "turns", togrow));
 //    }
 //  
@@ -924,7 +924,7 @@ public class Cityrep{
 //   
 //  /* city size */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.size);
+//  cBuf = util.my_snprintf( "%d", pCity.size);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //      
 //  /* cma check box */
@@ -935,12 +935,12 @@ public class Cityrep{
 //  
 //  /* food consumptions */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.food_prod - pCity.food_surplus);
+//  cBuf = util.my_snprintf( "%d", pCity.food_prod - pCity.food_surplus);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //    
 //  /* food surplus */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.food_surplus);
+//  cBuf = util.my_snprintf( "%d", pCity.food_surplus);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //  
 //  /* time to grow */
@@ -948,13 +948,13 @@ public class Cityrep{
 //  togrow = city_turns_to_grow(pCity);
 //  switch (togrow) {
 //    case 0:
-//      my_snprintf(cBuf, sizeof(cBuf), "#");
+//      cBuf = util.my_snprintf( "#");
 //    break;
 //    case FC_INFINITY:
-//      my_snprintf(cBuf, sizeof(cBuf), "--");
+//      cBuf = util.my_snprintf( "--");
 //    break;
 //    default:
-//      my_snprintf(cBuf, sizeof(cBuf), "%d", togrow);
+//      cBuf = util.my_snprintf( "%d", togrow);
 //    break;
 //  }
 //  copy_chars_to_string16(pWidget.string16, cBuf);
@@ -967,49 +967,49 @@ public class Cityrep{
 //    
 //  /* trade production */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.trade_prod);
+//  cBuf = util.my_snprintf( "%d", pCity.trade_prod);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //    
 //  /* corruptions */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.corruption);
+//  cBuf = util.my_snprintf( "%d", pCity.corruption);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //            
 //  /* gold surplus */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", city_gold_surplus(pCity, pcity.tax_total));
+//  cBuf = util.my_snprintf( "%d", city_gold_surplus(pCity, pcity.tax_total));
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //    
 //  /* science income */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.science_total);
+//  cBuf = util.my_snprintf( "%d", pCity.science_total);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //    
 //  /* lugury income */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.luxury_total);
+//  cBuf = util.my_snprintf( "%d", pCity.luxury_total);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //  
 //  /* total production */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d",
+//  cBuf = util.my_snprintf( "%d",
 //  			pCity.shield_prod + pCity.shield_waste);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //  
 //  /* waste */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.shield_waste);
+//  cBuf = util.my_snprintf( "%d", pCity.shield_waste);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //  
 //  /* units support */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d",
+//  cBuf = util.my_snprintf( "%d",
 //	  pCity.shield_prod + pCity.shield_waste - pCity.shield_surplus);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //  
 //  /* production income */
 //  pWidget = pWidget.prev;
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", pCity.shield_surplus);
+//  cBuf = util.my_snprintf( "%d", pCity.shield_surplus);
 //  copy_chars_to_string16(pWidget.string16, cBuf);
 //  
 //  /* change production */
@@ -1031,12 +1031,12 @@ public class Cityrep{
 //    dst.x = pLogo.w - pIcons.pWorklist.w;
 //    dst.y = 0;
 //    SDL_BlitSurface(pIcons.pWorklist, null, pLogo, &dst);
-//    my_snprintf(cBuf, sizeof(cBuf), "%s\n(%d/%d)\n%s",
+//    cBuf = util.my_snprintf( "%s\n(%d/%d)\n%s",
 //      	pName, pCity.shield_stock, togrow,
 //		pCity.worklist.name[0] != '\0' ?
 //			      pCity.worklist.name : "worklist");
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf), "%s\n(%d/%d)",
+//    cBuf = util.my_snprintf( "%s\n(%d/%d)",
 //      		pName, pCity.shield_stock, togrow);
 //  }
 //    
@@ -1052,9 +1052,9 @@ public class Cityrep{
 //    	pCity.currently_building, pCity.is_building_unit, true);
 //  if(togrow == 999)
 //  {
-//    my_snprintf(cBuf, sizeof(cBuf), "%s", "never");
+//    cBuf = util.my_snprintf( "%s", "never");
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf), "%d %s",
+//    cBuf = util.my_snprintf( "%d %s",
 //      			togrow, PL_("turn", "turns", togrow));
 //  }
 //  
@@ -1156,7 +1156,7 @@ public class Cityrep{
 //*****************************************************************/
 //void hilite_cities_from_canvas()
 //{
-//  freelog(LOG_DEBUG, "hilite_cities_from_canvas : PORT ME");
+//  util.freelog(LOG_DEBUG, "hilite_cities_from_canvas : PORT ME");
 //}
 //
 ///****************************************************************
@@ -1164,6 +1164,6 @@ public class Cityrep{
 //*****************************************************************/
 //void toggle_city_hilite(city pcity, boolean on_off)
 //{
-//  freelog(LOG_DEBUG, "toggle_city_hilite : PORT ME");
+//  util.freelog(LOG_DEBUG, "toggle_city_hilite : PORT ME");
 //}
 }

@@ -362,7 +362,7 @@ public class Menu{
 //    menu_entry_sensitive(MENU_GAME, MENU_GAME_DISCONNECT, 1);
 //
 //    menu_entry_sensitive(MENU_REPORT, MENU_REPORT_SPACESHIP,
-//			 (game.player_ptr.spaceship.state!=SSHIP_NONE));
+//			 (game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
 //
 //    if (punit && can_client_issue_orders()) {
 //      Terrain_type_id  ttype;
@@ -1039,11 +1039,11 @@ public class Menu{
 //  xlt=_(pmenu.entries[ent].text[var]);
 //
 //  if (strstr(xlt, "%s")) {
-//    my_snprintf(tmp, sizeof(tmp), xlt, terr);
+//    tmp = util.my_snprintf( xlt, terr);
 //    xlt=tmp;
 //  }
 //
-//  my_snprintf(retbuf, sizeof(retbuf), "%*.*s%*.*s",
+//  retbuf = util.my_snprintf( "%*.*s%*.*s",
 //	  -pmenu.maxitemlen, pmenu.maxitemlen, xlt,
 //	  pmenu.maxacellen, pmenu.maxacellen, pmenu.entries[ent].acel);
 //

@@ -160,7 +160,7 @@ public class Happiness{
 //  int i;
 //  struct citizen_type citizens[MAX_CITY_SIZE];
 //  int num_citizens = pcity.size;
-//  int offset = MIN(SMALL_TILE_WIDTH, PIXCOMM_WIDTH / num_citizens);
+//  int offset = Math.min(SMALL_TILE_WIDTH, PIXCOMM_WIDTH / num_citizens);
 //
 //  get_city_citizen_types(pcity, index, citizens);
 //

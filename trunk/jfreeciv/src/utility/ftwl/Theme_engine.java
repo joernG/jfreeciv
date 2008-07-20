@@ -75,13 +75,13 @@ public class Theme_engine{
 //  char filename[512];
 //
 //  current_theme = mystrdup(theme);
-//  my_snprintf(current_res, sizeof(current_res), "%dx%d", size.width,
+//  current_res = util.my_snprintf( "%dx%d", size.width,
 //	      size.height);
 //
-//  my_snprintf(filename, sizeof(filename), "themes/%s/%s/%s",
+//  filename = util.my_snprintf( "themes/%s/%s/%s",
 //	      current_theme, current_res, example_file);
 //  if (!datafilename(filename)) {
-//    freelog(LOG_FATAL, "ERROR: There is no theme '%s' in resolution '%s'.",
+//    util.freelog(LOG_FATAL, "ERROR: There is no theme '%s' in resolution '%s'.",
 //	    current_theme, current_res);
 //    exit(EXIT_FAILURE);
 //  }
@@ -96,18 +96,18 @@ public class Theme_engine{
 //  struct section_file file;
 //  char *realname;
 //
-//  my_snprintf(filename, sizeof(filename), "themes/%s/%s/%s",
+//  filename = util.my_snprintf( "themes/%s/%s/%s",
 //	      current_theme, current_res, name);
 //
 //  section_file_init(&file);
 //  realname = datafilename(filename);
 //  if (!realname) {
-//    freelog(LOG_FATAL, "Could not find required file %s", name);
+//    util.freelog(LOG_FATAL, "Could not find required file %s", name);
 //    assert(0);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!section_file_load(&file, realname)) {
-//    freelog(LOG_FATAL, "Could not find required file %s", filename);
+//    util.freelog(LOG_FATAL, "Could not find required file %s", filename);
 //    assert(0);
 //    exit(EXIT_FAILURE);
 //  }
@@ -137,7 +137,7 @@ public class Theme_engine{
 //    char fullname[512];
 //    char *tmp;
 //
-//    my_snprintf(fullname, sizeof(fullname), "%s%s", prefix[i], filename);
+//    fullname = util.my_snprintf( "%s%s", prefix[i], filename);
 //
 //    tmp = datafilename(fullname);
 //    if (tmp) {
@@ -190,7 +190,7 @@ public class Theme_engine{
 //                                   "%s.%s%s", section, prefix, suffix))) {
 //    return col;
 //  } else {
-//    freelog(LOG_FATAL, "Wrong colour string in %s, %s.%s%s",
+//    util.freelog(LOG_FATAL, "Wrong colour string in %s, %s.%s%s",
 //            file.filename, section, prefix, suffix);
 //    assert(0);
 //    exit(EXIT_FAILURE);
@@ -624,13 +624,13 @@ public class Theme_engine{
 //  section_file result = fc_malloc(sizeof(*result));
 //  char filename[512],*tmp;
 //
-//  my_snprintf(filename, sizeof(filename), "themes/%s/%s/%s",
+//  filename = util.my_snprintf( "themes/%s/%s/%s",
 //	      current_theme, current_res, name);
 //  tmp = datafilename_required(filename);
 //
 //  if (!section_file_load(result, tmp)) {
 //    free(result);
-//    freelog(LOG_FATAL, _("Could not load screen file \"%s\"."), filename);
+//    util.freelog(LOG_FATAL, _("Could not load screen file \"%s\"."), filename);
 //    exit(EXIT_FAILURE);
 //    return null;
 //  }
@@ -698,7 +698,7 @@ public class Theme_engine{
 //  result.widgets = hash_new(hash_fval_string, hash_fcmp_string);
 //  sw_widget_set_position(result.window, 0, 0);
 //
-//  my_snprintf(filename, sizeof(filename), "%s.screen", screen_name);
+//  filename = util.my_snprintf( "%s.screen", screen_name);
 //
 //  file = te_open_themed_file(filename);
 //

@@ -68,9 +68,9 @@ public class Citydlg_common{
 //    map_to_gui_vector(&canvas_x, &canvas_y,
 //		      city_x - CITY_MAP_RADIUS, city_y - CITY_MAP_RADIUS);
 //
-//    min_x = MIN(canvas_x, min_x);
+//    min_x = Math.min(canvas_x, min_x);
 //    max_x = MAX(canvas_x, max_x);
-//    min_y = MIN(canvas_y, min_y);
+//    min_y = Math.min(canvas_y, min_y);
 //    max_y = MAX(canvas_y, max_y);
 //  } city_map_iterate_end;
 //
@@ -135,7 +135,7 @@ public class Citydlg_common{
 //  *city_x += CITY_MAP_RADIUS;
 //  *city_y += CITY_MAP_RADIUS;
 //
-//  freelog(LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
+//  util.freelog(LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
 //  return is_valid_city_coords(*city_x, *city_y);
@@ -249,13 +249,13 @@ public class Citydlg_common{
 //
 //    if (turns < 999) {
 //      if (concise_city_production) {
-//	my_snprintf(time, sizeof(time), "%3d", turns);
+//	time = util.my_snprintf( "%3d", turns);
 //      } else {
-//	my_snprintf(time, sizeof(time),
+//	time = util.my_snprintf(
 //		    PL_("%3d turn", "%3d turns", turns), turns);
 //      }
 //    } else {
-//      my_snprintf(time, sizeof(time), "%s",
+//      time = util.my_snprintf( "%s",
 //		  concise_city_production ? "-" : "never");
 //    }
 //

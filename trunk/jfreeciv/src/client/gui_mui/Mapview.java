@@ -192,7 +192,7 @@ public class Mapview{
 //
 //  settextf(main_people_text, "Population: %s",
 //	   population_to_text(civ_population(game.player_ptr)));
-//  settextf(main_year_text, "Year: %s", textyear(game.year));
+//  settextf(main_year_text, "Year: %s", Shared.textyear(game.year));
 //  settextf(main_gold_text, "Gold: %d", game.player_ptr.economic.gold);
 //  settextf(main_tax_text, "Tax:%d Lux:%d Sci:%d",
 //	   game.player_ptr.economic.tax,

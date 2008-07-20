@@ -55,7 +55,7 @@ public class Cityhand{
 //    return;
 //  }
 //
-//  freelog(LOG_VERBOSE, "handle_city_name_suggest_req(unit_pos=(%d,%d))",
+//  util.freelog(LOG_VERBOSE, "handle_city_name_suggest_req(unit_pos=(%d,%d))",
 //	  punit.tile.x, punit.tile.y);
 //
 //  dlsend_packet_city_name_suggestion_info(&pplayer.connections, value, 
@@ -79,7 +79,7 @@ public class Cityhand{
 //      || from < 0 || from >= SP_COUNT
 //      || !city_can_use_specialist(pcity, to)
 //      || pcity.specialists[from] == 0) {
-//    freelog(LOG_ERROR, "Error in specialist change request from client.");
+//    util.freelog(Log.LOG_ERROR, "Error in specialist change request from client.");
 //    return;
 //  }
 //
@@ -129,7 +129,7 @@ public class Cityhand{
 //  int i;
 //
 //  if (!is_valid_city_coords(worker_x, worker_y)) {
-//    freelog(LOG_ERROR, "invalid city coords %d,%d in package",
+//    util.freelog(Log.LOG_ERROR, "invalid city coords %d,%d in package",
 //	    worker_x, worker_y);
 //    return;
 //  }

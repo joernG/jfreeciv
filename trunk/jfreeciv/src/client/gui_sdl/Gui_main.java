@@ -602,8 +602,8 @@ public class Gui_main{
 //      case SDL_KEYDOWN:
 //	switch(Main.event.key.keysym.sym) {
 //	  case SDLK_PRINT:
-//	    freelog(Log.LOG_NORMAL, "Make screenshot nr. %d", schot_nr);
-//	    my_snprintf(schot, sizeof(schot), "schot0%d.bmp", schot_nr++);
+//	    util.freelog(Log.LOG_NORMAL, "Make screenshot nr. %d", schot_nr);
+//	    schot = util.my_snprintf( "schot0%d.bmp", schot_nr++);
 //	    SDL_SaveBMP(Main.screen, schot);
 //	  break;
 //	  
@@ -714,7 +714,7 @@ public class Gui_main{
 //  
 //  init_sdl(iSDL_Flags);
 //  
-//  freelog(Log.LOG_NORMAL, "Using Video Output: %s",
+//  util.freelog(Log.LOG_NORMAL, "Using Video Output: %s",
 //	  SDL_VideoDriverName(device, sizeof(device)));
 //  
 //  /* create splash screen */  
@@ -913,7 +913,7 @@ public class Gui_main{
 //**************************************************************************/
 //void sound_bell()
 //{
-//  freelog(LOG_DEBUG, "sound_bell : PORT ME");
+//  util.freelog(LOG_DEBUG, "sound_bell : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -941,7 +941,7 @@ public class Gui_main{
 //**************************************************************************/
 //void add_net_input(int sock)
 //{
-//  freelog(LOG_DEBUG, "Connection UP (%d)", sock);
+//  util.freelog(LOG_DEBUG, "Connection UP (%d)", sock);
 //  net_socket = sock;
 //  autoconnect = false;
 //  enable_focus_animation();
@@ -954,7 +954,7 @@ public class Gui_main{
 //void remove_net_input()
 //{
 //  net_socket = (-1);
-//  freelog(LOG_DEBUG, "Connection DOWN... ");
+//  util.freelog(LOG_DEBUG, "Connection DOWN... ");
 //  disable_focus_animation();
 //  draw_goto_patrol_lines = false;
 //  if (pAnimCursor) {

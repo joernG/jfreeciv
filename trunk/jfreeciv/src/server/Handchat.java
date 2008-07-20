@@ -1,55 +1,17 @@
 package server;
-import static common.Player_P.*;
-import static common.player.Player_H.*;
-import static common.Player_P.*;
-import static common.City.is_city_option_set;
-import static common.Combat.can_unit_attack_all_at_tile;
-import static common.Combat.get_defender;
-import static common.Game.find_unit_by_id;
-import static common.Map.map;
-import static common.Map.map_get_city;
-import static common.Map.normalize_map_pos;
-import static common.Map.same_pos;
-import static common.Connection.*;
-import static common.Player_P.ai_handicap;
-import static common.Player_P.can_player_see_unit;
-import static common.Unit.get_transporter_capacity;
-import static common.Unit.is_enemy_unit_tile;
-import static common.Unit.is_military_unit;
-import static common.Unit.set_unit_activity;
-import static common.Unit.unit_list_find;
-import static common.Unit.unit_move_rate;
-import static common.Unit.unit_owner;
-import static common.Unittype_P.get_unit_name;
-import static common.Unittype_P.unit_flag;
-import static common.Unittype_P.unit_name;
-import static common.Unittype_P.unit_type;
-import static common.city.City_H.CITYOPT_AUTOATTACK_BITS;
-import static common.map.Map_H.map_pos_to_index;
-import static common.Game.*;
-import static common.player.Player_H.H_TARGETS;
-import static server.Gotohand.calculate_move_cost;
-import static server.Plrhand.notify_player_ex;
-import static server.Unithand.handle_unit_activity_request;
-import static server.Unittools.send_unit_info;
-import static utility.Log.LOG_DEBUG;
-import static utility.Log.freelog;
-import static port.util.*;
+import static common.Connection.find_conn_by_user_prefix;
+import static common.Game.game;
+import static common.Player_P.find_player_by_name_prefix;
+import static common.Player_P.pplayers_allied;
+import static common.player.Player_H.ANON_PLAYER_NAME;
+import static port.util.my_snprintf;
+import static server.Stdinhand.SERVER_COMMAND_PREFIX;
 import utility.Speclists;
 import utility.shared.m_pre_result;
-import static server.Stdinhand.*;
 
 import common.Connection;
 import common.event_type;
-import common.city.city;
-import common.city.city_options;
-import common.map.Map_H;
-import common.map.tile;
 import common.player.player;
-import common.unit.goto_move_restriction;
-import common.unit.unit;
-import common.unit.unit_activity;
-import common.unittype.Eunit_flag_id;
 
 public class Handchat{
 //	#include "fcintl.h"
@@ -285,7 +247,7 @@ public class Handchat{
 			int cpblank;
 
 //			() mystrlcpy(name, message,
-//			MIN(sizeof(name), cp - message + 1));
+//			Math.min(sizeof(name), cp - message + 1));
 			name = message.substring(0, cp);
 
 			double_colon = (message.substring(cp+1, cp+1).equals(":"));

@@ -111,7 +111,7 @@ public class Rand{
 //    rand_state.v[rand_state.x] = new_rand;
 //
 //    if (++bailout > 10000) {
-//      freelog(LOG_ERROR, "Bailout in myrand(%u)", size);
+//      util.freelog(Log.LOG_ERROR, "Bailout in myrand(%u)", size);
 //      new_rand = 0;
 //      break;
 //    }
@@ -124,7 +124,7 @@ public class Rand{
 //    new_rand = 0;
 //  }
 //
-//  /* freelog(LOG_DEBUG, "rand(%u) = %u", size, new_rand); */
+//  /* util.freelog(LOG_DEBUG, "rand(%u) = %u", size, new_rand); */
 //
 //  return new_rand;
 //} 
@@ -217,7 +217,7 @@ public class Rand{
 //    }
 //    old_value = new_value;
 //  }
-//  freelog(Log.LOG_NORMAL, "test_random1(%d) same: %d, change: %d",
+//  util.freelog(Log.LOG_NORMAL, "test_random1(%d) same: %d, change: %d",
 //	  n, behavioursame, behaviourchange);
 //
 //  /* restore state: */

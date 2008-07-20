@@ -112,7 +112,7 @@ public class Repodlgs{
 //        (entries[pCity.currently_building].building_count)++;
 //	(total.building_count)++;
 //        entries[pCity.currently_building].soonest_completions =
-//		MIN(entries[pCity.currently_building].soonest_completions,
+//		Math.min(entries[pCity.currently_building].soonest_completions,
 //			city_turns_to_build(pCity,
 //				pCity.currently_building, true, true));
 //    }
@@ -190,7 +190,7 @@ public class Repodlgs{
 //  ut2 = can_upgrade_unittype(game.player_ptr, ut1);
 //  value = unit_upgrade_price(game.player_ptr, ut1, ut2);
 //  
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //    	_("Upgrade as many %s to %s as possible for %d gold each?\n"
 //	  "Treasury contains %d gold."),
 //	unit_types[ut1].name, unit_types[ut2].name,
@@ -343,24 +343,24 @@ public class Repodlgs{
 //    pUnitsDlg = MALLOC(sizeof(struct ADVANCED_DLG));  
 //  }
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "active");
+//  cBuf = util.my_snprintf( "active");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= SF_CENTER;
 //  pText1 = create_text_surf_from_str16(pStr);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "under\nfinalruction");
+//  cBuf = util.my_snprintf( "under\nfinalruction");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText2 = create_text_surf_from_str16(pStr);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "soonest\ncompletion");
+//  cBuf = util.my_snprintf( "soonest\ncompletion");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText5 = create_text_surf_from_str16(pStr);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "Total");
+//  cBuf = util.my_snprintf( "Total");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText3 = create_text_surf_from_str16(pStr);
 //    
-//  my_snprintf(cBuf, sizeof(cBuf), "Units");
+//  cBuf = util.my_snprintf( "Units");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText4 = create_text_surf_from_str16(pStr);
 //  name_w = pText4.w;
@@ -389,7 +389,7 @@ public class Repodlgs{
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //  /* ------------------------- */
 //  /* totals */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", total.active_count);
+//  cBuf = util.my_snprintf( "%d", total.active_count);
 //	
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -401,7 +401,7 @@ public class Repodlgs{
 //  pBuf.size.w = pText1.w + 6;
 //  add_to_gui_list(ID_LABEL, pBuf);
 //  /* ---------------------------------------------- */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", total.upkeep_shield);
+//  cBuf = util.my_snprintf( "%d", total.upkeep_shield);
 //	
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -411,7 +411,7 @@ public class Repodlgs{
 //  pBuf.size.w = pText1.w;
 //  add_to_gui_list(ID_LABEL, pBuf);
 //  /* ---------------------------------------------- */	
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", total.upkeep_food);
+//  cBuf = util.my_snprintf( "%d", total.upkeep_food);
 //	
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -421,7 +421,7 @@ public class Repodlgs{
 //  pBuf.size.w = pText1.w;
 //  add_to_gui_list(ID_LABEL, pBuf);
 //  /* ---------------------------------------------- */	
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", total.upkeep_gold);
+//  cBuf = util.my_snprintf( "%d", total.upkeep_gold);
 //	
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -431,7 +431,7 @@ public class Repodlgs{
 //  pBuf.size.w = pText1.w;
 //  add_to_gui_list(ID_LABEL, pBuf);
 //  /* ---------------------------------------------- */	
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", total.building_count);
+//  cBuf = util.my_snprintf( "%d", total.building_count);
 //	
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -480,7 +480,7 @@ public class Repodlgs{
 //      add_to_gui_list(MAX_ID - i, pBuf);
 //      
 //      /* ----------- */	
-//      my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].active_count);
+//      cBuf = util.my_snprintf( "%d", units[i].active_count);
 //      pStr = create_str16_from_char(cBuf, 10);
 //      pStr.style |= SF_CENTER;
 //      pBuf = create_iconlabel(null, pWindow.dst, pStr,
@@ -493,7 +493,7 @@ public class Repodlgs{
 //      add_to_gui_list(MAX_ID - i, pBuf);
 //      
 //      /* ----------- */	
-//      my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].upkeep_shield);
+//      cBuf = util.my_snprintf( "%d", units[i].upkeep_shield);
 //      pStr = create_str16_from_char(cBuf, 10);
 //      pStr.style |= SF_CENTER;
 //      pBuf = create_iconlabel(null, pWindow.dst, pStr,
@@ -506,7 +506,7 @@ public class Repodlgs{
 //      add_to_gui_list(MAX_ID - i, pBuf);
 //	
 //      /* ----------- */
-//      my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].upkeep_food);
+//      cBuf = util.my_snprintf( "%d", units[i].upkeep_food);
 //      pStr = create_str16_from_char(cBuf, 10);
 //      pStr.style |= SF_CENTER;
 //      pBuf = create_iconlabel(null, pWindow.dst, pStr,
@@ -520,7 +520,7 @@ public class Repodlgs{
 //      add_to_gui_list(MAX_ID - i, pBuf);
 //
 //      /* ----------- */
-//      my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].upkeep_gold);
+//      cBuf = util.my_snprintf( "%d", units[i].upkeep_gold);
 //      pStr = create_str16_from_char(cBuf, 10);
 //      pStr.style |= SF_CENTER;
 //      pBuf = create_iconlabel(null, pWindow.dst, pStr,
@@ -534,9 +534,9 @@ public class Repodlgs{
 //      add_to_gui_list(MAX_ID - i, pBuf);      
 //      /* ----------- */
 //      if(units[i].building_count > 0) {
-//	my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].building_count);
+//	cBuf = util.my_snprintf( "%d", units[i].building_count);
 //      } else {
-//	my_snprintf(cBuf, sizeof(cBuf), "--");
+//	cBuf = util.my_snprintf( "--");
 //      }
 //      pStr = create_str16_from_char(cBuf, 10);
 //      pStr.style |= SF_CENTER;
@@ -551,10 +551,10 @@ public class Repodlgs{
 //      
 //      /* ----------- */
 //      if(units[i].building_count > 0) {
-//	my_snprintf(cBuf, sizeof(cBuf), "%d %s", units[i].soonest_completions,
+//	cBuf = util.my_snprintf( "%d %s", units[i].soonest_completions,
 //			PL_("turn", "turns", units[i].soonest_completions));
 //      } else {
-//	my_snprintf(cBuf, sizeof(cBuf), "--");
+//	cBuf = util.my_snprintf( "--");
 //      }
 //	
 //      pStr = create_str16_from_char(cBuf, 10);
@@ -885,31 +885,31 @@ public class Repodlgs{
 //	    set_wstate(pBuf, FC_WS_NORMAL);
 //          }
 //	
-//	  my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].active_count);
+//	  cBuf = util.my_snprintf( "%d", units[i].active_count);
 //	  pBuf = pBuf.prev;
 //	  copy_chars_to_string16(pBuf.string16, cBuf);
 //	  	
-//          my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].upkeep_shield);
+//          cBuf = util.my_snprintf( "%d", units[i].upkeep_shield);
 //	  pBuf = pBuf.prev;
 //	  copy_chars_to_string16(pBuf.string16, cBuf);
 //	
-//          my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].upkeep_food);
+//          cBuf = util.my_snprintf( "%d", units[i].upkeep_food);
 //	  pBuf = pBuf.prev;
 //	  copy_chars_to_string16(pBuf.string16, cBuf);
 //	
 //	  if(units[i].building_count > 0) {
-//	    my_snprintf(cBuf, sizeof(cBuf), "%d", units[i].building_count);
+//	    cBuf = util.my_snprintf( "%d", units[i].building_count);
 //          } else {
-//	    my_snprintf(cBuf, sizeof(cBuf), "--");
+//	    cBuf = util.my_snprintf( "--");
 //          }
 //	  pBuf = pBuf.prev;
 //	  copy_chars_to_string16(pBuf.string16, cBuf);
 //	
 //          if(units[i].building_count > 0) {
-//	    my_snprintf(cBuf, sizeof(cBuf), "%d %s", units[i].soonest_completions,
+//	    cBuf = util.my_snprintf( "%d %s", units[i].soonest_completions,
 //			PL_("turn", "turns", units[i].soonest_completions));
 //          } else {
-//	    my_snprintf(cBuf, sizeof(cBuf), "--");
+//	    cBuf = util.my_snprintf( "--");
 //          }
 //	  pBuf = pBuf.prev;
 //	  copy_chars_to_string16(pBuf.string16, cBuf);
@@ -952,22 +952,22 @@ public class Repodlgs{
 //      /* -------------------------------------- */
 //      /* total active */
 //      pBuf = pUnitsDlg.pEndWidgetList.prev.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", units_total.active_count);
+//    cBuf = util.my_snprintf( "%d", units_total.active_count);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //  
 //    /* total shields cost */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", units_total.upkeep_shield);
+//    cBuf = util.my_snprintf( "%d", units_total.upkeep_shield);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //  
 //    /* total food cost widget */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", units_total.upkeep_food);
+//    cBuf = util.my_snprintf( "%d", units_total.upkeep_food);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //  
 //    /* total building count */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", units_total.building_count);
+//    cBuf = util.my_snprintf( "%d", units_total.building_count);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //
 //    /* -------------------------------------- */
@@ -1151,9 +1151,9 @@ public class Repodlgs{
 //      *pMotion.src_rate += inc;
 //      *pMotion.dst_rate -= inc;
 //	  	  
-//      my_snprintf(cBuf, sizeof(cBuf), "%d%%", *pMotion.src_rate);
+//      cBuf = util.my_snprintf( "%d%%", *pMotion.src_rate);
 //      copy_chars_to_string16(pMotion.pLabel_Src.string16, cBuf);
-//      my_snprintf(cBuf, sizeof(cBuf), "%d%%", *pMotion.dst_rate);
+//      cBuf = util.my_snprintf( "%d%%", *pMotion.dst_rate);
 //      copy_chars_to_string16(pMotion.pLabel_Dst.string16, cBuf);
 //      		      
 //      /* redraw label */
@@ -1470,13 +1470,13 @@ public class Repodlgs{
 //  } }
 //  
 //  if(count > 0) {
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //    _("We have %d of %s\n(total value is : %d)\n"
 //    	"We can sell %d of them for %d gold"),
 //	    total_count, get_improvement_name(imp),
 //			    total_count * value, count, gold); 
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf),
+//    cBuf = util.my_snprintf(
 //	"We can't sell any %s in this turn", get_improvement_name(imp)); 
 //  }
 //  
@@ -1602,25 +1602,25 @@ public class Repodlgs{
 //  
 //    /* tresure */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", game.player_ptr.economic.gold);
+//    cBuf = util.my_snprintf( "%d", game.player_ptr.economic.gold);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //    remake_label_size(pBuf);
 //  
 //    /* Icome */
 //    pBuf = pBuf.prev.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", tax);
+//    cBuf = util.my_snprintf( "%d", tax);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //    remake_label_size(pBuf);
 //  
 //    /* Cost */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", total);
+//    cBuf = util.my_snprintf( "%d", total);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //    remake_label_size(pBuf);
 //  
 //    /* Netto */
 //    pBuf = pBuf.prev;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", tax - total);
+//    cBuf = util.my_snprintf( "%d", tax - total);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //    remake_label_size(pBuf);
 //    if(tax - total < 0) {
@@ -1704,7 +1704,7 @@ public class Repodlgs{
 //  
 //  /* ------------------------- */
 //  /* Total Treasury */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", game.player_ptr.economic.gold);
+//  cBuf = util.my_snprintf( "%d", game.player_ptr.economic.gold);
 //
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -1718,7 +1718,7 @@ public class Repodlgs{
 //
 //  /* Tax Rate */
 //  /* it is important to leave 1 space at ending of this string */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d%% " , game.player_ptr.economic.tax);
+//  cBuf = util.my_snprintf( "%d%% " , game.player_ptr.economic.tax);
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //  
@@ -1729,7 +1729,7 @@ public class Repodlgs{
 //  w = MAX(w, pBuf.size.w + pBuf.next.size.w);
 //  
 //  /* Total Icome Label */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", tax);
+//  cBuf = util.my_snprintf( "%d", tax);
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  
@@ -1740,7 +1740,7 @@ public class Repodlgs{
 //  add_to_gui_list(ID_LABEL, pBuf);
 //  
 //  /* Total Cost Label */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", total);
+//  cBuf = util.my_snprintf( "%d", total);
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  
@@ -1751,7 +1751,7 @@ public class Repodlgs{
 //  add_to_gui_list(ID_LABEL, pBuf);
 //  
 //  /* Net Icome */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", tax - total);
+//  cBuf = util.my_snprintf( "%d", tax - total);
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //  
@@ -1768,7 +1768,7 @@ public class Repodlgs{
 //  /* ------------------------- */
 //  /* lux rate */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "Lock");
+//  cBuf = util.my_snprintf( "Lock");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= TTF_STYLE_BOLD;
 //
@@ -1798,7 +1798,7 @@ public class Repodlgs{
 //  /* ---- */
 //  
 //  /* it is important to leave 1 space at ending of this string */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d%% ", game.player_ptr.economic.luxury);
+//  cBuf = util.my_snprintf( "%d%% ", game.player_ptr.economic.luxury);
 //  pStr = create_str16_from_char(cBuf, 11);
 //  pStr.style |= TTF_STYLE_BOLD;
 //
@@ -1809,7 +1809,7 @@ public class Repodlgs{
 //  /* ------------------------- */
 //  /* science rate */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "Lock");
+//  cBuf = util.my_snprintf( "Lock");
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.style |= TTF_STYLE_BOLD;
 //
@@ -1839,7 +1839,7 @@ public class Repodlgs{
 //  /* ---- */
 //  
 //  /* it is important to leave 1 space at ending of this string */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d%% ", game.player_ptr.economic.science);
+//  cBuf = util.my_snprintf( "%d%% ", game.player_ptr.economic.science);
 //  pStr = create_str16_from_char(cBuf, 11);
 //  pStr.style |= TTF_STYLE_BOLD;
 //
@@ -1849,7 +1849,7 @@ public class Repodlgs{
 //  add_to_gui_list(ID_CHANGE_TAXRATE_DLG_SCI_LABEL, pBuf);
 //  /* ---- */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "Update");
+//  cBuf = util.my_snprintf( "Update");
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pBuf = create_themeicon_button(pTheme.Small_OK_Icon, pWindow.dst, pStr,
 //  			  			WF_DRAW_THEME_TRANSPARENT);
@@ -1861,7 +1861,7 @@ public class Repodlgs{
 //  
 //  /* ---- */
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "Cancel");
+//  cBuf = util.my_snprintf( "Cancel");
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pBuf = create_themeicon_button(pTheme.Small_CANCEL_Icon, pWindow.dst, pStr,
 //  			  			WF_DRAW_THEME_TRANSPARENT);
@@ -1900,14 +1900,14 @@ public class Repodlgs{
 //	
 //      pSurf = crop_rect_from_surface(pMain, null);
 //      
-//      my_snprintf(cBuf, sizeof(cBuf), "%s", get_improvement_name(p.type));
+//      cBuf = util.my_snprintf( "%s", get_improvement_name(p.type));
 //      
 //      copy_chars_to_string16(pStr, cBuf);
 //      pStr.style |= TTF_STYLE_BOLD;
 //      pText_Name = create_text_surf_smaller_that_w(pStr, pSurf.w - 4);
 //      SDL_SetAlpha(pText_Name, 0x0, 0x0);
 //            
-//      my_snprintf(cBuf, sizeof(cBuf), "%s %d\n%s %d",
+//      cBuf = util.my_snprintf( "%s %d\n%s %d",
 //			"Built", p.count, "U Total",p.total_cost);
 //      copy_chars_to_string16(pStr, cBuf);
 //      pStr.style &= ~TTF_STYLE_BOLD;
@@ -2006,29 +2006,29 @@ public class Repodlgs{
 //  }
 //  
 //  /* tresure */
-//  my_snprintf(cBuf, sizeof(cBuf), "Treasury: ");
+//  cBuf = util.my_snprintf( "Treasury: ");
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= TTF_STYLE_BOLD;
 //  pText = create_text_surf_from_str16(pStr);
 //  w3 = pText.w;
 //  
 //  /* tax rate label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Tax Rate: ");
+//  cBuf = util.my_snprintf( "Tax Rate: ");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText_Name = create_text_surf_from_str16(pStr);
 //  w3 = MAX(w3, pText_Name.w);
 //  /* total icome */
-//  my_snprintf(cBuf, sizeof(cBuf), "Total Income: ");
+//  cBuf = util.my_snprintf( "Total Income: ");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pSurf = create_text_surf_from_str16(pStr);
 //  w3 = MAX(w3, pSurf.w);
 //  /* total cost */
-//  my_snprintf(cBuf, sizeof(cBuf), "Total Cost: ");
+//  cBuf = util.my_snprintf( "Total Cost: ");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pZoom = create_text_surf_from_str16(pStr);
 //
 //  /* net icome */
-//  my_snprintf(cBuf, sizeof(cBuf), "Net Income: ");
+//  cBuf = util.my_snprintf( "Net Income: ");
 //  copy_chars_to_string16(pStr, cBuf);
 //  pText2 = create_text_surf_from_str16(pStr);
 //  w3 = MAX(w3, pText2.w);
@@ -2115,7 +2115,7 @@ public class Repodlgs{
 //  FREESURFACE(pText2);
 //
 //  /* gov and taxrate */
-//  my_snprintf(cBuf, sizeof(cBuf), "%s max rate : %d%%",
+//  cBuf = util.my_snprintf( "%s max rate : %d%%",
 //	      				pGov.name, pGov.max_rate);
 //  copy_chars_to_string16(pStr, cBuf);
 //  pMain = create_text_surf_from_str16(pStr);
@@ -2522,7 +2522,7 @@ public class Repodlgs{
 //    } }
 //
 //    if (curent_output <= 0) {
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //		_("Current output : 0\nResearch speed : "
 //		  "none\nNext's advance time : never"));
 //    } else {
@@ -2532,11 +2532,11 @@ public class Repodlgs{
 //	    (cost - game.player_ptr.research.bulbs_researched +
 //		    curent_output - 1) / curent_output;
 //      
-//      my_snprintf(cBiernikujemy, sizeof(cBiernikujemy),
+//      cBiernikujemy = util.my_snprintf(
 //                 PL_("Next advance in %d turn",
 //                     "Next advance in %d turns",
 //                     turns_to_next_tech), turns_to_next_tech);
-//      my_snprintf(cBuf, sizeof(cBuf),
+//      cBuf = util.my_snprintf(
 //		_("Current output : %d per turn\nResearch speed "
 //		  ": %d %s/advance\n%s"),
 //	  	  curent_output, turns_to_advance,
@@ -2564,7 +2564,7 @@ public class Repodlgs{
 //    dest.y += 6;
 //    /* ------------------------------------- */
 //
-//    my_snprintf(cBuf, sizeof(cBuf), "%s (%d/%d)",
+//    cBuf = util.my_snprintf( "%s (%d/%d)",
 //	      get_tech_name(game.player_ptr,
 //			    game.player_ptr.research.researching),
 //	      game.player_ptr.research.bulbs_researched, cost);
@@ -2663,7 +2663,7 @@ public class Repodlgs{
 //      steps =
 //        num_unknown_techs_for_goal(game.player_ptr,
 //				 game.player_ptr.ai.tech_goal);
-//      my_snprintf(cBuf, sizeof(cBuf), "%s ( %d %s )",
+//      cBuf = util.my_snprintf( "%s ( %d %s )",
 //	      get_tech_name(game.player_ptr,
 //			    game.player_ptr.ai.tech_goal), steps,
 //	      PL_("step", "steps", steps));
@@ -3057,7 +3057,7 @@ public class Repodlgs{
 //	    || i == game.player_ptr.ai.tech_goal)) {
 //    
 //      count++;
-//      my_snprintf(cBuf, sizeof(cBuf), "%s\n%d %s", advances[i].name, num,
+//      cBuf = util.my_snprintf( "%s\n%d %s", advances[i].name, num,
 //	  					PL_("step", "steps", num));
 //      copy_chars_to_string16(pStr, cBuf);
 //      pSurf = create_sellect_tech_icon(pStr, i, FULL_MODE);

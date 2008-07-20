@@ -111,7 +111,7 @@ public class Helpdlg{
 //**************************************************************************/
 //void popup_help_dialog_typed(final String item, enum help_page_type eHPT)
 //{
-//  freelog(LOG_DEBUG, "popup_help_dialog_typed : PORT ME");
+//  util.freelog(LOG_DEBUG, "popup_help_dialog_typed : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -699,7 +699,7 @@ public class Helpdlg{
 //  {
 //    char local[2048];
 //    
-//    my_snprintf(local, sizeof(local), "%s %d %s",
+//    local = util.my_snprintf( "%s %d %s",
 //	      N"Cost:", unit_build_shield_cost(type_id),
 //	      PL_("shield", "shields", unit_build_shield_cost(type_id)));
 //  
@@ -1732,7 +1732,7 @@ public class Helpdlg{
 //    {
 //      if(sub_targets_count < 5)
 //      {
-//        for(i =0; i <MIN(sub_targets_count, 4); i++)
+//        for(i =0; i <Math.min(sub_targets_count, 4); i++)
 //        {       
 //	  pStore.pSub_Targets[i].size.x = pTech.size.x + pTech.size.w - pStore.pSub_Targets[i].size.w;
 //	  if (i < 2)
@@ -1744,7 +1744,7 @@ public class Helpdlg{
 //        }
 //      } else {
 //	h = (pStore.pSub_Targets[0].size.h + 6);
-//	for(i =0; i <MIN(sub_targets_count, 6); i++)
+//	for(i =0; i <Math.min(sub_targets_count, 6); i++)
 //        {
 //	  switch(i)
 //	  {

@@ -368,7 +368,7 @@ public class Menu{
 //  Uint16 *unibuf;  
 //  size_t len;
 //  
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "No orders", " (Space)");
+//  cBuf = util.my_snprintf("%s%s", "No orders", " (Space)");
 //  pBuf = create_themeicon(pTheme.ODone_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -379,7 +379,7 @@ public class Menu{
 //  add_to_gui_list(ID_UNIT_ORDER_DONE, pBuf);
 //  pEndOrderWidgetList = pBuf;
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Wait", " (W)");
+//  cBuf = util.my_snprintf("%s%s", "Wait", " (W)");
 //  pBuf = create_themeicon(pTheme.OWait_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -389,7 +389,7 @@ public class Menu{
 //  pBuf.key = SDLK_w;
 //  add_to_gui_list(ID_UNIT_ORDER_WAIT, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Explode Nuclear", " (Shift + N)");
+//  cBuf = util.my_snprintf("%s%s", "Explode Nuclear", " (Shift + N)");
 //  pBuf = create_themeicon(pTheme.ONuke_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -400,7 +400,7 @@ public class Menu{
 //  pBuf.mod = KMOD_SHIFT;
 //  add_to_gui_list(ID_UNIT_ORDER_NUKE, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Diplomat|Spy Actions", " (D)");
+//  cBuf = util.my_snprintf("%s%s", "Diplomat|Spy Actions", " (D)");
 //  pBuf = create_themeicon(pTheme.OSpy_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -410,7 +410,7 @@ public class Menu{
 //  pBuf.key = SDLK_d;
 //  add_to_gui_list(ID_UNIT_ORDER_DIPLOMAT_DLG, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Disband", " (Shift + D)");
+//  cBuf = util.my_snprintf("%s%s", "Disband", " (Shift + D)");
 //  pBuf = create_themeicon(pTheme.ODisband_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -421,7 +421,7 @@ public class Menu{
 //  pBuf.mod = KMOD_SHIFT;
 //  add_to_gui_list(ID_UNIT_ORDER_DISBAND, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Upgrade", " (Shift + U)");
+//  cBuf = util.my_snprintf("%s%s", "Upgrade", " (Shift + U)");
 //  pBuf = create_themeicon(pTheme.Order_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -432,7 +432,7 @@ public class Menu{
 //  pBuf.mod = KMOD_SHIFT;
 //  add_to_gui_list(ID_UNIT_ORDER_UPGRADE, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Return to nearest city", " (Shift + G)");
+//  cBuf = util.my_snprintf("%s%s", "Return to nearest city", " (Shift + G)");
 //  pBuf = create_themeicon(pTheme.OReturn_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -443,7 +443,7 @@ public class Menu{
 //  pBuf.mod = KMOD_SHIFT;
 //  add_to_gui_list(ID_UNIT_ORDER_RETURN, pBuf);
 //  
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Goto City", " (L)");
+//  cBuf = util.my_snprintf("%s%s", "Goto City", " (L)");
 //  pBuf = create_themeicon(pTheme.OGotoCity_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -453,7 +453,7 @@ public class Menu{
 //  pBuf.key = SDLK_l;
 //  add_to_gui_list(ID_UNIT_ORDER_GOTO_CITY, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Airlift", " (L)");
+//  cBuf = util.my_snprintf("%s%s", "Airlift", " (L)");
 //  pBuf = create_themeicon(pTheme.Order_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -463,7 +463,7 @@ public class Menu{
 //  pBuf.key = SDLK_l;
 //  add_to_gui_list(ID_UNIT_ORDER_AIRLIFT, pBuf);
 //  
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Goto location", " (G)");
+//  cBuf = util.my_snprintf("%s%s", "Goto location", " (G)");
 //  pBuf = create_themeicon(pTheme.OGoto_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -473,7 +473,7 @@ public class Menu{
 //  pBuf.key = SDLK_g;
 //  add_to_gui_list(ID_UNIT_ORDER_GOTO, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Patrol", " (Q)");
+//  cBuf = util.my_snprintf("%s%s", "Patrol", " (Q)");
 //  pBuf = create_themeicon(pTheme.OPatrol_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -483,7 +483,7 @@ public class Menu{
 //  pBuf.key = SDLK_q;
 //  add_to_gui_list(ID_UNIT_ORDER_PATROL, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Connect", " (Shift + C)");
+//  cBuf = util.my_snprintf("%s%s", "Connect", " (Shift + C)");
 //  pBuf = create_themeicon(pTheme.OAutoConnect_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -494,7 +494,7 @@ public class Menu{
 //  pBuf.mod = KMOD_SHIFT;
 //  add_to_gui_list(ID_UNIT_ORDER_CONNECT, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Auto-Explore", " (X)");
+//  cBuf = util.my_snprintf("%s%s", "Auto-Explore", " (X)");
 //  pBuf = create_themeicon(pTheme.OAutoExp_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -505,9 +505,9 @@ public class Menu{
 //  pBuf.key = SDLK_x;
 //  add_to_gui_list(ID_UNIT_ORDER_AUTO_EXPLORE, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Auto-Attack", " (A)");
+//  cBuf = util.my_snprintf("%s%s", "Auto-Attack", " (A)");
 //  len = cBuf.length();
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Auto-Settler", " (A)");
+//  cBuf = util.my_snprintf("%s%s", "Auto-Settler", " (A)");
 //  len = MAX(len, cBuf.length());
 //  
 //  pBuf = create_themeicon(pTheme.OAutoSett_Icon, Main.gui,
@@ -523,7 +523,7 @@ public class Menu{
 //  add_to_gui_list(ID_UNIT_ORDER_AUTOMATION, pBuf);
 //  pOrder_Automate_Unit_Button = pBuf;
 //  
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Wake Up Others", " (Shift + W)");
+//  cBuf = util.my_snprintf("%s%s", "Wake Up Others", " (Shift + W)");
 //  pBuf = create_themeicon(pTheme.OWakeUp_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -534,7 +534,7 @@ public class Menu{
 //  pBuf.mod = KMOD_SHIFT;
 //  add_to_gui_list(ID_UNIT_ORDER_WAKEUP_OTHERS, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Unload", " (U)");
+//  cBuf = util.my_snprintf("%s%s", "Unload", " (U)");
 //  pBuf = create_themeicon(pTheme.OUnload_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -544,7 +544,7 @@ public class Menu{
 //  pBuf.key = SDLK_u;
 //  add_to_gui_list(ID_UNIT_ORDER_UNLOAD, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Find Homecity", " (H)");
+//  cBuf = util.my_snprintf("%s%s", "Find Homecity", " (H)");
 //  pBuf = create_themeicon(pTheme.OHomeCity_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -554,7 +554,7 @@ public class Menu{
 //  pBuf.key = SDLK_h;
 //  add_to_gui_list(ID_UNIT_ORDER_HOMECITY, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Pillage", " (Shift + P)");
+//  cBuf = util.my_snprintf("%s%s", "Pillage", " (Shift + P)");
 //  pBuf = create_themeicon(pTheme.OPillage_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -565,7 +565,7 @@ public class Menu{
 //  pBuf.mod = KMOD_SHIFT;
 //  add_to_gui_list(ID_UNIT_ORDER_PILLAGE, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Sentry", " (S)");
+//  cBuf = util.my_snprintf("%s%s", "Sentry", " (S)");
 //  pBuf = create_themeicon(pTheme.OSentry_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -575,7 +575,7 @@ public class Menu{
 //  pBuf.key = SDLK_s;
 //  add_to_gui_list(ID_UNIT_ORDER_SENTRY, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Clean Nuclear Fallout", " (N)");
+//  cBuf = util.my_snprintf("%s%s", "Clean Nuclear Fallout", " (N)");
 //  pBuf = create_themeicon(pTheme.OFallout_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -585,7 +585,7 @@ public class Menu{
 //  pBuf.key = SDLK_n;
 //  add_to_gui_list(ID_UNIT_ORDER_FALLOUT, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Paradrop", " (P)");
+//  cBuf = util.my_snprintf("%s%s", "Paradrop", " (P)");
 //  pBuf = create_themeicon(pTheme.OParaDrop_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -595,7 +595,7 @@ public class Menu{
 //  pBuf.key = SDLK_p;
 //  add_to_gui_list(ID_UNIT_ORDER_PARADROP, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Clean Pollution", " (P)");
+//  cBuf = util.my_snprintf("%s%s", "Clean Pollution", " (P)");
 //  pBuf = create_themeicon(pTheme.OPollution_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -605,7 +605,7 @@ public class Menu{
 //  pBuf.key = SDLK_p;
 //  add_to_gui_list(ID_UNIT_ORDER_POLLUTION, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Build Airbase", " (E)");
+//  cBuf = util.my_snprintf("%s%s", "Build Airbase", " (E)");
 //  pBuf = create_themeicon(pTheme.OAirBase_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -615,7 +615,7 @@ public class Menu{
 //  pBuf.key = SDLK_e;
 //  add_to_gui_list(ID_UNIT_ORDER_AIRBASE, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Fortify", " (F)");
+//  cBuf = util.my_snprintf("%s%s", "Fortify", " (F)");
 //  pBuf = create_themeicon(pTheme.OFortify_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -625,7 +625,7 @@ public class Menu{
 //  pBuf.key = SDLK_f;
 //  add_to_gui_list(ID_UNIT_ORDER_FORTIFY, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Build Fortress", " (F)");
+//  cBuf = util.my_snprintf("%s%s", "Build Fortress", " (F)");
 //  pBuf = create_themeicon(pTheme.OFortress_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -635,7 +635,7 @@ public class Menu{
 //  pBuf.key = SDLK_f;
 //  add_to_gui_list(ID_UNIT_ORDER_FORTRESS, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Transform Tile", " (O)");
+//  cBuf = util.my_snprintf("%s%s", "Transform Tile", " (O)");
 //  pBuf = create_themeicon(pTheme.OTransform_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -646,7 +646,7 @@ public class Menu{
 //  pOrder_Transform_Button = pBuf;
 //  add_to_gui_list(ID_UNIT_ORDER_TRANSFORM, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Build Mine", " (M)");
+//  cBuf = util.my_snprintf("%s%s", "Build Mine", " (M)");
 //  pBuf = create_themeicon(pTheme.OMine_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -657,7 +657,7 @@ public class Menu{
 //  add_to_gui_list(ID_UNIT_ORDER_MINE, pBuf);
 //  pOrder_Mine_Button = pBuf;
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Build Irrigation", " (I)");
+//  cBuf = util.my_snprintf("%s%s", "Build Irrigation", " (I)");
 //  pBuf = create_themeicon(pTheme.OIrrigation_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -668,7 +668,7 @@ public class Menu{
 //  pBuf.string16 = create_str16_from_char(cBuf, 10);
 //  pOrder_Irrigation_Button = pBuf;
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Form Traderoute", " (R)");
+//  cBuf = util.my_snprintf("%s%s", "Form Traderoute", " (R)");
 //  pBuf = create_themeicon(pTheme.OTrade_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -679,11 +679,11 @@ public class Menu{
 //  pOrder_Trade_Button = pBuf;
 //  add_to_gui_list(ID_UNIT_ORDER_TRADEROUTE, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s %d %s",
+//  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Railroad", " (R)", 999, 
 //			PL_("turn", "turns", 999));
 //  len = cBuf.length();
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s %d %s",
+//  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Road", " (R)", 999, 
 //			PL_("turn", "turns", 999));
 //  len = MAX(len, cBuf.length());
@@ -701,7 +701,7 @@ public class Menu{
 //  pOrder_Road_Button = pBuf;
 //  add_to_gui_list(ID_UNIT_ORDER_ROAD, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Help Build Wonder", " (B)");
+//  cBuf = util.my_snprintf("%s%s", "Help Build Wonder", " (B)");
 //  pBuf = create_themeicon(pTheme.OWonder_Icon, Main.gui,
 //			  (WF_HIDDEN | WF_DRAW_THEME_TRANSPARENT |
 //			   WF_WIDGET_HAS_INFO_LABEL));
@@ -711,9 +711,9 @@ public class Menu{
 //  pBuf.key = SDLK_b;
 //  add_to_gui_list(ID_UNIT_ORDER_BUILD_WONDER, pBuf);
 //
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Add to City", " (B)");
+//  cBuf = util.my_snprintf("%s%s", "Add to City", " (B)");
 //  len = cBuf.length();
-//  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Build New City", " (B)");
+//  cBuf = util.my_snprintf("%s%s", "Build New City", " (B)");
 //  len = MAX(len, cBuf.length());
 //      
 //  pBuf = create_themeicon(pTheme.OBuildCity_Icon, Main.gui,
@@ -961,9 +961,9 @@ public class Menu{
 //
 //      if (can_unit_add_or_build_city(pUnit)) {
 //	if(pTile.city) {
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Add to City", " (B)");
+//	  cBuf = util.my_snprintf("%s%s", "Add to City", " (B)");
 //	} else {
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Build New City", " (B)");
+//	  cBuf = util.my_snprintf("%s%s", "Build New City", " (B)");
 //	}
 //	copy_chars_to_string16(pOrder_Build_AddTo_City_Button.string16, cBuf);
 //	clear_wflag(pOrder_Build_AddTo_City_Button, WF_HIDDEN);
@@ -981,13 +981,13 @@ public class Menu{
 //      if (can_unit_do_activity(pUnit, ACTIVITY_ROAD) || time) {
 //	if(time) {
 //	  time = map_build_rail_time(pUnit.x, pUnit.y);
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s%s %d %s",
+//	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Railroad", " (R)", time , 
 //			PL_("turn", "turns", time));
 //	  pOrder_Road_Button.theme = pTheme.ORailRoad_Icon;
 //	} else {
 //	  time = map_build_road_time(pUnit.x, pUnit.y);
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s%s %d %s",
+//	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Road", " (R)", time , 
 //			PL_("turn", "turns", time));
 //	  pOrder_Road_Button.theme = pTheme.ORoad_Icon;
@@ -1005,13 +1005,13 @@ public class Menu{
 //	int revenue = get_caravan_enter_city_trade_bonus(pHomecity, pTile.city);
 //	
 //        if (can_establish_trade_route(pHomecity, pTile.city)) {
-//          my_snprintf(cBuf, sizeof(cBuf),
+//          cBuf = util.my_snprintf(
 //      		"Form Traderoute with %s ( %d R&G + %d trade ) (R)",
 //      		pHomecity.name, revenue,
 //      			trade_between_cities(pHomecity, pTile.city));
 //	} else {
 //          revenue = (revenue + 2) / 3;
-//          my_snprintf(cBuf, sizeof(cBuf),
+//          cBuf = util.my_snprintf(
 //		"Trade with %s ( %d R&G bonus ) (R)", pHomecity.name, revenue);
 //        }
 //	copy_chars_to_string16(pOrder_Trade_Button.string16, cBuf);
@@ -1026,7 +1026,7 @@ public class Menu{
 //	  /* set Crop Forest Icon */
 //	case T_FOREST:
 //	case T_JUNGLE:  
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s %s%s %d %s",
+//	  cBuf = util.my_snprintf("%s %s%s %d %s",
 //			"Cut Down to",
 //			tile_types[tile_types[terrain].irrigation_result
 //				].terrain_name
@@ -1034,7 +1034,7 @@ public class Menu{
 //	  pOrder_Irrigation_Button.theme = pTheme.OCutDownForest_Icon;
 //	  break;
 //	case T_SWAMP:
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s %s%s %d %s",
+//	  cBuf = util.my_snprintf("%s %s%s %d %s",
 //			"Irrigate to",
 //			tile_types[tile_types[terrain].irrigation_result
 //				].terrain_name
@@ -1043,7 +1043,7 @@ public class Menu{
 //	  break;
 //	  /* set Irrigation Icon */
 //	default:
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s%s %d %s",
+//	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Irrigation", " (I)", time , 
 //			PL_("turn", "turns", time));
 //	  pOrder_Irrigation_Button.theme = pTheme.OIrrigation_Icon;
@@ -1060,7 +1060,7 @@ public class Menu{
 //	switch (terrain) {
 //	  /* set Irrigate Icon . make swamp */
 //	case T_FOREST:
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s %s%s %d %s",
+//	  cBuf = util.my_snprintf("%s %s%s %d %s",
 //			"Irrigate to",
 //			tile_types[tile_types[terrain].mining_result
 //				].terrain_name
@@ -1072,14 +1072,14 @@ public class Menu{
 //	case T_PLAINS:
 //	case T_GRASSLAND:
 //	case T_SWAMP:
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s%s %d %s",
+//	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Plant Forest", " (M)", time , 
 //			PL_("turn", "turns", time));
 //	  pOrder_Mine_Button.theme = pTheme.OPlantForest_Icon;
 //	  break;
 //	  /* set Mining Icon */
 //	default:
-//	  my_snprintf(cBuf, sizeof(cBuf),"%s%s %d %s",
+//	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Mine", " (M)", time , 
 //			PL_("turn", "turns", time));
 //	  pOrder_Mine_Button.theme = pTheme.OMine_Icon;
@@ -1093,7 +1093,7 @@ public class Menu{
 //
 //      if (can_unit_do_activity(pUnit, ACTIVITY_TRANSFORM)) {
 //	time = map_transform_time(pUnit.x, pUnit.y);
-//	my_snprintf(cBuf, sizeof(cBuf),"%s %s%s %d %s",
+//	cBuf = util.my_snprintf("%s %s%s %d %s",
 //	  "Transform to",
 //	  tile_types[tile_types[terrain].transform_result].terrain_name,
 //			" (M)", time , 
@@ -1174,13 +1174,13 @@ public class Menu{
 //      if (can_unit_do_auto(pUnit)) {
 //	if (unit_flag(pUnit, F_SETTLERS)) {
 //	  if(pOrder_Automate_Unit_Button.theme != pTheme.OAutoSett_Icon) {
-//	    my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Auto-Settler", " (A)");
+//	    cBuf = util.my_snprintf("%s%s", "Auto-Settler", " (A)");
 //	    pOrder_Automate_Unit_Button.theme = pTheme.OAutoSett_Icon;
 //	    copy_chars_to_string16(pOrder_Automate_Unit_Button.string16, cBuf);
 //	  }
 //	} else {
 //	  if(pOrder_Automate_Unit_Button.theme != pTheme.OAutoAtt_Icon) {
-//	    my_snprintf(cBuf, sizeof(cBuf),"%s%s", "Auto-Attack", " (A)");
+//	    cBuf = util.my_snprintf("%s%s", "Auto-Attack", " (A)");
 //	    pOrder_Automate_Unit_Button.theme = pTheme.OAutoAtt_Icon;
 //	    copy_chars_to_string16(pOrder_Automate_Unit_Button.string16, cBuf);
 //	  }

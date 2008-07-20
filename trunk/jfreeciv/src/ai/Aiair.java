@@ -77,7 +77,7 @@ public class Aiair{
 //   * unit of the same type nearby */
 //  if (acity && !TEST_BIT(acity.ai.invasion, 0) && punit.id != 0) {
 //    /* No ground troups are invading */
-//    freelog(LOG_DEBUG, "Don't want to attack %s, although we could", 
+//    util.freelog(LOG_DEBUG, "Don't want to attack %s, although we could", 
 //            acity.name);
 //    return false;
 //  }
@@ -138,12 +138,12 @@ public class Aiair{
 //    profit = military_amortize(unit_owner(punit), 
 //                               find_city_by_id(punit.homecity),
 //                               profit, sortie_time, balanced_cost);
-//    freelog(LOG_DEBUG, 
+//    util.freelog(LOG_DEBUG, 
 //	    "%s at (%d, %d) is a worthy target with profit %d", 
 //	    unit_type(pdefender).name, dst_tile.x, dst_tile.y,
 //	    profit);
 //  } else {
-//    freelog(LOG_DEBUG, 
+//    util.freelog(LOG_DEBUG, 
 //	    "%s(%d, %d): %s at (%d, %d) is unworthy with profit %d",
 //	    unit_type(punit).name, punit.tile.x, punit.tile.y,
 //	    unit_type(pdefender).name, dst_tile.x, dst_tile.y,
@@ -203,7 +203,7 @@ public class Aiair{
 //      if (new_best > best) {
 //	punit.goto_tile = tile1;
 //	best = new_best;
-//	freelog(LOG_DEBUG, "%s wants to attack tile (%d, %d)", 
+//	util.freelog(LOG_DEBUG, "%s wants to attack tile (%d, %d)", 
 //		unit_type(punit).name, tile1.x, tile1.y);
 //      }
 //    }
@@ -312,11 +312,11 @@ public class Aiair{
 //			     &refuel_tile)) {
 //      /* Go refuelling */
 //      punit.goto_tile = refuel_tile;
-//      freelog(LOG_DEBUG, "Sent %s to refuel", unit_type(punit).name);
+//      util.freelog(LOG_DEBUG, "Sent %s to refuel", unit_type(punit).name);
 //      ai_unit_goto(punit, punit.goto_tile);
 //    } else {
 //      if (punit.fuel == 1) {
-//	freelog(LOG_DEBUG, "Oops, %s is fallin outta sky", 
+//	util.freelog(LOG_DEBUG, "Oops, %s is fallin outta sky", 
 //		unit_type(punit).name);
 //      }
 //      return;
@@ -343,14 +343,14 @@ public class Aiair{
 //					true, false);
 //      }
 //    } else if (ai_find_strategic_airbase(punit, &dst_tile)) {
-//      freelog(LOG_DEBUG, "%s will fly to (%i, %i) (%s) to fight there",
+//      util.freelog(LOG_DEBUG, "%s will fly to (%i, %i) (%s) to fight there",
 //              unit_type(punit).name, dst_tile.x, dst_tile.y,
 //              (map_get_city(dst_tile) ? 
 //               map_get_city(dst_tile).name : ""));
 //      punit.goto_tile = dst_tile;
 //      ai_unit_goto(punit, punit.goto_tile);
 //    } else {
-//      freelog(LOG_DEBUG, "%s cannot find anything to kill and is staying put", 
+//      util.freelog(LOG_DEBUG, "%s cannot find anything to kill and is staying put", 
 //              unit_type(punit).name);
 //      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //    }
@@ -404,10 +404,10 @@ public class Aiair{
 //	choice.choice = u_type;
 //	choice.type = CT_ATTACKER;
 //	want_something = true;
-//	freelog(LOG_DEBUG, "%s wants to build %s (want=%d)",
+//	util.freelog(LOG_DEBUG, "%s wants to build %s (want=%d)",
 //		pcity.name, get_unit_type(u_type).name, profit);
 //      } else {
-//      freelog(LOG_DEBUG, "%s doesn't want to build %s (want=%d)",
+//      util.freelog(LOG_DEBUG, "%s doesn't want to build %s (want=%d)",
 //		pcity.name, get_unit_type(u_type).name, profit);
 //      }
 //      destroy_unit_virtual(virtual_unit);

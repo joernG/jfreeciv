@@ -448,9 +448,9 @@ public class Repodlgs{
 //    static char coststr[16];
 //    static char utotal[16];
 //
-//    my_snprintf(count, sizeof(count), "%5d", entry.count);
-//    my_snprintf(coststr, sizeof(coststr), "%5d", entry.cost);
-//    my_snprintf(utotal, sizeof(utotal), "%6d", entry.total_cost);
+//    count = util.my_snprintf( "%5d", entry.count);
+//    coststr = util.my_snprintf( "%5d", entry.cost);
+//    utotal = util.my_snprintf( "%6d", entry.total_cost);
 //
 //    *array++ = get_improvement_name(entry.type);
 //    *array++ = count;
@@ -648,11 +648,11 @@ public class Repodlgs{
 //    static char building_count[16];
 //    int i = entry.type;
 //
-//    my_snprintf(active_count, sizeof(active_count), "%5d", entry.active_count);
-//    my_snprintf(upkeep_shield, sizeof(upkeep_shield), "%5d", entry.upkeep_shield);
-//    my_snprintf(upkeep_food, sizeof(upkeep_food), "%5d", entry.upkeep_food);
-//    my_snprintf(upkeep_gold, sizeof(upkeep_gold), "%5d", entry.upkeep_gold);
-//    my_snprintf(building_count, sizeof(building_count), "%5d", entry.building_count);
+//    active_count = util.my_snprintf( "%5d", entry.active_count);
+//    upkeep_shield = util.my_snprintf( "%5d", entry.upkeep_shield);
+//    upkeep_food = util.my_snprintf( "%5d", entry.upkeep_food);
+//    upkeep_gold = util.my_snprintf( "%5d", entry.upkeep_gold);
+//    building_count = util.my_snprintf( "%5d", entry.building_count);
 //
 //    *array++ = unit_name(i);
 //    *array++ = can_upgrade_unittype(game.player_ptr, i) != -1 ? "*" : "-";
@@ -717,7 +717,7 @@ public class Repodlgs{
 //    {
 //      char buf[512];
 //
-//      my_snprintf(buf, sizeof(buf),
+//      buf = util.my_snprintf(
 //	      _("Upgrade as many %s to %s as possible for %d gold each?\n"
 //	      "Treasury contains %d gold."),
 //	      unit_types[ut1].name, unit_types[ut2].name,

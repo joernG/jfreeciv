@@ -144,7 +144,7 @@ public class Auth{
 //    } else {
 //      reject_new_connection(_("Guests are not allowed on this server. "
 //                              "Sorry."), pconn);
-//      freelog(Log.LOG_NORMAL, "%s was rejected: Guests not allowed.", username);
+//      util.freelog(Log.LOG_NORMAL, "%s was rejected: Guests not allowed.", username);
 //      return false;
 //    }
 //  } else {
@@ -161,7 +161,7 @@ public class Auth{
 //        get_unique_guest_name(tmpname); /* don't pass pconn.username here */
 //        sz_strlcpy(pconn.username, tmpname);
 //
-//        freelog(LOG_ERROR, "Error reading database; connection . guest");
+//        util.freelog(Log.LOG_ERROR, "Error reading database; connection . guest");
 //        notify_conn(&pconn.self, 
 //                    _("There was an error reading the user "
 //                      "database, logging in as guest connection '%s'."), 
@@ -171,7 +171,7 @@ public class Auth{
 //        reject_new_connection(_("There was an error reading the user database "
 //                                "and guest logins are not allowed. Sorry"), 
 //                              pconn);
-//        freelog(Log.LOG_NORMAL, 
+//        util.freelog(Log.LOG_NORMAL, 
 //                "%s was rejected: Database error and guests not allowed.",
 //                pconn.username);
 //        return false;
@@ -179,7 +179,7 @@ public class Auth{
 //      break;
 //    case AUTH_DB_SUCCESS:
 //      /* we found a user */
-//      my_snprintf(buffer, sizeof(buffer), "Enter password for %s:",
+//      buffer = util.my_snprintf( "Enter password for %s:",
 //                  pconn.username);
 //      dsend_packet_authentication_req(pconn, AUTH_LOGIN_FIRST, buffer);
 //      pconn.server.auth_settime = time(null);
@@ -195,7 +195,7 @@ public class Auth{
 //      } else {
 //        reject_new_connection(_("This server allows only preregistered "
 //                                "users. Sorry."), pconn);
-//        freelog(Log.LOG_NORMAL,
+//        util.freelog(Log.LOG_NORMAL,
 //                "%s was rejected: Only preregister users allowed.",
 //                pconn.username);
 //
@@ -225,7 +225,7 @@ public class Auth{
 //    if (!is_good_password(password, msg)) {
 //      if (pconn.server.auth_tries++ >= MAX_AUTH_TRIES) {
 //        reject_new_connection("Sorry, too many wrong tries...", pconn);
-//        freelog(Log.LOG_NORMAL, _("%s was rejected: Too many wrong password "
+//        util.freelog(Log.LOG_NORMAL, _("%s was rejected: Too many wrong password "
 //                "verifies for new user."), pconn.username);
 //
 //	return false;
@@ -243,7 +243,7 @@ public class Auth{
 //      notify_conn(&pconn.self, 
 //		  _("Warning: There was an error in saving to the database. "
 //                    "Continuing, but your stats will not be saved."));
-//      freelog(LOG_ERROR, "Error writing to database for: %s", pconn.username);
+//      util.freelog(Log.LOG_ERROR, "Error writing to database for: %s", pconn.username);
 //    }
 //
 //    establish_new_connection(pconn);
@@ -257,7 +257,7 @@ public class Auth{
 //                                   + auth_fail_wait[pconn.server.auth_tries];
 //    }
 //  } else {
-//    freelog(LOG_VERBOSE, "%s is sending unrequested auth packets", 
+//    util.freelog(LOG_VERBOSE, "%s is sending unrequested auth packets", 
 //            pconn.username);
 //    return false;
 //  }
@@ -283,7 +283,7 @@ public class Auth{
 //      if (pconn.server.auth_tries >= MAX_AUTH_TRIES) {
 //        pconn.server.status = AS_NOT_ESTABLISHED;
 //        reject_new_connection("Sorry, too many wrong tries...", pconn);
-//        freelog(Log.LOG_NORMAL,
+//        util.freelog(Log.LOG_NORMAL,
 //                "%s was rejected: Too many wrong password tries.",
 //                pconn.username);
 //        close_connection(pconn);
@@ -304,7 +304,7 @@ public class Auth{
 //    if (time(null) >= pconn.server.auth_settime + MAX_WAIT_TIME) {
 //      pconn.server.status = AS_NOT_ESTABLISHED;
 //      reject_new_connection("Sorry, your connection timed out...", pconn);
-//      freelog(Log.LOG_NORMAL,
+//      util.freelog(Log.LOG_NORMAL,
 //              "%s was rejected: Connection timeout waiting for password.",
 //              pconn.username);
 //
@@ -434,18 +434,18 @@ public class Auth{
 //  if ((sock = mysql_real_connect(&mysql, HOST, USER, PASSWORD, 
 //                                 DATABASE, 0, null, 0))) {
 //    /* insert an entry into our log */
-//    my_snprintf(buffer, sizeof(buffer),
+//    buffer = util.my_snprintf(
 //                    "insert into %s (name, logintime, address, succeed) "
 //                    "values ('%s',unix_timestamp(),'%s','%s')", LOGIN_TABLE,
 //                    pconn.username, pconn.server.ipaddr, ok ? "S" : "F");
 //
 //    if (mysql_query(sock, buffer)) {
-//      freelog(LOG_ERROR, "check_pass insert loginlog failed for user: %s (%s)",
+//      util.freelog(Log.LOG_ERROR, "check_pass insert loginlog failed for user: %s (%s)",
 //                         pconn.username, mysql_error(sock));
 //    }
 //    mysql_close(sock);
 //  } else {
-//    freelog(LOG_ERROR, "Can't connect to server! (%s)", mysql_error(&mysql));
+//    util.freelog(Log.LOG_ERROR, "Can't connect to server! (%s)", mysql_error(&mysql));
 //  }
 //
 //  return ok;
@@ -471,17 +471,17 @@ public class Auth{
 //  /* attempt to connect to the server */
 //  if (!(sock = mysql_real_connect(&mysql, HOST, USER, PASSWORD, DATABASE,
 //                                  0, null, 0))) {
-//    freelog(LOG_ERROR, "Can't connect to server! (%s)", mysql_error(&mysql));
+//    util.freelog(Log.LOG_ERROR, "Can't connect to server! (%s)", mysql_error(&mysql));
 //    return AUTH_DB_ERROR;
 //  } 
 //  
 //  /* select the password from the entry */
-//  my_snprintf(buffer, sizeof(buffer), 
+//  buffer = util.my_snprintf( 
 //              "select password from %s where name = '%s'",
 //              AUTH_TABLE, pconn.username);
 //
 //  if (mysql_query(sock, buffer)) {
-//    freelog(LOG_ERROR, "db_load query failed for user: %s (%s)",
+//    util.freelog(Log.LOG_ERROR, "db_load query failed for user: %s (%s)",
 //                       pconn.username, mysql_error(sock));
 //    return AUTH_DB_ERROR;
 //  } 
@@ -500,7 +500,7 @@ public class Auth{
 //  /* if there are more than one row that matches this name, it's an error 
 //   * continue anyway though */
 //  if (num_rows > 1) {
-//    freelog(LOG_ERROR, "db_load query found multiple entries (%d) for user: %s",
+//    util.freelog(Log.LOG_ERROR, "db_load query found multiple entries (%d) for user: %s",
 //                       num_rows, pconn.username);
 //  }
 //
@@ -511,13 +511,13 @@ public class Auth{
 //
 //  /* update the access time for this user */
 //  memset(buffer, 0, sizeof(buffer));
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //                 "update %s set accesstime=unix_timestamp(), address='%s', "
 //                 "logincount=logincount+1 where strcmp(name, '%s') = 0",
 //                 AUTH_TABLE, pconn.server.ipaddr, pconn.username);
 //
 //  if (mysql_query(sock, buffer)) {
-//    freelog(LOG_ERROR, "db_load update accesstime failed for user: %s (%s)",
+//    util.freelog(Log.LOG_ERROR, "db_load update accesstime failed for user: %s (%s)",
 //                       pconn.username, mysql_error(sock));
 //  }
 //
@@ -541,21 +541,21 @@ public class Auth{
 //  /* attempt to connect to the server */
 //  if (!(sock = mysql_real_connect(&mysql, HOST, USER, PASSWORD, DATABASE,
 //                                  0, null, 0))) {
-//    freelog(LOG_ERROR, "Can't connect to server! (%s)", mysql_error(&mysql));
+//    util.freelog(Log.LOG_ERROR, "Can't connect to server! (%s)", mysql_error(&mysql));
 //    return false;
 //  }
 //
 //  /* insert new user into table. we insert the following things: name
 //   * md5sum of the password, the creation time in seconds, the accesstime
 //   * also in seconds from 1970, the users address (twice) and the logincount */
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //          "insert into %s values "
 //          "(null, '%s', md5('%s'), null, unix_timestamp(), unix_timestamp(),"
 //          "'%s', '%s', 0)", AUTH_TABLE, pconn.username,
 //          pconn.server.password, pconn.server.ipaddr, pconn.server.ipaddr);
 //
 //  if (mysql_query(sock, buffer)) {
-//    freelog(LOG_ERROR, "db_save insert failed for new user: %s (%s)",
+//    util.freelog(Log.LOG_ERROR, "db_save insert failed for new user: %s (%s)",
 //                       pconn.username, mysql_error(sock));
 //    mysql_close(sock);
 //    return false;
@@ -563,13 +563,13 @@ public class Auth{
 //
 //  /* insert an entry into our log */
 //  memset(buffer, 0, sizeof(buffer));
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //                 "insert into %s (name, logintime, address, succeed) "
 //                 "values ('%s',unix_timestamp(),'%s', 'S')", LOGIN_TABLE,
 //                 pconn.username, pconn.server.ipaddr);
 //
 //  if (mysql_query(sock, buffer)) {
-//    freelog(LOG_ERROR, "db_load insert loginlog failed for user: %s (%s)",
+//    util.freelog(Log.LOG_ERROR, "db_load insert loginlog failed for user: %s (%s)",
 //                       pconn.username, mysql_error(sock));
 //  }
 //

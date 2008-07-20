@@ -420,23 +420,23 @@ public class Graphics{
 //
 //  if (!(fp=fopen(filename, "rb"))) {
 //    MessageBox(null, "failed reading", filename, MB_OK);
-//    freelog(LOG_FATAL, "Failed reading PNG file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed reading PNG file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //    
 //  if (!(pngp=png_create_read_struct(PNG_LIBPNG_VER_STRING, null, null, null))) {
 //
-//    freelog(LOG_FATAL, "Failed creating PNG struct");
+//    util.freelog(LOG_FATAL, "Failed creating PNG struct");
 //    exit(EXIT_FAILURE);
 //  }
 // 
 //  if (!(infop=png_create_info_struct(pngp))) {
-//    freelog(LOG_FATAL, "Failed creating PNG struct");
+//    util.freelog(LOG_FATAL, "Failed creating PNG struct");
 //    exit(EXIT_FAILURE);
 //  }
 //   
 //  if (setjmp(pngp.jmpbuf)) {
-//    freelog(LOG_FATAL, "Failed while reading PNG file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed while reading PNG file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //

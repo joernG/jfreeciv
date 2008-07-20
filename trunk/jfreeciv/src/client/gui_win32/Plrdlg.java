@@ -126,7 +126,7 @@ public class Plrdlg{
 //  /* we cassume that neither name nor the nation of a player changes */
 //  if (update == 0) {
 //    /* the playername */
-//    my_snprintf(namebuf, sizeof(namebuf), "%-16s", game.players[i].name);
+//    namebuf = util.my_snprintf( "%-16s", game.players[i].name);
 //    row[0] = namebuf;
 //
 //
@@ -144,10 +144,10 @@ public class Plrdlg{
 //  } else {
 //    pds = pplayer_get_diplstate(game.player_ptr, get_player(i));
 //    if (pds.type == DS_CEASEFIRE) {
-//      my_snprintf(dsbuf, sizeof(dsbuf), "%s (%d)",
+//      dsbuf = util.my_snprintf( "%s (%d)",
 //		  diplstate_text(pds.type), pds.turns_left);
 //    } else {
-//      my_snprintf(dsbuf, sizeof(dsbuf), "%s", diplstate_text(pds.type));
+//      dsbuf = util.my_snprintf( "%s", diplstate_text(pds.type));
 //    }
 //  }
 //
@@ -168,7 +168,7 @@ public class Plrdlg{
 //
 //  /* text for idleness */
 //  if (game.players[i].nturns_idle > 3) {
-//    my_snprintf(idlebuf, sizeof(idlebuf),
+//    idlebuf = util.my_snprintf(
 //		PL_("(idle %d turn)", "(idle %d turns)",
 //		    game.players[i].nturns_idle - 1),
 //		game.players[i].nturns_idle - 1);
@@ -177,7 +177,7 @@ public class Plrdlg{
 //  }
 //
 //  /* text for reputation */
-//  my_snprintf(repbuf, sizeof(repbuf),
+//  repbuf = util.my_snprintf(
 //	      reputation_text(game.players[i].reputation));
 //
 //  /* assemble the whole lot */
@@ -215,7 +215,7 @@ public class Plrdlg{
 //static void enable_buttons(int player_index)
 //{
 //  player pplayer=&game.players[player_index];
-//  if (pplayer.spaceship.state!=SSHIP_NONE)
+//  if (pplayer.spaceship.state!=spaceship_state.SSHIP_NONE)
 //    EnableWindow(GetDlgItem(players_dialog,ID_PLAYERS_SSHIP),
 //		 true);
 //  else

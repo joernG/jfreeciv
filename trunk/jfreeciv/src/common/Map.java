@@ -270,7 +270,7 @@ public class Map{
 //
 //#if 0
 //  for (i = 0; i < tiles; i++) {
-//    freelog(LOG_DEBUG, "%5d : (%3d,%3d) : %d",
+//    util.freelog(LOG_DEBUG, "%5d : (%3d,%3d) : %d",
 //	    i, array[i].dx, array[i].dy, array[i].dist);
 //  }
 //#endif
@@ -469,7 +469,7 @@ public class Map{
 //**************************************************************************/
 //void map_allocate()
 //{
-//  freelog(LOG_DEBUG, "map_allocate (was %p) (%d,%d)",
+//  util.freelog(LOG_DEBUG, "map_allocate (was %p) (%d,%d)",
 //	  map.tiles, map.xsize, map.ysize);
 //
 //  assert(map.tiles == null);
@@ -1187,7 +1187,7 @@ public class Map{
 //  /* the %x don't work so well for oceans, where
 //     move_cost[]==-3 ,.. --dwp
 //  */
-//  freelog(LOG_DEBUG, "%s (%d, %d) [%x%x%x%x%x%x%x%x]", str,
+//  util.freelog(LOG_DEBUG, "%s (%d, %d) [%x%x%x%x%x%x%x%x]", str,
 //	  tile0.x, tile0.y,
 //	  tile0.move_cost[0], tile0.move_cost[1],
 //	  tile0.move_cost[2], tile0.move_cost[3],

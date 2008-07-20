@@ -120,22 +120,22 @@ public class Gui_tilespec{
 //    
 //  if (strcmp("generic" , city_styles[style].citizens_graphic_alt))
 //  {
-//    my_snprintf(alt_buf , sizeof(alt_buf) , ".%s_",
+//    alt_buf = util.my_snprintf( ".%s_",
 //                       city_styles[style].citizens_graphic_alt ); 
 //  }
 //	
 //  /* Load the citizen sprite graphics. */
 //  for (i = 0; i < NUM_TILES_CITIZEN; i++) {
 //	  
-//    my_snprintf(tag, sizeof(tag), "citizen.%s_%s",
+//    tag = util.my_snprintf( "citizen.%s_%s",
 //	  city_styles[style].citizens_graphic , get_citizen_name(i));  
 //    
 //    
 //    pSpr = load_sprite(tag);
 //    if(!pSpr) {
-//      freelog(LOG_DEBUG,"Can't find %s", tag);
-//      my_snprintf(tag, sizeof(tag), "citizen%s%s", alt_buf ,get_citizen_name(i));  
-//      freelog(LOG_DEBUG,"Trying load alternative %s", tag);
+//      util.freelog(LOG_DEBUG,"Can't find %s", tag);
+//      tag = util.my_snprintf( "citizen%s%s", alt_buf ,get_citizen_name(i));  
+//      util.freelog(LOG_DEBUG,"Trying load alternative %s", tag);
 //      pSpr = load_sprite(tag);
 //    }
 //    
@@ -152,15 +152,15 @@ public class Gui_tilespec{
 //      continue;
 //    }
 //    for (j = 0; j < MAX_NUM_CITIZEN_SPRITES; j++) {
-//      my_snprintf(tag, sizeof(tag), "citizen.%s_%s_%d",
+//      tag = util.my_snprintf( "citizen.%s_%s_%d",
 //	  city_styles[style].citizens_graphic ,get_citizen_name(i) , j );
 //      
 //      pSpr = load_sprite(tag);
 //      if(!pSpr) {
-//        freelog(LOG_DEBUG,"Can't find %s", tag);
-//        my_snprintf(tag, sizeof(tag), "citizen%s%s_%d", alt_buf,
+//        util.freelog(LOG_DEBUG,"Can't find %s", tag);
+//        tag = util.my_snprintf( "citizen%s%s_%d", alt_buf,
 //	    				get_citizen_name(i), j);
-//        freelog(LOG_DEBUG,"Trying load alternative %s", tag);
+//        util.freelog(LOG_DEBUG,"Trying load alternative %s", tag);
 //        pSpr = load_sprite(tag);
 //      }
 //      
@@ -400,7 +400,7 @@ public class Gui_tilespec{
 //  pTheme = MALLOC(sizeof(struct Theme));
 //  
 //  if(!sprite_exists("theme.tech_tree")) {
-//    freelog(LOG_FATAL, "Your current tileset don't contains ""all"" GUI theme graphic\n"
+//    util.freelog(LOG_FATAL, "Your current tileset don't contains ""all"" GUI theme graphic\n"
 //    "Please use other tileset with ""full"" GUI graphic pack (use -t tileset options)\n"
 //    "If you don't have any tileset with SDLClient GUI theme then go to freeciv\n"
 //    "(ftp.freeciv.org/pub/freeciv/incoming) ftp site and download current DELUXE"
@@ -562,16 +562,16 @@ public class Gui_tilespec{
 //#define load_cursor(iter, num, pSpr, image, cBuf, Type, Tag, x, y, center) \
 //do { \
 //  iter = 0;	\
-//  my_snprintf(cBuf , sizeof(cBuf), "%s_%d", Tag, iter);	\
+//  cBuf = util.my_snprintf( "%s_%d", Tag, iter);	\
 //  while(sprite_exists(cBuf)) {	\
 //    iter++;	\
-//    my_snprintf(cBuf , sizeof(cBuf), "%s_%d", Tag, iter);	\
+//    cBuf = util.my_snprintf( "%s_%d", Tag, iter);	\
 //  }	\
 //  num = iter;	\
 //  if (num) {	\
 //    pAnim.Cursors.Type = CALLOC(num + 1, sizeof(SDL_Cursor *));	\
 //    for( iter=0; iter<num; iter++) {	\
-//      my_snprintf(cBuf,sizeof(cBuf), "%s_%d", Tag, iter);	\
+//      cBuf = util.my_snprintf( "%s_%d", Tag, iter);	\
 //      pSpr = load_sprite(cBuf);	\
 //      image = (pSpr ? GET_SURF(pSpr) : null);	\
 //      assert(image != null);	\
@@ -597,25 +597,25 @@ public class Gui_tilespec{
 //  pAnim = MALLOC(sizeof(struct Animation));
 //    
 //  i = 0;
-//  my_snprintf(buf , sizeof(buf), "explode.iso_nuke_%d", i);
+//  buf = util.my_snprintf( "explode.iso_nuke_%d", i);
 //  while(sprite_exists(buf)) {
 //    i++;
-//    my_snprintf(buf , sizeof(buf), "explode.iso_nuke_%d", i);
+//    buf = util.my_snprintf( "explode.iso_nuke_%d", i);
 //  }
 //  pAnim.num_tiles_explode_nuke = i;
 //  
 //  /* focus unit animation */
 //  i = 0;
-//  my_snprintf(buf , sizeof(buf), "anim.focus_%d", i);
+//  buf = util.my_snprintf( "anim.focus_%d", i);
 //  while(sprite_exists(buf)) {
 //    i++;
-//    my_snprintf(buf , sizeof(buf), "anim.focus_%d", i);
+//    buf = util.my_snprintf( "anim.focus_%d", i);
 //  }
 //  pAnim.num_tiles_focused_unit = i;
 //  
 //  pAnim.Focus = CALLOC(pAnim.num_tiles_focused_unit, sizeof(SDL_Surface *));
 //  for( i=0; i<pAnim.num_tiles_focused_unit; i++) {
-//    my_snprintf(buf,sizeof(buf), "anim.focus_%d", i);
+//    buf = util.my_snprintf( "anim.focus_%d", i);
 //    load_GUI_surface(pSpr, pAnim, Focus[i], buf);
 //  }
 //  

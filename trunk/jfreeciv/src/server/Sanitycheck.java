@@ -178,56 +178,56 @@ public class Sanitycheck{
 //      switch (get_worker_city(pcity, x, y)) {
 //      case C_TILE_EMPTY:
 //	if (ptile.worked) {
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "empty but worked by %s!",
 //		  pcity.name, TILE_XY(ptile),
 //		  (ptile).worked.name);
 //	}
 //	if (is_enemy_unit_tile(ptile, pplayer)) {
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "empty but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (game.borders > 0
 //	    && owner && owner.player_no != pcity.owner) {
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "empty but in enemy territory!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (!city_can_work_tile(pcity, x, y)) {
 //	  /* Complete check. */
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "empty but is unavailable!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	break;
 //      case C_TILE_WORKER:
 //	if ((ptile).worked != pcity) {
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "worked but main map disagrees!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (is_enemy_unit_tile(ptile, pplayer)) {
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "worked but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (game.borders > 0
 //	    && owner && owner.player_no != pcity.owner) {
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "worked but in enemy territory!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (!city_can_work_tile(pcity, x, y)) {
 //	  /* Complete check. */
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "worked but is unavailable!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	break;
 //      case C_TILE_UNAVAILABLE:
 //	if (city_can_work_tile(pcity, x, y)) {
-//	  freelog(LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
 //		  "unavailable but seems to be available!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
@@ -274,7 +274,7 @@ public class Sanitycheck{
 //      assert(is_valid);
 //
 //      if (pcity.city_map[city_x][city_y] != C_TILE_WORKER) {
-//	freelog(LOG_ERROR, "%d,%d is listed as being worked by %s "
+//	util.freelog(Log.LOG_ERROR, "%d,%d is listed as being worked by %s "
 //		"on the map, but %s lists the tile %d,%d as having "
 //		"status %d\n",
 //		TILE_XY(ptile), pcity.name, pcity.name, city_x, city_y,
@@ -303,7 +303,7 @@ public class Sanitycheck{
 //      }
 //
 //      if (!can_unit_continue_current_activity(punit)) {
-//	freelog(LOG_ERROR, "%s at %d,%d (%s) has activity %s, "
+//	util.freelog(Log.LOG_ERROR, "%s at %d,%d (%s) has activity %s, "
 //		"which it can't continue!",
 //		unit_type(punit).name,
 //		TILE_XY(ptile), map_get_tile_info_text(ptile),
@@ -378,7 +378,7 @@ public class Sanitycheck{
 //    }
 //
 //    for (city pcity : pplayer.cities.data) {
-//      if (is_capital(pcity)) {
+//      if (pcity.is_capital()) {
 //	found_palace++;
 //      }
 //      assert(found_palace <= 1);
@@ -395,7 +395,7 @@ public class Sanitycheck{
 //
 //    if (pplayer.revolution_finishes == -1) {
 //      if (pplayer.government == game.government_when_anarchy) {
-//        freelog(LOG_FATAL, "%s's government is anarchy but does not finish",
+//        util.freelog(LOG_FATAL, "%s's government is anarchy but does not finish",
 //                pplayer.name);
 //      }
 //      assert(pplayer.government != game.government_when_anarchy);

@@ -457,10 +457,10 @@ public class Optiondlg{
 //
 //  /* change setting label */
 //  if (Main.screen.flags & SDL_FULLSCREEN) {
-//    my_snprintf(cBuf, sizeof(cBuf), "Current Setup\nFullscreen %dx%d",
+//    cBuf = util.my_snprintf( "Current Setup\nFullscreen %dx%d",
 //	    Main.screen.w, Main.screen.h);
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf), "Current Setup\n%dx%d",
+//    cBuf = util.my_snprintf( "Current Setup\n%dx%d",
 //	    Main.screen.w, Main.screen.h);
 //  }
 //  copy_chars_to_string16(
@@ -592,13 +592,13 @@ public class Optiondlg{
 //    
 //  /* Check is there are any modes available */
 //  if (!pModes_Rect) {
-//    freelog(LOG_DEBUG, "No modes available!");
+//    util.freelog(LOG_DEBUG, "No modes available!");
 //    return 0;
 //  }
 //  
 //  /* Check if or resolution is restricted */
 //  if (pModes_Rect == (SDL_Rect **) - 1) {
-//    freelog(LOG_DEBUG, "All resolutions available.");
+//    util.freelog(LOG_DEBUG, "All resolutions available.");
 //    return 0;
 //    /* fix ME */
 //  }
@@ -612,10 +612,10 @@ public class Optiondlg{
 //
 //  /* create setting label */
 //  if (Main.screen.flags & SDL_FULLSCREEN) {
-//    my_snprintf(cBuf, sizeof(cBuf),"Current Setup\nFullscreen %dx%d",
+//    cBuf = util.my_snprintf("Current Setup\nFullscreen %dx%d",
 //	    Main.screen.w, Main.screen.h);
 //  } else {
-//    my_snprintf(cBuf, sizeof(cBuf),"Current Setup\n%dx%d", Main.screen.w,
+//    cBuf = util.my_snprintf("Current Setup\n%dx%d", Main.screen.w,
 //	    Main.screen.h);
 //  }
 //
@@ -669,7 +669,7 @@ public class Optiondlg{
 //      continue;
 //    }
 //  
-//    my_snprintf(cBuf, sizeof(cBuf), "%dx%d",
+//    cBuf = util.my_snprintf( "%dx%d",
 //    				pModes_Rect[i].w, pModes_Rect[i].h);
 //    pTmpGui = create_icon_button_from_chars(null, pWindow.dst, cBuf, 14, 0);
 //  
@@ -971,7 +971,7 @@ public class Optiondlg{
 //  /* 'smooth unit move steps' */
 //
 //  /* edit */
-//  my_snprintf(cBuf, sizeof(cBuf), "%d", smooth_move_unit_steps);
+//  cBuf = util.my_snprintf( "%d", smooth_move_unit_steps);
 //  pTmpGui = create_edit_from_chars(null, pWindow.dst, cBuf, 11, 25,
 //					  WF_DRAW_THEME_TRANSPARENT);
 //

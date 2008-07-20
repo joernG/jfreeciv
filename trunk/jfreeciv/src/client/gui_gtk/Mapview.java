@@ -115,13 +115,13 @@ public class Mapview{
 //  char buffer	[512];
 //  int  d;
 //
-//  gtk_frame_set_label( GTK_FRAME( main_frame_civ_name ), get_nation_name(game.player_ptr.nation) );
+//  gtk_frame_set_label( GTK_FRAME( main_frame_civ_name ), Nation.get_nation_name(game.player_ptr.nation) );
 //
-//  my_snprintf(buffer, sizeof(buffer),
+//  buffer = util.my_snprintf(
 //	      _("Population: %s\nYear: %s\n"
 //		"Gold: %d\nTax: %d Lux: %d Sci: %d"),
 //	      population_to_text(civ_population(game.player_ptr)),
-//	      textyear(game.year), game.player_ptr.economic.gold,
+//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
 //	      game.player_ptr.economic.tax,
 //	      game.player_ptr.economic.luxury,
 //	      game.player_ptr.economic.science);
@@ -165,7 +165,7 @@ public class Mapview{
 //**************************************************************************/
 //void update_unit_info_label(unit punit)
 //{
-//  if (punit && get_client_state() != CLIENT_GAME_OVER_STATE) {
+//  if (punit && get_client_state() != CLIENT_server_states.GAME_OVER_STATE) {
 //    char buffer[512];
 //    city pcity =
 //	player_find_city_by_id(game.player_ptr, punit.homecity);
@@ -173,7 +173,7 @@ public class Mapview{
 //	get_tile_infrastructure_set(punit.tile);
 //    unit_type ptype = unit_type(punit);
 //
-//    my_snprintf(buffer, sizeof(buffer), "%s", ptype.name);
+//    buffer = util.my_snprintf( "%s", ptype.name);
 //
 //    if (ptype.veteran[punit.veteran].name[0] != '\0') {
 //      sz_strlcat(buffer, " (");
@@ -184,7 +184,7 @@ public class Mapview{
 //    gtk_frame_set_label(GTK_FRAME(unit_info_frame), buffer);
 //
 //
-//    my_snprintf(buffer, sizeof(buffer), "%s\n%s\n%s%s%s",
+//    buffer = util.my_snprintf( "%s\n%s\n%s%s%s",
 //		(hover_unit == punit.id) ?
 //		"Select destination" : unit_activity_text(punit),
 //		map_get_tile_info_text(punit.tile),
@@ -629,8 +629,8 @@ public class Mapview{
 //  gdk_draw_pixmap(pixmap, civ_gc, ssprite.pixmap,
 //		  offset_x, offset_y,
 //		  pixmap_x + offset_x, pixmap_y + offset_y,
-//		  MIN(width, MAX(0, ssprite.width - offset_x)),
-//		  MIN(height, MAX(0, ssprite.height - offset_y)));
+//		  Math.min(width, MAX(0, ssprite.width - offset_x)),
+//		  Math.min(height, MAX(0, ssprite.height - offset_y)));
 //
 //  gdk_gc_set_clip_mask(civ_gc, null);
 //}

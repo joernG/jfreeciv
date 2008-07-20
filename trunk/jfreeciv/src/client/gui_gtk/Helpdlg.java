@@ -247,7 +247,7 @@ public class Helpdlg{
 //  /* l is the original in the tree. */
 //  original = (l == null);
 //
-//  my_snprintf(label, sizeof(label), "%s:%d", advances[tech].name,
+//  label = util.my_snprintf( "%s:%d", advances[tech].name,
 //	      d.turns_to_tech);
 //
 //  leaf = (advances[tech].req[0] == A_NONE && advances[tech].req[1] == A_NONE);

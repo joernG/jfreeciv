@@ -72,12 +72,12 @@ public class Aihand{
 //static void ai_manage_spaceship(player pplayer)
 //{
 //  if (game.spacerace) {
-//    if (pplayer.spaceship.state == SSHIP_STARTED) {
+//    if (pplayer.spaceship.state == spaceship_state.SSHIP_STARTED) {
 //      ai_spaceship_autoplace(pplayer, &pplayer.spaceship);
 //      /* if we have built the best possible spaceship  -- AJS 19990610 */
-//      if ((pplayer.spaceship.structurals == NUM_SS_STRUCTURALS) &&
-//        (pplayer.spaceship.components == NUM_SS_COMPONENTS) &&
-//        (pplayer.spaceship.modules == NUM_SS_MODULES))
+//      if ((pplayer.spaceship.structurals == player_spaceship.NUM_SS_STRUCTURALS) &&
+//        (pplayer.spaceship.components == player_spaceship.NUM_SS_COMPONENTS) &&
+//        (pplayer.spaceship.modules == player_spaceship.NUM_SS_MODULES))
 //        handle_spaceship_launch(pplayer);
 //    }
 //  }
@@ -182,16 +182,16 @@ public class Aihand{
 //    /* If more than half our cities can celebrate, go for it! */
 //    celebrate = (can_celebrate * 2 > total_cities);
 //    if (celebrate) {
-//      freelog(LOGLEVEL_TAX, "*** %s CELEBRATES! ***", pplayer.name);
+//      util.freelog(LOGLEVEL_TAX, "*** %s CELEBRATES! ***", pplayer.name);
 //      for (city pcity : pplayer.cities.data) {
 //        if (pcity.ai.celebrate == true) {
-//          freelog(LOGLEVEL_TAX, "setting %s to celebrate", pcity.name);
+//          util.freelog(LOGLEVEL_TAX, "setting %s to celebrate", pcity.name);
 //          cm_query_result(pcity, &cmp, &cmr);
 //          if (cmr.found_a_valid) {
 //            apply_cmresult_to_city(pcity, &cmr);
 //            generic_city_refresh(pcity, true, null);
 //            if (!city_happy(pcity)) {
-//              CITY_LOG(LOG_ERROR, pcity, "is NOT happy when it should be!");
+//              CITY_LOG(Log.LOG_ERROR, pcity, "is NOT happy when it should be!");
 //            }
 //          }
 //        }
@@ -225,7 +225,7 @@ public class Aihand{
 //
 //  assert(pplayer.economic.tax + pplayer.economic.luxury 
 //         + pplayer.economic.science == 100);
-//  freelog(LOGLEVEL_TAX, "%s rates: Sci %d Lux%d Tax %d NetIncome %d "
+//  util.freelog(LOGLEVEL_TAX, "%s rates: Sci %d Lux%d Tax %d NetIncome %d "
 //          "celeb=(%d/%d)", pplayer.name, pplayer.economic.science,
 //          pplayer.economic.luxury, pplayer.economic.tax,
 //          player_get_expected_income(pplayer), can_celebrate, total_cities);
@@ -361,7 +361,7 @@ public class Aihand{
 //    return; /* already got it! */
 //  }
 //  pplayer.ai.tech_want[ai.goal.govt.req] += ai.goal.govt.val;
-//  freelog(LOG_DEBUG, "%s wants %s with want %d", pplayer.name,
+//  util.freelog(LOG_DEBUG, "%s wants %s with want %d", pplayer.name,
 //          get_tech_name(pplayer, ai.goal.govt.req), 
 //          pplayer.ai.tech_want[ai.goal.govt.req]);
 //}

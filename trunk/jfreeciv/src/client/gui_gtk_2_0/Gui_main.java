@@ -862,7 +862,7 @@ public class Gui_main{
 //  g_signal_connect(turn_done_button, "clicked",
 //                   G_CALLBACK(end_turn_callback), null);
 //
-//  my_snprintf(buf, sizeof(buf), "%s:\n%s", "Turn Done", "Shift+Return");
+//  buf = util.my_snprintf( "%s:\n%s", "Turn Done", "Shift+Return");
 //  gtk_tooltips_set_tip(main_tips, turn_done_button, buf, "");
 //
 //  /* Selected unit status */
@@ -1383,11 +1383,11 @@ public class Gui_main{
 //    GtkWidget *p;
 //    char buf[512];
 //    
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //	    _("%s People\nYear: %s Turn: %d\nGold: %d\nNet Income: %d\n"
 //	      "Tax:%d Lux:%d Sci:%d\nResearching %s: %d/%d\nGovernment: %s"),
 //	    population_to_text(civ_population(game.player_ptr)),
-//	    textyear(game.year), game.turn,
+//	    Shared.textyear(game.year), game.turn,
 //	    game.player_ptr.economic.gold,
 //	    player_get_expected_income(game.player_ptr),
 //	    game.player_ptr.economic.tax,
@@ -1451,7 +1451,7 @@ public class Gui_main{
 //  if (previous_state == socket_writable)
 //    return;
 //
-//  freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
+//  util.freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
 //  gtk_input_remove(input_id);
 //  input_id = gtk_input_add_full(aconnection.sock, GDK_INPUT_READ 
 //				| (socket_writable ? GDK_INPUT_WRITE : 0)

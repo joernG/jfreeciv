@@ -114,7 +114,7 @@ public class Timing{
 //  static boolean first = true;
 //
 //  if (first) {
-//    freelog(Log.LOG_NORMAL, "clock() returned -1, ignoring timer");
+//    util.freelog(Log.LOG_NORMAL, "clock() returned -1, ignoring timer");
 //    first = false;
 //  }
 //  t.use = TIMER_IGNORE;
@@ -130,7 +130,7 @@ public class Timing{
 //  static boolean first = true;
 //
 //  if (first) {
-//    freelog(Log.LOG_NORMAL, "gettimeofday() returned -1, ignoring timer");
+//    util.freelog(Log.LOG_NORMAL, "gettimeofday() returned -1, ignoring timer");
 //    first = false;
 //  }
 //  t.use = TIMER_IGNORE;
@@ -145,7 +145,7 @@ public class Timing{
 //  static boolean first = true;
 //
 //  if (first) {
-//    freelog(Log.LOG_NORMAL, "time() returned -1, ignoring timer");
+//    util.freelog(Log.LOG_NORMAL, "time() returned -1, ignoring timer");
 //    first = false;
 //  }
 //  t.use = TIMER_IGNORE;
@@ -181,7 +181,7 @@ public class Timing{
 //     static timer t = null; 
 //     t = renew_timer_start(t, TIMER_CPU, TIMER_USE);
 //     ... stuff ...
-//     freelog(LOG_VERBOSE, "That took %g seconds.", read_timer_seconds(t));
+//     util.freelog(LOG_VERBOSE, "That took %g seconds.", read_timer_seconds(t));
 //     ... never free t ...
 //  }
 //***********************************************************************/
@@ -253,7 +253,7 @@ public class Timing{
 //    return;
 //  }
 //  if (t.state == TIMER_STARTED) {
-//    freelog(LOG_ERROR, "tried to start already started timer");
+//    util.freelog(Log.LOG_ERROR, "tried to start already started timer");
 //    return;
 //  }
 //  if (t.type == TIMER_CPU) {
@@ -305,7 +305,7 @@ public class Timing{
 //    return;
 //  }
 //  if (t.state == TIMER_STOPPED) {
-//    freelog(LOG_ERROR, "tried to stop already stopped timer");
+//    util.freelog(Log.LOG_ERROR, "tried to stop already stopped timer");
 //    return;
 //  }
 //  if (t.type == TIMER_CPU) {
@@ -388,10 +388,10 @@ public class Timing{
 //  {
 //      timer t = new_timer_start();
 //      ...do stuff...
-//      freelog(Log.LOG_NORMAL, "That took %g seconds", read_timer_seconds_free(t));
+//      util.freelog(Log.LOG_NORMAL, "That took %g seconds", read_timer_seconds_free(t));
 //  }
 //  (BUT: make sure the _free call really happens!
-//  eg, freelog(LOG_DEBUG,...) might not actually evaluate its args.)
+//  eg, util.freelog(LOG_DEBUG,...) might not actually evaluate its args.)
 //***********************************************************************/
 //double read_timer_seconds_free(timer t)
 //{

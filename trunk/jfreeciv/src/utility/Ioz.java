@@ -92,7 +92,7 @@ public class Ioz{
 //#ifndef HAVE_LIBZ
 //    /* In theory this shouldn't happen, but check anyway. */
 //    if (method == FZ_ZLIB) {
-//      freelog(Log.LOG_NORMAL, "Not compiled with zlib support, reverting to plain.");
+//      util.freelog(Log.LOG_NORMAL, "Not compiled with zlib support, reverting to plain.");
 //      method = FZ_PLAIN;
 //    }
 //#endif
@@ -236,7 +236,7 @@ public class Ioz{
 //      int num;
 //      num = my_vsnprintf(buffer, sizeof(buffer), format, ap);
 //      if (num == -1) {
-//	  freelog(LOG_ERROR, "Too much data: truncated in fz_fprintf (%lu)",
+//	  util.freelog(Log.LOG_ERROR, "Too much data: truncated in fz_fprintf (%lu)",
 //		  (unsigned long) sizeof(buffer));
 //      }
 //      retval = gzwrite(fp.u.zlib, buffer, (unsigned int)buffer.length());

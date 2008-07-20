@@ -501,7 +501,7 @@ public class Diplodlg{
 //    
 //    /*if(type == diplstate_type.DS_WAR || type == DS_NEUTRAL) {*/
 //    if(type != DS_CEASEFIRE) {
-//      my_snprintf(cBuf, sizeof(cBuf), "  %s", Q"?diplomatic_state:Cease-fire");
+//      cBuf = util.my_snprintf( "  %s", Q"?diplomatic_state:Cease-fire");
 //      pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //	cBuf, 12, (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
 //      pBuf.string16.fgcol = color;
@@ -515,7 +515,7 @@ public class Diplodlg{
 //    }
 //    
 //    if(type != DS_PEACE) {
-//      my_snprintf(cBuf, sizeof(cBuf), "  %s", Q"?diplomatic_state:Peace");
+//      cBuf = util.my_snprintf( "  %s", Q"?diplomatic_state:Peace");
 //  
 //      pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //	cBuf, 12, (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
@@ -530,7 +530,7 @@ public class Diplodlg{
 //    }
 //    
 //    if(pplayer_can_ally(pPlayer0, pPlayer1)) {
-//      my_snprintf(cBuf, sizeof(cBuf), "  %s", Q"?diplomatic_state:Alliance");
+//      cBuf = util.my_snprintf( "  %s", Q"?diplomatic_state:Alliance");
 //      
 //      pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //	cBuf, 12, (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
@@ -572,7 +572,7 @@ public class Diplodlg{
 //    count++;
 //    
 //    /* ----- */
-//    my_snprintf(cBuf, sizeof(cBuf), "  %s", "World map");
+//    cBuf = util.my_snprintf( "  %s", "World map");
 //  
 //    pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //	cBuf, 12, (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
@@ -586,7 +586,7 @@ public class Diplodlg{
 //    count++;
 //    
 //    /* ----- */
-//    my_snprintf(cBuf, sizeof(cBuf), "  %s", "Sea map");
+//    cBuf = util.my_snprintf( "  %s", "Sea map");
 //  
 //    pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //	cBuf, 12, (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
@@ -603,7 +603,7 @@ public class Diplodlg{
 //  if(pPlayer0.economic.gold > 0) {
 //    pCont.value = pPlayer0.economic.gold;
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "Gold(max %d)", pPlayer0.economic.gold);
+//    cBuf = util.my_snprintf( "Gold(max %d)", pPlayer0.economic.gold);
 //    pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //			  cBuf, 12, WF_DRAW_THEME_TRANSPARENT);
 //    pBuf.string16.fgcol = color_t;
@@ -644,7 +644,7 @@ public class Diplodlg{
 //             add_to_gui_list(ID_LABEL, pBuf);
 //	     count++;
 //	     
-//	     my_snprintf(cBuf, sizeof(cBuf), "  %s", advances[i].name);
+//	     cBuf = util.my_snprintf( "  %s", advances[i].name);
 //  
 //             pBuf = create_iconlabel_from_chars(null, pWindow.dst, cBuf, 12,
 //	         (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
@@ -669,7 +669,7 @@ public class Diplodlg{
 //	  (get_invention(pPlayer1, i) == TECH_UNKNOWN || 
 //	   get_invention(pPlayer1, i) == TECH_REACHABLE)) {
 //	     
-//	     my_snprintf(cBuf, sizeof(cBuf), "  %s", advances[i].name);
+//	     cBuf = util.my_snprintf( "  %s", advances[i].name);
 //  
 //             pBuf = create_iconlabel_from_chars(null, pWindow.dst, cBuf, 12,
 //	         (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
@@ -702,7 +702,7 @@ public class Diplodlg{
 //    if (n > 0) {
 //      city_list_ptrs = MALLOC(sizeof(city ) * n);
 //      for (city pCity : pPlayer0.cities.data) {
-//        if (!is_capital(pCity)) {
+//        if (!pCity.is_capital()) {
 //	  city_list_ptrs[i] = pCity;
 //	  i++;
 //        }
@@ -726,7 +726,7 @@ public class Diplodlg{
 //      qsort(city_list_ptrs, i, sizeof(city ), city_name_compare);
 //        
 //      for (j = 0; j < i; j++) {
-//	my_snprintf(cBuf, sizeof(cBuf), "  %s", city_list_ptrs[j].name);
+//	cBuf = util.my_snprintf( "  %s", city_list_ptrs[j].name);
 //  
 //        pBuf = create_iconlabel_from_chars(null, pWindow.dst, cBuf, 12,
 //	     (WF_DRAW_THEME_TRANSPARENT|WF_DRAW_TEXT_LABEL_WITH_SPACE));
@@ -824,7 +824,7 @@ public class Diplodlg{
 //    pCont.id0 = pPlayer0.player_no;
 //    pCont.id1 = pPlayer1.player_no;
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "Diplomacy meeting");
+//    cBuf = util.my_snprintf( "Diplomacy meeting");
 //    
 //    hh = WINDOW_TILE_HIGH + 2;
 //    pStr = create_str16_from_char(cBuf, 12);
@@ -1077,7 +1077,7 @@ public class Diplodlg{
 //  pSDip_Dlg = MALLOC(sizeof(struct SMALL_DLG));
 //      
 //    
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //       "%s incident !", get_nation_name(pPlayer.nation));
 //  hh = WINDOW_TILE_HIGH + 2;
 //  pStr = create_str16_from_char(cBuf, 12);
@@ -1094,7 +1094,7 @@ public class Diplodlg{
 //
 //  /* ============================================================= */
 //  /* label */
-//  my_snprintf(cBuf, sizeof(cBuf), "Shall we declare WAR on them?");
+//  cBuf = util.my_snprintf( "Shall we declare WAR on them?");
 //  
 //  pStr = create_str16_from_char(cBuf, 14);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -1207,7 +1207,7 @@ public class Diplodlg{
 //  
 //    pSDip_Dlg = MALLOC(sizeof(struct SMALL_DLG));
 //          
-//    my_snprintf(cBuf, sizeof(cBuf),  "Foreign Minister");
+//    cBuf = util.my_snprintf(  "Foreign Minister");
 //    hh = WINDOW_TILE_HIGH + 2;
 //    pStr = create_str16_from_char(cBuf, 12);
 //    pStr.style |= TTF_STYLE_BOLD;
@@ -1223,7 +1223,7 @@ public class Diplodlg{
 //
 //    /* ============================================================= */
 //    /* label */
-//    my_snprintf(cBuf, sizeof(cBuf), _("Sir!, %s ambassador has arrived\n"
+//    cBuf = util.my_snprintf( _("Sir!, %s ambassador has arrived\n"
 //    		"What are your wishes?"), get_nation_name(pPlayer.nation));
 //  
 //    pStr = create_str16_from_char(cBuf, 14);
@@ -1240,9 +1240,9 @@ public class Diplodlg{
 //    if(type != diplstate_type.DS_WAR && can_client_issue_orders()) {
 //      
 //      if(type == DS_NEUTRAL) {
-//	my_snprintf(cBuf, sizeof(cBuf), "Declare WAR");
+//	cBuf = util.my_snprintf( "Declare WAR");
 //      } else {
-//	my_snprintf(cBuf, sizeof(cBuf), "Cancel Treaty");
+//	cBuf = util.my_snprintf( "Cancel Treaty");
 //      }
 //      
 //      /* cancel treaty */

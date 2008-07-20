@@ -122,5 +122,17 @@ public class city {
 	// struct ai_city ai;
 	//		  bool debug;
 	//		};
+	
+	/**************************************************************************
+	  Return true iff this city is its nation's capital.  The capital city is
+	  special-cased in a number of ways.
+	**************************************************************************/
+	public boolean is_capital()
+	{
+		//TODO
+//	  return (get_city_bonus(pcity, EFT_CAPITAL_CITY) != 0);
+		return false;
+	}
+	
 
 }

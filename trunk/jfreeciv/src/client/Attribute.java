@@ -184,7 +184,7 @@ public class Attribute{
 //  *pdata = result;
 //  *pdata_length = total_length;
 //  free(value_lengths);
-//  freelog(LOG_DEBUG, "serialized %d entries in %d bytes", entries,
+//  util.freelog(LOG_DEBUG, "serialized %d entries in %d bytes", entries,
 //	  total_length);
 //}
 //
@@ -213,7 +213,7 @@ public class Attribute{
 //  dio_get_uint32(&din, &dummy);
 //  assert(data_length == dummy);
 //
-//  freelog(LOG_DEBUG, "try to unserialized %d entries from %d bytes",
+//  util.freelog(LOG_DEBUG, "try to unserialized %d entries from %d bytes",
 //	  entries, (unsigned int) data_length);
 //
 //  for (i = 0; i < entries; i++) {
@@ -241,7 +241,7 @@ public class Attribute{
 //       * to delete all attributes.  Another symptom of the bug is the
 //       * value_length (above) is set to a random value, which can also
 //       * cause a bug. */
-//      freelog(LOG_ERROR, _("There has been a CMA error.  "
+//      util.freelog(Log.LOG_ERROR, _("There has been a CMA error.  "
 //			   "Your CMA settings may be broken."));
 //      free(pvalue);
 //      free(pkey);
@@ -287,7 +287,7 @@ public class Attribute{
 //
 //  if (!unserialize_hash(attribute_hash, pplayer.attribute_block.data,
 //			pplayer.attribute_block.length)) {
-//    freelog(LOG_ERROR, "Old attributes detected and removed.");
+//    util.freelog(Log.LOG_ERROR, "Old attributes detected and removed.");
 //  }
 //}
 //
@@ -301,7 +301,7 @@ public class Attribute{
 //  attr_key pkey;
 //  void *pvalue = null;
 //
-//  freelog(ATTRIBUTE_LOG_LEVEL, "attribute_set(key=%d, id=%d, x=%d, y=%d, "
+//  util.freelog(ATTRIBUTE_LOG_LEVEL, "attribute_set(key=%d, id=%d, x=%d, y=%d, "
 //	  "data_length=%d, data=%p)", key, id, x, y,
 //	  (unsigned int) data_length, data);
 //
@@ -354,7 +354,7 @@ public class Attribute{
 //  int length;
 //  struct data_in din;
 //
-//  freelog(ATTRIBUTE_LOG_LEVEL, "attribute_get(key=%d, id=%d, x=%d, y=%d, "
+//  util.freelog(ATTRIBUTE_LOG_LEVEL, "attribute_get(key=%d, id=%d, x=%d, y=%d, "
 //	  "max_data_length=%d, data=%p)", key, id, x, y,
 //	  (unsigned int) max_data_length, data);
 //
@@ -368,7 +368,7 @@ public class Attribute{
 //  pvalue = hash_lookup_data(attribute_hash, &pkey);
 //
 //  if (!pvalue) {
-//    freelog(ATTRIBUTE_LOG_LEVEL, "  not found");
+//    util.freelog(ATTRIBUTE_LOG_LEVEL, "  not found");
 //    return 0;
 //  }
 //
@@ -379,7 +379,7 @@ public class Attribute{
 //    dio_get_memory(&din, data, length);
 //  }
 //
-//  freelog(ATTRIBUTE_LOG_LEVEL, "  found length=%d", length);
+//  util.freelog(ATTRIBUTE_LOG_LEVEL, "  found length=%d", length);
 //  return length;
 //}
 //

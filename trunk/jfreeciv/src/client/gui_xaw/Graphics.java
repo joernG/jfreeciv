@@ -149,7 +149,7 @@ public class Graphics{
 //
 //  y+=lin;
 //
-//  my_snprintf(s, sizeof(s), "%d.%d.%d%s",
+//  s = util.my_snprintf( "%d.%d.%d%s",
 //	      MAJOR_VERSION, MINOR_VERSION,
 //	      PATCH_VERSION, VERSION_LABEL);
 //  w = XmbTextEscapement(main_font_set, s, s.length());
@@ -391,24 +391,24 @@ public class Graphics{
 //
 //  fp = fopen(filename, "rb");
 //  if (!fp) {
-//    freelog(LOG_FATAL, "Failed reading PNG file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed reading PNG file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  pngp = png_create_read_struct(PNG_LIBPNG_VER_STRING, null, null, null);
 //  if (!pngp) {
-//    freelog(LOG_FATAL, "Failed creating PNG struct");
+//    util.freelog(LOG_FATAL, "Failed creating PNG struct");
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  infop = png_create_info_struct(pngp);
 //  if (!infop) {
-//    freelog(LOG_FATAL, "Failed creating PNG struct");
+//    util.freelog(LOG_FATAL, "Failed creating PNG struct");
 //    exit(EXIT_FAILURE);
 //  }
 //  
 //  if (setjmp(pngp.jmpbuf)) {
-//    freelog(LOG_FATAL, "Failed while reading PNG file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed while reading PNG file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -443,7 +443,7 @@ public class Graphics{
 //
 //    free(mycolors);
 //  } else {
-//    freelog(LOG_FATAL, "PNG file has no palette: %s", filename);
+//    util.freelog(LOG_FATAL, "PNG file has no palette: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //

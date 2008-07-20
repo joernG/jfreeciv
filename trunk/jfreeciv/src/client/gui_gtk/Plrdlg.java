@@ -283,7 +283,7 @@ public class Plrdlg{
 //   * nation and color never change. */
 //  if (update == 0) {
 //    /* the playername */
-//    my_snprintf(namebuf, sizeof(namebuf), "%-16s", game.players[i].name);
+//    namebuf = util.my_snprintf( "%-16s", game.players[i].name);
 //    row[0] = namebuf;
 //
 //    /* since flag is a pixmap, this can be empty */
@@ -291,7 +291,7 @@ public class Plrdlg{
 //    row[1] = flagbuf;
 //
 //    /* the nation */
-//    row[2] = (char *) get_nation_name(game.players[i].nation);
+//    row[2] = (char *) Nation.get_nation_name(game.players[i].nation);
 //
 //    /* the nation color, empty since it's a block of color (no text). */
 //    row[3] = colbuf;
@@ -314,10 +314,10 @@ public class Plrdlg{
 //  } else {
 //    pds = pplayer_get_diplstate(game.player_ptr, get_player(i));
 //    if (pds.type == DS_CEASEFIRE) {
-//      my_snprintf(dsbuf, sizeof(dsbuf), "%s (%d)",
+//      dsbuf = util.my_snprintf( "%s (%d)",
 //		  diplstate_text(pds.type), pds.turns_left);
 //    } else {
-//      my_snprintf(dsbuf, sizeof(dsbuf), "%s", diplstate_text(pds.type));
+//      dsbuf = util.my_snprintf( "%s", diplstate_text(pds.type));
 //    }
 //  }
 //
@@ -338,7 +338,7 @@ public class Plrdlg{
 //
 //  /* text for idleness */
 //  if (game.players[i].nturns_idle > 3) {
-//    my_snprintf(idlebuf, sizeof(idlebuf),
+//    idlebuf = util.my_snprintf(
 //		PL_("(idle %d turn)", "(idle %d turns)",
 //		    game.players[i].nturns_idle - 1),
 //		game.players[i].nturns_idle - 1);
@@ -347,7 +347,7 @@ public class Plrdlg{
 //  }
 //
 //  /* text for reputation */
-//  my_snprintf(repbuf, sizeof(repbuf),
+//  repbuf = util.my_snprintf(
 //	      reputation_text(game.players[i].reputation));
 //
 //  /* assemble the whole lot */
@@ -399,7 +399,7 @@ public class Plrdlg{
 //  newflag_h = GTK_CLIST(players_list).row_height;
 //  newflag_w = ((double) newflag_h / flag_h) * flag_w;
 //
-//  freelog(LOG_DEBUG, "%dx%d %dx%d %dx%d", flag.width,
+//  util.freelog(LOG_DEBUG, "%dx%d %dx%d %dx%d", flag.width,
 //	  flag.height, flag_w, flag_h, newflag_w, newflag_h);
 //
 //  scaled = sprite_scale(croped, newflag_w, newflag_h);
@@ -509,7 +509,7 @@ public class Plrdlg{
 //  int player_index = LI_2_PI(row);
 //  player pplayer = &game.players[player_index];
 //
-//  if (pplayer.spaceship.state != SSHIP_NONE)
+//  if (pplayer.spaceship.state != spaceship_state.SSHIP_NONE)
 //    gtk_widget_set_sensitive(players_sship_command, true);
 //  else
 //    gtk_widget_set_sensitive(players_sship_command, false);

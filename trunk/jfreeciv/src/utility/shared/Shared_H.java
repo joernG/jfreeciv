@@ -40,7 +40,7 @@ public class Shared_H {
 
 //	#ifndef MAX
 //	#define MAX(x,y) (((x)>(y))?(x):(y))
-//	#define MIN(x,y) (((x)<(y))?(x):(y))
+//	#define Math.min(x,y) (((x)<(y))?(x):(y))
 //	#endif
 //	#define CLIP(lower,this,upper) \
 //	    ((this)<(lower)?(lower):(this)>(upper)?(upper):(this))
@@ -162,7 +162,7 @@ public class Shared_H {
 //	final char *int_to_text(unsigned int number);
 //
 //	bool is_ascii_name(final char *name);
-//	final char *textyear(int year);
+//	final char *Shared.textyear(int year);
 //	int compare_strings(final void *first, final void *second);
 //	int compare_strings_ptrs(final void *first, final void *second);
 //

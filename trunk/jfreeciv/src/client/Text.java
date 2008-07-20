@@ -89,7 +89,7 @@ public class Text{
 //     * overhead adds up quickly. */
 //    size_t new_size = MAX(new_len, *buffer_size * 2);
 //
-//    freelog(LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
+//    util.freelog(LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
 //	    (unsigned long)*buffer_size, (unsigned long)new_size, buf);
 //
 //    *buffer_size = new_size;
@@ -145,30 +145,30 @@ public class Text{
 //  before_penalty = gov.food_before_penalty;
 //
 //  if (before_penalty > 0 && x > before_penalty) {
-//    my_snprintf(food, sizeof(food), "%d(-1)", x);
+//    food = util.my_snprintf( "%d(-1)", x);
 //  } else {
-//    my_snprintf(food, sizeof(food), "%d", x);
+//    food = util.my_snprintf( "%d", x);
 //  }
 //
 //  x = get_shields_tile(ptile);
 //  before_penalty = gov.shields_before_penalty;
 //
 //  if (before_penalty > 0 && x > before_penalty) {
-//    my_snprintf(shields, sizeof(shields), "%d(-1)", x);
+//    shields = util.my_snprintf( "%d(-1)", x);
 //  } else {
-//    my_snprintf(shields, sizeof(shields), "%d", x);
+//    shields = util.my_snprintf( "%d", x);
 //  }
 //
 //  x = get_trade_tile(ptile);
 //  before_penalty = gov.trade_before_penalty;
 //
 //  if (before_penalty > 0 && x > before_penalty) {
-//    my_snprintf(trade, sizeof(trade), "%d(-1)", x);
+//    trade = util.my_snprintf( "%d(-1)", x);
 //  } else {
-//    my_snprintf(trade, sizeof(trade), "%d", x);
+//    trade = util.my_snprintf( "%d", x);
 //  }
 //  
-//  my_snprintf(s, sizeof(s), "%s/%s/%s", food, shields, trade);
+//  s = util.my_snprintf( "%s/%s/%s", food, shields, trade);
 //  return s;
 //}
 //
@@ -217,13 +217,13 @@ public class Text{
 //	add_line(PL_("%s territory (%d turn ceasefire)",
 //		     "%s territory (%d turn ceasefire)",
 //		     turns),
-//		 get_nation_name(owner.nation), turns);
+//		 Nation.get_nation_name(owner.nation), turns);
 //      } else {
 //	/* TRANS: "Territory of the friendly Polish".  See the
 //	 * ?nation adjectives. */
 //	add_line("Territory of the %s %s",
 //		 diplo_nation_plural_adjectives[ds[owner.player_no].type],
-//		 get_nation_name_plural(owner.nation));
+//		 Nation.Nation.get_nation_name_plural(owner.nation));
 //      }
 //    } else {
 //      add_line("Unclaimed territory");
@@ -238,7 +238,7 @@ public class Text{
 //    if (owner == game.player_ptr){
 //      /* TRANS: "City: Warsaw (Polish)" */
 //      add_line("City: %s (%s)", pcity.name,
-//	       get_nation_name(owner.nation));
+//	       Nation.get_nation_name(owner.nation));
 //    } else if (owner) {
 //      if (ds[owner.player_no].type == DS_CEASEFIRE) {
 //	int turns = ds[owner.player_no].turns_left;
@@ -248,12 +248,12 @@ public class Text{
 //				       "City: %s (%s, %d turn ceasefire)",
 //				       turns),
 //		 pcity.name,
-//		 get_nation_name(owner.nation),
+//		 Nation.get_nation_name(owner.nation),
 //		 turns);
 //      } else {
 //        /* TRANS: "City: Warsaw (Polish,friendly)" */
 //        add_line("City: %s (%s,%s)", pcity.name,
-//		 get_nation_name(owner.nation),
+//		 Nation.get_nation_name(owner.nation),
 //		 diplo_city_adjectives[ds[owner.player_no].type]);
 //      }
 //    }
@@ -294,11 +294,11 @@ public class Text{
 //
 //      pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
 //      if (pcity) {
-//	my_snprintf(tmp, sizeof(tmp), "/%s", pcity.name);
+//	tmp = util.my_snprintf( "/%s", pcity.name);
 //      }
 //      /* TRANS: "Unit: Musketeers (Polish/Warsaw)" */
 //      add_line("Unit: %s (%s%s)", ptype.name,
-//	  get_nation_name(owner.nation),
+//	  Nation.get_nation_name(owner.nation),
 //	  tmp);
 //    } else if (owner) {
 //      if (ds[owner.player_no].type == DS_CEASEFIRE) {
@@ -309,12 +309,12 @@ public class Text{
 //				       "Unit: %s (%s, %d turn ceasefire)",
 //				       turns),
 //		 ptype.name,
-//		 get_nation_name(owner.nation),
+//		 Nation.get_nation_name(owner.nation),
 //		 turns);
 //      } else {
 //	/* TRANS: "Unit: Musketeers (Polish,friendly)" */
 //	add_line("Unit: %s (%s,%s)", ptype.name,
-//		 get_nation_name(owner.nation),
+//		 Nation.get_nation_name(owner.nation),
 //		 diplo_city_adjectives[ds[owner.player_no].type]);
 //      }
 //    }
@@ -331,8 +331,8 @@ public class Text{
 //	  found = true;
 //
 //	  /* Presumably the best attacker and defender will be used. */
-//	  att_chance = MIN(att, att_chance);
-//	  def_chance = MIN(def, def_chance);
+//	  att_chance = Math.min(att, att_chance);
+//	  def_chance = Math.min(def, def_chance);
 //	}
 //      } }
 //
@@ -343,7 +343,7 @@ public class Text{
 //      }
 //    }
 //
-//    my_snprintf(vet, sizeof(vet), " (%s)",
+//    vet = util.my_snprintf( " (%s)",
 //		_(unit_type(punit).veteran[punit.veteran].name));
 //
 //    /* TRANS: A is attack power, D is defense power, FP is firepower,
@@ -514,7 +514,7 @@ public class Text{
 //
 //  add_line("Population: %s",
 //	     population_to_text(civ_population(game.player_ptr)));
-//  add_line("Year: %s", textyear(game.year));
+//  add_line("Year: %s", Shared.textyear(game.year));
 //  add_line("Gold: %d", game.player_ptr.economic.gold);
 //  add_line("Tax: %d Lux: %d Sci: %d", game.player_ptr.economic.tax,
 //	   game.player_ptr.economic.luxury,
@@ -680,7 +680,7 @@ public class Text{
 //  /* TRANS: spaceship text; should have finalant width. */
 //  add_line("Year of arrival: %8s",
 //	   (pship.state ==
-//	    SSHIP_LAUNCHED) ? textyear((int) (pship.launch_year +
+//	    spaceship_state.SSHIP_LAUNCHED) ? Shared.textyear((int) (pship.launch_year +
 //					      (int) pship.
 //					      travel_time)) : "-   ");
 //
@@ -767,13 +767,13 @@ public class Text{
 //  /* TRANS: "Republic of the Polish" */
 //  add_line("%s of the %s",
 //	   get_government_name(game.player_ptr.government),
-//	   get_nation_name_plural(game.player_ptr.nation));
+//	   Nation.Nation.get_nation_name_plural(game.player_ptr.nation));
 //
 //  add_line("%s %s: %s",
 //	   get_ruler_title(game.player_ptr.government,
 //			   game.player_ptr.is_male,
 //			   game.player_ptr.nation), game.player_ptr.name,
-//	   textyear(game.year));
+//	   Shared.textyear(game.year));
 //  RETURN;
 //}
 //

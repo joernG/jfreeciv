@@ -220,11 +220,11 @@ public class Mapgen_topology{
 //   * this error is to set the maximum size smaller for all topologies! */
 //  if (map.size > size + 0.9) {
 //    /* Warning when size is set uselessly big */ 
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Requested size of %d is too big for this topology.",
 //	    map.size);
 //  }
-//  freelog(LOG_VERBOSE,
+//  util.freelog(LOG_VERBOSE,
 //	  "Creating a map of size %d x %d = %d tiles (%d requested).",
 //	  map.xsize, map.ysize, map.xsize * map.ysize, map.size * 1000);
 //}

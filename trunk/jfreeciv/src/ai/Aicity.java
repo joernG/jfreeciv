@@ -97,7 +97,7 @@ public class Aicity{
 //
 //  if (pcity.food_surplus < 0 || pcity.shield_surplus < 0) {
 //    /* The city is unmaintainable, it can't be good */
-//    i = MIN(i, 0);
+//    i = Math.min(i, 0);
 //  }
 //
 //  return i;
@@ -157,7 +157,7 @@ public class Aicity{
 //{
 //  ai_data ai = ai_data_get(pplayer);
 //  int final_want = 0;
-//  city capital = find_palace(pplayer);
+//  city capital = pplayer.find_palace();
 //
 //  if (ai.impr_calc[id] == AI_IMPR_ESTIMATE) {
 //    return 0; /* Nothing to calculate here. */
@@ -181,7 +181,7 @@ public class Aicity{
 //  }
 //
 //  /* Ensure that we didn't inadvertantly move our palace */
-//  if (find_palace(pplayer) != capital) {
+//  if (pplayer.find_palace() != capital) {
 //    city_add_improvement(capital, get_building_for_effect(EFT_CAPITAL_CITY));
 //  }
 //
@@ -213,7 +213,7 @@ public class Aicity{
 //                 - team_count_members_alive(pplayer.team);
 //  ai_data ai = ai_data_get(pplayer);
 //  tile ptile = pcity.tile;
-//  boolean capital = is_capital(pcity);
+//  boolean capital = pcity.is_capital();
 //  government gov = get_gov_pplayer(pplayer);
 //
 //  /* Base want is calculated above using a more direct approach. */
@@ -238,7 +238,7 @@ public class Aicity{
 //      if (is_effect_useful(TARGET_BUILDING, pplayer, pcity, id,
 //			   null, id, peff)) {
 //	int amount = peff.value, c = cities[peff.range];
-//        city palace = find_palace(pplayer);
+//        city palace = pplayer.find_palace();
 //
 //	switch (*ptype) {
 //	  case EFT_PROD_TO_GOLD:
@@ -292,9 +292,9 @@ public class Aicity{
 //	  case EFT_MAKE_CONTENT_MIL_PER:
 //	  case EFT_MAKE_CONTENT:
 //	    if (!government_has_flag(gov, G_NO_UNHAPPY_CITIZENS)) {
-//              v += MIN(pcity.ppl_unhappy[4] + pcity.specialists[SP_ELVIS],
+//              v += Math.min(pcity.ppl_unhappy[4] + pcity.specialists[SP_ELVIS],
 //                       amount) * 20;
-//              v += MIN(amount, 5) * c;
+//              v += Math.min(amount, 5) * c;
 //	    }
 //	    break;
 //	  case EFT_MAKE_CONTENT_MIL:
@@ -315,11 +315,11 @@ public class Aicity{
 //	  case EFT_AIRLIFT:
 //            /* FIXME: We need some smart algorithm here. The below is 
 //             * totally braindead. */
-//	    v += c + MIN(ai.stats.units.land, 13);
+//	    v += c + Math.min(ai.stats.units.land, 13);
 //	    break;
 //	  case EFT_ANY_GOVERNMENT:
 //	    if (!can_change_to_government(pplayer, ai.goal.govt.idx)) {
-//	      v += MIN(MIN(ai.goal.govt.val, 65),
+//	      v += Math.min(Math.min(ai.goal.govt.val, 65),
 //		  num_unknown_techs_for_goal(pplayer, ai.goal.govt.req) * 10);
 //	    }
 //	    break;
@@ -493,7 +493,7 @@ public class Aicity{
 //            }
 //            break;
 //	  case EFT_LAST:
-//	    freelog(LOG_ERROR, "Bad effect type.");
+//	    util.freelog(Log.LOG_ERROR, "Bad effect type.");
 //	    break;
 //	}
 //      }
@@ -642,7 +642,7 @@ public class Aicity{
 //    choice.want   = 101;
 //    choice.type   = CT_ATTACKER;
 //  } else {
-//    freelog(LOG_VERBOSE, "Barbarians don't know what to build!");
+//    util.freelog(LOG_VERBOSE, "Barbarians don't know what to build!");
 //  }
 //}
 //
@@ -713,7 +713,7 @@ public class Aicity{
 //	    || pcity.ai.choice.choice != pcity.currently_building))
 //      notify_player_ex(null, pcity.tile, E_WONDER_STOPPED,
 //		       "Game: The %s have stopped building The %s in %s.",
-//		       get_nation_name_plural(pplayer.nation),
+//		       Nation.get_nation_name_plural(pplayer.nation),
 //		       get_impr_name_ex(pcity, pcity.currently_building),
 //		       pcity.name);
 //    
@@ -723,7 +723,7 @@ public class Aicity{
 //	    || pcity.currently_building != pcity.ai.choice.choice)) {
 //      notify_player_ex(null, pcity.tile, E_WONDER_STARTED,
 //		       "Game: The %s have started building The %s in %s.",
-//		       get_nation_name_plural(city_owner(pcity).nation),
+//		       Nation.get_nation_name_plural(city_owner(pcity).nation),
 //		       get_impr_name_ex(pcity, pcity.ai.choice.choice),
 //		       pcity.name);
 //      pcity.currently_building = pcity.ai.choice.choice;
@@ -942,7 +942,7 @@ public class Aicity{
 //    ai_upgrade_units(pcity, cached_limit, false);
 //  } }
 //
-//  freelog(LOG_BUY, "%s wants to keep %d in reserve (tax factor %d)", 
+//  util.freelog(LOG_BUY, "%s wants to keep %d in reserve (tax factor %d)", 
 //          pplayer.name, cached_limit, pplayer.ai.maxbuycost);
 //}
 //
@@ -1053,7 +1053,7 @@ public class Aicity{
 //{
 //  Speclists<city> minilist;
 //
-//  freelog(LOG_EMERGENCY,
+//  util.freelog(LOG_EMERGENCY,
 //          "Emergency in %s (%s, angry%d, unhap%d food%d, prod%d)",
 //          pcity.name, city_unhappy(pcity) ? "unhappy" : "content",
 //          pcity.ppl_angry[4], pcity.ppl_unhappy[4],
@@ -1070,7 +1070,7 @@ public class Aicity{
 //        /* can't stop working city center */
 //        continue;
 //      }
-//      freelog(LOG_DEBUG, "%s taking over %s's square in (%d, %d)",
+//      util.freelog(LOG_DEBUG, "%s taking over %s's square in (%d, %d)",
 //              pcity.name, acity.name, ptile.x, ptile.y);
 //      is_valid = map_to_city_map(&city_map_x, &city_map_y, acity, ptile);
 //      assert(is_valid);
@@ -1084,7 +1084,7 @@ public class Aicity{
 //  auto_arrange_workers(pcity);
 //
 //  if (!CITY_EMERGENCY(pcity)) {
-//    freelog(LOG_EMERGENCY, "Emergency in %s resolved", pcity.name);
+//    util.freelog(LOG_EMERGENCY, "Emergency in %s resolved", pcity.name);
 //    goto cleanup;
 //  }
 //
@@ -1099,10 +1099,10 @@ public class Aicity{
 //  }
 //
 //  if (CITY_EMERGENCY(pcity)) {
-//    freelog(LOG_EMERGENCY, "Emergency in %s remains unresolved", 
+//    util.freelog(LOG_EMERGENCY, "Emergency in %s remains unresolved", 
 //            pcity.name);
 //  } else {
-//    freelog(LOG_EMERGENCY, 
+//    util.freelog(LOG_EMERGENCY, 
 //            "Emergency in %s resolved by disbanding unit(s)", pcity.name);
 //  }
 //

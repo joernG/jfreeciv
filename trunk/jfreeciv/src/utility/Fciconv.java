@@ -162,7 +162,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //  assert(text != null);
 //
 //  if (cd == (iconv_t) (-1)) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "Could not convert text from %s to %s: %s",
 //	    from, to, strerror(errno));
 //    /* The best we can do? */
@@ -199,7 +199,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //    if (res == (size_t) (-1)) {
 //      if (errno != E2BIG) {
 //	/* Invalid input. */
-//	freelog(LOG_ERROR, "Invalid string conversion from %s to %s.",
+//	util.freelog(Log.LOG_ERROR, "Invalid string conversion from %s to %s.",
 //		from, to);
 //	iconv_close(cd);
 //	if (alloc) {
@@ -222,7 +222,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //    if (alloc) {
 //      /* Not enough space; try again. */
 //      buf[to_len - 1] = 0;
-//      freelog(LOG_VERBOSE, "   Result was '%s'.", buf);
+//      util.freelog(LOG_VERBOSE, "   Result was '%s'.", buf);
 //
 //      free(buf);
 //      to_len *= 2;
@@ -247,7 +247,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //  final String encoding1 = (dst ## _encoding);				    \
 //  char encoding[encoding1.length() + transliteration_string.length() + 1];    \
 //									    \
-//  my_snprintf(encoding, sizeof(encoding),				    \
+//  encoding = util.my_snprintf(				    \
 //	      "%s%s", encoding1, transliteration_string);		    \
 //  return convert_string(text, (src ## _encoding),			    \
 //			(encoding), null, 0);				    \
@@ -260,7 +260,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //  final String encoding1 = (dst ## _encoding);				    \
 //  char encoding[encoding1.length() + transliteration_string.length() + 1];    \
 //									    \
-//  my_snprintf(encoding, sizeof(encoding),				    \
+//  encoding = util.my_snprintf(				    \
 //	      "%s%s", encoding1, transliteration_string);		    \
 //  return convert_string(text, (src ## _encoding),			    \
 //                        encoding, buf, bufsz);				    \
@@ -296,7 +296,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //  static boolean recursion = false;
 //
 //  /* The recursion variable is used to prevent a recursive loop.  If
-//   * an iconv conversion fails, then freelog will be called and an
+//   * an iconv conversion fails, then util.freelog will be called and an
 //   * fc_fprintf will be done.  But below we do another iconv conversion
 //   * on the error messages, which is of course likely to fail also. */
 //  if (recursion) {

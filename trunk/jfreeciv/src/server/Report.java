@@ -202,9 +202,9 @@ public class Report{
 //    }
 //    cat_snprintf(buffer, sizeof(buffer),
 //		 "%2d: The %s %s\n", rank + 1, _(greatness[rank]),
-//		 get_nation_name_plural(size[i].player.nation));
+//		 Nation.get_nation_name_plural(size[i].player.nation));
 //  }
-//  my_snprintf(title, sizeof(title), _(historian_message[which_news]),
+//  title = util.my_snprintf( _(historian_message[which_news]),
 //    _(historian_name[myrand(ARRAY_SIZE(historian_name))]));
 //  page_conn_etype(&game.game_connections, "Historian Publishes!",
 //		  title, buffer, E_BROADCAST_REPORT);
@@ -534,7 +534,7 @@ public class Report{
 //{
 //  static char buf[64];
 //
-//  if (my_snprintf(buf, sizeof(buf), "%s%s", int_to_text(val), uni) == -1) {
+//  if (buf = util.my_snprintf( "%s%s", int_to_text(val), uni) == -1) {
 //    die("String truncated in value_units()!");
 //  }
 //
@@ -586,13 +586,13 @@ public class Report{
 //  assert(num > 0);
 //
 //  if ((num % 10) == 1 && num != 11) {
-//    my_snprintf(buf, sizeof(buf), fmt, num, "st");
+//    buf = util.my_snprintf( fmt, num, "st");
 //  } else if ((num % 10) == 2 && num != 12) {
-//    my_snprintf(buf, sizeof(buf), fmt, num, "nd");
+//    buf = util.my_snprintf( fmt, num, "nd");
 //  } else if ((num % 10) == 3 && num != 13) {
-//    my_snprintf(buf, sizeof(buf), fmt, num, "rd");
+//    buf = util.my_snprintf( fmt, num, "rd");
 //  } else {
-//    my_snprintf(buf, sizeof(buf), fmt, num, "th");
+//    buf = util.my_snprintf( fmt, num, "th");
 //  }
 //
 //  return buf;
@@ -648,7 +648,7 @@ public class Report{
 //
 //    if(player_has_embassy(pplayer, best_player) && (pplayer != best_player)) {
 //      cat_snprintf(outptr, out_size, "   %s: %s",
-//		   get_nation_name_plural(best_player.nation),
+//		   Nation.get_nation_name_plural(best_player.nation),
 //		   prow.to_text(prow.get_value(best_player)));
 //    }
 //  }
@@ -738,9 +738,9 @@ public class Report{
 //    return;
 //  }
 //
-//  my_snprintf(civbuf, sizeof(civbuf), "The %s of the %s",
+//  civbuf = util.my_snprintf( "The %s of the %s",
 //	      get_government_name(pplayer.government),
-//	      get_nation_name_plural(pplayer.nation));
+//	      Nation.get_nation_name_plural(pplayer.nation));
 //
 //  buffer[0] = '\0';
 //  for (i = 0; i < ARRAY_SIZE(rowtable); i++) {
@@ -780,32 +780,32 @@ public class Report{
 //      if (feof(fp) != 0) {
 //	break;
 //      }
-//      freelog(LOG_ERROR, "Can't read scorelog file header!");
+//      util.freelog(Log.LOG_ERROR, "Can't read scorelog file header!");
 //      return false;
 //    }
 //
 //    ptr = strchr(line, '\n');
 //    if (!ptr) {
-//      freelog(LOG_ERROR, "Scorelog file line is too long!");
+//      util.freelog(Log.LOG_ERROR, "Scorelog file line is too long!");
 //      return false;
 //    }
 //    *ptr = '\0';
 //
 //    if (line_nr == 1) {
 //      if (strncmp(line, scorelog_magic, scorelog_magic.length()) != 0) {
-//	freelog(LOG_ERROR, "Bad magic in file line %d!", line_nr);
+//	util.freelog(Log.LOG_ERROR, "Bad magic in file line %d!", line_nr);
 //	return false;
 //      }
 //    }
 //
 //    if (strncmp(line, "id ", strlen("id ")) == 0) {
 //      if (id.length() > 0) {
-//	freelog(LOG_ERROR, "Multiple ID entries!");
+//	util.freelog(Log.LOG_ERROR, "Multiple ID entries!");
 //	return false;
 //      }
 //      mystrlcpy(id, line + strlen("id "), MAX_ID_LEN);
 //      if (strcmp(id, game.id) != 0) {
-//	freelog(LOG_ERROR, "IDs don't match! game='%s' scorelog='%s'",
+//	util.freelog(Log.LOG_ERROR, "IDs don't match! game='%s' scorelog='%s'",
 //		game.id, id);
 //	return false;
 //      }
@@ -815,7 +815,7 @@ public class Report{
 //      int turn;
 //
 //      if (sscanf(line + strlen("turn "), "%d", &turn) != 1) {
-//	freelog(LOG_ERROR, "Scorelog file line is bad!");
+//	util.freelog(Log.LOG_ERROR, "Scorelog file line is bad!");
 //	return false;
 //      }
 //
@@ -830,7 +830,7 @@ public class Report{
 //      if (sscanf
 //	  (line + strlen("addplayer "), "%d %d %s", &turn, &plr_no,
 //	   plr_name) != 3) {
-//	freelog(LOG_ERROR, "Scorelog file line is bad!");
+//	util.freelog(Log.LOG_ERROR, "Scorelog file line is bad!");
 //	return false;
 //      }
 //
@@ -841,7 +841,7 @@ public class Report{
 //      int turn, plr_no;
 //
 //      if (sscanf(line + strlen("delplayer "), "%d %d", &turn, &plr_no) != 2) {
-//	freelog(LOG_ERROR, "Scorelog file line is bad!");
+//	util.freelog(Log.LOG_ERROR, "Scorelog file line is bad!");
 //	return false;
 //      }
 //
@@ -850,17 +850,17 @@ public class Report{
 //  }
 //
 //  if (*last_turn == -1) {
-//    freelog(LOG_ERROR, "Scorelog contains no turn!");
+//    util.freelog(Log.LOG_ERROR, "Scorelog contains no turn!");
 //    return false;
 //  }
 //
 //  if (id.length() == 0) {
-//    freelog(LOG_ERROR, "Scorelog contains no ID!");
+//    util.freelog(Log.LOG_ERROR, "Scorelog contains no ID!");
 //    return false;
 //  }
 //
 //  if (*last_turn + 1 != game.turn) {
-//    freelog(LOG_ERROR, "Scorelog doesn't match savegame!");
+//    util.freelog(Log.LOG_ERROR, "Scorelog doesn't match savegame!");
 //    return false;
 //  }
 //
@@ -958,7 +958,7 @@ public class Report{
 //    case SL_CREATE:
 //      fp = fopen(logname, "w");
 //      if (!fp) {
-//	freelog(LOG_ERROR, "Can't open scorelog file for creation!");
+//	util.freelog(Log.LOG_ERROR, "Can't open scorelog file for creation!");
 //	goto log_civ_score_disable;
 //      }
 //      fprintf(fp, "%s%s\n", scorelog_magic, VERSION_STRING);
@@ -976,12 +976,12 @@ public class Report{
 //    case SL_APPEND:
 //      fp = fopen(logname, "a");
 //      if (!fp) {
-//	freelog(LOG_ERROR, "Can't open scorelog file for appending!");
+//	util.freelog(Log.LOG_ERROR, "Can't open scorelog file for appending!");
 //	goto log_civ_score_disable;
 //      }
 //      break;
 //    default:
-//      freelog(LOG_ERROR, "log_civ_score: bad operation %d", (int) oper);
+//      util.freelog(Log.LOG_ERROR, "log_civ_score: bad operation %d", (int) oper);
 //      goto log_civ_score_disable;
 //    }
 //  }
@@ -989,7 +989,7 @@ public class Report{
 //#define GOOD_PLAYER(p) ((p).is_alive)
 //
 //  if (game.turn > last_turn) {
-//    fprintf(fp, "turn %d %d %s\n", game.turn, game.year, textyear(game.year));
+//    fprintf(fp, "turn %d %d %s\n", game.turn, game.year, Shared.textyear(game.year));
 //    last_turn = game.turn;
 //  }
 //
@@ -1106,7 +1106,7 @@ public class Report{
 //		     "%2d: The %s %s scored %d points\n",
 //		     size[i].value),
 //		 i + 1, _(greatness[i]),
-//		 get_nation_name_plural(size[i].player.nation),
+//		 Nation.get_nation_name_plural(size[i].player.nation),
 //		 size[i].value);
 //  }
 //  page_conn(&game.game_connections,
@@ -1181,10 +1181,10 @@ public class Report{
 //  int len;
 //  struct packet_page_msg genmsg;
 //
-//  len = my_snprintf(genmsg.message, sizeof(genmsg.message),
+//  len = genmsg.message = util.my_snprintf(
 //		    "%s\n%s\n%s", caption, headline, lines);
 //  if (len == -1) {
-//    freelog(LOG_ERROR, "Message truncated in page_conn_etype()!");
+//    util.freelog(Log.LOG_ERROR, "Message truncated in page_conn_etype()!");
 //  }
 //  genmsg.event = event;
 //  

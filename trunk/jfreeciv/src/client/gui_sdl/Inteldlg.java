@@ -130,7 +130,7 @@ public class Inteldlg{
 //  pBuf.action = spaceship_callback;
 //  set_wstate(pBuf, FC_WS_NORMAL);
 //  pBuf.data.player = pPlayer;
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //	      "Intelligence Information about %s Spaceship", 
 //	      				get_nation_name(pPlayer.nation));
 //  pBuf.string16 = create_str16_from_char(cBuf, 12);
@@ -138,7 +138,7 @@ public class Inteldlg{
 //  add_to_gui_list(ID_ICON, pBuf);
 //	
 //  /* ---------- */
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //	      "Intelligence Information for the %s Empire", 
 //	      				get_nation_name(pPlayer.nation));
 //  
@@ -154,10 +154,10 @@ public class Inteldlg{
 //    
 //  /* ---------- */
 //  
-//  pCapital = find_palace(pPlayer);
+//  pCapital = pPlayer.find_palace();
 //  change_ptsize16(pStr, 10);
 //  pStr.style &= ~TTF_STYLE_BOLD;
-//  my_snprintf(cBuf, sizeof(cBuf),
+//  cBuf = util.my_snprintf(
 //    _("Ruler: %s %s  Government: %s\nCapital: %s  Gold: %d\nTax: %d%%"
 //      " Science: %d%% Luxury: %d%%\nResearching: %s(%d/%d)"),
 //    get_ruler_title(pPlayer.government, pPlayer.is_male, pPlayer.nation),
@@ -218,7 +218,7 @@ public class Inteldlg{
 //    
 //    w = MAX(w, col * pBuf.size.w + count + DOUBLE_FRAME_WH);
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "Their techs that we don't have :");
+//    cBuf = util.my_snprintf( "Their techs that we don't have :");
 //    copy_chars_to_string16(pStr, cBuf);
 //    pStr.style |= TTF_STYLE_BOLD;
 //    pText2 = create_text_surf_from_str16(pStr);

@@ -139,7 +139,7 @@ public class Graphics{
 //  radar_gfx_sprite = load_gfxfile(minimap_intro_filename);
 //  tot = radar_gfx_sprite.width;
 //
-//  my_snprintf(s, sizeof(s), "%d.%d.%d%s",
+//  s = util.my_snprintf( "%d.%d.%d%s",
 //	      MAJOR_VERSION, MINOR_VERSION,
 //	      PATCH_VERSION, VERSION_LABEL);
 //
@@ -341,7 +341,7 @@ public class Graphics{
 //  int		 w, h;
 //
 //  if(!(im=gdk_imlib_load_image((char*)filename))) {
-//    freelog(LOG_FATAL, "Failed reading graphics file: %s", filename);
+//    util.freelog(LOG_FATAL, "Failed reading graphics file: %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -350,7 +350,7 @@ public class Graphics{
 //  w=im.rgb_width; h=im.rgb_height;
 //
 //  if(!gdk_imlib_render (im, w, h)) {
-//    freelog(LOG_FATAL, "failed render of sprite struct for %s", filename);
+//    util.freelog(LOG_FATAL, "failed render of sprite struct for %s", filename);
 //    exit(EXIT_FAILURE);
 //  }
 //  

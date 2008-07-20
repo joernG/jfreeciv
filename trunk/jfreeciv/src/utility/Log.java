@@ -51,16 +51,16 @@ public class Log{
 //	void log_set_level(int level);
 //	void log_set_callback(log_callback_fn callback);
 //
-//	void real_freelog(int level, final char *message, ...)
+//	void real_util.freelog(int level, final char *message, ...)
 //	                  fc__attribute((__format__ (__printf__, 2, 3)));
-//	void vreal_freelog(int level, final char *message, va_list ap);
+//	void vreal_util.freelog(int level, final char *message, va_list ap);
 //
 //
 //	#ifdef DEBUG
 //	/* A static (per-file) function to use/update the above per-file vars.
 //	 * This should only be called for LOG_DEBUG messages.
 //	 * It returns whether such a LOG_DEBUG message should be sent on
-//	 * to real_freelog.
+//	 * to real_util.freelog.
 //	 */
 //	static inline int logdebug_check(final char *file, int line)
 //	{
@@ -76,17 +76,17 @@ public class Log{
 //
 	public static void freelog(int level, Object ... message){
 //	#ifdef DEBUG
-//	#  define freelog(level, ...)                                             \
+//	#  define util.freelog(level, ...)                                             \
 //	  do {                                                                      \
 //	    if ((level) != LOG_DEBUG || logdebug_check(__FILE__, __LINE__)) {       \
-//	      real_freelog((level), __VA_ARGS__);                                   \
+//	      real_util.freelog((level), __VA_ARGS__);                                   \
 //	    }                                                                       \
 //	  } while(FALSE)
 //	#else
-//	#  define freelog(level, ...)                                             \
+//	#  define util.freelog(level, ...)                                             \
 //	  do {                                                                      \
 //	    if ((level) != LOG_DEBUG) {                                             \
-//	      real_freelog((level), __VA_ARGS__);                                   \
+//	      real_util.freelog((level), __VA_ARGS__);                                   \
 //	    }                                                                       \
 //	  } while(FALSE) 
 //
@@ -247,8 +247,8 @@ public class Log{
 //			log_filename = null;
 //		}
 //		log_callback = callback;
-//		freelog(LOG_VERBOSE, "log started");
-//		freelog(LOG_DEBUG, "LOG_DEBUG test");
+//		util.freelog(LOG_VERBOSE, "log started");
+//		util.freelog(LOG_DEBUG, "LOG_DEBUG test");
 	}
 
 // /**************************************************************************
@@ -316,7 +316,7 @@ public class Log{
 //Calls log_callback if non-null, else prints to stderr.
 //**************************************************************************/
 //public static final int MAX_LEN_LOG_LINE = 512;
-//void vreal_freelog(int level, final String message, va_list ap)
+//void vreal_util.freelog(int level, final String message, va_list ap)
 //{
 //  static char bufbuf[2][MAX_LEN_LOG_LINE];
 //  char buf[MAX_LEN_LOG_LINE];
@@ -344,7 +344,7 @@ public class Log{
 //    if(level==prev_level && 0==strncmp(bufbuf[0],bufbuf[1],MAX_LEN_LOG_LINE-1)){
 //      repeated++;
 //      if(repeated==next){
-//	my_snprintf(buf, sizeof(buf),
+//	buf = util.my_snprintf(
 //		    PL_("last message repeated %d time",
 //		        "last message repeated %d times",
 //			repeated-prev), repeated-prev);
@@ -363,7 +363,7 @@ public class Log{
 //	  /* just repeat the previous message: */
 //	  log_write(fs, prev_level, bufbuf1 ? bufbuf[0] : bufbuf[1]);
 //	} else {
-//          my_snprintf(buf, sizeof(buf),
+//          buf = util.my_snprintf(
 //                      PL_("last message repeated %d time", 
 //                          "last message repeated %d times", repeated - prev), 
 //                      repeated - prev);
@@ -389,11 +389,11 @@ public class Log{
 //    }
 //  }
 //}
-//void real_freelog(int level, final String message)
+//void real_util.freelog(int level, final String message)
 //{
 //  va_list ap;
 //  va_start(ap, message);
-//  vreal_freelog(level, message, ap);
+//  vreal_util.freelog(level, message, ap);
 //  va_end(ap);
 //}
 }

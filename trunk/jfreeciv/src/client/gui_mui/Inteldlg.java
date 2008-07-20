@@ -135,7 +135,7 @@ public class Inteldlg{
 //
 //  if (intel_wnd)
 //  {
-//    city pcity = find_palace(p);
+//    city pcity = p.find_palace();
 //    int i;
 //
 //    settextf(title_text, "Intelligence Information for the %s Empire", get_nation_name(p.nation));

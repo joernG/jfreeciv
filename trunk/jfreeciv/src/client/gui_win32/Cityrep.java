@@ -336,7 +336,7 @@ public class Cityrep{
 //  city pcity;
 //  selcount=ListBox_GetSelCount(GetDlgItem(hWnd,ID_CITYREP_LIST));
 //  if (selcount==LB_ERR) return;
-//  selcount=MIN(256,selcount);
+//  selcount=Math.min(256,selcount);
 //  selcount=ListBox_GetSelItems(GetDlgItem(hWnd,ID_CITYREP_LIST),
 //			       selcount,&cityids[0]);
 //  for(i=0;i<selcount;i++)
@@ -359,7 +359,7 @@ public class Cityrep{
 //  if (selcount == LB_ERR) {
 //    return;
 //  }
-//  selcount = MIN(256, selcount);
+//  selcount = Math.min(256, selcount);
 //  selcount = ListBox_GetSelItems(GetDlgItem(hWnd, ID_CITYREP_LIST),
 //				 selcount, &cityids[0]);
 //  for (i = 0; i < selcount; i++) {
@@ -387,7 +387,7 @@ public class Cityrep{
 //      send_packet_generic_integer(&aconnection, PACKET_CITY_REFRESH, &packet);
 //      return;
 //    }
-//  selcount=MIN(256,selcount);
+//  selcount=Math.min(256,selcount);
 //  selcount=ListBox_GetSelItems(GetDlgItem(hWnd,ID_CITYREP_LIST),
 //			       selcount,&cityids[0]);
 //  for (i=0;i<selcount;i++)
@@ -416,7 +416,7 @@ public class Cityrep{
 //
 //  if ((selcount==LB_ERR)||(selcount==0))
 //    return;
-//  selcount=MIN(256,selcount);
+//  selcount=Math.min(256,selcount);
 //  selcount=ListBox_GetSelItems(GetDlgItem(hWnd,ID_CITYREP_LIST),
 //			       selcount,&cityids[0]);
 //  popup=CreatePopupMenu();
@@ -496,7 +496,7 @@ public class Cityrep{
 //  
 //  selcount=ListBox_GetSelCount(GetDlgItem(hWnd,ID_CITYREP_LIST));
 //  if (selcount==LB_ERR) return;
-//  selcount=MIN(256,selcount);
+//  selcount=Math.min(256,selcount);
 //  selcount=ListBox_GetSelItems(GetDlgItem(hWnd,ID_CITYREP_LIST),
 //			       selcount,&cityids[0]);
 //
@@ -572,7 +572,7 @@ public class Cityrep{
 //  int num;
 //  selcount=ListBox_GetSelCount(hLst);
 //  if (selcount==LB_ERR) return;
-//    selcount=MIN(256,selcount);
+//    selcount=Math.min(256,selcount);
 //  selcount=ListBox_GetSelItems(hLst,
 //			       selcount,&cityids[0]);
 //  num=ListBox_GetCount(hLst);

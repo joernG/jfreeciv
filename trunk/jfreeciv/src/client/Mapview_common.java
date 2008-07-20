@@ -454,9 +454,9 @@ public class Mapview_common{
 //   * done in GUI coordinates.  Note that if the GUI coordinates wrap
 //   * no overlap will be found. */
 //  common_x0 = MAX(old_gui_x0, gui_x0);
-//  common_x1 = MIN(old_gui_x0, gui_x0) + width;
+//  common_x1 = Math.min(old_gui_x0, gui_x0) + width;
 //  common_y0 = MAX(old_gui_y0, gui_y0);
-//  common_y1 = MIN(old_gui_y0, gui_y0) + height;
+//  common_y1 = Math.min(old_gui_y0, gui_y0) + height;
 //
 //  if (mapview_canvas.can_do_cached_drawing
 //      && common_x1 > common_x0 && common_y1 > common_y0) {
@@ -470,14 +470,14 @@ public class Mapview_common{
 //      update_x1 = gui_x0 + width;
 //    } else {
 //      update_x0 = gui_x0;
-//      update_x1 = MIN(old_gui_x0, gui_x0 + width);
+//      update_x1 = Math.min(old_gui_x0, gui_x0 + width);
 //    }
 //    if (old_gui_y0 < gui_y0) {
 //      update_y0 = MAX(old_gui_y0 + height, gui_y0);
 //      update_y1 = gui_y0 + height;
 //    } else {
 //      update_y0 = gui_y0;
-//      update_y1 = MIN(old_gui_y0, gui_y0 + height);
+//      update_y1 = Math.min(old_gui_y0, gui_y0 + height);
 //    }
 //
 //    dirty_all();
@@ -548,7 +548,7 @@ public class Mapview_common{
 //    anim_timer = renew_timer_start(anim_timer, TIMER_USER, TIMER_ACTIVE);
 //
 //    do {
-//      mytime = MIN(read_timer_seconds(anim_timer), timing_sec);
+//      mytime = Math.min(read_timer_seconds(anim_timer), timing_sec);
 //
 //      base_set_mapview_origin(start_x + diff_x * (mytime / timing_sec),
 //			      start_y + diff_y * (mytime / timing_sec));
@@ -559,7 +559,7 @@ public class Mapview_common{
 //    } while (mytime < timing_sec);
 //
 //    mytime = read_timer_seconds(anim_timer);
-//    freelog(LOG_DEBUG, "Got %d frames in %f seconds: %f FPS.",
+//    util.freelog(LOG_DEBUG, "Got %d frames in %f seconds: %f FPS.",
 //	    frames, mytime, (double)frames / mytime);
 //  } else {
 //    base_set_mapview_origin(gui_x0, gui_y0);
@@ -647,8 +647,8 @@ public class Mapview_common{
 //    NATIVE_TO_MAP_POS(&map_x, &map_y, map.xsize - 1, map.ysize - 1);
 //    map_to_gui_pos(&gui_x4, &gui_y4, map_x, map_y);
 //
-//    *xmin = MIN(gui_x1, MIN(gui_x2, gui_x3)) - mapview_canvas.width / 2;
-//    *ymin = MIN(gui_y1, MIN(gui_y2, gui_y3)) - mapview_canvas.height / 2;
+//    *xmin = Math.min(gui_x1, Math.min(gui_x2, gui_x3)) - mapview_canvas.width / 2;
+//    *ymin = Math.min(gui_y1, Math.min(gui_y2, gui_y3)) - mapview_canvas.height / 2;
 //
 //    *xmax = MAX(gui_x4, MAX(gui_x2, gui_x3)) + mapview_canvas.width / 2;
 //    *ymax = MAX(gui_y4, MAX(gui_y2, gui_y3)) + mapview_canvas.height / 2;
@@ -668,7 +668,7 @@ public class Mapview_common{
 //    *ymax += (diff + 1) / 2;
 //  }
 //
-//  freelog(LOG_DEBUG, "x: %d<-%d.%d; y: %d<-%d.%d",
+//  util.freelog(LOG_DEBUG, "x: %d<-%d.%d; y: %d<-%d.%d",
 //	  *xmin, *xsize, *xmax, *ymin, *ymax, *ysize);
 //}
 //
@@ -816,7 +816,7 @@ public class Mapview_common{
 //      static boolean reported = false;
 //
 //      if (!reported) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		_("Paths longer than 99 turns are not supported.\n"
 //		  "Report this bug to bugs@freeciv.org."));
 //	reported = true;
@@ -1385,7 +1385,7 @@ public class Mapview_common{
 //  int canvas_x, canvas_y;
 //
 //  if (tile_to_canvas_pos(&canvas_x, &canvas_y, ptile)) {
-//    freelog(LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
+//    util.freelog(LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
 //	    TILE_XY(ptile), canvas_x, canvas_y);
 //    put_one_tile(mapview_canvas.store, ptile,
 //		 canvas_x, canvas_y, false);
@@ -1529,7 +1529,7 @@ public class Mapview_common{
 //  int canvas_x, canvas_y;
 //
 //  if (tile_to_canvas_pos(&canvas_x, &canvas_y, ptile)) {
-//    freelog(LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
+//    util.freelog(LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
 //	    TILE_XY(ptile), canvas_x, canvas_y);
 //
 //    put_one_tile_iso(mapview_canvas.store,
@@ -1561,8 +1561,8 @@ public class Mapview_common{
 //
 //  canvas_x = MAX(canvas_x, 0);
 //  canvas_y = MAX(canvas_y, 0);
-//  width = MIN(mapview_canvas.store_width - canvas_x, width);
-//  height = MIN(mapview_canvas.store_height - canvas_y, height);
+//  width = Math.min(mapview_canvas.store_width - canvas_x, width);
+//  height = Math.min(mapview_canvas.store_height - canvas_y, height);
 //
 //  gui_x0 = mapview_canvas.gui_x0 + canvas_x;
 //  gui_y0 = mapview_canvas.gui_y0 + canvas_y;
@@ -1570,7 +1570,7 @@ public class Mapview_common{
 //	  && width == mapview_canvas.store_width
 //	  && height == mapview_canvas.store_height);
 //
-//  freelog(LOG_DEBUG,
+//  util.freelog(LOG_DEBUG,
 //	  "update_map_canvas(pos=(%d,%d), size=(%d,%d))",
 //	  canvas_x, canvas_y, width, height);
 //
@@ -1833,8 +1833,8 @@ public class Mapview_common{
 //
 //  /* The actual area drawn will extend beyond the base rectangle, since
 //   * the goto lines have width. */
-//  dirty_rect(MIN(canvas_x, canvas_x + canvas_dx) - GOTO_WIDTH,
-//	     MIN(canvas_y, canvas_y + canvas_dy) - GOTO_WIDTH,
+//  dirty_rect(Math.min(canvas_x, canvas_x + canvas_dx) - GOTO_WIDTH,
+//	     Math.min(canvas_y, canvas_y + canvas_dy) - GOTO_WIDTH,
 //	     ABS(canvas_dx) + 2 * GOTO_WIDTH,
 //	     ABS(canvas_dy) + 2 * GOTO_WIDTH);
 //
@@ -1862,8 +1862,8 @@ public class Mapview_common{
 //  () tile_to_canvas_pos(&canvas_x, &canvas_y, src_tile);
 //  map_to_gui_vector(&canvas_dx, &canvas_dy, DIR_DX[dir], DIR_DY[dir]);
 //
-//  update_map_canvas(MIN(canvas_x, canvas_x + canvas_dx),
-//		    MIN(canvas_y, canvas_y + canvas_dy),
+//  update_map_canvas(Math.min(canvas_x, canvas_x + canvas_dx),
+//		    Math.min(canvas_y, canvas_y + canvas_dy),
 //		    ABS(canvas_dx) + NORMAL_TILE_WIDTH,
 //		    ABS(canvas_dy) + NORMAL_TILE_HEIGHT);
 //}
@@ -1999,7 +1999,7 @@ public class Mapview_common{
 //    do {
 //      int new_x, new_y;
 //
-//      mytime = MIN(read_timer_seconds(anim_timer), timing_sec);
+//      mytime = Math.min(read_timer_seconds(anim_timer), timing_sec);
 //
 //      new_x = start_x + canvas_dx * (mytime / timing_sec);
 //      new_y = start_y + canvas_dy * (mytime / timing_sec);
@@ -2192,7 +2192,7 @@ public class Mapview_common{
 //**************************************************************************/
 //void unqueue_mapview_updates()
 //{
-//  freelog(LOG_DEBUG, "unqueue_mapview_update: needed_updates=%d",
+//  util.freelog(LOG_DEBUG, "unqueue_mapview_update: needed_updates=%d",
 //	  needed_updates);
 //
 //  if (needed_updates & UPDATE_MAP_CANVAS_VISIBLE) {
@@ -2457,7 +2457,7 @@ public class Mapview_common{
 //    y[3] = y[2];
 //  }
 //
-//  freelog(LOG_DEBUG, "(%d,%d).(%d,%x).(%d,%d).(%d,%d)",
+//  util.freelog(LOG_DEBUG, "(%d,%d).(%d,%x).(%d,%d).(%d,%d)",
 //	  x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3]);
 //}
 //
@@ -2592,12 +2592,12 @@ public class Mapview_common{
 //  /* Set the scale of the overview map.  This attempts to limit the overview
 //   * to 120 pixels wide or high. */
 //  if (MAP_IS_ISOMETRIC) {
-//    OVERVIEW_TILE_SIZE = MIN(MAX(120 / width, 1), 120 / height + 1);
+//    OVERVIEW_TILE_SIZE = Math.min(MAX(120 / width, 1), 120 / height + 1);
 //
 //    /* Clip half tile left and right.  See comment in map_to_overview_pos. */
 //    shift = (!topo_has_flag(TF_WRAPX) ? -OVERVIEW_TILE_SIZE : 0);
 //  } else {
-//    OVERVIEW_TILE_SIZE = MIN(120 / width + 1, 120 / height + 1);
+//    OVERVIEW_TILE_SIZE = Math.min(120 / width + 1, 120 / height + 1);
 //  }
 //
 //  overview.height = OVERVIEW_TILE_HEIGHT * height;

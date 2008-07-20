@@ -260,7 +260,7 @@ public class Diplodlg{
 //  }
 //
 //  for (city pcity : pgiver.cities.data) {
-//    if (!is_capital(pcity)) {
+//    if (!pcity.is_capital()) {
 //      city_list_ptrs[i] = pcity;
 //      i++;
 //    }
@@ -312,7 +312,7 @@ public class Diplodlg{
 //	pdialog.dip_hbox);
 //
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "The %s offerings", get_nation_name(plr0.nation));
 //  pdialog.dip_frame0=gtk_frame_new(buf);
 //  gtk_box_pack_start(GTK_BOX(pdialog.dip_hbox),pdialog.dip_frame0, true, false, 2);
@@ -320,7 +320,7 @@ public class Diplodlg{
 //  pdialog.dip_vboxm = gtk_vbox_new(false,0);
 //  gtk_box_pack_start(GTK_BOX(pdialog.dip_hbox),pdialog.dip_vboxm, true, false, 2);
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	      "The %s offerings", get_nation_name(plr1.nation));
 //  pdialog.dip_frame1=gtk_frame_new(buf);
 //  gtk_box_pack_start(GTK_BOX(pdialog.dip_hbox),pdialog.dip_frame1, true, false, 2);
@@ -426,14 +426,14 @@ public class Diplodlg{
 //
 //  pdialog.dip_gold_entry1=gtk_entry_new();
 //  
-//  my_snprintf(buf, sizeof(buf), "Gold(max %d)", plr0.economic.gold);
+//  buf = util.my_snprintf( "Gold(max %d)", plr0.economic.gold);
 //  pdialog.dip_gold_frame0=gtk_frame_new(buf);
 //  gtk_container_add(GTK_CONTAINER(pdialog.dip_gold_frame0),
 //	pdialog.dip_gold_entry0);
 //  gtk_box_pack_start(GTK_BOX(pdialog.dip_vbox0),
 //	pdialog.dip_gold_frame0, false,false,2);
 //
-//  my_snprintf(buf, sizeof(buf), "Gold(max %d)", plr1.economic.gold);
+//  buf = util.my_snprintf( "Gold(max %d)", plr1.economic.gold);
 //  pdialog.dip_gold_frame1=gtk_frame_new(buf);
 //  gtk_container_add(GTK_CONTAINER(pdialog.dip_gold_frame1),
 //	pdialog.dip_gold_entry1);
@@ -510,7 +510,7 @@ public class Diplodlg{
 //
 //  /* End of pact button insertion */
 //
-//  my_snprintf(buf, sizeof(buf),
+//  buf = util.my_snprintf(
 //	       _("This Eternal Treaty\n"
 //		 "marks the results of the diplomatic work between\n"
 //		 "The %s %s %s\nand\nThe %s %s %s"),
@@ -541,7 +541,7 @@ public class Diplodlg{
 //  table=gtk_table_new(1,4,false);
 //  gtk_box_pack_start(GTK_BOX(pdialog.dip_vboxm), table, true, false, 2);
 //
-//  my_snprintf(buf, sizeof(buf), "%s view:", get_nation_name(plr0.nation));
+//  buf = util.my_snprintf( "%s view:", get_nation_name(plr0.nation));
 //  label=gtk_label_new(buf);
 //  gtk_table_attach_defaults(GTK_TABLE(table),label,0,1,0,1);
 //
@@ -550,7 +550,7 @@ public class Diplodlg{
 //  gtk_table_attach_defaults(GTK_TABLE(table),pdialog.dip_acceptthumb0,1,2,0,1);
 //  gtk_widget_show(pdialog.dip_acceptthumb0);
 //
-//  my_snprintf(buf, sizeof(buf), "%s view:", get_nation_name(plr1.nation));
+//  buf = util.my_snprintf( "%s view:", get_nation_name(plr1.nation));
 //  label=gtk_label_new(buf);
 //  gtk_table_attach_defaults(GTK_TABLE(table),label,2,3,0,1);
 //

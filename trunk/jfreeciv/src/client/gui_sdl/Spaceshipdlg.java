@@ -122,7 +122,7 @@ public class Spaceshipdlg{
 //  pBuf = pSpaceShp.pEndWidgetList.prev.prev;
 //  if(game.spacerace
 //     && pPlayer.player_no == game.player_idx
-//     && pPlayer.spaceship.state == SSHIP_STARTED
+//     && pPlayer.spaceship.state == spaceship_state.SSHIP_STARTED
 //     && pPlayer.spaceship.success_rate > 0.0) {
 //    set_wstate(pBuf, FC_WS_NORMAL);
 //  }
@@ -156,7 +156,7 @@ public class Spaceshipdlg{
 //  
 //    pSpaceShp = MALLOC(sizeof(struct SMALL_DLG));
 //    
-//    my_snprintf(cBuf, sizeof(cBuf), "%s's SpaceShip",
+//    cBuf = util.my_snprintf( "%s's SpaceShip",
 //				    get_nation_name(pPlayer.nation));
 //    pStr = create_str16_from_char(cBuf, 12);
 //    pStr.style |= TTF_STYLE_BOLD;

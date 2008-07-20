@@ -398,7 +398,7 @@ public class Helpdlg{
 //    return;
 //  }
 //  
-//  my_snprintf(label, sizeof(label), "%s:%d", advances[tech].name,
+//  label = util.my_snprintf( "%s:%d", advances[tech].name,
 //	      num_unknown_techs_for_goal(game.player_ptr, tech));
 //
 //  o = ColorTextObject,
@@ -871,7 +871,7 @@ public class Helpdlg{
 //
 //    help_terrain_dynamic_group = VGroup,End;
 //
-//    my_snprintf(buf,sizeof(buf),"Food:   %d\nShield: %d\nTrade:  %d",tile.food, tile.shield, tile.trade);
+//    buf = util.my_snprintf("Food:   %d\nShield: %d\nTrade:  %d",tile.food, tile.shield, tile.trade);
 //    if((o = HGroup,
 //              Child, HSpace(0),
 //	      Child, TextObject, MUIA_Text_Contents, "", End,
@@ -888,7 +888,7 @@ public class Helpdlg{
 //
 //    g = HGroup, Child, HSpace(0), End;
 //
-//    my_snprintf(buf,sizeof(buf),"Food:   %d\nShield: %d\nTrade:  %d",tile.food_special_1, tile.shield_special_1,
+//    buf = util.my_snprintf("Food:   %d\nShield: %d\nTrade:  %d",tile.food_special_1, tile.shield_special_1,
 //    tile.trade_special_1);
 //    if((o = HGroup,
 //              Child, HSpace(0),
@@ -906,7 +906,7 @@ public class Helpdlg{
 //      DoMethod(g, OM_ADDMEMBER, o);
 //    }
 //
-//    my_snprintf(buf,sizeof(buf),"Food:   %d\nShield: %d\nTrade:  %d",tile.food_special_2, tile.shield_special_2,
+//    buf = util.my_snprintf("Food:   %d\nShield: %d\nTrade:  %d",tile.food_special_2, tile.shield_special_2,
 //    tile.trade_special_2);
 //    if((o = HGroup,
 //              Child, HSpace(0),

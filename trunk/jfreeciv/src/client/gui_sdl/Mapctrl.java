@@ -546,7 +546,7 @@ public class Mapctrl{
 //					pUnits_Info_Window.size.x) {
 //    char cBuf[4];
 //    OVERVIEW_TILE_WIDTH++;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", OVERVIEW_TILE_WIDTH);
+//    cBuf = util.my_snprintf( "%d", OVERVIEW_TILE_WIDTH);
 //    copy_chars_to_string16(pWidget.next.string16, cBuf);
 //    redraw_label(pWidget.next);
 //    sdl_dirty_rect(pWidget.next.size);
@@ -565,7 +565,7 @@ public class Mapctrl{
 //    char cBuf[4];
 //    
 //    OVERVIEW_TILE_WIDTH--;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", OVERVIEW_TILE_WIDTH);
+//    cBuf = util.my_snprintf( "%d", OVERVIEW_TILE_WIDTH);
 //    copy_chars_to_string16(pWidget.prev.string16, cBuf);
 //    redraw_label(pWidget.prev);
 //    sdl_dirty_rect(pWidget.prev.size);
@@ -585,7 +585,7 @@ public class Mapctrl{
 //    char cBuf[4];
 //      
 //    OVERVIEW_TILE_HEIGHT++;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", OVERVIEW_TILE_HEIGHT);
+//    cBuf = util.my_snprintf( "%d", OVERVIEW_TILE_HEIGHT);
 //    copy_chars_to_string16(pWidget.next.string16, cBuf);
 //    redraw_label(pWidget.next);
 //    sdl_dirty_rect(pWidget.next.size);
@@ -603,7 +603,7 @@ public class Mapctrl{
 //    char cBuf[4];
 //    
 //    OVERVIEW_TILE_HEIGHT--;
-//    my_snprintf(cBuf, sizeof(cBuf), "%d", OVERVIEW_TILE_HEIGHT);
+//    cBuf = util.my_snprintf( "%d", OVERVIEW_TILE_HEIGHT);
 //    copy_chars_to_string16(pWidget.prev.string16, cBuf);
 //    redraw_label(pWidget.prev);
 //    sdl_dirty_rect(pWidget.prev.size);
@@ -655,7 +655,7 @@ public class Mapctrl{
 //  clear_wflag(pBuf, WF_DRAW_FRAME_AROUND_WIDGET);
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "%d" , OVERVIEW_TILE_WIDTH);
+//  cBuf = util.my_snprintf( "%d" , OVERVIEW_TILE_WIDTH);
 //  pStr = create_str16_from_char(cBuf, 24);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //  pBuf = create_iconlabel(null, pWindow.dst, pStr, WF_DRAW_THEME_TRANSPARENT);
@@ -677,7 +677,7 @@ public class Mapctrl{
 //  clear_wflag(pBuf, WF_DRAW_FRAME_AROUND_WIDGET);
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //  
-//  my_snprintf(cBuf, sizeof(cBuf), "%d" , OVERVIEW_TILE_HEIGHT);
+//  cBuf = util.my_snprintf( "%d" , OVERVIEW_TILE_HEIGHT);
 //  pStr = create_str16_from_char(cBuf, 24);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //  pBuf = create_iconlabel(null, pWindow.dst, pStr, WF_DRAW_THEME_TRANSPARENT);

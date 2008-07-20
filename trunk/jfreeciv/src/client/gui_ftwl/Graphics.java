@@ -122,7 +122,7 @@ public class Graphics{
 //			   int mask_offset_y)
 //{
 //  if (mask) {
-//    freelog(LOG_ERROR, "mask isn't supported in crop_sprite");
+//    util.freelog(Log.LOG_ERROR, "mask isn't supported in crop_sprite");
 //  }
 //  return be_crop_sprite(source, x, y, width, height);
 //}

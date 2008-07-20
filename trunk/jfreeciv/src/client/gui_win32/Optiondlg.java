@@ -183,7 +183,7 @@ public class Optiondlg{
 //		      (*(o.p_bool_value))?BST_CHECKED:BST_UNCHECKED);
 //      break;
 //    case COT_INT:
-//      my_snprintf(valstr, sizeof(valstr), "%d", *(o.p_int_value));
+//      valstr = util.my_snprintf( "%d", *(o.p_int_value));
 //      SetWindowText((HWND)(o.p_gui_data), valstr);
 //      break;
 //    case COT_STR:

@@ -107,7 +107,7 @@ public class Plrdlg{
 //    final player_diplstate pds;
 //
 //    if (game.players[i].nturns_idle > 3)
-//      my_snprintf(idlebuf, sizeof(idlebuf),
+//      idlebuf = util.my_snprintf(
 //		  PL_("(idle %d turn)", "(idle %d turns)",
 //		      game.players[i].nturns_idle - 1),
 //		  game.players[i].nturns_idle - 1);
@@ -130,9 +130,9 @@ public class Plrdlg{
 //      sz_strlcpy(statebuf, "R.I.P");
 //
 //    if (game.players[i].ai.control)
-//      my_snprintf(namebuf, sizeof(namebuf), "*%-15s", game.players[i].name);
+//      namebuf = util.my_snprintf( "*%-15s", game.players[i].name);
 //    else
-//      my_snprintf(namebuf, sizeof(namebuf), "%-16s", game.players[i].name);
+//      namebuf = util.my_snprintf( "%-16s", game.players[i].name);
 //
 //
 //
@@ -142,20 +142,20 @@ public class Plrdlg{
 //    } else {
 //      pds = pplayer_get_diplstate(game.player_ptr, get_player(i));
 //      if (pds.type == DS_CEASEFIRE) {
-//	my_snprintf(dsbuf, sizeof(dsbuf), "%s (%d)",
+//	dsbuf = util.my_snprintf( "%s (%d)",
 //		    diplstate_text(pds.type), pds.turns_left);
 //      } else {
-//	my_snprintf(dsbuf, sizeof(dsbuf), "%s",
+//	dsbuf = util.my_snprintf( "%s",
 //		    diplstate_text(pds.type));
 //      }
 //    }
 //
 //    /* text for reputation */
-//    my_snprintf(repbuf, sizeof(repbuf),
+//    repbuf = util.my_snprintf(
 //		reputation_text(game.players[i].reputation));
 //
 //    *array++ = namebuf;
-//    *array++ = get_nation_name(game.players[i].nation);
+//    *array++ = Nation.get_nation_name(game.players[i].nation);
 //    *array++ = get_embassy_status(game.player_ptr, &game.players[i]);
 //    *array++ = dsbuf;
 //    *array++ = get_vision_status(game.player_ptr, &game.players[i]);
@@ -193,7 +193,7 @@ public class Plrdlg{
 //
 //    pplayer = get_player(playerno);
 //
-//    if (pplayer.spaceship.state != SSHIP_NONE)
+//    if (pplayer.spaceship.state != spaceship_state.SSHIP_NONE)
 //      set(player_spaceship_button, MUIA_Disabled, false);
 //    else
 //      set(player_spaceship_button, MUIA_Disabled, true);

@@ -318,10 +318,10 @@ public class Tilespec{
 //  }
 //
 //  if (tileset_name.equals(tileset_default)) {
-//    freelog(LOG_FATAL, "No usable default tileset found, aborting!");
+//    util.freelog(LOG_FATAL, "No usable default tileset found, aborting!");
 //    exit(EXIT_FAILURE);
 //  }
-//  freelog(LOG_ERROR, _("Trying \"%s\" tileset."), tileset_default);
+//  util.freelog(Log.LOG_ERROR, _("Trying \"%s\" tileset."), tileset_default);
 //  return tilespec_fullname(tileset_default);
 //}
 //
@@ -338,7 +338,7 @@ public class Tilespec{
 //  char *file_capstr = secfile_lookup_str(file, "%s.options", which);
 //  
 //  if (!has_capabilities(us_capstr, file_capstr)) {
-//    freelog(LOG_ERROR, _("%s file appears incompatible:\n"
+//    util.freelog(Log.LOG_ERROR, _("%s file appears incompatible:\n"
 //			 "file: \"%s\"\n"
 //			 "file options: %s\n"
 //			 "supported options: %s"),
@@ -346,7 +346,7 @@ public class Tilespec{
 //    return false;
 //  }
 //  if (!has_capabilities(file_capstr, us_capstr)) {
-//    freelog(LOG_ERROR, _("%s file claims required option(s)"
+//    util.freelog(Log.LOG_ERROR, _("%s file claims required option(s)"
 //			 " which we don't support:\n"
 //			 "file: \"%s\"\n"
 //			 "file options: %s\n"
@@ -413,7 +413,7 @@ public class Tilespec{
 //  tile center_tile;
 //  enum client_states state = get_client_state();
 //
-//  freelog(Log.LOG_NORMAL, "Loading tileset %s.", tileset_name);
+//  util.freelog(Log.LOG_NORMAL, "Loading tileset %s.", tileset_name);
 //
 //  /* Step 0:  Record old data.
 //   *
@@ -534,7 +534,7 @@ public class Tilespec{
 //
 //    sprintf(full_name, "%s.%s", gfx_filename, gfx_fileext);
 //    if ((real_full_name = datafilename(full_name))) {
-//      freelog(LOG_DEBUG, "trying to load gfx file %s", real_full_name);
+//      util.freelog(LOG_DEBUG, "trying to load gfx file %s", real_full_name);
 //      s = load_gfxfile(real_full_name);
 //      if (s) {
 //	return s;
@@ -542,7 +542,7 @@ public class Tilespec{
 //    }
 //  }
 //
-//  freelog(LOG_VERBOSE, "Could not load gfx file %s.", gfx_filename);
+//  util.freelog(LOG_VERBOSE, "Could not load gfx file %s.", gfx_filename);
 //  return null;
 //}
 //
@@ -563,7 +563,7 @@ public class Tilespec{
 //   * to be reloaded, but most of the time it's just loaded once, the small
 //   * sprites are extracted, and then it's freed. */
 //  if (!section_file_load(file, sf.file_name)) {
-//    freelog(LOG_FATAL, _("Could not open \"%s\"."), sf.file_name);
+//    util.freelog(LOG_FATAL, _("Could not open \"%s\"."), sf.file_name);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -577,7 +577,7 @@ public class Tilespec{
 //  sf.big_sprite = load_gfx_file(gfx_filename);
 //
 //  if (!sf.big_sprite) {
-//    freelog(LOG_FATAL, "Couldn't load gfx file for the spec file %s",
+//    util.freelog(LOG_FATAL, "Couldn't load gfx file for the spec file %s",
 //	    sf.file_name);
 //    exit(EXIT_FAILURE);
 //  }
@@ -596,7 +596,7 @@ public class Tilespec{
 //  int num_grids, i;
 //
 //  if (!section_file_load(file, sf.file_name)) {
-//    freelog(LOG_FATAL, _("Could not open \"%s\"."), sf.file_name);
+//    util.freelog(LOG_FATAL, _("Could not open \"%s\"."), sf.file_name);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!check_tilespec_capabilities(file, "spec",
@@ -662,7 +662,7 @@ public class Tilespec{
 //      if (!duplicates_ok) {
 //        for (k = 0; k < num_tags; k++) {
 //          if (!hash_insert(sprite_hash, mystrdup(tags[k]), ss)) {
-//	    freelog(LOG_ERROR, "warning: already have a sprite for %s", tags[k]);
+//	    util.freelog(Log.LOG_ERROR, "warning: already have a sprite for %s", tags[k]);
 //          }
 //        }
 //      } else {
@@ -700,7 +700,7 @@ public class Tilespec{
 //    if (!duplicates_ok) {
 //      for (k = 0; k < num_tags; k++) {
 //	if (!hash_insert(sprite_hash, mystrdup(tags[k]), ss)) {
-//	  freelog(LOG_ERROR, "warning: already have a sprite for %s", tags[k]);
+//	  util.freelog(Log.LOG_ERROR, "warning: already have a sprite for %s", tags[k]);
 //	}
 //      }
 //    } else {
@@ -739,7 +739,7 @@ public class Tilespec{
 //    }
 //  }
 //
-//  freelog(LOG_FATAL, "Couldn't find a supported gfx file extension for %s",
+//  util.freelog(LOG_FATAL, "Couldn't find a supported gfx file extension for %s",
 //         gfx_filename);
 //  exit(EXIT_FAILURE);
 //  return null;
@@ -762,11 +762,11 @@ public class Tilespec{
 //  enum direction8 dir;
 //
 //  fname = tilespec_fullname(tileset_name);
-//  freelog(LOG_VERBOSE, "tilespec file is %s", fname);
+//  util.freelog(LOG_VERBOSE, "tilespec file is %s", fname);
 //
 //  if (!section_file_load(file, fname)) {
 //    free(fname);
-//    freelog(LOG_ERROR, _("Could not open \"%s\"."), fname);
+//    util.freelog(Log.LOG_ERROR, _("Could not open \"%s\"."), fname);
 //    return false;
 //  }
 //
@@ -798,7 +798,7 @@ public class Tilespec{
 //  }
 //
 //  if (is_isometric && !isometric_view_supported()) {
-//    freelog(LOG_ERROR, _("Client does not support isometric tilesets."
+//    util.freelog(Log.LOG_ERROR, _("Client does not support isometric tilesets."
 //	    " Using default tileset instead."));
 //    assert(tileset_name != null);
 //    section_file_free(file);
@@ -806,7 +806,7 @@ public class Tilespec{
 //    return tilespec_read_toplevel(null);
 //  }
 //  if (!is_isometric && !overhead_view_supported()) {
-//    freelog(LOG_ERROR, _("Client does not support overhead view tilesets."
+//    util.freelog(Log.LOG_ERROR, _("Client does not support overhead view tilesets."
 //	    " Using default tileset instead."));
 //    assert(tileset_name != null);
 //    section_file_free(file);
@@ -846,7 +846,7 @@ public class Tilespec{
 //  }
 //  SMALL_TILE_WIDTH = secfile_lookup_int(file, "tilespec.small_tile_width");
 //  SMALL_TILE_HEIGHT = secfile_lookup_int(file, "tilespec.small_tile_height");
-//  freelog(LOG_VERBOSE, "tile sizes %dx%d, %d%d unit, %d%d small",
+//  util.freelog(LOG_VERBOSE, "tile sizes %dx%d, %d%d unit, %d%d small",
 //	  NORMAL_TILE_WIDTH, NORMAL_TILE_HEIGHT,
 //	  UNIT_TILE_WIDTH, UNIT_TILE_HEIGHT,
 //	  SMALL_TILE_WIDTH, SMALL_TILE_HEIGHT);
@@ -860,7 +860,7 @@ public class Tilespec{
 //      || darkness_style > DARKNESS_CARD_FULL
 //      || (darkness_style == DARKNESS_ISORECT
 //	  && (!is_isometric || hex_width > 0 || hex_height > 0))) {
-//    freelog(LOG_FATAL, "Invalid darkness style set in tileset.");
+//    util.freelog(LOG_FATAL, "Invalid darkness style set in tileset.");
 //    exit(EXIT_FAILURE);
 //  }
 //  flag_offset_x = secfile_lookup_int_default(file, 0,
@@ -878,11 +878,11 @@ public class Tilespec{
 //
 //  c = secfile_lookup_str(file, "tilespec.main_intro_file");
 //  main_intro_filename = tilespec_gfx_filename(c);
-//  freelog(LOG_DEBUG, "intro file %s", main_intro_filename);
+//  util.freelog(LOG_DEBUG, "intro file %s", main_intro_filename);
 //  
 //  c = secfile_lookup_str(file, "tilespec.minimap_intro_file");
 //  minimap_intro_filename = tilespec_gfx_filename(c);
-//  freelog(LOG_DEBUG, "radar file %s", minimap_intro_filename);
+//  util.freelog(LOG_DEBUG, "radar file %s", minimap_intro_filename);
 //
 //  /* Terrain layer info. */
 //  for (i = 0; i < MAX_NUM_LAYERS; i++) {
@@ -908,7 +908,7 @@ public class Tilespec{
 //  /* Terrain drawing info. */
 //  terrains = secfile_get_secnames_prefix(file, "terrain_", &num_terrains);
 //  if (num_terrains == 0) {
-//    freelog(LOG_ERROR, "No terrain types supported by tileset.");
+//    util.freelog(Log.LOG_ERROR, "No terrain types supported by tileset.");
 //    section_file_free(file);
 //    free(fname);
 //    return false;
@@ -978,21 +978,21 @@ public class Tilespec{
 //	}
 //	terr.layer[l].match_type = j;
 //	if (j >= layers[l].count) {
-//	  freelog(LOG_ERROR, "Invalid match type given for %s.", terrains[i]);
+//	  util.freelog(Log.LOG_ERROR, "Invalid match type given for %s.", terrains[i]);
 //	  terr.layer[l].match_type = 0;
 //	  terr.layer[l].match_style = MATCH_NONE;
 //	}
 //      } else {
 //	terr.layer[l].match_style = MATCH_NONE;
 //	if (layers[l].match_style != MATCH_NONE) {
-//	  freelog(LOG_ERROR, "Layer %d has a match_style set; all terrains"
+//	  util.freelog(Log.LOG_ERROR, "Layer %d has a match_style set; all terrains"
 //		  " must have a match_type.  %s doesn't.", l, terrains[i]);
 //	}
 //      }
 //
 //      if (terr.layer[l].match_style == MATCH_NONE
 //	  && layers[l].match_style == MATCH_FULL) {
-//	freelog(LOG_ERROR, "Layer %d has match_type full set; all terrains"
+//	util.freelog(Log.LOG_ERROR, "Layer %d has match_type full set; all terrains"
 //		" must match this.  %s doesn't.", l, terrains[i]);
 //      }
 //
@@ -1006,7 +1006,7 @@ public class Tilespec{
 //	if (terr.layer[l].is_tall
 //	    || terr.layer[l].offset_x > 0
 //	    || terr.layer[l].offset_y > 0) {
-//	  freelog(LOG_ERROR,
+//	  util.freelog(Log.LOG_ERROR,
 //		  _("Error in %s layer %d: you cannot have tall terrain or\n"
 //		    "a sprite offset with a cell-based drawing method."),
 //		  terrains[i], l);
@@ -1014,7 +1014,7 @@ public class Tilespec{
 //	  terr.layer[l].offset_x = terr.layer[l].offset_y = 0;
 //	}
 //      } else {
-//	freelog(LOG_ERROR, "Unknown cell type %s for %s.",
+//	util.freelog(Log.LOG_ERROR, "Unknown cell type %s for %s.",
 //		cell_type, terrains[i]);
 //	terr.layer[l].cell_type = CELL_SINGLE;
 //      }
@@ -1027,7 +1027,7 @@ public class Tilespec{
 //    }
 //
 //    if (!hash_insert(terrain_hash, terr.name, terr)) {
-//      freelog(Log.LOG_NORMAL, "warning: duplicate terrain entry %s.",
+//      util.freelog(Log.LOG_NORMAL, "warning: duplicate terrain entry %s.",
 //	      terrains[i]);
 //      section_file_free(file);
 //      free(fname);
@@ -1040,7 +1040,7 @@ public class Tilespec{
 //  spec_filenames = secfile_lookup_str_vec(file, &num_spec_files,
 //					  "tilespec.files");
 //  if (num_spec_files == 0) {
-//    freelog(LOG_ERROR, "No tile files specified in \"%s\"", fname);
+//    util.freelog(Log.LOG_ERROR, "No tile files specified in \"%s\"", fname);
 //    section_file_free(file);
 //    free(fname);
 //    return false;
@@ -1052,7 +1052,7 @@ public class Tilespec{
 //  for (i = 0; i < num_spec_files; i++) {
 //    specfile sf = fc_malloc(sizeof(*sf));
 //
-//    freelog(LOG_DEBUG, "spec file %s", spec_filenames[i]);
+//    util.freelog(LOG_DEBUG, "spec file %s", spec_filenames[i]);
 //    
 //    sf.big_sprite = null;
 //    sf.file_name = mystrdup(datafilename_required(spec_filenames[i]));
@@ -1065,7 +1065,7 @@ public class Tilespec{
 //  section_file_check_unused(file, fname);
 //  
 //  section_file_free(file);
-//  freelog(LOG_VERBOSE, "finished reading %s", fname);
+//  util.freelog(LOG_VERBOSE, "finished reading %s", fname);
 //  free(fname);
 //
 //  sz_strlcpy(current_tileset, tileset_name);
@@ -1180,7 +1180,7 @@ public class Tilespec{
 //    int j;
 //
 //    for (j = 0; j < NUM_TILES_CITIZEN; j++) {
-//      my_snprintf(buffer, sizeof(buffer), "specialist.%s_%d", name, j);
+//      buffer = util.my_snprintf( "specialist.%s_%d", name, j);
 //      sprites.specialist[i].sprite[j] = load_sprite(buffer);
 //      if (!sprites.specialist[i].sprite[j]) {
 //	break;
@@ -1188,7 +1188,7 @@ public class Tilespec{
 //    }
 //    sprites.specialist[i].count = j;
 //    if (j == 0) {
-//      freelog(Log.LOG_NORMAL, "No graphics for specialist %s.", name);
+//      util.freelog(Log.LOG_NORMAL, "No graphics for specialist %s.", name);
 //      exit(EXIT_FAILURE);
 //    }
 //  } specialist_type_iterate_end;
@@ -1212,7 +1212,7 @@ public class Tilespec{
 //    }
 //
 //    for (j = 0; j < NUM_TILES_CITIZEN; j++) {
-//      my_snprintf(buffer, sizeof(buffer), "citizen.%s_%d", name, j);
+//      buffer = util.my_snprintf( "citizen.%s_%d", name, j);
 //      sprites.citizen[i].sprite[j] = load_sprite(buffer);
 //      if (!sprites.citizen[i].sprite[j]) {
 //	break;
@@ -1220,7 +1220,7 @@ public class Tilespec{
 //    }
 //    sprites.citizen[i].count = j;
 //    if (j == 0) {
-//      freelog(Log.LOG_NORMAL, "No graphics for citizen %s.", name);
+//      util.freelog(Log.LOG_NORMAL, "No graphics for citizen %s.", name);
 //      exit(EXIT_FAILURE);
 //    }
 //  }
@@ -1242,11 +1242,11 @@ public class Tilespec{
 //  SET_SPRITE(treaty_thumb[1], "treaty.agree_thumb_up");
 //
 //  for(i=0; i<NUM_TILES_PROGRESS; i++) {
-//    my_snprintf(buffer, sizeof(buffer), "s.science_bulb_%d", i);
+//    buffer = util.my_snprintf( "s.science_bulb_%d", i);
 //    SET_SPRITE(bulb[i], buffer);
-//    my_snprintf(buffer, sizeof(buffer), "s.warming_sun_%d", i);
+//    buffer = util.my_snprintf( "s.warming_sun_%d", i);
 //    SET_SPRITE(warming[i], buffer);
-//    my_snprintf(buffer, sizeof(buffer), "s.cooling_flake_%d", i);
+//    buffer = util.my_snprintf( "s.cooling_flake_%d", i);
 //    SET_SPRITE(cooling[i], buffer);
 //  }
 //
@@ -1282,9 +1282,9 @@ public class Tilespec{
 //      enum direction8 dir = valid_tileset_dirs[i];
 //      final String dir_name = dir_get_tileset_name(dir);
 //
-//      my_snprintf(buffer, sizeof(buffer), "r.road_%s", dir_name);
+//      buffer = util.my_snprintf( "r.road_%s", dir_name);
 //      SET_SPRITE(road.dir[i], buffer);
-//      my_snprintf(buffer, sizeof(buffer), "r.rail_%s", dir_name);
+//      buffer = util.my_snprintf( "r.rail_%s", dir_name);
 //      SET_SPRITE(rail.dir[i], buffer);
 //    }
 //  } else if (roadstyle == 1) {
@@ -1308,26 +1308,26 @@ public class Tilespec{
 //		 dir_get_tileset_name(valid_tileset_dirs[2 * j + 1]), value);
 //      }
 //
-//      my_snprintf(buffer, sizeof(buffer), "r.c_road_%s", c);
+//      buffer = util.my_snprintf( "r.c_road_%s", c);
 //      SET_SPRITE(road.even[i], buffer);
 //
-//      my_snprintf(buffer, sizeof(buffer), "r.d_road_%s", d);
+//      buffer = util.my_snprintf( "r.d_road_%s", d);
 //      SET_SPRITE(road.odd[i], buffer);
 //
-//      my_snprintf(buffer, sizeof(buffer), "r.c_rail_%s", c);
+//      buffer = util.my_snprintf( "r.c_rail_%s", c);
 //      SET_SPRITE(rail.even[i], buffer);
 //
-//      my_snprintf(buffer, sizeof(buffer), "r.d_rail_%s", d);
+//      buffer = util.my_snprintf( "r.d_rail_%s", d);
 //      SET_SPRITE(rail.odd[i], buffer);
 //    }
 //  } else {
 //    /* Roadstyle 2 includes 256 sprites, one for every possibility.
 //     * Just go around clockwise, with all combinations. */
 //    for (i = 0; i < num_index_valid; i++) {
-//      my_snprintf(buffer, sizeof(buffer), "r.road_%s", valid_index_str(i));
+//      buffer = util.my_snprintf( "r.road_%s", valid_index_str(i));
 //      SET_SPRITE(road.total[i], buffer);
 //
-//      my_snprintf(buffer, sizeof(buffer), "r.rail_%s", valid_index_str(i));
+//      buffer = util.my_snprintf( "r.rail_%s", valid_index_str(i));
 //      SET_SPRITE(rail.total[i], buffer);
 //    }
 //  }
@@ -1338,11 +1338,11 @@ public class Tilespec{
 //      enum direction8 dir = valid_tileset_dirs[i];
 //
 //      if (!is_cardinal_tileset_dir(dir)) {
-//	my_snprintf(buffer, sizeof(buffer), "r.c_road_%s",
+//	buffer = util.my_snprintf( "r.c_road_%s",
 //		    dir_get_tileset_name(dir));
 //	SET_SPRITE_OPT(road.corner[dir], buffer);
 //
-//	my_snprintf(buffer, sizeof(buffer), "r.c_rail_%s",
+//	buffer = util.my_snprintf( "r.c_rail_%s",
 //		    dir_get_tileset_name(dir));
 //	SET_SPRITE_OPT(rail.corner[dir], buffer);
 //      }
@@ -1353,7 +1353,7 @@ public class Tilespec{
 //
 //  num_tiles_explode_unit = 0;
 //  do {
-//    my_snprintf(buffer, sizeof(buffer), "explode.unit_%d",
+//    buffer = util.my_snprintf( "explode.unit_%d",
 //		num_tiles_explode_unit++);
 //  } while (sprite_exists(buffer));
 //  num_tiles_explode_unit--;
@@ -1365,7 +1365,7 @@ public class Tilespec{
 //				     sizeof(Sprite ));
 //
 //    for (i = 0; i < num_tiles_explode_unit; i++) {
-//      my_snprintf(buffer, sizeof(buffer), "explode.unit_%d", i);
+//      buffer = util.my_snprintf( "explode.unit_%d", i);
 //      SET_SPRITE(explode.unit[i], buffer);
 //    }
 //  }
@@ -1394,14 +1394,14 @@ public class Tilespec{
 //  SET_SPRITE(unit.tired, "unit.tired");
 //
 //  for(i=0; i<NUM_TILES_HP_BAR; i++) {
-//    my_snprintf(buffer, sizeof(buffer), "unit.hp_%d", i*10);
+//    buffer = util.my_snprintf( "unit.hp_%d", i*10);
 //    SET_SPRITE(unit.hp_bar[i], buffer);
 //  }
 //
 //  for (i = 0; i < MAX_VET_LEVELS; i++) {
 //    /* Veteran level sprites are optional.  For instance "green" units
 //     * usually have no special graphic. */
-//    my_snprintf(buffer, sizeof(buffer), "unit.vet_%d", i);
+//    buffer = util.my_snprintf( "unit.vet_%d", i);
 //    sprites.unit.vet_lev[i] = load_sprite(buffer);
 //  }
 //
@@ -1410,22 +1410,22 @@ public class Tilespec{
 //  for(i=0; i<NUM_TILES_DIGITS; i++) {
 //    char buffer2[512];
 //
-//    my_snprintf(buffer, sizeof(buffer), "city.size_%d", i);
+//    buffer = util.my_snprintf( "city.size_%d", i);
 //    SET_SPRITE(city.size[i], buffer);
-//    my_snprintf(buffer2, sizeof(buffer2), "path.turns_%d", i);
+//    buffer2 = util.my_snprintf( "path.turns_%d", i);
 //    SET_SPRITE_ALT_OPT(path.turns[i], buffer2, buffer);
 //
 //    if(i!=0) {
-//      my_snprintf(buffer, sizeof(buffer), "city.size_%d", i*10);
+//      buffer = util.my_snprintf( "city.size_%d", i*10);
 //      SET_SPRITE(city.size_tens[i], buffer);
-//      my_snprintf(buffer2, sizeof(buffer2), "path.turns_%d", i * 10);
+//      buffer2 = util.my_snprintf( "path.turns_%d", i * 10);
 //      SET_SPRITE_ALT_OPT(path.turns_tens[i], buffer2, buffer);
 //    }
-//    my_snprintf(buffer, sizeof(buffer), "city.t_food_%d", i);
+//    buffer = util.my_snprintf( "city.t_food_%d", i);
 //    SET_SPRITE(city.tile_foodnum[i], buffer);
-//    my_snprintf(buffer, sizeof(buffer), "city.t_shields_%d", i);
+//    buffer = util.my_snprintf( "city.t_shields_%d", i);
 //    SET_SPRITE(city.tile_shieldnum[i], buffer);
-//    my_snprintf(buffer, sizeof(buffer), "city.t_trade_%d", i);
+//    buffer = util.my_snprintf( "city.t_trade_%d", i);
 //    SET_SPRITE(city.tile_tradenum[i], buffer);
 //  }
 //
@@ -1448,7 +1448,7 @@ public class Tilespec{
 //  SET_SPRITE(tx.fog,        "tx.fog");
 //
 //  for (i = 0; i < num_index_cardinal; i++) {
-//    my_snprintf(buffer, sizeof(buffer), "tx.s_river_%s",
+//    buffer = util.my_snprintf( "tx.s_river_%s",
 //		cardinal_index_str(i));
 //    SET_SPRITE(tx.spec_river[i], buffer);
 //  }
@@ -1457,12 +1457,12 @@ public class Tilespec{
 //   * are available.  If not, we just fall back to the basic irrigation
 //   * graphics. */
 //  for (i = 0; i < num_index_cardinal; i++) {
-//    my_snprintf(buffer, sizeof(buffer), "tx.s_irrigation_%s",
+//    buffer = util.my_snprintf( "tx.s_irrigation_%s",
 //		cardinal_index_str(i));
 //    SET_SPRITE_ALT(tx.irrigation[i], buffer, "tx.irrigation");
 //  }
 //  for (i = 0; i < num_index_cardinal; i++) {
-//    my_snprintf(buffer, sizeof(buffer), "tx.s_farmland_%s",
+//    buffer = util.my_snprintf( "tx.s_farmland_%s",
 //		cardinal_index_str(i));
 //    SET_SPRITE_ALT(tx.farmland[i], buffer, "tx.farmland");
 //  }
@@ -1479,7 +1479,7 @@ public class Tilespec{
 //      int offsets[4][2] = {{W / 2, 0}, {0, H / 2}, {W / 2, H / 2}, {0, 0}};
 //
 //      if (!darkness) {
-//	freelog(LOG_FATAL, "Sprite tx.darkness missing.");
+//	util.freelog(LOG_FATAL, "Sprite tx.darkness missing.");
 //	exit(EXIT_FAILURE);
 //      }
 //      for (i = 0; i < 4; i++) {
@@ -1493,14 +1493,14 @@ public class Tilespec{
 //    for (i = 0; i < num_cardinal_tileset_dirs; i++) {
 //      enum direction8 dir = cardinal_tileset_dirs[i];
 //
-//      my_snprintf(buffer, sizeof(buffer), "tx.darkness_%s",
+//      buffer = util.my_snprintf( "tx.darkness_%s",
 //		  dir_get_tileset_name(dir));
 //      SET_SPRITE(tx.darkness[i], buffer);
 //    }
 //    break;
 //  case DARKNESS_CARD_FULL:
 //    for(i = 1; i < num_index_cardinal; i++) {
-//      my_snprintf(buffer, sizeof(buffer), "tx.darkness_%s",
+//      buffer = util.my_snprintf( "tx.darkness_%s",
 //		  cardinal_index_str(i));
 //      SET_SPRITE(tx.darkness[i], buffer);
 //    }
@@ -1508,7 +1508,7 @@ public class Tilespec{
 //  }
 //
 //  for(i=0; i<4; i++) {
-//    my_snprintf(buffer, sizeof(buffer), "tx.river_outlet_%c", dir_char[i]);
+//    buffer = util.my_snprintf( "tx.river_outlet_%c", dir_char[i]);
 //    SET_SPRITE(tx.river_outlet[i], buffer);
 //  }
 //
@@ -1548,13 +1548,13 @@ public class Tilespec{
 //
 //  sp = load_sprite(alt);
 //  if (sp) {
-//    freelog(LOG_VERBOSE,
+//    util.freelog(LOG_VERBOSE,
 //	    "Using alternate graphic %s (instead of %s) for %s %s",
 //	    alt, tag, what, name);
 //    return sp;
 //  }
 //
-//  freelog(required ? LOG_FATAL : LOG_VERBOSE,
+//  util.freelog(required ? LOG_FATAL : LOG_VERBOSE,
 //	  "Don't have graphics tags %s or %s for %s %s",
 //	  tag, alt, what, name);
 //  if (required) {
@@ -1628,7 +1628,7 @@ public class Tilespec{
 //  if (!draw) {
 //    draw = hash_lookup_data(terrain_hash, tt.graphic_alt);
 //    if (!draw) {
-//      freelog(LOG_FATAL, "No graphics %s or %s for %s terrain.",
+//      util.freelog(LOG_FATAL, "No graphics %s or %s for %s terrain.",
 //	      tt.graphic_str, tt.graphic_alt, tt.terrain_name);
 //      exit(EXIT_FAILURE);
 //    }
@@ -1643,7 +1643,7 @@ public class Tilespec{
 //      for (i = 0; ; i++) {
 //	Sprite sprite;
 //
-//	my_snprintf(buffer1, sizeof(buffer1), "t.%s%d", draw.name, i + 1);
+//	buffer1 = util.my_snprintf( "t.%s%d", draw.name, i + 1);
 //	sprite = load_sprite(buffer1);
 //	if (!sprite) {
 //	  break;
@@ -1653,7 +1653,7 @@ public class Tilespec{
 //      }
 //      if (i == 0) {
 //	/* TRANS: obscure tileset error. */
-//	freelog(LOG_FATAL, _("Missing base sprite tag \"%s1\"."),
+//	util.freelog(LOG_FATAL, _("Missing base sprite tag \"%s1\"."),
 //		draw.name);
 //	exit(EXIT_FAILURE);
 //      }
@@ -1662,7 +1662,7 @@ public class Tilespec{
 //      case CELL_SINGLE:
 //	/* Load 16 cardinally-matched sprites. */
 //	for (i = 0; i < num_index_cardinal; i++) {
-//	  my_snprintf(buffer1, sizeof(buffer1),
+//	  buffer1 = util.my_snprintf(
 //		      "t.%s_%s", draw.name, cardinal_index_str(i));
 //	  draw.layer[l].match[i] = lookup_sprite_tag_alt(buffer1, "", true,
 //							  "tile_type",
@@ -1690,7 +1690,7 @@ public class Tilespec{
 //	      assert(0); /* Impossible. */
 //	      break;
 //	    case MATCH_BOOLEAN:
-//	      my_snprintf(buffer1, sizeof(buffer1), "t.%s_cell_%c%d%d%d",
+//	      buffer1 = util.my_snprintf( "t.%s_cell_%c%d%d%d",
 //			  draw.name, dirs[dir],
 //			  (value >> 0) & 1,
 //			  (value >> 1) & 1,
@@ -1741,7 +1741,7 @@ public class Tilespec{
 //		  n = v3;
 //		  break;
 //		}
-//		my_snprintf(buffer1, sizeof(buffer1),
+//		buffer1 = util.my_snprintf(
 //			    "t.cellgroup_%s_%s_%s_%s",
 //			    layers[l].match_types[n],
 //			    layers[l].match_types[e],
@@ -1768,7 +1768,7 @@ public class Tilespec{
 //	    }
 //	  }
 //	}
-//	my_snprintf(buffer1, sizeof(buffer1), "t.%s1", draw.name);
+//	buffer1 = util.my_snprintf( "t.%s1", draw.name);
 //	draw.layer[l].base.p[0]
 //	  = lookup_sprite_tag_alt(buffer1, "", false, "tile_type",
 //				  tt.terrain_name);
@@ -1849,7 +1849,7 @@ public class Tilespec{
 //  }
 //  if (!nation.flag_sprite) {
 //    /* Should never get here because of the f.unknown fallback. */
-//    freelog(LOG_FATAL, "No national flag for %s.", nation.name);
+//    util.freelog(LOG_FATAL, "No national flag for %s.", nation.name);
 //    exit(EXIT_FAILURE);
 //  }
 //}
@@ -2834,10 +2834,10 @@ public class Tilespec{
 //  city_styles[style].tiles_num = 0;
 //
 //  for(j=0; j<32 && city_styles[style].tiles_num < MAX_CITY_TILES; j++) {
-//    my_snprintf(buffer, sizeof(buffer), "%s_%d", graphics, j);
+//    buffer = util.my_snprintf( "%s_%d", graphics, j);
 //    sp = load_sprite(buffer);
 //    if (is_isometric) {
-//      my_snprintf(buffer, sizeof(buffer_wall), "%s_%d_wall", graphics, j);
+//      buffer = util.my_snprintf( "%s_%d_wall", graphics, j);
 //      sp_wall = load_sprite(buffer);
 //    }
 //    if (sp) {
@@ -2848,7 +2848,7 @@ public class Tilespec{
 //      }
 //      city_styles[style].tresh[city_styles[style].tiles_num] = j;
 //      city_styles[style].tiles_num++;
-//      freelog(LOG_DEBUG, "Found tile %s_%d", graphics, j);
+//      util.freelog(LOG_DEBUG, "Found tile %s_%d", graphics, j);
 //    }
 //  }
 //
@@ -2857,22 +2857,22 @@ public class Tilespec{
 //
 //  if (!is_isometric) {
 //    /* the wall tile */
-//    my_snprintf(buffer, sizeof(buffer), "%s_wall", graphics);
+//    buffer = util.my_snprintf( "%s_wall", graphics);
 //    sp = load_sprite(buffer);
 //    if (sp) {
 //      sprites.city.tile[style][city_styles[style].tiles_num] = sp;
 //    } else {
-//      freelog(Log.LOG_NORMAL, "Warning: no wall tile for graphic %s", graphics);
+//      util.freelog(Log.LOG_NORMAL, "Warning: no wall tile for graphic %s", graphics);
 //    }
 //  }
 //
 //  /* occupied tile */
-//  my_snprintf(buffer, sizeof(buffer), "%s_occupied", graphics);
+//  buffer = util.my_snprintf( "%s_occupied", graphics);
 //  sp = load_sprite(buffer);
 //  if (sp) {
 //    sprites.city.tile[style][city_styles[style].tiles_num+1] = sp;
 //  } else {
-//    freelog(Log.LOG_NORMAL, "Warning: no occupied tile for graphic %s", graphics);
+//    util.freelog(Log.LOG_NORMAL, "Warning: no occupied tile for graphic %s", graphics);
 //  }
 //}
 //
@@ -2886,7 +2886,7 @@ public class Tilespec{
 //
 //  if (city_styles[style].tiles_num == 0) {
 //    /* no tiles found, try alternate */
-//    freelog(Log.LOG_NORMAL, "No tiles for %s style, trying alternate %s style",
+//    util.freelog(Log.LOG_NORMAL, "No tiles for %s style, trying alternate %s style",
 //            city_styles[style].graphic, city_styles[style].graphic_alt);
 //
 //    tilespec_setup_style_tile(style, city_styles[style].graphic_alt);
@@ -2895,7 +2895,7 @@ public class Tilespec{
 //  if (city_styles[style].tiles_num == 0) {
 //      /* no alternate, use default */
 //
-//    freelog(Log.LOG_NORMAL,
+//    util.freelog(Log.LOG_NORMAL,
 //	    "No tiles for alternate %s style, using default tiles",
 //            city_styles[style].graphic_alt);
 //
@@ -3054,7 +3054,7 @@ public class Tilespec{
 //{
 //  int i, entries = hash_num_entries(sprite_hash);
 //
-//  freelog(LOG_DEBUG, "tilespec_free_tiles");
+//  util.freelog(LOG_DEBUG, "tilespec_free_tiles");
 //
 //  unload_all_sprites();
 //
@@ -3124,7 +3124,7 @@ public class Tilespec{
 //  /* Lookup information about where the sprite is found. */
 //  small_sprite ss = hash_lookup_data(sprite_hash, tag_name);
 //
-//  freelog(LOG_DEBUG, "load_sprite(tag='%s')", tag_name);
+//  util.freelog(LOG_DEBUG, "load_sprite(tag='%s')", tag_name);
 //  if (!ss) {
 //    return null;
 //  }
@@ -3137,7 +3137,7 @@ public class Tilespec{
 //    if (ss.file) {
 //      ss.sprite = load_gfx_file(ss.file);
 //      if (!ss.sprite) {
-//	freelog(LOG_FATAL, "Couldn't load gfx file %s for sprite %s",
+//	util.freelog(LOG_FATAL, "Couldn't load gfx file %s for sprite %s",
 //		ss.file, tag_name);
 //	exit(EXIT_FAILURE);
 //      }
@@ -3148,7 +3148,7 @@ public class Tilespec{
 //      get_sprite_dimensions(ss.sf.big_sprite, &sf_w, &sf_h);
 //      if (ss.x < 0 || ss.x + ss.width > sf_w
 //	  || ss.y < 0 || ss.y + ss.height > sf_h) {
-//	freelog(LOG_ERROR,
+//	util.freelog(Log.LOG_ERROR,
 //		"Sprite '%s' in file '%s' isn't within the image!",
 //		tag_name, ss.sf.file_name);
 //	return null;
@@ -3182,7 +3182,7 @@ public class Tilespec{
 //  if (ss.ref_count == 0) {
 //    /* Nobody's using the sprite anymore, so we should free it.  We know
 //     * where to find it if we need it again. */
-//    freelog(LOG_DEBUG, "freeing sprite '%s'", tag_name);
+//    util.freelog(LOG_DEBUG, "freeing sprite '%s'", tag_name);
 //    free_sprite(ss.sprite);
 //    ss.sprite = null;
 //  }

@@ -100,7 +100,7 @@ public class Citymap{
 //void citymap_reserve_city_spot(tile ptile, int id)
 //{
 //#ifdef DEBUG
-//  freelog(LOG_CITYMAP, "id %d reserving (%d, %d), was %d", 
+//  util.freelog(LOG_CITYMAP, "id %d reserving (%d, %d), was %d", 
 //          id, TILE_XY(ptile), citymap[ptile.index]);
 //  assert(citymap[ptile.index] >= 0);
 //#endif

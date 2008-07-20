@@ -548,7 +548,7 @@ public class Advmilitary{
 //  for (i = 0; i < 5; i++) {
 //    if (danger[i] < 0 || danger[i] > 1<<24) {
 //      /* I hope never to see this! */
-//      freelog(LOG_ERROR, "Dangerous danger[%d] (%d) in %s.  Beware of "
+//      util.freelog(Log.LOG_ERROR, "Dangerous danger[%d] (%d) in %s.  Beware of "
 //              "overflow.", i, danger[i], pcity.name);
 //      danger[i] = danger[i]>>2; /* reduce danger of overflow */
 //    }
@@ -751,7 +751,7 @@ public class Advmilitary{
 //      
 //      pplayer.ai.tech_want[tech_req] += desire;
 //      
-//      freelog(LOG_DEBUG, "%s wants %s for defense with desire %d <%d>",
+//      util.freelog(LOG_DEBUG, "%s wants %s for defense with desire %d <%d>",
 //              pcity.name, get_tech_name(pplayer, tech_req), desire,
 //              tech_desire[unit_type]);
 //    }
@@ -1010,7 +1010,7 @@ public class Advmilitary{
 //  }
 //
 //  if (!is_ground_unit(myunit) && !is_sailing_unit(myunit)) {
-//    freelog(LOG_ERROR, "ERROR: Attempting to deal with non-trivial"
+//    util.freelog(Log.LOG_ERROR, "ERROR: Attempting to deal with non-trivial"
 //            " unit_type in kill_something_with");
 //    return;
 //  }
@@ -1035,7 +1035,7 @@ public class Advmilitary{
 //  acity = map_get_city(ptile);
 //
 //  if (myunit.id != 0) {
-//    freelog(LOG_ERROR, "ERROR: Non-virtual unit in kill_something_with!");
+//    util.freelog(Log.LOG_ERROR, "ERROR: Non-virtual unit in kill_something_with!");
 //    return;
 //  }
 //  
@@ -1064,7 +1064,7 @@ public class Advmilitary{
 //    }
 //
 //    go_by_boat = (is_ground_unit(myunit)
-//                  && !(WARMAP_COST(ptile) <= (MIN(6, move_rate) * THRESHOLD)
+//                  && !(WARMAP_COST(ptile) <= (Math.min(6, move_rate) * THRESHOLD)
 //                       && goto_is_sane(myunit, acity.tile, true)));
 //
 //    move_time = turns_to_enemy_city(myunit.type, acity, move_rate, 
@@ -1131,7 +1131,7 @@ public class Advmilitary{
 //    if (go_by_boat && !ferryboat) {
 //      ai_choose_role_unit(pplayer, pcity, choice, L_FERRYBOAT, choice.want);
 //    }
-//    freelog(LOG_DEBUG, "%s has chosen attacker, %s, want=%d",
+//    util.freelog(LOG_DEBUG, "%s has chosen attacker, %s, want=%d",
 //            pcity.name, unit_types[choice.choice].name, choice.want);
 //  } 
 //}
@@ -1208,7 +1208,7 @@ public class Advmilitary{
 //    }
 //    break;
 //  default:
-//    freelog(LOG_ERROR, "Unknown move_type in adjust_ai_unit_choice");
+//    util.freelog(Log.LOG_ERROR, "Unknown move_type in adjust_ai_unit_choice");
 //    assert(false);
 //  }
 //}
@@ -1234,7 +1234,7 @@ public class Advmilitary{
 //   * of small units -- Syela */
 //  /* It has to be AFTER assess_danger thanks to wallvalue. */
 //  our_def = assess_defense_quadratic(pcity); 
-//  freelog(LOG_DEBUG, "%s: danger = %d, grave_danger = %d, our_def = %d",
+//  util.freelog(LOG_DEBUG, "%s: danger = %d, grave_danger = %d, our_def = %d",
 //          pcity.name, pcity.ai.danger, pcity.ai.grave_danger, our_def);
 //
 //  ai_choose_diplomat_defensive(pplayer, pcity, choice, our_def);
@@ -1253,7 +1253,7 @@ public class Advmilitary{
 //      } else if (our_def == 0) {
 //        danger = 200 + urgency;
 //      } else {
-//        danger = MIN(200, 100 * pcity.ai.danger / our_def) + urgency;
+//        danger = Math.min(200, 100 * pcity.ai.danger / our_def) + urgency;
 //      }
 //    } else { 
 //      danger = 100 * pcity.ai.danger / our_def;
@@ -1323,14 +1323,14 @@ public class Advmilitary{
 //      if (urgency == 0 && unit_types[choice.choice].defense_strength == 1) {
 //        if (get_city_bonus(pcity, EFT_LAND_REGEN) > 0) {
 //          /* unlikely */
-//          choice.want = MIN(49, danger);
+//          choice.want = Math.min(49, danger);
 //        } else {
-//          choice.want = MIN(25, danger);
+//          choice.want = Math.min(25, danger);
 //        }
 //      } else {
 //        choice.want = danger;
 //      }
-//      freelog(LOG_DEBUG, "%s wants %s to defend with desire %d.",
+//      util.freelog(LOG_DEBUG, "%s wants %s to defend with desire %d.",
 //                    pcity.name, get_unit_type(choice.choice).name,
 //                    choice.want);
 //    }

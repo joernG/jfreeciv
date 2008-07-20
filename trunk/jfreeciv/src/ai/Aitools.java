@@ -671,7 +671,7 @@ public class Aitools{
 //void copy_if_better_choice(ai_choice cur, ai_choice best)
 //{
 //  if (cur.want > best.want) {
-//    freelog(LOG_DEBUG, "Overriding choice (%s, %d) with (%s, %d)",
+//    util.freelog(LOG_DEBUG, "Overriding choice (%s, %d) with (%s, %d)",
 //	    (best.type == CT_BUILDING ? 
 //	     get_improvement_name(best.choice) : unit_types[best.choice].name), 
 //	    best.want, 
@@ -751,7 +751,7 @@ public class Aitools{
 //          want = pcity.ai.building_want[i];
 //          id = i;
 //        } else {
-//	  freelog(LOG_DEBUG, "%s can't build %s", pcity.name,
+//	  util.freelog(LOG_DEBUG, "%s can't build %s", pcity.name,
 //		  get_improvement_name(i));
 //	}
 //      } /* id is the building we like the best */
@@ -759,10 +759,10 @@ public class Aitools{
 //  } impr_type_iterate_end;
 //
 //  if (want != 0) {
-//    freelog(LOG_DEBUG, "AI_Chosen: %s with desire = %d for %s",
+//    util.freelog(LOG_DEBUG, "AI_Chosen: %s with desire = %d for %s",
 //	    get_improvement_name(id), want, pcity.name);
 //  } else {
-//    freelog(LOG_DEBUG, "AI_Chosen: None for %s", pcity.name);
+//    util.freelog(LOG_DEBUG, "AI_Chosen: None for %s", pcity.name);
 //  }
 //  choice.want = want;
 //  choice.choice = id;

@@ -287,11 +287,11 @@ public class Civclient{
 //  if (!is_valid_username(default_user_name)) {
 //    char buf[sizeof(default_user_name)];
 //
-//    my_snprintf(buf, sizeof(buf), "_%s", default_user_name);
+//    buf = util.my_snprintf( "_%s", default_user_name);
 //    if (is_valid_username(buf)) {
 //      sz_strlcpy(default_user_name, buf);
 //    } else {
-//      my_snprintf(default_user_name, sizeof(default_user_name),
+//      default_user_name = util.my_snprintf(
 //		  "player%d", myrand(10000));
 //    }
 //  }
@@ -373,7 +373,7 @@ public class Civclient{
 //void handle_packet_input(void *packet, int type)
 //{
 //  if (!client_handle_packet(type, packet)) {
-//    freelog(LOG_ERROR, "Received unknown packet (type %d) from server!",
+//    util.freelog(Log.LOG_ERROR, "Received unknown packet (type %d) from server!",
 //	    type);
 //  }
 //}
@@ -391,7 +391,7 @@ public class Civclient{
 //**************************************************************************/
 //void send_turn_done()
 //{
-//  freelog(LOG_DEBUG, "send_turn_done() turn_done_button_state=%d",
+//  util.freelog(LOG_DEBUG, "send_turn_done() turn_done_button_state=%d",
 //	  get_turn_done_button_state());
 //
 //  if (!get_turn_done_button_state()) {
@@ -465,7 +465,7 @@ public class Civclient{
 //      && (newstate == CLIENT_PRE_GAME_STATE);
 //  enum client_states oldstate = client_state;
 //
-//  if (newstate == CLIENT_GAME_OVER_STATE) {
+//  if (newstate == CLIENT_server_states.GAME_OVER_STATE) {
 //    /*
 //     * Extra kludge for end-game handling of the CMA.
 //     */
@@ -530,7 +530,7 @@ public class Civclient{
 //    gui_server_connect();
 //    if (auto_connect) {
 //      if (connect_error) {
-//	freelog(Log.LOG_NORMAL,
+//	util.freelog(Log.LOG_NORMAL,
 //		"There was an error while auto connecting; aborting.");
 //	exit(EXIT_FAILURE);
 //      } else {
@@ -690,6 +690,6 @@ public class Civclient{
 //boolean can_client_change_view()
 //{
 //  return (get_client_state() == CLIENT_GAME_RUNNING_STATE
-//	  || get_client_state() == CLIENT_GAME_OVER_STATE);
+//	  || get_client_state() == CLIENT_server_states.GAME_OVER_STATE);
 //}
 }

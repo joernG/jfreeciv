@@ -221,7 +221,7 @@ public class Dialogs{
 //  
 //  if(game.player_ptr.economic.gold>=punit.bribe_cost)
 //  {
-//    my_snprintf(buf, sizeof(buf),"Bribe unit for %d gold?\nTreasury contains %d gold.",
+//    buf = util.my_snprintf("Bribe unit for %d gold?\nTreasury contains %d gold.",
 //                punit.bribe_cost, game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(main_wnd, "Bribe Enemy Unit", buf,
@@ -230,7 +230,7 @@ public class Dialogs{
 //                         0);
 //  } else
 //  {
-//    my_snprintf(buf, sizeof(buf), "Bribing the unit costs %d gold.\nTreasury contains %d gold.",
+//    buf = util.my_snprintf( "Bribing the unit costs %d gold.\nTreasury contains %d gold.",
 //                punit.bribe_cost, game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(main_wnd, "Traitors Demand Too Much!", buf,
@@ -483,12 +483,12 @@ public class Dialogs{
 //  char buf[128];
 //
 //  if (pcity.incite_revolt_cost == INCITE_IMPOSSIBLE_COST) {
-//    my_snprintf(buf, sizeof(buf), "You can't incite a revolt in %s.",
+//    buf = util.my_snprintf( "You can't incite a revolt in %s.",
 //		pcity.name);
 //    popup_message_dialog(main_wnd, "City can't be incited!", buf,
 //			 "Darn", diplomat_incite_no, 0, 0);
 //  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
-//    my_snprintf(buf, sizeof(buf),"Incite a revolt for %d gold?\nTreasury contains %d gold.",
+//    buf = util.my_snprintf("Incite a revolt for %d gold?\nTreasury contains %d gold.",
 //            pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //    diplomat_target_id = pcity.id;
 //
@@ -499,7 +499,7 @@ public class Dialogs{
 //
 //  } else
 //  {
-//    my_snprintf(buf, sizeof(buf), "Inciting a revolt costs %d gold.\nTreasury contains %d gold.",
+//    buf = util.my_snprintf( "Inciting a revolt costs %d gold.\nTreasury contains %d gold.",
 //                pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //    popup_message_dialog(main_wnd, "Traitors Demand Too Much!", buf,
 //                         "Darn", diplomat_incite_no,0,
@@ -973,7 +973,7 @@ public class Dialogs{
 //  int i=0;
 //  char buf[128];
 //
-//  my_snprintf(buf, sizeof(buf),"Your caravan from %s reaches the city of %s.\nWhat now?",
+//  buf = util.my_snprintf("Your caravan from %s reaches the city of %s.\nWhat now?",
 //          phomecity.name, pdestcity.name);
 //
 //  if (can_cities_trade(phomecity, pdestcity))
@@ -1410,7 +1410,7 @@ public class Dialogs{
 //
 //        pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
 //
-//        my_snprintf(buffer, sizeof(buffer),"%s%s\n%s\n%s", punittemp.name,
+//        buffer = util.my_snprintf("%s%s\n%s\n%s", punittemp.name,
 //               (punit.veteran) ? " (veteran)" : "", unit_activity_text(punit),pcity ? pcity.name : "");
 //
 //        o = HGroup,
@@ -1460,7 +1460,7 @@ public class Dialogs{
 // Get the nation id of the nation selected in the nations
 // listview
 //*****************************************************************/
-//Nation_Type_id get_active_nation()
+//int get_active_nation()
 //{
 //  char *nationname;
 //
@@ -1478,7 +1478,7 @@ public class Dialogs{
 //  int i, leader_count;
 //  leader leaders;
 //  Object *list = (Object*)xget(nations_leader_poplist,MUIA_Popobject_Object);
-//  Nation_Type_id nation = get_active_nation();
+//  int nation = get_active_nation();
 //
 //  set(nations_flag_sprite, MUIA_Sprite_Sprite, get_nation_by_idx(nation).flag_sprite);
 //
@@ -1541,7 +1541,7 @@ public class Dialogs{
 //HOOKPROTONH(nations_obj2str, void, Object *list, Object *str)
 //{
 //  char *x;
-//  Nation_Type_id nation = get_active_nation();
+//  int nation = get_active_nation();
 //  DoMethod(list,MUIM_List_GetEntry,MUIV_List_GetEntry_Active,&x);
 //  set(str,MUIA_String_Contents,x);
 //  if(x) set(nations_sex_radio, MUIA_Radio_Active, get_nation_leader_sex(nation,x)?0:1);
@@ -1668,7 +1668,7 @@ public class Dialogs{
 //    {
 //      DoMethod(nations_nation_listview, MUIM_List_Clear);
 //      for(i=0;i<game.playable_nation_count && i<64;i++)
-//	DoMethod(nations_nation_listview, MUIM_List_InsertSingle, get_nation_name(i), MUIV_List_Insert_Sorted);
+//	DoMethod(nations_nation_listview, MUIM_List_InsertSingle, Nation.get_nation_name(i), MUIV_List_Insert_Sorted);
 //
 //      DoMethod(nations_nation_listview, MUIM_Notify, MUIA_List_Active, MUIV_EveryTime, app, 3, MUIM_CallHook, &civstandard_hook, nations_nation_active);
 //      DoMethod(nations_ok_button, MUIM_Notify, MUIA_Pressed, false, app, 3, MUIM_CallHook, &civstandard_hook, nations_ok);
@@ -1745,7 +1745,7 @@ public class Dialogs{
 //  if (ut2 == -1)
 //  {
 //    /* this shouldn't generally happen, but it is conceivable */
-//    my_snprintf(buf, sizeof(buf),
+//    buf = util.my_snprintf(
 //		"Sorry: cannot upgrade %s.", unit_types[ut1].name);
 //    popup_message_dialog( main_wnd, "Upgrade Unit!", buf,
 //			  "_Darn", message_close, 0,
@@ -1756,7 +1756,7 @@ public class Dialogs{
 //
 //    if (game.player_ptr.economic.gold>=value)
 //    {
-//      my_snprintf(buf, sizeof(buf), _("Upgrade %s to %s for %d gold?\n"
+//      buf = util.my_snprintf( _("Upgrade %s to %s for %d gold?\n"
 //	         "Treasury contains %d gold."),
 //	         unit_types[ut1].name, unit_types[ut2].name,
 //	         value, game.player_ptr.economic.gold);
@@ -1766,7 +1766,7 @@ public class Dialogs{
 //			     null);
 //    } else
 //    {
-//	my_snprintf(buf, sizeof(buf), _("Upgrading %s to %s costs %d gold.\n"
+//	buf = util.my_snprintf( _("Upgrading %s to %s costs %d gold.\n"
 //	       "Treasury contains %d gold."),
 //	       unit_types[ut1].name, unit_types[ut2].name,
 //	       value, game.player_ptr.economic.gold);

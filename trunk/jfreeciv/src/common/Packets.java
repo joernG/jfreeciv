@@ -104,14 +104,14 @@ public class Packets{
 //  /* default for the server */
 //  int result = 0;
 //
-//  freelog(BASIC_PACKET_LOG_LEVEL, "sending packet type=%s(%d) len=%d",
+//  util.freelog(BASIC_PACKET_LOG_LEVEL, "sending packet type=%s(%d) len=%d",
 //	  get_packet_name(data[2]), data[2], len);
 //
 //  if (!is_server) {
 //    pc.client.last_request_id_used =
 //	get_next_request_id(pc.client.last_request_id_used);
 //    result = pc.client.last_request_id_used;
-//    freelog(LOG_DEBUG, "sending request %d", result);
+//    util.freelog(LOG_DEBUG, "sending request %d", result);
 //  }
 //
 //  if (pc.outgoing_packet_notify) {
@@ -149,11 +149,11 @@ public class Packets{
 //
 //      byte_vector_reserve(&pc.compression.queue, old_size + len);
 //      memcpy(pc.compression.queue.p + old_size, data, len);
-//      freelog(COMPRESS2_LOG_LEVEL, "COMPRESS: putting %s into the queue",
+//      util.freelog(COMPRESS2_LOG_LEVEL, "COMPRESS: putting %s into the queue",
 //	      get_packet_name(packet_type));
 //    } else {
 //      stat_size_alone += size;
-//      freelog(COMPRESS_LOG_LEVEL, "COMPRESS: sending %s alone (%d bytes total)",
+//      util.freelog(COMPRESS_LOG_LEVEL, "COMPRESS: sending %s alone (%d bytes total)",
 //	      get_packet_name(packet_type), stat_size_alone);
 //      send_connection_data(pc, data, len);
 //    }
@@ -174,7 +174,7 @@ public class Packets{
 //	if (compressed_size + 2 < pc.compression.queue.size) {
 //	    struct data_out dout;
 //
-//	  freelog(COMPRESS_LOG_LEVEL,
+//	  util.freelog(COMPRESS_LOG_LEVEL,
 //		  "COMPRESS: compressed %lu bytes to %ld (level %d)",
 //		  (unsigned long)pc.compression.queue.size, compressed_size,
 //		  compression_level);
@@ -184,7 +184,7 @@ public class Packets{
 //	  if (compressed_size <= JUMBO_BORDER) {
 //	    unsigned char header[2];
 //
-//	    freelog(COMPRESS_LOG_LEVEL, "COMPRESS: sending %ld as normal",
+//	    util.freelog(COMPRESS_LOG_LEVEL, "COMPRESS: sending %ld as normal",
 //		    compressed_size);
 //
 //	    dio_output_init(&dout, header, sizeof(header));
@@ -194,7 +194,7 @@ public class Packets{
 //	  } else {
 //	    unsigned char header[6];
 //
-//	    freelog(COMPRESS_LOG_LEVEL, "COMPRESS: sending %ld as jumbo",
+//	    util.freelog(COMPRESS_LOG_LEVEL, "COMPRESS: sending %ld as jumbo",
 //		    compressed_size);
 //	    dio_output_init(&dout, header, sizeof(header));
 //	    dio_put_uint16(&dout, JUMBO_SIZE);
@@ -203,7 +203,7 @@ public class Packets{
 //	    send_connection_data(pc, compressed, compressed_size);
 //	  }
 //	} else {
-//	  freelog(COMPRESS_LOG_LEVEL,
+//	  util.freelog(COMPRESS_LOG_LEVEL,
 //		  "COMPRESS: would enlarging %lu bytes to %ld; sending uncompressed",
 //		  (unsigned long)pc.compression.queue.size, compressed_size);
 //	  send_connection_data(pc, pc.compression.queue.p,
@@ -212,7 +212,7 @@ public class Packets{
 //	}
 //      }
 //    }
-//    freelog(COMPRESS2_LOG_LEVEL,
+//    util.freelog(COMPRESS2_LOG_LEVEL,
 //	    "COMPRESS: STATS: alone=%d compression-expand=%d compression (before/after) = %d/%d",
 //	    stat_size_alone, stat_size_no_compression,
 //	    stat_size_uncompressed, stat_size_compressed);
@@ -270,8 +270,8 @@ public class Packets{
 //#if PACKET_SIZE_STATISTICS == 2
 //      delta_stats_report();
 //#endif
-//      freelog(ll, "Transmitted packets:");
-//      freelog(ll, "%8s %8s %8s %s", "Packets", "Bytes",
+//      util.freelog(ll, "Transmitted packets:");
+//      util.freelog(ll, "%8s %8s %8s %s", "Packets", "Bytes",
 //	      "Byt/Pac", "Name");
 //
 //      for (i = 0; i < PACKET_LAST; i++) {
@@ -279,16 +279,16 @@ public class Packets{
 //	  continue;
 //	}
 //	sum += packets_stats[i].size;
-//	freelog(ll, "%8d %8d %8d %s(%i)",
+//	util.freelog(ll, "%8d %8d %8d %s(%i)",
 //		packets_stats[i].counter, packets_stats[i].size,
 //		packets_stats[i].size / packets_stats[i].counter,
 //		get_packet_name(i),i);
 //      }
-//      freelog(Log.LOG_NORMAL,
+//      util.freelog(Log.LOG_NORMAL,
 //	      "turn=%d; transmitted %d bytes in %d packets;average size "
 //	      "per packet %d bytes", game.turn, sum, packet_counter,
 //	      sum / packet_counter);
-//      freelog(Log.LOG_NORMAL, "turn=%d; transmitted %d bytes", game.turn,
+//      util.freelog(Log.LOG_NORMAL, "turn=%d; transmitted %d bytes", game.turn,
 //	      pc.statistics.bytes_send);
 //    }    
 //    if (clear) {
@@ -352,7 +352,7 @@ public class Packets{
 //    header_size = 6;
 //    if (dio_input_remaining(&din) >= 4) {
 //      dio_get_uint32(&din, &whole_packet_len);
-//      freelog(COMPRESS_LOG_LEVEL, "COMPRESS: got a jumbo packet of size %d", whole_packet_len);
+//      util.freelog(COMPRESS_LOG_LEVEL, "COMPRESS: got a jumbo packet of size %d", whole_packet_len);
 //    } else {
 //      /* to return null below */
 //      whole_packet_len = 6;
@@ -361,7 +361,7 @@ public class Packets{
 //    compressed_packet = true;
 //    header_size = 2;
 //    whole_packet_len = len_read - COMPRESSION_BORDER;
-//    freelog(COMPRESS_LOG_LEVEL, "COMPRESS: got a normal packet of size %d", whole_packet_len);
+//    util.freelog(COMPRESS_LOG_LEVEL, "COMPRESS: got a normal packet of size %d", whole_packet_len);
 //  }
 //#endif
 //
@@ -388,7 +388,7 @@ public class Packets{
 //    if (error != Z_OK) {
 //      CLOSE_FUN close_callback = close_socket_get_callback();
 //
-//      freelog(LOG_ERROR, "Uncompressing of the packet stream failed. "
+//      util.freelog(Log.LOG_ERROR, "Uncompressing of the packet stream failed. "
 //	      "The connection will be closed now.");
 //      assert(close_callback);
 //      (*close_callback) (pc);
@@ -423,7 +423,7 @@ public class Packets{
 //
 //    buffer.ndata += decompressed_size;
 //    
-//    freelog(COMPRESS_LOG_LEVEL, "COMPRESS: decompressed %ld into %ld",
+//    util.freelog(COMPRESS_LOG_LEVEL, "COMPRESS: decompressed %ld into %ld",
 //	    compressed_size, decompressed_size);
 //
 //    return get_packet_from_connection(pc, ptype, presult);
@@ -437,7 +437,7 @@ public class Packets{
 //  if (whole_packet_len < 3) {
 //    CLOSE_FUN close_callback = close_socket_get_callback();
 //
-//    freelog(LOG_ERROR, "The packet stream is corrupt. The connection "
+//    util.freelog(Log.LOG_ERROR, "The packet stream is corrupt. The connection "
 //	    "will be closed now.");
 //    assert(close_callback);
 //    (*close_callback) (pc);
@@ -447,7 +447,7 @@ public class Packets{
 //
 //  dio_get_uint8(&din, &utype.itype);
 //
-//  freelog(BASIC_PACKET_LOG_LEVEL, "got packet type=(%s)%d len=%d",
+//  util.freelog(BASIC_PACKET_LOG_LEVEL, "got packet type=(%s)%d len=%d",
 //	  get_packet_name(utype.type), utype.itype, whole_packet_len);
 //
 //  *ptype = utype.type;
@@ -485,19 +485,19 @@ public class Packets{
 //	|| (!is_server && (packet_counter % 1000 == 0))) {
 //      int i, sum = 0;
 //
-//      freelog(Log.LOG_NORMAL, "Received packets:");
+//      util.freelog(Log.LOG_NORMAL, "Received packets:");
 //      for (i = 0; i < PACKET_LAST; i++) {
 //	if (packets_stats[i].counter == 0)
 //	  continue;
 //	sum += packets_stats[i].size;
-//	freelog(Log.LOG_NORMAL,
+//	util.freelog(Log.LOG_NORMAL,
 //		"  [%-25.25s %3d]: %6d packets; %8d bytes total; "
 //		"%5d bytes/packet average",
 //		get_packet_name(i), i, packets_stats[i].counter,
 //		packets_stats[i].size,
 //		packets_stats[i].size / packets_stats[i].counter);
 //      }
-//      freelog(Log.LOG_NORMAL,
+//      util.freelog(Log.LOG_NORMAL,
 //	      "received %d bytes in %d packets;average size "
 //	      "per packet %d bytes",
 //	      sum, packet_counter, sum / packet_counter);
@@ -519,7 +519,7 @@ public class Packets{
 //  dio_get_uint16(&din, &len);
 //  memmove(buffer.data, buffer.data + len, buffer.ndata - len);
 //  buffer.ndata -= len;
-//  freelog(LOG_DEBUG, "remove_packet_from_buffer: remove %d; remaining %d",
+//  util.freelog(LOG_DEBUG, "remove_packet_from_buffer: remove %d; remaining %d",
 //	  len, buffer.ndata);
 //}
 //
@@ -535,33 +535,33 @@ public class Packets{
 //    int type, len;
 //
 //    assert(pc != null);
-//    my_snprintf(from, sizeof(from), " from %s", conn_description(pc));
+//    from = util.my_snprintf( " from %s", conn_description(pc));
 //
 //    dio_input_rewind(din);
 //    dio_get_uint16(din, &len);
 //    dio_get_uint8(din, &type);
 //
 //    if (din.bad_string) {
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      "received bad string in packet (type %d, len %d)%s",
 //	      type, len, from);
 //    }
 //
 //    if (din.bad_bit_string) {
-//      freelog(LOG_ERROR,
+//      util.freelog(Log.LOG_ERROR,
 //	      "received bad bit string in packet (type %d, len %d)%s",
 //	      type, len, from);
 //    }
 //
 //    if (din.too_short) {
-//      freelog(LOG_ERROR, "received short packet (type %d, len %d)%s",
+//      util.freelog(Log.LOG_ERROR, "received short packet (type %d, len %d)%s",
 //	      type, len, from);
 //    }
 //
 //    if (rem > 0) {
 //      /* This may be ok, eg a packet from a newer version with extra info
 //       * which we should just ignore */
-//      freelog(LOG_VERBOSE,
+//      util.freelog(LOG_VERBOSE,
 //	      "received long packet (type %d, len %d, rem %lu)%s", type,
 //	      len, (unsigned long)rem, from);
 //    }
@@ -576,7 +576,7 @@ public class Packets{
 //					   packet_player_attribute_chunk
 //					   *chunk)
 //{
-//  freelog(LOG_DEBUG, "received attribute chunk %d/%d %d", chunk.offset,
+//  util.freelog(LOG_DEBUG, "received attribute chunk %d/%d %d", chunk.offset,
 //	  chunk.total_length, chunk.chunk_length);
 //
 //  if (chunk.total_length < 0
@@ -594,7 +594,7 @@ public class Packets{
 //      pplayer.attribute_block_buffer.data = null;
 //    }
 //    pplayer.attribute_block_buffer.length = 0;
-//    freelog(LOG_ERROR, "Received wrong attribute chunk");
+//    util.freelog(Log.LOG_ERROR, "Received wrong attribute chunk");
 //    return;
 //  }
 //  /* first one in a row */
@@ -645,7 +645,7 @@ public class Packets{
 //  connection_do_buffer(pconn);
 //
 //  for (current_chunk = 0; current_chunk < chunks; current_chunk++) {
-//    int size_of_current_chunk = MIN(bytes_left, ATTRIBUTE_CHUNK_SIZE);
+//    int size_of_current_chunk = Math.min(bytes_left, ATTRIBUTE_CHUNK_SIZE);
 //
 //    packet.offset = ATTRIBUTE_CHUNK_SIZE * current_chunk;
 //    packet.total_length = pplayer.attribute_block.length;
@@ -713,7 +713,7 @@ public class Packets{
 //  assert(packet.chunk_length <= packet.total_length);
 //  assert(packet.offset >= 0 && packet.offset < packet.total_length);
 //
-//  freelog(LOG_DEBUG, "sending attribute chunk %d/%d %d", packet.offset,
+//  util.freelog(LOG_DEBUG, "sending attribute chunk %d/%d %d", packet.offset,
 //	  packet.total_length, packet.chunk_length);
 //
 //}

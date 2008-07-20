@@ -129,13 +129,13 @@ public class Worklistclass{
 //
 //  if (ptype.fuel > 0)
 //  {
-//    my_snprintf(info, sizeof(info), "%d/%d/%d(%d)", ptype.attack_strength,
+//    info = util.my_snprintf( "%d/%d/%d(%d)", ptype.attack_strength,
 //		ptype.defense_strength,
 //		ptype.move_rate / 3, (ptype.move_rate / 3) * ptype.fuel);
 //
 //  } else
 //  {
-//    my_snprintf(info, sizeof(info), "%d/%d/%d", ptype.attack_strength,
+//    info = util.my_snprintf( "%d/%d/%d", ptype.attack_strength,
 //		ptype.defense_strength, ptype.move_rate / 3);
 //  }
 //  return info;

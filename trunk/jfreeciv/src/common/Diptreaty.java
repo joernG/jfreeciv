@@ -130,12 +130,12 @@ public class Diptreaty{
 //                     pplayer_get_diplstate(ptreaty.plr0, ptreaty.plr1).type;
 //
 //  if (type < 0 || type >= CLAUSE_LAST) {
-//    freelog(LOG_ERROR, "Illegal clause type encountered.");
+//    util.freelog(Log.LOG_ERROR, "Illegal clause type encountered.");
 //    return false;
 //  }
 //
 //  if (type == CLAUSE_ADVANCE && !tech_exists(val)) {
-//    freelog(LOG_ERROR, "Illegal tech value %i in clause.", val);
+//    util.freelog(Log.LOG_ERROR, "Illegal tech value %i in clause.", val);
 //    return false;
 //  }
 //  
@@ -144,7 +144,7 @@ public class Diptreaty{
 //          || (ds == diplstate_type.DS_ALLIANCE && type == CLAUSE_ALLIANCE)
 //          || (ds == DS_CEASEFIRE && type == CLAUSE_CEASEFIRE))) {
 //    /* we already have this diplomatic state */
-//    freelog(LOG_ERROR, "Illegal treaty suggested between %s and %s - they "
+//    util.freelog(Log.LOG_ERROR, "Illegal treaty suggested between %s and %s - they "
 //                       "already have this treaty level.", ptreaty.plr0.name, 
 //                       ptreaty.plr1.name);
 //    return false;

@@ -29,7 +29,7 @@ import static server.Plrhand.notify_player_ex;
 import static server.Unithand.handle_unit_activity_request;
 import static server.Unittools.send_unit_info;
 import static utility.Log.LOG_DEBUG;
-import static utility.Log.freelog;
+import port.util;
 import utility.Speclists;
 
 import common.event_type;
@@ -76,7 +76,7 @@ public class Autoattack {
 		/* attack the next to city */ 
 		range = range<4 ? 3 : range;
 
-		freelog(LOG_DEBUG, "doing autoattack for %s (%d/%d) in %s," +
+		util.freelog(LOG_DEBUG, "doing autoattack for %s (%d/%d) in %s," +
 				" range %d(%d), city_options %d",
 				unit_name(punit.type), punit.tile.x, punit.tile.y,
 				pcity.name,
@@ -113,23 +113,23 @@ public class Autoattack {
 			if (null==is_enemy_unit_tile(ptile, pplayer))
 				continue;
 
-			freelog(LOG_DEBUG,  "found enemy unit/stack at %d,%d",
+			util.freelog(LOG_DEBUG,  "found enemy unit/stack at %d,%d",
 					ptile.x, ptile.y);
 			enemy = get_defender(punit, ptile);
 			if (null==enemy) {
 				continue;
 			}
-			freelog(LOG_DEBUG,  "defender is %s", unit_name(enemy.type));
+			util.freelog(LOG_DEBUG,  "defender is %s", unit_name(enemy.type));
 
 			if (!is_city_option_set(pcity, city_options.CITYO_ATT_LAND.ordinal()
 					+ unit_type(enemy).move_type.ordinal())) {
-				freelog(LOG_DEBUG, "wrong target type");
+				util.freelog(LOG_DEBUG, "wrong target type");
 				continue;
 			}
 
 			mv_cost = calculate_move_cost(punit, ptile);
 			if (mv_cost > range) {
-				freelog(LOG_DEBUG, "too far away: %d", mv_cost);
+				util.freelog(LOG_DEBUG, "too far away: %d", mv_cost);
 				continue;
 			}
 
@@ -144,7 +144,7 @@ public class Autoattack {
 			 */
 			if (ai_handicap(pplayer, H_TARGETS)
 					&& !can_player_see_unit(pplayer, enemy)) {
-				freelog(LOG_DEBUG, "can't see %s at (%d,%d)", unit_name(enemy.type),
+				util.freelog(LOG_DEBUG, "can't see %s at (%d,%d)", unit_name(enemy.type),
 						ptile.x, ptile.y);
 				continue;
 			}
@@ -155,7 +155,7 @@ public class Autoattack {
 			 * wasted when they cannot engage.
 			 */
 			if (!can_unit_attack_all_at_tile(punit, ptile)) {
-				freelog(LOG_DEBUG, "%s at (%d,%d) cannot attack at (%d,%d)",
+				util.freelog(LOG_DEBUG, "%s at (%d,%d) cannot attack at (%d,%d)",
 						unit_name(punit.type), punit.tile.x, punit.tile.y,
 						ptile.x, ptile.y);
 				continue;
@@ -176,7 +176,7 @@ public class Autoattack {
 
 		enemy = best_enemy;
 
-		freelog(LOG_DEBUG, "chosen target=%s (%d/%d)",
+		util.freelog(LOG_DEBUG, "chosen target=%s (%d/%d)",
 				get_unit_name(enemy.type), enemy.tile.x, enemy.tile.y);
 
 		if((unit_type(enemy).defense_strength) >
@@ -207,7 +207,7 @@ public class Autoattack {
 		if (null == enemy)
 			return;
 
-		freelog(LOG_DEBUG, "launching attack");
+		util.freelog(LOG_DEBUG, "launching attack");
 
 		notify_player_ex(pplayer, enemy.tile, event_type.E_NOEVENT,
 				"Game: Auto-Attack: %s's %s attacking %s's %s",
@@ -254,7 +254,7 @@ public class Autoattack {
 	 * ...
 	 **************************************************************************/
 	static void auto_attack_player(player pplayer) {
-		freelog(LOG_DEBUG, "doing auto_attack for: %s", pplayer.name);
+		util.freelog(LOG_DEBUG, "doing auto_attack for: %s", pplayer.name);
 
 		for (city pcity : pplayer.cities.data) {
 			/* fasten things up -- fisch */
@@ -295,7 +295,7 @@ public class Autoattack {
 		// auto_attack_player(pplayer);
 		// } shuffled_players_iterate_end;
 		// if (timer_in_use(t)) {
-		// freelog(LOG_VERBOSE, "autoattack consumed %g milliseconds.",
+		// util.freelog(LOG_VERBOSE, "autoattack consumed %g milliseconds.",
 		// 1000.0*read_timer_seconds(t));
 		// }
 	}

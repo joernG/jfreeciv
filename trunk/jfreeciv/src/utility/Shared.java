@@ -1,5 +1,7 @@
 package utility;
 
+import port.util;
+
 public class Shared{
 //#include "astring.h"
 //#include "fciconv.h"
@@ -103,7 +105,7 @@ public class Shared{
 //  return a char * to the parameter of the option or null.
 //  *i can be increased to get next string in the array argv[].
 //  It is an error for the option to exist but be an empty string.
-//  This doesn't use freelog() because it is used before logging is set up.
+//  This doesn't use util.freelog() because it is used before logging is set up.
 //**************************************************************************/
 //char *get_option(final String option_name, char **argv, int *i, int argc)
 //{
@@ -369,21 +371,22 @@ public class Shared{
 //  /* otherwise, it's okay... */
 //  return true;
 //}
-//
-///***************************************************************
-//  Produce a statically allocated textual representation of the given
-//  year.
-//***************************************************************/
-//final String textyear(int year)
-//{
+
+/***************************************************************
+  Produce a statically allocated textual representation of the given
+  year.
+***************************************************************/
+public static final String textyear(int year)
+{
 //  static char y[32];
-//  if (year<0) 
-//    my_snprintf(y, sizeof(y), "%d BC", -year);
-//  else
-//    my_snprintf(y, sizeof(y), "%d AD", year);
-//  return y;
-//}
-//
+	String y= null;
+  if (year<0) 
+    y = util.my_snprintf("%d BC", -year);
+  else
+    y = util.my_snprintf("%d AD", year);
+  return y;
+}
+
 ///**************************************************************************
 //  Compares two strings, in the collating order of the current locale,
 //  given pointers to the two strings (i.e., given "char *"s).
@@ -570,7 +573,7 @@ public class Shared{
 //boolean check_strlen(final String str, size_t len, final String errmsg)
 //{
 //  if (str.length() >= len) {
-//    freelog(LOG_ERROR, errmsg, str, len);
+//    util.freelog(Log.LOG_ERROR, errmsg, str, len);
 //    assert(0);
 //    return true;
 //  }
@@ -626,9 +629,9 @@ public class Shared{
 //{
 //  va_list ap;
 //
-//  freelog(LOG_FATAL, "Detected fatal error in %s line %d:", file, line);
+//  util.freelog(LOG_FATAL, "Detected fatal error in %s line %d:", file, line);
 //  va_start(ap, format);
-//  vreal_freelog(LOG_FATAL, format, ap);
+//  vreal_util.freelog(LOG_FATAL, format, ap);
 //  va_end(ap);
 //
 //  assert(false);
@@ -654,17 +657,17 @@ public class Shared{
 //    char *env = getenv("HOME");
 //    if (env) {
 //      home_dir = mystrdup(env);	        /* never free()d */
-//      freelog(LOG_VERBOSE, "HOME is %s", home_dir);
+//      util.freelog(LOG_VERBOSE, "HOME is %s", home_dir);
 //    } else {
 //#ifdef WIN32_NATIVE
 //      home_dir=fc_malloc(PATH_MAX);
 //      if (!getcwd(home_dir,PATH_MAX)) {
 //	free(home_dir);
 //	home_dir=null;
-//	freelog(LOG_ERROR, "Could not find home directory (HOME is not set)");
+//	util.freelog(Log.LOG_ERROR, "Could not find home directory (HOME is not set)");
 //      }
 //#else
-//      freelog(LOG_ERROR, "Could not find home directory (HOME is not set)");
+//      util.freelog(Log.LOG_ERROR, "Could not find home directory (HOME is not set)");
 //      home_dir = null;
 //#endif
 //    }
@@ -703,7 +706,7 @@ public class Shared{
 //    if (env) {
 //      sz_strlcpy(username, env);
 //      if (is_ascii_name(username)) {
-//	freelog(LOG_VERBOSE, "USER username is %s", username);
+//	util.freelog(LOG_VERBOSE, "USER username is %s", username);
 //	return username;
 //      }
 //    }
@@ -718,7 +721,7 @@ public class Shared{
 //    if (pwent) {
 //      sz_strlcpy(username, pwent.pw_name);
 //      if (is_ascii_name(username)) {
-//	freelog(LOG_VERBOSE, "getpwuid username is %s", username);
+//	util.freelog(LOG_VERBOSE, "getpwuid username is %s", username);
 //	return username;
 //      }
 //    }
@@ -734,7 +737,7 @@ public class Shared{
 //    if (GetUserName(name, &length)) {
 //      sz_strlcpy(username, name);
 //      if (is_ascii_name(username)) {
-//	freelog(LOG_VERBOSE, "GetUserName username is %s", username);
+//	util.freelog(LOG_VERBOSE, "GetUserName username is %s", username);
 //	return username;
 //      }
 //    }
@@ -746,7 +749,7 @@ public class Shared{
 //#else
 //  my_snprintf(username, MAX_LEN_NAME, "name%d", (int)getuid());
 //#endif
-//  freelog(LOG_VERBOSE, "fake username is %s", username);
+//  util.freelog(LOG_VERBOSE, "fake username is %s", username);
 //  assert(is_ascii_name(username));
 //  return username;
 //}
@@ -784,7 +787,7 @@ public class Shared{
 //  if (!path) {
 //    path = DEFAULT_DATA_PATH;
 //  } else if (*path == '\0') {
-//    freelog(LOG_ERROR, _("FREECIV_PATH is set but empty; "
+//    util.freelog(Log.LOG_ERROR, _("FREECIV_PATH is set but empty; "
 //			 "using default path instead."));
 //    path = DEFAULT_DATA_PATH;
 //  }
@@ -805,14 +808,14 @@ public class Shared{
 //    i = tok.length();
 //    if (tok[0] == '~') {
 //      if (i > 1 && tok[1] != '/') {
-//	freelog(LOG_ERROR, "For \"%s\" in data path cannot expand '~'"
+//	util.freelog(Log.LOG_ERROR, "For \"%s\" in data path cannot expand '~'"
 //		" except as '~/'; ignoring", tok);
 //	i = 0;   /* skip this one */
 //      } else {
 //	char *home = user_home_dir();
 //
 //	if (!home) {
-//	  freelog(LOG_VERBOSE,
+//	  util.freelog(LOG_VERBOSE,
 //		  "No HOME, skipping data path component %s", tok);
 //	  i = 0;
 //	} else {
@@ -832,7 +835,7 @@ public class Shared{
 //      num++;
 //      dirs = fc_realloc(dirs, num * sizeof(char*));
 //      dirs[num - 1] = mystrdup(tok);
-//      freelog(LOG_VERBOSE, "Data path component (%d): %s", num - 1, tok);
+//      util.freelog(LOG_VERBOSE, "Data path component (%d): %s", num - 1, tok);
 //      if (i == -1) {
 //	free(tok);
 //	tok = null;
@@ -885,10 +888,10 @@ public class Shared{
 //    dir = opendir(dirs[dir_num]);
 //    if (!dir) {
 //      if (errno == ENOENT) {
-//	freelog(LOG_VERBOSE, "Skipping non-existing data directory %s.",
+//	util.freelog(LOG_VERBOSE, "Skipping non-existing data directory %s.",
 //		dirs[dir_num]);
 //      } else {
-//	freelog(LOG_ERROR, "Could not read data directory %s: %s.",
+//	util.freelog(Log.LOG_ERROR, "Could not read data directory %s: %s.",
 //		dirs[dir_num], mystrerror());
 //      }
 //      continue;
@@ -998,7 +1001,7 @@ public class Shared{
 //    }
 //  }
 //
-//  freelog(LOG_VERBOSE, "Could not find readable file \"%s\" in data path.",
+//  util.freelog(LOG_VERBOSE, "Could not find readable file \"%s\" in data path.",
 //	  filename);
 //
 //  return null;
@@ -1051,7 +1054,7 @@ public class Shared{
 //    dirent entry;
 //
 //    if (subpath) {
-//      my_snprintf(path, sizeof(path), "%s/%s", dirs[dir_num], subpath);
+//      path = util.my_snprintf( "%s/%s", dirs[dir_num], subpath);
 //    } else {
 //      sz_strlcpy(path, dirs[dir_num]);
 //    }
@@ -1140,10 +1143,10 @@ public class Shared{
 //  if (dname) {
 //    return dname;
 //  } else {
-//    freelog(LOG_ERROR, _("The data path may be set via"
+//    util.freelog(Log.LOG_ERROR, _("The data path may be set via"
 //			 " the environment variable FREECIV_PATH."));
-//    freelog(LOG_ERROR, _("Current data path is: \"%s\""), datafilename(null));
-//    freelog(LOG_FATAL,
+//    util.freelog(Log.LOG_ERROR, _("Current data path is: \"%s\""), datafilename(null));
+//    util.freelog(LOG_FATAL,
 //		 _("The \"%s\" file is required ... aborting!"), filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -1209,7 +1212,7 @@ public static void init_nls()
 //    if (langname) {
 //      static char envstr[40];
 //
-//      my_snprintf(envstr, sizeof(envstr), "LANG=%s", langname);
+//      envstr = util.my_snprintf( "LANG=%s", langname);
 //      putenv(envstr);
 //    }
 //  }
@@ -1259,7 +1262,7 @@ public static void init_nls()
 //  used instead if argv0 is null.
 //  But don't die on systems where the user is always root...
 //  (a general test for this would be better).
-//  Doesn't use freelog() because gets called before logging is setup.
+//  Doesn't use util.freelog() because gets called before logging is setup.
 //***************************************************************************/
 //void dont_run_as_root(final String argv0, final String fallback)
 //{

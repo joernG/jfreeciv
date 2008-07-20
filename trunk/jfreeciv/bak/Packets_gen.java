@@ -390,7 +390,7 @@ public class Packets_gen{
 //    return receive_packet_ruleset_cache_effect(pc, type);
 //
 //  default:
-//    freelog(LOG_ERROR, "unknown packet type %d received from %s",
+//    util.freelog(Log.LOG_ERROR, "unknown packet type %d received from %s",
 //	    type, conn_description(pc));
 //    remove_packet_from_buffer(pc->buffer);
 //    return null;
@@ -781,14 +781,14 @@ public class Packets_gen{
 //struct packet_processing_started *receive_packet_processing_started(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_processing_started at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_processing_started at the server.");
 //  }
 //  ensure_valid_variant_packet_processing_started(pc);
 //
@@ -801,14 +801,14 @@ public class Packets_gen{
 //int send_packet_processing_started(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_processing_started from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_processing_started from the client.");
 //  }
 //  ensure_valid_variant_packet_processing_started(pc);
 //
@@ -851,14 +851,14 @@ public class Packets_gen{
 //struct packet_processing_finished *receive_packet_processing_finished(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_processing_finished at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_processing_finished at the server.");
 //  }
 //  ensure_valid_variant_packet_processing_finished(pc);
 //
@@ -871,14 +871,14 @@ public class Packets_gen{
 //int send_packet_processing_finished(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_processing_finished from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_processing_finished from the client.");
 //  }
 //  ensure_valid_variant_packet_processing_finished(pc);
 //
@@ -921,14 +921,14 @@ public class Packets_gen{
 //struct packet_freeze_hint *receive_packet_freeze_hint(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_freeze_hint at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_freeze_hint at the server.");
 //  }
 //  ensure_valid_variant_packet_freeze_hint(pc);
 //
@@ -941,14 +941,14 @@ public class Packets_gen{
 //int send_packet_freeze_hint(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_freeze_hint from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_freeze_hint from the client.");
 //  }
 //  ensure_valid_variant_packet_freeze_hint(pc);
 //
@@ -998,14 +998,14 @@ public class Packets_gen{
 //struct packet_thaw_hint *receive_packet_thaw_hint(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_thaw_hint at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_thaw_hint at the server.");
 //  }
 //  ensure_valid_variant_packet_thaw_hint(pc);
 //
@@ -1018,14 +1018,14 @@ public class Packets_gen{
 //int send_packet_thaw_hint(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_thaw_hint from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_thaw_hint from the client.");
 //  }
 //  ensure_valid_variant_packet_thaw_hint(pc);
 //
@@ -1105,14 +1105,14 @@ public class Packets_gen{
 //struct packet_server_join_req *receive_packet_server_join_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_server_join_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_server_join_req at the client.");
 //  }
 //  ensure_valid_variant_packet_server_join_req(pc);
 //
@@ -1125,14 +1125,14 @@ public class Packets_gen{
 //int send_packet_server_join_req(struct connection *pc, final struct packet_server_join_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_server_join_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_server_join_req from the server.");
 //  }
 //  ensure_valid_variant_packet_server_join_req(pc);
 //
@@ -1207,14 +1207,14 @@ public class Packets_gen{
 //struct packet_server_join_reply *receive_packet_server_join_reply(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_server_join_reply at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_server_join_reply at the server.");
 //  }
 //  ensure_valid_variant_packet_server_join_reply(pc);
 //
@@ -1227,14 +1227,14 @@ public class Packets_gen{
 //int send_packet_server_join_reply(struct connection *pc, final struct packet_server_join_reply *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_server_join_reply from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_server_join_reply from the client.");
 //  }
 //  ensure_valid_variant_packet_server_join_reply(pc);
 //
@@ -1370,14 +1370,14 @@ public class Packets_gen{
 //struct packet_authentication_req *receive_packet_authentication_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_authentication_req at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_authentication_req at the server.");
 //  }
 //  ensure_valid_variant_packet_authentication_req(pc);
 //
@@ -1390,14 +1390,14 @@ public class Packets_gen{
 //int send_packet_authentication_req(struct connection *pc, final struct packet_authentication_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_authentication_req from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_authentication_req from the client.");
 //  }
 //  ensure_valid_variant_packet_authentication_req(pc);
 //
@@ -1528,14 +1528,14 @@ public class Packets_gen{
 //struct packet_authentication_reply *receive_packet_authentication_reply(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_authentication_reply at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_authentication_reply at the client.");
 //  }
 //  ensure_valid_variant_packet_authentication_reply(pc);
 //
@@ -1548,14 +1548,14 @@ public class Packets_gen{
 //int send_packet_authentication_reply(struct connection *pc, final struct packet_authentication_reply *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_authentication_reply from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_authentication_reply from the server.");
 //  }
 //  ensure_valid_variant_packet_authentication_reply(pc);
 //
@@ -1598,14 +1598,14 @@ public class Packets_gen{
 //struct packet_server_shutdown *receive_packet_server_shutdown(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_server_shutdown at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_server_shutdown at the server.");
 //  }
 //  ensure_valid_variant_packet_server_shutdown(pc);
 //
@@ -1618,14 +1618,14 @@ public class Packets_gen{
 //int send_packet_server_shutdown(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_server_shutdown from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_server_shutdown from the client.");
 //  }
 //  ensure_valid_variant_packet_server_shutdown(pc);
 //
@@ -1758,14 +1758,14 @@ public class Packets_gen{
 //struct packet_nation_unavailable *receive_packet_nation_unavailable(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_nation_unavailable at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_nation_unavailable at the server.");
 //  }
 //  ensure_valid_variant_packet_nation_unavailable(pc);
 //
@@ -1778,14 +1778,14 @@ public class Packets_gen{
 //int send_packet_nation_unavailable(struct connection *pc, final struct packet_nation_unavailable *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_nation_unavailable from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_nation_unavailable from the client.");
 //  }
 //  ensure_valid_variant_packet_nation_unavailable(pc);
 //
@@ -1835,14 +1835,14 @@ public class Packets_gen{
 //struct packet_select_races *receive_packet_select_races(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_select_races at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_select_races at the server.");
 //  }
 //  ensure_valid_variant_packet_select_races(pc);
 //
@@ -1855,14 +1855,14 @@ public class Packets_gen{
 //int send_packet_select_races(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_select_races from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_select_races from the client.");
 //  }
 //  ensure_valid_variant_packet_select_races(pc);
 //
@@ -2026,14 +2026,14 @@ public class Packets_gen{
 //struct packet_nation_select_req *receive_packet_nation_select_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_nation_select_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_nation_select_req at the client.");
 //  }
 //  ensure_valid_variant_packet_nation_select_req(pc);
 //
@@ -2046,14 +2046,14 @@ public class Packets_gen{
 //int send_packet_nation_select_req(struct connection *pc, final struct packet_nation_select_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_nation_select_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_nation_select_req from the server.");
 //  }
 //  ensure_valid_variant_packet_nation_select_req(pc);
 //
@@ -2063,7 +2063,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int dsend_packet_nation_select_req(struct connection *pc, Nation_Type_id nation_no, boolean is_male, final String name, int city_style)
+//int dsend_packet_nation_select_req(struct connection *pc, int nation_no, boolean is_male, final String name, int city_style)
 //{
 //  struct packet_nation_select_req packet, *real_packet = &packet;
 //
@@ -2108,14 +2108,14 @@ public class Packets_gen{
 //struct packet_nation_select_ok *receive_packet_nation_select_ok(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_nation_select_ok at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_nation_select_ok at the server.");
 //  }
 //  ensure_valid_variant_packet_nation_select_ok(pc);
 //
@@ -2128,14 +2128,14 @@ public class Packets_gen{
 //int send_packet_nation_select_ok(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_nation_select_ok from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_nation_select_ok from the client.");
 //  }
 //  ensure_valid_variant_packet_nation_select_ok(pc);
 //
@@ -2270,14 +2270,14 @@ public class Packets_gen{
 //struct packet_game_state *receive_packet_game_state(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_game_state at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_game_state at the server.");
 //  }
 //  ensure_valid_variant_packet_game_state(pc);
 //
@@ -2290,14 +2290,14 @@ public class Packets_gen{
 //int send_packet_game_state(struct connection *pc, final struct packet_game_state *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_game_state from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_game_state from the client.");
 //  }
 //  ensure_valid_variant_packet_game_state(pc);
 //
@@ -2374,7 +2374,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2393,7 +2393,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2412,7 +2412,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2431,7 +2431,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2450,7 +2450,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2469,7 +2469,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2488,7 +2488,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2507,7 +2507,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2526,7 +2526,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2545,7 +2545,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2564,7 +2564,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2583,7 +2583,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2602,7 +2602,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -2621,7 +2621,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nscores > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nscores = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
@@ -3078,14 +3078,14 @@ public class Packets_gen{
 //struct packet_endgame_report *receive_packet_endgame_report(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_endgame_report at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_endgame_report at the server.");
 //  }
 //  ensure_valid_variant_packet_endgame_report(pc);
 //
@@ -3098,14 +3098,14 @@ public class Packets_gen{
 //int send_packet_endgame_report(struct connection *pc, final struct packet_endgame_report *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_endgame_report from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_endgame_report from the client.");
 //  }
 //  ensure_valid_variant_packet_endgame_report(pc);
 //
@@ -3350,14 +3350,14 @@ public class Packets_gen{
 //struct packet_tile_info *receive_packet_tile_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_tile_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_tile_info at the server.");
 //  }
 //  ensure_valid_variant_packet_tile_info(pc);
 //
@@ -3370,14 +3370,14 @@ public class Packets_gen{
 //int send_packet_tile_info(struct connection *pc, final struct packet_tile_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_tile_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_tile_info from the client.");
 //  }
 //  ensure_valid_variant_packet_tile_info(pc);
 //
@@ -3649,7 +3649,7 @@ public class Packets_gen{
 //        break;
 //      }
 //      if(i > A_LAST) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: ignoring intra array diff");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: ignoring intra array diff");
 //      } else {
 //        {
 //      int readin;
@@ -3670,7 +3670,7 @@ public class Packets_gen{
 //        break;
 //      }
 //      if(i > B_LAST) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: ignoring intra array diff");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: ignoring intra array diff");
 //      } else {
 //        {
 //      int readin;
@@ -4012,14 +4012,14 @@ public class Packets_gen{
 //struct packet_game_info *receive_packet_game_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_game_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_game_info at the server.");
 //  }
 //  ensure_valid_variant_packet_game_info(pc);
 //
@@ -4032,14 +4032,14 @@ public class Packets_gen{
 //int send_packet_game_info(struct connection *pc, final struct packet_game_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_game_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_game_info from the client.");
 //  }
 //  ensure_valid_variant_packet_game_info(pc);
 //
@@ -4195,14 +4195,14 @@ public class Packets_gen{
 //struct packet_map_info *receive_packet_map_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_map_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_map_info at the server.");
 //  }
 //  ensure_valid_variant_packet_map_info(pc);
 //
@@ -4215,14 +4215,14 @@ public class Packets_gen{
 //int send_packet_map_info(struct connection *pc, final struct packet_map_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_map_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_map_info from the client.");
 //  }
 //  ensure_valid_variant_packet_map_info(pc);
 //
@@ -4370,14 +4370,14 @@ public class Packets_gen{
 //struct packet_nuke_tile_info *receive_packet_nuke_tile_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_nuke_tile_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_nuke_tile_info at the server.");
 //  }
 //  ensure_valid_variant_packet_nuke_tile_info(pc);
 //
@@ -4390,14 +4390,14 @@ public class Packets_gen{
 //int send_packet_nuke_tile_info(struct connection *pc, final struct packet_nuke_tile_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_nuke_tile_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_nuke_tile_info from the client.");
 //  }
 //  ensure_valid_variant_packet_nuke_tile_info(pc);
 //
@@ -4622,14 +4622,14 @@ public class Packets_gen{
 //struct packet_chat_msg *receive_packet_chat_msg(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_chat_msg at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_chat_msg at the server.");
 //  }
 //  ensure_valid_variant_packet_chat_msg(pc);
 //
@@ -4642,14 +4642,14 @@ public class Packets_gen{
 //int send_packet_chat_msg(struct connection *pc, final struct packet_chat_msg *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_chat_msg from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_chat_msg from the client.");
 //  }
 //  ensure_valid_variant_packet_chat_msg(pc);
 //
@@ -4803,14 +4803,14 @@ public class Packets_gen{
 //struct packet_chat_msg_req *receive_packet_chat_msg_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_chat_msg_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_chat_msg_req at the client.");
 //  }
 //  ensure_valid_variant_packet_chat_msg_req(pc);
 //
@@ -4823,14 +4823,14 @@ public class Packets_gen{
 //int send_packet_chat_msg_req(struct connection *pc, final struct packet_chat_msg_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_chat_msg_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_chat_msg_req from the server.");
 //  }
 //  ensure_valid_variant_packet_chat_msg_req(pc);
 //
@@ -4965,14 +4965,14 @@ public class Packets_gen{
 //struct packet_city_remove *receive_packet_city_remove(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_remove at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_remove at the server.");
 //  }
 //  ensure_valid_variant_packet_city_remove(pc);
 //
@@ -4985,14 +4985,14 @@ public class Packets_gen{
 //int send_packet_city_remove(struct connection *pc, final struct packet_city_remove *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_remove from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_remove from the client.");
 //  }
 //  ensure_valid_variant_packet_city_remove(pc);
 //
@@ -5961,14 +5961,14 @@ public class Packets_gen{
 //struct packet_city_info *receive_packet_city_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_info at the server.");
 //  }
 //  ensure_valid_variant_packet_city_info(pc);
 //
@@ -5981,14 +5981,14 @@ public class Packets_gen{
 //int send_packet_city_info(struct connection *pc, final struct packet_city_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_info from the client.");
 //  }
 //  ensure_valid_variant_packet_city_info(pc);
 //
@@ -6249,14 +6249,14 @@ public class Packets_gen{
 //struct packet_city_short_info *receive_packet_city_short_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_short_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_short_info at the server.");
 //  }
 //  ensure_valid_variant_packet_city_short_info(pc);
 //
@@ -6269,14 +6269,14 @@ public class Packets_gen{
 //int send_packet_city_short_info(struct connection *pc, final struct packet_city_short_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_short_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_short_info from the client.");
 //  }
 //  ensure_valid_variant_packet_city_short_info(pc);
 //
@@ -6424,14 +6424,14 @@ public class Packets_gen{
 //struct packet_city_sell *receive_packet_city_sell(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_sell at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_sell at the client.");
 //  }
 //  ensure_valid_variant_packet_city_sell(pc);
 //
@@ -6444,14 +6444,14 @@ public class Packets_gen{
 //int send_packet_city_sell(struct connection *pc, final struct packet_city_sell *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_sell from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_sell from the server.");
 //  }
 //  ensure_valid_variant_packet_city_sell(pc);
 //
@@ -6587,14 +6587,14 @@ public class Packets_gen{
 //struct packet_city_buy *receive_packet_city_buy(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_buy at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_buy at the client.");
 //  }
 //  ensure_valid_variant_packet_city_buy(pc);
 //
@@ -6607,14 +6607,14 @@ public class Packets_gen{
 //int send_packet_city_buy(struct connection *pc, final struct packet_city_buy *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_buy from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_buy from the server.");
 //  }
 //  ensure_valid_variant_packet_city_buy(pc);
 //
@@ -6770,14 +6770,14 @@ public class Packets_gen{
 //struct packet_city_change *receive_packet_city_change(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_change at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_change at the client.");
 //  }
 //  ensure_valid_variant_packet_city_change(pc);
 //
@@ -6790,14 +6790,14 @@ public class Packets_gen{
 //int send_packet_city_change(struct connection *pc, final struct packet_city_change *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_change from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_change from the server.");
 //  }
 //  ensure_valid_variant_packet_city_change(pc);
 //
@@ -6944,14 +6944,14 @@ public class Packets_gen{
 //struct packet_city_worklist *receive_packet_city_worklist(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_worklist at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_worklist at the client.");
 //  }
 //  ensure_valid_variant_packet_city_worklist(pc);
 //
@@ -6964,14 +6964,14 @@ public class Packets_gen{
 //int send_packet_city_worklist(struct connection *pc, final struct packet_city_worklist *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_worklist from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_worklist from the server.");
 //  }
 //  ensure_valid_variant_packet_city_worklist(pc);
 //
@@ -7137,14 +7137,14 @@ public class Packets_gen{
 //struct packet_city_make_specialist *receive_packet_city_make_specialist(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_make_specialist at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_make_specialist at the client.");
 //  }
 //  ensure_valid_variant_packet_city_make_specialist(pc);
 //
@@ -7157,14 +7157,14 @@ public class Packets_gen{
 //int send_packet_city_make_specialist(struct connection *pc, final struct packet_city_make_specialist *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_make_specialist from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_make_specialist from the server.");
 //  }
 //  ensure_valid_variant_packet_city_make_specialist(pc);
 //
@@ -7331,14 +7331,14 @@ public class Packets_gen{
 //struct packet_city_make_worker *receive_packet_city_make_worker(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_make_worker at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_make_worker at the client.");
 //  }
 //  ensure_valid_variant_packet_city_make_worker(pc);
 //
@@ -7351,14 +7351,14 @@ public class Packets_gen{
 //int send_packet_city_make_worker(struct connection *pc, final struct packet_city_make_worker *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_make_worker from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_make_worker from the server.");
 //  }
 //  ensure_valid_variant_packet_city_make_worker(pc);
 //
@@ -7525,14 +7525,14 @@ public class Packets_gen{
 //struct packet_city_change_specialist *receive_packet_city_change_specialist(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_change_specialist at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_change_specialist at the client.");
 //  }
 //  ensure_valid_variant_packet_city_change_specialist(pc);
 //
@@ -7545,14 +7545,14 @@ public class Packets_gen{
 //int send_packet_city_change_specialist(struct connection *pc, final struct packet_city_change_specialist *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_change_specialist from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_change_specialist from the server.");
 //  }
 //  ensure_valid_variant_packet_city_change_specialist(pc);
 //
@@ -7699,14 +7699,14 @@ public class Packets_gen{
 //struct packet_city_rename *receive_packet_city_rename(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_rename at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_rename at the client.");
 //  }
 //  ensure_valid_variant_packet_city_rename(pc);
 //
@@ -7719,14 +7719,14 @@ public class Packets_gen{
 //int send_packet_city_rename(struct connection *pc, final struct packet_city_rename *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_rename from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_rename from the server.");
 //  }
 //  ensure_valid_variant_packet_city_rename(pc);
 //
@@ -7877,14 +7877,14 @@ public class Packets_gen{
 //struct packet_city_options_req *receive_packet_city_options_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_options_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_options_req at the client.");
 //  }
 //  ensure_valid_variant_packet_city_options_req(pc);
 //
@@ -7897,14 +7897,14 @@ public class Packets_gen{
 //int send_packet_city_options_req(struct connection *pc, final struct packet_city_options_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_options_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_options_req from the server.");
 //  }
 //  ensure_valid_variant_packet_city_options_req(pc);
 //
@@ -8040,14 +8040,14 @@ public class Packets_gen{
 //struct packet_city_refresh *receive_packet_city_refresh(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_refresh at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_refresh at the client.");
 //  }
 //  ensure_valid_variant_packet_city_refresh(pc);
 //
@@ -8060,14 +8060,14 @@ public class Packets_gen{
 //int send_packet_city_refresh(struct connection *pc, final struct packet_city_refresh *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_refresh from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_refresh from the server.");
 //  }
 //  ensure_valid_variant_packet_city_refresh(pc);
 //
@@ -8202,14 +8202,14 @@ public class Packets_gen{
 //struct packet_city_incite_inq *receive_packet_city_incite_inq(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_incite_inq at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_incite_inq at the client.");
 //  }
 //  ensure_valid_variant_packet_city_incite_inq(pc);
 //
@@ -8222,14 +8222,14 @@ public class Packets_gen{
 //int send_packet_city_incite_inq(struct connection *pc, final struct packet_city_incite_inq *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_incite_inq from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_incite_inq from the server.");
 //  }
 //  ensure_valid_variant_packet_city_incite_inq(pc);
 //
@@ -8379,14 +8379,14 @@ public class Packets_gen{
 //struct packet_city_incite_info *receive_packet_city_incite_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_incite_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_incite_info at the server.");
 //  }
 //  ensure_valid_variant_packet_city_incite_info(pc);
 //
@@ -8399,14 +8399,14 @@ public class Packets_gen{
 //int send_packet_city_incite_info(struct connection *pc, final struct packet_city_incite_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_incite_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_incite_info from the client.");
 //  }
 //  ensure_valid_variant_packet_city_incite_info(pc);
 //
@@ -8542,14 +8542,14 @@ public class Packets_gen{
 //struct packet_city_name_suggestion_req *receive_packet_city_name_suggestion_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_name_suggestion_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_name_suggestion_req at the client.");
 //  }
 //  ensure_valid_variant_packet_city_name_suggestion_req(pc);
 //
@@ -8562,14 +8562,14 @@ public class Packets_gen{
 //int send_packet_city_name_suggestion_req(struct connection *pc, final struct packet_city_name_suggestion_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_name_suggestion_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_name_suggestion_req from the server.");
 //  }
 //  ensure_valid_variant_packet_city_name_suggestion_req(pc);
 //
@@ -8714,14 +8714,14 @@ public class Packets_gen{
 //struct packet_city_name_suggestion_info *receive_packet_city_name_suggestion_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_name_suggestion_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_name_suggestion_info at the server.");
 //  }
 //  ensure_valid_variant_packet_city_name_suggestion_info(pc);
 //
@@ -8734,14 +8734,14 @@ public class Packets_gen{
 //int send_packet_city_name_suggestion_info(struct connection *pc, final struct packet_city_name_suggestion_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_name_suggestion_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_name_suggestion_info from the client.");
 //  }
 //  ensure_valid_variant_packet_city_name_suggestion_info(pc);
 //
@@ -8919,14 +8919,14 @@ public class Packets_gen{
 //struct packet_city_sabotage_list *receive_packet_city_sabotage_list(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_city_sabotage_list at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_sabotage_list at the server.");
 //  }
 //  ensure_valid_variant_packet_city_sabotage_list(pc);
 //
@@ -8939,14 +8939,14 @@ public class Packets_gen{
 //int send_packet_city_sabotage_list(struct connection *pc, final struct packet_city_sabotage_list *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_city_sabotage_list from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_city_sabotage_list from the client.");
 //  }
 //  ensure_valid_variant_packet_city_sabotage_list(pc);
 //
@@ -9079,14 +9079,14 @@ public class Packets_gen{
 //struct packet_player_remove *receive_packet_player_remove(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_remove at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_remove at the server.");
 //  }
 //  ensure_valid_variant_packet_player_remove(pc);
 //
@@ -9099,14 +9099,14 @@ public class Packets_gen{
 //int send_packet_player_remove(struct connection *pc, final struct packet_player_remove *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_remove from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_remove from the client.");
 //  }
 //  ensure_valid_variant_packet_player_remove(pc);
 //
@@ -10275,14 +10275,14 @@ public class Packets_gen{
 //struct packet_player_info *receive_packet_player_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_info at the server.");
 //  }
 //  ensure_valid_variant_packet_player_info(pc);
 //
@@ -10296,14 +10296,14 @@ public class Packets_gen{
 //int send_packet_player_info(struct connection *pc, final struct packet_player_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_info from the client.");
 //  }
 //  ensure_valid_variant_packet_player_info(pc);
 //
@@ -10347,14 +10347,14 @@ public class Packets_gen{
 //struct packet_player_turn_done *receive_packet_player_turn_done(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_turn_done at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_turn_done at the client.");
 //  }
 //  ensure_valid_variant_packet_player_turn_done(pc);
 //
@@ -10367,14 +10367,14 @@ public class Packets_gen{
 //int send_packet_player_turn_done(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_turn_done from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_turn_done from the server.");
 //  }
 //  ensure_valid_variant_packet_player_turn_done(pc);
 //
@@ -10530,14 +10530,14 @@ public class Packets_gen{
 //struct packet_player_rates *receive_packet_player_rates(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_rates at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_rates at the client.");
 //  }
 //  ensure_valid_variant_packet_player_rates(pc);
 //
@@ -10550,14 +10550,14 @@ public class Packets_gen{
 //int send_packet_player_rates(struct connection *pc, final struct packet_player_rates *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_rates from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_rates from the server.");
 //  }
 //  ensure_valid_variant_packet_player_rates(pc);
 //
@@ -10694,14 +10694,14 @@ public class Packets_gen{
 //struct packet_player_change_government *receive_packet_player_change_government(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_change_government at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_change_government at the client.");
 //  }
 //  ensure_valid_variant_packet_player_change_government(pc);
 //
@@ -10714,14 +10714,14 @@ public class Packets_gen{
 //int send_packet_player_change_government(struct connection *pc, final struct packet_player_change_government *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_change_government from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_change_government from the server.");
 //  }
 //  ensure_valid_variant_packet_player_change_government(pc);
 //
@@ -10856,14 +10856,14 @@ public class Packets_gen{
 //struct packet_player_research *receive_packet_player_research(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_research at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_research at the client.");
 //  }
 //  ensure_valid_variant_packet_player_research(pc);
 //
@@ -10876,14 +10876,14 @@ public class Packets_gen{
 //int send_packet_player_research(struct connection *pc, final struct packet_player_research *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_research from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_research from the server.");
 //  }
 //  ensure_valid_variant_packet_player_research(pc);
 //
@@ -11018,14 +11018,14 @@ public class Packets_gen{
 //struct packet_player_tech_goal *receive_packet_player_tech_goal(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_tech_goal at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_tech_goal at the client.");
 //  }
 //  ensure_valid_variant_packet_player_tech_goal(pc);
 //
@@ -11038,14 +11038,14 @@ public class Packets_gen{
 //int send_packet_player_tech_goal(struct connection *pc, final struct packet_player_tech_goal *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_tech_goal from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_tech_goal from the server.");
 //  }
 //  ensure_valid_variant_packet_player_tech_goal(pc);
 //
@@ -11097,14 +11097,14 @@ public class Packets_gen{
 //struct packet_player_attribute_block *receive_packet_player_attribute_block(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_player_attribute_block at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_player_attribute_block at the client.");
 //  }
 //  ensure_valid_variant_packet_player_attribute_block(pc);
 //
@@ -11117,14 +11117,14 @@ public class Packets_gen{
 //int send_packet_player_attribute_block(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_player_attribute_block from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_player_attribute_block from the server.");
 //  }
 //  ensure_valid_variant_packet_player_attribute_block(pc);
 //
@@ -11306,7 +11306,7 @@ public class Packets_gen{
 //struct packet_player_attribute_chunk *receive_packet_player_attribute_chunk(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
@@ -11323,7 +11323,7 @@ public class Packets_gen{
 //int send_packet_player_attribute_chunk(struct connection *pc, final struct packet_player_attribute_chunk *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
@@ -11453,14 +11453,14 @@ public class Packets_gen{
 //struct packet_unit_remove *receive_packet_unit_remove(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_remove at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_remove at the server.");
 //  }
 //  ensure_valid_variant_packet_unit_remove(pc);
 //
@@ -11473,14 +11473,14 @@ public class Packets_gen{
 //int send_packet_unit_remove(struct connection *pc, final struct packet_unit_remove *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_remove from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_remove from the client.");
 //  }
 //  ensure_valid_variant_packet_unit_remove(pc);
 //
@@ -11760,7 +11760,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->orders_length > MAX_LEN_ROUTE) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->orders_length = MAX_LEN_ROUTE;
 //      }
 //      for (i = 0; i < real_packet->orders_length; i++) {
@@ -11779,7 +11779,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->orders_length > MAX_LEN_ROUTE) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->orders_length = MAX_LEN_ROUTE;
 //      }
 //      for (i = 0; i < real_packet->orders_length; i++) {
@@ -11798,7 +11798,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->orders_length > MAX_LEN_ROUTE) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->orders_length = MAX_LEN_ROUTE;
 //      }
 //      for (i = 0; i < real_packet->orders_length; i++) {
@@ -12157,14 +12157,14 @@ public class Packets_gen{
 //struct packet_unit_info *receive_packet_unit_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_info at the server.");
 //  }
 //  ensure_valid_variant_packet_unit_info(pc);
 //
@@ -12177,14 +12177,14 @@ public class Packets_gen{
 //int send_packet_unit_info(struct connection *pc, final struct packet_unit_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_info from the client.");
 //  }
 //  ensure_valid_variant_packet_unit_info(pc);
 //
@@ -12513,14 +12513,14 @@ public class Packets_gen{
 //struct packet_unit_short_info *receive_packet_unit_short_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_short_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_short_info at the server.");
 //  }
 //  ensure_valid_variant_packet_unit_short_info(pc);
 //
@@ -12533,14 +12533,14 @@ public class Packets_gen{
 //int send_packet_unit_short_info(struct connection *pc, final struct packet_unit_short_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_short_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_short_info from the client.");
 //  }
 //  ensure_valid_variant_packet_unit_short_info(pc);
 //
@@ -12724,14 +12724,14 @@ public class Packets_gen{
 //struct packet_unit_combat_info *receive_packet_unit_combat_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_combat_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_combat_info at the server.");
 //  }
 //  ensure_valid_variant_packet_unit_combat_info(pc);
 //
@@ -12744,14 +12744,14 @@ public class Packets_gen{
 //int send_packet_unit_combat_info(struct connection *pc, final struct packet_unit_combat_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_combat_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_combat_info from the client.");
 //  }
 //  ensure_valid_variant_packet_unit_combat_info(pc);
 //
@@ -12914,14 +12914,14 @@ public class Packets_gen{
 //struct packet_unit_move *receive_packet_unit_move(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_move at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_move at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_move(pc);
 //
@@ -12934,14 +12934,14 @@ public class Packets_gen{
 //int send_packet_unit_move(struct connection *pc, final struct packet_unit_move *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_move from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_move from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_move(pc);
 //
@@ -13088,14 +13088,14 @@ public class Packets_gen{
 //struct packet_unit_build_city *receive_packet_unit_build_city(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_build_city at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_build_city at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_build_city(pc);
 //
@@ -13108,14 +13108,14 @@ public class Packets_gen{
 //int send_packet_unit_build_city(struct connection *pc, final struct packet_unit_build_city *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_build_city from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_build_city from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_build_city(pc);
 //
@@ -13251,14 +13251,14 @@ public class Packets_gen{
 //struct packet_unit_disband *receive_packet_unit_disband(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_disband at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_disband at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_disband(pc);
 //
@@ -13271,14 +13271,14 @@ public class Packets_gen{
 //int send_packet_unit_disband(struct connection *pc, final struct packet_unit_disband *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_disband from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_disband from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_disband(pc);
 //
@@ -13428,14 +13428,14 @@ public class Packets_gen{
 //struct packet_unit_change_homecity *receive_packet_unit_change_homecity(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_change_homecity at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_change_homecity at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_change_homecity(pc);
 //
@@ -13448,14 +13448,14 @@ public class Packets_gen{
 //int send_packet_unit_change_homecity(struct connection *pc, final struct packet_unit_change_homecity *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_change_homecity from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_change_homecity from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_change_homecity(pc);
 //
@@ -13591,14 +13591,14 @@ public class Packets_gen{
 //struct packet_unit_establish_trade *receive_packet_unit_establish_trade(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_establish_trade at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_establish_trade at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_establish_trade(pc);
 //
@@ -13611,14 +13611,14 @@ public class Packets_gen{
 //int send_packet_unit_establish_trade(struct connection *pc, final struct packet_unit_establish_trade *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_establish_trade from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_establish_trade from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_establish_trade(pc);
 //
@@ -13753,14 +13753,14 @@ public class Packets_gen{
 //struct packet_unit_help_build_wonder *receive_packet_unit_help_build_wonder(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_help_build_wonder at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_help_build_wonder at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_help_build_wonder(pc);
 //
@@ -13773,14 +13773,14 @@ public class Packets_gen{
 //int send_packet_unit_help_build_wonder(struct connection *pc, final struct packet_unit_help_build_wonder *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_help_build_wonder from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_help_build_wonder from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_help_build_wonder(pc);
 //
@@ -13945,14 +13945,14 @@ public class Packets_gen{
 //struct packet_unit_goto *receive_packet_unit_goto(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_goto at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_goto at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_goto(pc);
 //
@@ -13965,14 +13965,14 @@ public class Packets_gen{
 //int send_packet_unit_goto(struct connection *pc, final struct packet_unit_goto *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_goto from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_goto from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_goto(pc);
 //
@@ -14045,7 +14045,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->length > MAX_LEN_ROUTE) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->length = MAX_LEN_ROUTE;
 //      }
 //      for (i = 0; i < real_packet->length; i++) {
@@ -14064,7 +14064,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->length > MAX_LEN_ROUTE) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->length = MAX_LEN_ROUTE;
 //      }
 //      for (i = 0; i < real_packet->length; i++) {
@@ -14083,7 +14083,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->length > MAX_LEN_ROUTE) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->length = MAX_LEN_ROUTE;
 //      }
 //      for (i = 0; i < real_packet->length; i++) {
@@ -14301,14 +14301,14 @@ public class Packets_gen{
 //struct packet_unit_orders *receive_packet_unit_orders(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_orders at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_orders at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_orders(pc);
 //
@@ -14321,14 +14321,14 @@ public class Packets_gen{
 //int send_packet_unit_orders(struct connection *pc, final struct packet_unit_orders *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_orders from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_orders from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_orders(pc);
 //
@@ -14454,14 +14454,14 @@ public class Packets_gen{
 //struct packet_unit_auto *receive_packet_unit_auto(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_auto at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_auto at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_auto(pc);
 //
@@ -14474,14 +14474,14 @@ public class Packets_gen{
 //int send_packet_unit_auto(struct connection *pc, final struct packet_unit_auto *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_auto from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_auto from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_auto(pc);
 //
@@ -14631,14 +14631,14 @@ public class Packets_gen{
 //struct packet_unit_load *receive_packet_unit_load(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_load at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_load at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_load(pc);
 //
@@ -14651,14 +14651,14 @@ public class Packets_gen{
 //int send_packet_unit_load(struct connection *pc, final struct packet_unit_load *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_load from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_load from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_load(pc);
 //
@@ -14809,14 +14809,14 @@ public class Packets_gen{
 //struct packet_unit_unload *receive_packet_unit_unload(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_unload at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_unload at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_unload(pc);
 //
@@ -14829,14 +14829,14 @@ public class Packets_gen{
 //int send_packet_unit_unload(struct connection *pc, final struct packet_unit_unload *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_unload from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_unload from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_unload(pc);
 //
@@ -14972,14 +14972,14 @@ public class Packets_gen{
 //struct packet_unit_upgrade *receive_packet_unit_upgrade(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_upgrade at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_upgrade at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_upgrade(pc);
 //
@@ -14992,14 +14992,14 @@ public class Packets_gen{
 //int send_packet_unit_upgrade(struct connection *pc, final struct packet_unit_upgrade *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_upgrade from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_upgrade from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_upgrade(pc);
 //
@@ -15134,14 +15134,14 @@ public class Packets_gen{
 //struct packet_unit_nuke *receive_packet_unit_nuke(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_nuke at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_nuke at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_nuke(pc);
 //
@@ -15154,14 +15154,14 @@ public class Packets_gen{
 //int send_packet_unit_nuke(struct connection *pc, final struct packet_unit_nuke *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_nuke from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_nuke from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_nuke(pc);
 //
@@ -15326,14 +15326,14 @@ public class Packets_gen{
 //struct packet_unit_paradrop_to *receive_packet_unit_paradrop_to(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_paradrop_to at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_paradrop_to at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_paradrop_to(pc);
 //
@@ -15346,14 +15346,14 @@ public class Packets_gen{
 //int send_packet_unit_paradrop_to(struct connection *pc, final struct packet_unit_paradrop_to *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_paradrop_to from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_paradrop_to from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_paradrop_to(pc);
 //
@@ -15505,14 +15505,14 @@ public class Packets_gen{
 //struct packet_unit_airlift *receive_packet_unit_airlift(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_airlift at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_airlift at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_airlift(pc);
 //
@@ -15525,14 +15525,14 @@ public class Packets_gen{
 //int send_packet_unit_airlift(struct connection *pc, final struct packet_unit_airlift *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_airlift from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_airlift from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_airlift(pc);
 //
@@ -15668,14 +15668,14 @@ public class Packets_gen{
 //struct packet_unit_bribe_inq *receive_packet_unit_bribe_inq(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_bribe_inq at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_bribe_inq at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_bribe_inq(pc);
 //
@@ -15688,14 +15688,14 @@ public class Packets_gen{
 //int send_packet_unit_bribe_inq(struct connection *pc, final struct packet_unit_bribe_inq *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_bribe_inq from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_bribe_inq from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_bribe_inq(pc);
 //
@@ -15845,14 +15845,14 @@ public class Packets_gen{
 //struct packet_unit_bribe_info *receive_packet_unit_bribe_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_bribe_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_bribe_info at the server.");
 //  }
 //  ensure_valid_variant_packet_unit_bribe_info(pc);
 //
@@ -15865,14 +15865,14 @@ public class Packets_gen{
 //int send_packet_unit_bribe_info(struct connection *pc, final struct packet_unit_bribe_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_bribe_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_bribe_info from the client.");
 //  }
 //  ensure_valid_variant_packet_unit_bribe_info(pc);
 //
@@ -16008,14 +16008,14 @@ public class Packets_gen{
 //struct packet_unit_type_upgrade *receive_packet_unit_type_upgrade(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_type_upgrade at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_type_upgrade at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_type_upgrade(pc);
 //
@@ -16028,14 +16028,14 @@ public class Packets_gen{
 //int send_packet_unit_type_upgrade(struct connection *pc, final struct packet_unit_type_upgrade *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_type_upgrade from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_type_upgrade from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_type_upgrade(pc);
 //
@@ -16215,14 +16215,14 @@ public class Packets_gen{
 //struct packet_unit_diplomat_action *receive_packet_unit_diplomat_action(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_diplomat_action at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_diplomat_action at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_diplomat_action(pc);
 //
@@ -16235,14 +16235,14 @@ public class Packets_gen{
 //int send_packet_unit_diplomat_action(struct connection *pc, final struct packet_unit_diplomat_action *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_diplomat_action from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_diplomat_action from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_diplomat_action(pc);
 //
@@ -16395,14 +16395,14 @@ public class Packets_gen{
 //struct packet_unit_diplomat_popup_dialog *receive_packet_unit_diplomat_popup_dialog(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_diplomat_popup_dialog at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_diplomat_popup_dialog at the server.");
 //  }
 //  ensure_valid_variant_packet_unit_diplomat_popup_dialog(pc);
 //
@@ -16415,14 +16415,14 @@ public class Packets_gen{
 //int send_packet_unit_diplomat_popup_dialog(struct connection *pc, final struct packet_unit_diplomat_popup_dialog *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_diplomat_popup_dialog from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_diplomat_popup_dialog from the client.");
 //  }
 //  ensure_valid_variant_packet_unit_diplomat_popup_dialog(pc);
 //
@@ -16605,14 +16605,14 @@ public class Packets_gen{
 //struct packet_unit_change_activity *receive_packet_unit_change_activity(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_unit_change_activity at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_unit_change_activity at the client.");
 //  }
 //  ensure_valid_variant_packet_unit_change_activity(pc);
 //
@@ -16625,14 +16625,14 @@ public class Packets_gen{
 //int send_packet_unit_change_activity(struct connection *pc, final struct packet_unit_change_activity *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_unit_change_activity from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_unit_change_activity from the server.");
 //  }
 //  ensure_valid_variant_packet_unit_change_activity(pc);
 //
@@ -16769,14 +16769,14 @@ public class Packets_gen{
 //struct packet_diplomacy_init_meeting_req *receive_packet_diplomacy_init_meeting_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_init_meeting_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_init_meeting_req at the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_init_meeting_req(pc);
 //
@@ -16789,14 +16789,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_init_meeting_req(struct connection *pc, final struct packet_diplomacy_init_meeting_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_init_meeting_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_init_meeting_req from the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_init_meeting_req(pc);
 //
@@ -16946,14 +16946,14 @@ public class Packets_gen{
 //struct packet_diplomacy_init_meeting *receive_packet_diplomacy_init_meeting(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_init_meeting at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_init_meeting at the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_init_meeting(pc);
 //
@@ -16966,14 +16966,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_init_meeting(struct connection *pc, final struct packet_diplomacy_init_meeting *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_init_meeting from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_init_meeting from the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_init_meeting(pc);
 //
@@ -17126,14 +17126,14 @@ public class Packets_gen{
 //struct packet_diplomacy_cancel_meeting_req *receive_packet_diplomacy_cancel_meeting_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_cancel_meeting_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_cancel_meeting_req at the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_cancel_meeting_req(pc);
 //
@@ -17146,14 +17146,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_cancel_meeting_req(struct connection *pc, final struct packet_diplomacy_cancel_meeting_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_cancel_meeting_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_cancel_meeting_req from the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_cancel_meeting_req(pc);
 //
@@ -17303,14 +17303,14 @@ public class Packets_gen{
 //struct packet_diplomacy_cancel_meeting *receive_packet_diplomacy_cancel_meeting(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_cancel_meeting at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_cancel_meeting at the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_cancel_meeting(pc);
 //
@@ -17323,14 +17323,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_cancel_meeting(struct connection *pc, final struct packet_diplomacy_cancel_meeting *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_cancel_meeting from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_cancel_meeting from the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_cancel_meeting(pc);
 //
@@ -17528,14 +17528,14 @@ public class Packets_gen{
 //struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_create_clause_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_create_clause_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_create_clause_req at the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_create_clause_req(pc);
 //
@@ -17548,14 +17548,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_create_clause_req(struct connection *pc, final struct packet_diplomacy_create_clause_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_create_clause_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_create_clause_req from the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_create_clause_req(pc);
 //
@@ -17738,14 +17738,14 @@ public class Packets_gen{
 //struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_clause(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_create_clause at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_create_clause at the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_create_clause(pc);
 //
@@ -17758,14 +17758,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_create_clause(struct connection *pc, final struct packet_diplomacy_create_clause *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_create_clause from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_create_clause from the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_create_clause(pc);
 //
@@ -17967,14 +17967,14 @@ public class Packets_gen{
 //struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remove_clause_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_remove_clause_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_remove_clause_req at the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_remove_clause_req(pc);
 //
@@ -17987,14 +17987,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_remove_clause_req(struct connection *pc, final struct packet_diplomacy_remove_clause_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_remove_clause_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_remove_clause_req from the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_remove_clause_req(pc);
 //
@@ -18177,14 +18177,14 @@ public class Packets_gen{
 //struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_clause(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_remove_clause at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_remove_clause at the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_remove_clause(pc);
 //
@@ -18197,14 +18197,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_remove_clause(struct connection *pc, final struct packet_diplomacy_remove_clause *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_remove_clause from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_remove_clause from the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_remove_clause(pc);
 //
@@ -18361,14 +18361,14 @@ public class Packets_gen{
 //struct packet_diplomacy_accept_treaty_req *receive_packet_diplomacy_accept_treaty_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_accept_treaty_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_accept_treaty_req at the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_accept_treaty_req(pc);
 //
@@ -18381,14 +18381,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_accept_treaty_req(struct connection *pc, final struct packet_diplomacy_accept_treaty_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_accept_treaty_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_accept_treaty_req from the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_accept_treaty_req(pc);
 //
@@ -18535,14 +18535,14 @@ public class Packets_gen{
 //struct packet_diplomacy_accept_treaty *receive_packet_diplomacy_accept_treaty(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_accept_treaty at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_accept_treaty at the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_accept_treaty(pc);
 //
@@ -18555,14 +18555,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_accept_treaty(struct connection *pc, final struct packet_diplomacy_accept_treaty *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_accept_treaty from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_accept_treaty from the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_accept_treaty(pc);
 //
@@ -18732,14 +18732,14 @@ public class Packets_gen{
 //struct packet_diplomacy_cancel_pact *receive_packet_diplomacy_cancel_pact(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_diplomacy_cancel_pact at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_diplomacy_cancel_pact at the client.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_cancel_pact(pc);
 //
@@ -18752,14 +18752,14 @@ public class Packets_gen{
 //int send_packet_diplomacy_cancel_pact(struct connection *pc, final struct packet_diplomacy_cancel_pact *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_diplomacy_cancel_pact from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_diplomacy_cancel_pact from the server.");
 //  }
 //  ensure_valid_variant_packet_diplomacy_cancel_pact(pc);
 //
@@ -18905,14 +18905,14 @@ public class Packets_gen{
 //struct packet_page_msg *receive_packet_page_msg(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_page_msg at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_page_msg at the server.");
 //  }
 //  ensure_valid_variant_packet_page_msg(pc);
 //
@@ -18925,14 +18925,14 @@ public class Packets_gen{
 //int send_packet_page_msg(struct connection *pc, final struct packet_page_msg *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_page_msg from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_page_msg from the client.");
 //  }
 //  ensure_valid_variant_packet_page_msg(pc);
 //
@@ -19065,14 +19065,14 @@ public class Packets_gen{
 //struct packet_report_req *receive_packet_report_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_report_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_report_req at the client.");
 //  }
 //  ensure_valid_variant_packet_report_req(pc);
 //
@@ -19085,14 +19085,14 @@ public class Packets_gen{
 //int send_packet_report_req(struct connection *pc, final struct packet_report_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_report_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_report_req from the server.");
 //  }
 //  ensure_valid_variant_packet_report_req(pc);
 //
@@ -19318,14 +19318,14 @@ public class Packets_gen{
 //struct packet_conn_info *receive_packet_conn_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_conn_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_conn_info at the server.");
 //  }
 //  ensure_valid_variant_packet_conn_info(pc);
 //
@@ -19338,14 +19338,14 @@ public class Packets_gen{
 //int send_packet_conn_info(struct connection *pc, final struct packet_conn_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_conn_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_conn_info from the client.");
 //  }
 //  ensure_valid_variant_packet_conn_info(pc);
 //
@@ -19404,7 +19404,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->connections > MAX_NUM_CONNECTIONS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->connections = MAX_NUM_CONNECTIONS;
 //      }
 //      for (i = 0; i < real_packet->connections; i++) {
@@ -19423,7 +19423,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->connections > MAX_NUM_CONNECTIONS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->connections = MAX_NUM_CONNECTIONS;
 //      }
 //      for (i = 0; i < real_packet->connections; i++) {
@@ -19588,7 +19588,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->connections > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->connections = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->connections; i++) {
@@ -19607,7 +19607,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->connections > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->connections = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->connections; i++) {
@@ -19752,14 +19752,14 @@ public class Packets_gen{
 //struct packet_conn_ping_info *receive_packet_conn_ping_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_conn_ping_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_conn_ping_info at the server.");
 //  }
 //  ensure_valid_variant_packet_conn_ping_info(pc);
 //
@@ -19773,14 +19773,14 @@ public class Packets_gen{
 //int send_packet_conn_ping_info(struct connection *pc, final struct packet_conn_ping_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_conn_ping_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_conn_ping_info from the client.");
 //  }
 //  ensure_valid_variant_packet_conn_ping_info(pc);
 //
@@ -19831,14 +19831,14 @@ public class Packets_gen{
 //struct packet_conn_ping *receive_packet_conn_ping(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_conn_ping at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_conn_ping at the server.");
 //  }
 //  ensure_valid_variant_packet_conn_ping(pc);
 //
@@ -19851,14 +19851,14 @@ public class Packets_gen{
 //int send_packet_conn_ping(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_conn_ping from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_conn_ping from the client.");
 //  }
 //  ensure_valid_variant_packet_conn_ping(pc);
 //
@@ -19901,14 +19901,14 @@ public class Packets_gen{
 //struct packet_conn_pong *receive_packet_conn_pong(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_conn_pong at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_conn_pong at the client.");
 //  }
 //  ensure_valid_variant_packet_conn_pong(pc);
 //
@@ -19921,14 +19921,14 @@ public class Packets_gen{
 //int send_packet_conn_pong(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_conn_pong from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_conn_pong from the server.");
 //  }
 //  ensure_valid_variant_packet_conn_pong(pc);
 //
@@ -19971,14 +19971,14 @@ public class Packets_gen{
 //struct packet_before_new_year *receive_packet_before_new_year(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_before_new_year at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_before_new_year at the server.");
 //  }
 //  ensure_valid_variant_packet_before_new_year(pc);
 //
@@ -19991,14 +19991,14 @@ public class Packets_gen{
 //int send_packet_before_new_year(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_before_new_year from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_before_new_year from the client.");
 //  }
 //  ensure_valid_variant_packet_before_new_year(pc);
 //
@@ -20048,14 +20048,14 @@ public class Packets_gen{
 //struct packet_start_turn *receive_packet_start_turn(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_start_turn at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_start_turn at the server.");
 //  }
 //  ensure_valid_variant_packet_start_turn(pc);
 //
@@ -20068,14 +20068,14 @@ public class Packets_gen{
 //int send_packet_start_turn(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_start_turn from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_start_turn from the client.");
 //  }
 //  ensure_valid_variant_packet_start_turn(pc);
 //
@@ -20223,14 +20223,14 @@ public class Packets_gen{
 //struct packet_new_year *receive_packet_new_year(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_new_year at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_new_year at the server.");
 //  }
 //  ensure_valid_variant_packet_new_year(pc);
 //
@@ -20243,14 +20243,14 @@ public class Packets_gen{
 //int send_packet_new_year(struct connection *pc, final struct packet_new_year *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_new_year from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_new_year from the client.");
 //  }
 //  ensure_valid_variant_packet_new_year(pc);
 //
@@ -20300,14 +20300,14 @@ public class Packets_gen{
 //struct packet_spaceship_launch *receive_packet_spaceship_launch(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_spaceship_launch at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_spaceship_launch at the client.");
 //  }
 //  ensure_valid_variant_packet_spaceship_launch(pc);
 //
@@ -20320,14 +20320,14 @@ public class Packets_gen{
 //int send_packet_spaceship_launch(struct connection *pc)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_spaceship_launch from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_spaceship_launch from the server.");
 //  }
 //  ensure_valid_variant_packet_spaceship_launch(pc);
 //
@@ -20468,14 +20468,14 @@ public class Packets_gen{
 //struct packet_spaceship_place *receive_packet_spaceship_place(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_spaceship_place at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_spaceship_place at the client.");
 //  }
 //  ensure_valid_variant_packet_spaceship_place(pc);
 //
@@ -20488,14 +20488,14 @@ public class Packets_gen{
 //int send_packet_spaceship_place(struct connection *pc, final struct packet_spaceship_place *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_spaceship_place from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_spaceship_place from the server.");
 //  }
 //  ensure_valid_variant_packet_spaceship_place(pc);
 //
@@ -20894,14 +20894,14 @@ public class Packets_gen{
 //struct packet_spaceship_info *receive_packet_spaceship_info(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_spaceship_info at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_spaceship_info at the server.");
 //  }
 //  ensure_valid_variant_packet_spaceship_info(pc);
 //
@@ -20914,14 +20914,14 @@ public class Packets_gen{
 //int send_packet_spaceship_info(struct connection *pc, final struct packet_spaceship_info *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_spaceship_info from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_spaceship_info from the client.");
 //  }
 //  ensure_valid_variant_packet_spaceship_info(pc);
 //
@@ -21600,14 +21600,14 @@ public class Packets_gen{
 //struct packet_ruleset_unit *receive_packet_ruleset_unit(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_unit at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_unit at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_unit(pc);
 //
@@ -21620,14 +21620,14 @@ public class Packets_gen{
 //int send_packet_ruleset_unit(struct connection *pc, final struct packet_ruleset_unit *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_unit from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_unit from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_unit(pc);
 //
@@ -22292,14 +22292,14 @@ public class Packets_gen{
 //struct packet_ruleset_game *receive_packet_ruleset_game(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_game at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_game at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_game(pc);
 //
@@ -22312,14 +22312,14 @@ public class Packets_gen{
 //int send_packet_ruleset_game(struct connection *pc, final struct packet_ruleset_game *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_game from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_game from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_game(pc);
 //
@@ -22502,14 +22502,14 @@ public class Packets_gen{
 //struct packet_ruleset_government_ruler_title *receive_packet_ruleset_government_ruler_title(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_government_ruler_title at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_government_ruler_title at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_government_ruler_title(pc);
 //
@@ -22522,14 +22522,14 @@ public class Packets_gen{
 //int send_packet_ruleset_government_ruler_title(struct connection *pc, final struct packet_ruleset_government_ruler_title *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_government_ruler_title from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_government_ruler_title from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_government_ruler_title(pc);
 //
@@ -22803,14 +22803,14 @@ public class Packets_gen{
 //struct packet_ruleset_tech *receive_packet_ruleset_tech(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_tech at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_tech at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_tech(pc);
 //
@@ -22823,14 +22823,14 @@ public class Packets_gen{
 //int send_packet_ruleset_tech(struct connection *pc, final struct packet_ruleset_tech *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_tech from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_tech from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_tech(pc);
 //
@@ -23603,14 +23603,14 @@ public class Packets_gen{
 //struct packet_ruleset_government *receive_packet_ruleset_government(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_government at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_government at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_government(pc);
 //
@@ -23623,14 +23623,14 @@ public class Packets_gen{
 //int send_packet_ruleset_government(struct connection *pc, final struct packet_ruleset_government *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_government from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_government from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_government(pc);
 //
@@ -24037,14 +24037,14 @@ public class Packets_gen{
 //struct packet_ruleset_terrain_control *receive_packet_ruleset_terrain_control(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_terrain_control at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_terrain_control at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_terrain_control(pc);
 //
@@ -24057,14 +24057,14 @@ public class Packets_gen{
 //int send_packet_ruleset_terrain_control(struct connection *pc, final struct packet_ruleset_terrain_control *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_terrain_control from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_terrain_control from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_terrain_control(pc);
 //
@@ -24160,7 +24160,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->leader_count > MAX_NUM_LEADERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->leader_count = MAX_NUM_LEADERS;
 //      }
 //      for (i = 0; i < real_packet->leader_count; i++) {
@@ -24174,7 +24174,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->leader_count > MAX_NUM_LEADERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->leader_count = MAX_NUM_LEADERS;
 //      }
 //      for (i = 0; i < real_packet->leader_count; i++) {
@@ -24389,14 +24389,14 @@ public class Packets_gen{
 //struct packet_ruleset_nation *receive_packet_ruleset_nation(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_nation at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_nation at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_nation(pc);
 //
@@ -24409,14 +24409,14 @@ public class Packets_gen{
 //int send_packet_ruleset_nation(struct connection *pc, final struct packet_ruleset_nation *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_nation from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_nation from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_nation(pc);
 //
@@ -24629,14 +24629,14 @@ public class Packets_gen{
 //struct packet_ruleset_city *receive_packet_ruleset_city(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_city at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_city at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_city(pc);
 //
@@ -24649,14 +24649,14 @@ public class Packets_gen{
 //int send_packet_ruleset_city(struct connection *pc, final struct packet_ruleset_city *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_city from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_city from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_city(pc);
 //
@@ -24806,7 +24806,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->terr_gate_count > 255) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->terr_gate_count = 255;
 //      }
 //      for (i = 0; i < real_packet->terr_gate_count; i++) {
@@ -24833,7 +24833,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->spec_gate_count > 255) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->spec_gate_count = 255;
 //      }
 //      for (i = 0; i < real_packet->spec_gate_count; i++) {
@@ -24860,7 +24860,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->equiv_dupl_count > 255) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->equiv_dupl_count = 255;
 //      }
 //      for (i = 0; i < real_packet->equiv_dupl_count; i++) {
@@ -24887,7 +24887,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->equiv_repl_count > 255) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->equiv_repl_count = 255;
 //      }
 //      for (i = 0; i < real_packet->equiv_repl_count; i++) {
@@ -25215,14 +25215,14 @@ public class Packets_gen{
 //struct packet_ruleset_building *receive_packet_ruleset_building(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_building at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_building at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_building(pc);
 //
@@ -25235,14 +25235,14 @@ public class Packets_gen{
 //int send_packet_ruleset_building(struct connection *pc, final struct packet_ruleset_building *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_building from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_building from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_building(pc);
 //
@@ -25875,14 +25875,14 @@ public class Packets_gen{
 //struct packet_ruleset_terrain *receive_packet_ruleset_terrain(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_terrain at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_terrain at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_terrain(pc);
 //
@@ -25895,14 +25895,14 @@ public class Packets_gen{
 //int send_packet_ruleset_terrain(struct connection *pc, final struct packet_ruleset_terrain *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_terrain from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_terrain from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_terrain(pc);
 //
@@ -26390,14 +26390,14 @@ public class Packets_gen{
 //struct packet_ruleset_control *receive_packet_ruleset_control(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_control at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_control at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_control(pc);
 //
@@ -26410,14 +26410,14 @@ public class Packets_gen{
 //int send_packet_ruleset_control(struct connection *pc, final struct packet_ruleset_control *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_control from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_control from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_control(pc);
 //
@@ -26643,14 +26643,14 @@ public class Packets_gen{
 //struct packet_single_want_hack_req *receive_packet_single_want_hack_req(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_single_want_hack_req at the client.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_single_want_hack_req at the client.");
 //  }
 //  ensure_valid_variant_packet_single_want_hack_req(pc);
 //
@@ -26664,14 +26664,14 @@ public class Packets_gen{
 //int send_packet_single_want_hack_req(struct connection *pc, final struct packet_single_want_hack_req *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Sending packet_single_want_hack_req from the server.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_single_want_hack_req from the server.");
 //  }
 //  ensure_valid_variant_packet_single_want_hack_req(pc);
 //
@@ -26789,14 +26789,14 @@ public class Packets_gen{
 //struct packet_single_want_hack_reply *receive_packet_single_want_hack_reply(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_single_want_hack_reply at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_single_want_hack_reply at the server.");
 //  }
 //  ensure_valid_variant_packet_single_want_hack_reply(pc);
 //
@@ -26809,14 +26809,14 @@ public class Packets_gen{
 //int send_packet_single_want_hack_reply(struct connection *pc, final struct packet_single_want_hack_reply *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_single_want_hack_reply from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_single_want_hack_reply from the client.");
 //  }
 //  ensure_valid_variant_packet_single_want_hack_reply(pc);
 //
@@ -26881,7 +26881,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nplayers = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
@@ -26895,7 +26895,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nplayers = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
@@ -26909,7 +26909,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nplayers = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
@@ -26923,7 +26923,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nplayers = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
@@ -26937,7 +26937,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nplayers = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
@@ -26951,7 +26951,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->nplayers = MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
@@ -27207,14 +27207,14 @@ public class Packets_gen{
 //struct packet_game_load *receive_packet_game_load(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_game_load at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_game_load at the server.");
 //  }
 //  ensure_valid_variant_packet_game_load(pc);
 //
@@ -27227,14 +27227,14 @@ public class Packets_gen{
 //int send_packet_game_load(struct connection *pc, final struct packet_game_load *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_game_load from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_game_load from the client.");
 //  }
 //  ensure_valid_variant_packet_game_load(pc);
 //
@@ -27301,7 +27301,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->ncategories > 256) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->ncategories = 256;
 //      }
 //      for (i = 0; i < real_packet->ncategories; i++) {
@@ -27422,14 +27422,14 @@ public class Packets_gen{
 //struct packet_options_settable_control *receive_packet_options_settable_control(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_options_settable_control at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_options_settable_control at the server.");
 //  }
 //  ensure_valid_variant_packet_options_settable_control(pc);
 //
@@ -27442,14 +27442,14 @@ public class Packets_gen{
 //int send_packet_options_settable_control(struct connection *pc, final struct packet_options_settable_control *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_options_settable_control from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_options_settable_control from the client.");
 //  }
 //  ensure_valid_variant_packet_options_settable_control(pc);
 //
@@ -27715,14 +27715,14 @@ public class Packets_gen{
 //struct packet_options_settable *receive_packet_options_settable(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_options_settable at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_options_settable at the server.");
 //  }
 //  ensure_valid_variant_packet_options_settable(pc);
 //
@@ -27735,14 +27735,14 @@ public class Packets_gen{
 //int send_packet_options_settable(struct connection *pc, final struct packet_options_settable *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_options_settable from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_options_settable from the client.");
 //  }
 //  ensure_valid_variant_packet_options_settable(pc);
 //
@@ -27797,7 +27797,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->num_elements > 255) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->num_elements = 255;
 //      }
 //      for (i = 0; i < real_packet->num_elements; i++) {
@@ -27816,7 +27816,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->num_elements > 255) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->num_elements = 255;
 //      }
 //      for (i = 0; i < real_packet->num_elements; i++) {
@@ -27835,7 +27835,7 @@ public class Packets_gen{
 //      int i;
 //    
 //      if(real_packet->num_elements > 255) {
-//        freelog(LOG_ERROR, "packets_gen.c: WARNING: truncation array");
+//        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
 //        real_packet->num_elements = 255;
 //      }
 //      for (i = 0; i < real_packet->num_elements; i++) {
@@ -28008,14 +28008,14 @@ public class Packets_gen{
 //struct packet_ruleset_cache_group *receive_packet_ruleset_cache_group(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_cache_group at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_cache_group at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_cache_group(pc);
 //
@@ -28028,14 +28028,14 @@ public class Packets_gen{
 //int send_packet_ruleset_cache_group(struct connection *pc, final struct packet_ruleset_cache_group *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_cache_group from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_cache_group from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_cache_group(pc);
 //
@@ -28264,14 +28264,14 @@ public class Packets_gen{
 //struct packet_ruleset_cache_effect *receive_packet_ruleset_cache_effect(struct connection *pc, enum packet_type type)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
 //	    conn_description(pc));
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(is_server) {
-//    freelog(LOG_ERROR, "Receiving packet_ruleset_cache_effect at the server.");
+//    util.freelog(Log.LOG_ERROR, "Receiving packet_ruleset_cache_effect at the server.");
 //  }
 //  ensure_valid_variant_packet_ruleset_cache_effect(pc);
 //
@@ -28284,14 +28284,14 @@ public class Packets_gen{
 //int send_packet_ruleset_cache_effect(struct connection *pc, final struct packet_ruleset_cache_effect *packet)
 //{
 //  if(!pc->used) {
-//    freelog(LOG_ERROR,
+//    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
 //	    conn_description(pc));
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
 //  if(!is_server) {
-//    freelog(LOG_ERROR, "Sending packet_ruleset_cache_effect from the client.");
+//    util.freelog(Log.LOG_ERROR, "Sending packet_ruleset_cache_effect from the client.");
 //  }
 //  ensure_valid_variant_packet_ruleset_cache_effect(pc);
 //

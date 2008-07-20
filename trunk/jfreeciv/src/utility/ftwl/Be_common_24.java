@@ -338,8 +338,8 @@ public class Be_common_24{
 //  ct_clip_rect(&src_use, &src.full_rect);
 //  ct_clip_rect(&dest_use, &dest.full_rect);
 //
-//  real_size.width = MIN(src_use.width, dest_use.width);
-//  real_size.height = MIN(src_use.height, dest_use.height);
+//  real_size.width = Math.min(src_use.width, dest_use.width);
+//  real_size.height = Math.min(src_use.height, dest_use.height);
 //
 //  dx = MAX(src_use.x - src_pos.x, dest_use.x - dest_pos.x);
 //  dy = MAX(src_use.y - src_pos.y, dest_use.y - dest_pos.y);
@@ -545,7 +545,7 @@ public class Be_common_24{
 //  struct ct_rect rect = { 0, 0, width, height };
 //  osda result = fc_malloc(sizeof(*result));
 //
-//  freelog(LOG_DEBUG, "create_osda(%dx%d)", width, height);
+//  util.freelog(LOG_DEBUG, "create_osda(%dx%d)", width, height);
 //  result.image = image_create(width, height);
 //  result.has_transparent_pixels = true;
 //  be_set_transparent(result, &rect);
@@ -739,7 +739,7 @@ public class Be_common_24{
 //    ct_clip_point(&start2, &bounds);
 //    ct_clip_point(&end2, &bounds);
 //
-//    draw_vline(target.image, tmp, start2.x, MIN(start2.y, end2.y),
+//    draw_vline(target.image, tmp, start2.x, Math.min(start2.y, end2.y),
 //	       MAX(start2.y, end2.y), line_width, dashed);
 //  } else if (start.y == end.y) {
 //    struct ct_point start2 = *start;
@@ -748,7 +748,7 @@ public class Be_common_24{
 //    ct_clip_point(&start2, &bounds);
 //    ct_clip_point(&end2, &bounds);
 //
-//    draw_hline(target.image, tmp, start2.y, MIN(start2.x, end2.x),
+//    draw_hline(target.image, tmp, start2.y, Math.min(start2.x, end2.x),
 //	       MAX(start2.x, end2.x), line_width, dashed);
 //  } else {
 //    assert(ct_point_in_rect(start, &bounds));
@@ -775,11 +775,11 @@ public class Be_common_24{
 //  tmp[3] = get_mask(draw_type);
 //
 //  /*
-//    freelog(Log.LOG_NORMAL,"draw_region(): actual=%s",ct_rect_to_string(&actual));
-//    freelog(Log.LOG_NORMAL,"  bounds=%s",ct_rect_to_string(&bounds));
+//    util.freelog(Log.LOG_NORMAL,"draw_region(): actual=%s",ct_rect_to_string(&actual));
+//    util.freelog(Log.LOG_NORMAL,"  bounds=%s",ct_rect_to_string(&bounds));
 //  */
 //  ct_clip_rect(&actual, &bounds);
-//  /* freelog(Log.LOG_NORMAL,"  actual=%s",ct_rect_to_string(&actual)); */
+//  /* util.freelog(Log.LOG_NORMAL,"  actual=%s",ct_rect_to_string(&actual)); */
 //
 //  width = actual.width;
 //  for (y = actual.y; y < actual.y + actual.height; y++) {

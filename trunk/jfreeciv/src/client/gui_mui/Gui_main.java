@@ -1224,7 +1224,7 @@ public class Gui_main{
 //    menu_title_sensitive(MENU_KINGDOM_WORKLISTS, can_client_issue_orders());
 //    menu_title_sensitive(MENU_KINGDOM_REVOLUTION, can_client_issue_orders());
 //
-//    menu_entry_sensitive(MENU_REPORT_SPACESHIP, (game.player_ptr.spaceship.state != SSHIP_NONE));
+//    menu_entry_sensitive(MENU_REPORT_SPACESHIP, (game.player_ptr.spaceship.state != spaceship_state.SSHIP_NONE));
 //
 //    if (punit && can_client_issue_orders()) {
 //      final String chgfmt = "Change to %s";
@@ -1289,7 +1289,7 @@ public class Gui_main{
 //      tinfo = get_tile_type(ttype);
 //      if ((tinfo.irrigation_result != T_NONE)
 //	  && (tinfo.irrigation_result != ttype)) {
-//	my_snprintf(irrtext, sizeof(irrtext), chgfmt,
+//	irrtext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //      } else if (map_has_special(punit.tile, S_IRRIGATION)
 //		 && player_knows_techs_with_flag(game.player_ptr,
@@ -1301,7 +1301,7 @@ public class Gui_main{
 //
 //      if ((tinfo.mining_result != T_NONE)
 //	  && (tinfo.mining_result != ttype)) {
-//	my_snprintf(mintext, sizeof(mintext), chgfmt,
+//	mintext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.mining_result)).terrain_name);
 //      } else {
 //        sz_strlcpy(mintext, "Build Mine");
@@ -1309,7 +1309,7 @@ public class Gui_main{
 //
 //      if ((tinfo.transform_result != T_NONE)
 //	  && (tinfo.transform_result != ttype)) {
-//	my_snprintf(transtext, sizeof(transtext), chgfmt,
+//	transtext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.transform_result)).terrain_name);
 //      } else {
 //        sz_strlcpy(transtext, "Transform Terrain");

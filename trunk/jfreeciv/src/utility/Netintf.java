@@ -109,7 +109,7 @@ public class Netintf{
 //  WSADATA wsa;
 //
 //  if (WSAStartup(MAKEWORD(1, 1), &wsa) != 0) {
-//    freelog(LOG_ERROR, "no usable WINSOCK.DLL: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "no usable WINSOCK.DLL: %s", mystrerror());
 //  }
 //#endif
 //
@@ -139,25 +139,25 @@ public class Netintf{
 //  int f_set;
 //
 //  if ((f_set=fcntl(sockfd, F_GETFL)) == -1) {
-//    freelog(LOG_ERROR, "fcntl F_GETFL failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "fcntl F_GETFL failed: %s", mystrerror());
 //  }
 //
 //  f_set |= O_NONBLOCK;
 //
 //  if (fcntl(sockfd, F_SETFL, f_set) == -1) {
-//    freelog(LOG_ERROR, "fcntl F_SETFL failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "fcntl F_SETFL failed: %s", mystrerror());
 //  }
 //#else
 //#ifdef HAVE_IOCTL
 //  long value=1;
 //
 //  if (ioctl(sockfd, FIONBIO, (char*)&value) == -1) {
-//    freelog(LOG_ERROR, "ioctl failed: %s", mystrerror());
+//    util.freelog(Log.LOG_ERROR, "ioctl failed: %s", mystrerror());
 //  }
 //#endif
 //#endif
 //#else
-//  freelog(LOG_DEBUG, "NONBLOCKING_SOCKETS not available");
+//  util.freelog(LOG_DEBUG, "NONBLOCKING_SOCKETS not available");
 //#endif
 //}
 //
@@ -285,10 +285,10 @@ public class Netintf{
 //  server[0] = '\0';
 //
 //  if (pport) {
-//    strncat(server, str, MIN(MAX_LEN_ADDR, pport-str));
+//    strncat(server, str, Math.min(MAX_LEN_ADDR, pport-str));
 //  } else {
 //    if (ppath) {
-//      strncat(server, str, MIN(MAX_LEN_ADDR, ppath-str));
+//      strncat(server, str, Math.min(MAX_LEN_ADDR, ppath-str));
 //    } else {
 //      strncat(server, str, MAX_LEN_ADDR);
 //    }
