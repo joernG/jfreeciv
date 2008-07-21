@@ -24,7 +24,7 @@ public class Advdomestic{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "unit.h"
 //#include "unittype.h"
@@ -173,7 +173,7 @@ public class Advdomestic{
 //     * -- Syela */
 //
 //    if (want > 0) {
-//      CITY_LOG(LOG_DEBUG, pcity, "desires terrain improvers with passion %d", 
+//      CITY_LOG(Log.LOG_DEBUG, pcity, "desires terrain improvers with passion %d", 
 //               want);
 //      choice.want = want;
 //      choice.type = CT_NONMIL;
@@ -192,7 +192,7 @@ public class Advdomestic{
 //    int want = pcity.ai.founder_want;
 //
 //    if (want > choice.want) {
-//      CITY_LOG(LOG_DEBUG, pcity, "desires founders with passion %d", want);
+//      CITY_LOG(Log.LOG_DEBUG, pcity, "desires founders with passion %d", want);
 //      choice.want = want;
 //      choice.need_boat = pcity.ai.founder_boat;
 //      choice.type = CT_NONMIL;
@@ -200,7 +200,7 @@ public class Advdomestic{
 //      
 //    } else if (want < -choice.want) {
 //      /* We need boats to colonize! */
-//      CITY_LOG(LOG_DEBUG, pcity, "desires founders with passion %d and asks"
+//      CITY_LOG(Log.LOG_DEBUG, pcity, "desires founders with passion %d and asks"
 //	       " for a boat", want);
 //      choice.want = 0 - want;
 //      choice.type = CT_NONMIL;

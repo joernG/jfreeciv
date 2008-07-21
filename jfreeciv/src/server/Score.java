@@ -23,7 +23,7 @@ public class Score{
 //
 //#include "improvement.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "player.h"
 //#include "srv_main.h"
@@ -35,7 +35,7 @@ public class Score{
 //
 //
 ///**************************************************************************
-//  Allocates, fills and returns a land area claim map.
+//  Allocates, fills and returns a land area claim Map.map.
 //  Call free_landarea_map(&cmap) to free allocated memory.
 //**************************************************************************/
 //
@@ -79,7 +79,7 @@ public class Score{
 //}
 //
 ///* 
-// * Writes the map_char_expr expression for each position on the map.
+// * Writes the map_char_expr expression for each position on the Map.map.
 // * map_char_expr is provided with the variables x,y to evaluate the
 // * position. The 'type' argument is used for formatting by printf; for
 // * instance it should be "%c" for characters.  The data is printed in a
@@ -88,13 +88,13 @@ public class Score{
 //#define WRITE_MAP_DATA(type, map_char_expr)        \
 //{                                                  \
 //  int nat_x, nat_y;                                \
-//  for (nat_x = 0; nat_x < map.xsize; nat_x++) {    \
+//  for (nat_x = 0; nat_x < Map.map.xsize; nat_x++) {    \
 //    printf("%d", nat_x % 10);                      \
 //  }                                                \
 //  putchar('\n');                                   \
-//  for (nat_y = 0; nat_y < map.ysize; nat_y++) {    \
+//  for (nat_y = 0; nat_y < Map.map.ysize; nat_y++) {    \
 //    printf("%d ", nat_y % 10);                     \
-//    for (nat_x = 0; nat_x < map.xsize; nat_x++) {  \
+//    for (nat_x = 0; nat_x < Map.map.xsize; nat_x++) {  \
 //      int x, y;                                    \
 //      NATIVE_TO_MAP_POS(&x, &y, nat_x,nat_y);      \
 //      printf(type, map_char_expr);                 \
@@ -153,7 +153,7 @@ public class Score{
 //{
 //  int nbytes;
 //
-//  nbytes = map.xsize * map.ysize * sizeof(struct claim_cell);
+//  nbytes = Map.map.xsize * Map.map.ysize * sizeof(struct claim_cell);
 //  pcmap.claims = fc_malloc(nbytes);
 //  memset(pcmap.claims, 0, nbytes);
 //
@@ -165,7 +165,7 @@ public class Score{
 //  pcmap.player_owndarea = fc_malloc(nbytes);
 //  memset(pcmap.player_owndarea, 0, nbytes);
 //
-//  nbytes = 2 * map.xsize * map.ysize * sizeof(*pcmap.edges);
+//  nbytes = 2 * Map.map.xsize * Map.map.ysize * sizeof(*pcmap.edges);
 //  pcmap.edges = fc_malloc(nbytes);
 //
 //  for(player pplayer: game.players){
@@ -189,11 +189,11 @@ public class Score{
 //  turn = 0;
 //  nextedge = pcmap.edges;
 //
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    int i = ptile.index;
 //
 //    pclaim = &pcmap.claims[i];
-//    ptile = &map.tiles[i];
+//    ptile = &Map.map.tiles[i];
 //
 //    if (is_ocean(ptile.terrain)) {
 //      /* pclaim.when = 0; */
@@ -233,7 +233,7 @@ public class Score{
 //      pclaim.whom = no_owner;
 //      pclaim.know = ptile.known;
 //    }
-//  } whole_map_iterate_end;
+//  }
 //
 //  *nextedge = null;
 //
@@ -252,7 +252,7 @@ public class Score{
 //  tile *thisedge;
 //  tile *nextedge;
 //
-//  midedge = &pcmap.edges[map.xsize * map.ysize];
+//  midedge = &pcmap.edges[Map.map.xsize * Map.map.ysize];
 //
 //  for (accum = 1, turn = 1; accum > 0; turn++) {
 //    thisedge = ((turn & 0x1) == 1) ? pcmap.edges : midedge;
@@ -314,7 +314,7 @@ public class Score{
 //}
 //
 ///**************************************************************************
-//  Frees and NULLs an allocated claim map.
+//  Frees and NULLs an allocated claim Map.map.
 //**************************************************************************/
 //static void free_landarea_map(claim_map pcmap)
 //{
@@ -339,7 +339,7 @@ public class Score{
 //}
 //
 ///**************************************************************************
-//  Returns the given player's land and settled areas from a claim map.
+//  Returns the given player's land and settled areas from a claim Map.map.
 //**************************************************************************/
 //static void get_player_landarea(claim_map pcmap,
 //				player pplayer,
@@ -560,11 +560,11 @@ public class Score{
 //            pplayer.name);
 //  }
 //
-//  fprintf(fp, "%d %d\n", map.xsize, map.ysize);
+//  fprintf(fp, "%d %d\n", Map.map.xsize, Map.map.ysize);
 //  fprintf(fp, "255\n");
 //
-//  for (j = 0; j < map.ysize; j++) {
-//    for (i = 0; i < map.xsize; i++) {
+//  for (j = 0; j < Map.map.ysize; j++) {
+//    for (i = 0; i < Map.map.xsize; i++) {
 //       tile ptile = native_pos_to_tile(i, j);
 //       int *color;
 //

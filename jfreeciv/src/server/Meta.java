@@ -319,11 +319,11 @@ public class Meta{
 //    s = end_of_strn(s, &rest);
 //
 //    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
-//                my_url_encode("generator"), map.generator);
+//                my_url_encode("generator"), Map.map.generator);
 //    s = end_of_strn(s, &rest);
 //
 //    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
-//                my_url_encode("size"), map.size);
+//                my_url_encode("size"), Map.map.size);
 //    s = end_of_strn(s, &rest);
 //  }
 //

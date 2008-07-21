@@ -230,7 +230,7 @@ public class Gui_main{
 //  MAKE_SUBITEM(N"Road & Rails", MENU_VIEW_SHOW_ROADS_RAILS, null, MENUTOGGLE|CHECKIT),
 //  MAKE_SUBITEM(N"Irrigation", MENU_VIEW_SHOW_IRRIGATION, null, MENUTOGGLE|CHECKIT),
 //  MAKE_SUBITEM(N"Mines", MENU_VIEW_SHOW_MINES, null, MENUTOGGLE|CHECKIT),
-//  MAKE_SUBITEM(N"Fortress & Airbase", MENU_VIEW_SHOW_FORTRESS_AIRBASE, null, MENUTOGGLE|CHECKIT),
+//  MAKE_SUBITEM(N"Fortress & Airbase", MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE, null, MENUTOGGLE|CHECKIT),
 //  MAKE_SUBITEM(N"Specials", MENU_VIEW_SHOW_SPECIALS, null, MENUTOGGLE|CHECKIT),
 //  MAKE_SUBITEM(N"Pollution & Fallout", MENU_VIEW_SHOW_POLLUTION, null, MENUTOGGLE|CHECKIT),
 //  MAKE_SUBITEM(N"Cities", MENU_VIEW_SHOW_CITIES, null, MENUTOGGLE|CHECKIT),
@@ -517,8 +517,8 @@ public class Gui_main{
 //	  if (draw_mines != xget(menu_find_item(MENU_VIEW_SHOW_MINES),MUIA_Menuitem_Checked))
 //            request_toggle_mines();
 //	  break;
-//    case  MENU_VIEW_SHOW_FORTRESS_AIRBASE:
-//	  if (draw_fortress_airbase != xget(menu_find_item(MENU_VIEW_SHOW_FORTRESS_AIRBASE),MUIA_Menuitem_Checked))
+//    case  MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE:
+//	  if (draw_fortress_airbase != xget(menu_find_item(MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE),MUIA_Menuitem_Checked))
 //            request_toggle_fortress_airbase();
 //	  break;
 //    case  MENU_VIEW_SHOW_SPECIALS:
@@ -1373,7 +1373,7 @@ public class Gui_main{
 //      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_ROADS_RAILS,MUIA_Menuitem_Checked,draw_roads_rails);
 //      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_IRRIGATION,MUIA_Menuitem_Checked,draw_irrigation);
 //      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_MINES,MUIA_Menuitem_Checked,draw_mines);
-//      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_FORTRESS_AIRBASE,MUIA_Menuitem_Checked,draw_fortress_airbase);
+//      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE,MUIA_Menuitem_Checked,draw_fortress_airbase);
 //      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_SPECIALS,MUIA_Menuitem_Checked,draw_specials);
 //      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_POLLUTION,MUIA_Menuitem_Checked,draw_pollution);
 //      DoMethod(main_menu,MUIM_SetUData,MENU_VIEW_SHOW_CITIES,MUIA_Menuitem_Checked,draw_cities);

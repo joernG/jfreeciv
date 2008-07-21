@@ -157,7 +157,7 @@ public class Netintf{
 //#endif
 //#endif
 //#else
-//  util.freelog(LOG_DEBUG, "NONBLOCKING_SOCKETS not available");
+//  util.freelog(Log.LOG_DEBUG, "NONBLOCKING_SOCKETS not available");
 //#endif
 //}
 //

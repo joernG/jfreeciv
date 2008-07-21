@@ -5,7 +5,7 @@ public class Gamelog{
 //#include "fcintl.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "score.h"
 //#include "srv_main.h"
@@ -156,7 +156,7 @@ public class Gamelog{
     player 
   GAMELOG_EVERYTHING
      do not call this
-  GAMELOG_DEBUG
+  GAMELog.LOG_DEBUG
      do not call this
 
 	 **************************************************************************/
@@ -358,17 +358,17 @@ public class Gamelog{
 //      buf = util.my_snprintf(
 //                  "<n1>%d</n1><n2>%d</n2><name>%s</name>"
 //                  "<m>%s lose %s to the %s</m>",
-//                  unit_owner(punit).player_no, pplayer.player_no,
+//                  punit.unit_owner().player_no, pplayer.player_no,
 //                  unit_name(punit.type),
-//                  Nation.get_nation_name_plural(unit_owner(punit).nation),
+//                  Nation.get_nation_name_plural(punit.unit_owner().nation),
 //                  unit_name(punit.type),
 //                  Nation.get_nation_name_plural(pplayer.nation));
 //    } else {
 //      word = va_arg(args, char *);
 //      buf = util.my_snprintf(
 //                  "<n1>%d</n1><name>%s</name><m>%s lose %s (%s)</m>",
-//                  unit_owner(punit).player_no, unit_name(punit.type),
-//                  Nation.get_nation_name_plural(unit_owner(punit).nation),
+//                  punit.unit_owner().player_no, unit_name(punit.type),
+//                  Nation.get_nation_name_plural(punit.unit_owner().nation),
 //                  unit_name(punit.type), word);
 //    }
 //    gamelog_put_prefix(buf, sizeof(buf), "unitl");
@@ -379,8 +379,8 @@ public class Gamelog{
 //    buf = util.my_snprintf(
 //                "<n>%d</n><name>%s</name>"
 //                "<m>%s lost a game loss unit and died</m>",
-//                unit_owner(punit).player_no, unit_name(punit.type),
-//                Nation.get_nation_name_plural(unit_owner(punit).nation));
+//                punit.unit_owner().player_no, unit_name(punit.type),
+//                Nation.get_nation_name_plural(punit.unit_owner().nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "gamel");
 //    break;
 //  case GAMELOG_EMBASSY:
@@ -544,10 +544,10 @@ public class Gamelog{
 //    /* this is big, so it's special */
 //    {
 //      int nat_x, nat_y, i = 0;
-//      char *mapline = fc_malloc(((map.xsize + 1) * map.ysize) + 1);
+//      char *mapline = fc_malloc(((Map.map.xsize + 1) * Map.map.ysize) + 1);
 //
-//      for (nat_y = 0; nat_y < map.ysize; nat_y++) {
-//        for (nat_x = 0; nat_x < map.xsize; nat_x++) {
+//      for (nat_y = 0; nat_y < Map.map.ysize; nat_y++) {
+//        for (nat_x = 0; nat_x < Map.map.xsize; nat_x++) {
 //          tile ptile = native_pos_to_tile(nat_x, nat_y);
 //
 //          mapline[i++] = is_ocean(map_get_terrain(ptile)) ? ' ' : '.';

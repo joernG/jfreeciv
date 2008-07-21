@@ -172,7 +172,7 @@ public class Registry{
 //public static final int MAX_LEN_BUFFER = 1024;
 //
 //public static final int SAVE_TABLES = true;	/* set to 0 for old-style savefiles */
-//public static final int SECF_DEBUG_ENTRIES = false;/* LOG_DEBUG each entry value */
+//public static final int SECF_DEBUG_ENTRIES = false;/* Log.LOG_DEBUG each entry value */
 //
 //#define SPECVEC_TAG astring
 //#include "specvec.h"
@@ -344,7 +344,7 @@ public class Registry{
 //    pentry.svalue = minstrdup(sb, tok+1);
 //    pentry.ivalue = 0;
 //    if (SECF_DEBUG_ENTRIES) {
-//      util.freelog(LOG_DEBUG, "entry %s '%s'", name, pentry.svalue);
+//      util.freelog(Log.LOG_DEBUG, "entry %s '%s'", name, pentry.svalue);
 //    }
 //  } else {
 //    pentry.svalue = null;
@@ -352,7 +352,7 @@ public class Registry{
 //      util.freelog(Log.LOG_ERROR, "'%s' isn't an integer", tok);
 //    }
 //    if (SECF_DEBUG_ENTRIES) {
-//      util.freelog(LOG_DEBUG, "entry %s %d", name, pentry.ivalue);
+//      util.freelog(Log.LOG_DEBUG, "entry %s %d", name, pentry.ivalue);
 //    }
 //  }
 //  pentry.used = false;
@@ -1217,7 +1217,7 @@ public class Registry{
 //  entry result;
 //  section psection;
 //
-//  /* util.freelog(LOG_DEBUG, "looking up: %s", fullpath); */
+//  /* util.freelog(Log.LOG_DEBUG, "looking up: %s", fullpath); */
 //  
 //  /* treat "sec.foo,0" as "sec.foo": */
 //  len = fullpath.length();
@@ -1404,7 +1404,7 @@ public class Registry{
 //  }
 //  
 //  if (hashd.allow_duplicates) {
-//    util.freelog(LOG_DEBUG, "Hash duplicates during build: %d",
+//    util.freelog(Log.LOG_DEBUG, "Hash duplicates during build: %d",
 //	    hashd.num_duplicates);
 //  }
 //}
@@ -1557,7 +1557,7 @@ public class Registry{
 //  char *c, *dest;
 //
 //  if (!str) {
-//    util.freelog(LOG_DEBUG, "moutstr alloc was %d", nalloc);
+//    util.freelog(Log.LOG_DEBUG, "moutstr alloc was %d", nalloc);
 //    free(buf);
 //    buf = null;
 //    nalloc = 0;

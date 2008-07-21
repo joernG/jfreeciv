@@ -33,7 +33,7 @@ public class Gotodlg{
 //#include <X11/Xaw/Toggle.h>     
 //
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"

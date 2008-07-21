@@ -39,7 +39,7 @@ public class Gui_main{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "shared.h"
 //#include "support.h"
@@ -1156,7 +1156,7 @@ public class Gui_main{
 //  if (previous_state == socket_writable)
 //    return;
 //
-//  util.freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
+//  util.freelog(Log.LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
 //  gdk_input_remove(gdk_input_id);
 //  gdk_input_id = gdk_input_add(aconnection.sock, GDK_INPUT_READ 
 //                               | (socket_writable ? GDK_INPUT_WRITE : 0)

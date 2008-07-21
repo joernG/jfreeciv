@@ -111,7 +111,7 @@ public class Helpdlg{
 //**************************************************************************/
 //void popup_help_dialog_typed(final String item, enum help_page_type eHPT)
 //{
-//  util.freelog(LOG_DEBUG, "popup_help_dialog_typed : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "popup_help_dialog_typed : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -735,7 +735,7 @@ public class Helpdlg{
 //    cat_snprintf(local, sizeof(local), "\n%s %d %s %d %s %d\n%s %d %s %d %s %d",
 //	      N"Attack:", pUnit.attack_strength,
 //	      N"Defense:", pUnit.defense_strength,
-//              N"Move:", pUnit.move_rate / SINGLE_MOVE,
+//              N"Move:", pUnit.move_rate / Unit_H.SINGLE_MOVE,
 //              N"Vision:", pUnit.vision_range,
 //	      N"FirePower:", pUnit.firepower,
 //              N"Hitpoints:", pUnit.hp);

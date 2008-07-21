@@ -366,7 +366,7 @@ public class Options{
 //    for (j = 0; j < strlen(events[i].tag_name); j++) {
 //      events[i].tag_name[j] = my_tolower(events[i].tag_name[j]);
 //    }
-//    util.freelog(LOG_DEBUG,
+//    util.freelog(Log.LOG_DEBUG,
 //	    "event[%d]=%d: name='%s' / '%s'\n\tdescr_orig='%s'\n\tdescr='%s'",
 //	    i, events[i].event, events[i].enum_name, events[i].tag_name,
 //	    events[i].descr_orig, events[i].descr);

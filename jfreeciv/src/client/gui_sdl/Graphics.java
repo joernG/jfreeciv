@@ -897,7 +897,7 @@ public class Graphics{
 //    util.freelog(Log.LOG_ERROR, _("No available mode for this resolution "
 //			 ": %d x %d %d bpp"), iWidth, iHeight, iDepth);
 //
-//    util.freelog(LOG_DEBUG, _("Setting default resolution to : "
+//    util.freelog(Log.LOG_DEBUG, _("Setting default resolution to : "
 //    					"640 x 480 16 bpp SW"));
 //
 //    Main.screen = SDL_SetVideoMode(640, 480, 16, SDL_SWSURFACE);
@@ -912,7 +912,7 @@ public class Graphics{
 //  }
 //
 //
-//  util.freelog(LOG_DEBUG, "Setting resolution to: %d x %d %d bpp",
+//  util.freelog(Log.LOG_DEBUG, "Setting resolution to: %d x %d %d bpp",
 //	  					iWidth, iHeight, iDepth);
 //
 //  mapview_canvas.width = iWidth;
@@ -3722,12 +3722,12 @@ public class Graphics{
 //
 //  if (correct_black(pBuf)) {
 //    pNew = pBuf;
-//    util.freelog(LOG_DEBUG, "%s load with own %d bpp format !", filename,
+//    util.freelog(Log.LOG_DEBUG, "%s load with own %d bpp format !", filename,
 //	    pNew.format.BitsPerPixel);
 //  } else {
 //    Uint32 color;
 //    
-//    util.freelog(LOG_DEBUG, "%s (%d bpp) load with screen (%d bpp) format !",
+//    util.freelog(Log.LOG_DEBUG, "%s (%d bpp) load with screen (%d bpp) format !",
 //	    filename, pBuf.format.BitsPerPixel,
 //	    Main.screen.format.BitsPerPixel);
 //

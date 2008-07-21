@@ -18,7 +18,7 @@ public class Temperature_map{
 //#include <config.h>
 //#endif
 //
-//#include "map.h"
+//#include "Map.map.h"
 //
 //#include "height_map.h"
 //#include "temperature_map.h"
@@ -83,8 +83,8 @@ public class Temperature_map{
 //    return;
 //  }
 //
-//  temperature_map = fc_malloc(sizeof(int) * MAX_MAP_INDEX);
-//  whole_map_iterate(ptile) {
+//  temperature_map = fc_malloc(sizeof(int) * Map_H.MAX_MAP_INDEX);
+//  for(tile ptile :  Map.map.tiles){
 //  
 //     /* the base temperature is equal to base map_colatitude */
 //    int t = map_colatitude(ptile);
@@ -95,22 +95,22 @@ public class Temperature_map{
 //      float height = - 0.3 * MAX(0, hmap(ptile) - hmap_shore_level) 
 //	  / (hmap_max_level - hmap_shore_level); 
 //      /* near ocean temperature can be 15 % more "temperate" */
-//      float temperate = 0.15 * (map.temperature / 100 - t / MAX_COLATITUDE) * 
+//      float temperate = 0.15 * (Map.map.temperature / 100 - t / MAX_COLATITUDE) * 
 //	  2 * Math.min (50 ,count_ocean_near_tile(ptile, false, true)) /
 //	  100;
 //      
 //      tmap(ptile) =  t * (1.0 + temperate) * (1.0 + height);
 //    }
-//  } whole_map_iterate_end;
+//  }
 //  /* adjust to get well sizes frequencies */
 //  /* Notice: if colatitude is load from a scenario never call adjust has
 //             scenario maybe has a odd colatitude ditribution and adjust will
 //	     brack it */
-//  if (!map.alltemperate) {
+//  if (!Map.map.alltemperate) {
 //    adjust_int_map(temperature_map, MAX_COLATITUDE);
 //  }
 //  /* now simplify to 4 base values */ 
-//  for (i = 0; i < MAX_MAP_INDEX; i++) {
+//  for (i = 0; i < Map_H.MAX_MAP_INDEX; i++) {
 //    int t = temperature_map[i];
 //
 //    if (t >= TROPICAL_LEVEL) {

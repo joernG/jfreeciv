@@ -63,7 +63,7 @@ public class Audio_esd{
 //
 //  for (i = 0; i < MAX_SAMPLES; i++) {
 //    if (samples[i].id != -1) {
-//      util.freelog(LOG_DEBUG, "Freeing sample <%d> in slot %d", samples[i].id,
+//      util.freelog(Log.LOG_DEBUG, "Freeing sample <%d> in slot %d", samples[i].id,
 //	      i);
 //      esd_sample_free(sock, samples[i].id);
 //    }
@@ -130,7 +130,7 @@ public class Audio_esd{
 //    /* see if we can cache on this one */
 //    for (i = 0; i < MAX_SAMPLES; i++) {
 //      if (samples[i].tag && (strcmp(samples[i].tag, tag) == 0)) {
-//	util.freelog(LOG_DEBUG, "Playing file %s from cache (slot %d)", fullpath,
+//	util.freelog(Log.LOG_DEBUG, "Playing file %s from cache (slot %d)", fullpath,
 //		i);
 //	esd_sample_play(sock, samples[i].id);
 //	return true;
@@ -139,11 +139,11 @@ public class Audio_esd{
 //
 //    /* not in cache, so let's create an open sample slot */
 //    if (samples[last_sample].id != -1) {
-//      util.freelog(LOG_DEBUG, "Opening sample slot %d", last_sample);
+//      util.freelog(Log.LOG_DEBUG, "Opening sample slot %d", last_sample);
 //      esd_sample_free(sock, samples[last_sample].id);
 //    }
 //
-//    util.freelog(LOG_DEBUG, "Playing file %s in slot %d", fullpath,
+//    util.freelog(Log.LOG_DEBUG, "Playing file %s in slot %d", fullpath,
 //	    last_sample);
 //    samples[last_sample].id = esd_file_cache(sock, program_name, fullpath);
 //    samples[last_sample].tag = tag;

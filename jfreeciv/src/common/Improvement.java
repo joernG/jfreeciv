@@ -22,7 +22,7 @@ public class Improvement{
 //
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "shared.h" /* ARRAY_SIZE */
 //#include "support.h"
@@ -479,12 +479,12 @@ public class Improvement{
 //
 //  for(player pplayer: game.players){
 //    pplayer.island_improv = fc_realloc(pplayer.island_improv,
-//                                        (map.num_continents + 1)
+//                                        (Map.map.num_continents + 1)
 //                                        * game.num_impr_types
 //                                        * sizeof(Impr_Status));
 //  
 //    /* We index into this array with the continent number, so don't use zero */
-//    for (i = 1; i <= map.num_continents; i++) {
+//    for (i = 1; i <= Map.map.num_continents; i++) {
 //      improvement_status_init(&pplayer.island_improv[i * game.num_impr_types],
 //                              game.num_impr_types);
 //    } 
@@ -527,7 +527,7 @@ public class Improvement{
 //    for (city pcity : pplayer.cities.data) {
 //      built_impr_iterate(pcity, i) {
 //        if (improvement_obsolete(pplayer, i)) {
-//          util.freelog(LOG_DEBUG,"%s in %s is obsolete",
+//          util.freelog(Log.LOG_DEBUG,"%s in %s is obsolete",
 //                  improvement_types[i].name, pcity.name);
 //          mark_improvement(pcity, i, I_OBSOLETE);
 //          did_mark = true;
@@ -571,11 +571,11 @@ public class Improvement{
 //    }                                                                        \
 //                                                                             \
 //    if (improvement_redundant(city_owner(_pcity), (_pcity), i, false)) {     \
-//      util.freelog(LOG_DEBUG,"%s in %s is redundant",                             \
+//      util.freelog(Log.LOG_DEBUG,"%s in %s is redundant",                             \
 //              improvement_types[i].name, (_pcity).name);                    \
 //      mark_improvement((_pcity), i, I_REDUNDANT);                            \
 //    } else {                                                                 \
-//      util.freelog(LOG_DEBUG,"%s in %s is active!",                               \
+//      util.freelog(Log.LOG_DEBUG,"%s in %s is active!",                               \
 //             improvement_types[i].name, (_pcity).name);                     \
 //      mark_improvement((_pcity), i, I_ACTIVE);                               \
 //    }                                                                        \

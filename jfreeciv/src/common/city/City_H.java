@@ -32,7 +32,7 @@ public class City_H {
 	public static final int MAX_CITY_SIZE			=		100;
 
 //	/*
-//	 * Iterate a city map.  This iterates over all city positions in the
+//	 * Iterate a city Map.map.  This iterates over all city positions in the
 //	 * city map (i.e., positions that are workable by the city) in unspecified
 //	 * order.
 //	 */

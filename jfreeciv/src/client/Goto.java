@@ -35,8 +35,8 @@ public class Goto{
 //
 //#include "goto.h"
 //
-//public static final int PATH_LOG_LEVEL = LOG_DEBUG;
-//public static final int PACKET_LOG_LEVEL = LOG_DEBUG;
+//public static final int PATH_LOG_LEVEL = Log.LOG_DEBUG;
+//public static final int PACKET_LOG_LEVEL = Log.LOG_DEBUG;
 //
 ///*
 // * The whole path is seperated by waypoints into parts. The number of parts is
@@ -95,17 +95,17 @@ public class Goto{
 //    free_client_goto();
 //  }
 //
-//  goto_map.tiles = fc_malloc(map.xsize * map.ysize
+//  goto_map.tiles = fc_malloc(Map.mapxsize * Map.mapysize
 //                             * sizeof(*goto_map.tiles));
 //  goto_map.parts = null;
 //  goto_map.num_parts = 0;
 //  goto_map.unit_id = -1;
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    int dir;
 //    for (dir = 0; dir < 4; dir++) {
 //      DRAWN(ptile, dir) = 0;
 //    }
-//  } whole_map_iterate_end;
+//  }
 //  initialize_move_costs();
 //
 //  is_init = true;
@@ -139,7 +139,7 @@ public class Goto{
 //  tile old_tile = p.start_tile;
 //  int i, start_index = 0;
 //
-//  util.freelog(LOG_DEBUG, "update_last_part(%d,%d) old (%d,%d)-(%d,%d)",
+//  util.freelog(Log.LOG_DEBUG, "update_last_part(%d,%d) old (%d,%d)-(%d,%d)",
 //          TILE_XY(ptile), TILE_XY(p.start_tile), TILE_XY(p.end_tile));
 //  new_path = pf_get_path(p.map, ptile);
 //
@@ -160,7 +160,7 @@ public class Goto{
 //      pf_position b = &new_path.positions[i];
 //
 //      if (a.dir_to_next_pos != b.dir_to_next_pos
-//          || !same_pos(a.tile, b.tile)) {
+//          || !Map.same_pos(a.tile, b.tile)) {
 //        break;
 //      }
 //    }
@@ -226,7 +226,7 @@ public class Goto{
 //{
 //  part p = &goto_map.parts[goto_map.num_parts - 1];
 //
-//  if (!same_pos(p.start_tile, p.end_tile)) {
+//  if (!Map.same_pos(p.start_tile, p.end_tile)) {
 //    /* Otherwise no need to update */
 //    update_last_part(p.start_tile);
 //  }
@@ -298,7 +298,7 @@ public class Goto{
 //  assert(find_unit_by_id(goto_map.unit_id)
 //	 && find_unit_by_id(goto_map.unit_id) == get_unit_in_focus());
 //
-//  if (!same_pos(p.start_tile, p.end_tile)) {
+//  if (!Map.same_pos(p.start_tile, p.end_tile)) {
 //    /* Otherwise the last part has zero length. */
 //    add_part();
 //  }
@@ -355,7 +355,7 @@ public class Goto{
 //    if (!goto_into_unknown) {
 //      return TB_IGNORE;
 //    }
-//  } else if (is_non_allied_unit_tile(ptile, param.owner)
+//  } else if (Unit.is_non_allied_unit_tile(ptile, param.owner)
 //	     || is_non_allied_city_tile(ptile, param.owner)) {
 //    /* Can attack but can't count on going through */
 //    return TB_DONT_LEAVE;
@@ -379,7 +379,7 @@ public class Goto{
 //    /* F_TRADE_ROUTE units can travel to, but not through, enemy cities.
 //     * FIXME: F_HELP_WONDER units cannot.  */
 //    return TB_DONT_LEAVE;
-//  } else if (is_non_allied_unit_tile(ptile, param.owner)) {
+//  } else if (Unit.is_non_allied_unit_tile(ptile, param.owner)) {
 //    /* Note this must be below the city check. */
 //    return TB_IGNORE;
 //  }
@@ -411,7 +411,7 @@ public class Goto{
 //      return -1;
 //    }
 //
-//    if (tile_has_special(ptile, S_IRRIGATION)) {
+//    if (Map.tile_has_special(ptile, S_IRRIGATION)) {
 //      break;
 //    }
 //
@@ -419,9 +419,9 @@ public class Goto{
 //    break;
 //  case ACTIVITY_RAILROAD:
 //  case ACTIVITY_ROAD:
-//    if (!tile_has_special(ptile, S_ROAD)) {
+//    if (!Map.tile_has_special(ptile, S_ROAD)) {
 //      if (ttype.road_time == 0
-//	  || (tile_has_special(ptile, S_RIVER)
+//	  || (Map.tile_has_special(ptile, S_RIVER)
 //	      && !player_knows_techs_with_flag(pplayer, TF_BRIDGE))) {
 //	/* 0 means road is impossible here (??) */
 //	return -1;
@@ -429,7 +429,7 @@ public class Goto{
 //      activity_mc += ttype.road_time;
 //    }
 //    if (connect_activity == ACTIVITY_ROAD 
-//        || tile_has_special(ptile, S_RAILROAD)) {
+//        || Map.tile_has_special(ptile, S_RAILROAD)) {
 //      break;
 //    }
 //    activity_mc += ttype.rail_time;
@@ -677,7 +677,7 @@ public class Goto{
 //
 //    /* Take into account the activity time at the origin */
 //    connect_initial = get_activity_time(punit.tile, 
-//                                        unit_owner(punit)) / speed;
+//                                        punit.unit_owner()) / speed;
 //    assert(connect_initial >= 0);
 //    if (connect_initial > 0) {
 //      parameter.moves_left_initially = 0;
@@ -843,7 +843,7 @@ public class Goto{
 //  for (i = 0; i < path.length - 1; i++) {
 //    tile new_tile = path.positions[i + 1].tile;
 //
-//    if (same_pos(new_tile, old_tile)) {
+//    if (Map.same_pos(new_tile, old_tile)) {
 //      p.orders[i] = ORDER_FULL_MP;
 //      p.dir[i] = -1;
 //      util.freelog(PACKET_LOG_LEVEL, "  packet[%d] = wait: %d,%d",
@@ -980,7 +980,7 @@ public class Goto{
 //    if (i != path.length - 1) {
 //      tile new_tile = path.positions[i + 1].tile;
 //
-//      assert(!same_pos(new_tile, old_tile));
+//      assert(!Map.same_pos(new_tile, old_tile));
 //
 //      p.orders[p.length] = ORDER_MOVE;
 //      p.dir[p.length] = get_direction_for_step(old_tile, new_tile);
@@ -1047,7 +1047,7 @@ public class Goto{
 //{
 //  unsigned char *count = get_drawn_char(src_tile, dir);
 //
-//  util.freelog(LOG_DEBUG, "increment_drawn(src=(%d,%d) dir=%s)",
+//  util.freelog(Log.LOG_DEBUG, "increment_drawn(src=(%d,%d) dir=%s)",
 //          TILE_XY(src_tile), dir_get_name(dir));
 //
 //  if (*count < 255) {
@@ -1070,7 +1070,7 @@ public class Goto{
 //{
 //  unsigned char *count = get_drawn_char(src_tile, dir);
 //
-//  util.freelog(LOG_DEBUG, "decrement_drawn(src=(%d,%d) dir=%s)",
+//  util.freelog(Log.LOG_DEBUG, "decrement_drawn(src=(%d,%d) dir=%s)",
 //          TILE_XY(src_tile), dir_get_name(dir));
 //
 //  if (*count > 0) {
@@ -1109,7 +1109,7 @@ public class Goto{
 //  pf_map map;
 //  pf_path path = null;
 //
-//  if ((pcity = is_allied_city_tile(punit.tile, game.player_ptr))) {
+//  if ((pcity = City.is_allied_city_tile(punit.tile, game.player_ptr))) {
 //    /* We're already on a city - don't go anywhere. */
 //    return null;
 //  }
@@ -1122,7 +1122,7 @@ public class Goto{
 //
 //    pf_next_get_position(map, &pos);
 //
-//    if ((pcity = is_allied_city_tile(pos.tile, game.player_ptr))) {
+//    if ((pcity = City.is_allied_city_tile(pos.tile, game.player_ptr))) {
 //      break;
 //    }
 //  }

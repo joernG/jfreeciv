@@ -10,7 +10,7 @@ public class Unithand{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"
@@ -45,7 +45,7 @@ public class Unithand{
 //static void handle_unit_activity_request_targeted(unit punit,
 //						  enum unit_activity
 //						  new_activity,
-//						  enum tile_special_type
+//						  enum int
 //						  new_target);
 //static boolean base_handle_unit_establish_trade(player pplayer, int unit_id, city pcity_dest);
 //static void how_to_declare_war(player pplayer);
@@ -325,7 +325,7 @@ public class Unithand{
 //    }
 //    wipe_unit(punit);
 //  } else {
-//    notify_player_ex(unit_owner(punit), punit.tile, event_type.E_NOEVENT,
+//    notify_player_ex(punit.unit_owner(), punit.tile, event_type.E_NOEVENT,
 //              "Game: %s refuses to disband!", unit_name(punit.type));
 //    return;
 //  }
@@ -344,7 +344,7 @@ public class Unithand{
 //  /* Given that res came from test_unit_add_or_build_city, pcity will
 //     be non-null for all required status values. */
 //  city pcity = map_get_city(punit.tile);
-//  final String unit_name = unit_type(punit).name;
+//  final String unit_name = punit.unit_type().name;
 //
 //  switch (res) {
 //  case AB_NOT_BUILD_LOC:
@@ -419,7 +419,7 @@ public class Unithand{
 //static void city_add_unit(player pplayer, unit punit)
 //{
 //  city pcity = map_get_city(punit.tile);
-//  final String unit_name = unit_type(punit).name;
+//  final String unit_name = punit.unit_type().name;
 //
 //  assert(unit_pop_value(punit.type) > 0);
 //  pcity.size += unit_pop_value(punit.type);
@@ -481,7 +481,7 @@ public class Unithand{
 //**************************************************************************/
 //void handle_unit_change_activity(player pplayer, int unit_id,
 //				 enum unit_activity activity,
-//				 enum tile_special_type activity_target)
+//				 enum int activity_target)
 //{
 //  unit punit = player_find_unit_by_id(pplayer, unit_id);
 //
@@ -623,28 +623,28 @@ public class Unithand{
 //**************************************************************************/
 //static boolean unit_bombard(unit punit, tile ptile)
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  city pcity = map_get_city(ptile);
 //  int old_unit_vet;
 //
-//  util.freelog(LOG_DEBUG, "Start bombard: %s's %s to %d, %d.",
-//	  pplayer.name, unit_type(punit).name, TILE_XY(ptile));
+//  util.freelog(Log.LOG_DEBUG, "Start bombard: %s's %s to %d, %d.",
+//	  pplayer.name, punit.unit_type().name, TILE_XY(ptile));
 //
 //  for (unit pdefender : ptile.units.data) {
 //
 //    /* Sanity checks */
-//    if (pplayers_non_attack(unit_owner(punit), unit_owner(pdefender))) {
+//    if (pplayers_non_attack(punit.unit_owner(), pdefender.unit_owner())) {
 //      die("Trying to attack a unit with which you have peace "
 //	  "or cease-fire at %i, %i", TILE_XY(pdefender.tile));
 //    }
-//    if (pplayers_allied(unit_owner(punit), unit_owner(pdefender))
+//    if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
 //	&& !(unit_flag(punit, F_NUCLEAR) && punit == pdefender)) {
 //      die("Trying to attack a unit with which you have alliance at %i, %i",
 //	  TILE_XY(pdefender.tile));
 //    }
 //
 //    if (!is_air_unit(pdefender)
-//	|| (pcity || map_has_special(ptile, S_AIRBASE))) {
+//	|| (pcity || map_has_special(ptile, Terrain_H.S_AIRBASE))) {
 //      see_combat(punit, pdefender);
 //
 //      unit_versus_unit(punit, pdefender, true);
@@ -670,11 +670,11 @@ public class Unithand{
 //  old_unit_vet = punit.veteran;
 //  maybe_make_veteran(punit);
 //  if (punit.veteran != old_unit_vet) {
-//    notify_player_ex(unit_owner(punit), punit.tile,
+//    notify_player_ex(punit.unit_owner(), punit.tile,
 //		     E_UNIT_WIN_ATT,
 //		     "Game: Your bombarding %s%s became more experienced!",
 //		     unit_name(punit.type),
-//		     get_location_str_at(unit_owner(punit),
+//		     get_location_str_at(punit.unit_owner(),
 //		     punit.tile));
 //  }
 //
@@ -688,31 +688,31 @@ public class Unithand{
 //**************************************************************************/
 //static void handle_unit_attack_request(unit punit, unit pdefender)
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  unit plooser, *pwinner;
 //  city pcity;
 //  int moves_used, def_moves_used; 
 //  tile def_tile = pdefender.tile;
 //  int old_unit_vet, old_defender_vet, vet;
 //
-//  util.freelog(LOG_DEBUG, "Start attack: %s's %s against %s's %s.",
-//	  pplayer.name, unit_type(punit).name, 
-//	  unit_owner(pdefender).name,
-//	  unit_type(pdefender).name);
+//  util.freelog(Log.LOG_DEBUG, "Start attack: %s's %s against %s's %s.",
+//	  pplayer.name, punit.unit_type().name, 
+//	  pdefender.unit_owner().name,
+//	  pdefender.unit_type().name);
 //
 //  /* Sanity checks */
-//  if (pplayers_non_attack(unit_owner(punit), unit_owner(pdefender))) {
+//  if (pplayers_non_attack(punit.unit_owner(), pdefender.unit_owner())) {
 //    die("Trying to attack a unit with which you have peace "
 //	"or cease-fire at %i, %i", TILE_XY(def_tile));
 //  }
-//  if (pplayers_allied(unit_owner(punit), unit_owner(pdefender))
+//  if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
 //      && !(unit_flag(punit, F_NUCLEAR) && punit == pdefender)) {
 //    die("Trying to attack a unit with which you have alliance at %i, %i",
 //	TILE_XY(def_tile));
 //  }
 //
 //  if (unit_flag(punit, F_NUCLEAR)) {
-//    if ((pcity = sdi_defense_close(unit_owner(punit), def_tile))) {
+//    if ((pcity = sdi_defense_close(punit.unit_owner(), def_tile))) {
 //      notify_player_ex(pplayer, punit.tile, E_UNIT_LOST_ATT,
 //		       _("Game: Your Nuclear missile was shot down by"
 //			 " SDI defences, what a waste."));
@@ -730,8 +730,8 @@ public class Unithand{
 //    do_nuclear_explosion(pplayer, def_tile);
 //    return;
 //  }
-//  moves_used = unit_move_rate(punit) - punit.moves_left;
-//  def_moves_used = unit_move_rate(pdefender) - pdefender.moves_left;
+//  moves_used = punit.move_rate() - punit.moves_left;
+//  def_moves_used = pdefender.move_rate() - pdefender.moves_left;
 //
 //  see_combat(punit, pdefender);
 //
@@ -747,8 +747,8 @@ public class Unithand{
 //   * and subtract the MPs that had been used before the combat (plus the 
 //   * points used in the attack itself, for the attacker). -GJW, Glip
 //   */
-//  punit.moves_left = unit_move_rate(punit) - moves_used - SINGLE_MOVE;
-//  pdefender.moves_left = unit_move_rate(pdefender) - def_moves_used;
+//  punit.moves_left = punit.move_rate() - moves_used - Unit_H.SINGLE_MOVE;
+//  pdefender.moves_left = pdefender.move_rate() - def_moves_used;
 //  
 //  if (punit.moves_left < 0) {
 //    punit.moves_left = 0;
@@ -778,63 +778,63 @@ public class Unithand{
 //  
 //  if (punit == plooser) {
 //    /* The attacker lost */
-//    util.freelog(LOG_DEBUG, "Attacker lost: %s's %s against %s's %s.",
-//	    pplayer.name, unit_type(punit).name,
-//	    unit_owner(pdefender).name, unit_type(pdefender).name);
+//    util.freelog(Log.LOG_DEBUG, "Attacker lost: %s's %s against %s's %s.",
+//	    pplayer.name, punit.unit_type().name,
+//	    pdefender.unit_owner().name, pdefender.unit_type().name);
 //
 //    if (vet) {
-//      notify_player_ex(unit_owner(pwinner),
+//      notify_player_ex(pwinner.unit_owner(),
 //		       pwinner.tile, E_UNIT_WIN,
 //		       _("Game: Your %s%s survived the pathetic attack"
 //		         " from %s's %s and became more experienced!"),
 //		       unit_name(pwinner.type),
-//		       get_location_str_in(unit_owner(pwinner),
+//		       get_location_str_in(pwinner.unit_owner(),
 //					   pwinner.tile),
-//		       unit_owner(plooser).name, unit_name(plooser.type));
+//		       plooser.unit_owner().name, unit_name(plooser.type));
 //    } else {
-//      notify_player_ex(unit_owner(pwinner),
+//      notify_player_ex(pwinner.unit_owner(),
 //		       pwinner.tile, E_UNIT_WIN,
 //		       _("Game: Your %s%s survived the pathetic attack"
 //		         " from %s's %s."),
 //		       unit_name(pwinner.type),
-//		       get_location_str_in(unit_owner(pwinner),
+//		       get_location_str_in(pwinner.unit_owner(),
 //					   pwinner.tile),
-//		       unit_owner(plooser).name, unit_name(plooser.type));
+//		       plooser.unit_owner().name, unit_name(plooser.type));
 //    }
 //    
-//    notify_player_ex(unit_owner(plooser),
+//    notify_player_ex(plooser.unit_owner(),
 //		     def_tile, E_UNIT_LOST_ATT,
 //		     _("Game: Your attacking %s failed "
 //		       "against %s's %s%s!"),
-//		     unit_name(plooser.type), unit_owner(pwinner).name,
+//		     unit_name(plooser.type), pwinner.unit_owner().name,
 //		     unit_name(pwinner.type),
-//		     get_location_str_at(unit_owner(plooser),
+//		     get_location_str_at(plooser.unit_owner(),
 //					 pwinner.tile));
 //    wipe_unit(plooser);
 //  } else {
 //    /* The defender lost, the attacker punit lives! */
-//    util.freelog(LOG_DEBUG, "Defender lost: %s's %s against %s's %s.",
-//	    pplayer.name, unit_type(punit).name,
-//	    unit_owner(pdefender).name, unit_type(pdefender).name);
+//    util.freelog(Log.LOG_DEBUG, "Defender lost: %s's %s against %s's %s.",
+//	    pplayer.name, punit.unit_type().name,
+//	    pdefender.unit_owner().name, pdefender.unit_type().name);
 //
 //    punit.moved = true;	/* We moved */
 //    if (vet && !unit_flag(punit, F_MISSILE)) {
-//      notify_player_ex(unit_owner(pwinner), punit.tile,
+//      notify_player_ex(pwinner.unit_owner(), punit.tile,
 //		       E_UNIT_WIN_ATT,
 //		       _("Game: Your attacking %s succeeded"
 //		         " against %s's %s%s and became more experienced!"),
 //		       unit_name(pwinner.type),
-//		       unit_owner(plooser).name, unit_name(plooser.type),
-//		       get_location_str_at(unit_owner(pwinner),
+//		       plooser.unit_owner().name, unit_name(plooser.type),
+//		       get_location_str_at(pwinner.unit_owner(),
 //		       plooser.tile));
 //    } else {
-//      notify_player_ex(unit_owner(pwinner), punit.tile,
+//      notify_player_ex(pwinner.unit_owner(), punit.tile,
 //		       E_UNIT_WIN_ATT,
 //		       _("Game: Your attacking %s succeeded"
 //		         " against %s's %s%s!"),
 //		       unit_name(pwinner.type),
-//		       unit_owner(plooser).name, unit_name(plooser.type),
-//		       get_location_str_at(unit_owner(pwinner),
+//		       plooser.unit_owner().name, unit_name(plooser.type),
+//		       get_location_str_at(pwinner.unit_owner(),
 //		       plooser.tile));
 //    }
 //    kill_unit(pwinner, plooser);
@@ -851,14 +851,14 @@ public class Unithand{
 //   * capturing (or destroying) a city. */
 //
 //  if (pwinner == punit && myrand(100) < game.occupychance &&
-//      !is_non_allied_unit_tile(def_tile,
-//			       unit_owner(punit))) {
+//      !Unit.is_non_allied_unit_tile(def_tile,
+//			       punit.unit_owner())) {
 //
 //    /* Hack: make sure the unit has enough moves_left for the move to succeed,
 //       and adjust moves_left to afterward (if successful). */
 //
 //    int old_moves = punit.moves_left;
-//    int full_moves = unit_move_rate(punit);
+//    int full_moves = punit.move_rate();
 //    punit.moves_left = full_moves;
 //    if (handle_unit_move_request(punit, def_tile, false, false)) {
 //      punit.moves_left = old_moves - (full_moves - punit.moves_left);
@@ -893,7 +893,7 @@ public class Unithand{
 //  tile src_tile = punit.tile;
 //
 //  reason =
-//      test_unit_move_to_tile(punit.type, unit_owner(punit),
+//      test_unit_move_to_tile(punit.type, punit.unit_owner(),
 //			     punit.activity,
 //			     punit.tile, dest_tile, igzoc);
 //  if (reason == MR_OK)
@@ -902,22 +902,22 @@ public class Unithand{
 //  if (reason == MR_BAD_TYPE_FOR_CITY_TAKE_OVER) {
 //    final String units_str = get_units_with_flag_string(F_MARINES);
 //    if (units_str) {
-//      notify_player_ex(unit_owner(punit), src_tile,
+//      notify_player_ex(punit.unit_owner(), src_tile,
 //		       event_type.E_NOEVENT, "Game: Only %s can attack from sea.",
 //		       units_str);
 //      free((void *) units_str);
 //    } else {
-//      notify_player_ex(unit_owner(punit), src_tile,
+//      notify_player_ex(punit.unit_owner(), src_tile,
 //		       event_type.E_NOEVENT, "Game: Cannot attack from sea.");
 //    }
 //  } else if (reason == MR_NO_WAR) {
-//    notify_player_ex(unit_owner(punit), src_tile,
+//    notify_player_ex(punit.unit_owner(), src_tile,
 //		     event_type.E_NOEVENT,
 //		     "Game: Cannot attack unless you declare war first.");
 //  } else if (reason == MR_ZOC) {
-//    notify_player_ex(unit_owner(punit), src_tile, event_type.E_NOEVENT,
+//    notify_player_ex(punit.unit_owner(), src_tile, event_type.E_NOEVENT,
 //		     "Game: %s can only move into your own zone of control.",
-//		     unit_type(punit).name);
+//		     punit.unit_type().name);
 //  }
 //  return false;
 //}
@@ -939,14 +939,14 @@ public class Unithand{
 //boolean handle_unit_move_request(unit punit, tile pdesttile,
 //                              boolean igzoc, boolean move_diplomat_city)
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  city pcity = pdesttile.city;
 //
 //  /*** Phase 1: Basic checks ***/
 //
 //  /* this occurs often during lag, and to the AI due to some quirks -- Syela */
 //  if (!is_tiles_adjacent(punit.tile, pdesttile)) {
-//    util.freelog(LOG_DEBUG, "tiles not adjacent in move request");
+//    util.freelog(Log.LOG_DEBUG, "tiles not adjacent in move request");
 //    return false;
 //  }
 //
@@ -972,7 +972,7 @@ public class Unithand{
 //   * For allied cities, keep moving if move_diplomat_city tells us to, 
 //   * or if the unit is on goto and the city is not the final destination. */
 //  if (is_diplomat_unit(punit)) {
-//    unit target = is_non_allied_unit_tile(pdesttile, pplayer);
+//    unit target = Unit.is_non_allied_unit_tile(pdesttile, pplayer);
 //
 //    if (target || is_non_allied_city_tile(pdesttile, pplayer)
 //        || !move_diplomat_city) {
@@ -1017,7 +1017,7 @@ public class Unithand{
 //
 //  /*** Phase 3: Is it attack? ***/
 //
-//  if (is_non_allied_unit_tile(pdesttile, pplayer) 
+//  if (Unit.is_non_allied_unit_tile(pdesttile, pplayer) 
 //      || is_non_allied_city_tile(pdesttile, pplayer)) {
 //    unit victim;
 //
@@ -1037,8 +1037,8 @@ public class Unithand{
 //      notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                       _("Game: Can't attack %s's unit "
 //			 "because you are not at war with %s."),
-//                       unit_owner(victim).name,
-//                       unit_owner(victim).name);
+//                       victim.unit_owner().name,
+//                       victim.unit_owner().name);
 //      how_to_declare_war(pplayer);
 //      return false;
 //    }
@@ -1103,8 +1103,8 @@ public class Unithand{
 //  if (get_transporter_capacity(punit) > 0) {
 //    for (unit pcargo : punit.tile.units.data) {
 //      if (pcargo.transported_by == punit.id
-//          && (is_non_allied_unit_tile(pdesttile, unit_owner(pcargo))
-//              || is_non_allied_city_tile(pdesttile, unit_owner(pcargo)))) {
+//          && (Unit.is_non_allied_unit_tile(pdesttile, pcargo.unit_owner())
+//              || is_non_allied_city_tile(pdesttile, pcargo.unit_owner()))) {
 //         notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                          _("Game: A transported unit is not allied to all "
 //                            "units or city on target tile."));
@@ -1408,14 +1408,14 @@ public class Unithand{
 //**************************************************************************/
 //static void handle_unit_activity_dependencies(unit punit,
 //				enum unit_activity old_activity,
-//				enum tile_special_type old_target)
+//				enum int old_target)
 //{
 //  switch (punit.activity) {
 //  case unit_activity.ACTIVITY_IDLE:
 //    switch (old_activity) {
 //    case ACTIVITY_PILLAGE: 
 //      {
-//        enum tile_special_type prereq =
+//        enum int prereq =
 //	  map_get_infrastructure_prerequisite(old_target);
 //        if (prereq != S_NO_SPECIAL) {
 //          unit_list_iterate (punit.tile.units, punit2)
@@ -1455,7 +1455,7 @@ public class Unithand{
 	{
 //		if (can_unit_do_activity(punit, new_activity)) {
 //			unit_activity old_activity = punit.activity;
-//			tile_special_type old_target = punit.activity_target;
+//			int old_target = punit.activity_target;
 //
 //			free_unit_orders(punit);
 //			set_unit_activity(punit, new_activity);
@@ -1470,12 +1470,12 @@ public class Unithand{
 //static void handle_unit_activity_request_targeted(unit punit,
 //						  enum unit_activity
 //						  new_activity,
-//						  enum tile_special_type
+//						  enum int
 //						  new_target)
 //{
 //  if (can_unit_do_activity_targeted(punit, new_activity, new_target)) {
 //    enum unit_activity old_activity = punit.activity;
-//    enum tile_special_type old_target = punit.activity_target;
+//    enum int old_target = punit.activity_target;
 //
 //    free_unit_orders(punit);
 //    set_unit_activity_targeted(punit, new_activity, new_target);
@@ -1653,10 +1653,10 @@ public class Unithand{
 //  }
 //
 //#ifdef DEBUG
-//  util.freelog(LOG_DEBUG, "Orders for unit %d: length:%d",
+//  util.freelog(Log.LOG_DEBUG, "Orders for unit %d: length:%d",
 //	  packet.unit_id, packet.length);
 //  for (i = 0; i < packet.length; i++) {
-//    util.freelog(LOG_DEBUG, "  %d,%s", packet.orders[i],
+//    util.freelog(Log.LOG_DEBUG, "  %d,%s", packet.orders[i],
 //	    dir_get_name(packet.dir[i]));
 //  }
 //#endif

@@ -620,7 +620,7 @@ public class Dialogs{
 //
 //  if( (punit=find_unit_by_id(diplomat_id))
 //      && (pcity=find_city_by_id(diplomat_target_id))
-//      && !same_pos(punit.tile, pcity.tile)) {
+//      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1072,16 +1072,16 @@ public class Dialogs{
 //...
 //*****************************************************************/
 //void popup_pillage_dialog(unit punit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  if(!is_showing_pillage_dialog)
 //  {
-//    enum tile_special_type may_pillage_save = may_pillage;
+//    enum int may_pillage_save = may_pillage;
 //    int count=0;
 //
 //    while (may_pillage != S_NO_SPECIAL)
 //    {
-//      enum tile_special_type what = get_preferred_pillage(may_pillage);
+//      enum int what = get_preferred_pillage(may_pillage);
 //
 //      may_pillage &= (~(what | map_get_infrastructure_prerequisite (what)));
 //      count++;
@@ -1101,7 +1101,7 @@ public class Dialogs{
 //
 //	for(i=0;i<count;i++)
 //	{
-//	  enum tile_special_type what = get_preferred_pillage (may_pillage);
+//	  enum int what = get_preferred_pillage (may_pillage);
 //	
 //          msg_dlg[i].label = mystrdup(map_get_infrastructure_text(what));
 //          msg_dlg[i].function = (APTR)pillage_button;
@@ -1402,7 +1402,7 @@ public class Dialogs{
 //      for(i=0;i<n;i++)
 //      {
 //        unit punit=unit_list_get(&ptile.units, i);
-//        unit_type punittemp=unit_type(punit);
+//        unit_type punittemp=punit.unit_type();
 //        city pcity;
 //
 //        Object *o;

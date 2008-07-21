@@ -36,7 +36,7 @@ public class Citydlg{
 //#include "game.h"
 //#include "genlist.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"

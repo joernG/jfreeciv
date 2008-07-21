@@ -17,7 +17,7 @@ public class Mapgen_topology{
 //#include <config.h>
 //#endif
 //
-//#include "map.h"
+//#include "Map.map.h"
 //#include "log.h"
 //
 //#include "mapgen_topology.h"
@@ -36,7 +36,7 @@ public class Mapgen_topology{
 //{
 //  double x, y;
 //  
-//  if (map.alltemperate) {
+//  if (Map.map.alltemperate) {
 //    /* An all-temperate map has "average" temperature everywhere.
 //     *
 //     * TODO: perhaps there should be a random temperature variation. */
@@ -47,13 +47,13 @@ public class Mapgen_topology{
 //    if (!topo_has_flag(TF_WRAPX) && !topo_has_flag(TF_WRAPY)) {
 //      /* A FLAT (unwrapped) map 
 //       *
-//       * We assume this is a partial planetary map.  A polar zone is placed
+//       * We assume this is a partial planetary Map.map.  A polar zone is placed
 //       * at the top and the equator is at the bottom.  The user can specify
 //       * all-temperate to avoid this. */
 //      return MAX_COLATITUDE * ntl_y / (NATURAL_HEIGHT - 1);
 //    }
 //
-//    /* Otherwise a wrapping map is assumed to be a global planetary map. */
+//    /* Otherwise a wrapping map is assumed to be a global planetary Map.map. */
 //
 //    /* we fold the map to get the base symetries
 //     *
@@ -74,7 +74,7 @@ public class Mapgen_topology{
 //     * V
 //     * y
 //     *
-//     * And now this is what we have - just one-quarter of the map.
+//     * And now this is what we have - just one-quarter of the Map.map.
 //     */
 //    x = ((ntl_x > (NATURAL_WIDTH / 2 - 1)
 //	 ? NATURAL_WIDTH - 1.0 - (double)ntl_x
@@ -161,7 +161,7 @@ public class Mapgen_topology{
 //
 ///****************************************************************************
 //  Return true if the map in a city radius is SINGULAR.  This is used to
-//  avoid putting (non-polar) land near the edge of the map.
+//  avoid putting (non-polar) land near the edge of the Map.map.
 //****************************************************************************/
 //boolean near_singularity(final tile ptile)
 //{
@@ -179,7 +179,7 @@ public class Mapgen_topology{
 //   * Future topologies may also require even dimensions. */
 //  final int even = 2;
 //
-//  /* In iso-maps we need to double the map.ysize factor, since xsize is
+//  /* In iso-maps we need to double the Map.map.ysize factor, since xsize is
 //   * in native coordinates which are compressed 2x in the X direction. */ 
 //  final int iso = MAP_IS_ISOMETRIC ? 2 : 1;
 //
@@ -205,8 +205,8 @@ public class Mapgen_topology{
 //	   / (float)(Xratio * Yratio * iso * even * even)) + 0.49;
 //
 //  /* Now build xsize and ysize value as described above. */
-//  map.xsize = Xratio * i_size * even;
-//  map.ysize = Yratio * i_size * even * iso;
+//  Map.map.xsize = Xratio * i_size * even;
+//  Map.map.ysize = Yratio * i_size * even * iso;
 //
 //  /* Now make sure the size isn't too large for this ratio.  If it is
 //   * then decrease the size and try again. */
@@ -218,15 +218,15 @@ public class Mapgen_topology{
 //
 //  /* If the ratio is too big for some topology the simplest way to avoid
 //   * this error is to set the maximum size smaller for all topologies! */
-//  if (map.size > size + 0.9) {
+//  if (Map.map.size > size + 0.9) {
 //    /* Warning when size is set uselessly big */ 
 //    util.freelog(Log.LOG_ERROR,
 //	    "Requested size of %d is too big for this topology.",
-//	    map.size);
+//	    Map.map.size);
 //  }
 //  util.freelog(LOG_VERBOSE,
 //	  "Creating a map of size %d x %d = %d tiles (%d requested).",
-//	  map.xsize, map.ysize, map.xsize * map.ysize, map.size * 1000);
+//	  Map.map.xsize, Map.map.ysize, Map.map.xsize * Map.map.ysize, Map.map.size * 1000);
 //}
 //
 ///*
@@ -253,12 +253,12 @@ public class Mapgen_topology{
 //    final int default_ratios[4][2] =
 //      {AUTO_RATIO_FLAT, AUTO_RATIO_CLASSIC,
 //       AUTO_RATIO_URANUS, AUTO_RATIO_TORUS};
-//    final int id = 0x3 & map.topology_id;
+//    final int id = 0x3 & Map.map.topology_id;
 //
 //    assert(TF_WRAPX == 0x1 && TF_WRAPY == 0x2);
 //
-//    /* Set map.xsize and map.ysize based on map.size. */
-//    set_sizes(map.size, default_ratios[id][0], default_ratios[id][1]);
+//    /* Set Map.map.xsize and Map.map.ysize based on Map.map.size. */
+//    set_sizes(Map.map.size, default_ratios[id][0], default_ratios[id][1]);
 //  }
 //
 //  /* initialize the ICE_BASE_LEVEL */
@@ -271,11 +271,11 @@ public class Mapgen_topology{
 //  /*
 //   *if maps has strip like poles we get smaller poles 
 //   * (less playables than island poles)
-//   *  5% for little maps; 2% for big ones, if map.temperature == 50 
+//   *  5% for little maps; 2% for big ones, if Map.map.temperature == 50 
 //   * exept if separate poles is set
 //   */
 //  if (!topo_has_flag(TF_WRAPX) || !topo_has_flag(TF_WRAPY)) {
-//    if (map.separatepoles) {
+//    if (Map.map.separatepoles) {
 //      /* with separatepoles option strip poles are useless */
 //      ice_base_colatitude =
 //	  (MAX(0, 100 * COLD_LEVEL / 3 - 1 *  MAX_COLATITUDE) 

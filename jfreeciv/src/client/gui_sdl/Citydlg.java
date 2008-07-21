@@ -716,7 +716,7 @@ public class Citydlg{
 //    pHome_City = find_city_by_id(pUnit.homecity);
 //    cBuf = util.my_snprintf( "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
 //		pUType.name, pUType.attack_strength,
-//		pUType.defense_strength, pUType.move_rate / SINGLE_MOVE,
+//		pUType.defense_strength, pUType.move_rate / Unit_H.SINGLE_MOVE,
 //                (pUnit.veteran ? "\nveteran" : ""),
 //                unit_activity_text(pUnit),
 //		pUnit.hp, pUType.hp,
@@ -1670,7 +1670,7 @@ public class Citydlg{
 //    *city_x = canvas_x / SCALLED_TILE_WIDTH;
 //    *city_y = canvas_y / SCALLED_TILE_HEIGHT;
 //  }
-//  util.freelog(LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
+//  util.freelog(Log.LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
 //  return is_valid_city_coords(*city_x, *city_y);
@@ -1712,7 +1712,7 @@ public class Citydlg{
 //    *pRow = result;
 //  }
 //  
-//  util.freelog(LOG_DEBUG, "get_citymap_cr(pos=(%d,%d))=(%d,%d)",
+//  util.freelog(Log.LOG_DEBUG, "get_citymap_cr(pos=(%d,%d))=(%d,%d)",
 //	  map_x, map_y, *pCol, *pRow);
 //  
 //  return is_valid_city_coords(*pCol, *pRow);
@@ -1843,14 +1843,14 @@ public class Citydlg{
 //      }
 //
 //      /* inc row with correct */
-//      if (++real_row >= map.ysize) {
+//      if (++real_row >= Map.map.ysize) {
 //	real_row = 0;
 //      }
 //
 //    }
 //    real_row = row0;
 //    /* inc col with correct */
-//    if (++real_col >= map.xsize) {
+//    if (++real_col >= Map.map.xsize) {
 //      real_col = 0;
 //    }
 //

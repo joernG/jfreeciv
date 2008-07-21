@@ -43,7 +43,7 @@ public class Packets{
 //#include "fcintl.h"
 //#include "hash.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "support.h"
 //
@@ -67,9 +67,9 @@ public class Packets{
 //#define JUMBO_BORDER 		(64*1024-COMPRESSION_BORDER-1)
 //#endif
 //
-//public static final int BASIC_PACKET_LOG_LEVEL = LOG_DEBUG;
-//public static final int COMPRESS_LOG_LEVEL = LOG_DEBUG;
-//public static final int COMPRESS2_LOG_LEVEL = LOG_DEBUG;
+//public static final int BASIC_PACKET_LOG_LEVEL = Log.LOG_DEBUG;
+//public static final int COMPRESS_LOG_LEVEL = Log.LOG_DEBUG;
+//public static final int COMPRESS2_LOG_LEVEL = Log.LOG_DEBUG;
 //
 ///* 
 // * Valid values are 0, 1 and 2. For 2 you have to set generate_stats
@@ -111,7 +111,7 @@ public class Packets{
 //    pc.client.last_request_id_used =
 //	get_next_request_id(pc.client.last_request_id_used);
 //    result = pc.client.last_request_id_used;
-//    util.freelog(LOG_DEBUG, "sending request %d", result);
+//    util.freelog(Log.LOG_DEBUG, "sending request %d", result);
 //  }
 //
 //  if (pc.outgoing_packet_notify) {
@@ -265,7 +265,7 @@ public class Packets{
 //
 //    if(print) {
 //      int i, sum = 0;
-//      int ll = LOG_DEBUG;
+//      int ll = Log.LOG_DEBUG;
 //
 //#if PACKET_SIZE_STATISTICS == 2
 //      delta_stats_report();
@@ -519,7 +519,7 @@ public class Packets{
 //  dio_get_uint16(&din, &len);
 //  memmove(buffer.data, buffer.data + len, buffer.ndata - len);
 //  buffer.ndata -= len;
-//  util.freelog(LOG_DEBUG, "remove_packet_from_buffer: remove %d; remaining %d",
+//  util.freelog(Log.LOG_DEBUG, "remove_packet_from_buffer: remove %d; remaining %d",
 //	  len, buffer.ndata);
 //}
 //
@@ -576,7 +576,7 @@ public class Packets{
 //					   packet_player_attribute_chunk
 //					   *chunk)
 //{
-//  util.freelog(LOG_DEBUG, "received attribute chunk %d/%d %d", chunk.offset,
+//  util.freelog(Log.LOG_DEBUG, "received attribute chunk %d/%d %d", chunk.offset,
 //	  chunk.total_length, chunk.chunk_length);
 //
 //  if (chunk.total_length < 0
@@ -713,7 +713,7 @@ public class Packets{
 //  assert(packet.chunk_length <= packet.total_length);
 //  assert(packet.offset >= 0 && packet.offset < packet.total_length);
 //
-//  util.freelog(LOG_DEBUG, "sending attribute chunk %d/%d %d", packet.offset,
+//  util.freelog(Log.LOG_DEBUG, "sending attribute chunk %d/%d %d", packet.offset,
 //	  packet.total_length, packet.chunk_length);
 //
 //}

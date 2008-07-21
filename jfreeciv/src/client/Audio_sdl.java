@@ -72,7 +72,7 @@ public class Audio_sdl{
 //    /* see if we can cache on this one */
 //    for (j = 0; j < MIX_CHANNELS; j++) {
 //      if (samples[j].tag && (strcmp(samples[j].tag, tag) == 0)) {
-//	util.freelog(LOG_DEBUG, "Playing file %s from cache (slot %d)", fullpath,
+//	util.freelog(Log.LOG_DEBUG, "Playing file %s from cache (slot %d)", fullpath,
 //		j);
 //	i = Mix_PlayChannel(-1, samples[j].wave, 0);
 //	return true;

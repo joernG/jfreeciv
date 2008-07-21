@@ -28,7 +28,7 @@ public class Gui_main{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "shared.h"
 //#include "support.h"

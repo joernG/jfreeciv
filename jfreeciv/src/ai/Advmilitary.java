@@ -170,7 +170,7 @@ public class Advmilitary{
 //
 //  defense = get_defense_power(punit) * punit.hp;
 //  if (!is_sailing_unit(punit)) {
-//    defense *= unit_type(punit).firepower;
+//    defense *= punit.unit_type().firepower;
 //    if (is_ground_unit(punit)) {
 //      if (pcity) {
 //        do_wall = (!igwall && city_got_citywalls(pcity));
@@ -292,7 +292,7 @@ public class Advmilitary{
 //  }
 //
 //  /* Moves in the last turn to reach us.. */
-//  move_rate /= SINGLE_MOVE;
+//  move_rate /= Unit_H.SINGLE_MOVE;
 //  while (distance > 0 && distance >= move_rate) {
 //    num *= 4;
 //    denom *= 5;
@@ -345,17 +345,17 @@ public class Advmilitary{
 //  int distance = 0;
 //  unit ferry = find_unit_by_id(punit.transported_by);
 //
-//  if (same_pos(punit.tile, pcity.tile)) {
+//  if (Map.same_pos(punit.tile, pcity.tile)) {
 //    return 0;
 //  }
 //
 //  if (is_tiles_adjacent(punit.tile, pcity.tile)) {
-//    distance = SINGLE_MOVE;
+//    distance = Unit_H.SINGLE_MOVE;
 //  } else if (is_sailing_unit(punit)) {
 //    distance = WARMAP_SEACOST(punit.tile);
 //  } else if (!is_ground_unit(punit)) {
 //    distance = real_map_distance(punit.tile, pcity.tile)
-//               * SINGLE_MOVE;
+//               * Unit_H.SINGLE_MOVE;
 //  } else if (is_ground_unit(punit) && ferry) {
 //    distance = WARMAP_SEACOST(ferry.tile); /* Sea travellers. */
 //  } else if (unit_flag(punit, F_IGTER)) {
@@ -365,8 +365,8 @@ public class Advmilitary{
 //  }
 //
 //  /* If distance = 9, a chariot is 1.5 turns away.  NOT 2 turns away. */
-//  if (distance < SINGLE_MOVE) {
-//    distance = SINGLE_MOVE;
+//  if (distance < Unit_H.SINGLE_MOVE) {
+//    distance = Unit_H.SINGLE_MOVE;
 //  }
 //
 //  return distance;
@@ -474,7 +474,7 @@ public class Advmilitary{
 //    /* Look for enemy units */
 //    for (unit punit : aplayer.units.data) {
 //      int paramove = 0;
-//      int move_rate = unit_move_rate(punit);
+//      int move_rate = punit.move_rate();
 //      unsigned int vulnerability = assess_danger_unit(pcity, punit);
 //      int dist = assess_distance(pcity, punit, move_rate);
 //      /* Although enemy units will not be in our cities,
@@ -483,7 +483,7 @@ public class Advmilitary{
 //      boolean igwall = unit_really_ignores_citywalls(punit);
 //
 //      if (unit_flag(punit, F_PARATROOPERS)) {
-//        paramove = unit_type(punit).paratroopers_range;
+//        paramove = punit.unit_type().paratroopers_range;
 //      }
 //
 //      if ((is_ground_unit(punit) && vulnerability != 0)
@@ -611,7 +611,7 @@ public class Advmilitary{
 //    desire *= get_unit_type(i).firepower;
 //  }
 //  desire *= defense;
-//  desire += get_unit_type(i).move_rate / SINGLE_MOVE;
+//  desire += get_unit_type(i).move_rate / Unit_H.SINGLE_MOVE;
 //  desire += attack;
 //  if (unit_type_flag(i, F_PIKEMEN)) {
 //    desire += desire / 2;
@@ -751,7 +751,7 @@ public class Advmilitary{
 //      
 //      pplayer.ai.tech_want[tech_req] += desire;
 //      
-//      util.freelog(LOG_DEBUG, "%s wants %s for defense with desire %d <%d>",
+//      util.freelog(Log.LOG_DEBUG, "%s wants %s for defense with desire %d <%d>",
 //              pcity.name, get_tech_name(pplayer, tech_req), desire,
 //              tech_desire[unit_type]);
 //    }
@@ -842,7 +842,7 @@ public class Advmilitary{
 //      int bcost = unit_build_shield_cost(unit_type);
 //      int vuln;
 //      int attack = unittype_att_rating(unit_type, will_be_veteran,
-//                                       SINGLE_MOVE,
+//                                       Unit_H.SINGLE_MOVE,
 //                                       unit_types[unit_type].hp);
 //      /* Values to be computed */
 //      int desire, want;
@@ -860,7 +860,7 @@ public class Advmilitary{
 //
 //      if (unit_type_flag(unit_type, F_IGTER)) {
 //        /* TODO: Use something like IGTER_MOVE_COST. -- Raahul */
-//        move_rate *= SINGLE_MOVE;
+//        move_rate *= Unit_H.SINGLE_MOVE;
 //      }
 //
 //      /* Set the move_time appropriatelly. */
@@ -922,7 +922,7 @@ public class Advmilitary{
 //          /* This is a future unit, tell the scientist how much we need it */
 //          pplayer.ai.tech_want[tech_req] += want;
 //          
-//          CITY_LOG(LOG_DEBUG, pcity, "wants %s to build %s to punish %s@(%d,%d)"
+//          CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s to build %s to punish %s@(%d,%d)"
 //                   " with desire %d", get_tech_name(pplayer, tech_req), 
 //                   unit_name(unit_type), (acity ? acity.name : "enemy"),
 //                   TILE_XY(ptile), want);
@@ -931,7 +931,7 @@ public class Advmilitary{
 //          if (can_build_unit(pcity, unit_type)) {
 //            /* This is a real unit and we really want it */
 //
-//            CITY_LOG(LOG_DEBUG, pcity, "overriding %s(%d) with %s(%d)"
+//            CITY_LOG(Log.LOG_DEBUG, pcity, "overriding %s(%d) with %s(%d)"
 //                     " [attack=%d,value=%d,move_time=%d,vuln=%d,bcost=%d]",
 //                     unit_name(best_choice.choice), best_choice.want,
 //                     unit_name(unit_type), want, attack, value, move_time,
@@ -947,7 +947,7 @@ public class Advmilitary{
 //	     * best behavior. */
 //            Impr_Type_id id = get_unit_type(unit_type).impr_requirement;
 //
-//            CITY_LOG(LOG_DEBUG, pcity, "building %s to build %s",
+//            CITY_LOG(Log.LOG_DEBUG, pcity, "building %s to build %s",
 //                     get_improvement_type(id).name,
 //                     get_unit_type(unit_type).name);
 //            best_choice.choice = id;
@@ -1131,7 +1131,7 @@ public class Advmilitary{
 //    if (go_by_boat && !ferryboat) {
 //      ai_choose_role_unit(pplayer, pcity, choice, L_FERRYBOAT, choice.want);
 //    }
-//    util.freelog(LOG_DEBUG, "%s has chosen attacker, %s, want=%d",
+//    util.freelog(Log.LOG_DEBUG, "%s has chosen attacker, %s, want=%d",
 //            pcity.name, unit_types[choice.choice].name, choice.want);
 //  } 
 //}
@@ -1234,7 +1234,7 @@ public class Advmilitary{
 //   * of small units -- Syela */
 //  /* It has to be AFTER assess_danger thanks to wallvalue. */
 //  our_def = assess_defense_quadratic(pcity); 
-//  util.freelog(LOG_DEBUG, "%s: danger = %d, grave_danger = %d, our_def = %d",
+//  util.freelog(Log.LOG_DEBUG, "%s: danger = %d, grave_danger = %d, our_def = %d",
 //          pcity.name, pcity.ai.danger, pcity.ai.grave_danger, our_def);
 //
 //  ai_choose_diplomat_defensive(pplayer, pcity, choice, our_def);
@@ -1330,7 +1330,7 @@ public class Advmilitary{
 //      } else {
 //        choice.want = danger;
 //      }
-//      util.freelog(LOG_DEBUG, "%s wants %s to defend with desire %d.",
+//      util.freelog(Log.LOG_DEBUG, "%s wants %s to defend with desire %d.",
 //                    pcity.name, get_unit_type(choice.choice).name,
 //                    choice.want);
 //    }

@@ -72,8 +72,8 @@ public class Advdiplomacy{
 //
 //*/
 //
-//public static final int LOG_DIPL = LOG_DEBUG;
-//public static final int LOG_DIPL2 = LOG_DEBUG;
+//public static final int LOG_DIPL = Log.LOG_DEBUG;
+//public static final int LOG_DIPL2 = Log.LOG_DEBUG;
 //
 ///* one hundred thousand */
 //public static final int BIG_NUMBER = 100000;
@@ -739,7 +739,7 @@ public class Advdiplomacy{
 //        && !adip.at_war_with_ally
 //        && adip.ally_patience >= 0) {
 //      pplayer.ai.love[aplayer.player_no] += ai.diplomacy.love_incr;
-//      PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Increased love for %s (now %d)",
+//      PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Increased love for %s (now %d)",
 //                 aplayer.name, pplayer.ai.love[aplayer.player_no]);
 //    } else if (pplayer.diplstates[aplayer.player_no].type == diplstate_type.DS_WAR) {
 //      pplayer.ai.love[aplayer.player_no] -= ai.diplomacy.love_incr;
@@ -748,12 +748,12 @@ public class Advdiplomacy{
 //        /* Give him a better chance for a cease fire */
 //        pplayer.ai.love[aplayer.player_no] += (MAX_AI_LOVE) * 3 / 100;
 //      }
-//      PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Reduced love for %s (now %d) ",
+//      PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Reduced love for %s (now %d) ",
 //                 aplayer.name, pplayer.ai.love[aplayer.player_no]);
 //    } else if (pplayer.diplstates[a].has_reason_to_cancel != 0) {
 //      /* Provoked in time of peace */
 //      if (pplayer.ai.love[aplayer.player_no] > 0) {
-//        PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Provoked by %s! Love halved "
+//        PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Provoked by %s! Love halved "
 //                   "(was %d)", aplayer.name, 
 //                   pplayer.ai.love[aplayer.player_no]);
 //        pplayer.ai.love[aplayer.player_no] /= 2;
@@ -852,7 +852,7 @@ public class Advdiplomacy{
 //      war_desire[aplayer.player_no] /= 2;
 //    }
 //    
-//    PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Against %s we have war desire "
+//    PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Against %s we have war desire "
 //            "%d ", aplayer.name, war_desire[aplayer.player_no]);
 //
 //    /* Find best target */
@@ -863,7 +863,7 @@ public class Advdiplomacy{
 //  }
 //
 //  if (!target) {
-//    PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Found no target.");
+//    PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Found no target.");
 //    ai.diplomacy.target = null;
 //    return;
 //  }
@@ -1032,7 +1032,7 @@ public class Advdiplomacy{
 //      && ai.diplomacy.countdown <= 0
 //      && !ai_handicap(pplayer, H_AWAY)) {
 //    if (pplayers_allied(pplayer, target)) {
-//      PLAYER_LOG(LOG_DEBUG, pplayer, ai, "Went to war against %s, who is "
+//      PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Went to war against %s, who is "
 //                 "an ally!", target.name); /* Oh, my. */
 //    }
 //    if (pplayer.diplstates[target.player_no].has_reason_to_cancel > 0) {

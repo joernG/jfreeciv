@@ -304,7 +304,7 @@ public class Plrhand {
 	// && is_ground_unit(punit)) {
 	// unfog_area(plr, punit.tile, get_watchtower_vision(punit));
 	// fog_area(plr, punit.tile,
-	// unit_type(punit).vision_range);
+	// punit.unit_type().vision_range);
 	// }
 	// }
 	// }
@@ -916,7 +916,7 @@ public class Plrhand {
 	// pplayer.government = government;
 	// /* Leave the target government the same. */
 	//
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "Revolution finished for %s. Government is %s. Revofin %d (%d).",
 	// pplayer.name, get_government_name(government),
 	// pplayer.revolution_finishes, game.turn);
@@ -967,7 +967,7 @@ public class Plrhand {
 	// pplayer.revolution_finishes = game.turn + game.revolution_length;
 	// }
 	//
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "Revolution started for %s. Target government is %s. "
 	// "Revofin %d (%d).",
 	// pplayer.name, get_government_name(pplayer.target_government),
@@ -1001,7 +1001,7 @@ public class Plrhand {
 	//
 	// pplayer.target_government = government;
 	//
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "Government changed for %s. Target government is %s; "
 	// "old %s. Revofin %d, Turn %d.",
 	// pplayer.name,
@@ -1023,7 +1023,7 @@ public class Plrhand {
 	// start_revolution(pplayer);
 	// }
 	//
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "Government change complete for %s. Target government is %s; "
 	// "now %s. Turn %d; revofin %d.",
 	// pplayer.name,
@@ -1057,7 +1057,7 @@ public class Plrhand {
 	// * is reset at the end of any turn when a non-anarchy government is
 	// * chosen.
 	// */
-	// util.freelog(LOG_DEBUG, "Update revolution for %s. Current government %s, "
+	// util.freelog(Log.LOG_DEBUG, "Update revolution for %s. Current government %s, "
 	// "target %s, revofin %d, turn %d.",
 	// pplayer.name, get_government_name(pplayer.government),
 	// get_government_name(pplayer.target_government),
@@ -1067,7 +1067,7 @@ public class Plrhand {
 	// if (pplayer.target_government != game.government_when_anarchy) {
 	// /* If the revolution is over and a target government is set, go into
 	// * the new government. */
-	// util.freelog(LOG_DEBUG, "Update: finishing revolution for %s.",
+	// util.freelog(Log.LOG_DEBUG, "Update: finishing revolution for %s.",
 	// pplayer.name);
 	// finish_revolution(pplayer);
 	// } else {
@@ -1081,7 +1081,7 @@ public class Plrhand {
 	// && pplayer.revolution_finishes < game.turn) {
 	// /* Reset the revolution counter. If the player has another revolution
 	// * they'll have to re-enter anarchy. */
-	// util.freelog(LOG_DEBUG, "Update: resetting revofin for %s.",
+	// util.freelog(Log.LOG_DEBUG, "Update: resetting revofin for %s.",
 	// pplayer.name);
 	// pplayer.revolution_finishes = -1;
 	// send_player_info(pplayer, pplayer);
@@ -1828,7 +1828,7 @@ public class Plrhand {
 	// make_contact(pplayer, city_owner(pcity), ptile);
 	// }
 	// for (unit punit : tile1.units.data) {
-	// make_contact(pplayer, unit_owner(punit), ptile);
+	// make_contact(pplayer, punit.unit_owner(), ptile);
 	// } }
 	// } square_iterate_end;
 	// }
@@ -1847,7 +1847,7 @@ public class Plrhand {
 	// int i, pos;
 	// player tmp_plr;
 	//
-	// util.freelog(LOG_DEBUG, "shuffling %d players", game.nplayers);
+	// util.freelog(Log.LOG_DEBUG, "shuffling %d players", game.nplayers);
 	//
 	// /* Initialize array in unshuffled order: */
 	// for(i=0; i<game.nplayers; i++) {
@@ -1865,7 +1865,7 @@ public class Plrhand {
 	//
 	// #ifdef DEBUG
 	// for (i = 0; i < game.nplayers; i++) {
-	// util.freelog(LOG_DEBUG, "Shuffling player %d as %d.",
+	// util.freelog(Log.LOG_DEBUG, "Shuffling player %d as %d.",
 	// i, shuffled_plr[i].player_no);
 	// }
 	// #endif
@@ -1884,7 +1884,7 @@ public class Plrhand {
 	// for (i = 0; i < game.nplayers; i++) {
 	// shuffled_plr[i] = get_player(shuffled_players[i]);
 	//
-	// util.freelog(LOG_DEBUG, "Set shuffled player %d as %d.",
+	// util.freelog(Log.LOG_DEBUG, "Set shuffled player %d as %d.",
 	// i, shuffled_plr[i].player_no);
 	// }
 	//

@@ -19,7 +19,7 @@ public class Player_P{
 //#include "government.h"
 //#include "idex.h"
 //#include "improvement.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "rand.h"
 //#include "shared.h"
@@ -135,10 +135,10 @@ public class Player_P{
 //  /* Initialise list of improvements with Island-wide equiv_range */
 //  plr.island_improv = null;
 //
-//  if (map.num_continents > 0) {
-//    plr.island_improv = fc_malloc((map.num_continents + 1) * 
+//  if (Map.map.num_continents > 0) {
+//    plr.island_improv = fc_malloc((Map.map.num_continents + 1) * 
 //                                   game.num_impr_types * sizeof(Impr_Status));
-//    for (i = 1; i <= map.num_continents; i++) {
+//    for (i = 1; i <= Map.map.num_continents; i++) {
 //      improvement_status_init(&plr.island_improv[i * game.num_impr_types],
 //                              game.num_impr_types);
 //    }
@@ -240,8 +240,8 @@ public class Player_P{
 		// * because allied transports can also contain our units. Shared vision
 		// * isn't taken into account.
 		// */
-		// if (punit.transported_by != -1 && unit_owner(punit) != pplayer
-		// && !pplayers_allied(pplayer, unit_owner(punit))) {
+		// if (punit.transported_by != -1 && punit.unit_owner() != pplayer
+		// && !pplayers_allied(pplayer, punit.unit_owner())) {
 		// return false;
 		// }
 
@@ -252,7 +252,7 @@ public class Player_P{
 		// }
 
 		// /* Allied or non-hiding units are always seen. */
-		// if (pplayers_allied(unit_owner(punit), pplayer)
+		// if (pplayers_allied(punit.unit_owner(), pplayer)
 		// || !is_hiding_unit(punit)) {
 		// return true;
 		// }
@@ -266,7 +266,7 @@ public class Player_P{
 		// return true;
 		// }
 		// for (unit punit2 : ptile1.units.data) {
-		// if (pplayers_allied(unit_owner(punit2), pplayer)) {
+		// if (pplayers_allied(punit2.unit_owner(), pplayer)) {
 		// return true;
 		//		}
 		//		} }

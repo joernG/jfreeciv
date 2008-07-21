@@ -67,7 +67,7 @@ public class Gamehand{
 //  int utype;
 //  Eunit_flag_id role;
 //
-//  assert(!is_non_allied_unit_tile(ptile, pplayer));
+//  assert(!Unit.is_non_allied_unit_tile(ptile, pplayer));
 //
 //  /* For scenarios or dispersion, huts may coincide with player starts (in 
 //   * other cases, huts are avoided as start positions).  Remove any such hut,
@@ -148,7 +148,7 @@ public class Gamehand{
 //{
 //  final int NO_START_POS = -1;
 //  int start_pos[game.nplayers];
-//  boolean pos_used[map.num_start_positions];
+//  boolean pos_used[Map.map.num_start_positions];
 //  int i, num_used = 0;
 //
 //  init_game_id();
@@ -158,13 +158,13 @@ public class Gamehand{
 //
 //  /* First set up some data fields. */
 //  util.freelog(LOG_VERBOSE, "Placing players at start positions.");
-//  for (i = 0; i < map.num_start_positions; i++) {
-//    int n = map.start_positions[i].nation;
+//  for (i = 0; i < Map.map.num_start_positions; i++) {
+//    int n = Map.map.start_positions[i].nation;
 //
 //    pos_used[i] = false;
 //    util.freelog(LOG_VERBOSE, "%3d : (%2d,%2d) : %d : %s",
-//	    i, map.start_positions[i].tile.x,
-//	    map.start_positions[i].tile.y,
+//	    i, Map.map.start_positions[i].tile.x,
+//	    Map.map.start_positions[i].tile.y,
 //	    n, (n >= 0 ? Nation.get_nation_name(n) : ""));
 //  }
 //  for(player pplayer: game.players){
@@ -174,9 +174,9 @@ public class Gamehand{
 //  /* Second, assign a nation to a start position for that nation. */
 //  util.freelog(LOG_VERBOSE, "Assigning matching nations.");
 //  for(player pplayer: game.players){
-//    for (i = 0; i < map.num_start_positions; i++) {
+//    for (i = 0; i < Map.map.num_start_positions; i++) {
 //      assert(pplayer.nation != NO_NATION_SELECTED);
-//      if (pplayer.nation == map.start_positions[i].nation) {
+//      if (pplayer.nation == Map.map.start_positions[i].nation) {
 //	util.freelog(LOG_VERBOSE, "Start_pos %d matches player %d (%s).",
 //		i, pplayer.player_no, Nation.get_nation_name(pplayer.nation));
 //	start_pos[pplayer.player_no] = i;
@@ -190,9 +190,9 @@ public class Gamehand{
 //  util.freelog(LOG_VERBOSE, "Assigning random nations.");
 //  for(player pplayer: game.players){
 //    if (start_pos[pplayer.player_no] == NO_START_POS) {
-//      int which = myrand(map.num_start_positions - num_used);
+//      int which = myrand(Map.map.num_start_positions - num_used);
 //
-//      for (i = 0; i < map.num_start_positions; i++) {
+//      for (i = 0; i < Map.map.num_start_positions; i++) {
 //	if (!pos_used[i]) {
 //	  if (which == 0) {
 //	    util.freelog(LOG_VERBOSE,
@@ -213,7 +213,7 @@ public class Gamehand{
 //  /* Loop over all players, creating their initial units... */
 //  for(player pplayer: game.players){
 //    struct start_position pos
-//      = map.start_positions[start_pos[pplayer.player_no]];
+//      = Map.map.start_positions[start_pos[pplayer.player_no]];
 //
 //    /* don't give any units to observer */
 //    if (pplayer.is_observer) {
@@ -229,7 +229,7 @@ public class Gamehand{
 //    int i, x, y;
 //    tile ptile;
 //    struct start_position p
-//      = map.start_positions[start_pos[pplayer.player_no]];
+//      = Map.map.start_positions[start_pos[pplayer.player_no]];
 //
 //    /* don't give any units to observer */
 //    if (pplayer.is_observer) {
@@ -243,7 +243,7 @@ public class Gamehand{
 //      } while (!((ptile = map_pos_to_tile(x, y))
 //		 && map_get_continent(p.tile) == map_get_continent(ptile)
 //		 && !is_ocean(map_get_terrain(ptile))
-//		 && !is_non_allied_unit_tile(ptile, pplayer)));
+//		 && !Unit.is_non_allied_unit_tile(ptile, pplayer)));
 //
 //
 //      /* Create the unit of an appropriate type. */
@@ -386,7 +386,7 @@ public class Gamehand{
 //      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
 //		     _("The turn timeout has exceeded its maximum value, "
 //		       "fixing at its maximum"));
-//      util.freelog(LOG_DEBUG, "game.timeout exceeded maximum value");
+//      util.freelog(Log.LOG_DEBUG, "game.timeout exceeded maximum value");
 //      game.timeout = GAME_MAX_TIMEOUT;
 //      game.timeoutint = 0;
 //      game.timeoutinc = 0;
@@ -394,14 +394,14 @@ public class Gamehand{
 //      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
 //		     _("The turn timeout is smaller than zero, "
 //		       "fixing at zero."));
-//      util.freelog(LOG_DEBUG, "game.timeout less than zero");
+//      util.freelog(Log.LOG_DEBUG, "game.timeout less than zero");
 //      game.timeout = 0;
 //    }
 //  } else {
 //    game.timeoutcounter++;
 //  }
 //
-//  util.freelog(LOG_DEBUG, "timeout=%d, inc=%d incmult=%d\n   "
+//  util.freelog(Log.LOG_DEBUG, "timeout=%d, inc=%d incmult=%d\n   "
 //	  "int=%d, intinc=%d, turns till next=%d",
 //	  game.timeout, game.timeoutinc, game.timeoutincmult,
 //	  game.timeoutint, game.timeoutintinc,
@@ -498,7 +498,7 @@ public class Gamehand{
 //  }
 //
 //  if (!token) {
-//    util.freelog(LOG_DEBUG, "Failed to read authentication token");
+//    util.freelog(Log.LOG_DEBUG, "Failed to read authentication token");
 //  }
 //
 //  if (you_have_hack) {

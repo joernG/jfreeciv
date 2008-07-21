@@ -391,7 +391,7 @@ public class Timing{
 //      util.freelog(Log.LOG_NORMAL, "That took %g seconds", read_timer_seconds_free(t));
 //  }
 //  (BUT: make sure the _free call really happens!
-//  eg, util.freelog(LOG_DEBUG,...) might not actually evaluate its args.)
+//  eg, util.freelog(Log.LOG_DEBUG,...) might not actually evaluate its args.)
 //***********************************************************************/
 //double read_timer_seconds_free(timer t)
 //{

@@ -23,7 +23,7 @@ public class Mapview{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "registry.h"
 //#include "support.h"
 //
@@ -299,7 +299,7 @@ public class Mapview{
 //  struct ct_point src_pos = { src_x, src_y };
 //  struct ct_point dest_pos = { dest_x, dest_y };
 //
-//  util.freelog(LOG_DEBUG, "canvas_copy(src=%p,dest=%p)",src,dest);
+//  util.freelog(Log.LOG_DEBUG, "canvas_copy(src=%p,dest=%p)",src,dest);
 //
 //  be_copy_osda_to_osda(dest.osda, src.osda, &size, &dest_pos, &src_pos, 0);
 //  if (dest.widget) {
@@ -320,12 +320,12 @@ public class Mapview{
 //  util.freelog(Log.LOG_NORMAL, "refresh_overview_canvas()");
 //  whole_map_iterate(x, y) {
 //    overview_update_tile0(x, y);
-//  } whole_map_iterate_end;
+//  }
 //
 //  rect.x = 0;
 //  rect.y = 0;
-//  rect.width = OVERVIEW_SCALE * map.xsize;
-//  rect.height = OVERVIEW_SCALE * map.ysize;
+//  rect.width = OVERVIEW_SCALE * Map.map.xsize;
+//  rect.height = OVERVIEW_SCALE * Map.map.ysize;
 //  sw_window_canvas_background_region_needs_repaint(overview_window, &rect);
 //
 //  /* PORTME */
@@ -434,7 +434,7 @@ public class Mapview{
 //  struct ct_point src_pos = { offset_x, offset_y };
 //  struct ct_size size = { width, height };
 //
-//  util.freelog(LOG_DEBUG, "gui_put_sprite canvas=%p",pcanvas);
+//  util.freelog(Log.LOG_DEBUG, "gui_put_sprite canvas=%p",pcanvas);
 //  be_draw_sprite(osda, BE_OPAQUE, sprite, &size, &dest_pos, &src_pos);
 //  if (pcanvas.widget) {
 //    sw_window_canvas_background_region_needs_repaint(pcanvas.widget,
@@ -451,7 +451,7 @@ public class Mapview{
 //{
 //  struct ct_size size;
 //
-//  util.freelog(LOG_DEBUG, "gui_put_sprite_full");
+//  util.freelog(Log.LOG_DEBUG, "gui_put_sprite_full");
 //  be_sprite_get_size(&size, sprite);
 //  canvas_put_sprite(pcanvas, canvas_x, canvas_y,
 //		    sprite, 0, 0, size.width, size.height);
@@ -466,7 +466,7 @@ public class Mapview{
 //{
 //  struct ct_rect rect = { canvas_x, canvas_y, width, height };
 //
-//  util.freelog(LOG_DEBUG, "gui_put_rectangle(...)");
+//  util.freelog(Log.LOG_DEBUG, "gui_put_rectangle(...)");
 //  be_draw_region(pcanvas.osda,
 //		 BE_OPAQUE, &rect, enum_color_to_be_color(color));
 //  if (pcanvas.widget) {
@@ -488,7 +488,7 @@ public class Mapview{
 //
 //  ct_rect_fill_on_2_points(&rect,&start,&end);
 //
-//  util.freelog(LOG_DEBUG, "gui_put_line(...)");
+//  util.freelog(Log.LOG_DEBUG, "gui_put_line(...)");
 //
 //  if (ltype == LINE_NORMAL) {
 //    be_draw_line(pcanvas.osda, BE_OPAQUE, &start, &end, 1, false,
@@ -517,7 +517,7 @@ public class Mapview{
 //  struct ct_size size = { pixel_width, pixel_height };
 //  struct ct_point pos = { canvas_x, canvas_y };
 //
-//  util.freelog(LOG_DEBUG,"flush_mapcanvas=%s",ct_rect_to_string(&rect));
+//  util.freelog(Log.LOG_DEBUG,"flush_mapcanvas=%s",ct_rect_to_string(&rect));
 //  be_copy_osda_to_osda(sw_window_get_canvas_background(mapview_canvas_window),
 //		       mapview_canvas.store.osda, &size, &pos, &pos, 0);
 //  sw_window_canvas_background_region_needs_repaint(mapview_canvas_window,
@@ -583,7 +583,7 @@ public class Mapview{
 //**************************************************************************/
 //void prepare_show_city_descriptions()
 //{
-//  util.freelog(LOG_DEBUG, "prepare_show_city_descriptions");
+//  util.freelog(Log.LOG_DEBUG, "prepare_show_city_descriptions");
 //  
 //  for (widget widget : city_descr_windows.data) {
 //    widget_list_unlink(&city_descr_windows, widget);
@@ -903,7 +903,7 @@ public class Mapview{
 //			  enum be_mouse_button button)
 //{
 //  get_mapview_scroll_pos(&starting_map_position_x,&starting_map_position_y);
-//  util.freelog(LOG_DEBUG, "drag start (%d,%d)", starting_map_position_x,
+//  util.freelog(Log.LOG_DEBUG, "drag start (%d,%d)", starting_map_position_x,
 //	  starting_map_position_y);
 //  clear_timer_start(drag_timer);
 //}
@@ -931,7 +931,7 @@ public class Mapview{
 //    int new_x = starting_map_position_x - dx * factorx;
 //    int new_y = starting_map_position_y - dy * factory;
 //
-//    util.freelog(LOG_DEBUG, "drag map canvas (%d,%d) . (%d,%d)", dx,
+//    util.freelog(Log.LOG_DEBUG, "drag map canvas (%d,%d) . (%d,%d)", dx,
 //	    dy, new_x, new_y);
 //    set_mapview_scroll_pos(new_x, new_y);
 //    flush_dirty();

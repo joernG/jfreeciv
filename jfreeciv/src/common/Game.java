@@ -12,7 +12,7 @@ public class Game{
 //#include "government.h"
 //#include "idex.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "nation.h"
 //#include "packets.h"
@@ -110,25 +110,25 @@ public class Game{
 //{
 //  city pcity;
 //
-//  util.freelog(LOG_DEBUG, "game_remove_unit %d", punit.id);
-//  util.freelog(LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
-//	  punit.id, Nation.get_nation_name(unit_owner(punit).nation),
+//  util.freelog(Log.LOG_DEBUG, "game_remove_unit %d", punit.id);
+//  util.freelog(Log.LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
+//	  punit.id, Nation.get_nation_name(punit.unit_owner().nation),
 //	  unit_name(punit.type), punit.tile.x, punit.tile.y,
 //	  punit.homecity);
 //
-//  pcity = player_find_city_by_id(unit_owner(punit), punit.homecity);
+//  pcity = player_find_city_by_id(punit.unit_owner(), punit.homecity);
 //  if (pcity) {
 //    unit_list_unlink(&pcity.units_supported, punit);
 //  }
 //
 //  if (pcity) {
-//    util.freelog(LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
+//    util.freelog(Log.LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
 //	    Nation.get_nation_name(city_owner(pcity).nation), pcity.tile.x,
 //	    pcity.tile.y);
 //  }
 //
 //  unit_list_unlink(&punit.tile.units, punit);
-//  unit_list_unlink(&unit_owner(punit).units, punit);
+//  unit_list_unlink(&punit.unit_owner().units, punit);
 //
 //  idex_unregister_unit(punit);
 //
@@ -143,8 +143,8 @@ public class Game{
 //**************************************************************************/
 //void game_remove_city(city pcity)
 //{
-//  util.freelog(LOG_DEBUG, "game_remove_city %d", pcity.id);
-//  util.freelog(LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
+//  util.freelog(Log.LOG_DEBUG, "game_remove_city %d", pcity.id);
+//  util.freelog(Log.LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
 //	   Nation.get_nation_name(city_owner(pcity).nation), pcity.tile.x,
 //	  pcity.tile.y);
 //

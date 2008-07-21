@@ -33,7 +33,7 @@ public class Gotodlg{
 //
 //#include "fcintl.h"
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "packets.h"
 //#include "player.h"
 //#include "support.h"

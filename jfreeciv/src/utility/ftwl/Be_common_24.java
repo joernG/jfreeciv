@@ -545,7 +545,7 @@ public class Be_common_24{
 //  struct ct_rect rect = { 0, 0, width, height };
 //  osda result = fc_malloc(sizeof(*result));
 //
-//  util.freelog(LOG_DEBUG, "create_osda(%dx%d)", width, height);
+//  util.freelog(Log.LOG_DEBUG, "create_osda(%dx%d)", width, height);
 //  result.image = image_create(width, height);
 //  result.has_transparent_pixels = true;
 //  be_set_transparent(result, &rect);

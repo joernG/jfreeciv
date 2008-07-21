@@ -106,7 +106,7 @@ public class Mapclass{
 //      text_obj = TextObject, MUIA_Text_Contents, s, End;
 //      DoMethod(group, OM_ADDMEMBER, text_obj);
 //
-//      if (tile_has_special(ptile, S_HUT))
+//      if (Map.tile_has_special(ptile, S_HUT))
 //      {
 //	text_obj = TextObject, MUIA_Text_Contents, "Minor Tribe Village", End;
 //	DoMethod(group, OM_ADDMEMBER, text_obj);
@@ -139,7 +139,7 @@ public class Mapclass{
 //      if ((punit = find_visible_unit(ptile)) && !pcity)
 //      {
 //	char cn[64];
-//	unit_type ptype = unit_type(punit);
+//	unit_type ptype = punit.unit_type();
 //	cn[0] = '\0';
 //	if (punit.owner == game.player_idx)
 //	{
@@ -149,7 +149,7 @@ public class Mapclass{
 //	    cn = util.my_snprintf( "/%s", pcity.name);
 //	}
 //	s = util.my_snprintf( "Unit: %s(%s%s)", ptype.name,
-//		    get_nation_name(unit_owner(punit).nation), cn);
+//		    get_nation_name(punit.unit_owner().nation), cn);
 //
 //	text_obj = TextObject, MUIA_Text_Contents, s, End;
 //	DoMethod(group, OM_ADDMEMBER, text_obj);
@@ -641,7 +641,7 @@ public class Mapclass{
 //      case  MUIA_Map_HorizFirst:
 //	    {
 //	      LONG visible = xget(o, MUIA_Map_HorizVisible);
-//	      LONG maxx = map.xsize + visible - 1;
+//	      LONG maxx = Map.map.xsize + visible - 1;
 //
 //	      new_horiz_first = ti.ti_Data;
 //	      if (new_horiz_first + visible > maxx)
@@ -655,7 +655,7 @@ public class Mapclass{
 //      case  MUIA_Map_VertFirst:
 //	    {
 //	      LONG visible = xget(o, MUIA_Map_VertVisible);
-//	      LONG maxy = map.ysize;
+//	      LONG maxy = Map.map.ysize;
 //
 //	      new_vert_first = ti.ti_Data;
 //	      if (new_vert_first + visible > maxy)
@@ -942,7 +942,7 @@ public class Mapclass{
 //      	int xsize;
 //      	int ysize;
 //
-//	/* determine sizes. The usually way was to use map.xsize (or map.ysize) but
+//	/* determine sizes. The usually way was to use Map.map.xsize (or Map.map.ysize) but
 //	 * this won't work anymore */
 //	if (data.overview_object)
 //	{
@@ -950,8 +950,8 @@ public class Mapclass{
 //	    ysize = xget(data.overview_object, MUIA_Overview_Height);
 //	} else
 //	{
-//	    xsize = map.xsize;
-//	    ysize = map.ysize;
+//	    xsize = Map.map.xsize;
+//	    ysize = Map.map.ysize;
 //	}
 //
 //	if (data.hscroller_object)
@@ -1104,7 +1104,7 @@ public class Mapclass{
 //	is_real = normalize_map_pos(&pcity.x, &pcity.y);
 //	assert(is_real);
 //	if (pcity.x < map_view_x0) {
-//	  pcity.x += map.xsize;
+//	  pcity.x += Map.map.xsize;
 //	}
 //
 //	SetAPen(_rp(o),color);

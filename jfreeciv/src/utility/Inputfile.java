@@ -231,7 +231,7 @@ public class Inputfile{
 //  if (!fp) {
 //    return null;
 //  }
-//  util.freelog(LOG_DEBUG, "inputfile: opened \"%s\" ok", filename);
+//  util.freelog(Log.LOG_DEBUG, "inputfile: opened \"%s\" ok", filename);
 //  inf = inf_from_stream(fp, datafn);
 //  inf.filename = mystrdup(filename);
 //  return inf;
@@ -253,7 +253,7 @@ public class Inputfile{
 //  inf.fp = stream;
 //  inf.datafn = datafn;
 //
-//  util.freelog(LOG_DEBUG, "inputfile: opened \"%s\" ok", inf_filename(inf));
+//  util.freelog(Log.LOG_DEBUG, "inputfile: opened \"%s\" ok", inf_filename(inf));
 //  return inf;
 //}
 //
@@ -268,7 +268,7 @@ public class Inputfile{
 //{
 //  assert_sanity(inf);
 //
-//  util.freelog(LOG_DEBUG, "inputfile: sub-closing \"%s\"", inf_filename(inf));
+//  util.freelog(Log.LOG_DEBUG, "inputfile: sub-closing \"%s\"", inf_filename(inf));
 //
 //  if (fz_ferror(inf.fp) != 0) {
 //    util.freelog(Log.LOG_ERROR, "Error before closing %s: %s", inf_filename(inf),
@@ -292,7 +292,7 @@ public class Inputfile{
 //  init_zeros(inf);
 //  inf.magic = ~INF_MAGIC;
 //
-//  util.freelog(LOG_DEBUG, "inputfile: sub-closed ok");
+//  util.freelog(Log.LOG_DEBUG, "inputfile: sub-closed ok");
 //}
 //
 
@@ -305,13 +305,13 @@ public class Inputfile{
 //{
 //  assert_sanity(inf);
 //
-//  util.freelog(LOG_DEBUG, "inputfile: closing \"%s\"", inf_filename(inf));
+//  util.freelog(Log.LOG_DEBUG, "inputfile: closing \"%s\"", inf_filename(inf));
 //  if (inf.included_from) {
 //    inf_close(inf.included_from);
 //  }
 //  inf_close_partial(inf);
 //  free(inf);
-//  util.freelog(LOG_DEBUG, "inputfile: closed ok");
+//  util.freelog(Log.LOG_DEBUG, "inputfile: closed ok");
 //}
 //
 
@@ -608,7 +608,7 @@ public class Inputfile{
 //  }
 //  if (c) {
 //    if (INF_DEBUG_FOUND) {
-//      util.freelog(LOG_DEBUG, "inputfile: found %s '%s'", name, inf.token.str);
+//      util.freelog(Log.LOG_DEBUG, "inputfile: found %s '%s'", name, inf.token.str);
 //    }
 //  } else if (required) {
 //    util.freelog(LOG_FATAL, "Did not find token %s in %s line %d", 

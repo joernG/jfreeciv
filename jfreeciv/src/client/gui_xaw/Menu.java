@@ -151,7 +151,7 @@ public class Menu{
 //    { { N"Roads and Rails", 0      },      "", MENU_VIEW_SHOW_ROADS_RAILS, 0 },
 //    { { N"Irrigation", 0           },      "", MENU_VIEW_SHOW_IRRIGATION, 0 },
 //    { { N"Mines", 0                },      "", MENU_VIEW_SHOW_MINES, 0 },
-//    { { N"Fortress and Airbase", 0 },      "", MENU_VIEW_SHOW_FORTRESS_AIRBASE, 0 },
+//    { { N"Fortress and Airbase", 0 },      "", MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE, 0 },
 //    { { N"Specials", 0             },      "", MENU_VIEW_SHOW_SPECIALS, 0 },
 //    { { N"Pollution & Fallout", 0  },      "", MENU_VIEW_SHOW_POLLUTION, 0 },
 //    { { N"Cities", 0               },      "", MENU_VIEW_SHOW_CITIES, 0 },
@@ -344,7 +344,7 @@ public class Menu{
 //    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_ROADS_RAILS, 1);
 //    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_IRRIGATION, 1);
 //    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_MINES, 1);
-//    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_FORTRESS_AIRBASE, 1);
+//    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE, 1);
 //    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_SPECIALS, 1);
 //    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_POLLUTION, 1);
 //    menu_entry_sensitive(MENU_VIEW, MENU_VIEW_SHOW_CITIES, 1);
@@ -622,7 +622,7 @@ public class Menu{
 //  case MENU_VIEW_SHOW_MINES:
 //    key_mines_toggle();
 //    break;
-//  case MENU_VIEW_SHOW_FORTRESS_AIRBASE:
+//  case MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE:
 //    key_fortress_airbase_toggle();
 //    break;
 //  case MENU_VIEW_SHOW_SPECIALS:

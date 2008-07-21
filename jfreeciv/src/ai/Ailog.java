@@ -153,7 +153,7 @@ public class Ailog{
 //  }
 //  
 //  buffer = util.my_snprintf( "%s's %s[%d] (%d,%d).(%d,%d){%d,%d} ",
-//              unit_owner(punit).name, unit_type(punit).name,
+//              punit.unit_owner().name, punit.unit_type().name,
 //              punit.id, punit.tile.x, punit.tile.y,
 //	      gx, gy,
 //              punit.ai.bodyguard, punit.ai.ferryboat);
@@ -195,7 +195,7 @@ public class Ailog{
 //  if (pcharge) {
 //    ptile = pcharge.tile;
 //    id = pcharge.id;
-//    s = unit_type(pcharge).name;
+//    s = pcharge.unit_type().name;
 //  } else if (pcity) {
 //    ptile = pcity.tile;
 //    id = pcity.id;
@@ -203,7 +203,7 @@ public class Ailog{
 //  }
 //  buffer = util.my_snprintf(
 //              "%s's bodyguard %s[%d] (%d,%d){%s:%d@%d,%d} ",
-//              unit_owner(punit).name, unit_type(punit).name,
+//              punit.unit_owner().name, punit.unit_type().name,
 //              punit.id, punit.tile.x, punit.tile.y,
 //	      s, id, ptile.x, ptile.y);
 //  cat_snprintf(buffer, sizeof(buffer), msg);

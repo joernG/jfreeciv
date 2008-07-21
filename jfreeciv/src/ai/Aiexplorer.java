@@ -137,14 +137,14 @@ public class Aiexplorer{
 //public static final int KNOWN_DIFF_TER_SCORE = 51;
 //
 ///* The maximum number of tiles that the unit might uncover in a move. 
-// * #define MAX_NEW_TILES          (1 + 4 * (unit_type(punit).vision_range))
+// * #define MAX_NEW_TILES          (1 + 4 * (punit.unit_type().vision_range))
 // * The previous line would be ideal, but we'd like these to be finalants
 // * for efficiency, so pretend vision_range == 1 */
 //public static final int MAX_NEW_TILES = 5;
 //
 ///* The number of tiles that the unit can see. =(1 + 2r)^2
-// * #define VISION_TILES           (1 + 2 * unit_type(punit).vision_range)*\
-// *                                (1 + 2 * unit_type(punit).vision_range)
+// * #define VISION_TILES           (1 + 2 * punit.unit_type().vision_range)*\
+// *                                (1 + 2 * punit.unit_type().vision_range)
 // * As above, set vision_range == 1 */
 //public static final int VISION_TILES = 9;
 //
@@ -168,7 +168,7 @@ public class Aiexplorer{
 //                              unit punit)
 //{
 //  int land_score, ocean_score, known_land_score, known_ocean_score;
-//  int range = unit_type(punit).vision_range;
+//  int range = punit.unit_type().vision_range;
 //  int desirable = 0;
 //  int unknown = 0;
 //
@@ -247,7 +247,7 @@ public class Aiexplorer{
 //**************************************************************************/
 //boolean ai_manage_explorer(unit punit)
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  /* Loop prevention */
 //  int init_moves = punit.moves_left;
 //
@@ -365,7 +365,7 @@ public class Aiexplorer{
 //	 * one turn delay (the next tile we would occupy is not safe).
 //	 * In that case, we should just wait. */
 //        if (unit_flag(punit, F_TRIREME) 
-//            && (punit.moves_left != unit_move_rate(punit))) {
+//            && (punit.moves_left != punit.move_rate())) {
 //          /* we're a trireme with non-full complement of movement points,
 //           * so wait until next turn. */
 //          return true;
@@ -376,7 +376,7 @@ public class Aiexplorer{
 //    return true;
 //  } else {
 //    /* Didn't find anything. */
-//    UNIT_LOG(LOG_DEBUG, punit, "failed to explore more");
+//    UNIT_LOG(Log.LOG_DEBUG, punit, "failed to explore more");
 //    return false;
 //  }
 //#undef DIST_FACTOR

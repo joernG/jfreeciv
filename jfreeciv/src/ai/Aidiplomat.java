@@ -25,7 +25,6 @@ public class Aidiplomat{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "path_finding.h"
@@ -54,8 +53,8 @@ public class Aidiplomat{
 //
 //#include "aidiplomat.h"
 //
-//public static final int LOG_DIPLOMAT = LOG_DEBUG;
-//public static final int LOG_DIPLOMAT_BUILD = LOG_DEBUG;
+//public static final int LOG_DIPLOMAT = Log.LOG_DEBUG;
+//public static final int LOG_DIPLOMAT_BUILD = Log.LOG_DEBUG;
 //
 //static void find_city_to_diplomat(player pplayer, unit punit,
 //                                  city *ctarget, int *move_dist,
@@ -253,7 +252,7 @@ public class Aidiplomat{
 //**************************************************************************/
 //static void ai_diplomat_city(unit punit, city ctarget)
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  player tplayer = city_owner(ctarget);
 //  int count_impr = count_sabotagable_improvements(ctarget);
 //  int count_tech = count_stealable_techs(pplayer, tplayer);
@@ -402,7 +401,7 @@ public class Aidiplomat{
 //
 //    urgency = acity.ai.urgency;
 //    dipls = (count_diplomats_on_tile(pos.tile)
-//             - (same_pos(pos.tile, punit.tile) ? 1 : 0));
+//             - (Map.same_pos(pos.tile, punit.tile) ? 1 : 0));
 //    if (dipls == 0 && acity.ai.diplomat_threat) {
 //      /* We are _really_ needed there */
 //      urgency = (urgency + 1) * 5;
@@ -453,10 +452,10 @@ public class Aidiplomat{
 //    }
 //
 //    if (!pvictim
-//        || !HOSTILE_PLAYER(pplayer, ai, unit_owner(pvictim))
+//        || !HOSTILE_PLAYER(pplayer, ai, pvictim.unit_owner())
 //        || unit_list_size(&ptile.units) > 1
 //        || map_get_city(pos.tile)
-//        || government_has_flag(get_gov_pplayer(unit_owner(pvictim)),
+//        || government_has_flag(get_gov_pplayer(pvictim.unit_owner()),
 //                               G_UNBRIBABLE)) {
 //      continue;
 //    }
@@ -472,7 +471,7 @@ public class Aidiplomat{
 //    /* Compare with victim's attack power */
 //    newval = ATTACK_POWER(pvictim);
 //    if (newval > bestval
-//        && unit_move_rate(pvictim) > pos.total_MC) {
+//        && pvictim.move_rate() > pos.total_MC) {
 //      /* Enemy can probably kill us */
 //      threat = true;
 //    } else {
@@ -582,7 +581,7 @@ public class Aidiplomat{
 //    ctarget = map_get_city(punit.goto_tile);
 //    if (pf_get_position(map, punit.goto_tile, &pos)
 //        && ctarget) {
-//      if (same_pos(ctarget.tile, punit.tile)) {
+//      if (Map.same_pos(ctarget.tile, punit.tile)) {
 //        failure = true;
 //      } else if (pplayers_allied(pplayer, city_owner(ctarget))
 //          && punit.ai.ai_role == AIUNIT_ATTACK
@@ -607,7 +606,7 @@ public class Aidiplomat{
 //  /* We may need a new map now. Both because we cannot get paths from an 
 //   * old map, and we need paths to move, and because fctd below requires
 //   * a new map for its iterator. */
-//  if (!same_pos(parameter.start_tile, punit.tile)
+//  if (!Map.same_pos(parameter.start_tile, punit.tile)
 //      || punit.ai.ai_role == AIUNIT_NONE) {
 //    pf_destroy_map(map);
 //    pft_fill_unit_parameter(&parameter, punit);
@@ -657,7 +656,7 @@ public class Aidiplomat{
 //  }
 //
 //  /* GOTO unless we want to stay */
-//  if (!same_pos(punit.tile, ctarget.tile)) {
+//  if (!Map.same_pos(punit.tile, ctarget.tile)) {
 //    pf_path path;
 //
 //    path = pf_get_path(map, punit.goto_tile);

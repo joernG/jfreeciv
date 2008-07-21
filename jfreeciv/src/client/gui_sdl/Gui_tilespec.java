@@ -133,9 +133,9 @@ public class Gui_tilespec{
 //    
 //    pSpr = load_sprite(tag);
 //    if(!pSpr) {
-//      util.freelog(LOG_DEBUG,"Can't find %s", tag);
+//      util.freelog(Log.LOG_DEBUG,"Can't find %s", tag);
 //      tag = util.my_snprintf( "citizen%s%s", alt_buf ,get_citizen_name(i));  
-//      util.freelog(LOG_DEBUG,"Trying load alternative %s", tag);
+//      util.freelog(Log.LOG_DEBUG,"Trying load alternative %s", tag);
 //      pSpr = load_sprite(tag);
 //    }
 //    
@@ -157,10 +157,10 @@ public class Gui_tilespec{
 //      
 //      pSpr = load_sprite(tag);
 //      if(!pSpr) {
-//        util.freelog(LOG_DEBUG,"Can't find %s", tag);
+//        util.freelog(Log.LOG_DEBUG,"Can't find %s", tag);
 //        tag = util.my_snprintf( "citizen%s%s_%d", alt_buf,
 //	    				get_citizen_name(i), j);
-//        util.freelog(LOG_DEBUG,"Trying load alternative %s", tag);
+//        util.freelog(Log.LOG_DEBUG,"Trying load alternative %s", tag);
 //        pSpr = load_sprite(tag);
 //      }
 //      

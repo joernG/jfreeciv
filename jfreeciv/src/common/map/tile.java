@@ -25,7 +25,8 @@ public class tile {
 	  public int nat_x, nat_y; /* Native coordinates of the tile. */
 	  public int index; /* Index coordinate of the tile. */
 //	  Terrain_type_id terrain;
-//	  public tile_special_type special;
+//	  public int special;
+	  public int special;
 	  public city city;
 //	  Speclists<unit> units;
 	  public Speclists<unit> units;

@@ -1451,7 +1451,7 @@ public class Gui_main{
 //  if (previous_state == socket_writable)
 //    return;
 //
-//  util.freelog(LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
+//  util.freelog(Log.LOG_DEBUG, "set_wait_for_writable_socket(%d)", socket_writable);
 //  gtk_input_remove(input_id);
 //  input_id = gtk_input_add_full(aconnection.sock, GDK_INPUT_READ 
 //				| (socket_writable ? GDK_INPUT_WRITE : 0)

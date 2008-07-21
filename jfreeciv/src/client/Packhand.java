@@ -29,7 +29,7 @@ public class Packhand{
 //#include "government.h"
 //#include "idex.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "nation.h"
 //#include "packets.h"
@@ -241,7 +241,7 @@ public class Packhand{
 //    return;
 //  }
 //
-//  powner = unit_owner(punit);
+//  powner = punit.unit_owner();
 //
 //  agents_unit_remove(punit);
 //  client_remove_unit(punit);
@@ -289,10 +289,10 @@ public class Packhand{
 //    if (show_combat) {
 //      int hp0 = attacker_hp, hp1 = defender_hp;
 //
-//      audio_play_sound(unit_type(punit0).sound_fight,
-//		       unit_type(punit0).sound_fight_alt);
-//      audio_play_sound(unit_type(punit1).sound_fight,
-//		       unit_type(punit1).sound_fight_alt);
+//      audio_play_sound(punit0.unit_type().sound_fight,
+//		       punit0.unit_type().sound_fight_alt);
+//      audio_play_sound(punit1.unit_type().sound_fight,
+//		       punit1.unit_type().sound_fight_alt);
 //
 //      if (do_combat_animation) {
 //	flush_dirty();
@@ -662,13 +662,13 @@ public class Packhand{
 //  /* update menus if the focus unit is on the tile. */
 //  {
 //    unit punit = get_unit_in_focus();
-//    if (punit && same_pos(punit.tile, pcity.tile)) {
+//    if (punit && Map.same_pos(punit.tile, pcity.tile)) {
 //      update_menus();
 //    }
 //  }
 //
 //  if(is_new) {
-//    util.freelog(LOG_DEBUG, "New %s city %s id %d (%d %d)",
+//    util.freelog(Log.LOG_DEBUG, "New %s city %s id %d (%d %d)",
 //	    Nation.get_nation_name(city_owner(pcity).nation),
 //	    pcity.name, pcity.id, TILE_XY(pcity.tile));
 //  }
@@ -1042,7 +1042,7 @@ public class Packhand{
 //          && packet_unit.activity == unit_activity.ACTIVITY_IDLE
 //          && (!get_unit_in_focus()
 //              /* only 1 wakeup focus per tile is useful */
-//              || !same_pos(packet_unit.tile, get_unit_in_focus().tile))) {
+//              || !Map.same_pos(packet_unit.tile, get_unit_in_focus().tile))) {
 //        set_unit_focus(punit);
 //        check_focus = false; /* and keep it */
 //
@@ -1133,7 +1133,7 @@ public class Packhand{
 //      check_focus = true;
 //    }
 //
-//    if (!same_pos(punit.tile, packet_unit.tile)) { 
+//    if (!Map.same_pos(punit.tile, packet_unit.tile)) { 
 //      /*** Change position ***/
 //      city pcity = map_get_city(punit.tile);
 //
@@ -1247,8 +1247,8 @@ public class Packhand{
 //      unit_list_insert(&pcity.units_supported, punit);
 //    }
 //
-//    util.freelog(LOG_DEBUG, "New %s %s id %d (%d %d) hc %d %s", 
-//	    Nation.get_nation_name(unit_owner(punit).nation),
+//    util.freelog(Log.LOG_DEBUG, "New %s %s id %d (%d %d) hc %d %s", 
+//	    Nation.get_nation_name(punit.unit_owner().nation),
 //	    unit_name(punit.type), TILE_XY(punit.tile), punit.id,
 //	    punit.homecity, (pcity ? pcity.name : "(unknown)"));
 //
@@ -1266,9 +1266,9 @@ public class Packhand{
 //  if (punit == get_unit_in_focus()) {
 //    update_unit_info_label(punit);
 //  } else if (get_unit_in_focus()
-//	     && (same_pos(get_unit_in_focus().tile, punit.tile)
+//	     && (Map.same_pos(get_unit_in_focus().tile, punit.tile)
 //		 || (moved
-//		     && same_pos(get_unit_in_focus().tile, old_tile)))) {
+//		     && Map.same_pos(get_unit_in_focus().tile, old_tile)))) {
 //    update_unit_info_label(get_unit_in_focus());
 //  }
 //
@@ -1371,9 +1371,9 @@ public class Packhand{
 //****************************************************************************/
 //void handle_map_info(int xsize, int ysize, int topology_id)
 //{
-//  map.xsize = xsize;
-//  map.ysize = ysize;
-//  map.topology_id = topology_id;
+//  Map.map.xsize = xsize;
+//  Map.map.ysize = ysize;
+//  Map.map.topology_id = topology_id;
 //
 //  /* Parameter is false so that sizes are kept unchanged. */
 //  map_init_topology(false);
@@ -1383,7 +1383,7 @@ public class Packhand{
 //
 //  generate_citydlg_dimensions();
 //
-//  set_overview_dimensions(map.xsize, map.ysize);
+//  set_overview_dimensions(Map.map.xsize, Map.map.ysize);
 //}
 //
 ///**************************************************************************
@@ -1679,10 +1679,10 @@ public class Packhand{
 //{
 //  connection pconn = find_conn_by_id(pinfo.id);
 //
-//  util.freelog(LOG_DEBUG, "conn_info id%d used%d est%d plr%d obs%d acc%d",
+//  util.freelog(Log.LOG_DEBUG, "conn_info id%d used%d est%d plr%d obs%d acc%d",
 //	  pinfo.id, pinfo.used, pinfo.established, pinfo.player_num,
 //	  pinfo.observer, (int)pinfo.access_level);
-//  util.freelog(LOG_DEBUG, "conn_info \"%s\" \"%s\" \"%s\"",
+//  util.freelog(Log.LOG_DEBUG, "conn_info \"%s\" \"%s\" \"%s\"",
 //	  pinfo.username, pinfo.addr, pinfo.capability);
 //  
 //  if (!pinfo.used) {
@@ -1716,7 +1716,7 @@ public class Packhand{
 //      conn_list_insert_back(&game.est_connections, pconn);
 //      conn_list_insert_back(&game.game_connections, pconn);
 //    } else {
-//      util.freelog(LOG_DEBUG, "Server reports updated connection %d %s",
+//      util.freelog(Log.LOG_DEBUG, "Server reports updated connection %d %s",
 //	      pinfo.id, pinfo.username);
 //      if (pplayer != pconn.player) {
 //	if (pconn.player) {
@@ -1762,7 +1762,7 @@ public class Packhand{
 //    }
 //
 //    pconn.ping_time = packet.ping_time[i];
-//    util.freelog(LOG_DEBUG, "conn-id=%d, ping=%fs", pconn.id,
+//    util.freelog(Log.LOG_DEBUG, "conn-id=%d, ping=%fs", pconn.id,
 //	    pconn.ping_time);
 //  }
 //  /* The old_ping_time data is ignored. */
@@ -2021,8 +2021,8 @@ public class Packhand{
 //     * But for NDEBUG clients we fix the error. */
 //    for (unit punit : ptile.units.data) {
 //      util.freelog(Log.LOG_ERROR, "%p %s at (%d,%d) %s", punit,
-//	      unit_type(punit).name, TILE_XY(punit.tile),
-//	      unit_owner(punit).name);
+//	      punit.unit_type().name, TILE_XY(punit.tile),
+//	      punit.unit_owner().name);
 //    } }
 //    unit_list_unlink_all(&ptile.units);
 //  }
@@ -2033,13 +2033,13 @@ public class Packhand{
 //    /* We're renumbering continents, somebody did a transform.
 //     * But we don't care about renumbering oceans since 
 //     * num_oceans is not kept at the client. */
-//    map.num_continents = 0;
+//    Map.map.num_continents = 0;
 //  }
 //
 //  ptile.continent = packet.continent;
 //
-//  if (ptile.continent > map.num_continents) {
-//    map.num_continents = ptile.continent;
+//  if (ptile.continent > Map.map.num_continents) {
+//    Map.map.num_continents = ptile.continent;
 //    allot_island_improvs();
 //  }
 //
@@ -2087,7 +2087,7 @@ public class Packhand{
 //  /* update menus if the focus unit is on the tile. */
 //  if (tile_changed) {
 //    unit punit = get_unit_in_focus();
-//    if (punit && same_pos(punit.tile, ptile)) {
+//    if (punit && Map.same_pos(punit.tile, ptile)) {
 //      update_menus();
 //    }
 //  }
@@ -2185,7 +2185,7 @@ public class Packhand{
 //
 //  for(i=0; i<MAX_NUM_TECH_LIST; i++) {
 //    game.rtech.partisan_req[i]  = packet.rtech_partisan_req[i];
-//    util.freelog(LOG_DEBUG, "techl %d: %d", i, game.rtech.partisan_req[i]);
+//    util.freelog(Log.LOG_DEBUG, "techl %d: %d", i, game.rtech.partisan_req[i]);
 //  }
 //
 //  game.government_when_anarchy = packet.government_when_anarchy;
@@ -2356,51 +2356,51 @@ public class Packhand{
 //    impr_type_iterate(id) {
 //      int inx;
 //      b = &improvement_types[id];
-//      util.freelog(LOG_DEBUG, "Impr: %s...",
+//      util.freelog(Log.LOG_DEBUG, "Impr: %s...",
 //	      b.name);
-//      util.freelog(LOG_DEBUG, "  tech_req    %2d/%s",
+//      util.freelog(Log.LOG_DEBUG, "  tech_req    %2d/%s",
 //	      b.tech_req,
 //	      (b.tech_req == A_LAST) ?
 //	      "Never" : get_tech_name(game.player_ptr, b.tech_req));
-//      util.freelog(LOG_DEBUG, "  bldg_req    %2d/%s",
+//      util.freelog(Log.LOG_DEBUG, "  bldg_req    %2d/%s",
 //	      b.bldg_req,
 //	      (b.bldg_req == B_LAST) ?
 //	      "None" :
 //	      improvement_types[b.bldg_req].name);
-//      util.freelog(LOG_DEBUG, "  terr_gate...");
+//      util.freelog(Log.LOG_DEBUG, "  terr_gate...");
 //      for (inx = 0; b.terr_gate[inx] != T_NONE; inx++) {
-//	util.freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(Log.LOG_DEBUG, "    %2d/%s",
 //		b.terr_gate[inx], get_terrain_name(b.terr_gate[inx]));
 //      }
-//      util.freelog(LOG_DEBUG, "  spec_gate...");
+//      util.freelog(Log.LOG_DEBUG, "  spec_gate...");
 //      for (inx = 0; b.spec_gate[inx] != S_NO_SPECIAL; inx++) {
-//	util.freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(Log.LOG_DEBUG, "    %2d/%s",
 //		b.spec_gate[inx], get_special_name(b.spec_gate[inx]));
 //      }
-//      util.freelog(LOG_DEBUG, "  equiv_range %2d/%s",
+//      util.freelog(Log.LOG_DEBUG, "  equiv_range %2d/%s",
 //	      b.equiv_range, effect_range_name(b.equiv_range));
-//      util.freelog(LOG_DEBUG, "  equiv_dupl...");
+//      util.freelog(Log.LOG_DEBUG, "  equiv_dupl...");
 //      for (inx = 0; b.equiv_dupl[inx] != B_LAST; inx++) {
-//	util.freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(Log.LOG_DEBUG, "    %2d/%s",
 //		b.equiv_dupl[inx], improvement_types[b.equiv_dupl[inx]].name);
 //      }
-//      util.freelog(LOG_DEBUG, "  equiv_repl...");
+//      util.freelog(Log.LOG_DEBUG, "  equiv_repl...");
 //      for (inx = 0; b.equiv_repl[inx] != B_LAST; inx++) {
-//	util.freelog(LOG_DEBUG, "    %2d/%s",
+//	util.freelog(Log.LOG_DEBUG, "    %2d/%s",
 //		b.equiv_repl[inx], improvement_types[b.equiv_repl[inx]].name);
 //      }
 //      if (tech_exists(b.obsolete_by)) {
-//	util.freelog(LOG_DEBUG, "  obsolete_by %2d/%s",
+//	util.freelog(Log.LOG_DEBUG, "  obsolete_by %2d/%s",
 //		b.obsolete_by,
 //		get_tech_name(game.player_ptr, b.obsolete_by));
 //      } else {
-//	util.freelog(LOG_DEBUG, "  obsolete_by %2d/Never", b.obsolete_by);
+//	util.freelog(Log.LOG_DEBUG, "  obsolete_by %2d/Never", b.obsolete_by);
 //      }
-//      util.freelog(LOG_DEBUG, "  is_wonder   %2d", b.is_wonder);
-//      util.freelog(LOG_DEBUG, "  build_cost %3d", b.build_cost);
-//      util.freelog(LOG_DEBUG, "  upkeep      %2d", b.upkeep);
-//      util.freelog(LOG_DEBUG, "  sabotage   %3d", b.sabotage);
-//      util.freelog(LOG_DEBUG, "  helptext    %s", b.helptext);
+//      util.freelog(Log.LOG_DEBUG, "  is_wonder   %2d", b.is_wonder);
+//      util.freelog(Log.LOG_DEBUG, "  build_cost %3d", b.build_cost);
+//      util.freelog(Log.LOG_DEBUG, "  upkeep      %2d", b.upkeep);
+//      util.freelog(Log.LOG_DEBUG, "  sabotage   %3d", b.sabotage);
+//      util.freelog(Log.LOG_DEBUG, "  helptext    %s", b.helptext);
 //    } impr_type_iterate_end;
 //  }
 //#endif
@@ -2817,7 +2817,7 @@ public class Packhand{
 //      get_next_request_id(aconnection.
 //			  client.last_processed_request_id_seen);
 //
-//  util.freelog(LOG_DEBUG, "start processing packet %d",
+//  util.freelog(Log.LOG_DEBUG, "start processing packet %d",
 //	  aconnection.client.request_id_of_currently_handled_packet);
 //}
 //
@@ -2828,7 +2828,7 @@ public class Packhand{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG, "finish processing packet %d",
+//  util.freelog(Log.LOG_DEBUG, "finish processing packet %d",
 //	  aconnection.client.request_id_of_currently_handled_packet);
 //
 //  assert(aconnection.client.request_id_of_currently_handled_packet != 0);
@@ -2857,7 +2857,7 @@ public class Packhand{
 //				   int packet_type, int size)
 //{
 //  assert(pc == &aconnection);
-//  util.freelog(LOG_DEBUG, "incoming packet={type=%d, size=%d}", packet_type,
+//  util.freelog(Log.LOG_DEBUG, "incoming packet={type=%d, size=%d}", packet_type,
 //	  size);
 //}
 //
@@ -2869,7 +2869,7 @@ public class Packhand{
 //				  int request_id)
 //{
 //  assert(pc == &aconnection);
-//  util.freelog(LOG_DEBUG, "outgoing packet={type=%d, size=%d, request_id=%d}",
+//  util.freelog(Log.LOG_DEBUG, "outgoing packet={type=%d, size=%d, request_id=%d}",
 //	  packet_type, size, request_id);
 //
 //  assert(request_id);
@@ -2901,7 +2901,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_freeze_hint()
 //{
-//  util.freelog(LOG_DEBUG, "handle_freeze_hint");
+//  util.freelog(Log.LOG_DEBUG, "handle_freeze_hint");
 //
 //  reports_freeze();
 //
@@ -2913,7 +2913,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_thaw_hint()
 //{
-//  util.freelog(LOG_DEBUG, "handle_thaw_hint");
+//  util.freelog(Log.LOG_DEBUG, "handle_thaw_hint");
 //
 //  reports_thaw();
 //

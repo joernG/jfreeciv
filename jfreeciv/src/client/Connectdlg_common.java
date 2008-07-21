@@ -384,7 +384,7 @@ public class Connectdlg_common{
 //   *
 //   * When a typical player launches a game, he wants the map orientation to
 //   * match the tileset orientation.  So if you use an isometric tileset you
-//   * get an iso-map and for a classic tileset you get a classic map.  In
+//   * get an iso-map and for a classic tileset you get a classic Map.map.  In
 //   * both cases the map wraps in the X direction by default.
 //   *
 //   * This works with hex maps too now.  A hex map always has is_isometric

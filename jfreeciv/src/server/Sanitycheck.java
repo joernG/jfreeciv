@@ -23,7 +23,7 @@ public class Sanitycheck{
 //#include "city.h"
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "terrain.h"
 //#include "unit.h"
@@ -40,9 +40,9 @@ public class Sanitycheck{
 //**************************************************************************/
 //static void check_specials()
 //{
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    Terrain_type_id terrain = map_get_terrain(ptile);
-//    enum tile_special_type special = map_get_special(ptile);
+//    enum int special = map_get_special(ptile);
 //
 //    if (contains_special(special, S_RAILROAD))
 //      assert(contains_special(special, S_ROAD));
@@ -57,7 +57,7 @@ public class Sanitycheck{
 //      assert(get_tile_type(terrain).irrigation_result == terrain);
 //
 //    assert(terrain >= T_FIRST && terrain < T_COUNT);
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -65,7 +65,7 @@ public class Sanitycheck{
 //**************************************************************************/
 //static void check_fow()
 //{
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    for(player pplayer: game.players){
 //      player_tile plr_tile = map_get_player_tile(ptile, pplayer);
 //      /* underflow of unsigned int */
@@ -78,7 +78,7 @@ public class Sanitycheck{
 //	assert(plr_tile.pending_seen == 0);
 //      }
 //    }
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -102,7 +102,7 @@ public class Sanitycheck{
 //**************************************************************************/
 //static void check_map()
 //{
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    city pcity = map_get_city(ptile);
 //    int cont = map_get_continent(ptile), x, y;
 //
@@ -133,21 +133,21 @@ public class Sanitycheck{
 //    }
 //
 //    if (pcity) {
-//      assert(same_pos(pcity.tile, ptile));
+//      assert(Map.same_pos(pcity.tile, ptile));
 //    }
 //
 //    for (unit punit : ptile.units.data) {
-//      assert(same_pos(punit.tile, ptile));
+//      assert(Map.same_pos(punit.tile, ptile));
 //
 //      /* Check diplomatic status of stacked units. */
 //      for (unit punit2 : ptile.units.data) {
-//	assert(pplayers_allied(unit_owner(punit), unit_owner(punit2)));
+//	assert(pplayers_allied(punit.unit_owner(), punit2.unit_owner()));
 //      } }
 //      if (pcity) {
-//	assert(pplayers_allied(unit_owner(punit), city_owner(pcity)));
+//	assert(pplayers_allied(punit.unit_owner(), city_owner(pcity)));
 //      }
 //    } }
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -164,7 +164,7 @@ public class Sanitycheck{
 //
 //  for (unit punit : pcity.units_supported.data) {
 //    assert(punit.homecity == pcity.id);
-//    assert(unit_owner(punit) == pplayer);
+//    assert(punit.unit_owner() == pplayer);
 //  } }
 //
 //  /* Note that cities may be found on land or water. */
@@ -264,7 +264,7 @@ public class Sanitycheck{
 //    } }
 //  }
 //
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    if (ptile.worked) {
 //      city pcity = ptile.worked;
 //      int city_x, city_y;
@@ -281,7 +281,7 @@ public class Sanitycheck{
 //		pcity.city_map[city_x][city_y]);
 //      }
 //    }
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************
@@ -294,7 +294,7 @@ public class Sanitycheck{
 //      city pcity;
 //      unit transporter = null, *transporter2 = null;
 //
-//      assert(unit_owner(punit) == pplayer);
+//      assert(punit.unit_owner() == pplayer);
 //
 //      if (punit.homecity != 0) {
 //	pcity = player_find_city_by_id(pplayer, punit.homecity);
@@ -305,7 +305,7 @@ public class Sanitycheck{
 //      if (!can_unit_continue_current_activity(punit)) {
 //	util.freelog(Log.LOG_ERROR, "%s at %d,%d (%s) has activity %s, "
 //		"which it can't continue!",
-//		unit_type(punit).name,
+//		punit.unit_type().name,
 //		TILE_XY(ptile), map_get_tile_info_text(ptile),
 //		get_activity_text(punit.activity));
 //      }
@@ -333,7 +333,7 @@ public class Sanitycheck{
 //        /* Also in the list of owner? */
 //        assert(player_find_unit_by_id(get_player(transporter.owner),
 //				      punit.transported_by) != null);
-//        assert(same_pos(ptile, transporter.tile));
+//        assert(Map.same_pos(ptile, transporter.tile));
 //
 //        /* Transporter capacity will be checked when transporter itself
 //	 * is checked */

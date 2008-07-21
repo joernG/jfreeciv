@@ -38,7 +38,7 @@ public class Dialogs{
 //#include "log.h"
 //#include "game.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //
 //#include "gui_mem.h"
 //
@@ -665,7 +665,7 @@ public class Dialogs{
 //  
 //  for(i = 0; i < n; i++) {
 //    pUnit = unit_list_get(&ptile.units, i);
-//    pUnitType = unit_type(pUnit);
+//    pUnitType = pUnit.unit_type();
 //        
 //    if(pUnit.owner == game.player_idx) {
 //      cBuf = util.my_snprintf( "Contact %s (%d / %d) %s(%d,%d,%d) %s",
@@ -674,18 +674,18 @@ public class Dialogs{
 //            pUnitType.name,
 //            pUnitType.attack_strength,
 //            pUnitType.defense_strength,
-//            (pUnitType.move_rate / SINGLE_MOVE),
+//            (pUnitType.move_rate / Unit_H.SINGLE_MOVE),
 //	    unit_activity_text(pUnit));
 //    } else {
 //      int att_chance, def_chance;
 //      
 //      cBuf = util.my_snprintf( "%s %s %s(A:%d D:%d M:%d FP:%d) HP:%d%%",
-//            get_nation_by_plr(unit_owner(pUnit)).name,
+//            get_nation_by_plr(pUnit.unit_owner()).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
 //            pUnitType.attack_strength,
 //            pUnitType.defense_strength,
-//            (pUnitType.move_rate / SINGLE_MOVE),
+//            (pUnitType.move_rate / Unit_H.SINGLE_MOVE),
 //      	    pUnitType.firepower,
 //	    (pUnit.hp * 100 / pUnitType.hp + 9) / 10);
 //      
@@ -913,7 +913,7 @@ public class Dialogs{
 //		map_get_tile_fpt_text(x, y),
 //    		sdl_get_tile_defense_info_text(pTile));
 //        
-//    if (tile_has_special(pTile, S_HUT))
+//    if (Map.tile_has_special(pTile, S_HUT))
 //    { 
 //      sz_strlcat(cBuf, "\nMinor Tribe Village");
 //    }
@@ -1447,7 +1447,7 @@ public class Dialogs{
 //      !(is_sailing_unit(pFocus_Unit) && (!is_ocean(pTile.terrain) || !pCity)) &&
 //      !(((pCity && pplayers_non_attack(game.player_ptr, city_owner(pCity))) 
 //      || is_non_attack_unit_tile(pTile, game.player_ptr))) &&
-//      (unit_type(pFocus_Unit).paratroopers_range >=
+//      (pFocus_Unit.unit_type().paratroopers_range >=
 //	    real_map_distance(pFocus_Unit.x, pFocus_Unit.y, x, y))) {
 //	      
 //      create_active_iconlabel(pBuf, pWindow.dst, pStr, "Paradrop here",
@@ -1495,7 +1495,7 @@ public class Dialogs{
 //	if (pUnit == pFocus_Unit) {
 //	  continue;
 //	}
-//        pUnitType = unit_type(pUnit);
+//        pUnitType = pUnit.unit_type();
 //        if(pUnit.owner == game.player_idx) {
 //          cBuf = util.my_snprintf(
 //            "Activate %s (%d / %d) %s (%d,%d,%d) %s",
@@ -1504,7 +1504,7 @@ public class Dialogs{
 //            pUnitType.name,
 //            pUnitType.attack_strength,
 //            pUnitType.defense_strength,
-//            (pUnitType.move_rate / SINGLE_MOVE),
+//            (pUnitType.move_rate / Unit_H.SINGLE_MOVE),
 //	    unit_activity_text(pUnit));
 //    
 //	  create_active_iconlabel(pBuf, pWindow.dst, pStr,
@@ -1517,12 +1517,12 @@ public class Dialogs{
 //	  int att_chance, def_chance;
 //	  
 //          cBuf = util.my_snprintf( "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
-//            get_nation_by_plr(unit_owner(pUnit)).name,
+//            get_nation_by_plr(pUnit.unit_owner()).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
 //            pUnitType.attack_strength,
 //            pUnitType.defense_strength,
-//            (pUnitType.move_rate / SINGLE_MOVE),
+//            (pUnitType.move_rate / Unit_H.SINGLE_MOVE),
 //      	    pUnitType.firepower,
 //	    ((pUnit.hp * 100) / pUnitType.hp));
 //    
@@ -1608,7 +1608,7 @@ public class Dialogs{
 //    { /* n == 1 */
 //      /* one unit - give orders */
 //      pUnit = unit_list_get(&pTile.units, 0);
-//      pUnitType = unit_type(pUnit);
+//      pUnitType = pUnit.unit_type();
 //      if (pUnit != pFocus_Unit) {
 //        if ((pCity && pCity.owner == game.player_idx) ||
 //	   (pUnit.owner == game.player_idx))
@@ -1620,7 +1620,7 @@ public class Dialogs{
 //            pUnitType.name,
 //            pUnitType.attack_strength,
 //            pUnitType.defense_strength,
-//            (pUnitType.move_rate / SINGLE_MOVE),
+//            (pUnitType.move_rate / Unit_H.SINGLE_MOVE),
 //	    unit_activity_text(pUnit));
 //    
 //	  create_active_iconlabel(pBuf, pWindow.dst, pStr,
@@ -1642,12 +1642,12 @@ public class Dialogs{
 //	  int att_chance, def_chance;
 //	
 //          cBuf = util.my_snprintf( "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
-//            get_nation_by_plr(unit_owner(pUnit)).name,
+//            get_nation_by_plr(pUnit.unit_owner()).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
 //            pUnitType.attack_strength,
 //            pUnitType.defense_strength,
-//            (pUnitType.move_rate / SINGLE_MOVE),
+//            (pUnitType.move_rate / Unit_H.SINGLE_MOVE),
 //      	    pUnitType.firepower,
 //	    ((pUnit.hp * 100) / pUnitType.hp));
 //    
@@ -2335,7 +2335,7 @@ public class Dialogs{
 //  
 //  popdown_diplomat_dialog();
 //  
-//  if(pUnit && pCity && !same_pos(pUnit.x, pUnit.y, pCity.x, pCity.y)) {
+//  if(pUnit && pCity && !Map.same_pos(pUnit.x, pUnit.y, pCity.x, pCity.y)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, pUnit.id, pCity.id, 0);
 //  }
 //  process_diplomat_arrival(null, 0);
@@ -3337,7 +3337,7 @@ public class Dialogs{
 //{
 //  
 //  unit pUnit = pWidget.data.unit;
-//  enum tile_special_type what = MAX_ID - pWidget.ID;
+//  enum int what = MAX_ID - pWidget.ID;
 //  
 //  popdown_pillage_dialog();
 //  
@@ -3375,11 +3375,11 @@ public class Dialogs{
 //  pillage.
 //**************************************************************************/
 //void popup_pillage_dialog(unit pUnit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  GUI pWindow = null, *pBuf = null;
 //  SDL_String16 *pStr;
-//  enum tile_special_type what;
+//  enum int what;
 //  int w = 0, h;
 //  
 //  if (pPillage_Dlg) {
@@ -4452,7 +4452,7 @@ public class Dialogs{
 //
 //  for (nation = 0; nation < game.playable_nation_count; nation++) {
 //    if (nations_used[nation]) {
-//      util.freelog(LOG_DEBUG,"  [%d]: %d = %s", nation, nations_used[nation],
+//      util.freelog(Log.LOG_DEBUG,"  [%d]: %d = %s", nation, nations_used[nation],
 //	      get_nation_name(nation));
 //
 //      pNat = get_widget_pointer_form_main_list(MAX_ID - nation);

@@ -1156,7 +1156,7 @@ public class Cityrep{
 //*****************************************************************/
 //void hilite_cities_from_canvas()
 //{
-//  util.freelog(LOG_DEBUG, "hilite_cities_from_canvas : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "hilite_cities_from_canvas : PORT ME");
 //}
 //
 ///****************************************************************
@@ -1164,6 +1164,6 @@ public class Cityrep{
 //*****************************************************************/
 //void toggle_city_hilite(city pcity, boolean on_off)
 //{
-//  util.freelog(LOG_DEBUG, "toggle_city_hilite : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "toggle_city_hilite : PORT ME");
 //}
 }

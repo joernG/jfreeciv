@@ -161,7 +161,7 @@ public class Aitech{
 //     * it's supposed to be doing; it just looks strange. -- Syela */
 //    goal_values[i] /= steps;
 //    if (steps < 6) {
-//      util.freelog(LOG_DEBUG, "%s: want = %d, value = %d, goal_value = %d",
+//      util.freelog(Log.LOG_DEBUG, "%s: want = %d, value = %d, goal_value = %d",
 //	      get_tech_name(pplayer, i), pplayer.ai.tech_want[i],
 //	      values[i], goal_values[i]);
 //    }
@@ -180,7 +180,7 @@ public class Aitech{
 //      newgoal = i;
 //    }
 //  } tech_type_iterate_end;
-//  util.freelog(LOG_DEBUG, "%s wants %s with desire %d (%d).", 
+//  util.freelog(Log.LOG_DEBUG, "%s wants %s with desire %d (%d).", 
 //	  pplayer.name, get_tech_name(pplayer, newtech), values[newtech], 
 //	  pplayer.ai.tech_want[newtech]);
 //  if (choice) {
@@ -194,7 +194,7 @@ public class Aitech{
 //    goal.choice = newgoal;
 //    goal.want = goal_values[newgoal] / num_cities_nonzero;
 //    goal.current_want = goal_values[pplayer.ai.tech_goal] / num_cities_nonzero;
-//    util.freelog(LOG_DEBUG,
+//    util.freelog(Log.LOG_DEBUG,
 //	    "Goal.choice = %s, goal.want = %d, goal_value = %d, "
 //	    "num_cities_nonzero = %d",
 //	    get_tech_name(pplayer, goal.choice), goal.want,
@@ -223,7 +223,7 @@ public class Aitech{
 //  }
 //  if (goal_choice.choice != A_UNSET) {
 //    pplayer.ai.tech_goal = goal_choice.choice;
-//    util.freelog(LOG_DEBUG, "next_tech_goal for %s is set to %s",
+//    util.freelog(Log.LOG_DEBUG, "next_tech_goal for %s is set to %s",
 //	    pplayer.name, get_tech_name(pplayer, goal_choice.choice));
 //  }
 //}
@@ -289,7 +289,7 @@ public class Aitech{
 //    if ((choice.want - choice.current_want) > penalty &&
 //	penalty + pplayer.research.bulbs_researched <=
 //	total_bulbs_required(pplayer)) {
-//      util.freelog(LOG_DEBUG, "%s switching from %s to %s with penalty of %d.",
+//      util.freelog(Log.LOG_DEBUG, "%s switching from %s to %s with penalty of %d.",
 //	      pplayer.name,
 //	      get_tech_name(pplayer, pplayer.research.researching),
 //	      get_tech_name(pplayer, choice.choice), penalty);
@@ -301,7 +301,7 @@ public class Aitech{
 //  /* It worked, in particular, because the value it sets (ai.tech_goal)
 //   * is practically never used, see the comment for ai_next_tech_goal */
 //  if (goal.choice != pplayer.ai.tech_goal) {
-//    util.freelog(LOG_DEBUG, "%s change goal from %s (want=%d) to %s (want=%d)",
+//    util.freelog(Log.LOG_DEBUG, "%s change goal from %s (want=%d) to %s (want=%d)",
 //	    pplayer.name, get_tech_name(pplayer, pplayer.ai.tech_goal), 
 //	    goal.current_want, get_tech_name(pplayer, goal.choice),
 //	    goal.want);

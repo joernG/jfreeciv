@@ -365,7 +365,7 @@ public class Cma_fec{
 //	      buf[9], buf[FOOD], buf[GOLD], buf[SHIELD], buf[LUXURY],
 //	      buf[TRADE], buf[SCIENCE], buf[6], buf[7], buf[8]);
 //
-//  util.freelog(LOG_DEBUG, "\n%s", buffer);
+//  util.freelog(Log.LOG_DEBUG, "\n%s", buffer);
 //  return buffer;
 //}
 //

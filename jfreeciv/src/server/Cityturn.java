@@ -29,7 +29,7 @@ public class Cityturn{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "player.h"
 //#include "rand.h"
@@ -261,7 +261,7 @@ public class Cityturn{
 //
 //	if (!cmr.found_a_valid) {
 //	  /* Should never happen. */
-//	  CITY_LOG(LOG_DEBUG, pcity, "emergency management");
+//	  CITY_LOG(Log.LOG_DEBUG, pcity, "emergency management");
 //	  cm_init_emergency_parameter(&cmp);
 //	  cm_query_result(pcity, &cmp, &cmr);
 //	}
@@ -287,7 +287,7 @@ public class Cityturn{
 //
 //	if (!cmr.found_a_valid) {
 //	  /* Should never happen. */
-//	  CITY_LOG(LOG_DEBUG, pcity, "emergency management");
+//	  CITY_LOG(Log.LOG_DEBUG, pcity, "emergency management");
 //	  cm_init_emergency_parameter(&cmp);
 //	  cm_query_result(pcity, &cmp, &cmr);
 //	}
@@ -565,12 +565,12 @@ public class Cityturn{
 //     * reserves.  Hence, I'll assume food upkeep > 0 units. -- jjm
 //     */
 //    for (unit punit : pcity.units_supported.data) {
-//      if (unit_type(punit).food_cost > 0 
+//      if (punit.unit_type().food_cost > 0 
 //          && !unit_flag(punit, F_UNDISBANDABLE)) {
 //
 //	notify_player_ex(city_owner(pcity), pcity.tile, E_UNIT_LOST,
 //			 "Game: Famine feared in %s, %s lost!", 
-//			 pcity.name, unit_type(punit).name);
+//			 pcity.name, punit.unit_type().name);
 // 
 //        Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "famine");
 //        wipe_unit(punit);
@@ -864,12 +864,12 @@ public class Cityturn{
 //
 //  if (pcity.shield_surplus < 0) {
 //    for (unit punit : pcity.units_supported.data) {
-//      if (utype_shield_cost(unit_type(punit), g) > 0
+//      if (utype_shield_cost(punit.unit_type(), g) > 0
 //	  && pcity.shield_surplus < 0
 //          && !unit_flag(punit, F_UNDISBANDABLE)) {
 //	notify_player_ex(pplayer, pcity.tile, E_UNIT_LOST,
 //			 "Game: %s can't upkeep %s, unit disbanded.",
-//			 pcity.name, unit_type(punit).name);
+//			 pcity.name, punit.unit_type().name);
 //        handle_unit_disband(pplayer, punit.id);
 //	/* pcity.shield_surplus is automatically updated. */
 //      }
@@ -882,13 +882,13 @@ public class Cityturn{
 //     * it! If we make it here all normal units are already disbanded, so only
 //     * undisbandable ones remain. */
 //    for (unit punit : pcity.units_supported.data) {
-//      int upkeep = utype_shield_cost(unit_type(punit), g);
+//      int upkeep = utype_shield_cost(punit.unit_type(), g);
 //
 //      if (upkeep > 0 && pcity.shield_surplus < 0) {
 //	assert(unit_flag(punit, F_UNDISBANDABLE));
 //	notify_player_ex(pplayer, pcity.tile, E_UNIT_LOST,
 //			 _("Game: Citizens in %s perish for their failure to "
-//			 "upkeep %s!"), pcity.name, unit_type(punit).name);
+//			 "upkeep %s!"), pcity.name, punit.unit_type().name);
 //	if (!city_reduce_size(pcity, 1)) {
 //	  return false;
 //	}
@@ -1025,9 +1025,9 @@ public class Cityturn{
 //     */
 //    if (!worklist_change_build_target(pplayer, pcity) && !space_part) {
 //      /* Fall back to the good old ways. */
-//      util.freelog(LOG_DEBUG, "Trying advisor_choose_build.");
+//      util.freelog(Log.LOG_DEBUG, "Trying advisor_choose_build.");
 //      advisor_choose_build(pplayer, pcity);
-//      util.freelog(LOG_DEBUG, "Advisor_choose_build didn't kill us.");
+//      util.freelog(Log.LOG_DEBUG, "Advisor_choose_build didn't kill us.");
 //    }
 //  }
 //
@@ -1183,7 +1183,7 @@ public class Cityturn{
 //      }
 //      k--;
 //    }
-//    util.freelog(LOG_DEBUG, "pollution not placed: city: %s", pcity.name);
+//    util.freelog(Log.LOG_DEBUG, "pollution not placed: city: %s", pcity.name);
 //  }
 //}
 //
@@ -1286,7 +1286,7 @@ public class Cityturn{
 //  pcity.changed_from_id = pcity.currently_building;
 //  pcity.changed_from_is_unit = pcity.is_building_unit;
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "In %s, building %s.  Beg of Turn shields = %d",
 //	  pcity.name,
 //	  pcity.changed_from_is_unit ?

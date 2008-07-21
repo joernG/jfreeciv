@@ -42,7 +42,7 @@ public class Citydlg{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "genlist.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"

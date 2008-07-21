@@ -201,12 +201,12 @@ public class Overviewclass{
 //  LONG scaley = data.ov_ScaleY;
 //  int s, x, y;
 //
-//  for (y = 0; y < map.ysize; y++)
+//  for (y = 0; y < Map.map.ysize; y++)
 //  {
 //    UBYTE *bufstart = &data.ov_Buffer[(y * scaley) * data.ov_BufferWidth];
 //    UBYTE *buf = bufstart;
 //
-//    for (x = 0; x < map.xsize; x++)
+//    for (x = 0; x < Map.map.xsize; x++)
 //    {
 //      UBYTE penno = Overview_GetMapPen(data, x, y);
 //

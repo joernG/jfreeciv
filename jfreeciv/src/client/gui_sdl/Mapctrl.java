@@ -519,8 +519,8 @@ public class Mapctrl{
 //
 //static int resize_minimap()
 //{
-//  int w = OVERVIEW_TILE_WIDTH * map.xsize;
-//  int h = OVERVIEW_TILE_HEIGHT * map.ysize;
+//  int w = OVERVIEW_TILE_WIDTH * Map.map.xsize;
+//  int h = OVERVIEW_TILE_HEIGHT * Map.map.ysize;
 //  int current_w = pMiniMap_Window.size.w - BLOCK_W - DOUBLE_FRAME_WH;
 //  int current_h = pMiniMap_Window.size.h - DOUBLE_FRAME_WH;
 //  
@@ -542,7 +542,7 @@ public class Mapctrl{
 //{
 //  redraw_widget(pWidget);
 //  sdl_dirty_rect(pWidget.size);
-//  if (((OVERVIEW_TILE_WIDTH + 1) * map.xsize + BLOCK_W + DOUBLE_FRAME_WH) <=
+//  if (((OVERVIEW_TILE_WIDTH + 1) * Map.map.xsize + BLOCK_W + DOUBLE_FRAME_WH) <=
 //					pUnits_Info_Window.size.x) {
 //    char cBuf[4];
 //    OVERVIEW_TILE_WIDTH++;
@@ -581,7 +581,7 @@ public class Mapctrl{
 //  redraw_widget(pWidget);
 //  sdl_dirty_rect(pWidget.size);
 //  if (Main.gui.h -
-//    ((OVERVIEW_TILE_HEIGHT + 1) * map.ysize + DOUBLE_FRAME_WH) >= 40) {
+//    ((OVERVIEW_TILE_HEIGHT + 1) * Map.map.ysize + DOUBLE_FRAME_WH) >= 40) {
 //    char cBuf[4];
 //      
 //    OVERVIEW_TILE_HEIGHT++;
@@ -807,8 +807,8 @@ public class Mapctrl{
 //
 //static int resize_unit_info()
 //{
-//  int w = INFO_WIDTH * map.xsize;
-//  int h = INFO_HEIGHT * map.ysize;
+//  int w = INFO_WIDTH * Map.map.xsize;
+//  int h = INFO_HEIGHT * Map.map.ysize;
 //  int current_w = pUnits_Info_Window.size.w - BLOCK_W - DOUBLE_FRAME_WH;
 //  int current_h = pUnits_Info_Window.size.h - DOUBLE_FRAME_WH;
 //  
@@ -830,7 +830,7 @@ public class Mapctrl{
 //  redraw_widget(pWidget);
 //  sdl_dirty_rect(pWidget.size);
 //  if (Main.gui.w -
-//    ((INFO_WIDTH + 1) * map.xsize + BLOCK_W + DOUBLE_FRAME_WH) >=
+//    ((INFO_WIDTH + 1) * Map.map.xsize + BLOCK_W + DOUBLE_FRAME_WH) >=
 //		pMiniMap_Window.size.x + pMiniMap_Window.size.w) {
 //    INFO_WIDTH++;
 //    resize_unit_info();
@@ -856,7 +856,7 @@ public class Mapctrl{
 //  redraw_widget(pWidget);
 //  sdl_dirty_rect(pWidget.size);
 //  if(Main.gui.h -
-//    ((INFO_HEIGHT + 1) * map.ysize + DOUBLE_FRAME_WH) >= 40) {
+//    ((INFO_HEIGHT + 1) * Map.map.ysize + DOUBLE_FRAME_WH) >= 40) {
 //    INFO_HEIGHT++;
 //    resize_unit_info();
 //  }
@@ -1018,11 +1018,11 @@ public class Mapctrl{
 //  pBuf.size.y = pWindow.size.y + pWindow.size.h - pBuf.size.h - 10;
 //    
 //  if (!INFO_HEIGHT) {
-//    INFO_WIDTH_MIN = (DEFAULT_UNITS_W - BLOCK_W - DOUBLE_FRAME_WH) / map.xsize;
+//    INFO_WIDTH_MIN = (DEFAULT_UNITS_W - BLOCK_W - DOUBLE_FRAME_WH) / Map.map.xsize;
 //    if (INFO_WIDTH_MIN == 1) {
 //      INFO_WIDTH_MIN = 0;
 //    }
-//    INFO_HEIGHT_MIN = (DEFAULT_UNITS_H - DOUBLE_FRAME_WH) / map.ysize;
+//    INFO_HEIGHT_MIN = (DEFAULT_UNITS_H - DOUBLE_FRAME_WH) / Map.map.ysize;
 //    if (!INFO_HEIGHT_MIN) {
 //      INFO_HEIGHT_MIN = 1;
 //    }  
@@ -1048,12 +1048,12 @@ public class Mapctrl{
 //      if ((SDL_Client_Flags & CF_MINI_MAP_SHOW) &&  
 //         (Main.event.motion.x >= OVERVIEW_START_X) &&
 //         (Main.event.motion.x <
-//	   OVERVIEW_START_X + OVERVIEW_TILE_WIDTH * map.xsize) &&
+//	   OVERVIEW_START_X + OVERVIEW_TILE_WIDTH * Map.map.xsize) &&
 //         (Main.event.motion.y >=
 //	   Main.gui.h - pMiniMap_Window.size.h + OVERVIEW_START_Y) &&
 //         (Main.event.motion.y <
 //	   Main.gui.h - pMiniMap_Window.size.h + OVERVIEW_START_Y +
-//			  OVERVIEW_TILE_HEIGHT * map.ysize)) {
+//			  OVERVIEW_TILE_HEIGHT * Map.map.ysize)) {
 //        center_tile_mapcanvas(
 //          (Main.event.motion.x - OVERVIEW_START_X) / OVERVIEW_TILE_WIDTH,
 //	  (Main.event.motion.y -

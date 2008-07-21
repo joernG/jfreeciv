@@ -123,7 +123,7 @@ public class Dialogs{
 //
 //  selected_nation = row;
 //
-//  util.freelog(LOG_DEBUG, "selcted %s\n", nation.name);
+//  util.freelog(Log.LOG_DEBUG, "selcted %s\n", nation.name);
 //  sw_list_clear(leaders_list);
 //
 //  for (i = 0; i < leader_count; i++) {
@@ -342,7 +342,7 @@ public class Dialogs{
 //  pillage.
 //**************************************************************************/
 //void popup_pillage_dialog(unit punit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  /* PORTME */
 //}

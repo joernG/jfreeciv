@@ -30,7 +30,7 @@ public class Mapview{
 //#include "game.h"
 //#include "government.h"		/* government_graphic() */
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "rand.h"
 //#include "support.h"
@@ -171,7 +171,7 @@ public class Mapview{
 //	player_find_city_by_id(game.player_ptr, punit.homecity);
 //    int infrastructure =
 //	get_tile_infrastructure_set(punit.tile);
-//    unit_type ptype = unit_type(punit);
+//    unit_type ptype = punit.unit_type();
 //
 //    buffer = util.my_snprintf( "%s", ptype.name);
 //
@@ -483,7 +483,7 @@ public class Mapview{
 //}
 //
 ///**************************************************************************
-// Update display of descriptions associated with cities on the main map.
+// Update display of descriptions associated with cities on the main Map.map.
 //**************************************************************************/
 //void update_city_descriptions()
 //{

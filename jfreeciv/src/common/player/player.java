@@ -59,7 +59,7 @@ public class player {
 //	  unsigned public int really_gives_vision; /* takes into account that p3 may see what p1 has via p2 */
 //	  Impr_Status improvements[B_LAST]; /* improvements with equiv_range==Player */
 //	  Impr_Status *island_improv; /* improvements with equiv_range==Island, dimensioned to
-//				 	 [map.num_continents][game.num_impr_types] */
+//				 	 [Map.map.num_continents][game.num_impr_types] */
 //	  struct {
 //	    public int length;
 //	    void *data;

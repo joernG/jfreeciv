@@ -1,8 +1,15 @@
 package server;
-import static server.spaceace.player_spaceship.*;
-import static common.Game.*;
-import static server.Plrhand.*;
+import static common.Game.game;
+import static server.Plrhand.notify_player;
+import static server.Plrhand.notify_player_ex;
 import port.util;
+import server.gamelog.EEndGameState;
+import server.gamelog.EGamelog;
+import server.spaceace.player_spaceship;
+import utility.Log;
+import utility.Shared;
+import utility.Speclists;
+
 import common.Connection;
 import common.Nation;
 import common.Spaceship;
@@ -12,13 +19,6 @@ import common.packet_gen.packet_spaceship_info;
 import common.packets.spaceship_place_type;
 import common.play_spaceship.spaceship_state;
 import common.player.player;
-
-import server.gamelog.EEndGameState;
-import server.gamelog.EGamelog;
-import server.spaceace.player_spaceship;
-import utility.Log;
-import utility.Shared;
-import utility.Speclists;
 
 public class Spacerace{
 

@@ -1,26 +1,6 @@
 package common;
 
 public class Terrain{
-
-// Freeciv - Copyright (C) 2003 - The Freeciv Project
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <assert.h>
-//
-//#include "map.h"
 //#include "mem.h"		/* free */
 //#include "rand.h"
 //#include "shared.h"
@@ -152,11 +132,11 @@ public class Terrain{
 //  int _total;								    \
 //  									    \
 //  if (card_only) {							    \
-//    _dirlist = map.cardinal_dirs;					    \
-//    _total = map.num_cardinal_dirs;					    \
+//    _dirlist = Map.map.cardinal_dirs;					    \
+//    _total = Map.map.num_cardinal_dirs;					    \
 //  } else {								    \
-//    _dirlist = map.valid_dirs;						    \
-//    _total = map.num_valid_dirs;					    \
+//    _dirlist = Map.map.valid_dirs;						    \
+//    _total = Map.map.num_valid_dirs;					    \
 //  }									    \
 //  									    \
 //  adjc_dirlist_iterate(center_tile, itr_tile, _dir, _dirlist, _total) {
@@ -205,7 +185,7 @@ public class Terrain{
 ///****************************************************************************
 //  Returns true iff any tile adjacent to (map_x,map_y) has the given special.
 //****************************************************************************/
-//boolean is_special_near_tile(final tile ptile, enum tile_special_type spe)
+//boolean is_special_near_tile(final tile ptile, enum int spe)
 //{
 //  adjc_iterate(ptile, adjc_tile) {
 //    if (map_has_special(adjc_tile, spe)) {
@@ -221,7 +201,7 @@ public class Terrain{
 //****************************************************************************/
 //int count_special_near_tile(final tile ptile,
 //			    boolean cardinal_only, boolean percentage,
-//			    enum tile_special_type spe)
+//			    enum int spe)
 //{
 //  int count = 0, total = 0;
 //

@@ -123,7 +123,7 @@ public class Audio{
 //  }
 //
 //  if (found && i != selected_plugin) {
-//    util.freelog(LOG_DEBUG, "Shutting down %s", plugins[selected_plugin].name);
+//    util.freelog(Log.LOG_DEBUG, "Shutting down %s", plugins[selected_plugin].name);
 //    plugins[selected_plugin].stop();
 //    plugins[selected_plugin].wait();
 //    plugins[selected_plugin].shutdown();
@@ -337,7 +337,7 @@ public class Audio{
 //
 //  assert(tag != null);
 //
-//  util.freelog(LOG_DEBUG, "audio_play_sound('%s', '%s')", tag, pretty_alt_tag);
+//  util.freelog(Log.LOG_DEBUG, "audio_play_sound('%s', '%s')", tag, pretty_alt_tag);
 //
 //  /* try playing primary tag first, if not go to alternative tag */
 //  if (!audio_play_tag(tag, false) && !audio_play_tag(alt_tag, false)) {
@@ -355,7 +355,7 @@ public class Audio{
 //
 //  assert(tag != null);
 //
-//  util.freelog(LOG_DEBUG, "audio_play_music('%s', '%s')", tag, pretty_alt_tag);
+//  util.freelog(Log.LOG_DEBUG, "audio_play_music('%s', '%s')", tag, pretty_alt_tag);
 //
 //  /* try playing primary tag first, if not go to alternative tag */
 //  if (!audio_play_tag(tag, true) && !audio_play_tag(alt_tag, true)) {

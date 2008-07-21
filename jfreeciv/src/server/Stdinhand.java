@@ -17,7 +17,7 @@ public class Stdinhand{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"
@@ -1659,7 +1659,7 @@ public class Stdinhand{
 //    }
 //    cat_snprintf(buffer, sizeof(buffer), "\n");
 //  }
-//  util.freelog(LOG_DEBUG, "report_server_options buffer len %d", i);
+//  util.freelog(Log.LOG_DEBUG, "report_server_options buffer len %d", i);
 //  page_conn(dest, caption, title, buffer);
 //}
 //
@@ -2318,11 +2318,11 @@ public class Stdinhand{
 //      if (punit.debug) {
 //        punit.debug = false;
 //        cmd_reply(CMD_DEBUG, caller, C_OK, "%s's %s no longer debugged.",
-//                  unit_owner(punit).name, unit_name(punit.type));
+//                  punit.unit_owner().name, unit_name(punit.type));
 //      } else {
 //        punit.debug = true;
 //        UNIT_LOG(Log.LOG_NORMAL, punit, "%s's %s debugged.",
-//                 unit_owner(punit).name, unit_name(punit.type));
+//                 punit.unit_owner().name, unit_name(punit.type));
 //      }
 //    } }
 //  } else if (ntokens > 0 && strcmp(arg[0], "unit") == 0) {
@@ -2344,11 +2344,11 @@ public class Stdinhand{
 //    if (punit.debug) {
 //      punit.debug = false;
 //      cmd_reply(CMD_DEBUG, caller, C_OK, "%s's %s no longer debugged.",
-//                unit_owner(punit).name, unit_name(punit.type));
+//                punit.unit_owner().name, unit_name(punit.type));
 //    } else {
 //      punit.debug = true;
 //      UNIT_LOG(Log.LOG_NORMAL, punit, "%s's %s debugged.",
-//               unit_owner(punit).name, unit_name(punit.type));
+//               punit.unit_owner().name, unit_name(punit.type));
 //    }
 //  } else {
 //    cmd_reply(CMD_DEBUG, caller, C_SYNTAX, usage);
@@ -3253,7 +3253,7 @@ public class Stdinhand{
 //  int i;
 //  boolean in_single_quotes = false, in_double_quotes = false;
 //
-//  util.freelog(LOG_DEBUG,"cut_comment(str='%s')",str);
+//  util.freelog(Log.LOG_DEBUG,"cut_comment(str='%s')",str);
 //
 //  for (i = 0; i < str.length(); i++) {
 //    if (str[i] == '"' && !in_single_quotes) {
@@ -3266,7 +3266,7 @@ public class Stdinhand{
 //      break;
 //    }
 //  }
-//  util.freelog(LOG_DEBUG,"cut_comment: returning '%s'",str);
+//  util.freelog(Log.LOG_DEBUG,"cut_comment: returning '%s'",str);
 //}
 //
 ///**************************************************************************
@@ -3595,16 +3595,16 @@ public class Stdinhand{
 //  case server_states.PRE_GAME_STATE:
 //    /* Sanity check scenario */
 //    if (game.is_new_game && !check) {
-//      if (map.num_start_positions > 0
-//	  && game.max_players > map.num_start_positions) {
+//      if (Map.map.num_start_positions > 0
+//	  && game.max_players > Map.map.num_start_positions) {
 //	/* If we load a pre-generated map (i.e., a scenario) it is possible
 //	 * to increase the number of players beyond the number supported by
 //	 * the scenario.  The solution is a hack: cut the extra players
 //	 * when the game starts. */
 //	util.freelog(LOG_VERBOSE, "Reduced maxplayers from %i to %i to fit "
 //	        "to the number of start positions.",
-//		game.max_players, map.num_start_positions);
-//	game.max_players = map.num_start_positions;
+//		game.max_players, Map.map.num_start_positions);
+//	game.max_players = Map.map.num_start_positions;
 //      }
 //
 //      if (get_num_nonobserver_players() > game.max_players) {

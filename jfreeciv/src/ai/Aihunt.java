@@ -23,7 +23,7 @@ public class Aihunt{
 //#include "city.h"
 //#include "combat.h"
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "log.h"
 //#include "pf_tools.h"
 //#include "player.h"
@@ -245,7 +245,7 @@ public class Aihunt{
 //
 //  if (is_barbarian(pplayer)
 //      || !(is_sailing_unit(punit) || is_ground_unit(punit))
-//      || punittype.move_rate < 2 * SINGLE_MOVE
+//      || punittype.move_rate < 2 * Unit_H.SINGLE_MOVE
 //      || ATTACK_POWER(punit) <= 1
 //      || punit.owner != pplayer.player_no) {
 //    return false;
@@ -295,7 +295,7 @@ public class Aihunt{
 //      }
 //      UNIT_LOG(LOGLEVEL_HUNT, punit, "considering chasing %s(%d, %d) id %d "
 //               "dist1 %d dist2 %d",
-//	       unit_type(target).name, TILE_XY(target.tile),
+//	       target.unit_type().name, TILE_XY(target.tile),
 //               target.id, dist1, dist2);
 //      /* We can't attack units stationary in cities. */
 //      if (map_get_city(target.tile) 
@@ -303,10 +303,10 @@ public class Aihunt{
 //        continue;
 //      }
 //      /* We can't chase if we aren't faster or on intercept vector */
-//      if (unit_type(punit).move_rate < unit_type(target).move_rate
+//      if (punit.unit_type().move_rate < target.unit_type().move_rate
 //          && dist1 >= dist2) {
 //        UNIT_LOG(LOGLEVEL_HUNT, punit, "giving up racing %s (%d, %d).(%d, %d)",
-//                 unit_type(target).name,
+//                 target.unit_type().name,
 //		 target.ai.prev_pos ? (*target.ai.prev_pos).x : -1,
 //                 target.ai.prev_pos ? (*target.ai.prev_pos).y : -1,
 //                 TILE_XY(target.tile));
@@ -317,13 +317,13 @@ public class Aihunt{
 //        if (unit_flag(sucker, F_DIPLOMAT)) {
 //          stackthreat += 500;
 //        }
-//        stackcost += unit_type(sucker).build_cost;
+//        stackcost += sucker.unit_type().build_cost;
 //      } }
 //      defender = get_defender(punit, target.tile);
-//      if (stackcost < unit_type(punit).build_cost
+//      if (stackcost < punit.unit_type().build_cost
 //          && unit_win_chance(punit, defender) < 0.6) {
 //        UNIT_LOG(LOGLEVEL_HUNT, punit, "chickening out from attacking %s"
-//                 "(%d, %d)", unit_type(defender).name,
+//                 "(%d, %d)", defender.unit_type().name,
 //                 TILE_XY(defender.tile));
 //        continue;
 //      }
@@ -332,7 +332,7 @@ public class Aihunt{
 //      stackthreat /= real_map_distance(punit.tile, target.tile) + 1;
 //      UNIT_LOG(LOGLEVEL_HUNT, punit, "considering hunting %s's %s(%d, %d) id "
 //               "id %d with want %d, dist1 %d, dist2 %d", 
-//               unit_owner(defender).name, unit_type(defender).name, 
+//               defender.unit_owner().name, defender.unit_type().name, 
 //               TILE_XY(defender.tile), defender.id, stackthreat, dist1,
 //               dist2);
 //      /* TO DO: probably ought to WAG down targets of players we are not (yet)
@@ -379,7 +379,7 @@ public class Aihunt{
 //      map = pf_create_map(&parameter);
 //
 //      pf_iterator(map, pos) {
-//        if (pos.total_MC > missile.moves_left / SINGLE_MOVE) {
+//        if (pos.total_MC > missile.moves_left / Unit_H.SINGLE_MOVE) {
 //          break;
 //        }
 //        if (map_get_city(pos.tile)
@@ -387,9 +387,9 @@ public class Aihunt{
 //          continue;
 //        }
 //        for (unit victim : pos.tile.units.data) {
-//          unit_type ut = unit_type(victim);
+//          unit_type ut = victim.unit_type();
 //          enum diplstate_type ds = pplayer_get_diplstate(pplayer, 
-//                                                         unit_owner(victim)).type;
+//                                                         victim.unit_owner()).type;
 //
 //          if (ds != diplstate_type.DS_WAR) {
 //            continue;
@@ -453,7 +453,7 @@ public class Aihunt{
 //  if (!target
 //      || !goto_is_sane(punit, target.tile, true)
 //      || map_get_city(target.tile)
-//      || !is_player_dangerous(pplayer, unit_owner(target))) {
+//      || !is_player_dangerous(pplayer, target.unit_owner())) {
 //    UNIT_LOG(LOGLEVEL_HUNT, punit, "target vanished");
 //    ai_unit_new_role(punit, AIUNIT_NONE, null);
 //    return false;

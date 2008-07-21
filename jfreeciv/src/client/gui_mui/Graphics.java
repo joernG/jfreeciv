@@ -36,7 +36,7 @@ public class Graphics{
 //
 //#include "fcintl.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "options.h"
 //
 //#include "climap.h"
@@ -1225,7 +1225,7 @@ public class Graphics{
 //  Sprite dither[4];
 //  city pcity;
 //  unit punit, *pfocus;
-//  enum tile_special_type special;
+//  enum int special;
 //  int count, i = 0;
 //  int fog;
 //  int solid_bg;
@@ -1257,7 +1257,7 @@ public class Graphics{
 //    if (solid_color_behind_units && (pcity || punit))
 //    {
 //      if (pcity) color = player_color(city_owner(pcity));
-//      else color = player_color(unit_owner(punit));
+//      else color = player_color(punit.unit_owner());
 //    } else color = COLOR_STD_BACKGROUND;
 //
 //    put_color_tile_iso(rp,canvas_x,canvas_y, offset_x,offset_y,width,height,color);
@@ -1374,7 +1374,7 @@ public class Graphics{
 //		  offset_x, offset_y_unit,
 //		  width, height_unit, fog);
 //  }
-//  if (contains_special(special, S_AIRBASE) && draw_fortress_airbase)
+//  if (contains_special(special, Terrain_H.S_AIRBASE) && draw_fortress_airbase)
 //    put_overlay_tile_draw(rp,
 //			  canvas_x, canvas_y-NORMAL_TILE_HEIGHT/2,
 //			  sprites.tx.airbase,
@@ -1441,10 +1441,10 @@ public class Graphics{
 //  int dest_x = 0, dest_y = 0;
 //
 //  if (!tile_visible_mapcanvas(x, y)) {
-//    util.freelog(LOG_DEBUG, "dropping %d,%d", x, y);
+//    util.freelog(Log.LOG_DEBUG, "dropping %d,%d", x, y);
 //    return;
 //  }
-//  util.freelog(LOG_DEBUG, "putting %d,%d draw %x", x, y, draw);
+//  util.freelog(Log.LOG_DEBUG, "putting %d,%d draw %x", x, y, draw);
 //
 //  width = (draw & D_TMB_L) && (draw & D_TMB_R) ? NORMAL_TILE_WIDTH : NORMAL_TILE_WIDTH/2;
 //  if (!(draw & D_TMB_L))

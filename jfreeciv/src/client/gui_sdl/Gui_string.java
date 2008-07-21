@@ -266,10 +266,10 @@ public class Gui_string{
 //    break;
 //  }
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  _("SDL_create_str16_surf: Font is generally %d big, and "
 //	    "string is %hd big"), TTF_FontHeight(pString.font), pText.h);
-//  util.freelog(LOG_DEBUG, "SDL_create_str16_surf: String is %d lenght",
+//  util.freelog(Log.LOG_DEBUG, "SDL_create_str16_surf: String is %d lenght",
 //	  pText.w);
 //
 //
