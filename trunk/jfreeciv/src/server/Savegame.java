@@ -37,7 +37,7 @@ public class Savegame{
 //#include "game.h"
 //#include "government.h"
 //#include "idex.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "unit.h"
 //#include "version.h"
 //
@@ -79,11 +79,11 @@ public class Savegame{
 //#define SAVE_MAP_DATA(ptile, line,					    \
 //                      GET_XY_CHAR, SECFILE_INSERT_LINE)                     \
 //{                                                                           \
-//  char line[map.xsize + 1];                                                 \
+//  char line[Map.map.xsize + 1];                                                 \
 //  int _nat_x, _nat_y;							    \
 //                                                                            \
-//  for (_nat_y = 0; _nat_y < map.ysize; _nat_y++) {			    \
-//    for (_nat_x = 0; _nat_x < map.xsize; _nat_x++) {			    \
+//  for (_nat_y = 0; _nat_y < Map.map.ysize; _nat_y++) {			    \
+//    for (_nat_x = 0; _nat_x < Map.map.xsize; _nat_x++) {			    \
 //      tile ptile = native_pos_to_tile(_nat_x, _nat_y);		    \
 //									    \
 //      line[_nat_x] = (GET_XY_CHAR);                                         \
@@ -92,7 +92,7 @@ public class Savegame{
 //              "data: '%c' %d", line[_nat_x], line[_nat_x]);                 \
 //      }                                                                     \
 //    }                                                                       \
-//    line[map.xsize] = '\0';                                                 \
+//    line[Map.map.xsize] = '\0';                                                 \
 //    (SECFILE_INSERT_LINE);                                                  \
 //  }                                                                         \
 //}
@@ -141,11 +141,11 @@ public class Savegame{
 //  int _nat_x, _nat_y;							    \
 //                                                                            \
 //  boolean _warning_printed = false;                                            \
-//  for (_nat_y = 0; _nat_y < map.ysize; _nat_y++) {			    \
+//  for (_nat_y = 0; _nat_y < Map.map.ysize; _nat_y++) {			    \
 //    final int nat_y = _nat_y;						    \
 //    final String _line = (SECFILE_LOOKUP_LINE);                              \
 //                                                                            \
-//    if (!_line || _line.length() != map.xsize) {                             \
+//    if (!_line || _line.length() != Map.map.xsize) {                             \
 //      if (!_warning_printed) {                                              \
 //        /* TRANS: Error message. */                                         \
 //        util.freelog(Log.LOG_ERROR, _("The save file contains incomplete "           \
@@ -158,7 +158,7 @@ public class Savegame{
 //        } else {                                                            \
 //          /* TRANS: Error message. */                                       \
 //          util.freelog(Log.LOG_ERROR, _("Reason: line too short "                    \
-//                  "(expected %d got %lu"), map.xsize,                       \
+//                  "(expected %d got %lu"), Map.map.xsize,                       \
 //                  (unsigned long) _line.length());                           \
 //        }                                                                   \
 //        /* Do not translate.. */                                            \
@@ -168,7 +168,7 @@ public class Savegame{
 //      }                                                                     \
 //      continue;                                                             \
 //    }                                                                       \
-//    for (_nat_x = 0; _nat_x < map.xsize; _nat_x++) {			    \
+//    for (_nat_x = 0; _nat_x < Map.map.xsize; _nat_x++) {			    \
 //      final char ch = _line[_nat_x];                                        \
 //      tile ptile = native_pos_to_tile(_nat_x, _nat_y);		    \
 //                                                                            \
@@ -491,7 +491,7 @@ public class Savegame{
 //  int nat_x, nat_y;
 //  
 //  for (savegame_start_positions = 0;
-//       secfile_lookup_int_default(file, -1, "map.r%dsx",
+//       secfile_lookup_int_default(file, -1, "Map.map.r%dsx",
 //                                  savegame_start_positions) != -1;
 //       savegame_start_positions++) {
 //    /* Nothing. */
@@ -502,7 +502,7 @@ public class Savegame{
 //    struct start_position start_positions[savegame_start_positions];
 //    
 //    for (i = j = 0; i < savegame_start_positions; i++) {
-//      char *nation = secfile_lookup_str_default(file, null, "map.r%dsnation",
+//      char *nation = secfile_lookup_str_default(file, null, "Map.map.r%dsnation",
 //                                                i);
 //
 //      if (nation == null) {
@@ -520,32 +520,32 @@ public class Savegame{
 //	continue;
 //      }
 //      
-//      nat_x = secfile_lookup_int(file, "map.r%dsx", i);
-//      nat_y = secfile_lookup_int(file, "map.r%dsy", i);
+//      nat_x = secfile_lookup_int(file, "Map.map.r%dsx", i);
+//      nat_y = secfile_lookup_int(file, "Map.map.r%dsy", i);
 //
 //      start_positions[j].tile = native_pos_to_tile(nat_x, nat_y);
 //      start_positions[j].nation = nation_id;
 //      j++;
 //    }
-//    map.num_start_positions = j;
-//    if (map.num_start_positions > 0) {
-//      map.start_positions = fc_realloc(map.start_positions,
-//  	                               map.num_start_positions
-//				       * sizeof(*map.start_positions));
+//    Map.map.num_start_positions = j;
+//    if (Map.map.num_start_positions > 0) {
+//      Map.map.start_positions = fc_realloc(Map.map.start_positions,
+//  	                               Map.map.num_start_positions
+//				       * sizeof(*Map.map.start_positions));
 //      for (i = 0; i < j; i++) {
-//        map.start_positions[i] = start_positions[i];
+//        Map.map.start_positions[i] = start_positions[i];
 //      }
 //    }
 //  }
 //  
 //
-//  if (map.num_start_positions
-//      && map.num_start_positions < game.max_players) {
+//  if (Map.map.num_start_positions
+//      && Map.map.num_start_positions < game.max_players) {
 //    util.freelog(LOG_VERBOSE,
 //	    _("Number of starts (%d) are lower than max_players (%d),"
 //	      " lowering max_players."),
-// 	    map.num_start_positions, game.max_players);
-//    game.max_players = map.num_start_positions;
+// 	    Map.map.num_start_positions, game.max_players);
+//    game.max_players = Map.map.num_start_positions;
 //  }
 //}
 //
@@ -554,14 +554,14 @@ public class Savegame{
 //***************************************************************/
 //static void map_tiles_load(section_file file)
 //{
-//  map.topology_id = secfile_lookup_int_default(file, MAP_ORIGINAL_TOPO,
-//					       "map.topology_id");
+//  Map.map.topology_id = secfile_lookup_int_default(file, MAP_ORIGINAL_TOPO,
+//					       "Map.map.topology_id");
 //
 //  /* In some cases we read these before, but not always, and
 //   * its safe to read them again:
 //   */
-//  map.xsize=secfile_lookup_int(file, "map.width");
-//  map.ysize=secfile_lookup_int(file, "map.height");
+//  Map.map.xsize=secfile_lookup_int(file, "Map.map.width");
+//  Map.map.ysize=secfile_lookup_int(file, "Map.map.height");
 //
 //  /* With a false parameter [xy]size are not changed by this call. */
 //  map_init_topology(false);
@@ -570,19 +570,19 @@ public class Savegame{
 //
 //  /* get the terrain type */
 //  LOAD_MAP_DATA(ch, line, ptile,
-//		secfile_lookup_str(file, "map.t%03d", line),
+//		secfile_lookup_str(file, "Map.map.t%03d", line),
 //		ptile.terrain = char2terrain(ch));
 //
 //  assign_continent_numbers(false);
 //
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    ptile.spec_sprite = secfile_lookup_str_default(file, null,
-//				"map.spec_sprite_%d_%d",
+//				"Map.map.spec_sprite_%d_%d",
 //				ptile.nat_x, ptile.nat_y);
 //    if (ptile.spec_sprite) {
 //      ptile.spec_sprite = mystrdup(ptile.spec_sprite);
 //    }
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -599,9 +599,9 @@ public class Savegame{
 //  /* Get the bits of the special flags which contain the river special
 //     and extract the rivers overlay from them. */
 //  LOAD_MAP_DATA(ch, line, ptile,
-//		secfile_lookup_str_default(file, null, "map.n%03d", line),
+//		secfile_lookup_str_default(file, null, "Map.map.n%03d", line),
 //		ptile.special |= (ascii_hex2bin(ch, 2) & S_RIVER));
-//  map.have_rivers_overlay = true;
+//  Map.map.have_rivers_overlay = true;
 //}
 //
 ///***************************************************************
@@ -613,65 +613,65 @@ public class Savegame{
 //
 //  /* map_init();
 //   * This is already called in game_init(), and calling it
-//   * here stomps on map.huts etc.  --dwp
+//   * here stomps on Map.map.huts etc.  --dwp
 //   */
 //
 //  map_tiles_load(file);
 //  if (secfile_lookup_bool_default(file, true, "game.save_starts")) {
 //    map_startpos_load(file);
 //  } else {
-//    map.num_start_positions = 0;
+//    Map.map.num_start_positions = 0;
 //  }
 //
 //  /* get 4-bit segments of 16-bit "special" field. */
 //  LOAD_MAP_DATA(ch, nat_y, ptile,
-//		secfile_lookup_str(file, "map.l%03d", nat_y),
+//		secfile_lookup_str(file, "Map.map.l%03d", nat_y),
 //		ptile.special = ascii_hex2bin(ch, 0));
 //  LOAD_MAP_DATA(ch, nat_y, ptile,
-//		secfile_lookup_str(file, "map.u%03d", nat_y),
+//		secfile_lookup_str(file, "Map.map.u%03d", nat_y),
 //		ptile.special |= ascii_hex2bin(ch, 1));
 //  LOAD_MAP_DATA(ch, nat_y, ptile,
-//		secfile_lookup_str_default(file, null, "map.n%03d", nat_y),
+//		secfile_lookup_str_default(file, null, "Map.map.n%03d", nat_y),
 //		ptile.special |= ascii_hex2bin(ch, 2));
 //  LOAD_MAP_DATA(ch, nat_y, ptile,
-//		secfile_lookup_str_default(file, null, "map.f%03d", nat_y),
+//		secfile_lookup_str_default(file, null, "Map.map.f%03d", nat_y),
 //		ptile.special |= ascii_hex2bin(ch, 3));
 //
 //  if (secfile_lookup_bool_default(file, true, "game.save_known")) {
 //
 //    /* get 4-bit segments of the first half of the 32-bit "known" field */
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
-//		  secfile_lookup_str(file, "map.a%03d", nat_y),
+//		  secfile_lookup_str(file, "Map.map.a%03d", nat_y),
 //		  ptile.known = ascii_hex2bin(ch, 0));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
-//		  secfile_lookup_str(file, "map.b%03d", nat_y),
+//		  secfile_lookup_str(file, "Map.map.b%03d", nat_y),
 //		  ptile.known |= ascii_hex2bin(ch, 1));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
-//		  secfile_lookup_str(file, "map.c%03d", nat_y),
+//		  secfile_lookup_str(file, "Map.map.c%03d", nat_y),
 //		  ptile.known |= ascii_hex2bin(ch, 2));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
-//		  secfile_lookup_str(file, "map.d%03d", nat_y),
+//		  secfile_lookup_str(file, "Map.map.d%03d", nat_y),
 //		  ptile.known |= ascii_hex2bin(ch, 3));
 //
 //    if (has_capability("known32fix", savefile_options)) {
 //      /* get 4-bit segments of the second half of the 32-bit "known" field */
 //      LOAD_MAP_DATA(ch, nat_y, ptile,
-//		    secfile_lookup_str(file, "map.e%03d", nat_y),
+//		    secfile_lookup_str(file, "Map.map.e%03d", nat_y),
 //		    ptile.known |= ascii_hex2bin(ch, 4));
 //      LOAD_MAP_DATA(ch, nat_y, ptile,
-//		    secfile_lookup_str(file, "map.g%03d", nat_y),
+//		    secfile_lookup_str(file, "Map.map.g%03d", nat_y),
 //		    ptile.known |= ascii_hex2bin(ch, 5));
 //      LOAD_MAP_DATA(ch, nat_y, ptile,
-//		    secfile_lookup_str(file, "map.h%03d", nat_y),
+//		    secfile_lookup_str(file, "Map.map.h%03d", nat_y),
 //		    ptile.known |= ascii_hex2bin(ch, 6));
 //      LOAD_MAP_DATA(ch, nat_y, ptile,
-//		    secfile_lookup_str(file, "map.i%03d", nat_y),
+//		    secfile_lookup_str(file, "Map.map.i%03d", nat_y),
 //		    ptile.known |= ascii_hex2bin(ch, 7));
 //    }
 //  }
 //
 //
-//  map.have_specials = true;
+//  Map.map.have_specials = true;
 //}
 //
 ///***************************************************************
@@ -681,43 +681,43 @@ public class Savegame{
 //{
 //  int i;
 //
-//  /* map.xsize and map.ysize (saved as map.width and map.height)
+//  /* Map.map.xsize and Map.map.ysize (saved as Map.map.width and Map.map.height)
 //   * are now always saved in game_save()
 //   */
 //
-//  /* Old freecivs expect map.is_earth to be present in the savegame. */
-//  secfile_insert_bool(file, false, "map.is_earth");
+//  /* Old freecivs expect Map.map.is_earth to be present in the savegame. */
+//  secfile_insert_bool(file, false, "Map.map.is_earth");
 //
 //  secfile_insert_bool(file, game.save_options.save_starts, "game.save_starts");
 //  if (game.save_options.save_starts) {
-//    for (i=0; i<map.num_start_positions; i++) {
-//      tile ptile = map.start_positions[i].tile;
+//    for (i=0; i<Map.map.num_start_positions; i++) {
+//      tile ptile = Map.map.start_positions[i].tile;
 //
-//      secfile_insert_int(file, ptile.nat_x, "map.r%dsx", i);
-//      secfile_insert_int(file, ptile.nat_y, "map.r%dsy", i);
+//      secfile_insert_int(file, ptile.nat_x, "Map.map.r%dsx", i);
+//      secfile_insert_int(file, ptile.nat_y, "Map.map.r%dsy", i);
 //
-//      if (map.start_positions[i].nation != NO_NATION_SELECTED) {
+//      if (Map.map.start_positions[i].nation != NO_NATION_SELECTED) {
 //	final String nation = 
-//	  get_nation_name_orig(map.start_positions[i].nation);
+//	  get_nation_name_orig(Map.map.start_positions[i].nation);
 //
-//	secfile_insert_str(file, nation, "map.r%dsnation", i);
+//	secfile_insert_str(file, nation, "Map.map.r%dsnation", i);
 //      }
 //    }
 //  }
 //
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    if (ptile.spec_sprite) {
-//      secfile_insert_str(file, ptile.spec_sprite, "map.spec_sprite_%d_%d",
+//      secfile_insert_str(file, ptile.spec_sprite, "Map.map.spec_sprite_%d_%d",
 //			 ptile.nat_x, ptile.nat_y);
 //    }
-//  } whole_map_iterate_end;
+//  }
 //    
 //  /* put the terrain type */
-//  SAVE_NORMAL_MAP_DATA(ptile, file, "map.t%03d",
+//  SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.t%03d",
 //		       terrain2char(ptile.terrain));
 //
-//  if (!map.have_specials) {
-//    if (map.have_rivers_overlay) {
+//  if (!Map.map.have_specials) {
+//    if (Map.map.have_rivers_overlay) {
 //      /* 
 //       * Save the rivers overlay map; this is a special case to allow
 //       * re-saving scenarios which have rivers overlay data.  This only
@@ -725,42 +725,42 @@ public class Savegame{
 //       */
 //
 //      /* bits 8-11 of special flags field */
-//      SAVE_NORMAL_MAP_DATA(ptile, file, "map.n%03d",
+//      SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.n%03d",
 //			   bin2ascii_hex(ptile.special, 2));
 //    }
 //    return;
 //  }
 //
 //  /* put 4-bit segments of 12-bit "special flags" field */
-//  SAVE_NORMAL_MAP_DATA(ptile, file, "map.l%03d",
+//  SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.l%03d",
 //		       bin2ascii_hex(ptile.special, 0));
-//  SAVE_NORMAL_MAP_DATA(ptile, file, "map.u%03d",
+//  SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.u%03d",
 //		       bin2ascii_hex(ptile.special, 1));
-//  SAVE_NORMAL_MAP_DATA(ptile, file, "map.n%03d",
+//  SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.n%03d",
 //		       bin2ascii_hex(ptile.special, 2));
 //
 //  secfile_insert_bool(file, game.save_options.save_known, "game.save_known");
 //  if (game.save_options.save_known) {
 //    /* put the top 4 bits (bits 12-15) of special flags */
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.f%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.f%03d",
 //			 bin2ascii_hex(ptile.special, 3));
 //
 //    /* put 4-bit segments of the 32-bit "known" field */
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.a%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.a%03d",
 //			 bin2ascii_hex(ptile.known, 0));
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.b%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.b%03d",
 //			 bin2ascii_hex(ptile.known, 1));
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.c%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.c%03d",
 //			 bin2ascii_hex(ptile.known, 2));
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.d%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.d%03d",
 //			 bin2ascii_hex(ptile.known, 3));
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.e%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.e%03d",
 //			 bin2ascii_hex(ptile.known, 4));
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.g%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.g%03d",
 //			 bin2ascii_hex(ptile.known, 5));
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.h%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.h%03d",
 //			 bin2ascii_hex(ptile.known, 6));
-//    SAVE_NORMAL_MAP_DATA(ptile, file, "map.i%03d",
+//    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.i%03d",
 //			 bin2ascii_hex(ptile.known, 7));
 //  }
 //}
@@ -1573,7 +1573,7 @@ public class Savegame{
 //       *
 //       * FIXME: shouldn't this take into account modifiers like 
 //       * watchtowers? */
-//      int range = unit_type(punit).vision_range;
+//      int range = punit.unit_type().vision_range;
 //
 //      square_iterate(punit.tile, range, tile1) {
 //	map_set_known(tile1, plr);
@@ -1583,11 +1583,11 @@ public class Savegame{
 //    /* allocate the unit's contribution to fog of war */
 //    if (unit_profits_of_watchtower(punit)
 //	&& map_has_special(punit.tile, S_FORTRESS)) {
-//      unfog_area(unit_owner(punit), punit.tile,
+//      unfog_area(punit.unit_owner(), punit.tile,
 //		 get_watchtower_vision(punit));
 //    } else {
-//      unfog_area(unit_owner(punit), punit.tile,
-//		 unit_type(punit).vision_range);
+//      unfog_area(punit.unit_owner(), punit.tile,
+//		 punit.unit_type().vision_range);
 //    }
 //
 //    unit_list_insert_back(&plr.units, punit);
@@ -2218,7 +2218,7 @@ public class Savegame{
 //					 plrno, part_nr);
 //      if (!current)
 //	break;
-//      util.freelog(LOG_DEBUG, "quoted_length=%lu quoted=%lu current=%lu",
+//      util.freelog(Log.LOG_DEBUG, "quoted_length=%lu quoted=%lu current=%lu",
 //	      (unsigned long) quoted_length,
 //	      (unsigned long) quoted.length(),
 //	      (unsigned long) current.length());
@@ -2250,9 +2250,9 @@ public class Savegame{
 //  int i;
 //
 //  if (!plr.is_alive)
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      map_change_seen(ptile, plr, +1);
-//    } whole_map_iterate_end;
+//    }
 //
 //  /* load map if:
 //     1) it from a fog of war build
@@ -2339,7 +2339,7 @@ public class Savegame{
 //
 //    /* This shouldn't be neccesary if the savegame was consistent, but there
 //       is a bug in some pre-1.11 savegames. Anyway, it can't hurt */
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      if (map_is_known_and_seen(ptile, plr)) {
 //	update_player_tile_knowledge(plr, ptile);
 //	reality_check_city(plr, ptile);
@@ -2347,13 +2347,13 @@ public class Savegame{
 //	  update_dumb_city(plr, map_get_city(ptile));
 //	}
 //      }
-//    } whole_map_iterate_end;
+//    }
 //
 //  } else {
 //    /* We have an old savegame or fog of war was turned off; the
 //       players private knowledge is set to be what he could see
 //       without fog of war */
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      if (map_is_known(ptile, plr)) {
 //	city pcity = map_get_city(ptile);
 //	update_player_tile_last_seen(plr, ptile);
@@ -2361,7 +2361,7 @@ public class Savegame{
 //	if (pcity)
 //	  update_dumb_city(plr, pcity);
 //      }
-//    } whole_map_iterate_end;
+//    }
 //  }
 //}
 //
@@ -2843,7 +2843,7 @@ public class Savegame{
 //  }
 //
 //  /********** Put the players private map **********/
-// /* Otherwise the player can see all, and there's no reason to save the private map. */
+// /* Otherwise the player can see all, and there's no reason to save the private Map.map. */
 //  if (game.fogofwar
 //      && game.save_options.save_private_map) {
 //
@@ -2881,7 +2881,7 @@ public class Savegame{
 //      dumb_city pdcity;
 //      i = 0;
 //      
-//      whole_map_iterate(ptile) {
+//      for(tile ptile :  Map.map.tiles){
 //	if ((pdcity = map_get_player_tile(ptile, plr).city)) {
 //	  secfile_insert_int(file, pdcity.id, "player%d.dc%d.id", plrno,
 //			     i);
@@ -2905,7 +2905,7 @@ public class Savegame{
 //			     plrno, i);
 //	  i++;
 //	}
-//      } whole_map_iterate_end;
+//      }
 //    }
 //    secfile_insert_int(file, i, "player%d.total_ncities", plrno);
 //  }
@@ -2969,12 +2969,12 @@ public class Savegame{
 //    } }
 //  }
 //
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    j = 0;
 //    for (unit punit : ptile.units.data) {
 //      punit.ord_map = j++;
 //    } }
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -2990,9 +2990,9 @@ public class Savegame{
 //    }
 //  }
 //
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    unit_list_sort_ord_map(&ptile.units);
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -3006,7 +3006,7 @@ public class Savegame{
 //    case C_TILE_EMPTY:
 //      if (!res) {
 //	set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
-//	util.freelog(LOG_DEBUG, "unavailable tile marked as empty!");
+//	util.freelog(Log.LOG_DEBUG, "unavailable tile marked as empty!");
 //      }
 //      break;
 //    case C_TILE_WORKER:
@@ -3015,7 +3015,7 @@ public class Savegame{
 //
 //	pcity.specialists[SP_ELVIS]++;
 //	set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
-//	util.freelog(LOG_DEBUG, "Worked tile was unavailable!");
+//	util.freelog(Log.LOG_DEBUG, "Worked tile was unavailable!");
 //
 //	ptile = city_map_to_map(pcity, x, y);
 //
@@ -3029,7 +3029,7 @@ public class Savegame{
 //    case C_TILE_UNAVAILABLE:
 //      if (res) {
 //	set_worker_city(pcity, x, y, C_TILE_EMPTY);
-//	util.freelog(LOG_DEBUG, "Empty tile Marked as unavailable!");
+//	util.freelog(Log.LOG_DEBUG, "Empty tile Marked as unavailable!");
 //      }
 //      break;
 //    }
@@ -3334,44 +3334,44 @@ public class Savegame{
 //				     "game.dispersion");
 //      }
 //
-//      map.topology_id = secfile_lookup_int_default(file, MAP_ORIGINAL_TOPO,
-//					           "map.topology_id");
-//      map.size = secfile_lookup_int_default(file, MAP_DEFAULT_SIZE,
-//                                            "map.size");
-//      map.riches = secfile_lookup_int(file, "map.riches");
-//      map.huts = secfile_lookup_int(file, "map.huts");
-//      map.generator = secfile_lookup_int(file, "map.generator");
-//      map.seed = secfile_lookup_int(file, "map.seed");
-//      map.landpercent = secfile_lookup_int(file, "map.landpercent");
-//      map.wetness = secfile_lookup_int_default(file, MAP_DEFAULT_WETNESS,
-//					       "map.wetness");
-//      map.steepness = secfile_lookup_int_default(file, MAP_DEFAULT_STEEPNESS, 
-//						 "map.steepness");
-//      map.have_huts = secfile_lookup_bool_default(file, true,
-//						  "map.have_huts");
-//      map.temperature =
+//      Map.map.topology_id = secfile_lookup_int_default(file, MAP_ORIGINAL_TOPO,
+//					           "Map.map.topology_id");
+//      Map.map.size = secfile_lookup_int_default(file, MAP_DEFAULT_SIZE,
+//                                            "Map.map.size");
+//      Map.map.riches = secfile_lookup_int(file, "Map.map.riches");
+//      Map.map.huts = secfile_lookup_int(file, "Map.map.huts");
+//      Map.map.generator = secfile_lookup_int(file, "Map.map.generator");
+//      Map.map.seed = secfile_lookup_int(file, "Map.map.seed");
+//      Map.map.landpercent = secfile_lookup_int(file, "Map.map.landpercent");
+//      Map.map.wetness = secfile_lookup_int_default(file, MAP_DEFAULT_WETNESS,
+//					       "Map.map.wetness");
+//      Map.map.steepness = secfile_lookup_int_default(file, MAP_DEFAULT_STEEPNESS, 
+//						 "Map.map.steepness");
+//      Map.map.have_huts = secfile_lookup_bool_default(file, true,
+//						  "Map.map.have_huts");
+//      Map.map.temperature =
 //	secfile_lookup_int_default(file,
-//				   MAP_DEFAULT_TEMPERATURE, "map.temperature");
-//      map.alltemperate
+//				   MAP_DEFAULT_TEMPERATURE, "Map.map.temperature");
+//      Map.map.alltemperate
 //	= secfile_lookup_bool_default(file, MAP_DEFAULT_ALLTEMPERATE,
-//				      "map.alltemperate");
-//      map.tinyisles
+//				      "Map.map.alltemperate");
+//      Map.map.tinyisles
 //	= secfile_lookup_bool_default(file, MAP_DEFAULT_TINYISLES,
-//				      "map.tinyisles");
-//      map.separatepoles
+//				      "Map.map.tinyisles");
+//      Map.map.separatepoles
 //	= secfile_lookup_bool_default(file, MAP_DEFAULT_SEPARATE_POLES,
-//				      "map.separatepoles");
+//				      "Map.map.separatepoles");
 //
 //      if (has_capability("startoptions", savefile_options)) {
-//	map.xsize = secfile_lookup_int(file, "map.width");
-//	map.ysize = secfile_lookup_int(file, "map.height");
+//	Map.map.xsize = secfile_lookup_int(file, "Map.map.width");
+//	Map.map.ysize = secfile_lookup_int(file, "Map.map.height");
 //      } else {
 //	/* old versions saved with these names in server_states.PRE_GAME_STATE: */
-//	map.xsize = secfile_lookup_int(file, "map.xsize");
-//	map.ysize = secfile_lookup_int(file, "map.ysize");
+//	Map.map.xsize = secfile_lookup_int(file, "Map.map.xsize");
+//	Map.map.ysize = secfile_lookup_int(file, "Map.map.ysize");
 //      }
 //
-//      if (tmp_Srv_main.server_state==server_states.PRE_GAME_STATE && map.generator == 0) {
+//      if (tmp_Srv_main.server_state==server_states.PRE_GAME_STATE && Map.map.generator == 0) {
 //	/* generator 0 = map done with map editor */
 //	/* aka a "scenario" */
 //        if (has_capability("specials",savefile_options)) {
@@ -3619,13 +3619,13 @@ public class Savegame{
 //  
 //  sz_strlcpy(options, SAVEFILE_OPTIONS);
 //  if (game.is_new_game) {
-//    if (map.num_start_positions>0) {
+//    if (Map.map.num_start_positions>0) {
 //      sz_strlcat(options, " startpos");
 //    }
-//    if (map.have_specials) {
+//    if (Map.map.have_specials) {
 //      sz_strlcat(options, " specials");
 //    }
-//    if (map.have_rivers_overlay && !map.have_specials) {
+//    if (Map.map.have_rivers_overlay && !Map.map.have_specials) {
 //      sz_strlcat(options, " riversoverlay");
 //    }
 //  }
@@ -3729,37 +3729,37 @@ public class Savegame{
 //   * don't matter, though. */
 //  secfile_insert_int(file, 2, "game.settlers");
 //  secfile_insert_int(file, 1, "game.explorer");
-//  secfile_insert_int(file, 30, "map.mountains");
-//  secfile_insert_int(file, 35, "map.grass");
-//  secfile_insert_int(file, 5, "map.swampsize");
-//  secfile_insert_int(file, 5, "map.deserts");
-//  secfile_insert_int(file, 5, "map.riverlength");
-//  secfile_insert_int(file, 20, "map.forestsize");
+//  secfile_insert_int(file, 30, "Map.map.mountains");
+//  secfile_insert_int(file, 35, "Map.map.grass");
+//  secfile_insert_int(file, 5, "Map.map.swampsize");
+//  secfile_insert_int(file, 5, "Map.map.deserts");
+//  secfile_insert_int(file, 5, "Map.map.riverlength");
+//  secfile_insert_int(file, 20, "Map.map.forestsize");
 //
 //  if (true) {
 //    /* Now always save these, so the server options reflect the
 //     * actual values used at the start of the game.
-//     * The first two used to be saved as "map.xsize" and "map.ysize"
+//     * The first two used to be saved as "Map.map.xsize" and "Map.map.ysize"
 //     * when server_states.PRE_GAME_STATE, but I'm standardizing on width,height --dwp
 //     */
-//    secfile_insert_int(file, map.topology_id, "map.topology_id");
-//    secfile_insert_int(file, map.size, "map.size");
-//    secfile_insert_int(file, map.xsize, "map.width");
-//    secfile_insert_int(file, map.ysize, "map.height");
+//    secfile_insert_int(file, Map.map.topology_id, "Map.map.topology_id");
+//    secfile_insert_int(file, Map.map.size, "Map.map.size");
+//    secfile_insert_int(file, Map.map.xsize, "Map.map.width");
+//    secfile_insert_int(file, Map.map.ysize, "Map.map.height");
 //    secfile_insert_str(file, game.start_units, "game.start_units");
 //    secfile_insert_int(file, game.dispersion, "game.dispersion");
-//    secfile_insert_int(file, map.seed, "map.seed");
-//    secfile_insert_int(file, map.landpercent, "map.landpercent");
-//    secfile_insert_int(file, map.riches, "map.riches");
-//    secfile_insert_int(file, map.wetness, "map.wetness");
-//    secfile_insert_int(file, map.steepness, "map.steepness");
-//    secfile_insert_int(file, map.huts, "map.huts");
-//    secfile_insert_int(file, map.generator, "map.generator");
-//    secfile_insert_bool(file, map.have_huts, "map.have_huts");
-//    secfile_insert_int(file, map.temperature, "map.temperature");
-//    secfile_insert_bool(file, map.alltemperate, "map.alltemperate");
-//    secfile_insert_bool(file, map.tinyisles, "map.tinyisles");
-//    secfile_insert_bool(file, map.separatepoles, "map.separatepoles");
+//    secfile_insert_int(file, Map.map.seed, "Map.map.seed");
+//    secfile_insert_int(file, Map.map.landpercent, "Map.map.landpercent");
+//    secfile_insert_int(file, Map.map.riches, "Map.map.riches");
+//    secfile_insert_int(file, Map.map.wetness, "Map.map.wetness");
+//    secfile_insert_int(file, Map.map.steepness, "Map.map.steepness");
+//    secfile_insert_int(file, Map.map.huts, "Map.map.huts");
+//    secfile_insert_int(file, Map.map.generator, "Map.map.generator");
+//    secfile_insert_bool(file, Map.map.have_huts, "Map.map.have_huts");
+//    secfile_insert_int(file, Map.map.temperature, "Map.map.temperature");
+//    secfile_insert_bool(file, Map.map.alltemperate, "Map.map.alltemperate");
+//    secfile_insert_bool(file, Map.map.tinyisles, "Map.map.tinyisles");
+//    secfile_insert_bool(file, Map.map.separatepoles, "Map.map.separatepoles");
 //  } 
 //
 //  secfile_insert_int(file, game.seed, "game.randseed");

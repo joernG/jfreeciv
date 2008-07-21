@@ -100,9 +100,9 @@ public class Barbarian{
 //        pick_ai_player_name(game.nation_count - 1, barbarians.name);
 //	sz_strlcpy(barbarians.username, ANON_USER_NAME);
 //        /* I need to make them to forget the map, I think */
-//	whole_map_iterate(ptile) {
+//	for(tile ptile :  Map.map.tiles){
 //	  map_clear_known(ptile, barbarians);
-//	} whole_map_iterate_end;
+//	}
 //      }
 //      barbarians.economic.gold += 100;  /* New leader, new money */
 //      return barbarians;
@@ -174,7 +174,7 @@ public class Barbarian{
 //static boolean is_free_land(tile ptile, player who)
 //{
 //  return (!is_ocean(map_get_terrain(ptile))
-//	  && !is_non_allied_unit_tile((ptile), who));
+//	  && !Unit.is_non_allied_unit_tile((ptile), who));
 //}
 //
 ///**************************************************************************
@@ -183,7 +183,7 @@ public class Barbarian{
 //static boolean is_free_sea(tile ptile, player who)
 //{
 //  return (is_ocean(map_get_terrain(ptile))
-//	  && !is_non_allied_unit_tile((ptile), who));
+//	  && !Unit.is_non_allied_unit_tile((ptile), who));
 //}
 //
 ///**************************************************************************
@@ -220,7 +220,7 @@ public class Barbarian{
 //  for (i = 0; i < unit_cnt; i++) {
 //    unit = find_a_unit_type(L_BARBARIAN, L_BARBARIAN_TECH);
 //    () create_unit(barbarians, ptile, unit, 0, 0, -1);
-//    util.freelog(LOG_DEBUG, "Created barbarian unit %s", unit_types[unit].name);
+//    util.freelog(Log.LOG_DEBUG, "Created barbarian unit %s", unit_types[unit].name);
 //  }
 //
 //  adjc_iterate(ptile, tile1) {
@@ -237,7 +237,7 @@ public class Barbarian{
 //	    utile = rand_neighbour(ptile);
 //	  } while (!is_free_land(utile, barbarians));
 //        } while (!handle_unit_move_request(punit2, utile, true, false));
-//        util.freelog(LOG_DEBUG, "Moved barbarian unit from %d %d to %d, %d", 
+//        util.freelog(Log.LOG_DEBUG, "Moved barbarian unit from %d %d to %d, %d", 
 //                ptile.x, ptile.y, utile.x, utile.y);
 //      }
 //    } }
@@ -363,7 +363,7 @@ public class Barbarian{
 //  victim = city_owner(pc);
 //
 //  dist = real_map_distance(ptile, pc.tile);
-//  util.freelog(LOG_DEBUG,"Closest city to %d %d is %s at %d %d which is %d far", 
+//  util.freelog(Log.LOG_DEBUG,"Closest city to %d %d is %s at %d %d which is %d far", 
 //          ptile.x, ptile.y, pc.name, pc.tile.x, pc.tile.y, dist);
 //  if (dist > MAX_UNREST_DIST || dist < MIN_UNREST_DIST) {
 //    return;
@@ -384,7 +384,7 @@ public class Barbarian{
 //      || myrand(100) > get_gov_pcity(pc).civil_war) {
 //    return;
 //  }
-//  util.freelog(LOG_DEBUG, "Barbarians are willing to fight");
+//  util.freelog(Log.LOG_DEBUG, "Barbarians are willing to fight");
 //
 //  if (map_has_special(utile, S_HUT)) {
 //    /* remove the hut in place of uprising */
@@ -401,7 +401,7 @@ public class Barbarian{
 //    for (i = 0; i < myrand(3) + uprise * game.barbarianrate; i++) {
 //      unit = find_a_unit_type(L_BARBARIAN, L_BARBARIAN_TECH);
 //      () create_unit(barbarians, utile, unit, 0, 0, -1);
-//      util.freelog(LOG_DEBUG, "Created barbarian unit %s", unit_types[unit].name);
+//      util.freelog(Log.LOG_DEBUG, "Created barbarian unit %s", unit_types[unit].name);
 //    }
 //    () create_unit(barbarians, utile,
 //		       get_role_unit(L_BARBARIAN_LEADER, 0), 0, 0, -1);
@@ -416,7 +416,7 @@ public class Barbarian{
 //      unit = find_a_unit_type(L_BARBARIAN_SEA,L_BARBARIAN_SEA_TECH);
 //      () create_unit_full(barbarians, utile, unit, 0, 0, -1, -1,
 //			      ptrans);
-//      util.freelog(LOG_DEBUG, "Created barbarian unit %s", unit_types[unit].name);
+//      util.freelog(Log.LOG_DEBUG, "Created barbarian unit %s", unit_types[unit].name);
 //    }
 //    () create_unit_full(barbarians, utile,
 //			    get_role_unit(L_BARBARIAN_LEADER, 0), 0, 0,

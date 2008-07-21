@@ -287,7 +287,7 @@ public class Hash{
 //  hash_table h;
 //  unsigned i;
 //
-//  util.freelog(LOG_DEBUG, "New hash table with %u buckets", nbuckets);
+//  util.freelog(Log.LOG_DEBUG, "New hash table with %u buckets", nbuckets);
 //  
 //  h = (hash_table )fc_malloc(sizeof(struct hash_table));
 //  zero_htable(h);
@@ -412,7 +412,7 @@ public class Hash{
 //  
 //  new_nbuckets = calc_appropriate_nbuckets(h.num_entries);
 //  
-//  util.freelog(LOG_DEBUG, "%s hash table "
+//  util.freelog(Log.LOG_DEBUG, "%s hash table "
 //	  "(entry %u del %u used %u nbuck %u new %u %slimit %u)",
 //	  (new_nbuckets<h.num_buckets) ? "Shrinking" :
 //	  (new_nbuckets>h.num_buckets) ? "Expanding" : "Rehashing",

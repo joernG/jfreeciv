@@ -1,16 +1,19 @@
 package server;
 
+import port.util;
 import common.map.tile;
+import common.player.player;
 import common.unit.goto_move_restriction;
 import common.unit.unit;
 
 import server.gotohand.goto_result;
+import utility.Log;
 
 public class Gotohand {
 	// #include "combat.h"
 	// #include "game.h"
 	// #include "log.h"
-	// #include "map.h"
+	// #include "Map.map.h"
 	// #include "mem.h"
 	// #include "rand.h"
 	//
@@ -119,7 +122,7 @@ public class Gotohand {
 	// /**************************************************************************
 	// ...
 	// **************************************************************************/
-	// static void add_to_mapqueue(int cost, tile ptile)
+	// static void add_to_maPqueue(int cost, tile ptile)
 	// {
 	// mappos_array our_array;
 	//
@@ -139,18 +142,18 @@ public class Gotohand {
 	// our_array.tile[++(our_array.last_pos)] = ptile;
 	// if (cost > highest_cost)
 	// highest_cost = cost;
-	// util.freelog(LOG_DEBUG, "adding cost:%i at %i,%i", cost, ptile.x, ptile.y);
+	// util.freelog(Log.LOG_DEBUG, "adding cost:%i at %i,%i", cost, ptile.x, ptile.y);
 	// }
 	//
 	// /**************************************************************************
 	// ...
 	// **************************************************************************/
-	// static tile get_from_mapqueue()
+	// static tile get_from_maPqueue()
 	// {
 	// mappos_array our_array;
 	// tile ptile;
 	//
-	// util.freelog(LOG_DEBUG, "trying get");
+	// util.freelog(Log.LOG_DEBUG, "trying get");
 	// while (lowest_cost < MAXCOST) {
 	// if (lowest_cost > highest_cost)
 	// return false;
@@ -181,14 +184,14 @@ public class Gotohand {
 	// **************************************************************************/
 	// static void init_warmap(tile orig_tile, enum unit_move_type move_type)
 	// {
-	// if (warmap.size != MAX_MAP_INDEX) {
+	// if (warmap.size != Map_H.MAX_MAP_INDEX) {
 	// warmap.cost = fc_realloc(warmap.cost,
-	// MAX_MAP_INDEX * sizeof(*warmap.cost));
+	// Map_H.MAX_MAP_INDEX * sizeof(*warmap.cost));
 	// warmap.seacost = fc_realloc(warmap.seacost,
-	// MAX_MAP_INDEX * sizeof(*warmap.seacost));
+	// Map_H.MAX_MAP_INDEX * sizeof(*warmap.seacost));
 	// warmap.vector = fc_realloc(warmap.vector,
-	// MAX_MAP_INDEX * sizeof(*warmap.vector));
-	// warmap.size = MAX_MAP_INDEX;
+	// Map_H.MAX_MAP_INDEX * sizeof(*warmap.vector));
+	// warmap.size = Map_H.MAX_MAP_INDEX;
 	// }
 	//
 	// init_queue();
@@ -198,12 +201,12 @@ public class Gotohand {
 	// case HELI_MOVING:
 	// case AIR_MOVING:
 	// assert(sizeof(*warmap.cost) == sizeof(char));
-	// memset(warmap.cost, MAXCOST, map.xsize * map.ysize);
+	// memset(warmap.cost, MAXCOST, Map.map.xsize * Map.map.ysize);
 	// WARMAP_COST(orig_tile) = 0;
 	// break;
 	// case SEA_MOVING:
 	// assert(sizeof(*warmap.seacost) == sizeof(char));
-	// memset(warmap.seacost, MAXCOST, map.xsize * map.ysize);
+	// memset(warmap.seacost, MAXCOST, Map.map.xsize * Map.map.ysize);
 	// WARMAP_SEACOST(orig_tile) = 0;
 	// break;
 	// default:
@@ -214,7 +217,7 @@ public class Gotohand {
 	//
 	// /**************************************************************************
 	// This creates a movecostmap (warmap), which is a two-dimentional array
-	// corresponding to the real map. The value of a position is the number of
+	// corresponding to the real Map.map. The value of a position is the number of
 	// moves it would take to get there. If the function found no route the cost
 	// is MAXCOST. (the value it is initialized with)
 	// For sea units we let the map overlap onto the land one field, to allow
@@ -269,11 +272,11 @@ public class Gotohand {
 	// pplayer = city_owner(pcity);
 	// } else {
 	// orig_tile = punit.tile;
-	// pplayer = unit_owner(punit);
+	// pplayer = punit.unit_owner();
 	// }
 	//
 	// init_warmap(orig_tile, move_type);
-	// add_to_mapqueue(0, orig_tile);
+	// add_to_maPqueue(0, orig_tile);
 	//
 	// if (punit && unit_flag(punit, F_IGTER))
 	// igter = true;
@@ -283,11 +286,11 @@ public class Gotohand {
 	// /* FIXME: Should this apply only to F_CITIES units? -- jjm */
 	// if (punit
 	// && unit_flag(punit, F_SETTLERS)
-	// && unit_move_rate(punit)==3)
+	// && punit.move_rate()==3)
 	// maxcost /= 2;
 	// /* (?) was punit.type == U_SETTLERS -- dwp */
 	//
-	// while ((ptile = get_from_mapqueue())) {
+	// while ((ptile = get_from_maPqueue())) {
 	// /* Just look up the cost value once. This is a minor optimization but
 	// * it makes a big difference since this code is called so much. */
 	// unsigned char cost = ((move_type == SEA_MOVING)
@@ -301,19 +304,19 @@ public class Gotohand {
 	//
 	// if (is_ocean(map_get_terrain(tile1))) {
 	// if (punit && ground_unit_transporter_capacity(tile1, pplayer) > 0)
-	// move_cost = SINGLE_MOVE;
+	// move_cost = Unit_H.SINGLE_MOVE;
 	// else
 	// continue;
 	// } else if (is_ocean(ptile.terrain)) {
 	// int base_cost = get_tile_type(map_get_terrain(tile1)).movement_cost *
-	// SINGLE_MOVE;
+	// Unit_H.SINGLE_MOVE;
 	// move_cost = igter ? MOVE_COST_ROAD : Math.min(base_cost,
-	// unit_move_rate(punit));
+	// punit.move_rate());
 	// } else if (igter)
 	// /* NOT c = 1 (Syela) [why not? - Thue] */
-	// move_cost = (ptile.move_cost[dir] != 0 ? SINGLE_MOVE : 0);
+	// move_cost = (ptile.move_cost[dir] != 0 ? Unit_H.SINGLE_MOVE : 0);
 	// else if (punit)
-	// move_cost = Math.min(ptile.move_cost[dir], unit_move_rate(punit));
+	// move_cost = Math.min(ptile.move_cost[dir], punit.move_rate());
 	// /* else c = ptile.move_cost[k];
 	// This led to a bad bug where a unit in a swamp was considered too far away
 	// */
@@ -326,13 +329,13 @@ public class Gotohand {
 	// move_cost += cost;
 	// if (WARMAP_COST(tile1) > move_cost && move_cost < maxcost) {
 	// WARMAP_COST(tile1) = move_cost;
-	// add_to_mapqueue(move_cost, tile1);
+	// add_to_maPqueue(move_cost, tile1);
 	// }
 	// break;
 	//
 	//
 	// case SEA_MOVING:
-	// move_cost = SINGLE_MOVE;
+	// move_cost = Unit_H.SINGLE_MOVE;
 	// move_cost += cost;
 	// if (WARMAP_SEACOST(tile1) > move_cost && move_cost < maxcost) {
 	// /* by adding the move_cost to the warmap regardless if we
@@ -340,7 +343,7 @@ public class Gotohand {
 	// to inland positions/etc. */
 	// WARMAP_SEACOST(tile1) = move_cost;
 	// if (ptile.move_cost[dir] == MOVE_COST_FOR_VALID_SEA_STEP) {
-	// add_to_mapqueue(move_cost, tile1);
+	// add_to_maPqueue(move_cost, tile1);
 	// }
 	// }
 	// break;
@@ -351,7 +354,7 @@ public class Gotohand {
 	// } adjc_dir_iterate_end;
 	// }
 	//
-	// util.freelog(LOG_DEBUG, "Generated warmap for (%d,%d).",
+	// util.freelog(Log.LOG_DEBUG, "Generated warmap for (%d,%d).",
 	// TILE_XY(orig_tile));
 	// }
 	//
@@ -364,9 +367,9 @@ public class Gotohand {
 	// **************************************************************************/
 	// void generate_warmap(city pcity, unit punit)
 	// {
-	// util.freelog(LOG_DEBUG, "Generating warmap, pcity = %s, punit = %s",
+	// util.freelog(Log.LOG_DEBUG, "Generating warmap, pcity = %s, punit = %s",
 	// (pcity ? pcity.name : "null"),
-	// (punit ? unit_type(punit).name : "null"));
+	// (punit ? punit.unit_type().name : "null"));
 	//
 	// if (punit) {
 	// /*
@@ -451,7 +454,7 @@ public class Gotohand {
 	// tile dest_tile, dir_vector came_from)
 	// {
 	// if (can_step_taken_wrt_to_zoc
-	// (punit.type, unit_owner(punit), src_tile, dest_tile))
+	// (punit.type, punit.unit_owner(), src_tile, dest_tile))
 	// return true;
 	//
 	// /*
@@ -472,13 +475,13 @@ public class Gotohand {
 	//
 	// /* If we just started the GOTO the enemy unit blocking ZOC on the tile
 	// we come from is still alive. */
-	// if (same_pos(src_tile, punit.tile)
-	// && !is_non_allied_unit_tile(dest_tile, unit_owner(punit))) {
+	// if (Map.same_pos(src_tile, punit.tile)
+	// && !Unit.is_non_allied_unit_tile(dest_tile, punit.unit_owner())) {
 	// return false;
 	// }
 	//
 	// {
-	// player owner = unit_owner(punit);
+	// player owner = punit.unit_owner();
 	//
 	// adjc_dir_iterate(src_tile, ptile, dir) {
 	// /* if we didn't come from there */
@@ -495,8 +498,8 @@ public class Gotohand {
 	// }
 	//
 	// /* DANGER_MOVE is the cost of movement assigned to "dangerous" tiles. It
-	// * is arbitrarily larger than SINGLE_MOVE to make it a penalty. */
-	// #define DANGER_MOVE (2 * SINGLE_MOVE + 1)
+	// * is arbitrarily larger than Unit_H.SINGLE_MOVE to make it a penalty. */
+	// #define DANGER_MOVE (2 * Unit_H.SINGLE_MOVE + 1)
 	//
 	// /**************************************************************************
 	// This function mark paths on the warmaps vector showing the shortest path
@@ -575,15 +578,15 @@ public class Gotohand {
 	// tile dest_tile,
 	// goto_move_restriction restriction)
 	// {
-	// player pplayer = unit_owner(punit);
+	// player pplayer = punit.unit_owner();
 	// boolean igter;
 	// tile ptile, *orig_tile;
 	// tile psrctile, *pdesttile;
-	// enum unit_move_type move_type = unit_type(punit).move_type;
+	// enum unit_move_type move_type = punit.unit_type().move_type;
 	// int maxcost = MAXCOST;
 	// int move_cost, total_cost;
 	// int straight_dir = 0; /* init to silence compiler warning */
-	// dir_vector local_vector[MAX_MAP_INDEX];
+	// dir_vector local_vector[Map_H.MAX_MAP_INDEX];
 	// #define LOCAL_VECTOR(ptile) local_vector[(ptile).index]
 	// unit pcargo;
 	// /*
@@ -594,7 +597,7 @@ public class Gotohand {
 	//
 	// orig_tile = punit.tile;
 	//
-	// if (same_pos(dest_tile, orig_tile)) {
+	// if (Map.same_pos(dest_tile, orig_tile)) {
 	// return true; /* [Kero] */
 	// }
 	//
@@ -602,7 +605,7 @@ public class Gotohand {
 	//
 	// init_warmap(punit.tile, move_type);
 	// warmap_cost = (move_type == SEA_MOVING) ? warmap.seacost : warmap.cost;
-	// add_to_mapqueue(0, orig_tile);
+	// add_to_maPqueue(0, orig_tile);
 	//
 	// if (punit && unit_flag(punit, F_IGTER))
 	// igter = true;
@@ -617,16 +620,16 @@ public class Gotohand {
 	// pcargo = other_passengers(punit);
 	// if (pcargo)
 	// if (is_ocean(map_get_terrain(dest_tile)) ||
-	// !is_non_allied_unit_tile(dest_tile, unit_owner(pcargo))
-	// || is_allied_city_tile(dest_tile, unit_owner(pcargo))
+	// !Unit.is_non_allied_unit_tile(dest_tile, pcargo.unit_owner())
+	// || City.is_allied_city_tile(dest_tile, pcargo.unit_owner())
 	// || unit_flag(pcargo, F_MARINES)
-	// || is_my_zoc(unit_owner(pcargo), dest_tile))
+	// || is_my_zoc(pcargo.unit_owner(), dest_tile))
 	// pcargo = null;
 	// } else
 	// pcargo = null;
 	//
 	// /* until we have found the shortest paths */
-	// while ((ptile = get_from_mapqueue())) {
+	// while ((ptile = get_from_maPqueue())) {
 	// psrctile = ptile;
 	//
 	// if (restriction == GOTO_MOVE_STRAIGHTEST)
@@ -651,61 +654,61 @@ public class Gotohand {
 	// RR loops, ie you can't create a cycle with the same move_cost */
 	//
 	// if (is_ocean(pdesttile.terrain)) {
-	// if (ground_unit_transporter_capacity(tile1, unit_owner(punit)) <= 0)
+	// if (ground_unit_transporter_capacity(tile1, punit.unit_owner()) <= 0)
 	// continue;
 	// else
 	// move_cost = 3;
 	// } else if (is_ocean(psrctile.terrain)) {
 	// int base_cost = get_tile_type(pdesttile.terrain).movement_cost *
-	// SINGLE_MOVE;
-	// move_cost = igter ? 1 : Math.min(base_cost, unit_move_rate(punit));
+	// Unit_H.SINGLE_MOVE;
+	// move_cost = igter ? 1 : Math.min(base_cost, punit.move_rate());
 	// } else if (igter)
-	// move_cost = (psrctile.move_cost[dir] != 0 ? SINGLE_MOVE : 0);
+	// move_cost = (psrctile.move_cost[dir] != 0 ? Unit_H.SINGLE_MOVE : 0);
 	// else
-	// move_cost = Math.min(psrctile.move_cost[dir], unit_move_rate(punit));
+	// move_cost = Math.min(psrctile.move_cost[dir], punit.move_rate());
 	//
 	// if (!pplayer.ai.control && !map_is_known(tile1, pplayer)) {
-	// /* Don't go into the unknown. 5*SINGLE_MOVE is an arbitrary deterrent. */
-	// move_cost = (restriction == GOTO_MOVE_STRAIGHTEST) ? SINGLE_MOVE :
-	// 5*SINGLE_MOVE;
-	// } else if (is_non_allied_unit_tile(pdesttile, unit_owner(punit))) {
+	// /* Don't go into the unknown. 5*Unit_H.SINGLE_MOVE is an arbitrary deterrent. */
+	// move_cost = (restriction == GOTO_MOVE_STRAIGHTEST) ? Unit_H.SINGLE_MOVE :
+	// 5*Unit_H.SINGLE_MOVE;
+	// } else if (Unit.is_non_allied_unit_tile(pdesttile, punit.unit_owner())) {
 	// if (is_ocean(psrctile.terrain) && !unit_flag(punit, F_MARINES)) {
 	// continue; /* Attempting to attack from a ship */
 	// }
 	//
-	// if (!same_pos(tile1, dest_tile)) {
+	// if (!Map.same_pos(tile1, dest_tile)) {
 	// /* Allow players to target anything */
 	// if (pplayer.ai.control) {
-	// if ((null==is_enemy_unit_tile(pdesttile, unit_owner(punit))
+	// if ((null==is_enemy_unit_tile(pdesttile, punit.unit_owner())
 	// || !is_military_unit(punit))
 	// && !is_diplomat_unit(punit)) {
 	// continue; /* unit is non_allied and non_enemy, ie non_attack */
 	// } else {
-	// move_cost = SINGLE_MOVE; /* Attack cost */
+	// move_cost = Unit_H.SINGLE_MOVE; /* Attack cost */
 	// }
 	// } else {
 	// continue; /* non-AI players don't attack on goto */
 	// }
 	// } else {
-	// move_cost = SINGLE_MOVE;
+	// move_cost = Unit_H.SINGLE_MOVE;
 	// }
-	// } else if (is_non_allied_city_tile(pdesttile, unit_owner(punit))) {
+	// } else if (is_non_allied_city_tile(pdesttile, punit.unit_owner())) {
 	// if (is_ocean(psrctile.terrain) && !unit_flag(punit, F_MARINES)) {
 	// continue; /* Attempting to attack from a ship */
 	// }
 	//
-	// if ((is_non_attack_city_tile(pdesttile, unit_owner(punit))
+	// if ((is_non_attack_city_tile(pdesttile, punit.unit_owner())
 	// || !is_military_unit(punit))) {
 	// if (!is_diplomat_unit(punit)
-	// && !same_pos(tile1, dest_tile)) {
+	// && !Map.same_pos(tile1, dest_tile)) {
 	// /* Allow players to target anything */
 	// continue;
 	// } else {
 	// /* Assign the basic move cost. There's a penalty for
 	// * dangerous tiles. */
 	// move_cost
-	// = ((unit_loss_pct(unit_owner(punit), tile1, punit) > 0)
-	// ? DANGER_MOVE : SINGLE_MOVE);
+	// = ((unit_loss_pct(punit.unit_owner(), tile1, punit) > 0)
+	// ? DANGER_MOVE : Unit_H.SINGLE_MOVE);
 	// }
 	// }
 	// } else if (!goto_zoc_ok(punit, ptile, tile1, LOCAL_VECTOR(ptile))) {
@@ -713,7 +716,7 @@ public class Gotohand {
 	// }
 	//
 	// if (restriction == GOTO_MOVE_STRAIGHTEST && dir == straight_dir)
-	// move_cost /= SINGLE_MOVE;
+	// move_cost /= Unit_H.SINGLE_MOVE;
 	//
 	// total_cost = move_cost + WARMAP_COST(ptile);
 	// break;
@@ -724,36 +727,36 @@ public class Gotohand {
 	//
 	// /* allow ships to target a shore */
 	// if (psrctile.move_cost[dir] != MOVE_COST_FOR_VALID_SEA_STEP
-	// && !same_pos(tile1, dest_tile)) {
+	// && !Map.same_pos(tile1, dest_tile)) {
 	// continue;
-	// } else if (unit_loss_pct(unit_owner(punit), tile1, punit) > 0) {
+	// } else if (unit_loss_pct(punit.unit_owner(), tile1, punit) > 0) {
 	// /* Impose a penalty for travel over dangerous tiles. */
 	// move_cost = DANGER_MOVE;
 	// } else {
-	// move_cost = SINGLE_MOVE;
+	// move_cost = Unit_H.SINGLE_MOVE;
 	// }
 	//
 	// /* See previous comment on pcargo */
-	// if (same_pos(tile1, dest_tile) && pcargo
-	// && move_cost < 20 * SINGLE_MOVE
-	// && !is_my_zoc(unit_owner(pcargo), ptile)) {
-	// move_cost = 20 * SINGLE_MOVE;
+	// if (Map.same_pos(tile1, dest_tile) && pcargo
+	// && move_cost < 20 * Unit_H.SINGLE_MOVE
+	// && !is_my_zoc(pcargo.unit_owner(), ptile)) {
+	// move_cost = 20 * Unit_H.SINGLE_MOVE;
 	// }
 	//
 	// if (!pplayer.ai.control && !map_is_known(tile1, pplayer))
-	// move_cost = (restriction == GOTO_MOVE_STRAIGHTEST) ? SINGLE_MOVE :
-	// 5*SINGLE_MOVE; /* arbitrary deterrent. */
+	// move_cost = (restriction == GOTO_MOVE_STRAIGHTEST) ? Unit_H.SINGLE_MOVE :
+	// 5*Unit_H.SINGLE_MOVE; /* arbitrary deterrent. */
 	//
 	// /* We don't allow attacks during GOTOs here; you can almost
 	// always find a way around enemy units on sea */
-	// if (!same_pos(tile1, dest_tile)) {
-	// if (is_non_allied_unit_tile(pdesttile, unit_owner(punit))
-	// || is_non_allied_city_tile(pdesttile, unit_owner(punit)))
+	// if (!Map.same_pos(tile1, dest_tile)) {
+	// if (Unit.is_non_allied_unit_tile(pdesttile, punit.unit_owner())
+	// || is_non_allied_city_tile(pdesttile, punit.unit_owner()))
 	// continue;
 	// }
 	//
 	// if ((restriction == GOTO_MOVE_STRAIGHTEST) && (dir == straight_dir))
-	// move_cost /= SINGLE_MOVE;
+	// move_cost /= Unit_H.SINGLE_MOVE;
 	//
 	// total_cost = move_cost + WARMAP_SEACOST(ptile);
 	//
@@ -762,11 +765,11 @@ public class Gotohand {
 	// WARMAP_SEACOST(ptile) < punit.moves_left
 	// && total_cost < maxcost
 	// && total_cost >= punit.moves_left - (get_transporter_capacity(punit) >
-	// unit_type(punit).attack_strength ? 3 : 2)
+	// punit.unit_type().attack_strength ? 3 : 2)
 	// && enemies_at(punit, tile1)) {
-	// total_cost += unit_move_rate(punit);
-	// util.freelog(LOG_DEBUG, "%s#%d@(%d,%d) dissuaded from (%d,%d) . (%d,%d)",
-	// unit_type(punit).name, punit.id,
+	// total_cost += punit.move_rate();
+	// util.freelog(Log.LOG_DEBUG, "%s#%d@(%d,%d) dissuaded from (%d,%d) . (%d,%d)",
+	// punit.unit_type().name, punit.id,
 	// TILE_XY(punit.tile), TILE_XY(tile1), TILE_XY(dest_tile));
 	// }
 	// break;
@@ -776,18 +779,18 @@ public class Gotohand {
 	// if (WARMAP_COST(tile1) <= WARMAP_COST(ptile))
 	// continue; /* No need for all the calculations */
 	//
-	// move_cost = SINGLE_MOVE;
+	// move_cost = Unit_H.SINGLE_MOVE;
 	// /* Planes could run out of fuel, therefore we don't care if territory
 	// is unknown. Also, don't attack except at the destination. */
 	//
-	// if (!same_pos(tile1, dest_tile)
+	// if (!Map.same_pos(tile1, dest_tile)
 	// && !airspace_looks_safe(tile1, pplayer)) {
 	// /* If it's not our destination, we check if it's safe */
 	// continue;
 	// }
 	//
 	// if ((restriction == GOTO_MOVE_STRAIGHTEST) && (dir == straight_dir))
-	// move_cost /= SINGLE_MOVE;
+	// move_cost /= Unit_H.SINGLE_MOVE;
 	// total_cost = move_cost + WARMAP_COST(ptile);
 	// break;
 	//
@@ -801,24 +804,24 @@ public class Gotohand {
 	// if (total_cost < maxcost) {
 	// if (warmap_cost[tile1.index] > total_cost) {
 	// warmap_cost[tile1.index] = total_cost;
-	// add_to_mapqueue(total_cost, tile1);
+	// add_to_maPqueue(total_cost, tile1);
 	// BV_CLR_ALL(LOCAL_VECTOR(tile1));
 	// BV_SET(LOCAL_VECTOR(tile1), DIR_REVERSE(dir));
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "Candidate: %s from (%d, %d) to (%d, %d), cost %d",
 	// dir_get_name(dir), TILE_XY(ptile), TILE_XY(tile1),
 	// total_cost);
 	// } else if (warmap_cost[tile1.index] == total_cost) {
 	// BV_SET(LOCAL_VECTOR(tile1), DIR_REVERSE(dir));
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "Co-Candidate: %s from (%d, %d) to (%d, %d), cost %d",
 	// dir_get_name(dir), TILE_XY(ptile), TILE_XY(tile1),
 	// total_cost);
 	// }
 	// }
 	//
-	// if (same_pos(tile1, dest_tile) && maxcost > total_cost) {
-	// util.freelog(LOG_DEBUG, "Found path, cost = %d", total_cost);
+	// if (Map.same_pos(tile1, dest_tile) && maxcost > total_cost) {
+	// util.freelog(Log.LOG_DEBUG, "Found path, cost = %d", total_cost);
 	// /* Make sure we stop searching when we have no hope of finding a shorter
 	// path */
 	// maxcost = total_cost + 1;
@@ -826,7 +829,7 @@ public class Gotohand {
 	// } adjc_dir_iterate_end;
 	// }
 	//
-	// util.freelog(LOG_DEBUG, "GOTO: (%d, %d) . (%d, %d), cost = %d",
+	// util.freelog(Log.LOG_DEBUG, "GOTO: (%d, %d) . (%d, %d), cost = %d",
 	// TILE_XY(orig_tile), TILE_XY(dest_tile), maxcost - 1);
 	//
 	// if (maxcost == MAXCOST)
@@ -836,13 +839,13 @@ public class Gotohand {
 	// there.
 	// Now backtrack to remove all the blind paths ***/
 	// assert(sizeof(*warmap.vector) == sizeof(char));
-	// memset(warmap.vector, 0, map.xsize * map.ysize);
+	// memset(warmap.vector, 0, Map.map.xsize * Map.map.ysize);
 	//
 	// init_queue();
-	// add_to_mapqueue(0, dest_tile);
+	// add_to_maPqueue(0, dest_tile);
 	//
 	// while (true) {
-	// if (!(ptile = get_from_mapqueue()))
+	// if (!(ptile = get_from_maPqueue()))
 	// break;
 	//
 	// adjc_dir_iterate(ptile, tile1, dir) {
@@ -854,11 +857,11 @@ public class Gotohand {
 	// ? WARMAP_SEACOST(tile1)
 	// : WARMAP_COST(tile1);
 	//
-	// add_to_mapqueue(MAXCOST-1 - move_cost, tile1);
+	// add_to_maPqueue(MAXCOST-1 - move_cost, tile1);
 	// /* Mark it on the warmap */
 	// WARMAP_VECTOR(tile1) |= 1 << DIR_REVERSE(dir);
 	// BV_CLR(LOCAL_VECTOR(ptile), dir); /* avoid repetition */
-	// util.freelog(LOG_DEBUG, "PATH-SEGMENT: %s from (%d, %d) to (%d, %d)",
+	// util.freelog(Log.LOG_DEBUG, "PATH-SEGMENT: %s from (%d, %d) to (%d, %d)",
 	// dir_get_name(DIR_REVERSE(dir)),
 	// TILE_XY(tile1), TILE_XY(ptile));
 	// }
@@ -932,7 +935,7 @@ public class Gotohand {
 	//
 	// int i, fitness[8], best_fitness = DONT_SELECT_ME_FITNESS;
 	// unit passenger;
-	// player pplayer = unit_owner(punit);
+	// player pplayer = punit.unit_owner();
 	// boolean afraid_of_sinking = (unit_flag(punit, F_TRIREME)
 	// && get_player_bonus(pplayer,
 	// EFT_NO_SINK_DEEP) == 0);
@@ -1001,14 +1004,14 @@ public class Gotohand {
 	// -- GB */
 	// base_move_cost = punit.tile.move_cost[dir];
 	// } else {
-	// base_move_cost = SINGLE_MOVE;
+	// base_move_cost = Unit_H.SINGLE_MOVE;
 	// }
 	//
 	// if (unit_flag(punit, F_IGTER) && base_move_cost >= MOVE_COST_ROAD) {
 	// base_move_cost = MOVE_COST_ROAD;
 	// }
 	//
-	// util.freelog(LOG_DEBUG, "%d@(%d,%d) evaluating (%d,%d)[%d/%d]", punit.id,
+	// util.freelog(Log.LOG_DEBUG, "%d@(%d,%d) evaluating (%d,%d)[%d/%d]", punit.id,
 	// TILE_XY(punit.tile), TILE_XY(ptile),
 	// base_move_cost, punit.moves_left);
 	//
@@ -1038,7 +1041,7 @@ public class Gotohand {
 	// int rating_of_best_ally = 0;
 	//
 	// for (unit aunit : ptile.units.data) {
-	// if (pplayers_allied(unit_owner(aunit), unit_owner(punit))) {
+	// if (pplayers_allied(aunit.unit_owner(), punit.unit_owner())) {
 	// int rating_of_current_ally =
 	// UNIT_RATING(aunit, ptile, defence_multiplier);
 	// num_of_allied_units++;
@@ -1078,7 +1081,7 @@ public class Gotohand {
 	//
 	// if (num_of_allied_units == 0) {
 	// fitness[dir] = rating_of_unit;
-	// } else if (pcity || tile_has_special(ptile, S_FORTRESS)) {
+	// } else if (pcity || Map.tile_has_special(ptile, S_FORTRESS)) {
 	// fitness[dir] = MAX(rating_of_unit, rating_of_ally);
 	// } else if (rating_of_unit <= rating_of_ally) {
 	// fitness[dir] = rating_of_ally * (num_of_allied_units /
@@ -1097,7 +1100,7 @@ public class Gotohand {
 	// * In case we change directions next turn, roads and railroads are
 	// * nice.
 	// */
-	// if (tile_has_special(ptile, S_ROAD) || tile_has_special(ptile,
+	// if (Map.tile_has_special(ptile, S_ROAD) || Map.tile_has_special(ptile,
 	// S_RAILROAD)) {
 	// fitness[dir] += 10;
 	// }
@@ -1117,12 +1120,12 @@ public class Gotohand {
 	// }
 	// } else {
 	// /* lookin for trouble */
-	// if (punit.moves_left < base_move_cost + SINGLE_MOVE) {
+	// if (punit.moves_left < base_move_cost + Unit_H.SINGLE_MOVE) {
 	// /* can't fight */
 	// for (unit aunit : adjtile.units.data) {
 	// int attack_of_enemy;
 	//
-	// if (!pplayers_at_war(unit_owner(aunit), unit_owner(punit))) {
+	// if (!pplayers_at_war(aunit.unit_owner(), punit.unit_owner())) {
 	// continue;
 	// }
 	//
@@ -1152,7 +1155,7 @@ public class Gotohand {
 	// * Try to make triremes safe
 	// */
 	// if (afraid_of_sinking && !is_coast_seen(ptile, pplayer)) {
-	// if (punit.moves_left < 2 * SINGLE_MOVE) {
+	// if (punit.moves_left < 2 * Unit_H.SINGLE_MOVE) {
 	// fitness[dir] = DONT_SELECT_ME_FITNESS;
 	// continue;
 	// }
@@ -1164,9 +1167,9 @@ public class Gotohand {
 	// /*
 	// * Clip the fitness value.
 	// */
-	// if (fitness[dir] < 1 && (!unit_owner(punit).ai.control
+	// if (fitness[dir] < 1 && (!punit.unit_owner().ai.control
 	// || punit.ai.passenger == 0
-	// || punit.moves_left >= 2 * SINGLE_MOVE)) {
+	// || punit.moves_left >= 2 * Unit_H.SINGLE_MOVE)) {
 	// fitness[dir] = 1;
 	// }
 	// if (fitness[dir] < 0) {
@@ -1179,7 +1182,7 @@ public class Gotohand {
 	// if (fitness[dir] != DONT_SELECT_ME_FITNESS
 	// && fitness[dir] > best_fitness) {
 	// best_fitness = fitness[dir];
-	// util.freelog(LOG_DEBUG, "New best = %d: dir=%d (%d, %d) . (%d, %d)",
+	// util.freelog(Log.LOG_DEBUG, "New best = %d: dir=%d (%d, %d) . (%d, %d)",
 	// best_fitness, dir, TILE_XY(punit.tile), TILE_XY(ptile));
 	// }
 	// } adjc_dir_iterate_end;
@@ -1191,7 +1194,7 @@ public class Gotohand {
 	// * best_fitness==DONT_SELECT_ME_FITNESS, it'll end its turn right
 	// * there and could very well die. We'll try to rescue.
 	// */
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "%s's trireme in trouble at (%d,%d), looking for coast",
 	// pplayer.name, TILE_XY(punit.tile));
 	//
@@ -1199,13 +1202,13 @@ public class Gotohand {
 	// if (is_coast_seen(ptile, pplayer)) {
 	// fitness[dir] = 1;
 	// best_fitness = 1;
-	// util.freelog(LOG_DEBUG, "found coast");
+	// util.freelog(Log.LOG_DEBUG, "found coast");
 	// }
 	// } adjc_dir_iterate_end;
 	// }
 	//
 	// if (best_fitness == DONT_SELECT_ME_FITNESS) {
-	// util.freelog(LOG_DEBUG, "find_a_direction: no good direction found");
+	// util.freelog(Log.LOG_DEBUG, "find_a_direction: no good direction found");
 	// return -1;
 	// }
 	//
@@ -1216,7 +1219,7 @@ public class Gotohand {
 	// int dir = myrand(8);
 	//
 	// if (fitness[dir] == best_fitness) {
-	// util.freelog(LOG_DEBUG,
+	// util.freelog(Log.LOG_DEBUG,
 	// "find_a_direction: returning dir=%d with fitness=%d", dir,
 	// fitness[dir]);
 	// return dir;
@@ -1235,9 +1238,9 @@ public class Gotohand {
 	// **************************************************************************/
 	// boolean goto_is_sane(unit punit, tile ptile, boolean omni)
 	// {
-	// player pplayer = unit_owner(punit);
+	// player pplayer = punit.unit_owner();
 	//
-	// if (same_pos(punit.tile, ptile)) {
+	// if (Map.same_pos(punit.tile, ptile)) {
 	// return true;
 	// }
 	//
@@ -1246,7 +1249,7 @@ public class Gotohand {
 	// return true;
 	// }
 	//
-	// switch (unit_type(punit).move_type) {
+	// switch (punit.unit_type().move_type) {
 	//
 	// case LAND_MOVING:
 	// if (is_ocean(map_get_terrain(ptile))) {
@@ -1302,7 +1305,7 @@ public class Gotohand {
 	 **************************************************************************/
 	static goto_result do_unit_goto(unit punit, goto_move_restriction restriction,
 			boolean trigger_special_ability) {
-		// player pplayer = unit_owner(punit);
+		// player pplayer = punit.unit_owner();
 		// int unit_id;
 		goto_result status = goto_result.GR_WAITING;
 		// tile ptile, *dest_tile, *waypoint_tile;
@@ -1312,11 +1315,11 @@ public class Gotohand {
 		// unit_id = punit.id;
 		// dest_tile = waypoint_tile = punit.goto_tile;
 
-		// if (same_pos(punit.tile, dest_tile) ||
+		// if (Map.same_pos(punit.tile, dest_tile) ||
 		// !goto_is_sane(punit, dest_tile, false)) {
 		// punit.activity = unit_activity.ACTIVITY_IDLE;
 		// send_unit_info(null, punit);
-		// if (same_pos(punit.tile, dest_tile)) {
+		// if (Map.same_pos(punit.tile, dest_tile)) {
 		// return GR_ARRIVED;
 		// } else {
 		// return GR_FAILED;
@@ -1332,7 +1335,7 @@ public class Gotohand {
 		// if (find_air_first_destination(punit, &waypoint_tile)) {
 		// /* this is a special case for air units who do not always want to
 		// move. */
-		// if (same_pos(waypoint_tile, punit.tile)) {
+		// if (Map.same_pos(waypoint_tile, punit.tile)) {
 		// punit.done_moving = true;
 		// send_unit_info(null, punit);
 		// return GR_WAITING; /* out of fuel */
@@ -1340,7 +1343,7 @@ public class Gotohand {
 		// } else {
 		// util.freelog(LOG_VERBOSE, "Did not find an airroute for "
 		// "%s's %s at (%d, %d) . (%d, %d)",
-		// pplayer.name, unit_type(punit).name,
+		// pplayer.name, punit.unit_type().name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
 		// punit.activity = unit_activity.ACTIVITY_IDLE;
 		// send_unit_info(null, punit);
@@ -1364,19 +1367,19 @@ public class Gotohand {
 
 		// dir = find_a_direction(punit, restriction, waypoint_tile);
 		// if (dir < 0) {
-		// util.freelog(LOG_DEBUG, "%s#%d@(%d,%d) stalling so it won't be killed.",
-		// unit_type(punit).name, punit.id,
+		// util.freelog(Log.LOG_DEBUG, "%s#%d@(%d,%d) stalling so it won't be killed.",
+		// punit.unit_type().name, punit.id,
 		// TILE_XY(punit.tile));
 		// return GR_FAILED;
 		// }
 
-		// util.freelog(LOG_DEBUG, "Going %s", dir_get_name(dir));
+		// util.freelog(Log.LOG_DEBUG, "Going %s", dir_get_name(dir));
 		// ptile = mapstep(punit.tile, dir);
 
-		// penemy = is_enemy_unit_tile(ptile, unit_owner(punit));
+		// penemy = is_enemy_unit_tile(ptile, punit.unit_owner());
 		// assert(punit.moves_left > 0);
 
-		// last_tile = same_pos(ptile, punit.goto_tile);
+		// last_tile = Map.same_pos(ptile, punit.goto_tile);
 
 		// /* Call handle_unit_move_request for humans and ai_unit_move for AI
 		// */
@@ -1404,17 +1407,17 @@ public class Gotohand {
 		// return GR_FOUGHT;
 		// }
 
-		// if(!same_pos(ptile, punit.tile)) {
+		// if(!Map.same_pos(ptile, punit.tile)) {
 		// send_unit_info(null, punit);
 		// return GR_OUT_OF_MOVEPOINTS;
 		// }
 
-		// util.freelog(LOG_DEBUG, "Moving on.");
-		// } while(!same_pos(ptile, waypoint_tile));
+		// util.freelog(Log.LOG_DEBUG, "Moving on.");
+		// } while(!Map.same_pos(ptile, waypoint_tile));
 		// } else {
 		// util.freelog(LOG_VERBOSE, "Did not find the shortest path for "
 		// "%s's %s at (%d, %d) . (%d, %d)",
-		// pplayer.name, unit_type(punit).name,
+		// pplayer.name, punit.unit_type().name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
 		// handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 		// send_unit_info(null, punit);
@@ -1424,7 +1427,7 @@ public class Gotohand {
 
 		// /* normally we would just do this unconditionally, but if we had an
 		// airplane goto we might not be finished even if the loop exited */
-		// if (same_pos(punit.tile, dest_tile)) {
+		// if (Map.same_pos(punit.tile, dest_tile)) {
 		// punit.activity = unit_activity.ACTIVITY_IDLE;
 		// status = GR_ARRIVED;
 		// } else {
@@ -1452,7 +1455,7 @@ public class Gotohand {
 //			 * these we just assume cost = distance. (times 3 for road factor).
 //			 * (Could be wrong if there are things in the way.)
 //			 */
-//			return SINGLE_MOVE * real_map_distance(punit.tile, dest_tile);
+//			return Unit_H.SINGLE_MOVE * real_map_distance(punit.tile, dest_tile);
 //		}
 //
 //		generate_warmap(null, punit);
@@ -1499,124 +1502,124 @@ public class Gotohand {
 	//
 	// /* The tile is unfogged so we can check for enemy units on the
 	// tile. */
-	// return !is_non_allied_unit_tile(ptile, pplayer);
+	// return !Unit.is_non_allied_unit_tile(ptile, pplayer);
 	// }
-	//
-	// /**************************************************************************
-	// An air unit starts (src_x,src_y) with moves moves and want to go to
-	// (dest_x,dest_y). It returns the number of moves left if this is
-	// possible without running out of moves. It returns -1 if it is
-	// impossible.
-	//
-	// The function has 3 stages:
-	// Try to rule out the possibility in O(1) time else
-	// Try to quickly verify in O(moves) time else
-	// Do an A* search using the warmap to completely search for the path.
-	// **************************************************************************/
-	// int air_can_move_between(int moves, tile src_tile,
-	// tile dest_tile, player pplayer)
-	// {
-	// tile ptile;
-	// int dist, total_distance = real_map_distance(src_tile, dest_tile);
-	//
-	// util.freelog(LOG_DEBUG,
-	// "air_can_move_between(moves=%d, src=(%i,%i), "
-	// "dest=(%i,%i), player=%s)", moves, TILE_XY(src_tile),
-	// TILE_XY(dest_tile), pplayer.name);
-	//
-	// /* First we do some very simple O(1) checks. */
-	// if (total_distance > moves) {
-	// return -1;
-	// }
-	// if (total_distance == 0) {
-	// return moves;
-	// }
-	//
-	// /*
-	// * Then we do a fast O(n) straight-line check. It'll work so long
-	// * as the straight-line doesn't cross any unreal tiles, unknown
-	// * tiles, or enemy-controlled tiles. So, it should work most of the
-	// * time.
-	// */
-	// ptile = src_tile;
-	//  
-	// /*
-	// * We don't check the endpoint of the goto, since it is possible
-	// * that the endpoint is a tile which has an enemy which should be
-	// * attacked. But we do check that all points in between are safe.
-	// */
-	// for (dist = total_distance; dist > 1; dist--) {
-	// /* Warning: straightest_direction may not actually follow the
-	// straight line. */
-	// int dir = straightest_direction(ptile, dest_tile);
-	// tile new_tile;
-	//
-	// if (!(new_tile = mapstep(ptile, dir))
-	// || !airspace_looks_safe(new_tile, pplayer)) {
-	// break;
-	// }
-	// ptile = new_tile;
-	// }
-	// if (dist == 1) {
-	// /* Looks like the O(n) quicksearch worked. */
-	// assert(real_map_distance(ptile, dest_tile) == 1);
-	// return moves - total_distance * MOVE_COST_AIR;
-	// }
-	//
-	// /*
-	// * Finally, we do a full A* search if this isn't one of the specical
-	// * cases from above. This is copied from find_the_shortest_path but
-	// * we use real_map_distance as a minimum distance estimator for the
-	// * A* search. This distance estimator is used for the cost value in
-	// * the queue, but is not stored in the warmap itself.
-	//   *
-	//   * Note, A* is possible here but not in a normal FreeCiv path
-	//   * finding because planes always take 1 movement unit to move -
-	//   * which is not true of land units.
-	//   */
-	//  util.freelog(LOG_DEBUG,
-	//	  "air_can_move_between: quick search didn't work. Lets try full.");
-	//
-	//  init_warmap(src_tile, AIR_MOVING);
-	//
-	//  /* The 0 is inaccurate under A*, but it doesn't matter. */
-	//  add_to_mapqueue(0, src_tile);
-	//
-	//  while ((ptile = get_from_mapqueue())) {
-	//    adjc_dir_iterate(ptile, tile1, dir) {
-	//      if (WARMAP_COST(tile1) != MAXCOST) {
-	//	continue;
-	//      }
-	//
-	//      /*
-	//       * This comes before the airspace_looks_safe check because it's
-	//       * okay to goto into an enemy. 
-	//       */
-	//      if (same_pos(tile1, dest_tile)) {
-	//	/* We're there! */
-	//	util.freelog(LOG_DEBUG, "air_can_move_between: movecost: %i",
-	//		WARMAP_COST(ptile) + MOVE_COST_AIR);
-	//	/* The -MOVE_COST_AIR is because we haven't taken the final
-	//	   step yet. */
-	//	return moves - WARMAP_COST(ptile) - MOVE_COST_AIR;
-	//      }
-	//
-	//      /* We refuse to goto through unsafe airspace. */
-	//      if (airspace_looks_safe(tile1, pplayer)) {
-	//	int cost = WARMAP_COST(ptile) + MOVE_COST_AIR;
-	//
-	//	WARMAP_COST(tile1) = cost;
-	//
-	//	/* Now for A* we find the minimum total cost. */
-	//	cost += real_map_distance(tile1, dest_tile);
-	//	if (cost <= moves) {
-	//	  add_to_mapqueue(cost, tile1);
-	//	}
-	//      }
-	//    } adjc_dir_iterate_end;
-	//  }
-	//
-	//  util.freelog(LOG_DEBUG, "air_can_move_between: no route found");
-	//  return -1;
-	//}
+	
+	 /**************************************************************************
+	 An air unit starts (src_x,src_y) with moves moves and want to go to
+	 (dest_x,dest_y). It returns the number of moves left if this is
+	 possible without running out of moves. It returns -1 if it is
+	 impossible.
+	
+	 The function has 3 stages:
+	 Try to rule out the possibility in O(1) time else
+	 Try to quickly verify in O(moves) time else
+	 Do an A* search using the warmap to completely search for the path.
+	 **************************************************************************/
+	 public static int air_can_move_between(int moves, tile src_tile,
+	 tile dest_tile, player pplayer)
+	 {
+		 tile ptile;
+		 // int dist, total_distance = real_map_distance(src_tile, dest_tile);
+		 //
+		 // util.freelog(Log.LOG_DEBUG,
+		 // "air_can_move_between(moves=%d, src=(%i,%i), "
+		 // "dest=(%i,%i), player=%s)", moves, TILE_XY(src_tile),
+		 // TILE_XY(dest_tile), pplayer.name);
+		 //
+		 // /* First we do some very simple O(1) checks. */
+		 // if (total_distance > moves) {
+		 // return -1;
+		 // }
+		 // if (total_distance == 0) {
+		 // return moves;
+		 // }
+		 //
+		 // /*
+		 // * Then we do a fast O(n) straight-line check. It'll work so long
+		 // * as the straight-line doesn't cross any unreal tiles, unknown
+		 // * tiles, or enemy-controlled tiles. So, it should work most of the
+		 // * time.
+		 // */
+		 // ptile = src_tile;
+		 //  
+		 // /*
+		 // * We don't check the endpoint of the goto, since it is possible
+		 // * that the endpoint is a tile which has an enemy which should be
+		 // * attacked. But we do check that all points in between are safe.
+		 // */
+		 // for (dist = total_distance; dist > 1; dist--) {
+		 // /* Warning: straightest_direction may not actually follow the
+		 // straight line. */
+		 // int dir = straightest_direction(ptile, dest_tile);
+		 // tile new_tile;
+		 //
+		 // if (!(new_tile = mapstep(ptile, dir))
+		 // || !airspace_looks_safe(new_tile, pplayer)) {
+		 // break;
+		 // }
+		 // ptile = new_tile;
+		 // }
+		 // if (dist == 1) {
+		 // /* Looks like the O(n) quicksearch worked. */
+		 // assert(real_map_distance(ptile, dest_tile) == 1);
+		 // return moves - total_distance * MOVE_COST_AIR;
+		 // }
+		 //
+		 // /*
+		 // * Finally, we do a full A* search if this isn't one of the specical
+		 // * cases from above. This is copied from find_the_shortest_path but
+		 // * we use real_map_distance as a minimum distance estimator for the
+		 // * A* search. This distance estimator is used for the cost value in
+		 // * the queue, but is not stored in the warmap itself.
+		 //   *
+		 //   * Note, A* is possible here but not in a normal FreeCiv path
+		 //   * finding because planes always take 1 movement unit to move -
+		 //   * which is not true of land units.
+		 //   */
+		 //  util.freelog(Log.LOG_DEBUG,
+		 //	  "air_can_move_between: quick search didn't work. Lets try full.");
+		 //
+		 //  init_warmap(src_tile, AIR_MOVING);
+		 //
+		 //  /* The 0 is inaccurate under A*, but it doesn't matter. */
+		 //  add_to_maPqueue(0, src_tile);
+		 //
+		 //  while ((ptile = get_from_maPqueue())) {
+		 //    adjc_dir_iterate(ptile, tile1, dir) {
+		 //      if (WARMAP_COST(tile1) != MAXCOST) {
+		 //	continue;
+		 //      }
+		 //
+		 //      /*
+		 //       * This comes before the airspace_looks_safe check because it's
+		 //       * okay to goto into an enemy. 
+		 //       */
+		 //      if (Map.same_pos(tile1, dest_tile)) {
+		 //	/* We're there! */
+		 //	util.freelog(Log.LOG_DEBUG, "air_can_move_between: movecost: %i",
+		 //		WARMAP_COST(ptile) + MOVE_COST_AIR);
+		 //	/* The -MOVE_COST_AIR is because we haven't taken the final
+		 //	   step yet. */
+		 //	return moves - WARMAP_COST(ptile) - MOVE_COST_AIR;
+		 //      }
+		 //
+		 //      /* We refuse to goto through unsafe airspace. */
+		 //      if (airspace_looks_safe(tile1, pplayer)) {
+		 //	int cost = WARMAP_COST(ptile) + MOVE_COST_AIR;
+		 //
+		 //	WARMAP_COST(tile1) = cost;
+		 //
+		 //	/* Now for A* we find the minimum total cost. */
+		 //	cost += real_map_distance(tile1, dest_tile);
+		 //	if (cost <= moves) {
+		 //	  add_to_maPqueue(cost, tile1);
+		 //	}
+		 //      }
+		 //    } adjc_dir_iterate_end;
+		 //  }
+
+		 util.freelog(Log.LOG_DEBUG, "air_can_move_between: no route found");
+		 return -1;
+	 }
 }

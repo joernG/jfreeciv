@@ -25,7 +25,7 @@ public class Aitools{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"
@@ -115,8 +115,8 @@ public class Aitools{
 //    tile ptile = path.positions[i].tile;
 //    int id = punit.id;
 //
-//    if (same_pos(punit.tile, ptile)) {
-//      UNIT_LOG(LOG_DEBUG, punit, "execute_path: waiting this turn");
+//    if (Map.same_pos(punit.tile, ptile)) {
+//      UNIT_LOG(Log.LOG_DEBUG, punit, "execute_path: waiting this turn");
 //      return true;
 //    }
 //
@@ -134,7 +134,7 @@ public class Aitools{
 //      return false;
 //    }
 //
-//    if (!same_pos(punit.tile, ptile)) {
+//    if (!Map.same_pos(punit.tile, ptile)) {
 //      /* Stopped (or maybe fought) */
 //      return true;
 //    }
@@ -150,13 +150,13 @@ public class Aitools{
 //****************************************************************************/
 //static void ai_gothere_bodyguard(unit punit, tile dest_tile)
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  ai_data ai = ai_data_get(pplayer);
 //  unsigned int danger = 0;
 //  city dcity;
 //  tile ptile;
 //  
-//  if (is_barbarian(unit_owner(punit))) {
+//  if (is_barbarian(punit.unit_owner())) {
 //    /* barbarians must have more courage (ie less brains) */
 //    punit.ai.bodyguard = BODYGUARD_NONE;
 //    return;
@@ -164,7 +164,7 @@ public class Aitools{
 //
 //  /* Estimate enemy attack power. */
 //  for (unit aunit : dest_tile.units.data) {
-//    if (HOSTILE_PLAYER(pplayer, ai, unit_owner(aunit))) {
+//    if (HOSTILE_PLAYER(pplayer, ai, aunit.unit_owner())) {
 //      danger += unit_att_rating(aunit);
 //    }
 //  } }
@@ -174,12 +174,12 @@ public class Aitools{
 //    int d_type = ai_choose_defender_versus(dcity, punit.type);
 //    danger += 
 //      unittype_att_rating(d_type, do_make_unit_veteran(dcity, d_type), 
-//                          SINGLE_MOVE, unit_types[d_type].hp);
+//                          Unit_H.SINGLE_MOVE, unit_types[d_type].hp);
 //  }
 //  danger *= POWER_DIVIDER;
 //
 //  /* If we are fast, there is less danger. */
-//  danger /= (unit_type(punit).move_rate / SINGLE_MOVE);
+//  danger /= (punit.unit_type().move_rate / Unit_H.SINGLE_MOVE);
 //  if (unit_flag(punit, F_IGTER)) {
 //    danger /= 1.5;
 //  }
@@ -188,8 +188,8 @@ public class Aitools{
 //  /* We look for the bodyguard where we stand. */
 //  if (!unit_list_find(&ptile.units, punit.ai.bodyguard)) {
 //    int my_def = (punit.hp 
-//                  * unit_type(punit).veteran[punit.veteran].power_fact
-//		  * unit_type(punit).defense_strength
+//                  * punit.unit_type().veteran[punit.veteran].power_fact
+//		  * punit.unit_type().defense_strength
 //                  * POWER_FACTOR);
 //    
 //    if (danger >= my_def) {
@@ -205,7 +205,7 @@ public class Aitools{
 //  /* What if we have a bodyguard, but don't need one? */
 //}
 //
-//#define LOGLEVEL_GOTHERE LOG_DEBUG
+//#define LOGLEVEL_GOTHERE Log.LOG_DEBUG
 ///****************************************************************************
 //  This is ferry-enabled goto.  Should not normally be used for non-ferried 
 //  units (i.e. planes or ships), use ai_unit_goto instead.
@@ -223,7 +223,7 @@ public class Aitools{
 //{
 //  CHECK_UNIT(punit);
 //
-//  if (same_pos(dest_tile, punit.tile)) {
+//  if (Map.same_pos(dest_tile, punit.tile)) {
 //    /* Nowhere to go */
 //    return true;
 //  }
@@ -264,7 +264,7 @@ public class Aitools{
 //  /* Dead unit shouldn't reach this point */
 //  CHECK_UNIT(punit);
 //  
-//  return (same_pos(punit.tile, dest_tile) 
+//  return (Map.same_pos(punit.tile, dest_tile) 
 //          || is_tiles_adjacent(punit.tile, dest_tile));
 //}
 //
@@ -283,7 +283,7 @@ public class Aitools{
 //  old_tile = punit.goto_tile; /* May be null. */
 //
 //  CHECK_UNIT(punit);
-//  /* TODO: log error on same_pos with punit.x|y */
+//  /* TODO: log error on Map.same_pos with punit.x|y */
 //  punit.goto_tile = ptile;
 //  handle_unit_activity_request(punit, unit_activity.ACTIVITY_GOTO);
 //  result = do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
@@ -311,7 +311,7 @@ public class Aitools{
 //  /* If the unit is under (human) orders we shouldn't control it. */
 //  assert(!unit_has_orders(punit));
 //
-//  UNIT_LOG(LOG_DEBUG, punit, "changing role from %d to %d",
+//  UNIT_LOG(Log.LOG_DEBUG, punit, "changing role from %d to %d",
 //           punit.activity, task);
 //
 //  /* Free our ferry.  Most likely it has been done already. */
@@ -333,7 +333,7 @@ public class Aitools{
 //    unit target = find_unit_by_id(punit.ai.target);
 //
 //    if (target) {
-//      target.ai.hunted &= ~(1 << unit_owner(punit).player_no);
+//      target.ai.hunted &= ~(1 << punit.unit_owner().player_no);
 //      UNIT_LOG(LOGLEVEL_HUNT, target, "no longer hunted (new role %d, old %d)",
 //               task, punit.ai.ai_role);
 //    }
@@ -364,7 +364,7 @@ public class Aitools{
 //    unit target = find_unit_by_id(punit.ai.target);
 //
 //    assert(target != null);
-//    target.ai.hunted |= (1 << unit_owner(punit).player_no);
+//    target.ai.hunted |= (1 << punit.unit_owner().player_no);
 //    UNIT_LOG(LOGLEVEL_HUNT, target, "is being hunted");
 //
 //    /* Grab missiles lying around and bring them along */
@@ -403,9 +403,9 @@ public class Aitools{
 //       the greater good -- Per */
 //    return false;
 //  }
-//  if (pcity.shield_surplus - unit_type(punit).shield_cost >= 0
-//      && pcity.food_surplus - unit_type(punit).food_cost >= 0) {
-//    handle_unit_change_homecity(unit_owner(punit), punit.id, pcity.id);
+//  if (pcity.shield_surplus - punit.unit_type().shield_cost >= 0
+//      && pcity.food_surplus - punit.unit_type().food_cost >= 0) {
+//    handle_unit_change_homecity(punit.unit_owner(), punit.id, pcity.id);
 //    return true;
 //  }
 //  return false;
@@ -424,7 +424,7 @@ public class Aitools{
 //  player pplayer;
 //
 //  assert(bodyguard != null);
-//  pplayer = unit_owner(bodyguard);
+//  pplayer = bodyguard.unit_owner();
 //  assert(pplayer != null);
 //  punit = find_unit_by_id(bodyguard.ai.charge);
 //  assert(punit != null);
@@ -438,7 +438,7 @@ public class Aitools{
 //
 //  if (bodyguard.moves_left <= 0) {
 //    /* should generally should not happen */
-//    BODYGUARD_LOG(LOG_DEBUG, bodyguard, "was left behind by charge");
+//    BODYGUARD_LOG(Log.LOG_DEBUG, bodyguard, "was left behind by charge");
 //    return;
 //  }
 //
@@ -478,14 +478,14 @@ public class Aitools{
 //  boolean alive;
 //
 //  CHECK_UNIT(punit);
-//  assert(unit_owner(punit).ai.control);
+//  assert(punit.unit_owner().ai.control);
 //  assert(is_tiles_adjacent(punit.tile, ptile));
 //
 //  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  () handle_unit_move_request(punit, ptile, false, false);
 //  alive = (find_unit_by_id(sanity) != null);
 //
-//  if (alive && same_pos(ptile, punit.tile)
+//  if (alive && Map.same_pos(ptile, punit.tile)
 //      && has_bodyguard(punit)) {
 //    ai_unit_bodyguard_move(punit.ai.bodyguard, ptile);
 //    /* Clumsy bodyguard might trigger an auto-attack */
@@ -506,28 +506,28 @@ public class Aitools{
 //{
 //  unit bodyguard;
 //  int sanity = punit.id;
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //
 //  CHECK_UNIT(punit);
-//  assert(unit_owner(punit).ai.control);
+//  assert(punit.unit_owner().ai.control);
 //  assert(is_tiles_adjacent(punit.tile, ptile));
 //
 //  /* if enemy, stop and let ai attack function take this case */
 //  if (is_enemy_unit_tile(ptile, pplayer)
 //      || is_enemy_city_tile(ptile, pplayer)) {
-//    UNIT_LOG(LOG_DEBUG, punit, "movement halted due to enemy presence");
+//    UNIT_LOG(Log.LOG_DEBUG, punit, "movement halted due to enemy presence");
 //    return false;
 //  }
 //
 //  /* barbarians shouldn't enter huts */
-//  if (is_barbarian(pplayer) && tile_has_special(ptile, S_HUT)) {
+//  if (is_barbarian(pplayer) && Map.tile_has_special(ptile, S_HUT)) {
 //    return false;
 //  }
 //
 //  /* don't leave bodyguard behind */
 //  if (has_bodyguard(punit)
 //      && (bodyguard = find_unit_by_id(punit.ai.bodyguard))
-//      && same_pos(punit.tile, bodyguard.tile)
+//      && Map.same_pos(punit.tile, bodyguard.tile)
 //      && bodyguard.moves_left == 0) {
 //    UNIT_LOG(LOGLEVEL_BODYGUARD, punit, "does not want to leave "
 //             "its bodyguard");
@@ -536,10 +536,10 @@ public class Aitools{
 //
 //  /* Try not to end move next to an enemy if we can avoid it by waiting */
 //  if (punit.moves_left <= map_move_cost(punit, ptile)
-//      && unit_move_rate(punit) > map_move_cost(punit, ptile)
+//      && punit.move_rate() > map_move_cost(punit, ptile)
 //      && enemies_at(punit, ptile)
 //      && !enemies_at(punit, punit.tile)) {
-//    UNIT_LOG(LOG_DEBUG, punit, "ending move early to stay out of trouble");
+//    UNIT_LOG(Log.LOG_DEBUG, punit, "ending move early to stay out of trouble");
 //    return false;
 //  }
 //
@@ -548,7 +548,7 @@ public class Aitools{
 //  () handle_unit_move_request(punit, ptile, false, true);
 //
 //  /* handle the results */
-//  if (find_unit_by_id(sanity) && same_pos(ptile, punit.tile)) {
+//  if (find_unit_by_id(sanity) && Map.same_pos(ptile, punit.tile)) {
 //    if (has_bodyguard(punit)) {
 //      ai_unit_bodyguard_move(punit.ai.bodyguard, ptile);
 //    }
@@ -671,7 +671,7 @@ public class Aitools{
 //void copy_if_better_choice(ai_choice cur, ai_choice best)
 //{
 //  if (cur.want > best.want) {
-//    util.freelog(LOG_DEBUG, "Overriding choice (%s, %d) with (%s, %d)",
+//    util.freelog(Log.LOG_DEBUG, "Overriding choice (%s, %d) with (%s, %d)",
 //	    (best.type == CT_BUILDING ? 
 //	     get_improvement_name(best.choice) : unit_types[best.choice].name), 
 //	    best.want, 
@@ -751,7 +751,7 @@ public class Aitools{
 //          want = pcity.ai.building_want[i];
 //          id = i;
 //        } else {
-//	  util.freelog(LOG_DEBUG, "%s can't build %s", pcity.name,
+//	  util.freelog(Log.LOG_DEBUG, "%s can't build %s", pcity.name,
 //		  get_improvement_name(i));
 //	}
 //      } /* id is the building we like the best */
@@ -759,10 +759,10 @@ public class Aitools{
 //  } impr_type_iterate_end;
 //
 //  if (want != 0) {
-//    util.freelog(LOG_DEBUG, "AI_Chosen: %s with desire = %d for %s",
+//    util.freelog(Log.LOG_DEBUG, "AI_Chosen: %s with desire = %d for %s",
 //	    get_improvement_name(id), want, pcity.name);
 //  } else {
-//    util.freelog(LOG_DEBUG, "AI_Chosen: None for %s", pcity.name);
+//    util.freelog(Log.LOG_DEBUG, "AI_Chosen: None for %s", pcity.name);
 //  }
 //  choice.want = want;
 //  choice.choice = id;
@@ -795,7 +795,7 @@ public class Aitools{
 //  free_happy += get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL);
 //
 //  for (unit punit : pcity.units_supported.data) {
-//    int happy_cost = utype_happy_cost(unit_type(punit), g);
+//    int happy_cost = utype_happy_cost(punit.unit_type(), g);
 //
 //    if (happy_cost <= 0) {
 //      continue;

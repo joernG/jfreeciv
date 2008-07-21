@@ -29,7 +29,7 @@ public class Cm{
 //#include "government.h"
 //#include "hash.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "shared.h"
 //#include "support.h"
@@ -94,12 +94,12 @@ public class Cm{
 //   if GATHER_TIME_STATS is on */
 //#define PRINT_TIME_STATS_EVERY_QUERY
 //
-//#define LOG_TIME_STATS                                  LOG_DEBUG
-//#define LOG_CM_STATE                                    LOG_DEBUG
-//#define LOG_LATTICE                                     LOG_DEBUG
-//#define LOG_REACHED_LEAF                                LOG_DEBUG
-//#define LOG_BETTER_LEAF                                 LOG_DEBUG
-//#define LOG_PRUNE_BRANCH                                LOG_DEBUG
+//#define LOG_TIME_STATS                                  Log.LOG_DEBUG
+//#define LOG_CM_STATE                                    Log.LOG_DEBUG
+//#define LOG_LATTICE                                     Log.LOG_DEBUG
+//#define LOG_REACHED_LEAF                                Log.LOG_DEBUG
+//#define LOG_BETTER_LEAF                                 Log.LOG_DEBUG
+//#define LOG_PRUNE_BRANCH                                Log.LOG_DEBUG
 //
 //#ifdef GATHER_TIME_STATS
 //static struct {

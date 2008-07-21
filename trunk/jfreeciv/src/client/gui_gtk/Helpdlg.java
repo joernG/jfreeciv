@@ -30,7 +30,7 @@ public class Helpdlg{
 //#include "game.h"
 //#include "genlist.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "shared.h"
 //#include "support.h"

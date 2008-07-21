@@ -18,7 +18,7 @@ public class Climap{
 //#include <config.h>
 //#endif
 //
-//#include "map.h"
+//#include "Map.map.h"
 //#include "shared.h"
 //
 //#include "tilespec.h"           /* is_isometric */

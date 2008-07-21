@@ -908,7 +908,7 @@ public class Sernet{
 //{
 //  assert(request_id);
 //  assert(pconn.server.currently_processed_request_id == 0);
-//  util.freelog(LOG_DEBUG, "start processing packet %d from connection %d",
+//  util.freelog(Log.LOG_DEBUG, "start processing packet %d from connection %d",
 //	  request_id, pconn.id);
 //  send_packet_processing_started(pconn);
 //  pconn.server.currently_processed_request_id = request_id;
@@ -920,7 +920,7 @@ public class Sernet{
 //static void finish_processing_request(connection pconn)
 //{
 //  assert(pconn.server.currently_processed_request_id);
-//  util.freelog(LOG_DEBUG, "finish processing packet %d from connection %d",
+//  util.freelog(Log.LOG_DEBUG, "finish processing packet %d from connection %d",
 //	  pconn.server.currently_processed_request_id, pconn.id);
 //  send_packet_processing_finished(pconn);
 //  pconn.server.currently_processed_request_id = 0;
@@ -931,7 +931,7 @@ public class Sernet{
 //**************************************************************************/
 //static void ping_connection(connection pconn)
 //{
-//  util.freelog(LOG_DEBUG, "sending ping to %s (open=%d)",
+//  util.freelog(Log.LOG_DEBUG, "sending ping to %s (open=%d)",
 //	  conn_description(pconn),
 //	  pconn.server.ping_timers.foo_list_size());
 //  timer_list_insert_back(pconn.server.ping_timers,
@@ -955,7 +955,7 @@ public class Sernet{
 //  timer = timer_list_get(pconn.server.ping_timers, 0);
 //  timer_list_unlink(pconn.server.ping_timers, timer);
 //  pconn.ping_time = read_timer_seconds_free(timer);
-//  util.freelog(LOG_DEBUG, "got pong from %s (open=%d); ping time = %fs",
+//  util.freelog(Log.LOG_DEBUG, "got pong from %s (open=%d); ping time = %fs",
 //	  conn_description(pconn),
 //	  pconn.server.ping_timers.foo_list_size(), pconn.ping_time);
 //}
@@ -1030,10 +1030,10 @@ public class Sernet{
 //      dio_input_init(&din, msgbuf, 1);
 //      dio_get_uint8(&din, &type);
 //      if (type == SERVER_LAN_VERSION) {
-//        util.freelog(LOG_DEBUG, "Received request for server LAN announcement.");
+//        util.freelog(Log.LOG_DEBUG, "Received request for server LAN announcement.");
 //        send_lanserver_response();
 //      } else {
-//        util.freelog(LOG_DEBUG,
+//        util.freelog(Log.LOG_DEBUG,
 //                "Received invalid request for server LAN announcement.");
 //      }
 //    }

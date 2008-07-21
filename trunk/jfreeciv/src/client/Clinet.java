@@ -309,7 +309,7 @@ public class Clinet{
 //      if (errno == EINTR) {
 //	/* EINTR can happen sometimes, especially when compiling with -pg.
 //	 * Generally we just want to run select again. */
-//	util.freelog(LOG_DEBUG, "select() returned EINTR");
+//	util.freelog(Log.LOG_DEBUG, "select() returned EINTR");
 //	continue;
 //      }
 //
@@ -376,7 +376,7 @@ public class Clinet{
 //  assert(expected_request_id);
 //  assert(fd == aconnection.sock);
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "input_from_server_till_request_got_processed("
 //	  "expected_request_id=%d)", expected_request_id);
 //
@@ -398,12 +398,12 @@ public class Clinet{
 //	free(packet);
 //
 //	if (type == PACKET_PROCESSING_FINISHED) {
-//	  util.freelog(LOG_DEBUG, "ifstrgp: expect=%d, seen=%d",
+//	  util.freelog(Log.LOG_DEBUG, "ifstrgp: expect=%d, seen=%d",
 //		  expected_request_id,
 //		  aconnection.client.last_processed_request_id_seen);
 //	  if (aconnection.client.last_processed_request_id_seen >=
 //	      expected_request_id) {
-//	    util.freelog(LOG_DEBUG, "ifstrgp: got it; returning");
+//	    util.freelog(Log.LOG_DEBUG, "ifstrgp: got it; returning");
 //	    goto out;
 //	  }
 //	}
@@ -779,7 +779,7 @@ public class Clinet{
 //    util.freelog(Log.LOG_ERROR, "sendto failed: %s", mystrerror());
 //    return 0;
 //  } else {
-//    util.freelog(LOG_DEBUG, ("Sending request for server announcement on LAN."));
+//    util.freelog(Log.LOG_DEBUG, ("Sending request for server announcement on LAN."));
 //  }
 //
 //  my_closesocket(sock);
@@ -901,7 +901,7 @@ public class Clinet{
 //      } 
 //    } }
 //
-//    util.freelog(LOG_DEBUG,
+//    util.freelog(Log.LOG_DEBUG,
 //            ("Received a valid announcement from a server on the LAN."));
 //    
 //    pserver =  (struct server*)fc_malloc(sizeof(struct server));

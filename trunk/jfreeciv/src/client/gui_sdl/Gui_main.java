@@ -54,7 +54,7 @@ public class Gui_main{
 //#include "gui_mem.h"
 //
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "version.h"
 //
 //#include "gui_string.h"
@@ -314,7 +314,7 @@ public class Gui_main{
 //                  
 //        rect.x = rect.y = 0;
 //        rect.w = SCROLL_MAP_AREA;
-//        rect.h = Main.map.h;
+//        rect.h = Main.Map.map.h;
 //        if (is_in_rect_area(pMotionEvent.x, pMotionEvent.y, rect)) {
 //	  is_map_scrolling = true;
 //	  if (scroll_dir != DIR8_WEST) {
@@ -327,7 +327,7 @@ public class Gui_main{
 //	    scroll_dir = DIR8_WEST;
 //	  }
 //        } else {
-//	  rect.x = Main.map.w - SCROLL_MAP_AREA;
+//	  rect.x = Main.Map.map.w - SCROLL_MAP_AREA;
 //	  if (is_in_rect_area(pMotionEvent.x, pMotionEvent.y, rect)) {
 //	    is_map_scrolling = true;
 //	    if (scroll_dir != DIR8_EAST) {
@@ -341,7 +341,7 @@ public class Gui_main{
 //	    }
 //          } else {
 //	    rect.x = rect.y = 0;
-//            rect.w = Main.map.w;
+//            rect.w = Main.Map.map.w;
 //            rect.h = SCROLL_MAP_AREA;
 //	    if (is_in_rect_area(pMotionEvent.x, pMotionEvent.y, rect)) {
 //	      is_map_scrolling = true;
@@ -355,7 +355,7 @@ public class Gui_main{
 //	        scroll_dir = DIR8_NORTH;
 //	      }
 //            } else {
-//              rect.y = Main.map.h - SCROLL_MAP_AREA;
+//              rect.y = Main.Map.map.h - SCROLL_MAP_AREA;
 //	      if (is_in_rect_area(pMotionEvent.x, pMotionEvent.y, rect)) {
 //	        is_map_scrolling = true;
 //		if (scroll_dir != DIR8_SOUTH) {
@@ -729,19 +729,19 @@ public class Gui_main{
 //    center_main_window_on_screen();
 //#endif
 //    SDL_BlitSurface(pBgd, null, Main.map, null);
-//    putframe(Main.map, 0, 0, Main.map.w - 1, Main.map.h - 1,
-//    			SDL_MapRGB(Main.map.format, 255, 255, 255));
+//    putframe(Main.map, 0, 0, Main.Map.map.w - 1, Main.Map.map.h - 1,
+//    			SDL_MapRGB(Main.Map.map.format, 255, 255, 255));
 //    FREESURFACE(pBgd);
 //    SDL_WM_SetCaption("SDLClient of Freeciv", "FreeCiv");
 //  } else {
 //    set_video_mode(640, 480, SDL_SWSURFACE | SDL_ANYFORMAT);
 //    if(pBgd) {
-//      blit_entire_src(pBgd, Main.map, (Main.map.w - pBgd.w) / 2,
-//    				      (Main.map.h - pBgd.h) / 2);
+//      blit_entire_src(pBgd, Main.map, (Main.Map.map.w - pBgd.w) / 2,
+//    				      (Main.Map.map.h - pBgd.h) / 2);
 //      FREESURFACE(pBgd);
 //      SDL_Client_Flags |= CF_TOGGLED_FULLSCREEN;
 //    } else {
-//      SDL_FillRect(Main.map, null, SDL_MapRGB(Main.map.format, 0, 0, 128));
+//      SDL_FillRect(Main.map, null, SDL_MapRGB(Main.Map.map.format, 0, 0, 128));
 //      SDL_WM_SetCaption("SDLClient of Freeciv", "FreeCiv");
 //    }
 //  }
@@ -913,7 +913,7 @@ public class Gui_main{
 //**************************************************************************/
 //void sound_bell()
 //{
-//  util.freelog(LOG_DEBUG, "sound_bell : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "sound_bell : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -941,7 +941,7 @@ public class Gui_main{
 //**************************************************************************/
 //void add_net_input(int sock)
 //{
-//  util.freelog(LOG_DEBUG, "Connection UP (%d)", sock);
+//  util.freelog(Log.LOG_DEBUG, "Connection UP (%d)", sock);
 //  net_socket = sock;
 //  autoconnect = false;
 //  enable_focus_animation();
@@ -954,7 +954,7 @@ public class Gui_main{
 //void remove_net_input()
 //{
 //  net_socket = (-1);
-//  util.freelog(LOG_DEBUG, "Connection DOWN... ");
+//  util.freelog(Log.LOG_DEBUG, "Connection DOWN... ");
 //  disable_focus_animation();
 //  draw_goto_patrol_lines = false;
 //  if (pAnimCursor) {

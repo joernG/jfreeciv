@@ -404,7 +404,7 @@ public class Gui_text{
 //****************************************************************************/
 //final String mapview_get_unit_tooltip_text(unit punit)
 //{
-//  unit_type ptype = unit_type(punit);
+//  unit_type ptype = punit.unit_type();
 //  city pcity =
 //      player_find_city_by_id(game.player_ptr, punit.homecity);
 //  INIT;
@@ -435,7 +435,7 @@ public class Gui_text{
 //  }
 //  if (punit) {
 //    char tmp[64] = { 0 };
-//    unit_type ptype = unit_type(punit);
+//    unit_type ptype = punit.unit_type();
 //
 //    if (punit.owner == game.player_idx) {
 //      city pcity =
@@ -446,7 +446,7 @@ public class Gui_text{
 //      }
 //    }
 //    add_line("Unit: %s(%s%s)", ptype.name,
-//	     get_nation_name(unit_owner(punit).nation), tmp);
+//	     get_nation_name(punit.unit_owner().nation), tmp);
 //    if (punit.owner != game.player_idx) {
 //      unit apunit = get_unit_in_focus();
 //

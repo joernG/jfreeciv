@@ -39,8 +39,8 @@ public class Agents{
 //
 //public static final int DEBUG_REQUEST_IDS = false;
 //public static final int DEBUG_TODO_LISTS = false;
-//public static final int META_CALLBACKS_LOGLEVEL = LOG_DEBUG;
-//public static final int PRINT_STATS_LOGLEVEL = LOG_DEBUG;
+//public static final int META_CALLBACKS_LOGLEVEL = Log.LOG_DEBUG;
+//public static final int PRINT_STATS_LOGLEVEL = Log.LOG_DEBUG;
 //public static final int DEBUG_FREEZE = false;
 //public static final int MAX_AGENTS = 10;
 //
@@ -313,7 +313,7 @@ public class Agents{
 //      aconnection.client.request_id_of_currently_handled_packet &&
 //      agent.last_outstanding_request_id >=
 //      aconnection.client.request_id_of_currently_handled_packet) {
-//    util.freelog(LOG_DEBUG,
+//    util.freelog(Log.LOG_DEBUG,
 //	    "A:%s: ignoring packet; outstanding [%d..%d] got=%d",
 //	    agent.agent.name,
 //	    agent.first_outstanding_request_id,
@@ -517,10 +517,10 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_unit_changed(unit=%d) type=%s pos=(%d,%d) owner=%s",
 //	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
-//	  unit_owner(punit).name);
+//	  punit.unit_owner().name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -543,10 +543,10 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_new_unit(unit=%d) type=%s pos=(%d,%d) owner=%s",
 //	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
-//	  unit_owner(punit).name);
+//	  punit.unit_owner().name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -570,10 +570,10 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_remove_unit(unit=%d) type=%s pos=(%d,%d) owner=%s",
 //	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
-//	  unit_owner(punit).name);
+//	  punit.unit_owner().name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -597,7 +597,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG, "A: agents_city_changed(city='%s'(%d)) owner=%s",
+//  util.freelog(Log.LOG_DEBUG, "A: agents_city_changed(city='%s'(%d)) owner=%s",
 //	  pcity.name, pcity.id, city_owner(pcity).name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
@@ -622,7 +622,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_city_new(city='%s'(%d)) pos=(%d,%d) owner=%s",
 //	  pcity.name, pcity.id, TILE_XY(pcity.tile),
 //	  city_owner(pcity).name);
@@ -649,7 +649,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_city_remove(city='%s'(%d)) pos=(%d,%d) owner=%s",
 //	  pcity.name, pcity.id, TILE_XY(pcity.tile),
 //	  city_owner(pcity).name);
@@ -677,7 +677,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG, "A: agents_tile_remove(tile=(%d, %d))", TILE_XY(ptile));
+//  util.freelog(Log.LOG_DEBUG, "A: agents_tile_remove(tile=(%d, %d))", TILE_XY(ptile));
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -701,7 +701,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG, "A: agents_tile_changed(tile=(%d, %d))", TILE_XY(ptile));
+//  util.freelog(Log.LOG_DEBUG, "A: agents_tile_changed(tile=(%d, %d))", TILE_XY(ptile));
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -725,7 +725,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  util.freelog(LOG_DEBUG, "A: agents_tile_new(tile=(%d, %d))", TILE_XY(ptile));
+//  util.freelog(Log.LOG_DEBUG, "A: agents_tile_new(tile=(%d, %d))", TILE_XY(ptile));
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];

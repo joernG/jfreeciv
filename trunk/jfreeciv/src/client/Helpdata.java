@@ -34,7 +34,7 @@ public class Helpdata{
 //#include "genlist.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "registry.h"

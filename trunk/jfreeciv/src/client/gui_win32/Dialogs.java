@@ -29,7 +29,7 @@ public class Dialogs{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "packets.h"
@@ -743,7 +743,7 @@ public class Dialogs{
 //  for(i=0;i<n;i++)
 //    {
 //      unit punit = unit_list[i];
-//      unit_type punittemp=unit_type(punit);
+//      unit_type punittemp=punit.unit_type();
 //      city pcity;
 //      unit_select_ids[i]=punit.id;
 //      pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
@@ -772,7 +772,7 @@ public class Dialogs{
 //    {
 //      struct canvas canvas_store = {unitsel_dc, null};
 //      unit punit=unit_list[i];
-//      unit_type punittemp=unit_type(punit);
+//      unit_type punittemp=punit.unit_type();
 //      city pcity;
 //      pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
 //      buffer = util.my_snprintf( "%s(%s)\n%s",
@@ -865,7 +865,7 @@ public class Dialogs{
 //      continue;
 //    }
 //
-//    util.freelog(LOG_DEBUG, "  [%d]: %d", i, nation);
+//    util.freelog(Log.LOG_DEBUG, "  [%d]: %d", i, nation);
 //
 //    EnableWindow(GetDlgItem(races_dlg, ID_RACESDLG_NATION_BASE + nation),
 //		 false);
@@ -1645,7 +1645,7 @@ public class Dialogs{
 //
 //**************************************************************************/
 //void popup_pillage_dialog(unit punit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  HWND dlg;
 //  fcwin_box vbox;
@@ -1662,7 +1662,7 @@ public class Dialogs{
 //    fcwin_box_add_static(vbox,"Select what to pillage:",0,SS_LEFT,
 //			 false,false,10);
 //    while(may_pillage != S_NO_SPECIAL) {
-//      enum tile_special_type what = get_preferred_pillage(may_pillage);
+//      enum int what = get_preferred_pillage(may_pillage);
 //
 //      fcwin_box_add_button(vbox,map_get_infrastructure_text(what),
 //			   ID_PILLAGE_BASE+what,0,true,false,5);

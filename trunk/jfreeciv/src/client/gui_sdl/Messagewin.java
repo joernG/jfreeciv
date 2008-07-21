@@ -70,7 +70,7 @@ public class Messagewin{
 //**************************************************************************/
 //void meswin_update_delay_on()
 //{
-//  util.freelog(LOG_DEBUG, "meswin_update_delay_on : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "meswin_update_delay_on : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -79,7 +79,7 @@ public class Messagewin{
 //void meswin_update_delay_off()
 //{
 //  /* dissconect_from_server call this */
-//  util.freelog(LOG_DEBUG, "meswin_update_delay_off : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "meswin_update_delay_off : PORT ME");
 //}
 //#endif
 //

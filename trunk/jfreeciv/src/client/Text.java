@@ -22,7 +22,7 @@ public class Text{
 //#include <stdarg.h>
 //#include <string.h>
 //
-//#include "map.h"
+//#include "Map.map.h"
 //#include "combat.h"
 //#include "fcintl.h"
 //#include "log.h"
@@ -200,7 +200,7 @@ public class Text{
 //  add_line("Terrain: %s",  map_get_tile_info_text(ptile));
 //  add_line("Food/Prod/Trade: %s",
 //	   map_get_tile_fpt_text(ptile));
-//  if (tile_has_special(ptile, S_HUT)) {
+//  if (Map.tile_has_special(ptile, S_HUT)) {
 //    add_line("Minor Tribe Village");
 //  }
 //  if (game.borders > 0 && !pcity) {
@@ -283,9 +283,9 @@ public class Text{
 //    add_line("Activity: %s", activity_text);
 //  }
 //  if (punit && !pcity) {
-//    player owner = unit_owner(punit);
+//    player owner = punit.unit_owner();
 //    player_diplstate ds = game.player_ptr.diplstates;
-//    unit_type ptype = unit_type(punit);
+//    unit_type ptype = punit.unit_type();
 //    char vet[1024] = "";
 //
 //    if (owner == game.player_ptr){
@@ -344,7 +344,7 @@ public class Text{
 //    }
 //
 //    vet = util.my_snprintf( " (%s)",
-//		_(unit_type(punit).veteran[punit.veteran].name));
+//		_(punit.unit_type().veteran[punit.veteran].name));
 //
 //    /* TRANS: A is attack power, D is defense power, FP is firepower,
 //     * HP is hitpoints (current and max). */
@@ -435,7 +435,7 @@ public class Text{
 //  city pcity =
 //      player_find_city_by_id(game.player_ptr, punit.homecity);
 //  city pcity_near = get_nearest_city(punit, &pcity_near_dist);
-//  unit_type ptype = unit_type(punit);
+//  unit_type ptype = punit.unit_type();
 //  INIT;
 //
 //  add("%s", ptype.name);
@@ -532,7 +532,7 @@ public class Text{
 //  INIT;
 //  
 //  if (punit) {
-//    unit_type ptype = unit_type(punit);
+//    unit_type ptype = punit.unit_type();
 //
 //    add("%s", ptype.name);
 //  }

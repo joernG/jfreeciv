@@ -25,7 +25,7 @@ public class Mapctrl{
 //#include "combat.h"
 //#include "fcintl.h"
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "support.h"
 //#include "unit.h"
@@ -68,7 +68,7 @@ public class Mapctrl{
 //
 ///**************************************************************************
 //  Popup a label with information about the tile, unit, city, when the user
-//  used the middle mouse button on the map.
+//  used the middle mouse button on the Map.map.
 //**************************************************************************/
 //static void popit(GdkEventButton *event, tile ptile)
 //{
@@ -311,8 +311,8 @@ public class Mapctrl{
 //  } else {
 //    gdk_window_get_pointer(overview_canvas.window, &x, &y, 0);
 //    if (x >= 0 && y >= 0
-//	&& x < OVERVIEW_TILE_WIDTH * map.xsize
-//	&& y < OVERVIEW_TILE_HEIGHT * map.ysize) {
+//	&& x < OVERVIEW_TILE_WIDTH * Map.map.xsize
+//	&& y < OVERVIEW_TILE_HEIGHT * Map.map.ysize) {
 //      overview_update_line(x, y);
 //    }
 //  }

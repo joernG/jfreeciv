@@ -22,7 +22,7 @@ public class Aiair{
 //
 //#include "combat.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "unit.h"
 //
@@ -48,12 +48,12 @@ public class Aiair{
 //static boolean find_nearest_airbase(tile ptile, unit punit, 
 //				 tile *airbase_tile)
 //{
-//  player pplayer = unit_owner(punit);
-//  int moves_left = punit.moves_left / SINGLE_MOVE;
+//  player pplayer = punit.unit_owner();
+//  int moves_left = punit.moves_left / Unit_H.SINGLE_MOVE;
 //
 //  iterate_outward(ptile, moves_left, tile1) {
 //    if (is_airunit_refuel_point(tile1, pplayer, punit.type, false)
-//	&& (air_can_move_between (moves_left, ptile, tile1, pplayer) >= 0)) {
+//	&& (Gotohand.air_can_move_between (moves_left, ptile, tile1, pplayer) >= 0)) {
 //      *airbase_tile = tile1;
 //      return true;
 //    }
@@ -77,7 +77,7 @@ public class Aiair{
 //   * unit of the same type nearby */
 //  if (acity && !TEST_BIT(acity.ai.invasion, 0) && punit.id != 0) {
 //    /* No ground troups are invading */
-//    util.freelog(LOG_DEBUG, "Don't want to attack %s, although we could", 
+//    util.freelog(Log.LOG_DEBUG, "Don't want to attack %s, although we could", 
 //            acity.name);
 //    return false;
 //  }
@@ -113,7 +113,7 @@ public class Aiair{
 //  /* Cost of our unit */
 //  unit_cost = unit_build_shield_cost(punit.type);
 //  /* This is to say "wait, ill unit will get better!" */
-//  unit_cost = unit_cost * unit_type(punit).hp / punit.hp; 
+//  unit_cost = unit_cost * punit.unit_type().hp / punit.hp; 
 //
 //  /* Determine cost of enemy units */
 //  victim_cost = stack_cost(pdefender);
@@ -135,18 +135,18 @@ public class Aiair{
 //  profit = kill_desire(victim_cost, unit_attack, unit_cost, victim_defence, 1) 
 //    - SHIELD_WEIGHTING + 2 * TRADE_WEIGHTING;
 //  if (profit > 0) {
-//    profit = military_amortize(unit_owner(punit), 
+//    profit = military_amortize(punit.unit_owner(), 
 //                               find_city_by_id(punit.homecity),
 //                               profit, sortie_time, balanced_cost);
-//    util.freelog(LOG_DEBUG, 
+//    util.freelog(Log.LOG_DEBUG, 
 //	    "%s at (%d, %d) is a worthy target with profit %d", 
-//	    unit_type(pdefender).name, dst_tile.x, dst_tile.y,
+//	    pdefender.unit_type().name, dst_tile.x, dst_tile.y,
 //	    profit);
 //  } else {
-//    util.freelog(LOG_DEBUG, 
+//    util.freelog(Log.LOG_DEBUG, 
 //	    "%s(%d, %d): %s at (%d, %d) is unworthy with profit %d",
-//	    unit_type(punit).name, punit.tile.x, punit.tile.y,
-//	    unit_type(pdefender).name, dst_tile.x, dst_tile.y,
+//	    punit.unit_type().name, punit.tile.x, punit.tile.y,
+//	    pdefender.unit_type().name, dst_tile.x, dst_tile.y,
 //	    profit);
 //    profit = 0;
 //  }
@@ -165,16 +165,16 @@ public class Aiair{
 // *********************************************************************/
 //static int find_something_to_bomb(unit punit, tile ptile)
 //{
-//  player pplayer = unit_owner(punit);
-//  int max_dist = punit.moves_left / SINGLE_MOVE;
+//  player pplayer = punit.unit_owner();
+//  int max_dist = punit.moves_left / Unit_H.SINGLE_MOVE;
 //  int best = 0;
 //
-//  if (same_pos(ptile, punit.tile)) {
+//  if (Map.same_pos(ptile, punit.tile)) {
 //    /* Unit is attacking from here */
-//    max_dist = punit.moves_left / SINGLE_MOVE;
+//    max_dist = punit.moves_left / Unit_H.SINGLE_MOVE;
 //  } else {
 //    /* Unit will be attacking from another airbase */
-//    max_dist = unit_type(punit). move_rate / SINGLE_MOVE;
+//    max_dist = punit.unit_type(). move_rate / Unit_H.SINGLE_MOVE;
 //  }
 //
 //  /* Adjust the max distance so Fighters can attack safely */
@@ -198,13 +198,13 @@ public class Aiair{
 //
 //    if (is_enemy_unit_tile(tile1, pplayer)
 //        && ai_should_we_air_attack_tile(punit, tile1)
-//	&& (air_can_move_between (max_dist, ptile, tile1, pplayer) >= 0)){
+//	&& (Gotohand.air_can_move_between (max_dist, ptile, tile1, pplayer) >= 0)){
 //      int new_best = ai_evaluate_tile_for_air_attack(punit, tile1);
 //      if (new_best > best) {
 //	punit.goto_tile = tile1;
 //	best = new_best;
-//	util.freelog(LOG_DEBUG, "%s wants to attack tile (%d, %d)", 
-//		unit_type(punit).name, tile1.x, tile1.y);
+//	util.freelog(Log.LOG_DEBUG, "%s wants to attack tile (%d, %d)", 
+//		punit.unit_type().name, tile1.x, tile1.y);
 //      }
 //    }
 //
@@ -221,17 +221,17 @@ public class Aiair{
 //				      tile *airbase_tile)
 //{
 //  refuel airbase;
-//  pqueue airbase_iterator;
+//  Pqueue airbase_iterator;
 //  int turns_to_dest = 0;
 //  int best_worth = 0;
 //  boolean found = false;
 //
 //  airbase_iterator 
-//    = refuel_iterate_init(unit_owner(punit), punit.tile,
+//    = refuel_iterate_init(punit.unit_owner(), punit.tile,
 //                          punit.tile, true, 
-//                          punit.moves_left / SINGLE_MOVE, 
-//                          unit_move_rate(punit) / SINGLE_MOVE, 
-//                          unit_type(punit).fuel);
+//                          punit.moves_left / Unit_H.SINGLE_MOVE, 
+//                          punit.move_rate() / Unit_H.SINGLE_MOVE, 
+//                          punit.unit_type().fuel);
 //
 //  while( (airbase = refuel_iterate_next(airbase_iterator)) != null) {
 //    int target_worth;
@@ -303,7 +303,7 @@ public class Aiair{
 //      /* We are on a GOTO.  Check if it will get us anywhere */
 //	&& is_airunit_refuel_point(punit.goto_tile, 
 //				   pplayer, punit.type, false)
-//	&& air_can_move_between (punit.moves_left/SINGLE_MOVE, 
+//	&& Gotohand.air_can_move_between (punit.moves_left/Unit_H.SINGLE_MOVE, 
 //                                 punit.tile, punit.goto_tile,
 //				 pplayer) >= 0) {
 //      /* It's an ok GOTO, just go there */
@@ -312,17 +312,17 @@ public class Aiair{
 //			     &refuel_tile)) {
 //      /* Go refuelling */
 //      punit.goto_tile = refuel_tile;
-//      util.freelog(LOG_DEBUG, "Sent %s to refuel", unit_type(punit).name);
+//      util.freelog(Log.LOG_DEBUG, "Sent %s to refuel", punit.unit_type().name);
 //      ai_unit_goto(punit, punit.goto_tile);
 //    } else {
 //      if (punit.fuel == 1) {
-//	util.freelog(LOG_DEBUG, "Oops, %s is fallin outta sky", 
-//		unit_type(punit).name);
+//	util.freelog(Log.LOG_DEBUG, "Oops, %s is fallin outta sky", 
+//		punit.unit_type().name);
 //      }
 //      return;
 //    }
 //
-//  } else if (punit.fuel == unit_type(punit).fuel) {
+//  } else if (punit.fuel == punit.unit_type().fuel) {
 //    /* We only leave a refuel point when we are on full fuel */
 //
 //    if (find_something_to_bomb(punit, punit.tile) > 0) {
@@ -343,15 +343,15 @@ public class Aiair{
 //					true, false);
 //      }
 //    } else if (ai_find_strategic_airbase(punit, &dst_tile)) {
-//      util.freelog(LOG_DEBUG, "%s will fly to (%i, %i) (%s) to fight there",
-//              unit_type(punit).name, dst_tile.x, dst_tile.y,
+//      util.freelog(Log.LOG_DEBUG, "%s will fly to (%i, %i) (%s) to fight there",
+//              punit.unit_type().name, dst_tile.x, dst_tile.y,
 //              (map_get_city(dst_tile) ? 
 //               map_get_city(dst_tile).name : ""));
 //      punit.goto_tile = dst_tile;
 //      ai_unit_goto(punit, punit.goto_tile);
 //    } else {
-//      util.freelog(LOG_DEBUG, "%s cannot find anything to kill and is staying put", 
-//              unit_type(punit).name);
+//      util.freelog(Log.LOG_DEBUG, "%s cannot find anything to kill and is staying put", 
+//              punit.unit_type().name);
 //      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //  }
@@ -404,10 +404,10 @@ public class Aiair{
 //	choice.choice = u_type;
 //	choice.type = CT_ATTACKER;
 //	want_something = true;
-//	util.freelog(LOG_DEBUG, "%s wants to build %s (want=%d)",
+//	util.freelog(Log.LOG_DEBUG, "%s wants to build %s (want=%d)",
 //		pcity.name, get_unit_type(u_type).name, profit);
 //      } else {
-//      util.freelog(LOG_DEBUG, "%s doesn't want to build %s (want=%d)",
+//      util.freelog(Log.LOG_DEBUG, "%s doesn't want to build %s (want=%d)",
 //		pcity.name, get_unit_type(u_type).name, profit);
 //      }
 //      destroy_unit_virtual(virtual_unit);

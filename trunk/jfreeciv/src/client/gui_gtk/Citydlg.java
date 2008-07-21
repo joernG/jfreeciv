@@ -30,7 +30,7 @@ public class Citydlg{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"
@@ -2659,11 +2659,11 @@ public class Citydlg{
 //
 //      gdk_window_get_geometry(pdialog.overview.map_canvas.window, &x, &y,
 //			      &width, &height, &depth);
-//      util.freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
+//      util.freelog(Log.LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
 //
 //      gdk_window_get_geometry(pdialog.overview.map_canvas_pixmap.window,
 //			      &x, &y, &width, &height, &depth);
-//      util.freelog(LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
+//      util.freelog(Log.LOG_DEBUG, "%d x %d at (%d,%d)", width, height, x, y);
 //    }
 //#endif
 //    if (pdialog.overview.map_canvas == w

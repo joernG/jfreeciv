@@ -41,7 +41,7 @@ public class Helpdlg{
 //#include "support.h"
 //#include "tech.h"
 //#include "unit.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "version.h"
 //
 //#include "climisc.h"

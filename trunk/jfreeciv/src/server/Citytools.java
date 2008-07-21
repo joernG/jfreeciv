@@ -29,7 +29,7 @@ public class Citytools{
 //#include "government.h"
 //#include "idex.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "player.h"
 //#include "rand.h"
@@ -349,7 +349,7 @@ public class Citytools{
 //  int nation_list[game.nation_count], n;
 //  int queue_size;
 //
-//  static final int num_tiles = MAP_MAX_WIDTH * MAP_MAX_HEIGHT; 
+//  static final int num_tiles = Map_H.MAP_MAX_WIDTH * Map_H.MAP_MAX_HEIGHT; 
 //
 //  /* tempname must be static because it's returned below. */
 //  static char tempname[MAX_LEN_NAME];
@@ -398,7 +398,7 @@ public class Citytools{
 //      nation = get_nation_by_idx(nation_list[i]);
 //      name = search_for_city_name(ptile, nation.city_names, pplayer);
 //
-//      util.freelog(LOG_DEBUG, "Looking through %s.", nation.name);
+//      util.freelog(Log.LOG_DEBUG, "Looking through %s.", nation.name);
 //
 //      if (name) {
 //	return name;
@@ -411,7 +411,7 @@ public class Citytools{
 //	  nation_list[queue_size] = n;
 //	  nations_selected[n] = true;
 //	  queue_size++;
-//	  util.freelog(LOG_DEBUG, "Parent %s.", get_nation_by_idx(n).name);
+//	  util.freelog(Log.LOG_DEBUG, "Parent %s.", get_nation_by_idx(n).name);
 //	}
 //      }
 //
@@ -422,7 +422,7 @@ public class Citytools{
 //	  nation_list[queue_size] = n;
 //	  nations_selected[n] = true;
 //	  queue_size++;
-//	  util.freelog(LOG_DEBUG, "Child %s.", get_nation_by_idx(n).name);
+//	  util.freelog(Log.LOG_DEBUG, "Child %s.", get_nation_by_idx(n).name);
 //	}
 //      }
 //    }
@@ -433,7 +433,7 @@ public class Citytools{
 //	nation_list[queue_size] = n;
 //	nations_selected[n] = true;
 //	queue_size++;
-//	util.freelog(LOG_DEBUG, "Misc nation %s.", get_nation_by_idx(n).name);
+//	util.freelog(Log.LOG_DEBUG, "Misc nation %s.", get_nation_by_idx(n).name);
 //      }
 //    }
 //  }
@@ -548,7 +548,7 @@ public class Citytools{
 //static void transfer_unit(unit punit, city tocity,
 //			  boolean verbose)
 //{
-//  player from_player = unit_owner(punit);
+//  player from_player = punit.unit_owner();
 //  player to_player = city_owner(tocity);
 //
 //  if (from_player == to_player) {
@@ -620,11 +620,11 @@ public class Citytools{
 //  if (pplayer != pvictim) {
 //    unit_list_iterate_safe((ptile).units, vunit)  {
 //      /* Don't transfer units already owned by new city-owner --wegge */ 
-//      if (unit_owner(vunit) == pvictim) {
+//      if (vunit.unit_owner() == pvictim) {
 //	transfer_unit(vunit, pcity, verbose);
 //	wipe_unit(vunit);
 //	unit_list_unlink(units, vunit);
-//      } else if (!pplayers_allied(pplayer, unit_owner(vunit))) {
+//      } else if (!pplayers_allied(pplayer, vunit.unit_owner())) {
 //        /* the owner of vunit is allied to pvictim but not to pplayer */
 //        bounce_unit(vunit, verbose);
 //      }
@@ -636,7 +636,7 @@ public class Citytools{
 //  unit_list_iterate_safe(*units, vunit) {
 //    city new_home_city = map_get_city(vunit.tile);
 //    if (new_home_city && new_home_city != exclude_city
-//	&& city_owner(new_home_city) == unit_owner(vunit)) {
+//	&& city_owner(new_home_city) == vunit.unit_owner()) {
 //      /* unit is in another city: make that the new homecity,
 //	 unless that city is actually the same city (happens if disbanding) */
 //      transfer_unit(vunit, new_home_city, verbose);
@@ -648,10 +648,10 @@ public class Citytools{
 //      /* The unit is lost.  Call notify_player (in all other cases it is
 //       * called autmatically). */
 //      util.freelog(LOG_VERBOSE, "Lost %s's %s at (%d,%d) when %s was lost.",
-//	      unit_owner(vunit).name, unit_name(vunit.type),
+//	      vunit.unit_owner().name, unit_name(vunit.type),
 //	      vunit.tile.x, vunit.tile.y, pcity.name);
 //      if (verbose) {
-//	notify_player_ex(unit_owner(vunit), vunit.tile,
+//	notify_player_ex(vunit.unit_owner(), vunit.tile,
 //			 E_UNIT_LOST,
 //			 "Game: %s lost along with control of %s.",
 //			 unit_name(vunit.type), pcity.name);
@@ -953,7 +953,7 @@ public class Citytools{
 //  int x_itr, y_itr;
 //  nation_type nation = get_nation_by_plr(pplayer);
 //
-//  util.freelog(LOG_DEBUG, "Creating city %s", name);
+//  util.freelog(Log.LOG_DEBUG, "Creating city %s", name);
 //
 //  if (terrain_control.may_road) {
 //    map_set_special(ptile, S_ROAD);
@@ -1023,10 +1023,10 @@ public class Citytools{
 //  /* Put vision back to normal, if fortress acted as a watchtower */
 //  if (map_has_special(ptile, S_FORTRESS)) {
 //    unit_list_iterate((ptile).units, punit) {
-//      player owner = unit_owner(punit);
+//      player owner = punit.unit_owner();
 //      if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
 //        unfog_area(owner, punit.tile,
-//                   unit_type(punit).vision_range);
+//                   punit.unit_type().vision_range);
 //        fog_area(owner, punit.tile, get_watchtower_vision(punit));
 //      }
 //    }
@@ -1114,7 +1114,7 @@ public class Citytools{
 //  for (unit punit : ptile.units.data) {
 //    boolean moved;
 //    if (!punit
-//	|| !same_pos(punit.tile, ptile)
+//	|| !Map.same_pos(punit.tile, ptile)
 //	|| !is_sailing_unit(punit)) {
 //      continue;
 //    }
@@ -1126,10 +1126,10 @@ public class Citytools{
 //	if (could_unit_move_to_tile(punit, tile1) == 1) {
 //	  moved = handle_unit_move_request(punit, tile1, false, true);
 //	  if (moved) {
-//	    notify_player_ex(unit_owner(punit), null, event_type.E_NOEVENT,
+//	    notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
 //			     _("Game: Moved %s out of disbanded city %s "
 //			       "to avoid being landlocked."),
-//			     unit_type(punit).name, pcity.name);
+//			     punit.unit_type().name, pcity.name);
 //	    goto OUT;
 //	  }
 //	}
@@ -1137,10 +1137,10 @@ public class Citytools{
 //    } adjc_iterate_end;
 //  OUT:
 //    if (!moved) {
-//      notify_player_ex(unit_owner(punit), null, event_type.E_NOEVENT,
+//      notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
 //		       _("Game: When %s was disbanded your %s could not "
 //			 "get out, and it was therefore stranded."),
-//		       pcity.name, unit_type(punit).name);
+//		       pcity.name, punit.unit_type().name);
 //      wipe_unit(punit);
 //    }
 //    /* We just messed with the unit list. Avoid trouble by starting over.
@@ -1207,7 +1207,7 @@ public class Citytools{
 //{
 //  boolean do_civil_war = false;
 //  int coins;
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  player cplayer = city_owner(pcity);
 //
 //  /* If not at war, may peacefully enter city. Or, if we cannot occupy
@@ -1381,7 +1381,7 @@ public class Citytools{
 ///**************************************************************************
 //  Broadcast info about a city to all players who observe the tile. 
 //  If the player can see the city we update the city info first.
-//  If not we just use the info from the players private map.
+//  If not we just use the info from the players private Map.map.
 //  See also comments to send_city_info_at_tile().
 //  (Split off from send_city_info_at_tile() because that was getting
 //  too difficult for me to understand... --dwp)
@@ -1434,11 +1434,11 @@ public class Citytools{
 //    if (!pplayer && !pconn.observer) {
 //      continue;
 //    }
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      if (!pplayer || map_get_player_tile(ptile, pplayer).city) {
 //	send_city_info_at_tile(pplayer, &pconn.self, null, ptile);
 //      }
-//    } whole_map_iterate_end;
+//    }
 //  }
 //  }
 //  conn_list_do_unbuffer(dest);
@@ -1485,7 +1485,7 @@ public class Citytools{
 ///**************************************************************************
 //Send info about a city, as seen by pviewer, to dest (usually dest will
 //be pviewer.connections). If pplayer can see the city we update the city
-//info first. If not we just use the info from the players private map.
+//info first. If not we just use the info from the players private Map.map.
 //
 //If (pviewer == null) this is for observers, who see everything (?)
 //For this function dest may not be null.  See send_city_info() and

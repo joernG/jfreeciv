@@ -29,7 +29,7 @@ public class Menu{
 //#include "fcintl.h"
 //#include "log.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "support.h"
 //#include "unit.h"
@@ -98,7 +98,7 @@ public class Menu{
 //  IDM_VIEW_ROADS_RAILS,
 //  IDM_VIEW_IRRIGATION,
 //  IDM_VIEW_MINES,
-//  IDM_VIEW_FORTRESS_AIRBASE,
+//  IDM_VIEW_FORTRESTerrain_H.S_AIRBASE,
 //  IDM_VIEW_SPECIALS,
 //  IDM_VIEW_POLLUTION,
 //  IDM_VIEW_CITIES,
@@ -114,7 +114,7 @@ public class Menu{
 //  IDM_ORDERS_MINE,
 //  IDM_ORDERS_TRANSFORM,
 //  IDM_ORDERS_FORTRESS,		/* shared with FORTIFY */
-//  IDM_ORDERS_AIRBASE, 
+//  IDM_ORDERTerrain_H.S_AIRBASE, 
 //  IDM_ORDERS_POLLUTION,		/* shared with PARADROP */
 //  IDM_ORDERS_FALLOUT,
 //  IDM_ORDERS_SENTRY,
@@ -346,7 +346,7 @@ public class Menu{
 //  {N"Roads & Rails",				IDM_VIEW_ROADS_RAILS},
 //  {N"Irrigation",				IDM_VIEW_IRRIGATION},
 //  {N"Mines",					IDM_VIEW_MINES},
-//  {N"Fortress & Airbase",			IDM_VIEW_FORTRESS_AIRBASE},
+//  {N"Fortress & Airbase",			IDM_VIEW_FORTRESTerrain_H.S_AIRBASE},
 //  {null, 0},
 //  {N"Specials",				IDM_VIEW_SPECIALS},
 //  {N"Pollution & Fallout",			IDM_VIEW_POLLUTION},
@@ -365,7 +365,7 @@ public class Menu{
 //  {N"Build _Mine"		"\tM",		IDM_ORDERS_MINE},
 //  {N"Transf_orm to Hills"	"\tO",		IDM_ORDERS_TRANSFORM},
 //  {N"Build _Fortress"	"\tF",		IDM_ORDERS_FORTRESS},
-//  {N"Build Airbas_e"		"\tE",		IDM_ORDERS_AIRBASE},
+//  {N"Build Airbas_e"		"\tE",		IDM_ORDERTerrain_H.S_AIRBASE},
 //  {N"Clean _Pollution"	"\tP",		IDM_ORDERS_POLLUTION},
 //  {N"Clean _Nuclear Fallout" "\tN",		IDM_ORDERS_FALLOUT},
 //  {"", IDM_SEPARATOR},
@@ -656,9 +656,9 @@ public class Menu{
 //      key_mines_toggle();
 //      my_check_menu(menu, IDM_VIEW_MINES, draw_mines);
 //      break;
-//    case IDM_VIEW_FORTRESS_AIRBASE:
+//    case IDM_VIEW_FORTRESTerrain_H.S_AIRBASE:
 //      key_fortress_airbase_toggle();
-//      my_check_menu(menu, IDM_VIEW_FORTRESS_AIRBASE, draw_fortress_airbase);
+//      my_check_menu(menu, IDM_VIEW_FORTRESTerrain_H.S_AIRBASE, draw_fortress_airbase);
 //      break;
 //    case IDM_VIEW_SPECIALS:
 //      key_specials_toggle();
@@ -730,7 +730,7 @@ public class Menu{
 //	}
 //      }
 //      break;
-//    case IDM_ORDERS_AIRBASE:
+//    case IDM_ORDERTerrain_H.S_AIRBASE:
 //      key_unit_airbase();
 //      break;
 //    case IDM_ORDERS_POLLUTION:
@@ -1072,7 +1072,7 @@ public class Menu{
 //    my_check_menu(menu, IDM_VIEW_ROADS_RAILS, draw_roads_rails);
 //    my_check_menu(menu, IDM_VIEW_IRRIGATION, draw_irrigation);
 //    my_check_menu(menu, IDM_VIEW_MINES, draw_mines);
-//    my_check_menu(menu, IDM_VIEW_FORTRESS_AIRBASE, draw_fortress_airbase);
+//    my_check_menu(menu, IDM_VIEW_FORTRESTerrain_H.S_AIRBASE, draw_fortress_airbase);
 //    my_check_menu(menu, IDM_VIEW_SPECIALS, draw_specials);
 //    my_check_menu(menu, IDM_VIEW_POLLUTION, draw_pollution);
 //    my_check_menu(menu, IDM_VIEW_CITIES, draw_cities);
@@ -1126,7 +1126,7 @@ public class Menu{
 //      my_enable_menu(menu, IDM_ORDERS_FORTRESS,
 //		     can_unit_do_activity(punit, ACTIVITY_FORTRESS)
 //		     || can_unit_do_activity(punit, ACTIVITY_FORTIFYING));
-//      my_enable_menu(menu, IDM_ORDERS_AIRBASE,
+//      my_enable_menu(menu, IDM_ORDERTerrain_H.S_AIRBASE,
 //		     can_unit_do_activity(punit, ACTIVITY_AIRBASE));
 //      my_enable_menu(menu, IDM_ORDERS_POLLUTION,
 //		     can_unit_do_activity(punit, ACTIVITY_POLLUTION)

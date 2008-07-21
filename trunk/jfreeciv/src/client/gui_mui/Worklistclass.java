@@ -38,7 +38,7 @@ public class Worklistclass{
 //#include "civclient.h"
 //#include "fcintl.h"
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "support.h"
 //#include "tech.h"
 //#include "worklist.h"

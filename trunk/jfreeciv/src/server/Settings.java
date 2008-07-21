@@ -196,14 +196,14 @@ public class Settings{
 //  /* These should be grouped by sclass */
 //  
 //  /* Map size parameters: adjustable if we don't yet have a map */  
-//  GEN_INT("size", map.size, SSET_MAP_SIZE,
+//  GEN_INT("size", Map.map.size, SSET_MAP_SIZE,
 //	  SSET_GEOLOGY, SSET_VITAL, SSET_TO_CLIENT,
 //          N"Map size (in thousands of tiles)",
 //          N_("This value is used to determine the map dimensions.\n"
 //             "  size = 4 is a normal map of 4,000 tiles (default)\n"
 //             "  size = 20 is a huge map of 20,000 tiles"), null,
 //          MAP_MIN_SIZE, MAP_MAX_SIZE, MAP_DEFAULT_SIZE)
-//  GEN_INT("topology", map.topology_id, SSET_MAP_SIZE,
+//  GEN_INT("topology", Map.map.topology_id, SSET_MAP_SIZE,
 //	  SSET_GEOLOGY, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Map topology index",
 //	  /* TRANS: do not edit the ugly ASCII art */
@@ -247,7 +247,7 @@ public class Settings{
 //  /* Map generation parameters: once we have a map these are of historical
 //   * interest only, and cannot be changed.
 //   */
-//  GEN_INT("generator", map.generator,
+//  GEN_INT("generator", Map.map.generator,
 //	  SSET_MAP_GEN, SSET_GEOLOGY, SSET_VITAL,  SSET_TO_CLIENT,
 //	  N"Method used to generate map",
 //	  N_("0 = Scenario map - no generator;\n"
@@ -261,7 +261,7 @@ public class Settings{
 //	     "generator.  See the \"startpos\" setting."), null,
 //	  MAP_MIN_GENERATOR, MAP_MAX_GENERATOR, MAP_DEFAULT_GENERATOR)
 //
-//  GEN_INT("startpos", map.startpos,
+//  GEN_INT("startpos", Map.map.startpos,
 //	  SSET_MAP_GEN, SSET_GEOLOGY, SSET_VITAL,  SSET_TO_CLIENT,
 //	  N"Method used to choose start positions",
 //	  N_("0 = Generator's choice.  Selecting this setting means\n"
@@ -275,30 +275,30 @@ public class Settings{
 //	     "for the choice of start pos and to the number of players"),
 //	  null, MAP_MIN_STARTPOS, MAP_MAX_STARTPOS, MAP_DEFAULT_STARTPOS)
 //
-//  GEN_BOOL("tinyisles", map.tinyisles,
+//  GEN_BOOL("tinyisles", Map.map.tinyisles,
 //	   SSET_MAP_GEN, SSET_GEOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //	   N"Presence of 1x1 islands",
 //	   N"0 = no 1x1 islands; 1 = some 1x1 islands", null,
 //	   MAP_DEFAULT_TINYISLES)
 //
-//  GEN_BOOL("separatepoles", map.separatepoles,
+//  GEN_BOOL("separatepoles", Map.map.separatepoles,
 //	   SSET_MAP_GEN, SSET_GEOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	   N"Whether the poles are separate continents",
 //	   N_("0 = continents may attach to poles; 1 = poles will "
 //	      "usually be separate"), null, 
 //	   MAP_DEFAULT_SEPARATE_POLES)
 //
-//  GEN_BOOL("alltemperate", map.alltemperate, 
+//  GEN_BOOL("alltemperate", Map.map.alltemperate, 
 //           SSET_MAP_GEN, SSET_GEOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //	   N"All the map is temperate",
 //	   N"0 = normal Earth-like planet; 1 = all-temperate planet ",
 //	   null, MAP_DEFAULT_ALLTEMPERATE)
 //
-//  GEN_INT("temperature", map.temperature,
+//  GEN_INT("temperature", Map.map.temperature,
 // 	  SSET_MAP_GEN, SSET_GEOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 // 	  N"Average temperature of the planet",
 // 	  N_("Small values will give a cold map, while larger values will "
-//             "give a hotter map.\n"
+//             "give a hotter Map.map.\n"
 //	     "\n"
 //	     "100 means a very dry and hot planet with no polar arctic "
 //	     "zones, only tropical and dry zones.\n\n"
@@ -312,21 +312,21 @@ public class Settings{
 //          null,
 //  	  MAP_MIN_TEMPERATURE, MAP_MAX_TEMPERATURE, MAP_DEFAULT_TEMPERATURE)
 // 
-//  GEN_INT("landmass", map.landpercent,
+//  GEN_INT("landmass", Map.map.landpercent,
 //	  SSET_MAP_GEN, SSET_GEOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Percentage of the map that is land",
 //	  N_("This setting gives the approximate percentage of the map "
 //	     "that will be made into land."), null,
 //	  MAP_MIN_LANDMASS, MAP_MAX_LANDMASS, MAP_DEFAULT_LANDMASS)
 //
-//  GEN_INT("steepness", map.steepness,
+//  GEN_INT("steepness", Map.map.steepness,
 //	  SSET_MAP_GEN, SSET_GEOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Amount of hills/mountains",
 //	  N_("Small values give flat maps, while higher values give a "
 //	     "steeper map with more hills and mountains."), null,
 //	  MAP_MIN_STEEPNESS, MAP_MAX_STEEPNESS, MAP_DEFAULT_STEEPNESS)
 //
-//  GEN_INT("wetness", map.wetness,
+//  GEN_INT("wetness", Map.map.wetness,
 // 	  SSET_MAP_GEN, SSET_GEOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 // 	  N"Amount of water on lands", 
 //	  N_("Small values mean lots of dry, desert-like land; "
@@ -334,12 +334,12 @@ public class Settings{
 //	     "jungles, and rivers."), null, 
 // 	  MAP_MIN_WETNESS, MAP_MAX_WETNESS, MAP_DEFAULT_WETNESS)
 //
-//  GEN_INT("mapseed", map.seed,
+//  GEN_INT("mapseed", Map.map.seed,
 //	  SSET_MAP_GEN, SSET_INTERNAL, SSET_RARE, SSET_SERVER_ONLY,
 //	  N"Map generation random seed",
 //	  N_("The same seed will always produce the same map; "
 //	     "for zero (the default) a seed will be chosen based on "
-//	     "the time to give a random map. This setting is usually "
+//	     "the time to give a random Map.map. This setting is usually "
 //	     "only of interest while debugging the game."), null, 
 //	  MAP_MIN_SEED, MAP_MAX_SEED, MAP_DEFAULT_SEED)
 //
@@ -356,7 +356,7 @@ public class Settings{
 //	     "only of interest while debugging the game"), null, 
 //	  GAME_MIN_SEED, GAME_MAX_SEED, GAME_DEFAULT_SEED)
 //
-//  GEN_INT("specials", map.riches,
+//  GEN_INT("specials", Map.map.riches,
 //	  SSET_MAP_ADD, SSET_GEOLOGY, SSET_VITAL, SSET_TO_CLIENT,
 //	  N_("Amount of \"special\" resource squares"), 
 //	  N_("Special resources improve the basic terrain type they "
@@ -364,11 +364,11 @@ public class Settings{
 //	     "thousand."), null,
 //	  MAP_MIN_RICHES, MAP_MAX_RICHES, MAP_DEFAULT_RICHES)
 //
-//  GEN_INT("huts", map.huts,
+//  GEN_INT("huts", Map.map.huts,
 //	  SSET_MAP_ADD, SSET_GEOLOGY, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Amount of huts (minor tribe villages)",
 //	  N_("This setting gives the exact number of huts that will be "
-//	     "placed on the entire map. Huts are small tribal villages "
+//	     "placed on the entire Map.map. Huts are small tribal villages "
 //	     "that may be investiged by units."), null,
 //	  MAP_MIN_HUTS, MAP_MAX_HUTS, MAP_DEFAULT_HUTS)
 //

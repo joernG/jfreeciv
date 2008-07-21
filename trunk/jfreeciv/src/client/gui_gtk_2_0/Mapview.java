@@ -36,7 +36,7 @@ public class Mapview{
 //
 //#include "game.h"
 //#include "government.h"		/* government_graphic() */
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //
 //#include "civclient.h"
@@ -507,7 +507,7 @@ public class Mapview{
 //}
 //
 ///**************************************************************************
-// Update display of descriptions associated with cities on the main map.
+// Update display of descriptions associated with cities on the main Map.map.
 //**************************************************************************/
 //void update_city_descriptions()
 //{

@@ -30,7 +30,7 @@ public class Dialogs{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "packets.h"
@@ -773,7 +773,7 @@ public class Dialogs{
 //  
 //  if( (punit=find_unit_by_id(diplomat_id))
 //      && (pcity=find_city_by_id(diplomat_target_id))
-//      && !same_pos(punit.tile, pcity.tile)) {
+//      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1074,7 +1074,7 @@ public class Dialogs{
 //...
 //*****************************************************************/
 //void popup_pillage_dialog(unit punit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  GtkWidget *shl;
 //
@@ -1087,7 +1087,7 @@ public class Dialogs{
 //			       "Select what to pillage:");
 //
 //    while (may_pillage != S_NO_SPECIAL) {
-//      enum tile_special_type what = get_preferred_pillage(may_pillage);
+//      enum int what = get_preferred_pillage(may_pillage);
 //
 //      message_dialog_add(shl, map_get_infrastructure_text(what),
 //			 G_CALLBACK(pillage_callback), GINT_TO_POINTER(what));
@@ -1278,7 +1278,7 @@ public class Dialogs{
 //    			       GtkTreeIter *parent)
 //{
 //  GdkPixbuf *pix;
-//  unit_type ptype = unit_type(punit);
+//  unit_type ptype = punit.unit_type();
 //
 //  pix = gdk_pixbuf_new(GDK_COLORSPACE_RGB, true, 8,
 //      UNIT_TILE_WIDTH, UNIT_TILE_HEIGHT);

@@ -7,7 +7,6 @@ import static common.Game.find_unit_by_id;
 import static common.Map.map;
 import static common.Map.map_get_city;
 import static common.Map.normalize_map_pos;
-import static common.Map.same_pos;
 import static common.Player_P.ai_handicap;
 import static common.Player_P.can_player_see_unit;
 import static common.Unit.get_transporter_capacity;
@@ -15,12 +14,9 @@ import static common.Unit.is_enemy_unit_tile;
 import static common.Unit.is_military_unit;
 import static common.Unit.set_unit_activity;
 import static common.Unit.unit_list_find;
-import static common.Unit.unit_move_rate;
-import static common.Unit.unit_owner;
 import static common.Unittype_P.get_unit_name;
 import static common.Unittype_P.unit_flag;
 import static common.Unittype_P.unit_name;
-import static common.Unittype_P.unit_type;
 import static common.city.City_H.CITYOPT_AUTOATTACK_BITS;
 import static common.map.Map_H.map_pos_to_index;
 import static common.player.Player_H.H_TARGETS;
@@ -28,10 +24,11 @@ import static server.Gotohand.calculate_move_cost;
 import static server.Plrhand.notify_player_ex;
 import static server.Unithand.handle_unit_activity_request;
 import static server.Unittools.send_unit_info;
-import static utility.Log.LOG_DEBUG;
 import port.util;
+import utility.Log;
 import utility.Speclists;
 
+import common.Map;
 import common.event_type;
 import common.city.city;
 import common.city.city_options;
@@ -76,7 +73,7 @@ public class Autoattack {
 		/* attack the next to city */ 
 		range = range<4 ? 3 : range;
 
-		util.freelog(LOG_DEBUG, "doing autoattack for %s (%d/%d) in %s," +
+		util.freelog(Log.LOG_DEBUG, "doing autoattack for %s (%d/%d) in %s," +
 				" range %d(%d), city_options %d",
 				unit_name(punit.type), punit.tile.x, punit.tile.y,
 				pcity.name,
@@ -89,20 +86,20 @@ public class Autoattack {
 		int _index;	    
 		boolean _is_border = Map_H.is_border_tile(_start_tile, _max_dist);		    
 
-		for (_index = 0; _index < map.num_iterate_outwards_indices; _index++) {   
-			if (map.iterate_outwards_indices[_index].dist > _max_dist) {	    
+		for (_index = 0; _index < Map.map.num_iterate_outwards_indices; _index++) {   
+			if (Map.map.iterate_outwards_indices[_index].dist > _max_dist) {	    
 				break;								    
 			}									    
-			dx_itr = map.iterate_outwards_indices[_index].dx;			    
-			dy_itr = map.iterate_outwards_indices[_index].dy;			    
+			dx_itr = Map.map.iterate_outwards_indices[_index].dx;			    
+			dy_itr = Map.map.iterate_outwards_indices[_index].dy;			    
 			_x_itr = dx_itr + _start_tile.x;					    
 			_y_itr = dy_itr + _start_tile.y;					    
 			if (_is_border && !normalize_map_pos(_x_itr, _y_itr)) {		    
 				continue;								    
 			}									    
-			//ptile = map.tiles + map_pos_to_index(_x_itr, _y_itr);
-			ptile = map.tiles[ map_pos_to_index(_x_itr, _y_itr) ];
-			if (same_pos(punit.tile, ptile))
+			//ptile = Map.map.tiles + map_pos_to_index(_x_itr, _y_itr);
+			ptile = Map.map.tiles[ map_pos_to_index(_x_itr, _y_itr) ];
+			if (Map.same_pos(punit.tile, ptile))
 				continue;
 
 			if (null!=map_get_city(ptile)) continue;
@@ -113,23 +110,23 @@ public class Autoattack {
 			if (null==is_enemy_unit_tile(ptile, pplayer))
 				continue;
 
-			util.freelog(LOG_DEBUG,  "found enemy unit/stack at %d,%d",
+			util.freelog(Log.LOG_DEBUG,  "found enemy unit/stack at %d,%d",
 					ptile.x, ptile.y);
 			enemy = get_defender(punit, ptile);
 			if (null==enemy) {
 				continue;
 			}
-			util.freelog(LOG_DEBUG,  "defender is %s", unit_name(enemy.type));
+			util.freelog(Log.LOG_DEBUG,  "defender is %s", unit_name(enemy.type));
 
 			if (!is_city_option_set(pcity, city_options.CITYO_ATT_LAND.ordinal()
-					+ unit_type(enemy).move_type.ordinal())) {
-				util.freelog(LOG_DEBUG, "wrong target type");
+					+ enemy.unit_type().move_type.ordinal())) {
+				util.freelog(Log.LOG_DEBUG, "wrong target type");
 				continue;
 			}
 
 			mv_cost = calculate_move_cost(punit, ptile);
 			if (mv_cost > range) {
-				util.freelog(LOG_DEBUG, "too far away: %d", mv_cost);
+				util.freelog(Log.LOG_DEBUG, "too far away: %d", mv_cost);
 				continue;
 			}
 
@@ -144,7 +141,7 @@ public class Autoattack {
 			 */
 			if (ai_handicap(pplayer, H_TARGETS)
 					&& !can_player_see_unit(pplayer, enemy)) {
-				util.freelog(LOG_DEBUG, "can't see %s at (%d,%d)", unit_name(enemy.type),
+				util.freelog(Log.LOG_DEBUG, "can't see %s at (%d,%d)", unit_name(enemy.type),
 						ptile.x, ptile.y);
 				continue;
 			}
@@ -155,7 +152,7 @@ public class Autoattack {
 			 * wasted when they cannot engage.
 			 */
 			if (!can_unit_attack_all_at_tile(punit, ptile)) {
-				util.freelog(LOG_DEBUG, "%s at (%d,%d) cannot attack at (%d,%d)",
+				util.freelog(Log.LOG_DEBUG, "%s at (%d,%d) cannot attack at (%d,%d)",
 						unit_name(punit.type), punit.tile.x, punit.tile.y,
 						ptile.x, ptile.y);
 				continue;
@@ -164,7 +161,7 @@ public class Autoattack {
 			/*
 			 * perhaps there is a better algorithm in the ai-package -- fisch
 			 */
-			score = (unit_type(enemy).defense_strength + (enemy.hp / 2)
+			score = (enemy.unit_type().defense_strength + (enemy.hp / 2)
 					+ (get_transporter_capacity(enemy) > 0 ? 1 : 0));
 
 			if(null==best_enemy || score >= best_score) {
@@ -176,11 +173,11 @@ public class Autoattack {
 
 		enemy = best_enemy;
 
-		util.freelog(LOG_DEBUG, "chosen target=%s (%d/%d)",
+		util.freelog(Log.LOG_DEBUG, "chosen target=%s (%d/%d)",
 				get_unit_name(enemy.type), enemy.tile.x, enemy.tile.y);
 
-		if((unit_type(enemy).defense_strength) >
-		unit_type(punit).attack_strength*1.5) {
+		if((enemy.unit_type().defense_strength) >
+		punit.unit_type().attack_strength*1.5) {
 			notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 					("Game: Auto-Attack: %s's %s found a too " +
 					"tough enemy (%s)"),
@@ -207,12 +204,12 @@ public class Autoattack {
 		if (null == enemy)
 			return;
 
-		util.freelog(LOG_DEBUG, "launching attack");
+		util.freelog(Log.LOG_DEBUG, "launching attack");
 
 		notify_player_ex(pplayer, enemy.tile, event_type.E_NOEVENT,
 				"Game: Auto-Attack: %s's %s attacking %s's %s",
 				pcity.name, unit_name(punit.type),
-				unit_owner(enemy).name, unit_name(enemy.type));
+				enemy.unit_owner().name, unit_name(enemy.type));
 
 		set_unit_activity(punit, unit_activity.ACTIVITY_GOTO);
 		punit.goto_tile = enemy.tile;
@@ -254,7 +251,7 @@ public class Autoattack {
 	 * ...
 	 **************************************************************************/
 	static void auto_attack_player(player pplayer) {
-		util.freelog(LOG_DEBUG, "doing auto_attack for: %s", pplayer.name);
+		util.freelog(Log.LOG_DEBUG, "doing auto_attack for: %s", pplayer.name);
 
 		for (city pcity : pplayer.cities.data) {
 			/* fasten things up -- fisch */
@@ -274,7 +271,7 @@ public class Autoattack {
 		for (unit punit : pplayer.units.data) {
 			if (punit.ai.control && is_military_unit(punit)
 					&& punit.activity == unit_activity.ACTIVITY_GOTO
-					&& punit.moves_left == unit_move_rate(punit)) {
+					&& punit.moves_left == punit.move_rate()) {
 				Gotohand.do_unit_goto(punit,
 						goto_move_restriction.GOTO_MOVE_ANY, false);
 			}

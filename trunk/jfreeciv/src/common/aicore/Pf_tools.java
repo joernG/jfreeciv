@@ -43,22 +43,22 @@ public class Pf_tools{
 //{
 //  /* MOVE_COST_FOR_VALID_SEA_STEP means ships can move between */
 //  if (ptile.move_cost[dir] == MOVE_COST_FOR_VALID_SEA_STEP
-//      || is_non_allied_unit_tile(ptile1, param.owner)
+//      || Unit.is_non_allied_unit_tile(ptile1, param.owner)
 //      || is_non_allied_city_tile(ptile1, param.owner)) {
-//    return SINGLE_MOVE;
+//    return Unit_H.SINGLE_MOVE;
 //  } else {
 //    return PF_IMPOSSIBLE_MC;
 //  }
 //}
 //
 ///*************************************************************
-//  SINGLE_MOVE cost function for AIR_MOVING
+//  Unit_H.SINGLE_MOVE cost function for AIR_MOVING
 //*************************************************************/
 //static int single_airmove(final tile ptile, enum direction8 dir,
 //			  final tile ptile1,
 //			  pf_parameter param)
 //{
-//  return SINGLE_MOVE; /* simple, eh? */
+//  return Unit_H.SINGLE_MOVE; /* simple, eh? */
 //}
 //
 ///*************************************************************
@@ -72,7 +72,7 @@ public class Pf_tools{
 //  /* MOVE_COST_FOR_VALID_SEA_STEP means ships can move between */
 //  if (ptile.move_cost[dir] == MOVE_COST_FOR_VALID_SEA_STEP
 //      && !is_non_allied_city_tile(ptile1, param.owner)) {
-//    return SINGLE_MOVE;
+//    return Unit_H.SINGLE_MOVE;
 //  } else {
 //    return PF_IMPOSSIBLE_MC;
 //  }
@@ -90,10 +90,10 @@ public class Pf_tools{
 //			    pf_parameter param)
 //{
 //  if (is_ocean(ptile.terrain)) {
-//    return SINGLE_MOVE;
-//  } else if (is_allied_city_tile(ptile, param.owner)
+//    return Unit_H.SINGLE_MOVE;
+//  } else if (City.is_allied_city_tile(ptile, param.owner)
 //	     && is_ocean(ptile1.terrain)) {
-//    return SINGLE_MOVE;
+//    return Unit_H.SINGLE_MOVE;
 //  }
 //
 //  return PF_IMPOSSIBLE_MC;
@@ -108,13 +108,13 @@ public class Pf_tools{
 //			   pf_parameter param)
 //{
 //  if (is_ocean(src_tile.terrain)) {
-//    if (is_non_allied_unit_tile(src_tile, param.owner)) {
+//    if (Unit.is_non_allied_unit_tile(src_tile, param.owner)) {
 //      return PF_IMPOSSIBLE_MC;
 //    }
-//    return SINGLE_MOVE;
-//  } else if (is_allied_city_tile(src_tile, param.owner)
+//    return Unit_H.SINGLE_MOVE;
+//  } else if (City.is_allied_city_tile(src_tile, param.owner)
 //	     && is_ocean(dest_tile.terrain)) {
-//    return SINGLE_MOVE;
+//    return Unit_H.SINGLE_MOVE;
 //  }
 //
 //  return PF_IMPOSSIBLE_MC;
@@ -132,17 +132,17 @@ public class Pf_tools{
 //
 //  if (is_ocean(terrain1)) {
 //    if (ground_unit_transporter_capacity(ptile1, param.owner) > 0) {
-//      move_cost = SINGLE_MOVE;
+//      move_cost = Unit_H.SINGLE_MOVE;
 //    } else {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
 //  } else if (is_ocean(ptile.terrain)) {
 //    if (!BV_ISSET(param.unit_flags, F_MARINES)
-//        && (is_non_allied_unit_tile(ptile1, param.owner) 
+//        && (Unit.is_non_allied_unit_tile(ptile1, param.owner) 
 //            || is_non_allied_city_tile(ptile1, param.owner))) {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    } else {
-//      move_cost = get_tile_type(terrain1).movement_cost * SINGLE_MOVE;
+//      move_cost = get_tile_type(terrain1).movement_cost * Unit_H.SINGLE_MOVE;
 //    }
 //  } else {
 //    move_cost = ptile.move_cost[dir];
@@ -165,33 +165,33 @@ public class Pf_tools{
 //
 //    /* Any-to-Sea */
 //    if (ground_unit_transporter_capacity(tgt_tile, param.owner) > 0) {
-//      move_cost = SINGLE_MOVE;
+//      move_cost = Unit_H.SINGLE_MOVE;
 //    } else {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
 //  } else if (is_ocean(src_tile.terrain)) {
 //
 //    /* Sea-to-Land. */
-//    if (!is_non_allied_unit_tile(tgt_tile, param.owner)
+//    if (!Unit.is_non_allied_unit_tile(tgt_tile, param.owner)
 //        && !is_non_allied_city_tile(tgt_tile, param.owner)) {
 //      move_cost 
-//        = get_tile_type(tgt_tile.terrain).movement_cost * SINGLE_MOVE;
+//        = get_tile_type(tgt_tile.terrain).movement_cost * Unit_H.SINGLE_MOVE;
 //    } else if (BV_ISSET(param.unit_flags, F_MARINES)) {
 //      /* Can attack!! */
-//      move_cost = SINGLE_MOVE;
+//      move_cost = Unit_H.SINGLE_MOVE;
 //    } else {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
 //  } else {
 //
 //    /* Land-to-Land */
-//    if (is_non_allied_unit_tile(src_tile, param.owner)) {
+//    if (Unit.is_non_allied_unit_tile(src_tile, param.owner)) {
 //      /* Cannot pass through defended tiles */
 //      move_cost = PF_IMPOSSIBLE_MC;
-//    } else if (is_non_allied_unit_tile(tgt_tile, param.owner)) {
+//    } else if (Unit.is_non_allied_unit_tile(tgt_tile, param.owner)) {
 //
 //      /* Attack! */
-//      move_cost = SINGLE_MOVE;
+//      move_cost = Unit_H.SINGLE_MOVE;
 //    } else {
 //      /* Normal move */
 //      move_cost = src_tile.move_cost[dir];
@@ -204,7 +204,7 @@ public class Pf_tools{
 //
 ///************************************************************ 
 //  A cost function for a land unit, which allows going into
-//  the ocean (with moves costing SINGLE_MOVE).  It is 
+//  the ocean (with moves costing Unit_H.SINGLE_MOVE).  It is 
 //  recommended to use dont_cross_ocean TB callback with this 
 //  one, so we don't venture too far into the ocean ;)
 //
@@ -212,7 +212,7 @@ public class Pf_tools{
 //  if (is_ocean(ptile.terrain)) {
 //    move_cost = PF_IMPOSSIBLE_MC;
 //  } else if (is_ocean(terrain1)) {
-//    move_cost = SINGLE_MOVE;
+//    move_cost = Unit_H.SINGLE_MOVE;
 //  } else {
 //    move_cost = ptile.move_cost[dir];
 //  }
@@ -226,9 +226,9 @@ public class Pf_tools{
 //  int move_cost;
 //
 //  if (is_ocean(terrain1)) {
-//    move_cost = SINGLE_MOVE;
+//    move_cost = Unit_H.SINGLE_MOVE;
 //  } else if (is_ocean(ptile.terrain)) {
-//    move_cost = get_tile_type(terrain1).movement_cost * SINGLE_MOVE;
+//    move_cost = get_tile_type(terrain1).movement_cost * Unit_H.SINGLE_MOVE;
 //  } else {
 //    move_cost = ptile.move_cost[dir];
 //  }
@@ -252,14 +252,14 @@ public class Pf_tools{
 //  if (is_ocean(terrain1)) {
 //    if (ground_unit_transporter_capacity(ptile, param.owner) > 0) {
 //      /* Landing */
-//      move_cost = get_tile_type(terrain0).movement_cost * SINGLE_MOVE;
+//      move_cost = get_tile_type(terrain0).movement_cost * Unit_H.SINGLE_MOVE;
 //    } else {
 //      /* Nothing to land from */
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
 //  } else if (is_ocean(terrain0)) {
 //    /* Boarding */
-//    move_cost = SINGLE_MOVE;
+//    move_cost = Unit_H.SINGLE_MOVE;
 //  } else {
 //    move_cost = ptile.move_cost[DIR_REVERSE(dir)];
 //  }
@@ -285,7 +285,7 @@ public class Pf_tools{
 //    }
 //  } else if (is_ocean(ptile.terrain)) {
 //    if (!BV_ISSET(param.unit_flags, F_MARINES)
-//        && (is_non_allied_unit_tile(ptile1, param.owner) 
+//        && (Unit.is_non_allied_unit_tile(ptile1, param.owner) 
 //            || is_non_allied_city_tile(ptile1, param.owner))) {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    } else {
@@ -373,7 +373,7 @@ public class Pf_tools{
 //                                        pf_parameter param)
 //{
 //  if (known == TILE_UNKNOWN
-//      || is_non_allied_unit_tile(ptile, param.owner)
+//      || Unit.is_non_allied_unit_tile(ptile, param.owner)
 //      || is_non_allied_city_tile(ptile, param.owner)) {
 //    /* Can't attack */
 //    return TB_IGNORE;
@@ -387,7 +387,7 @@ public class Pf_tools{
 //enum tile_behavior no_fights(final tile ptile, enum known_type known,
 //			     pf_parameter param)
 //{
-//  if (is_non_allied_unit_tile(ptile, param.owner)
+//  if (Unit.is_non_allied_unit_tile(ptile, param.owner)
 //      || is_non_allied_city_tile(ptile, param.owner)) {
 //    /* Can't attack */
 //    return TB_IGNORE;
@@ -440,7 +440,7 @@ public class Pf_tools{
 //{
 //  pft_fill_unit_default_parameter(parameter, punit);
 //
-//  switch (unit_type(punit).move_type) {
+//  switch (punit.unit_type().move_type) {
 //  case LAND_MOVING:
 //    if (unit_flag(punit, F_IGTER)) {
 //      parameter.get_MC = igter_move_unit;
@@ -462,7 +462,7 @@ public class Pf_tools{
 //    die("unknown move_type");
 //  }
 //
-//  if (unit_type(punit).move_type == LAND_MOVING 
+//  if (punit.unit_type().move_type == LAND_MOVING 
 //      && !unit_flag(punit, F_IGZOC)) {
 //    parameter.get_zoc = is_my_zoc;
 //  } else {
@@ -470,10 +470,10 @@ public class Pf_tools{
 //  }
 //
 //  if (unit_flag(punit, F_TRIREME)
-//      && base_trireme_loss_pct(unit_owner(punit), punit) > 0) {
+//      && base_trireme_loss_pct(punit.unit_owner(), punit) > 0) {
 //    parameter.turn_mode = TM_WORST_TIME;
 //    parameter.is_pos_dangerous = trireme_is_pos_dangerous;
-//  } else if (base_unsafe_terrain_loss_pct(unit_owner(punit), punit) > 0) {
+//  } else if (base_unsafe_terrain_loss_pct(punit.unit_owner(), punit) > 0) {
 //    parameter.turn_mode = TM_WORST_TIME;
 //    parameter.is_pos_dangerous = is_pos_dangerous;
 //  }
@@ -488,7 +488,7 @@ public class Pf_tools{
 //{
 //  pft_fill_unit_default_parameter(parameter, punit);
 //
-//  switch (unit_type(punit).move_type) {
+//  switch (punit.unit_type().move_type) {
 //  case LAND_MOVING:
 //    parameter.get_MC = land_overlap_move;
 //    parameter.get_TB = dont_cross_ocean;
@@ -503,9 +503,9 @@ public class Pf_tools{
 //  parameter.get_zoc = null;
 //
 //  if (unit_flag(punit, F_TRIREME)
-//      && base_trireme_loss_pct(unit_owner(punit), punit) > 0) {
+//      && base_trireme_loss_pct(punit.unit_owner(), punit) > 0) {
 //    parameter.is_pos_dangerous = trireme_is_pos_dangerous;
-//  } else if (base_unsafe_terrain_loss_pct(unit_owner(punit), punit) > 0) {
+//  } else if (base_unsafe_terrain_loss_pct(punit.unit_owner(), punit) > 0) {
 //    parameter.is_pos_dangerous = is_pos_dangerous;
 //  }
 //}
@@ -518,7 +518,7 @@ public class Pf_tools{
 //{
 //  pft_fill_unit_default_parameter(parameter, punit);
 //
-//  switch (unit_type(punit).move_type) {
+//  switch (punit.unit_type().move_type) {
 //  case LAND_MOVING:
 //    parameter.get_MC = land_attack_move;
 //    break;
@@ -529,7 +529,7 @@ public class Pf_tools{
 //    die("Unsupported move_type");
 //  }
 //
-//  if (unit_type(punit).move_type == LAND_MOVING 
+//  if (punit.unit_type().move_type == LAND_MOVING 
 //      && !unit_flag(punit, F_IGZOC)) {
 //    parameter.get_zoc = is_my_zoc;
 //  } else {
@@ -548,12 +548,12 @@ public class Pf_tools{
 //{
 //  parameter.turn_mode = TM_CAPPED;
 //  if (is_air_unit(punit) || is_heli_unit(punit)) {
-//    parameter.unknown_MC = SINGLE_MOVE;
+//    parameter.unknown_MC = Unit_H.SINGLE_MOVE;
 //  } else if (is_sailing_unit(punit)) {
-//    parameter.unknown_MC = 2 * SINGLE_MOVE;
+//    parameter.unknown_MC = 2 * Unit_H.SINGLE_MOVE;
 //  } else {
 //    assert(is_ground_unit(punit));
-//    parameter.unknown_MC = SINGLE_MOVE;
+//    parameter.unknown_MC = Unit_H.SINGLE_MOVE;
 //    terrain_type_iterate(t) {
 //      int mr = 2 * get_tile_type(t).movement_cost;
 //
@@ -569,11 +569,11 @@ public class Pf_tools{
 //
 //  parameter.start_tile = punit.tile;
 //  parameter.moves_left_initially = punit.moves_left;
-//  parameter.move_rate = unit_move_rate(punit);
-//  parameter.owner = unit_owner(punit);
-//  parameter.unit_flags = unit_type(punit).flags;
+//  parameter.move_rate = punit.move_rate();
+//  parameter.owner = punit.unit_owner();
+//  parameter.unit_flags = punit.unit_type().flags;
 //
-//  parameter.omniscience = !ai_handicap(unit_owner(punit), H_MAP);
+//  parameter.omniscience = !ai_handicap(punit.unit_owner(), H_MAP);
 //}
 //
 ///**********************************************************************

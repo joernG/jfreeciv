@@ -592,13 +592,13 @@ public class Optiondlg{
 //    
 //  /* Check is there are any modes available */
 //  if (!pModes_Rect) {
-//    util.freelog(LOG_DEBUG, "No modes available!");
+//    util.freelog(Log.LOG_DEBUG, "No modes available!");
 //    return 0;
 //  }
 //  
 //  /* Check if or resolution is restricted */
 //  if (pModes_Rect == (SDL_Rect **) - 1) {
-//    util.freelog(LOG_DEBUG, "All resolutions available.");
+//    util.freelog(Log.LOG_DEBUG, "All resolutions available.");
 //    return 0;
 //    /* fix ME */
 //  }

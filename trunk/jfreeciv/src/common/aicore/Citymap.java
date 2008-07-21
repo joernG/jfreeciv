@@ -27,7 +27,7 @@ public class Citymap{
 //#ifdef DEBUG
 //#include "log.h"
 //#endif
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "support.h"
 //#include "unit.h"
@@ -38,7 +38,7 @@ public class Citymap{
 ///* CITYMAP - reserve space for cities
 // *
 // * The citymap is a large int double array that corresponds to
-// * the freeciv main map. For each tile, it stores three different 
+// * the freeciv main Map.map. For each tile, it stores three different 
 // * and exclusive values in a single int: A positive int tells you
 // * how many cities can use this tile (a crowdedness inidicator). A 
 // * value of zero indicates that the tile is presently unused and 
@@ -54,7 +54,7 @@ public class Citymap{
 //
 //static int *citymap;
 //
-//#define LOG_CITYMAP LOG_DEBUG
+//#define LOG_CITYMAP Log.LOG_DEBUG
 //
 ///**************************************************************************
 //  Initialize citymap by reserving worked tiles and establishing the
@@ -65,8 +65,8 @@ public class Citymap{
 //  /* The citymap is reinitialized at the start of ever turn.  This includes
 //   * a call to realloc, which only really matters if this is the first turn
 //   * of the game (but it's easier than a separate function to do this). */
-//  citymap = fc_realloc(citymap, MAX_MAP_INDEX * sizeof(*citymap));
-//  memset(citymap, 0, MAX_MAP_INDEX * sizeof(*citymap));
+//  citymap = fc_realloc(citymap, Map_H.MAX_MAP_INDEX * sizeof(*citymap));
+//  memset(citymap, 0, Map_H.MAX_MAP_INDEX * sizeof(*citymap));
 //
 //  for(player pplayer: game.players){
 //    for (city pcity : pplayer.cities.data) {

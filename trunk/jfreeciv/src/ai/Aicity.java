@@ -29,7 +29,7 @@ public class Aicity{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "packets.h"
 //#include "player.h"
 //#include "rand.h"
@@ -73,7 +73,7 @@ public class Aicity{
 //#define CITY_EMERGENCY(pcity)                        \
 // (pcity.shield_surplus < 0 || city_unhappy(pcity)   \
 //  || pcity.food_stock + pcity.food_surplus < 0)
-//public static final int LOG_BUY = LOG_DEBUG;
+//public static final int LOG_BUY = Log.LOG_DEBUG;
 //
 //static void resolve_city_emergency(player pplayer, city pcity);
 //static void ai_sell_obsolete_buildings(city pcity);
@@ -219,7 +219,7 @@ public class Aicity{
 //  /* Base want is calculated above using a more direct approach. */
 //  v += base_want(pplayer, pcity, id);
 //  if (v != 0) {
-//    CITY_LOG(LOG_DEBUG, pcity, "%s base_want is %d (range=%d)", 
+//    CITY_LOG(Log.LOG_DEBUG, pcity, "%s base_want is %d (range=%d)", 
 //             get_improvement_name(id), v, ai.impr_range[id]);
 //  }
 //
@@ -544,7 +544,7 @@ public class Aicity{
 //        continue; /* Don't build redundant buildings */
 //      }
 //      adjust_building_want_by_effects(pcity, id);
-//      CITY_LOG(LOG_DEBUG, pcity, "want to build %s with %d", 
+//      CITY_LOG(Log.LOG_DEBUG, pcity, "want to build %s with %d", 
 //               get_improvement_name(id), pcity.ai.building_want[id]);
 //    } }
 //  } impr_type_iterate_end;
@@ -577,7 +577,7 @@ public class Aicity{
 //  int distance;
 //  Continent_id wonder_continent;
 //  int freight = best_role_unit(pcity, F_HELP_WONDER);
-//  int moverate = (freight == U_LAST) ? SINGLE_MOVE
+//  int moverate = (freight == U_LAST) ? Unit_H.SINGLE_MOVE
 //                                     : get_unit_type(freight).move_rate;
 //
 //  if (!pcity.is_building_unit && is_wonder(pcity.currently_building)) {
@@ -702,7 +702,7 @@ public class Aicity{
 //  if (pcity.ai.choice.want != 0) { 
 //    ASSERT_REAL_CHOICE_TYPE(pcity.ai.choice.type);
 //
-//    CITY_LOG(LOG_DEBUG, pcity, "wants %s with desire %d.",
+//    CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s with desire %d.",
 //	     (is_unit_choice_type(pcity.ai.choice.type) ?
 //	      unit_name(pcity.ai.choice.choice) :
 //	      get_improvement_name(pcity.ai.choice.choice)),
@@ -777,7 +777,7 @@ public class Aicity{
 //      /* Only upgrade military units this round */
 //      continue;
 //    } else if (!military && is_military_unit(punit)
-//               && unit_type(punit).transport_capacity == 0) {
+//               && punit.unit_type().transport_capacity == 0) {
 //      /* Only civilians or tranports this round */
 //      continue;
 //    }
@@ -790,7 +790,7 @@ public class Aicity{
 //      }
 //      if (pplayer.economic.gold - cost > real_limit) {
 //        CITY_LOG(LOG_BUY, pcity, "Upgraded %s to %s for %d (%s)",
-//                 unit_type(punit).name, unit_types[id].name, cost,
+//                 punit.unit_type().name, unit_types[id].name, cost,
 //                 military ? "military" : "civilian");
 //        handle_unit_upgrade(city_owner(pcity), punit.id);
 //      } else {
@@ -1049,7 +1049,7 @@ public class Aicity{
 //  Also, most of the time we are unable to resolve the situation. 
 //**************************************************************************/
 //static void resolve_city_emergency(player pplayer, city pcity)
-//public static final int LOG_EMERGENCY = LOG_DEBUG;
+//public static final int LOG_EMERGENCY = Log.LOG_DEBUG;
 //{
 //  Speclists<city> minilist;
 //
@@ -1066,11 +1066,11 @@ public class Aicity{
 //    boolean is_valid;
 //
 //    if (acity && acity != pcity && acity.owner == pcity.owner)  {
-//      if (same_pos(acity.tile, ptile)) {
+//      if (Map.same_pos(acity.tile, ptile)) {
 //        /* can't stop working city center */
 //        continue;
 //      }
-//      util.freelog(LOG_DEBUG, "%s taking over %s's square in (%d, %d)",
+//      util.freelog(Log.LOG_DEBUG, "%s taking over %s's square in (%d, %d)",
 //              pcity.name, acity.name, ptile.x, ptile.y);
 //      is_valid = map_to_city_map(&city_map_x, &city_map_y, acity, ptile);
 //      assert(is_valid);

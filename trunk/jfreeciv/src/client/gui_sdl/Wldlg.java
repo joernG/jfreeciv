@@ -1565,14 +1565,14 @@ public class Wldlg{
 //          cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d/%d %s\nnever",
 //		    pUnit.attack_strength,
-//		    pUnit.defense_strength, pUnit.move_rate / SINGLE_MOVE,
+//		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
 //		    pCity.shield_stock, unit_build_shield_cost(un),
 //	  	    PL_("shield","shields", unit_build_shield_cost(un)));
 //        } else {
 //          cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d/%d %s\n%d %s",
 //		    pUnit.attack_strength,
-//		    pUnit.defense_strength, pUnit.move_rate / SINGLE_MOVE,
+//		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
 //		    pCity.shield_stock, unit_build_shield_cost(un), 
 //	  	    PL_("shield","shields", unit_build_shield_cost(un)),
 //		    turns, PL_("turn", "turns", turns));
@@ -1581,7 +1581,7 @@ public class Wldlg{
 //        cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d %s",
 //		    pUnit.attack_strength,
-//		    pUnit.defense_strength, pUnit.move_rate / SINGLE_MOVE,
+//		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
 //		    unit_build_shield_cost(un),
 //		    PL_("shield","shields", unit_build_shield_cost(un)));
 //      }

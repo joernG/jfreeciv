@@ -35,7 +35,7 @@ public class Civclient{
 //#include "game.h"
 //#include "idex.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "netintf.h"
 //#include "packets.h"
@@ -391,7 +391,7 @@ public class Civclient{
 //**************************************************************************/
 //void send_turn_done()
 //{
-//  util.freelog(LOG_DEBUG, "send_turn_done() turn_done_button_state=%d",
+//  util.freelog(Log.LOG_DEBUG, "send_turn_done() turn_done_button_state=%d",
 //	  get_turn_done_button_state());
 //
 //  if (!get_turn_done_button_state()) {

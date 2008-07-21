@@ -20,7 +20,7 @@ public class Startpos{
 //#include "log.h"
 //#include "fcintl.h"
 //
-//#include "map.h"
+//#include "Map.map.h"
 //
 //#include "maphand.h"
 //
@@ -45,7 +45,7 @@ public class Startpos{
 //static int get_tile_value(tile ptile)
 //{
 //  Terrain_type_id old_terrain;
-//  enum tile_special_type old_special;
+//  enum int old_special;
 //  int value, irrig_bonus, mine_bonus;
 //
 //  /* Give one point for each food / shield / trade produced. */
@@ -94,7 +94,7 @@ public class Startpos{
 //  - Too close to another starter on the same continent:
 //    'dist' is too close (real_map_distance)
 //    'nr' is the number of other start positions in
-//    map.start_positions to check for too closeness.
+//    Map.map.start_positions to check for too closeness.
 //**************************************************************************/
 //static boolean is_valid_start_pos(final tile ptile, final void *dataptr)
 //{
@@ -130,7 +130,7 @@ public class Startpos{
 //  cont_size = get_continent_size(cont);
 //  island = islands + islands_index[cont];
 //  for (i = 0; i < pdata.count; i++) {
-//    tile tile1 = map.start_positions[i].tile;
+//    tile tile1 = Map.map.start_positions[i].tile;
 //
 //    if ((map_get_continent(ptile) == map_get_continent(tile1)
 //	 && (real_map_distance(ptile, tile1) * 1000 / pdata.min_value
@@ -159,12 +159,12 @@ public class Startpos{
 //{
 //  int nr;
 //
-//  islands = fc_malloc((map.num_continents + 1) * sizeof(*islands));
-//  islands_index = fc_malloc((map.num_continents + 1)
+//  islands = fc_malloc((Map.map.num_continents + 1) * sizeof(*islands));
+//  islands_index = fc_malloc((Map.map.num_continents + 1)
 //			    * sizeof(*islands_index));
 //
 //  /* islands[0] is unused. */
-//  for (nr = 1; nr <= map.num_continents; nr++) {
+//  for (nr = 1; nr <= Map.map.num_continents; nr++) {
 //    islands[nr].id = nr;
 //    islands[nr].size = get_continent_size(nr);
 //    islands[nr].goodies = 0;
@@ -197,18 +197,18 @@ public class Startpos{
 //  tile ptile;
 //  int k, sum;
 //  struct start_filter_data data;
-//  int tile_value_aux[MAX_MAP_INDEX], tile_value[MAX_MAP_INDEX];
+//  int tile_value_aux[Map_H.MAX_MAP_INDEX], tile_value[Map_H.MAX_MAP_INDEX];
 //  int min_goodies_per_player = 2000;
 //  int total_goodies = 0;
 //  /* this is factor is used to maximize land used in extreme little maps */
-//  float efactor =  game.nplayers / map.size / 4; 
+//  float efactor =  game.nplayers / Map.map.size / 4; 
 //  boolean failure = false;
 //  boolean is_tmap = temperature_is_initialized();
 //
 //  if (!is_tmap) {
 //    /* The temperature map has already been destroyed by the time start
 //     * positions have been placed.  We check for this and then create a
-//     * false temperature map. This is used in the tmap_is() call above.
+//     * false temperature Map.map. This is used in the tmap_is() call above.
 //     * We don't create a "real" map here because that requires the height
 //     * map and other information which has already been destroyed. */
 //    create_tmap(false);
@@ -225,12 +225,12 @@ public class Startpos{
 //  }
 //
 //  /* get the tile value */
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    tile_value_aux[ptile.index] = get_tile_value(ptile);
-//  } whole_map_iterate_end;
+//  }
 //
 //  /* select the best tiles */
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    int this_tile_value = tile_value_aux[ptile.index];
 //    int lcount = 0, bcount = 0;
 //
@@ -245,37 +245,37 @@ public class Startpos{
 //      this_tile_value = 0;
 //    }
 //    tile_value[ptile.index] = 100 * this_tile_value;
-//  } whole_map_iterate_end;
+//  }
 //  /* get an average value */
 //  smooth_int_map(tile_value, true);
 //
 //  initialize_isle_data();
 //
 //  /* oceans are not good for starters; discard them */
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    if (!filter_starters(ptile, null)) {
 //      tile_value[ptile.index] = 0;
 //    } else {
 //      islands[map_get_continent(ptile)].goodies += tile_value[ptile.index];
 //      total_goodies += tile_value[ptile.index];
 //    }
-//  } whole_map_iterate_end;
+//  }
 //
 //  /* evaluate the best places on the map */
 //  adjust_int_map_filtered(tile_value, 1000, null, filter_starters);
 // 
 //  /* Sort the islands so the best ones come first.  Note that islands[0] is
 //   * unused so we just skip it. */
-//  qsort(islands + 1, map.num_continents,
+//  qsort(islands + 1, Map.map.num_continents,
 //	sizeof(*islands), compare_islands);
 //
 //  /* If we can't place starters according to the first choice, change the
 //   * choice. */
-//  if (mode == MT_SINGLE && map.num_continents < game.nplayers + 3) {
+//  if (mode == MT_SINGLE && Map.map.num_continents < game.nplayers + 3) {
 //    mode = MT_2or3;
 //  }
 //
-//  if (mode == MT_2or3 && map.num_continents < game.nplayers / 2 + 4) {
+//  if (mode == MT_2or3 && Map.map.num_continents < game.nplayers / 2 + 4) {
 //    mode = MT_VARIABLE;
 //  }
 //
@@ -296,7 +296,7 @@ public class Startpos{
 //    int nr, to_place = game.nplayers, first = 1;
 //
 //    /* inizialize islands_index */
-//    for (nr = 1; nr <= map.num_continents; nr++) {
+//    for (nr = 1; nr <= Map.map.num_continents; nr++) {
 //      islands_index[islands[nr].id] = nr;
 //    }
 //
@@ -306,7 +306,7 @@ public class Startpos{
 //      int num_islands
 //	= (mode == MT_SINGLE) ? game.nplayers : (game.nplayers / 2);
 //
-//      for (nr = 1; nr <= 1 + map.num_continents - num_islands; nr++) {
+//      for (nr = 1; nr <= 1 + Map.map.num_continents - num_islands; nr++) {
 //	if (islands[nr + num_islands - 1].goodies < min_goodies_per_player) {
 //	  break;
 //	}
@@ -327,7 +327,7 @@ public class Startpos{
 //      islands[1].total = to_place;
 //      to_place = 0;
 //    }
-//    for (nr = 1; nr <= map.num_continents; nr++) {
+//    for (nr = 1; nr <= Map.map.num_continents; nr++) {
 //      if (mode == MT_SINGLE && to_place > 0 && nr >= first) {
 //	islands[nr].starters = 1;
 //	islands[nr].total = 1;
@@ -350,7 +350,7 @@ public class Startpos{
 //  data.value = tile_value;
 //  data.min_value = 900;
 //  sum = 0;
-//  for (k = 1; k <= map.num_continents; k++) {
+//  for (k = 1; k <= Map.map.num_continents; k++) {
 //    sum += islands[islands_index[k]].starters;
 //    if (islands[islands_index[k]].starters != 0) {
 //      util.freelog(LOG_VERBOSE, "starters on isle %i", k);
@@ -359,15 +359,15 @@ public class Startpos{
 //  assert(game.nplayers <= data.count + sum);
 //
 //  /* now search for the best place and set start_positions */
-//  map.start_positions = fc_realloc(map.start_positions,
+//  Map.map.start_positions = fc_realloc(Map.map.start_positions,
 //				   game.nplayers
-//				   * sizeof(*map.start_positions));
+//				   * sizeof(*Map.map.start_positions));
 //  while (data.count < game.nplayers) {
 //    if ((ptile = rand_map_pos_filtered(&data, is_valid_start_pos))) {
 //      islands[islands_index[(int) map_get_continent(ptile)]].starters--;
-//      map.start_positions[data.count].tile = ptile;
-//      map.start_positions[data.count].nation = NO_NATION_SELECTED;
-//      util.freelog(LOG_DEBUG,
+//      Map.map.start_positions[data.count].tile = ptile;
+//      Map.map.start_positions[data.count].nation = NO_NATION_SELECTED;
+//      util.freelog(Log.LOG_DEBUG,
 //	      "Adding %d,%d as starting position %d, %d goodies on islands.",
 //	      TILE_XY(ptile), data.count,
 //	      islands[islands_index[(int) map_get_continent(ptile)]].goodies);
@@ -379,14 +379,14 @@ public class Startpos{
 //	util.freelog(Log.LOG_ERROR,
 //	        _("The server appears to have gotten into an infinite loop "
 //	          "in the allocation of starting positions.\n"
-//	          "Maybe the numbers of players/ia is too much for this map.\n"
+//	          "Maybe the numbers of players/ia is too much for this Map.map.\n"
 //	          "Please report this bug at %s."), WEBSITE_URL);
 //	failure = true;
 //	break;
 //      }
 //    }
 //  }
-//  map.num_start_positions = game.nplayers;
+//  Map.map.num_start_positions = game.nplayers;
 //
 //  free(islands);
 //  free(islands_index);

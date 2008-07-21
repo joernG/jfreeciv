@@ -399,7 +399,7 @@ public class Plrdlg{
 //  newflag_h = GTK_CLIST(players_list).row_height;
 //  newflag_w = ((double) newflag_h / flag_h) * flag_w;
 //
-//  util.freelog(LOG_DEBUG, "%dx%d %dx%d %dx%d", flag.width,
+//  util.freelog(Log.LOG_DEBUG, "%dx%d %dx%d %dx%d", flag.width,
 //	  flag.height, flag_w, flag_h, newflag_w, newflag_h);
 //
 //  scaled = sprite_scale(croped, newflag_w, newflag_h);

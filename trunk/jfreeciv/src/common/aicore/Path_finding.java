@@ -22,9 +22,9 @@ public class Path_finding{
 //
 //#include "game.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
-//#include "pqueue.h"
+//#include "Pqueue.h"
 //
 //#include "path_finding.h"
 //
@@ -96,13 +96,13 @@ public class Path_finding{
 //struct pf_map {
 //  tile tile;		/* The current position */
 //  pf_parameter params;  /* Initial parameters */
-//  pqueue queue;         /* Queue of nodes we have reached but not 
+//  Pqueue queue;         /* Queue of nodes we have reached but not 
 //                                 * processed yet (NS_NEW), sorted by their 
 //                                 * total_CC*/
 //  pf_node lattice;      /* Lattice of nodes */
 //  utiny_t *status;		/* Array of node statuses 
 //				 * (enum pf_node_status really) */
-//  pqueue danger_queue;	/* Dangerous positions go there */
+//  Pqueue danger_queue;	/* Dangerous positions go there */
 //  danger_node d_lattice;	/* Lattice with danger stuff */
 //};
 //
@@ -277,14 +277,14 @@ public class Path_finding{
 //       * (the costs are recorded already) */
 //      *status = NS_NEW;
 //      node1.dir_to_here = dir;
-//      pq_insert(pf_map.queue, tile1.index, -priority);
+//      pf_map.queue.pq_insert(tile1.index, -priority);
 //    }
 //
 //  } adjc_dir_iterate_end;
 //
 //  /* Get the next nearest node */
 //  for (;;) {
-//    boolean removed = pq_remove(pf_map.queue, &index);
+//    boolean removed = pf_map.queue.pq_remove(&index);
 //
 //    if (!removed) {
 //      return false;
@@ -391,7 +391,7 @@ public class Path_finding{
 //	  node1.extra_cost = extra;
 //	  node1.cost = cost;
 //	  node1.dir_to_here = dir;
-//	  pq_insert(pf_map.queue, index1, -cost_of_path);
+//	  pf_map.queue.pq_insert( index1, -cost_of_path);
 //	}
 //      }
 //
@@ -400,7 +400,7 @@ public class Path_finding{
 //
 //  /* Get the next nearest node */
 //  for (;;) {
-//    boolean removed = pq_remove(pf_map.queue, &index);
+//    boolean removed = pf_map.queue.pq_remove( &index);
 //
 //    if (!removed) {
 //      return false;
@@ -417,21 +417,21 @@ public class Path_finding{
 //}
 //
 ///******************************************************************
-//  Allocates the memory for the map.  No initialization.
+//  Allocates the memory for the Map.map.  No initialization.
 //******************************************************************/
 //static pf_map create_map(boolean with_danger)
 //{
 //  pf_map pf_map = fc_calloc(1, sizeof(struct pf_map));
 //
-//  pf_map.lattice = fc_malloc(MAX_MAP_INDEX * sizeof(struct pf_node));
-//  pf_map.queue = pq_create(INITIAL_QUEUE_SIZE);
-//  pf_map.status = fc_calloc(MAX_MAP_INDEX, sizeof(*(pf_map.status)));
+//  pf_map.lattice = fc_malloc(Map_H.MAX_MAP_INDEX * sizeof(struct pf_node));
+//  pf_map.queue = Pqueue.pq_create(INITIAL_QUEUE_SIZE);
+//  pf_map.status = fc_calloc(Map_H.MAX_MAP_INDEX, sizeof(*(pf_map.status)));
 //
 //  if (with_danger) {
 //    /* Initialize stuff for dangerous positions.
 //     * Otherwise they stay null */
-//    pf_map.d_lattice = fc_calloc(MAX_MAP_INDEX, sizeof(struct danger_node));
-//    pf_map.danger_queue = pq_create(INITIAL_QUEUE_SIZE);
+//    pf_map.d_lattice = fc_calloc(Map_H.MAX_MAP_INDEX, sizeof(struct danger_node));
+//    pf_map.danger_queue = Pqueue.pq_create(INITIAL_QUEUE_SIZE);
 //  }
 //
 //  return pf_map;
@@ -479,7 +479,7 @@ public class Path_finding{
 //void pf_destroy_map(pf_map pf_map)
 //{
 //  free(pf_map.lattice);
-//  pq_destroy(pf_map.queue);
+//  pf_map.queue.pq_destroy();
 //  free(pf_map.status);
 //
 //  free(pf_map.params);
@@ -489,7 +489,7 @@ public class Path_finding{
 //    int i;
 //
 //    /* Need to clean up the dangling danger_sements */
-//    for (i = 0; i < MAX_MAP_INDEX; i++) {
+//    for (i = 0; i < Map_H.MAX_MAP_INDEX; i++) {
 //      if (pf_map.d_lattice[i].danger_segment) {
 //	free(pf_map.d_lattice[i].danger_segment);
 //      }
@@ -497,7 +497,7 @@ public class Path_finding{
 //    free(pf_map.d_lattice);
 //  }
 //  if (pf_map.danger_queue) {
-//    pq_destroy(pf_map.danger_queue);
+//    pf_map.danger_queue.pq_destroy();
 //  }
 //
 //  free(pf_map);
@@ -518,7 +518,7 @@ public class Path_finding{
 //
 //  /* Debug period only!  Please remove after PF is settled */
 //  if (pf_map.status[index] != NS_PROCESSED
-//      && !same_pos(ptile, pf_map.tile)) {
+//      && !Map.same_pos(ptile, pf_map.tile)) {
 //    die("pf_finalruct_path to an unreached destination");
 //    return;
 //  }
@@ -565,14 +565,14 @@ public class Path_finding{
 //  mapindex_t index = ptile.index;
 //  utiny_t status = pf_map.status[index];
 //
-//  if (status == NS_PROCESSED || same_pos(ptile, pf_map.tile)) {
+//  if (status == NS_PROCESSED || Map.same_pos(ptile, pf_map.tile)) {
 //    /* We already reached (x,y) */
 //    fill_position(pf_map, ptile, pos);
 //    return true;
 //  }
 //
 //  while (pf_next(pf_map)) {
-//    if (same_pos(ptile, pf_map.tile)) {
+//    if (Map.same_pos(ptile, pf_map.tile)) {
 //      /* That's the one */
 //      fill_position(pf_map, ptile, pos);
 //      return true;
@@ -598,7 +598,7 @@ public class Path_finding{
 //  /* Debug period only!  Please remove after PF is settled */
 //  assert(!pf_map.params.is_pos_dangerous);
 //  if (pf_map.status[index] != NS_PROCESSED
-//      && !same_pos(dest_tile, pf_map.tile)) {
+//      && !Map.same_pos(dest_tile, pf_map.tile)) {
 //    die("finalruct_path to an unreached destination");
 //    return null;
 //  }
@@ -611,7 +611,7 @@ public class Path_finding{
 //  for (i = 0; ; i++) {
 //    pf_node node = &pf_map.lattice[ptile.index];
 //
-//    if (same_pos(ptile, pf_map.params.start_tile)) {
+//    if (Map.same_pos(ptile, pf_map.params.start_tile)) {
 //      /* Ah-ha, reached the starting point! */
 //      break;
 //    }
@@ -661,7 +661,7 @@ public class Path_finding{
 //
 ///************************************************************************
 //  Get the path to x, y, put it in "path".  If (x, y) has not been reached 
-//  yet, iterate the map until we reach it or run out of map.
+//  yet, iterate the map until we reach it or run out of Map.map.
 //************************************************************************/
 //pf_path pf_get_path(pf_map pf_map, tile ptile)
 //{
@@ -673,13 +673,13 @@ public class Path_finding{
 //    return danger_get_path(pf_map, ptile);
 //  }
 //
-//  if (status == NS_PROCESSED || same_pos(ptile, pf_map.tile)) {
+//  if (status == NS_PROCESSED || Map.same_pos(ptile, pf_map.tile)) {
 //    /* We already reached (x,y) */
 //    return finalruct_path(pf_map, ptile);
 //  }
 //
 //  while (pf_next(pf_map)) {
-//    if (same_pos(ptile, pf_map.tile)) {
+//    if (Map.same_pos(ptile, pf_map.tile)) {
 //      /* That's the one */
 //      return finalruct_path(pf_map, ptile);
 //    }
@@ -966,7 +966,7 @@ public class Path_finding{
 //	    d_node1.waited = false;
 //	  }
 //	  pf_map.status[index1] = NS_NEW;
-//	  pq_insert(pf_map.queue, index1, -cost_of_path);
+//	  pf_map.queue.pq_insert( index1, -cost_of_path);
 //	}
 //      } else {
 //	/* The procedure is slightly different for dangerous nodes */
@@ -988,7 +988,7 @@ public class Path_finding{
 //	  d_node1.waited = (pf_map.status[pf_map.tile.index]
 //			     == NS_WAITING);
 //	  /* Extra costs of all nodes in danger_queue are equal! */
-//	  pq_insert(pf_map.danger_queue, index1, -cost);
+//	  pf_map.danger_queue.pq_insert( index1, -cost);
 //	}
 //      }
 //    }
@@ -1002,7 +1002,7 @@ public class Path_finding{
 //    /* Consider waiting at this node. 
 //     * To do it, put it back into queue. */
 //    pf_map.status[pf_map.tile.index] = NS_WAITING;
-//    pq_insert(pf_map.queue, pf_map.tile.index,
+//    pf_map.queue.pq_insert( pf_map.tile.index,
 //	      -get_total_CC(pf_map, get_moves_left(pf_map, node.cost)
 //			    + node.cost, node.extra_cost));
 //  } else {
@@ -1012,10 +1012,10 @@ public class Path_finding{
 //  /* Get the next nearest node */
 //
 //  /* First try to get it from danger_queue */
-//  if (!pq_remove(pf_map.danger_queue, &index)) {
+//  if (!pf_map.danger_queue.pq_remove( &index)) {
 //    /* No dangerous nodes to process, go for a safe one */
 //    do {
-//      if (!pq_remove(pf_map.queue, &index)) {
+//      if (!pf_map.queue.pq_remove( &index)) {
 //	return false;
 //      }
 //    } while (pf_map.status[index] == NS_PROCESSED);
@@ -1027,12 +1027,12 @@ public class Path_finding{
 //
 //  if (pf_map.status[pf_map.tile.index] == NS_WAITING) {
 //    /* We've already returned this node once, skip it */
-//    util.freelog(LOG_DEBUG, "Considering waiting at (%d, %d)",
+//    util.freelog(Log.LOG_DEBUG, "Considering waiting at (%d, %d)",
 //	    pf_map.tile.x, pf_map.tile.y);
 //    return danger_iterate_map(pf_map);
 //  } else if (pf_map.d_lattice[index].is_dangerous) {
 //    /* We don't return dangerous tiles */
-//    util.freelog(LOG_DEBUG, "Reached dangerous tile (%d, %d)",
+//    util.freelog(Log.LOG_DEBUG, "Reached dangerous tile (%d, %d)",
 //	    pf_map.tile.x, pf_map.tile.y);
 //    return danger_iterate_map(pf_map);
 //  } else {
@@ -1066,7 +1066,7 @@ public class Path_finding{
 //  }
 //
 //  /* First iterate to find path length */
-//  while(!same_pos(iter_tile, pf_map.params.start_tile)) {
+//  while(!Map.same_pos(iter_tile, pf_map.params.start_tile)) {
 //
 //    if (!d_node.is_dangerous && d_node.waited) {
 //      length += 2;
@@ -1151,7 +1151,7 @@ public class Path_finding{
 //    /* 3: Check if we finished */
 //    if (i == 0) {
 //      /* We should be back at the start now! */
-//      assert(same_pos(iter_tile, pf_map.params.start_tile));
+//      assert(Map.same_pos(iter_tile, pf_map.params.start_tile));
 //      return path;
 //    }
 //
@@ -1198,13 +1198,13 @@ public class Path_finding{
 //  }
 //
 //  if (status == NS_PROCESSED || status == NS_WAITING 
-//      || same_pos(ptile, pf_map.tile)) {
+//      || Map.same_pos(ptile, pf_map.tile)) {
 //    /* We already reached (x,y) */
 //    return danger_finalruct_path(pf_map, ptile);
 //  }
 //
 //  while (pf_next(pf_map)) {
-//    if (same_pos(ptile, pf_map.tile)) {
+//    if (Map.same_pos(ptile, pf_map.tile)) {
 //      /* That's the one */
 //      return danger_finalruct_path(pf_map, ptile);
 //    }
@@ -1218,6 +1218,6 @@ public class Path_finding{
 //************************************************************************/
 //pf_parameter pf_get_parameter(pf_map map)
 //{
-//  return map.params;
+//  return Map.map.params;
 //}
 }

@@ -16642,7 +16642,7 @@ public class Packets_gen{
 //  }
 //}
 //
-//int dsend_packet_unit_change_activity(struct connection *pc, int unit_id, enum unit_activity activity, enum tile_special_type activity_target)
+//int dsend_packet_unit_change_activity(struct connection *pc, int unit_id, enum unit_activity activity, enum int activity_target)
 //{
 //  struct packet_unit_change_activity packet, *real_packet = &packet;
 //

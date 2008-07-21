@@ -28,7 +28,7 @@ public class Mapview{
 //#include "game.h"
 //#include "log.h"
 //#include "government.h"         /* government_graphic() */
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "player.h"
 //#include "rand.h"
@@ -353,7 +353,7 @@ public class Mapview{
 //void
 //map_size_changed()
 //{
-//  set_overview_win_dim(OVERVIEW_TILE_WIDTH * map.xsize,OVERVIEW_TILE_HEIGHT * map.ysize);
+//  set_overview_win_dim(OVERVIEW_TILE_WIDTH * Map.map.xsize,OVERVIEW_TILE_HEIGHT * Map.map.ysize);
 //}
 //
 ///**************************************************************************

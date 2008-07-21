@@ -159,7 +159,7 @@ public class Dialogs{
 //  pillage.
 //**************************************************************************/
 //void popup_pillage_dialog(unit punit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  /* PORTME */
 //}

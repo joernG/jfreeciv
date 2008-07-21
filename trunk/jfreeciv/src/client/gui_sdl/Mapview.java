@@ -43,7 +43,7 @@ public class Mapview{
 //#include "game.h"
 //#include "government.h"		/* government_graphic() */
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "rand.h"
 //#include "support.h"
@@ -603,7 +603,7 @@ public class Mapview{
 //      change_ptsize16(pStr, 12);
 //
 //      /* get and draw unit name (with veteran status) */
-//      copy_chars_to_string16(pStr, unit_type(pUnit).name);
+//      copy_chars_to_string16(pStr, pUnit.unit_type().name);
 //            
 //      pStr.style |= TTF_STYLE_BOLD;
 //      pName = create_text_surf_from_str16(pStr);
@@ -781,7 +781,7 @@ public class Mapview{
 //      FREESURFACE(pName);
 //      
 //      /* draw unit sprite */
-//      pBuf_Surf = GET_SURF(unit_type(pUnit).sprite);
+//      pBuf_Surf = GET_SURF(pUnit.unit_type().sprite);
 //      src = get_smaller_surface_rect(pBuf_Surf);
 //      sx = FRAME_WH + BLOCK_W + 3 +
 //			      (width / 2 - src.w - 3 - BLOCK_W - FRAME_WH) / 2;
@@ -850,7 +850,7 @@ public class Mapview{
 //          pHome_City = find_city_by_id(aunit.homecity);
 //          buffer = util.my_snprintf( "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
 //		pUType.name, pUType.attack_strength,
-//		pUType.defense_strength, pUType.move_rate / SINGLE_MOVE,
+//		pUType.defense_strength, pUType.move_rate / Unit_H.SINGLE_MOVE,
 //                (aunit.veteran ? "\nveteran" : ""),
 //                unit_activity_text(aunit),
 //		aunit.hp, pUType.hp,
@@ -891,7 +891,7 @@ public class Mapview{
 //             set_wflag(pBuf, WF_HIDDEN);
 //          }
 //  
-//          if (unit_owner(aunit) == game.player_ptr) {    
+//          if (aunit.unit_owner() == game.player_ptr) {    
 //            set_wstate(pBuf, FC_WS_NORMAL);
 //          }
 //    
@@ -1129,12 +1129,12 @@ public class Mapview{
 //
 //void update_timeout_label()
 //{
-//  util.freelog(LOG_DEBUG, "MAPVIEW: update_timeout_label : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "MAPVIEW: update_timeout_label : PORT ME");
 //}
 //
 //void update_turn_done_button(boolean do_restore)
 //{
-//  util.freelog(LOG_DEBUG, "MAPVIEW: update_turn_done_button : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "MAPVIEW: update_turn_done_button : PORT ME");
 //}
 //
 ///* ===================================================================== */
@@ -1451,9 +1451,9 @@ public class Mapview{
 //  GUI pMMap = get_minimap_window_widget();
 //  OVERVIEW_START_X = FRAME_WH +
 //	  (pMMap.size.w - 30 - DOUBLE_FRAME_WH -
-//				  OVERVIEW_TILE_WIDTH * map.xsize) / 2;
+//				  OVERVIEW_TILE_WIDTH * Map.map.xsize) / 2;
 //  OVERVIEW_START_Y = FRAME_WH + (pMMap.size.h - DOUBLE_FRAME_WH -
-//			  OVERVIEW_TILE_HEIGHT * map.ysize) / 2;
+//			  OVERVIEW_TILE_HEIGHT * Map.map.ysize) / 2;
 //}
 //
 ///**************************************************************************
@@ -1466,7 +1466,7 @@ public class Mapview{
 //  int width = pMMap.size.w - 30 - DOUBLE_FRAME_WH;
 //  int height = pMMap.size.h - DOUBLE_FRAME_WH;
 //  
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //    "MAPVIEW: 'set_overview_dimensions' call with x = %d  y = %d", w, h);
 //
 //  if(w > width || h > height) {
@@ -1641,7 +1641,7 @@ public class Mapview{
 //			OVERVIEW_TILE_WIDTH, OVERVIEW_TILE_HEIGHT};
 //  SDL_Color color = sdl_overview_tile_color(x, y);
 //
-//  util.freelog(LOG_DEBUG, "MAPVIEW: overview_update_tile (x = %d y = %d )", x, y);
+//  util.freelog(Log.LOG_DEBUG, "MAPVIEW: overview_update_tile (x = %d y = %d )", x, y);
 //			 
 //  SDL_FillRect(pMMap.theme, &cell_size,
 //	    SDL_MapRGBA(pMMap.theme.format, color.r,color.g,
@@ -1676,11 +1676,11 @@ public class Mapview{
 //    cell_size.x += OVERVIEW_TILE_WIDTH;
 //    col++;
 //
-//    if (col == map.xsize) {
+//    if (col == Map.map.xsize) {
 //      cell_size.y += OVERVIEW_TILE_HEIGHT;
 //      cell_size.x = OVERVIEW_START_X;
 //      row++;
-//      if (row == map.ysize) {
+//      if (row == Map.map.ysize) {
 //	break;
 //      }
 //      col = 0;
@@ -1690,7 +1690,7 @@ public class Mapview{
 //}
 //
 ///**************************************************************************
-//  draw line on mini map.
+//  draw line on mini Map.map.
 //  this algoritm is far from optim.
 //**************************************************************************/
 //static void putline_on_mini_map(SDL_Rect * pMapArea, Sint16 x0, Sint16 y0,
@@ -1767,7 +1767,7 @@ public class Mapview{
 //    return;
 //  }
 //  
-//  util.freelog(LOG_DEBUG, "MAPVIEW: refresh_overview_viewrect");
+//  util.freelog(Log.LOG_DEBUG, "MAPVIEW: refresh_overview_viewrect");
 //  
 //  pMMap = get_minimap_window_widget();
 //    
@@ -1781,9 +1781,9 @@ public class Mapview{
 //    map_area.x += OVERVIEW_START_X;
 //    map_area.y += OVERVIEW_START_Y;
 //    map_area.w = Math.min(pMMap.size.w - 30 - DOUBLE_FRAME_WH,
-//					    OVERVIEW_TILE_WIDTH * map.xsize);
+//					    OVERVIEW_TILE_WIDTH * Map.map.xsize);
 //    map_area.h = Math.min(pMMap.size.h - DOUBLE_FRAME_WH,
-//					    OVERVIEW_TILE_HEIGHT * map.ysize);
+//					    OVERVIEW_TILE_HEIGHT * Map.map.ysize);
 //    
 //    if(OVERVIEW_START_X != FRAME_WH || OVERVIEW_START_Y != FRAME_WH) {
 //      putframe(pMMap.dst , map_area.x - 1, map_area.y - 1,
@@ -1823,7 +1823,7 @@ public class Mapview{
 //
 //    putline_on_mini_map(&map_area, Wx, Wy, Nx, Ny, color, pMMap.dst);
 //
-//    util.freelog(LOG_DEBUG, "wx,wy: %d,%d nx,ny:%d,%x ex,ey:%d,%d, sx,sy:%d,%d",
+//    util.freelog(Log.LOG_DEBUG, "wx,wy: %d,%d nx,ny:%d,%x ex,ey:%d,%d, sx,sy:%d,%d",
 //	    Wx, Wy, Nx, Ny, Ex, Ey, Sx, Sy);
 //    /* ===== */
 //
@@ -2117,7 +2117,7 @@ public class Mapview{
 //  static tile pTile = null;
 //  static city pCity = null;
 //  static unit pUnit = null, *pFocus = null;
-//  static enum tile_special_type special;
+//  static enum int special;
 //  static Terrain_type_id terrain;
 //  static int count, i;
 //  static boolean fog, full_ocean, solid_bg;
@@ -2368,7 +2368,7 @@ public class Mapview{
 //			 des.x, des.y - HALF_NORMAL_TILE_HEIGHT);
 //  }
 //
-//  if (sdl_contains_special(special, S_AIRBASE) && draw_fortress_airbase) {
+//  if (sdl_contains_special(special, Terrain_H.S_AIRBASE) && draw_fortress_airbase) {
 //    SDL_BlitSurface(GET_SURF(sprites.tx.airbase), null, pBufSurface, &des);
 //    des = dst;
 //  }
@@ -2677,7 +2677,7 @@ public class Mapview{
 //**************************************************************************/
 //void put_cross_overlay_tile(int x, int y)
 //{
-//  util.freelog(LOG_DEBUG, "MAPVIEW: put_cross_overlay_tile : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "MAPVIEW: put_cross_overlay_tile : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -2686,7 +2686,7 @@ public class Mapview{
 //**************************************************************************/
 //void put_city_workers(city pcity, int color)
 //{
-//  util.freelog(LOG_DEBUG, "MAPVIEW: put_city_workers : PORT ME");
+//  util.freelog(Log.LOG_DEBUG, "MAPVIEW: put_city_workers : PORT ME");
 //}
 //
 ///**************************************************************************
@@ -2834,20 +2834,20 @@ public class Mapview{
 //
 //  /* correction ... pCol and pRow must be in map :) */
 //  if (*pCol < 0) {
-//    *pCol += map.xsize;
+//    *pCol += Map.map.xsize;
 //    iRet = 1;
 //  } else {
-//    if (*pCol >= map.xsize) {
-//      *pCol -= map.xsize;
+//    if (*pCol >= Map.map.xsize) {
+//      *pCol -= Map.map.xsize;
 //      iRet = 1;
 //    }
 //  }
 //
 //  if (*pRow < 0) {
-//    *pRow += map.ysize;
+//    *pRow += Map.map.ysize;
 //    iRet = 1;
-//  } else if (*pRow >= map.ysize) {
-//    *pRow -= map.ysize;
+//  } else if (*pRow >= Map.map.ysize) {
+//    *pRow -= Map.map.ysize;
 //    iRet = 1;
 //  }
 //
@@ -2958,12 +2958,12 @@ public class Mapview{
 //	}
 //
 //      }
-//      if (++real_row >= map.ysize) {
+//      if (++real_row >= Map.map.ysize) {
 //        real_row = 0;
 //      }      
 //    }
 //    real_row = row0;
-//    if (++real_col >= map.xsize) {
+//    if (++real_col >= Map.map.xsize) {
 //      real_col = 0;
 //    }
 //  }
@@ -3228,7 +3228,7 @@ public class Mapview{
 //      }
 //    } else {
 //      /* We draw the edges of the map as if the same terrain just
-//       * continued off the edge of the map. */
+//       * continued off the edge of the Map.map. */
 //      
 //      __ter[dir] = terrain;
 //    }

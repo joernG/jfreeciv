@@ -37,7 +37,7 @@ public class Civmanual{
 //#include "events.h"
 //#include "game.h"
 //#include "improvement.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "version.h"
 //

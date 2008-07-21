@@ -26,7 +26,7 @@ public class Settlers{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "support.h"
@@ -67,7 +67,7 @@ public class Settlers{
 //  tile ptile = punit.tile;
 //  city pcity;
 //
-//  assert(pplayer == unit_owner(punit));
+//  assert(pplayer == punit.unit_owner());
 //  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //
 //  /* Free city reservations */
@@ -134,7 +134,7 @@ public class Settlers{
 //}
 //
 ///**************************************************************************
-//  Initialize the territory map. 
+//  Initialize the territory Map.map. 
 //
 //  TODO: Add borders support.
 //**************************************************************************/
@@ -143,7 +143,7 @@ public class Settlers{
 //  /* (Re)allocate map arrays.  Note that the server may run more than one
 //   * game so the realloc() is necessary. */
 //  territory = fc_realloc(territory,
-//                         map.xsize * map.ysize * sizeof(*territory));
+//                         Map.map.xsize * Map.map.ysize * sizeof(*territory));
 //}
 //
 ///**************************************************************************
@@ -166,13 +166,13 @@ public class Settlers{
 //static boolean is_already_assigned(unit myunit, player pplayer, 
 //    tile ptile)
 //{
-//  if (same_pos(myunit.tile, ptile)
+//  if (Map.same_pos(myunit.tile, ptile)
 //      || (myunit.goto_tile /* HACK? */
-//	  && same_pos(myunit.goto_tile, ptile))) {
+//	  && Map.same_pos(myunit.goto_tile, ptile))) {
 ///* I'm still not sure this is exactly right -- Syela */
 //    unit_list_iterate(ptile.units, punit)
 //      if (myunit==punit) continue;
-//      if (!pplayers_allied(unit_owner(punit), pplayer))
+//      if (!pplayers_allied(punit.unit_owner(), pplayer))
 //        return true; /* oops, tile is occupied! */
 //      if (unit_flag(punit, F_SETTLERS) && unit_flag(myunit, F_SETTLERS))
 //        return true;
@@ -286,7 +286,7 @@ public class Settlers{
 //static boolean is_wet(player pplayer, tile ptile)
 //{
 //  Terrain_type_id terrain;
-//  enum tile_special_type special;
+//  enum int special;
 //
 //  /* FIXME: this should check a handicap. */
 //  if (!pplayer.ai.control && !map_is_known(ptile, pplayer)) {
@@ -349,7 +349,7 @@ public class Settlers{
 //{
 //  int goodness;
 //  Terrain_type_id old_terrain = ptile.terrain;
-//  enum tile_special_type old_special = ptile.special;
+//  enum int old_special = ptile.special;
 //  tile_type type = get_tile_type(old_terrain);
 //  Terrain_type_id new_terrain = type.irrigation_result;
 //
@@ -366,7 +366,7 @@ public class Settlers{
 //    ptile.special = old_special;
 //    return goodness;
 //  } else if (old_terrain == new_terrain
-//	     && !tile_has_special(ptile, S_IRRIGATION)
+//	     && !Map.tile_has_special(ptile, S_IRRIGATION)
 //	     && is_wet_or_is_wet_cardinal_around(pplayer, ptile)) {
 //    /* The tile is currently unirrigated; irrigating it would put an
 //     * S_IRRIGATE on it replacing any S_MINE already there.  Calculate
@@ -378,13 +378,13 @@ public class Settlers{
 //    assert(ptile.terrain == old_terrain);
 //    return goodness;
 //  } else if (old_terrain == new_terrain
-//	     && tile_has_special(ptile, S_IRRIGATION)
-//	     && !tile_has_special(ptile, S_FARMLAND)
+//	     && Map.tile_has_special(ptile, S_IRRIGATION)
+//	     && !Map.tile_has_special(ptile, S_FARMLAND)
 //	     && player_knows_techs_with_flag(pplayer, TF_FARMLAND)
 //	     && is_wet_or_is_wet_cardinal_around(pplayer, ptile)) {
 //    /* The tile is currently irrigated; irrigating it more puts an
 //     * S_FARMLAND on it.  Calculate the benefit of doing so. */
-//    assert(!tile_has_special(ptile, S_MINE));
+//    assert(!Map.tile_has_special(ptile, S_MINE));
 //    map_set_special(ptile, S_FARMLAND);
 //    goodness = city_tile_value(pcity, city_x, city_y, 0, 0);
 //    map_clear_special(ptile, S_FARMLAND);
@@ -412,7 +412,7 @@ public class Settlers{
 //{
 //  int goodness;
 //  Terrain_type_id old_terrain = ptile.terrain;
-//  enum tile_special_type old_special = ptile.special;
+//  enum int old_special = ptile.special;
 //  tile_type type = get_tile_type(old_terrain);
 //  Terrain_type_id new_terrain = type.mining_result;
 //
@@ -430,7 +430,7 @@ public class Settlers{
 //    ptile.special = old_special;
 //    return goodness;
 //  } else if (old_terrain == new_terrain
-//	     && !tile_has_special(ptile, S_MINE)) {
+//	     && !Map.tile_has_special(ptile, S_MINE)) {
 //    /* The tile is currently unmined; mining it would put an S_MINE on it
 //     * replacing any S_IRRIGATION/S_FARMLAND already there.  Calculate
 //     * the benefit of doing so. */
@@ -464,7 +464,7 @@ public class Settlers{
 //{
 //  int goodness;
 //  Terrain_type_id old_terrain = ptile.terrain;
-//  enum tile_special_type old_special = ptile.special;
+//  enum int old_special = ptile.special;
 //  tile_type type = get_tile_type(old_terrain);
 //  Terrain_type_id new_terrain = type.transform_result;
 //
@@ -513,7 +513,7 @@ public class Settlers{
 //
 //  "special" must be either S_ROAD or S_RAILROAD.
 //**************************************************************************/
-//static int road_bonus(tile ptile, enum tile_special_type special)
+//static int road_bonus(tile ptile, enum int special)
 //{
 //  int bonus = 0, i;
 //  boolean has_road[12], is_slow[12];
@@ -531,7 +531,7 @@ public class Settlers{
 //    } else {
 //      tile_type ptype = get_tile_type(tile1.terrain);
 //
-//      has_road[i] = tile_has_special(tile1, special);
+//      has_road[i] = Map.tile_has_special(tile1, special);
 //
 //      /* If true, this value indicates that this tile does not need
 //       * a road connector.  This is set for terrains which cannot have
@@ -649,9 +649,9 @@ public class Settlers{
 //  int goodness;
 //
 //  if (!is_ocean(ptile.terrain)
-//      && (!tile_has_special(ptile, S_RIVER)
+//      && (!Map.tile_has_special(ptile, S_RIVER)
 //	  || player_knows_techs_with_flag(pplayer, TF_BRIDGE))
-//      && !tile_has_special(ptile, S_ROAD)) {
+//      && !Map.tile_has_special(ptile, S_ROAD)) {
 //
 //    /* HACK: calling map_set_special here will have side effects, so we
 //     * have to set it manually. */
@@ -688,11 +688,11 @@ public class Settlers{
 //			    int city_x, int city_y, tile ptile)
 //{
 //  int goodness;
-//  enum tile_special_type old_special;
+//  enum int old_special;
 //
 //  if (!is_ocean(ptile.terrain)
 //      && player_knows_techs_with_flag(pplayer, TF_RAILROAD)
-//      && !tile_has_special(ptile, S_RAILROAD)) {
+//      && !Map.tile_has_special(ptile, S_RAILROAD)) {
 //    old_special = ptile.special;
 //
 //    /* HACK: calling map_set_special here will have side effects, so we
@@ -806,7 +806,7 @@ public class Settlers{
 //  if (total_value > *best_value
 //      || (total_value == *best_value
 //	  && old_tile_value > *best_old_tile_value)) {
-//    util.freelog(LOG_DEBUG,
+//    util.freelog(Log.LOG_DEBUG,
 //	    "Replacing (%d, %d) = %d with %s (%d, %d) = %d [d=%d b=%d]",
 //	    TILE_XY(*best_tile), *best_value, get_activity_text(act),
 //	    TILE_XY(ptile), total_value,
@@ -851,8 +851,8 @@ public class Settlers{
 //**************************************************************************/
 //static int unit_food_upkeep(unit punit)
 //{
-//  player pplayer = unit_owner(punit);
-//  int upkeep = utype_food_cost(unit_type(punit),
+//  player pplayer = punit.unit_owner();
+//  int upkeep = utype_food_cost(punit.unit_type(),
 //			       get_gov_pplayer(pplayer));
 //  if (punit.id != 0 && punit.homecity == 0)
 //    upkeep = 0; /* thanks, Peter */
@@ -873,11 +873,11 @@ public class Settlers{
 //				 tile *best_tile)
 //{
 //  city mycity = map_get_city(punit.tile);
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  boolean in_use;			/* true if the target square is being used
 //				   by one of our cities */
 //  Continent_id ucont     = map_get_continent(punit.tile);
-//  int mv_rate         = unit_type(punit).move_rate;
+//  int mv_rate         = punit.unit_type().move_rate;
 //  int mv_turns;			/* estimated turns to move to target square */
 //  int oldv;			/* current value of consideration tile */
 //  int best_oldv = 9999;		/* oldv of best target so far; compared if
@@ -894,7 +894,7 @@ public class Settlers{
 //
 //  for (city pcity : pplayer.cities.data) {
 //#ifdef REALLY_DEBUG_THIS
-//    util.freelog(LOG_DEBUG, "Evaluating improvements for %s...", pcity.name);
+//    util.freelog(Log.LOG_DEBUG, "Evaluating improvements for %s...", pcity.name);
 //#endif
 //    /* try to work near the city */
 //    city_map_checked_iterate(pcity.tile, i, j, ptile) {
@@ -996,7 +996,7 @@ public class Settlers{
 //	}
 //
 //#ifdef REALLY_DEBUG_THIS
-//	util.freelog(LOG_DEBUG,
+//	util.freelog(Log.LOG_DEBUG,
 //		"(%d %d) I=%+-4d O=%+-4d M=%+-4d R=%+-4d RR=%+-4d P=%+-4d N=%+-4d",
 //		i, j,
 //		pcity.ai.irrigate[i][j], pcity.ai.transform[i][j],
@@ -1013,7 +1013,7 @@ public class Settlers{
 //    best_newv = 0; /* Bad Things happen without this line! :( -- Syela */
 //
 //  if (best_newv > 0) {
-//    util.freelog(LOG_DEBUG,
+//    util.freelog(Log.LOG_DEBUG,
 //	    "Settler %d@(%d,%d) wants to %s at (%d,%d) with desire %d",
 //	    punit.id, TILE_XY(punit.tile), get_activity_text(*best_act),
 //	    TILE_XY(*best_tile), best_newv);
@@ -1030,7 +1030,7 @@ public class Settlers{
 ///**************************************************************************
 //  Find some work for our settlers and/or workers.
 //**************************************************************************/
-//public static final int LOG_SETTLER = LOG_DEBUG;
+//public static final int LOG_SETTLER = Log.LOG_DEBUG;
 //static void auto_settler_findwork(player pplayer, unit punit)
 //{
 //  struct cityresult result;
@@ -1055,7 +1055,7 @@ public class Settlers{
 //
 //    /* Check that the mission is still possible.  If the tile has become
 //     * unavailable or the player has been autotoggled, call it off. */
-//    if (!unit_owner(punit).ai.control
+//    if (!punit.unit_owner().ai.control
 //	|| !city_can_be_built_here(ptile, punit)) {
 //      UNIT_LOG(LOG_SETTLER, punit, "city founding mission failed");
 //      ai_unit_new_role(punit, AIUNIT_NONE, null);
@@ -1068,7 +1068,7 @@ public class Settlers{
 //          || punit.moves_left <= 0) {
 //        return;
 //      }
-//      if (same_pos(punit.tile, ptile)) {
+//      if (Map.same_pos(punit.tile, ptile)) {
 //        if (!ai_do_build_city(pplayer, punit)) {
 //          UNIT_LOG(Log.LOG_ERROR, punit, "could not make city on %s",
 //                   map_get_tile_info_text(punit.tile));
@@ -1137,7 +1137,7 @@ public class Settlers{
 //    if (best_tile) {
 //      best_tile.assigned = best_tile.assigned | 1 << pplayer.player_no;
 //    } else {
-//      UNIT_LOG(LOG_DEBUG, punit, "giving up trying to improve terrain");
+//      UNIT_LOG(Log.LOG_DEBUG, punit, "giving up trying to improve terrain");
 //      return; /* We cannot do anything */
 //    }
 //    punit.goto_tile = best_tile; /* TMP */
@@ -1145,7 +1145,7 @@ public class Settlers{
 //      return;
 //    }
 //    if (punit.moves_left > 0
-//        && same_pos(best_tile, punit.tile)) {
+//        && Map.same_pos(best_tile, punit.tile)) {
 //      handle_unit_activity_request(punit, best_act);
 //      send_unit_info(null, punit);
 //      return;
@@ -1207,7 +1207,7 @@ public class Settlers{
 //			     city_x, city_y, ptile) {
 //#ifndef NDEBUG
 //      Terrain_type_id old_terrain = ptile.terrain;
-//      enum tile_special_type old_special = ptile.special;
+//      enum int old_special = ptile.special;
 //#endif
 //
 //      pcity.ai.detox[city_x][city_y]
@@ -1246,7 +1246,7 @@ public class Settlers{
 //  t = renew_timer_start(t, TIMER_CPU, TIMER_DEBUG);
 //
 //  if (pplayer.ai.control) {
-//    /* Set up our city map. */
+//    /* Set up our city Map.map. */
 //    citymap_turn_init(pplayer);
 //  }
 //
@@ -1255,7 +1255,7 @@ public class Settlers{
 //
 //  pplayer.ai.warmth = WARMING_FACTOR * (game.heating > game.warminglevel ? 2 : 1);
 //
-//  util.freelog(LOG_DEBUG, "Warmth = %d, game.globalwarming=%d",
+//  util.freelog(Log.LOG_DEBUG, "Warmth = %d, game.globalwarming=%d",
 //	  pplayer.ai.warmth, game.globalwarming);
 //
 //  /* Auto-settle with a settler unit if it's under AI control (e.g. human
@@ -1267,7 +1267,7 @@ public class Settlers{
 //	&& (unit_flag(punit, F_SETTLERS)
 //	    || unit_flag(punit, F_CITIES))
 //	&& !unit_has_orders(punit)) {
-//      util.freelog(LOG_DEBUG, "%s's settler at (%d, %d) is ai controlled.",
+//      util.freelog(Log.LOG_DEBUG, "%s's settler at (%d, %d) is ai controlled.",
 //	      pplayer.name, TILE_XY(punit.tile)); 
 //      if (punit.activity == ACTIVITY_SENTRY) {
 //	handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
@@ -1320,9 +1320,9 @@ public class Settlers{
 //**************************************************************************/
 //static void assign_settlers()
 //{
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    ptile.assigned = 0;
-//  } whole_map_iterate_end;
+//  }
 //
 //  shuffled_for(player pplayer: game.players){
 //    assign_settlers_player(pplayer);
@@ -1359,19 +1359,19 @@ public class Settlers{
 //{
 //  int n = pplayer.player_no;
 //  unit_list_iterate(pplayer.units, punit)
-//    if (unit_type(punit).attack_strength != 0) {
+//    if (punit.unit_type().attack_strength != 0) {
 ///* I could argue that phalanxes aren't really a threat, but ... */
 //      if (is_sailing_unit(punit)) {
-//        assign_region(punit.tile, n, 1 + unit_type(punit).move_rate / SINGLE_MOVE, 1);
+//        assign_region(punit.tile, n, 1 + punit.unit_type().move_rate / Unit_H.SINGLE_MOVE, 1);
 //      } else if (is_ground_unit(punit)) {
-//        assign_region(punit.tile, n, 1 + unit_type(punit).move_rate /
+//        assign_region(punit.tile, n, 1 + punit.unit_type().move_rate /
 //             (unit_flag(punit, F_IGTER) ? 1 : 3), 0);
 ///* I realize this is not the most accurate, but I don't want to iterate
 //road networks 100 times/turn, and I can't justifiably abort when I encounter
 //already assigned territory.  If anyone has a reasonable alternative that won't
 //noticeably slow the game, feel free to replace this else{}  -- Syela */
 //      } else {
-//        assign_region(punit.tile, n, 1 + unit_type(punit).move_rate / SINGLE_MOVE, 0);
+//        assign_region(punit.tile, n, 1 + punit.unit_type().move_rate / Unit_H.SINGLE_MOVE, 0);
 //      } 
 //    }
 //  }
@@ -1386,7 +1386,7 @@ public class Settlers{
 //**************************************************************************/
 //static void assign_territory()
 //{
-//  memset(territory, 0, map.xsize * map.ysize * sizeof(*territory));
+//  memset(territory, 0, Map.map.xsize * Map.map.ysize * sizeof(*territory));
 //
 //  for(player pplayer: game.players){
 //    assign_territory_player(pplayer);
@@ -1432,7 +1432,7 @@ public class Settlers{
 //  int unit_type = best_role_unit(pcity, F_CITIES); 
 //
 //  if (unit_type == U_LAST) {
-//    util.freelog(LOG_DEBUG, "No F_CITIES role unit available");
+//    util.freelog(Log.LOG_DEBUG, "No F_CITIES role unit available");
 //    return;
 //  }
 //
@@ -1448,7 +1448,7 @@ public class Settlers{
 //
 //    find_best_city_placement(virtualunit, &result, is_coastal, is_coastal);
 //
-//    CITY_LOG(LOG_DEBUG, pcity, "want(%d) to establish city at"
+//    CITY_LOG(Log.LOG_DEBUG, pcity, "want(%d) to establish city at"
 //	     " (%d, %d) and will %s to get there", result.result, 
 //	     TILE_XY(result.tile), 
 //	     (result.virt_boat ? "build a boat" : 
@@ -1479,7 +1479,7 @@ public class Settlers{
 //  int unit_type = best_role_unit(pcity, F_SETTLERS);
 //
 //  if (unit_type == U_LAST) {
-//    util.freelog(LOG_DEBUG, "No F_SETTLERS role unit available");
+//    util.freelog(Log.LOG_DEBUG, "No F_SETTLERS role unit available");
 //    return;
 //  }
 //
@@ -1496,7 +1496,7 @@ public class Settlers{
 //                 / (ai.stats.cities[ptile.continent] + 1));
 //  want -= Math.min(ai.stats.workers[ptile.continent], want);
 //
-//  CITY_LOG(LOG_DEBUG, pcity, "wants %s with want %d to do %s at (%d,%d), "
+//  CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s with want %d to do %s at (%d,%d), "
 //           "we have %d workers and %d cities on the continent",
 //	   unit_name(unit_type), want, get_activity_text(best_act),
 //	   TILE_XY(best_tile),

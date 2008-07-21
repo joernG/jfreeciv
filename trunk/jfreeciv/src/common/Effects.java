@@ -32,7 +32,7 @@ public class Effects{
 //#include "game.h"
 //#include "government.h"
 //#include "improvement.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "packets.h"
 //#include "player.h"
 //#include "tech.h"
@@ -1048,7 +1048,7 @@ public class Effects{
 //    break;
 //  case REQ_SPECIAL:
 //    /* The requirement is filled if the tile has the special. */
-//    return target_tile && tile_has_special(target_tile,
+//    return target_tile && Map.tile_has_special(target_tile,
 //					   peffect.req.value.special);
 //    break;
 //  case REQ_TERRAIN:

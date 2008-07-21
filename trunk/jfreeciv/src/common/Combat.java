@@ -36,7 +36,7 @@ public class Combat{
 
 		/* 3. Are we allowed to attack _all_ units there? */
 		for (unit aunit : ptile.units.data) {
-			if (!pplayers_at_war(unit_owner(aunit), pplayer)) {
+			if (!pplayers_at_war(aunit.unit_owner(), pplayer)) {
 				/* Enemy hiding behind a human/diplomatic shield */
 				return false;
 			}
@@ -71,7 +71,7 @@ public class Combat{
 //
 //		/* 2. Only fighters can attack planes, except in city or airbase attacks */
 //		if (!unit_flag(punit, F_FIGHTER) && is_air_unit(pdefender)
-//				&& !(pcity || map_has_special(dest_tile, S_AIRBASE))) {
+//				&& !(pcity || map_has_special(dest_tile, Terrain_H.S_AIRBASE))) {
 //			return false;
 //		}
 //
@@ -123,7 +123,7 @@ public class Combat{
 	 * do so?
 	 **************************************************************************/
 	public static boolean can_unit_attack_tile(unit punit, final tile dest_tile) {
-		if (!can_player_attack_tile(unit_owner(punit), dest_tile)) {
+		if (!can_player_attack_tile(punit.unit_owner(), dest_tile)) {
 			return false;
 		}
 
@@ -222,8 +222,8 @@ public class Combat{
 //void get_modified_firepower(unit attacker, unit defender,
 //			    int *att_fp, int *def_fp)
 //{
-//  *att_fp = unit_type(attacker).firepower;
-//  *def_fp = unit_type(defender).firepower;
+//  *att_fp = attacker.unit_type().firepower;
+//  *def_fp = defender.unit_type().firepower;
 //
 //  /* Check CityBuster flag */
 //  if (unit_flag(attacker, F_CITYBUSTER)
@@ -329,7 +329,7 @@ public class Combat{
 //
 ///**************************************************************************
 // Returns the attack power, modified by moves left, and veteran
-// status. Set moves_left to SINGLE_MOVE to disable the reduction of
+// status. Set moves_left to Unit_H.SINGLE_MOVE to disable the reduction of
 // power caused by tired units.
 //**************************************************************************/
 //int base_get_attack_power(int type, int veteran, int moves_left)
@@ -339,8 +339,8 @@ public class Combat{
 //  power = get_unit_type(type).attack_strength * POWER_FACTOR;
 //  power *= get_unit_type(type).veteran[veteran].power_fact;
 //
-//  if (!unit_type_flag(type, F_IGTIRED) && moves_left < SINGLE_MOVE) {
-//    power = (power * moves_left) / SINGLE_MOVE;
+//  if (!unit_type_flag(type, F_IGTIRED) && moves_left < Unit_H.SINGLE_MOVE) {
+//    power = (power * moves_left) / Unit_H.SINGLE_MOVE;
 //  }
 //  return power;
 //}
@@ -350,8 +350,8 @@ public class Combat{
 //**************************************************************************/
 //int base_get_defense_power(unit punit)
 //{
-//  return unit_type(punit).defense_strength * POWER_FACTOR
-//  	* unit_type(punit).veteran[punit.veteran].power_fact;
+//  return punit.unit_type().defense_strength * POWER_FACTOR
+//  	* punit.unit_type().veteran[punit.veteran].power_fact;
 //}
 //
 ///**************************************************************************
@@ -565,9 +565,9 @@ public class Combat{
 //    unit punit = unit_list_get(&ptile.units, 0);
 //
 //    util.freelog(Log.LOG_ERROR, "get_defender bug: %s's %s vs %s's %s (total %d"
-//            " units) on %s at (%d,%d). ", unit_owner(attacker).name,
-//            unit_type(attacker).name, unit_owner(punit).name,
-//            unit_type(punit).name, unit_list_size(&ptile.units), 
+//            " units) on %s at (%d,%d). ", attacker.unit_owner().name,
+//            attacker.unit_type().name, punit.unit_owner().name,
+//            punit.unit_type().name, unit_list_size(&ptile.units), 
 //            get_terrain_name(ptile.terrain), ptile.x, ptile.y);
 //  }
 
@@ -588,7 +588,7 @@ public class Combat{
 //  for (unit attacker : ptile.units.data) {
 //    int build_cost = unit_build_shield_cost(attacker.type);
 //
-//    if (pplayers_allied(unit_owner(defender), unit_owner(attacker))) {
+//    if (pplayers_allied(defender.unit_owner(), attacker.unit_owner())) {
 //      return null;
 //    }
 //    unit_a = (int) (100000 * (unit_win_chance(attacker, defender)));
@@ -610,7 +610,7 @@ public class Combat{
 //{
 //  return !(ptile.city != null
 //           || map_has_special(ptile, S_FORTRESS)
-//           || map_has_special(ptile, S_AIRBASE)
+//           || map_has_special(ptile, Terrain_H.S_AIRBASE)
 //           || !game.rgame.killstack);
 //}
 }

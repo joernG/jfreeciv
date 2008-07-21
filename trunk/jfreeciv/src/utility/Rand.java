@@ -124,7 +124,7 @@ public class Rand{
 //    new_rand = 0;
 //  }
 //
-//  /* util.freelog(LOG_DEBUG, "rand(%u) = %u", size, new_rand); */
+//  /* util.freelog(Log.LOG_DEBUG, "rand(%u) = %u", size, new_rand); */
 //
 //  return new_rand;
 //} 

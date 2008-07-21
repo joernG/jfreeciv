@@ -17,7 +17,7 @@ public class Utilities{
 //#include <config.h>
 //#endif
 //
-//#include "map.h"
+//#include "Map.map.h"
 //
 //#include "utilities.h"
 //
@@ -41,8 +41,8 @@ public class Utilities{
 //void create_placed_map()                               
 //{                                                          
 //  assert(!placed_map_is_initialized());                              
-//  placed_map = fc_malloc (sizeof(boolean) * MAX_MAP_INDEX);   
-//  INITIALIZE_ARRAY(placed_map, MAX_MAP_INDEX, false );     
+//  placed_map = fc_malloc (sizeof(boolean) * Map_H.MAX_MAP_INDEX);   
+//  INITIALIZE_ARRAY(placed_map, Map_H.MAX_MAP_INDEX, false );     
 //}
 //
 ///**************************************************************************** 
@@ -81,11 +81,11 @@ public class Utilities{
 //****************************************************************************/
 //void set_all_ocean_tiles_placed() 
 //{
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    if (is_ocean(map_get_terrain(ptile))) {
 //      map_set_placed(ptile);
 //    }
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///****************************************************************************
@@ -165,7 +165,7 @@ public class Utilities{
 //
 ///****************************************************************************
 // * Apply a Gaussian difusion filtre on the map
-// * the size of the map is MAX_MAP_INDEX and the map is indexed by 
+// * the size of the map is Map_H.MAX_MAP_INDEX and the map is indexed by 
 // * native_pos_to_index function
 // * if zeroes_at_edges is set, any unreal position on difusion has 0 value
 // * if zeroes_at_edges in unset the unreal position are not counted.
@@ -175,7 +175,7 @@ public class Utilities{
 //  float weight[5] =  {0.35,  0.5 ,1 , 0.5, 0.35};
 //  float total_weight = 2.70;
 //  boolean axe = true;
-//  int alt_int_map[MAX_MAP_INDEX];
+//  int alt_int_map[Map_H.MAX_MAP_INDEX];
 //  int *target_map, *source_map;
 //
 //  assert(int_map != null);
@@ -184,7 +184,7 @@ public class Utilities{
 //  source_map = int_map;
 //
 //  do {
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      int  N = 0, D = 0;
 //
 //      iterate_axe(tile1, i, ptile, 2, axe) {
@@ -195,7 +195,7 @@ public class Utilities{
 //	D = total_weight;
 //      }
 //      target_map[ptile.index] = N / D;
-//    } whole_map_iterate_end;
+//    }
 //
 //    if (MAP_IS_ISOMETRIC) {
 //      weight[0] = weight[4] = 0.5;

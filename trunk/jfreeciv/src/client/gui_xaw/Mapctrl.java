@@ -37,7 +37,7 @@ public class Mapctrl{
 //#include "climap.h"
 //#include "fcintl.h"
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "city.h"
 //#include "player.h"
 //#include "support.h"

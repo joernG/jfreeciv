@@ -22,7 +22,6 @@ public class Control{
 //
 //#include "fcintl.h"
 //#include "log.h"
-//#include "map.h"
 //#include "mem.h"
 //
 //#include "audio.h"
@@ -161,7 +160,7 @@ public class Control{
 //  
 //  /* avoid the old focus unit disappearing: */
 //  if (punit_old_focus
-//      && (!punit || !same_pos(punit_old_focus.tile, punit.tile))) {
+//      && (!punit || !Map.same_pos(punit_old_focus.tile, punit.tile))) {
 //    refresh_tile_mapcanvas(punit_old_focus.tile, false);
 //  }
 //
@@ -320,21 +319,21 @@ public class Control{
 //  }
 //
 //  /* If a unit is attacking we should show that on top */
-//  if (punit_attacking && same_pos(punit_attacking.tile, ptile)) {
+//  if (punit_attacking && Map.same_pos(punit_attacking.tile, ptile)) {
 //    unit_list_iterate(ptile.units, punit)
 //      if(punit == punit_attacking) return punit;
 //    }
 //  }
 //
 //  /* If a unit is defending we should show that on top */
-//  if (punit_defending && same_pos(punit_defending.tile, ptile)) {
+//  if (punit_defending && Map.same_pos(punit_defending.tile, ptile)) {
 //    unit_list_iterate(ptile.units, punit)
 //      if(punit == punit_defending) return punit;
 //    }
 //  }
 //
 //  /* If the unit in focus is at this tile, show that on top */
-//  if (punit_focus && same_pos(punit_focus.tile, ptile)) {
+//  if (punit_focus && Map.same_pos(punit_focus.tile, ptile)) {
 //    unit_list_iterate(ptile.units, punit)
 //      if(punit == punit_focus) return punit;
 //    }
@@ -352,7 +351,7 @@ public class Control{
 //       4: any unit
 //     (always return first in stack). */
 //  unit_list_iterate(ptile.units, punit)
-//    if (unit_owner(punit) == game.player_ptr) {
+//    if (punit.unit_owner() == game.player_ptr) {
 //      if (punit.transported_by == -1) {
 //        if (get_transporter_capacity(punit) > 0) {
 //	  return punit;
@@ -639,7 +638,7 @@ public class Control{
 //**************************************************************************/
 //boolean can_unit_do_connect(unit punit, enum unit_activity activity) 
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  Terrain_type_id terrain = map_get_terrain(punit.tile);
 //  tile_type ttype = get_tile_type(terrain);
 //
@@ -654,9 +653,9 @@ public class Control{
 //  case ACTIVITY_ROAD:
 //    return terrain_control.may_road
 //      && unit_flag(punit, F_SETTLERS)
-//      && (tile_has_special(punit.tile, S_ROAD)
+//      && (Map.tile_has_special(punit.tile, S_ROAD)
 //	  || (ttype.road_time != 0
-//	      && (!tile_has_special(punit.tile, S_RIVER)
+//	      && (!Map.tile_has_special(punit.tile, S_RIVER)
 //		  || player_knows_techs_with_flag(pplayer, TF_BRIDGE))));
 //  case ACTIVITY_RAILROAD:
 //    /* There is no check for existing road/rail; the connect is allowed
@@ -670,7 +669,7 @@ public class Control{
 //     * never to transform tiles. */
 //    return (terrain_control.may_irrigate
 //	    && unit_flag(punit, F_SETTLERS)
-//	    && (tile_has_special(punit.tile, S_IRRIGATION)
+//	    && (Map.tile_has_special(punit.tile, S_IRRIGATION)
 //		|| (terrain == ttype.irrigation_result
 //		    && is_water_adjacent_to_tile(punit.tile)
 //		    && !is_activity_on_tile(punit.tile, ACTIVITY_MINE))));
@@ -767,7 +766,7 @@ public class Control{
 //
 //    if (punit.hp + turns * get_player_bonus(game.player_ptr,
 //					     EFT_UNIT_RECOVER)
-//	< unit_type(punit).hp) {
+//	< punit.unit_type().hp) {
 //      activity = ACTIVITY_SENTRY;
 //    }
 //    send_goto_path(punit, path, activity);
@@ -872,7 +871,7 @@ public class Control{
 //**************************************************************************/
 //void request_new_unit_activity_targeted(unit punit,
 //					enum unit_activity act,
-//					enum tile_special_type tgt)
+//					enum int tgt)
 //{
 //  dsend_packet_unit_change_activity(&aconnection, punit.id, act, tgt);
 //}
@@ -1075,12 +1074,12 @@ public class Control{
 //void request_unit_pillage(unit punit)
 //{
 //  tile ptile = punit.tile;
-//  enum tile_special_type pspresent = get_tile_infrastructure_set(ptile);
-//  enum tile_special_type psworking =
+//  enum int pspresent = get_tile_infrastructure_set(ptile);
+//  enum int psworking =
 //      get_unit_tile_pillage_set(punit.tile);
-//  enum tile_special_type what =
+//  enum int what =
 //      get_preferred_pillage(pspresent & (~psworking));
-//  enum tile_special_type would =
+//  enum int would =
 //      what | map_get_infrastructure_prerequisite(what);
 //
 //  if ((game.rgame.pillage_select) &&
@@ -1365,8 +1364,8 @@ public class Control{
 //  if (!was_teleported
 //      && punit.activity != ACTIVITY_SENTRY
 //      && punit.transported_by == -1) {
-//    audio_play_sound(unit_type(punit).sound_move,
-//		     unit_type(punit).sound_move_alt);
+//    audio_play_sound(punit.unit_type().sound_move,
+//		     punit.unit_type().sound_move_alt);
 //  }
 //
 //  unit_list_unlink(&ptile.units, punit);
@@ -1435,7 +1434,7 @@ public class Control{
 //      do_unit_goto(ptile);
 //      break;
 //    case HOVER_NUKE:
-//      if (SINGLE_MOVE * real_map_distance(punit.tile, ptile)
+//      if (Unit_H.SINGLE_MOVE * real_map_distance(punit.tile, ptile)
 //	  > punit.moves_left) {
 //        append_output_window("Game: Too far for this unit.");
 //      } else {
@@ -1682,7 +1681,7 @@ public class Control{
 //    draw_line(ptile);
 //    dest_tile = get_line_dest();
 //    if (ptile == dest_tile
-//        && !is_non_allied_unit_tile(ptile, unit_owner(punit))) {
+//        && !Unit.is_non_allied_unit_tile(ptile, punit.unit_owner())) {
 //      send_patrol_route(punit);
 //    } else {
 //      append_output_window("Game: Didn't find a route to the destination!");
@@ -1706,7 +1705,7 @@ public class Control{
 //
 //    draw_line(ptile);
 //    dest_tile = get_line_dest();
-//    if (same_pos(dest_tile, ptile)) {
+//    if (Map.same_pos(dest_tile, ptile)) {
 //      send_connect_route(punit, activity);
 //    } else {
 //      append_output_window(_("Game: Didn't find a route to "

@@ -29,7 +29,7 @@ public class Ruleset{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "nation.h"
 //#include "packets.h"
@@ -278,7 +278,7 @@ public class Ruleset{
 //      exit(EXIT_FAILURE);
 //    }
 //    output[i] = tech;
-//    util.freelog(LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, tech);
+//    util.freelog(Log.LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, tech);
 //  }
 //  free(slist);
 //  return;
@@ -328,7 +328,7 @@ public class Ruleset{
 //      exit(EXIT_FAILURE);
 //    }
 //    output[i] = building;
-//    util.freelog(LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, building);
+//    util.freelog(Log.LOG_DEBUG, "%s.%s,%d %s %d", prefix, entry, i, sval, building);
 //  }
 //  free(slist);
 //}
@@ -937,7 +937,7 @@ public class Ruleset{
 //    u.defense_strength =
 //      secfile_lookup_int(file,"%s.defense", sec[i]);
 //    u.move_rate =
-//      SINGLE_MOVE*secfile_lookup_int(file,"%s.move_rate", sec[i]);
+//      Unit_H.SINGLE_MOVE*secfile_lookup_int(file,"%s.move_rate", sec[i]);
 //    
 //    u.vision_range =
 //      secfile_lookup_int(file,"%s.vision_range", sec[i]);
@@ -963,9 +963,9 @@ public class Ruleset{
 //
 //    u.paratroopers_range = secfile_lookup_int_default(file,
 //        0, "%s.paratroopers_range", sec[i]);
-//    u.paratroopers_mr_req = SINGLE_MOVE * secfile_lookup_int_default(file,
+//    u.paratroopers_mr_req = Unit_H.SINGLE_MOVE * secfile_lookup_int_default(file,
 //        0, "%s.paratroopers_mr_req", sec[i]);
-//    u.paratroopers_mr_sub = SINGLE_MOVE * secfile_lookup_int_default(file,
+//    u.paratroopers_mr_sub = Unit_H.SINGLE_MOVE * secfile_lookup_int_default(file,
 //        0, "%s.paratroopers_mr_sub", sec[i]);
 //    u.bombard_rate = secfile_lookup_int_default(file,
 //	0, "%s.bombard_rate", sec[i]);
@@ -1099,7 +1099,7 @@ public class Ruleset{
 //    j = get_role_unit(L_FERRYBOAT,i);
 //    if (!unit_type_flag(j, F_TRIREME)) {
 //      j = get_unit_type(j).tech_requirement;
-//      util.freelog(LOG_DEBUG, "nav tech is %s", advances[j].name);
+//      util.freelog(Log.LOG_DEBUG, "nav tech is %s", advances[j].name);
 //      game.rtech.nav = j;
 //      break;
 //    }
@@ -1112,7 +1112,7 @@ public class Ruleset{
 //  } else {
 //    j = get_role_unit(L_PARTISAN, 0);
 //    j = game.rtech.u_partisan = get_unit_type(j).tech_requirement;
-//    util.freelog(LOG_DEBUG, "partisan tech is %s", advances[j].name);
+//    util.freelog(Log.LOG_DEBUG, "partisan tech is %s", advances[j].name);
 //  }
 //
 //  update_simple_ai_types();
@@ -1796,7 +1796,7 @@ public class Ruleset{
 //  game.ai_goal_government
 //    = lookup_government(file, "governments.ai_goal", filename);
 //
-//  util.freelog(LOG_DEBUG, "govs: def %d, anarchy %d, ai_goal %d",
+//  util.freelog(Log.LOG_DEBUG, "govs: def %d, anarchy %d, ai_goal %d",
 //	  game.default_government, game.government_when_anarchy,
 //	  game.ai_goal_government);
 //  
@@ -2445,11 +2445,11 @@ public class Ruleset{
 //	val = A_LAST;
 //      }
 //      if(val != A_LAST && val != A_NONE) {
-//	util.freelog(LOG_DEBUG, "%s tech goal (%d) %3d %s", pl.name, j, val, techs[j]);
+//	util.freelog(Log.LOG_DEBUG, "%s tech goal (%d) %3d %s", pl.name, j, val, techs[j]);
 //	pl.goals.tech[j] = val;
 //      }
 //    }
-//    util.freelog(LOG_DEBUG, "%s %d tech goals", pl.name, j);
+//    util.freelog(Log.LOG_DEBUG, "%s %d tech goals", pl.name, j);
 //    if(j==0) {
 //      util.freelog(LOG_VERBOSE, "No valid goal techs for %s", pl.name);
 //    }
@@ -2474,7 +2474,7 @@ public class Ruleset{
 //      val = B_LAST;
 //    }
 //    pl.goals.wonder = val;
-//    util.freelog(LOG_DEBUG, "%s wonder goal %d %s", pl.name, val, temp_name);
+//    util.freelog(Log.LOG_DEBUG, "%s wonder goal %d %s", pl.name, val, temp_name);
 //
 //    sz_strlcpy(temp_name, secfile_lookup_str(file, "%s.government", sec[i]));
 //    gov = find_government_by_name(temp_name);

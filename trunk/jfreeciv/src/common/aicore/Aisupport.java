@@ -20,7 +20,7 @@ public class Aisupport{
 //
 //#include "city.h"
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "shared.h"
 //#include "spaceship.h"
@@ -110,8 +110,8 @@ public class Aisupport{
 //
 //  worth = pcity.size * 150; /* reasonable base cost */
 //  for (unit punit : pcity.units_supported.data) {
-//    if (same_pos(punit.tile, pcity.tile)) {
-//      int id = unit_type(punit).obsoleted_by;
+//    if (Map.same_pos(punit.tile, pcity.tile)) {
+//      int id = punit.unit_type().obsoleted_by;
 //
 //      if (id >= 0 && can_build_unit_direct(pcity, id)) {
 //        worth += unit_disband_shields(punit.type) / 2; /* obsolete */

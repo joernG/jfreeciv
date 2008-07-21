@@ -362,10 +362,10 @@ public class Mapview_common{
 //  Point p = MAP_TO_NATIVE_POS(nat_x, nat_y, map_x, map_y);
 //	nat_x = p.x; nat_y =p.y;
 //  if (topo_has_flag(TF_WRAPX)) {
-//    nat_x = FC_WRAP(nat_x, map.xsize);
+//    nat_x = FC_WRAP(nat_x, Map.map.xsize);
 //  }
 //  if (topo_has_flag(TF_WRAPY)) {
-//    nat_y = FC_WRAP(nat_y, map.ysize);
+//    nat_y = FC_WRAP(nat_y, Map.map.ysize);
 //  }
 //  NATIVE_TO_MAP_POS(&map_x, &map_y, nat_x, nat_y);
 //
@@ -559,7 +559,7 @@ public class Mapview_common{
 //    } while (mytime < timing_sec);
 //
 //    mytime = read_timer_seconds(anim_timer);
-//    util.freelog(LOG_DEBUG, "Got %d frames in %f seconds: %f FPS.",
+//    util.freelog(Log.LOG_DEBUG, "Got %d frames in %f seconds: %f FPS.",
 //	    frames, mytime, (double)frames / mytime);
 //  } else {
 //    base_set_mapview_origin(gui_x0, gui_y0);
@@ -606,7 +606,7 @@ public class Mapview_common{
 //    NATIVE_TO_MAP_POS(xmin, ymin, 0, 0);
 //    map_to_gui_pos(xmin, ymin, *xmin, *ymin);
 //
-//    NATIVE_TO_MAP_POS(xmax, ymax, map.xsize - 1, map.ysize - 1);
+//    NATIVE_TO_MAP_POS(xmax, ymax, Map.map.xsize - 1, Map.map.ysize - 1);
 //    map_to_gui_pos(xmax, ymax, *xmax, *ymax);
 //    *xmax += NORMAL_TILE_WIDTH;
 //    *ymax += NORMAL_TILE_HEIGHT;
@@ -638,13 +638,13 @@ public class Mapview_common{
 //    NATIVE_TO_MAP_POS(&map_x, &map_y, 0, 0);
 //    map_to_gui_pos(&gui_x1, &gui_y1, map_x, map_y);
 //
-//    NATIVE_TO_MAP_POS(&map_x, &map_y, map.xsize - 1, 0);
+//    NATIVE_TO_MAP_POS(&map_x, &map_y, Map.map.xsize - 1, 0);
 //    map_to_gui_pos(&gui_x2, &gui_y2, map_x, map_y);
 //
-//    NATIVE_TO_MAP_POS(&map_x, &map_y, 0, map.ysize - 1);
+//    NATIVE_TO_MAP_POS(&map_x, &map_y, 0, Map.map.ysize - 1);
 //    map_to_gui_pos(&gui_x3, &gui_y3, map_x, map_y);
 //
-//    NATIVE_TO_MAP_POS(&map_x, &map_y, map.xsize - 1, map.ysize - 1);
+//    NATIVE_TO_MAP_POS(&map_x, &map_y, Map.map.xsize - 1, Map.map.ysize - 1);
 //    map_to_gui_pos(&gui_x4, &gui_y4, map_x, map_y);
 //
 //    *xmin = Math.min(gui_x1, Math.min(gui_x2, gui_x3)) - mapview_canvas.width / 2;
@@ -668,7 +668,7 @@ public class Mapview_common{
 //    *ymax += (diff + 1) / 2;
 //  }
 //
-//  util.freelog(LOG_DEBUG, "x: %d<-%d.%d; y: %d<-%d.%d",
+//  util.freelog(Log.LOG_DEBUG, "x: %d<-%d.%d; y: %d<-%d.%d",
 //	  *xmin, *xsize, *xmax, *ymin, *ymax, *ysize);
 //}
 //
@@ -776,7 +776,7 @@ public class Mapview_common{
 //  /* For each direction: if the tile is too close to the mapview border
 //   * in that direction, and scrolling can get us any closer to the
 //   * border, then it's a border tile.  We can only really check the
-//   * scrolling when the mapview window lines up with the map. */
+//   * scrolling when the mapview window lines up with the Map.map. */
 //  if (canvas_x < border_x
 //      && (!same || scroll_x > xmin || topo_has_flag(TF_WRAPX))) {
 //    return false;
@@ -1385,7 +1385,7 @@ public class Mapview_common{
 //  int canvas_x, canvas_y;
 //
 //  if (tile_to_canvas_pos(&canvas_x, &canvas_y, ptile)) {
-//    util.freelog(LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
+//    util.freelog(Log.LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
 //	    TILE_XY(ptile), canvas_x, canvas_y);
 //    put_one_tile(mapview_canvas.store, ptile,
 //		 canvas_x, canvas_y, false);
@@ -1529,7 +1529,7 @@ public class Mapview_common{
 //  int canvas_x, canvas_y;
 //
 //  if (tile_to_canvas_pos(&canvas_x, &canvas_y, ptile)) {
-//    util.freelog(LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
+//    util.freelog(Log.LOG_DEBUG, "putting (%d,%d) at (%d,%d)",
 //	    TILE_XY(ptile), canvas_x, canvas_y);
 //
 //    put_one_tile_iso(mapview_canvas.store,
@@ -1570,7 +1570,7 @@ public class Mapview_common{
 //	  && width == mapview_canvas.store_width
 //	  && height == mapview_canvas.store_height);
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "update_map_canvas(pos=(%d,%d), size=(%d,%d))",
 //	  canvas_x, canvas_y, width, height);
 //
@@ -2175,7 +2175,7 @@ public class Mapview_common{
 //  queue_mapview_update in place of this update, and later (after all
 //  packets have been read) call unqueue_mapview_update.  The functions
 //  don't track which areas of the screen need updating, rather when the
-//  unqueue is done we just update the whole visible mapqueue, and redraw
+//  unqueue is done we just update the whole visible maPqueue, and redraw
 //  the city descriptions.
 //
 //  Using these functions, updates are done correctly, and are probably
@@ -2192,7 +2192,7 @@ public class Mapview_common{
 //**************************************************************************/
 //void unqueue_mapview_updates()
 //{
-//  util.freelog(LOG_DEBUG, "unqueue_mapview_update: needed_updates=%d",
+//  util.freelog(Log.LOG_DEBUG, "unqueue_mapview_update: needed_updates=%d",
 //	  needed_updates);
 //
 //  if (needed_updates & UPDATE_MAP_CANVAS_VISIBLE) {
@@ -2457,7 +2457,7 @@ public class Mapview_common{
 //    y[3] = y[2];
 //  }
 //
-//  util.freelog(LOG_DEBUG, "(%d,%d).(%d,%x).(%d,%d).(%d,%d)",
+//  util.freelog(Log.LOG_DEBUG, "(%d,%d).(%d,%x).(%d,%d).(%d,%d)",
 //	  x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3]);
 //}
 //
@@ -2466,9 +2466,9 @@ public class Mapview_common{
 //**************************************************************************/
 //void refresh_overview_canvas()
 //{
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    overview_update_tile(ptile);
-//  } whole_map_iterate_end;
+//  }
 //  redraw_overview();
 //}
 //

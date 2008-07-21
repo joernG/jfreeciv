@@ -39,7 +39,7 @@ public class Dialogs{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"
@@ -1018,7 +1018,7 @@ public class Dialogs{
 //
 //  if( (punit=find_unit_by_id(diplomat_id))
 //      && (pcity=find_city_by_id(diplomat_target_id))
-//      && !same_pos(punit.tile, pcity.tile)) {
+//      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1289,7 +1289,7 @@ public class Dialogs{
 //...
 //*****************************************************************/
 //void popup_pillage_dialog(unit punit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  Widget shell, form, dlabel, button, prev;
 //
@@ -1308,7 +1308,7 @@ public class Dialogs{
 //
 //  prev = dlabel;
 //  while (may_pillage) {
-//    enum tile_special_type what = get_preferred_pillage(may_pillage);
+//    enum int what = get_preferred_pillage(may_pillage);
 //
 //    button =
 //      XtVaCreateManagedWidget ("button", commandWidgetClass, form,
@@ -1457,7 +1457,7 @@ public class Dialogs{
 //
 //  for(i=0; i<n; i++) {
 //    unit punit = unit_list[i];
-//    unit_type punittemp=unit_type(punit);
+//    unit_type punittemp=punit.unit_type();
 //    city pcity;
 //    struct canvas store;
 //    
@@ -1954,7 +1954,7 @@ public class Dialogs{
 //	  races_toggles_to_nations[races_buttons_get_current()];
 //    }
 //
-//    util.freelog(LOG_DEBUG, "  [%d]: %d = %s", i, nation,
+//    util.freelog(Log.LOG_DEBUG, "  [%d]: %d = %s", i, nation,
 //	    Nation.get_nation_name(nation));
 //
 //    if (nation == selected_nation) {

@@ -24,7 +24,7 @@ public class Aidata{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "unit.h"
 //
@@ -133,7 +133,7 @@ public class Aidata{
 //  memset(&ai.stats.units, 0, sizeof(ai.stats.units));
 //
 //  for (unit punit : pplayer.units.data) {
-//    switch (unit_type(punit).move_type) {
+//    switch (punit.unit_type().move_type) {
 //    case LAND_MOVING:
 //      ai.stats.units.land++;
 //      break;
@@ -161,7 +161,7 @@ public class Aidata{
 ///**************************************************************************
 //  Make and cache lots of calculations needed for other functions.
 //
-//  Note: We use map.num_continents here rather than pplayer.num_continents
+//  Note: We use Map.map.num_continents here rather than pplayer.num_continents
 //  because we are omniscient and don't care about such trivialities as who
 //  can see what.
 //
@@ -179,8 +179,8 @@ public class Aidata{
 //
 //  /*** Threats ***/
 //
-//  ai.num_continents    = map.num_continents;
-//  ai.num_oceans        = map.num_oceans;
+//  ai.num_continents    = Map.map.num_continents;
+//  ai.num_oceans        = Map.map.num_oceans;
 //  ai.threats.continent = fc_calloc(ai.num_continents + 1, sizeof(boolean));
 //  ai.threats.invasions = false;
 //  ai.threats.air       = false;
@@ -216,7 +216,7 @@ public class Aidata{
 //
 //        /* The idea is that while our enemies don't have any offensive
 //         * seaborne units, we don't have to worry. Go on the offensive! */
-//        if (unit_type(punit).attack_strength > 1) {
+//        if (punit.unit_type().attack_strength > 1) {
 //	  if (is_ocean(map_get_terrain(punit.tile))) {
 //	    Continent_id continent = map_get_continent(punit.tile);
 //	    ai.threats.ocean[-continent] = true;
@@ -235,13 +235,13 @@ public class Aidata{
 //      /* The next idea is that if our enemies don't have any offensive
 //       * airborne units, we don't have to worry. Go on the offensive! */
 //      if ((is_air_unit(punit) || is_heli_unit(punit))
-//           && unit_type(punit).attack_strength > 1) {
+//           && punit.unit_type().attack_strength > 1) {
 //        ai.threats.air = true;
 //      }
 //
 //      /* If our enemy builds missiles, worry about missile defence. */
 //      if (unit_flag(punit, F_MISSILE)
-//          && unit_type(punit).attack_strength > 1) {
+//          && punit.unit_type().attack_strength > 1) {
 //        ai.threats.missile = true;
 //      }
 //
@@ -269,7 +269,7 @@ public class Aidata{
 //  ai.explore.sea_done = true;
 //  ai.explore.continent = fc_calloc(ai.num_continents + 1, sizeof(boolean));
 //  ai.explore.ocean = fc_calloc(ai.num_oceans + 1, sizeof(boolean));
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    Continent_id continent = map_get_continent(ptile);
 //
 //    if (is_ocean(ptile.terrain)) {
@@ -298,7 +298,7 @@ public class Aidata{
 //      ai.explore.land_done = false;
 //      ai.explore.continent[continent] = true;
 //    }
-//  } whole_map_iterate_end;
+//  }
 //
 //  /*** Statistics ***/
 //
@@ -467,8 +467,8 @@ public class Aidata{
 //{
 //  ai_data ai = &aidata[pplayer.player_no];
 //
-//  if (ai.num_continents != map.num_continents
-//      || ai.num_oceans != map.num_oceans) {
+//  if (ai.num_continents != Map.map.num_continents
+//      || ai.num_oceans != Map.map.num_oceans) {
 //    /* we discovered more continents, recalculate! */
 //    ai_data_turn_done(pplayer);
 //    ai_data_turn_init(pplayer);

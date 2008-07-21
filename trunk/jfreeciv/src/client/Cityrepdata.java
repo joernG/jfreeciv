@@ -25,7 +25,7 @@ public class Cityrepdata{
 //#include "city.h"
 //#include "fcintl.h"
 //#include "game.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "support.h"
 //
 //#include "cma_fec.h"

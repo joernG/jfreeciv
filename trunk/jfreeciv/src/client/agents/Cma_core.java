@@ -62,10 +62,10 @@ public class Cma_core{
 // defines, structs, globals, forward declarations
 //*****************************************************************************/
 //
-//public static final int APPLY_RESULT_LOG_LEVEL = LOG_DEBUG;
-//public static final int HANDLE_CITY_LOG_LEVEL = LOG_DEBUG;
-//public static final int HANDLE_CITY_LOG_LEVEL2 = LOG_DEBUG;
-//public static final int RESULTS_ARE_EQUAL_LOG_LEVEL = LOG_DEBUG;
+//public static final int APPLY_RESULT_LOG_LEVEL = Log.LOG_DEBUG;
+//public static final int HANDLE_CITY_LOG_LEVEL = Log.LOG_DEBUG;
+//public static final int HANDLE_CITY_LOG_LEVEL2 = Log.LOG_DEBUG;
+//public static final int RESULTS_ARE_EQUAL_LOG_LEVEL = Log.LOG_DEBUG;
 //
 //public static final int SHOW_TIME_STATS = false;
 //public static final int SHOW_APPLY_RESULT_ON_SERVER_ERRORS = false;
@@ -481,9 +481,9 @@ public class Cma_core{
 //  struct agent self;
 //  timer timer = stats.wall_timer;
 //
-//  util.freelog(LOG_DEBUG, "sizeof(struct cm_result)=%d",
+//  util.freelog(Log.LOG_DEBUG, "sizeof(struct cm_result)=%d",
 //	  (unsigned int) sizeof(struct cm_result));
-//  util.freelog(LOG_DEBUG, "sizeof(struct cm_parameter)=%d",
+//  util.freelog(Log.LOG_DEBUG, "sizeof(struct cm_parameter)=%d",
 //	  (unsigned int) sizeof(struct cm_parameter));
 //
 //  /* reset cache counters */
@@ -519,7 +519,7 @@ public class Cma_core{
 //void cma_put_city_under_agent(city pcity,
 //			      final cm_parameter final parameter)
 //{
-//  util.freelog(LOG_DEBUG, "cma_put_city_under_agent(city='%s'(%d))",
+//  util.freelog(Log.LOG_DEBUG, "cma_put_city_under_agent(city='%s'(%d))",
 //	  pcity.name, pcity.id);
 //
 //  assert(city_owner(pcity) == game.player_ptr);
@@ -528,7 +528,7 @@ public class Cma_core{
 //
 //  cause_a_city_changed_for_agent("CMA", pcity);
 //
-//  util.freelog(LOG_DEBUG, "cma_put_city_under_agent: return");
+//  util.freelog(Log.LOG_DEBUG, "cma_put_city_under_agent: return");
 //}
 //
 ///****************************************************************************

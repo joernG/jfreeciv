@@ -27,7 +27,7 @@ public class Diplodlg{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"

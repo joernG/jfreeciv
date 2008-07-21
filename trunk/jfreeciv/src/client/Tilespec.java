@@ -36,7 +36,7 @@ public class Tilespec{
 //#include "government.h"
 //#include "hash.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "nation.h"
 //#include "player.h"
@@ -534,7 +534,7 @@ public class Tilespec{
 //
 //    sprintf(full_name, "%s.%s", gfx_filename, gfx_fileext);
 //    if ((real_full_name = datafilename(full_name))) {
-//      util.freelog(LOG_DEBUG, "trying to load gfx file %s", real_full_name);
+//      util.freelog(Log.LOG_DEBUG, "trying to load gfx file %s", real_full_name);
 //      s = load_gfxfile(real_full_name);
 //      if (s) {
 //	return s;
@@ -878,11 +878,11 @@ public class Tilespec{
 //
 //  c = secfile_lookup_str(file, "tilespec.main_intro_file");
 //  main_intro_filename = tilespec_gfx_filename(c);
-//  util.freelog(LOG_DEBUG, "intro file %s", main_intro_filename);
+//  util.freelog(Log.LOG_DEBUG, "intro file %s", main_intro_filename);
 //  
 //  c = secfile_lookup_str(file, "tilespec.minimap_intro_file");
 //  minimap_intro_filename = tilespec_gfx_filename(c);
-//  util.freelog(LOG_DEBUG, "radar file %s", minimap_intro_filename);
+//  util.freelog(Log.LOG_DEBUG, "radar file %s", minimap_intro_filename);
 //
 //  /* Terrain layer info. */
 //  for (i = 0; i < MAX_NUM_LAYERS; i++) {
@@ -1052,7 +1052,7 @@ public class Tilespec{
 //  for (i = 0; i < num_spec_files; i++) {
 //    specfile sf = fc_malloc(sizeof(*sf));
 //
-//    util.freelog(LOG_DEBUG, "spec file %s", spec_filenames[i]);
+//    util.freelog(Log.LOG_DEBUG, "spec file %s", spec_filenames[i]);
 //    
 //    sf.big_sprite = null;
 //    sf.file_name = mystrdup(datafilename_required(spec_filenames[i]));
@@ -1867,7 +1867,7 @@ public class Tilespec{
 //***********************************************************************/
 //static Sprite get_unit_nation_flag_sprite(unit punit)
 //{
-//  return get_nation_by_plr(unit_owner(punit)).flag_sprite;
+//  return get_nation_by_plr(punit.unit_owner()).flag_sprite;
 //}
 //
 ///**************************************************************************
@@ -1948,9 +1948,9 @@ public class Tilespec{
 //**************************************************************************/
 //static void build_tile_data(tile ptile,
 //			    Terrain_type_id *ttype,
-//			    enum tile_special_type *tspecial,
+//			    enum int *tspecial,
 //			    Terrain_type_id *ttype_near,
-//			    enum tile_special_type *tspecial_near)
+//			    enum int *tspecial_near)
 //{
 //  enum direction8 dir;
 //
@@ -1966,7 +1966,7 @@ public class Tilespec{
 //      ttype_near[dir] = map_get_terrain(tile1);
 //    } else {
 //      /* We draw the edges of the (known) map as if the same terrain just
-//       * continued off the edge of the map. */
+//       * continued off the edge of the Map.map. */
 //      tspecial_near[dir] = S_NO_SPECIAL;
 //      ttype_near[dir] = *ttype;
 //    }
@@ -1988,11 +1988,11 @@ public class Tilespec{
 //      ADD_SPRITE(get_unit_nation_flag_sprite(punit),
 //		 DRAW_FULL, true, flag_offset_x, flag_offset_y);
 //    } else {
-//      ADD_BG(player_color(unit_owner(punit)));
+//      ADD_BG(player_color(punit.unit_owner()));
 //    }
 //  }
 //
-//  ADD_SPRITE_FULL(unit_type(punit).sprite);
+//  ADD_SPRITE_FULL(punit.unit_type().sprite);
 //
 //  if (sprites.unit.loaded && punit.transported_by != -1) {
 //    ADD_SPRITE_FULL(sprites.unit.loaded);
@@ -2070,14 +2070,14 @@ public class Tilespec{
 //  }
 //
 //  if (sprites.unit.lowfuel
-//      && unit_type(punit).fuel > 0
+//      && punit.unit_type().fuel > 0
 //      && punit.fuel == 1
-//      && punit.moves_left <= 2 * SINGLE_MOVE) {
+//      && punit.moves_left <= 2 * Unit_H.SINGLE_MOVE) {
 //    /* Show a low-fuel graphic if the plane has 2 or fewer moves left. */
 //    ADD_SPRITE_FULL(sprites.unit.lowfuel);
 //  }
 //  if (sprites.unit.tired
-//      && punit.moves_left < SINGLE_MOVE) {
+//      && punit.moves_left < Unit_H.SINGLE_MOVE) {
 //    /* Show a "tired" graphic if the unit has fewer than one move
 //     * remaining. */
 //    ADD_SPRITE_FULL(sprites.unit.tired);
@@ -2091,7 +2091,7 @@ public class Tilespec{
 //    ADD_SPRITE_FULL(sprites.unit.vet_lev[punit.veteran]);
 //  }
 //
-//  ihp = ((NUM_TILES_HP_BAR-1)*punit.hp) / unit_type(punit).hp;
+//  ihp = ((NUM_TILES_HP_BAR-1)*punit.hp) / punit.unit_type().hp;
 //  ihp = CLIP(0, ihp, NUM_TILES_HP_BAR-1);
 //  ADD_SPRITE_FULL(sprites.unit.hp_bar[ihp]);
 //
@@ -2182,8 +2182,8 @@ public class Tilespec{
 //  Fill all road and rail sprites into the sprite array.
 //**************************************************************************/
 //static int fill_road_rail_sprite_array(drawn_sprite sprs,
-//				       enum tile_special_type tspecial,
-//				       enum tile_special_type *tspecial_near,
+//				       enum int tspecial,
+//				       enum int *tspecial_near,
 //				       city pcity)
 //{
 //  drawn_sprite saved_sprs = sprs;
@@ -2367,7 +2367,7 @@ public class Tilespec{
 //  either farmland or irrigation (the two are considered interchangable for
 //  this).
 //**************************************************************************/
-//static int get_irrigation_index(enum tile_special_type *tspecial_near)
+//static int get_irrigation_index(enum int *tspecial_near)
 //{
 //  int tileno = 0, i;
 //
@@ -2387,8 +2387,8 @@ public class Tilespec{
 //  Fill in the farmland/irrigation sprite for the tile.
 //**************************************************************************/
 //static int fill_irrigation_sprite_array(drawn_sprite sprs,
-//					enum tile_special_type tspecial,
-//					enum tile_special_type *tspecial_near,
+//					enum int tspecial,
+//					enum int *tspecial_near,
 //					city pcity)
 //{
 //  drawn_sprite saved_sprs = sprs;
@@ -2434,7 +2434,7 @@ public class Tilespec{
 //    /*
 //     * We want to mark unknown tiles so that an unreal tile will be
 //     * given the same marking as our current tile - that way we won't
-//     * get the "unknown" dither along the edge of the map.
+//     * get the "unknown" dither along the edge of the Map.map.
 //     */
 //    for (dir = 0; dir < 4; dir++) {
 //      tile tile1 = mapstep(ptile, DIR4_TO_DIR8[dir]);
@@ -2488,7 +2488,7 @@ public class Tilespec{
 //public static final int LARGE_PRIME = 10007;
 //public static final int SMALL_PRIME = 1009;
 //      assert(count < SMALL_PRIME);
-//      assert((int)(LARGE_PRIME * MAX_MAP_INDEX) > 0);
+//      assert((int)(LARGE_PRIME * Map_H.MAX_MAP_INDEX) > 0);
 //      count = ((ptile.index
 //		* LARGE_PRIME) % SMALL_PRIME) % count;
 //      ADD_SPRITE(draw.layer[l].base.p[count],
@@ -2611,7 +2611,7 @@ public class Tilespec{
 //	 * are unknown.  We want to mark unknown tiles so that an unreal
 //	 * tile will be given the same marking as our current tile - that
 //	 * way we won't get the "unknown" dither along the edge of the
-//	 * map. */
+//	 * Map.map. */
 //	tileno = 0;
 //	for (i = 0; i < num_cardinal_tileset_dirs; i++) {
 //	  if (UNKNOWN(cardinal_tileset_dirs[i])) {
@@ -2653,7 +2653,7 @@ public class Tilespec{
 //		      boolean citymode)
 //{
 //  Terrain_type_id ttype, ttype_near[8];
-//  enum tile_special_type tspecial = S_NO_SPECIAL, tspecial_near[8];
+//  enum int tspecial = S_NO_SPECIAL, tspecial_near[8];
 //  int tileno, dir;
 //  unit pfocus = get_unit_in_focus();
 //  drawn_sprite save_sprs = sprs;
@@ -2670,7 +2670,7 @@ public class Tilespec{
 //  /* Set up background color. */
 //  if (solid_color_behind_units) {
 //    if (do_draw_unit) {
-//      ADD_BG(player_color(unit_owner(punit)));
+//      ADD_BG(player_color(punit.unit_owner()));
 //    } else if (pcity && draw_cities) {
 //      ADD_BG(player_color(city_owner(pcity)));
 //    }
@@ -2767,7 +2767,7 @@ public class Tilespec{
 //  }
 //
 //  if (ptile) {
-//    if (draw_fortress_airbase && contains_special(tspecial, S_AIRBASE)) {
+//    if (draw_fortress_airbase && contains_special(tspecial, Terrain_H.S_AIRBASE)) {
 //      ADD_SPRITE_FULL(sprites.tx.airbase);
 //    }
 //
@@ -2848,7 +2848,7 @@ public class Tilespec{
 //      }
 //      city_styles[style].tresh[city_styles[style].tiles_num] = j;
 //      city_styles[style].tiles_num++;
-//      util.freelog(LOG_DEBUG, "Found tile %s_%d", graphics, j);
+//      util.freelog(Log.LOG_DEBUG, "Found tile %s_%d", graphics, j);
 //    }
 //  }
 //
@@ -3027,7 +3027,7 @@ public class Tilespec{
 //
 //  if (punit != pfocus
 //      || !focus_unit_hidden
-//      || !same_pos(punit.tile, pfocus.tile))
+//      || !Map.same_pos(punit.tile, pfocus.tile))
 //    return punit;
 //  else
 //    return null;
@@ -3054,7 +3054,7 @@ public class Tilespec{
 //{
 //  int i, entries = hash_num_entries(sprite_hash);
 //
-//  util.freelog(LOG_DEBUG, "tilespec_free_tiles");
+//  util.freelog(Log.LOG_DEBUG, "tilespec_free_tiles");
 //
 //  unload_all_sprites();
 //
@@ -3124,7 +3124,7 @@ public class Tilespec{
 //  /* Lookup information about where the sprite is found. */
 //  small_sprite ss = hash_lookup_data(sprite_hash, tag_name);
 //
-//  util.freelog(LOG_DEBUG, "load_sprite(tag='%s')", tag_name);
+//  util.freelog(Log.LOG_DEBUG, "load_sprite(tag='%s')", tag_name);
 //  if (!ss) {
 //    return null;
 //  }
@@ -3182,7 +3182,7 @@ public class Tilespec{
 //  if (ss.ref_count == 0) {
 //    /* Nobody's using the sprite anymore, so we should free it.  We know
 //     * where to find it if we need it again. */
-//    util.freelog(LOG_DEBUG, "freeing sprite '%s'", tag_name);
+//    util.freelog(Log.LOG_DEBUG, "freeing sprite '%s'", tag_name);
 //    free_sprite(ss.sprite);
 //    ss.sprite = null;
 //  }

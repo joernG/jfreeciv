@@ -34,7 +34,7 @@ public class Mapview{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "government.h"		/* government_graphic() */
-//#include "map.h"
+//#include "Map.map.h"
 //#include "player.h"
 //#include "rand.h"
 //#include "support.h"		/* myusleep() */
@@ -245,7 +245,7 @@ public class Mapview{
 //    int units = 0;
 //    pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
 //
-//    settextf(main_unitname_text, "%s%s", unit_type(punit).name,
+//    settextf(main_unitname_text, "%s%s", punit.unit_type().name,
 //	     (punit.veteran) ? " (veteran)" : "");
 //    settext(main_moves_text, (hover_unit == punit.id) ? "Select destination" : unit_activity_text(punit));
 //    settext(main_terrain_text, map_get_tile_info_text(punit.tile));
@@ -445,7 +445,7 @@ public class Mapview{
 //}
 //
 ///**************************************************************************
-// Update display of descriptions associated with cities on the main map.
+// Update display of descriptions associated with cities on the main Map.map.
 //**************************************************************************/
 //void update_city_descriptions()
 //{

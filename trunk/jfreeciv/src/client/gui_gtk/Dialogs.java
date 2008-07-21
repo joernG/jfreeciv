@@ -31,7 +31,7 @@ public class Dialogs{
 //#include "game.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "player.h"
@@ -162,7 +162,7 @@ public class Dialogs{
 //
 //struct pillage_data {
 //  int unit_id;
-//  enum tile_special_type what;
+//  enum int what;
 //};
 //
 ///****************************************************************
@@ -979,7 +979,7 @@ public class Dialogs{
 //  
 //  if( (punit=find_unit_by_id(diplomat_id))
 //      && (pcity=find_city_by_id(diplomat_target_id))
-//      && !same_pos(punit.tile, pcity.tile)) {
+//      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1227,16 +1227,16 @@ public class Dialogs{
 //...
 //*****************************************************************/
 //void popup_pillage_dialog(unit punit,
-//			  enum tile_special_type may_pillage)
+//			  enum int may_pillage)
 //{
 //  /* +1 for cancel button */
 //  int i, num = 1;
-//  enum tile_special_type tmp = may_pillage;
+//  enum int tmp = may_pillage;
 //  button_descr buttons;
 //  pillage_data datas;
 //
 //  while (tmp != S_NO_SPECIAL) {
-//    enum tile_special_type what = get_preferred_pillage(tmp);
+//    enum int what = get_preferred_pillage(tmp);
 //
 //    tmp &= (~(what | map_get_infrastructure_prerequisite(what)));
 //    num++;
@@ -1245,7 +1245,7 @@ public class Dialogs{
 //  datas = fc_malloc(sizeof(struct pillage_data) * num);
 //
 //  for (i = 0; i < num - 1; i++) {
-//    enum tile_special_type what = get_preferred_pillage(may_pillage);
+//    enum int what = get_preferred_pillage(may_pillage);
 //
 //    datas[i].unit_id = punit.id;
 //    datas[i].what = what;
@@ -1557,11 +1557,11 @@ public class Dialogs{
 //
 //  for(i=0; i<n; i++) {
 //    unit punit = unit_list[i];
-//    unit_type punittemp=unit_type(punit);
+//    unit_type punittemp=punit.unit_type();
 //    city pcity;
 //
 //    /* The "Ready all" button is activated if any units are owned by us. */
-//    can_ready = can_ready || (unit_owner(punit) == game.player_ptr);
+//    can_ready = can_ready || (punit.unit_owner() == game.player_ptr);
 //
 //    hbox = gtk_hbox_new(false,10);
 //    gtk_table_attach_defaults(GTK_TABLE(table), hbox, 
@@ -1862,7 +1862,7 @@ public class Dialogs{
 //    GList *race_names = null;
 //    GSList *group = null;
 //
-//    util.freelog(LOG_DEBUG, "  %s[%d] has %d nations",
+//    util.freelog(Log.LOG_DEBUG, "  %s[%d] has %d nations",
 //	    skip_intl_qualifier_prefix(class_names[class_id]), class_id,
 //	    nations_in_class);
 //    sorted_races_list[class_id] =

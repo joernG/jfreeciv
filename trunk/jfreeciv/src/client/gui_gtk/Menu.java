@@ -28,7 +28,7 @@ public class Menu{
 //#include "fcintl.h"
 //#include "government.h"
 //#include "log.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "support.h"
 //#include "unit.h"
@@ -94,7 +94,7 @@ public class Menu{
 //  MENU_VIEW_SHOW_ROADS_RAILS,
 //  MENU_VIEW_SHOW_IRRIGATION,
 //  MENU_VIEW_SHOW_MINES,
-//  MENU_VIEW_SHOW_FORTRESS_AIRBASE,
+//  MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE,
 //  MENU_VIEW_SHOW_SPECIALS,
 //  MENU_VIEW_SHOW_POLLUTION,
 //  MENU_VIEW_SHOW_CITIES,
@@ -280,7 +280,7 @@ public class Menu{
 //    if (draw_mines ^ GTK_CHECK_MENU_ITEM(widget).active)
 //      key_mines_toggle();
 //    break;
-//  case MENU_VIEW_SHOW_FORTRESS_AIRBASE:
+//  case MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE:
 //    if (draw_fortress_airbase ^ GTK_CHECK_MENU_ITEM(widget).active)
 //      key_fortress_airbase_toggle();
 //    break;
@@ -669,7 +669,7 @@ public class Menu{
 //  { "/" N"_View" "/" N"Improvements" "/" N"Mines",	null,
 //	view_menu_callback,	MENU_VIEW_SHOW_MINES,			"<CheckItem>"	},
 //  { "/" N"_View" "/" N"Improvements" "/" N"Fortress & Airbase", null,
-//	view_menu_callback,	MENU_VIEW_SHOW_FORTRESS_AIRBASE,	"<CheckItem>"	},
+//	view_menu_callback,	MENU_VIEW_SHOW_FORTRESTerrain_H.S_AIRBASE,	"<CheckItem>"	},
 //  { "/" N"_View" "/" N"Specials",			null,
 //	view_menu_callback,	MENU_VIEW_SHOW_SPECIALS,		"<CheckItem>"	},
 //  { "/" N"_View" "/" N"Pollution & Fallout",	null,
@@ -861,12 +861,12 @@ public class Menu{
 //  strcpy(in.str, path);
 //  astr_minsize(&out, 1);
 //  out.str[0] = '\0';
-//  util.freelog(LOG_DEBUG, "trans: %s", in.str);
+//  util.freelog(Log.LOG_DEBUG, "trans: %s", in.str);
 //
 //  s = in.str;
 //  while ((tok=strtok(s, "/"))) {
 //    len = tok.length();
-//    util.freelog(LOG_DEBUG, "tok \"%s\", len %d", tok, len);
+//    util.freelog(Log.LOG_DEBUG, "tok \"%s\", len %d", tok, len);
 //    if (len && tok[0] == '<' && tok[len-1] == '>') {
 //      t = tok;
 //    } else {
@@ -879,7 +879,7 @@ public class Menu{
 //    }
 //    astr_minsize(&out, out.n + len);
 //    strcat(out.str, t);
-//    util.freelog(LOG_DEBUG, "t \"%s\", len %d, out \"%s\"", t, len, out.str);
+//    util.freelog(Log.LOG_DEBUG, "t \"%s\", len %d, out \"%s\"", t, len, out.str);
 //    s = null;
 //  }
 //  res = out.str;

@@ -22,7 +22,7 @@ public class Unittype_P {
 
 	// #include "unittype.h"
 
-	static unittype unit_types[] = new unittype[U_LAST];
+	public static unittype unit_types[] = new unittype[U_LAST];
 	/*
 	 * the unit_types array is now setup in: server/ruleset.c (for the server)
 	 * client/packhand.c (for the client)
@@ -58,22 +58,6 @@ public class Unittype_P {
 //		else
 //			return unit_types[id].tech_requirement != A_LAST;
 //	}
-
-	/***************************************************************************
-	 * ...
-	 **************************************************************************/
-	static unittype get_unit_type(int id)
-	{
-		assert(id >= 0 && id < U_LAST && id < game.num_unit_types);
-		return unit_types[id];
-	}
-
-	/***************************************************************************
-	 * ...
-	 **************************************************************************/
-	public static unittype unit_type(unit punit) {
-		return get_unit_type(punit.type);
-	}
 
 //	/***************************************************************************
 //	 * ...
@@ -215,7 +199,7 @@ public class Unittype_P {
 		unittype ptype;
 //		static char buffer[256];
 		String buffer;
-		ptype =get_unit_type(id);
+		ptype = unit.get_unit_type(id);
 		if (ptype.fuel > 0) {
 			buffer = my_snprintf("%s [%d/%d/%d(%d)]", ptype.name, ptype.attack_strength,
 					ptype.defense_strength,

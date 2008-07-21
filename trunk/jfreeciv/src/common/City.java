@@ -3,6 +3,7 @@ package common;
 import static utility.shared.Shared_H.*;
 import static common.Game.*;
 import common.city.city;
+import common.map.tile;
 import common.player.player;
 
 public class City{
@@ -13,7 +14,7 @@ public class City{
 //
 //#include "game.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
 //
@@ -49,7 +50,7 @@ public class City{
 //   *  32223
 //   *   333
 //   *
-//   * So CITY_MAP_RADIUS==2 corresponds to the "traditional" city map.
+//   * So CITY_MAP_RADIUS==2 corresponds to the "traditional" city Map.map.
 //   *
 //   * FIXME: this won't work for hexagonal tiles.
 //   */
@@ -58,7 +59,7 @@ public class City{
 //
 ///**************************************************************************
 //  Finds the city map coordinate for a given map position and a city
-//  center. Returns whether the map position is inside of the city map.
+//  center. Returns whether the map position is inside of the city Map.map.
 //**************************************************************************/
 //static boolean base_map_to_city_map(int *city_map_x, int *city_map_y,
 //				 final tile city_tile,
@@ -72,7 +73,7 @@ public class City{
 //
 ///**************************************************************************
 //Finds the city map coordinate for a given map position and a
-//city. Returns whether the map position is inside of the city map.
+//city. Returns whether the map position is inside of the city Map.map.
 //**************************************************************************/
 //boolean map_to_city_map(int *city_map_x, int *city_map_y,
 //		     final city final pcity,
@@ -181,7 +182,7 @@ public class City{
 //
 //#ifdef DEBUG
 //  for (i = 0; i < CITY_TILES; i++) {
-//    util.freelog(LOG_DEBUG, "%2d : (%2d,%2d) : %d", i,
+//    util.freelog(Log.LOG_DEBUG, "%2d : (%2d,%2d) : %d", i,
 //	    array[i].dx + CITY_MAP_RADIUS, array[i].dy + CITY_MAP_RADIUS,
 //	    array[i].dist);
 //  }
@@ -193,7 +194,7 @@ public class City{
 //}
 //
 ///**************************************************************************
-//  Set the worker on the citymap.  Also sets the worked field in the map.
+//  Set the worker on the citymap.  Also sets the worked field in the Map.map.
 //**************************************************************************/
 //void set_worker_city(city pcity, int city_x, int city_y,
 //		     enum city_tile_type type)
@@ -303,7 +304,7 @@ public class City{
 //{
 //  impr_type impr;
 //  Terrain_type_id *terr_gate;
-//  enum tile_special_type *spec_gate;
+//  enum int *spec_gate;
 //
 //  impr = get_improvement_type(id);
 //  spec_gate = impr.spec_gate;
@@ -520,7 +521,7 @@ public class City{
 //				 final city pcity,
 //				 int city_x, int city_y, boolean is_celebrating)
 //{
-//  enum tile_special_type spec_t = map_get_special(ptile);
+//  enum int spec_t = map_get_special(ptile);
 //  Terrain_type_id tile_t = ptile.terrain;
 //  int s;
 //
@@ -625,7 +626,7 @@ public class City{
 //			       final city pcity,
 //			       int city_x, int city_y, boolean is_celebrating)
 //{
-//  enum tile_special_type spec_t = map_get_special(ptile);
+//  enum int spec_t = map_get_special(ptile);
 //  Terrain_type_id tile_t = ptile.terrain;
 //  int t;
 //
@@ -734,7 +735,7 @@ public class City{
 //			      final city pcity,
 //			      int city_x, int city_y, boolean is_celebrating)
 //{
-//  final enum tile_special_type spec_t = map_get_special(ptile);
+//  final enum int spec_t = map_get_special(ptile);
 //  final Terrain_type_id tile_t = ptile.terrain;
 //  tile_type type = get_tile_type(tile_t);
 //  struct tile tile;
@@ -857,7 +858,7 @@ public class City{
 //  }
 //
 //  if (punit) {
-//    enum unit_move_type move_type = unit_type(punit).move_type;
+//    enum unit_move_type move_type = punit.unit_type().move_type;
 //    Terrain_type_id t = ptile.terrain;
 //
 //    /* We allow land units to build land cities and sea units to build
@@ -1425,22 +1426,20 @@ public class City{
 //  else
 //    return null;
 //}
+
+	/***************************************************************************
+	 * is there an friendly city on this tile?
+	 **************************************************************************/
+	public static city is_allied_city_tile(final tile ptile, player pplayer) {
+//		city pcity = ptile.city;
 //
-///**************************************************************************
-// is there an friendly city on this tile?
-//**************************************************************************/
-//city is_allied_city_tile(final tile ptile,
-//				 player pplayer)
-//{
-//  city pcity = ptile.city;
-//
-//  if (pcity && pplayers_allied(pplayer, city_owner(pcity)))
-//    return pcity;
-//  else
-//    return null;
-//}
-//
-///**************************************************************************
+//		if (pcity && pplayers_allied(pplayer, city_owner(pcity)))
+//			return pcity;
+//		else
+			return null;
+	}
+
+// /**************************************************************************
 // is there an enemy city on this tile?
 //**************************************************************************/
 //city is_non_attack_city_tile(final tile ptile,
@@ -1473,7 +1472,7 @@ public class City{
 //**************************************************************************/
 //boolean is_unit_near_a_friendly_city(unit punit)
 //{
-//  return is_friendly_city_near(unit_owner(punit), punit.tile);
+//  return is_friendly_city_near(punit.unit_owner(), punit.tile);
 //}
 //
 ///**************************************************************************
@@ -1498,7 +1497,7 @@ public class City{
 //				    boolean may_be_on_center)
 //{
 //  map_city_radius_iterate(ptile, ptile1) {
-//    if (may_be_on_center || !same_pos(ptile, ptile1)) {
+//    if (may_be_on_center || !Map.same_pos(ptile, ptile1)) {
 //      if (ptile1.city) {
 //	return true;
 //      }
@@ -2030,7 +2029,7 @@ public class City{
 //  /* loop over units, subtracting appropriate amounts of food, shields,
 //   * gold etc -- SKi */
 //  for (unit this_unit : pcity.units_supported.data) {
-//    unit_type ut = unit_type(this_unit);
+//    unit_type ut = this_unit.unit_type();
 //    int shield_cost = utype_shield_cost(ut, g);
 //    int happy_cost = utype_happy_cost(ut, g);
 //    int food_cost = utype_food_cost(ut, g);
@@ -2102,7 +2101,7 @@ public class City{
 //            || this_unit.upkeep != old_upkeep
 //            || this_unit.upkeep_food != old_upkeep_food
 //            || this_unit.upkeep_gold != old_upkeep_gold)) {
-//      send_unit_info(unit_owner(this_unit), this_unit);
+//      send_unit_info(this_unit.unit_owner(), this_unit);
 //    }
 //  }
 //  }
@@ -2318,7 +2317,7 @@ public class City{
 //{
 //  player pplayer = city_owner(pcity);
 //  
-//  util.freelog(LOG_DEBUG,"Improvement %s removed from city %s",
+//  util.freelog(Log.LOG_DEBUG,"Improvement %s removed from city %s",
 //          improvement_types[impr].name, pcity.name);
 //  
 //  mark_improvement(pcity, impr, I_NONE);

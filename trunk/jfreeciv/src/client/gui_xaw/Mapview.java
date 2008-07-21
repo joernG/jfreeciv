@@ -32,7 +32,7 @@ public class Mapview{
 //#include "fcintl.h"
 //#include "game.h"
 //#include "government.h"		/* government_graphic() */
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "player.h"
 //#include "rand.h"
@@ -652,7 +652,7 @@ public class Mapview{
 //}
 //
 ///**************************************************************************
-//Update display of descriptions associated with cities on the main map.
+//Update display of descriptions associated with cities on the main Map.map.
 //**************************************************************************/
 //void update_city_descriptions()
 //{

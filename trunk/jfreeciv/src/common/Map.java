@@ -18,7 +18,7 @@ public class Map{
 //#include "support.h"
 //#include "unit.h"
 //
-//#include "map.h"
+//#include "Map.map.h"
 
 /* the very map */
 	public static civ_map map;
@@ -45,9 +45,9 @@ public class Map{
 //final int DIR_DY[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
 //
 ///* Names of specials.
-// * (These must correspond to enum tile_special_type in terrain.h.)
+// * (These must correspond to enum int in terrain.h.)
 // */
-//static final String tile_special_type_names[] =
+//static final String int_names[] =
 //{
 //  N"Special1",
 //  N"Road",
@@ -67,11 +67,11 @@ public class Map{
 ///****************************************************************************
 //  Return a bitfield of the specials on the tile that are infrastructure.
 //****************************************************************************/
-//enum tile_special_type get_tile_infrastructure_set(final tile ptile)
+//enum int get_tile_infrastructure_set(final tile ptile)
 //{
 //  return (ptile.special
 //	  & (S_ROAD | S_RAILROAD | S_IRRIGATION | S_FARMLAND | S_MINE
-//	     | S_FORTRESS | S_AIRBASE));
+//	     | S_FORTRESS | Terrain_H.S_AIRBASE));
 //}
 //
 ///***************************************************************
@@ -149,7 +149,7 @@ public class Map{
 //***************************************************************/
 //boolean map_is_empty()
 //{
-//  return !map.tiles;
+//  return !Map.map.tiles;
 //}
 //
 ///***************************************************************
@@ -157,34 +157,34 @@ public class Map{
 //***************************************************************/
 //void map_init()
 //{
-//  map.topology_id = MAP_DEFAULT_TOPO;
-//  map.size = MAP_DEFAULT_SIZE;
+//  Map.map.topology_id = MAP_DEFAULT_TOPO;
+//  Map.map.size = MAP_DEFAULT_SIZE;
 //
 //  /* The [xy]size values are set in map_init_topology.  It is initialized
 //   * to a non-zero value because some places erronously use these values
 //   * before they're initialized. */
-//  map.xsize = MAP_MIN_LINEAR_SIZE;  
-//  map.ysize = MAP_MIN_LINEAR_SIZE;
+//  Map.map.xsize = MAP_MIN_LINEAR_SIZE;  
+//  Map.map.ysize = MAP_MIN_LINEAR_SIZE;
 //
-//  map.seed = MAP_DEFAULT_SEED;
-//  map.riches                = MAP_DEFAULT_RICHES;
-//  map.huts                  = MAP_DEFAULT_HUTS;
-//  map.landpercent           = MAP_DEFAULT_LANDMASS;
-//  map.wetness               = MAP_DEFAULT_WETNESS;
-//  map.steepness             = MAP_DEFAULT_STEEPNESS;
-//  map.generator             = MAP_DEFAULT_GENERATOR;
-//  map.startpos              = MAP_DEFAULT_STARTPOS;
-//  map.tinyisles             = MAP_DEFAULT_TINYISLES;
-//  map.separatepoles         = MAP_DEFAULT_SEPARATE_POLES;
-//  map.alltemperate          = MAP_DEFAULT_ALLTEMPERATE;
-//  map.temperature           = MAP_DEFAULT_TEMPERATURE;
-//  map.tiles                 = null;
-//  map.num_continents        = 0;
-//  map.num_oceans            = 0;
-//  map.num_start_positions   = 0;
-//  map.have_specials         = false;
-//  map.have_rivers_overlay   = false;
-//  map.have_huts             = false;
+//  Map.map.seed = MAP_DEFAULT_SEED;
+//  Map.map.riches                = MAP_DEFAULT_RICHES;
+//  Map.map.huts                  = MAP_DEFAULT_HUTS;
+//  Map.map.landpercent           = MAP_DEFAULT_LANDMASS;
+//  Map.map.wetness               = MAP_DEFAULT_WETNESS;
+//  Map.map.steepness             = MAP_DEFAULT_STEEPNESS;
+//  Map.map.generator             = MAP_DEFAULT_GENERATOR;
+//  Map.map.startpos              = MAP_DEFAULT_STARTPOS;
+//  Map.map.tinyisles             = MAP_DEFAULT_TINYISLES;
+//  Map.map.separatepoles         = MAP_DEFAULT_SEPARATE_POLES;
+//  Map.map.alltemperate          = MAP_DEFAULT_ALLTEMPERATE;
+//  Map.map.temperature           = MAP_DEFAULT_TEMPERATURE;
+//  Map.map.tiles                 = null;
+//  Map.map.num_continents        = 0;
+//  Map.map.num_oceans            = 0;
+//  Map.map.num_start_positions   = 0;
+//  Map.map.have_specials         = false;
+//  Map.map.have_rivers_overlay   = false;
+//  Map.map.have_huts             = false;
 //}
 //
 ///**************************************************************************
@@ -193,7 +193,7 @@ public class Map{
 //static void generate_map_indices()
 //{
 //  int i = 0, nat_x, nat_y, tiles;
-//  iter_index array = map.iterate_outwards_indices;
+//  iter_index array = Map.map.iterate_outwards_indices;
 //  int nat_center_x, nat_center_y, nat_min_x, nat_min_y, nat_max_x, nat_max_y;
 //  int map_center_x, map_center_y;
 //
@@ -210,37 +210,37 @@ public class Map{
 //   *
 //   * Thus the "center" position below is just an arbitrary point.  We choose
 //   * the center of the map to make the min/max values (below) simpler. */
-//  nat_center_x = map.xsize / 2;
-//  nat_center_y = map.ysize / 2;
+//  nat_center_x = Map.map.xsize / 2;
+//  nat_center_y = Map.map.ysize / 2;
 //  NATIVE_TO_MAP_POS(&map_center_x, &map_center_y,
 //		    nat_center_x, nat_center_y);
 //
 //  /* If we wrap in a particular direction (X or Y) we only need to explore a
 //   * half of a map-width in that direction before we hit the wrap point.  If
 //   * not we need to explore the full width since we have to account for the
-//   * worst-case where we start at one edge of the map.  Of course if we try
+//   * worst-case where we start at one edge of the Map.map.  Of course if we try
 //   * to explore too far the extra steps will just be skipped by the
 //   * normalize check later on.  So the purpose at this point is just to
 //   * get the right set of positions, relative to the start position, that
 //   * may be needed for the iteration.
 //   *
-//   * If the map does wrap, we go map.Nsize / 2 in each direction.  This
+//   * If the map does wrap, we go Map.map.Nsize / 2 in each direction.  This
 //   * gives a min value of 0 and a max value of Nsize-1, because of the
 //   * center position chosen above.  This also avoids any off-by-one errors.
 //   *
-//   * If the map doesn't wrap, we go map.Nsize-1 in each direction.  In this
+//   * If the map doesn't wrap, we go Map.map.Nsize-1 in each direction.  In this
 //   * case we're not concerned with going too far and wrapping around, so we
 //   * just have to make sure we go far enough if we're at one edge of the
-//   * map. */
-//  nat_min_x = (topo_has_flag(TF_WRAPX) ? 0 : (nat_center_x - map.xsize + 1));
-//  nat_min_y = (topo_has_flag(TF_WRAPY) ? 0 : (nat_center_y - map.ysize + 1));
+//   * Map.map. */
+//  nat_min_x = (topo_has_flag(TF_WRAPX) ? 0 : (nat_center_x - Map.map.xsize + 1));
+//  nat_min_y = (topo_has_flag(TF_WRAPY) ? 0 : (nat_center_y - Map.map.ysize + 1));
 //
 //  nat_max_x = (topo_has_flag(TF_WRAPX)
-//	       ? (map.xsize - 1)
-//	       : (nat_center_x + map.xsize - 1));
+//	       ? (Map.map.xsize - 1)
+//	       : (nat_center_x + Map.map.xsize - 1));
 //  nat_max_y = (topo_has_flag(TF_WRAPY)
-//	       ? (map.ysize - 1)
-//	       : (nat_center_y + map.ysize - 1));
+//	       ? (Map.map.ysize - 1)
+//	       : (nat_center_y + Map.map.ysize - 1));
 //  tiles = (nat_max_x - nat_min_x + 1) * (nat_max_y - nat_min_y + 1);
 //
 //  array = fc_realloc(array, tiles * sizeof(*array));
@@ -270,24 +270,24 @@ public class Map{
 //
 //#if 0
 //  for (i = 0; i < tiles; i++) {
-//    util.freelog(LOG_DEBUG, "%5d : (%3d,%3d) : %d",
+//    util.freelog(Log.LOG_DEBUG, "%5d : (%3d,%3d) : %d",
 //	    i, array[i].dx, array[i].dy, array[i].dist);
 //  }
 //#endif
 //
-//  map.num_iterate_outwards_indices = tiles;
-//  map.iterate_outwards_indices = array;
+//  Map.map.num_iterate_outwards_indices = tiles;
+//  Map.map.iterate_outwards_indices = array;
 //}
 //
 ///****************************************************************************
-//  map_init_topology needs to be called after map.topology_id is changed.
+//  map_init_topology needs to be called after Map.map.topology_id is changed.
 //
-//  If map.size is changed, map.xsize and map.ysize must be set before
+//  If Map.map.size is changed, Map.map.xsize and Map.map.ysize must be set before
 //  calling map_init_topology(true).  This is done by the mapgen code
 //  (server) and packhand code (client).
 //
-//  If map.xsize and map.ysize are changed, call map_init_topology(false) to
-//  calculate map.size.  This should be done in the client or when loading
+//  If Map.map.xsize and Map.map.ysize are changed, call map_init_topology(false) to
+//  calculate Map.map.size.  This should be done in the client or when loading
 //  savegames, since the [xy]size values are already known.
 //****************************************************************************/
 //void map_init_topology(boolean set_sizes)
@@ -295,12 +295,12 @@ public class Map{
 //  enum direction8 dir;
 //
 //  if (!set_sizes) {
-//    /* Set map.size based on map.xsize and map.ysize. */
-//    map.size = (float)(map.xsize * map.ysize) / 1000.0 + 0.5;
+//    /* Set Map.map.size based on Map.map.xsize and Map.map.ysize. */
+//    Map.map.size = (float)(Map.map.xsize * Map.map.ysize) / 1000.0 + 0.5;
 //  }
 //  
 //  /* sanity check for iso topologies*/
-//  assert(!MAP_IS_ISOMETRIC || (map.ysize % 2) == 0);
+//  assert(!MAP_IS_ISOMETRIC || (Map.map.ysize % 2) == 0);
 //
 //  /* The size and ratio must satisfy the minimum and maximum *linear*
 //   * restrictions on width */
@@ -309,20 +309,20 @@ public class Map{
 //  assert(MAP_WIDTH <= MAP_MAX_LINEAR_SIZE);
 //  assert(MAP_HEIGHT <= MAP_MAX_LINEAR_SIZE);
 //
-//  map.num_valid_dirs = map.num_cardinal_dirs = 0;
+//  Map.map.num_valid_dirs = Map.map.num_cardinal_dirs = 0;
 //  for (dir = 0; dir < 8; dir++) {
 //    if (is_valid_dir(dir)) {
-//      map.valid_dirs[map.num_valid_dirs] = dir;
-//      map.num_valid_dirs++;
+//      Map.map.valid_dirs[Map.map.num_valid_dirs] = dir;
+//      Map.map.num_valid_dirs++;
 //    }
 //    if (is_cardinal_dir(dir)) {
-//      map.cardinal_dirs[map.num_cardinal_dirs] = dir;
-//      map.num_cardinal_dirs++;
+//      Map.map.cardinal_dirs[Map.map.num_cardinal_dirs] = dir;
+//      Map.map.num_cardinal_dirs++;
 //    }
 //  }
-//  assert(map.num_valid_dirs > 0 && map.num_valid_dirs <= 8);
-//  assert(map.num_cardinal_dirs > 0
-//	 && map.num_cardinal_dirs <= map.num_valid_dirs);
+//  assert(Map.map.num_valid_dirs > 0 && Map.map.num_valid_dirs <= 8);
+//  assert(Map.map.num_cardinal_dirs > 0
+//	 && Map.map.num_cardinal_dirs <= Map.map.num_valid_dirs);
 //}
 //
 ///***************************************************************
@@ -345,7 +345,7 @@ public class Map{
 //
 ///****************************************************************************
 //  Step from the given tile in the given direction.  The new tile is returned,
-//  or null if the direction is invalid or leads off the map.
+//  or null if the direction is invalid or leads off the Map.map.
 //****************************************************************************/
 //tile mapstep(final tile ptile, enum direction8 dir)
 //{
@@ -374,20 +374,20 @@ public class Map{
 		 * If the position is out of range in a non-wrapping direction, it is
 		 * unreal.
 		 */
-		if (!((topo_has_flag(TF_WRAPX) || (nat_x >= 0 && nat_x < map.xsize))
-				&& (topo_has_flag(TF_WRAPY) || (nat_y >= 0 && nat_y < map.ysize)))) {
+		if (!((topo_has_flag(TF_WRAPX) || (nat_x >= 0 && nat_x < Map.map.xsize))
+				&& (topo_has_flag(TF_WRAPY) || (nat_y >= 0 && nat_y < Map.map.ysize)))) {
 			return null;
 		}
 
 		/* Wrap in X and Y directions, as needed. */
 		if (topo_has_flag(TF_WRAPX)) {
-			nat_x = FC_WRAP(nat_x, map.xsize);
+			nat_x = FC_WRAP(nat_x, Map.map.xsize);
 		}
 		if (topo_has_flag(TF_WRAPY)) {
-			nat_y = FC_WRAP(nat_y, map.ysize);
+			nat_y = FC_WRAP(nat_y, Map.map.ysize);
 		}
 
-		return map.tiles[ native_pos_to_index(nat_x, nat_y) ];
+		return Map.map.tiles[ native_pos_to_index(nat_x, nat_y) ];
 	}
 
 	/***************************************************************************
@@ -397,7 +397,7 @@ public class Map{
 	{
 		int nat_x=0, nat_y=0;
 
-		if (null==map.tiles) {
+		if (null==Map.map.tiles) {
 			return null;
 		}
 
@@ -410,7 +410,7 @@ public class Map{
 	 * Return the tile for the given native position.
 	 **************************************************************************/
 	tile native_pos_to_tile(int nat_x, int nat_y) {
-		if (null==map.tiles) {
+		if (null==Map.map.tiles) {
 			return null;
 		}
 
@@ -422,12 +422,12 @@ public class Map{
 //****************************************************************************/
 //tile index_to_tile(int index)
 //{
-//  if (null==map.tiles) {
+//  if (null==Map.map.tiles) {
 //    return null;
 //  }
 //
-//  if (index >= 0 && index < MAX_MAP_INDEX) {
-//    return map.tiles + index;
+//  if (index >= 0 && index < Map_H.MAX_MAP_INDEX) {
+//    return Map.map.tiles + index;
 //  } else {
 //    /* Unwrapped index coordinates are impossible, so the best we can do is
 //     * return null. */
@@ -465,19 +465,19 @@ public class Map{
 //
 ///**************************************************************************
 //  Allocate space for map, and initialise the tiles.
-//  Uses current map.xsize and map.ysize.
+//  Uses current Map.map.xsize and Map.map.ysize.
 //**************************************************************************/
 //void map_allocate()
 //{
-//  util.freelog(LOG_DEBUG, "map_allocate (was %p) (%d,%d)",
-//	  map.tiles, map.xsize, map.ysize);
+//  util.freelog(Log.LOG_DEBUG, "map_allocate (was %p) (%d,%d)",
+//	  Map.map.tiles, Map.map.xsize, Map.map.ysize);
 //
-//  assert(map.tiles == null);
-//  map.tiles = fc_malloc(map.xsize * map.ysize * sizeof(struct tile));
-//  whole_map_iterate(ptile) {
+//  assert(Map.map.tiles == null);
+//  Map.map.tiles = fc_malloc(Map.map.xsize * Map.map.ysize * sizeof(struct tile));
+//  for(tile ptile :  Map.map.tiles){
 //    int index, nat_x, nat_y, map_x, map_y;
 //
-//    index = ptile - map.tiles;
+//    index = ptile - Map.map.tiles;
 //    index_to_native_pos(&nat_x, &nat_y, index);
 //    index_to_map_pos(&map_x, &map_y, index);
 //    CHECK_INDEX(index);
@@ -494,39 +494,39 @@ public class Map{
 //    *(int *)&ptile.nat_y = nat_y;
 //
 //    tile_init(ptile);
-//  } whole_map_iterate_end;
+//  }
 //
 //  generate_city_map_indices();
 //  generate_map_indices();
 //}
 //
 ///***************************************************************
-//  Frees the allocated memory of the map.
+//  Frees the allocated memory of the Map.map.
 //***************************************************************/
 //void map_free()
 //{
-//  if (map.tiles) {
+//  if (Map.map.tiles) {
 //    /* it is possible that map_init was called but not map_allocate */
 //
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      tile_free(ptile);
-//    } whole_map_iterate_end;
+//    }
 //
-//    free(map.tiles);
-//    map.tiles = null;
+//    free(Map.map.tiles);
+//    Map.map.tiles = null;
 //  }
 //}
 //
 ///***************************************************************
 //...
 //***************************************************************/
-//enum tile_special_type get_special_by_name(final String name)
+//enum int get_special_by_name(final String name)
 //{
 //  int i;
-//  enum tile_special_type st = 1;
+//  enum int st = 1;
 //
-//  for (i = 0; i < ARRAY_SIZE(tile_special_type_names); i++) {
-//    if (0 == strcmp(name, tile_special_type_names[i]))
+//  for (i = 0; i < ARRAY_SIZE(int_names); i++) {
+//    if (0 == strcmp(name, int_names[i]))
 //      return st;
 //      
 //    st <<= 1;
@@ -538,13 +538,13 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//final String get_special_name(enum tile_special_type type)
+//final String get_special_name(enum int type)
 //{
 //  int i;
 //
-//  for (i = 0; i < ARRAY_SIZE(tile_special_type_names); i++) {
+//  for (i = 0; i < ARRAY_SIZE(int_names); i++) {
 //    if ((type & 0x1) == 1) {
-//      return _(tile_special_type_names[i]);
+//      return _(int_names[i]);
 //    }
 //    type >>= 1;
 //  }
@@ -744,7 +744,7 @@ public class Map{
 //  eg: "Mine"
 //  eg: "Road/Farmland"
 //***************************************************************/
-//final String map_get_infrastructure_text(enum tile_special_type spe)
+//final String map_get_infrastructure_text(enum int spe)
 //{
 //  static char s[64];
 //  char *p;
@@ -769,7 +769,7 @@ public class Map{
 //  if (contains_special(spe, S_FORTRESS))
 //    cat_snprintf(s, sizeof(s), "%s/", "Fortress");
 //
-//  if (contains_special(spe, S_AIRBASE))
+//  if (contains_special(spe, Terrain_H.S_AIRBASE))
 //    cat_snprintf(s, sizeof(s), "%s/", "Airbase");
 //
 //  p = s + s.length() - 1;
@@ -782,9 +782,9 @@ public class Map{
 ///****************************************************************************
 //  Return the prerequesites needed before building the given infrastructure.
 //****************************************************************************/
-//enum tile_special_type map_get_infrastructure_prerequisite(enum tile_special_type spe)
+//enum int map_get_infrastructure_prerequisite(enum int spe)
 //{
-//  enum tile_special_type prereq = S_NO_SPECIAL;
+//  enum int prereq = S_NO_SPECIAL;
 //
 //  if (contains_special(spe, S_RAILROAD)) {
 //    prereq |= S_ROAD;
@@ -799,7 +799,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//enum tile_special_type get_preferred_pillage(enum tile_special_type pset)
+//enum int get_preferred_pillage(enum int pset)
 //{
 //  if (contains_special(pset, S_FARMLAND))
 //    return S_FARMLAND;
@@ -809,8 +809,8 @@ public class Map{
 //    return S_MINE;
 //  if (contains_special(pset, S_FORTRESS))
 //    return S_FORTRESS;
-//  if (contains_special(pset, S_AIRBASE))
-//    return S_AIRBASE;
+//  if (contains_special(pset, Terrain_H.S_AIRBASE))
+//    return Terrain_H.S_AIRBASE;
 //  if (contains_special(pset, S_RAILROAD))
 //    return S_RAILROAD;
 //  if (contains_special(pset, S_ROAD))
@@ -1104,12 +1104,12 @@ public class Map{
 //    return punit.moves_left;
 //  }
 //  if (punit && !is_ground_unit(punit))
-//    return SINGLE_MOVE;
+//    return Unit_H.SINGLE_MOVE;
 //  if (tile_has_special(t1, S_RAILROAD) && tile_has_special(t2, S_RAILROAD))
 //    return MOVE_COST_RAIL;
-///* return (unit_move_rate(punit)/RAIL_MAX) */
+///* return (punit.move_rate()/RAIL_MAX) */
 //  if (punit && unit_flag(punit, F_IGTER))
-//    return SINGLE_MOVE/3;
+//    return Unit_H.SINGLE_MOVE/3;
 //  if (tile_has_special(t1, S_ROAD) && tile_has_special(t2, S_ROAD))
 //    return MOVE_COST_ROAD;
 //
@@ -1134,7 +1134,7 @@ public class Map{
 //    }
 //  }
 //
-//  return(get_tile_type(t2.terrain).movement_cost*SINGLE_MOVE);
+//  return(get_tile_type(t2.terrain).movement_cost*Unit_H.SINGLE_MOVE);
 //}
 //
 ///***************************************************************
@@ -1187,7 +1187,7 @@ public class Map{
 //  /* the %x don't work so well for oceans, where
 //     move_cost[]==-3 ,.. --dwp
 //  */
-//  util.freelog(LOG_DEBUG, "%s (%d, %d) [%x%x%x%x%x%x%x%x]", str,
+//  util.freelog(Log.LOG_DEBUG, "%s (%d, %d) [%x%x%x%x%x%x%x%x]", str,
 //	  tile0.x, tile0.y,
 //	  tile0.move_cost[0], tile0.move_cost[1],
 //	  tile0.move_cost[2], tile0.move_cost[3],
@@ -1227,7 +1227,7 @@ public class Map{
 //{
 //  int maxcost = 72; /* should be big enough without being TOO big */
 //
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    /* trying to move off the screen is the default */
 //    memset(ptile.move_cost, maxcost, sizeof(ptile.move_cost));
 //
@@ -1235,7 +1235,7 @@ public class Map{
 //      ptile.move_cost[dir] = tile_move_cost_ai(ptile, tile1, maxcost);
 //    }
 //    adjc_dir_iterate_end;
-//  } whole_map_iterate_end;
+//  }
 //}
 //
 ///***************************************************************
@@ -1290,7 +1290,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//enum tile_special_type map_get_special(final tile ptile)
+//enum int map_get_special(final tile ptile)
 //{
 //  return ptile.special;
 //}
@@ -1299,43 +1299,42 @@ public class Map{
 // Returns true iff the given special is found at the given map
 // position.
 //***************************************************************/
-//boolean map_has_special(final tile ptile, enum tile_special_type special)
+//boolean map_has_special(final tile ptile, enum int special)
 //{
 //  return contains_special(ptile.special, special);
 //}
-//
-///***************************************************************
-// Returns true iff the given tile has the given special.
-//***************************************************************/
-//boolean tile_has_special(final tile ptile,
-//		      enum tile_special_type special)
-//{
-//  return contains_special(ptile.special, special);
-//}
-//  
-///***************************************************************
-// Returns true iff the given special is found in the given set.
-//***************************************************************/
-//boolean contains_special(enum tile_special_type set,
-//		      enum tile_special_type to_test_for)
-//{
-//  enum tile_special_type masked = set & to_test_for;
-//
-//  assert(0 == (int) S_NO_SPECIAL);
-//
-//  /*
-//   * contains_special should only be called with one S_* in
-//   * to_test_for.
-//   */
-//  assert(masked == S_NO_SPECIAL || masked == to_test_for);
-//
-//  return masked == to_test_for;
-//}
-//
+
+	/***************************************************************************
+	 * Returns true iff the given tile has the given special.
+	 **************************************************************************/
+	public static boolean tile_has_special(final tile ptile,
+			int special)
+	{
+		return contains_special(ptile.special, special);
+	}
+
+	/***************************************************************************
+	 * Returns true iff the given special is found in the given set.
+	 **************************************************************************/
+	static boolean contains_special(int set, int to_test_for) {
+		// enum int masked = set & to_test_for;
+
+		// assert(0 == (int) S_NO_SPECIAL);
+
+		// /*
+		// * contains_special should only be called with one S_* in
+		// * to_test_for.
+		// */
+		// assert(masked == S_NO_SPECIAL || masked == to_test_for);
+
+		// return masked == to_test_for;
+		return false;
+	}
+
 ///***************************************************************
 //...
 //***************************************************************/
-//void map_set_special(tile ptile, enum tile_special_type spe)
+//void map_set_special(tile ptile, enum int spe)
 //{
 //  ptile.special |= spe;
 //
@@ -1347,7 +1346,7 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//void map_clear_special(tile ptile, enum tile_special_type spe)
+//void map_clear_special(tile ptile, enum int spe)
 //{
 //  ptile.special &= ~spe;
 //
@@ -1398,14 +1397,14 @@ public class Map{
 //Returns true iff the map position is normal. "Normal" here means that
 //it is both a real/valid coordinate set and that the coordinates are in
 //their canonical/proper form. In plain English: the coordinates must be
-//on the map.
+//on the Map.map.
 //**************************************************************************/
 //boolean is_normal_map_pos(int x, int y)
 //{
 //  int nat_x, nat_y;
 //
 //  MAP_TO_NATIVE_POS(&nat_x, &nat_y, x, y);
-//  return nat_x >= 0 && nat_x < map.xsize && nat_y >= 0 && nat_y < map.ysize;
+//  return nat_x >= 0 && nat_x < Map.map.xsize && nat_y >= 0 && nat_y < Map.map.ysize;
 //}
 
 	/***************************************************************************
@@ -1439,10 +1438,10 @@ public class Map{
 //
 //  MAP_TO_NATIVE_POS(&nat_x, &nat_y, x, y);
 //  if (!topo_has_flag(TF_WRAPX)) {
-//    nat_x = CLIP(0, nat_x, map.xsize - 1);
+//    nat_x = CLIP(0, nat_x, Map.map.xsize - 1);
 //  }
 //  if (!topo_has_flag(TF_WRAPY)) {
-//    nat_y = CLIP(0, nat_y, map.ysize - 1);
+//    nat_y = CLIP(0, nat_y, Map.map.ysize - 1);
 //  }
 //  NATIVE_TO_MAP_POS(&x, &y, nat_x, nat_y);
 //
@@ -1450,11 +1449,11 @@ public class Map{
 //}
 //
 ///**************************************************************************
-//Returns the total number of (real) positions (or tiles) on the map.
+//Returns the total number of (real) positions (or tiles) on the Map.map.
 //**************************************************************************/
 //int map_num_tiles()
 //{
-//  return map.xsize * map.ysize;
+//  return Map.map.xsize * Map.map.ysize;
 //}
 //
 ///****************************************************************************
@@ -1475,12 +1474,12 @@ public class Map{
 //    *dx = x1 - x0;
 //    *dy = y1 - y0;
 //    if (topo_has_flag(TF_WRAPX)) {
-//      /* Wrap dx to be in [-map.xsize/2, map.xsize/2). */
-//      *dx = FC_WRAP(*dx + map.xsize / 2, map.xsize) - map.xsize / 2;
+//      /* Wrap dx to be in [-Map.map.xsize/2, Map.map.xsize/2). */
+//      *dx = FC_WRAP(*dx + Map.map.xsize / 2, Map.map.xsize) - Map.map.xsize / 2;
 //    }
 //    if (topo_has_flag(TF_WRAPY)) {
-//      /* Wrap dy to be in [-map.ysize/2, map.ysize/2). */
-//      *dy = FC_WRAP(*dy + map.ysize / 2, map.ysize) - map.ysize / 2;
+//      /* Wrap dy to be in [-Map.map.ysize/2, Map.map.ysize/2). */
+//      *dy = FC_WRAP(*dy + Map.map.ysize / 2, Map.map.ysize) - Map.map.ysize / 2;
 //    }
 //
 //    /* Convert the native delta vector back to a pair of map positions. */
@@ -1508,8 +1507,8 @@ public class Map{
 //  (See also: real_map_distance, map_distance, and sq_map_distance.)
 //
 //  With the standard topology the ranges of the return value are:
-//    -map.xsize/2 <= dx <= map.xsize/2
-//    -map.ysize   <  dy <  map.ysize
+//    -Map.map.xsize/2 <= dx <= Map.map.xsize/2
+//    -Map.map.ysize   <  dy <  Map.map.ysize
 //****************************************************************************/
 //void map_distance_vector(int *dx, int *dy,
 //			 final tile tile0,
@@ -1556,12 +1555,12 @@ public class Map{
 //}
 //
 ///**************************************************************************
-// Random square anywhere on the map.  Only normal positions (for which
+// Random square anywhere on the Map.map.  Only normal positions (for which
 // is_normal_map_pos returns true) will be found.
 //**************************************************************************/
 //tile rand_map_pos()
 //{
-//  int nat_x = myrand(map.xsize), nat_y = myrand(map.ysize);
+//  int nat_x = myrand(Map.map.xsize), nat_y = myrand(Map.map.ysize);
 //
 //  return native_pos_to_tile(nat_x, nat_y);
 //}
@@ -1578,31 +1577,31 @@ public class Map{
 //{
 //  tile ptile;
 //  int tries = 0;
-//  final int max_tries = map.xsize * map.ysize / ACTIVITY_FACTOR;
+//  final int max_tries = Map.map.xsize * Map.map.ysize / ACTIVITY_FACTOR;
 //
 //  /* First do a few quick checks to find a spot.  The limit on number of
 //   * tries could use some tweaking. */
 //  do {
-//    ptile = map.tiles + myrand(map.xsize * map.ysize);
+//    ptile = Map.map.tiles + myrand(Map.map.xsize * Map.map.ysize);
 //  } while (filter && !filter(ptile, data) && ++tries < max_tries);
 //
 //  /* If that fails, count all available spots and pick one.
 //   * Slow but reliable. */
 //  if (tries == max_tries) {
-//    int count = 0, positions[map.xsize * map.ysize];
+//    int count = 0, positions[Map.map.xsize * Map.map.ysize];
 //
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      if (filter(ptile, data)) {
 //	positions[count] = ptile.index;
 //	count++;
 //      }
-//    } whole_map_iterate_end;
+//    }
 //
 //    if (count == 0) {
 //      return null;
 //    }
 //
-//    return map.tiles + positions[myrand(count)];
+//    return Map.map.tiles + positions[myrand(count)];
 //  } else {
 //    return ptile;
 //  }

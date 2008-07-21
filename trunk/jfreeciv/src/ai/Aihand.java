@@ -64,7 +64,7 @@ public class Aihand{
 //  /U2 Lemon.
 //******************************************************************************/
 //
-//public static final int LOGLEVEL_TAX = LOG_DEBUG;
+//public static final int LOGLEVEL_TAX = Log.LOG_DEBUG;
 //
 ///**************************************************************************
 // handle spaceship related stuff
@@ -361,7 +361,7 @@ public class Aihand{
 //    return; /* already got it! */
 //  }
 //  pplayer.ai.tech_want[ai.goal.govt.req] += ai.goal.govt.val;
-//  util.freelog(LOG_DEBUG, "%s wants %s with want %d", pplayer.name,
+//  util.freelog(Log.LOG_DEBUG, "%s wants %s with want %d", pplayer.name,
 //          get_tech_name(pplayer, ai.goal.govt.req), 
 //          pplayer.ai.tech_want[ai.goal.govt.req]);
 //}

@@ -32,7 +32,7 @@ public class Attribute{
 //
 //#include "attribute.h"
 //
-//#define ATTRIBUTE_LOG_LEVEL	LOG_DEBUG
+//#define ATTRIBUTE_LOG_LEVEL	Log.LOG_DEBUG
 //
 //static hash_table attribute_hash = null;
 //
@@ -184,7 +184,7 @@ public class Attribute{
 //  *pdata = result;
 //  *pdata_length = total_length;
 //  free(value_lengths);
-//  util.freelog(LOG_DEBUG, "serialized %d entries in %d bytes", entries,
+//  util.freelog(Log.LOG_DEBUG, "serialized %d entries in %d bytes", entries,
 //	  total_length);
 //}
 //
@@ -213,7 +213,7 @@ public class Attribute{
 //  dio_get_uint32(&din, &dummy);
 //  assert(data_length == dummy);
 //
-//  util.freelog(LOG_DEBUG, "try to unserialized %d entries from %d bytes",
+//  util.freelog(Log.LOG_DEBUG, "try to unserialized %d entries from %d bytes",
 //	  entries, (unsigned int) data_length);
 //
 //  for (i = 0; i < entries; i++) {

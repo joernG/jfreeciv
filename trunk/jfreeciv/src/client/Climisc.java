@@ -75,8 +75,8 @@ public class Climisc{
 //  int hc = punit.homecity;
 //  unit ufocus = get_unit_in_focus();
 //
-//  util.freelog(LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
-//	  punit.id, get_nation_name(unit_owner(punit).nation),
+//  util.freelog(Log.LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
+//	  punit.id, get_nation_name(punit.unit_owner().nation),
 //	  unit_name(punit.type), TILE_XY(punit.tile), hc);
 //
 //  if (punit == ufocus) {
@@ -87,7 +87,7 @@ public class Climisc{
 //  } else {
 //    /* calculate before punit disappears, use after punit removed: */
 //    boolean update = (ufocus
-//		   && same_pos(ufocus.tile, punit.tile));
+//		   && Map.same_pos(ufocus.tile, punit.tile));
 //
 //    game_remove_unit(punit);
 //    punit = null;
@@ -104,7 +104,7 @@ public class Climisc{
 //    }
 //
 //    refresh_city_dialog(pcity);
-//    util.freelog(LOG_DEBUG, "map city %s, %s, (%d %d)", pcity.name,
+//    util.freelog(Log.LOG_DEBUG, "map city %s, %s, (%d %d)", pcity.name,
 //	    get_nation_name(city_owner(pcity).nation),
 //	    TILE_XY(pcity.tile));
 //  }
@@ -112,7 +112,7 @@ public class Climisc{
 //  pcity = player_find_city_by_id(game.player_ptr, hc);
 //  if (pcity) {
 //    refresh_city_dialog(pcity);
-//    util.freelog(LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
+//    util.freelog(Log.LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
 //	    get_nation_name(city_owner(pcity).nation),
 //	    TILE_XY(pcity.tile));
 //  }
@@ -128,7 +128,7 @@ public class Climisc{
 //  boolean effect_update;
 //  tile ptile = pcity.tile;
 //
-//  util.freelog(LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
+//  util.freelog(Log.LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
 //	  get_nation_name(city_owner(pcity).nation), TILE_XY(ptile));
 //
 //  /* Explicitly remove all improvements, to properly remove any global effects
@@ -372,15 +372,15 @@ public class Climisc{
 //    assert(punit != null);
 //    center_tile_mapcanvas(punit.tile);
 //  } else {
-//    tile ctile = native_pos_to_tile(map.xsize / 2, map.ysize / 2);
+//    tile ctile = native_pos_to_tile(Map.map.xsize / 2, Map.map.ysize / 2);
 //
 //    /* Just any known tile will do; search near the middle first. */
 //    /* Iterate outward from the center tile.  We have to give a radius that
 //     * is guaranteed to be larger than the map will be.  Although this is
-//     * a misuse of map.xsize and map.ysize (which are native dimensions),
+//     * a misuse of Map.map.xsize and Map.map.ysize (which are native dimensions),
 //     * it should give a sufficiently large radius. */
-//    iterate_outward(native_pos_to_tile(map.xsize / 2, map.ysize / 2),
-//		    map.xsize + map.ysize, ptile) {
+//    iterate_outward(native_pos_to_tile(Map.map.xsize / 2, Map.map.ysize / 2),
+//		    Map.map.xsize + Map.map.ysize, ptile) {
 //      if (tile_get_known(ptile) != TILE_UNKNOWN) {
 //	ctile = ptile;
 //	break;
@@ -918,7 +918,7 @@ public class Climisc{
 //**************************************************************************/
 //void reports_freeze()
 //{
-//  util.freelog(LOG_DEBUG, "reports_freeze");
+//  util.freelog(Log.LOG_DEBUG, "reports_freeze");
 //
 //  meswin_freeze();
 //  plrdlg_freeze();
@@ -943,7 +943,7 @@ public class Climisc{
 //**************************************************************************/
 //void reports_thaw()
 //{
-//  util.freelog(LOG_DEBUG, "reports_thaw");
+//  util.freelog(Log.LOG_DEBUG, "reports_thaw");
 //
 //  meswin_thaw();
 //  plrdlg_thaw();

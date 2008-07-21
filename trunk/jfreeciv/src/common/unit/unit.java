@@ -1,6 +1,11 @@
 package common.unit;
 
+import static common.Game.game;
+import static common.unittype.unittype.U_LAST;
+import common.Unittype_P;
 import common.map.tile;
+import common.player.player;
+import common.unittype.unittype;
 
 public class unit {
 //	struct unit {
@@ -28,7 +33,7 @@ public class unit {
 	 * fractional values in some cases). */
 	public int activity_count;
 
-//	public tile_special_type activity_target;
+//	public int activity_target;
 	public int activity_target;
 //	enum unit_focus_status focus_status;
 	public int ord_map, ord_city;
@@ -62,5 +67,64 @@ public class unit {
 //		unit_order list;
 //	} orders;
 //	};
+	public player unit_owner() {
+		return (game.players[owner]);
+	}
+	public int move_rate() {
+		// TODO Auto-generated method stub
+		int move_rate = 0;
+//		int base_move_rate = punit.unit_type().move_rate
+//				+ punit.unit_type().veteran[punit.veteran].move_bonus;
+//
+//		switch (punit.unit_type().move_type) {
+//		case LAND_MOVING:
+//			move_rate = (base_move_rate * punit.hp) / punit.unit_type().hp;
+//			break;
+//
+//		case SEA_MOVING:
+//			move_rate = (base_move_rate * punit.hp) / punit.unit_type().hp;
+//
+//			move_rate += (get_player_bonus(punit.unit_owner(), EFT_SEA_MOVE) * Unit_H.SINGLE_MOVE);
+//
+//			if (player_knows_techs_with_flag(punit.unit_owner(), TF_BOAT_FAST)) {
+//				move_rate += Unit_H.SINGLE_MOVE;
+//			}
+//
+//			if (move_rate < 2 * Unit_H.SINGLE_MOVE) {
+//				move_rate = Math.min(2 * Unit_H.SINGLE_MOVE, base_move_rate);
+//			}
+//			break;
+//
+//		case HELI_MOVING:
+//		case AIR_MOVING:
+//			move_rate = base_move_rate;
+//			break;
+//
+//		default:
+//			die("In common/unit.c:unit_move_rate: illegal move type %d",
+//					punit.unit_type().move_type);
+//		}
+//
+//		if (move_rate < Unit_H.SINGLE_MOVE && base_move_rate > 0) {
+//			move_rate = Unit_H.SINGLE_MOVE;
+//		}
+		return move_rate;
+	}
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static unittype get_unit_type(int id)
+	{
+		assert(id >= 0 && id < U_LAST && id < game.num_unit_types);
+		return Unittype_P.unit_types[id];
+	}
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public unittype unit_type() {
+		return get_unit_type(type);
+	}
+
 
 }

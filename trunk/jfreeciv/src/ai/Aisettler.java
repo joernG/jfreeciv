@@ -25,7 +25,7 @@ public class Aisettler{
 //#include "city.h"
 //#include "game.h"
 //#include "government.h"
-//#include "map.h"
+//#include "Map.map.h"
 //#include "mem.h"
 //#include "log.h"
 //#include "packets.h"
@@ -444,8 +444,8 @@ public class Aisettler{
 //**************************************************************************/
 //void ai_settler_init(player pplayer)
 //{
-//  cachemap = fc_realloc(cachemap, MAX_MAP_INDEX * sizeof(*cachemap));
-//  memset(cachemap, -1, MAX_MAP_INDEX * sizeof(*cachemap));
+//  cachemap = fc_realloc(cachemap, Map_H.MAX_MAP_INDEX * sizeof(*cachemap));
+//  memset(cachemap, -1, Map_H.MAX_MAP_INDEX * sizeof(*cachemap));
 //}
 //
 ///**************************************************************************
@@ -509,7 +509,7 @@ public class Aisettler{
 //     * weeds out very small wants. ie we create a threshold here. */
 //    /* We also penalise here for using a boat (either virtual or real)
 //     * it's crude but what isn't? */
-//    result.result -= unit_type(punit).build_cost + boat_cost;
+//    result.result -= punit.unit_type().build_cost + boat_cost;
 //
 //    /* Find best spot */
 //    if (result.result > best.result) {
@@ -545,7 +545,7 @@ public class Aisettler{
 //void find_best_city_placement(unit punit, cityresult best,
 //			      boolean look_for_boat, boolean use_virt_boat)
 //{
-//  player pplayer = unit_owner(punit);
+//  player pplayer = punit.unit_owner();
 //  struct pf_parameter parameter;
 //  unit ferry = null;
 //
@@ -604,7 +604,7 @@ public class Aisettler{
 //     * Building a new boat is like a war against a weaker enemy -- 
 //     * good for the economy. (c) Bush family */
 //    if (settler_map_iterate(&parameter, punit, best, pplayer, 
-//			    unit_type(ferry).build_cost)) {
+//			    ferry.unit_type().build_cost)) {
 //      best.overseas = true;
 //      best.virt_boat = (ferry.id == 0);
 //    }

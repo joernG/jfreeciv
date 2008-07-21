@@ -270,22 +270,22 @@ public class Connection{
 //	return -1;
 //	}
 
-//	util.freelog(LOG_DEBUG, "try reading %d bytes", buffer.nsize - buffer.ndata);
+//	util.freelog(Log.LOG_DEBUG, "try reading %d bytes", buffer.nsize - buffer.ndata);
 //	didget = my_readsocket(sock, (char *) (buffer.data + buffer.ndata),
 //	buffer.nsize - buffer.ndata);
 
 //	if (didget > 0) {
 //	buffer.ndata+=didget;
-//	util.freelog(LOG_DEBUG, "didget:%d", didget);
+//	util.freelog(Log.LOG_DEBUG, "didget:%d", didget);
 //	return didget;
 //	}
 //	else if (didget == 0) {
-//	util.freelog(LOG_DEBUG, "EOF on socket read");
+//	util.freelog(Log.LOG_DEBUG, "EOF on socket read");
 //	return -1;
 //	}
 //	#ifdef NONBLOCKING_SOCKETS
 //	else if (errno == EWOULDBLOCK || errno == EAGAIN) {
-//	util.freelog(LOG_DEBUG, "EGAIN on socket read");
+//	util.freelog(Log.LOG_DEBUG, "EGAIN on socket read");
 //	return 0;
 //	}
 //	#endif
@@ -346,7 +346,7 @@ public class Connection{
 
 //	if (FD_ISSET(pc.sock, &writefs)) {
 //	nblock=Math.min(buf.ndata-start, MAX_LEN_PACKET);
-//	util.freelog(LOG_DEBUG,"trying to write %d limit=%d",nblock,limit);
+//	util.freelog(Log.LOG_DEBUG,"trying to write %d limit=%d",nblock,limit);
 //	if((nput=my_writesocket(pc.sock, 
 //	(final String)buf.data+start, nblock)) == -1) {
 //	#ifdef NONBLOCKING_SOCKETS
@@ -427,7 +427,7 @@ public class Connection{
 
 //	buf = pc.send_buffer;
 
-//	util.freelog(LOG_DEBUG, "add %d bytes to %d (space=%d)", len, buf.ndata,
+//	util.freelog(Log.LOG_DEBUG, "add %d bytes to %d (space=%d)", len, buf.ndata,
 //	buf.nsize);
 //	if (!buffer_ensure_free_extra_space(buf, len)) {
 //	if (delayed_disconnect > 0) {

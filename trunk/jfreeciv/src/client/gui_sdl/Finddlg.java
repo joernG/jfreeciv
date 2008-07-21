@@ -30,7 +30,7 @@ public class Finddlg{
 //
 //#include "game.h"
 //#include "player.h"
-//#include "map.h"
+//#include "Map.map.h"
 //
 //#include "gui_main.h"
 //#include "graphics.h"
@@ -125,7 +125,7 @@ public class Finddlg{
 //     
 //  h = WINDOW_TILE_HIGH + 3 + FRAME_WH;
 //  
-//  canvas_to_map_pos(&orginal_x, &orginal_y, Main.map.w/2, Main.map.h/2);
+//  canvas_to_map_pos(&orginal_x, &orginal_y, Main.Map.map.w/2, Main.Map.map.h/2);
 //  
 //  pFind_City_Dlg = MALLOC(sizeof(struct ADVANCED_DLG));
 //  

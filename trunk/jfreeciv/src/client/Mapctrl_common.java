@@ -207,8 +207,8 @@ public class Mapctrl_common{
 //      rec_h += (diff_x + diff_y) * half_H;
 //
 //      /* Iso wrapping */
-//      if (abs(rec_w) > map.xsize * half_W / 2) {
-//        int wx = map.xsize * half_W,  wy = map.xsize * half_H;
+//      if (abs(rec_w) > Map.map.xsize * half_W / 2) {
+//        int wx = Map.map.xsize * half_W,  wy = Map.map.xsize * half_H;
 //        rec_w > 0 ? (rec_w -= wx, rec_h -= wy) : (rec_w += wx, rec_h += wy);
 //      }
 //
@@ -217,8 +217,8 @@ public class Mapctrl_common{
 //      rec_h += diff_y * H;
 //
 //      /* X wrapping */
-//      if (abs(rec_w) > map.xsize * half_W) {
-//        int wx = map.xsize * W;
+//      if (abs(rec_w) > Map.map.xsize * half_W) {
+//        int wx = Map.map.xsize * W;
 //        rec_w > 0 ? (rec_w -= wx) : (rec_w += wx);
 //      }
 //    }
@@ -262,9 +262,9 @@ public class Mapctrl_common{
 //  if (tiles_hilited_cities)  {
 //    tiles_hilited_cities = false;
 //
-//    whole_map_iterate(ptile) {
+//    for(tile ptile :  Map.map.tiles){
 //      ptile.client.hilite = HILITE_NONE;
-//    } whole_map_iterate_end;
+//    }
 //
 //    update_map_canvas_visible();
 //  }
@@ -458,7 +458,7 @@ public class Mapctrl_common{
 //  tile ptile = canvas_pos_to_tile(canvas_x, canvas_y);
 //
 //  if (ptile && get_unit_in_focus()
-//      && !same_pos(keyboardless_goto_start_tile, ptile)
+//      && !Map.same_pos(keyboardless_goto_start_tile, ptile)
 //      && can_client_issue_orders()) {
 //    keyboardless_goto_active = true;
 //    request_unit_goto();
@@ -555,7 +555,7 @@ public class Mapctrl_common{
 //      }
 //
 //      /* When the city info packet is received, update the workers on the
-//       * map.  This is a bad hack used to selectively update the mapview
+//       * Map.map.  This is a bad hack used to selectively update the mapview
 //       * when we receive the corresponding city packet. */
 //      city_workers_display = pcity;
 //    }
@@ -587,7 +587,7 @@ public class Mapctrl_common{
 //    turn_done_state = false;
 //    is_turn_done_state_valid = true;
 //    set_turn_done_button_state(turn_done_state);
-//    util.freelog(LOG_DEBUG, "setting turn done button state init %d",
+//    util.freelog(Log.LOG_DEBUG, "setting turn done button state init %d",
 //	    turn_done_state);
 //  }
 //
@@ -598,7 +598,7 @@ public class Mapctrl_common{
 //    return;
 //  }
 //
-//  util.freelog(LOG_DEBUG, "setting turn done button state from %d to %d",
+//  util.freelog(Log.LOG_DEBUG, "setting turn done button state from %d to %d",
 //	  turn_done_state, new_state);
 //  turn_done_state = new_state;
 //
@@ -631,7 +631,7 @@ public class Mapctrl_common{
 //    }
 //
 //    old_tile = get_line_dest();
-//    if (!same_pos(old_tile, ptile)) {
+//    if (!Map.same_pos(old_tile, ptile)) {
 //      draw_line(ptile);
 //    }
 //  }
@@ -653,7 +653,7 @@ public class Mapctrl_common{
 //    ptile = map_pos_to_tile(x, y);
 //
 //    old_tile = get_line_dest();
-//    if (!same_pos(ptile, old_tile)) {
+//    if (!Map.same_pos(ptile, old_tile)) {
 //      draw_line(ptile);
 //    }
 //  }

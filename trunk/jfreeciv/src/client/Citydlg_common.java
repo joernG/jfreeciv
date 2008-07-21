@@ -135,7 +135,7 @@ public class Citydlg_common{
 //  *city_x += CITY_MAP_RADIUS;
 //  *city_y += CITY_MAP_RADIUS;
 //
-//  util.freelog(LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
+//  util.freelog(Log.LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
 //  return is_valid_city_coords(*city_x, *city_y);
@@ -557,35 +557,35 @@ public class Citydlg_common{
 ///**************************************************************************
 //  Get the city current production and the worklist, like it should be.
 //**************************************************************************/
-//void city_get_queue(city pcity, worklist pqueue)
+//void city_get_queue(city pcity, worklist Pqueue)
 //{
 //  int id;
 //  boolean is_unit;
 //
-//  copy_worklist(pqueue, &pcity.worklist);
+//  copy_worklist(Pqueue, &pcity.worklist);
 //
 //  /* The GUI wants current production to be in the task list, but the
 //     worklist API wants it out for reasons unknown. Perhaps someone enjoyed
 //     making things more complicated than necessary? So I dance around it. */
 //
 //  /* We want the current production to be in the queue. Always. */
-//  worklist_remove(pqueue, MAX_LEN_WORKLIST - 1);
+//  worklist_remove(Pqueue, MAX_LEN_WORKLIST - 1);
 //
 //  id = pcity.currently_building;
 //  is_unit = pcity.is_building_unit;
-//  worklist_insert(pqueue, id, is_unit, 0);
+//  worklist_insert(Pqueue, id, is_unit, 0);
 //}
 //
 ///**************************************************************************
 //  Set the city current production and the worklist, like it should be.
 //**************************************************************************/
-//boolean city_set_queue(city pcity, worklist pqueue)
+//boolean city_set_queue(city pcity, worklist Pqueue)
 //{
 //  struct worklist copy;
 //  int id;
 //  boolean is_unit;
 //
-//  copy_worklist(&copy, pqueue);
+//  copy_worklist(&copy, Pqueue);
 //
 //  /* The GUI wants current production to be in the task list, but the
 //     worklist API wants it out for reasons unknown. Perhaps someone enjoyed

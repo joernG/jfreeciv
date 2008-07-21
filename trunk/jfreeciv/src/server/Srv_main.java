@@ -260,18 +260,18 @@ public void srv_init()
 ///**************************************************************************
 //...
 //**************************************************************************/
-//static void update_environmental_upset(enum tile_special_type cause,
+//static void update_environmental_upset(enum int cause,
 //				       int *current, int *accum, int *level,
 //				       void (*upset_action_fn)(int))
 //{
 //  int count;
 //
 //  count = 0;
-//  whole_map_iterate(ptile) {
+//  for(tile ptile :  Map.map.tiles){
 //    if (map_has_special(ptile, cause)) {
 //      count++;
 //    }
-//  } whole_map_iterate_end;
+//  }
 //
 //  *current = count;
 //  *accum += count;
@@ -280,13 +280,13 @@ public void srv_init()
 //  } else {
 //    *accum -= *level;
 //    if (myrand(200) <= *accum) {
-//      upset_action_fn((map.xsize / 10) + (map.ysize / 10) + ((*accum) * 5));
+//      upset_action_fn((Map.map.xsize / 10) + (Map.map.ysize / 10) + ((*accum) * 5));
 //      *accum = 0;
 //      *level+=4;
 //    }
 //  }
 //
-//  util.freelog(LOG_DEBUG,
+//  util.freelog(Log.LOG_DEBUG,
 //	  "environmental_upset: cause=%-4d current=%-2d level=%-2d accum=%-2d",
 //	  cause, *current, *level, *accum);
 //}
@@ -368,7 +368,7 @@ public void srv_init()
 //**************************************************************************/
 //static void begin_turn(boolean is_new_turn)
 //{
-//  util.freelog(LOG_DEBUG, "Begin turn");
+//  util.freelog(Log.LOG_DEBUG, "Begin turn");
 //
 //  if (is_new_turn) {
 //    /* We build scores at the beginning and end of every turn.  We have to
@@ -390,7 +390,7 @@ public void srv_init()
 //  }
 //
 //  if (is_new_turn) {
-//    util.freelog(LOG_DEBUG, "Shuffleplayers");
+//    util.freelog(Log.LOG_DEBUG, "Shuffleplayers");
 //    shuffle_players();
 //  }
 //
@@ -403,12 +403,12 @@ public void srv_init()
 //**************************************************************************/
 //static void begin_phase(boolean is_new_phase)
 //{
-//  util.freelog(LOG_DEBUG, "Begin phase");
+//  util.freelog(Log.LOG_DEBUG, "Begin phase");
 //
 //  conn_list_do_buffer(&game.game_connections);
 //
 //  for(player pplayer: game.players){
-//    util.freelog(LOG_DEBUG, "beginning player turn for #%d (%s)",
+//    util.freelog(Log.LOG_DEBUG, "beginning player turn for #%d (%s)",
 //	    pplayer.player_no, pplayer.name);
 //    /* human players also need this for building advice */
 //    ai_data_turn_init(pplayer);
@@ -434,7 +434,7 @@ public void srv_init()
 //      }
 //    }
 //
-//    util.freelog(LOG_DEBUG, "Aistartturn");
+//    util.freelog(Log.LOG_DEBUG, "Aistartturn");
 //    ai_start_turn();
 //  }
 //
@@ -449,7 +449,7 @@ public void srv_init()
 //**************************************************************************/
 //static void end_phase()
 //{
-//  util.freelog(LOG_DEBUG, "Endphase");
+//  util.freelog(Log.LOG_DEBUG, "Endphase");
 // 
 //  /* 
 //   * This empties the client Messages window; put this before
@@ -504,7 +504,7 @@ public void srv_init()
 //  do_reveal_effects();
 //  do_have_embassies_effect();
 //
-//  util.freelog(LOG_DEBUG, "Auto-Attack phase");
+//  util.freelog(Log.LOG_DEBUG, "Auto-Attack phase");
 //  auto_attack();
 //}
 //
@@ -513,7 +513,7 @@ public void srv_init()
 //**************************************************************************/
 //static void end_turn()
 //{
-//  util.freelog(LOG_DEBUG, "Endturn");
+//  util.freelog(Log.LOG_DEBUG, "Endturn");
 //
 //  /* Output some ranking and AI debugging info here. */
 //  if (game.turn % 10 == 0) {
@@ -528,7 +528,7 @@ public void srv_init()
 //    calc_civ_score(pplayer);
 //  }
 //
-//  util.freelog(LOG_DEBUG, "Season of native unrests");
+//  util.freelog(Log.LOG_DEBUG, "Season of native unrests");
 //  summon_barbarians(); /* wild guess really, no idea where to put it, but
 //			  I want to give them chance to move their units */
 //
@@ -543,25 +543,25 @@ public void srv_init()
 //  stdinhand_turn();
 //  send_player_turn_notifications(null);
 //
-//  util.freelog(LOG_DEBUG, "Turn ended.");
+//  util.freelog(Log.LOG_DEBUG, "Turn ended.");
 //  game.turn_start = time(null);
 //
-//  util.freelog(LOG_DEBUG, "Gamenextyear");
+//  util.freelog(Log.LOG_DEBUG, "Gamenextyear");
 //  game_advance_year();
 //  after_game_advance_year();
 //
-//  util.freelog(LOG_DEBUG, "Updatetimeout");
+//  util.freelog(Log.LOG_DEBUG, "Updatetimeout");
 //  update_timeout();
 //
 //  check_spaceship_arrivals();
 //
-//  util.freelog(LOG_DEBUG, "Sendplayerinfo");
+//  util.freelog(Log.LOG_DEBUG, "Sendplayerinfo");
 //  send_player_info(null, null);
 //
-//  util.freelog(LOG_DEBUG, "Sendgameinfo");
+//  util.freelog(Log.LOG_DEBUG, "Sendgameinfo");
 //  send_game_info(null);
 //
-//  util.freelog(LOG_DEBUG, "Sendyeartoclients");
+//  util.freelog(Log.LOG_DEBUG, "Sendyeartoclients");
 //  send_year_to_clients(game.year);
 //}
 //
@@ -866,8 +866,8 @@ public void srv_init()
 //      && type != PACKET_REPORT_REQ) {
 //    if (Srv_main.server_state == server_states.GAME_OVER_STATE) {
 //      /* This can happen by accident, so we don't want to print
-//	 out lots of error messages. Ie, we use LOG_DEBUG. */
-//      util.freelog(LOG_DEBUG, "got a packet of type %d "
+//	 out lots of error messages. Ie, we use Log.LOG_DEBUG. */
+//      util.freelog(Log.LOG_DEBUG, "got a packet of type %d "
 //			  "in server_states.GAME_OVER_STATE", type);
 //    } else {
 //      util.freelog(Log.LOG_ERROR, "got a packet of type %d "
@@ -1454,7 +1454,7 @@ public void srv_init()
 //    }
 //    save_counter++;
 //    
-//    util.freelog(LOG_DEBUG, "sniffingpackets");
+//    util.freelog(Log.LOG_DEBUG, "sniffingpackets");
 //    while (sniff_packets() == 1) {
 //      /* nothing */
 //    }
@@ -1473,7 +1473,7 @@ public void srv_init()
 //
 //    end_phase();
 //    end_turn();
-//    util.freelog(LOG_DEBUG, "Sendinfotometaserver");
+//    util.freelog(Log.LOG_DEBUG, "Sendinfotometaserver");
 //    () send_server_info_to_metaserver(META_REFRESH);
 //
 //    conn_list_do_unbuffer(&game.game_connections);
@@ -1609,11 +1609,11 @@ public void srv_main()
 //
 //  send_rulesets(&game.game_connections);
 //
-//  if (map.num_start_positions > 0) {
+//  if (Map.map.num_start_positions > 0) {
 //    start_nations = true;
 //
-//    for (i = 0; i < map.num_start_positions; i++) {
-//      if (map.start_positions[i].nation == NO_NATION_SELECTED) {
+//    for (i = 0; i < Map.map.num_start_positions; i++) {
+//      if (Map.map.start_positions[i].nation == NO_NATION_SELECTED) {
 //	start_nations = false;
 //	break;
 //      }
@@ -1626,8 +1626,8 @@ public void srv_main()
 //    for (i = 0; i < game.playable_nation_count; i++) {
 //      nations_available[i] = false;
 //    }
-//    for (i = 0; i < map.num_start_positions; i++) {
-//      nations_available[map.start_positions[i].nation] = true;
+//    for (i = 0; i < Map.map.num_start_positions; i++) {
+//      nations_available[Map.map.start_positions[i].nation] = true;
 //    }
 //    
 //  } else {
@@ -1699,9 +1699,9 @@ public void srv_main()
 //    generate_ai_players();
 //  }
 //   
-//  /* If we have a tile map, and map.generator==0, call map_fractal_generate
+//  /* If we have a tile map, and Map.map.generator==0, call map_fractal_generate
 //   * anyway to make the specials, huts and continent numbers. */
-//  if (map_is_empty() || (map.generator == 0 && game.is_new_game)) {
+//  if (map_is_empty() || (Map.map.generator == 0 && game.is_new_game)) {
 //    map_fractal_generate(true);
 //  }
 //
