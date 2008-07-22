@@ -1448,7 +1448,7 @@ public class Settlers{
 //
 //    find_best_city_placement(virtualunit, &result, is_coastal, is_coastal);
 //
-//    CITY_LOG(Log.LOG_DEBUG, pcity, "want(%d) to establish city at"
+//    CITY_LOG(Log.LOG_DEBUG, pcity, "want(%d) to establish city at" +
 //	     " (%d, %d) and will %s to get there", result.result, 
 //	     TILE_XY(result.tile), 
 //	     (result.virt_boat ? "build a boat" : 
@@ -1496,7 +1496,7 @@ public class Settlers{
 //                 / (ai.stats.cities[ptile.continent] + 1));
 //  want -= Math.min(ai.stats.workers[ptile.continent], want);
 //
-//  CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s with want %d to do %s at (%d,%d), "
+//  CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s with want %d to do %s at (%d,%d), " +
 //           "we have %d workers and %d cities on the continent",
 //	   unit_name(unit_type), want, get_activity_text(best_act),
 //	   TILE_XY(best_tile),

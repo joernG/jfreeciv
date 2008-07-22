@@ -125,7 +125,7 @@ public class Citydlg{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -169,7 +169,7 @@ public class Citydlg{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -1829,7 +1829,7 @@ public class Citydlg{
 //  } else {
 //    char buf[64];
 //    buf = util.my_snprintf(
-//		PL_("%d turn", "%d turns", granaryturns), granaryturns);
+//		PL("%d turn", "%d turns", granaryturns), granaryturns);
 //    settext(info.growth_text,buf);
 //  }
 //
@@ -2254,7 +2254,7 @@ public class Citydlg{
 //    if (mlmax == 100)
 //      my_snprintf(bptr, nleft, "no maximum, ");
 //    else
-//      my_snprintf(bptr, nleft, PL_("%d unit maximum, ",
+//      my_snprintf(bptr, nleft, PL("%d unit maximum, ",
 //				   "%d units maximum", mlmax), mlmax);
 //    bptr = end_of_strn(bptr, &nleft);
 //

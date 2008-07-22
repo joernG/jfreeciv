@@ -181,7 +181,7 @@ public class Gamelog{
 //
 //  fs = fopen(gamelog_filename, "a");
 //  if (!fs) {
-//    util.freelog(LOG_FATAL, _("Couldn't open gamelogfile \"%s\" for appending."), 
+//    util.freelog(LOG_FATAL, ("Couldn't open gamelogfile \"%s\" for appending."), 
 //	    gamelog_filename);
 //    exit(EXIT_FAILURE);
 //  }
@@ -209,7 +209,7 @@ public class Gamelog{
 //  case GAMELOG_FOUNDCITY:
 //    pcity = va_arg(args, city );
 //
-//    buf = util.my_snprintf( "<n>%d</n><name>%s</name>"
+//    buf = util.my_snprintf( "<n>%d</n><name>%s</name>" +
 //                "<x>%d</x><y>%d</y><m>%s (%d,%d) founded by the %s</m>",
 //                city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
@@ -223,8 +223,8 @@ public class Gamelog{
 //    pcity = va_arg(args, city );
 //    word = va_arg(args, char *);
 //
-//    buf = util.my_snprintf( "<n1>%d</n1><n2>%d</n2>"
-//                "<name>%s</name><x>%d</x><y>%d</y>"
+//    buf = util.my_snprintf( "<n1>%d</n1><n2>%d</n2>" +
+//                "<name>%s</name><x>%d</x><y>%d</y>" +
 //                "<m>%s (%s) (%d,%d) %s by %s</m>", 
 //                pplayer.player_no, pplayer2.player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
@@ -236,7 +236,7 @@ public class Gamelog{
 //  case GAMELOG_DISBANDCITY:
 //    pcity = va_arg(args, city );
 //
-//    buf = util.my_snprintf( "<n>%d</n><name>%s</name>"
+//    buf = util.my_snprintf( "<n>%d</n><name>%s</name>" +
 //                "<x>%d</x><y>%d</y><m>%s (%d, %d) disbanded by the %s</m>",
 //                city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
@@ -332,7 +332,7 @@ public class Gamelog{
 //      word = va_arg(args, char *);
 //
 //      buf = util.my_snprintf(
-//                  "<n1>%d</n1><n2>%d</n2><name>%s</name>"
+//                  "<n1>%d</n1><n2>%d</n2><name>%s</name>" +
 //                  "<m>%s %s %s from the %s</m>",
 //                  pplayer.player_no, pplayer2.player_no,
 //                  get_tech_name(pplayer, (Tech_Type_id) num),
@@ -341,7 +341,7 @@ public class Gamelog{
 //                  Nation.get_nation_name_plural(pplayer2.nation));
 //    } else {
 //      buf = util.my_snprintf(
-//                  "<n1>%d</n1><name>%s</name>"
+//                  "<n1>%d</n1><name>%s</name>" +
 //                  "<m>%s discover %s</m>",
 //                  pplayer.player_no,
 //                  get_tech_name(pplayer, (Tech_Type_id) num),
@@ -356,7 +356,7 @@ public class Gamelog{
 //
 //    if (pplayer) {
 //      buf = util.my_snprintf(
-//                  "<n1>%d</n1><n2>%d</n2><name>%s</name>"
+//                  "<n1>%d</n1><n2>%d</n2><name>%s</name>" +
 //                  "<m>%s lose %s to the %s</m>",
 //                  punit.unit_owner().player_no, pplayer.player_no,
 //                  unit_name(punit.type),
@@ -377,7 +377,7 @@ public class Gamelog{
 //    punit = va_arg(args, unit );
 //
 //    buf = util.my_snprintf(
-//                "<n>%d</n><name>%s</name>"
+//                "<n>%d</n><name>%s</name>" +
 //                "<m>%s lost a game loss unit and died</m>",
 //                punit.unit_owner().player_no, unit_name(punit.type),
 //                Nation.get_nation_name_plural(punit.unit_owner().nation));
@@ -388,7 +388,7 @@ public class Gamelog{
 //    pcity = va_arg(args, city );
 //
 //    buf = util.my_snprintf(
-//                "<n1>%d</n1><n2>%d</n2><name>%s</name><x>%d</x><y>%d</y>"
+//                "<n1>%d</n1><n2>%d</n2><name>%s</name><x>%d</x><y>%d</y>" +
 //                "<m>%s establish an embassy in %s (%s) (%d,%d)</m>",
 //                pplayer.player_no, city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
@@ -403,7 +403,7 @@ public class Gamelog{
 //    pcity = va_arg(args, city );
 //
 //    buf = util.my_snprintf(
-//                "<n>%d</n><city>%s</city><u>%d</u>"
+//                "<n>%d</n><city>%s</city><u>%d</u>" +
 //                "<w>%d</w><name>%s</name><m>%s build %s in %s</m>",
 //                city_owner(pcity).player_no, pcity.name,
 //                pcity.is_building_unit ? 1 : 0,
@@ -454,8 +454,8 @@ public class Gamelog{
 //        trade += pcity.trade_prod;
 //      } }
 //
-//      buf = util.my_snprintf( "<n>%d</n><cities>%d</cities>"
-//                  "<pop>%d</pop><food>%d</food><prod>%d</prod>"
+//      buf = util.my_snprintf( "<n>%d</n><cities>%d</cities>" +
+//                  "<pop>%d</pop><food>%d</food><prod>%d</prod>" +
 //                  "<trade>%d</trade><settlers>%d</settlers><units>%d</units>",
 //                  pplayer.player_no, city_list_size(&pplayer.cities),
 //                  total_player_citizens(pplayer), food, shields, trade, 
@@ -466,7 +466,7 @@ public class Gamelog{
 //  case GAMELOG_PLAYER:
 //    pplayer = va_arg(args, player );
 //
-//    buf = util.my_snprintf( "<n>%d</n><u>%s</u><c>%d</c>"
+//    buf = util.my_snprintf( "<n>%d</n><u>%s</u><c>%d</c>" +
 //                "<ai>%s</ai><nat>%s</nat><l>%s</l>",
 //                pplayer.player_no, pplayer.username,
 //                pplayer.is_connected ? 1 : 0,
@@ -489,7 +489,7 @@ public class Gamelog{
 //    break;
 //  case GAMELOG_BEGIN:
 //    buf = util.my_snprintf(
-//                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+//                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 //                "<Gamelog.gamelog version=\"2.0\">");
 //    break; 
 //  case GAMELOG_END:
@@ -570,7 +570,7 @@ public class Gamelog{
 //    gamelog_put_prefix(buf, sizeof(buf), "status");
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //    break;
 //  }
 //
@@ -618,8 +618,8 @@ public class Gamelog{
 //  count = 0;
 //  for(player pplayer: game.players){
 //    if (!is_barbarian(pplayer)) {
-//      if ((BV_ISSET_ANY(srvarg.draw)
-//           && BV_ISSET(srvarg.draw, pplayer.player_no))
+//      if ((BV_ISSET_ANY(Srv_main.srvarg.draw)
+//           && BV_ISSET(Srv_main.srvarg.draw, pplayer.player_no))
 //          || players_on_same_team(pplayer, highest_plr)) {
 //        /* We win a shared victory, so equal the score. */
 //        rank[count].value = highest;

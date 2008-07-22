@@ -225,7 +225,7 @@ public class Gotodlg{
 //    if(!all_cities && i!=game.player_idx) continue;
 //    city_list_iterate(game.players[i].cities, pcity) {
 //      char name[MAX_LEN_NAME+3];
-//      sz_strlcpy(name, pcity.name);
+//      name = pcity.name;
 //      /* FIXME: should use unit_can_airlift_to(). */
 //      if (pcity.airlift) {
 //	sz_strlcat(name, "(A)");

@@ -222,7 +222,7 @@ public class Cma_core{
 //		      + cm_count_specialist(pcity, result))) {
 //    cm_print_city(pcity);
 //    cm_print_result(pcity, result);
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  /* Remove all surplus workers */
@@ -342,7 +342,7 @@ public class Cma_core{
 //  per_mill = (stats.apply_result_ignored * 1000) / (total ? total : 1);
 //
 //  util.freelog(Log.LOG_NORMAL,
-//	  "CMA: apply_result: ignored=%2d.%d%% (%d) "
+//	  "CMA: apply_result: ignored=%2d.%d%% (%d) " +
 //	  "applied=%2d.%d%% (%d) total=%d",
 //	  per_mill / 10, per_mill % 10, stats.apply_result_ignored,
 //	  (1000 - per_mill) / 10, (1000 - per_mill) % 10,
@@ -400,7 +400,7 @@ public class Cma_core{
 //      cma_release_city(pcity);
 //
 //      create_event(pcity.tile, E_CITY_CMA_RELEASE,
-//		   _("CMA: The agent can't fulfill the requirements "
+//		   ("CMA: The agent can't fulfill the requirements " +
 //		     "for %s. Passing back control."), pcity.name);
 //      handled = true;
 //      break;
@@ -409,7 +409,7 @@ public class Cma_core{
 //	util.freelog(HANDLE_CITY_LOG_LEVEL2, "  doesn't cleanly apply");
 //	if (check_city(city_id, null) && i == 0) {
 //	  create_event(pcity.tile, event_type.E_NOEVENT,
-//		       _("CMA: %s has changed and the calculated "
+//		       ("CMA: %s has changed and the calculated " +
 //			 "result can't be applied. Will retry."),
 //		       pcity.name);
 //	}
@@ -429,14 +429,14 @@ public class Cma_core{
 //    util.freelog(HANDLE_CITY_LOG_LEVEL2, "  not handled");
 //
 //    create_event(pcity.tile, E_CITY_CMA_RELEASE,
-//		 _("CMA: %s has changed multiple times. This may be "
-//		   "an error in Freeciv or bad luck. The CMA will detach "
+//		 ("CMA: %s has changed multiple times. This may be " +
+//		   "an error in Freeciv or bad luck. The CMA will detach " +
 //		   "itself from the city now."), pcity.name);
 //
 //    cma_release_city(pcity);
 //
-//    util.freelog(Log.LOG_ERROR, "CMA: %s has changed multiple times due to "
-//            "an error in Freeciv. Please send a savegame that can reproduce "
+//    util.freelog(Log.LOG_ERROR, "CMA: %s has changed multiple times due to " +
+//            "an error in Freeciv. Please send a savegame that can reproduce " +
 //            "this bug to <bugs@freeciv.org>. Thank you.", pcity.name);
 //  }
 //

@@ -171,7 +171,7 @@ public class Packhand{
 //  char msg[MAX_LEN_MSG];
 //  char *s_capability = aconnection.capability;
 //
-//  sz_strlcpy(aconnection.capability, capability);
+//  aconnection.capability = capability;
 //  close_connection_dialog();
 //
 //  if (you_can_join) {
@@ -455,7 +455,7 @@ public class Packhand{
 //  
 //  pcity.owner=packet.owner;
 //  pcity.tile = map_pos_to_tile(packet.x, packet.y);
-//  sz_strlcpy(pcity.name, packet.name);
+//  pcity.name = packet.name;
 //  
 //  pcity.size = packet.size;
 //  for (i = 0; i < 5; i++) {
@@ -712,7 +712,7 @@ public class Packhand{
 //
 //  pcity.owner=packet.owner;
 //  pcity.tile = map_pos_to_tile(packet.x, packet.y);
-//  sz_strlcpy(pcity.name, packet.name);
+//  pcity.name = packet.name;
 //  
 //  pcity.size=packet.size;
 //  pcity.tile_trade = packet.tile_trade;
@@ -1538,7 +1538,7 @@ public class Packhand{
 //  char msg[MAX_LEN_MSG];
 //  player pplayer = &game.players[pinfo.playerno];
 //
-//  sz_strlcpy(pplayer.name, pinfo.name);
+//  pplayer.name = pinfo.name;
 //
 //  pplayer.nation=pinfo.nation;
 //  pplayer.is_male=pinfo.is_male;
@@ -1655,11 +1655,11 @@ public class Packhand{
 //  }
 //
 //  if (has_capability("username_info", aconnection.capability)) {
-//    sz_strlcpy(pplayer.username, pinfo.username);
+//    pplayer.username = pinfo.username;
 //  } else {
 //    for (conn pconn : game.est_connections.data) {
 //      if (pconn.player == pplayer && !pconn.observer) {
-//        sz_strlcpy(pplayer.username, pconn.username);
+//        pplayer.username = pconn.username;
 //      }
 //    } }
 //  }
@@ -1732,9 +1732,9 @@ public class Packhand{
 //    pconn.observer = pinfo.observer;
 //    pconn.access_level = pinfo.access_level;
 //    pconn.player = pplayer;
-//    sz_strlcpy(pconn.username, pinfo.username);
-//    sz_strlcpy(pconn.addr, pinfo.addr);
-//    sz_strlcpy(pconn.capability, pinfo.capability);
+//    pconn.username = pinfo.username;
+//    pconn.addr = pinfo.addr;
+//    pconn.capability = pinfo.capability;
 //
 //    if (pinfo.id == aconnection.id) {
 //      aconnection.established = pconn.established;
@@ -2232,14 +2232,14 @@ public class Packhand{
 //  }
 //  u = get_unit_type(p.id);
 //
-//  sz_strlcpy(u.name_orig, p.name);
+//  u.name_orig = p.name;
 //  u.name = u.name_orig;
-//  sz_strlcpy(u.graphic_str, p.graphic_str);
-//  sz_strlcpy(u.graphic_alt, p.graphic_alt);
-//  sz_strlcpy(u.sound_move, p.sound_move);
-//  sz_strlcpy(u.sound_move_alt, p.sound_move_alt);
-//  sz_strlcpy(u.sound_fight, p.sound_fight);
-//  sz_strlcpy(u.sound_fight_alt, p.sound_fight_alt);
+//  u.graphic_str = p.graphic_str;
+//  u.graphic_alt = p.graphic_alt;
+//  u.sound_move = p.sound_move;
+//  u.sound_move_alt = p.sound_move_alt;
+//  u.sound_fight = p.sound_fight;
+//  u.sound_fight_alt = p.sound_fight_alt;
 //
 //  u.move_type          = p.move_type;
 //  u.build_cost         = p.build_cost;
@@ -2291,10 +2291,10 @@ public class Packhand{
 //  }
 //  a = &advances[p.id];
 //
-//  sz_strlcpy(a.name_orig, p.name);
+//  a.name_orig = p.name;
 //  a.name = a.name_orig;
-//  sz_strlcpy(a.graphic_str, p.graphic_str);
-//  sz_strlcpy(a.graphic_alt, p.graphic_alt);
+//  a.graphic_str = p.graphic_str;
+//  a.graphic_alt = p.graphic_alt;
 //  a.req[0] = p.req[0];
 //  a.req[1] = p.req[1];
 //  a.root_req = p.root_req;
@@ -2322,10 +2322,10 @@ public class Packhand{
 //  }
 //  b = &improvement_types[p.id];
 //
-//  sz_strlcpy(b.name_orig, p.name);
+//  b.name_orig = p.name;
 //  b.name = b.name_orig;
-//  sz_strlcpy(b.graphic_str, p.graphic_str);
-//  sz_strlcpy(b.graphic_alt, p.graphic_alt);
+//  b.graphic_str = p.graphic_str;
+//  b.graphic_alt = p.graphic_alt;
 //  b.tech_req = p.tech_req;
 //  b.bldg_req = p.bldg_req;
 //  b.equiv_range = p.equiv_range;
@@ -2335,8 +2335,8 @@ public class Packhand{
 //  b.upkeep = p.upkeep;
 //  b.sabotage = p.sabotage;
 //  b.helptext = mystrdup(p.helptext);
-//  sz_strlcpy(b.soundtag, p.soundtag);
-//  sz_strlcpy(b.soundtag_alt, p.soundtag_alt);
+//  b.soundtag = p.soundtag;
+//  b.soundtag_alt = p.soundtag_alt;
 //
 //#define T(elem,count,last) \
 //  b.elem = fc_malloc(sizeof(*b.elem) * (p.count + 1)); \
@@ -2475,10 +2475,10 @@ public class Packhand{
 //  gov.flags               = p.flags;
 //  gov.num_ruler_titles    = p.num_ruler_titles;
 //    
-//  sz_strlcpy(gov.name_orig, p.name);
+//  gov.name_orig = p.name;
 //  gov.name = gov.name_orig;
-//  sz_strlcpy(gov.graphic_str, p.graphic_str);
-//  sz_strlcpy(gov.graphic_alt, p.graphic_alt);
+//  gov.graphic_str = p.graphic_str;
+//  gov.graphic_alt = p.graphic_alt;
 //
 //  gov.ruler_titles = fc_calloc(gov.num_ruler_titles,
 //				sizeof(struct ruler_title));
@@ -2527,21 +2527,21 @@ public class Packhand{
 //  }
 //  t = get_tile_type(p.id);
 //
-//  sz_strlcpy(t.terrain_name_orig, p.terrain_name);
+//  t.terrain_name_orig = p.terrain_name;
 //  t.terrain_name = t.terrain_name_orig;
-//  sz_strlcpy(t.graphic_str, p.graphic_str);
-//  sz_strlcpy(t.graphic_alt, p.graphic_alt);
+//  t.graphic_str = p.graphic_str;
+//  t.graphic_alt = p.graphic_alt;
 //  t.movement_cost = p.movement_cost;
 //  t.defense_bonus = p.defense_bonus;
 //  t.food = p.food;
 //  t.shield = p.shield;
 //  t.trade = p.trade;
-//  sz_strlcpy(t.special_1_name_orig, p.special_1_name);
+//  t.special_1_name_orig = p.special_1_name;
 //  t.special_1_name = t.special_1_name_orig;
 //  t.food_special_1 = p.food_special_1;
 //  t.shield_special_1 = p.shield_special_1;
 //  t.trade_special_1 = p.trade_special_1;
-//  sz_strlcpy(t.special_2_name_orig, p.special_2_name);
+//  t.special_2_name_orig = p.special_2_name;
 //  t.special_2_name = t.special_2_name_orig;
 //  t.food_special_2 = p.food_special_2;
 //  t.shield_special_2 = p.shield_special_2;
@@ -2601,12 +2601,12 @@ public class Packhand{
 //  }
 //  pl = get_nation_by_idx(p.id);
 //
-//  sz_strlcpy(pl.name_orig, p.name);
+//  pl.name_orig = p.name;
 //  pl.name = pl.name_orig;
-//  sz_strlcpy(pl.name_plural_orig, p.name_plural);
+//  pl.name_plural_orig = p.name_plural;
 //  pl.name_plural = pl.name_plural_orig;
-//  sz_strlcpy(pl.flag_graphic_str, p.graphic_str);
-//  sz_strlcpy(pl.flag_graphic_alt, p.graphic_alt);
+//  pl.flag_graphic_str = p.graphic_str;
+//  pl.flag_graphic_alt = p.graphic_alt;
 //  pl.leader_count = p.leader_count;
 //  pl.leaders = fc_malloc(sizeof(*pl.leaders) * pl.leader_count);
 //  for (i = 0; i < pl.leader_count; i++) {
@@ -2649,12 +2649,12 @@ public class Packhand{
 //  cs.techreq = packet.techreq;
 //  cs.replaced_by = packet.replaced_by;
 //
-//  sz_strlcpy(cs.name_orig, packet.name);
+//  cs.name_orig = packet.name;
 //  cs.name = cs.name_orig;
-//  sz_strlcpy(cs.graphic, packet.graphic);
-//  sz_strlcpy(cs.graphic_alt, packet.graphic_alt);
-//  sz_strlcpy(cs.citizens_graphic, packet.citizens_graphic);
-//  sz_strlcpy(cs.citizens_graphic_alt, packet.citizens_graphic_alt);
+//  cs.graphic = packet.graphic;
+//  cs.graphic_alt = packet.graphic_alt;
+//  cs.citizens_graphic = packet.citizens_graphic;
+//  cs.citizens_graphic_alt = packet.citizens_graphic_alt;
 //
 //  tilespec_setup_city_tiles(id);
 //}

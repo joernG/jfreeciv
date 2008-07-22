@@ -101,7 +101,7 @@ public class Agents{
 //    return true;
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return false;
 //}
 //
@@ -137,7 +137,7 @@ public class Agents{
 //    /* nothing */
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //  va_end(ap);
 //
@@ -214,7 +214,7 @@ public class Agents{
 //    call.agent.agent.tile_callbacks[call.cb_type]
 //      (index_to_tile(call.arg));
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //
@@ -297,7 +297,7 @@ public class Agents{
 //      return &agents.entries[i];
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return null;
 //}
 //
@@ -330,7 +330,7 @@ public class Agents{
 //static void print_stats(my_agent agent)
 //{
 //  util.freelog(PRINT_STATS_LOGLEVEL,
-//	  "A:%s: waited %fs in total for network; "
+//	  "A:%s: waited %fs in total for network; " +
 //	  "requests=%d; waited %d times",
 //	  agent.agent.name,
 //	  read_timer_seconds(agent.stats.network_wall_timer),

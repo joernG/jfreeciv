@@ -178,56 +178,56 @@ public class Sanitycheck{
 //      switch (get_worker_city(pcity, x, y)) {
 //      case C_TILE_EMPTY:
 //	if (ptile.worked) {
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "empty but worked by %s!",
 //		  pcity.name, TILE_XY(ptile),
 //		  (ptile).worked.name);
 //	}
 //	if (is_enemy_unit_tile(ptile, pplayer)) {
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "empty but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (game.borders > 0
 //	    && owner && owner.player_no != pcity.owner) {
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "empty but in enemy territory!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (!city_can_work_tile(pcity, x, y)) {
 //	  /* Complete check. */
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "empty but is unavailable!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	break;
 //      case C_TILE_WORKER:
 //	if ((ptile).worked != pcity) {
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "worked but main map disagrees!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (is_enemy_unit_tile(ptile, pplayer)) {
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "worked but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (game.borders > 0
 //	    && owner && owner.player_no != pcity.owner) {
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "worked but in enemy territory!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	if (!city_can_work_tile(pcity, x, y)) {
 //	  /* Complete check. */
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "worked but is unavailable!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	break;
 //      case C_TILE_UNAVAILABLE:
 //	if (city_can_work_tile(pcity, x, y)) {
-//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as "
+//	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "unavailable but seems to be available!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
@@ -274,8 +274,8 @@ public class Sanitycheck{
 //      assert(is_valid);
 //
 //      if (pcity.city_map[city_x][city_y] != C_TILE_WORKER) {
-//	util.freelog(Log.LOG_ERROR, "%d,%d is listed as being worked by %s "
-//		"on the map, but %s lists the tile %d,%d as having "
+//	util.freelog(Log.LOG_ERROR, "%d,%d is listed as being worked by %s " +
+//		"on the map, but %s lists the tile %d,%d as having " +
 //		"status %d\n",
 //		TILE_XY(ptile), pcity.name, pcity.name, city_x, city_y,
 //		pcity.city_map[city_x][city_y]);
@@ -303,7 +303,7 @@ public class Sanitycheck{
 //      }
 //
 //      if (!can_unit_continue_current_activity(punit)) {
-//	util.freelog(Log.LOG_ERROR, "%s at %d,%d (%s) has activity %s, "
+//	util.freelog(Log.LOG_ERROR, "%s at %d,%d (%s) has activity %s, " +
 //		"which it can't continue!",
 //		punit.unit_type().name,
 //		TILE_XY(ptile), map_get_tile_info_text(ptile),

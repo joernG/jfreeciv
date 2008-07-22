@@ -60,7 +60,7 @@ public class Gotodlg{
 //HOOKPROTONH(goto_cities_display, void, char **array, city pcity)
 //{
 //  static char name[80];
-//  sz_strlcpy(name, pcity.name);
+//  name = pcity.name;
 //  /* FIXME: should use unit_can_airlift_to(). */
 //  if (pcity.airlift) {
 //    sz_strlcat(name, "(A)");

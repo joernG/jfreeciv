@@ -278,7 +278,7 @@ public class Report{
 //      cat_snprintf(buffer, sizeof(buffer), "with no wonders\n");
 //    } else {
 //      cat_snprintf(buffer, sizeof(buffer),
-//		   PL_("with %d wonder\n", "with %d wonders\n", wonders),
+//		   PL("with %d wonder\n", "with %d wonders\n", wonders),
 //		   wonders);}
 //  }
 //  page_conn(dest, "Traveler's Report:",
@@ -567,12 +567,12 @@ public class Report{
 //
 //static final String mil_service_to_text(int value)
 //{
-//  return value_units(value, PL_(" month", " months", value));
+//  return value_units(value, PL(" month", " months", value));
 //}
 //
 //static final String pollution_to_text(int value)
 //{
-//  return value_units(value, PL_(" ton", " tons", value));
+//  return value_units(value, PL(" ton", " tons", value));
 //}
 //
 ///**************************************************************************
@@ -693,7 +693,7 @@ public class Report{
 //
 //    if (!found) {
 //      /* The character is invalid. */
-//      *error_string = _("Demography string contains invalid characters. "
+//      *error_string = ("Demography string contains invalid characters. " +
 //			"Try \"help demography\".");
 //      return false;
 //    }
@@ -963,9 +963,9 @@ public class Report{
 //      }
 //      fprintf(fp, "%s%s\n", scorelog_magic, VERSION_STRING);
 //      fprintf(fp, 
-//	      "\n"
-//	      "# For a specification of the format of this see doc/README.scorelog or \n"
-//	      "# <http://www.freeciv.org/lxr/source/doc/README.scorelog?v=cvs>.\n"
+//	      "\n" +
+//	      "# For a specification of the format of this see doc/README.scorelog or \n" +
+//	      "# <http://www.freeciv.org/lxr/source/doc/README.scorelog?v=cvs>.\n" +
 //	      "\n");
 //
 //      fprintf(fp, "id %s\n", game.id);
@@ -1102,7 +1102,7 @@ public class Report{
 //
 //  for (i = 0; i < j; i++) {
 //    cat_snprintf(buffer, sizeof(buffer),
-//		 PL_("%2d: The %s %s scored %d point\n",
+//		 PL("%2d: The %s %s scored %d point\n",
 //		     "%2d: The %s %s scored %d points\n",
 //		     size[i].value),
 //		 i + 1, _(greatness[i]),

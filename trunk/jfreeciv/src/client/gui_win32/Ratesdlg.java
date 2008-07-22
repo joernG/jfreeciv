@@ -295,7 +295,7 @@ public class Ratesdlg{
 //    fcwin_box hbox;
 //    fcwin_box vbox;
 //    ratesdlg=fcwin_create_layouted_window(ratesdlg_proc,
-//					  _("Select tax, luxury "
+//					  ("Select tax, luxury " +
 //					    "and science rates"),
 //					  WS_OVERLAPPEDWINDOW,
 //					  CW_USEDEFAULT,

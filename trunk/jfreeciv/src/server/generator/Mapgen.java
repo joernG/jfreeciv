@@ -121,7 +121,7 @@ public class Mapgen{
 //  case WC_NDRY:
 //    return !map_pos_is_dry(ptile);
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return false;
 //}
 //
@@ -138,7 +138,7 @@ public class Mapgen{
 //  case MC_NLOW:
 //    return !map_pos_is_low(ptile);
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return false;
 //}
 //
@@ -759,7 +759,7 @@ public class Mapgen{
 //    }
 //
 //    /* One or more valid directions: choose randomly. */
-//    util.freelog(Log.LOG_DEBUG, "mapgen.c: Had to let the random number"
+//    util.freelog(Log.LOG_DEBUG, "mapgen.c: Had to let the random number" +
 //	    " generator select a direction for a river.");
 //    direction = myrand(num_valid_directions);
 //    util.freelog(Log.LOG_DEBUG, "mapgen.c: direction: %d", direction);
@@ -873,7 +873,7 @@ public class Mapgen{
 //      }
 //
 //      util.freelog(Log.LOG_DEBUG,
-//	      "Found a suitable starting tile for a river at (%d, %d)."
+//	      "Found a suitable starting tile for a river at (%d, %d)." +
 //	      " Starting to make it.",
 //	      ptile.x, ptile.y);
 //
@@ -1146,7 +1146,7 @@ public class Mapgen{
 //	  mode = MT_VARIABLE;
 //	  break;
 //	default:
-//	  assert(0);
+//	  assert(0!=1);
 //	  die("The server couldn't allocate starting positions.");
 //      }
 //    }

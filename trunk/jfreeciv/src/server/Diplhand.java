@@ -127,7 +127,7 @@ public class Diplhand{
 //	switch(pclause.type) {
 //	case CLAUSE_EMBASSY:
 //          if (player_has_embassy(pother, pplayer)) {
-//            util.freelog(Log.LOG_ERROR, "%s tried to give embassy to %s, who already "
+//            util.freelog(Log.LOG_ERROR, "%s tried to give embassy to %s, who already " +
 //                    "has an embassy", pplayer.name, pother.name);
 //            return;
 //          }
@@ -161,7 +161,7 @@ public class Diplhand{
 //	  pcity = find_city_by_id(pclause.value);
 //	  if (!pcity) { /* Can't find out cityname any more. */
 //	    notify_player(pplayer,
-//			  _("City you are trying to give no longer exists, "
+//			  ("City you are trying to give no longer exists, " +
 //			    "you can't accept treaty."));
 //	    return;
 //	  }
@@ -173,7 +173,7 @@ public class Diplhand{
 //	  }
 //	  if (pcity.is_capital()) {
 //	    notify_player(pplayer,
-//			  _("Game: Your capital (%s) is requested, "
+//			  ("Game: Your capital (%s) is requested, " +
 //			    "you can't accept treaty."),
 //			  pcity.name);
 //	    return;
@@ -182,14 +182,14 @@ public class Diplhand{
 //	case CLAUSE_ALLIANCE:
 //          if (!pplayer_can_ally(pplayer, pother)) {
 //	    notify_player(pplayer,
-//			  _("Game: You are at war with one of %s's "
+//			  ("Game: You are at war with one of %s's " +
 //			    "allies - an alliance with %s is impossible."),
 //			  pother.name, pother.name);
 //            return;
 //          }
 //          if (!pplayer_can_ally(pother, pplayer)) {
 //	    notify_player(pplayer,
-//			  _("Game: %s is at war with one of your allies "
+//			  ("Game: %s is at war with one of your allies " +
 //			    "- an alliance with %s is impossible."),
 //			  pother.name, pother.name);
 //            return;
@@ -198,7 +198,7 @@ public class Diplhand{
 //	case CLAUSE_GOLD:
 //	  if (pplayer.economic.gold < pclause.value) {
 //	    notify_player(pplayer,
-//			  _("Game: You don't have enough gold, "
+//			  ("Game: You don't have enough gold, " +
 //			    "you can't accept treaty."));
 //	    return;
 //	  }
@@ -230,12 +230,12 @@ public class Diplhand{
 // 					   pplayer.player_no);
 //
 //    notify_player(pplayer,
-//		  PL_("Game: A treaty containing %d clause was agreed upon.",
+//		  PL("Game: A treaty containing %d clause was agreed upon.",
 //		      "Game: A treaty containing %d clauses was agreed upon.",
 //		      nclauses),
 //		  nclauses);
 //    notify_player(pother,
-//		  PL_("Game: A treaty containing %d clause was agreed upon.",
+//		  PL("Game: A treaty containing %d clause was agreed upon.",
 //		      "Game: A treaty containing %d clauses was agreed upon.",
 //		      nclauses),
 //		  nclauses);
@@ -251,23 +251,23 @@ public class Diplhand{
 //	  pcity = find_city_by_id(pclause.value);
 //	  if (!pcity) { /* Can't find out cityname any more. */
 //	    notify_player(pplayer,
-//			  _("Game: One of the cities %s is giving away is destroyed! "
+//			  ("Game: One of the cities %s is giving away is destroyed! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
 //	    notify_player(pother,
-//			  _("Game: One of the cities %s is giving away is destroyed! "
+//			  ("Game: One of the cities %s is giving away is destroyed! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
 //	    goto cleanup;
 //	  }
 //	  if (pcity.owner != pother.player_no) {
 //	    notify_player(pplayer,
-//			  _("Game: The %s no longer control %s! "
+//			  ("Game: The %s no longer control %s! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation),
 //			  pcity.name);
 //	    notify_player(pother,
-//			  _("Game: The %s no longer control %s! "
+//			  ("Game: The %s no longer control %s! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation),
 //			  pcity.name);
@@ -275,7 +275,7 @@ public class Diplhand{
 //	  }
 //	  if (pcity.is_capital()) {
 //	    notify_player(pother,
-//			  _("Game: Your capital (%s) is requested, "
+//			  ("Game: Your capital (%s) is requested, " +
 //			    "you can't accept treaty."), pcity.name);
 //	    goto cleanup;
 //	  }
@@ -286,11 +286,11 @@ public class Diplhand{
 //           * changed. */
 //          if (!pplayer_can_ally(pother, pplayer)) {
 //	    notify_player(pplayer,
-//			  _("Game: %s is at war with one of your "
+//			  ("Game: %s is at war with one of your " +
 //			    "allies - an alliance with %s is impossible."),
 //			  pother.name, pother.name);
 //	    notify_player(pother,
-//			  _("Game: You are at war with one of %s's "
+//			  ("Game: You are at war with one of %s's " +
 //			    "allies - an alliance with %s is impossible."),
 //			  pplayer.name, pplayer.name);
 //	    goto cleanup;
@@ -299,11 +299,11 @@ public class Diplhand{
 //	case CLAUSE_GOLD:
 //	  if (pother.economic.gold < pclause.value) {
 //	    notify_player(pplayer,
-//			  _("Game: The %s don't have the promised amount "
+//			  ("Game: The %s don't have the promised amount " +
 //			    "of gold! Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
 //	    notify_player(pother,
-//			  _("Game: The %s don't have the promised amount "
+//			  ("Game: The %s don't have the promised amount " +
 //			    "of gold! Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
 //	    goto cleanup;

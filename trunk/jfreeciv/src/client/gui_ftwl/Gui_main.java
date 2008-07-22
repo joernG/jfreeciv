@@ -184,7 +184,7 @@ public class Gui_main{
 //  init_character_encodings("ISO-8859-1", true);
 //
 //  if (!auto_connect) {
-//    die("Connection dialog not yet implemented. Start client using "
+//    die("Connection dialog not yet implemented. Start client using " +
 //        "the -a option.");
 //  }
 //
@@ -193,16 +193,16 @@ public class Gui_main{
 //      fc_fprintf(stderr, "  -d, --dump\t\tEnable screen dumper\n");
 //      if (be_supports_fullscreen()) {
 //	fc_fprintf(stderr,
-//		   _("  -f, --fullscreen\t"
+//		   ("  -f, --fullscreen\t" +
 //		     "Switch to full-screen at start\n"));
 //      }
 //      fc_fprintf(stderr, "  -h, --help\t\tThis list\n");
 //      fc_fprintf(stderr,
-//		 _("  -r, --res <res>\t"
+//		 ("  -r, --res <res>\t" +
 //		   "Use the given resolution [Default: %s]\n"),
 //		 DEFAULT_RESOLUTION);
 //      fc_fprintf(stderr,
-//		 _("  -t, --theme <name>\t"
+//		 ("  -t, --theme <name>\t" +
 //		   "Use the given theme [Default: %s]\n"),
 //		 DEFAULT_THEME);
 //      exit(EXIT_SUCCESS);
@@ -232,7 +232,7 @@ public class Gui_main{
 //  be_init(&res, fullscreen);
 //  be_screen_get_size(&size);
 //  if (size.width != res.width || size.height != res.height) {
-//    die("Instead of the desired screen resolution (%dx%d) "
+//    die("Instead of the desired screen resolution (%dx%d) " +
 //	"got (%dx%d). This may be a problem with the window-manager.",
 //	res.width, res.height, size.width, size.height);
 //  }

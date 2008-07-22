@@ -144,10 +144,10 @@ public class Text_renderer{
 //
 //  if (error == FT_Err_Unknown_File_Format) {
 //    printf("unknown font format\n");
-//    assert(0);
+//    assert(0!=1);
 //  } else if (error) {
 //    printf("error:%d while opening '%s'\n", error,string.font);
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  slot = face.glyph;
@@ -184,7 +184,7 @@ public class Text_renderer{
 //	glyph_index = FT_Get_Char_Index(face, c);
 //	if (glyph_index == 0) {
 //	  util.freelog(Log.LOG_ERROR, "can't find glyph for %d '%c'", c, c);
-//	  assert(0);
+//	  assert(0!=1);
 //	}
 //
 //	if (use_kerning && previous && glyph_index) {
@@ -209,7 +209,7 @@ public class Text_renderer{
 //	if (error) {
 //	  util.freelog(Log.LOG_ERROR, "can't render glyph for %d '%c': error=0x%x", c,
 //		  c, error);
-//	  assert(0);
+//	  assert(0!=1);
 //	}
 //
 //	if (0)

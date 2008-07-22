@@ -145,15 +145,15 @@ public class Log{
 //  }
 //  if (n == 0) {
 //    if (sscanf(level_str, "%d", &level) != 1) {
-//      fc_fprintf(stderr, _("Bad log level \"%s\".\n"), level_str);
+//      fc_fprintf(stderr, ("Bad log level \"%s\".\n"), level_str);
 //      return -1;
 //    }
 //    if (level >= LOG_FATAL && level <= max_level) {
 //      return level;
 //    } else {
-//      fc_fprintf(stderr, _("Bad log level %d in \"%s\".\n"), level, level_str);
+//      fc_fprintf(stderr, ("Bad log level %d in \"%s\".\n"), level, level_str);
 //      if (level == LOG_DEBUG && max_level < LOG_DEBUG) {
-//	fc_fprintf(stderr, _("Freeciv must be compiled with the DEBUG flag"
+//	fc_fprintf(stderr, ("Freeciv must be compiled with the DEBUG flag" +
 //			     " to use debug level %d.\n"), LOG_DEBUG);
 //      }
 //      return -1;
@@ -164,12 +164,12 @@ public class Log{
 //  if (c[0] == ('0' + LOG_DEBUG) && c[1] == ':') {
 //    level = LOG_DEBUG;
 //    if (max_level < LOG_DEBUG) {
-//      fc_fprintf(stderr, _("Freeciv must be compiled with the DEBUG flag"
+//      fc_fprintf(stderr, ("Freeciv must be compiled with the DEBUG flag" +
 //			   " to use debug level %d.\n"), LOG_DEBUG);
 //      return -1;
 //    }
 //  } else {
-//    fc_fprintf(stderr, _("Badly formed log level argument \"%s\".\n"),
+//    fc_fprintf(stderr, ("Badly formed log level argument \"%s\".\n"),
 //	       level_str);
 //    return -1;
 //  }
@@ -181,7 +181,7 @@ public class Log{
 //  tok = strtok(dup, ":");
 //  
 //  if (!tok) {
-//    fc_fprintf(stderr, _("Badly formed log level argument \"%s\".\n"),
+//    fc_fprintf(stderr, ("Badly formed log level argument \"%s\".\n"),
 //	       level_str);
 //    level = -1;
 //    goto out;
@@ -211,7 +211,7 @@ public class Log{
 //      }
 //    }
 //    if(tok.length()==0) {
-//      fc_fprintf(stderr, _("Empty filename in log level argument \"%s\".\n"),
+//      fc_fprintf(stderr, ("Empty filename in log level argument \"%s\".\n"),
 //		 level_str);
 //      level = -1;
 //      goto out;
@@ -222,7 +222,7 @@ public class Log{
 //  } while(tok);
 //
 //  if (i!=logd_num_files) {
-//    fc_fprintf(stderr, _("Badly formed log level argument \"%s\".\n"),
+//    fc_fprintf(stderr, ("Badly formed log level argument \"%s\".\n"),
 //	       level_str);
 //    level = -1;
 //    goto out;
@@ -345,12 +345,12 @@ public class Log{
 //      repeated++;
 //      if(repeated==next){
 //	buf = util.my_snprintf(
-//		    PL_("last message repeated %d time",
+//		    PL("last message repeated %d time",
 //		        "last message repeated %d times",
 //			repeated-prev), repeated-prev);
 //	if (repeated>2) {
 //	  cat_snprintf(buf, sizeof(buf), 
-//	               PL_(" (total %d repeat)", " (total %d repeats)", repeated), 
+//	               PL(" (total %d repeat)", " (total %d repeats)", repeated), 
 //		       repeated);
 //	}
 //	log_write(fs, prev_level, buf);
@@ -364,12 +364,12 @@ public class Log{
 //	  log_write(fs, prev_level, bufbuf1 ? bufbuf[0] : bufbuf[1]);
 //	} else {
 //          buf = util.my_snprintf(
-//                      PL_("last message repeated %d time", 
+//                      PL("last message repeated %d time", 
 //                          "last message repeated %d times", repeated - prev), 
 //                      repeated - prev);
 //	  if (repeated > 2) {
 //	    cat_snprintf(buf, sizeof(buf), 
-//	                 PL_(" (total %d repeat)", " (total %d repeats)",
+//	                 PL(" (total %d repeat)", " (total %d repeats)",
 //			     repeated), 
 //			 repeated);
 //	  }

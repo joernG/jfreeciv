@@ -194,7 +194,7 @@ public class Graphics{
 //  if(Main.screen) {
 //    SDL_Surface *pNew_sur;
 //    if ((pNew_sur = SDL_DisplayFormat(pBuf)) == null) {
-//      util.freelog(Log.LOG_ERROR, _("load_surf: Unable to convert file %s "
+//      util.freelog(Log.LOG_ERROR, ("load_surf: Unable to convert file %s " +
 //			 "into screen's format!"), pFname);
 //    } else {
 //      FREESURFACE(pBuf);
@@ -216,13 +216,13 @@ public class Graphics{
 //  SDL_PixelFormat *pSpf = SDL_GetVideoSurface().format;
 //
 //  if ((pBuf = IMG_Load(pFname)) == null) {
-//    util.freelog(Log.LOG_ERROR, _("load_surf_with_flags: "
+//    util.freelog(Log.LOG_ERROR, ("load_surf_with_flags: " +
 //                         "Unable to load file %s."), pFname);
 //    return null;
 //  }
 //
 //  if ((pNew_sur = SDL_ConvertSurface(pBuf, pSpf, iFlags)) == null) {
-//    util.freelog(Log.LOG_ERROR, _("Unable to convert image from file %s "
+//    util.freelog(Log.LOG_ERROR, ("Unable to convert image from file %s " +
 //			 "into format %d."), pFname, iFlags);
 //    return pBuf;
 //  }
@@ -247,7 +247,7 @@ public class Graphics{
 //					    pSpf.Bmask, pSpf.Amask);
 //
 //  if (!pSurf) {
-//    util.freelog(Log.LOG_ERROR, _("Unable to create Sprite (Surface) of size "
+//    util.freelog(Log.LOG_ERROR, ("Unable to create Sprite (Surface) of size " +
 //			 "%d x %d %d Bits in format %d"), iWidth, 
 //	    			iHeight, pSpf.BitsPerPixel, iFlags);
 //    return null;
@@ -577,7 +577,7 @@ public class Graphics{
 //      }, lng);
 //    return;
 //    default:
-//      assert(0);
+//      assert(0!=1);
 //  }
 //}
 //
@@ -639,7 +639,7 @@ public class Graphics{
 //      my_memset32(buf_ptr, color, lng);
 //    return;
 //    default:
-//      assert(0);
+//      assert(0!=1);
 //  }
 //}
 //
@@ -894,17 +894,17 @@ public class Graphics{
 //
 //  /* Check to see if a particular video mode is supported */
 //  if ((iDepth = SDL_VideoModeOK(iWidth, iHeight, iDepth, iFlags)) == 0) {
-//    util.freelog(Log.LOG_ERROR, _("No available mode for this resolution "
+//    util.freelog(Log.LOG_ERROR, ("No available mode for this resolution " +
 //			 ": %d x %d %d bpp"), iWidth, iHeight, iDepth);
 //
-//    util.freelog(Log.LOG_DEBUG, _("Setting default resolution to : "
+//    util.freelog(Log.LOG_DEBUG, ("Setting default resolution to : " +
 //    					"640 x 480 16 bpp SW"));
 //
 //    Main.screen = SDL_SetVideoMode(640, 480, 16, SDL_SWSURFACE);
 //  } else /* set video mode */
 //    if ((Main.screen = SDL_SetVideoMode(iWidth, iHeight,
 //					iDepth, iFlags)) == null) {
-//    util.freelog(Log.LOG_ERROR, _("Unable to set this resolution: "
+//    util.freelog(Log.LOG_ERROR, ("Unable to set this resolution: " +
 //			 "%d x %d %d bpp %s"),
 //	    		iWidth, iHeight, iDepth, SDL_GetError());
 //

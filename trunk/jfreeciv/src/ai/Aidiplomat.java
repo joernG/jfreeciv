@@ -221,13 +221,13 @@ public class Aidiplomat{
 //    if (!player_has_embassy(pplayer, city_owner(acity))
 //        && want < 99) {
 //        util.freelog(LOG_DIPLOMAT_BUILD,
-//                "A diplomat desired in %s to establish an embassy with %s "
+//                "A diplomat desired in %s to establish an embassy with %s " +
 //                "in %s", pcity.name, city_owner(acity).name, acity.name);
 //        want = 99;
 //    }
 //    if (want > choice.want) {
 //      util.freelog(LOG_DIPLOMAT_BUILD,
-//              "%s, %s: %s is desired with want %d to spy in %s (incite "
+//              "%s, %s: %s is desired with want %d to spy in %s (incite " +
 //              "want %d cost %d gold %d, tech theft want %d, ttd %d)",
 //              pplayer.name, pcity.name, ut.name, want, acity.name, 
 //              gain_incite, incite_cost, 
@@ -304,7 +304,7 @@ public class Aidiplomat{
 //#undef T
 //
 //  /* This can happen for a number of odd and esoteric reasons  */
-//  UNIT_LOG(LOG_DIPLOMAT, punit, "decides to stand idle outside "
+//  UNIT_LOG(LOG_DIPLOMAT, punit, "decides to stand idle outside " +
 //           "enemy city %s!", ctarget.name);
 //  ai_unit_new_role(punit, AIUNIT_NONE, null);
 //}
@@ -520,7 +520,7 @@ public class Aidiplomat{
 //      }
 //    } else {
 //      /* usually because we ended move early due to another unit */
-//      UNIT_LOG(LOG_DIPLOMAT, punit, "could not bribe target (%d, %d), "
+//      UNIT_LOG(LOG_DIPLOMAT, punit, "could not bribe target (%d, %d), " +
 //               " %d moves left", TILE_XY(pos.tile), punit.moves_left);
 //      return false;
 //    }

@@ -377,9 +377,9 @@ public class Startpos{
 //      data.min_value *= 0.9;
 //      if (data.min_value <= 10) {
 //	util.freelog(Log.LOG_ERROR,
-//	        _("The server appears to have gotten into an infinite loop "
-//	          "in the allocation of starting positions.\n"
-//	          "Maybe the numbers of players/ia is too much for this Map.map.\n"
+//	        ("The server appears to have gotten into an infinite loop " +
+//	          "in the allocation of starting positions.\n" +
+//	          "Maybe the numbers of players/ia is too much for this Map.map.\n" +
 //	          "Please report this bug at %s."), WEBSITE_URL);
 //	failure = true;
 //	break;

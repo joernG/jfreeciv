@@ -1032,8 +1032,8 @@ public class Gui_main{
 //    DoMethod(main_wnd, MUIM_Notify, MUIA_Window_MenuAction, MUIV_EveryTime, main_wnd, 4, MUIM_CallHook, &civstandard_hook, control_callback, MUIV_TriggerValue);
 //
 //    append_output_window(
-//      _("Freeciv is free software and you are welcome to distribute copies of"
-//       " it\nunder certain conditions; See the \"Copying\" item on the Help"
+//      ("Freeciv is free software and you are welcome to distribute copies of" +
+//       " it\nunder certain conditions; See the \"Copying\" item on the Help" +
 //			  " menu.\nNow.. Go give'em hell!"));
 //
 //    return true;

@@ -70,7 +70,7 @@ public class Connectdlg{
 //    if (password[0] != '\0') {
 //      struct packet_authentication_reply reply;
 //
-//      sz_strlcpy(reply.password, password);
+//      reply.password = password;
 //      send_packet_authentication_reply(&aconnection, &reply);
 //      return;
 //    } else {
@@ -81,7 +81,7 @@ public class Connectdlg{
 //     /* PORTME: switch configs if need be */
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  /* PORTME etc. */
@@ -118,13 +118,13 @@ public class Connectdlg{
 //  int outcome;
 //
 //  buf = util.my_snprintf(
-//	      _("Auto-connecting to server \"%s\" at port %d as \"%s\""),
+//	      ("Auto-connecting to server \"%s\" at port %d as \"%s\""),
 //	      server_host, server_port, user_name);
 //  append_output_window(buf);
 //  outcome = get_server_address(server_host, server_port, buf, sizeof(buf));
 //  if (outcome < 0) {
 //    util.freelog(LOG_FATAL,
-//	    _("Error contacting server \"%s\" at port %d "
+//	    ("Error contacting server \"%s\" at port %d " +
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);
 //    exit(EXIT_FAILURE);
@@ -151,7 +151,7 @@ public class Connectdlg{
 //
 //  if (AUTOCONNECT_INTERVAL * count >= 10000) {
 //    util.freelog(LOG_FATAL,
-//	    _("Failed to contact server \"%s\" at port "
+//	    ("Failed to contact server \"%s\" at port " +
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, user_name, count);
 //    exit(EXIT_FAILURE);
@@ -171,7 +171,7 @@ public class Connectdlg{
 //  default:
 //    /* All other errors are fatal */
 //    util.freelog(LOG_FATAL,
-//	    _("Error contacting server \"%s\" at port %d "
+//	    ("Error contacting server \"%s\" at port %d " +
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, errbuf);
 //    exit(EXIT_FAILURE);

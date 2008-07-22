@@ -107,7 +107,7 @@ public class Cityrep{
 //static city *cities_in_list = null;
 //
 //static char *dummy_city_list[]={ 
-//  "    "
+//  "    " +
 //  " ",  " ",  " ",  " ",  " ",  " ",  " ",  " ",  " ",  " ",  " ",  " ",  " ",
 //  " ",  " ",  " ",  0
 //};

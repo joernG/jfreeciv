@@ -182,7 +182,7 @@ public class Repodlgs{
 //  steps = num_unknown_techs_for_goal(game.player_ptr,
 //                                     game.player_ptr.ai.tech_goal);
 //  text = util.my_snprintf(
-//	      PL_("(%d step)", "(%d steps)", steps), steps);
+//	      PL("(%d step)", "(%d steps)", steps), steps);
 //  SetWindowText(GetDlgItem(science_dlg,ID_SCIENCE_STEPS),text);
 //  fcwin_redo_layout(science_dlg);
 //}
@@ -240,7 +240,7 @@ public class Repodlgs{
 //					to);
 //	      steps = num_unknown_techs_for_goal(game.player_ptr, to);
 //	      text = util.my_snprintf( 
-//	                  PL_("(%d step)", "(%d steps)", steps),
+//	                  PL("(%d step)", "(%d steps)", steps),
 //			  steps);
 //	      SetWindowText(GetDlgItem(hWnd,ID_SCIENCE_STEPS), text);
 //	      dsend_packet_player_tech_goal(&aconnection, to);
@@ -564,7 +564,7 @@ public class Repodlgs{
 //		break;
 //	      ut2=can_upgrade_unittype(game.player_ptr,activeunits_type[sel]);
 //	      buf = util.my_snprintf(
-//			  _("Upgrade as many %s to %s as possible for %d gold each?\n"
+//			  ("Upgrade as many %s to %s as possible for %d gold each?\n" +
 //			    "Treasury contains %d gold."),
 //			  unit_types[ut1].name, unit_types[ut2].name,
 //			  unit_upgrade_price(game.player_ptr, ut1, ut2),
@@ -745,7 +745,7 @@ public class Repodlgs{
 //  buffer[0] = '\0';
 //  for (i = 0; i < packet.nscores; i++) {
 //    cat_snprintf(buffer, sizeof(buffer),
-//                 PL_("%2d: The %s ruler %s scored %d point\n",
+//                 PL("%2d: The %s ruler %s scored %d point\n",
 //                     "%2d: The %s ruler %s scored %d points\n",
 //                     packet.score[i]),
 //                 i + 1,

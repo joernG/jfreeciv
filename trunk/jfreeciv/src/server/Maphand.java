@@ -238,7 +238,7 @@ public class Maphand{
 //
 //  notify_player_ex(null, null, E_GLOBAL_ECO,
 //		   "Game: Global warming has occurred!");
-//  notify_player(null, _("Game: Coastlines have been flooded and vast "
+//  notify_player(null, ("Game: Coastlines have been flooded and vast " +
 //			"ranges of grassland have become deserts."));
 //}
 //
@@ -280,7 +280,7 @@ public class Maphand{
 //
 //  notify_player_ex(null, null, E_GLOBAL_ECO,
 //		   "Game: Nuclear winter has occurred!");
-//  notify_player(null, _("Game: Wetlands have dried up and vast "
+//  notify_player(null, ("Game: Wetlands have dried up and vast " +
 //			"ranges of grassland have become tundra."));
 //}
 //
@@ -301,15 +301,15 @@ public class Maphand{
 //
 //  if (discovery) {
 //    notify_player(pplayer,
-//		  _("Game: New hope sweeps like fire through the country as "
-//		    "the discovery of railroad is announced.\n"
-//		    "      Workers spontaneously gather and upgrade all "
+//		  ("Game: New hope sweeps like fire through the country as " +
+//		    "the discovery of railroad is announced.\n" +
+//		    "      Workers spontaneously gather and upgrade all " +
 //		    "cities with railroads."));
 //  } else {
 //    notify_player(pplayer,
-//		  _("Game: The people are pleased to hear that your "
-//		    "scientists finally know about railroads.\n"
-//		    "      Workers spontaneously gather and upgrade all "
+//		  ("Game: The people are pleased to hear that your " +
+//		    "scientists finally know about railroads.\n" +
+//		    "      Workers spontaneously gather and upgrade all " +
 //		    "cities with railroads."));
 //  }
 //  
@@ -456,7 +456,7 @@ public class Maphand{
 //  info.y = ptile.y;
 //  info.owner = ptile.owner ? ptile.owner.player_no : MAP_TILE_OWNER_NULL;
 //  if (ptile.spec_sprite) {
-//    sz_strlcpy(info.spec_sprite, ptile.spec_sprite);
+//    info.spec_sprite = ptile.spec_sprite;
 //  } else {
 //    info.spec_sprite[0] = '\0';
 //  }
@@ -505,7 +505,7 @@ public class Maphand{
 //  info.y = ptile.y;
 //  info.owner = ptile.owner ? ptile.owner.player_no : MAP_TILE_OWNER_NULL;
 //  if (ptile.spec_sprite) {
-//    sz_strlcpy(info.spec_sprite, ptile.spec_sprite);
+//    info.spec_sprite = ptile.spec_sprite;
 //  } else {
 //    info.spec_sprite[0] = '\0';
 //  }
@@ -1288,7 +1288,7 @@ public class Maphand{
 //  int save_vision[MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS];
 //  if (pfrom == pto) return;
 //  if (gives_shared_vision(pfrom, pto)) {
-//    util.freelog(Log.LOG_ERROR, "Trying to give shared vision from %s to %s, "
+//    util.freelog(Log.LOG_ERROR, "Trying to give shared vision from %s to %s, " +
 //	    "but that vision is already given!",
 //	    pfrom.name, pto.name);
 //    return;
@@ -1341,7 +1341,7 @@ public class Maphand{
 //  int save_vision[MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS];
 //  assert(pfrom != pto);
 //  if (!gives_shared_vision(pfrom, pto)) {
-//    util.freelog(Log.LOG_ERROR, "Tried removing the shared vision from %s to %s, "
+//    util.freelog(Log.LOG_ERROR, "Tried removing the shared vision from %s to %s, " +
 //	    "but it did not exist in the first place!",
 //	    pfrom.name, pto.name);
 //    return;

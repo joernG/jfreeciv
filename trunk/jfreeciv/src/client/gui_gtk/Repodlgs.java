@@ -305,7 +305,7 @@ public class Repodlgs{
 //    char text[512];
 //
 //    text = util.my_snprintf(
-//		PL_("(%d step)", "(%d steps)", steps), steps);
+//		PL("(%d step)", "(%d steps)", steps), steps);
 //    gtk_set_label(science_goal_label,text);
 //
 //    dsend_packet_player_tech_goal(&aconnection, to);
@@ -490,7 +490,7 @@ public class Repodlgs{
 //  
 //  steps = num_unknown_techs_for_goal(game.player_ptr,
 //				     game.player_ptr.ai.tech_goal);
-//  text = util.my_snprintf( PL_("(%d step)", "(%d steps)", steps),
+//  text = util.my_snprintf( PL("(%d step)", "(%d steps)", steps),
 //	      steps);
 //  gtk_set_label(science_goal_label,text);
 //
@@ -960,7 +960,7 @@ public class Repodlgs{
 //  ut2 = can_upgrade_unittype(game.player_ptr, activeunits_type[row]);
 //
 //  buf = util.my_snprintf(
-//	  _("Upgrade as many %s to %s as possible for %d gold each?\n"
+//	  ("Upgrade as many %s to %s as possible for %d gold each?\n" +
 //	    "Treasury contains %d gold."),
 //	  unit_types[ut1].name, unit_types[ut2].name,
 //	  unit_upgrade_price(game.player_ptr, ut1, ut2),

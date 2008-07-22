@@ -214,7 +214,7 @@ public class Advmilitary{
 //  } }
 //
 //  if (defense > 1<<12) {
-//    CITY_LOG(LOG_VERBOSE, pcity, "Overflow danger in assess_defense_quadratic:"
+//    CITY_LOG(LOG_VERBOSE, pcity, "Overflow danger in assess_defense_quadratic:" +
 //             " %d", defense);
 //    if (defense > 1<<15) {
 //      defense = 1<<15; /* more defense than we know what to do with! */
@@ -548,7 +548,7 @@ public class Advmilitary{
 //  for (i = 0; i < 5; i++) {
 //    if (danger[i] < 0 || danger[i] > 1<<24) {
 //      /* I hope never to see this! */
-//      util.freelog(Log.LOG_ERROR, "Dangerous danger[%d] (%d) in %s.  Beware of "
+//      util.freelog(Log.LOG_ERROR, "Dangerous danger[%d] (%d) in %s.  Beware of " +
 //              "overflow.", i, danger[i], pcity.name);
 //      danger[i] = danger[i]>>2; /* reduce danger of overflow */
 //    }
@@ -922,7 +922,7 @@ public class Advmilitary{
 //          /* This is a future unit, tell the scientist how much we need it */
 //          pplayer.ai.tech_want[tech_req] += want;
 //          
-//          CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s to build %s to punish %s@(%d,%d)"
+//          CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s to build %s to punish %s@(%d,%d)" +
 //                   " with desire %d", get_tech_name(pplayer, tech_req), 
 //                   unit_name(unit_type), (acity ? acity.name : "enemy"),
 //                   TILE_XY(ptile), want);
@@ -931,7 +931,7 @@ public class Advmilitary{
 //          if (can_build_unit(pcity, unit_type)) {
 //            /* This is a real unit and we really want it */
 //
-//            CITY_LOG(Log.LOG_DEBUG, pcity, "overriding %s(%d) with %s(%d)"
+//            CITY_LOG(Log.LOG_DEBUG, pcity, "overriding %s(%d) with %s(%d)" +
 //                     " [attack=%d,value=%d,move_time=%d,vuln=%d,bcost=%d]",
 //                     unit_name(best_choice.choice), best_choice.want,
 //                     unit_name(unit_type), want, attack, value, move_time,
@@ -1010,7 +1010,7 @@ public class Advmilitary{
 //  }
 //
 //  if (!is_ground_unit(myunit) && !is_sailing_unit(myunit)) {
-//    util.freelog(Log.LOG_ERROR, "ERROR: Attempting to deal with non-trivial"
+//    util.freelog(Log.LOG_ERROR, "ERROR: Attempting to deal with non-trivial" +
 //            " unit_type in kill_something_with");
 //    return;
 //  }

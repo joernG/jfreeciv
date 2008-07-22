@@ -82,7 +82,7 @@ public class Ioz{
 //  }
 //
 //  fp = (fz_FILE *)fc_malloc(sizeof(*fp));
-//  sz_strlcpy(mode, in_mode);
+//  mode = in_mode;
 //
 //  if (mode[0] == 'w') {
 //    /* Writing: */

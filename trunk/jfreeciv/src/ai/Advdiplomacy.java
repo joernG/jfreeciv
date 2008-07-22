@@ -254,7 +254,7 @@ public class Advdiplomacy{
 //     * leader. */
 //    if (pplayer != ai.diplomacy.alliance_leader
 //        && pplayers_at_war(aplayer, ai.diplomacy.alliance_leader)) {
-//      notify(aplayer, _("*%s (AI)* %s leads our alliance. You must contact "
+//      notify(aplayer, ("*%s (AI)* %s leads our alliance. You must contact " +
 //             "and make peace with him first."), pplayer.name, 
 //             ai.diplomacy.alliance_leader.name);
 //      worth = -BIG_NUMBER;
@@ -279,7 +279,7 @@ public class Advdiplomacy{
 //	&& (pclause.type != CLAUSE_CEASEFIRE
 //	    || ai.diplomacy.acceptable_reputation_for_ceasefire > 
 //	       aplayer.reputation)) {
-//      notify(aplayer, _("*%s (AI)* Begone scoundrel, we all know that"
+//      notify(aplayer, ("*%s (AI)* Begone scoundrel, we all know that" +
 //             " you cannot be trusted!"), pplayer.name);
 //      worth = -BIG_NUMBER;
 //      break;
@@ -291,7 +291,7 @@ public class Advdiplomacy{
 //
 //      if ((pclause.type == CLAUSE_PEACE && ds > DS_PEACE)
 //          || (pclause.type == CLAUSE_CEASEFIRE && ds > DS_CEASEFIRE)) {
-//        notify(aplayer, _("*%s (AI)* I will not let you go that easy, %s. "
+//        notify(aplayer, ("*%s (AI)* I will not let you go that easy, %s. " +
 //               "The current treaty stands."), pplayer.name, aplayer.name);
 //        worth = -BIG_NUMBER;
 //        break;
@@ -308,7 +308,7 @@ public class Advdiplomacy{
 //     * let him live. */
 //    if (pplayer_get_diplstate(aplayer, ai.diplomacy.alliance_leader).type
 //        == DS_CEASEFIRE && pclause.type == CLAUSE_CEASEFIRE) {
-//        notify(aplayer, _("*%s (AI)* %s recommended that I give you a ceasefire."
+//        notify(aplayer, ("*%s (AI)* %s recommended that I give you a ceasefire." +
 //               " This is your lucky day."), pplayer.name,
 //               ai.diplomacy.alliance_leader.name);
 //        if (ai.diplomacy.target == aplayer) {
@@ -433,7 +433,7 @@ public class Advdiplomacy{
 //    if (give) {
 //      if (pplayers_allied(pplayer, aplayer)) {
 //        if (!shared_vision_is_safe(pplayer, aplayer)) {
-//          notify(aplayer, _("*%s (AI)* Sorry, sharing vision with you "
+//          notify(aplayer, ("*%s (AI)* Sorry, sharing vision with you " +
 //	                    "is not safe."),
 //                 pplayer.name);
 //	  worth = -BIG_NUMBER;
@@ -753,7 +753,7 @@ public class Advdiplomacy{
 //    } else if (pplayer.diplstates[a].has_reason_to_cancel != 0) {
 //      /* Provoked in time of peace */
 //      if (pplayer.ai.love[aplayer.player_no] > 0) {
-//        PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Provoked by %s! Love halved "
+//        PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Provoked by %s! Love halved " +
 //                   "(was %d)", aplayer.name, 
 //                   pplayer.ai.love[aplayer.player_no]);
 //        pplayer.ai.love[aplayer.player_no] /= 2;
@@ -852,7 +852,7 @@ public class Advdiplomacy{
 //      war_desire[aplayer.player_no] /= 2;
 //    }
 //    
-//    PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Against %s we have war desire "
+//    PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Against %s we have war desire " +
 //            "%d ", aplayer.name, war_desire[aplayer.player_no]);
 //
 //    /* Find best target */
@@ -974,7 +974,7 @@ public class Advdiplomacy{
 //        && pplayer.diplstates[aplayer.player_no].has_reason_to_cancel >= 2) {
 //      PLAYER_LOG(LOG_DIPL2, pplayer, ai, "Declaring war on %s in revenge",
 //                 target.name);
-//      notify(target, _("*%s (AI)* I will NOT accept such behaviour! This "
+//      notify(target, ("*%s (AI)* I will NOT accept such behaviour! This " +
 //             "means WAR!"), pplayer.name);
 //      ai_go_to_war(pplayer, ai, aplayer);
 //    }
@@ -997,8 +997,8 @@ public class Advdiplomacy{
 //      if (aplayer.spaceship.state == spaceship_state.SSHIP_LAUNCHED
 //          && ai.diplomacy.spacerace_leader == aplayer
 //          && pplayers_allied(pplayer, aplayer)) {
-//        notify(aplayer, _("*%s (AI)* Your attempt to conquer space for "
-//               "yourself alone betray your true intentions, and I "
+//        notify(aplayer, ("*%s (AI)* Your attempt to conquer space for " +
+//               "yourself alone betray your true intentions, and I " +
 //               "will have no more of our alliance!"), pplayer.name);
 //	handle_diplomacy_cancel_pact(pplayer, aplayer.player_no,
 //				     CLAUSE_ALLIANCE);
@@ -1010,9 +1010,9 @@ public class Advdiplomacy{
 //      } else if (ship.state == spaceship_state.SSHIP_STARTED 
 //		 && adip.warned_about_space == 0) {
 //        adip.warned_about_space = 10 + myrand(6);
-//        notify(aplayer, _("*%s (AI)* Your attempt to unilaterally "
+//        notify(aplayer, ("*%s (AI)* Your attempt to unilaterally " +
 //               "dominate outer space is highly offensive."), pplayer.name);
-//        notify(aplayer, _("*%s (AI)* If you do not stop finalructing your "
+//        notify(aplayer, ("*%s (AI)* If you do not stop finalructing your " +
 //               "spaceship, I may be forced to take action!"), pplayer.name);
 //      }
 //      if (aplayer.spaceship.state == spaceship_state.SSHIP_LAUNCHED
@@ -1032,16 +1032,16 @@ public class Advdiplomacy{
 //      && ai.diplomacy.countdown <= 0
 //      && !ai_handicap(pplayer, H_AWAY)) {
 //    if (pplayers_allied(pplayer, target)) {
-//      PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Went to war against %s, who is "
+//      PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Went to war against %s, who is " +
 //                 "an ally!", target.name); /* Oh, my. */
 //    }
 //    if (pplayer.diplstates[target.player_no].has_reason_to_cancel > 0) {
 //      /* We have good reason */
-//      notify(target, _("*%s (AI)* Your despicable actions will not go "
+//      notify(target, ("*%s (AI)* Your despicable actions will not go " +
 //             "unpunished!"), pplayer.name);
 //    } if (pplayer.ai.love[target.player_no] < 0) {
 //      /* We have a reason of sorts from way back. */
-//      notify(target, _("*%s (AI)* Finally I get around to you! Did "
+//      notify(target, ("*%s (AI)* Finally I get around to you! Did " +
 //             "you really think you could get away with your crimes?"),
 //             pplayer.name);
 //    } else {
@@ -1063,7 +1063,7 @@ public class Advdiplomacy{
 //        && !pplayers_at_war(pplayer, aplayer)
 //	&& (pplayer_get_diplstate(pplayer, aplayer).type != DS_CEASEFIRE || 
 //	    myrand(5) < 1)) {
-//      notify(aplayer, _("*%s (AI)* Your aggression against my allies was "
+//      notify(aplayer, ("*%s (AI)* Your aggression against my allies was " +
 //			"your last mistake!"), pplayer.name);
 //      ai_go_to_war(pplayer, ai, aplayer);
 //    }
@@ -1085,7 +1085,7 @@ public class Advdiplomacy{
 //      if (!pplayers_allied(pplayer, aplayer)) {
 //        remove_shared_vision(pplayer, aplayer);
 //      } else if (!shared_vision_is_safe(pplayer, aplayer)) {
-//        notify(aplayer, _("*%s (AI)* Sorry, sharing vision with you "
+//        notify(aplayer, ("*%s (AI)* Sorry, sharing vision with you " +
 //	                    "is no longer safe."),
 //	       pplayer.name);
 //	remove_shared_vision(pplayer, aplayer);
@@ -1144,7 +1144,7 @@ public class Advdiplomacy{
 //        break;
 //      }
 //      if (target && pplayer.ai.control) {
-//        PLAYER_LOG(LOG_DIPL2, pplayer, ai, "Ally %s not at war with enemy %s "
+//        PLAYER_LOG(LOG_DIPL2, pplayer, ai, "Ally %s not at war with enemy %s " +
 //                "(patience %d, %s %s)", aplayer.name, 
 //                target.name, adip.ally_patience, adip.at_war_with_ally
 //                ? "war_with_ally" : "", adip.is_allied_with_ally ? 
@@ -1153,21 +1153,21 @@ public class Advdiplomacy{
 //      }
 //      switch (adip.ally_patience--) {
 //        case 0:
-//          notify(aplayer, _("*%s (AI)* Greetings our most trustworthy "
+//          notify(aplayer, ("*%s (AI)* Greetings our most trustworthy " +
 //                 "ally, we call upon you to destroy our enemy, %s"), 
 //                 pplayer.name, target.name);
 //          break;
 //        case -1:
-//          notify(aplayer, _("*%s (AI)* Greetings ally, I see you have not yet "
-//                 "made war with our enemy, %s. Why do I need to remind "
+//          notify(aplayer, ("*%s (AI)* Greetings ally, I see you have not yet " +
+//                 "made war with our enemy, %s. Why do I need to remind " +
 //                 "you of your promises?"), pplayer.name, target.name);
 //          break;
 //        case -2:
-//          notify(aplayer, _("*%s (AI)* Dishonoured one, we made a pact of "
-//                 "alliance, and yet you remain at peace with our mortal "
-//                 "enemy, %s! This is unacceptable, our alliance is no "
+//          notify(aplayer, ("*%s (AI)* Dishonoured one, we made a pact of " +
+//                 "alliance, and yet you remain at peace with our mortal " +
+//                 "enemy, %s! This is unacceptable, our alliance is no " +
 //                 "more!"), pplayer.name, target.name);
-//          PLAYER_LOG(LOG_DIPL2, pplayer, ai, "breaking useless alliance with "
+//          PLAYER_LOG(LOG_DIPL2, pplayer, ai, "breaking useless alliance with " +
 //                     "%s", aplayer.name);
 //	  /* to peace */
 //	  handle_diplomacy_cancel_pact(pplayer, aplayer.player_no,
@@ -1192,7 +1192,7 @@ public class Advdiplomacy{
 //      }
 //      ai_diplomacy_suggest(pplayer, aplayer, CLAUSE_ALLIANCE, 0);
 //      adip.asked_about_alliance = !aplayer.ai.control ? 13 : 0;
-//      notify(aplayer, _("*%s (AI)* Greetings friend, may we suggest "
+//      notify(aplayer, ("*%s (AI)* Greetings friend, may we suggest " +
 //             "a joint campaign against %s?"), pplayer.name, target.name);
 //      break;
 //
@@ -1207,7 +1207,7 @@ public class Advdiplomacy{
 //      }
 //      ai_diplomacy_suggest(pplayer, aplayer, CLAUSE_PEACE, 0);
 //      adip.asked_about_peace = !aplayer.ai.control ? 12 : 0;
-//      notify(aplayer, _("*%s (AI)* Greetings neighbour, may we suggest "
+//      notify(aplayer, ("*%s (AI)* Greetings neighbour, may we suggest " +
 //             "a joint campaign against %s?"), pplayer.name, target.name);
 //      break;
 //
@@ -1221,7 +1221,7 @@ public class Advdiplomacy{
 //      }
 //      ai_diplomacy_suggest(pplayer, aplayer, CLAUSE_CEASEFIRE, 0);
 //      adip.asked_about_ceasefire = !aplayer.ai.control ? 9 : 0;
-//      notify(aplayer, _("*%s (AI)* %s is threatening us both, may we "
+//      notify(aplayer, ("*%s (AI)* %s is threatening us both, may we " +
 //             "suggest a cessation of hostilities?"), pplayer.name,
 //             target.name);
 //      break;

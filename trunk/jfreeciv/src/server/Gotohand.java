@@ -438,7 +438,7 @@ public class Gotohand {
 	// } else if (diff_x < 0) {
 	// best_dir = (diff_y > 0) ? DIR8_SOUTHWEST : DIR8_NORTHWEST;
 	// } else {
-	// assert(0);
+	// assert(0!=1);
 	// best_dir = 0;
 	// }
 	//

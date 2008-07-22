@@ -104,9 +104,9 @@ public class Helpdata{
 //  if (0 == strcmp (name, "TerrainAlterations")) {
 //    int i;
 //
-//    strcat(outbuf, _("Terrain     Road   Irrigation     Mining         "
+//    strcat(outbuf, ("Terrain     Road   Irrigation     Mining         " +
 //		      "Transform\n"));
-//    strcat(outbuf, "---------------------------------------------------"
+//    strcat(outbuf, "---------------------------------------------------" +
 //	   "------------\n");
 //    for (i = T_FIRST; i < T_COUNT; i++) {
 //      tile_type ptype = get_tile_type(i);
@@ -132,7 +132,7 @@ public class Helpdata{
 //      }
 //    }
 //    strcat(outbuf, "\n");
-//    strcat(outbuf, _("(Railroads and fortresses require 3 turns, "
+//    strcat(outbuf, ("(Railroads and fortresses require 3 turns, " +
 //		     "regardless of terrain.)"));
 //  }
 //  return;
@@ -434,7 +434,7 @@ public class Helpdata{
 //  if(!pitem) {
 //    idx = -1;
 //    vitem.topic = vtopic;
-//    sz_strlcpy(vtopic, name);
+//    vtopic = name;
 //    vitem.text = vtext;
 //    if(htype==HELP_ANY || htype==HELP_TEXT) {
 //      vtext = util.my_snprintf(
@@ -442,7 +442,7 @@ public class Helpdata{
 //      vitem.type = HELP_TEXT;
 //    } else {
 //      vtext = util.my_snprintf(
-//		  _("Sorry, no help topic for %s.\n"
+//		  ("Sorry, no help topic for %s.\n" +
 //		    "This page was auto-generated.\n\n"),
 //		  vitem.topic);
 //      vitem.type = htype;
@@ -541,7 +541,7 @@ public class Helpdata{
 //    assert(t < game.num_tech_types);
 //
 //    my_snprintf(buf + buf.length(), bufsz - buf.length(),
-//		_("* Allows all players with knowledge of %s "
+//		("* Allows all players with knowledge of %s " +
 //		  "to build %s units.\n"),
 //		get_tech_name(game.player_ptr, t), get_unit_type(u).name);
 //    my_snprintf(buf + buf.length(), bufsz - buf.length(), "  ");
@@ -680,17 +680,17 @@ public class Helpdata{
 //  if (utype.transport_capacity>0) {
 //    if (unit_type_flag(i, F_CARRIER)) {
 //      sprintf(buf + buf.length(),
-//	      PL_("* Can carry and refuel %d air unit.\n",
+//	      PL("* Can carry and refuel %d air unit.\n",
 //		  "* Can carry and refuel %d air units.\n",
 //		  utype.transport_capacity), utype.transport_capacity);
 //    } else if (unit_type_flag(i, F_MISSILE_CARRIER)) {
 //      sprintf(buf + buf.length(),
-//	      PL_("* Can carry and refuel %d missile unit.\n",
+//	      PL("* Can carry and refuel %d missile unit.\n",
 //		  "* Can carry and refuel %d missile units.\n",
 //		  utype.transport_capacity), utype.transport_capacity);
 //    } else {
 //      sprintf(buf + buf.length(),
-//	      PL_("* Can carry %d ground unit across water.\n",
+//	      PL("* Can carry %d ground unit across water.\n",
 //		  "* Can carry %d ground units across water.\n",
 //		  utype.transport_capacity), utype.transport_capacity);
 //    }
@@ -698,9 +698,9 @@ public class Helpdata{
 //  if (unit_type_flag(i, F_TRADE_ROUTE)) {
 //    /* TRANS: "Manhattan" distance is the distance along gridlines, with
 //     * no diagonals allowed. */
-//    sprintf(buf + buf.length(), _("* Can establish trade routes (must travel "
-//				 "to target city and must be at least 9 "
-//				 "tiles [in Manhattan distance] from this "
+//    sprintf(buf + buf.length(), ("* Can establish trade routes (must travel " +
+//				 "to target city and must be at least 9 " +
+//				 "tiles [in Manhattan distance] from this " +
 //				 "unit's home city).\n"));
 //  }
 //  if (unit_type_flag(i, F_HELP_WONDER)) {
@@ -711,14 +711,14 @@ public class Helpdata{
 //  if (unit_type_flag(i, F_UNDISBANDABLE)) {
 //    sprintf(buf + buf.length(), "* May not be disbanded.\n");
 //  } else {
-//    sprintf(buf + buf.length(), _("* May be disbanded in a city to "
+//    sprintf(buf + buf.length(), ("* May be disbanded in a city to " +
 //				 "recover 50%% of the production cost.\n"));
 //  }
 //  if (unit_type_flag(i, F_CITIES)) {
 //    sprintf(buf + buf.length(), "* Can build new cities.\n");
 //  }
 //  if (unit_type_flag(i, F_ADD_TO_CITY)) {
-//    sprintf(buf + buf.length(), _("* Can add on %d population to "
+//    sprintf(buf + buf.length(), ("* Can add on %d population to " +
 //				 "cities of no more than size %d.\n"),
 //	    unit_pop_value(i), game.add_to_size_limit - unit_pop_value(i));
 //  }
@@ -741,7 +741,7 @@ public class Helpdata{
 //      break;
 //    default:
 //      sprintf(buf + buf.length(),
-//	      _("* Can build farmland (if any of the following are "
+//	      ("* Can build farmland (if any of the following are " +
 //		"known: %s).\n"), buf2);
 //      break;
 //    }
@@ -757,7 +757,7 @@ public class Helpdata{
 //      break;
 //    default:
 //      sprintf(buf + buf.length(),
-//	      _("* Can build fortresses (if any of the following are "
+//	      ("* Can build fortresses (if any of the following are " +
 //		"known: %s).\n"), buf2);
 //      break;
 //    }
@@ -783,14 +783,14 @@ public class Helpdata{
 //  }
 //  if (unit_type_flag(i, F_DIPLOMAT)) {
 //    if (unit_type_flag(i, F_SPY)) {
-//      sprintf(buf + buf.length(), _("* Can perform diplomatic actions,"
+//      sprintf(buf + buf.length(), ("* Can perform diplomatic actions," +
 //				   " plus special spy abilities.\n"));
 //    } else {
 //      sprintf(buf + buf.length(), "* Can perform diplomatic actions.\n");
 //    }
 //  }
 //  if (unit_type_flag(i, F_SUPERSPY)) {
-//    sprintf(buf + buf.length(), _("* Will never lose a "
+//    sprintf(buf + buf.length(), ("* Will never lose a " +
 //				 "diplomat-versus-diplomat fight.\n"));
 //  }
 //  if (unit_type_flag(i, F_UNBRIBABLE)) {
@@ -800,25 +800,25 @@ public class Helpdata{
 //    sprintf(buf + buf.length(), "* Can attack enemy air units.\n");
 //  }
 //  if (unit_type_flag(i, F_PARTIAL_INVIS)) {
-//    sprintf(buf + buf.length(), _("* Is invisible except when next to an"
+//    sprintf(buf + buf.length(), ("* Is invisible except when next to an" +
 //				 " enemy unit or city.\n"));
 //  }
 //  if (unit_type_flag(i, F_NO_LAND_ATTACK)) {
-//    sprintf(buf + buf.length(), _("* Can only attack units on ocean squares"
+//    sprintf(buf + buf.length(), ("* Can only attack units on ocean squares" +
 //				 " (no land attacks).\n"));
 //  }
 //  if (unit_type_flag(i, F_MARINES)) {
 //    sprintf(buf + buf.length(),
-//	    _("* Can attack from aboard sea units: against"
+//	    ("* Can attack from aboard sea units: against" +
 //	      " enemy cities and onto land squares.\n"));
 //  }
 //  if (unit_type_flag(i, F_PARATROOPERS)) {
 //    sprintf(buf + buf.length(),
-//	    _("* Can be paradropped from a friendly city"
+//	    ("* Can be paradropped from a friendly city" +
 //	      " (Range: %d).\n"), utype.paratroopers_range);
 //  }
 //  if (unit_type_flag(i, F_PIKEMEN)) {
-//    sprintf(buf + buf.length(), _("* Gets double defense against units"
+//    sprintf(buf + buf.length(), ("* Gets double defense against units" +
 //				 " specified as 'mounted'.\n"));
 //  }
 //  if (unit_type_flag(i, F_HORSE)) {
@@ -845,8 +845,8 @@ public class Helpdata{
 //  }
 //  if (unit_type_flag(i, F_BOMBARDER)) {
 //    sprintf(buf + buf.length(),
-//	    _("* Does bombard attacks (%d per turn).  These attacks will "
-//	      "only damage (never kill) the defender but has no risk to "
+//	    ("* Does bombard attacks (%d per turn).  These attacks will " +
+//	      "only damage (never kill) the defender but has no risk to " +
 //	      "the attacker.\n"), utype.bombard_rate);
 //  }
 //  if (unit_type_flag(i, F_AEGIS)) {
@@ -859,18 +859,18 @@ public class Helpdata{
 //  }
 //  if (unit_type_flag(i, F_IGTIRED)) {
 //    sprintf(buf + buf.length(),
-//	    _("* Attacks with full strength even if less than "
+//	    ("* Attacks with full strength even if less than " +
 //	      "one movement left.\n"));
 //  }
 //  if (unit_type_flag(i, F_IGZOC)) {
 //    sprintf(buf + buf.length(), "* Ignores zones of control.\n");
 //  }
 //  if (unit_type_flag(i, Eunit_flag_id.F_NONMIL)) {
-//    sprintf(buf + buf.length(), _("* A non-military unit"
+//    sprintf(buf + buf.length(), ("* A non-military unit" +
 //				 " (cannot attack; no martial law).\n"));
 //  }
 //  if (unit_type_flag(i, F_FIELDUNIT)) {
-//    sprintf(buf + buf.length(), _("* A field unit: one unhappiness applies"
+//    sprintf(buf + buf.length(), ("* A field unit: one unhappiness applies" +
 //				 " even when non-aggressive.\n"));
 //  }
 //  if (unit_type_flag(i, F_NO_VETERAN)) {
@@ -884,7 +884,7 @@ public class Helpdata{
 //    Tech_Type_id tech1 = find_tech_by_flag(0, TF_REDUCE_TRIREME_LOSS1);
 //    Tech_Type_id tech2 = find_tech_by_flag(0, TF_REDUCE_TRIREME_LOSS2);
 //    sprintf(buf + buf.length(),
-//	    _("* Must end turn in a city or next to land,"
+//	    ("* Must end turn in a city or next to land," +
 //	      " or has a 50%% risk of being lost at sea.\n"));
 //    if (tech1 != A_LAST) {
 //      sprintf(buf + buf.length(),
@@ -954,9 +954,9 @@ public class Helpdata{
 //    assert(num_allowed_units > 0);
 //
 //    sprintf(buf + buf.length(),
-//	    PL_("* Unit has to be in a city, or on a %s"
+//	    PL("* Unit has to be in a city, or on a %s" +
 //		" after %d turn.\n",
-//		"* Unit has to be in a city, or on a %s"
+//		"* Unit has to be in a city, or on a %s" +
 //		" after %d turns.\n", utype.fuel),
 //	    astr.str, utype.fuel);
 //    astr_free(&astr);
@@ -987,8 +987,8 @@ public class Helpdata{
 //	      base_total_bulbs_required(game.player_ptr, i));
 //    } else if (tech_is_available(game.player_ptr, i)) {
 //      sprintf(buf + buf.length(),
-//	      _("To reach %s we need to obtain %d other "
-//		"technologies first. The whole project "
+//	      ("To reach %s we need to obtain %d other " +
+//		"technologies first. The whole project " +
 //		"will require %d bulbs to complete."),
 //	      get_tech_name(game.player_ptr, i),
 //	      num_unknown_techs_for_goal(game.player_ptr, i) - 1,
@@ -999,7 +999,7 @@ public class Helpdata{
 //    }
 //    if (!techs_have_fixed_costs() && tech_is_available(game.player_ptr, i)) {
 //      sprintf(buf + buf.length(),
-//	      _(" This number may vary depending on what "
+//	      (" This number may vary depending on what " +
 //		"other players will research.\n"));
 //    } else {
 //      sprintf(buf + buf.length(), "\n");
@@ -1013,20 +1013,20 @@ public class Helpdata{
 //    }
 //  } government_iterate_end;
 //  if (tech_flag(i, TF_BONUS_TECH)) {
-//    sprintf(buf + buf.length(), _("* The first player to research %s gets "
+//    sprintf(buf + buf.length(), ("* The first player to research %s gets " +
 //				 "an immediate advance.\n"),
 //	    get_tech_name(game.player_ptr, i));
 //  }
 //  if (tech_flag(i, TF_BOAT_FAST))
 //    sprintf(buf + buf.length(), "* Gives sea units one extra move.\n");
 //  if (tech_flag(i, TF_REDUCE_TRIREME_LOSS1))
-//    sprintf(buf + buf.length(), _("* Reduces the chance of losing boats "
+//    sprintf(buf + buf.length(), ("* Reduces the chance of losing boats " +
 //				 "on the high seas to 25%%.\n"));
 //  if (tech_flag(i, TF_REDUCE_TRIREME_LOSS2))
-//    sprintf(buf + buf.length(), _("* Reduces the chance of losing boats "
+//    sprintf(buf + buf.length(), ("* Reduces the chance of losing boats " +
 //				 "on the high seas to 12%%.\n"));
 //  if (tech_flag(i, TF_POPULATION_POLLUTION_INC))
-//    sprintf(buf + buf.length(), _("* Increases the pollution generated by "
+//    sprintf(buf + buf.length(), ("* Increases the pollution generated by " +
 //				 "the population.\n"));
 //  if (game.rtech.cathedral_plus == i)
 //    sprintf(buf + buf.length(), "* Improves the effect of Cathedrals.\n");
@@ -1039,7 +1039,7 @@ public class Helpdata{
 //
 //  if (tech_flag(i, TF_BRIDGE)) {
 //    final String units_str = get_units_with_flag_string(F_SETTLERS);
-//    sprintf(buf + buf.length(), _("* Allows %s to build roads on river "
+//    sprintf(buf + buf.length(), ("* Allows %s to build roads on river " +
 //				 "squares.\n"), units_str);
 //    free((void *) units_str);
 //  }

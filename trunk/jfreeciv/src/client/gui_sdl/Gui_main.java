@@ -157,7 +157,7 @@ public class Gui_main{
 //  fc_fprintf(stderr, "Report bugs to <%s>.\n", BUG_EMAIL_ADDRESS);
 //  fc_fprintf(stderr,
 //	     "  -f,  --fullscreen\tStart Client in Fulscreen mode\n");
-//  fc_fprintf(stderr, _("  -e,  --eventthread\tInit Event Subsystem in "
+//  fc_fprintf(stderr, ("  -e,  --eventthread\tInit Event Subsystem in " +
 //		       "other thread (only Linux and BeOS)\n"));
 //}
 //

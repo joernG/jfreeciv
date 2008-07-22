@@ -400,10 +400,10 @@ public class Gui_tilespec{
 //  pTheme = MALLOC(sizeof(struct Theme));
 //  
 //  if(!sprite_exists("theme.tech_tree")) {
-//    util.freelog(LOG_FATAL, "Your current tileset don't contains ""all"" GUI theme graphic\n"
-//    "Please use other tileset with ""full"" GUI graphic pack (use -t tileset options)\n"
-//    "If you don't have any tileset with SDLClient GUI theme then go to freeciv\n"
-//    "(ftp.freeciv.org/pub/freeciv/incoming) ftp site and download current DELUXE"
+//    util.freelog(LOG_FATAL, "Your current tileset don't contains ""all"" GUI theme graphic\n" +
+//    "Please use other tileset with ""full"" GUI graphic pack (use -t tileset options)\n" +
+//    "If you don't have any tileset with SDLClient GUI theme then go to freeciv\n" +
+//    "(ftp.freeciv.org/pub/freeciv/incoming) ftp site and download current DELUXE" +
 //    "tileset theme");
 //  }
 //  

@@ -183,7 +183,7 @@ public class Localcharset{
 //	 directory as the DLL and of retrieving the DLL's directory at
 //	 runtime, simply inline the aliases here.  */
 //
-//      cp = "CP936" "\0" "GBK" "\0"
+//      cp = "CP936" "\0" "GBK" "\0" +
 //	   "CP1361" "\0" "JOHAB" "\0";
 //#endif
 //

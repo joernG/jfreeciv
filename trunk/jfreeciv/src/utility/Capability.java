@@ -52,7 +52,7 @@ public class Capability{
 //    if (*capstr == '+') {
 //      capstr++;
 //    }
-//    if ((next-capstr == cap_len) && strncmp(cap, capstr, cap_len)==0) {
+//    if ((next-capstr == cap_len) && !cap.equals(capstr)) {
 //      return true;
 //    }
 //    if (*next == '\0') {

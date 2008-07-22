@@ -1292,13 +1292,13 @@ public class Dialogs{
 //    buf = util.my_snprintf(
 //                "Bribe unit for %d gold?\nTreasury contains %d gold.", 
 //                punit.bribe_cost, game.player_ptr.economic.gold);
-//    popup_message_dialog(root_window, /*"diplomatbribedialog"*/_("Bribe Enemy Unit"
+//    popup_message_dialog(root_window, /*"diplomatbribedialog"*/("Bribe Enemy Unit"
 //), buf,
 //                        "_Yes", diplomat_bribe_yes_callback, 0,
 //                        "_No", diplomat_bribe_no_callback, 0, 0);
 //  } else {
 //    buf = util.my_snprintf(
-//                _("Bribing the unit costs %d gold.\n"
+//                ("Bribing the unit costs %d gold.\n" +
 //                  "Treasury contains %d gold."), 
 //                punit.bribe_cost, game.player_ptr.economic.gold);
 //    popup_message_dialog(root_window, /*"diplomatnogolddialog"*/
@@ -1482,7 +1482,7 @@ public class Dialogs{
 //		       "_No", diplomat_incite_no_callback, 0, 0);
 //  } else {
 //    buf = util.my_snprintf(
-//		_("Inciting a revolt costs %d gold.\n"
+//		("Inciting a revolt costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
 //		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //   popup_message_dialog(root_window, /*"diplomatnogolddialog"*/"Traitors Demand Too Much!", buf,
@@ -1709,7 +1709,7 @@ public class Dialogs{
 //    {
 //      char *replacepos;
 //      char converted_name[512];
-//      sz_strlcpy(converted_name,name);
+//      converted_name = name;
 //      replacepos=converted_name;
 //      while ((replacepos=strchr(replacepos,'_')))
 //	{

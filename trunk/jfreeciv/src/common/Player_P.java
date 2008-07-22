@@ -84,8 +84,8 @@ public class Player_P{
 //
 //  plr.player_no=plr-game.players;
 //
-//  sz_strlcpy(plr.name, ANON_PLAYER_NAME);
-//  sz_strlcpy(plr.username, ANON_USER_NAME);
+//  plr.name = ANON_PLAYER_NAME;
+//  plr.username = ANON_USER_NAME;
 //  plr.is_male = true;
 //  plr.government=game.default_government;
 //  plr.target_government = game.default_government;
@@ -514,7 +514,7 @@ public class Player_P{
 ///**************************************************************************
 //  Return a text describing an AI's love for you.  (Oooh, kinky!!)
 //  These words should be adjectives which can fit in the sentence
-//  "The x are y towards us"
+//  "The x are y towards us" +
 //  "The Babylonians are respectful towards us"
 //**************************************************************************/
 //final String love_text(final int love)

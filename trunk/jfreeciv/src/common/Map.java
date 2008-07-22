@@ -86,7 +86,7 @@ public class Map{
 //  boolean first;
 //  tile_type ptype = get_tile_type(ptile.terrain);
 //
-//  sz_strlcpy(s, ptype.terrain_name);
+//  s = ptype.terrain_name;
 //  if (tile_has_special(ptile, S_RIVER)) {
 //    sz_strlcat(s, "/");
 //    sz_strlcat(s, get_special_name(S_RIVER));
@@ -1550,7 +1550,7 @@ public class Map{
 //    dirs[choice] = dirs[n - 1];
 //  }
 //
-//  assert(0);			/* Are we on a 1x1 map with no wrapping??? */
+//  assert(0!=1);			/* Are we on a 1x1 map with no wrapping??? */
 //  return null;
 //}
 //
@@ -1659,7 +1659,7 @@ public class Map{
 //  case DIR8_NORTHWEST:
 //    return DIR8_NORTH;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //    return -1;
 //  }
 //}
@@ -1688,7 +1688,7 @@ public class Map{
 //  case DIR8_NORTHWEST:
 //    return DIR8_WEST;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //    return -1;
 //  }
 //}
@@ -1775,7 +1775,7 @@ public class Map{
 //    return dir;
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return -1;
 //}
 //

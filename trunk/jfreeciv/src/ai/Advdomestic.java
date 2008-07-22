@@ -200,7 +200,7 @@ public class Advdomestic{
 //      
 //    } else if (want < -choice.want) {
 //      /* We need boats to colonize! */
-//      CITY_LOG(Log.LOG_DEBUG, pcity, "desires founders with passion %d and asks"
+//      CITY_LOG(Log.LOG_DEBUG, pcity, "desires founders with passion %d and asks" +
 //	       " for a boat", want);
 //      choice.want = 0 - want;
 //      choice.type = CT_NONMIL;

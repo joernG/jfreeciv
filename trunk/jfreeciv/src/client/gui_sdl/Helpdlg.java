@@ -701,12 +701,12 @@ public class Helpdlg{
 //    
 //    local = util.my_snprintf( "%s %d %s",
 //	      N"Cost:", unit_build_shield_cost(type_id),
-//	      PL_("shield", "shields", unit_build_shield_cost(type_id)));
+//	      PL("shield", "shields", unit_build_shield_cost(type_id)));
 //  
 //    if(pUnit.pop_cost)
 //    {
 //      cat_snprintf(local, sizeof(local), " %d %s",
-//	  pUnit.pop_cost, PL_("citizen", "citizens", pUnit.pop_cost));
+//	  pUnit.pop_cost, PL("citizen", "citizens", pUnit.pop_cost));
 //    }
 //  
 //    cat_snprintf(local, sizeof(local), "      %s",  N"Upkeep:");
@@ -714,22 +714,22 @@ public class Helpdlg{
 //    if(pUnit.shield_cost)
 //    {
 //      cat_snprintf(local, sizeof(local), " %d %s",
-//	  pUnit.shield_cost, PL_("shield", "shields", pUnit.shield_cost));
+//	  pUnit.shield_cost, PL("shield", "shields", pUnit.shield_cost));
 //     }
 //    if(pUnit.food_cost)
 //    {
 //      cat_snprintf(local, sizeof(local), " %d %s",
-//	  pUnit.food_cost, PL_("food", "foods", pUnit.food_cost));
+//	  pUnit.food_cost, PL("food", "foods", pUnit.food_cost));
 //    }
 //    if(pUnit.gold_cost)
 //    {
 //      cat_snprintf(local, sizeof(local), " %d %s",
-//	  pUnit.gold_cost, PL_("gold", "golds", pUnit.gold_cost));
+//	  pUnit.gold_cost, PL("gold", "golds", pUnit.gold_cost));
 //    }
 //    if(pUnit.happy_cost)
 //    {
 //      cat_snprintf(local, sizeof(local), " %d %s",
-//	  pUnit.happy_cost, PL_("citizen", "citizens", pUnit.happy_cost));
+//	  pUnit.happy_cost, PL("citizen", "citizens", pUnit.happy_cost));
 //    }
 // 
 //    cat_snprintf(local, sizeof(local), "\n%s %d %s %d %s %d\n%s %d %s %d %s %d",

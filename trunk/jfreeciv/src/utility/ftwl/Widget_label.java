@@ -91,7 +91,7 @@ public class Widget_label{
 //      ct_string_destroy(string2);
 //    }
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return null;
 //}
 }

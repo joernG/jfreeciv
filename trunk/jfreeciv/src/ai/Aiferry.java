@@ -541,7 +541,7 @@ public class Aiferry{
 //      }
 //    } else {
 //      /* Waiting for the boss to load and move us */
-//      UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, "Cannot command boat [%d],"
+//      UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, "Cannot command boat [%d]," +
 //               " its boss is [%d]", 
 //               ferryboat.id, ferryboat.ai.passenger);
 //      return false;
@@ -672,13 +672,13 @@ public class Aiferry{
 //
 //      if (pos.turn > turns && pcity.is_building_unit
 //          && unit_has_role(pcity.currently_building, L_FERRYBOAT)) {
-//        UNIT_LOG(LOGLEVEL_FERRY, pferry, "%s is NOT suitable: "
+//        UNIT_LOG(LOGLEVEL_FERRY, pferry, "%s is NOT suitable: " +
 //                 "will finish building its own ferry too soon", pcity.name);
 //        continue;
 //      }
 //
 //      if (turns >= turns_horizon) {
-//        UNIT_LOG(LOGLEVEL_FERRY, pferry, "%s is NOT suitable: "
+//        UNIT_LOG(LOGLEVEL_FERRY, pferry, "%s is NOT suitable: " +
 //                 "has just started building", pcity.name);
 //        continue;
 //      }
@@ -687,7 +687,7 @@ public class Aiferry{
 //	if (aunit != pferry && aunit.owner == pferry.owner
 //            && unit_has_role(aunit.type, L_FERRYBOAT)) {
 //
-//          UNIT_LOG(LOGLEVEL_FERRY, pferry, "%s is NOT suitable: "
+//          UNIT_LOG(LOGLEVEL_FERRY, pferry, "%s is NOT suitable: " +
 //                   "has another ferry", pcity.name);
 //	  really_needed = false;
 //	  break;
@@ -695,7 +695,7 @@ public class Aiferry{
 //      } }
 //
 //      if (really_needed) {
-//        UNIT_LOG(LOGLEVEL_FERRY, pferry, "will go to %s unless we "
+//        UNIT_LOG(LOGLEVEL_FERRY, pferry, "will go to %s unless we " +
 //                 "find something better", pcity.name);
 //	pferry.goto_tile = pos.tile;
 //        turns_horizon = turns;

@@ -386,7 +386,7 @@ public class Cityhand{
 //    return;
 //  }
 //
-//  sz_strlcpy(pcity.name, name);
+//  pcity.name = name;
 //  city_refresh(pcity);
 //  send_city_info(null, pcity);
 //}

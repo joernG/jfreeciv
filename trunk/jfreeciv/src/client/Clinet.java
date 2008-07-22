@@ -229,9 +229,9 @@ public class Clinet{
 //  req.major_version = MAJOR_VERSION;
 //  req.minor_version = MINOR_VERSION;
 //  req.patch_version = PATCH_VERSION;
-//  sz_strlcpy(req.version_label, VERSION_LABEL);
-//  sz_strlcpy(req.capability, our_capability);
-//  sz_strlcpy(req.username, username);
+//  req.version_label = VERSION_LABEL;
+//  req.capability = our_capability;
+//  req.username = username;
 //  
 //  send_packet_server_join_req(&aconnection, &req);
 //
@@ -377,7 +377,7 @@ public class Clinet{
 //  assert(fd == aconnection.sock);
 //
 //  util.freelog(Log.LOG_DEBUG,
-//	  "input_from_server_till_request_got_processed("
+//	  "input_from_server_till_request_got_processed(" +
 //	  "expected_request_id=%d)", expected_request_id);
 //
 //  while (true) {
@@ -610,7 +610,7 @@ public class Clinet{
 //
 //  urlpath = my_lookup_httpd(metaname, &metaport, metaserver);
 //  if (!urlpath) {
-//    () mystrlcpy(errbuf, _("Invalid $http_proxy or metaserver value, must "
+//    () mystrlcpy(errbuf, ("Invalid $http_proxy or metaserver value, must " +
 //                              "start with 'http://'"), n_errbuf);
 //    return null;
 //  }
@@ -652,13 +652,13 @@ public class Clinet{
 //  capstr = my_url_encode(our_capability);
 //
 //  str = util.my_snprintf(
-//    "POST %s HTTP/1.1\r\n"
-//    "Host: %s:%d\r\n"
-//    "User-Agent: Freeciv/%s %s %s\r\n"
-//    "Connection: close\r\n"
-//    "Content-Type: application/x-www-form-urlencoded; charset=\"utf-8\"\r\n"
-//    "Content-Length: %lu\r\n"
-//    "\r\n"
+//    "POST %s HTTP/1.1\r\n" +
+//    "Host: %s:%d\r\n" +
+//    "User-Agent: Freeciv/%s %s %s\r\n" +
+//    "Connection: close\r\n" +
+//    "Content-Type: application/x-www-form-urlencoded; charset=\"utf-8\"\r\n" +
+//    "Content-Length: %lu\r\n" +
+//    "\r\n" +
 //    "client_cap=%s\r\n",
 //    urlpath,
 //    metaname, metaport,

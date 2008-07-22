@@ -152,9 +152,9 @@ public class Cityturn{
 //{
 //  /* The caller had better check this! */
 //  if (!cmr.found_a_valid) {
-//    util.freelog(Log.LOG_ERROR, "apply_cmresult_to_city() called with non-valid "
+//    util.freelog(Log.LOG_ERROR, "apply_cmresult_to_city() called with non-valid " +
 //            "cm_result");
-//    assert(0);
+//    assert(0!=1);
 //    return;
 //  }
 //
@@ -321,7 +321,7 @@ public class Cityturn{
 //	  && can_player_build_improvement(city_owner(pcity), pcity.currently_building)) {
 //	notify_conn_ex(dest, pcity.tile,
 //		       E_WONDER_WILL_BE_BUILT,
-//		       _("Game: Notice: Wonder %s in %s will be finished"
+//		       ("Game: Notice: Wonder %s in %s will be finished" +
 //			 " next turn."), 
 //		       get_improvement_name(pcity.currently_building),
 //		       pcity.name);
@@ -354,7 +354,7 @@ public class Cityturn{
 //	  && turns_growth < turns_granary) {
 //	notify_conn_ex(dest, pcity.tile,
 //			 E_CITY_GRAN_THROTTLE,
-//			 _("Game: Suggest throttling growth in %s to use %s "
+//			 ("Game: Suggest throttling growth in %s to use %s " +
 //			   "(being built) more effectively."), pcity.name,
 //			 improvement_types[pcity.currently_building].name);
 //      }
@@ -487,7 +487,7 @@ public class Cityturn{
 //    if (get_current_finalruction_bonus(pcity, EFT_SIZE_ADJ) > 0
 //        || get_current_finalruction_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
 //      notify_player_ex(powner, pcity.tile, E_CITY_AQ_BUILDING,
-//		       _("Game: %s needs %s (being built) "
+//		       ("Game: %s needs %s (being built) " +
 //			 "to grow any further."), pcity.name,
 //		       improvement_types[pcity.currently_building].name);
 //    } else {
@@ -650,7 +650,7 @@ public class Cityturn{
 //      if (!can_eventually_build_unit(pcity, new_target)) {
 //	/* Nope, never in a million years. */
 //	notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
-//			 _("Game: %s can't build %s from the worklist.  "
+//			 ("Game: %s can't build %s from the worklist.  " +
 //			   "Purging..."),
 //			 pcity.name,
 //			 /* Yes, warn about the targets that's actually
@@ -669,7 +669,7 @@ public class Cityturn{
 //      if (new_target == target) {
 //	/* Nope, we're stuck.  Dump this item from the worklist. */
 //	notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
-//			 _("Game: %s can't build %s from the worklist; "
+//			 ("Game: %s can't build %s from the worklist; " +
 //			   "tech not yet available.  Postponing..."),
 //			 pcity.name,
 //			 get_unit_type(target).name);
@@ -690,7 +690,7 @@ public class Cityturn{
 //      if (!can_eventually_build_improvement(pcity, new_target)) {
 //	/* Nope, never in a million years. */
 //	notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
-//			 _("Game: %s can't build %s from the worklist.  "
+//			 ("Game: %s can't build %s from the worklist.  " +
 //			   "Purging..."),
 //			 pcity.name,
 //			 get_impr_name_ex(pcity, target));
@@ -710,13 +710,13 @@ public class Cityturn{
 //	/* Nope, no use.  *sigh*  */
 //	if (!player_knows_improvement_tech(pplayer, target)) {
 //	  notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
-//			   _("Game: %s can't build %s from the worklist; "
+//			   ("Game: %s can't build %s from the worklist; " +
 //			     "tech not yet available.  Postponing..."),
 //			   pcity.name,
 //			   get_impr_name_ex(pcity, target));
 //	} else if (improvement_types[target].bldg_req != B_LAST) {
 //	  notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
-//			   _("Game: %s can't build %s from the worklist; "
+//			   ("Game: %s can't build %s from the worklist; " +
 //			     "need to have %s first.  Postponing..."),
 //			   pcity.name,
 //			   get_impr_name_ex(pcity, target),
@@ -725,7 +725,7 @@ public class Cityturn{
 //	  /* This shouldn't happen...
 //	     FIXME: make can_build_improvement() return a reason enum. */
 //	  notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
-//			   _("Game: %s can't build %s from the worklist; "
+//			   ("Game: %s can't build %s from the worklist; " +
 //			     "Reason unknown!  Postponing..."),
 //			   pcity.name,
 //			   get_impr_name_ex(pcity, target));
@@ -887,7 +887,7 @@ public class Cityturn{
 //      if (upkeep > 0 && pcity.shield_surplus < 0) {
 //	assert(unit_flag(punit, F_UNDISBANDABLE));
 //	notify_player_ex(pplayer, pcity.tile, E_UNIT_LOST,
-//			 _("Game: Citizens in %s perish for their failure to "
+//			 ("Game: Citizens in %s perish for their failure to " +
 //			 "upkeep %s!"), pcity.name, punit.unit_type().name);
 //	if (!city_reduce_size(pcity, 1)) {
 //	  return false;
@@ -926,7 +926,7 @@ public class Cityturn{
 //  upgrade_building_prod(pcity);
 //  if (!can_build_improvement(pcity, pcity.currently_building)) {
 //    notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
-//		     _("Game: %s is building %s, which "
+//		     ("Game: %s is building %s, which " +
 //		       "is no longer available."),
 //		     pcity.name, get_impr_name_ex(pcity,
 //						   pcity.
@@ -981,9 +981,9 @@ public class Cityturn{
 //    if ((mod = get_current_finalruction_bonus(pcity, EFT_GIVE_IMM_TECH))) {
 //      int i;
 //
-//      notify_player(pplayer, PL_("Game: %s boosts research; "
+//      notify_player(pplayer, PL("Game: %s boosts research; " +
 //			         "you gain %d immediate advance.",
-//				 "Game: %s boosts research; "
+//				 "Game: %s boosts research; " +
 //			         "you gain %d immediate advances.",
 //				 mod),
 //		    improvement_types[pcity.currently_building].name, mod);
@@ -1008,7 +1008,7 @@ public class Cityturn{
 //    }
 //    if (space_part && pplayer.spaceship.state == spaceship_state.SSHIP_NONE) {
 //      notify_player_ex(null, pcity.tile, event_type.E_SPACESHIP,
-//		       _("Game: The %s have started "
+//		       ("Game: The %s have started " +
 //			 "building a spaceship!"),
 //		       Nation.get_nation_name_plural(pplayer.nation));
 //      pplayer.spaceship.state = spaceship_state.SSHIP_STARTED;
@@ -1142,7 +1142,7 @@ public class Cityturn{
 //	&& pplayer.government != game.government_when_anarchy) {
 //      if (pplayer.economic.gold - improvement_upkeep(pcity, i) < 0) {
 //	notify_player_ex(pplayer, pcity.tile, E_IMP_AUCTIONED,
-//			 _("Game: Can't afford to maintain %s in %s, "
+//			 ("Game: Can't afford to maintain %s in %s, " +
 //			   "building sold!"),
 //			 improvement_types[i].name, pcity.name);
 //	do_sell_building(pplayer, pcity, i);
@@ -1385,7 +1385,7 @@ public class Cityturn{
 //    send_city_info(null, pcity);
 //    if (pcity.anarchy>2 && government_has_flag(g, G_REVOLUTION_WHEN_UNHAPPY)) {
 //      notify_player_ex(pplayer, pcity.tile, E_ANARCHY,
-//		       _("Game: The people have overthrown your %s, "
+//		       ("Game: The people have overthrown your %s, " +
 //			 "your country is in turmoil."),
 //		       get_government_name(g.index));
 //      handle_player_change_government(pplayer, g.index);
@@ -1409,7 +1409,7 @@ public class Cityturn{
 //  if (!rcity) {
 //    /* What should we do when we try to disband our only city? */
 //    notify_player_ex(pplayer, ptile, E_CITY_CANTBUILD,
-//		     _("Game: %s can't build %s yet, "
+//		     ("Game: %s can't build %s yet, " +
 //		     "and we can't disband our only city."),
 //		     pcity.name, unit_name(pcity.currently_building));
 //    return false;

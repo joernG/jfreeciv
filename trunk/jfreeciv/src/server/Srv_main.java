@@ -312,13 +312,13 @@ public void srv_init()
 //	switch(--pdiplstate.turns_left) {
 //	case 1:
 //	  notify_player(player1,
-//			_("Game: Concerned citizens point "
+//			("Game: Concerned citizens point " +
 //  			  "out that the cease-fire with %s will run out soon."),
 //			player2.name);
 //  	  break;
 //  	case 0:
 //	  notify_player(player1,
-//  			_("Game: The cease-fire with %s has "
+//  			("Game: The cease-fire with %s has " +
 //  			  "run out. You are now neutral towards the %s."),
 //			player2.name,
 //			Nation.Nation.get_nation_name_plural(player2.nation));
@@ -544,7 +544,7 @@ public void srv_init()
 //  send_player_turn_notifications(null);
 //
 //  util.freelog(Log.LOG_DEBUG, "Turn ended.");
-//  game.turn_start = time(null);
+//  game.turn_start = new Date(); //time(null);
 //
 //  util.freelog(Log.LOG_DEBUG, "Gamenextyear");
 //  game_advance_year();
@@ -595,7 +595,7 @@ public void srv_init()
 //  if (!orig_filename) {
 //    filename[0] = '\0';
 //  } else {
-//    sz_strlcpy(filename, orig_filename);
+//    filename = orig_filename;
 //  }
 //
 //  /* Strip extension. */
@@ -629,12 +629,12 @@ public void srv_init()
 //    /* Ensure the saves directory exists. */
 //    make_dir(srvarg.saves_pathname);
 //
-//    sz_strlcpy(tmpname, srvarg.saves_pathname);
+//    tmpname = srvarg.saves_pathname;
 //    if (tmpname[0] != '\0') {
 //      sz_strlcat(tmpname, "/");
 //    }
 //    sz_strlcat(tmpname, filename);
-//    sz_strlcpy(filename, tmpname);
+//    filename = tmpname;
 //  }
 //
 //  if(!section_file_save(&file, filename, game.save_compress_level))
@@ -722,7 +722,7 @@ public void srv_init()
 //    break;
 //  case REPORT_SERVER_OPTIONS: /* obsolete */
 //  default:
-//    notify_conn(dest, "Game: request for unknown report (type %d)", type);
+//    Plrhand.notify_conn(dest, "Game: request for unknown report (type %d)", type);
 //  }
 //}
 //
@@ -794,9 +794,9 @@ public void srv_init()
 //    dio_put_uint8(&dout, 1);
 //
 //    dio_put_bool32(&dout, false);
-//    dio_put_string(&dout, _("Your client is too old. To use this server "
-//			    "please upgrade your client to a CVS version "
-//			    "later than 2003-11-28 or Freeciv 1.15.0 or "
+//    dio_put_string(&dout, ("Your client is too old. To use this server " +
+//			    "please upgrade your client to a CVS version " +
+//			    "later than 2003-11-28 or Freeciv 1.15.0 or " +
 //			    "later."));
 //    dio_put_string(&dout, "");
 //
@@ -867,10 +867,10 @@ public void srv_init()
 //    if (Srv_main.server_state == server_states.GAME_OVER_STATE) {
 //      /* This can happen by accident, so we don't want to print
 //	 out lots of error messages. Ie, we use Log.LOG_DEBUG. */
-//      util.freelog(Log.LOG_DEBUG, "got a packet of type %d "
+//      util.freelog(Log.LOG_DEBUG, "got a packet of type %d " +
 //			  "in server_states.GAME_OVER_STATE", type);
 //    } else {
-//      util.freelog(Log.LOG_ERROR, "got a packet of type %d "
+//      util.freelog(Log.LOG_ERROR, "got a packet of type %d " +
 //	                 "outside RUN_GAME_STATE", type);
 //    }
 //    return true;
@@ -880,7 +880,7 @@ public void srv_init()
 //
 //  if((!pplayer.is_alive || pconn.observer)
 //     && !(type == PACKET_REPORT_REQ || type == PACKET_CONN_PONG)) {
-//    util.freelog(Log.LOG_ERROR, _("Got a packet of type %d from a "
+//    util.freelog(Log.LOG_ERROR, ("Got a packet of type %d from a " +
 //			 "dead or observer player"), type);
 //    return true;
 //  }
@@ -984,7 +984,7 @@ public void srv_init()
 //	  && mystrcasecmp(other_player.name, name) == 0) {
 //	if (error_buf) {
 //	  my_snprintf(error_buf, bufsz,
-//		      _("Another player already has the name '%s'.  Please "
+//		      ("Another player already has the name '%s'.  Please " +
 //			"choose another name."), name);
 //	}
 //	return false;
@@ -1005,7 +1005,7 @@ public void srv_init()
 //  if (!is_ascii_name(name)
 //      && (!pconn || pconn.access_level != ALLOW_HACK)) {
 //    if (error_buf) {
-//      my_snprintf(error_buf, bufsz, _("Please choose a name containing "
+//      my_snprintf(error_buf, bufsz, ("Please choose a name containing " +
 //				      "only ASCII characters."));
 //    }
 //    return false;
@@ -1025,7 +1025,7 @@ public void srv_init()
 //  char message[1024];
 //
 //  if (Srv_main.server_state != SELECT_RACES_STATE) {
-//    util.freelog(Log.LOG_ERROR, _("Trying to alloc nation outside "
+//    util.freelog(Log.LOG_ERROR, ("Trying to alloc nation outside " +
 //			 "of SELECT_RACES_STATE!"));
 //    return;
 //  }  
@@ -1057,7 +1057,7 @@ public void srv_init()
 //  lsend_packet_nation_select_ok(&pplayer.connections);
 //
 //  pplayer.nation = nation_no;
-//  sz_strlcpy(pplayer.name, name);
+//  pplayer.name = name;
 //  pplayer.is_male = is_male;
 //  pplayer.city_style = city_style;
 //
@@ -1295,12 +1295,12 @@ public void srv_init()
 //    old_nplayers = game.nplayers;
 //    pplayer = get_player(old_nplayers);
 //     
-//    sz_strlcpy(pplayer.name, player_name);
-//    sz_strlcpy(pplayer.username, ANON_USER_NAME);
+//    pplayer.name = player_name;
+//    pplayer.username = ANON_USER_NAME;
 //
 //    util.freelog(Log.LOG_NORMAL, "%s has been added as an AI-controlled player.",
 //            player_name);
-//    notify_conn(null,
+//    Plrhand.notify_conn(null,
 //		"Game: %s has been added as an AI-controlled player.",
 //		player_name);
 //
@@ -1553,7 +1553,7 @@ public void srv_main()
 //    send_game_state(&game.game_connections, CLIENT_server_states.GAME_OVER_STATE);
 //    report_final_scores();
 //    show_map_to_all();
-//    notify_conn(null, "Game: The game is over...");
+//    Plrhand.notify_conn(null, "Game: The game is over...");
 //    Gamelog.gamelog(EGamelog.GAMELOG_JUDGE, GL_NONE);
 //    send_server_info_to_metaserver(META_INFO);
 //    if (game.save_nturns > 0) {
@@ -1795,7 +1795,7 @@ public void srv_main()
 //  
 //  /* We want to reset the timer as late as possible but before the info is
 //   * sent to the clients */
-//  game.turn_start = time(null);
+//  game.turn_start = new Date(); //time(null);
 //
 //  lsend_packet_freeze_hint(&game.game_connections);
 //  send_all_info(&game.game_connections);

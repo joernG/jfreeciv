@@ -148,7 +148,7 @@ public class Savegame{
 //    if (!_line || _line.length() != Map.map.xsize) {                             \
 //      if (!_warning_printed) {                                              \
 //        /* TRANS: Error message. */                                         \
-//        util.freelog(Log.LOG_ERROR, _("The save file contains incomplete "           \
+//        util.freelog(Log.LOG_ERROR, ("The save file contains incomplete "           \
 //                "map data.  This can happen with old saved "                \
 //                "games, or it may indicate an invalid saved "               \
 //                "game file.  Proceed at your own risk."));                  \
@@ -157,7 +157,7 @@ public class Savegame{
 //          util.freelog(Log.LOG_ERROR, "Reason: line not found");                  \
 //        } else {                                                            \
 //          /* TRANS: Error message. */                                       \
-//          util.freelog(Log.LOG_ERROR, _("Reason: line too short "                    \
+//          util.freelog(Log.LOG_ERROR, ("Reason: line too short "                    \
 //                  "(expected %d got %lu"), Map.map.xsize,                       \
 //                  (unsigned long) _line.length());                           \
 //        }                                                                   \
@@ -294,7 +294,7 @@ public class Savegame{
 //    break;
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return '?';
 //}
 //
@@ -352,7 +352,7 @@ public class Savegame{
 //    return '1';
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return '?';
 //}
 //
@@ -401,7 +401,7 @@ public class Savegame{
 //    break;
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return '?';
 //}
 //
@@ -542,7 +542,7 @@ public class Savegame{
 //  if (Map.map.num_start_positions
 //      && Map.map.num_start_positions < game.max_players) {
 //    util.freelog(LOG_VERBOSE,
-//	    _("Number of starts (%d) are lower than max_players (%d),"
+//	    ("Number of starts (%d) are lower than max_players (%d)," +
 //	      " lowering max_players."),
 // 	    Map.map.num_start_positions, game.max_players);
 //    game.max_players = Map.map.num_start_positions;
@@ -1274,11 +1274,11 @@ public class Savegame{
 //  boolean end = false;
 //  final char* name;
 //
-//  sz_strlcpy(efpath, path);
+//  efpath = path;
 //  sz_strlcat(efpath, ".wlef%d");
-//  sz_strlcpy(idpath, path);
+//  idpath = path;
 //  sz_strlcat(idpath, ".wlid%d");
-//  sz_strlcpy(namepath, path);
+//  namepath = path;
 //  sz_strlcat(namepath, ".wlname%d");
 //
 //  for (i = 0; i < MAX_LEN_WORKLIST; i++) {
@@ -1727,7 +1727,7 @@ public class Savegame{
 //  }
 //  c_s = get_style_by_name_orig(p);
 //  if (c_s == -1) {
-//    util.freelog(Log.LOG_ERROR, _("Unsupported city style found in player%d section. "
+//    util.freelog(Log.LOG_ERROR, ("Unsupported city style found in player%d section. " +
 //                         "Changed to %s"), plrno, get_city_style_name(0));
 //    c_s = 0;
 //  }	
@@ -1903,7 +1903,7 @@ public class Savegame{
 //        && aplayer.is_alive
 //        && pplayers_allied(plr, aplayer)
 //        && !pplayer_can_ally(plr, aplayer)) {
-//      util.freelog(Log.LOG_ERROR, _("Illegal alliance structure detected: "
+//      util.freelog(Log.LOG_ERROR, ("Illegal alliance structure detected: " +
 //              "%s's alliance to %s reduced to peace treaty."),
 //              plr.name, aplayer.name);
 //      plr.diplstates[aplayer.player_no].type = DS_PEACE;
@@ -2122,7 +2122,7 @@ public class Savegame{
 //
 //	  if (ptile.worked) {
 //	    /* oops, inconsistent savegame; minimal fix: */
-//	    util.freelog(LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), "
+//	    util.freelog(LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), " +
 //		    "converting to elvis", pcity.name, x, y);
 //	    pcity.specialists[SP_ELVIS]++;
 //	    set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
@@ -2229,7 +2229,7 @@ public class Savegame{
 //      util.freelog(Log.LOG_NORMAL, "quoted_length=%lu quoted=%lu",
 //	      (unsigned long) quoted_length,
 //	      (unsigned long) quoted.length());
-//      assert(0);
+//      assert(0!=1);
 //    }
 //
 //    raw_length2 =
@@ -2378,11 +2378,11 @@ public class Savegame{
 //  char namepath[64];
 //  int i;
 //
-//  sz_strlcpy(efpath, path);
+//  efpath = path;
 //  sz_strlcat(efpath, ".wlef%d");
-//  sz_strlcpy(idpath, path);
+//  idpath = path;
 //  sz_strlcat(idpath, ".wlid%d");
-//  sz_strlcpy(namepath, path);
+//  namepath = path;
 //  sz_strlcat(namepath, ".wlname%d");
 //
 //  for (i = 0; i < MAX_LEN_WORKLIST; i++) {
@@ -3085,7 +3085,7 @@ public class Savegame{
 //                                                default_meta_message_string(),
 //                                                "game.metamessage"));
 //
-//    sz_strlcpy(srvarg.metaserver_addr,
+//    sz_strlcpy(Srv_main.srvarg.metaserver_addr,
 //	       secfile_lookup_str_default(file, DEFAULT_META_SERVER_ADDR,
 //					  "game.metaserver"));
 //
@@ -3259,7 +3259,7 @@ public class Savegame{
 //      if (strcmp("classic",
 //		 secfile_lookup_str_default(file, "default",
 //					    "game.ruleset.terrain")) == 0) {
-//	util.freelog(LOG_FATAL, _("The savegame uses the classic terrain "
+//	util.freelog(LOG_FATAL, ("The savegame uses the classic terrain " +
 //			     "ruleset which is no longer supported."));
 //	exit(EXIT_FAILURE);
 //      }
@@ -3268,7 +3268,7 @@ public class Savegame{
 //#define T(x) \
 //      str2 = secfile_lookup_str_default(file, "default", x); \
 //      if (strcmp(str, str2) != 0) { \
-//	util.freelog(Log.LOG_NORMAL, _("Warning: Different rulesetdirs " \
+//	util.freelog(Log.LOG_NORMAL, ("Warning: Different rulesetdirs " \
 //			      "('%s' and '%s') are no longer supported. " \
 //			      "Using '%s'."), \
 //			      str, str2, str); \
@@ -3283,7 +3283,7 @@ public class Savegame{
 //      T("game.ruleset.game");
 //#undef T
 //
-//      sz_strlcpy(game.rulesetdir, str);
+//      game.rulesetdir = str;
 //    } else {
 //      sz_strlcpy(game.rulesetdir, 
 //	       secfile_lookup_str_default(file, string,
@@ -3617,7 +3617,7 @@ public class Savegame{
 //  secfile_insert_str(file, get_meta_message_string(), "game.metamessage");
 //  secfile_insert_str(file, meta_addr_port(), "game.metaserver");
 //  
-//  sz_strlcpy(options, SAVEFILE_OPTIONS);
+//  options = SAVEFILE_OPTIONS;
 //  if (game.is_new_game) {
 //    if (Map.map.num_start_positions>0) {
 //      sz_strlcat(options, " startpos");

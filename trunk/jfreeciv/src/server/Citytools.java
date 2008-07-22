@@ -303,7 +303,7 @@ public class Citytools{
 //
 //    if (pother != null) {
 //      if (error_buf) {
-//	my_snprintf(error_buf, bufsz, _("Can't use %s as a city name. It is "
+//	my_snprintf(error_buf, bufsz, ("Can't use %s as a city name. It is " +
 //					"reserved for %s."),
 //		    city_name, Nation.get_nation_name_plural(pother.nation));
 //      }
@@ -322,7 +322,7 @@ public class Citytools{
 //      && (!pconn || pconn.access_level != ALLOW_HACK)) {
 //    if (error_buf) {
 //      my_snprintf(error_buf, bufsz,
-//		  _("%s is not a valid name. Only ASCII or "
+//		  ("%s is not a valid name. Only ASCII or " +
 //		    "ruleset names are allowed for cities."),
 //		  city_name);
 //    }
@@ -772,7 +772,7 @@ public class Citytools{
 //   */
 //  send_player_cities(pplayer);
 //
-//  notify_player(pplayer, _("Game: You lost your capital %s. A new palace "
+//  notify_player(pplayer, ("Game: You lost your capital %s. A new palace " +
 //			   "was built in %s."), old_capital_name,
 //		pnew_capital.name);
 //
@@ -826,13 +826,13 @@ public class Citytools{
 //  give_citymap_from_player_to_player(pcity, pgiver, ptaker);
 //  map_unfog_pseudo_city_area(ptaker, pcity.tile);
 //
-//  sz_strlcpy(old_city_name, pcity.name);
+//  old_city_name = pcity.name;
 //  if (game.allowed_city_names == 1
 //      && city_list_find_name(&ptaker.cities, pcity.name)) {
 //    sz_strlcpy(pcity.name,
 //	       city_name_suggestion(ptaker, pcity.tile));
 //    notify_player_ex(ptaker, pcity.tile, event_type.E_NOEVENT,
-//		     _("You already had a city called %s."
+//		     ("You already had a city called %s." +
 //		       " The city was renamed to %s."), old_city_name,
 //		     pcity.name);
 //  }
@@ -922,9 +922,9 @@ public class Citytools{
 //      && player_knows_techs_with_flag (ptaker, TF_RAILROAD)
 //      && !map_has_special(pcity.tile, S_RAILROAD)) {
 //    notify_player(ptaker,
-//		  _("Game: The people in %s are stunned by your"
-//		    " technological insight!\n"
-//		    "      Workers spontaneously gather and upgrade"
+//		  ("Game: The people in %s are stunned by your" +
+//		    " technological insight!\n" +
+//		    "      Workers spontaneously gather and upgrade" +
 //		    " the city with railroads."),
 //		  pcity.name);
 //    map_set_special(pcity.tile, S_RAILROAD);
@@ -1127,7 +1127,7 @@ public class Citytools{
 //	  moved = handle_unit_move_request(punit, tile1, false, true);
 //	  if (moved) {
 //	    notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
-//			     _("Game: Moved %s out of disbanded city %s "
+//			     ("Game: Moved %s out of disbanded city %s " +
 //			       "to avoid being landlocked."),
 //			     punit.unit_type().name, pcity.name);
 //	    goto OUT;
@@ -1138,7 +1138,7 @@ public class Citytools{
 //  OUT:
 //    if (!moved) {
 //      notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
-//		       _("Game: When %s was disbanded your %s could not "
+//		       ("Game: When %s was disbanded your %s could not " +
 //			 "get out, and it was therefore stranded."),
 //		       pcity.name, punit.unit_type().name);
 //      wipe_unit(punit);
@@ -1263,22 +1263,22 @@ public class Citytools{
 //  send_player_info(cplayer, cplayer);
 //  if (pcity.original != pplayer.player_no) {
 //    notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT, 
-//		     _("Game: You conquer %s, your lootings accumulate"
+//		     ("Game: You conquer %s, your lootings accumulate" +
 //		       " to %d gold!"), 
 //		     pcity.name, coins);
 //    notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
-//		     _("Game: %s conquered %s and looted %d gold"
+//		     ("Game: %s conquered %s and looted %d gold" +
 //		       " from the city."),
 //		     pplayer.name, pcity.name, coins);
 //    Gamelog.gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "conquered");
 //  } else {
 //    notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT, 
-//		     _("Game: You have liberated %s!"
+//		     ("Game: You have liberated %s!" +
 //		       " Lootings accumulate to %d gold."),
 //		     pcity.name, coins);
 //    
 //    notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
-//		     _("Game: %s liberated %s and looted %d gold"
+//		     ("Game: %s liberated %s and looted %d gold" +
 //		       " from the city."),
 //		     pplayer.name, pcity.name, coins);
 //
@@ -1330,7 +1330,7 @@ public class Citytools{
 //  packet.owner = pdcity.owner;
 //  packet.x = ptile.x;
 //  packet.y = ptile.y;
-//  sz_strlcpy(packet.name, pdcity.name);
+//  packet.name = pdcity.name;
 //
 //  packet.size = pdcity.size;
 //
@@ -1567,7 +1567,7 @@ public class Citytools{
 //  packet.owner=pcity.owner;
 //  packet.x = pcity.tile.x;
 //  packet.y = pcity.tile.y;
-//  sz_strlcpy(packet.name, pcity.name);
+//  packet.name = pcity.name;
 //
 //  packet.size=pcity.size;
 //  for (i=0;i<5;i++) {
@@ -1676,12 +1676,12 @@ public class Citytools{
 //    plrtile.city.id = pcity.id;
 //  }
 //  if (pdcity.id != pcity.id) {
-//    util.freelog(Log.LOG_ERROR, "Trying to update old city (wrong ID)"
+//    util.freelog(Log.LOG_ERROR, "Trying to update old city (wrong ID)" +
 //	    " at %i,%i for player %s",
 //	    pcity.tile.x, pcity.tile.y, pplayer.name);
 //    pdcity.id = pcity.id;   /* ?? */
 //  }
-//  sz_strlcpy(pdcity.name, pcity.name);
+//  pdcity.name = pcity.name;
 //  pdcity.size = pcity.size;
 //  pdcity.has_walls = city_got_citywalls(pcity);
 //  pdcity.occupied = occupied;
@@ -2122,7 +2122,7 @@ public class Citytools{
 //            && !city_has_terr_spec_gate(pcity, impr)) {
 //          do_sell_building(pplayer, pcity, impr);
 //          notify_player_ex(pplayer, tile1, E_IMP_SOLD,
-//                           _("Game: You sell %s in %s (now landlocked)"
+//                           ("Game: You sell %s in %s (now landlocked)" +
 //                             " for %d gold."),
 //                           get_improvement_name(impr), pcity.name,
 //                           impr_sell_gold(impr)); 

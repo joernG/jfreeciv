@@ -280,7 +280,7 @@ public class Plrhand {
 	// government_iterate(gov) {
 	// if (tech_found == gov.required_tech) {
 	// notify_player_ex(plr, null, E_NEW_GOVERNMENT,
-	// _("Game: Discovery of %s makes the government form %s"
+	// ("Game: Discovery of %s makes the government form %s"
 	// " available. You may want to start a revolution."),
 	// get_tech_name(plr, tech_found), gov.name);
 	// }
@@ -320,7 +320,7 @@ public class Plrhand {
 	//
 	// if (next_tech != A_UNSET) {
 	// notify_player_ex(plr, null, E_TECH_LEARNED,
-	// _("Game: Learned %s. "
+	// ("Game: Learned %s. "
 	// "Our scientists focus on %s, goal is %s."),
 	// get_tech_name(plr, tech_found),
 	// get_tech_name(plr, plr.research.researching),
@@ -338,7 +338,7 @@ public class Plrhand {
 	// && (!is_future_tech(plr.research.researching)
 	// || !is_future_tech(tech_found))) {
 	// notify_player_ex(plr, null, E_TECH_LEARNED,
-	// _("Game: Learned %s. Scientists "
+	// ("Game: Learned %s. Scientists "
 	// "choose to research %s."),
 	// get_tech_name(plr, tech_found),
 	// get_tech_name(plr, plr.research.researching));
@@ -355,7 +355,7 @@ public class Plrhand {
 	// buffer2);
 	// } else {
 	// notify_player_ex(plr, null, E_TECH_LEARNED,
-	// _("Game: Learned %s. Scientists "
+	// ("Game: Learned %s. Scientists "
 	// "do not know what to research next."),
 	// get_tech_name(plr, tech_found));
 	// }
@@ -375,7 +375,7 @@ public class Plrhand {
 	// notify_player(plr, "Game: %s",
 	// _(advances[tech_found].bonus_message));
 	// } else {
-	// notify_player(plr, _("Game: Great scientists from all the "
+	// notify_player(plr, ("Game: Great scientists from all the "
 	// "world join your civilization: you get "
 	// "an immediate advance."));
 	// }
@@ -435,13 +435,13 @@ public class Plrhand {
 	// && get_invention(aplayer, tech_found) != TECH_KNOWN) {
 	// if (tech_exists(plr.research.researching)) {
 	// notify_player_ex(aplayer, null, E_TECH_LEARNED,
-	// _("Game: Learned %s in cooperation with %s. "
+	// ("Game: Learned %s in cooperation with %s. "
 	// "Scientists choose to research %s."),
 	// get_tech_name(aplayer, tech_found), plr.name,
 	// get_tech_name(plr, plr.research.researching));
 	// } else {
 	// notify_player_ex(aplayer, null, E_TECH_LEARNED,
-	// _("Game: Learned %s in cooperation with %s. "
+	// ("Game: Learned %s in cooperation with %s. "
 	// "Scientists do not know what to research next."),
 	// get_tech_name(aplayer, tech_found), plr.name);
 	// }
@@ -578,7 +578,7 @@ public class Plrhand {
 	// }
 	// }
 	// } tech_type_iterate_end;
-	// assert(0);
+	// assert(0!=1);
 	// return A_NONE;
 	// }
 	//
@@ -905,11 +905,11 @@ public class Plrhand {
 	// int government = pplayer.target_government;
 	//
 	// if (pplayer.target_government == game.government_when_anarchy) {
-	// assert(0);
+	// assert(0!=1);
 	// return;
 	// }
 	// if (pplayer.revolution_finishes > game.turn) {
-	// assert(0);
+	// assert(0!=1);
 	// return;
 	// }
 	//
@@ -1074,7 +1074,7 @@ public class Plrhand {
 	// /* If the revolution is over but there's no target government set,
 	// * alert the player. */
 	// notify_player_ex(pplayer, null, E_REVOLT_DONE,
-	// _("You should choose a new government from the "
+	// ("You should choose a new government from the "
 	// "government menu."));
 	// }
 	// } else if (pplayer.government != game.government_when_anarchy
@@ -1246,7 +1246,7 @@ public class Plrhand {
 	// pplayer.diplstates[pplayer2.player_no].has_reason_to_cancel = 0;
 	// if (has_senate && !repeat) {
 	// notify_player_ex(pplayer, null, E_TREATY_BROKEN,
-	// _("The senate passes your bill because of the "
+	// ("The senate passes your bill because of the "
 	// "finalant provocations of the %s."),
 	// Nation.get_nation_name_plural(pplayer2.nation));
 	// }
@@ -1263,7 +1263,7 @@ public class Plrhand {
 	// if (has_senate && pplayer.revolution_finishes < 0) {
 	// if (myrand(GAME_MAX_REPUTATION) > pplayer.reputation) {
 	// notify_player_ex(pplayer, null, E_ANARCHY,
-	// _("Game: The senate decides to dissolve "
+	// ("Game: The senate decides to dissolve "
 	// "rather than support your actions any longer."));
 	// handle_player_change_government(pplayer, pplayer.government);
 	// }
@@ -1294,13 +1294,13 @@ public class Plrhand {
 	// check_city_workers(pplayer2);
 	//
 	// notify_player_ex(pplayer, null, E_TREATY_BROKEN,
-	// _("Game: The diplomatic state between the %s "
+	// ("Game: The diplomatic state between the %s "
 	// "and the %s is now %s."),
 	// Nation.get_nation_name_plural(pplayer.nation),
 	// Nation.get_nation_name_plural(pplayer2.nation),
 	// diplstate_text(new_type));
 	// notify_player_ex(pplayer2, null, E_TREATY_BROKEN,
-	// _("Game: %s cancelled the diplomatic agreement! "
+	// ("Game: %s cancelled the diplomatic agreement! "
 	// "The diplomatic state between the %s and the %s "
 	// "is now %s."), pplayer.name,
 	// Nation.get_nation_name_plural(pplayer2.nation),
@@ -1317,7 +1317,7 @@ public class Plrhand {
 	// * to the aggressor. This prevents in-alliance wars, which are not
 	// * permitted. */
 	// notify_player_ex(other, null, E_TREATY_BROKEN,
-	// _("Game: %s has attacked your ally %s! "
+	// ("Game: %s has attacked your ally %s! "
 	// "You cancel your alliance to the aggressor."),
 	// pplayer.name, pplayer2.name);
 	// other.diplstates[pplayer.player_no].has_reason_to_cancel = 1;
@@ -1328,7 +1328,7 @@ public class Plrhand {
 	// * alliance with him. We trust our team mate and break alliance
 	// * with the attacked player */
 	// notify_player_ex(other, null, E_TREATY_BROKEN,
-	// _("Game: Your team mate %s declared war on %s. "
+	// ("Game: Your team mate %s declared war on %s. "
 	// "You are obligated to cancel alliance with %s."),
 	// pplayer.name,
 	// Nation.get_nation_name_plural(pplayer2.nation),
@@ -1387,20 +1387,20 @@ public class Plrhand {
 		// va_end(args);
 	}
 
-	// /**************************************************************************
-	// See vnotify_conn_ex - this is varargs, and cannot specify (x,y), event.
-	// **************************************************************************/
-	// void notify_conn(Speclists<Connection> dest, final String format)
-	// {
-	// va_list args;
-	//
-	// if (!dest) {
-	// dest = &game.est_connections;
-	// }
-	// va_start(args, format);
-	// vnotify_conn_ex(dest, null, event_type.E_NOEVENT, format, args);
-	// va_end(args);
-	// }
+	 /**************************************************************************
+	 See vnotify_conn_ex - this is varargs, and cannot specify (x,y), event.
+	 **************************************************************************/
+	 public static void notify_conn(Speclists<Connection> dest, final String format, Object ...args)
+	 {
+//	 va_list args;
+	
+	 if (null==dest) {
+	 dest = game.est_connections;
+	 }
+//	 va_start(args, format);
+	 vnotify_conn_ex(dest, null, event_type.E_NOEVENT, format, args);
+//	 va_end(args);
+	 }
 
 	/***************************************************************************
 	 * Similar to vnotify_conn_ex (see also), but takes player as "destination".
@@ -1526,8 +1526,8 @@ public class Plrhand {
 	// int i;
 	//
 	// packet.playerno=plr.player_no;
-	// sz_strlcpy(packet.name, plr.name);
-	// sz_strlcpy(packet.username, plr.username);
+	// packet.name = plr.name;
+	// packet.username = plr.username;
 	// packet.nation=plr.nation;
 	// packet.is_male=plr.is_male;
 	// packet.team = plr.team;
@@ -2000,7 +2000,7 @@ public class Plrhand {
 	// cplayer.nation = pick_available_nation(civilwar_nations);
 	// pick_ai_player_name(cplayer.nation, cplayer.name);
 	//
-	// sz_strlcpy(cplayer.username, ANON_USER_NAME);
+	// cplayer.username = ANON_USER_NAME;
 	// cplayer.is_connected = false;
 	// cplayer.government = game.default_government;
 	// cplayer.target_government = game.default_government;
@@ -2195,7 +2195,7 @@ public class Plrhand {
 	//
 	// if (game.nplayers >= MAX_NUM_PLAYERS) {
 	// /* No space to make additional player */
-	// util.freelog(Log.LOG_NORMAL, _("Could not throw %s into civil war - too many "
+	// util.freelog(Log.LOG_NORMAL, ("Could not throw %s into civil war - too many "
 	// "players"), pplayer.name);
 	// return;
 	// }
@@ -2217,7 +2217,7 @@ public class Plrhand {
 	// "%s's nation is thrust into civil war, created AI player %s",
 	// pplayer.name, cplayer.name);
 	// notify_player_ex(pplayer, null, E_CIVIL_WAR,
-	// _("Game: Your nation is thrust into civil war, "
+	// ("Game: Your nation is thrust into civil war, "
 	// " %s is declared the leader of the rebel states."),
 	// cplayer.name);
 	//
@@ -2251,7 +2251,7 @@ public class Plrhand {
 	// resolve_unit_stacks(pplayer, cplayer, false);
 	//
 	// notify_player(null,
-	// _("Game: The capture of %s's capital and the destruction "
+	// ("Game: The capture of %s's capital and the destruction "
 	// "of the empire's administrative\n"
 	// " structures have sparked a civil war. "
 	// "Opportunists have flocked to the rebel cause,\n"

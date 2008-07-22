@@ -78,7 +78,7 @@ public class Connectdlg{
 //  if (strcmp(id, "connect") == 0) {
 //    connect_callback();
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //
@@ -99,7 +99,7 @@ public class Connectdlg{
 //  } else if (strcmp(id, "server") == 0) {
 //    return server_host;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return null;
 //  }
 //}
@@ -118,7 +118,7 @@ public class Connectdlg{
 //  } else if (strcmp(id, "server") == 0) {
 //    return 10;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return 0;
 //  }
 //}
@@ -131,7 +131,7 @@ public class Connectdlg{
 //  if (0) {
 //
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return null;
 //  }
 //}
@@ -172,13 +172,13 @@ public class Connectdlg{
 //  int outcome;
 //
 //  buf = util.my_snprintf(
-//	      _("Auto-connecting to server \"%s\" at port %d as \"%s\""),
+//	      ("Auto-connecting to server \"%s\" at port %d as \"%s\""),
 //	      server_host, server_port, user_name);
 //  append_output_window(buf);
 //  outcome = get_server_address(server_host, server_port, buf, sizeof(buf));
 //  if (outcome < 0) {
 //    util.freelog(LOG_FATAL,
-//	    _("Error contacting server \"%s\" at port %d "
+//	    ("Error contacting server \"%s\" at port %d " +
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);
 //    exit(EXIT_FAILURE);
@@ -205,7 +205,7 @@ public class Connectdlg{
 //
 //  if (AUTOCONNECT_INTERVAL * count >= 10000) {
 //    util.freelog(LOG_FATAL,
-//	    _("Failed to contact server \"%s\" at port "
+//	    ("Failed to contact server \"%s\" at port " +
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, user_name, count);
 //    exit(EXIT_FAILURE);
@@ -222,7 +222,7 @@ public class Connectdlg{
 //  default:
 //    /* All other errors are fatal */
 //    util.freelog(LOG_FATAL,
-//	    _("Error contacting server \"%s\" at port %d "
+//	    ("Error contacting server \"%s\" at port %d " +
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, errbuf);
 //    exit(EXIT_FAILURE);

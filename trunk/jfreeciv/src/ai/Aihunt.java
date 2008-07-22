@@ -177,7 +177,7 @@ public class Aihunt{
 //    choice.want = best;
 //    choice.type = CT_ATTACKER;
 //  } else if (best != -1) {
-//    CITY_LOG(LOGLEVEL_HUNT, pcity, "not pri missile w/ want %d"
+//    CITY_LOG(LOGLEVEL_HUNT, pcity, "not pri missile w/ want %d" +
 //             "(old want %d)", best, choice.want);
 //  }
 //}
@@ -293,7 +293,7 @@ public class Aihunt{
 //      } else {
 //        dist1 = dist2 = 0;
 //      }
-//      UNIT_LOG(LOGLEVEL_HUNT, punit, "considering chasing %s(%d, %d) id %d "
+//      UNIT_LOG(LOGLEVEL_HUNT, punit, "considering chasing %s(%d, %d) id %d " +
 //               "dist1 %d dist2 %d",
 //	       target.unit_type().name, TILE_XY(target.tile),
 //               target.id, dist1, dist2);
@@ -322,7 +322,7 @@ public class Aihunt{
 //      defender = get_defender(punit, target.tile);
 //      if (stackcost < punit.unit_type().build_cost
 //          && unit_win_chance(punit, defender) < 0.6) {
-//        UNIT_LOG(LOGLEVEL_HUNT, punit, "chickening out from attacking %s"
+//        UNIT_LOG(LOGLEVEL_HUNT, punit, "chickening out from attacking %s" +
 //                 "(%d, %d)", defender.unit_type().name,
 //                 TILE_XY(defender.tile));
 //        continue;
@@ -330,7 +330,7 @@ public class Aihunt{
 //      stackthreat *= 9; /* WAG */
 //      stackthreat += stackcost;
 //      stackthreat /= real_map_distance(punit.tile, target.tile) + 1;
-//      UNIT_LOG(LOGLEVEL_HUNT, punit, "considering hunting %s's %s(%d, %d) id "
+//      UNIT_LOG(LOGLEVEL_HUNT, punit, "considering hunting %s's %s(%d, %d) id " +
 //               "id %d with want %d, dist1 %d, dist2 %d", 
 //               defender.unit_owner().name, defender.unit_type().name, 
 //               TILE_XY(defender.tile), defender.id, stackthreat, dist1,
@@ -396,7 +396,7 @@ public class Aihunt{
 //          }
 //          if (victim == target) {
 //            sucker = victim;
-//            UNIT_LOG(LOGLEVEL_HUNT, missile, "found primary target %d(%d, %d)"
+//            UNIT_LOG(LOGLEVEL_HUNT, missile, "found primary target %d(%d, %d)" +
 //                     " dist %d", victim.id, TILE_XY(victim.tile), 
 //                     pos.total_MC);
 //            break; /* Our target! Get him!!! */

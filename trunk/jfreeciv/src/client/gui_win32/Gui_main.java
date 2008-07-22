@@ -462,8 +462,8 @@ public class Gui_main{
 //	      WM_SETFONT,(WPARAM) font_12arial,MAKELPARAM(true,0)); 
 //  SendMessage(unit_info_label,
 //	      WM_SETFONT,(WPARAM) font_12arial,MAKELPARAM(true,0)); 
-//  append_output_window(_("Freeciv is free software and you are welcome to distribute copies of"
-//			 " it\nunder certain conditions; See the \"Copying\" item on the Help"
+//  append_output_window(("Freeciv is free software and you are welcome to distribute copies of" +
+//			 " it\nunder certain conditions; See the \"Copying\" item on the Help" +
 //			 " menu.\nNow.. Go give'em hell!") );
 //  hchatline=fcwin_box_add_edit(main_win_box,"",40,
 //			       IDOK, 

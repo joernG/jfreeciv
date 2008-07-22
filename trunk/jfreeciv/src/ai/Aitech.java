@@ -195,7 +195,7 @@ public class Aitech{
 //    goal.want = goal_values[newgoal] / num_cities_nonzero;
 //    goal.current_want = goal_values[pplayer.ai.tech_goal] / num_cities_nonzero;
 //    util.freelog(Log.LOG_DEBUG,
-//	    "Goal.choice = %s, goal.want = %d, goal_value = %d, "
+//	    "Goal.choice = %s, goal.want = %d, goal_value = %d, " +
 //	    "num_cities_nonzero = %d",
 //	    get_tech_name(pplayer, goal.choice), goal.want,
 //	    goal_values[newgoal],

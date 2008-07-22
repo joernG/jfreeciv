@@ -385,7 +385,7 @@ public class Sernet{
 //  }
 //  if (game.timeout == 0) {
 //    /* Just in case someone sets timeout we keep game.turn_start updated */
-//    game.turn_start = time(null);
+//    game.turn_start = new Date(); //time(null);
 //  }
 //  
 //  while(true) {
@@ -399,13 +399,13 @@ public class Sernet{
 //
 //    get_lanserver_announcement();
 //
-//    /* end server if no players for 'srvarg.quitidle' seconds */
-//    if (srvarg.quitidle != 0 && Srv_main.server_state != server_states.PRE_GAME_STATE) {
+//    /* end server if no players for 'Srv_main.srvarg.quitidle' seconds */
+//    if (Srv_main.srvarg.quitidle != 0 && Srv_main.server_state != server_states.PRE_GAME_STATE) {
 //      static time_t last_noplayers;
 //      if(conn_list_size(&game.est_connections) == 0) {
 //	if (last_noplayers != 0) {
-//	  if (time(null)>last_noplayers + srvarg.quitidle) {
-//	    if (srvarg.exit_on_end) {
+//	  if (time(null)>last_noplayers + Srv_main.srvarg.quitidle) {
+//	    if (Srv_main.srvarg.exit_on_end) {
 //	      save_game_auto();
 //	    }
 //	    set_meta_message_string("restarting for lack of players");
@@ -419,18 +419,18 @@ public class Sernet{
 //              close_connection(pconn);
 //            } }
 //
-//	    if (srvarg.exit_on_end) {
+//	    if (Srv_main.srvarg.exit_on_end) {
 //	      /* No need for anything more; just quit. */
 //	      server_quit();
 //	    }
 //	  }
 //	} else {
 //          char buf[256];
-//	  last_noplayers = time(null);
+//	  last_noplayers = new Date(); //time(null);
 //	  
 //	  buf = util.my_snprintf(
 //		      "restarting in %d seconds for lack of players",
-//		      srvarg.quitidle);
+//		      Srv_main.srvarg.quitidle);
 //          set_meta_message_string((final String)buf);
 //	  util.freelog(Log.LOG_NORMAL, get_meta_message_string());
 //	  () send_server_info_to_metaserver(META_INFO);
@@ -464,12 +464,12 @@ public class Sernet{
 //	  ping_connection(pconn);
 //	}
 //      } }
-//      game.last_ping = time(null);
+//      game.last_ping = new Date(); //time(null);
 //    }
 //
 //    /* if we've waited long enough after a failure, respond to the client */
 //    for (conn pconn : game.all_connections.data) {
-//      if (srvarg.auth_enabled && pconn.server.status != AS_ESTABLISHED) {
+//      if (Srv_main.srvarg.auth_enabled && pconn.server.status != AS_ESTABLISHED) {
 //        process_authentication_status(pconn);
 //      }
 //    } conn_list_iterate_end
@@ -544,7 +544,7 @@ public class Sernet{
 //    }
 //    if (game.timeout == 0) {
 //      /* Just in case someone sets timeout we keep game.turn_start updated */
-//      game.turn_start = time(null);
+//      game.turn_start = new Date(); //time(null);
 //    }
 //
 //    if(FD_ISSET(sock, &exceptfs)) {	     /* handle Ctrl-Z suspend/resume */
@@ -821,9 +821,9 @@ public class Sernet{
 //    util.freelog(Log.LOG_ERROR, "SO_REUSEADDR failed: %s", mystrerror());
 //  }
 //
-//  if (!net_lookup_service(srvarg.bind_addr, srvarg.port, &src)) {
+//  if (!net_lookup_service(Srv_main.srvarg.bind_addr, Srv_main.srvarg.port, &src)) {
 //    util.freelog(Log.LOG_ERROR, "Server: bad address: [%s:%d].",
-//	    srvarg.bind_addr, srvarg.port);
+//	    Srv_main.srvarg.bind_addr, Srv_main.srvarg.port);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -1111,7 +1111,7 @@ public class Sernet{
 //   players = util.my_snprintf( "%d",
 //               get_num_human_and_ai_players());
 //   port = util.my_snprintf( "%d",
-//              srvarg.port );
+//              Srv_main.srvarg.port );
 //
 //  dio_output_init(&dout, buffer, sizeof(buffer));
 //  dio_put_uint8(&dout, SERVER_LAN_VERSION);

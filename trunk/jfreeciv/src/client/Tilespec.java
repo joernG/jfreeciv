@@ -227,7 +227,7 @@ public class Tilespec{
 //  case DIR8_NORTHWEST:
 //    return "nw";
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return "";
 //}
 //
@@ -305,7 +305,7 @@ public class Tilespec{
 //   * it here, since this is the only place where we know it.  Note this
 //   * also means if you do "civ -t foo" this will change your *default*
 //   * tileset to 'foo'. */
-//  sz_strlcpy(default_tileset_name, tileset_name);
+//  default_tileset_name = tileset_name;
 //
 //  fname = fc_malloc(tileset_name.length() + TILESPEC_SUFFIX.length() + 1);
 //  sprintf(fname, "%s%s", tileset_name, TILESPEC_SUFFIX);
@@ -321,7 +321,7 @@ public class Tilespec{
 //    util.freelog(LOG_FATAL, "No usable default tileset found, aborting!");
 //    exit(EXIT_FAILURE);
 //  }
-//  util.freelog(Log.LOG_ERROR, _("Trying \"%s\" tileset."), tileset_default);
+//  util.freelog(Log.LOG_ERROR, ("Trying \"%s\" tileset."), tileset_default);
 //  return tilespec_fullname(tileset_default);
 //}
 //
@@ -338,18 +338,18 @@ public class Tilespec{
 //  char *file_capstr = secfile_lookup_str(file, "%s.options", which);
 //  
 //  if (!has_capabilities(us_capstr, file_capstr)) {
-//    util.freelog(Log.LOG_ERROR, _("%s file appears incompatible:\n"
-//			 "file: \"%s\"\n"
-//			 "file options: %s\n"
+//    util.freelog(Log.LOG_ERROR, ("%s file appears incompatible:\n" +
+//			 "file: \"%s\"\n" +
+//			 "file options: %s\n" +
 //			 "supported options: %s"),
 //	    which, filename, file_capstr, us_capstr);
 //    return false;
 //  }
 //  if (!has_capabilities(file_capstr, us_capstr)) {
-//    util.freelog(Log.LOG_ERROR, _("%s file claims required option(s)"
-//			 " which we don't support:\n"
-//			 "file: \"%s\"\n"
-//			 "file options: %s\n"
+//    util.freelog(Log.LOG_ERROR, ("%s file claims required option(s)" +
+//			 " which we don't support:\n" +
+//			 "file: \"%s\"\n" +
+//			 "file options: %s\n" +
 //			 "supported options: %s"),
 //	    which, filename, file_capstr, us_capstr);
 //    return false;
@@ -563,7 +563,7 @@ public class Tilespec{
 //   * to be reloaded, but most of the time it's just loaded once, the small
 //   * sprites are extracted, and then it's freed. */
 //  if (!section_file_load(file, sf.file_name)) {
-//    util.freelog(LOG_FATAL, _("Could not open \"%s\"."), sf.file_name);
+//    util.freelog(LOG_FATAL, ("Could not open \"%s\"."), sf.file_name);
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -596,7 +596,7 @@ public class Tilespec{
 //  int num_grids, i;
 //
 //  if (!section_file_load(file, sf.file_name)) {
-//    util.freelog(LOG_FATAL, _("Could not open \"%s\"."), sf.file_name);
+//    util.freelog(LOG_FATAL, ("Could not open \"%s\"."), sf.file_name);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!check_tilespec_capabilities(file, "spec",
@@ -766,7 +766,7 @@ public class Tilespec{
 //
 //  if (!section_file_load(file, fname)) {
 //    free(fname);
-//    util.freelog(Log.LOG_ERROR, _("Could not open \"%s\"."), fname);
+//    util.freelog(Log.LOG_ERROR, ("Could not open \"%s\"."), fname);
 //    return false;
 //  }
 //
@@ -798,7 +798,7 @@ public class Tilespec{
 //  }
 //
 //  if (is_isometric && !isometric_view_supported()) {
-//    util.freelog(Log.LOG_ERROR, _("Client does not support isometric tilesets."
+//    util.freelog(Log.LOG_ERROR, ("Client does not support isometric tilesets." +
 //	    " Using default tileset instead."));
 //    assert(tileset_name != null);
 //    section_file_free(file);
@@ -806,7 +806,7 @@ public class Tilespec{
 //    return tilespec_read_toplevel(null);
 //  }
 //  if (!is_isometric && !overhead_view_supported()) {
-//    util.freelog(Log.LOG_ERROR, _("Client does not support overhead view tilesets."
+//    util.freelog(Log.LOG_ERROR, ("Client does not support overhead view tilesets." +
 //	    " Using default tileset instead."));
 //    assert(tileset_name != null);
 //    section_file_free(file);
@@ -985,14 +985,14 @@ public class Tilespec{
 //      } else {
 //	terr.layer[l].match_style = MATCH_NONE;
 //	if (layers[l].match_style != MATCH_NONE) {
-//	  util.freelog(Log.LOG_ERROR, "Layer %d has a match_style set; all terrains"
+//	  util.freelog(Log.LOG_ERROR, "Layer %d has a match_style set; all terrains" +
 //		  " must have a match_type.  %s doesn't.", l, terrains[i]);
 //	}
 //      }
 //
 //      if (terr.layer[l].match_style == MATCH_NONE
 //	  && layers[l].match_style == MATCH_FULL) {
-//	util.freelog(Log.LOG_ERROR, "Layer %d has match_type full set; all terrains"
+//	util.freelog(Log.LOG_ERROR, "Layer %d has match_type full set; all terrains" +
 //		" must match this.  %s doesn't.", l, terrains[i]);
 //      }
 //
@@ -1007,7 +1007,7 @@ public class Tilespec{
 //	    || terr.layer[l].offset_x > 0
 //	    || terr.layer[l].offset_y > 0) {
 //	  util.freelog(Log.LOG_ERROR,
-//		  _("Error in %s layer %d: you cannot have tall terrain or\n"
+//		  ("Error in %s layer %d: you cannot have tall terrain or\n" +
 //		    "a sprite offset with a cell-based drawing method."),
 //		  terrains[i], l);
 //	  terr.layer[l].is_tall = false;
@@ -1068,7 +1068,7 @@ public class Tilespec{
 //  util.freelog(LOG_VERBOSE, "finished reading %s", fname);
 //  free(fname);
 //
-//  sz_strlcpy(current_tileset, tileset_name);
+//  current_tileset = tileset_name;
 //
 //  return true;
 //}
@@ -1653,7 +1653,7 @@ public class Tilespec{
 //      }
 //      if (i == 0) {
 //	/* TRANS: obscure tileset error. */
-//	util.freelog(LOG_FATAL, _("Missing base sprite tag \"%s1\"."),
+//	util.freelog(LOG_FATAL, ("Missing base sprite tag \"%s1\"."),
 //		draw.name);
 //	exit(EXIT_FAILURE);
 //      }
@@ -1687,7 +1687,7 @@ public class Tilespec{
 //
 //	    switch (draw.layer[l].match_style) {
 //	    case MATCH_NONE:
-//	      assert(0); /* Impossible. */
+//	      assert(0!=1); /* Impossible. */
 //	      break;
 //	    case MATCH_BOOLEAN:
 //	      buffer1 = util.my_snprintf( "t.%s_cell_%c%d%d%d",
@@ -2545,7 +2545,7 @@ public class Tilespec{
 //         switch (draw.layer[l].match_style) {
 //	 case MATCH_NONE:
 //	   /* Impossible */
-//	   assert(0);
+//	   assert(0!=1);
 //	   break;
 //	 case MATCH_BOOLEAN:
 //	   assert(count == 2);

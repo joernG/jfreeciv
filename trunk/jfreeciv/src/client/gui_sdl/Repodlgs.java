@@ -191,7 +191,7 @@ public class Repodlgs{
 //  value = unit_upgrade_price(game.player_ptr, ut1, ut2);
 //  
 //  cBuf = util.my_snprintf(
-//    	_("Upgrade as many %s to %s as possible for %d gold each?\n"
+//    	("Upgrade as many %s to %s as possible for %d gold each?\n" +
 //	  "Treasury contains %d gold."),
 //	unit_types[ut1].name, unit_types[ut2].name,
 //	value, game.player_ptr.economic.gold);
@@ -552,7 +552,7 @@ public class Repodlgs{
 //      /* ----------- */
 //      if(units[i].building_count > 0) {
 //	cBuf = util.my_snprintf( "%d %s", units[i].soonest_completions,
-//			PL_("turn", "turns", units[i].soonest_completions));
+//			PL("turn", "turns", units[i].soonest_completions));
 //      } else {
 //	cBuf = util.my_snprintf( "--");
 //      }
@@ -907,7 +907,7 @@ public class Repodlgs{
 //	
 //          if(units[i].building_count > 0) {
 //	    cBuf = util.my_snprintf( "%d %s", units[i].soonest_completions,
-//			PL_("turn", "turns", units[i].soonest_completions));
+//			PL("turn", "turns", units[i].soonest_completions));
 //          } else {
 //	    cBuf = util.my_snprintf( "--");
 //          }
@@ -1471,7 +1471,7 @@ public class Repodlgs{
 //  
 //  if(count > 0) {
 //    cBuf = util.my_snprintf(
-//    _("We have %d of %s\n(total value is : %d)\n"
+//    ("We have %d of %s\n(total value is : %d)\n" +
 //    	"We can sell %d of them for %d gold"),
 //	    total_count, get_improvement_name(imp),
 //			    total_count * value, count, gold); 
@@ -2523,7 +2523,7 @@ public class Repodlgs{
 //
 //    if (curent_output <= 0) {
 //      cBuf = util.my_snprintf(
-//		_("Current output : 0\nResearch speed : "
+//		("Current output : 0\nResearch speed : " +
 //		  "none\nNext's advance time : never"));
 //    } else {
 //      char cBiernikujemy[64];
@@ -2533,14 +2533,14 @@ public class Repodlgs{
 //		    curent_output - 1) / curent_output;
 //      
 //      cBiernikujemy = util.my_snprintf(
-//                 PL_("Next advance in %d turn",
+//                 PL("Next advance in %d turn",
 //                     "Next advance in %d turns",
 //                     turns_to_next_tech), turns_to_next_tech);
 //      cBuf = util.my_snprintf(
-//		_("Current output : %d per turn\nResearch speed "
+//		("Current output : %d per turn\nResearch speed " +
 //		  ": %d %s/advance\n%s"),
 //	  	  curent_output, turns_to_advance,
-//		  PL_("turn", "turns", turns_to_advance), cBiernikujemy);
+//		  PL("turn", "turns", turns_to_advance), cBiernikujemy);
 //    }
 //
 //    pStr = create_str16_from_char(cBuf, 12);
@@ -2666,7 +2666,7 @@ public class Repodlgs{
 //      cBuf = util.my_snprintf( "%s ( %d %s )",
 //	      get_tech_name(game.player_ptr,
 //			    game.player_ptr.ai.tech_goal), steps,
-//	      PL_("step", "steps", steps));
+//	      PL("step", "steps", steps));
 //
 //      copy_chars_to_string16(pStr, cBuf);
 //
@@ -3058,7 +3058,7 @@ public class Repodlgs{
 //    
 //      count++;
 //      cBuf = util.my_snprintf( "%s\n%d %s", advances[i].name, num,
-//	  					PL_("step", "steps", num));
+//	  					PL("step", "steps", num));
 //      copy_chars_to_string16(pStr, cBuf);
 //      pSurf = create_sellect_tech_icon(pStr, i, FULL_MODE);
 //      pBuf = create_icon2(pSurf, pWindow.dst,
@@ -3307,7 +3307,7 @@ public class Repodlgs{
 //  buffer[0] = '\0';
 //  for (i = 0; i < packet.nscores; i++) {
 //    cat_snprintf(buffer, sizeof(buffer),
-//                 PL_("%2d: The %s ruler %s scored %d point\n",
+//                 PL("%2d: The %s ruler %s scored %d point\n",
 //                     "%2d: The %s ruler %s scored %d points\n",
 //                     packet.score[i]),
 //                 i + 1,

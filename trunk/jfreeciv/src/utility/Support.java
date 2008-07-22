@@ -363,7 +363,7 @@ public class Support{
 //      buf = malloc(VSNP_BUF_SIZE);
 //
 //      if (!buf) {
-//	fprintf(stderr, "Could not allocate %i bytes for vsnprintf() "
+//	fprintf(stderr, "Could not allocate %i bytes for vsnprintf() " +
 //		"replacement.", VSNP_BUF_SIZE);
 //	exit(EXIT_FAILURE);
 //      }
@@ -377,7 +377,7 @@ public class Support{
 //    len = buf.length();
 //
 //    if (len >= VSNP_BUF_SIZE - 1) {
-//      fprintf(stderr, "Overflow in vsnprintf replacement!"
+//      fprintf(stderr, "Overflow in vsnprintf replacement!" +
 //              " (buffer size %d) aborting...\n", VSNP_BUF_SIZE);
 //      abort();
 //    }

@@ -184,8 +184,8 @@ public class Messagedlg{
 //  
 //  vbox=fcwin_vbox_new(messageopt_dialog,false);
 //  fcwin_box_add_static(vbox,
-//		       _("Where to Display Messages\nOut = Output window,"
-//			 " Mes = Messages window,"
+//		       ("Where to Display Messages\nOut = Output window," +
+//			 " Mes = Messages window," +
 //			 " Pop = Popup individual window"),
 //		       0,SS_CENTER,false,false,5);
 //  num_pages = ((E_LAST + OPTIONS_PER_PAGE-1) / OPTIONS_PER_PAGE);

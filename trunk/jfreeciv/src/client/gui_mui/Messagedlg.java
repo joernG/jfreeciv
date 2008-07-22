@@ -71,7 +71,7 @@ public class Messagedlg{
 //      MUIA_Window_Title, "Message Options",
 //      WindowContents, VGroup,
 //        Child, TextObject,
-//          MUIA_Text_Contents,_("Where to Display Messages\n"
+//          MUIA_Text_Contents,("Where to Display Messages\n" +
 //          "Out = Output window, Mes = Messages window, Pop = Popup individual window"),
 //          MUIA_Text_PreParse, "\33c",
 //          End,

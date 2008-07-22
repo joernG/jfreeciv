@@ -272,7 +272,7 @@ public class Timing{
 //#elif defined HAVE_FTIME
 //    ftime(&t.start.tp);
 //#else
-//    t.start.t = time(null);
+//    t.start.t = new Date(); //time(null);
 //    if (t.start.t == (time_t) -1) {
 //      report_time_failed(t);
 //      return;
@@ -351,7 +351,7 @@ public class Timing{
 //    }
 //    t.start.tp = now;
 //#else
-//    time_t now = time(null);
+//    time_t now = new Date(); //time(null);
 //    if (now == (time_t) -1) {
 //      report_time_failed(t);
 //      return;

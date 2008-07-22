@@ -74,7 +74,7 @@ public class Ailog{
 //
 //  cat_snprintf(buffer, sizeof(buffer), buffer2);
 //  if (pplayer.debug) {
-//    notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}
@@ -108,7 +108,7 @@ public class Ailog{
 //
 //  cat_snprintf(buffer, sizeof(buffer), buffer2);
 //  if (pcity.debug) {
-//    notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}
@@ -164,7 +164,7 @@ public class Ailog{
 //
 //  cat_snprintf(buffer, sizeof(buffer), buffer2);
 //  if (punit.debug || messwin) {
-//    notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}
@@ -208,7 +208,7 @@ public class Ailog{
 //	      s, id, ptile.x, ptile.y);
 //  cat_snprintf(buffer, sizeof(buffer), msg);
 //  if (punit.debug) {
-//    notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}

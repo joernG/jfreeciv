@@ -294,7 +294,7 @@ public class Repodlgs_common{
 //    settable_options[i].default_strval = mystrdup(packet.default_strval);
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  /* if we've received all the options, pop up the settings dialog */

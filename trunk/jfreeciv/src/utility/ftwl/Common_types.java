@@ -147,7 +147,7 @@ public class Common_types{
 //      result.text[i] = my_toupper(result.text[i]);
 //    }
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //      
 //  /* split the string */
@@ -279,7 +279,7 @@ public class Common_types{
 //      return result;
 //    }
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return null;
 //}
 //
@@ -457,7 +457,7 @@ public class Common_types{
 //    dest.x = placement.data.grid.x + x * placement.data.grid.dx;
 //    dest.y = placement.data.grid.y + y * placement.data.grid.dy;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //

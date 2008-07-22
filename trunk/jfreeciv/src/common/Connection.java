@@ -1,8 +1,13 @@
 package common;
 
 import static common.Game.*;
+
+import java.util.Date;
+
+import utility.Speclists;
 import utility.shared.m_pre_result;
 
+import common.connection.auth_status;
 import common.player.player;
 
 public class Connection{
@@ -38,7 +43,7 @@ public class Connection{
 
 	// double ping_time;
 
-	// struct Speclists<Connection> self; /* list with this connection as single element */
+	public Speclists<Connection> self; /* list with this connection as single element */
 	
 	// char username[MAX_LEN_NAME];
 	public String username;
@@ -85,16 +90,17 @@ public class Connection{
 	// } client;
 
 	// struct {
-	// /*
-	// * Holds the id of the request which is processed now. Can be
-	// * zero.
-	// */
-	// int currently_processed_request_id;
+	public class ConnServer{
+	 /*
+	 * Holds the id of the request which is processed now. Can be
+	 * zero.
+	 */
+		public int currently_processed_request_id;
 
-	// /*
-	// * Will increase for every received packet.
-	// */
-	// int last_request_id_seen;
+	 /*
+	 * Will increase for every received packet.
+	 */
+		public int last_request_id_seen;
 
 	// /*
 	// * The start times of the PACKET_CONN_PING which have been sent
@@ -102,36 +108,42 @@ public class Connection{
 	// */
 	// struct timer_list *ping_timers;
 
-	// /* Holds number of tries for authentication from client. */
-	// int auth_tries;
+	 /* Holds number of tries for authentication from client. */
+		public  int auth_tries;
 
-	// /* the time that the server will respond after receiving an auth reply.
-	// * this is used to throttle the connection. Also used to reject a
-	// * connection if we've waited too long for a password. */
+	 /* the time that the server will respond after receiving an auth reply.
+	 * this is used to throttle the connection. Also used to reject a
+	 * connection if we've waited too long for a password. */
 	// time_t auth_settime;
+		public Date auth_settime;
 
-	// /* used to follow where the connection is in the authentication process
-	// */
+	 /* used to follow where the connection is in the authentication process
+	 */
 	// enum auth_status status;
+		public auth_status status;
 	// char password[MAX_LEN_PASSWORD];
+		public 	String password;
 
-	// /* for reverse lookup and blacklisting in db */
+	 /* for reverse lookup and blacklisting in db */
 	// char ipaddr[MAX_LEN_ADDR];
-	// } server;
+		public 	String ipaddr;
+	// } 
+	}
+	public ConnServer server;
 
-	// /*
-	// * Called before an incoming packet is processed. The packet_type
-	// * argument should really be a "enum packet_type". However due
-	// * circular dependency this is impossible.
-	// */
+	 /*
+	 * Called before an incoming packet is processed. The packet_type
+	 * argument should really be a "enum packet_type". However due
+	 * circular dependency this is impossible.
+	 */
 	// void (*incoming_packet_notify) (struct connection * pc,
 	// int packet_type, int size);
 
-	// /*
-	// * Called before a packet is sent. The packet_type argument should
-	// * really be a "enum packet_type". However due circular dependency
-	// * this is impossible.
-	// */
+	 /*
+	 * Called before a packet is sent. The packet_type argument should
+	 * really be a "enum packet_type". However due circular dependency
+	 * this is impossible.
+	 */
 	// void (*outgoing_packet_notify) (struct connection * pc,
 	// int packet_type, int size,
 	// int request_id);
@@ -649,7 +661,7 @@ public class Connection{
 
 //	if ((result & 0xffff) == 0) {
 //	util.freelog(Log.LOG_NORMAL,
-//	"INFORMATION: request_id has wrapped around; "
+//	"INFORMATION: request_id has wrapped around; " +
 //	"setting from %d to 2", result);
 //	result = 2;
 //	}

@@ -523,7 +523,7 @@ public class Score{
 //  int watercol[3] = {0,0,255}; /* blue */
 //  int landcol[3] =  {0,0,0};   /* black */
 //
-//  if (!srvarg.save_ppm) {
+//  if (!Srv_main.srvarg.save_ppm) {
 //    return;
 //  }
 //
@@ -532,14 +532,14 @@ public class Score{
 //              "%s%+05d.int.ppm", game.save_name, game.year);
 //
 //  /* Ensure the saves directory exists. */
-//  make_dir(srvarg.saves_pathname);
+//  make_dir(Srv_main.srvarg.saves_pathname);
 //
-//  sz_strlcpy(tmpname, srvarg.saves_pathname);
+//  tmpname = Srv_main.srvarg.saves_pathname;
 //  if (tmpname[0] != '\0') {
 //    sz_strlcat(tmpname, "/");
 //  }
 //  sz_strlcat(tmpname, filename);
-//  sz_strlcpy(filename, tmpname);
+//  filename = tmpname;
 //
 //  fp = fopen(filename, "w");
 //

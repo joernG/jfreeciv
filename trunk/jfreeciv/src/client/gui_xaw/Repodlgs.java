@@ -985,7 +985,7 @@ public class Repodlgs{
 //			       activeunits_type[ret.list_index]);
 //
 //    buf = util.my_snprintf(
-//	    _("Upgrade as many %s to %s as possible for %d gold each?\n"
+//	    ("Upgrade as many %s to %s as possible for %d gold each?\n" +
 //	      "Treasury contains %d gold."),
 //	    unit_types[ut1].name, unit_types[ut2].name,
 //	    unit_upgrade_price(game.player_ptr, ut1, ut2),
@@ -1129,7 +1129,7 @@ public class Repodlgs{
 //  buffer[0] = '\0';
 //  for (i = 0; i < packet.nscores; i++) {
 //    cat_snprintf(buffer, sizeof(buffer),
-//                 PL_("%2d: The %s ruler %s scored %d point\n",
+//                 PL("%2d: The %s ruler %s scored %d point\n",
 //                     "%2d: The %s ruler %s scored %d points\n",
 //                     packet.score[i]),
 //                 i + 1,

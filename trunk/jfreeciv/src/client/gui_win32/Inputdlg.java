@@ -100,7 +100,7 @@ public class Inputdlg{
 //	      SetWindowText((HWND)lParam, buf);
 //	      id.ok_callback(hWnd, id.okdata);
 //	    } else {
-//	      sz_strlcpy(buf, buf2);
+//	      buf = buf2;
 //	    }
 //	  }
 //	  break;

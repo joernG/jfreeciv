@@ -126,9 +126,9 @@ public class Messagewin_common{
 //    messages = fc_realloc(messages, messages_alloc * sizeof(*messages));
 //  }
 //
-//  if (strncmp(message, game_prefix1, gp_len1) == 0) {
+//  if (!message.equals(game_prefix1)) {
 //    strcpy(s, message + gp_len1);
-//  } else if (strncmp(message, game_prefix2, gp_len2) == 0) {
+//  } else if (!message.equals(game_prefix2)) {
 //    strcpy(s, message + gp_len2);
 //  } else {
 //    strcpy(s, message);

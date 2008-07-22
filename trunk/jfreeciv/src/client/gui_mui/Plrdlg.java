@@ -108,7 +108,7 @@ public class Plrdlg{
 //
 //    if (game.players[i].nturns_idle > 3)
 //      idlebuf = util.my_snprintf(
-//		  PL_("(idle %d turn)", "(idle %d turns)",
+//		  PL("(idle %d turn)", "(idle %d turns)",
 //		      game.players[i].nturns_idle - 1),
 //		  game.players[i].nturns_idle - 1);
 //    else
@@ -255,7 +255,7 @@ public class Plrdlg{
 //    if (can_meet_with_player(&game.players[playerno])) {
 //      request_diplomacy_init_meeting(game.player_idx, playerno);
 //    } else {
-//      append_output_window(_("Game: You need an embassy to establish a "
+//      append_output_window(("Game: You need an embassy to establish a " +
 //                             "diplomatic meeting."));
 //    }
 //  }

@@ -323,7 +323,7 @@ public class Unittools{
 //      } else if (loss_chance > 0) {
 //        if (maybe_make_veteran(punit)) {
 //	  notify_player_ex(pplayer, punit.tile, E_UNIT_BECAME_VET,
-//                           _("Game: Your %s survived on the high seas "
+//                           ("Game: Your %s survived on the high seas " +
 //	                   "and became more experienced!"), 
 //                           unit_name(punit.type));
 //        }
@@ -848,7 +848,7 @@ public class Unittools{
 //		    punit2.tile.x, punit2.tile.y);
 //	    notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
-//			     _("Game: Moved your %s due to changing"
+//			     ("Game: Moved your %s due to changing" +
 //			       " land to sea."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
@@ -869,7 +869,7 @@ public class Unittools{
 //		    punit2.tile.x, punit2.tile.x);
 //	    notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
-//			     _("Game: Embarked your %s due to changing"
+//			     ("Game: Embarked your %s due to changing" +
 //			       " land to sea."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
@@ -884,7 +884,7 @@ public class Unittools{
 //		punit2.tile.x, punit2.tile.y);
 //	notify_player_ex(punit2.unit_owner(),
 //			 punit2.tile, E_UNIT_LOST,
-//			 _("Game: Disbanded your %s due to changing"
+//			 ("Game: Disbanded your %s due to changing" +
 //			   " land to sea."), unit_name(punit2.type));
 //	wipe_unit_spec_safe(punit2, false);
 //	goto START;
@@ -906,7 +906,7 @@ public class Unittools{
 //		    punit2.tile.x, punit2.tile.y);
 //	    notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
-//			     _("Game: Moved your %s due to changing"
+//			     ("Game: Moved your %s due to changing" +
 //			       " sea to land."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
@@ -926,7 +926,7 @@ public class Unittools{
 //		    punit2.tile.x, punit2.tile.y);
 //	    notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
-//			     _("Game: Docked your %s due to changing"
+//			     ("Game: Docked your %s due to changing" +
 //			       " sea to land."), unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
@@ -941,7 +941,7 @@ public class Unittools{
 //		punit2.tile.x, punit2.tile.y);
 //	notify_player_ex(punit2.unit_owner(),
 //			 punit2.tile, E_UNIT_LOST,
-//			 _("Game: Disbanded your %s due to changing"
+//			 ("Game: Disbanded your %s due to changing" +
 //			   " sea to land."), unit_name(punit2.type));
 //	wipe_unit_spec_safe(punit2, false);
 //	goto START;
@@ -956,8 +956,8 @@ public class Unittools{
 //  message about location (x,y), in terms of cities known by pplayer.
 //  One of:
 //    "in Foo City"  or  "at Foo City" (see below)
-//    "outside Foo City"
-//    "near Foo City"
+//    "outside Foo City" +
+//    "near Foo City" +
 //    "" (if no cities known)
 //  There are two variants for the first case, one when something happens
 //  inside the city, otherwise when it happens "at" but "outside" the city.
@@ -1551,7 +1551,7 @@ public class Unittools{
 //    notify_conn_ex(&game.est_connections, punit.tile, E_UNIT_LOST,
 //                   "Unable to defend %s, %s has lost the game.",
 //                   unit_name(punit.type), punit.unit_owner().name);
-//    notify_player(punit.unit_owner(), _("Losing %s meant losing the game! "
+//    notify_player(punit.unit_owner(), ("Losing %s meant losing the game! " +
 //                  "Be more careful next time!"), unit_name(punit.type));
 //    Gamelog.gamelog(GAMELOG_UNITGAMELOSS, punit);
 //    punit.unit_owner().is_dying = true;
@@ -1655,7 +1655,7 @@ public class Unittools{
 //					    pcargo.tile, true, null);
 //	    if (pcity && teleport_unit_to_city(pcargo, pcity, 0, false)) {
 //	      notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
-//			       _("Game: %s escaped the destruction of %s, and "
+//			       ("Game: %s escaped the destruction of %s, and " +
 //				 "fled to %s."), pcargo.unit_type().name,
 //			       ptype.name, pcity.name);
 //	    }
@@ -1764,9 +1764,9 @@ public class Unittools{
 //    for (i = 0; i<MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS; i++) {
 //      if (num_killed[i]>0) {
 //	notify_player_ex(get_player(i), punit.tile, E_UNIT_LOST,
-//			 PL_("Game: You lost %d unit to an attack "
+//			 PL("Game: You lost %d unit to an attack " +
 //			     "from %s's %s%s.",
-//			     "Game: You lost %d units to an attack "
+//			     "Game: You lost %d units to an attack " +
 //			     "from %s's %s%s.",
 //			     num_killed[i]), num_killed[i],
 //			 destroyer.name, unit_name(pkiller.type),
@@ -1779,7 +1779,7 @@ public class Unittools{
 //      if (pplayers_at_war(pkiller.unit_owner(), punit2.unit_owner())) {
 //	notify_player_ex(punit2.unit_owner(), 
 //			 punit2.tile, E_UNIT_LOST,
-//			 _("Game: %s lost to an attack"
+//			 ("Game: %s lost to an attack" +
 //			   " from %s's %s."),
 //			 punit2.unit_type().name, destroyer.name,
 //			 unit_name(pkiller.type));
@@ -2237,7 +2237,7 @@ public class Unittools{
 //    int distance = real_map_distance(punit.tile, ptile);
 //    if (distance > range) {
 //      notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
-//                       _("Game: The distance to the target (%i) "
+//                       ("Game: The distance to the target (%i) " +
 //                         "is greater than the unit's range (%i)."),
 //                       distance, range);
 //      return false;
@@ -2251,7 +2251,7 @@ public class Unittools{
 //    show_area(pplayer, ptile, srange);
 //
 //    notify_player_ex(pplayer, ptile, E_UNIT_LOST,
-//                     _("Game: Your %s paradropped into the ocean "
+//                     ("Game: Your %s paradropped into the ocean " +
 //                       "and was lost."),
 //                     punit.unit_type().name);
 //    server_remove_unit(punit);
@@ -2264,7 +2264,7 @@ public class Unittools{
 //    show_area(pplayer, ptile, srange);
 //    maybe_make_contact(ptile, pplayer);
 //    notify_player_ex(pplayer, ptile, E_UNIT_LOST_ATT,
-//                     _("Game: Your %s was killed by enemy units at the "
+//                     ("Game: Your %s was killed by enemy units at the " +
 //                       "paradrop destination."),
 //                     punit.unit_type().name);
 //    server_remove_unit(punit);
@@ -2306,7 +2306,7 @@ public class Unittools{
 //		   "Game: You found %s in ancient scrolls of wisdom.",
 //		   tech_name);
 //  Gamelog.gamelog(GAMELOG_TECH, pplayer, null, new_tech);
-//  notify_embassies(pplayer, null, _("Game: The %s have acquired %s"
+//  notify_embassies(pplayer, null, ("Game: The %s have acquired %s" +
 //				    " from ancient scrolls of wisdom."),
 //		   Nation.get_nation_name_plural(pplayer.nation), tech_name);
 //}
@@ -2380,7 +2380,7 @@ public class Unittools{
 //
 //  } else {
 //    notify_player_ex(pplayer, punit.tile, E_HUT_SETTLER,
-//		     _("Game: Friendly nomads are impressed by you,"
+//		     ("Game: Friendly nomads are impressed by you," +
 //		       " and join you."));
 //    () create_unit(pplayer, punit.tile, get_role_unit(F_CITIES,0),
 //		0, punit.homecity, -1);
@@ -2405,7 +2405,7 @@ public class Unittools{
 //
 //  if (game.rgame.hut_overflight==OVERFLIGHT_FRIGHTEN && is_air_unit(punit)) {
 //    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//		     _("Game: Your overflight frightens the tribe;"
+//		     ("Game: Your overflight frightens the tribe;" +
 //		       " they scatter in terror."));
 //    return ok;
 //  }
@@ -2526,7 +2526,7 @@ public class Unittools{
 //	  && ppatrol.orders.vigilant) {
 //	if (maybe_cancel_patrol_due_to_enemy(ppatrol)) {
 //	  notify_player_ex(ppatrol.unit_owner(), ppatrol.tile, E_UNIT_ORDERS, 
-//			   _("Game: Your %s cancelled patrol order because it "
+//			   ("Game: Your %s cancelled patrol order because it " +
 //			     "encountered a foreign unit."),
 //			   unit_name(ppatrol.type));
 //	}
@@ -2952,7 +2952,7 @@ public class Unittools{
 //      /* "Patrol" orders are stopped if an enemy is near. */
 //      cancel_orders(punit, "  stopping because of nearby enemy");
 //      notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
-//		       _("Game: Orders for %s aborted as there "
+//		       ("Game: Orders for %s aborted as there " +
 //			 "are units nearby."),
 //		       unit_name(punit.type));
 //      return true;
@@ -3001,7 +3001,7 @@ public class Unittools{
 //      if (!can_unit_do_activity(punit, activity)) {
 //	cancel_orders(punit, "  orders canceled because of failed activity");
 //	notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
-//			 _("Game: Orders for %s aborted since they "
+//			 ("Game: Orders for %s aborted since they " +
 //			   "give an invalid activity."),
 //			 unit_name(punit.type));
 //	return true;
@@ -3015,7 +3015,7 @@ public class Unittools{
 //      if (!(dst_tile = mapstep(punit.tile, order.dir))) {
 //	cancel_orders(punit, "  move order sent us to invalid location");
 //	notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
-//			 _("Game: Orders for %s aborted since they "
+//			 ("Game: Orders for %s aborted since they " +
 //			   "give an invalid location."),
 //			 unit_name(punit.type));
 //	return true;
@@ -3025,7 +3025,7 @@ public class Unittools{
 //	  && maybe_cancel_goto_due_to_enemy(punit, dst_tile)) {
 //	cancel_orders(punit, "  orders canceled because of enemy");
 //	notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
-//			 _("Game: Orders for %s aborted as there "
+//			 ("Game: Orders for %s aborted as there " +
 //			   "are units in the way."),
 //			 unit_name(punit.type));
 //	return true;
@@ -3051,7 +3051,7 @@ public class Unittools{
 //	/* Movement failed (ZOC, etc.) */
 //	cancel_orders(punit, "  attempt to move failed.");
 //	notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
-//			 _("Game: Orders for %s aborted because of "
+//			 ("Game: Orders for %s aborted because of " +
 //			   "failed move."),
 //			 unit_name(punit.type));
 //	return true;

@@ -241,7 +241,7 @@ public class Attribute{
 //       * to delete all attributes.  Another symptom of the bug is the
 //       * value_length (above) is set to a random value, which can also
 //       * cause a bug. */
-//      util.freelog(Log.LOG_ERROR, _("There has been a CMA error.  "
+//      util.freelog(Log.LOG_ERROR, ("There has been a CMA error.  " +
 //			   "Your CMA settings may be broken."));
 //      free(pvalue);
 //      free(pkey);
@@ -301,7 +301,7 @@ public class Attribute{
 //  attr_key pkey;
 //  void *pvalue = null;
 //
-//  util.freelog(ATTRIBUTE_LOG_LEVEL, "attribute_set(key=%d, id=%d, x=%d, y=%d, "
+//  util.freelog(ATTRIBUTE_LOG_LEVEL, "attribute_set(key=%d, id=%d, x=%d, y=%d, " +
 //	  "data_length=%d, data=%p)", key, id, x, y,
 //	  (unsigned int) data_length, data);
 //
@@ -354,7 +354,7 @@ public class Attribute{
 //  int length;
 //  struct data_in din;
 //
-//  util.freelog(ATTRIBUTE_LOG_LEVEL, "attribute_get(key=%d, id=%d, x=%d, y=%d, "
+//  util.freelog(ATTRIBUTE_LOG_LEVEL, "attribute_get(key=%d, id=%d, x=%d, y=%d, " +
 //	  "max_data_length=%d, data=%p)", key, id, x, y,
 //	  (unsigned int) max_data_length, data);
 //

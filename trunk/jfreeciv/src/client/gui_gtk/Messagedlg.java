@@ -83,8 +83,8 @@ public class Messagedlg{
 //  gtk_accel_group_attach(accel, GTK_OBJECT(shell));
 //  gtk_widget_set_usize(shell, 0, 500);
 //
-//  explanation = gtk_label_new(_("Where to Display Messages\n"
-//                                 "Out = Output window, Mes = Messages window," 
+//  explanation = gtk_label_new(("Where to Display Messages\n" +
+//                                 "Out = Output window, Mes = Messages window," + 
 //                                 "\nPop = Popup individual window"));
 //  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(shell).vbox), explanation,
 //		false, false, 0);

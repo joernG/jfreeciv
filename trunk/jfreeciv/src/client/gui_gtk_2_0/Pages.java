@@ -504,7 +504,7 @@ public class Pages{
 //    if (password[0] != '\0') {
 //      struct packet_authentication_reply reply;
 //
-//      sz_strlcpy(reply.password, password);
+//      reply.password = password;
 //      send_packet_authentication_reply(&aconnection, &reply);
 //      return;
 //    } else {
@@ -515,7 +515,7 @@ public class Pages{
 //    set_connection_state(ENTER_PASSWORD_TYPE);
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //
@@ -549,7 +549,7 @@ public class Pages{
 //	  gtk_entry_get_text(GTK_ENTRY(network_password)));
 //      sz_strlcpy(reply.password,
 //	  gtk_entry_get_text(GTK_ENTRY(network_confirm_password)));
-//      if (strncmp(reply.password, password, MAX_LEN_NAME) == 0) {
+//      if (!reply.password.equals(password)) {
 //	password[0] = '\0';
 //	send_packet_authentication_reply(&aconnection, &reply);
 //
@@ -572,7 +572,7 @@ public class Pages{
 //  case WAITING_TYPE:
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //
@@ -1386,7 +1386,7 @@ public class Pages{
 //  }
 //
 //  gtk_tree_model_get(GTK_TREE_MODEL(nation_store), &it, 0, &name, -1);
-//  sz_strlcpy(player_name, name);
+//  player_name = name;
 //
 //  send_start_saved_game();
 //}

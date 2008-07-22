@@ -202,7 +202,7 @@ public class Worklistclass{
 //              int entries = worklist_length(&pplr.worklists[entry.id]);
 //
 //	      my_snprintf(buf, 64, "%d %s", entries,
-//			  PL_("entry", "entries", entries));
+//			  PL("entry", "entries", entries));
 //
 //	      *array++ = pplr.worklists[entry.id].name;
 //	      *array++ = buf;
@@ -685,7 +685,7 @@ public class Worklistclass{
 //    wl.wlids[0] = wl.wlids[1] = 0;
 //  }
 //
-//  sz_strlcpy(wl.name, data.worklist.name);
+//  wl.name = data.worklist.name;
 //  wl.is_valid = data.worklist.is_valid;
 //  
 //  /* Invoke the dialog's parent-specified callback */

@@ -255,7 +255,7 @@ public class Widget_edit{
 //      ct_string_destroy(string2);
 //    }
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return null;
 //}
 //

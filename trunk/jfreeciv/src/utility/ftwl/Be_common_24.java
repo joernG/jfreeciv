@@ -65,7 +65,7 @@ public class Be_common_24{
 //  } else if (draw_type == BE_ALPHA) {
 //    return MASK_ALPHA;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return MASK_OPAQUE;
 //  }
 //}
@@ -281,7 +281,7 @@ public class Be_common_24{
 //	} else if (mask_value == MASK_OPAQUE) {
 //	  memcpy(pdest, psrc, 4);
 //	} else {
-//	  assert(0);
+//	  assert(0!=1);
 //	}
 //      }
 //    }
@@ -533,7 +533,7 @@ public class Be_common_24{
 //    assert(bitmap.num_grays == 256);
 //    draw_alpha_bitmap(target.image, draw_type, color, position, bitmap);
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //

@@ -529,7 +529,7 @@ public class Aitools{
 //      && (bodyguard = find_unit_by_id(punit.ai.bodyguard))
 //      && Map.same_pos(punit.tile, bodyguard.tile)
 //      && bodyguard.moves_left == 0) {
-//    UNIT_LOG(LOGLEVEL_BODYGUARD, punit, "does not want to leave "
+//    UNIT_LOG(LOGLEVEL_BODYGUARD, punit, "does not want to leave " +
 //             "its bodyguard");
 //    return false;
 //  }

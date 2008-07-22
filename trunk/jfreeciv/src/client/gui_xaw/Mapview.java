@@ -160,9 +160,9 @@ public class Mapview{
 //  char buffer[512]; int d;
 //  
 //  buffer = util.my_snprintf(
-//	      _("%s People\n"
-//		"Year: %s\n"
-//		"Gold: %d\n"
+//	      ("%s People\n" +
+//		"Year: %s\n" +
+//		"Gold: %d\n" +
 //		"Tax:%d Lux:%d Sci:%d"),
 //	  population_to_text(civ_population(game.player_ptr)),
 //	  Shared.textyear(game.year),

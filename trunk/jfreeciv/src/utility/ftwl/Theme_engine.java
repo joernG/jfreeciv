@@ -103,12 +103,12 @@ public class Theme_engine{
 //  realname = datafilename(filename);
 //  if (!realname) {
 //    util.freelog(LOG_FATAL, "Could not find required file %s", name);
-//    assert(0);
+//    assert(0!=1);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!section_file_load(&file, realname)) {
 //    util.freelog(LOG_FATAL, "Could not find required file %s", filename);
-//    assert(0);
+//    assert(0!=1);
 //    exit(EXIT_FAILURE);
 //  }
 //  theme_bytes_per_pixel = secfile_lookup_int(&file, "meta.bpp") / 8;
@@ -192,7 +192,7 @@ public class Theme_engine{
 //  } else {
 //    util.freelog(LOG_FATAL, "Wrong colour string in %s, %s.%s%s",
 //            file.filename, section, prefix, suffix);
-//    assert(0);
+//    assert(0!=1);
 //    exit(EXIT_FAILURE);
 //    return 0;
 //  }
@@ -258,7 +258,7 @@ public class Theme_engine{
 //  } else if (strcmp(transform_str, "upper") == 0) {
 //    transform = CTS_TRANSFORM_UPPER;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    transform = CTS_TRANSFORM_NONE;
 //  }
 //  return ct_string_create(font, size, color, background, text, anti_alias,
@@ -306,10 +306,10 @@ public class Theme_engine{
 //    } else if (strcmp(last, "s") == 0) {
 //      result.data.grid.last = PL_S;
 //    } else {
-//      assert(0);
+//      assert(0!=1);
 //    }
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //  return result;
 //}
@@ -407,7 +407,7 @@ public class Theme_engine{
 //    return A_WE;
 //  if (mystrcasecmp(s, "center") == 0)
 //    return A_CENTER;
-//  assert(0);
+//  assert(0!=1);
 //  return 0;
 //}
 //
@@ -514,7 +514,7 @@ public class Theme_engine{
 //    data.tooltip = te_read_tooltip(file, sec[i], false);
 //    if (data.tooltip == null) {
 //      printf("didn't found tooltip data for '%s'\n", sec[i]);
-//      assert(0);
+//      assert(0!=1);
 //    }
 //    data.widget =
 //	sw_window_create(screen.window, data.bounds.width,
@@ -630,7 +630,7 @@ public class Theme_engine{
 //
 //  if (!section_file_load(result, tmp)) {
 //    free(result);
-//    util.freelog(LOG_FATAL, _("Could not load screen file \"%s\"."), filename);
+//    util.freelog(LOG_FATAL, ("Could not load screen file \"%s\"."), filename);
 //    exit(EXIT_FAILURE);
 //    return null;
 //  }

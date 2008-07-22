@@ -225,7 +225,7 @@ public class Aihand{
 //
 //  assert(pplayer.economic.tax + pplayer.economic.luxury 
 //         + pplayer.economic.science == 100);
-//  util.freelog(LOGLEVEL_TAX, "%s rates: Sci %d Lux%d Tax %d NetIncome %d "
+//  util.freelog(LOGLEVEL_TAX, "%s rates: Sci %d Lux%d Tax %d NetIncome %d " +
 //          "celeb=(%d/%d)", pplayer.name, pplayer.economic.science,
 //          pplayer.economic.luxury, pplayer.economic.tax,
 //          player_get_expected_income(pplayer), can_celebrate, total_cities);

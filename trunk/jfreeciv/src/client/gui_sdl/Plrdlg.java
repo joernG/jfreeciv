@@ -237,13 +237,13 @@ public class Plrdlg{
 //        idle = 0;
 //      }
 //      
-//      cBuf = util.my_snprintf( _("Name : %s\nNation : %s\nTeam : %s\n"
-//      					"Reputation : %s\nEmbassy :%s\n"
+//      cBuf = util.my_snprintf( ("Name : %s\nNation : %s\nTeam : %s\n" +
+//      					"Reputation : %s\nEmbassy :%s\n" +
 //    					"State : %s\nIdle : %d %s"),
 //                   pPlayer.name, get_nation_name(pPlayer.nation),
 //		   team, reputation_text(pPlayer.reputation),
 //                   get_embassy_status(game.player_ptr, pPlayer),
-//		   state, idle, PL_("turn", "turns", idle));
+//		   state, idle, PL("turn", "turns", idle));
 //      
 //      copy_chars_to_string16(pPlayer0.string16, cBuf);
 //          
@@ -670,7 +670,7 @@ public class Plrdlg{
 //      if(pDS.type == DS_CEASEFIRE) {
 //	cBuf = util.my_snprintf( "%s(%s) - %d %s",
 //                get_nation_name(pPlayer.nation), state,
-//		pDS.turns_left, PL_("turn", "turns", pDS.turns_left));
+//		pDS.turns_left, PL("turn", "turns", pDS.turns_left));
 //      } else {
 //	cBuf = util.my_snprintf( "%s(%s)",
 //                           get_nation_name(pPlayer.nation), state);

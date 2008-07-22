@@ -198,7 +198,7 @@ public class Audio{
 //    return null;
 //  }
 //
-//  util.freelog(Log.LOG_ERROR, _("Couldn't find soundset \"%s\" trying \"%s\"."),
+//  util.freelog(Log.LOG_ERROR, ("Couldn't find soundset \"%s\" trying \"%s\"."),
 //	  soundset_name, soundset_default);
 //  return soundspec_fullname(soundset_default);
 //}
@@ -221,13 +221,13 @@ public class Audio{
 //  }
 //  if (num_plugins_used == 1) {
 //    /* We only have the dummy plugin, skip the code but issue an advertise */
-//    util.freelog(Log.LOG_NORMAL, _("No real audio plugin present, "
+//    util.freelog(Log.LOG_NORMAL, ("No real audio plugin present, " +
 //      "proceeding with sound support disabled"));
 //    util.freelog(Log.LOG_NORMAL,
 //      "For sound support, install either esound or SDL_mixer");
 //    util.freelog(Log.LOG_NORMAL, 
 //      "Esound: http://www.tux.org/~ricdude/EsounD.html");
-//    util.freelog(Log.LOG_NORMAL, _("SDL_mixer: http://www.libsdl.org/"
+//    util.freelog(Log.LOG_NORMAL, ("SDL_mixer: http://www.libsdl.org/" +
 //      "projects/SDL_mixer/index.html"));
 //    tagfile = null;
 //    return;
@@ -239,7 +239,7 @@ public class Audio{
 //  util.freelog(LOG_VERBOSE, "Initializing sound using %s...", spec_name);
 //  filename = soundspec_fullname(spec_name);
 //  if (!filename) {
-//    util.freelog(Log.LOG_ERROR, _("Cannot find sound spec-file \"%s\"."), spec_name);
+//    util.freelog(Log.LOG_ERROR, ("Cannot find sound spec-file \"%s\"."), spec_name);
 //    util.freelog(Log.LOG_ERROR, "To get sound you need to download a sound set!");
 //    util.freelog(Log.LOG_ERROR, "Get sound sets from <%s>.",
 //	    "ftp://ftp.freeciv.org/freeciv/contrib/sounds/sets");
@@ -255,15 +255,15 @@ public class Audio{
 //  file_capstr = secfile_lookup_str(tagfile, "soundspec.options");
 //  if (!has_capabilities(us_capstr, file_capstr)) {
 //    util.freelog(LOG_FATAL, "sound spec-file appears incompatible:");
-//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, ("file: \"%s\""), filename);
 //    util.freelog(LOG_FATAL, "file options: %s", file_capstr);
 //    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!has_capabilities(file_capstr, us_capstr)) {
-//    util.freelog(LOG_FATAL, _("sound spec-file claims required option(s)"
+//    util.freelog(LOG_FATAL, ("sound spec-file claims required option(s)" +
 //			 " which we don't support:"));
-//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, ("file: \"%s\""), filename);
 //    util.freelog(LOG_FATAL, "file options: %s", file_capstr);
 //    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
