@@ -260,10 +260,10 @@ public class Government{
 //
 //  title.nation = nation;
 //
-//  sz_strlcpy(title.male_title_orig, male);
+//  title.male_title_orig = male;
 //  title.male_title = title.male_title_orig;
 //
-//  sz_strlcpy(title.female_title_orig, female);
+//  title.female_title_orig = female;
 //  title.female_title = title.female_title_orig;
 //}
 //

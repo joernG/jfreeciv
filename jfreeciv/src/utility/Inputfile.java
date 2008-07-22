@@ -58,7 +58,7 @@ public class Inputfile{
 //  value:  a signed integer, or a double-quoted string, or a
 //          gettext-marked double quoted string.  Strings _may_ contain
 //	  raw embedded newlines, and escaped doublequotes, or \.
-//	  eg:  '123', '-999', '"foo"', '_("foo")'
+//	  eg:  '123', '-999', '"foo"', '("foo")'
 //  returned token: string containing number, for numeric, or string
 //          starting at first doublequote for strings, but ommiting
 //	  trailing double-quote.  Note this does _not_ translate
@@ -365,7 +365,7 @@ public class Inputfile{
 //      || inf.cur_line_pos > 0) {
 //    return false;
 //  }
-//  if (strncmp(inf.cur_line.str, include_prefix, len)!=0) {
+//  if (!inf.cur_line.str.equals(include_prefix)) {
 //    return false;
 //  }
 //  /* from here, the include-line must be well formed or we die */

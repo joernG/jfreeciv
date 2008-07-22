@@ -788,7 +788,7 @@ public class Cm{
 //  }
 //
 //  /* If we get here, then we have two copies of identical types, an error */
-//  assert(0);
+//  assert(0!=1);
 //  return 0;
 //}
 //

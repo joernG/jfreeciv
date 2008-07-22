@@ -1,25 +1,10 @@
 package server;
 
+import utility.Speclists;
+import common.Connection;
+import common.player.player;
+
 public class Connecthand{
-///**********************************************************************
-// Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
-//
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//***********************************************************************/
-//
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include <string.h>
-//
 //#include "capability.h"
 //#include "capstr.h"
 //#include "events.h"
@@ -44,18 +29,18 @@ public class Connecthand{
 //#include "stdinhand.h"
 //
 //#include "connecthand.h"
-//
-///**************************************************************************
-//  This is used when a new player joins a server, before the game
-//  has started.  If pconn is null, is an AI, else a client.
-//
-//  N.B. this only attachs a connection to a player if 
-//       pconn.name == player.username
-//**************************************************************************/
-//void establish_new_connection(connection pconn)
-//{
-//  Speclists<Connection> dest = &pconn.self;
-//  player pplayer;
+
+	/***************************************************************************
+	 * This is used when a new player joins a server, before the game has
+	 * started. If pconn is null, is an AI, else a client.
+	 * 
+	 * N.B. this only attachs a Connection to a player if pconn.name ==
+	 * player.username
+	 **************************************************************************/
+	public static void establish_new_connection(Connection pconn)
+	{
+		Speclists<Connection> dest = pconn.self;
+  player pplayer;
 //  struct packet_server_join_reply packet;
 //  char hostname[512];
 //
@@ -64,24 +49,24 @@ public class Connecthand{
 //
 //  /* send off login_replay packet */
 //  packet.you_can_join = true;
-//  sz_strlcpy(packet.capability, our_capability);
+//  packet.capability = our_capability;
 //  packet.message = util.my_snprintf( "%s Welcome",
 //              pconn.username);
 //  sz_strlcpy(packet.challenge_file, new_challenge_filename(pconn));
 //  packet.conn_id = pconn.id;
 //  send_packet_server_join_reply(pconn, &packet);
 //
-//  /* "establish" the connection */
+//  /* "establish" the Connection */
 //  pconn.established = true;
 //  pconn.server.status = AS_ESTABLISHED;
 //
-//  /* introduce the server to the connection */
+//  /* introduce the server to the Connection */
 //  if (my_gethostname(hostname, sizeof(hostname)) == 0) {
-//    notify_conn(dest, "Welcome to the %s Server running at %s port %d.",
-//                freeciv_name_version(), hostname, srvarg.port);
+//    Plrhand.notify_conn(dest, "Welcome to the %s Server running at %s port %d.",
+//                freeciv_name_version(), hostname, Srv_main.srvarg.port);
 //  } else {
-//    notify_conn(dest, "Welcome to the %s Server at port %d.",
-//                freeciv_name_version(), srvarg.port);
+//    Plrhand.notify_conn(dest, "Welcome to the %s Server at port %d.",
+//                freeciv_name_version(), Srv_main.srvarg.port);
 //  }
 //
 //  /* FIXME: this (getting messages about others logging on) should be a 
@@ -92,7 +77,7 @@ public class Connecthand{
 //          pconn.username, pconn.addr);
 //  for (conn aconn : game.est_connections.data) {
 //    if (aconn != pconn) {
-//      notify_conn(&aconn.self, "Server: %s has connected from %s.",
+//      Plrhand.notify_conn(&aconn.self, "Server: %s has connected from %s.",
 //                  pconn.username, pconn.addr);
 //    }
 //  } }
@@ -125,23 +110,23 @@ public class Connecthand{
 //
 //  } else if (Srv_main.server_state == server_states.PRE_GAME_STATE && game.is_new_game) {
 //    if (!attach_connection_to_player(pconn, null)) {
-//      notify_conn(dest, "Couldn't attach your connection to new player.");
+//      Plrhand.notify_conn(dest, "Couldn't attach your Connection to new player.");
 //      util.freelog(LOG_VERBOSE, "%s is not attached to a player", pconn.username);
 //    } else {
-//      sz_strlcpy(pconn.player.name, pconn.username);
+//      pconn.player.name = pconn.username;
 //    }
 //  }
 //
-//  /* remind the connection who he is */
+//  /* remind the Connection who he is */
 //  if (!pconn.player) {
-//    notify_conn(dest, "You are logged in as '%s' connected to no player.",
+//    Plrhand.notify_conn(dest, "You are logged in as '%s' connected to no player.",
 //                pconn.username);
 //  } else if (pconn.player.name.equals(ANON_PLAYER_NAME)) {
-//    notify_conn(dest, _("You are logged in as '%s' connected to an "
+//    Plrhand.notify_conn(dest, ("You are logged in as '%s' connected to an " +
 //                        "anonymous player."),
 //		pconn.username);
 //  } else {
-//    notify_conn(dest, "You are logged in as '%s' connected to %s.",
+//    Plrhand.notify_conn(dest, "You are logged in as '%s' connected to %s.",
 //                pconn.username, pconn.player.name);
 //  }
 //
@@ -152,7 +137,7 @@ public class Connecthand{
 //          && !cplayer.ai.control
 //          && !cplayer.turn_done
 //          && cplayer != pconn.player) {  /* skip current player */
-//        notify_conn(dest, _("Turn-blocking game play: "
+//        Plrhand.notify_conn(dest, ("Turn-blocking game play: " +
 //                            "waiting on %s to finish turn..."),
 //                    cplayer.name);
 //      }
@@ -168,33 +153,33 @@ public class Connecthand{
 //  conn_list_insert_back(&game.est_connections, pconn);
 //  send_conn_info(&game.est_connections, dest);
 //  () send_server_info_to_metaserver(META_INFO);
-//}
-//
-///**************************************************************************
-//  send the rejection packet to the client.
-//**************************************************************************/
-//void reject_new_connection(final String msg, connection pconn)
-//{
+	}
+
+/**************************************************************************
+  send the rejection packet to the client.
+**************************************************************************/
+public static void reject_new_connection(final String msg, Connection pconn)
+{
 //  struct packet_server_join_reply packet;
 //
 //  /* zero out the password */
 //  memset(pconn.server.password, 0, sizeof(pconn.server.password));
 //
 //  packet.you_can_join = false;
-//  sz_strlcpy(packet.capability, our_capability);
-//  sz_strlcpy(packet.message, msg);
+//  packet.capability = our_capability;
+//  packet.message = msg;
 //  packet.challenge_file[0] = '\0';
 //  packet.conn_id = -1;
 //  send_packet_server_join_reply(pconn, &packet);
 //  util.freelog(Log.LOG_NORMAL, "Client rejected: %s.", conn_description(pconn));
 //  flush_connection_send_buffer_all(pconn);
-//}
-//
+}
+
 ///**************************************************************************
-// Returns false if the clients gets rejected and the connection should be
+// Returns false if the clients gets rejected and the Connection should be
 // closed. Returns true if the client get accepted.
 //**************************************************************************/
-//boolean handle_login_request(connection pconn, 
+//boolean handle_login_request(Connection pconn, 
 //                          packet_server_join_req req)
 //{
 //  char msg[MAX_LEN_MSG];
@@ -208,13 +193,13 @@ public class Connecthand{
 //          req.patch_version, req.version_label);
 //  util.freelog(LOG_VERBOSE, "Client caps: %s", req.capability);
 //  util.freelog(LOG_VERBOSE, "Server caps: %s", our_capability);
-//  sz_strlcpy(pconn.capability, req.capability);
+//  pconn.capability = req.capability;
 //  
 //  /* Make sure the server has every capability the client needs */
 //  if (!has_capabilities(our_capability, req.capability)) {
 //    msg = util.my_snprintf(
-//                _("The client is missing a capability that this server needs.\n"
-//                   "Server version: %d.%d.%d%s Client version: %d.%d.%d%s."
+//                ("The client is missing a capability that this server needs.\n" +
+//                   "Server version: %d.%d.%d%s Client version: %d.%d.%d%s." +
 //                   "  Upgrading may help!"),
 //                MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, VERSION_LABEL,
 //                req.major_version, req.minor_version,
@@ -228,8 +213,8 @@ public class Connecthand{
 //  /* Make sure the client has every capability the server needs */
 //  if (!has_capabilities(req.capability, our_capability)) {
 //    msg = util.my_snprintf(
-//                _("The server is missing a capability that the client needs.\n"
-//                   "Server version: %d.%d.%d%s Client version: %d.%d.%d%s."
+//                ("The server is missing a capability that the client needs.\n" +
+//                   "Server version: %d.%d.%d%s Client version: %d.%d.%d%s." +
 //                   "  Upgrading may help!"),
 //                MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION, VERSION_LABEL,
 //                req.major_version, req.minor_version,
@@ -263,37 +248,37 @@ public class Connecthand{
 //    }
 //  } }
 //
-//  if (srvarg.auth_enabled) {
+//  if (Srv_main.srvarg.auth_enabled) {
 //    return authenticate_user(pconn, req.username);
 //  } else {
-//    sz_strlcpy(pconn.username, req.username);
+//    pconn.username = req.username;
 //    establish_new_connection(pconn);
 //    return true;
 //  }
 //}
 //
 ///**************************************************************************
-//  High-level server stuff when connection to client is closed or lost.
-//  Reports loss to log, and to other players if the connection was a
+//  High-level server stuff when Connection to client is closed or lost.
+//  Reports loss to log, and to other players if the Connection was a
 //  player.  Also removes player if in pregame, applies auto_toggle, and
-//  does check for turn done (since can depend on connection/ai status).
+//  does check for turn done (since can depend on Connection/ai status).
 //  Note caller should also call close_connection() after this, to do
 //  lower-level close stuff.
 //**************************************************************************/
-//void lost_connection_to_client(connection pconn)
+//void lost_connection_to_client(Connection pconn)
 //{
 //  player pplayer = pconn.player;
 //  final String desc = conn_description(pconn);
 //
-//  util.freelog(Log.LOG_NORMAL, "Lost connection: %s.", desc);
+//  util.freelog(Log.LOG_NORMAL, "Lost Connection: %s.", desc);
 //  
-//  /* _Must_ avoid sending to pconn, in case pconn connection is
+//  /* _Must_ avoid sending to pconn, in case pconn Connection is
 //   * really lost (as opposed to server shutting it down) which would
 //   * trigger an error on send and recurse back to here.
 //   * Safe to unlink even if not in list: */
 //  conn_list_unlink(&game.est_connections, pconn);
 //  delayed_disconnect++;
-//  notify_conn(&game.est_connections, "Game: Lost connection: %s.", desc);
+//  Plrhand.notify_conn(&game.est_connections, "Game: Lost Connection: %s.", desc);
 //
 //  if (!pplayer) {
 //    delayed_disconnect--;
@@ -343,9 +328,9 @@ public class Connecthand{
 //}
 //
 ///**************************************************************************
-//  Fill in packet_conn_info from full connection struct.
+//  Fill in packet_conn_info from full Connection struct.
 //**************************************************************************/
-//static void package_conn_info(connection pconn,
+//static void package_conn_info(Connection pconn,
 //                              packet_conn_info packet)
 //{
 //  packet.id           = pconn.id;
@@ -355,9 +340,9 @@ public class Connecthand{
 //  packet.observer     = pconn.observer;
 //  packet.access_level = pconn.access_level;
 //
-//  sz_strlcpy(packet.username, pconn.username);
-//  sz_strlcpy(packet.addr, pconn.addr);
-//  sz_strlcpy(packet.capability, pconn.capability);
+//  packet.username = pconn.username;
+//  packet.addr = pconn.addr;
+//  packet.capability = pconn.capability;
 //}
 //
 ///**************************************************************************
@@ -407,7 +392,7 @@ public class Connecthand{
 //  Note "observer" connections do not count for is_connected. You must set
 //       pconn.obserber to true before attaching!
 //**************************************************************************/
-//boolean attach_connection_to_player(connection pconn,
+//boolean attach_connection_to_player(Connection pconn,
 //                                 player pplayer)
 //{
 //  /* if pplayer is null, attach to first non-connected player slot */
@@ -422,7 +407,7 @@ public class Connecthand{
 //  }
 //
 //  if (!pconn.observer) {
-//    sz_strlcpy(pplayer.username, pconn.username);
+//    pplayer.username = pconn.username;
 //    pplayer.is_connected = true;
 //  }
 //
@@ -439,7 +424,7 @@ public class Connecthand{
 //
 //  pconn remains a member of game.est_connections.
 //**************************************************************************/
-//boolean unattach_connection_from_player(connection pconn)
+//boolean unattach_connection_from_player(Connection pconn)
 //{
 //  if (!pconn.player) {
 //    return false; /* no player is attached to this conn */

@@ -214,7 +214,7 @@ public class Text{
 //	int turns = ds[owner.player_no].turns_left;
 //
 //	/* TRANS: "Polish territory (5 turn ceasefire)" */
-//	add_line(PL_("%s territory (%d turn ceasefire)",
+//	add_line(PL("%s territory (%d turn ceasefire)",
 //		     "%s territory (%d turn ceasefire)",
 //		     turns),
 //		 Nation.get_nation_name(owner.nation), turns);
@@ -244,7 +244,7 @@ public class Text{
 //	int turns = ds[owner.player_no].turns_left;
 //
 //	/* TRANS:  "City: Warsaw (Polish, 5 turn ceasefire)" */
-//        add_line(PL_("City: %s (%s, %d turn ceasefire)",
+//        add_line(PL("City: %s (%s, %d turn ceasefire)",
 //				       "City: %s (%s, %d turn ceasefire)",
 //				       turns),
 //		 pcity.name,
@@ -305,7 +305,7 @@ public class Text{
 //	int turns = ds[owner.player_no].turns_left;
 //
 //	/* TRANS:  "Unit: Musketeers (Polish, 5 turn ceasefire)" */
-//        add_line(PL_("Unit: %s (%s, %d turn ceasefire)",
+//        add_line(PL("Unit: %s (%s, %d turn ceasefire)",
 //				       "Unit: %s (%s, %d turn ceasefire)",
 //				       turns),
 //		 ptype.name,
@@ -490,14 +490,14 @@ public class Text{
 //                     / (ours + theirs);
 //  if (theirs == 0) {
 //    /* Simple version, no techpool */
-//    add(PL_("Progress: %d turn/advance (%d pts/turn)",
+//    add(PL("Progress: %d turn/advance (%d pts/turn)",
 //	    "Progress: %d turns/advance (%d pts/turn)",
 //	    turns_to_advance), turns_to_advance, ours);
 //  } else {
 //    /* Techpool version */
-//    add(PL_("Progress: %d turn/advance (%d pts/turn, "
+//    add(PL("Progress: %d turn/advance (%d pts/turn, " +
 //	    "%d pts/turn from team)",
-//	    "Progress: %d turns/advance (%d pts/turn, "
+//	    "Progress: %d turns/advance (%d pts/turn, " +
 //	    "%d pts/turn from team)",
 //	    turns_to_advance), turns_to_advance, ours, theirs);
 //  }
@@ -587,7 +587,7 @@ public class Text{
 //{
 //  INIT;
 //
-//  add(_("Shows your progress in researching "
+//  add(("Shows your progress in researching " +
 //	"the current technology.\n%s: %d/%d."),
 //      get_tech_name(game.player_ptr,
 //		    game.player_ptr.research.researching),
@@ -661,7 +661,7 @@ public class Text{
 //	   (int) (pship.energy_rate * 100.0));
 //
 //  /* TRANS: spaceship text; should have finalant width. */
-//  add_line(PL_("Mass:            %5d ton",
+//  add_line(PL("Mass:            %5d ton",
 //	       "Mass:            %5d tons", pship.mass), pship.mass);
 //
 //  if (pship.propulsion > 0) {

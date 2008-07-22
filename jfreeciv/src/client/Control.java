@@ -916,7 +916,7 @@ public class Control{
 //  if (can_unit_do_auto(punit)) {
 //    dsend_packet_unit_auto(&aconnection, punit.id);
 //  } else {
-//    append_output_window(_("Game: Only settler units and military units"
+//    append_output_window(("Game: Only settler units and military units" +
 //			   " in cities can be put in auto-mode."));
 //  }
 //}
@@ -1027,7 +1027,7 @@ public class Control{
 //
 //  if (is_air_unit(punit) || is_heli_unit(punit)) {
 //    /* Same string as in do_unit_patrol_to. */
-//    append_output_window(_("Game: Sorry, airunit patrol "
+//    append_output_window(("Game: Sorry, airunit patrol " +
 //			   "not yet implemented."));
 //    return;
 //  }
@@ -1698,7 +1698,7 @@ public class Control{
 //		     enum unit_activity activity)
 //{
 //  if (is_air_unit(punit) || is_heli_unit(punit)) {
-//    append_output_window(_("Game: Sorry, airunit connect "
+//    append_output_window(("Game: Sorry, airunit connect " +
 //			   "not yet implemented."));
 //  } else {
 //    tile dest_tile;
@@ -1708,7 +1708,7 @@ public class Control{
 //    if (Map.same_pos(dest_tile, ptile)) {
 //      send_connect_route(punit, activity);
 //    } else {
-//      append_output_window(_("Game: Didn't find a route to "
+//      append_output_window(("Game: Didn't find a route to " +
 //			     "the destination!"));
 //    }
 //  }

@@ -271,7 +271,7 @@ public class Cma_fec{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -314,7 +314,7 @@ public class Cma_fec{
 //      turns = (stock / surplus);
 //    }
 //  }
-//  buffer = util.my_snprintf( PL_("%d turn", "%d turns", turns),
+//  buffer = util.my_snprintf( PL("%d turn", "%d turns", turns),
 //	      turns);
 //  return buffer;
 //}
@@ -354,13 +354,13 @@ public class Cma_fec{
 //  }
 //
 //  buffer = util.my_snprintf(
-//	      _("Name: %s\n"
-//		"Food:       %10s Gold:    %10s\n"
-//		"Production: %10s Luxury:  %10s\n"
-//		"Trade:      %10s Science: %10s\n"
-//		"\n"
-//		"    People (W/E/S/T): %s\n"
-//		"          City grows: %s\n"
+//	      ("Name: %s\n" +
+//		"Food:       %10s Gold:    %10s\n" +
+//		"Production: %10s Luxury:  %10s\n" +
+//		"Trade:      %10s Science: %10s\n" +
+//		"\n" +
+//		"    People (W/E/S/T): %s\n" +
+//		"          City grows: %s\n" +
 //		"Production completed: %s"),
 //	      buf[9], buf[FOOD], buf[GOLD], buf[SHIELD], buf[LUXURY],
 //	      buf[TRADE], buf[SCIENCE], buf[6], buf[7], buf[8]);

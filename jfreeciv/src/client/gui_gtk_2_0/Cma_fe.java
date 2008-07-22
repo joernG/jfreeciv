@@ -248,9 +248,9 @@ public class Cma_fe{
 //      		   G_CALLBACK(button_press_callback), pdialog);
 //
 //  gtk_tooltips_set_tip(pdialog.tips, view,
-//		       _("For information on:\n"
-//		         "CMA and presets\n"
-//			 "including sample presets,\n"
+//		       ("For information on:\n" +
+//		         "CMA and presets\n" +
+//			 "including sample presets,\n" +
 //		         "see README.cma."),
 //		       "");
 //

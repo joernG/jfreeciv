@@ -681,11 +681,11 @@ public class Menu{
 //
 //  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Railroad", " (R)", 999, 
-//			PL_("turn", "turns", 999));
+//			PL("turn", "turns", 999));
 //  len = cBuf.length();
 //  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Road", " (R)", 999, 
-//			PL_("turn", "turns", 999));
+//			PL("turn", "turns", 999));
 //  len = MAX(len, cBuf.length());
 //  
 //  pBuf = create_themeicon(pTheme.ORoad_Icon, Main.gui,
@@ -983,13 +983,13 @@ public class Menu{
 //	  time = map_build_rail_time(pUnit.x, pUnit.y);
 //	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Railroad", " (R)", time , 
-//			PL_("turn", "turns", time));
+//			PL("turn", "turns", time));
 //	  pOrder_Road_Button.theme = pTheme.ORailRoad_Icon;
 //	} else {
 //	  time = map_build_road_time(pUnit.x, pUnit.y);
 //	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Road", " (R)", time , 
-//			PL_("turn", "turns", time));
+//			PL("turn", "turns", time));
 //	  pOrder_Road_Button.theme = pTheme.ORoad_Icon;
 //	}
 //	copy_chars_to_string16(pOrder_Road_Button.string16, cBuf);
@@ -1030,7 +1030,7 @@ public class Menu{
 //			"Cut Down to",
 //			tile_types[tile_types[terrain].irrigation_result
 //				].terrain_name
-//			," (I)", time , PL_("turn", "turns", time));
+//			," (I)", time , PL("turn", "turns", time));
 //	  pOrder_Irrigation_Button.theme = pTheme.OCutDownForest_Icon;
 //	  break;
 //	case T_SWAMP:
@@ -1038,14 +1038,14 @@ public class Menu{
 //			"Irrigate to",
 //			tile_types[tile_types[terrain].irrigation_result
 //				].terrain_name
-//			," (I)", time , PL_("turn", "turns", time));
+//			," (I)", time , PL("turn", "turns", time));
 //	  pOrder_Irrigation_Button.theme = pTheme.OIrrigation_Icon;
 //	  break;
 //	  /* set Irrigation Icon */
 //	default:
 //	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Irrigation", " (I)", time , 
-//			PL_("turn", "turns", time));
+//			PL("turn", "turns", time));
 //	  pOrder_Irrigation_Button.theme = pTheme.OIrrigation_Icon;
 //	  break;
 //	}
@@ -1064,7 +1064,7 @@ public class Menu{
 //			"Irrigate to",
 //			tile_types[tile_types[terrain].mining_result
 //				].terrain_name
-//			," (M)", time , PL_("turn", "turns", time));
+//			," (M)", time , PL("turn", "turns", time));
 //	  pOrder_Mine_Button.theme = pTheme.OIrrigation_Icon;
 //	  break;
 //	  /* set Forest Icon . plant Forrest*/
@@ -1074,14 +1074,14 @@ public class Menu{
 //	case T_SWAMP:
 //	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Plant Forest", " (M)", time , 
-//			PL_("turn", "turns", time));
+//			PL("turn", "turns", time));
 //	  pOrder_Mine_Button.theme = pTheme.OPlantForest_Icon;
 //	  break;
 //	  /* set Mining Icon */
 //	default:
 //	  cBuf = util.my_snprintf("%s%s %d %s",
 //			"Build Mine", " (M)", time , 
-//			PL_("turn", "turns", time));
+//			PL("turn", "turns", time));
 //	  pOrder_Mine_Button.theme = pTheme.OMine_Icon;
 //	  break;
 //	}
@@ -1097,7 +1097,7 @@ public class Menu{
 //	  "Transform to",
 //	  tile_types[tile_types[terrain].transform_result].terrain_name,
 //			" (M)", time , 
-//			PL_("turn", "turns", time));
+//			PL("turn", "turns", time));
 //	copy_chars_to_string16(pOrder_Transform_Button.string16, cBuf);
 //	clear_wflag(pOrder_Transform_Button, WF_HIDDEN);
 //      } else {

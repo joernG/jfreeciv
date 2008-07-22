@@ -289,8 +289,8 @@ public class Mapview{
 //       * the flush code would simply stop working.  But this means the
 //       * below message may be repeated many times. */
 //      util.freelog(Log.LOG_ERROR,
-//	      _("The SDL event buffer is full; you may see drawing errors\n"
-//		"as a result.  If you see this message often, please\n"
+//	      ("The SDL event buffer is full; you may see drawing errors\n" +
+//		"as a result.  If you see this message often, please\n" +
 //		"report it to freeciv-dev@freeciv.org."));
 //    }
 //  }
@@ -502,7 +502,7 @@ public class Mapview{
 //
 //
 //  buffer = util.my_snprintf(
-//	      _("%s Population: %s  Year: %s  "
+//	      ("%s Population: %s  Year: %s  " +
 //		"Gold %d Tax: %d Lux: %d Sci: %d "),
 //	      get_nation_name(game.player_ptr.nation),
 //	      population_to_text(civ_population(game.player_ptr)),
@@ -662,7 +662,7 @@ public class Mapview{
 //                if (game.player_ptr.diplstates[pTile.owner.player_no].type==DS_CEASEFIRE){
 //		  int turns = game.player_ptr.diplstates[pTile.owner.player_no].turns_left;
 //		  cat_snprintf(buffer, sizeof(buffer),
-//		  	PL_("\n%s territory (%d turn ceasefire)",
+//		  	PL("\n%s territory (%d turn ceasefire)",
 //				"\n%s territory (%d turn ceasefire)", turns),
 //		 		get_nation_name(pTile.owner.nation), turns);
 //                } else {

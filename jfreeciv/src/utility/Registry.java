@@ -90,9 +90,9 @@ public class Registry{
 //  never have "foo,0" as a real name in the datafile.)
 //
 //  - Tabular format:  The lines:
-//      foo = { "bar",  "baz",   "bax"
+//      foo = { "bar",  "baz",   "bax" +
 //              "wow",   10,     -5
-//              "cool",  "str"
+//              "cool",  "str" +
 //              "hmm",    314,   99, 33, 11
 //      }
 //  are equivalent to the following:
@@ -697,7 +697,7 @@ public class Registry{
 //
 //	offset = c - first;
 //	first[offset-2] = '\0';
-//	sz_strlcpy(base, first);
+//	base = first;
 //	first[offset-2] = '0';
 //	fz_fprintf(fs, "%s={", base);
 //
@@ -710,7 +710,7 @@ public class Registry{
 //	ncol = 0;
 //	col_iter = save_iter;
 //	for( ; (col_pentry = ITERATOR_PTR(col_iter)); ITERATOR_NEXT(col_iter)) {
-//	  if(strncmp(col_pentry.name, first, offset) != 0)
+//	  if(!col_pentry.name.equals(first))
 //	    break;
 //	  fz_fprintf(fs, "%c\"%s\"", (ncol==0?' ':','), col_pentry.name+offset);
 //	  ncol++;
@@ -745,12 +745,12 @@ public class Registry{
 //	       * second or later row has, then we'll drop out of tabular
 //	       * format without an error message. */
 //	      util.freelog(Log.LOG_ERROR,
-//		      "In file %s, there is no entry in the registry for \n"
-//		      "%s (or the entries are out of order. This means a \n"
-//		      "less efficient non-tabular format will be used. To\n"
-//		      "avoid this make sure all rows of a table are filled\n"
-//		      "out with an entry for every column.  This is surely\n"
-//		      "a bug so if you're reading this message, report it\n"
+//		      "In file %s, there is no entry in the registry for \n" +
+//		      "%s (or the entries are out of order. This means a \n" +
+//		      "less efficient non-tabular format will be used. To\n" +
+//		      "avoid this make sure all rows of a table are filled\n" +
+//		      "out with an entry for every column.  This is surely\n" +
+//		      "a bug so if you're reading this message, report it\n" +
 //		      "to bugs@freeciv.org.",
 //		      real_filename, expect);
 //	      fz_fprintf(fs, "\n");
@@ -1615,7 +1615,7 @@ public class Registry{
 //  /* count 'em: */
 //  i = 0;
 //  section_list_iterate(*my_section_file.sections, psection) {
-//    if (strncmp(psection.name, prefix, len) == 0) {
+//    if (!psection.name.equals(prefix)) {
 //      i++;
 //    }
 //  }
@@ -1630,7 +1630,7 @@ public class Registry{
 //
 //  i = 0;
 //  section_list_iterate(*my_section_file.sections, psection) {
-//    if (strncmp(psection.name, prefix, len) == 0) {
+//    if (!psection.name.equals(prefix)) {
 //      ret[i++] = psection.name;
 //    }
 //  }

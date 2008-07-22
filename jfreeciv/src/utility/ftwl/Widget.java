@@ -402,7 +402,7 @@ public class Widget{
 //      }
 //      break;	    
 //    default:
-//      assert(0);
+//      assert(0!=1);
 //    }
 //  }
 //}

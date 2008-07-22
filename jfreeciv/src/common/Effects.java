@@ -165,7 +165,7 @@ public class Effects{
 //  if (effect_range >= 0 && effect_range < EFR_LAST) {
 //    return effect_range_names[effect_range];
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return null;
 //  }
 //}
@@ -199,7 +199,7 @@ public class Effects{
 //  if (effect_type >= 0 && effect_type < EFT_LAST) {
 //    return effect_type_names[effect_type];
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return null;
 //  }
 //}
@@ -495,7 +495,7 @@ public class Effects{
 //
 //  In the effect
 //
-//    { "name", "value", "equiv", "req_type", "req"
+//    { "name", "value", "equiv", "req_type", "req" +
 //      "Prod_Bonus", 25, "Generators", "Building", "Factory"
 //    }
 //
@@ -592,7 +592,7 @@ public class Effects{
 //    peffect.req.value.terrain = req_value;
 //    break;
 //  case REQ_LAST:
-//    assert(0);
+//    assert(0!=1);
 //    break;
 //  }
 //
@@ -656,7 +656,7 @@ public class Effects{
 //  int i;
 //
 //  effect_for (group pgroup : groups.data) {
-//    sz_strlcpy(packet.name, pgroup.name);
+//    packet.name = pgroup.name;
 //
 //    packet.num_elements = effect_group_element_list_size(&pgroup.elements);
 //    for (i = 0; i < packet.num_elements; i++) {
@@ -720,7 +720,7 @@ public class Effects{
 //	  packet.req_value = peffect.req.value.terrain;
 //	  break;
 //	case REQ_LAST:
-//	  assert(0);
+//	  assert(0!=1);
 //	  break;
 //	}
 //
@@ -881,7 +881,7 @@ public class Effects{
 //  case TARGET_BUILDING:
 //    return (range >= EFR_LOCAL);
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return false;
 //}
 //
@@ -952,7 +952,7 @@ public class Effects{
 //  case EFR_LAST:
 //    break;
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return 0;
 //}
 //
@@ -1060,7 +1060,7 @@ public class Effects{
 //    break;
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return false;
 //}
 //

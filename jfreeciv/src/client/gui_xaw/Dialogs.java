@@ -451,7 +451,7 @@ public class Dialogs{
 //                         diplomat_bribe_no_callback, 0, 0, null);
 //  } else if(game.player_ptr.economic.gold>=punit.bribe_cost) {
 //    buf = util.my_snprintf(
-//		_("Bribe unit for %d gold?\n"
+//		("Bribe unit for %d gold?\n" +
 //		  "Treasury contains %d gold."), 
 //		punit.bribe_cost, game.player_ptr.economic.gold);
 //    popup_message_dialog(toplevel, "diplomatbribedialog", buf,
@@ -460,7 +460,7 @@ public class Dialogs{
 //			 null);
 //  } else {
 //    buf = util.my_snprintf(
-//		_("Bribing the unit costs %d gold.\n"
+//		("Bribing the unit costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
 //		punit.bribe_cost, game.player_ptr.economic.gold);
 //    popup_message_dialog(toplevel, "diplomatnogolddialog", buf,
@@ -983,7 +983,7 @@ public class Dialogs{
 //			 diplomat_incite_no_callback, 0, 0, null);
 //  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
 //    buf = util.my_snprintf(
-//		_("Incite a revolt for %d gold?\n"
+//		("Incite a revolt for %d gold?\n" +
 //		  "Treasury contains %d gold."), 
 //		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //   diplomat_target_id = pcity.id;
@@ -993,7 +993,7 @@ public class Dialogs{
 //			null);
 //  } else {
 //   buf = util.my_snprintf(
-//	       _("Inciting a revolt costs %d gold.\n"
+//	       ("Inciting a revolt costs %d gold.\n" +
 //		 "Treasury contains %d gold."), 
 //	       pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //   popup_message_dialog(toplevel, "diplomatnogolddialog", buf,

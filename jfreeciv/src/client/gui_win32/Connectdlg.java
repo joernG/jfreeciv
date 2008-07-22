@@ -130,7 +130,7 @@ public class Connectdlg{
 //    if (password[0] != '\0') {
 //      struct packet_authentication_reply reply;
 //
-//      sz_strlcpy(reply.password, password);
+//      reply.password = password;
 //      send_packet_authentication_reply(&aconnection, &reply);
 //      return;
 //    } else {
@@ -141,7 +141,7 @@ public class Connectdlg{
 //    dialog_config = ENTER_PASSWORD_TYPE;
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  SetWindowText(networkdlg_name, "Password:");
@@ -287,7 +287,7 @@ public class Connectdlg{
 //  case VERIFY_PASSWORD_TYPE:
 //    Edit_GetText(GetDlgItem(network_tabs[0], ID_CONNECTDLG_NAME), 
 //		 reply.password, 512);
-//    if (strncmp(reply.password, password, MAX_LEN_NAME) == 0) {
+//    if (!reply.password.equals(password)) {
 //      EnableWindow(GetDlgItem(network_dlg, ID_CONNECTDLG_CONNECT), false);
 //      password[0] = '\0';
 //      send_packet_authentication_reply(&aconnection, &reply);
@@ -306,7 +306,7 @@ public class Connectdlg{
 //    send_packet_authentication_reply(&aconnection, &reply);
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //
@@ -479,7 +479,7 @@ public class Connectdlg{
 //	  }
 //	}
 //
-//	sz_strlcpy(player_name, name);
+//	player_name = name;
 //
 //	if (nmlv.hdr.code == NM_DBLCLK) {
 //	  really_close_connection_dialog();
@@ -665,7 +665,7 @@ public class Connectdlg{
 //
 //  if (count >= MAX_AUTOCONNECT_ATTEMPTS) {
 //    util.freelog(LOG_FATAL,
-//            _("Failed to contact server \"%s\" at port "
+//            ("Failed to contact server \"%s\" at port " +
 //              "%d as \"%s\" after %d attempts"),
 //            server_host, server_port, user_name, count);
 //    exit(EXIT_FAILURE);
@@ -681,7 +681,7 @@ public class Connectdlg{
 //#endif
 //  default:                      /* All other errors are fatal */
 //    util.freelog(LOG_FATAL,
-//            _("Error contacting server \"%s\" at port %d "
+//            ("Error contacting server \"%s\" at port %d " +
 //              "as \"%s\":\n %s\n"),
 //            server_host, server_port, user_name, errbuf);
 //    exit(EXIT_FAILURE);     
@@ -711,7 +711,7 @@ public class Connectdlg{
 //  char buf[512];
 //
 //  buf = util.my_snprintf(
-//              _("Auto-connecting to server \"%s\" at port %d "
+//              ("Auto-connecting to server \"%s\" at port %d " +
 //                "as \"%s\" every %d.%d second(s) for %d times"),
 //              server_host, server_port, user_name,
 //              AUTOCONNECT_INTERVAL / 1000,AUTOCONNECT_INTERVAL % 1000, 
@@ -719,7 +719,7 @@ public class Connectdlg{
 //  append_output_window(buf);
 //  if (get_server_address(server_host, server_port, buf, sizeof(buf)) < 0) {
 //    util.freelog(LOG_FATAL,
-//            _("Error contacting server \"%s\" at port %d "
+//            ("Error contacting server \"%s\" at port %d " +
 //              "as \"%s\":\n %s\n"),
 //            server_host, server_port, user_name, buf);
 //    exit(EXIT_FAILURE);

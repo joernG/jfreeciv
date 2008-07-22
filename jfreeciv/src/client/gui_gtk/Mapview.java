@@ -118,7 +118,7 @@ public class Mapview{
 //  gtk_frame_set_label( GTK_FRAME( main_frame_civ_name ), Nation.get_nation_name(game.player_ptr.nation) );
 //
 //  buffer = util.my_snprintf(
-//	      _("Population: %s\nYear: %s\n"
+//	      ("Population: %s\nYear: %s\n" +
 //		"Gold: %d\nTax: %d Lux: %d Sci: %d"),
 //	      population_to_text(civ_population(game.player_ptr)),
 //	      Shared.textyear(game.year), game.player_ptr.economic.gold,

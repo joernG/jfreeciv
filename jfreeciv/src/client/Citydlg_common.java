@@ -252,7 +252,7 @@ public class Citydlg_common{
 //	time = util.my_snprintf( "%3d", turns);
 //      } else {
 //	time = util.my_snprintf(
-//		    PL_("%3d turn", "%3d turns", turns), turns);
+//		    PL("%3d turn", "%3d turns", turns), turns);
 //      }
 //    } else {
 //      time = util.my_snprintf( "%s",
@@ -300,7 +300,7 @@ public class Citydlg_common{
 //
 //    if (turns < 999) {
 //      my_snprintf(buffer, buffer_len,
-//		  PL_("%s (%d) %d turn", "%s (%d) %d turns", turns),
+//		  PL("%s (%d) %d turn", "%s (%d) %d turns", turns),
 //		  name, cost, turns);
 //    } else {
 //      my_snprintf(buffer, buffer_len, "%s (%d) never", name, cost);

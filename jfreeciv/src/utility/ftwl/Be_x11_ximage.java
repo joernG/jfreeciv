@@ -147,7 +147,7 @@ public class Be_x11_ximage{
 //	event.button = BE_MB_RIGHT;
 //	break;
 //      default:
-//	assert(0);
+//	assert(0!=1);
 //      }
 //    }
 //    break;
@@ -214,7 +214,7 @@ public class Be_x11_ximage{
 //    break;
 //  default:
 //    printf("got event %d\n", xevent.type);
-//    assert(0);
+//    assert(0!=1);
 //  }
 //  return true;
 //}
@@ -275,7 +275,7 @@ public class Be_x11_ximage{
 //    } else if (errno == EINTR) {
 //      goto restart;
 //    } else {
-//      assert(0);
+//      assert(0!=1);
 //    }
 //  }
 //}
@@ -410,14 +410,14 @@ public class Be_x11_ximage{
 //	     && root_image.byte_order == LSBFirst) {
 //    fill_ximage_from_image_8888(root_image, src.image);
 //  } else {
-//    fprintf(stderr, "ERROR: unknown screen format: red=0x%lx, "
-//	    "green=0x%lx, blue=0x%lx depth=%d bpp=%d "
+//    fprintf(stderr, "ERROR: unknown screen format: red=0x%lx, " +
+//	    "green=0x%lx, blue=0x%lx depth=%d bpp=%d " +
 //	    "byte_order=%d (LSB=%d MSB=%d)\n",
 //	    root_image.red_mask, root_image.green_mask,
 //	    root_image.blue_mask, root_image.depth,
 //	    root_image.bits_per_pixel, root_image.byte_order, LSBFirst,
 //	    MSBFirst);
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  XPutImage(display, window, gc_plain, root_image, 0, 0, 0, 0,

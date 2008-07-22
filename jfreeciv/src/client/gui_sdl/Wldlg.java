@@ -1004,7 +1004,7 @@ public class Wldlg{
 //        cBuf = util.my_snprintf( "%s\nblocked!", name);
 //      } else {
 //        cBuf = util.my_snprintf( "%s\n%d %s",
-//		    name, turns, PL_("turn", "turns", turns));
+//		    name, turns, PL("turn", "turns", turns));
 //      }
 //    } else {
 //      cBuf = util.my_snprintf( "%s\nfinished!", name);
@@ -1187,7 +1187,7 @@ public class Wldlg{
 //          cBuf = util.my_snprintf( "%s\nblocked!", name);
 //        } else {
 //          cBuf = util.my_snprintf( "%s\n%d %s",
-//		    name, turns, PL_("turn", "turns", turns));
+//		    name, turns, PL("turn", "turns", turns));
 //        }
 //      } else {
 //        cBuf = util.my_snprintf( "%s\nfinished!", name);
@@ -1441,13 +1441,13 @@ public class Wldlg{
 //              cBuf = util.my_snprintf( "(%s)\n%d/%d %s\n%s",
 //			  state, pCity.shield_stock,
 //			  impr_build_shield_cost(imp),
-//			  PL_("shield", "shields",
+//			  PL("shield", "shields",
 //			      impr_build_shield_cost(imp)),
 //			  "never");
 //	    } else {
 //	      cBuf = util.my_snprintf( "%d/%d %s\n%s",
 //			  pCity.shield_stock, impr_build_shield_cost(imp),
-//			  PL_("shield","shields",
+//			  PL("shield","shields",
 //			      impr_build_shield_cost(imp)), "never");
 //	    }	  
 //          } else {
@@ -1455,15 +1455,15 @@ public class Wldlg{
 //	      cBuf = util.my_snprintf( "(%s)\n%d/%d %s\n%d %s",
 //			  state, pCity.shield_stock,
 //			  impr_build_shield_cost(imp),
-//			  PL_("shield","shields",
+//			  PL("shield","shields",
 //			      impr_build_shield_cost(imp)),
-//			  turns, PL_("turn", "turns", turns));
+//			  turns, PL("turn", "turns", turns));
 //            } else {
 //	      cBuf = util.my_snprintf( "%d/%d %s\n%d %s",
 //			  pCity.shield_stock, impr_build_shield_cost(imp),
-//			  PL_("shield","shields",
+//			  PL("shield","shields",
 //			      impr_build_shield_cost(imp)),
-//			  turns, PL_("turn", "turns", turns));
+//			  turns, PL("turn", "turns", turns));
 //            }
 //          }
 //        } else {
@@ -1477,12 +1477,12 @@ public class Wldlg{
 //          if(state) {
 //            cBuf = util.my_snprintf( "(%s)\n%d %s",
 //			state, impr_build_shield_cost(imp),
-//			PL_("shield","shields",
+//			PL("shield","shields",
 //			    impr_build_shield_cost(imp)));
 //          } else {
 //	    cBuf = util.my_snprintf( "%d %s",
 //			impr_build_shield_cost(imp),
-//			PL_("shield","shields",
+//			PL("shield","shields",
 //			    impr_build_shield_cost(imp)));
 //          }
 //        } else {
@@ -1567,15 +1567,15 @@ public class Wldlg{
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
 //		    pCity.shield_stock, unit_build_shield_cost(un),
-//	  	    PL_("shield","shields", unit_build_shield_cost(un)));
+//	  	    PL("shield","shields", unit_build_shield_cost(un)));
 //        } else {
 //          cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d/%d %s\n%d %s",
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
 //		    pCity.shield_stock, unit_build_shield_cost(un), 
-//	  	    PL_("shield","shields", unit_build_shield_cost(un)),
-//		    turns, PL_("turn", "turns", turns));
+//	  	    PL("shield","shields", unit_build_shield_cost(un)),
+//		    turns, PL("turn", "turns", turns));
 //        }
 //      } else {
 //        cBuf = util.my_snprintf(
@@ -1583,7 +1583,7 @@ public class Wldlg{
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
 //		    unit_build_shield_cost(un),
-//		    PL_("shield","shields", unit_build_shield_cost(un)));
+//		    PL("shield","shields", unit_build_shield_cost(un)));
 //      }
 //
 //      copy_chars_to_string16(pStr, cBuf);

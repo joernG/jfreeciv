@@ -120,7 +120,7 @@ public class Ruleset{
 //  if (dfilename)
 //    return dfilename;
 //
-//  util.freelog(LOG_VERBOSE, "Trying to load file from default ruleset directory "
+//  util.freelog(LOG_VERBOSE, "Trying to load file from default ruleset directory " +
 //	  "instead.");
 //  filename = util.my_snprintf( "default/%s.ruleset", whichset);
 //  dfilename = datafilename(filename);
@@ -150,19 +150,19 @@ public class Ruleset{
 //  if (!dfilename) {
 //    util.freelog(LOG_FATAL,
 //	    /* TRANS: message for an obscure ruleset error. */
-//	    _("Could not find a readable \"%s\" ruleset file."), whichset);
+//	    ("Could not find a readable \"%s\" ruleset file."), whichset);
 //    exit(EXIT_FAILURE);
 //  }
 //
 //  /* Need to save a copy of the filename for following message, since
 //     section_file_load() may call datafilename() for includes. */
 //
-//  sz_strlcpy(sfilename, dfilename);
+//  sfilename = dfilename;
 //
 //  if (!section_file_load_nodup(file, sfilename)) {
 //    util.freelog(LOG_FATAL,
 //	    /* TRANS: message for an obscure ruleset error. */
-//	    _("Could not load ruleset file \"%s\"."), sfilename);
+//	    ("Could not load ruleset file \"%s\"."), sfilename);
 //    exit(EXIT_FAILURE);
 //  }
 //}
@@ -180,15 +180,15 @@ public class Ruleset{
 //  datafile_options = secfile_lookup_str(file, "datafile.options");
 //  if (!has_capabilities(us_capstr, datafile_options)) {
 //    util.freelog(LOG_FATAL, "Ruleset datafile appears incompatible:");
-//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, ("file: \"%s\""), filename);
 //    util.freelog(LOG_FATAL, "file options: %s", datafile_options);
 //    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
 //  }
 //  if (!has_capabilities(datafile_options, us_capstr)) {
-//    util.freelog(LOG_FATAL, _("Ruleset datafile claims required option(s)"
+//    util.freelog(LOG_FATAL, ("Ruleset datafile claims required option(s)" +
 //			 " which we don't support:"));
-//    util.freelog(LOG_FATAL, _("file: \"%s\""), filename);
+//    util.freelog(LOG_FATAL, ("file: \"%s\""), filename);
 //    util.freelog(LOG_FATAL, "file options: %s", datafile_options);
 //    util.freelog(LOG_FATAL, "supported options: %s", us_capstr);
 //    exit(EXIT_FAILURE);
@@ -946,8 +946,8 @@ public class Ruleset{
 //    u.hp = secfile_lookup_int(file,"%s.hitpoints", sec[i]);
 //    u.firepower = secfile_lookup_int(file,"%s.firepower", sec[i]);
 //    if (u.firepower <= 0) {
-//      util.freelog(LOG_FATAL, "for unit_type \"%s\": firepower is %d but "
-//	      "must be at least 1.\nSet the unit's attack strength to 0 "
+//      util.freelog(LOG_FATAL, "for unit_type \"%s\": firepower is %d but " +
+//	      "must be at least 1.\nSet the unit's attack strength to 0 " +
 //	      "if you want it to not have any attack ability. (%s)",
 //	      u.name, u.firepower, filename);
 //      exit(EXIT_FAILURE);
@@ -1179,7 +1179,7 @@ public class Ruleset{
 //    char name[MAX_LEN_NAME];
 //
 //    item = secfile_lookup_str(file, "%s.name", sec[i]);
-//    sz_strlcpy(name, item);
+//    name = item;
 //
 //    group = effect_group_new(name);
 //
@@ -1195,7 +1195,7 @@ public class Ruleset{
 //      if ((id = find_improvement_by_name(item)) == B_LAST) {
 //	util.freelog(Log.LOG_ERROR,
 //		/* TRANS: Obscure ruleset error */
-//		_("Group %s lists unknown building: \"%s\" (%s)"),
+//		("Group %s lists unknown building: \"%s\" (%s)"),
 //	    	name, item, filename);
 //	continue;
 //      }
@@ -1206,7 +1206,7 @@ public class Ruleset{
 //	if ((range = effect_range_from_str(item)) == EFR_LAST) {
 //	  util.freelog(Log.LOG_ERROR,
 //		  /* TRANS: Obscure ruleset error */
-//		  _("Group %s lists bad range: \"%s\" (%s)"),
+//		  ("Group %s lists bad range: \"%s\" (%s)"),
 //		  name, item, filename);
 //	  continue;
 //	}
@@ -1344,7 +1344,7 @@ public class Ruleset{
 //	if ((eff = effect_type_from_str(item)) == EFT_LAST) {
 //	  util.freelog(Log.LOG_ERROR,
 //		  /* TRANS: Obscure ruleset error */
-//		  _("Building %s lists unknown effect type: \"%s\" (%s)"),
+//		  ("Building %s lists unknown effect type: \"%s\" (%s)"),
 //		  b.name, item, filename);
 //	  continue;
 //	}
@@ -1355,7 +1355,7 @@ public class Ruleset{
 //	  if ((range = effect_range_from_str(item)) == EFR_LAST) {
 //	    util.freelog(Log.LOG_ERROR,
 //		    /* TRANS: Obscure ruleset error */
-//		    _("Building %s lists bad range: \"%s\" (%s)"),
+//		    ("Building %s lists bad range: \"%s\" (%s)"),
 //		    b.name, item, filename);
 //	    continue;
 //	  }
@@ -1376,7 +1376,7 @@ public class Ruleset{
 //	  if ((equiv = find_effect_group_id(item)) == -1) {
 //	    util.freelog(Log.LOG_ERROR,
 //		    /* TRANS: Obscure ruleset error */
-//		    _("Building %s lists bad effect group: \"%s\" (%s)"),
+//		    ("Building %s lists bad effect group: \"%s\" (%s)"),
 //		    b.name, item, filename);
 //	    continue;
 //	  }
@@ -1391,7 +1391,7 @@ public class Ruleset{
 //	  if ((type = effect_req_type_from_str(item)) == REQ_LAST) {
 //	    util.freelog(Log.LOG_ERROR,
 //		    /* TRANS: Obscure ruleset error */
-//		    _("Building %s has unknown req type: \"%s\" (%s)"),
+//		    ("Building %s has unknown req type: \"%s\" (%s)"),
 //		    b.name, item, filename);
 //	    continue;
 //          }
@@ -1478,7 +1478,7 @@ public class Ruleset{
 //    if (game.default_building == B_LAST) {
 //      util.freelog(Log.LOG_ERROR,
 //	      /* TRANS: Obscure ruleset error */
-//	      _("Bad value \"%s\" for b_special.default (%s)"),
+//	      ("Bad value \"%s\" for b_special.default (%s)"),
 //	      item, filename);
 //    }
 //  } else {
@@ -1577,7 +1577,7 @@ public class Ruleset{
 //  {
 //    char *s = secfile_lookup_str_default(file, "",
 //      "parameters.river_help_text");
-//    sz_strlcpy(terrain_control.river_help_text, s);
+//    terrain_control.river_help_text = s;
 //  }
 //  terrain_control.fortress_defense_bonus =
 //    secfile_lookup_int_default(file, 100, "parameters.fortress_defense_bonus");
@@ -1629,7 +1629,7 @@ public class Ruleset{
 //      }
 //      if (t.identifier == UNKNOWN_TERRAIN_IDENTIFIER) {
 //	/* TRANS: message for an obscure ruleset error. */
-//	util.freelog(LOG_FATAL, _("'%c' cannot be used as a terrain identifier; "
+//	util.freelog(LOG_FATAL, ("'%c' cannot be used as a terrain identifier; " +
 //			     "it is reserved."), UNKNOWN_TERRAIN_IDENTIFIER);
 //	exit(EXIT_FAILURE);
 //      }
@@ -2108,7 +2108,7 @@ public class Ruleset{
 //      if (0 == strcmp(get_nation_name(j), pl.name)
 //	  || 0 == strcmp(Nation.get_nation_name_plural(j), pl.name_plural)) {
 //        util.freelog(LOG_FATAL,
-//		"Nation %s (the %s) defined twice; "
+//		"Nation %s (the %s) defined twice; " +
 //		"in section nation%d and section nation%d",
 //		pl.name, pl.name_plural, j, i);
 //        exit(EXIT_FAILURE);
@@ -2174,7 +2174,7 @@ public class Ruleset{
 //      char *next = strchr(name + 1, ')');
 //      if (!next) {
 //	util.freelog(Log.LOG_ERROR,
-//	        "Badly formed city name %s in city name "
+//	        "Badly formed city name %s in city name " +
 //	        "ruleset \"%s%s\": unmatched parenthesis.",
 //	        cities[j], secfile_str1, secfile_str2);
 //	assert(false);
@@ -2225,7 +2225,7 @@ public class Ruleset{
 //	      }
 //	    }
 //	    if (!handled) {
-//	      util.freelog(Log.LOG_ERROR, "Unreadable terrain description %s "
+//	      util.freelog(Log.LOG_ERROR, "Unreadable terrain description %s " +
 //	              "in city name ruleset \"%s%s\" - skipping it.",
 //	    	      name, secfile_str1, secfile_str2);
 //	      assert(false);
@@ -2240,7 +2240,7 @@ public class Ruleset{
 //    if (check_name(city_names[j].name)) {
 //      /* The ruleset contains a name that is too long.  This shouldn't
 //	 happen - if it does, the author should get immediate feedback */
-//      util.freelog(Log.LOG_ERROR, "City name %s in ruleset for %s%s is too long "
+//      util.freelog(Log.LOG_ERROR, "City name %s in ruleset for %s%s is too long " +
 //	      "- shortening it.",
 //              city_names[j].name, secfile_str1, secfile_str2);
 //      assert(false);
@@ -2306,7 +2306,7 @@ public class Ruleset{
 //    leaders = secfile_lookup_str_vec(file, &dim, "%s.leader_sex", sec[i]);
 //    if (dim != pl.leader_count) {
 //      util.freelog(LOG_FATAL,
-//	      "Nation %s: the leader sex count (%d) "
+//	      "Nation %s: the leader sex count (%d) " +
 //	      "is not equal to the number of leaders (%d)",
 //              pl.name, dim, pl.leader_count);
 //      exit(EXIT_FAILURE);
@@ -2318,7 +2318,7 @@ public class Ruleset{
 //        pl.leaders[j].is_male = false;
 //      } else {
 //        util.freelog(Log.LOG_ERROR,
-//		"Nation %s, leader %s: sex must be either Male or Female; "
+//		"Nation %s, leader %s: sex must be either Male or Female; " +
 //		"assuming Male",
 //		pl.name, pl.leaders[j].name);
 //	pl.leaders[j].is_male = true;
@@ -2376,13 +2376,13 @@ public class Ruleset{
 //    while (city_styles[pl.city_style].techreq != A_NONE) {
 //      if (pl.city_style == 0) {
 //	util.freelog(LOG_FATAL,
-//	       "Nation %s: the default city style is not available "
+//	       "Nation %s: the default city style is not available " +
 //	       "from the beginning", pl.name);
 //	/* Note that we can't use temp_name here. */
 //	exit(EXIT_FAILURE);
 //      }
 //      util.freelog(Log.LOG_ERROR,
-//	      "Nation %s: city style %s is not available from beginning; "
+//	      "Nation %s: city style %s is not available from beginning; " +
 //	      "using default.", pl.name, temp_name);
 //      pl.city_style = 0;
 //    }
@@ -2605,7 +2605,7 @@ public class Ruleset{
 //    exit(EXIT_FAILURE);
 //  }
 //  if (game.rgame.specialists[SP_ELVIS].min_size > 0) {
-//    util.freelog(LOG_FATAL, "Elvises must be available without a "
+//    util.freelog(LOG_FATAL, "Elvises must be available without a " +
 //	    "city size restriction!");
 //    exit(EXIT_FAILURE);
 //  }
@@ -2697,7 +2697,7 @@ public class Ruleset{
 //  } else if (mystrcasecmp(sval, "Frighten") == 0) {
 //    game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
 //  } else {
-//    util.freelog(Log.LOG_ERROR, "Bad value %s for hut_overflight. Using "
+//    util.freelog(Log.LOG_ERROR, "Bad value %s for hut_overflight. Using " +
 //            "\"Frighten\".", sval);
 //    game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
 //  }
@@ -2711,7 +2711,7 @@ public class Ruleset{
 //  } else if (mystrcasecmp(sval, "Fallout") == 0) {
 //    game.rgame.nuke_contamination = CONTAMINATION_FALLOUT;
 //  } else {
-//    util.freelog(Log.LOG_ERROR, "Bad value %s for nuke_contamination. Using "
+//    util.freelog(Log.LOG_ERROR, "Bad value %s for nuke_contamination. Using " +
 //            "\"Pollution\".", sval);
 //    game.rgame.nuke_contamination = CONTAMINATION_POLLUTION;
 //  }
@@ -2818,13 +2818,13 @@ public class Ruleset{
 //    unit_type u = get_unit_type(utype_id);
 //
 //    packet.id = u-unit_types;
-//    sz_strlcpy(packet.name, u.name_orig);
-//    sz_strlcpy(packet.sound_move, u.sound_move);
-//    sz_strlcpy(packet.sound_move_alt, u.sound_move_alt);
-//    sz_strlcpy(packet.sound_fight, u.sound_fight);
-//    sz_strlcpy(packet.sound_fight_alt, u.sound_fight_alt);
-//    sz_strlcpy(packet.graphic_str, u.graphic_str);
-//    sz_strlcpy(packet.graphic_alt, u.graphic_alt);
+//    packet.name = u.name_orig;
+//    packet.sound_move = u.sound_move;
+//    packet.sound_move_alt = u.sound_move_alt;
+//    packet.sound_fight = u.sound_fight;
+//    packet.sound_fight_alt = u.sound_fight_alt;
+//    packet.graphic_str = u.graphic_str;
+//    packet.graphic_alt = u.graphic_alt;
 //    packet.move_type = u.move_type;
 //    packet.build_cost = u.build_cost;
 //    packet.pop_cost = u.pop_cost;
@@ -2855,7 +2855,7 @@ public class Ruleset{
 //      packet.move_bonus[i] = u.veteran[i].move_bonus;
 //    }
 //    if (u.helptext) {
-//      sz_strlcpy(packet.helptext, u.helptext);
+//      packet.helptext = u.helptext;
 //    } else {
 //      packet.helptext[0] = '\0';
 //    }
@@ -2876,9 +2876,9 @@ public class Ruleset{
 //    advance a = &advances[tech_id];
 //
 //    packet.id = tech_id;
-//    sz_strlcpy(packet.name, a.name_orig);
-//    sz_strlcpy(packet.graphic_str, a.graphic_str);
-//    sz_strlcpy(packet.graphic_alt, a.graphic_alt);	  
+//    packet.name = a.name_orig;
+//    packet.graphic_str = a.graphic_str;
+//    packet.graphic_alt = a.graphic_alt;	  
 //    packet.req[0] = a.req[0];
 //    packet.req[1] = a.req[1];
 //    packet.root_req = a.root_req;
@@ -2886,7 +2886,7 @@ public class Ruleset{
 //    packet.preset_cost = a.preset_cost;
 //    packet.num_reqs = a.num_reqs;
 //    if (a.helptext) {
-//      sz_strlcpy(packet.helptext, a.helptext);
+//      packet.helptext = a.helptext;
 //    } else {
 //      packet.helptext[0] = '\0';
 //    }
@@ -2906,9 +2906,9 @@ public class Ruleset{
 //    struct packet_ruleset_building packet;
 //
 //    packet.id = i;
-//    sz_strlcpy(packet.name, b.name_orig);
-//    sz_strlcpy(packet.graphic_str, b.graphic_str);
-//    sz_strlcpy(packet.graphic_alt, b.graphic_alt);
+//    packet.name = b.name_orig;
+//    packet.graphic_str = b.graphic_str;
+//    packet.graphic_alt = b.graphic_alt;
 //    packet.tech_req = b.tech_req;
 //    packet.bldg_req = b.bldg_req;
 //    packet.equiv_range = b.equiv_range;
@@ -2918,11 +2918,11 @@ public class Ruleset{
 //    packet.build_cost = b.build_cost;
 //    packet.upkeep = b.upkeep;
 //    packet.sabotage = b.sabotage;
-//    sz_strlcpy(packet.soundtag, b.soundtag);
-//    sz_strlcpy(packet.soundtag_alt, b.soundtag_alt);
+//    packet.soundtag = b.soundtag;
+//    packet.soundtag_alt = b.soundtag_alt;
 //
 //    if (b.helptext) {
-//      sz_strlcpy(packet.helptext, b.helptext);
+//      packet.helptext = b.helptext;
 //    } else {
 //      packet.helptext[0] = '\0';
 //    }
@@ -2957,9 +2957,9 @@ public class Ruleset{
 //
 //      packet.id = i;
 //
-//      sz_strlcpy(packet.terrain_name, t.terrain_name_orig);
-//      sz_strlcpy(packet.graphic_str, t.graphic_str);
-//      sz_strlcpy(packet.graphic_alt, t.graphic_alt);
+//      packet.terrain_name = t.terrain_name_orig;
+//      packet.graphic_str = t.graphic_str;
+//      packet.graphic_alt = t.graphic_alt;
 //
 //      packet.movement_cost = t.movement_cost;
 //      packet.defense_bonus = t.defense_bonus;
@@ -2968,12 +2968,12 @@ public class Ruleset{
 //      packet.shield = t.shield;
 //      packet.trade = t.trade;
 //
-//      sz_strlcpy(packet.special_1_name, t.special_1_name_orig);
+//      packet.special_1_name = t.special_1_name_orig;
 //      packet.food_special_1 = t.food_special_1;
 //      packet.shield_special_1 = t.shield_special_1;
 //      packet.trade_special_1 = t.trade_special_1;
 //
-//      sz_strlcpy(packet.special_2_name, t.special_2_name_orig);
+//      packet.special_2_name = t.special_2_name_orig;
 //      packet.food_special_2 = t.food_special_2;
 //      packet.shield_special_2 = t.shield_special_2;
 //      packet.trade_special_2 = t.trade_special_2;
@@ -3006,7 +3006,7 @@ public class Ruleset{
 //      packet.flags = t.flags;
 //
 //      if (t.helptext) {
-//	sz_strlcpy(packet.helptext, t.helptext);
+//	packet.helptext = t.helptext;
 //      } else {
 //	packet.helptext[0] = '\0';
 //      }
@@ -3080,12 +3080,12 @@ public class Ruleset{
 //    gov.flags = g.flags;
 //    gov.num_ruler_titles = g.num_ruler_titles;
 //
-//    sz_strlcpy(gov.name, g.name_orig);
-//    sz_strlcpy(gov.graphic_str, g.graphic_str);
-//    sz_strlcpy(gov.graphic_alt, g.graphic_alt);
+//    gov.name = g.name_orig;
+//    gov.graphic_str = g.graphic_str;
+//    gov.graphic_alt = g.graphic_alt;
 //    
 //    if (g.helptext) {
-//      sz_strlcpy(gov.helptext, g.helptext);
+//      gov.helptext = g.helptext;
 //    } else {
 //      gov.helptext[0] = '\0';
 //    }
@@ -3099,8 +3099,8 @@ public class Ruleset{
 //      title.gov = g.index;
 //      title.id = j;
 //      title.nation = p_title.nation;
-//      sz_strlcpy(title.male_title, p_title.male_title);
-//      sz_strlcpy(title.female_title, p_title.female_title);
+//      title.male_title = p_title.male_title;
+//      title.female_title = p_title.female_title;
 //    
 //      lsend_packet_ruleset_government_ruler_title(dest, &title);
 //    }
@@ -3123,10 +3123,10 @@ public class Ruleset{
 //  for( k=0; k<game.nation_count; k++) {
 //    n = get_nation_by_idx(k);
 //    packet.id = k;
-//    sz_strlcpy(packet.name, n.name_orig);
-//    sz_strlcpy(packet.name_plural, n.name_plural_orig);
-//    sz_strlcpy(packet.graphic_str, n.flag_graphic_str);
-//    sz_strlcpy(packet.graphic_alt, n.flag_graphic_alt);
+//    packet.name = n.name_orig;
+//    packet.name_plural = n.name_plural_orig;
+//    packet.graphic_str = n.flag_graphic_str;
+//    packet.graphic_alt = n.flag_graphic_alt;
 //    packet.leader_count = n.leader_count;
 //    for(i=0; i < n.leader_count; i++) {
 //      sz_strlcpy(packet.leader_name[i], n.leaders[i].name);
@@ -3134,8 +3134,8 @@ public class Ruleset{
 //    }
 //    packet.city_style = n.city_style;
 //    memcpy(packet.init_techs, n.init_techs, sizeof(packet.init_techs));
-//    sz_strlcpy(packet.class, n.class);
-//    sz_strlcpy(packet.legend, n.legend);
+//    packet.class = n.class;
+//    packet.legend = n.legend;
 //
 //    lsend_packet_ruleset_nation(dest, &packet);
 //  }

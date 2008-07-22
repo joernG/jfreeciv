@@ -218,12 +218,12 @@ public class Spaceshipdlg{
 //		Child, HVSpace,
 //		Child, HGroup,
 //		    TextFrame,
-//		    Child, MakeLabel(_("Population:\n"
-//				     "Support:\n"
-//				     "Energy:\n"
-//				     "Mass:\n"
-//				     "Travel time:\n"
-//				     "Success prob.:\n"
+//		    Child, MakeLabel(("Population:\n" +
+//				     "Support:\n" +
+//				     "Energy:\n" +
+//				     "Mass:\n" +
+//				     "Travel time:\n" +
+//				     "Success prob.:\n" +
 //				     "Year of arrival:")),
 //		    Child, pdialog.info_text = TextObject,
 //			End,
@@ -268,12 +268,12 @@ public class Spaceshipdlg{
 //				    + (int) pship.travel_time)));
 //  }
 //  buf = util.my_snprintf(
-//	  _("%5d\n"
-//	  "%5d %%\n"
-//	  "%5d %%\n"
-//	  "%5d tons\n"
-//	  "%5.1f years\n"
-//	  "%5d %%\n"
+//	  ("%5d\n" +
+//	  "%5d %%\n" +
+//	  "%5d %%\n" +
+//	  "%5d tons\n" +
+//	  "%5.1f years\n" +
+//	  "%5d %%\n" +
 //	  "%8s"),
 //	  pship.population,
 //	  (int) (pship.support_rate * 100.0),

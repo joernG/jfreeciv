@@ -71,7 +71,7 @@ public class Chatline{
 //    send_chat(msg_buf);
 //    SetWindowText(hchatline,"");
 //  } else {
-//    sz_strlcpy(msg_buf, msg_buf2);
+//    msg_buf = msg_buf2;
 //  }
 //}
 //

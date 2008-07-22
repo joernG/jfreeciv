@@ -367,7 +367,7 @@ public class Hash{
 //
 //    if (bucket.used == BUCKET_USED) {
 //      if (!hash_insert(h_new, bucket.key, bucket.data)) {
-//	assert(0);
+//	assert(0!=1);
 //      }
 //    }
 //  }
@@ -412,7 +412,7 @@ public class Hash{
 //  
 //  new_nbuckets = calc_appropriate_nbuckets(h.num_entries);
 //  
-//  util.freelog(Log.LOG_DEBUG, "%s hash table "
+//  util.freelog(Log.LOG_DEBUG, "%s hash table " +
 //	  "(entry %u del %u used %u nbuck %u new %u %slimit %u)",
 //	  (new_nbuckets<h.num_buckets) ? "Shrinking" :
 //	  (new_nbuckets>h.num_buckets) ? "Expanding" : "Rehashing",

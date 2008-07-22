@@ -158,7 +158,7 @@ public class Mapview{
 //
 //  /* update tooltips. */
 //  gtk_tooltips_set_tip(main_tips, econ_ebox,
-//		       _("Shows your current luxury/science/tax rates;"
+//		       ("Shows your current luxury/science/tax rates;" +
 //			 "click to toggle them."), "");
 //
 //  gtk_tooltips_set_tip(main_tips, bulb_ebox, get_bulb_tooltip(), "");

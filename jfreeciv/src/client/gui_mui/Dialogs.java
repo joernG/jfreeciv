@@ -1756,7 +1756,7 @@ public class Dialogs{
 //
 //    if (game.player_ptr.economic.gold>=value)
 //    {
-//      buf = util.my_snprintf( _("Upgrade %s to %s for %d gold?\n"
+//      buf = util.my_snprintf( ("Upgrade %s to %s for %d gold?\n" +
 //	         "Treasury contains %d gold."),
 //	         unit_types[ut1].name, unit_types[ut2].name,
 //	         value, game.player_ptr.economic.gold);
@@ -1766,7 +1766,7 @@ public class Dialogs{
 //			     null);
 //    } else
 //    {
-//	buf = util.my_snprintf( _("Upgrading %s to %s costs %d gold.\n"
+//	buf = util.my_snprintf( ("Upgrading %s to %s costs %d gold.\n" +
 //	       "Treasury contains %d gold."),
 //	       unit_types[ut1].name, unit_types[ut2].name,
 //	       value, game.player_ptr.economic.gold);

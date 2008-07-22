@@ -285,7 +285,7 @@ public class Packets{
 //		get_packet_name(i),i);
 //      }
 //      util.freelog(Log.LOG_NORMAL,
-//	      "turn=%d; transmitted %d bytes in %d packets;average size "
+//	      "turn=%d; transmitted %d bytes in %d packets;average size " +
 //	      "per packet %d bytes", game.turn, sum, packet_counter,
 //	      sum / packet_counter);
 //      util.freelog(Log.LOG_NORMAL, "turn=%d; transmitted %d bytes", game.turn,
@@ -388,7 +388,7 @@ public class Packets{
 //    if (error != Z_OK) {
 //      CLOSE_FUN close_callback = close_socket_get_callback();
 //
-//      util.freelog(Log.LOG_ERROR, "Uncompressing of the packet stream failed. "
+//      util.freelog(Log.LOG_ERROR, "Uncompressing of the packet stream failed. " +
 //	      "The connection will be closed now.");
 //      assert(close_callback);
 //      (*close_callback) (pc);
@@ -437,7 +437,7 @@ public class Packets{
 //  if (whole_packet_len < 3) {
 //    CLOSE_FUN close_callback = close_socket_get_callback();
 //
-//    util.freelog(Log.LOG_ERROR, "The packet stream is corrupt. The connection "
+//    util.freelog(Log.LOG_ERROR, "The packet stream is corrupt. The connection " +
 //	    "will be closed now.");
 //    assert(close_callback);
 //    (*close_callback) (pc);
@@ -491,14 +491,14 @@ public class Packets{
 //	  continue;
 //	sum += packets_stats[i].size;
 //	util.freelog(Log.LOG_NORMAL,
-//		"  [%-25.25s %3d]: %6d packets; %8d bytes total; "
+//		"  [%-25.25s %3d]: %6d packets; %8d bytes total; " +
 //		"%5d bytes/packet average",
 //		get_packet_name(i), i, packets_stats[i].counter,
 //		packets_stats[i].size,
 //		packets_stats[i].size / packets_stats[i].counter);
 //      }
 //      util.freelog(Log.LOG_NORMAL,
-//	      "received %d bytes in %d packets;average size "
+//	      "received %d bytes in %d packets;average size " +
 //	      "per packet %d bytes",
 //	      sum, packet_counter, sum / packet_counter);
 //    }

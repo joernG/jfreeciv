@@ -142,7 +142,7 @@ public class Be_sdl{
 //      event.button = BE_MB_RIGHT;
 //      break;
 //    default:
-//      assert(0);
+//      assert(0!=1);
 //    }
 //    break;
 //  case SDL_KEYDOWN:
@@ -379,13 +379,13 @@ public class Be_sdl{
 //	     && screen.format.BytesPerPixel == 4) {
 //    fill_surface_from_image_8888(screen, src.image);
 //  } else {
-//    fprintf(stderr, "ERROR: unknown screen format: red=0x%x, "
-//	    "green=0x%x, blue=0x%x, alpha=0x%x bits-per-pixel=%d "
+//    fprintf(stderr, "ERROR: unknown screen format: red=0x%x, " +
+//	    "green=0x%x, blue=0x%x, alpha=0x%x bits-per-pixel=%d " +
 //	    "bytes-per-pixel=%d\n",
 //	    screen.format.Rmask, screen.format.Gmask,
 //	    screen.format.Bmask, screen.format.Amask,
 //	    screen.format.BitsPerPixel, screen.format.BytesPerPixel);
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  SDL_UnlockSurface(screen);

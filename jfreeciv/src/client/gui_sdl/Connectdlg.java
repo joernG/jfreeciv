@@ -150,7 +150,7 @@ public class Connectdlg{
 //{
 //  server pServer = (server )pWidget.data.ptr;
 //      
-//  sz_strlcpy(server_host, pServer.name);
+//  server_host = pServer.name;
 //  sscanf(pServer.port, "%d", &server_port);
 //  
 //  exit_meta_severs_dlg_callback(null);
@@ -401,7 +401,7 @@ public class Connectdlg{
 //static int convert_playername_callback(GUI pWidget)
 //{
 //  char *tmp = convert_to_chars(pWidget.string16.text);
-//  sz_strlcpy(user_name, tmp);
+//  user_name = tmp;
 //  FREE(tmp);
 //  return -1;
 //}
@@ -412,7 +412,7 @@ public class Connectdlg{
 //static int convert_servername_callback(GUI pWidget)
 //{
 //  char *tmp = convert_to_chars(pWidget.string16.text);
-//  sz_strlcpy(server_host, tmp);
+//  server_host = tmp;
 //  FREE(tmp);
 //  return -1;
 //}
@@ -611,7 +611,7 @@ public class Connectdlg{
 //{
 //  struct packet_authentication_reply reply;
 //    
-//  sz_strlcpy(reply.password, password);
+//  reply.password = password;
 //  
 //  memset(password, 0, MAX_LEN_NAME);
 //  password[0] = '\0';
@@ -772,7 +772,7 @@ public class Connectdlg{
 //{
 //  char *tmp = convert_to_chars(pWidget.string16.text);
 //  
-//  if (tmp && strncmp(password, tmp, MAX_LEN_NAME) == 0) {
+//  if (tmp && !password.equals(tmp)) {
 //    set_wstate(pWidget.prev, FC_WS_NORMAL); /* next button */
 //    redraw_tibutton(pWidget.prev);
 //    flush_rect(pWidget.prev.size);
@@ -992,7 +992,7 @@ public class Connectdlg{
 //    if (password[0] != '\0') {
 //      struct packet_authentication_reply reply;
 //
-//      sz_strlcpy(reply.password, password);
+//      reply.password = password;
 //      send_packet_authentication_reply(&aconnection, &reply);
 //      return;
 //    } else {
@@ -1003,7 +1003,7 @@ public class Connectdlg{
 //      popup_user_passwd_dialog(message);
 //    break;
 //    default:
-//      assert(0);
+//      assert(0!=1);
 //  }
 //
 //}
@@ -1143,10 +1143,10 @@ public class Connectdlg{
 //
 //  set_output_window_text("SDLClient welcomes you...");
 //
-//  set_output_window_text(_("Freeciv is free software and you are welcome "
-//			   "to distribute copies of "
+//  set_output_window_text(("Freeciv is free software and you are welcome " +
+//			   "to distribute copies of " +
 //			   "it under certain conditions;"));
-//  set_output_window_text(_("See the \"Copying\" item on the Help"
+//  set_output_window_text(("See the \"Copying\" item on the Help" +
 //			   " menu."));
 //  set_output_window_text("Now.. Go give'em hell!");
 //  
@@ -1166,7 +1166,7 @@ public class Connectdlg{
 //
 //  if (count >= MAX_AUTOCONNECT_ATTEMPTS) {
 //    util.freelog(LOG_FATAL,
-//	    _("Failed to contact server \"%s\" at port "
+//	    ("Failed to contact server \"%s\" at port " +
 //	      "%d as \"%s\" after %d attempts"),
 //	    server_host, server_port, user_name, count);
 //
@@ -1176,9 +1176,9 @@ public class Connectdlg{
 //  if(try_to_connect(user_name, errbuf, sizeof(errbuf))) {
 //    /* Server not available (yet) */
 //    if (!warning_shown) {
-//      util.freelog(Log.LOG_NORMAL, _("Connection to server refused. "
+//      util.freelog(Log.LOG_NORMAL, ("Connection to server refused. " +
 //			    "Please start the server."));
-//      append_output_window(_("Connection to server refused. "
+//      append_output_window(("Connection to server refused. " +
 //			     "Please start the server."));
 //      warning_shown = 1;
 //    }
@@ -1201,7 +1201,7 @@ public class Connectdlg{
 //  char buf[512];
 //
 //  buf = util.my_snprintf(
-//	      _("Auto-connecting to server \"%s\" at port %d "
+//	      ("Auto-connecting to server \"%s\" at port %d " +
 //		"as \"%s\" every %d.%d second(s) for %d times"),
 //	      server_host, server_port, user_name,
 //	      AUTOCONNECT_INTERVAL / 1000, AUTOCONNECT_INTERVAL % 1000,
@@ -1210,7 +1210,7 @@ public class Connectdlg{
 //
 //  if (get_server_address(server_host, server_port, buf, sizeof(buf)) < 0) {
 //    util.freelog(LOG_FATAL,
-//	    _("Error contacting server \"%s\" at port %d "
+//	    ("Error contacting server \"%s\" at port %d " +
 //	      "as \"%s\":\n %s\n"),
 //	    server_host, server_port, user_name, buf);
 //

@@ -114,9 +114,9 @@ public class Tech{
 //
 //  if (advances[tech].req[0] == goal || advances[tech].req[1] == goal) {
 //    /* TRANS: Obscure ruleset error */
-//    util.freelog(LOG_FATAL, _("tech \"%s\": requires itself"),
+//    util.freelog(LOG_FATAL, ("tech \"%s\": requires itself"),
 //	    get_tech_name(pplayer, goal));
-//    assert(0);
+//    assert(0!=1);
 //    exit(EXIT_FAILURE);
 //  }
 //

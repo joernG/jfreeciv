@@ -191,11 +191,11 @@ public class Civclient{
 //     argv[1 + ui_options] = argv[i];
 //     ui_options++;
 //   } else if (is_option("--help", argv[i])) {
-//    fc_fprintf(stderr, _("Usage: %s [option ...]\n"
+//    fc_fprintf(stderr, ("Usage: %s [option ...]\n" +
 //		      "Valid options are:\n"), argv[0]);
 //    fc_fprintf(stderr, "  -a, --autoconnect\tSkip connect dialog\n");
 //#ifdef DEBUG
-//    fc_fprintf(stderr, _("  -d, --debug NUM\tSet debug log level (0 to 4,"
+//    fc_fprintf(stderr, ("  -d, --debug NUM\tSet debug log level (0 to 4," +
 //                                  " or 4:file1,min,max:...)\n"));
 //#else
 //    fc_fprintf(stderr,
@@ -203,9 +203,9 @@ public class Civclient{
 //#endif
 //    fc_fprintf(stderr,
 //	       "  -h, --help\t\tPrint a summary of the options\n");
-//    fc_fprintf(stderr, _("  -l, --log FILE\tUse FILE as logfile "
+//    fc_fprintf(stderr, ("  -l, --log FILE\tUse FILE as logfile " +
 //                      "(spawned server also uses this)\n"));
-//    fc_fprintf(stderr, _("  -m, --meta HOST\t"
+//    fc_fprintf(stderr, ("  -m, --meta HOST\t" +
 //		      "Connect to the metaserver at HOST\n"));
 //    fc_fprintf(stderr, "  -n, --name NAME\tUse NAME as name\n");
 //    fc_fprintf(stderr,
@@ -213,16 +213,16 @@ public class Civclient{
 //    fc_fprintf(stderr,
 //	       "  -P, --Plugin PLUGIN\tUse PLUGIN for sound output %s\n",
 //	    audio_get_all_plugin_names());
-//    fc_fprintf(stderr, _("  -r, --read FILE\tRead startup script FILE "
+//    fc_fprintf(stderr, ("  -r, --read FILE\tRead startup script FILE " +
 //                      "(for spawned server only)\n"));
 //    fc_fprintf(stderr,
 //	       "  -s, --server HOST\tConnect to the server at HOST\n");
 //    fc_fprintf(stderr, "  -S, --Sound FILE\tRead sound tags from FILE\n");
-//    fc_fprintf(stderr, _("  -t, --tiles FILE\t"
+//    fc_fprintf(stderr, ("  -t, --tiles FILE\t" +
 //		      "Use data file FILE.tilespec for tiles\n"));
 //    fc_fprintf(stderr, "  -v, --version\t\tPrint the version number\n");
-//    fc_fprintf(stderr, _("      --\t\t"
-//		      "Pass any following options to the UI.\n"
+//    fc_fprintf(stderr, ("      --\t\t" +
+//		      "Pass any following options to the UI.\n" +
 //		      "\t\t\tTry \"%s -- --help\" for more.\n"), argv[0]);
 //    exit(EXIT_SUCCESS);
 //   } else if (is_option("--version",argv[i])) {
@@ -233,40 +233,40 @@ public class Civclient{
 //   } else  if ((option = get_option("--read", argv, &i, argc)))
 //      scriptfile = mystrdup(option); /* never free()d */
 //   else if ((option = get_option("--name",argv,&i,argc)))
-//      sz_strlcpy(user_name, option);
+//      user_name = option;
 //   else if ((option = get_option("--meta",argv,&i,argc)))
-//      sz_strlcpy(metaserver, option);
+//      metaserver = option;
 //   else if ((option = get_option("--Sound", argv, &i, argc)))
-//      sz_strlcpy(sound_set_name, option);
+//      sound_set_name = option;
 //   else if ((option = get_option("--Plugin", argv, &i, argc)))
-//      sz_strlcpy(sound_plugin_name, option);
+//      sound_plugin_name = option;
 //   else if ((option = get_option("--port",argv,&i,argc))) {
 //     if(sscanf(option, "%d", &server_port) != 1) {
 //       fc_fprintf(stderr,
-//		  _("Invalid port \"%s\" specified with --port option.\n"),
+//		  ("Invalid port \"%s\" specified with --port option.\n"),
 //		  option);
 //       fc_fprintf(stderr, "Try using --help.\n");
 //        exit(EXIT_FAILURE);
 //     }
 //   } else if ((option = get_option("--server",argv,&i,argc)))
-//      sz_strlcpy(server_host, option);
+//      server_host = option;
 //   else if (is_option("--autoconnect",argv[i]))
 //      auto_connect = true;
 //   else if ((option = get_option("--debug",argv,&i,argc))) {
 //      loglevel=log_parse_level_str(option);
 //      if (loglevel==-1) {
 //	fc_fprintf(stderr,
-//		   _("Invalid debug level \"%s\" specified with --debug "
+//		   ("Invalid debug level \"%s\" specified with --debug " +
 //		     "option.\n"), option);
 //	fc_fprintf(stderr, "Try using --help.\n");
 //        exit(EXIT_FAILURE);
 //      }
 //   } else if ((option = get_option("--tiles", argv, &i, argc)))
-//      sz_strlcpy(tileset_name, option);
+//      tileset_name = option;
 //   else if (is_option("--", argv[i])) {
 //     ui_separator = true;
 //   } else { 
-//      fc_fprintf(stderr, _("Unrecognized option: \"%s\"\n"), argv[i]);
+//      fc_fprintf(stderr, ("Unrecognized option: \"%s\"\n"), argv[i]);
 //      exit(EXIT_FAILURE);
 //   }
 //   i++;
@@ -289,7 +289,7 @@ public class Civclient{
 //
 //    buf = util.my_snprintf( "_%s", default_user_name);
 //    if (is_valid_username(buf)) {
-//      sz_strlcpy(default_user_name, buf);
+//      default_user_name = buf;
 //    } else {
 //      default_user_name = util.my_snprintf(
 //		  "player%d", myrand(10000));
@@ -314,18 +314,18 @@ public class Civclient{
 //  load_general_options();
 //
 //  if (tileset_name[0] == '\0') {
-//    sz_strlcpy(tileset_name, default_tileset_name);
+//    tileset_name = default_tileset_name;
 //  }
 //  if (sound_set_name[0] == '\0') 
-//    sz_strlcpy(sound_set_name, default_sound_set_name); 
+//    sound_set_name = default_sound_set_name; 
 //  if (sound_plugin_name[0] == '\0')
-//    sz_strlcpy(sound_plugin_name, default_sound_plugin_name); 
+//    sound_plugin_name = default_sound_plugin_name; 
 //  if (server_host[0] == '\0')
-//    sz_strlcpy(server_host, default_server_host); 
+//    server_host = default_server_host; 
 //  if (user_name[0] == '\0')
-//    sz_strlcpy(user_name, default_user_name); 
+//    user_name = default_user_name; 
 //  if (metaserver[0] == '\0')
-//    sz_strlcpy(metaserver, default_metaserver); 
+//    metaserver = default_metaserver; 
 //  if (server_port == -1) server_port = default_server_port;
 //
 //

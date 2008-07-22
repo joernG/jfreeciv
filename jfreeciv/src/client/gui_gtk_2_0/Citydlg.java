@@ -1350,7 +1350,7 @@ public class Citydlg{
 //    /* A negative value means we'll have famine in that many turns.
 //       But that's handled down below. */
 //    my_snprintf(buf[GROWTH], sizeof(buf[GROWTH]),
-//		PL_("%d turn", "%d turns", abs(granaryturns)),
+//		PL("%d turn", "%d turns", abs(granaryturns)),
 //		abs(granaryturns));
 //  }
 //  my_snprintf(buf[CORRUPTION], sizeof(buf[CORRUPTION]), "%2d",
@@ -2711,7 +2711,7 @@ public class Citydlg{
 //  } else if (w == pdialog.prev_command) {
 //    dir = -1;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    dir = 1;
 //  }
 //

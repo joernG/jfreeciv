@@ -153,7 +153,7 @@ public class Mapview{
 //      return &city_descr_styles.style[i];
 //    }
 //  }
-//  assert(0);
+//  assert(0!=1);
 //  return null;
 //}
 //
@@ -497,7 +497,7 @@ public class Mapview{
 //    be_draw_line(pcanvas.osda, BE_OPAQUE, &start, &end, 2, true,
 //		 enum_color_to_be_color(color));
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //      
 //  if (pcanvas.widget) {
@@ -862,7 +862,7 @@ public class Mapview{
 //{
 //  if (strcmp(id, "connect") == 0) {
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //
@@ -874,7 +874,7 @@ public class Mapview{
 //  if (strcmp(id, "port") == 0) {
 //      return null;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return null;
 //  }
 //}
@@ -887,7 +887,7 @@ public class Mapview{
 //  if (strcmp(id, "port") == 0) {
 //      return 0;
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return 0;
 //  }
 //}
@@ -1212,9 +1212,9 @@ public class Mapview{
 //      return population_to_text(civ_population(game.player_ptr));
 //  } else if (strcmp(id, "general") == 0) {
 //      buffer = util.my_snprintf(
-//		  _("Population: %s\n"
-//		"Year: %s\n"
-//		"Gold %d\n"
+//		  ("Population: %s\n" +
+//		"Year: %s\n" +
+//		"Gold %d\n" +
 //		"Tax: %d Lux: %d Sci: %d"),
 //	      population_to_text(civ_population(game.player_ptr)),
 //	      Shared.textyear(game.year), game.player_ptr.economic.gold,
@@ -1226,9 +1226,9 @@ public class Mapview{
 //      return tile_list.item[tile_list.selected].info_text;
 //#if 0      
 //      buffer = util.my_snprintf(
-//		  _("Population: %s "
-//		"Year: %s "
-//		"Gold %d "
+//		  ("Population: %s " +
+//		"Year: %s " +
+//		"Gold %d " +
 //		"Tax: %d Lux: %d Sci: %d"),
 //	      population_to_text(civ_population(game.player_ptr)),
 //	      Shared.textyear(game.year), game.player_ptr.economic.gold,
@@ -1238,7 +1238,7 @@ public class Mapview{
 //      return buffer;
 //#endif
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //    return null;
 //  }
 //}

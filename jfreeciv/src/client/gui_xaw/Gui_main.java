@@ -305,7 +305,7 @@ public class Gui_main{
 //
 //  if(appResources.version==null)  {
 //    util.freelog(LOG_FATAL, "No version number in resources.");
-//    util.freelog(LOG_FATAL, _("You probably have an old (circa V1.0)"
+//    util.freelog(LOG_FATAL, ("You probably have an old (circa V1.0)" +
 //			 " Freeciv resource file somewhere."));
 //    exit(EXIT_FAILURE);
 //  }
@@ -316,7 +316,7 @@ public class Gui_main{
 //    util.freelog(LOG_FATAL, "Game version does not match Resource version.");
 //    util.freelog(LOG_FATAL, "Game version: %s - Resource version: %s", 
 //	    VERSION_STRING, appResources.version);
-//    util.freelog(LOG_FATAL, _("You might have an old Freeciv resourcefile"
+//    util.freelog(LOG_FATAL, ("You might have an old Freeciv resourcefile" +
 //			 " in /usr/lib/X11/app-defaults"));
 //    exit(EXIT_FAILURE);
 //  }
@@ -709,12 +709,12 @@ public class Gui_main{
 //    char buf[512];
 //
 //    buf = util.my_snprintf(
-//		_("%s People\n"
-//		  "Year: %s Turn: %d\n"
-//		  "Gold: %d\n"
-//		  "Net Income: %d\n"
-//		  "Tax:%d Lux:%d Sci:%d\n"
-//		  "Researching %s: %d/%d\n"
+//		("%s People\n" +
+//		  "Year: %s Turn: %d\n" +
+//		  "Gold: %d\n" +
+//		  "Net Income: %d\n" +
+//		  "Tax:%d Lux:%d Sci:%d\n" +
+//		  "Researching %s: %d/%d\n" +
 //		  "Government: %s"),
 //		population_to_text(civ_population(game.player_ptr)),
 //		Shared.textyear(game.year), game.turn,

@@ -751,7 +751,7 @@ public class Path_finding{
 //    d_node.is_dangerous =
 //	params.is_pos_dangerous(ptile, node.node_known_type, params);
 //  } else {
-//    util.freelog(Log.LOG_ERROR, "PF: init_danger_node called without"
+//    util.freelog(Log.LOG_ERROR, "PF: init_danger_node called without" +
 //	    "is_pos_dangerous callback");
 //  }
 //

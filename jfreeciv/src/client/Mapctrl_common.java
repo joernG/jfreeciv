@@ -538,7 +538,7 @@ public class Mapctrl_common{
 //
 //    if (pcity && !cma_is_city_under_agent(pcity, null)) {
 //      if (!map_to_city_map(&city_x, &city_y, pcity, ptile)) {
-//	assert(0);
+//	assert(0!=1);
 //      }
 //
 //      worker = get_worker_city(pcity, city_x, city_y);

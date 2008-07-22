@@ -571,7 +571,7 @@ public class Widget_list{
 //				     Sprite button_background,
 //				     Sprite scrollbar)
 //{
-//    assert(0);
+//    assert(0!=1);
 //    /*
 //  sw_widget window = widget.parent;
 //  sw_widget button_up, *button_down, *vslider;

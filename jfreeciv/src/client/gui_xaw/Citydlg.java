@@ -251,8 +251,8 @@ public class Citydlg{
 //  }
 //
 //  my_snprintf(retbuf, n,
-//	  _("Food:  %3d (%+-4d)\n"
-//	    "Prod:  %3d (%+-4d)\n"
+//	  ("Food:  %3d (%+-4d)\n" +
+//	    "Prod:  %3d (%+-4d)\n" +
 //	    "Trade: %3d (%+-4d)"),
 //	  foodprod, foodsurplus,
 //	  shieldprod, shieldsurplus,
@@ -280,8 +280,8 @@ public class Citydlg{
 //  }
 //
 //  my_snprintf(retbuf, n, 
-//	  _("Gold:  %3d (%+-4d)\n"
-//	    "Lux:   %3d\n"
+//	  ("Gold:  %3d (%+-4d)\n" +
+//	    "Lux:   %3d\n" +
 //	    "Sci:   %3d"),
 //	  goldtotal, goldsurplus,
 //	  luxtotal,
@@ -865,10 +865,10 @@ public class Citydlg{
 //#if LAYOUT_DEBUG >= 3
 //    printf
 //    (
-//     "T: w: %d\n"
-//     "C: wbis: %d %d %d %d\n"
-//     "U: wbis: %d %d %d %d\n"
-//     "N: wbis: %d %d %d %d\n"
+//     "T: w: %d\n" +
+//     "C: wbis: %d %d %d %d\n" +
+//     "U: wbis: %d %d %d %d\n" +
+//     "N: wbis: %d %d %d %d\n" +
 //     "P: wbis: %d %d %d %d\n"
 //     ,
 //     widthTotal,

@@ -396,7 +396,7 @@ public class Unithand{
 //    break;
 //  case AB_NO_SPACE:
 //    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//		     _("Game: %s needs an improvement to grow, so "
+//		     ("Game: %s needs an improvement to grow, so " +
 //		       "you cannot add %s."),
 //		     pcity.name, unit_name);
 //    break;
@@ -634,7 +634,7 @@ public class Unithand{
 //
 //    /* Sanity checks */
 //    if (pplayers_non_attack(punit.unit_owner(), pdefender.unit_owner())) {
-//      die("Trying to attack a unit with which you have peace "
+//      die("Trying to attack a unit with which you have peace " +
 //	  "or cease-fire at %i, %i", TILE_XY(pdefender.tile));
 //    }
 //    if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
@@ -702,7 +702,7 @@ public class Unithand{
 //
 //  /* Sanity checks */
 //  if (pplayers_non_attack(punit.unit_owner(), pdefender.unit_owner())) {
-//    die("Trying to attack a unit with which you have peace "
+//    die("Trying to attack a unit with which you have peace " +
 //	"or cease-fire at %i, %i", TILE_XY(def_tile));
 //  }
 //  if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
@@ -714,10 +714,10 @@ public class Unithand{
 //  if (unit_flag(punit, F_NUCLEAR)) {
 //    if ((pcity = sdi_defense_close(punit.unit_owner(), def_tile))) {
 //      notify_player_ex(pplayer, punit.tile, E_UNIT_LOST_ATT,
-//		       _("Game: Your Nuclear missile was shot down by"
+//		       ("Game: Your Nuclear missile was shot down by" +
 //			 " SDI defences, what a waste."));
 //      notify_player_ex(city_owner(pcity), def_tile, E_UNIT_WIN,
-//		       _("Game: The nuclear attack on %s was avoided by"
+//		       ("Game: The nuclear attack on %s was avoided by" +
 //			 " your SDI defense."), pcity.name);
 //      wipe_unit(punit);
 //      return;
@@ -785,7 +785,7 @@ public class Unithand{
 //    if (vet) {
 //      notify_player_ex(pwinner.unit_owner(),
 //		       pwinner.tile, E_UNIT_WIN,
-//		       _("Game: Your %s%s survived the pathetic attack"
+//		       ("Game: Your %s%s survived the pathetic attack" +
 //		         " from %s's %s and became more experienced!"),
 //		       unit_name(pwinner.type),
 //		       get_location_str_in(pwinner.unit_owner(),
@@ -794,7 +794,7 @@ public class Unithand{
 //    } else {
 //      notify_player_ex(pwinner.unit_owner(),
 //		       pwinner.tile, E_UNIT_WIN,
-//		       _("Game: Your %s%s survived the pathetic attack"
+//		       ("Game: Your %s%s survived the pathetic attack" +
 //		         " from %s's %s."),
 //		       unit_name(pwinner.type),
 //		       get_location_str_in(pwinner.unit_owner(),
@@ -804,7 +804,7 @@ public class Unithand{
 //    
 //    notify_player_ex(plooser.unit_owner(),
 //		     def_tile, E_UNIT_LOST_ATT,
-//		     _("Game: Your attacking %s failed "
+//		     ("Game: Your attacking %s failed " +
 //		       "against %s's %s%s!"),
 //		     unit_name(plooser.type), pwinner.unit_owner().name,
 //		     unit_name(pwinner.type),
@@ -821,7 +821,7 @@ public class Unithand{
 //    if (vet && !unit_flag(punit, F_MISSILE)) {
 //      notify_player_ex(pwinner.unit_owner(), punit.tile,
 //		       E_UNIT_WIN_ATT,
-//		       _("Game: Your attacking %s succeeded"
+//		       ("Game: Your attacking %s succeeded" +
 //		         " against %s's %s%s and became more experienced!"),
 //		       unit_name(pwinner.type),
 //		       plooser.unit_owner().name, unit_name(plooser.type),
@@ -830,7 +830,7 @@ public class Unithand{
 //    } else {
 //      notify_player_ex(pwinner.unit_owner(), punit.tile,
 //		       E_UNIT_WIN_ATT,
-//		       _("Game: Your attacking %s succeeded"
+//		       ("Game: Your attacking %s succeeded" +
 //		         " against %s's %s%s!"),
 //		       unit_name(pwinner.type),
 //		       plooser.unit_owner().name, unit_name(plooser.type),
@@ -1007,7 +1007,7 @@ public class Unithand{
 //      } else if (!can_unit_move_to_tile(punit, pdesttile, igzoc)) {
 //        notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //                         is_ocean(map_get_terrain(punit.tile))
-//                         ? _("Game: Unit must be on land to "
+//                         ? ("Game: Unit must be on land to " +
 //                             "perform diplomatic action.")
 //                         : "Game: No diplomat action possible.");
 //        return false;
@@ -1024,7 +1024,7 @@ public class Unithand{
 //    /* We can attack ONLY in enemy cities */
 //    if (pcity && !pplayers_at_war(city_owner(pcity), pplayer)) {
 //      notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//		       _("Game: Can't attack %s "
+//		       ("Game: Can't attack %s " +
 //			 "because you are not at war with %s."),
 //		       pcity.name,
 //		       city_owner(pcity).name);
@@ -1035,7 +1035,7 @@ public class Unithand{
 //    /* Tile must contain ONLY enemy units. */
 //    if ((victim = is_non_attack_unit_tile(pdesttile, pplayer))) {
 //      notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//                       _("Game: Can't attack %s's unit "
+//                       ("Game: Can't attack %s's unit " +
 //			 "because you are not at war with %s."),
 //                       victim.unit_owner().name,
 //                       victim.unit_owner().name);
@@ -1053,7 +1053,7 @@ public class Unithand{
 //	  return true;
 //	} else {
 //	  notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//			   _("Game: This unit is being transported, and"
+//			   ("Game: This unit is being transported, and" +
 //			     " so cannot bombard."));
 //	  return false;
 //	}
@@ -1088,7 +1088,7 @@ public class Unithand{
 //       * FIXME: Move this check into test_unit_move_tile */
 //      if (!COULD_OCCUPY(punit)) {
 //        notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//                         _("Game: This type of troops cannot "
+//                         ("Game: This type of troops cannot " +
 //                           "take over a city."));
 //        return false;
 //      }
@@ -1106,7 +1106,7 @@ public class Unithand{
 //          && (Unit.is_non_allied_unit_tile(pdesttile, pcargo.unit_owner())
 //              || is_non_allied_city_tile(pdesttile, pcargo.unit_owner()))) {
 //         notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//                          _("Game: A transported unit is not allied to all "
+//                          ("Game: A transported unit is not allied to all " +
 //                            "units or city on target tile."));
 //         return false;
 //      }
@@ -1196,7 +1196,7 @@ public class Unithand{
 //
 //  if (!pcity_homecity) {
 //    notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
-//		     _("Game: Sorry, your %s cannot establish"
+//		     ("Game: Sorry, your %s cannot establish" +
 //		       " a trade route because it has no home city"),
 //		     unit_name(punit.type));
 //    return false;
@@ -1206,7 +1206,7 @@ public class Unithand{
 //    
 //  if (!can_cities_trade(pcity_homecity, pcity_dest)) {
 //    notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
-//		     _("Game: Sorry, your %s cannot establish"
+//		     ("Game: Sorry, your %s cannot establish" +
 //		       " a trade route between %s and %s"),
 //		     unit_name(punit.type),pcity_homecity.name,
 //		     pcity_dest.name);
@@ -1234,10 +1234,10 @@ public class Unithand{
 //	assert(pcity_out_of_home != null);
 //      } else {
 //	notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
-//		     _("Game: Sorry, your %s cannot establish"
+//		     ("Game: Sorry, your %s cannot establish" +
 //		       " a trade route here!"), unit_name(punit.type));
 //        notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
-//		       _("      The city of %s already has %d "
+//		       ("      The city of %s already has %d " +
 //			 "better trade routes!"), pcity_homecity.name,
 //		       NUM_TRADEROUTES);
 //	can_establish = false;
@@ -1251,10 +1251,10 @@ public class Unithand{
 //	assert(pcity_out_of_dest != null);
 //      } else {
 //	notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
-//		     _("Game: Sorry, your %s cannot establish"
+//		     ("Game: Sorry, your %s cannot establish" +
 //		       " a trade route here!"), unit_name(punit.type));
 //        notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
-//		       _("      The city of %s already has %d "
+//		       ("      The city of %s already has %d " +
 //			 "better trade routes!"), pcity_dest.name,
 //		       NUM_TRADEROUTES);
 //	can_establish = false;
@@ -1266,7 +1266,7 @@ public class Unithand{
 //      remove_trade_route(pcity_homecity, pcity_out_of_home);
 //      notify_player_ex(city_owner(pcity_out_of_home),
 //		       pcity_out_of_home.tile, event_type.E_NOEVENT,
-//		       _("Game: Sorry, %s has canceled the trade route "
+//		       ("Game: Sorry, %s has canceled the trade route " +
 //			 "from %s to your city %s."),
 //		       city_owner(pcity_homecity).name,
 //		       pcity_homecity.name, pcity_out_of_home.name);
@@ -1277,7 +1277,7 @@ public class Unithand{
 //      remove_trade_route(pcity_dest, pcity_out_of_dest);
 //      notify_player_ex(city_owner(pcity_out_of_dest),
 //		       pcity_out_of_dest.tile, event_type.E_NOEVENT,
-//		       _("Game: Sorry, %s has canceled the trade route "
+//		       ("Game: Sorry, %s has canceled the trade route " +
 //			 "from %s to your city %s."),
 //		       city_owner(pcity_dest).name,
 //		       pcity_dest.name, pcity_out_of_dest.name);
@@ -1309,7 +1309,7 @@ public class Unithand{
 //  
 //  conn_list_do_buffer(&pplayer.connections);
 //  notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
-//		   _("Game: Your %s from %s has arrived in %s,"
+//		   ("Game: Your %s from %s has arrived in %s," +
 //		     " and revenues amount to %d in gold and research."), 
 //		   unit_name(punit.type), pcity_homecity.name,
 //		   pcity_dest.name, revenue);

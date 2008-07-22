@@ -1223,7 +1223,7 @@ public class Diplodlg{
 //
 //    /* ============================================================= */
 //    /* label */
-//    cBuf = util.my_snprintf( _("Sir!, %s ambassador has arrived\n"
+//    cBuf = util.my_snprintf( ("Sir!, %s ambassador has arrived\n" +
 //    		"What are your wishes?"), get_nation_name(pPlayer.nation));
 //  
 //    pStr = create_str16_from_char(cBuf, 14);

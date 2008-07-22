@@ -158,7 +158,7 @@ public class Inteldlg{
 //  change_ptsize16(pStr, 10);
 //  pStr.style &= ~TTF_STYLE_BOLD;
 //  cBuf = util.my_snprintf(
-//    _("Ruler: %s %s  Government: %s\nCapital: %s  Gold: %d\nTax: %d%%"
+//    ("Ruler: %s %s  Government: %s\nCapital: %s  Gold: %d\nTax: %d%%" +
 //      " Science: %d%% Luxury: %d%%\nResearching: %s(%d/%d)"),
 //    get_ruler_title(pPlayer.government, pPlayer.is_male, pPlayer.nation),
 //    pPlayer.name, get_government_name(pPlayer.government),

@@ -148,19 +148,19 @@ public class Widget_core{
 //    if (!ct_rect_valid(&widget.data.window.children_bounds)) {
 //      printf("children bounds of %p are %s and so invalid\n", widget,
 //	     ct_rect_to_string(&widget.data.window.children_bounds));
-//      assert(0);
+//      assert(0!=1);
 //    }
 //  }
 // 
 //  if (!ct_rect_valid(&widget.outer_bounds)) {
 //    printf("outer_bounds of %p are %s and so invalid\n", widget,
 //	   ct_rect_to_string(&widget.outer_bounds));
-//    assert(0);
+//    assert(0!=1);
 //  }
 //  if (!ct_rect_valid(&widget.inner_bounds)) {
 //    printf("inner_bounds of %p are %s and so invalid\n", widget,
 //	   ct_rect_to_string(&widget.inner_bounds));
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //
@@ -208,7 +208,7 @@ public class Widget_core{
 //	   ct_rect_to_string(&widget.outer_bounds));
 //    printf("is outside of parent %p (%s)\n", widget.parent,
 //	   ct_rect_to_string(&widget.parent.data.window.children_bounds));
-//    assert(0);
+//    assert(0!=1);
 //  }
 //  parent_needs_paint(widget);
 //}
@@ -265,7 +265,7 @@ public class Widget_core{
 //  case A_S:
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  switch (alignment) {
@@ -291,7 +291,7 @@ public class Widget_core{
 //  case A_E:
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //}
 //

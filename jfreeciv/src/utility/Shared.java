@@ -123,11 +123,11 @@ public class Shared{
 //	(*i)++;
 //	opt = argv[*i];
 //	if (opt.length()==0) {
-//	  fc_fprintf(stderr, _("Empty argument for \"%s\".\n"), option_name);
+//	  fc_fprintf(stderr, ("Empty argument for \"%s\".\n"), option_name);
 //	  exit(EXIT_FAILURE);
 //	}
 //      }	else {
-//	fc_fprintf(stderr, _("Missing argument for \"%s\".\n"), option_name);
+//	fc_fprintf(stderr, ("Missing argument for \"%s\".\n"), option_name);
 //	exit(EXIT_FAILURE);
 //      }
 //    }
@@ -574,7 +574,7 @@ public static final String textyear(int year)
 //{
 //  if (str.length() >= len) {
 //    util.freelog(Log.LOG_ERROR, errmsg, str, len);
-//    assert(0);
+//    assert(0!=1);
 //    return true;
 //  }
 //  return false;
@@ -704,7 +704,7 @@ public static final String textyear(int year)
 //    char *env = getenv("USER");
 //
 //    if (env) {
-//      sz_strlcpy(username, env);
+//      username = env;
 //      if (is_ascii_name(username)) {
 //	util.freelog(LOG_VERBOSE, "USER username is %s", username);
 //	return username;
@@ -719,7 +719,7 @@ public static final String textyear(int year)
 //    passwd pwent = getpwuid(getuid());
 //
 //    if (pwent) {
-//      sz_strlcpy(username, pwent.pw_name);
+//      username = pwent.pw_name;
 //      if (is_ascii_name(username)) {
 //	util.freelog(LOG_VERBOSE, "getpwuid username is %s", username);
 //	return username;
@@ -735,7 +735,7 @@ public static final String textyear(int year)
 //    DWORD length = sizeof(name);
 //
 //    if (GetUserName(name, &length)) {
-//      sz_strlcpy(username, name);
+//      username = name;
 //      if (is_ascii_name(username)) {
 //	util.freelog(LOG_VERBOSE, "GetUserName username is %s", username);
 //	return username;
@@ -787,7 +787,7 @@ public static final String textyear(int year)
 //  if (!path) {
 //    path = DEFAULT_DATA_PATH;
 //  } else if (*path == '\0') {
-//    util.freelog(Log.LOG_ERROR, _("FREECIV_PATH is set but empty; "
+//    util.freelog(Log.LOG_ERROR, ("FREECIV_PATH is set but empty; " +
 //			 "using default path instead."));
 //    path = DEFAULT_DATA_PATH;
 //  }
@@ -808,7 +808,7 @@ public static final String textyear(int year)
 //    i = tok.length();
 //    if (tok[0] == '~') {
 //      if (i > 1 && tok[1] != '/') {
-//	util.freelog(Log.LOG_ERROR, "For \"%s\" in data path cannot expand '~'"
+//	util.freelog(Log.LOG_ERROR, "For \"%s\" in data path cannot expand '~'" +
 //		" except as '~/'; ignoring", tok);
 //	i = 0;   /* skip this one */
 //      } else {
@@ -1143,11 +1143,11 @@ public static final String textyear(int year)
 //  if (dname) {
 //    return dname;
 //  } else {
-//    util.freelog(Log.LOG_ERROR, _("The data path may be set via"
+//    util.freelog(Log.LOG_ERROR, ("The data path may be set via" +
 //			 " the environment variable FREECIV_PATH."));
-//    util.freelog(Log.LOG_ERROR, _("Current data path is: \"%s\""), datafilename(null));
+//    util.freelog(Log.LOG_ERROR, ("Current data path is: \"%s\""), datafilename(null));
 //    util.freelog(LOG_FATAL,
-//		 _("The \"%s\" file is required ... aborting!"), filename);
+//		 ("The \"%s\" file is required ... aborting!"), filename);
 //    exit(EXIT_FAILURE);
 //  }
 //}

@@ -680,7 +680,7 @@ public class Aicity{
 //  /* Fallbacks */
 //  if (pcity.ai.choice.want == 0) {
 //    /* Fallbacks do happen with techlevel 0, which is now default. -- Per */
-//    CITY_LOG(LOG_VERBOSE, pcity, "Falling back - didn't want to build soldiers,"
+//    CITY_LOG(LOG_VERBOSE, pcity, "Falling back - didn't want to build soldiers," +
 //	     " settlers, or buildings");
 //    pcity.ai.choice.want = 1;
 //    if (best_role_unit(pcity, F_TRADE_ROUTE) != U_LAST) {
@@ -693,7 +693,7 @@ public class Aicity{
 //      pcity.ai.choice.choice = best_role_unit(pcity, F_SETTLERS);
 //      pcity.ai.choice.type = CT_NONMIL;
 //    } else {
-//      CITY_LOG(LOG_VERBOSE, pcity, "Cannot even build a fallback "
+//      CITY_LOG(LOG_VERBOSE, pcity, "Cannot even build a fallback " +
 //	       "(caravan/coinage/settlers). Fix the ruleset!");
 //      pcity.ai.choice.want = 0;
 //    }

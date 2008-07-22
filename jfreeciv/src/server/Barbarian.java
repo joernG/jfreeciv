@@ -98,7 +98,7 @@ public class Barbarian{
 //        barbarians.is_alive = true;
 //        barbarians.is_dying = false;
 //        pick_ai_player_name(game.nation_count - 1, barbarians.name);
-//	sz_strlcpy(barbarians.username, ANON_USER_NAME);
+//	barbarians.username = ANON_USER_NAME;
 //        /* I need to make them to forget the map, I think */
 //	for(tile ptile :  Map.map.tiles){
 //	  map_clear_known(ptile, barbarians);
@@ -126,7 +126,7 @@ public class Barbarian{
 //  game.nbarbarians++;
 //  game.max_players = game.nplayers;
 //
-//  sz_strlcpy(barbarians.username, ANON_USER_NAME);
+//  barbarians.username = ANON_USER_NAME;
 //  barbarians.is_connected = false;
 //  barbarians.government = game.default_government;
 //  barbarians.target_government = game.default_government;
@@ -158,7 +158,7 @@ public class Barbarian{
 //  util.freelog(LOG_VERBOSE, "Created barbarian %s, player %d",
 //          barbarians.name, barbarians.player_no);
 //  notify_player_ex(null, null, E_UPRISING,
-//                   _("Barbarians gain a leader by the name %s.  Dangerous "
+//                   ("Barbarians gain a leader by the name %s.  Dangerous " +
 //                     "times may lie ahead."), barbarians.name);
 //  Gamelog.gamelog(GAMELOG_PLAYER, barbarians);
 //

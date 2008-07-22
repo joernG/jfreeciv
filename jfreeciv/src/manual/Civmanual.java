@@ -159,29 +159,29 @@ public class Civmanual{
 //	fprintf(doc, "</p>\n\n");
 //	switch (op.type) {
 //	case SSET_BOOL:
-//	  fprintf(doc, _("<p class=\"bounds\">Minimum: 0, Default: %d, "
+//	  fprintf(doc, ("<p class=\"bounds\">Minimum: 0, Default: %d, " +
 //			 "Maximum: 1</p>\n\n"),
 //		  op.bool_default_value ? 1 : 0);
 //	  if (*(op.bool_value) != op.bool_default_value) {
-//	    fprintf(doc, _("<p class=\"changed\">Value set to %d</p>\n\n"),
+//	    fprintf(doc, ("<p class=\"changed\">Value set to %d</p>\n\n"),
 //		    *(op.bool_value));
 //	  }
 //	  break;
 //	case SSET_INT:
-//	  fprintf(doc, _("<p class=\"bounds\">Minimum: %d, Default: %d, "
+//	  fprintf(doc, ("<p class=\"bounds\">Minimum: %d, Default: %d, " +
 //			 "Maximum: %d</p>\n\n"),
 //		  op.int_min_value, op.int_default_value,
 //		  op.int_max_value);
 //	  if (*(op.int_value) != op.int_default_value) {
-//	    fprintf(doc, _("<p class=\"changed\">Value set to %d</p>\n\n"),
+//	    fprintf(doc, ("<p class=\"changed\">Value set to %d</p>\n\n"),
 //		    *(op.int_value));
 //	  }
 //	  break;
 //	case SSET_STRING:
-//	  fprintf(doc, _("<p class=\"bounds\">Default: \"%s\"</p>\n\n"),
+//	  fprintf(doc, ("<p class=\"bounds\">Default: \"%s\"</p>\n\n"),
 //		  op.string_default_value);
 //	  if (strcmp(op.string_value, op.string_default_value) != 0) {
-//	    fprintf(doc, _("<p class=\"changed\">Value set to %s</p>\n\n"),
+//	    fprintf(doc, ("<p class=\"changed\">Value set to %s</p>\n\n"),
 //		    op.string_value);
 //	  }
 //	  break;
@@ -199,14 +199,14 @@ public class Civmanual{
 //	fprintf(doc, "%s%s  -  %s%s\n\n", SECTION_BEGIN, cmd.name,
 //		_(cmd.short_help), SECTION_END);
 //	if (cmd.synopsis) {
-//	  fprintf(doc, _("<table>\n<tr>\n<td valign=\"top\">"
+//	  fprintf(doc, ("<table>\n<tr>\n<td valign=\"top\">" +
 //			 "<pre>Synopsis:</pre></td>\n<td>"));
 //	  fprintf(doc, "<pre>%s</pre></td></tr></table>", _(cmd.synopsis));
 //	}
-//	fprintf(doc, _("<p class=\"level\">Level: %s</p>\n\n"),
+//	fprintf(doc, ("<p class=\"level\">Level: %s</p>\n\n"),
 //		cmdlevel_name(cmd.game_level));
 //	if (cmd.game_level != cmd.pregame_level) {
-//	  fprintf(doc, _("<p class=\"level\">Pregame level: %s</p>\n\n"),
+//	  fprintf(doc, ("<p class=\"level\">Pregame level: %s</p>\n\n"),
 //		  cmdlevel_name(cmd.pregame_level));
 //	}
 //	if (cmd.extra_help) {
@@ -229,7 +229,7 @@ public class Civmanual{
 //      fprintf(doc, "<th>Food/ Shield/ Trade</th>");
 //      fprintf(doc, "<th>Special 1</th><th>Food/ Shield/ Trade</th>");
 //      fprintf(doc, "<th>Special 2</th><th>Food/ Shield/ Trade</th>");
-//      fprintf(doc, _("<th>Move cost</th><th>Defense</th><th>Road "
+//      fprintf(doc, ("<th>Move cost</th><th>Defense</th><th>Road " +
 //		     "+trade</th>\n"));
 //      fprintf(doc, "<th>Irrigation +food</th><th>Mining +shields</th>\n");
 //      fprintf(doc, "<th>Transform to</th>");

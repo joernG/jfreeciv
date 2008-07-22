@@ -121,7 +121,7 @@ public class Audio_esd{
 //
 //    music_id = esd_file_cache(sock, program_name, fullpath);
 //    if (music_id < 0) {
-//      util.freelog(Log.LOG_ERROR, _("Error while caching sample <%d>: "
+//      util.freelog(Log.LOG_ERROR, ("Error while caching sample <%d>: " +
 //			   "confirm value != music_id\n"), music_id);
 //    }
 //
@@ -148,7 +148,7 @@ public class Audio_esd{
 //    samples[last_sample].id = esd_file_cache(sock, program_name, fullpath);
 //    samples[last_sample].tag = tag;
 //    if (samples[last_sample].id < 0) {
-//      util.freelog(Log.LOG_ERROR, _("Error while caching sample <%d>: "
+//      util.freelog(Log.LOG_ERROR, ("Error while caching sample <%d>: " +
 //			   "confirm value != samples[].id\n"),
 //	      samples[last_sample].id);
 //    }

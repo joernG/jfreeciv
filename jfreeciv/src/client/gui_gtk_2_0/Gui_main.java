@@ -984,8 +984,8 @@ public class Gui_main{
 //  main_message_area = GTK_TEXT_VIEW(text);
 //
 //  set_output_window_text(
-//      _("Freeciv is free software and you are welcome to distribute copies of"
-//      " it\nunder certain conditions; See the \"Copying\" item on the Help"
+//      ("Freeciv is free software and you are welcome to distribute copies of" +
+//      " it\nunder certain conditions; See the \"Copying\" item on the Help" +
 //      " menu.\nNow.. Go give'em hell!") );
 //
 //  /* the chat line */
@@ -1028,16 +1028,16 @@ public class Gui_main{
 //
 //  /* convert inputs */
 //  s = g_locale_to_utf8(user_name, -1, null, null, null);
-//  sz_strlcpy(user_name, s);
+//  user_name = s;
 //  g_free(s);
 //
 //  /* this is silly, but i don't want the UI to barf on erroneous input */
 //  s = g_locale_to_utf8(metaserver, -1, null, null, null);
-//  sz_strlcpy(metaserver, s);
+//  metaserver = s;
 //  g_free(s);
 //
 //  s = g_locale_to_utf8(server_host, -1, null, null, null);
-//  sz_strlcpy(server_host, s);
+//  server_host = s;
 //  g_free(s);
 //}
 //
@@ -1384,7 +1384,7 @@ public class Gui_main{
 //    char buf[512];
 //    
 //    buf = util.my_snprintf(
-//	    _("%s People\nYear: %s Turn: %d\nGold: %d\nNet Income: %d\n"
+//	    ("%s People\nYear: %s Turn: %d\nGold: %d\nNet Income: %d\n" +
 //	      "Tax:%d Lux:%d Sci:%d\nResearching %s: %d/%d\nGovernment: %s"),
 //	    population_to_text(civ_population(game.player_ptr)),
 //	    Shared.textyear(game.year), game.turn,

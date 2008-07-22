@@ -1425,7 +1425,7 @@ public class Wldlg{
 //  model = GTK_TREE_MODEL(ptr.dst);
 //  
 //  init_worklist(&queue);
-//  sz_strlcpy(queue.name, pwl.name);
+//  queue.name = pwl.name;
 //
 //  i = 0;
 //  if (gtk_tree_model_get_iter_first(model, &it)) {

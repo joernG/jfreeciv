@@ -980,7 +980,7 @@ public class Aiunit{
 //   } }
 //  }
 //
-//  UNIT_LOG(LOGLEVEL_BODYGUARD, punit, "look_for_charge, best=%d, "
+//  UNIT_LOG(LOGLEVEL_BODYGUARD, punit, "look_for_charge, best=%d, " +
 //           "type=%s(%d,%d)", best * 100 / toughness, *acity ? (*acity).name
 //           : (*aunit ? unit_name((*aunit).type) : ""), 
 //           *acity ? (*acity).tile.x : (*aunit
@@ -1596,7 +1596,7 @@ public class Aiunit{
 //      /* END STEAM-ENGINES KLUGE */
 //      
 //      if (punit.id != 0 && ferryboat && is_ground_unit(punit)) {
-//        UNIT_LOG(Log.LOG_DEBUG, punit, "in fstk with boat %s@(%d, %d) . %s@(%d, %d)"
+//        UNIT_LOG(Log.LOG_DEBUG, punit, "in fstk with boat %s@(%d, %d) . %s@(%d, %d)" +
 //                 " (go_by_boat=%d, move_time=%d, want=%d, best=%d)",
 //                 ferryboat.unit_type().name, best_tile.x, best_tile.y,
 //                 acity.name, TILE_XY(acity.tile), 

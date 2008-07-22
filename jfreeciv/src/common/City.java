@@ -609,7 +609,7 @@ public class City{
 //  tile ptile;
 //
 //  if (!(ptile = city_map_to_map(pcity, city_x, city_y))) {
-//    assert(0);
+//    assert(0!=1);
 //    return 0;
 //  }
 //
@@ -719,7 +719,7 @@ public class City{
 //  tile ptile;
 //
 //  if (!(ptile = city_map_to_map(pcity, city_x, city_y))) {
-//    assert(0);
+//    assert(0!=1);
 //    return 0;
 //  }
 //
@@ -838,7 +838,7 @@ public class City{
 //  tile ptile;
 //
 //  if (!(ptile = city_map_to_map(pcity, city_x, city_y))) {
-//    assert(0);
+//    assert(0!=1);
 //    return 0;
 //  }
 //
@@ -2388,7 +2388,7 @@ public class City{
 //  pcity.id = 0;
 //  pcity.owner = pplayer.player_no;
 //  pcity.tile = ptile;
-//  sz_strlcpy(pcity.name, name);
+//  pcity.name = name;
 //  pcity.size = 1;
 //  specialist_type_iterate(sp) {
 //    pcity.specialists[sp] = 0;

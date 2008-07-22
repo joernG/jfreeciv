@@ -424,13 +424,13 @@ public class Dialogs{
 //  
 //    if (game.player_ptr.economic.gold >= value) {
 //      cBuf = util.my_snprintf(
-//    	      _("Upgrade %s to %s for %d gold?\n"
+//    	      ("Upgrade %s to %s for %d gold?\n" +
 //                "Treasury contains %d gold."),
 //	  unit_types[ut1].name, unit_types[ut2].name,
 //	  value, game.player_ptr.economic.gold);
 //    } else {
 //      cBuf = util.my_snprintf(
-//          _("Upgrading %s to %s costs %d gold.\n"
+//          ("Upgrading %s to %s costs %d gold.\n" +
 //            "Treasury contains %d gold."),
 //          unit_types[ut1].name, unit_types[ut2].name,
 //          value, game.player_ptr.economic.gold);
@@ -940,7 +940,7 @@ public class Dialogs{
 //	  int turns = ds[pTile.owner.player_no].turns_left;
 //
 //	  cat_snprintf(cBuf, sizeof(cBuf),
-//	  		PL_("\n%s territory (%d turn ceasefire)",
+//	  		PL("\n%s territory (%d turn ceasefire)",
 //			    "\n%s territory (%d turn ceasefire)", turns),
 //		 		get_nation_name(pTile.owner.nation), turns);
 //        } else {
@@ -971,7 +971,7 @@ public class Dialogs{
 //	if (ds[pOwner.player_no].type == DS_CEASEFIRE) {
 //	  int turns = ds[pOwner.player_no].turns_left;
 //
-//          cat_snprintf(cBuf, sizeof(cBuf), PL_("\n(%s, %d turn ceasefire)",
+//          cat_snprintf(cBuf, sizeof(cBuf), PL("\n(%s, %d turn ceasefire)",
 //				       "\n(%s, %d turn ceasefire)", turns),
 //		 		get_nation_name(pOwner.nation), turns);
 //        } else {
@@ -3074,7 +3074,7 @@ public class Dialogs{
 //    /* --------------- */
 //
 //    cBuf = util.my_snprintf(
-//		_("Inciting a revolt costs %d gold.\n"
+//		("Inciting a revolt costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
 //		pCity.incite_revolt_cost, game.player_ptr.economic.gold);
 //    
@@ -3268,7 +3268,7 @@ public class Dialogs{
 //    /* --------------- */
 //
 //    cBuf = util.my_snprintf(
-//		_("Bribing the unit costs %d gold.\n"
+//		("Bribing the unit costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
 //		pUnit.bribe_cost, game.player_ptr.economic.gold);
 //    

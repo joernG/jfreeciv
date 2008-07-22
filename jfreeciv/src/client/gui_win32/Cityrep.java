@@ -684,7 +684,7 @@ public class Cityrep{
 //	    id=ListBox_GetCurSel(GetDlgItem(hWnd,ID_PRODCHANGE_FROM));
 //	    if (id==LB_ERR)
 //	      {
-//		append_output_window(_("Game: Select a unit or improvement"
+//		append_output_window(("Game: Select a unit or improvement" +
 //				       " to change production from."));
 //		break;        
 //	      }
@@ -693,7 +693,7 @@ public class Cityrep{
 //	    id=ListBox_GetCurSel(GetDlgItem(hWnd,ID_PRODCHANGE_TO));
 //	    if (id==LB_ERR)
 //	      {
-//		append_output_window(_("Game: Select a unit or improvement"
+//		append_output_window(("Game: Select a unit or improvement" +
 //				       " to change production to."));
 //		break;          
 //	      }

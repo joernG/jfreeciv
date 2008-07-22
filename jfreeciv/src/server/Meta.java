@@ -96,7 +96,7 @@ public class Meta{
 //*************************************************************************/
 //void set_meta_patches_string(final String string)
 //{
-//  sz_strlcpy(meta_patches, string);
+//  meta_patches = string;
 //}
 //
 ///*************************************************************************
@@ -104,7 +104,7 @@ public class Meta{
 //*************************************************************************/
 //void set_meta_topic_string(final String string)
 //{
-//  sz_strlcpy(meta_topic, string);
+//  meta_topic = string;
 //}
 //
 ///*************************************************************************
@@ -112,7 +112,7 @@ public class Meta{
 //*************************************************************************/
 //void set_meta_message_string(final String string)
 //{
-//  sz_strlcpy(meta_message, string);
+//  meta_message = string;
 //}
 //
 ///*************************************************************************
@@ -120,7 +120,7 @@ public class Meta{
 //*************************************************************************/
 //char *meta_addr_port()
 //{
-//  return srvarg.metaserver_addr;
+//  return Srv_main.srvarg.metaserver_addr;
 //}
 //
 ///*************************************************************************
@@ -189,7 +189,7 @@ public class Meta{
 //    sz_strlcpy(host, "unknown");
 //  }
 //
-//  my_snprintf(s, rest, "host=%s&port=%d&state=%s&", host, srvarg.port, state);
+//  my_snprintf(s, rest, "host=%s&port=%d&state=%s&", host, Srv_main.srvarg.port, state);
 //  s = end_of_strn(s, &rest);
 //
 //  if (flag == META_GOODBYE) {
@@ -211,7 +211,7 @@ public class Meta{
 //    s = end_of_strn(s, &rest);
 //
 //    my_snprintf(s, rest, "serverid=%s&",
-//                my_url_encode(srvarg.serverid));
+//                my_url_encode(Srv_main.srvarg.serverid));
 //    s = end_of_strn(s, &rest);
 //
 //    my_snprintf(s, rest, "message=%s&",
@@ -328,11 +328,11 @@ public class Meta{
 //  }
 //
 //  n = msg = util.my_snprintf(
-//    "POST %s HTTP/1.1\r\n"
-//    "Host: %s:%d\r\n"
-//    "Content-Type: application/x-www-form-urlencoded; charset=\"utf-8\"\r\n"
-//    "Content-Length: %lu\r\n"
-//    "\r\n"
+//    "POST %s HTTP/1.1\r\n" +
+//    "Host: %s:%d\r\n" +
+//    "Content-Type: application/x-www-form-urlencoded; charset=\"utf-8\"\r\n" +
+//    "Content-Length: %lu\r\n" +
+//    "\r\n" +
 //    "%s\r\n",
 //    metaserver_path,
 //    metaname,
@@ -368,7 +368,7 @@ public class Meta{
 //    metaserver_path = null;
 //  }
 //  
-//  if (!(path = my_lookup_httpd(metaname, &metaport, srvarg.metaserver_addr))) {
+//  if (!(path = my_lookup_httpd(metaname, &metaport, Srv_main.srvarg.metaserver_addr))) {
 //    return;
 //  }
 //  

@@ -325,11 +325,11 @@ public class Aisettler{
 //void print_cityresult(player pplayer, cityresult cr,
 //                      ai_data ai)
 //{
-//  util.freelog(Log.LOG_NORMAL, "Result=(%d, %d)\nReservations:\n"
-//          "     %4d %4d %4d   \n"
-//          "%4d %4d %4d %4d %4d\n"
-//          "%4d %4d %4d %4d %4d\n"
-//          "%4d %4d %4d %4d %4d\n"
+//  util.freelog(Log.LOG_NORMAL, "Result=(%d, %d)\nReservations:\n" +
+//          "     %4d %4d %4d   \n" +
+//          "%4d %4d %4d %4d %4d\n" +
+//          "%4d %4d %4d %4d %4d\n" +
+//          "%4d %4d %4d %4d %4d\n" +
 //          "     %4d %4d %4d", cr.tile.x, cr.tile.y,
 //          cr.citymap[1][0].reserved, cr.citymap[2][0].reserved, 
 //          cr.citymap[3][0].reserved, cr.citymap[0][1].reserved,
@@ -343,18 +343,18 @@ public class Aisettler{
 //          cr.citymap[1][4].reserved, cr.citymap[2][4].reserved,
 //          cr.citymap[3][4].reserved);
 //#define M(a,b) cr.citymap[a][b].food, cr.citymap[a][b].shield, cr.citymap[a][b].trade
-//  util.freelog(Log.LOG_NORMAL, "Tiles (food/shield/trade):\n"
-//          "      %d-%d-%d %d-%d-%d %d-%d-%d\n"
-//          "%d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d\n"
-//          "%d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d\n"
-//          "%d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d\n"
+//  util.freelog(Log.LOG_NORMAL, "Tiles (food/shield/trade):\n" +
+//          "      %d-%d-%d %d-%d-%d %d-%d-%d\n" +
+//          "%d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d\n" +
+//          "%d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d\n" +
+//          "%d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d %d-%d-%d\n" +
 //          "      %d-%d-%d %d-%d-%d %d-%d-%d",
 //          M(1,0), M(2,0), M(3,0), M(0,1), M(1,1), M(2,1), M(3,1), M(4,1),
 //          M(0,2), M(1,2), M(2,2), M(3,2), M(4,2), M(0,3), M(1,3), M(2,3),
 //          M(3,3), M(4,3), M(1,4), M(2,4), M(3,4));
 //#undef M
-//  util.freelog(Log.LOG_NORMAL, "city center %d + best other(%d, %d) %d - corr %d "
-//          "- waste %d\n"
+//  util.freelog(Log.LOG_NORMAL, "city center %d + best other(%d, %d) %d - corr %d " +
+//          "- waste %d\n" +
 //          "+ remaining %d + defense bonus %d + naval bonus %d = %d (%d)", 
 //          cr.city_center, cr.other_tile.x, cr.other_tile.y,
 //	  cr.best_other,

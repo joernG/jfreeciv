@@ -1206,12 +1206,12 @@ public class Citydlg{
 //  if(!pCity.did_buy) {
 //    if (game.player_ptr.economic.gold >= value) {
 //      cBuf = util.my_snprintf(
-//		_("Buy %s for %d gold?\n"
+//		("Buy %s for %d gold?\n" +
 //		  "Treasury contains %d gold."),
 //		name, value, game.player_ptr.economic.gold);
 //    } else {
 //      cBuf = util.my_snprintf(
-//		_("%s costs %d gold.\n"
+//		("%s costs %d gold.\n" +
 //		  "Treasury contains %d gold."),
 //		name, value, game.player_ptr.economic.gold);
 //    }
@@ -1929,7 +1929,7 @@ public class Citydlg{
 //    if (pButton.ID == ID_CITY_DLG_PREV_BUTTON) {
 //      dir = -1;
 //    } else {
-//      assert(0);
+//      assert(0!=1);
 //      dir = 1;
 //    }
 //  }
@@ -2077,7 +2077,7 @@ public class Citydlg{
 //  size = pList.foo_list_size();
 //
 //  cBuf = util.my_snprintf( "Unit maintenance panel (%d %s)",
-//	      size, PL_("unit", "units", size));
+//	      size, PL("unit", "units", size));
 //
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.fgcol.r = 238;
@@ -2138,7 +2138,7 @@ public class Citydlg{
 //  size = pList.foo_list_size();
 //
 //  cBuf = util.my_snprintf( "Garrison Panel (%d %s)",
-//	      size, PL_("unit", "units", size));
+//	      size, PL("unit", "units", size));
 //
 //  pStr = create_str16_from_char(cBuf, 10);
 //  pStr.fgcol.r = 238;
@@ -3138,11 +3138,11 @@ public class Citydlg{
 //    /* turns until famine */
 //    cBuf = util.my_snprintf(
 //		"City shrinks : %d %s", abs(count),
-//		PL_("turn", "turns", abs(count)));
+//		PL("turn", "turns", abs(count)));
 //  } else {
 //    cBuf = util.my_snprintf(
 //		"City growth : %d %s", count,
-//		PL_("turn", "turns", count));
+//		PL("turn", "turns", count));
 //  }
 //
 //  copy_chars_to_string16(pStr, cBuf);
@@ -3449,7 +3449,7 @@ public class Citydlg{
 //		  		pCity.shield_stock, cost,  "blocked");
 //      } else {
 //        cBuf = util.my_snprintf( "(%d/%d) %d %s",
-//	    pCity.shield_stock, cost, count, PL_("turn", "turns", count));
+//	    pCity.shield_stock, cost, count, PL("turn", "turns", count));
 //     }
 //   } else {
 //     cBuf = util.my_snprintf( "(%d/%d) %s!",

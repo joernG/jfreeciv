@@ -399,7 +399,7 @@ public class Options{
 //  name = getenv("FREECIV_OPT");
 //
 //  if (name) {
-//    sz_strlcpy(name_buffer, name);
+//    name_buffer = name;
 //  } else {
 //#ifndef OPTION_FILE_NAME
 //    name = user_home_dir();
@@ -613,7 +613,7 @@ public class Options{
 //
 //  /* insert cma presets */
 //  secfile_insert_int_comment(&sf, cmafec_preset_num(),
-//			     _("If you add a preset by "
+//			     ("If you add a preset by " +
 //			       "hand, also update \"number_of_presets\""),
 //			     "cma.number_of_presets");
 //  for (i = 0; i < cmafec_preset_num(); i++) {
@@ -712,9 +712,9 @@ public class Options{
 //  int i;
 //  boolean end = false;
 //
-//  sz_strlcpy(efpath, path);
+//  efpath = path;
 //  sz_strlcat(efpath, ".wlef%d");
-//  sz_strlcpy(idpath, path);
+//  idpath = path;
 //  sz_strlcat(idpath, ".wlid%d");
 //
 //  for (i = 0; i < MAX_LEN_WORKLIST; i++) {
@@ -750,9 +750,9 @@ public class Options{
 //  char idpath[64];
 //  int i;
 //
-//  sz_strlcpy(efpath, path);
+//  efpath = path;
 //  sz_strlcat(efpath, ".wlef%d");
-//  sz_strlcpy(idpath, path);
+//  idpath = path;
 //  sz_strlcat(idpath, ".wlid%d");
 //
 //  for (i = 0; i < MAX_LEN_WORKLIST; i++) {

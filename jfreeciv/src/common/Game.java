@@ -195,7 +195,7 @@ public class Game{
 //  game.diplchance  = GAME_DEFAULT_DIPLCHANCE;
 //  game.freecost    = GAME_DEFAULT_FREECOST;
 //  game.conquercost = GAME_DEFAULT_CONQUERCOST;
-//  sz_strlcpy(game.start_units, GAME_DEFAULT_START_UNITS);
+//  game.start_units = GAME_DEFAULT_START_UNITS;
 //  game.dispersion  = GAME_DEFAULT_DISPERSION;
 //  game.cityfactor  = GAME_DEFAULT_CITYFACTOR;
 //  game.citymindist = GAME_DEFAULT_CITYMINDIST;
@@ -231,7 +231,7 @@ public class Game{
 //
 //  game.heating     = 0;
 //  game.cooling     = 0;
-//  sz_strlcpy(game.save_name, GAME_DEFAULT_SAVE_NAME);
+//  game.save_name = GAME_DEFAULT_SAVE_NAME;
 //  game.save_nturns=10;
 //#ifdef HAVE_LIBZ
 //  game.save_compress_level = GAME_DEFAULT_COMPRESS_LEVEL;
@@ -243,7 +243,7 @@ public class Game{
 //  game.watchtower_extra_vision=GAME_DEFAULT_WATCHTOWER_EXTRA_VISION,
 //  game.allowed_city_names = GAME_DEFAULT_ALLOWED_CITY_NAMES;
 //
-//  sz_strlcpy(game.rulesetdir, GAME_DEFAULT_RULESETDIR);
+//  game.rulesetdir = GAME_DEFAULT_RULESETDIR;
 //
 //  game.num_unit_types = 0;
 //  game.num_impr_types = 0;
@@ -259,8 +259,8 @@ public class Game{
 //  game.palace_building = B_LAST;
 //  game.land_defend_building = B_LAST;
 //
-//  sz_strlcpy(game.demography, GAME_DEFAULT_DEMOGRAPHY);
-//  sz_strlcpy(game.allow_take, GAME_DEFAULT_ALLOW_TAKE);
+//  game.demography = GAME_DEFAULT_DEMOGRAPHY;
+//  game.allow_take = GAME_DEFAULT_ALLOW_TAKE;
 //
 //  game.save_options.save_random = true;
 //  game.save_options.save_players = true;

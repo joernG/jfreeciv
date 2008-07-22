@@ -100,6 +100,6 @@ public class Capstr{
 //  if (!s) {
 //    s = CAPABILITY;
 //  }
-//  sz_strlcpy(our_capability_internal, s);
+//  our_capability_internal = s;
 //}
 }

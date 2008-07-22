@@ -449,7 +449,7 @@ public class Menu{
 //  char translated[256];
 //  char *accel;
 //  char *menustr_p;
-//  sz_strlcpy(menustr,item.name);
+//  menustr = item.name;
 //  if ((accel=strchr(menustr,'\t')))
 //    {
 //      my_add_menu_accelerator(item.name,item.id);
@@ -457,7 +457,7 @@ public class Menu{
 //      accel++;
 //    }
 //  tr=_(menustr);
-//  sz_strlcpy(translated,tr);
+//  translated = tr;
 //  if (accel)
 //    {
 //      sz_strlcat(translated,"\t");
@@ -942,13 +942,13 @@ public class Menu{
 //  char translated[256];
 //  char *accel;
 //  char *menustr_p;
-//  sz_strlcpy(menustr, name);
+//  menustr = name;
 //  if ((accel = strchr(menustr, '\t'))) {
 //    accel[0]=0;
 //    accel++;
 //  }
 //  tr=_(menustr);
-//  sz_strlcpy(translated, tr);
+//  translated = tr;
 //  if (accel) {
 //    sz_strlcat(translated, "\t");
 //    sz_strlcat(translated, accel);
@@ -1170,14 +1170,14 @@ public class Menu{
 //      my_enable_menu(menu, IDM_ORDERS_NUKE,
 //		     unit_flag(punit, F_NUCLEAR));
 //      if (unit_flag(punit, F_HELP_WONDER)) {
-//	my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Help Build Wonder"
+//	my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Help Build Wonder" +
 //		       "\tB");
 //      } else if (unit_flag(punit, F_CITIES)) {
 //	if (map_get_city(punit.tile)) {
-//	  my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Add to City"
+//	  my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Add to City" +
 //			 "\tB");
 //	} else {
-//	  my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Build City"
+//	  my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Build City" +
 //			 "\tB");
 //	}
 //      } else {
@@ -1231,22 +1231,22 @@ public class Menu{
 //      if (can_unit_do_activity(punit, ACTIVITY_FORTIFYING)) {
 //	my_rename_menu(menu, IDM_ORDERS_FORTRESS, N"Fortify" "\tF");
 //      } else {
-//	my_rename_menu(menu, IDM_ORDERS_FORTRESS, N"Build Fortress"
+//	my_rename_menu(menu, IDM_ORDERS_FORTRESS, N"Build Fortress" +
 //		       "\tF");
 //      }
 //
 //      if (unit_flag(punit, F_PARATROOPERS)) {
 //	my_rename_menu(menu, IDM_ORDERS_POLLUTION, N"Paradrop" "\tP");
 //      } else {
-//	my_rename_menu(menu, IDM_ORDERS_POLLUTION, N"Clean Pollution"
+//	my_rename_menu(menu, IDM_ORDERS_POLLUTION, N"Clean Pollution" +
 //		       "\tP");
 //      }
 //
 //      if (!unit_flag(punit, F_SETTLERS)) {
-//	my_rename_menu(menu, IDM_ORDERS_AUTO_SETTLER, N"Auto Attack"
+//	my_rename_menu(menu, IDM_ORDERS_AUTO_SETTLER, N"Auto Attack" +
 //		       "\tA");
 //      } else {
-//	my_rename_menu(menu, IDM_ORDERS_AUTO_SETTLER, N"Auto Settler"
+//	my_rename_menu(menu, IDM_ORDERS_AUTO_SETTLER, N"Auto Settler" +
 //		       "\tA");
 //      }
 //

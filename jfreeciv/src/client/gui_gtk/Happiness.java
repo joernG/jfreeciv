@@ -305,7 +305,7 @@ public class Happiness{
 //    if (mlmax == 100)
 //      my_snprintf(bptr, nleft, "no maximum, ");
 //    else
-//      my_snprintf(bptr, nleft, PL_("%d unit maximum, ",
+//      my_snprintf(bptr, nleft, PL("%d unit maximum, ",
 //				   "%d units maximum, ", mlmax), mlmax);
 //    bptr = end_of_strn(bptr, &nleft);
 //

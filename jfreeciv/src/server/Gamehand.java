@@ -130,9 +130,9 @@ public class Gamehand{
 //
 //    /* We cannot currently handle sea units as start units. */
 //    if (unit_types[utype].move_type == SEA_MOVING) {
-//      util.freelog(Log.LOG_ERROR, _("Sea moving start units are not yet supported, "
+//      util.freelog(Log.LOG_ERROR, ("Sea moving start units are not yet supported, " +
 //                           "%s not created."), unit_types[utype].name);
-//      notify_player(pplayer, _("Sea moving start units are not yet supported. "
+//      notify_player(pplayer, ("Sea moving start units are not yet supported. " +
 //                               "Nobody gets %s."), unit_types[utype].name);
 //      return;
 //    }
@@ -344,7 +344,7 @@ public class Gamehand{
 //     time a packet_game_info packet is created */
 //  if (game.timeout != 0) {
 //    ginfo.seconds_to_turndone =
-//	game.turn_start + game.timeout - time(null);
+//	game.turn_start + game.timeout - new Date(); //time(null);
 //  } else {
 //    /* unused but at least initialized */
 //    ginfo.seconds_to_turndone = -1;
@@ -384,7 +384,7 @@ public class Gamehand{
 //
 //    if (game.timeout > GAME_MAX_TIMEOUT) {
 //      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
-//		     _("The turn timeout has exceeded its maximum value, "
+//		     ("The turn timeout has exceeded its maximum value, " +
 //		       "fixing at its maximum"));
 //      util.freelog(Log.LOG_DEBUG, "game.timeout exceeded maximum value");
 //      game.timeout = GAME_MAX_TIMEOUT;
@@ -392,7 +392,7 @@ public class Gamehand{
 //      game.timeoutinc = 0;
 //    } else if (game.timeout < 0) {
 //      notify_conn_ex(&game.game_connections, null, event_type.E_NOEVENT,
-//		     _("The turn timeout is smaller than zero, "
+//		     ("The turn timeout is smaller than zero, " +
 //		       "fixing at zero."));
 //      util.freelog(Log.LOG_DEBUG, "game.timeout less than zero");
 //      game.timeout = 0;
@@ -401,7 +401,7 @@ public class Gamehand{
 //    game.timeoutcounter++;
 //  }
 //
-//  util.freelog(Log.LOG_DEBUG, "timeout=%d, inc=%d incmult=%d\n   "
+//  util.freelog(Log.LOG_DEBUG, "timeout=%d, inc=%d incmult=%d\n   " +
 //	  "int=%d, intinc=%d, turns till next=%d",
 //	  game.timeout, game.timeoutinc, game.timeoutincmult,
 //	  game.timeoutint, game.timeoutintinc,
@@ -418,7 +418,7 @@ public class Gamehand{
 //void increase_timeout_because_unit_moved()
 //{
 //  if (game.timeout != 0){
-//    int seconds_to_turndone = game.turn_start + game.timeout - time(null);
+//    int seconds_to_turndone = game.turn_start + game.timeout - new Date(); //time(null);
 //
 //    if (seconds_to_turndone < game.timeoutaddenemymove){
 //      game.turn_start = time(null) - game.timeout + game.timeoutaddenemymove;
@@ -442,7 +442,7 @@ public class Gamehand{
 //  static char filename[MAX_LEN_PATH];
 //
 //  filename = util.my_snprintf( "%s_%d_%d",
-//      CHALLENGE_ROOT, srvarg.port, pc.id);
+//      CHALLENGE_ROOT, Srv_main.srvarg.port, pc.id);
 //
 //  return filename;
 //}

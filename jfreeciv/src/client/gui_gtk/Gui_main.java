@@ -783,8 +783,8 @@ public class Gui_main{
 //  gtk_widget_realize(text_scrollbar);
 //
 //  set_output_window_text(
-//      _("Freeciv is free software and you are welcome to distribute copies of"
-//      " it\nunder certain conditions; See the \"Copying\" item on the Help"
+//      ("Freeciv is free software and you are welcome to distribute copies of" +
+//      " it\nunder certain conditions; See the \"Copying\" item on the Help" +
 //      " menu.\nNow.. Go give'em hell!") );
 //
 //  /* the chat line */
@@ -1090,7 +1090,7 @@ public class Gui_main{
 //    char buf[512];
 //    
 //    buf = util.my_snprintf(
-//	    _("%s People\nYear: %s Turn: %d\nGold: %d\nNet Income: %d\n"
+//	    ("%s People\nYear: %s Turn: %d\nGold: %d\nNet Income: %d\n" +
 //	      "Tax:%d Lux:%d Sci:%d\nResearching %s: %d/%d\nGovernment: %s"),
 //	    population_to_text(civ_population(game.player_ptr)),
 //	    Shared.textyear(game.year), game.turn,

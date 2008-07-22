@@ -527,7 +527,7 @@ public class Cityrep{
 //      cBuf = util.my_snprintf( "%s", "never");
 //    } else {
 //      cBuf = util.my_snprintf( "%d %s",
-//      			togrow, PL_("turn", "turns", togrow));
+//      			togrow, PL("turn", "turns", togrow));
 //    }
 //  
 //    pBuf = create_icon2(pLogo, pWindow.dst,
@@ -1055,7 +1055,7 @@ public class Cityrep{
 //    cBuf = util.my_snprintf( "%s", "never");
 //  } else {
 //    cBuf = util.my_snprintf( "%d %s",
-//      			togrow, PL_("turn", "turns", togrow));
+//      			togrow, PL("turn", "turns", togrow));
 //  }
 //  
 //  copy_chars_to_string16(pWidget.string16, cBuf);

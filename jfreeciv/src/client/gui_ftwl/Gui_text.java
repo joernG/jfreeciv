@@ -186,7 +186,7 @@ public class Gui_text{
 //    map_transform_tile(ptile);
 //    break;
 //  default:
-//    assert(0);
+//    assert(0!=1);
 //  }
 //
 //  stats_after[0] = get_food_tile(ptile);
@@ -239,7 +239,7 @@ public class Gui_text{
 //  } else if (n == 3) {
 //    add("%s %s %s", parts[0], parts[1],		parts[2]);
 //  } else {
-//    assert(0);
+//    assert(0!=1);
 //  }
 //  RETURN;
 //}

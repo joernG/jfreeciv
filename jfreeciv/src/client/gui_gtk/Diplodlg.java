@@ -511,8 +511,8 @@ public class Diplodlg{
 //  /* End of pact button insertion */
 //
 //  buf = util.my_snprintf(
-//	       _("This Eternal Treaty\n"
-//		 "marks the results of the diplomatic work between\n"
+//	       ("This Eternal Treaty\n" +
+//		 "marks the results of the diplomatic work between\n" +
 //		 "The %s %s %s\nand\nThe %s %s %s"),
 //	  get_nation_name(plr0.nation),
 //	  get_ruler_title(plr0.government, plr0.is_male, plr0.nation),

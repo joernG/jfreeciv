@@ -70,9 +70,9 @@ public class Messagedlg{
 //
 //  explanation = gtk_label_new(null);
 //  gtk_label_set_markup(GTK_LABEL(explanation),
-//    _("Where to display messages?\n"
-//      "\t<b>Out</b>put window ;\n"
-//      "\t<b>Mes</b>sages window ;\n"
+//    ("Where to display messages?\n" +
+//      "\t<b>Out</b>put window ;\n" +
+//      "\t<b>Mes</b>sages window ;\n" +
 //      "\t<b>Pop</b>up individual window"));
 //  gtk_widget_set_name(explanation, "comment label");
 //  gtk_box_pack_start(GTK_BOX(shell.vbox), explanation, false, false, 0);

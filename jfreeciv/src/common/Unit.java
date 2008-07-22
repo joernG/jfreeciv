@@ -603,7 +603,7 @@ public class Unit{
 //    break;
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return "Unknown";
 //}
 //
@@ -1845,7 +1845,7 @@ public class Unit{
 //  case UR_OK:
 //    upgrade_cost = unit_upgrade_price(pplayer, from_unittype, to_unittype);
 //    /* This message is targeted toward the GUI callers. */
-//    my_snprintf(buf, bufsz, _("Upgrade %s to %s for %d gold?\n"
+//    my_snprintf(buf, bufsz, ("Upgrade %s to %s for %d gold?\n" +
 //			      "Treasury contains %d gold."),
 //		unit_types[from_unittype].name, unit_types[to_unittype].name,
 //		upgrade_cost, pplayer.economic.gold);
@@ -1858,7 +1858,7 @@ public class Unit{
 //  case UR_NO_MONEY:
 //    upgrade_cost = unit_upgrade_price(pplayer, from_unittype, to_unittype);
 //    my_snprintf(buf, bufsz,
-//		_("Upgrading %s to %s costs %d gold.\n"
+//		("Upgrading %s to %s costs %d gold.\n" +
 //		  "Treasury contains %d gold."),
 //		unit_types[from_unittype].name, unit_types[to_unittype].name,
 //		upgrade_cost, pplayer.economic.gold);

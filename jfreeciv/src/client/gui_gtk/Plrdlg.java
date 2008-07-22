@@ -339,7 +339,7 @@ public class Plrdlg{
 //  /* text for idleness */
 //  if (game.players[i].nturns_idle > 3) {
 //    idlebuf = util.my_snprintf(
-//		PL_("(idle %d turn)", "(idle %d turns)",
+//		PL("(idle %d turn)", "(idle %d turns)",
 //		    game.players[i].nturns_idle - 1),
 //		game.players[i].nturns_idle - 1);
 //  } else {
@@ -568,7 +568,7 @@ public class Plrdlg{
 //  if (can_meet_with_player(&game.players[player_index])) {
 //    dsend_packet_diplomacy_init_meeting_req(&aconnection, player_index);
 //  } else {
-//    append_output_window(_("Game: You need an embassy to "
+//    append_output_window(("Game: You need an embassy to " +
 //			   "establish a diplomatic meeting."));
 //  }
 //}

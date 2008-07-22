@@ -246,7 +246,7 @@ public class Gui_string{
 //
 //    if ((pText = SDL_DisplayFormat(pTmp)) == null) {
 //      util.freelog(Log.LOG_ERROR,
-//	      _("Error in SDL_create_str16_surf: Couldn't convert text "
+//	      ("Error in SDL_create_str16_surf: Couldn't convert text " +
 //		"to display format: %s"), SDL_GetError());
 //      pText = pTmp;
 //    } else {
@@ -267,7 +267,7 @@ public class Gui_string{
 //  }
 //
 //  util.freelog(Log.LOG_DEBUG,
-//	  _("SDL_create_str16_surf: Font is generally %d big, and "
+//	  ("SDL_create_str16_surf: Font is generally %d big, and " +
 //	    "string is %hd big"), TTF_FontHeight(pString.font), pText.h);
 //  util.freelog(Log.LOG_DEBUG, "SDL_create_str16_surf: String is %d lenght",
 //	  pText.w);
@@ -597,7 +597,7 @@ public class Gui_string{
 //  if(!pFont_with_FullPath) {
 //    char *path = datafilename(FONT_NAME);
 //    if(!path) {
-//      die(_("Couldn't find stdfont.ttf file. Please link/copy/move any"
+//      die(("Couldn't find stdfont.ttf file. Please link/copy/move any" +
 //            "unicode ttf font to data dir as stdfont.ttf"));
 //    }
 //    pFont_with_FullPath = mystrdup(path);
@@ -661,7 +661,7 @@ public class Gui_string{
 //
 //  if (index == Sizeof_Font_TAB) {
 //    util.freelog(Log.LOG_ERROR,
-//	    _("Error in unload_font: Trying unload Font which is "
+//	    ("Error in unload_font: Trying unload Font which is " +
 //	      "not include in Font ARRAY"));
 //    return;
 //  }

@@ -452,7 +452,7 @@ public class Dialogs{
 //			 "_No", null, 0, 0);
 //  } else {
 //    buf = util.my_snprintf(
-//		_("Bribing the unit costs %d gold.\n"
+//		("Bribing the unit costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
 //		punit.bribe_cost, game.player_ptr.economic.gold);
 //    popup_message_dialog(top_vbox, "Traitors Demand Too Much!", buf,
@@ -957,7 +957,7 @@ public class Dialogs{
 //		       "_No", null, 0, 0);
 //  } else {
 //    buf = util.my_snprintf(
-//		_("Inciting a revolt costs %d gold.\n"
+//		("Inciting a revolt costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
 //		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
 //   popup_message_dialog(top_vbox, "Traitors Demand Too Much!", buf,

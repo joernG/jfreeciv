@@ -564,8 +564,8 @@ public class Menu{
 //          Item 5: The item type, used to define what kind of an item it is.
 //                  Here are the possible values:
 //
-//                  null               . "<Item>"
-//                  ""                 . "<Item>"
+//                  null               . "<Item>" +
+//                  ""                 . "<Item>" +
 //                  "<Title>"          . create a title item
 //                  "<Item>"           . create a simple item
 //                  "<CheckItem>"      . create a check item

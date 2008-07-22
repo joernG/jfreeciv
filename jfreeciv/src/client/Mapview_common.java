@@ -817,7 +817,7 @@ public class Mapview_common{
 //
 //      if (!reported) {
 //	util.freelog(Log.LOG_ERROR,
-//		_("Paths longer than 99 turns are not supported.\n"
+//		("Paths longer than 99 turns are not supported.\n" +
 //		  "Report this bug to bugs@freeciv.org."));
 //	reported = true;
 //      }
@@ -1232,7 +1232,7 @@ public class Mapview_common{
 //    }
 //  }
 //
-//  assert(0);
+//  assert(0!=1);
 //  return false;
 //}
 //
@@ -1794,7 +1794,7 @@ public class Mapview_common{
 //	  /* This shouldn't happen unless the server gives us invalid
 //	   * data.  To avoid disaster we need to break out of the
 //	   * switch and the enclosing for loop. */
-//	  assert(0);
+//	  assert(0!=1);
 //	  i = punit.orders.length;
 //	}
 //	break;
