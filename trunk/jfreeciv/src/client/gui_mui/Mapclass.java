@@ -130,7 +130,7 @@ public class Mapclass{
 //
 //      if (get_tile_infrastructure_set(ptile))
 //      {
-//	sz_strlcpy(s, "Infrastructure: ");
+//	s = String.format( "Infrastructure: ");
 //	sz_strlcat(s, map_get_infrastructure_text(ptile.special));
 //	text_obj = TextObject, MUIA_Text_Contents, s, End;
 //	DoMethod(group, OM_ADDMEMBER, text_obj);
@@ -1706,24 +1706,24 @@ public class Mapclass{
 //		  if (map_has_special(punit.tile, S_IRRIGATION) &&
 //		      player_knows_techs_with_flag(game.player_ptr, TF_FARMLAND))
 //		  {
-//		    sz_strlcpy(irrtext, "Build Farmland");
+//		    irrtext = String.format( "Build Farmland");
 //		  }
 //		  else
-//		    sz_strlcpy(irrtext, "Build Irrigation");
+//		    irrtext = String.format( "Build Irrigation");
 //		  Map_InsertCommand(&list, irrtext, PACK_USERDATA(punit, MENU_ORDER_IRRIGATE));
 //		}
 //
 //		if (can_unit_do_activity(punit, ACTIVITY_MINE))
 //		{
 //		  static char mintext[64];
-//		  sz_strlcpy(mintext, "Build Mine");
+//		  mintext = String.format( "Build Mine");
 //		  Map_InsertCommand(&list, mintext, PACK_USERDATA(punit, MENU_ORDER_MINE));
 //		}
 //
 //		if (can_unit_do_activity(punit, ACTIVITY_TRANSFORM))
 //		{
 //		  static char transtext[64];
-//		  sz_strlcpy(transtext, "Transform Terrain");
+//		  transtext = String.format( "Transform Terrain");
 //		  Map_InsertCommand(&list, transtext, PACK_USERDATA(punit, MENU_ORDER_TRANSFORM));
 //		}
 //

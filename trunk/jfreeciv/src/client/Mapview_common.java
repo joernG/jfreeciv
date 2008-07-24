@@ -2142,22 +2142,22 @@ public class Mapview_common{
 //    unit_type punit_type =
 //		get_unit_type(pcity.currently_building);
 //    if (turns < 999) {
-//      my_snprintf(buffer, buffer_len, "%s %d",
+//      buffer = String.format "%s %d",
 //                  punit_type.name, turns);
 //    } else {
-//      my_snprintf(buffer, buffer_len, "%s -",
+//      buffer = String.format "%s -",
 //                  punit_type.name);
 //    }
 //  } else {
 //    impr_type pimprovement_type =
 //		get_improvement_type(pcity.currently_building);
 //    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
-//      my_snprintf(buffer, buffer_len, "%s", pimprovement_type.name);
+//      buffer = String.format "%s", pimprovement_type.name);
 //    } else if (turns < 999) {
-//      my_snprintf(buffer, buffer_len, "%s %d",
+//      buffer = String.format "%s %d",
 //		  pimprovement_type.name, turns);
 //    } else {
-//      my_snprintf(buffer, buffer_len, "%s -",
+//      buffer = String.format "%s -",
 //                  pimprovement_type.name);
 //    }
 //  }
@@ -2225,19 +2225,19 @@ public class Mapview_common{
 //    return;
 //  }
 //
-//  my_snprintf(name_buffer, name_buffer_len, pcity.name);
+//  name_buffer = String.format pcity.name);
 //
 //  if (draw_city_growth && pcity.owner == game.player_idx) {
 //    int turns = city_turns_to_grow(pcity);
 //
 //    if (turns == 0) {
-//      my_snprintf(growth_buffer, growth_buffer_len, "X");
+//      growth_buffer = String.format "X");
 //    } else if (turns == FC_INFINITY) {
-//      my_snprintf(growth_buffer, growth_buffer_len, "-");
+//      growth_buffer = String.format "-");
 //    } else {
 //      /* Negative turns means we're shrinking, but that's handled
 //         down below. */
-//      my_snprintf(growth_buffer, growth_buffer_len, "%d", abs(turns));
+//      growth_buffer = String.format "%d", abs(turns));
 //    }
 //
 //    if (turns <= 0) {

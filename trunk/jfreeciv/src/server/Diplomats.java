@@ -132,7 +132,7 @@ public class Diplomats{
 //
 //  - It costs some minimal movement to investigate a city.
 //
-//  - Diplomats die after investigation.
+//  - Diplomats util.die after investigation.
 //  - Spies always survive.  There is no risk.
 //****************************************************************************/
 //void diplomat_investigate(player pplayer, unit pdiplomat,
@@ -1166,7 +1166,7 @@ public class Diplomats{
 //         always kills the attacker. */
 //      if (diplomat_success_vs_defender(pdiplomat, punit, ptile) 
 //          && !unit_flag(punit, F_SUPERSPY)) {
-//	/* Defending Spy/Diplomat dies. */
+//	/* Defending Spy/Diplomat util.dies. */
 //
 //	notify_player_ex(cplayer, ptile, E_MY_DIPLOMAT_FAILED,
 //			 ("Game: Your %s has been eliminated defending %s" +
@@ -1184,7 +1184,7 @@ public class Diplomats{
 //	/* Check to see if defending unit became more experienced */
 //	boolean vet = maybe_make_veteran(punit);
 //	
-//	/* Attacking Spy/Diplomat dies. */
+//	/* Attacking Spy/Diplomat util.dies. */
 //
 //	notify_player_ex(pplayer, ptile, E_MY_DIPLOMAT_FAILED,
 //			 ("Game: Your %s was eliminated" +
@@ -1238,7 +1238,7 @@ public class Diplomats{
 //
 //  Spies have a game.diplchance specified chance of survival (better 
 //  if veteran):
-//    - Diplomats always die.
+//    - Diplomats always util.die.
 //    - Escapes to home city.
 //    - Escapee may become a veteran.
 //**************************************************************************/
@@ -1321,7 +1321,7 @@ public class Diplomats{
 //    victim_tile = victim_unit.tile;
 //    victim_player = victim_unit.unit_owner();
 //  } else {
-//    die("No victim in call to maybe_cause_incident()");
+//    util.die("No victim in call to maybe_cause_incident()");
 //  }
 //
 //  if (!pplayers_at_war(offender, victim_player) &&
@@ -1371,12 +1371,12 @@ public class Diplomats{
 //    case DIPLOMAT_SABOTAGE:
 //      /* You can only do these when you are at war, so we should never
 // 	 get inside this "if" */
-//      die("Bug in maybe_cause_incident()");
+//      util.die("Bug in maybe_cause_incident()");
 //    }
 //    switch (ds) {
 //    case diplstate_type.DS_WAR:
 //    case diplstate_type.DS_NO_CONTACT:
-//      util.freelog(LOG_VERBOSE,"Trying to cause an incident between players at war");
+//      util.freelog(Log.LOG_VERBOSE,"Trying to cause an incident between players at war");
 //      punishment = 0;
 //      break;
 //    case DS_NEUTRAL:

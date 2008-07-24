@@ -126,7 +126,7 @@ public class Log{
 //#ifdef DEBUG
 //  final int max_level = LOG_DEBUG;
 //#else
-//  final int max_level = LOG_VERBOSE;
+//  final int max_level = Log.LOG_VERBOSE;
 //#endif
 //
 //  /* re-entrant: */
@@ -247,7 +247,7 @@ public class Log{
 //			log_filename = null;
 //		}
 //		log_callback = callback;
-//		util.freelog(LOG_VERBOSE, "log started");
+//		util.freelog(Log.LOG_VERBOSE, "log started");
 //		util.freelog(LOG_DEBUG, "LOG_DEBUG test");
 	}
 

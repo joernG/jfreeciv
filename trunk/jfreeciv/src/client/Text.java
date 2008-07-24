@@ -79,7 +79,7 @@ public class Text{
 //  static char buf[GROW_TMP_SIZE];
 //
 //  if (my_vsnprintf(buf, sizeof(buf), format, ap) == -1) {
-//    die("Formatted string bigger than %lu", (unsigned long)sizeof(buf));
+//    util.die("Formatted string bigger than %lu", (unsigned long)sizeof(buf));
 //  }
 //
 //  new_len = strlen(*buffer) + buf.length() + 1;
@@ -89,7 +89,7 @@ public class Text{
 //     * overhead adds up quickly. */
 //    size_t new_size = MAX(new_len, *buffer_size * 2);
 //
-//    util.freelog(LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
+//    util.freelog(Log.LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
 //	    (unsigned long)*buffer_size, (unsigned long)new_size, buf);
 //
 //    *buffer_size = new_size;

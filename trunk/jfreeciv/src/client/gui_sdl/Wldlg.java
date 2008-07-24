@@ -222,7 +222,7 @@ public class Wldlg{
 //{
 //  if(pWidget.string16.text) {
 //    char *pText = convert_to_chars(pWidget.string16.text);
-//    my_snprintf(pEditor.pCopy_WorkList.name, MAX_LEN_NAME, "%s", pText);
+//    pEditor.pCopy_WorkList.name = String.format "%s", pText);
 //    FREE(pText);
 //  }
 //  return -1;

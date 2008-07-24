@@ -227,15 +227,15 @@ public class Plrdlg{
 //      if(game.players[i].is_alive) {
 //	if(game.players[i].is_connected) {
 //	  if(game.players[i].turn_done)
-//	    sz_strlcpy(statebuf, "done");
+//	    statebuf = String.format( "done");
 //	  else
-//	    sz_strlcpy(statebuf, "moving");
+//	    statebuf = String.format( "moving");
 //	}
 //	else
 //	  statebuf[0]='\0';
 //      }
 //      else
-//	sz_strlcpy(statebuf, "R.I.P");
+//	statebuf = String.format( "R.I.P");
 //
 //      /* text for name, plus AI marker */       
 //      if(game.players[i].ai.control)

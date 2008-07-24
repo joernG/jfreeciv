@@ -272,7 +272,7 @@ public class Helpdlg{
 //  
 //  if(tech==A_LAST ||
 //     (advances[tech].req[0]==A_LAST && advances[tech].req[1]==A_LAST))  {
-//    sz_strlcpy(label, "Removed");
+//    label = String.format( "Removed");
 //    bg=TREE_NODE_REMOVED_TECH_BG;
 //    l=XtVaCreateManagedWidget("treenode", commandWidgetClass, 
 //			      tree,

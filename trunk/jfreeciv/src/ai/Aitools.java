@@ -104,7 +104,7 @@ public class Aitools{
 //  This is a function to execute paths returned by the path-finding engine.
 //
 //  Brings our bodyguard along.
-//  Returns false only if died.
+//  Returns false only if util.died.
 //*************************************************************************/
 //boolean ai_unit_execute_path(unit punit, pf_path path)
 //{
@@ -247,7 +247,7 @@ public class Aitools{
 //    UNIT_LOG(LOGLEVEL_GOTHERE, punit, "Walking to (%d,%d)",
 //	     dest_tile.x, dest_tile.y);
 //    if (!ai_unit_goto(punit, dest_tile)) {
-//      /* died */
+//      /* util.died */
 //      return false;
 //    }
 //    /* liable to bump into someone that will kill us.  Should avoid? */
@@ -270,7 +270,7 @@ public class Aitools{
 //
 ///**************************************************************************
 //  Go to specified destination but do not disturb existing role or activity
-//  and do not clear the role's destination. Return false iff we died.
+//  and do not clear the role's destination. Return false iff we util.died.
 //
 //  FIXME: add some logging functionality to replace GOTO_LOG()
 //**************************************************************************/
@@ -457,7 +457,7 @@ public class Aitools{
 //  if (punit.ai.bodyguard > BODYGUARD_NONE) {
 //    if ((guard = find_unit_by_id(punit.ai.bodyguard))) {
 //      if (guard.ai.charge != punit.id) {
-//        BODYGUARD_LOG(LOG_VERBOSE, guard, "my charge didn't know about me!");
+//        BODYGUARD_LOG(Log.LOG_VERBOSE, guard, "my charge didn't know about me!");
 //      }
 //      guard.ai.charge = punit.id; /* ensure sanity */
 //      return true;
@@ -599,19 +599,19 @@ public class Aitools{
 //
 ///**************************************************************************
 //  Calculate the value of the target unit including the other units which
-//  will die in a successful attack
+//  will util.die in a successful attack
 //**************************************************************************/
 //int stack_cost(unit pdef)
 //{
 //  int victim_cost = 0;
 //
 //  if (is_stack_vulnerable(pdef.tile)) {
-//    /* lotsa people die */
+//    /* lotsa people util.die */
 //    for (unit aunit : pdef.tile.units.data) {
 //      victim_cost += unit_build_shield_cost(aunit.type);
 //    } }
 //  } else {
-//    /* Only one unit dies if attack is successful */
+//    /* Only one unit util.dies if attack is successful */
 //    victim_cost = unit_build_shield_cost(pdef.type);
 //  }
 //  

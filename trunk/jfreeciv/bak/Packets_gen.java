@@ -42,7 +42,7 @@ public class Packets_gen{
 //
 //void delta_stats_reset() {}
 //
-//void *get_packet_from_connection_helper(struct connection *pc,
+//void *get_packet_from_connection_helper(Connection pc,
 //    enum packet_type type)
 //{
 //  switch(type) {
@@ -391,7 +391,7 @@ public class Packets_gen{
 //
 //  default:
 //    util.freelog(Log.LOG_ERROR, "unknown packet type %d received from %s",
-//	    type, conn_description(pc));
+//	    type, pc.conn_description());
 //    remove_packet_from_buffer(pc->buffer);
 //    return null;
 //  };
@@ -748,20 +748,20 @@ public class Packets_gen{
 //  }
 //}
 //
-//static struct packet_processing_started *receive_packet_processing_started_100(struct connection *pc, enum packet_type type)
+//static struct packet_processing_started *receive_packet_processing_started_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_processing_started, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_processing_started_100(struct connection *pc)
+//static int send_packet_processing_started_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_PROCESSING_STARTED);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_processing_started(struct connection *pc)
+//static void ensure_valid_variant_packet_processing_started(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -773,17 +773,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PROCESSING_STARTED] = variant;
 //}
 //
-//struct packet_processing_started *receive_packet_processing_started(struct connection *pc, enum packet_type type)
+//struct packet_processing_started *receive_packet_processing_started(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -794,16 +794,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PROCESSING_STARTED]) {
 //    case 100: return receive_packet_processing_started_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_processing_started(struct connection *pc)
+//int send_packet_processing_started(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -814,24 +814,24 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PROCESSING_STARTED]) {
 //    case 100: return send_packet_processing_started_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//static struct packet_processing_finished *receive_packet_processing_finished_100(struct connection *pc, enum packet_type type)
+//static struct packet_processing_finished *receive_packet_processing_finished_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_processing_finished, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_processing_finished_100(struct connection *pc)
+//static int send_packet_processing_finished_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_PROCESSING_FINISHED);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_processing_finished(struct connection *pc)
+//static void ensure_valid_variant_packet_processing_finished(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -843,17 +843,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PROCESSING_FINISHED] = variant;
 //}
 //
-//struct packet_processing_finished *receive_packet_processing_finished(struct connection *pc, enum packet_type type)
+//struct packet_processing_finished *receive_packet_processing_finished(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -864,16 +864,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PROCESSING_FINISHED]) {
 //    case 100: return receive_packet_processing_finished_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_processing_finished(struct connection *pc)
+//int send_packet_processing_finished(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -884,24 +884,24 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PROCESSING_FINISHED]) {
 //    case 100: return send_packet_processing_finished_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//static struct packet_freeze_hint *receive_packet_freeze_hint_100(struct connection *pc, enum packet_type type)
+//static struct packet_freeze_hint *receive_packet_freeze_hint_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_freeze_hint, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_freeze_hint_100(struct connection *pc)
+//static int send_packet_freeze_hint_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_FREEZE_HINT);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_freeze_hint(struct connection *pc)
+//static void ensure_valid_variant_packet_freeze_hint(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -913,17 +913,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_FREEZE_HINT] = variant;
 //}
 //
-//struct packet_freeze_hint *receive_packet_freeze_hint(struct connection *pc, enum packet_type type)
+//struct packet_freeze_hint *receive_packet_freeze_hint(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -934,16 +934,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_FREEZE_HINT]) {
 //    case 100: return receive_packet_freeze_hint_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_freeze_hint(struct connection *pc)
+//int send_packet_freeze_hint(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -954,7 +954,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_FREEZE_HINT]) {
 //    case 100: return send_packet_freeze_hint_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -965,20 +965,20 @@ public class Packets_gen{
 //  } }
 //}
 //
-//static struct packet_thaw_hint *receive_packet_thaw_hint_100(struct connection *pc, enum packet_type type)
+//static struct packet_thaw_hint *receive_packet_thaw_hint_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_thaw_hint, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_thaw_hint_100(struct connection *pc)
+//static int send_packet_thaw_hint_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_THAW_HINT);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_thaw_hint(struct connection *pc)
+//static void ensure_valid_variant_packet_thaw_hint(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -990,17 +990,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_THAW_HINT] = variant;
 //}
 //
-//struct packet_thaw_hint *receive_packet_thaw_hint(struct connection *pc, enum packet_type type)
+//struct packet_thaw_hint *receive_packet_thaw_hint(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1011,16 +1011,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_THAW_HINT]) {
 //    case 100: return receive_packet_thaw_hint_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_thaw_hint(struct connection *pc)
+//int send_packet_thaw_hint(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1031,7 +1031,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_THAW_HINT]) {
 //    case 100: return send_packet_thaw_hint_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -1042,7 +1042,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//static struct packet_server_join_req *receive_packet_server_join_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_server_join_req *receive_packet_server_join_req_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_server_join_req, real_packet);
 //  dio_get_string(&din, real_packet->username, sizeof(real_packet->username));
@@ -1070,7 +1070,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_server_join_req_100(struct connection *pc, final struct packet_server_join_req *packet)
+//static int send_packet_server_join_req_100(Connection pc, final struct packet_server_join_req *packet)
 //{
 //  final struct packet_server_join_req *real_packet = packet;
 //  SEND_PACKET_START(PACKET_SERVER_JOIN_REQ);
@@ -1085,7 +1085,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_server_join_req(struct connection *pc)
+//static void ensure_valid_variant_packet_server_join_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -1097,17 +1097,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SERVER_JOIN_REQ] = variant;
 //}
 //
-//struct packet_server_join_req *receive_packet_server_join_req(struct connection *pc, enum packet_type type)
+//struct packet_server_join_req *receive_packet_server_join_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1118,16 +1118,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SERVER_JOIN_REQ]) {
 //    case 100: return receive_packet_server_join_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_server_join_req(struct connection *pc, final struct packet_server_join_req *packet)
+//int send_packet_server_join_req(Connection pc, final struct packet_server_join_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1138,11 +1138,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SERVER_JOIN_REQ]) {
 //    case 100: return send_packet_server_join_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_server_join_req(struct connection *pc, final String username, final String capability, final String version_label, int major_version, int minor_version, int patch_version)
+//int dsend_packet_server_join_req(Connection pc, final String username, final String capability, final String version_label, int major_version, int minor_version, int patch_version)
 //{
 //  struct packet_server_join_req packet, *real_packet = &packet;
 //
@@ -1156,7 +1156,7 @@ public class Packets_gen{
 //  return send_packet_server_join_req(pc, real_packet);
 //}
 //
-//static struct packet_server_join_reply *receive_packet_server_join_reply_100(struct connection *pc, enum packet_type type)
+//static struct packet_server_join_reply *receive_packet_server_join_reply_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_server_join_reply, real_packet);
 //  dio_get_bool8(&din, &real_packet->you_can_join);
@@ -1173,7 +1173,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_server_join_reply_100(struct connection *pc, final struct packet_server_join_reply *packet)
+//static int send_packet_server_join_reply_100(Connection pc, final struct packet_server_join_reply *packet)
 //{
 //  final struct packet_server_join_reply *real_packet = packet;
 //  SEND_PACKET_START(PACKET_SERVER_JOIN_REPLY);
@@ -1187,7 +1187,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_server_join_reply(struct connection *pc)
+//static void ensure_valid_variant_packet_server_join_reply(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -1199,17 +1199,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SERVER_JOIN_REPLY] = variant;
 //}
 //
-//struct packet_server_join_reply *receive_packet_server_join_reply(struct connection *pc, enum packet_type type)
+//struct packet_server_join_reply *receive_packet_server_join_reply(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1220,16 +1220,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SERVER_JOIN_REPLY]) {
 //    case 100: return receive_packet_server_join_reply_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_server_join_reply(struct connection *pc, final struct packet_server_join_reply *packet)
+//int send_packet_server_join_reply(Connection pc, final struct packet_server_join_reply *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1240,7 +1240,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SERVER_JOIN_REPLY]) {
 //    case 100: return send_packet_server_join_reply_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -1250,7 +1250,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_authentication_req_100_fields, 2);
 //
-//static struct packet_authentication_req *receive_packet_authentication_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_authentication_req *receive_packet_authentication_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_authentication_req_100_fields fields;
 //  struct packet_authentication_req *old;
@@ -1293,86 +1293,13 @@ public class Packets_gen{
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
-//
-//static int send_packet_authentication_req_100(struct connection *pc, final struct packet_authentication_req *packet)
-//{
-//  final struct packet_authentication_req *real_packet = packet;
-//  packet_authentication_req_100_fields fields;
-//  struct packet_authentication_req *old, *clone;
-//  boolean differ, old_from_hash, force_send_of_unchanged = true;
-//  struct hash_table **hash = &pc->phs.sent[PACKET_AUTHENTICATION_REQ];
-//  int different = 0;
-//  SEND_PACKET_START(PACKET_AUTHENTICATION_REQ);
-//
-//  if (!*hash) {
-//    *hash = hash_new(hash_packet_authentication_req_100, cmp_packet_authentication_req_100);
-//  }
-//  BV_CLR_ALL(fields);
-//
-//  old = hash_lookup_data(*hash, real_packet);
-//  old_from_hash = (old != null);
-//  if (!old) {
-//    old = fc_malloc(sizeof(*old));
-//    memset(old, 0, sizeof(*old));
-//    force_send_of_unchanged = true;
-//  }
-//
-//  differ = (old->type != real_packet->type);
-//  if(differ) {different++;}
-//  if(differ) {BV_SET(fields, 0);}
-//
-//  differ = (strcmp(old->message, real_packet->message) != 0);
-//  if(differ) {different++;}
-//  if(differ) {BV_SET(fields, 1);}
-//
-//  if (different == 0 && !force_send_of_unchanged) {
-//    return 0;
-//  }
-//
-//  DIO_BV_PUT(&dout, fields);
-//
-//  if (BV_ISSET(fields, 0)) {
-//    dio_put_uint8(&dout, real_packet->type);
-//  }
-//  if (BV_ISSET(fields, 1)) {
-//    dio_put_string(&dout, real_packet->message);
-//  }
-//
-//
-//  if (old_from_hash) {
-//    hash_delete_entry(*hash, old);
-//  }
-//
-//  clone = old;
-//
-//  *clone = *real_packet;
-//  hash_insert(*hash, clone, clone);
-//  SEND_PACKET_END;
-//}
-//
-//static void ensure_valid_variant_packet_authentication_req(struct connection *pc)
-//{
-//  int variant = -1;
-//
-//  if(pc->phs.variant[PACKET_AUTHENTICATION_REQ] != -1) {
-//    return;
-//  }
-//
-//  if(false) {
-//  } else if(true) {
-//    variant = 100;
-//  } else {
-//    die("unknown variant");
-//  }
-//  pc->phs.variant[PACKET_AUTHENTICATION_REQ] = variant;
-//}
-//
-//struct packet_authentication_req *receive_packet_authentication_req(struct connection *pc, enum packet_type type)
+
+//struct packet_authentication_req *receive_packet_authentication_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1383,38 +1310,8 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_AUTHENTICATION_REQ]) {
 //    case 100: return receive_packet_authentication_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
-//}
-//
-//int send_packet_authentication_req(struct connection *pc, final struct packet_authentication_req *packet)
-//{
-//  if(!pc->used) {
-//    util.freelog(Log.LOG_ERROR,
-//	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
-//    return -1;
-//  }
-//  assert(pc->phs.variant != null);
-//  if(!is_server) {
-//    util.freelog(Log.LOG_ERROR, "Sending packet_authentication_req from the client.");
-//  }
-//  ensure_valid_variant_packet_authentication_req(pc);
-//
-//  switch(pc->phs.variant[PACKET_AUTHENTICATION_REQ]) {
-//    case 100: return send_packet_authentication_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
-//  }
-//}
-//
-//int dsend_packet_authentication_req(struct connection *pc, enum authentication_type type, final String message)
-//{
-//  struct packet_authentication_req packet, *real_packet = &packet;
-//
-//  real_packet->type = type;
-//  sz_strlcpy(real_packet->message, message);
-//  
-//  return send_packet_authentication_req(pc, real_packet);
 //}
 //
 //#define hash_packet_authentication_reply_100 hash_final
@@ -1423,7 +1320,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_authentication_reply_100_fields, 1);
 //
-//static struct packet_authentication_reply *receive_packet_authentication_reply_100(struct connection *pc, enum packet_type type)
+//static struct packet_authentication_reply *receive_packet_authentication_reply_100(Connection pc, enum packet_type type)
 //{
 //  packet_authentication_reply_100_fields fields;
 //  struct packet_authentication_reply *old;
@@ -1459,7 +1356,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_authentication_reply_100(struct connection *pc, final struct packet_authentication_reply *packet)
+//static int send_packet_authentication_reply_100(Connection pc, final struct packet_authentication_reply *packet)
 //{
 //  final struct packet_authentication_reply *real_packet = packet;
 //  packet_authentication_reply_100_fields fields;
@@ -1508,7 +1405,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_authentication_reply(struct connection *pc)
+//static void ensure_valid_variant_packet_authentication_reply(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -1520,17 +1417,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_AUTHENTICATION_REPLY] = variant;
 //}
 //
-//struct packet_authentication_reply *receive_packet_authentication_reply(struct connection *pc, enum packet_type type)
+//struct packet_authentication_reply *receive_packet_authentication_reply(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1541,16 +1438,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_AUTHENTICATION_REPLY]) {
 //    case 100: return receive_packet_authentication_reply_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_authentication_reply(struct connection *pc, final struct packet_authentication_reply *packet)
+//int send_packet_authentication_reply(Connection pc, final struct packet_authentication_reply *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1561,24 +1458,24 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_AUTHENTICATION_REPLY]) {
 //    case 100: return send_packet_authentication_reply_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//static struct packet_server_shutdown *receive_packet_server_shutdown_100(struct connection *pc, enum packet_type type)
+//static struct packet_server_shutdown *receive_packet_server_shutdown_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_server_shutdown, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_server_shutdown_100(struct connection *pc)
+//static int send_packet_server_shutdown_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_SERVER_SHUTDOWN);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_server_shutdown(struct connection *pc)
+//static void ensure_valid_variant_packet_server_shutdown(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -1590,17 +1487,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SERVER_SHUTDOWN] = variant;
 //}
 //
-//struct packet_server_shutdown *receive_packet_server_shutdown(struct connection *pc, enum packet_type type)
+//struct packet_server_shutdown *receive_packet_server_shutdown(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1611,16 +1508,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SERVER_SHUTDOWN]) {
 //    case 100: return receive_packet_server_shutdown_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_server_shutdown(struct connection *pc)
+//int send_packet_server_shutdown(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1631,7 +1528,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SERVER_SHUTDOWN]) {
 //    case 100: return send_packet_server_shutdown_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -1648,7 +1545,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_nation_unavailable_100_fields, 1);
 //
-//static struct packet_nation_unavailable *receive_packet_nation_unavailable_100(struct connection *pc, enum packet_type type)
+//static struct packet_nation_unavailable *receive_packet_nation_unavailable_100(Connection pc, enum packet_type type)
 //{
 //  packet_nation_unavailable_100_fields fields;
 //  struct packet_nation_unavailable *old;
@@ -1689,7 +1586,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_nation_unavailable_100(struct connection *pc, final struct packet_nation_unavailable *packet)
+//static int send_packet_nation_unavailable_100(Connection pc, final struct packet_nation_unavailable *packet)
 //{
 //  final struct packet_nation_unavailable *real_packet = packet;
 //  packet_nation_unavailable_100_fields fields;
@@ -1738,7 +1635,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_nation_unavailable(struct connection *pc)
+//static void ensure_valid_variant_packet_nation_unavailable(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -1750,17 +1647,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_NATION_UNAVAILABLE] = variant;
 //}
 //
-//struct packet_nation_unavailable *receive_packet_nation_unavailable(struct connection *pc, enum packet_type type)
+//struct packet_nation_unavailable *receive_packet_nation_unavailable(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1771,16 +1668,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NATION_UNAVAILABLE]) {
 //    case 100: return receive_packet_nation_unavailable_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_nation_unavailable(struct connection *pc, final struct packet_nation_unavailable *packet)
+//int send_packet_nation_unavailable(Connection pc, final struct packet_nation_unavailable *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1791,7 +1688,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NATION_UNAVAILABLE]) {
 //    case 100: return send_packet_nation_unavailable_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -1802,20 +1699,20 @@ public class Packets_gen{
 //  } }
 //}
 //
-//static struct packet_select_races *receive_packet_select_races_100(struct connection *pc, enum packet_type type)
+//static struct packet_select_races *receive_packet_select_races_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_select_races, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_select_races_100(struct connection *pc)
+//static int send_packet_select_races_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_SELECT_RACES);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_select_races(struct connection *pc)
+//static void ensure_valid_variant_packet_select_races(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -1827,17 +1724,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SELECT_RACES] = variant;
 //}
 //
-//struct packet_select_races *receive_packet_select_races(struct connection *pc, enum packet_type type)
+//struct packet_select_races *receive_packet_select_races(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1848,16 +1745,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SELECT_RACES]) {
 //    case 100: return receive_packet_select_races_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_select_races(struct connection *pc)
+//int send_packet_select_races(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -1868,7 +1765,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SELECT_RACES]) {
 //    case 100: return send_packet_select_races_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -1885,7 +1782,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_nation_select_req_100_fields, 4);
 //
-//static struct packet_nation_select_req *receive_packet_nation_select_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_nation_select_req *receive_packet_nation_select_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_nation_select_req_100_fields fields;
 //  struct packet_nation_select_req *old;
@@ -1938,7 +1835,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_nation_select_req_100(struct connection *pc, final struct packet_nation_select_req *packet)
+//static int send_packet_nation_select_req_100(Connection pc, final struct packet_nation_select_req *packet)
 //{
 //  final struct packet_nation_select_req *real_packet = packet;
 //  packet_nation_select_req_100_fields fields;
@@ -2006,7 +1903,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_nation_select_req(struct connection *pc)
+//static void ensure_valid_variant_packet_nation_select_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -2018,17 +1915,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_NATION_SELECT_REQ] = variant;
 //}
 //
-//struct packet_nation_select_req *receive_packet_nation_select_req(struct connection *pc, enum packet_type type)
+//struct packet_nation_select_req *receive_packet_nation_select_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -2039,16 +1936,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NATION_SELECT_REQ]) {
 //    case 100: return receive_packet_nation_select_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_nation_select_req(struct connection *pc, final struct packet_nation_select_req *packet)
+//int send_packet_nation_select_req(Connection pc, final struct packet_nation_select_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -2059,11 +1956,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NATION_SELECT_REQ]) {
 //    case 100: return send_packet_nation_select_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_nation_select_req(struct connection *pc, int nation_no, boolean is_male, final String name, int city_style)
+//int dsend_packet_nation_select_req(Connection pc, int nation_no, boolean is_male, final String name, int city_style)
 //{
 //  struct packet_nation_select_req packet, *real_packet = &packet;
 //
@@ -2075,20 +1972,20 @@ public class Packets_gen{
 //  return send_packet_nation_select_req(pc, real_packet);
 //}
 //
-//static struct packet_nation_select_ok *receive_packet_nation_select_ok_100(struct connection *pc, enum packet_type type)
+//static struct packet_nation_select_ok *receive_packet_nation_select_ok_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_nation_select_ok, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_nation_select_ok_100(struct connection *pc)
+//static int send_packet_nation_select_ok_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_NATION_SELECT_OK);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_nation_select_ok(struct connection *pc)
+//static void ensure_valid_variant_packet_nation_select_ok(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -2100,17 +1997,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_NATION_SELECT_OK] = variant;
 //}
 //
-//struct packet_nation_select_ok *receive_packet_nation_select_ok(struct connection *pc, enum packet_type type)
+//struct packet_nation_select_ok *receive_packet_nation_select_ok(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -2121,16 +2018,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NATION_SELECT_OK]) {
 //    case 100: return receive_packet_nation_select_ok_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_nation_select_ok(struct connection *pc)
+//int send_packet_nation_select_ok(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -2141,7 +2038,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NATION_SELECT_OK]) {
 //    case 100: return send_packet_nation_select_ok_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -2158,7 +2055,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_game_state_100_fields, 1);
 //
-//static struct packet_game_state *receive_packet_game_state_100(struct connection *pc, enum packet_type type)
+//static struct packet_game_state *receive_packet_game_state_100(Connection pc, enum packet_type type)
 //{
 //  packet_game_state_100_fields fields;
 //  struct packet_game_state *old;
@@ -2200,7 +2097,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_game_state_100(struct connection *pc, final struct packet_game_state *packet)
+//static int send_packet_game_state_100(Connection pc, final struct packet_game_state *packet)
 //{
 //  final struct packet_game_state *real_packet = packet;
 //  packet_game_state_100_fields fields;
@@ -2250,7 +2147,7 @@ public class Packets_gen{
 //SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_game_state(struct connection *pc)
+//static void ensure_valid_variant_packet_game_state(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -2262,17 +2159,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_GAME_STATE] = variant;
 //}
 //
-//struct packet_game_state *receive_packet_game_state(struct connection *pc, enum packet_type type)
+//struct packet_game_state *receive_packet_game_state(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -2283,16 +2180,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_GAME_STATE]) {
 //    case 100: return receive_packet_game_state_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_game_state(struct connection *pc, final struct packet_game_state *packet)
+//int send_packet_game_state(Connection pc, final struct packet_game_state *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -2303,7 +2200,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_GAME_STATE]) {
 //    case 100: return send_packet_game_state_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -2314,7 +2211,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_game_state(struct connection *pc, int value)
+//int dsend_packet_game_state(Connection pc, int value)
 //{
 //  struct packet_game_state packet, *real_packet = &packet;
 //
@@ -2338,7 +2235,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_endgame_report_100_fields, 15);
 //
-//static struct packet_endgame_report *receive_packet_endgame_report_100(struct connection *pc, enum packet_type type)
+//static struct packet_endgame_report *receive_packet_endgame_report_100(Connection pc, enum packet_type type)
 //{
 //  packet_endgame_report_100_fields fields;
 //  struct packet_endgame_report *old;
@@ -2645,7 +2542,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_endgame_report_100(struct connection *pc, final struct packet_endgame_report *packet)
+//static int send_packet_endgame_report_100(Connection pc, final struct packet_endgame_report *packet)
 //{
 //  final struct packet_endgame_report *real_packet = packet;
 //  packet_endgame_report_100_fields fields;
@@ -3058,7 +2955,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_endgame_report(struct connection *pc)
+//static void ensure_valid_variant_packet_endgame_report(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -3070,17 +2967,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_ENDGAME_REPORT] = variant;
 //}
 //
-//struct packet_endgame_report *receive_packet_endgame_report(struct connection *pc, enum packet_type type)
+//struct packet_endgame_report *receive_packet_endgame_report(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -3091,16 +2988,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_ENDGAME_REPORT]) {
 //    case 100: return receive_packet_endgame_report_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_endgame_report(struct connection *pc, final struct packet_endgame_report *packet)
+//int send_packet_endgame_report(Connection pc, final struct packet_endgame_report *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -3111,7 +3008,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_ENDGAME_REPORT]) {
 //    case 100: return send_packet_endgame_report_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -3150,7 +3047,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_tile_info_100_fields, 6);
 //
-//static struct packet_tile_info *receive_packet_tile_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_tile_info *receive_packet_tile_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_tile_info_100_fields fields;
 //  struct packet_tile_info *old;
@@ -3244,7 +3141,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_tile_info_100(struct connection *pc, final struct packet_tile_info *packet)
+//static int send_packet_tile_info_100(Connection pc, final struct packet_tile_info *packet)
 //{
 //  final struct packet_tile_info *real_packet = packet;
 //  packet_tile_info_100_fields fields;
@@ -3330,7 +3227,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_tile_info(struct connection *pc)
+//static void ensure_valid_variant_packet_tile_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -3342,17 +3239,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_TILE_INFO] = variant;
 //}
 //
-//struct packet_tile_info *receive_packet_tile_info(struct connection *pc, enum packet_type type)
+//struct packet_tile_info *receive_packet_tile_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -3363,16 +3260,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_TILE_INFO]) {
 //    case 100: return receive_packet_tile_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_tile_info(struct connection *pc, final struct packet_tile_info *packet)
+//int send_packet_tile_info(Connection pc, final struct packet_tile_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -3383,7 +3280,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_TILE_INFO]) {
 //    case 100: return send_packet_tile_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -3400,7 +3297,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_game_info_100_fields, 30);
 //
-//static struct packet_game_info *receive_packet_game_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_game_info *receive_packet_game_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_game_info_100_fields fields;
 //  struct packet_game_info *old;
@@ -3692,7 +3589,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_game_info_100(struct connection *pc, final struct packet_game_info *packet)
+//static int send_packet_game_info_100(Connection pc, final struct packet_game_info *packet)
 //{
 //  final struct packet_game_info *real_packet = packet;
 //  packet_game_info_100_fields fields;
@@ -3992,7 +3889,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_game_info(struct connection *pc)
+//static void ensure_valid_variant_packet_game_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -4004,17 +3901,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_GAME_INFO] = variant;
 //}
 //
-//struct packet_game_info *receive_packet_game_info(struct connection *pc, enum packet_type type)
+//struct packet_game_info *receive_packet_game_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4025,16 +3922,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_GAME_INFO]) {
 //    case 100: return receive_packet_game_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_game_info(struct connection *pc, final struct packet_game_info *packet)
+//int send_packet_game_info(Connection pc, final struct packet_game_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4045,7 +3942,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_GAME_INFO]) {
 //    case 100: return send_packet_game_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -4055,7 +3952,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_map_info_100_fields, 3);
 //
-//static struct packet_map_info *receive_packet_map_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_map_info *receive_packet_map_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_map_info_100_fields fields;
 //  struct packet_map_info *old;
@@ -4112,7 +4009,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_map_info_100(struct connection *pc, final struct packet_map_info *packet)
+//static int send_packet_map_info_100(Connection pc, final struct packet_map_info *packet)
 //{
 //  final struct packet_map_info *real_packet = packet;
 //  packet_map_info_100_fields fields;
@@ -4175,7 +4072,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_map_info(struct connection *pc)
+//static void ensure_valid_variant_packet_map_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -4187,17 +4084,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_MAP_INFO] = variant;
 //}
 //
-//struct packet_map_info *receive_packet_map_info(struct connection *pc, enum packet_type type)
+//struct packet_map_info *receive_packet_map_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4208,16 +4105,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_MAP_INFO]) {
 //    case 100: return receive_packet_map_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_map_info(struct connection *pc, final struct packet_map_info *packet)
+//int send_packet_map_info(Connection pc, final struct packet_map_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4228,7 +4125,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_MAP_INFO]) {
 //    case 100: return send_packet_map_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -4245,7 +4142,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_nuke_tile_info_100_fields, 2);
 //
-//static struct packet_nuke_tile_info *receive_packet_nuke_tile_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_nuke_tile_info *receive_packet_nuke_tile_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_nuke_tile_info_100_fields fields;
 //  struct packet_nuke_tile_info *old;
@@ -4294,7 +4191,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_nuke_tile_info_100(struct connection *pc, final struct packet_nuke_tile_info *packet)
+//static int send_packet_nuke_tile_info_100(Connection pc, final struct packet_nuke_tile_info *packet)
 //{
 //  final struct packet_nuke_tile_info *real_packet = packet;
 //  packet_nuke_tile_info_100_fields fields;
@@ -4350,7 +4247,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_nuke_tile_info(struct connection *pc)
+//static void ensure_valid_variant_packet_nuke_tile_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -4362,17 +4259,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_NUKE_TILE_INFO] = variant;
 //}
 //
-//struct packet_nuke_tile_info *receive_packet_nuke_tile_info(struct connection *pc, enum packet_type type)
+//struct packet_nuke_tile_info *receive_packet_nuke_tile_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4383,16 +4280,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NUKE_TILE_INFO]) {
 //    case 100: return receive_packet_nuke_tile_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_nuke_tile_info(struct connection *pc, final struct packet_nuke_tile_info *packet)
+//int send_packet_nuke_tile_info(Connection pc, final struct packet_nuke_tile_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4403,7 +4300,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NUKE_TILE_INFO]) {
 //    case 100: return send_packet_nuke_tile_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -4414,7 +4311,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_nuke_tile_info(struct connection *pc, int x, int y)
+//int dsend_packet_nuke_tile_info(Connection pc, int x, int y)
 //{
 //  struct packet_nuke_tile_info packet, *real_packet = &packet;
 //
@@ -4440,7 +4337,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_chat_msg_100_fields, 5);
 //
-//static struct packet_chat_msg *receive_packet_chat_msg_100(struct connection *pc, enum packet_type type)
+//static struct packet_chat_msg *receive_packet_chat_msg_100(Connection pc, enum packet_type type)
 //{
 //  packet_chat_msg_100_fields fields;
 //  struct packet_chat_msg *old;
@@ -4509,7 +4406,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_chat_msg_100(struct connection *pc, final struct packet_chat_msg *packet)
+//static int send_packet_chat_msg_100(Connection pc, final struct packet_chat_msg *packet)
 //{
 //  final struct packet_chat_msg *real_packet = packet;
 //  packet_chat_msg_100_fields fields;
@@ -4602,7 +4499,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_chat_msg(struct connection *pc)
+//static void ensure_valid_variant_packet_chat_msg(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -4614,17 +4511,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CHAT_MSG] = variant;
 //}
 //
-//struct packet_chat_msg *receive_packet_chat_msg(struct connection *pc, enum packet_type type)
+//struct packet_chat_msg *receive_packet_chat_msg(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4635,16 +4532,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CHAT_MSG]) {
 //    case 100: return receive_packet_chat_msg_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_chat_msg(struct connection *pc, final struct packet_chat_msg *packet)
+//int send_packet_chat_msg(Connection pc, final struct packet_chat_msg *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4655,7 +4552,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CHAT_MSG]) {
 //    case 100: return send_packet_chat_msg_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -4666,7 +4563,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_chat_msg(struct connection *pc, final String message, int x, int y, enum event_type event, int conn_id)
+//int dsend_packet_chat_msg(Connection pc, final String message, int x, int y, enum event_type event, int conn_id)
 //{
 //  struct packet_chat_msg packet, *real_packet = &packet;
 //
@@ -4698,7 +4595,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_chat_msg_req_100_fields, 1);
 //
-//static struct packet_chat_msg_req *receive_packet_chat_msg_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_chat_msg_req *receive_packet_chat_msg_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_chat_msg_req_100_fields fields;
 //  struct packet_chat_msg_req *old;
@@ -4734,7 +4631,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_chat_msg_req_100(struct connection *pc, final struct packet_chat_msg_req *packet)
+//static int send_packet_chat_msg_req_100(Connection pc, final struct packet_chat_msg_req *packet)
 //{
 //  final struct packet_chat_msg_req *real_packet = packet;
 //  packet_chat_msg_req_100_fields fields;
@@ -4783,7 +4680,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_chat_msg_req(struct connection *pc)
+//static void ensure_valid_variant_packet_chat_msg_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -4795,17 +4692,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CHAT_MSG_REQ] = variant;
 //}
 //
-//struct packet_chat_msg_req *receive_packet_chat_msg_req(struct connection *pc, enum packet_type type)
+//struct packet_chat_msg_req *receive_packet_chat_msg_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4816,16 +4713,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CHAT_MSG_REQ]) {
 //    case 100: return receive_packet_chat_msg_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_chat_msg_req(struct connection *pc, final struct packet_chat_msg_req *packet)
+//int send_packet_chat_msg_req(Connection pc, final struct packet_chat_msg_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4836,11 +4733,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CHAT_MSG_REQ]) {
 //    case 100: return send_packet_chat_msg_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_chat_msg_req(struct connection *pc, final String message)
+//int dsend_packet_chat_msg_req(Connection pc, final String message)
 //{
 //  struct packet_chat_msg_req packet, *real_packet = &packet;
 //
@@ -4855,7 +4752,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_remove_100_fields, 1);
 //
-//static struct packet_city_remove *receive_packet_city_remove_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_remove *receive_packet_city_remove_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_remove_100_fields fields;
 //  struct packet_city_remove *old;
@@ -4896,7 +4793,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_remove_100(struct connection *pc, final struct packet_city_remove *packet)
+//static int send_packet_city_remove_100(Connection pc, final struct packet_city_remove *packet)
 //{
 //  final struct packet_city_remove *real_packet = packet;
 //  packet_city_remove_100_fields fields;
@@ -4945,7 +4842,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_remove(struct connection *pc)
+//static void ensure_valid_variant_packet_city_remove(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -4957,17 +4854,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_REMOVE] = variant;
 //}
 //
-//struct packet_city_remove *receive_packet_city_remove(struct connection *pc, enum packet_type type)
+//struct packet_city_remove *receive_packet_city_remove(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4978,16 +4875,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_REMOVE]) {
 //    case 100: return receive_packet_city_remove_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_remove(struct connection *pc, final struct packet_city_remove *packet)
+//int send_packet_city_remove(Connection pc, final struct packet_city_remove *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -4998,7 +4895,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_REMOVE]) {
 //    case 100: return send_packet_city_remove_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -5009,7 +4906,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_city_remove(struct connection *pc, int city_id)
+//int dsend_packet_city_remove(Connection pc, int city_id)
 //{
 //  struct packet_city_remove packet, *real_packet = &packet;
 //
@@ -5050,7 +4947,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_info_100_fields, 45);
 //
-//static struct packet_city_info *receive_packet_city_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_info *receive_packet_city_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_info_100_fields fields;
 //  struct packet_city_info *old;
@@ -5445,7 +5342,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_info_100(struct connection *pc, final struct packet_city_info *packet)
+//static int send_packet_city_info_100(Connection pc, final struct packet_city_info *packet)
 //{
 //  final struct packet_city_info *real_packet = packet;
 //  packet_city_info_100_fields fields;
@@ -5941,7 +5838,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_info(struct connection *pc)
+//static void ensure_valid_variant_packet_city_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -5953,17 +5850,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_INFO] = variant;
 //}
 //
-//struct packet_city_info *receive_packet_city_info(struct connection *pc, enum packet_type type)
+//struct packet_city_info *receive_packet_city_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -5974,16 +5871,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_INFO]) {
 //    case 100: return receive_packet_city_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_info(struct connection *pc, final struct packet_city_info *packet)
+//int send_packet_city_info(Connection pc, final struct packet_city_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -5994,7 +5891,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_INFO]) {
 //    case 100: return send_packet_city_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -6028,7 +5925,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_short_info_100_fields, 11);
 //
-//static struct packet_city_short_info *receive_packet_city_short_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_short_info *receive_packet_city_short_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_short_info_100_fields fields;
 //  struct packet_city_short_info *old;
@@ -6119,7 +6016,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_short_info_100(struct connection *pc, final struct packet_city_short_info *packet)
+//static int send_packet_city_short_info_100(Connection pc, final struct packet_city_short_info *packet)
 //{
 //  final struct packet_city_short_info *real_packet = packet;
 //  packet_city_short_info_100_fields fields;
@@ -6229,7 +6126,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_short_info(struct connection *pc)
+//static void ensure_valid_variant_packet_city_short_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -6241,17 +6138,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_SHORT_INFO] = variant;
 //}
 //
-//struct packet_city_short_info *receive_packet_city_short_info(struct connection *pc, enum packet_type type)
+//struct packet_city_short_info *receive_packet_city_short_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6262,16 +6159,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_SHORT_INFO]) {
 //    case 100: return receive_packet_city_short_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_short_info(struct connection *pc, final struct packet_city_short_info *packet)
+//int send_packet_city_short_info(Connection pc, final struct packet_city_short_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6282,7 +6179,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_SHORT_INFO]) {
 //    case 100: return send_packet_city_short_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -6299,7 +6196,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_sell_100_fields, 2);
 //
-//static struct packet_city_sell *receive_packet_city_sell_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_sell *receive_packet_city_sell_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_sell_100_fields fields;
 //  struct packet_city_sell *old;
@@ -6348,7 +6245,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_sell_100(struct connection *pc, final struct packet_city_sell *packet)
+//static int send_packet_city_sell_100(Connection pc, final struct packet_city_sell *packet)
 //{
 //  final struct packet_city_sell *real_packet = packet;
 //  packet_city_sell_100_fields fields;
@@ -6404,7 +6301,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_sell(struct connection *pc)
+//static void ensure_valid_variant_packet_city_sell(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -6416,17 +6313,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_SELL] = variant;
 //}
 //
-//struct packet_city_sell *receive_packet_city_sell(struct connection *pc, enum packet_type type)
+//struct packet_city_sell *receive_packet_city_sell(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6437,16 +6334,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_SELL]) {
 //    case 100: return receive_packet_city_sell_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_sell(struct connection *pc, final struct packet_city_sell *packet)
+//int send_packet_city_sell(Connection pc, final struct packet_city_sell *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6457,11 +6354,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_SELL]) {
 //    case 100: return send_packet_city_sell_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_sell(struct connection *pc, int city_id, int build_id)
+//int dsend_packet_city_sell(Connection pc, int city_id, int build_id)
 //{
 //  struct packet_city_sell packet, *real_packet = &packet;
 //
@@ -6477,7 +6374,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_buy_100_fields, 1);
 //
-//static struct packet_city_buy *receive_packet_city_buy_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_buy *receive_packet_city_buy_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_buy_100_fields fields;
 //  struct packet_city_buy *old;
@@ -6518,7 +6415,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_buy_100(struct connection *pc, final struct packet_city_buy *packet)
+//static int send_packet_city_buy_100(Connection pc, final struct packet_city_buy *packet)
 //{
 //  final struct packet_city_buy *real_packet = packet;
 //  packet_city_buy_100_fields fields;
@@ -6567,7 +6464,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_buy(struct connection *pc)
+//static void ensure_valid_variant_packet_city_buy(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -6579,17 +6476,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_BUY] = variant;
 //}
 //
-//struct packet_city_buy *receive_packet_city_buy(struct connection *pc, enum packet_type type)
+//struct packet_city_buy *receive_packet_city_buy(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6600,16 +6497,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_BUY]) {
 //    case 100: return receive_packet_city_buy_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_buy(struct connection *pc, final struct packet_city_buy *packet)
+//int send_packet_city_buy(Connection pc, final struct packet_city_buy *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6620,11 +6517,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_BUY]) {
 //    case 100: return send_packet_city_buy_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_buy(struct connection *pc, int city_id)
+//int dsend_packet_city_buy(Connection pc, int city_id)
 //{
 //  struct packet_city_buy packet, *real_packet = &packet;
 //
@@ -6639,7 +6536,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_change_100_fields, 3);
 //
-//static struct packet_city_change *receive_packet_city_change_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_change *receive_packet_city_change_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_change_100_fields fields;
 //  struct packet_city_change *old;
@@ -6689,7 +6586,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_change_100(struct connection *pc, final struct packet_city_change *packet)
+//static int send_packet_city_change_100(Connection pc, final struct packet_city_change *packet)
 //{
 //  final struct packet_city_change *real_packet = packet;
 //  packet_city_change_100_fields fields;
@@ -6750,7 +6647,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_change(struct connection *pc)
+//static void ensure_valid_variant_packet_city_change(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -6762,17 +6659,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_CHANGE] = variant;
 //}
 //
-//struct packet_city_change *receive_packet_city_change(struct connection *pc, enum packet_type type)
+//struct packet_city_change *receive_packet_city_change(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6783,16 +6680,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_CHANGE]) {
 //    case 100: return receive_packet_city_change_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_change(struct connection *pc, final struct packet_city_change *packet)
+//int send_packet_city_change(Connection pc, final struct packet_city_change *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6803,11 +6700,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_CHANGE]) {
 //    case 100: return send_packet_city_change_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_change(struct connection *pc, int city_id, int build_id, boolean is_build_id_unit_id)
+//int dsend_packet_city_change(Connection pc, int city_id, int build_id, boolean is_build_id_unit_id)
 //{
 //  struct packet_city_change packet, *real_packet = &packet;
 //
@@ -6824,7 +6721,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_worklist_100_fields, 2);
 //
-//static struct packet_city_worklist *receive_packet_city_worklist_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_worklist *receive_packet_city_worklist_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_worklist_100_fields fields;
 //  struct packet_city_worklist *old;
@@ -6868,7 +6765,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_worklist_100(struct connection *pc, final struct packet_city_worklist *packet)
+//static int send_packet_city_worklist_100(Connection pc, final struct packet_city_worklist *packet)
 //{
 //  final struct packet_city_worklist *real_packet = packet;
 //  packet_city_worklist_100_fields fields;
@@ -6924,7 +6821,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_worklist(struct connection *pc)
+//static void ensure_valid_variant_packet_city_worklist(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -6936,17 +6833,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_WORKLIST] = variant;
 //}
 //
-//struct packet_city_worklist *receive_packet_city_worklist(struct connection *pc, enum packet_type type)
+//struct packet_city_worklist *receive_packet_city_worklist(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6957,16 +6854,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_WORKLIST]) {
 //    case 100: return receive_packet_city_worklist_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_worklist(struct connection *pc, final struct packet_city_worklist *packet)
+//int send_packet_city_worklist(Connection pc, final struct packet_city_worklist *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -6977,11 +6874,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_WORKLIST]) {
 //    case 100: return send_packet_city_worklist_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_worklist(struct connection *pc, int city_id, struct worklist *worklist)
+//int dsend_packet_city_worklist(Connection pc, int city_id, struct worklist *worklist)
 //{
 //  struct packet_city_worklist packet, *real_packet = &packet;
 //
@@ -6997,7 +6894,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_make_specialist_100_fields, 3);
 //
-//static struct packet_city_make_specialist *receive_packet_city_make_specialist_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_make_specialist *receive_packet_city_make_specialist_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_make_specialist_100_fields fields;
 //  struct packet_city_make_specialist *old;
@@ -7054,7 +6951,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_make_specialist_100(struct connection *pc, final struct packet_city_make_specialist *packet)
+//static int send_packet_city_make_specialist_100(Connection pc, final struct packet_city_make_specialist *packet)
 //{
 //  final struct packet_city_make_specialist *real_packet = packet;
 //  packet_city_make_specialist_100_fields fields;
@@ -7117,7 +7014,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_make_specialist(struct connection *pc)
+//static void ensure_valid_variant_packet_city_make_specialist(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -7129,17 +7026,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_MAKE_SPECIALIST] = variant;
 //}
 //
-//struct packet_city_make_specialist *receive_packet_city_make_specialist(struct connection *pc, enum packet_type type)
+//struct packet_city_make_specialist *receive_packet_city_make_specialist(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7150,16 +7047,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_MAKE_SPECIALIST]) {
 //    case 100: return receive_packet_city_make_specialist_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_make_specialist(struct connection *pc, final struct packet_city_make_specialist *packet)
+//int send_packet_city_make_specialist(Connection pc, final struct packet_city_make_specialist *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7170,11 +7067,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_MAKE_SPECIALIST]) {
 //    case 100: return send_packet_city_make_specialist_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_make_specialist(struct connection *pc, int city_id, int worker_x, int worker_y)
+//int dsend_packet_city_make_specialist(Connection pc, int city_id, int worker_x, int worker_y)
 //{
 //  struct packet_city_make_specialist packet, *real_packet = &packet;
 //
@@ -7191,7 +7088,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_make_worker_100_fields, 3);
 //
-//static struct packet_city_make_worker *receive_packet_city_make_worker_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_make_worker *receive_packet_city_make_worker_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_make_worker_100_fields fields;
 //  struct packet_city_make_worker *old;
@@ -7248,7 +7145,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_make_worker_100(struct connection *pc, final struct packet_city_make_worker *packet)
+//static int send_packet_city_make_worker_100(Connection pc, final struct packet_city_make_worker *packet)
 //{
 //  final struct packet_city_make_worker *real_packet = packet;
 //  packet_city_make_worker_100_fields fields;
@@ -7311,7 +7208,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_make_worker(struct connection *pc)
+//static void ensure_valid_variant_packet_city_make_worker(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -7323,17 +7220,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_MAKE_WORKER] = variant;
 //}
 //
-//struct packet_city_make_worker *receive_packet_city_make_worker(struct connection *pc, enum packet_type type)
+//struct packet_city_make_worker *receive_packet_city_make_worker(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7344,16 +7241,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_MAKE_WORKER]) {
 //    case 100: return receive_packet_city_make_worker_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_make_worker(struct connection *pc, final struct packet_city_make_worker *packet)
+//int send_packet_city_make_worker(Connection pc, final struct packet_city_make_worker *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7364,11 +7261,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_MAKE_WORKER]) {
 //    case 100: return send_packet_city_make_worker_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_make_worker(struct connection *pc, int city_id, int worker_x, int worker_y)
+//int dsend_packet_city_make_worker(Connection pc, int city_id, int worker_x, int worker_y)
 //{
 //  struct packet_city_make_worker packet, *real_packet = &packet;
 //
@@ -7385,7 +7282,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_change_specialist_100_fields, 3);
 //
-//static struct packet_city_change_specialist *receive_packet_city_change_specialist_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_change_specialist *receive_packet_city_change_specialist_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_change_specialist_100_fields fields;
 //  struct packet_city_change_specialist *old;
@@ -7442,7 +7339,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_change_specialist_100(struct connection *pc, final struct packet_city_change_specialist *packet)
+//static int send_packet_city_change_specialist_100(Connection pc, final struct packet_city_change_specialist *packet)
 //{
 //  final struct packet_city_change_specialist *real_packet = packet;
 //  packet_city_change_specialist_100_fields fields;
@@ -7505,7 +7402,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_change_specialist(struct connection *pc)
+//static void ensure_valid_variant_packet_city_change_specialist(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -7517,17 +7414,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_CHANGE_SPECIALIST] = variant;
 //}
 //
-//struct packet_city_change_specialist *receive_packet_city_change_specialist(struct connection *pc, enum packet_type type)
+//struct packet_city_change_specialist *receive_packet_city_change_specialist(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7538,16 +7435,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_CHANGE_SPECIALIST]) {
 //    case 100: return receive_packet_city_change_specialist_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_change_specialist(struct connection *pc, final struct packet_city_change_specialist *packet)
+//int send_packet_city_change_specialist(Connection pc, final struct packet_city_change_specialist *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7558,11 +7455,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_CHANGE_SPECIALIST]) {
 //    case 100: return send_packet_city_change_specialist_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_change_specialist(struct connection *pc, int city_id, Specialist_type_id from, Specialist_type_id to)
+//int dsend_packet_city_change_specialist(Connection pc, int city_id, Specialist_type_id from, Specialist_type_id to)
 //{
 //  struct packet_city_change_specialist packet, *real_packet = &packet;
 //
@@ -7579,7 +7476,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_rename_100_fields, 2);
 //
-//static struct packet_city_rename *receive_packet_city_rename_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_rename *receive_packet_city_rename_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_rename_100_fields fields;
 //  struct packet_city_rename *old;
@@ -7623,7 +7520,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_rename_100(struct connection *pc, final struct packet_city_rename *packet)
+//static int send_packet_city_rename_100(Connection pc, final struct packet_city_rename *packet)
 //{
 //  final struct packet_city_rename *real_packet = packet;
 //  packet_city_rename_100_fields fields;
@@ -7679,7 +7576,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_rename(struct connection *pc)
+//static void ensure_valid_variant_packet_city_rename(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -7691,17 +7588,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_RENAME] = variant;
 //}
 //
-//struct packet_city_rename *receive_packet_city_rename(struct connection *pc, enum packet_type type)
+//struct packet_city_rename *receive_packet_city_rename(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7712,16 +7609,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_RENAME]) {
 //    case 100: return receive_packet_city_rename_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_rename(struct connection *pc, final struct packet_city_rename *packet)
+//int send_packet_city_rename(Connection pc, final struct packet_city_rename *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7732,11 +7629,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_RENAME]) {
 //    case 100: return send_packet_city_rename_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_rename(struct connection *pc, int city_id, final String name)
+//int dsend_packet_city_rename(Connection pc, int city_id, final String name)
 //{
 //  struct packet_city_rename packet, *real_packet = &packet;
 //
@@ -7752,7 +7649,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_options_req_100_fields, 2);
 //
-//static struct packet_city_options_req *receive_packet_city_options_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_options_req *receive_packet_city_options_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_options_req_100_fields fields;
 //  struct packet_city_options_req *old;
@@ -7801,7 +7698,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_options_req_100(struct connection *pc, final struct packet_city_options_req *packet)
+//static int send_packet_city_options_req_100(Connection pc, final struct packet_city_options_req *packet)
 //{
 //  final struct packet_city_options_req *real_packet = packet;
 //  packet_city_options_req_100_fields fields;
@@ -7857,7 +7754,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_options_req(struct connection *pc)
+//static void ensure_valid_variant_packet_city_options_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -7869,17 +7766,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_OPTIONS_REQ] = variant;
 //}
 //
-//struct packet_city_options_req *receive_packet_city_options_req(struct connection *pc, enum packet_type type)
+//struct packet_city_options_req *receive_packet_city_options_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7890,16 +7787,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_OPTIONS_REQ]) {
 //    case 100: return receive_packet_city_options_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_options_req(struct connection *pc, final struct packet_city_options_req *packet)
+//int send_packet_city_options_req(Connection pc, final struct packet_city_options_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -7910,11 +7807,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_OPTIONS_REQ]) {
 //    case 100: return send_packet_city_options_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_options_req(struct connection *pc, int city_id, int value)
+//int dsend_packet_city_options_req(Connection pc, int city_id, int value)
 //{
 //  struct packet_city_options_req packet, *real_packet = &packet;
 //
@@ -7930,7 +7827,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_refresh_100_fields, 1);
 //
-//static struct packet_city_refresh *receive_packet_city_refresh_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_refresh *receive_packet_city_refresh_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_refresh_100_fields fields;
 //  struct packet_city_refresh *old;
@@ -7971,7 +7868,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_refresh_100(struct connection *pc, final struct packet_city_refresh *packet)
+//static int send_packet_city_refresh_100(Connection pc, final struct packet_city_refresh *packet)
 //{
 //  final struct packet_city_refresh *real_packet = packet;
 //  packet_city_refresh_100_fields fields;
@@ -8020,7 +7917,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_refresh(struct connection *pc)
+//static void ensure_valid_variant_packet_city_refresh(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -8032,17 +7929,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_REFRESH] = variant;
 //}
 //
-//struct packet_city_refresh *receive_packet_city_refresh(struct connection *pc, enum packet_type type)
+//struct packet_city_refresh *receive_packet_city_refresh(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8053,16 +7950,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_REFRESH]) {
 //    case 100: return receive_packet_city_refresh_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_refresh(struct connection *pc, final struct packet_city_refresh *packet)
+//int send_packet_city_refresh(Connection pc, final struct packet_city_refresh *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8073,11 +7970,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_REFRESH]) {
 //    case 100: return send_packet_city_refresh_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_refresh(struct connection *pc, int city_id)
+//int dsend_packet_city_refresh(Connection pc, int city_id)
 //{
 //  struct packet_city_refresh packet, *real_packet = &packet;
 //
@@ -8092,7 +7989,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_incite_inq_100_fields, 1);
 //
-//static struct packet_city_incite_inq *receive_packet_city_incite_inq_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_incite_inq *receive_packet_city_incite_inq_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_incite_inq_100_fields fields;
 //  struct packet_city_incite_inq *old;
@@ -8133,7 +8030,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_incite_inq_100(struct connection *pc, final struct packet_city_incite_inq *packet)
+//static int send_packet_city_incite_inq_100(Connection pc, final struct packet_city_incite_inq *packet)
 //{
 //  final struct packet_city_incite_inq *real_packet = packet;
 //  packet_city_incite_inq_100_fields fields;
@@ -8182,7 +8079,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_incite_inq(struct connection *pc)
+//static void ensure_valid_variant_packet_city_incite_inq(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -8194,17 +8091,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_INCITE_INQ] = variant;
 //}
 //
-//struct packet_city_incite_inq *receive_packet_city_incite_inq(struct connection *pc, enum packet_type type)
+//struct packet_city_incite_inq *receive_packet_city_incite_inq(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8215,16 +8112,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_INCITE_INQ]) {
 //    case 100: return receive_packet_city_incite_inq_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_incite_inq(struct connection *pc, final struct packet_city_incite_inq *packet)
+//int send_packet_city_incite_inq(Connection pc, final struct packet_city_incite_inq *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8235,11 +8132,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_INCITE_INQ]) {
 //    case 100: return send_packet_city_incite_inq_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_incite_inq(struct connection *pc, int city_id)
+//int dsend_packet_city_incite_inq(Connection pc, int city_id)
 //{
 //  struct packet_city_incite_inq packet, *real_packet = &packet;
 //
@@ -8254,7 +8151,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_incite_info_100_fields, 2);
 //
-//static struct packet_city_incite_info *receive_packet_city_incite_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_incite_info *receive_packet_city_incite_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_incite_info_100_fields fields;
 //  struct packet_city_incite_info *old;
@@ -8303,7 +8200,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_incite_info_100(struct connection *pc, final struct packet_city_incite_info *packet)
+//static int send_packet_city_incite_info_100(Connection pc, final struct packet_city_incite_info *packet)
 //{
 //  final struct packet_city_incite_info *real_packet = packet;
 //  packet_city_incite_info_100_fields fields;
@@ -8359,7 +8256,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_incite_info(struct connection *pc)
+//static void ensure_valid_variant_packet_city_incite_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -8371,17 +8268,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_INCITE_INFO] = variant;
 //}
 //
-//struct packet_city_incite_info *receive_packet_city_incite_info(struct connection *pc, enum packet_type type)
+//struct packet_city_incite_info *receive_packet_city_incite_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8392,16 +8289,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_INCITE_INFO]) {
 //    case 100: return receive_packet_city_incite_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_incite_info(struct connection *pc, final struct packet_city_incite_info *packet)
+//int send_packet_city_incite_info(Connection pc, final struct packet_city_incite_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8412,11 +8309,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_INCITE_INFO]) {
 //    case 100: return send_packet_city_incite_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_incite_info(struct connection *pc, int city_id, int cost)
+//int dsend_packet_city_incite_info(Connection pc, int city_id, int cost)
 //{
 //  struct packet_city_incite_info packet, *real_packet = &packet;
 //
@@ -8432,7 +8329,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_name_suggestion_req_100_fields, 1);
 //
-//static struct packet_city_name_suggestion_req *receive_packet_city_name_suggestion_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_name_suggestion_req *receive_packet_city_name_suggestion_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_name_suggestion_req_100_fields fields;
 //  struct packet_city_name_suggestion_req *old;
@@ -8473,7 +8370,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_name_suggestion_req_100(struct connection *pc, final struct packet_city_name_suggestion_req *packet)
+//static int send_packet_city_name_suggestion_req_100(Connection pc, final struct packet_city_name_suggestion_req *packet)
 //{
 //  final struct packet_city_name_suggestion_req *real_packet = packet;
 //  packet_city_name_suggestion_req_100_fields fields;
@@ -8522,7 +8419,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_name_suggestion_req(struct connection *pc)
+//static void ensure_valid_variant_packet_city_name_suggestion_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -8534,17 +8431,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_NAME_SUGGESTION_REQ] = variant;
 //}
 //
-//struct packet_city_name_suggestion_req *receive_packet_city_name_suggestion_req(struct connection *pc, enum packet_type type)
+//struct packet_city_name_suggestion_req *receive_packet_city_name_suggestion_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8555,16 +8452,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_NAME_SUGGESTION_REQ]) {
 //    case 100: return receive_packet_city_name_suggestion_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_name_suggestion_req(struct connection *pc, final struct packet_city_name_suggestion_req *packet)
+//int send_packet_city_name_suggestion_req(Connection pc, final struct packet_city_name_suggestion_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8575,11 +8472,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_NAME_SUGGESTION_REQ]) {
 //    case 100: return send_packet_city_name_suggestion_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_city_name_suggestion_req(struct connection *pc, int unit_id)
+//int dsend_packet_city_name_suggestion_req(Connection pc, int unit_id)
 //{
 //  struct packet_city_name_suggestion_req packet, *real_packet = &packet;
 //
@@ -8594,7 +8491,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_name_suggestion_info_100_fields, 2);
 //
-//static struct packet_city_name_suggestion_info *receive_packet_city_name_suggestion_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_name_suggestion_info *receive_packet_city_name_suggestion_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_name_suggestion_info_100_fields fields;
 //  struct packet_city_name_suggestion_info *old;
@@ -8638,7 +8535,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_name_suggestion_info_100(struct connection *pc, final struct packet_city_name_suggestion_info *packet)
+//static int send_packet_city_name_suggestion_info_100(Connection pc, final struct packet_city_name_suggestion_info *packet)
 //{
 //  final struct packet_city_name_suggestion_info *real_packet = packet;
 //  packet_city_name_suggestion_info_100_fields fields;
@@ -8694,7 +8591,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_name_suggestion_info(struct connection *pc)
+//static void ensure_valid_variant_packet_city_name_suggestion_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -8706,17 +8603,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_NAME_SUGGESTION_INFO] = variant;
 //}
 //
-//struct packet_city_name_suggestion_info *receive_packet_city_name_suggestion_info(struct connection *pc, enum packet_type type)
+//struct packet_city_name_suggestion_info *receive_packet_city_name_suggestion_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8727,16 +8624,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_NAME_SUGGESTION_INFO]) {
 //    case 100: return receive_packet_city_name_suggestion_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_name_suggestion_info(struct connection *pc, final struct packet_city_name_suggestion_info *packet)
+//int send_packet_city_name_suggestion_info(Connection pc, final struct packet_city_name_suggestion_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8747,7 +8644,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_NAME_SUGGESTION_INFO]) {
 //    case 100: return send_packet_city_name_suggestion_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -8758,7 +8655,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_city_name_suggestion_info(struct connection *pc, int unit_id, final String name)
+//int dsend_packet_city_name_suggestion_info(Connection pc, int unit_id, final String name)
 //{
 //  struct packet_city_name_suggestion_info packet, *real_packet = &packet;
 //
@@ -8784,7 +8681,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_city_sabotage_list_100_fields, 3);
 //
-//static struct packet_city_sabotage_list *receive_packet_city_sabotage_list_100(struct connection *pc, enum packet_type type)
+//static struct packet_city_sabotage_list *receive_packet_city_sabotage_list_100(Connection pc, enum packet_type type)
 //{
 //  packet_city_sabotage_list_100_fields fields;
 //  struct packet_city_sabotage_list *old;
@@ -8836,7 +8733,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_city_sabotage_list_100(struct connection *pc, final struct packet_city_sabotage_list *packet)
+//static int send_packet_city_sabotage_list_100(Connection pc, final struct packet_city_sabotage_list *packet)
 //{
 //  final struct packet_city_sabotage_list *real_packet = packet;
 //  packet_city_sabotage_list_100_fields fields;
@@ -8899,7 +8796,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_city_sabotage_list(struct connection *pc)
+//static void ensure_valid_variant_packet_city_sabotage_list(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -8911,17 +8808,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_SABOTAGE_LIST] = variant;
 //}
 //
-//struct packet_city_sabotage_list *receive_packet_city_sabotage_list(struct connection *pc, enum packet_type type)
+//struct packet_city_sabotage_list *receive_packet_city_sabotage_list(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8932,16 +8829,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_SABOTAGE_LIST]) {
 //    case 100: return receive_packet_city_sabotage_list_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_city_sabotage_list(struct connection *pc, final struct packet_city_sabotage_list *packet)
+//int send_packet_city_sabotage_list(Connection pc, final struct packet_city_sabotage_list *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -8952,7 +8849,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CITY_SABOTAGE_LIST]) {
 //    case 100: return send_packet_city_sabotage_list_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -8969,7 +8866,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_remove_100_fields, 1);
 //
-//static struct packet_player_remove *receive_packet_player_remove_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_remove *receive_packet_player_remove_100(Connection pc, enum packet_type type)
 //{
 //  packet_player_remove_100_fields fields;
 //  struct packet_player_remove *old;
@@ -9010,7 +8907,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_remove_100(struct connection *pc, final struct packet_player_remove *packet)
+//static int send_packet_player_remove_100(Connection pc, final struct packet_player_remove *packet)
 //{
 //  final struct packet_player_remove *real_packet = packet;
 //  packet_player_remove_100_fields fields;
@@ -9059,7 +8956,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_remove(struct connection *pc)
+//static void ensure_valid_variant_packet_player_remove(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -9071,17 +8968,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_REMOVE] = variant;
 //}
 //
-//struct packet_player_remove *receive_packet_player_remove(struct connection *pc, enum packet_type type)
+//struct packet_player_remove *receive_packet_player_remove(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -9092,16 +8989,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_REMOVE]) {
 //    case 100: return receive_packet_player_remove_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_remove(struct connection *pc, final struct packet_player_remove *packet)
+//int send_packet_player_remove(Connection pc, final struct packet_player_remove *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -9112,7 +9009,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_REMOVE]) {
 //    case 100: return send_packet_player_remove_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -9123,7 +9020,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_player_remove(struct connection *pc, int player_id)
+//int dsend_packet_player_remove(Connection pc, int player_id)
 //{
 //  struct packet_player_remove packet, *real_packet = &packet;
 //
@@ -9164,7 +9061,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_info_100_fields, 31);
 //
-//static struct packet_player_info *receive_packet_player_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_info *receive_packet_player_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_player_info_100_fields fields;
 //  struct packet_player_info *old;
@@ -9414,7 +9311,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_info_100(struct connection *pc, final struct packet_player_info *packet)
+//static int send_packet_player_info_100(Connection pc, final struct packet_player_info *packet)
 //{
 //  final struct packet_player_info *real_packet = packet;
 //  packet_player_info_100_fields fields;
@@ -9725,7 +9622,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_info_101_fields, 30);
 //
-//static struct packet_player_info *receive_packet_player_info_101(struct connection *pc, enum packet_type type)
+//static struct packet_player_info *receive_packet_player_info_101(Connection pc, enum packet_type type)
 //{
 //  packet_player_info_101_fields fields;
 //  struct packet_player_info *old;
@@ -9972,7 +9869,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_info_101(struct connection *pc, final struct packet_player_info *packet)
+//static int send_packet_player_info_101(Connection pc, final struct packet_player_info *packet)
 //{
 //  final struct packet_player_info *real_packet = packet;
 //  packet_player_info_101_fields fields;
@@ -10253,7 +10150,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_info(struct connection *pc)
+//static void ensure_valid_variant_packet_player_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -10267,17 +10164,17 @@ public class Packets_gen{
 //  } else if(!(has_capability("username_info", pc->capability) && has_capability("username_info", our_capability))) {
 //    variant = 101;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_INFO] = variant;
 //}
 //
-//struct packet_player_info *receive_packet_player_info(struct connection *pc, enum packet_type type)
+//struct packet_player_info *receive_packet_player_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10289,16 +10186,16 @@ public class Packets_gen{
 //  switch(pc->phs.variant[PACKET_PLAYER_INFO]) {
 //    case 100: return receive_packet_player_info_100(pc, type);
 //    case 101: return receive_packet_player_info_101(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_info(struct connection *pc, final struct packet_player_info *packet)
+//int send_packet_player_info(Connection pc, final struct packet_player_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10310,24 +10207,24 @@ public class Packets_gen{
 //  switch(pc->phs.variant[PACKET_PLAYER_INFO]) {
 //    case 100: return send_packet_player_info_100(pc, packet);
 //    case 101: return send_packet_player_info_101(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//static struct packet_player_turn_done *receive_packet_player_turn_done_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_turn_done *receive_packet_player_turn_done_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_player_turn_done, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_turn_done_100(struct connection *pc)
+//static int send_packet_player_turn_done_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_PLAYER_TURN_DONE);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_turn_done(struct connection *pc)
+//static void ensure_valid_variant_packet_player_turn_done(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -10339,17 +10236,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_TURN_DONE] = variant;
 //}
 //
-//struct packet_player_turn_done *receive_packet_player_turn_done(struct connection *pc, enum packet_type type)
+//struct packet_player_turn_done *receive_packet_player_turn_done(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10360,16 +10257,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_TURN_DONE]) {
 //    case 100: return receive_packet_player_turn_done_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_turn_done(struct connection *pc)
+//int send_packet_player_turn_done(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10380,7 +10277,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_TURN_DONE]) {
 //    case 100: return send_packet_player_turn_done_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -10390,7 +10287,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_rates_100_fields, 3);
 //
-//static struct packet_player_rates *receive_packet_player_rates_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_rates *receive_packet_player_rates_100(Connection pc, enum packet_type type)
 //{
 //  packet_player_rates_100_fields fields;
 //  struct packet_player_rates *old;
@@ -10447,7 +10344,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_rates_100(struct connection *pc, final struct packet_player_rates *packet)
+//static int send_packet_player_rates_100(Connection pc, final struct packet_player_rates *packet)
 //{
 //  final struct packet_player_rates *real_packet = packet;
 //  packet_player_rates_100_fields fields;
@@ -10510,7 +10407,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_rates(struct connection *pc)
+//static void ensure_valid_variant_packet_player_rates(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -10522,17 +10419,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_RATES] = variant;
 //}
 //
-//struct packet_player_rates *receive_packet_player_rates(struct connection *pc, enum packet_type type)
+//struct packet_player_rates *receive_packet_player_rates(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10543,16 +10440,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_RATES]) {
 //    case 100: return receive_packet_player_rates_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_rates(struct connection *pc, final struct packet_player_rates *packet)
+//int send_packet_player_rates(Connection pc, final struct packet_player_rates *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10563,11 +10460,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_RATES]) {
 //    case 100: return send_packet_player_rates_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_player_rates(struct connection *pc, int tax, int luxury, int science)
+//int dsend_packet_player_rates(Connection pc, int tax, int luxury, int science)
 //{
 //  struct packet_player_rates packet, *real_packet = &packet;
 //
@@ -10584,7 +10481,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_change_government_100_fields, 1);
 //
-//static struct packet_player_change_government *receive_packet_player_change_government_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_change_government *receive_packet_player_change_government_100(Connection pc, enum packet_type type)
 //{
 //  packet_player_change_government_100_fields fields;
 //  struct packet_player_change_government *old;
@@ -10625,7 +10522,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_change_government_100(struct connection *pc, final struct packet_player_change_government *packet)
+//static int send_packet_player_change_government_100(Connection pc, final struct packet_player_change_government *packet)
 //{
 //  final struct packet_player_change_government *real_packet = packet;
 //  packet_player_change_government_100_fields fields;
@@ -10674,7 +10571,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_change_government(struct connection *pc)
+//static void ensure_valid_variant_packet_player_change_government(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -10686,17 +10583,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_CHANGE_GOVERNMENT] = variant;
 //}
 //
-//struct packet_player_change_government *receive_packet_player_change_government(struct connection *pc, enum packet_type type)
+//struct packet_player_change_government *receive_packet_player_change_government(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10707,16 +10604,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_CHANGE_GOVERNMENT]) {
 //    case 100: return receive_packet_player_change_government_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_change_government(struct connection *pc, final struct packet_player_change_government *packet)
+//int send_packet_player_change_government(Connection pc, final struct packet_player_change_government *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10727,11 +10624,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_CHANGE_GOVERNMENT]) {
 //    case 100: return send_packet_player_change_government_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_player_change_government(struct connection *pc, int government)
+//int dsend_packet_player_change_government(Connection pc, int government)
 //{
 //  struct packet_player_change_government packet, *real_packet = &packet;
 //
@@ -10746,7 +10643,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_research_100_fields, 1);
 //
-//static struct packet_player_research *receive_packet_player_research_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_research *receive_packet_player_research_100(Connection pc, enum packet_type type)
 //{
 //  packet_player_research_100_fields fields;
 //  struct packet_player_research *old;
@@ -10787,7 +10684,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_research_100(struct connection *pc, final struct packet_player_research *packet)
+//static int send_packet_player_research_100(Connection pc, final struct packet_player_research *packet)
 //{
 //  final struct packet_player_research *real_packet = packet;
 //  packet_player_research_100_fields fields;
@@ -10836,7 +10733,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_research(struct connection *pc)
+//static void ensure_valid_variant_packet_player_research(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -10848,17 +10745,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_RESEARCH] = variant;
 //}
 //
-//struct packet_player_research *receive_packet_player_research(struct connection *pc, enum packet_type type)
+//struct packet_player_research *receive_packet_player_research(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10869,16 +10766,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_RESEARCH]) {
 //    case 100: return receive_packet_player_research_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_research(struct connection *pc, final struct packet_player_research *packet)
+//int send_packet_player_research(Connection pc, final struct packet_player_research *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -10889,11 +10786,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_RESEARCH]) {
 //    case 100: return send_packet_player_research_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_player_research(struct connection *pc, int tech)
+//int dsend_packet_player_research(Connection pc, int tech)
 //{
 //  struct packet_player_research packet, *real_packet = &packet;
 //
@@ -10908,7 +10805,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_tech_goal_100_fields, 1);
 //
-//static struct packet_player_tech_goal *receive_packet_player_tech_goal_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_tech_goal *receive_packet_player_tech_goal_100(Connection pc, enum packet_type type)
 //{
 //  packet_player_tech_goal_100_fields fields;
 //  struct packet_player_tech_goal *old;
@@ -10949,7 +10846,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_tech_goal_100(struct connection *pc, final struct packet_player_tech_goal *packet)
+//static int send_packet_player_tech_goal_100(Connection pc, final struct packet_player_tech_goal *packet)
 //{
 //  final struct packet_player_tech_goal *real_packet = packet;
 //  packet_player_tech_goal_100_fields fields;
@@ -10998,7 +10895,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_tech_goal(struct connection *pc)
+//static void ensure_valid_variant_packet_player_tech_goal(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -11010,17 +10907,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_TECH_GOAL] = variant;
 //}
 //
-//struct packet_player_tech_goal *receive_packet_player_tech_goal(struct connection *pc, enum packet_type type)
+//struct packet_player_tech_goal *receive_packet_player_tech_goal(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11031,16 +10928,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_TECH_GOAL]) {
 //    case 100: return receive_packet_player_tech_goal_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_tech_goal(struct connection *pc, final struct packet_player_tech_goal *packet)
+//int send_packet_player_tech_goal(Connection pc, final struct packet_player_tech_goal *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11051,11 +10948,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_TECH_GOAL]) {
 //    case 100: return send_packet_player_tech_goal_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_player_tech_goal(struct connection *pc, int tech)
+//int dsend_packet_player_tech_goal(Connection pc, int tech)
 //{
 //  struct packet_player_tech_goal packet, *real_packet = &packet;
 //
@@ -11064,20 +10961,20 @@ public class Packets_gen{
 //  return send_packet_player_tech_goal(pc, real_packet);
 //}
 //
-//static struct packet_player_attribute_block *receive_packet_player_attribute_block_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_attribute_block *receive_packet_player_attribute_block_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_player_attribute_block, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_attribute_block_100(struct connection *pc)
+//static int send_packet_player_attribute_block_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_PLAYER_ATTRIBUTE_BLOCK);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_attribute_block(struct connection *pc)
+//static void ensure_valid_variant_packet_player_attribute_block(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -11089,17 +10986,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_ATTRIBUTE_BLOCK] = variant;
 //}
 //
-//struct packet_player_attribute_block *receive_packet_player_attribute_block(struct connection *pc, enum packet_type type)
+//struct packet_player_attribute_block *receive_packet_player_attribute_block(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11110,16 +11007,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_ATTRIBUTE_BLOCK]) {
 //    case 100: return receive_packet_player_attribute_block_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_attribute_block(struct connection *pc)
+//int send_packet_player_attribute_block(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11130,7 +11027,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_ATTRIBUTE_BLOCK]) {
 //    case 100: return send_packet_player_attribute_block_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -11140,7 +11037,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_player_attribute_chunk_100_fields, 4);
 //
-//static struct packet_player_attribute_chunk *receive_packet_player_attribute_chunk_100(struct connection *pc, enum packet_type type)
+//static struct packet_player_attribute_chunk *receive_packet_player_attribute_chunk_100(Connection pc, enum packet_type type)
 //{
 //  packet_player_attribute_chunk_100_fields fields;
 //  struct packet_player_attribute_chunk *old;
@@ -11200,7 +11097,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_player_attribute_chunk_100(struct connection *pc, final struct packet_player_attribute_chunk *packet)
+//static int send_packet_player_attribute_chunk_100(Connection pc, final struct packet_player_attribute_chunk *packet)
 //{
 //  final struct packet_player_attribute_chunk *real_packet = packet;
 //  packet_player_attribute_chunk_100_fields fields;
@@ -11286,7 +11183,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_player_attribute_chunk(struct connection *pc)
+//static void ensure_valid_variant_packet_player_attribute_chunk(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -11298,17 +11195,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PLAYER_ATTRIBUTE_CHUNK] = variant;
 //}
 //
-//struct packet_player_attribute_chunk *receive_packet_player_attribute_chunk(struct connection *pc, enum packet_type type)
+//struct packet_player_attribute_chunk *receive_packet_player_attribute_chunk(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11316,16 +11213,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_ATTRIBUTE_CHUNK]) {
 //    case 100: return receive_packet_player_attribute_chunk_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_player_attribute_chunk(struct connection *pc, final struct packet_player_attribute_chunk *packet)
+//int send_packet_player_attribute_chunk(Connection pc, final struct packet_player_attribute_chunk *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11333,7 +11230,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PLAYER_ATTRIBUTE_CHUNK]) {
 //    case 100: return send_packet_player_attribute_chunk_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -11343,7 +11240,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_remove_100_fields, 1);
 //
-//static struct packet_unit_remove *receive_packet_unit_remove_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_remove *receive_packet_unit_remove_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_remove_100_fields fields;
 //  struct packet_unit_remove *old;
@@ -11384,7 +11281,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_remove_100(struct connection *pc, final struct packet_unit_remove *packet)
+//static int send_packet_unit_remove_100(Connection pc, final struct packet_unit_remove *packet)
 //{
 //  final struct packet_unit_remove *real_packet = packet;
 //  packet_unit_remove_100_fields fields;
@@ -11433,7 +11330,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_remove(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_remove(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -11445,17 +11342,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_REMOVE] = variant;
 //}
 //
-//struct packet_unit_remove *receive_packet_unit_remove(struct connection *pc, enum packet_type type)
+//struct packet_unit_remove *receive_packet_unit_remove(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11466,16 +11363,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_REMOVE]) {
 //    case 100: return receive_packet_unit_remove_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_remove(struct connection *pc, final struct packet_unit_remove *packet)
+//int send_packet_unit_remove(Connection pc, final struct packet_unit_remove *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -11486,7 +11383,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_REMOVE]) {
 //    case 100: return send_packet_unit_remove_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -11497,7 +11394,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_unit_remove(struct connection *pc, int unit_id)
+//int dsend_packet_unit_remove(Connection pc, int unit_id)
 //{
 //  struct packet_unit_remove packet, *real_packet = &packet;
 //
@@ -11538,7 +11435,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_info_100_fields, 33);
 //
-//static struct packet_unit_info *receive_packet_unit_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_info *receive_packet_unit_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_info_100_fields fields;
 //  struct packet_unit_info *old;
@@ -11822,7 +11719,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_info_100(struct connection *pc, final struct packet_unit_info *packet)
+//static int send_packet_unit_info_100(Connection pc, final struct packet_unit_info *packet)
 //{
 //  final struct packet_unit_info *real_packet = packet;
 //  packet_unit_info_100_fields fields;
@@ -12137,7 +12034,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_info(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -12149,17 +12046,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_INFO] = variant;
 //}
 //
-//struct packet_unit_info *receive_packet_unit_info(struct connection *pc, enum packet_type type)
+//struct packet_unit_info *receive_packet_unit_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12170,16 +12067,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_INFO]) {
 //    case 100: return receive_packet_unit_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_info(struct connection *pc, final struct packet_unit_info *packet)
+//int send_packet_unit_info(Connection pc, final struct packet_unit_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12190,7 +12087,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_INFO]) {
 //    case 100: return send_packet_unit_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -12224,7 +12121,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_short_info_100_fields, 14);
 //
-//static struct packet_unit_short_info *receive_packet_unit_short_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_short_info *receive_packet_unit_short_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_short_info_100_fields fields;
 //  struct packet_unit_short_info *old;
@@ -12358,7 +12255,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_short_info_100(struct connection *pc, final struct packet_unit_short_info *packet)
+//static int send_packet_unit_short_info_100(Connection pc, final struct packet_unit_short_info *packet)
 //{
 //  final struct packet_unit_short_info *real_packet = packet;
 //  packet_unit_short_info_100_fields fields;
@@ -12493,7 +12390,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_short_info(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_short_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -12505,17 +12402,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_SHORT_INFO] = variant;
 //}
 //
-//struct packet_unit_short_info *receive_packet_unit_short_info(struct connection *pc, enum packet_type type)
+//struct packet_unit_short_info *receive_packet_unit_short_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12526,16 +12423,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_SHORT_INFO]) {
 //    case 100: return receive_packet_unit_short_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_short_info(struct connection *pc, final struct packet_unit_short_info *packet)
+//int send_packet_unit_short_info(Connection pc, final struct packet_unit_short_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12546,7 +12443,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_SHORT_INFO]) {
 //    case 100: return send_packet_unit_short_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -12563,7 +12460,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_combat_info_100_fields, 5);
 //
-//static struct packet_unit_combat_info *receive_packet_unit_combat_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_combat_info *receive_packet_unit_combat_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_combat_info_100_fields fields;
 //  struct packet_unit_combat_info *old;
@@ -12629,7 +12526,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_combat_info_100(struct connection *pc, final struct packet_unit_combat_info *packet)
+//static int send_packet_unit_combat_info_100(Connection pc, final struct packet_unit_combat_info *packet)
 //{
 //  final struct packet_unit_combat_info *real_packet = packet;
 //  packet_unit_combat_info_100_fields fields;
@@ -12704,7 +12601,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_combat_info(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_combat_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -12716,17 +12613,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_COMBAT_INFO] = variant;
 //}
 //
-//struct packet_unit_combat_info *receive_packet_unit_combat_info(struct connection *pc, enum packet_type type)
+//struct packet_unit_combat_info *receive_packet_unit_combat_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12737,16 +12634,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_COMBAT_INFO]) {
 //    case 100: return receive_packet_unit_combat_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_combat_info(struct connection *pc, final struct packet_unit_combat_info *packet)
+//int send_packet_unit_combat_info(Connection pc, final struct packet_unit_combat_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12757,7 +12654,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_COMBAT_INFO]) {
 //    case 100: return send_packet_unit_combat_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -12774,7 +12671,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_move_100_fields, 3);
 //
-//static struct packet_unit_move *receive_packet_unit_move_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_move *receive_packet_unit_move_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_move_100_fields fields;
 //  struct packet_unit_move *old;
@@ -12831,7 +12728,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_move_100(struct connection *pc, final struct packet_unit_move *packet)
+//static int send_packet_unit_move_100(Connection pc, final struct packet_unit_move *packet)
 //{
 //  final struct packet_unit_move *real_packet = packet;
 //  packet_unit_move_100_fields fields;
@@ -12894,7 +12791,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_move(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_move(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -12906,17 +12803,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_MOVE] = variant;
 //}
 //
-//struct packet_unit_move *receive_packet_unit_move(struct connection *pc, enum packet_type type)
+//struct packet_unit_move *receive_packet_unit_move(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12927,16 +12824,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_MOVE]) {
 //    case 100: return receive_packet_unit_move_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_move(struct connection *pc, final struct packet_unit_move *packet)
+//int send_packet_unit_move(Connection pc, final struct packet_unit_move *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -12947,11 +12844,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_MOVE]) {
 //    case 100: return send_packet_unit_move_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_move(struct connection *pc, int unit_id, int x, int y)
+//int dsend_packet_unit_move(Connection pc, int unit_id, int x, int y)
 //{
 //  struct packet_unit_move packet, *real_packet = &packet;
 //
@@ -12968,7 +12865,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_build_city_100_fields, 2);
 //
-//static struct packet_unit_build_city *receive_packet_unit_build_city_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_build_city *receive_packet_unit_build_city_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_build_city_100_fields fields;
 //  struct packet_unit_build_city *old;
@@ -13012,7 +12909,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_build_city_100(struct connection *pc, final struct packet_unit_build_city *packet)
+//static int send_packet_unit_build_city_100(Connection pc, final struct packet_unit_build_city *packet)
 //{
 //  final struct packet_unit_build_city *real_packet = packet;
 //  packet_unit_build_city_100_fields fields;
@@ -13068,7 +12965,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_build_city(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_build_city(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -13080,17 +12977,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_BUILD_CITY] = variant;
 //}
 //
-//struct packet_unit_build_city *receive_packet_unit_build_city(struct connection *pc, enum packet_type type)
+//struct packet_unit_build_city *receive_packet_unit_build_city(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13101,16 +12998,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_BUILD_CITY]) {
 //    case 100: return receive_packet_unit_build_city_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_build_city(struct connection *pc, final struct packet_unit_build_city *packet)
+//int send_packet_unit_build_city(Connection pc, final struct packet_unit_build_city *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13121,11 +13018,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_BUILD_CITY]) {
 //    case 100: return send_packet_unit_build_city_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_build_city(struct connection *pc, int unit_id, final String name)
+//int dsend_packet_unit_build_city(Connection pc, int unit_id, final String name)
 //{
 //  struct packet_unit_build_city packet, *real_packet = &packet;
 //
@@ -13141,7 +13038,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_disband_100_fields, 1);
 //
-//static struct packet_unit_disband *receive_packet_unit_disband_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_disband *receive_packet_unit_disband_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_disband_100_fields fields;
 //  struct packet_unit_disband *old;
@@ -13182,7 +13079,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_disband_100(struct connection *pc, final struct packet_unit_disband *packet)
+//static int send_packet_unit_disband_100(Connection pc, final struct packet_unit_disband *packet)
 //{
 //  final struct packet_unit_disband *real_packet = packet;
 //  packet_unit_disband_100_fields fields;
@@ -13231,7 +13128,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_disband(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_disband(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -13243,17 +13140,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_DISBAND] = variant;
 //}
 //
-//struct packet_unit_disband *receive_packet_unit_disband(struct connection *pc, enum packet_type type)
+//struct packet_unit_disband *receive_packet_unit_disband(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13264,16 +13161,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_DISBAND]) {
 //    case 100: return receive_packet_unit_disband_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_disband(struct connection *pc, final struct packet_unit_disband *packet)
+//int send_packet_unit_disband(Connection pc, final struct packet_unit_disband *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13284,11 +13181,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_DISBAND]) {
 //    case 100: return send_packet_unit_disband_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_disband(struct connection *pc, int unit_id)
+//int dsend_packet_unit_disband(Connection pc, int unit_id)
 //{
 //  struct packet_unit_disband packet, *real_packet = &packet;
 //
@@ -13303,7 +13200,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_change_homecity_100_fields, 2);
 //
-//static struct packet_unit_change_homecity *receive_packet_unit_change_homecity_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_change_homecity *receive_packet_unit_change_homecity_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_change_homecity_100_fields fields;
 //  struct packet_unit_change_homecity *old;
@@ -13352,7 +13249,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_change_homecity_100(struct connection *pc, final struct packet_unit_change_homecity *packet)
+//static int send_packet_unit_change_homecity_100(Connection pc, final struct packet_unit_change_homecity *packet)
 //{
 //  final struct packet_unit_change_homecity *real_packet = packet;
 //  packet_unit_change_homecity_100_fields fields;
@@ -13408,7 +13305,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_change_homecity(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_change_homecity(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -13420,17 +13317,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_CHANGE_HOMECITY] = variant;
 //}
 //
-//struct packet_unit_change_homecity *receive_packet_unit_change_homecity(struct connection *pc, enum packet_type type)
+//struct packet_unit_change_homecity *receive_packet_unit_change_homecity(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13441,16 +13338,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_CHANGE_HOMECITY]) {
 //    case 100: return receive_packet_unit_change_homecity_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_change_homecity(struct connection *pc, final struct packet_unit_change_homecity *packet)
+//int send_packet_unit_change_homecity(Connection pc, final struct packet_unit_change_homecity *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13461,11 +13358,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_CHANGE_HOMECITY]) {
 //    case 100: return send_packet_unit_change_homecity_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_change_homecity(struct connection *pc, int unit_id, int city_id)
+//int dsend_packet_unit_change_homecity(Connection pc, int unit_id, int city_id)
 //{
 //  struct packet_unit_change_homecity packet, *real_packet = &packet;
 //
@@ -13481,7 +13378,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_establish_trade_100_fields, 1);
 //
-//static struct packet_unit_establish_trade *receive_packet_unit_establish_trade_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_establish_trade *receive_packet_unit_establish_trade_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_establish_trade_100_fields fields;
 //  struct packet_unit_establish_trade *old;
@@ -13522,7 +13419,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_establish_trade_100(struct connection *pc, final struct packet_unit_establish_trade *packet)
+//static int send_packet_unit_establish_trade_100(Connection pc, final struct packet_unit_establish_trade *packet)
 //{
 //  final struct packet_unit_establish_trade *real_packet = packet;
 //  packet_unit_establish_trade_100_fields fields;
@@ -13571,7 +13468,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_establish_trade(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_establish_trade(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -13583,17 +13480,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_ESTABLISH_TRADE] = variant;
 //}
 //
-//struct packet_unit_establish_trade *receive_packet_unit_establish_trade(struct connection *pc, enum packet_type type)
+//struct packet_unit_establish_trade *receive_packet_unit_establish_trade(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13604,16 +13501,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_ESTABLISH_TRADE]) {
 //    case 100: return receive_packet_unit_establish_trade_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_establish_trade(struct connection *pc, final struct packet_unit_establish_trade *packet)
+//int send_packet_unit_establish_trade(Connection pc, final struct packet_unit_establish_trade *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13624,11 +13521,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_ESTABLISH_TRADE]) {
 //    case 100: return send_packet_unit_establish_trade_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_establish_trade(struct connection *pc, int unit_id)
+//int dsend_packet_unit_establish_trade(Connection pc, int unit_id)
 //{
 //  struct packet_unit_establish_trade packet, *real_packet = &packet;
 //
@@ -13643,7 +13540,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_help_build_wonder_100_fields, 1);
 //
-//static struct packet_unit_help_build_wonder *receive_packet_unit_help_build_wonder_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_help_build_wonder *receive_packet_unit_help_build_wonder_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_help_build_wonder_100_fields fields;
 //  struct packet_unit_help_build_wonder *old;
@@ -13684,7 +13581,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_help_build_wonder_100(struct connection *pc, final struct packet_unit_help_build_wonder *packet)
+//static int send_packet_unit_help_build_wonder_100(Connection pc, final struct packet_unit_help_build_wonder *packet)
 //{
 //  final struct packet_unit_help_build_wonder *real_packet = packet;
 //  packet_unit_help_build_wonder_100_fields fields;
@@ -13733,7 +13630,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_help_build_wonder(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_help_build_wonder(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -13745,17 +13642,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_HELP_BUILD_WONDER] = variant;
 //}
 //
-//struct packet_unit_help_build_wonder *receive_packet_unit_help_build_wonder(struct connection *pc, enum packet_type type)
+//struct packet_unit_help_build_wonder *receive_packet_unit_help_build_wonder(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13766,16 +13663,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_HELP_BUILD_WONDER]) {
 //    case 100: return receive_packet_unit_help_build_wonder_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_help_build_wonder(struct connection *pc, final struct packet_unit_help_build_wonder *packet)
+//int send_packet_unit_help_build_wonder(Connection pc, final struct packet_unit_help_build_wonder *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13786,11 +13683,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_HELP_BUILD_WONDER]) {
 //    case 100: return send_packet_unit_help_build_wonder_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_help_build_wonder(struct connection *pc, int unit_id)
+//int dsend_packet_unit_help_build_wonder(Connection pc, int unit_id)
 //{
 //  struct packet_unit_help_build_wonder packet, *real_packet = &packet;
 //
@@ -13805,7 +13702,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_goto_100_fields, 3);
 //
-//static struct packet_unit_goto *receive_packet_unit_goto_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_goto *receive_packet_unit_goto_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_goto_100_fields fields;
 //  struct packet_unit_goto *old;
@@ -13862,7 +13759,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_goto_100(struct connection *pc, final struct packet_unit_goto *packet)
+//static int send_packet_unit_goto_100(Connection pc, final struct packet_unit_goto *packet)
 //{
 //  final struct packet_unit_goto *real_packet = packet;
 //  packet_unit_goto_100_fields fields;
@@ -13925,7 +13822,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_goto(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_goto(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -13937,17 +13834,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_GOTO] = variant;
 //}
 //
-//struct packet_unit_goto *receive_packet_unit_goto(struct connection *pc, enum packet_type type)
+//struct packet_unit_goto *receive_packet_unit_goto(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13958,16 +13855,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_GOTO]) {
 //    case 100: return receive_packet_unit_goto_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_goto(struct connection *pc, final struct packet_unit_goto *packet)
+//int send_packet_unit_goto(Connection pc, final struct packet_unit_goto *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -13978,11 +13875,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_GOTO]) {
 //    case 100: return send_packet_unit_goto_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_goto(struct connection *pc, int unit_id, int x, int y)
+//int dsend_packet_unit_goto(Connection pc, int unit_id, int x, int y)
 //{
 //  struct packet_unit_goto packet, *real_packet = &packet;
 //
@@ -13999,7 +13896,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_orders_100_fields, 9);
 //
-//static struct packet_unit_orders *receive_packet_unit_orders_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_orders *receive_packet_unit_orders_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_orders_100_fields fields;
 //  struct packet_unit_orders *old;
@@ -14123,7 +14020,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_orders_100(struct connection *pc, final struct packet_unit_orders *packet)
+//static int send_packet_unit_orders_100(Connection pc, final struct packet_unit_orders *packet)
 //{
 //  final struct packet_unit_orders *real_packet = packet;
 //  packet_unit_orders_100_fields fields;
@@ -14281,7 +14178,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_orders(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_orders(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -14293,17 +14190,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_ORDERS] = variant;
 //}
 //
-//struct packet_unit_orders *receive_packet_unit_orders(struct connection *pc, enum packet_type type)
+//struct packet_unit_orders *receive_packet_unit_orders(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14314,16 +14211,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_ORDERS]) {
 //    case 100: return receive_packet_unit_orders_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_orders(struct connection *pc, final struct packet_unit_orders *packet)
+//int send_packet_unit_orders(Connection pc, final struct packet_unit_orders *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14334,7 +14231,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_ORDERS]) {
 //    case 100: return send_packet_unit_orders_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -14344,7 +14241,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_auto_100_fields, 1);
 //
-//static struct packet_unit_auto *receive_packet_unit_auto_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_auto *receive_packet_unit_auto_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_auto_100_fields fields;
 //  struct packet_unit_auto *old;
@@ -14385,7 +14282,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_auto_100(struct connection *pc, final struct packet_unit_auto *packet)
+//static int send_packet_unit_auto_100(Connection pc, final struct packet_unit_auto *packet)
 //{
 //  final struct packet_unit_auto *real_packet = packet;
 //  packet_unit_auto_100_fields fields;
@@ -14434,7 +14331,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_auto(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_auto(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -14446,17 +14343,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_AUTO] = variant;
 //}
 //
-//struct packet_unit_auto *receive_packet_unit_auto(struct connection *pc, enum packet_type type)
+//struct packet_unit_auto *receive_packet_unit_auto(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14467,16 +14364,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_AUTO]) {
 //    case 100: return receive_packet_unit_auto_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_auto(struct connection *pc, final struct packet_unit_auto *packet)
+//int send_packet_unit_auto(Connection pc, final struct packet_unit_auto *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14487,11 +14384,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_AUTO]) {
 //    case 100: return send_packet_unit_auto_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_auto(struct connection *pc, int unit_id)
+//int dsend_packet_unit_auto(Connection pc, int unit_id)
 //{
 //  struct packet_unit_auto packet, *real_packet = &packet;
 //
@@ -14506,7 +14403,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_load_100_fields, 2);
 //
-//static struct packet_unit_load *receive_packet_unit_load_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_load *receive_packet_unit_load_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_load_100_fields fields;
 //  struct packet_unit_load *old;
@@ -14555,7 +14452,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_load_100(struct connection *pc, final struct packet_unit_load *packet)
+//static int send_packet_unit_load_100(Connection pc, final struct packet_unit_load *packet)
 //{
 //  final struct packet_unit_load *real_packet = packet;
 //  packet_unit_load_100_fields fields;
@@ -14611,7 +14508,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_load(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_load(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -14623,17 +14520,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_LOAD] = variant;
 //}
 //
-//struct packet_unit_load *receive_packet_unit_load(struct connection *pc, enum packet_type type)
+//struct packet_unit_load *receive_packet_unit_load(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14644,16 +14541,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_LOAD]) {
 //    case 100: return receive_packet_unit_load_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_load(struct connection *pc, final struct packet_unit_load *packet)
+//int send_packet_unit_load(Connection pc, final struct packet_unit_load *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14664,11 +14561,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_LOAD]) {
 //    case 100: return send_packet_unit_load_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_load(struct connection *pc, int cargo_id, int transporter_id)
+//int dsend_packet_unit_load(Connection pc, int cargo_id, int transporter_id)
 //{
 //  struct packet_unit_load packet, *real_packet = &packet;
 //
@@ -14684,7 +14581,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_unload_100_fields, 2);
 //
-//static struct packet_unit_unload *receive_packet_unit_unload_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_unload *receive_packet_unit_unload_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_unload_100_fields fields;
 //  struct packet_unit_unload *old;
@@ -14733,7 +14630,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_unload_100(struct connection *pc, final struct packet_unit_unload *packet)
+//static int send_packet_unit_unload_100(Connection pc, final struct packet_unit_unload *packet)
 //{
 //  final struct packet_unit_unload *real_packet = packet;
 //  packet_unit_unload_100_fields fields;
@@ -14789,7 +14686,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_unload(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_unload(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -14801,17 +14698,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_UNLOAD] = variant;
 //}
 //
-//struct packet_unit_unload *receive_packet_unit_unload(struct connection *pc, enum packet_type type)
+//struct packet_unit_unload *receive_packet_unit_unload(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14822,16 +14719,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_UNLOAD]) {
 //    case 100: return receive_packet_unit_unload_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_unload(struct connection *pc, final struct packet_unit_unload *packet)
+//int send_packet_unit_unload(Connection pc, final struct packet_unit_unload *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14842,11 +14739,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_UNLOAD]) {
 //    case 100: return send_packet_unit_unload_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_unload(struct connection *pc, int cargo_id, int transporter_id)
+//int dsend_packet_unit_unload(Connection pc, int cargo_id, int transporter_id)
 //{
 //  struct packet_unit_unload packet, *real_packet = &packet;
 //
@@ -14862,7 +14759,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_upgrade_100_fields, 1);
 //
-//static struct packet_unit_upgrade *receive_packet_unit_upgrade_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_upgrade *receive_packet_unit_upgrade_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_upgrade_100_fields fields;
 //  struct packet_unit_upgrade *old;
@@ -14903,7 +14800,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_upgrade_100(struct connection *pc, final struct packet_unit_upgrade *packet)
+//static int send_packet_unit_upgrade_100(Connection pc, final struct packet_unit_upgrade *packet)
 //{
 //  final struct packet_unit_upgrade *real_packet = packet;
 //  packet_unit_upgrade_100_fields fields;
@@ -14952,7 +14849,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_upgrade(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_upgrade(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -14964,17 +14861,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_UPGRADE] = variant;
 //}
 //
-//struct packet_unit_upgrade *receive_packet_unit_upgrade(struct connection *pc, enum packet_type type)
+//struct packet_unit_upgrade *receive_packet_unit_upgrade(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -14985,16 +14882,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_UPGRADE]) {
 //    case 100: return receive_packet_unit_upgrade_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_upgrade(struct connection *pc, final struct packet_unit_upgrade *packet)
+//int send_packet_unit_upgrade(Connection pc, final struct packet_unit_upgrade *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15005,11 +14902,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_UPGRADE]) {
 //    case 100: return send_packet_unit_upgrade_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_upgrade(struct connection *pc, int unit_id)
+//int dsend_packet_unit_upgrade(Connection pc, int unit_id)
 //{
 //  struct packet_unit_upgrade packet, *real_packet = &packet;
 //
@@ -15024,7 +14921,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_nuke_100_fields, 1);
 //
-//static struct packet_unit_nuke *receive_packet_unit_nuke_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_nuke *receive_packet_unit_nuke_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_nuke_100_fields fields;
 //  struct packet_unit_nuke *old;
@@ -15065,7 +14962,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_nuke_100(struct connection *pc, final struct packet_unit_nuke *packet)
+//static int send_packet_unit_nuke_100(Connection pc, final struct packet_unit_nuke *packet)
 //{
 //  final struct packet_unit_nuke *real_packet = packet;
 //  packet_unit_nuke_100_fields fields;
@@ -15114,7 +15011,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_nuke(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_nuke(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -15126,17 +15023,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_NUKE] = variant;
 //}
 //
-//struct packet_unit_nuke *receive_packet_unit_nuke(struct connection *pc, enum packet_type type)
+//struct packet_unit_nuke *receive_packet_unit_nuke(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15147,16 +15044,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_NUKE]) {
 //    case 100: return receive_packet_unit_nuke_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_nuke(struct connection *pc, final struct packet_unit_nuke *packet)
+//int send_packet_unit_nuke(Connection pc, final struct packet_unit_nuke *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15167,11 +15064,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_NUKE]) {
 //    case 100: return send_packet_unit_nuke_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_nuke(struct connection *pc, int unit_id)
+//int dsend_packet_unit_nuke(Connection pc, int unit_id)
 //{
 //  struct packet_unit_nuke packet, *real_packet = &packet;
 //
@@ -15186,7 +15083,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_paradrop_to_100_fields, 3);
 //
-//static struct packet_unit_paradrop_to *receive_packet_unit_paradrop_to_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_paradrop_to *receive_packet_unit_paradrop_to_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_paradrop_to_100_fields fields;
 //  struct packet_unit_paradrop_to *old;
@@ -15243,7 +15140,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_paradrop_to_100(struct connection *pc, final struct packet_unit_paradrop_to *packet)
+//static int send_packet_unit_paradrop_to_100(Connection pc, final struct packet_unit_paradrop_to *packet)
 //{
 //  final struct packet_unit_paradrop_to *real_packet = packet;
 //  packet_unit_paradrop_to_100_fields fields;
@@ -15306,7 +15203,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_paradrop_to(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_paradrop_to(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -15318,17 +15215,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_PARADROP_TO] = variant;
 //}
 //
-//struct packet_unit_paradrop_to *receive_packet_unit_paradrop_to(struct connection *pc, enum packet_type type)
+//struct packet_unit_paradrop_to *receive_packet_unit_paradrop_to(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15339,16 +15236,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_PARADROP_TO]) {
 //    case 100: return receive_packet_unit_paradrop_to_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_paradrop_to(struct connection *pc, final struct packet_unit_paradrop_to *packet)
+//int send_packet_unit_paradrop_to(Connection pc, final struct packet_unit_paradrop_to *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15359,11 +15256,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_PARADROP_TO]) {
 //    case 100: return send_packet_unit_paradrop_to_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_paradrop_to(struct connection *pc, int unit_id, int x, int y)
+//int dsend_packet_unit_paradrop_to(Connection pc, int unit_id, int x, int y)
 //{
 //  struct packet_unit_paradrop_to packet, *real_packet = &packet;
 //
@@ -15380,7 +15277,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_airlift_100_fields, 2);
 //
-//static struct packet_unit_airlift *receive_packet_unit_airlift_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_airlift *receive_packet_unit_airlift_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_airlift_100_fields fields;
 //  struct packet_unit_airlift *old;
@@ -15429,7 +15326,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_airlift_100(struct connection *pc, final struct packet_unit_airlift *packet)
+//static int send_packet_unit_airlift_100(Connection pc, final struct packet_unit_airlift *packet)
 //{
 //  final struct packet_unit_airlift *real_packet = packet;
 //  packet_unit_airlift_100_fields fields;
@@ -15485,7 +15382,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_airlift(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_airlift(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -15497,17 +15394,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_AIRLIFT] = variant;
 //}
 //
-//struct packet_unit_airlift *receive_packet_unit_airlift(struct connection *pc, enum packet_type type)
+//struct packet_unit_airlift *receive_packet_unit_airlift(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15518,16 +15415,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_AIRLIFT]) {
 //    case 100: return receive_packet_unit_airlift_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_airlift(struct connection *pc, final struct packet_unit_airlift *packet)
+//int send_packet_unit_airlift(Connection pc, final struct packet_unit_airlift *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15538,11 +15435,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_AIRLIFT]) {
 //    case 100: return send_packet_unit_airlift_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_airlift(struct connection *pc, int unit_id, int city_id)
+//int dsend_packet_unit_airlift(Connection pc, int unit_id, int city_id)
 //{
 //  struct packet_unit_airlift packet, *real_packet = &packet;
 //
@@ -15558,7 +15455,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_bribe_inq_100_fields, 1);
 //
-//static struct packet_unit_bribe_inq *receive_packet_unit_bribe_inq_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_bribe_inq *receive_packet_unit_bribe_inq_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_bribe_inq_100_fields fields;
 //  struct packet_unit_bribe_inq *old;
@@ -15599,7 +15496,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_bribe_inq_100(struct connection *pc, final struct packet_unit_bribe_inq *packet)
+//static int send_packet_unit_bribe_inq_100(Connection pc, final struct packet_unit_bribe_inq *packet)
 //{
 //  final struct packet_unit_bribe_inq *real_packet = packet;
 //  packet_unit_bribe_inq_100_fields fields;
@@ -15648,7 +15545,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_bribe_inq(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_bribe_inq(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -15660,17 +15557,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_BRIBE_INQ] = variant;
 //}
 //
-//struct packet_unit_bribe_inq *receive_packet_unit_bribe_inq(struct connection *pc, enum packet_type type)
+//struct packet_unit_bribe_inq *receive_packet_unit_bribe_inq(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15681,16 +15578,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_BRIBE_INQ]) {
 //    case 100: return receive_packet_unit_bribe_inq_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_bribe_inq(struct connection *pc, final struct packet_unit_bribe_inq *packet)
+//int send_packet_unit_bribe_inq(Connection pc, final struct packet_unit_bribe_inq *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15701,11 +15598,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_BRIBE_INQ]) {
 //    case 100: return send_packet_unit_bribe_inq_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_bribe_inq(struct connection *pc, int unit_id)
+//int dsend_packet_unit_bribe_inq(Connection pc, int unit_id)
 //{
 //  struct packet_unit_bribe_inq packet, *real_packet = &packet;
 //
@@ -15720,7 +15617,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_bribe_info_100_fields, 2);
 //
-//static struct packet_unit_bribe_info *receive_packet_unit_bribe_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_bribe_info *receive_packet_unit_bribe_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_bribe_info_100_fields fields;
 //  struct packet_unit_bribe_info *old;
@@ -15769,7 +15666,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_bribe_info_100(struct connection *pc, final struct packet_unit_bribe_info *packet)
+//static int send_packet_unit_bribe_info_100(Connection pc, final struct packet_unit_bribe_info *packet)
 //{
 //  final struct packet_unit_bribe_info *real_packet = packet;
 //  packet_unit_bribe_info_100_fields fields;
@@ -15825,7 +15722,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_bribe_info(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_bribe_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -15837,17 +15734,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_BRIBE_INFO] = variant;
 //}
 //
-//struct packet_unit_bribe_info *receive_packet_unit_bribe_info(struct connection *pc, enum packet_type type)
+//struct packet_unit_bribe_info *receive_packet_unit_bribe_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15858,16 +15755,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_BRIBE_INFO]) {
 //    case 100: return receive_packet_unit_bribe_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_bribe_info(struct connection *pc, final struct packet_unit_bribe_info *packet)
+//int send_packet_unit_bribe_info(Connection pc, final struct packet_unit_bribe_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -15878,11 +15775,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_BRIBE_INFO]) {
 //    case 100: return send_packet_unit_bribe_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_bribe_info(struct connection *pc, int unit_id, int cost)
+//int dsend_packet_unit_bribe_info(Connection pc, int unit_id, int cost)
 //{
 //  struct packet_unit_bribe_info packet, *real_packet = &packet;
 //
@@ -15898,7 +15795,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_type_upgrade_100_fields, 1);
 //
-//static struct packet_unit_type_upgrade *receive_packet_unit_type_upgrade_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_type_upgrade *receive_packet_unit_type_upgrade_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_type_upgrade_100_fields fields;
 //  struct packet_unit_type_upgrade *old;
@@ -15939,7 +15836,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_type_upgrade_100(struct connection *pc, final struct packet_unit_type_upgrade *packet)
+//static int send_packet_unit_type_upgrade_100(Connection pc, final struct packet_unit_type_upgrade *packet)
 //{
 //  final struct packet_unit_type_upgrade *real_packet = packet;
 //  packet_unit_type_upgrade_100_fields fields;
@@ -15988,7 +15885,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_type_upgrade(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_type_upgrade(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -16000,17 +15897,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_TYPE_UPGRADE] = variant;
 //}
 //
-//struct packet_unit_type_upgrade *receive_packet_unit_type_upgrade(struct connection *pc, enum packet_type type)
+//struct packet_unit_type_upgrade *receive_packet_unit_type_upgrade(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16021,16 +15918,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_TYPE_UPGRADE]) {
 //    case 100: return receive_packet_unit_type_upgrade_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_type_upgrade(struct connection *pc, final struct packet_unit_type_upgrade *packet)
+//int send_packet_unit_type_upgrade(Connection pc, final struct packet_unit_type_upgrade *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16041,11 +15938,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_TYPE_UPGRADE]) {
 //    case 100: return send_packet_unit_type_upgrade_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_type_upgrade(struct connection *pc, int type)
+//int dsend_packet_unit_type_upgrade(Connection pc, int type)
 //{
 //  struct packet_unit_type_upgrade packet, *real_packet = &packet;
 //
@@ -16060,7 +15957,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_diplomat_action_100_fields, 4);
 //
-//static struct packet_unit_diplomat_action *receive_packet_unit_diplomat_action_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_diplomat_action *receive_packet_unit_diplomat_action_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_diplomat_action_100_fields fields;
 //  struct packet_unit_diplomat_action *old;
@@ -16125,7 +16022,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_diplomat_action_100(struct connection *pc, final struct packet_unit_diplomat_action *packet)
+//static int send_packet_unit_diplomat_action_100(Connection pc, final struct packet_unit_diplomat_action *packet)
 //{
 //  final struct packet_unit_diplomat_action *real_packet = packet;
 //  packet_unit_diplomat_action_100_fields fields;
@@ -16195,7 +16092,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_diplomat_action(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_diplomat_action(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -16207,17 +16104,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_DIPLOMAT_ACTION] = variant;
 //}
 //
-//struct packet_unit_diplomat_action *receive_packet_unit_diplomat_action(struct connection *pc, enum packet_type type)
+//struct packet_unit_diplomat_action *receive_packet_unit_diplomat_action(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16228,16 +16125,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_DIPLOMAT_ACTION]) {
 //    case 100: return receive_packet_unit_diplomat_action_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_diplomat_action(struct connection *pc, final struct packet_unit_diplomat_action *packet)
+//int send_packet_unit_diplomat_action(Connection pc, final struct packet_unit_diplomat_action *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16248,11 +16145,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_DIPLOMAT_ACTION]) {
 //    case 100: return send_packet_unit_diplomat_action_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_diplomat_action(struct connection *pc, int diplomat_id, enum diplomat_actions action_type, int target_id, int value)
+//int dsend_packet_unit_diplomat_action(Connection pc, int diplomat_id, enum diplomat_actions action_type, int target_id, int value)
 //{
 //  struct packet_unit_diplomat_action packet, *real_packet = &packet;
 //
@@ -16270,7 +16167,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_diplomat_popup_dialog_100_fields, 2);
 //
-//static struct packet_unit_diplomat_popup_dialog *receive_packet_unit_diplomat_popup_dialog_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_diplomat_popup_dialog *receive_packet_unit_diplomat_popup_dialog_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_diplomat_popup_dialog_100_fields fields;
 //  struct packet_unit_diplomat_popup_dialog *old;
@@ -16319,7 +16216,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_diplomat_popup_dialog_100(struct connection *pc, final struct packet_unit_diplomat_popup_dialog *packet)
+//static int send_packet_unit_diplomat_popup_dialog_100(Connection pc, final struct packet_unit_diplomat_popup_dialog *packet)
 //{
 //  final struct packet_unit_diplomat_popup_dialog *real_packet = packet;
 //  packet_unit_diplomat_popup_dialog_100_fields fields;
@@ -16375,7 +16272,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_diplomat_popup_dialog(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_diplomat_popup_dialog(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -16387,17 +16284,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_DIPLOMAT_POPUP_DIALOG] = variant;
 //}
 //
-//struct packet_unit_diplomat_popup_dialog *receive_packet_unit_diplomat_popup_dialog(struct connection *pc, enum packet_type type)
+//struct packet_unit_diplomat_popup_dialog *receive_packet_unit_diplomat_popup_dialog(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16408,16 +16305,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_DIPLOMAT_POPUP_DIALOG]) {
 //    case 100: return receive_packet_unit_diplomat_popup_dialog_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_diplomat_popup_dialog(struct connection *pc, final struct packet_unit_diplomat_popup_dialog *packet)
+//int send_packet_unit_diplomat_popup_dialog(Connection pc, final struct packet_unit_diplomat_popup_dialog *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16428,7 +16325,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_DIPLOMAT_POPUP_DIALOG]) {
 //    case 100: return send_packet_unit_diplomat_popup_dialog_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -16439,7 +16336,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_unit_diplomat_popup_dialog(struct connection *pc, int diplomat_id, int target_id)
+//int dsend_packet_unit_diplomat_popup_dialog(Connection pc, int diplomat_id, int target_id)
 //{
 //  struct packet_unit_diplomat_popup_dialog packet, *real_packet = &packet;
 //
@@ -16465,7 +16362,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_unit_change_activity_100_fields, 3);
 //
-//static struct packet_unit_change_activity *receive_packet_unit_change_activity_100(struct connection *pc, enum packet_type type)
+//static struct packet_unit_change_activity *receive_packet_unit_change_activity_100(Connection pc, enum packet_type type)
 //{
 //  packet_unit_change_activity_100_fields fields;
 //  struct packet_unit_change_activity *old;
@@ -16522,7 +16419,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_unit_change_activity_100(struct connection *pc, final struct packet_unit_change_activity *packet)
+//static int send_packet_unit_change_activity_100(Connection pc, final struct packet_unit_change_activity *packet)
 //{
 //  final struct packet_unit_change_activity *real_packet = packet;
 //  packet_unit_change_activity_100_fields fields;
@@ -16585,7 +16482,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_unit_change_activity(struct connection *pc)
+//static void ensure_valid_variant_packet_unit_change_activity(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -16597,17 +16494,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_UNIT_CHANGE_ACTIVITY] = variant;
 //}
 //
-//struct packet_unit_change_activity *receive_packet_unit_change_activity(struct connection *pc, enum packet_type type)
+//struct packet_unit_change_activity *receive_packet_unit_change_activity(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16618,16 +16515,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_CHANGE_ACTIVITY]) {
 //    case 100: return receive_packet_unit_change_activity_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_unit_change_activity(struct connection *pc, final struct packet_unit_change_activity *packet)
+//int send_packet_unit_change_activity(Connection pc, final struct packet_unit_change_activity *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16638,11 +16535,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_UNIT_CHANGE_ACTIVITY]) {
 //    case 100: return send_packet_unit_change_activity_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_unit_change_activity(struct connection *pc, int unit_id, enum unit_activity activity, enum int activity_target)
+//int dsend_packet_unit_change_activity(Connection pc, int unit_id, enum unit_activity activity, enum int activity_target)
 //{
 //  struct packet_unit_change_activity packet, *real_packet = &packet;
 //
@@ -16659,7 +16556,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_init_meeting_req_100_fields, 1);
 //
-//static struct packet_diplomacy_init_meeting_req *receive_packet_diplomacy_init_meeting_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_init_meeting_req *receive_packet_diplomacy_init_meeting_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_init_meeting_req_100_fields fields;
 //  struct packet_diplomacy_init_meeting_req *old;
@@ -16700,7 +16597,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_init_meeting_req_100(struct connection *pc, final struct packet_diplomacy_init_meeting_req *packet)
+//static int send_packet_diplomacy_init_meeting_req_100(Connection pc, final struct packet_diplomacy_init_meeting_req *packet)
 //{
 //  final struct packet_diplomacy_init_meeting_req *real_packet = packet;
 //  packet_diplomacy_init_meeting_req_100_fields fields;
@@ -16749,7 +16646,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_init_meeting_req(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_init_meeting_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -16761,17 +16658,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_INIT_MEETING_REQ] = variant;
 //}
 //
-//struct packet_diplomacy_init_meeting_req *receive_packet_diplomacy_init_meeting_req(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_init_meeting_req *receive_packet_diplomacy_init_meeting_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16782,16 +16679,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_INIT_MEETING_REQ]) {
 //    case 100: return receive_packet_diplomacy_init_meeting_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_init_meeting_req(struct connection *pc, final struct packet_diplomacy_init_meeting_req *packet)
+//int send_packet_diplomacy_init_meeting_req(Connection pc, final struct packet_diplomacy_init_meeting_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16802,11 +16699,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_INIT_MEETING_REQ]) {
 //    case 100: return send_packet_diplomacy_init_meeting_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_diplomacy_init_meeting_req(struct connection *pc, int counterpart)
+//int dsend_packet_diplomacy_init_meeting_req(Connection pc, int counterpart)
 //{
 //  struct packet_diplomacy_init_meeting_req packet, *real_packet = &packet;
 //
@@ -16821,7 +16718,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_init_meeting_100_fields, 2);
 //
-//static struct packet_diplomacy_init_meeting *receive_packet_diplomacy_init_meeting_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_init_meeting *receive_packet_diplomacy_init_meeting_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_init_meeting_100_fields fields;
 //  struct packet_diplomacy_init_meeting *old;
@@ -16870,7 +16767,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_init_meeting_100(struct connection *pc, final struct packet_diplomacy_init_meeting *packet)
+//static int send_packet_diplomacy_init_meeting_100(Connection pc, final struct packet_diplomacy_init_meeting *packet)
 //{
 //  final struct packet_diplomacy_init_meeting *real_packet = packet;
 //  packet_diplomacy_init_meeting_100_fields fields;
@@ -16926,7 +16823,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_init_meeting(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_init_meeting(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -16938,17 +16835,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_INIT_MEETING] = variant;
 //}
 //
-//struct packet_diplomacy_init_meeting *receive_packet_diplomacy_init_meeting(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_init_meeting *receive_packet_diplomacy_init_meeting(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16959,16 +16856,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_INIT_MEETING]) {
 //    case 100: return receive_packet_diplomacy_init_meeting_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_init_meeting(struct connection *pc, final struct packet_diplomacy_init_meeting *packet)
+//int send_packet_diplomacy_init_meeting(Connection pc, final struct packet_diplomacy_init_meeting *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -16979,7 +16876,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_INIT_MEETING]) {
 //    case 100: return send_packet_diplomacy_init_meeting_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -16990,7 +16887,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_diplomacy_init_meeting(struct connection *pc, int counterpart, int initiated_from)
+//int dsend_packet_diplomacy_init_meeting(Connection pc, int counterpart, int initiated_from)
 //{
 //  struct packet_diplomacy_init_meeting packet, *real_packet = &packet;
 //
@@ -17016,7 +16913,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_cancel_meeting_req_100_fields, 1);
 //
-//static struct packet_diplomacy_cancel_meeting_req *receive_packet_diplomacy_cancel_meeting_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_cancel_meeting_req *receive_packet_diplomacy_cancel_meeting_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_cancel_meeting_req_100_fields fields;
 //  struct packet_diplomacy_cancel_meeting_req *old;
@@ -17057,7 +16954,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_cancel_meeting_req_100(struct connection *pc, final struct packet_diplomacy_cancel_meeting_req *packet)
+//static int send_packet_diplomacy_cancel_meeting_req_100(Connection pc, final struct packet_diplomacy_cancel_meeting_req *packet)
 //{
 //  final struct packet_diplomacy_cancel_meeting_req *real_packet = packet;
 //  packet_diplomacy_cancel_meeting_req_100_fields fields;
@@ -17106,7 +17003,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_cancel_meeting_req(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_cancel_meeting_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -17118,17 +17015,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_CANCEL_MEETING_REQ] = variant;
 //}
 //
-//struct packet_diplomacy_cancel_meeting_req *receive_packet_diplomacy_cancel_meeting_req(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_cancel_meeting_req *receive_packet_diplomacy_cancel_meeting_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17139,16 +17036,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CANCEL_MEETING_REQ]) {
 //    case 100: return receive_packet_diplomacy_cancel_meeting_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_cancel_meeting_req(struct connection *pc, final struct packet_diplomacy_cancel_meeting_req *packet)
+//int send_packet_diplomacy_cancel_meeting_req(Connection pc, final struct packet_diplomacy_cancel_meeting_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17159,11 +17056,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CANCEL_MEETING_REQ]) {
 //    case 100: return send_packet_diplomacy_cancel_meeting_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_diplomacy_cancel_meeting_req(struct connection *pc, int counterpart)
+//int dsend_packet_diplomacy_cancel_meeting_req(Connection pc, int counterpart)
 //{
 //  struct packet_diplomacy_cancel_meeting_req packet, *real_packet = &packet;
 //
@@ -17178,7 +17075,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_cancel_meeting_100_fields, 2);
 //
-//static struct packet_diplomacy_cancel_meeting *receive_packet_diplomacy_cancel_meeting_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_cancel_meeting *receive_packet_diplomacy_cancel_meeting_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_cancel_meeting_100_fields fields;
 //  struct packet_diplomacy_cancel_meeting *old;
@@ -17227,7 +17124,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_cancel_meeting_100(struct connection *pc, final struct packet_diplomacy_cancel_meeting *packet)
+//static int send_packet_diplomacy_cancel_meeting_100(Connection pc, final struct packet_diplomacy_cancel_meeting *packet)
 //{
 //  final struct packet_diplomacy_cancel_meeting *real_packet = packet;
 //  packet_diplomacy_cancel_meeting_100_fields fields;
@@ -17283,7 +17180,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_cancel_meeting(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_cancel_meeting(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -17295,17 +17192,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_CANCEL_MEETING] = variant;
 //}
 //
-//struct packet_diplomacy_cancel_meeting *receive_packet_diplomacy_cancel_meeting(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_cancel_meeting *receive_packet_diplomacy_cancel_meeting(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17316,16 +17213,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CANCEL_MEETING]) {
 //    case 100: return receive_packet_diplomacy_cancel_meeting_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_cancel_meeting(struct connection *pc, final struct packet_diplomacy_cancel_meeting *packet)
+//int send_packet_diplomacy_cancel_meeting(Connection pc, final struct packet_diplomacy_cancel_meeting *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17336,7 +17233,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CANCEL_MEETING]) {
 //    case 100: return send_packet_diplomacy_cancel_meeting_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -17347,7 +17244,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_diplomacy_cancel_meeting(struct connection *pc, int counterpart, int initiated_from)
+//int dsend_packet_diplomacy_cancel_meeting(Connection pc, int counterpart, int initiated_from)
 //{
 //  struct packet_diplomacy_cancel_meeting packet, *real_packet = &packet;
 //
@@ -17373,7 +17270,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_create_clause_req_100_fields, 4);
 //
-//static struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_create_clause_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_create_clause_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_create_clause_req_100_fields fields;
 //  struct packet_diplomacy_create_clause_req *old;
@@ -17438,7 +17335,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_create_clause_req_100(struct connection *pc, final struct packet_diplomacy_create_clause_req *packet)
+//static int send_packet_diplomacy_create_clause_req_100(Connection pc, final struct packet_diplomacy_create_clause_req *packet)
 //{
 //  final struct packet_diplomacy_create_clause_req *real_packet = packet;
 //  packet_diplomacy_create_clause_req_100_fields fields;
@@ -17508,7 +17405,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_create_clause_req(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_create_clause_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -17520,17 +17417,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_CREATE_CLAUSE_REQ] = variant;
 //}
 //
-//struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_create_clause_req(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_create_clause_req *receive_packet_diplomacy_create_clause_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17541,16 +17438,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CREATE_CLAUSE_REQ]) {
 //    case 100: return receive_packet_diplomacy_create_clause_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_create_clause_req(struct connection *pc, final struct packet_diplomacy_create_clause_req *packet)
+//int send_packet_diplomacy_create_clause_req(Connection pc, final struct packet_diplomacy_create_clause_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17561,11 +17458,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CREATE_CLAUSE_REQ]) {
 //    case 100: return send_packet_diplomacy_create_clause_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_diplomacy_create_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+//int dsend_packet_diplomacy_create_clause_req(Connection pc, int counterpart, int giver, enum clause_type type, int value)
 //{
 //  struct packet_diplomacy_create_clause_req packet, *real_packet = &packet;
 //
@@ -17583,7 +17480,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_create_clause_100_fields, 4);
 //
-//static struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_clause_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_clause_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_create_clause_100_fields fields;
 //  struct packet_diplomacy_create_clause *old;
@@ -17648,7 +17545,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_create_clause_100(struct connection *pc, final struct packet_diplomacy_create_clause *packet)
+//static int send_packet_diplomacy_create_clause_100(Connection pc, final struct packet_diplomacy_create_clause *packet)
 //{
 //  final struct packet_diplomacy_create_clause *real_packet = packet;
 //  packet_diplomacy_create_clause_100_fields fields;
@@ -17718,7 +17615,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_create_clause(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_create_clause(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -17730,17 +17627,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_CREATE_CLAUSE] = variant;
 //}
 //
-//struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_clause(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_create_clause *receive_packet_diplomacy_create_clause(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17751,16 +17648,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CREATE_CLAUSE]) {
 //    case 100: return receive_packet_diplomacy_create_clause_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_create_clause(struct connection *pc, final struct packet_diplomacy_create_clause *packet)
+//int send_packet_diplomacy_create_clause(Connection pc, final struct packet_diplomacy_create_clause *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17771,7 +17668,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CREATE_CLAUSE]) {
 //    case 100: return send_packet_diplomacy_create_clause_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -17782,7 +17679,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_diplomacy_create_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+//int dsend_packet_diplomacy_create_clause(Connection pc, int counterpart, int giver, enum clause_type type, int value)
 //{
 //  struct packet_diplomacy_create_clause packet, *real_packet = &packet;
 //
@@ -17812,7 +17709,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_remove_clause_req_100_fields, 4);
 //
-//static struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remove_clause_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remove_clause_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_remove_clause_req_100_fields fields;
 //  struct packet_diplomacy_remove_clause_req *old;
@@ -17877,7 +17774,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_remove_clause_req_100(struct connection *pc, final struct packet_diplomacy_remove_clause_req *packet)
+//static int send_packet_diplomacy_remove_clause_req_100(Connection pc, final struct packet_diplomacy_remove_clause_req *packet)
 //{
 //  final struct packet_diplomacy_remove_clause_req *real_packet = packet;
 //  packet_diplomacy_remove_clause_req_100_fields fields;
@@ -17947,7 +17844,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_remove_clause_req(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_remove_clause_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -17959,17 +17856,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ] = variant;
 //}
 //
-//struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remove_clause_req(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_remove_clause_req *receive_packet_diplomacy_remove_clause_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -17980,16 +17877,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ]) {
 //    case 100: return receive_packet_diplomacy_remove_clause_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_remove_clause_req(struct connection *pc, final struct packet_diplomacy_remove_clause_req *packet)
+//int send_packet_diplomacy_remove_clause_req(Connection pc, final struct packet_diplomacy_remove_clause_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18000,11 +17897,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_REMOVE_CLAUSE_REQ]) {
 //    case 100: return send_packet_diplomacy_remove_clause_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_diplomacy_remove_clause_req(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+//int dsend_packet_diplomacy_remove_clause_req(Connection pc, int counterpart, int giver, enum clause_type type, int value)
 //{
 //  struct packet_diplomacy_remove_clause_req packet, *real_packet = &packet;
 //
@@ -18022,7 +17919,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_remove_clause_100_fields, 4);
 //
-//static struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_clause_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_clause_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_remove_clause_100_fields fields;
 //  struct packet_diplomacy_remove_clause *old;
@@ -18087,7 +17984,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_remove_clause_100(struct connection *pc, final struct packet_diplomacy_remove_clause *packet)
+//static int send_packet_diplomacy_remove_clause_100(Connection pc, final struct packet_diplomacy_remove_clause *packet)
 //{
 //  final struct packet_diplomacy_remove_clause *real_packet = packet;
 //  packet_diplomacy_remove_clause_100_fields fields;
@@ -18157,7 +18054,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_remove_clause(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_remove_clause(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -18169,17 +18066,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_REMOVE_CLAUSE] = variant;
 //}
 //
-//struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_clause(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_remove_clause *receive_packet_diplomacy_remove_clause(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18190,16 +18087,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_REMOVE_CLAUSE]) {
 //    case 100: return receive_packet_diplomacy_remove_clause_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_remove_clause(struct connection *pc, final struct packet_diplomacy_remove_clause *packet)
+//int send_packet_diplomacy_remove_clause(Connection pc, final struct packet_diplomacy_remove_clause *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18210,7 +18107,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_REMOVE_CLAUSE]) {
 //    case 100: return send_packet_diplomacy_remove_clause_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -18221,7 +18118,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_diplomacy_remove_clause(struct connection *pc, int counterpart, int giver, enum clause_type type, int value)
+//int dsend_packet_diplomacy_remove_clause(Connection pc, int counterpart, int giver, enum clause_type type, int value)
 //{
 //  struct packet_diplomacy_remove_clause packet, *real_packet = &packet;
 //
@@ -18251,7 +18148,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_accept_treaty_req_100_fields, 1);
 //
-//static struct packet_diplomacy_accept_treaty_req *receive_packet_diplomacy_accept_treaty_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_accept_treaty_req *receive_packet_diplomacy_accept_treaty_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_accept_treaty_req_100_fields fields;
 //  struct packet_diplomacy_accept_treaty_req *old;
@@ -18292,7 +18189,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_accept_treaty_req_100(struct connection *pc, final struct packet_diplomacy_accept_treaty_req *packet)
+//static int send_packet_diplomacy_accept_treaty_req_100(Connection pc, final struct packet_diplomacy_accept_treaty_req *packet)
 //{
 //  final struct packet_diplomacy_accept_treaty_req *real_packet = packet;
 //  packet_diplomacy_accept_treaty_req_100_fields fields;
@@ -18341,7 +18238,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_accept_treaty_req(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_accept_treaty_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -18353,17 +18250,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_ACCEPT_TREATY_REQ] = variant;
 //}
 //
-//struct packet_diplomacy_accept_treaty_req *receive_packet_diplomacy_accept_treaty_req(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_accept_treaty_req *receive_packet_diplomacy_accept_treaty_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18374,16 +18271,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_ACCEPT_TREATY_REQ]) {
 //    case 100: return receive_packet_diplomacy_accept_treaty_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_accept_treaty_req(struct connection *pc, final struct packet_diplomacy_accept_treaty_req *packet)
+//int send_packet_diplomacy_accept_treaty_req(Connection pc, final struct packet_diplomacy_accept_treaty_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18394,11 +18291,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_ACCEPT_TREATY_REQ]) {
 //    case 100: return send_packet_diplomacy_accept_treaty_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_diplomacy_accept_treaty_req(struct connection *pc, int counterpart)
+//int dsend_packet_diplomacy_accept_treaty_req(Connection pc, int counterpart)
 //{
 //  struct packet_diplomacy_accept_treaty_req packet, *real_packet = &packet;
 //
@@ -18413,7 +18310,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_accept_treaty_100_fields, 3);
 //
-//static struct packet_diplomacy_accept_treaty *receive_packet_diplomacy_accept_treaty_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_accept_treaty *receive_packet_diplomacy_accept_treaty_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_accept_treaty_100_fields fields;
 //  struct packet_diplomacy_accept_treaty *old;
@@ -18456,7 +18353,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_accept_treaty_100(struct connection *pc, final struct packet_diplomacy_accept_treaty *packet)
+//static int send_packet_diplomacy_accept_treaty_100(Connection pc, final struct packet_diplomacy_accept_treaty *packet)
 //{
 //  final struct packet_diplomacy_accept_treaty *real_packet = packet;
 //  packet_diplomacy_accept_treaty_100_fields fields;
@@ -18515,7 +18412,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_accept_treaty(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_accept_treaty(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -18527,17 +18424,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_ACCEPT_TREATY] = variant;
 //}
 //
-//struct packet_diplomacy_accept_treaty *receive_packet_diplomacy_accept_treaty(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_accept_treaty *receive_packet_diplomacy_accept_treaty(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18548,16 +18445,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_ACCEPT_TREATY]) {
 //    case 100: return receive_packet_diplomacy_accept_treaty_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_accept_treaty(struct connection *pc, final struct packet_diplomacy_accept_treaty *packet)
+//int send_packet_diplomacy_accept_treaty(Connection pc, final struct packet_diplomacy_accept_treaty *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18568,7 +18465,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_ACCEPT_TREATY]) {
 //    case 100: return send_packet_diplomacy_accept_treaty_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -18579,7 +18476,7 @@ public class Packets_gen{
 //  } }
 //}
 //
-//int dsend_packet_diplomacy_accept_treaty(struct connection *pc, int counterpart, boolean I_accepted, boolean other_accepted)
+//int dsend_packet_diplomacy_accept_treaty(Connection pc, int counterpart, boolean I_accepted, boolean other_accepted)
 //{
 //  struct packet_diplomacy_accept_treaty packet, *real_packet = &packet;
 //
@@ -18607,7 +18504,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_diplomacy_cancel_pact_100_fields, 2);
 //
-//static struct packet_diplomacy_cancel_pact *receive_packet_diplomacy_cancel_pact_100(struct connection *pc, enum packet_type type)
+//static struct packet_diplomacy_cancel_pact *receive_packet_diplomacy_cancel_pact_100(Connection pc, enum packet_type type)
 //{
 //  packet_diplomacy_cancel_pact_100_fields fields;
 //  struct packet_diplomacy_cancel_pact *old;
@@ -18656,7 +18553,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_diplomacy_cancel_pact_100(struct connection *pc, final struct packet_diplomacy_cancel_pact *packet)
+//static int send_packet_diplomacy_cancel_pact_100(Connection pc, final struct packet_diplomacy_cancel_pact *packet)
 //{
 //  final struct packet_diplomacy_cancel_pact *real_packet = packet;
 //  packet_diplomacy_cancel_pact_100_fields fields;
@@ -18712,7 +18609,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_diplomacy_cancel_pact(struct connection *pc)
+//static void ensure_valid_variant_packet_diplomacy_cancel_pact(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -18724,17 +18621,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_DIPLOMACY_CANCEL_PACT] = variant;
 //}
 //
-//struct packet_diplomacy_cancel_pact *receive_packet_diplomacy_cancel_pact(struct connection *pc, enum packet_type type)
+//struct packet_diplomacy_cancel_pact *receive_packet_diplomacy_cancel_pact(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18745,16 +18642,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CANCEL_PACT]) {
 //    case 100: return receive_packet_diplomacy_cancel_pact_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_diplomacy_cancel_pact(struct connection *pc, final struct packet_diplomacy_cancel_pact *packet)
+//int send_packet_diplomacy_cancel_pact(Connection pc, final struct packet_diplomacy_cancel_pact *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18765,11 +18662,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_DIPLOMACY_CANCEL_PACT]) {
 //    case 100: return send_packet_diplomacy_cancel_pact_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_diplomacy_cancel_pact(struct connection *pc, int other_player_id, enum clause_type clause)
+//int dsend_packet_diplomacy_cancel_pact(Connection pc, int other_player_id, enum clause_type clause)
 //{
 //  struct packet_diplomacy_cancel_pact packet, *real_packet = &packet;
 //
@@ -18785,7 +18682,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_page_msg_100_fields, 2);
 //
-//static struct packet_page_msg *receive_packet_page_msg_100(struct connection *pc, enum packet_type type)
+//static struct packet_page_msg *receive_packet_page_msg_100(Connection pc, enum packet_type type)
 //{
 //  packet_page_msg_100_fields fields;
 //  struct packet_page_msg *old;
@@ -18829,7 +18726,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_page_msg_100(struct connection *pc, final struct packet_page_msg *packet)
+//static int send_packet_page_msg_100(Connection pc, final struct packet_page_msg *packet)
 //{
 //  final struct packet_page_msg *real_packet = packet;
 //  packet_page_msg_100_fields fields;
@@ -18885,7 +18782,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_page_msg(struct connection *pc)
+//static void ensure_valid_variant_packet_page_msg(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -18897,17 +18794,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_PAGE_MSG] = variant;
 //}
 //
-//struct packet_page_msg *receive_packet_page_msg(struct connection *pc, enum packet_type type)
+//struct packet_page_msg *receive_packet_page_msg(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18918,16 +18815,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PAGE_MSG]) {
 //    case 100: return receive_packet_page_msg_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_page_msg(struct connection *pc, final struct packet_page_msg *packet)
+//int send_packet_page_msg(Connection pc, final struct packet_page_msg *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -18938,7 +18835,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_PAGE_MSG]) {
 //    case 100: return send_packet_page_msg_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -18955,7 +18852,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_report_req_100_fields, 1);
 //
-//static struct packet_report_req *receive_packet_report_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_report_req *receive_packet_report_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_report_req_100_fields fields;
 //  struct packet_report_req *old;
@@ -18996,7 +18893,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_report_req_100(struct connection *pc, final struct packet_report_req *packet)
+//static int send_packet_report_req_100(Connection pc, final struct packet_report_req *packet)
 //{
 //  final struct packet_report_req *real_packet = packet;
 //  packet_report_req_100_fields fields;
@@ -19045,7 +18942,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_report_req(struct connection *pc)
+//static void ensure_valid_variant_packet_report_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -19057,17 +18954,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_REPORT_REQ] = variant;
 //}
 //
-//struct packet_report_req *receive_packet_report_req(struct connection *pc, enum packet_type type)
+//struct packet_report_req *receive_packet_report_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19078,16 +18975,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_REPORT_REQ]) {
 //    case 100: return receive_packet_report_req_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_report_req(struct connection *pc, final struct packet_report_req *packet)
+//int send_packet_report_req(Connection pc, final struct packet_report_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19098,11 +18995,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_REPORT_REQ]) {
 //    case 100: return send_packet_report_req_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_report_req(struct connection *pc, enum report_type type)
+//int dsend_packet_report_req(Connection pc, enum report_type type)
 //{
 //  struct packet_report_req packet, *real_packet = &packet;
 //
@@ -19134,7 +19031,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_conn_info_100_fields, 8);
 //
-//static struct packet_conn_info *receive_packet_conn_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_conn_info *receive_packet_conn_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_conn_info_100_fields fields;
 //  struct packet_conn_info *old;
@@ -19205,7 +19102,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_info_100(struct connection *pc, final struct packet_conn_info *packet)
+//static int send_packet_conn_info_100(Connection pc, final struct packet_conn_info *packet)
 //{
 //  final struct packet_conn_info *real_packet = packet;
 //  packet_conn_info_100_fields fields;
@@ -19298,7 +19195,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_conn_info(struct connection *pc)
+//static void ensure_valid_variant_packet_conn_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -19310,17 +19207,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CONN_INFO] = variant;
 //}
 //
-//struct packet_conn_info *receive_packet_conn_info(struct connection *pc, enum packet_type type)
+//struct packet_conn_info *receive_packet_conn_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19331,16 +19228,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CONN_INFO]) {
 //    case 100: return receive_packet_conn_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_conn_info(struct connection *pc, final struct packet_conn_info *packet)
+//int send_packet_conn_info(Connection pc, final struct packet_conn_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19351,7 +19248,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CONN_INFO]) {
 //    case 100: return send_packet_conn_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -19368,7 +19265,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_conn_ping_info_100_fields, 3);
 //
-//static struct packet_conn_ping_info *receive_packet_conn_ping_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_conn_ping_info *receive_packet_conn_ping_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_conn_ping_info_100_fields fields;
 //  struct packet_conn_ping_info *old;
@@ -19445,7 +19342,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_ping_info_100(struct connection *pc, final struct packet_conn_ping_info *packet)
+//static int send_packet_conn_ping_info_100(Connection pc, final struct packet_conn_ping_info *packet)
 //{
 //  final struct packet_conn_ping_info *real_packet = packet;
 //  packet_conn_ping_info_100_fields fields;
@@ -19552,7 +19449,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_conn_ping_info_101_fields, 3);
 //
-//static struct packet_conn_ping_info *receive_packet_conn_ping_info_101(struct connection *pc, enum packet_type type)
+//static struct packet_conn_ping_info *receive_packet_conn_ping_info_101(Connection pc, enum packet_type type)
 //{
 //  packet_conn_ping_info_101_fields fields;
 //  struct packet_conn_ping_info *old;
@@ -19629,7 +19526,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_ping_info_101(struct connection *pc, final struct packet_conn_ping_info *packet)
+//static int send_packet_conn_ping_info_101(Connection pc, final struct packet_conn_ping_info *packet)
 //{
 //  final struct packet_conn_ping_info *real_packet = packet;
 //  packet_conn_ping_info_101_fields fields;
@@ -19730,7 +19627,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_conn_ping_info(struct connection *pc)
+//static void ensure_valid_variant_packet_conn_ping_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -19744,17 +19641,17 @@ public class Packets_gen{
 //  } else if(!(has_capability("conn_ping_info", pc->capability) && has_capability("conn_ping_info", our_capability))) {
 //    variant = 101;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CONN_PING_INFO] = variant;
 //}
 //
-//struct packet_conn_ping_info *receive_packet_conn_ping_info(struct connection *pc, enum packet_type type)
+//struct packet_conn_ping_info *receive_packet_conn_ping_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19766,16 +19663,16 @@ public class Packets_gen{
 //  switch(pc->phs.variant[PACKET_CONN_PING_INFO]) {
 //    case 100: return receive_packet_conn_ping_info_100(pc, type);
 //    case 101: return receive_packet_conn_ping_info_101(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_conn_ping_info(struct connection *pc, final struct packet_conn_ping_info *packet)
+//int send_packet_conn_ping_info(Connection pc, final struct packet_conn_ping_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19787,7 +19684,7 @@ public class Packets_gen{
 //  switch(pc->phs.variant[PACKET_CONN_PING_INFO]) {
 //    case 100: return send_packet_conn_ping_info_100(pc, packet);
 //    case 101: return send_packet_conn_ping_info_101(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -19798,20 +19695,20 @@ public class Packets_gen{
 //  } }
 //}
 //
-//static struct packet_conn_ping *receive_packet_conn_ping_100(struct connection *pc, enum packet_type type)
+//static struct packet_conn_ping *receive_packet_conn_ping_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_conn_ping, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_ping_100(struct connection *pc)
+//static int send_packet_conn_ping_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_CONN_PING);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_conn_ping(struct connection *pc)
+//static void ensure_valid_variant_packet_conn_ping(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -19823,17 +19720,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CONN_PING] = variant;
 //}
 //
-//struct packet_conn_ping *receive_packet_conn_ping(struct connection *pc, enum packet_type type)
+//struct packet_conn_ping *receive_packet_conn_ping(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19844,16 +19741,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CONN_PING]) {
 //    case 100: return receive_packet_conn_ping_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_conn_ping(struct connection *pc)
+//int send_packet_conn_ping(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19864,24 +19761,24 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CONN_PING]) {
 //    case 100: return send_packet_conn_ping_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//static struct packet_conn_pong *receive_packet_conn_pong_100(struct connection *pc, enum packet_type type)
+//static struct packet_conn_pong *receive_packet_conn_pong_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_conn_pong, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_conn_pong_100(struct connection *pc)
+//static int send_packet_conn_pong_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_CONN_PONG);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_conn_pong(struct connection *pc)
+//static void ensure_valid_variant_packet_conn_pong(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -19893,17 +19790,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CONN_PONG] = variant;
 //}
 //
-//struct packet_conn_pong *receive_packet_conn_pong(struct connection *pc, enum packet_type type)
+//struct packet_conn_pong *receive_packet_conn_pong(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19914,16 +19811,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CONN_PONG]) {
 //    case 100: return receive_packet_conn_pong_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_conn_pong(struct connection *pc)
+//int send_packet_conn_pong(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19934,24 +19831,24 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_CONN_PONG]) {
 //    case 100: return send_packet_conn_pong_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//static struct packet_before_new_year *receive_packet_before_new_year_100(struct connection *pc, enum packet_type type)
+//static struct packet_before_new_year *receive_packet_before_new_year_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_before_new_year, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_before_new_year_100(struct connection *pc)
+//static int send_packet_before_new_year_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_BEFORE_NEW_YEAR);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_before_new_year(struct connection *pc)
+//static void ensure_valid_variant_packet_before_new_year(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -19963,17 +19860,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_BEFORE_NEW_YEAR] = variant;
 //}
 //
-//struct packet_before_new_year *receive_packet_before_new_year(struct connection *pc, enum packet_type type)
+//struct packet_before_new_year *receive_packet_before_new_year(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -19984,16 +19881,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_BEFORE_NEW_YEAR]) {
 //    case 100: return receive_packet_before_new_year_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_before_new_year(struct connection *pc)
+//int send_packet_before_new_year(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20004,7 +19901,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_BEFORE_NEW_YEAR]) {
 //    case 100: return send_packet_before_new_year_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -20015,20 +19912,20 @@ public class Packets_gen{
 //  } }
 //}
 //
-//static struct packet_start_turn *receive_packet_start_turn_100(struct connection *pc, enum packet_type type)
+//static struct packet_start_turn *receive_packet_start_turn_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_start_turn, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_start_turn_100(struct connection *pc)
+//static int send_packet_start_turn_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_START_TURN);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_start_turn(struct connection *pc)
+//static void ensure_valid_variant_packet_start_turn(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -20040,17 +19937,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_START_TURN] = variant;
 //}
 //
-//struct packet_start_turn *receive_packet_start_turn(struct connection *pc, enum packet_type type)
+//struct packet_start_turn *receive_packet_start_turn(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20061,16 +19958,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_START_TURN]) {
 //    case 100: return receive_packet_start_turn_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_start_turn(struct connection *pc)
+//int send_packet_start_turn(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20081,7 +19978,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_START_TURN]) {
 //    case 100: return send_packet_start_turn_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -20098,7 +19995,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_new_year_100_fields, 2);
 //
-//static struct packet_new_year *receive_packet_new_year_100(struct connection *pc, enum packet_type type)
+//static struct packet_new_year *receive_packet_new_year_100(Connection pc, enum packet_type type)
 //{
 //  packet_new_year_100_fields fields;
 //  struct packet_new_year *old;
@@ -20147,7 +20044,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_new_year_100(struct connection *pc, final struct packet_new_year *packet)
+//static int send_packet_new_year_100(Connection pc, final struct packet_new_year *packet)
 //{
 //  final struct packet_new_year *real_packet = packet;
 //  packet_new_year_100_fields fields;
@@ -20203,7 +20100,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_new_year(struct connection *pc)
+//static void ensure_valid_variant_packet_new_year(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -20215,17 +20112,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_NEW_YEAR] = variant;
 //}
 //
-//struct packet_new_year *receive_packet_new_year(struct connection *pc, enum packet_type type)
+//struct packet_new_year *receive_packet_new_year(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20236,16 +20133,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NEW_YEAR]) {
 //    case 100: return receive_packet_new_year_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_new_year(struct connection *pc, final struct packet_new_year *packet)
+//int send_packet_new_year(Connection pc, final struct packet_new_year *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20256,7 +20153,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_NEW_YEAR]) {
 //    case 100: return send_packet_new_year_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -20267,20 +20164,20 @@ public class Packets_gen{
 //  } }
 //}
 //
-//static struct packet_spaceship_launch *receive_packet_spaceship_launch_100(struct connection *pc, enum packet_type type)
+//static struct packet_spaceship_launch *receive_packet_spaceship_launch_100(Connection pc, enum packet_type type)
 //{
 //  RECEIVE_PACKET_START(packet_spaceship_launch, real_packet);
 //
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_spaceship_launch_100(struct connection *pc)
+//static int send_packet_spaceship_launch_100(Connection pc)
 //{
 //  SEND_PACKET_START(PACKET_SPACESHIP_LAUNCH);
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_spaceship_launch(struct connection *pc)
+//static void ensure_valid_variant_packet_spaceship_launch(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -20292,17 +20189,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SPACESHIP_LAUNCH] = variant;
 //}
 //
-//struct packet_spaceship_launch *receive_packet_spaceship_launch(struct connection *pc, enum packet_type type)
+//struct packet_spaceship_launch *receive_packet_spaceship_launch(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20313,16 +20210,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SPACESHIP_LAUNCH]) {
 //    case 100: return receive_packet_spaceship_launch_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_spaceship_launch(struct connection *pc)
+//int send_packet_spaceship_launch(Connection pc)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20333,7 +20230,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SPACESHIP_LAUNCH]) {
 //    case 100: return send_packet_spaceship_launch_100(pc);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -20343,7 +20240,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_spaceship_place_100_fields, 2);
 //
-//static struct packet_spaceship_place *receive_packet_spaceship_place_100(struct connection *pc, enum packet_type type)
+//static struct packet_spaceship_place *receive_packet_spaceship_place_100(Connection pc, enum packet_type type)
 //{
 //  packet_spaceship_place_100_fields fields;
 //  struct packet_spaceship_place *old;
@@ -20392,7 +20289,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_spaceship_place_100(struct connection *pc, final struct packet_spaceship_place *packet)
+//static int send_packet_spaceship_place_100(Connection pc, final struct packet_spaceship_place *packet)
 //{
 //  final struct packet_spaceship_place *real_packet = packet;
 //  packet_spaceship_place_100_fields fields;
@@ -20448,7 +20345,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_spaceship_place(struct connection *pc)
+//static void ensure_valid_variant_packet_spaceship_place(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -20460,17 +20357,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SPACESHIP_PLACE] = variant;
 //}
 //
-//struct packet_spaceship_place *receive_packet_spaceship_place(struct connection *pc, enum packet_type type)
+//struct packet_spaceship_place *receive_packet_spaceship_place(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20481,16 +20378,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SPACESHIP_PLACE]) {
 //    case 100: return receive_packet_spaceship_place_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_spaceship_place(struct connection *pc, final struct packet_spaceship_place *packet)
+//int send_packet_spaceship_place(Connection pc, final struct packet_spaceship_place *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20501,11 +20398,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SPACESHIP_PLACE]) {
 //    case 100: return send_packet_spaceship_place_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_spaceship_place(struct connection *pc, enum spaceship_place_type type, int num)
+//int dsend_packet_spaceship_place(Connection pc, enum spaceship_place_type type, int num)
 //{
 //  struct packet_spaceship_place packet, *real_packet = &packet;
 //
@@ -20538,7 +20435,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_spaceship_info_100_fields, 17);
 //
-//static struct packet_spaceship_info *receive_packet_spaceship_info_100(struct connection *pc, enum packet_type type)
+//static struct packet_spaceship_info *receive_packet_spaceship_info_100(Connection pc, enum packet_type type)
 //{
 //  packet_spaceship_info_100_fields fields;
 //  struct packet_spaceship_info *old;
@@ -20712,7 +20609,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_spaceship_info_100(struct connection *pc, final struct packet_spaceship_info *packet)
+//static int send_packet_spaceship_info_100(Connection pc, final struct packet_spaceship_info *packet)
 //{
 //  final struct packet_spaceship_info *real_packet = packet;
 //  packet_spaceship_info_100_fields fields;
@@ -20874,7 +20771,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_spaceship_info(struct connection *pc)
+//static void ensure_valid_variant_packet_spaceship_info(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -20886,17 +20783,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SPACESHIP_INFO] = variant;
 //}
 //
-//struct packet_spaceship_info *receive_packet_spaceship_info(struct connection *pc, enum packet_type type)
+//struct packet_spaceship_info *receive_packet_spaceship_info(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20907,16 +20804,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SPACESHIP_INFO]) {
 //    case 100: return receive_packet_spaceship_info_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_spaceship_info(struct connection *pc, final struct packet_spaceship_info *packet)
+//int send_packet_spaceship_info(Connection pc, final struct packet_spaceship_info *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -20927,7 +20824,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SPACESHIP_INFO]) {
 //    case 100: return send_packet_spaceship_info_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -20944,7 +20841,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_unit_100_fields, 36);
 //
-//static struct packet_ruleset_unit *receive_packet_ruleset_unit_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_unit *receive_packet_ruleset_unit_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_unit_100_fields fields;
 //  struct packet_ruleset_unit *old;
@@ -21229,7 +21126,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_unit_100(struct connection *pc, final struct packet_ruleset_unit *packet)
+//static int send_packet_ruleset_unit_100(Connection pc, final struct packet_ruleset_unit *packet)
 //{
 //  final struct packet_ruleset_unit *real_packet = packet;
 //  packet_ruleset_unit_100_fields fields;
@@ -21580,7 +21477,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_unit(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_unit(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -21592,17 +21489,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_UNIT] = variant;
 //}
 //
-//struct packet_ruleset_unit *receive_packet_ruleset_unit(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_unit *receive_packet_ruleset_unit(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -21613,16 +21510,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_UNIT]) {
 //    case 100: return receive_packet_ruleset_unit_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_unit(struct connection *pc, final struct packet_ruleset_unit *packet)
+//int send_packet_ruleset_unit(Connection pc, final struct packet_ruleset_unit *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -21633,7 +21530,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_UNIT]) {
 //    case 100: return send_packet_ruleset_unit_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -21650,7 +21547,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_game_100_fields, 26);
 //
-//static struct packet_ruleset_game *receive_packet_ruleset_game_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_game *receive_packet_ruleset_game_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_game_100_fields fields;
 //  struct packet_ruleset_game *old;
@@ -21909,7 +21806,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_game_100(struct connection *pc, final struct packet_ruleset_game *packet)
+//static int send_packet_ruleset_game_100(Connection pc, final struct packet_ruleset_game *packet)
 //{
 //  final struct packet_ruleset_game *real_packet = packet;
 //  packet_ruleset_game_100_fields fields;
@@ -22272,7 +22169,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_game(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_game(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -22284,17 +22181,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_GAME] = variant;
 //}
 //
-//struct packet_ruleset_game *receive_packet_ruleset_game(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_game *receive_packet_ruleset_game(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -22305,16 +22202,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_GAME]) {
 //    case 100: return receive_packet_ruleset_game_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_game(struct connection *pc, final struct packet_ruleset_game *packet)
+//int send_packet_ruleset_game(Connection pc, final struct packet_ruleset_game *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -22325,7 +22222,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_GAME]) {
 //    case 100: return send_packet_ruleset_game_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -22342,7 +22239,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_government_ruler_title_100_fields, 5);
 //
-//static struct packet_ruleset_government_ruler_title *receive_packet_ruleset_government_ruler_title_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_government_ruler_title *receive_packet_ruleset_government_ruler_title_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_government_ruler_title_100_fields fields;
 //  struct packet_ruleset_government_ruler_title *old;
@@ -22405,7 +22302,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_government_ruler_title_100(struct connection *pc, final struct packet_ruleset_government_ruler_title *packet)
+//static int send_packet_ruleset_government_ruler_title_100(Connection pc, final struct packet_ruleset_government_ruler_title *packet)
 //{
 //  final struct packet_ruleset_government_ruler_title *real_packet = packet;
 //  packet_ruleset_government_ruler_title_100_fields fields;
@@ -22482,7 +22379,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_government_ruler_title(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_government_ruler_title(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -22494,17 +22391,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_GOVERNMENT_RULER_TITLE] = variant;
 //}
 //
-//struct packet_ruleset_government_ruler_title *receive_packet_ruleset_government_ruler_title(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_government_ruler_title *receive_packet_ruleset_government_ruler_title(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -22515,16 +22412,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_GOVERNMENT_RULER_TITLE]) {
 //    case 100: return receive_packet_ruleset_government_ruler_title_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_government_ruler_title(struct connection *pc, final struct packet_ruleset_government_ruler_title *packet)
+//int send_packet_ruleset_government_ruler_title(Connection pc, final struct packet_ruleset_government_ruler_title *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -22535,7 +22432,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_GOVERNMENT_RULER_TITLE]) {
 //    case 100: return send_packet_ruleset_government_ruler_title_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -22552,7 +22449,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_tech_100_fields, 10);
 //
-//static struct packet_ruleset_tech *receive_packet_ruleset_tech_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_tech *receive_packet_ruleset_tech_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_tech_100_fields fields;
 //  struct packet_ruleset_tech *old;
@@ -22652,7 +22549,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_tech_100(struct connection *pc, final struct packet_ruleset_tech *packet)
+//static int send_packet_ruleset_tech_100(Connection pc, final struct packet_ruleset_tech *packet)
 //{
 //  final struct packet_ruleset_tech *real_packet = packet;
 //  packet_ruleset_tech_100_fields fields;
@@ -22783,7 +22680,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_tech(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_tech(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -22795,17 +22692,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_TECH] = variant;
 //}
 //
-//struct packet_ruleset_tech *receive_packet_ruleset_tech(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_tech *receive_packet_ruleset_tech(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -22816,16 +22713,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_TECH]) {
 //    case 100: return receive_packet_ruleset_tech_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_tech(struct connection *pc, final struct packet_ruleset_tech *packet)
+//int send_packet_ruleset_tech(Connection pc, final struct packet_ruleset_tech *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -22836,7 +22733,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_TECH]) {
 //    case 100: return send_packet_ruleset_tech_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -22853,7 +22750,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_government_100_fields, 45);
 //
-//static struct packet_ruleset_government *receive_packet_ruleset_government_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_government *receive_packet_ruleset_government_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_government_100_fields fields;
 //  struct packet_ruleset_government *old;
@@ -23226,7 +23123,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_government_100(struct connection *pc, final struct packet_ruleset_government *packet)
+//static int send_packet_ruleset_government_100(Connection pc, final struct packet_ruleset_government *packet)
 //{
 //  final struct packet_ruleset_government *real_packet = packet;
 //  packet_ruleset_government_100_fields fields;
@@ -23583,7 +23480,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_government(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_government(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -23595,17 +23492,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_GOVERNMENT] = variant;
 //}
 //
-//struct packet_ruleset_government *receive_packet_ruleset_government(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_government *receive_packet_ruleset_government(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -23616,16 +23513,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_GOVERNMENT]) {
 //    case 100: return receive_packet_ruleset_government_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_government(struct connection *pc, final struct packet_ruleset_government *packet)
+//int send_packet_ruleset_government(Connection pc, final struct packet_ruleset_government *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -23636,7 +23533,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_GOVERNMENT]) {
 //    case 100: return send_packet_ruleset_government_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -23653,7 +23550,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_terrain_control_100_fields, 22);
 //
-//static struct packet_ruleset_terrain_control *receive_packet_ruleset_terrain_control_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_terrain_control *receive_packet_ruleset_terrain_control_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_terrain_control_100_fields fields;
 //  struct packet_ruleset_terrain_control *old;
@@ -23829,7 +23726,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_terrain_control_100(struct connection *pc, final struct packet_ruleset_terrain_control *packet)
+//static int send_packet_ruleset_terrain_control_100(Connection pc, final struct packet_ruleset_terrain_control *packet)
 //{
 //  final struct packet_ruleset_terrain_control *real_packet = packet;
 //  packet_ruleset_terrain_control_100_fields fields;
@@ -24017,7 +23914,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_terrain_control(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_terrain_control(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -24029,17 +23926,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_TERRAIN_CONTROL] = variant;
 //}
 //
-//struct packet_ruleset_terrain_control *receive_packet_ruleset_terrain_control(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_terrain_control *receive_packet_ruleset_terrain_control(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -24050,16 +23947,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_TERRAIN_CONTROL]) {
 //    case 100: return receive_packet_ruleset_terrain_control_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_terrain_control(struct connection *pc, final struct packet_ruleset_terrain_control *packet)
+//int send_packet_ruleset_terrain_control(Connection pc, final struct packet_ruleset_terrain_control *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -24070,7 +23967,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_TERRAIN_CONTROL]) {
 //    case 100: return send_packet_ruleset_terrain_control_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -24087,7 +23984,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_nation_100_fields, 12);
 //
-//static struct packet_ruleset_nation *receive_packet_ruleset_nation_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_nation *receive_packet_ruleset_nation_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_nation_100_fields fields;
 //  struct packet_ruleset_nation *old;
@@ -24193,7 +24090,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_nation_100(struct connection *pc, final struct packet_ruleset_nation *packet)
+//static int send_packet_ruleset_nation_100(Connection pc, final struct packet_ruleset_nation *packet)
 //{
 //  final struct packet_ruleset_nation *real_packet = packet;
 //  packet_ruleset_nation_100_fields fields;
@@ -24369,7 +24266,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_nation(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_nation(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -24381,17 +24278,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_NATION] = variant;
 //}
 //
-//struct packet_ruleset_nation *receive_packet_ruleset_nation(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_nation *receive_packet_ruleset_nation(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -24402,16 +24299,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_NATION]) {
 //    case 100: return receive_packet_ruleset_nation_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_nation(struct connection *pc, final struct packet_ruleset_nation *packet)
+//int send_packet_ruleset_nation(Connection pc, final struct packet_ruleset_nation *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -24422,7 +24319,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_NATION]) {
 //    case 100: return send_packet_ruleset_nation_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -24439,7 +24336,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_city_100_fields, 8);
 //
-//static struct packet_ruleset_city *receive_packet_ruleset_city_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_city *receive_packet_ruleset_city_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_city_100_fields fields;
 //  struct packet_ruleset_city *old;
@@ -24511,7 +24408,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_city_100(struct connection *pc, final struct packet_ruleset_city *packet)
+//static int send_packet_ruleset_city_100(Connection pc, final struct packet_ruleset_city *packet)
 //{
 //  final struct packet_ruleset_city *real_packet = packet;
 //  packet_ruleset_city_100_fields fields;
@@ -24609,7 +24506,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_city(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_city(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -24621,17 +24518,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_CITY] = variant;
 //}
 //
-//struct packet_ruleset_city *receive_packet_ruleset_city(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_city *receive_packet_ruleset_city(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -24642,16 +24539,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CITY]) {
 //    case 100: return receive_packet_ruleset_city_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_city(struct connection *pc, final struct packet_ruleset_city *packet)
+//int send_packet_ruleset_city(Connection pc, final struct packet_ruleset_city *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -24662,7 +24559,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CITY]) {
 //    case 100: return send_packet_ruleset_city_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -24679,7 +24576,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_building_100_fields, 24);
 //
-//static struct packet_ruleset_building *receive_packet_ruleset_building_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_building *receive_packet_ruleset_building_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_building_100_fields fields;
 //  struct packet_ruleset_building *old;
@@ -24911,7 +24808,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_building_100(struct connection *pc, final struct packet_ruleset_building *packet)
+//static int send_packet_ruleset_building_100(Connection pc, final struct packet_ruleset_building *packet)
 //{
 //  final struct packet_ruleset_building *real_packet = packet;
 //  packet_ruleset_building_100_fields fields;
@@ -25195,7 +25092,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_building(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_building(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -25207,17 +25104,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_BUILDING] = variant;
 //}
 //
-//struct packet_ruleset_building *receive_packet_ruleset_building(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_building *receive_packet_ruleset_building(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -25228,16 +25125,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_BUILDING]) {
 //    case 100: return receive_packet_ruleset_building_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_building(struct connection *pc, final struct packet_ruleset_building *packet)
+//int send_packet_ruleset_building(Connection pc, final struct packet_ruleset_building *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -25248,7 +25145,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_BUILDING]) {
 //    case 100: return send_packet_ruleset_building_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -25265,7 +25162,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_terrain_100_fields, 38);
 //
-//static struct packet_ruleset_terrain *receive_packet_ruleset_terrain_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_terrain *receive_packet_ruleset_terrain_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_terrain_100_fields fields;
 //  struct packet_ruleset_terrain *old;
@@ -25547,7 +25444,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_terrain_100(struct connection *pc, final struct packet_ruleset_terrain *packet)
+//static int send_packet_ruleset_terrain_100(Connection pc, final struct packet_ruleset_terrain *packet)
 //{
 //  final struct packet_ruleset_terrain *real_packet = packet;
 //  packet_ruleset_terrain_100_fields fields;
@@ -25855,7 +25752,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_terrain(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_terrain(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -25867,17 +25764,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_TERRAIN] = variant;
 //}
 //
-//struct packet_ruleset_terrain *receive_packet_ruleset_terrain(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_terrain *receive_packet_ruleset_terrain(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -25888,16 +25785,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_TERRAIN]) {
 //    case 100: return receive_packet_ruleset_terrain_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_terrain(struct connection *pc, final struct packet_ruleset_terrain *packet)
+//int send_packet_ruleset_terrain(Connection pc, final struct packet_ruleset_terrain *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -25908,7 +25805,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_TERRAIN]) {
 //    case 100: return send_packet_ruleset_terrain_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -25925,7 +25822,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_control_100_fields, 24);
 //
-//static struct packet_ruleset_control *receive_packet_ruleset_control_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_control *receive_packet_ruleset_control_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_control_100_fields fields;
 //  struct packet_ruleset_control *old;
@@ -26133,7 +26030,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_control_100(struct connection *pc, final struct packet_ruleset_control *packet)
+//static int send_packet_ruleset_control_100(Connection pc, final struct packet_ruleset_control *packet)
 //{
 //  final struct packet_ruleset_control *real_packet = packet;
 //  packet_ruleset_control_100_fields fields;
@@ -26370,7 +26267,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_control(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_control(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -26382,17 +26279,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_CONTROL] = variant;
 //}
 //
-//struct packet_ruleset_control *receive_packet_ruleset_control(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_control *receive_packet_ruleset_control(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -26403,16 +26300,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CONTROL]) {
 //    case 100: return receive_packet_ruleset_control_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_control(struct connection *pc, final struct packet_ruleset_control *packet)
+//int send_packet_ruleset_control(Connection pc, final struct packet_ruleset_control *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -26423,7 +26320,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CONTROL]) {
 //    case 100: return send_packet_ruleset_control_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -26440,7 +26337,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_single_want_hack_req_100_fields, 1);
 //
-//static struct packet_single_want_hack_req *receive_packet_single_want_hack_req_100(struct connection *pc, enum packet_type type)
+//static struct packet_single_want_hack_req *receive_packet_single_want_hack_req_100(Connection pc, enum packet_type type)
 //{
 //  packet_single_want_hack_req_100_fields fields;
 //  struct packet_single_want_hack_req *old;
@@ -26476,7 +26373,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_single_want_hack_req_100(struct connection *pc, final struct packet_single_want_hack_req *packet)
+//static int send_packet_single_want_hack_req_100(Connection pc, final struct packet_single_want_hack_req *packet)
 //{
 //  final struct packet_single_want_hack_req *real_packet = packet;
 //  packet_single_want_hack_req_100_fields fields;
@@ -26531,7 +26428,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_single_want_hack_req_101_fields, 1);
 //
-//static struct packet_single_want_hack_req *receive_packet_single_want_hack_req_101(struct connection *pc, enum packet_type type)
+//static struct packet_single_want_hack_req *receive_packet_single_want_hack_req_101(Connection pc, enum packet_type type)
 //{
 //  packet_single_want_hack_req_101_fields fields;
 //  struct packet_single_want_hack_req *old;
@@ -26572,7 +26469,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_single_want_hack_req_101(struct connection *pc, final struct packet_single_want_hack_req *packet)
+//static int send_packet_single_want_hack_req_101(Connection pc, final struct packet_single_want_hack_req *packet)
 //{
 //  final struct packet_single_want_hack_req *real_packet = packet;
 //  packet_single_want_hack_req_101_fields fields;
@@ -26621,7 +26518,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_single_want_hack_req(struct connection *pc)
+//static void ensure_valid_variant_packet_single_want_hack_req(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -26635,17 +26532,17 @@ public class Packets_gen{
 //  } else if(!(has_capability("new_hack", pc->capability) && has_capability("new_hack", our_capability))) {
 //    variant = 101;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SINGLE_WANT_HACK_REQ] = variant;
 //}
 //
-//struct packet_single_want_hack_req *receive_packet_single_want_hack_req(struct connection *pc, enum packet_type type)
+//struct packet_single_want_hack_req *receive_packet_single_want_hack_req(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -26657,16 +26554,16 @@ public class Packets_gen{
 //  switch(pc->phs.variant[PACKET_SINGLE_WANT_HACK_REQ]) {
 //    case 100: return receive_packet_single_want_hack_req_100(pc, type);
 //    case 101: return receive_packet_single_want_hack_req_101(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_single_want_hack_req(struct connection *pc, final struct packet_single_want_hack_req *packet)
+//int send_packet_single_want_hack_req(Connection pc, final struct packet_single_want_hack_req *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -26678,7 +26575,7 @@ public class Packets_gen{
 //  switch(pc->phs.variant[PACKET_SINGLE_WANT_HACK_REQ]) {
 //    case 100: return send_packet_single_want_hack_req_100(pc, packet);
 //    case 101: return send_packet_single_want_hack_req_101(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -26688,7 +26585,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_single_want_hack_reply_100_fields, 1);
 //
-//static struct packet_single_want_hack_reply *receive_packet_single_want_hack_reply_100(struct connection *pc, enum packet_type type)
+//static struct packet_single_want_hack_reply *receive_packet_single_want_hack_reply_100(Connection pc, enum packet_type type)
 //{
 //  packet_single_want_hack_reply_100_fields fields;
 //  struct packet_single_want_hack_reply *old;
@@ -26722,7 +26619,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_single_want_hack_reply_100(struct connection *pc, final struct packet_single_want_hack_reply *packet)
+//static int send_packet_single_want_hack_reply_100(Connection pc, final struct packet_single_want_hack_reply *packet)
 //{
 //  final struct packet_single_want_hack_reply *real_packet = packet;
 //  packet_single_want_hack_reply_100_fields fields;
@@ -26769,7 +26666,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_single_want_hack_reply(struct connection *pc)
+//static void ensure_valid_variant_packet_single_want_hack_reply(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -26781,17 +26678,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_SINGLE_WANT_HACK_REPLY] = variant;
 //}
 //
-//struct packet_single_want_hack_reply *receive_packet_single_want_hack_reply(struct connection *pc, enum packet_type type)
+//struct packet_single_want_hack_reply *receive_packet_single_want_hack_reply(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -26802,16 +26699,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SINGLE_WANT_HACK_REPLY]) {
 //    case 100: return receive_packet_single_want_hack_reply_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_single_want_hack_reply(struct connection *pc, final struct packet_single_want_hack_reply *packet)
+//int send_packet_single_want_hack_reply(Connection pc, final struct packet_single_want_hack_reply *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -26822,11 +26719,11 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_SINGLE_WANT_HACK_REPLY]) {
 //    case 100: return send_packet_single_want_hack_reply_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
-//int dsend_packet_single_want_hack_reply(struct connection *pc, boolean you_have_hack)
+//int dsend_packet_single_want_hack_reply(Connection pc, boolean you_have_hack)
 //{
 //  struct packet_single_want_hack_reply packet, *real_packet = &packet;
 //
@@ -26841,7 +26738,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_game_load_100_fields, 9);
 //
-//static struct packet_game_load *receive_packet_game_load_100(struct connection *pc, enum packet_type type)
+//static struct packet_game_load *receive_packet_game_load_100(Connection pc, enum packet_type type)
 //{
 //  packet_game_load_100_fields fields;
 //  struct packet_game_load *old;
@@ -26970,7 +26867,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_game_load_100(struct connection *pc, final struct packet_game_load *packet)
+//static int send_packet_game_load_100(Connection pc, final struct packet_game_load *packet)
 //{
 //  final struct packet_game_load *real_packet = packet;
 //  packet_game_load_100_fields fields;
@@ -27187,7 +27084,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_game_load(struct connection *pc)
+//static void ensure_valid_variant_packet_game_load(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -27199,17 +27096,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_GAME_LOAD] = variant;
 //}
 //
-//struct packet_game_load *receive_packet_game_load(struct connection *pc, enum packet_type type)
+//struct packet_game_load *receive_packet_game_load(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -27220,16 +27117,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_GAME_LOAD]) {
 //    case 100: return receive_packet_game_load_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_game_load(struct connection *pc, final struct packet_game_load *packet)
+//int send_packet_game_load(Connection pc, final struct packet_game_load *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -27240,7 +27137,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_GAME_LOAD]) {
 //    case 100: return send_packet_game_load_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -27257,7 +27154,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_options_settable_control_100_fields, 3);
 //
-//static struct packet_options_settable_control *receive_packet_options_settable_control_100(struct connection *pc, enum packet_type type)
+//static struct packet_options_settable_control *receive_packet_options_settable_control_100(Connection pc, enum packet_type type)
 //{
 //  packet_options_settable_control_100_fields fields;
 //  struct packet_options_settable_control *old;
@@ -27320,7 +27217,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_options_settable_control_100(struct connection *pc, final struct packet_options_settable_control *packet)
+//static int send_packet_options_settable_control_100(Connection pc, final struct packet_options_settable_control *packet)
 //{
 //  final struct packet_options_settable_control *real_packet = packet;
 //  packet_options_settable_control_100_fields fields;
@@ -27402,7 +27299,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_options_settable_control(struct connection *pc)
+//static void ensure_valid_variant_packet_options_settable_control(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -27414,17 +27311,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_OPTIONS_SETTABLE_CONTROL] = variant;
 //}
 //
-//struct packet_options_settable_control *receive_packet_options_settable_control(struct connection *pc, enum packet_type type)
+//struct packet_options_settable_control *receive_packet_options_settable_control(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -27435,16 +27332,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_OPTIONS_SETTABLE_CONTROL]) {
 //    case 100: return receive_packet_options_settable_control_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_options_settable_control(struct connection *pc, final struct packet_options_settable_control *packet)
+//int send_packet_options_settable_control(Connection pc, final struct packet_options_settable_control *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -27455,7 +27352,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_OPTIONS_SETTABLE_CONTROL]) {
 //    case 100: return send_packet_options_settable_control_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -27465,7 +27362,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_options_settable_100_fields, 12);
 //
-//static struct packet_options_settable *receive_packet_options_settable_100(struct connection *pc, enum packet_type type)
+//static struct packet_options_settable *receive_packet_options_settable_100(Connection pc, enum packet_type type)
 //{
 //  packet_options_settable_100_fields fields;
 //  struct packet_options_settable *old;
@@ -27569,7 +27466,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_options_settable_100(struct connection *pc, final struct packet_options_settable *packet)
+//static int send_packet_options_settable_100(Connection pc, final struct packet_options_settable *packet)
 //{
 //  final struct packet_options_settable *real_packet = packet;
 //  packet_options_settable_100_fields fields;
@@ -27695,7 +27592,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_options_settable(struct connection *pc)
+//static void ensure_valid_variant_packet_options_settable(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -27707,17 +27604,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_OPTIONS_SETTABLE] = variant;
 //}
 //
-//struct packet_options_settable *receive_packet_options_settable(struct connection *pc, enum packet_type type)
+//struct packet_options_settable *receive_packet_options_settable(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -27728,16 +27625,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_OPTIONS_SETTABLE]) {
 //    case 100: return receive_packet_options_settable_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_options_settable(struct connection *pc, final struct packet_options_settable *packet)
+//int send_packet_options_settable(Connection pc, final struct packet_options_settable *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -27748,7 +27645,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_OPTIONS_SETTABLE]) {
 //    case 100: return send_packet_options_settable_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -27758,7 +27655,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_cache_group_100_fields, 5);
 //
-//static struct packet_ruleset_cache_group *receive_packet_ruleset_cache_group_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_cache_group *receive_packet_ruleset_cache_group_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_cache_group_100_fields fields;
 //  struct packet_ruleset_cache_group *old;
@@ -27854,7 +27751,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_cache_group_100(struct connection *pc, final struct packet_ruleset_cache_group *packet)
+//static int send_packet_ruleset_cache_group_100(Connection pc, final struct packet_ruleset_cache_group *packet)
 //{
 //  final struct packet_ruleset_cache_group *real_packet = packet;
 //  packet_ruleset_cache_group_100_fields fields;
@@ -27988,7 +27885,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_cache_group(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_cache_group(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -28000,17 +27897,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_CACHE_GROUP] = variant;
 //}
 //
-//struct packet_ruleset_cache_group *receive_packet_ruleset_cache_group(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_cache_group *receive_packet_ruleset_cache_group(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -28021,16 +27918,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CACHE_GROUP]) {
 //    case 100: return receive_packet_ruleset_cache_group_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_cache_group(struct connection *pc, final struct packet_ruleset_cache_group *packet)
+//int send_packet_ruleset_cache_group(Connection pc, final struct packet_ruleset_cache_group *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -28041,7 +27938,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CACHE_GROUP]) {
 //    case 100: return send_packet_ruleset_cache_group_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //
@@ -28058,7 +27955,7 @@ public class Packets_gen{
 //
 //BV_DEFINE(packet_ruleset_cache_effect_100_fields, 8);
 //
-//static struct packet_ruleset_cache_effect *receive_packet_ruleset_cache_effect_100(struct connection *pc, enum packet_type type)
+//static struct packet_ruleset_cache_effect *receive_packet_ruleset_cache_effect_100(Connection pc, enum packet_type type)
 //{
 //  packet_ruleset_cache_effect_100_fields fields;
 //  struct packet_ruleset_cache_effect *old;
@@ -28148,7 +28045,7 @@ public class Packets_gen{
 //  RECEIVE_PACKET_END(real_packet);
 //}
 //
-//static int send_packet_ruleset_cache_effect_100(struct connection *pc, final struct packet_ruleset_cache_effect *packet)
+//static int send_packet_ruleset_cache_effect_100(Connection pc, final struct packet_ruleset_cache_effect *packet)
 //{
 //  final struct packet_ruleset_cache_effect *real_packet = packet;
 //  packet_ruleset_cache_effect_100_fields fields;
@@ -28244,7 +28141,7 @@ public class Packets_gen{
 //  SEND_PACKET_END;
 //}
 //
-//static void ensure_valid_variant_packet_ruleset_cache_effect(struct connection *pc)
+//static void ensure_valid_variant_packet_ruleset_cache_effect(Connection pc)
 //{
 //  int variant = -1;
 //
@@ -28256,17 +28153,17 @@ public class Packets_gen{
 //  } else if(true) {
 //    variant = 100;
 //  } else {
-//    die("unknown variant");
+//    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_RULESET_CACHE_EFFECT] = variant;
 //}
 //
-//struct packet_ruleset_cache_effect *receive_packet_ruleset_cache_effect(struct connection *pc, enum packet_type type)
+//struct packet_ruleset_cache_effect *receive_packet_ruleset_cache_effect(Connection pc, enum packet_type type)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to read data from the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return null;
 //  }
 //  assert(pc->phs.variant != null);
@@ -28277,16 +28174,16 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CACHE_EFFECT]) {
 //    case 100: return receive_packet_ruleset_cache_effect_100(pc, type);
-//    default: die("unknown variant"); return null;
+//    default: util.die("unknown variant"); return null;
 //  }
 //}
 //
-//int send_packet_ruleset_cache_effect(struct connection *pc, final struct packet_ruleset_cache_effect *packet)
+//int send_packet_ruleset_cache_effect(Connection pc, final struct packet_ruleset_cache_effect *packet)
 //{
 //  if(!pc->used) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "WARNING: trying to send data to the closed connection %s",
-//	    conn_description(pc));
+//	    pc.conn_description());
 //    return -1;
 //  }
 //  assert(pc->phs.variant != null);
@@ -28297,7 +28194,7 @@ public class Packets_gen{
 //
 //  switch(pc->phs.variant[PACKET_RULESET_CACHE_EFFECT]) {
 //    case 100: return send_packet_ruleset_cache_effect_100(pc, packet);
-//    default: die("unknown variant"); return -1;
+//    default: util.die("unknown variant"); return -1;
 //  }
 //}
 //

@@ -119,7 +119,7 @@ public class Connectdlg{
 //  case AUTH_NEWUSER_RETRY:
 //    dialog_config = NEW_PASSWORD_TYPE;
 //    break;
-//  case AUTH_LOGIN_FIRST:
+//  case authentication_type.AUTH_LOGIN_FIRST:
 //    /* if we magically have a password already present in 'password'
 //     * then, use that and skip the password entry dialog */
 //    if (password[0] != '\0') {
@@ -161,8 +161,8 @@ public class Connectdlg{
 //
 //  switch (dialog_config) {
 //  case LOGIN_TYPE:
-//    sz_strlcpy(user_name, gtk_entry_get_text(GTK_ENTRY(iinput)));
-//    sz_strlcpy(server_host, gtk_entry_get_text(GTK_ENTRY(ihost)));
+//    user_name = String.format( gtk_entry_get_text(GTK_ENTRY(iinput)));
+//    server_host = String.format( gtk_entry_get_text(GTK_ENTRY(ihost)));
 //    sscanf(gtk_entry_get_text(GTK_ENTRY(iport)), "%d", &server_port);
 //  
 //    if (connect_to_server(user_name, server_host, server_port,
@@ -173,14 +173,14 @@ public class Connectdlg{
 //
 //    break;
 //  case NEW_PASSWORD_TYPE:
-//    sz_strlcpy(password, gtk_entry_get_text(GTK_ENTRY(iinput)));
+//    password = String.format( gtk_entry_get_text(GTK_ENTRY(iinput)));
 //    gtk_set_label(imsg, "Verify Password");
 //    gtk_entry_set_text(GTK_ENTRY(iinput), "");
 //    gtk_widget_grab_focus(iinput);
 //    dialog_config = VERIFY_PASSWORD_TYPE;
 //    break;
 //  case VERIFY_PASSWORD_TYPE:
-//    sz_strlcpy(reply.password, gtk_entry_get_text(GTK_ENTRY(iinput)));
+//    reply.password = String.format( gtk_entry_get_text(GTK_ENTRY(iinput)));
 //    if (!reply.password.equals(password)) {
 //      gtk_widget_set_sensitive(connw, false);
 //      memset(password, 0, MAX_LEN_NAME);
@@ -195,7 +195,7 @@ public class Connectdlg{
 //    break;
 //  case ENTER_PASSWORD_TYPE:
 //    gtk_widget_set_sensitive(connw, false);
-//    sz_strlcpy(reply.password, gtk_entry_get_text(GTK_ENTRY(iinput)));
+//    reply.password = String.format( gtk_entry_get_text(GTK_ENTRY(iinput)));
 //    send_packet_authentication_reply(&aconnection, &reply);
 //    break;
 //  default:

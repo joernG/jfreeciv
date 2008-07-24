@@ -485,23 +485,23 @@ public class Clinet{
 //      break;
 //
 //    case PROCESSOR_ARCHITECTURE_MIPS:
-//      sz_strlcpy(cpuname, "mips");
+//      cpuname = String.format( "mips");
 //      break;
 //
 //    case PROCESSOR_ARCHITECTURE_ALPHA:
-//      sz_strlcpy(cpuname, "alpha");
+//      cpuname = String.format( "alpha");
 //      break;
 //
 //    case PROCESSOR_ARCHITECTURE_PPC:
-//      sz_strlcpy(cpuname, "ppc");
+//      cpuname = String.format( "ppc");
 //      break;
 //#if 0
 //    case PROCESSOR_ARCHITECTURE_IA64:
-//      sz_strlcpy(cpuname, "ia64");
+//      cpuname = String.format( "ia64");
 //      break;
 //#endif
 //    default:
-//      sz_strlcpy(cpuname, "unknown");
+//      cpuname = String.format( "unknown");
 //      break;
 //  }
 //  uname_buf = util.my_snprintf(
@@ -642,7 +642,7 @@ public class Clinet{
 //  /* Fill in here if you are making a binary without sys/utsname.h and know
 //     the OS name, release number, and machine architechture */
 //#ifdef WIN32_NATIVE
-//  sz_strlcpy(machine_string,win_uname());
+//  machine_string = String.format(win_uname());
 //#else
 //  machine_string = util.my_snprintf(
 //              "unknown unknown [unknown]");
@@ -890,7 +890,7 @@ public class Clinet{
 //    if (!mystrcasecmp("none", servername)) {
 //      from = gethostbyaddr((char *) &fromend.sockaddr_in.sin_addr,
 //			   sizeof(fromend.sockaddr_in.sin_addr), AF_INET);
-//      sz_strlcpy(servername, inet_ntoa(fromend.sockaddr_in.sin_addr));
+//      servername = String.format( inet_ntoa(fromend.sockaddr_in.sin_addr));
 //    }
 //
 //    /* UDP can send duplicate or delayed packets. */

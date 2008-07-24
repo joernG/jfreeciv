@@ -195,11 +195,11 @@ public class Helpdata{
 //  popdown_help_dialog();
 //
 //  if(!booted) {
-//    util.freelog(LOG_VERBOSE, "Booting help texts");
+//    util.freelog(Log.LOG_VERBOSE, "Booting help texts");
 //  } else {
 //    /* free memory allocated last time booted */
 //    free_help_texts();
-//    util.freelog(LOG_VERBOSE, "Rebooting help texts");
+//    util.freelog(Log.LOG_VERBOSE, "Rebooting help texts");
 //  }    
 //
 //  filename = datafilename("helpdata.txt");
@@ -319,7 +319,7 @@ public class Helpdata{
 //	    }
 //	  } impr_type_iterate_end;
 //	} else {
-//	  die("Bad current_type %d", current_type);
+//	  util.die("Bad current_type %d", current_type);
 //	}
 //	help_list_sort(&category_nodes, help_item_compar);
 //	for (help ptmp : category_nodes.data) {
@@ -361,7 +361,7 @@ public class Helpdata{
 //  section_file_check_unused(sf, sf.filename);
 //  section_file_free(sf);
 //  booted = true;
-//  util.freelog(LOG_VERBOSE, "Booted help texts ok");
+//  util.freelog(Log.LOG_VERBOSE, "Booted help texts ok");
 //}
 //
 ///****************************************************************
@@ -559,7 +559,7 @@ public class Helpdata{
 //       ? my_snprintf(req_buf + req_buf.length(),				    \
 //		     sizeof(req_buf) - req_buf.length(),			    \
 //		     ", %s", (s))					    \
-//       : sz_strlcpy(req_buf, (s)))
+//       : req_buf = String.format( (s)))
 //
 //      if (b.tech_req != A_NONE) {
 //	req_append(get_tech_name(game.player_ptr, b.tech_req));
@@ -632,7 +632,7 @@ public class Helpdata{
 //    final String name = get_tech_name(game.player_ptr, tech_id);
 //    
 //    if (buf[0] == '\0') {
-//      my_snprintf(buf, bufsz, "%s", name);
+//      buf = String.format "%s", name);
 //    } else {
 //      my_snprintf(buf + buf.length(), bufsz - buf.length(), ", %s", name);
 //    }

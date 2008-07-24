@@ -186,29 +186,6 @@ public class Sernet{
 //}
 //
 //#endif /* HAVE_LIBREADLINE */
-///*****************************************************************************
-//...
-//*****************************************************************************/
-//void close_connection(connection pconn)
-//{
-//  while (pconn.server.ping_timers.foo_list_size() > 0) {
-//    timer timer = timer_list_get(pconn.server.ping_timers, 0);
-//
-//    timer_list_unlink(pconn.server.ping_timers, timer);
-//    free_timer(timer);
-//  }
-//  assert(pconn.server.ping_timers.foo_list_size() == 0);
-//  timer_list_unlink_all(pconn.server.ping_timers);
-//
-//  /* safe to do these even if not in lists: */
-//  conn_list_unlink(&game.all_connections, pconn);
-//  conn_list_unlink(&game.est_connections, pconn);
-//  conn_list_unlink(&game.game_connections, pconn);
-//
-//  pconn.player = null;
-//  pconn.access_level = ALLOW_NONE;
-//  connection_common_close(pconn);
-//}
 //
 ///*****************************************************************************
 //...
@@ -258,7 +235,7 @@ public class Sernet{
 //static void close_socket_callback(connection pc)
 //{
 //  lost_connection_to_client(pc);
-//  close_connection(pc);
+//  pc.close_connection();
 //}
 //
 ///****************************************************************************
@@ -276,7 +253,7 @@ public class Sernet{
 //  () time(&start);
 //
 //  for(;;) {
-//    tv.tv_sec=(game.netwait - (time(null) - start));
+//    tv.tv_sec=(game.netwait - (new Date() - start));
 //    tv.tv_usec=0;
 //
 //    if (tv.tv_sec < 0)
@@ -308,7 +285,7 @@ public class Sernet{
 //      if(pconn.used) {
 //        if(FD_ISSET(pconn.sock, &exceptfs)) {
 //	  util.freelog(Log.LOG_NORMAL, "cut connection %s due to exception data",
-//		  conn_description(pconn));
+//		  pconn.conn_description());
 //	  close_socket_callback(pconn);
 //        } else {
 //	  if(pconn.send_buffer && pconn.send_buffer.ndata > 0) {
@@ -316,9 +293,9 @@ public class Sernet{
 //	      flush_connection_send_buffer_all(pconn);
 //	    } else {
 //	      if(game.tcptimeout != 0 && pconn.last_write != 0
-//		 && (time(null)>pconn.last_write + game.tcptimeout)) {
+//		 && (new Date()>pconn.last_write + game.tcptimeout)) {
 //	        util.freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
-//			conn_description(pconn));
+//			pconn.conn_description());
 //		close_socket_callback(pconn);
 //	      }
 //	    }
@@ -404,7 +381,7 @@ public class Sernet{
 //      static time_t last_noplayers;
 //      if(conn_list_size(&game.est_connections) == 0) {
 //	if (last_noplayers != 0) {
-//	  if (time(null)>last_noplayers + Srv_main.srvarg.quitidle) {
+//	  if (new Date()>last_noplayers + Srv_main.srvarg.quitidle) {
 //	    if (Srv_main.srvarg.exit_on_end) {
 //	      save_game_auto();
 //	    }
@@ -416,7 +393,7 @@ public class Sernet{
 //            force_end_of_sniff = true;
 //            for (conn pconn : game.est_connections.data) {
 //              lost_connection_to_client(pconn);
-//              close_connection(pconn);
+//              pconn.close_connection();
 //            } }
 //
 //	    if (Srv_main.srvarg.exit_on_end) {
@@ -441,7 +418,7 @@ public class Sernet{
 //    }
 //
 //    /* Pinging around for statistics */
-//    if (time(null) > (game.last_ping + game.pingtime)) {
+//    if (new Date() > (game.last_ping + game.pingtime)) {
 //      /* send data about the previous run */
 //      send_ping_times_to_all();
 //
@@ -454,10 +431,10 @@ public class Sernet{
 //	  if (pconn.access_level == ALLOW_HACK) {
 //	    util.freelog(Log.LOG_NORMAL,
 //		    "ignoring ping timeout to hack-level connection %s",
-//		    conn_description(pconn));
+//		    pconn.conn_description());
 //	  } else {
 //	    util.freelog(Log.LOG_NORMAL, "cut connection %s due to ping timeout",
-//		    conn_description(pconn));
+//		    pconn.conn_description());
 //	    close_socket_callback(pconn);
 //	  }
 //	} else {
@@ -516,7 +493,7 @@ public class Sernet{
 //    if(select(max_desc+1, &readfs, &writefs, &exceptfs, &tv)==0) { /* timeout */
 //      () send_server_info_to_metaserver(META_REFRESH);
 //      if(game.timeout != 0
-//	&& (time(null)>game.turn_start + game.timeout)
+//	&& (new Date()>game.turn_start + game.timeout)
 //	&& (Srv_main.server_state == RUN_GAME_STATE)){
 //	con_prompt_off();
 //	return 0;
@@ -551,7 +528,7 @@ public class Sernet{
 //      continue;
 //    }
 //    if(FD_ISSET(sock, &readfs)) {	     /* new players connects */
-//      util.freelog(LOG_VERBOSE, "got new connection");
+//      util.freelog(Log.LOG_VERBOSE, "got new connection");
 //      if(server_accept_connection(sock)==-1) {
 //	util.freelog(Log.LOG_ERROR, "failed accepting connection");
 //      }
@@ -560,7 +537,7 @@ public class Sernet{
 //      connection pconn = &connections[i];
 //      if(pconn.used && FD_ISSET(pconn.sock, &exceptfs)) {
 // 	util.freelog(Log.LOG_ERROR, "cut connection %s due to exception data",
-//		conn_description(pconn));
+//		pconn.conn_description());
 //	close_socket_callback(pconn);
 //      }
 //    }
@@ -643,7 +620,7 @@ public class Sernet{
 //		finish_processing_request(pconn);
 //		connection_do_unbuffer(pconn);
 //		if (!command_ok) {
-//		  close_connection(pconn);
+//		  pconn.close_connection();
 //		}
 //#if PROCESSING_TIME_STATISTICS
 //		  err = gettimeofday(&end, &tz);
@@ -675,9 +652,9 @@ public class Sernet{
 //	    flush_connection_send_buffer_all(pconn);
 //	  } else {
 //	    if(game.tcptimeout != 0 && pconn.last_write != 0
-//	       && (time(null)>pconn.last_write + game.tcptimeout)) {
+//	       && (new Date()>pconn.last_write + game.tcptimeout)) {
 //	      util.freelog(Log.LOG_NORMAL, "cut connection %s due to lagging player",
-//		      conn_description(pconn));
+//		      pconn.conn_description());
 //	      close_socket_callback(pconn);
 //	    }
 //	  }
@@ -688,7 +665,7 @@ public class Sernet{
 //  }
 //  con_prompt_off();
 //
-//  if (game.timeout != 0 && (time(null) > game.turn_start + game.timeout)) {
+//  if (game.timeout != 0 && (new Date() > game.turn_start + game.timeout)) {
 //    return 0;
 //  }
 //  return 1;
@@ -713,7 +690,7 @@ public class Sernet{
 //    if (!find_player_by_name(name)
 //	&& !find_player_by_user(name)
 //	&& !find_conn_by_id(i)
-//	&& !find_conn_by_user(name)) {
+//	&& !Connection.find_conn_by_user(name)) {
 //      *id = i;
 //      return name;
 //    }
@@ -777,16 +754,16 @@ public class Sernet{
 //      pconn.incoming_packet_notify = null;
 //      pconn.outgoing_packet_notify = null;
 //
-//      sz_strlcpy(pconn.username, makeup_connection_name(&pconn.id));
-//      sz_strlcpy(pconn.addr,
+//      pconn.username = String.format( makeup_connection_name(&pconn.id));
+//      pconn.addr = String.format(
 //		 (from ? from.
 //		  h_name : inet_ntoa(fromend.sockaddr_in.sin_addr)));
-//      sz_strlcpy(pconn.server.ipaddr,
+//      pconn.server.ipaddr = String.format(
 //                 inet_ntoa(fromend.sockaddr_in.sin_addr));
 //
 //      conn_list_insert_back(&game.all_connections, pconn);
 //  
-//      util.freelog(LOG_VERBOSE, "connection (%s) from %s (%s)", 
+//      util.freelog(Log.LOG_VERBOSE, "connection (%s) from %s (%s)", 
 //              pconn.username, pconn.addr, pconn.server.ipaddr);
 //      ping_connection(pconn);
 //      return 0;
@@ -812,7 +789,7 @@ public class Sernet{
 //
 //  /* Create socket for client connections. */
 //  if((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-//    die("socket failed: %s", mystrerror());
+//    util.die("socket failed: %s", mystrerror());
 //  }
 //
 //  opt=1; 
@@ -932,7 +909,7 @@ public class Sernet{
 //static void ping_connection(connection pconn)
 //{
 //  util.freelog(Log.LOG_DEBUG, "sending ping to %s (open=%d)",
-//	  conn_description(pconn),
+//	  pconn.conn_description(),
 //	  pconn.server.ping_timers.foo_list_size());
 //  timer_list_insert_back(pconn.server.ping_timers,
 //			 new_timer_start(TIMER_USER, TIMER_ACTIVE));
@@ -948,7 +925,7 @@ public class Sernet{
 //
 //  if (pconn.server.ping_timers.foo_list_size() == 0) {
 //    util.freelog(Log.LOG_NORMAL, "got unexpected pong from %s",
-//	    conn_description(pconn));
+//	    pconn.conn_description());
 //    return;
 //  }
 //
@@ -956,7 +933,7 @@ public class Sernet{
 //  timer_list_unlink(pconn.server.ping_timers, timer);
 //  pconn.ping_time = read_timer_seconds_free(timer);
 //  util.freelog(Log.LOG_DEBUG, "got pong from %s (open=%d); ping time = %fs",
-//	  conn_description(pconn),
+//	  pconn.conn_description(),
 //	  pconn.server.ping_timers.foo_list_size(), pconn.ping_time);
 //}
 //
@@ -1088,7 +1065,7 @@ public class Sernet{
 //
 //  /* Create a description of server state to send to clients.  */
 //  if (my_gethostname(hostname, sizeof(hostname)) != 0) {
-//    sz_strlcpy(hostname, "none");
+//    hostname = String.format( "none");
 //  }
 //
 //  version = util.my_snprintf( "%d.%d.%d%s",

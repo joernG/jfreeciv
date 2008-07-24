@@ -11,16 +11,6 @@ import common.connection.auth_status;
 import common.player.player;
 
 public class Connection{
-//	#include "fcintl.h"
-//	#include "game.h"		/* game.all_connections */
-//	#include "hash.h"
-//	#include "log.h"
-//	#include "mem.h"
-//	#include "netintf.h"
-//	#include "packets.h"
-//	#include "support.h"		/* mystr(n)casecmp */
-
-//	#include "connection.h"
 	/***********************************************************
 	  The connection struct represents a single client or server
 	  at the other end of a network connection.
@@ -147,11 +137,14 @@ public class Connection{
 	// void (*outgoing_packet_notify) (struct connection * pc,
 	// int packet_type, int size,
 	// int request_id);
+	public class Tphs {
 	// struct {
 	// struct hash_table **sent;
 	// struct hash_table **received;
-	// int *variant;
-	// } phs;
+//	 int *variant;
+		public int variant[];
+	}
+	public Tphs phs;
 
 	// #ifdef USE_COMPRESSION
 	// struct {
@@ -471,7 +464,7 @@ public class Connection{
 //	flush_connection_send_buffer_packets(pc);
 //	if (!add_connection_data(pc, data, len)) {
 //	util.freelog(Log.LOG_ERROR, "cut connection %s due to huge send buffer (1)",
-//	conn_description(pc));
+//	pc.conn_description());
 //	}
 //	flush_connection_send_buffer_packets(pc);
 //	}
@@ -479,7 +472,7 @@ public class Connection{
 //	flush_connection_send_buffer_all(pc);
 //	if (!add_connection_data(pc, data, len)) {
 //	util.freelog(Log.LOG_ERROR, "cut connection %s due to huge send buffer (2)",
-//	conn_description(pc));
+//	pc.conn_description());
 //	}
 //	flush_connection_send_buffer_all(pc);
 //	}
@@ -530,19 +523,19 @@ public class Connection{
 //	}
 //	}
 
-//	/***************************************************************
-//	Find connection by exact user name, from game.all_connections,
-//	case-insensitve.  Returns null if not found.
-//	***************************************************************/
-//	connection find_conn_by_user(final String user_name)
-//	{
-//	for (conn pconn : game.all_connections.data) {
-//	if (mystrcasecmp(user_name, pconn.username)==0) {
-//	return pconn;
-//	}
-//	} }
-//	return null;
-//	}
+	/***************************************************************
+	Find connection by exact user name, from game.all_connections,
+	case-insensitve.  Returns null if not found.
+	 ***************************************************************/
+	public static Connection find_conn_by_user(final String user_name)
+	{
+		for (Connection pconn : game.all_connections.data) {
+			if (user_name.equals(pconn.username)) {
+				return pconn;
+			}
+		} 
+		return null;
+	}
 
 //	/***************************************************************
 //	Like find_conn_by_username(), but allow unambigous prefix
@@ -616,40 +609,64 @@ public class Connection{
 //	}
 //	}
 
-//	/**************************************************************************
-//	Return pointer to static string containing a description for this
-//	connection, based on pconn.name, pconn.addr, and (if applicable)
-//	pconn.player.name.  (Also pconn.established and pconn.observer.)
+	/**************************************************************************
+	Return pointer to static string containing a description for this
+	connection, based on pconn.name, pconn.addr, and (if applicable)
+	pconn.player.name.  (Also pconn.established and pconn.observer.)
 
-//	Note that if pconn is client's aconnection (connection to server),
-//	pconn.name and pconn.addr contain empty string, and pconn.player
-//	is null: in this case return string "server".
-//	**************************************************************************/
-//	final String conn_description(final connection pconn)
-//	{
-//	static char buffer[MAX_LEN_NAME*2 + MAX_LEN_ADDR + 128];
+	Note that if pconn is client's aconnection (connection to server),
+	pconn.name and pconn.addr contain empty string, and pconn.player
+	is null: in this case return string "server".
+	**************************************************************************/
+	public String conn_description()
+	{
+		// static char buffer[MAX_LEN_NAME*2 + MAX_LEN_ADDR + 128];
+		String buffer = "";
 
-//	buffer[0] = '\0';
+		// buffer[0] = '\0';
 
-//	if (*pconn.username != '\0') {
-//	buffer = util.my_snprintf( "%s from %s",
-//	pconn.username, pconn.addr); 
-//	} else {
-//	sz_strlcpy(buffer, "server");
-//	}
-//	if (!pconn.established) {
-//	sz_strlcat(buffer, " (connection incomplete)");
-//	return buffer;
-//	}
-//	if (pconn.player) {
-//	cat_snprintf(buffer, sizeof(buffer), " (player %s)",
-//	pconn.player.name);
-//	}
-//	if (pconn.observer) {
-//	sz_strlcat(buffer, " (observer)");
-//	}
-//	return buffer;
-//	}
+		// if (*pconn.username != '\0') {
+		// buffer = util.my_snprintf( "%s from %s",
+		// pconn.username, pconn.addr);
+		// } else {
+		// buffer = String.format( "server");
+		// }
+		// if (!pconn.established) {
+		// sz_strlcat(buffer, " (connection incomplete)");
+		// return buffer;
+		// }
+		// if (pconn.player) {
+		// cat_snprintf(buffer, sizeof(buffer), " (player %s)",
+		// pconn.player.name);
+		// }
+		// if (pconn.observer) {
+		// sz_strlcat(buffer, " (observer)");
+		//	}
+		return buffer;
+	}
+
+	///*****************************************************************************
+	//...
+	//*****************************************************************************/
+	public void close_connection() {
+		// while (pconn.server.ping_timers.foo_list_size() > 0) {
+		// timer timer = timer_list_get(pconn.server.ping_timers, 0);
+		//
+		// timer_list_unlink(pconn.server.ping_timers, timer);
+		// free_timer(timer);
+		// }
+		// assert(pconn.server.ping_timers.foo_list_size() == 0);
+		// timer_list_unlink_all(pconn.server.ping_timers);
+		//
+		// /* safe to do these even if not in lists: */
+		// conn_list_unlink(&game.all_connections, pconn);
+		// conn_list_unlink(&game.est_connections, pconn);
+		// conn_list_unlink(&game.game_connections, pconn);
+		//
+		// pconn.player = null;
+		// pconn.access_level = ALLOW_NONE;
+		// connection_common_close(pconn);
+	}
 
 //	/**************************************************************************
 //	Get next request id. Takes wrapping of the 16 bit wide unsigned int

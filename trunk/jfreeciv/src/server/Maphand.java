@@ -175,7 +175,7 @@ public class Maphand{
 //
 //  recalculate_lake_surrounders();
 //
-//  util.freelog(LOG_VERBOSE, "Map has %d continents and %d oceans", 
+//  util.freelog(Log.LOG_VERBOSE, "Map has %d continents and %d oceans", 
 //	  Map.map.num_continents, Map.map.num_oceans);
 //}
 //
@@ -207,7 +207,7 @@ public class Maphand{
 //{
 //  int k;
 //
-//  util.freelog(LOG_VERBOSE, "Global warming: %d", game.heating);
+//  util.freelog(Log.LOG_VERBOSE, "Global warming: %d", game.heating);
 //
 //  k = map_num_tiles();
 //  while(effect > 0 && (k--) > 0) {
@@ -249,7 +249,7 @@ public class Maphand{
 //{
 //  int k;
 //
-//  util.freelog(LOG_VERBOSE, "Nuclear winter: %d", game.cooling);
+//  util.freelog(Log.LOG_VERBOSE, "Nuclear winter: %d", game.cooling);
 //
 //  k = map_num_tiles();
 //  while(effect > 0 && (k--) > 0) {

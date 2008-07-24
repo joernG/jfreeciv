@@ -413,7 +413,7 @@ public class Options{
 //    mystrlcpy(name_buffer,OPTION_FILE_NAME,sizeof(name_buffer));
 //#endif
 //  }
-//  util.freelog(LOG_VERBOSE, "settings file is %s", name_buffer);
+//  util.freelog(Log.LOG_VERBOSE, "settings file is %s", name_buffer);
 //  return name_buffer;
 //}
 //  
@@ -447,7 +447,7 @@ public class Options{
 //  }
 //
 //  /* a "secret" option for the lazy. TODO: make this saveable */
-//  sz_strlcpy(password, 
+//  password = String.format( 
 //             secfile_lookup_str_default(&sf, "", "%s.password", prefix));
 //
 //  for (i = 0; i < num_options; i++) {

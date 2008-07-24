@@ -284,7 +284,7 @@ public class Tilespec{
 //  Returned data is allocated, and freed by user as required.
 //  Input name may be null, in which case uses default.
 //  Falls back to default if can't find specified name;
-//  dies if can't find default.
+//  util.dies if can't find default.
 //***********************************************************************/
 //static char *tilespec_fullname(final String tileset_name)
 //{
@@ -435,7 +435,7 @@ public class Tilespec{
 //   */
 //  if (!tilespec_read_toplevel(tileset_name)) {
 //    if (!tilespec_read_toplevel(current_tileset)) {
-//      die("Failed to re-read the currently loaded tileset.");
+//      util.die("Failed to re-read the currently loaded tileset.");
 //    }
 //  }
 //  tilespec_load_tiles();
@@ -542,7 +542,7 @@ public class Tilespec{
 //    }
 //  }
 //
-//  util.freelog(LOG_VERBOSE, "Could not load gfx file %s.", gfx_filename);
+//  util.freelog(Log.LOG_VERBOSE, "Could not load gfx file %s.", gfx_filename);
 //  return null;
 //}
 //
@@ -762,7 +762,7 @@ public class Tilespec{
 //  enum direction8 dir;
 //
 //  fname = tilespec_fullname(tileset_name);
-//  util.freelog(LOG_VERBOSE, "tilespec file is %s", fname);
+//  util.freelog(Log.LOG_VERBOSE, "tilespec file is %s", fname);
 //
 //  if (!section_file_load(file, fname)) {
 //    free(fname);
@@ -846,7 +846,7 @@ public class Tilespec{
 //  }
 //  SMALL_TILE_WIDTH = secfile_lookup_int(file, "tilespec.small_tile_width");
 //  SMALL_TILE_HEIGHT = secfile_lookup_int(file, "tilespec.small_tile_height");
-//  util.freelog(LOG_VERBOSE, "tile sizes %dx%d, %d%d unit, %d%d small",
+//  util.freelog(Log.LOG_VERBOSE, "tile sizes %dx%d, %d%d unit, %d%d small",
 //	  NORMAL_TILE_WIDTH, NORMAL_TILE_HEIGHT,
 //	  UNIT_TILE_WIDTH, UNIT_TILE_HEIGHT,
 //	  SMALL_TILE_WIDTH, SMALL_TILE_HEIGHT);
@@ -1065,7 +1065,7 @@ public class Tilespec{
 //  section_file_check_unused(file, fname);
 //  
 //  section_file_free(file);
-//  util.freelog(LOG_VERBOSE, "finished reading %s", fname);
+//  util.freelog(Log.LOG_VERBOSE, "finished reading %s", fname);
 //  free(fname);
 //
 //  current_tileset = tileset_name;
@@ -1094,7 +1094,7 @@ public class Tilespec{
 //  case CITIZEN_LAST:
 //    break;
 //  }
-//  die("unknown citizen type %d", (int) citizen.type);
+//  util.die("unknown citizen type %d", (int) citizen.type);
 //  return null;
 //}
 //
@@ -1143,7 +1143,7 @@ public class Tilespec{
 //#define SET_SPRITE(field, tag) do {                       \
 //       sprites.field = load_sprite(tag);                  \
 //       if (!sprites.field) {                              \
-//         die("Sprite tag %s missing.", tag);              \
+//         util.die("Sprite tag %s missing.", tag);              \
 //       }                                                  \
 //    } while(false)
 //
@@ -1154,7 +1154,7 @@ public class Tilespec{
 //           sprites.field = load_sprite(alt);                   \
 //       }                                                       \
 //       if (!sprites.field) {                                   \
-//         die("Sprite tag %s and alternate %s are both missing.", tag, alt); \
+//         util.die("Sprite tag %s and alternate %s are both missing.", tag, alt); \
 //       }                                                       \
 //    } while(false)
 //
@@ -1540,7 +1540,7 @@ public class Tilespec{
 //  
 //  /* (should get sprite_hash before connection) */
 //  if (!sprite_hash) {
-//    die("attempt to lookup for %s %s before sprite_hash setup", what, name);
+//    util.die("attempt to lookup for %s %s before sprite_hash setup", what, name);
 //  }
 //
 //  sp = load_sprite(tag);
@@ -1548,13 +1548,13 @@ public class Tilespec{
 //
 //  sp = load_sprite(alt);
 //  if (sp) {
-//    util.freelog(LOG_VERBOSE,
+//    util.freelog(Log.LOG_VERBOSE,
 //	    "Using alternate graphic %s (instead of %s) for %s %s",
 //	    alt, tag, what, name);
 //    return sp;
 //  }
 //
-//  util.freelog(required ? LOG_FATAL : LOG_VERBOSE,
+//  util.freelog(required ? LOG_FATAL : Log.LOG_VERBOSE,
 //	  "Don't have graphics tags %s or %s for %s %s",
 //	  tag, alt, what, name);
 //  if (required) {

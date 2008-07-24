@@ -530,9 +530,9 @@ public class Connectdlg_common{
 //  char message[MAX_LEN_MSG];
 //
 //  if (filename) {
-//    my_snprintf(message, MAX_LEN_MSG, "/save %s", filename);
+//    message = String.format "/save %s", filename);
 //  } else {
-//    my_snprintf(message, MAX_LEN_MSG, "/save");
+//    message = String.format "/save");
 //  }
 //
 //  send_chat(message);

@@ -142,7 +142,7 @@ public class Audio{
 //  }
 //
 //  selected_plugin = i;
-//  util.freelog(LOG_VERBOSE, "Plugin '%s' is now selected",
+//  util.freelog(Log.LOG_VERBOSE, "Plugin '%s' is now selected",
 //	  plugins[selected_plugin].name);
 //  return true;
 //}
@@ -215,7 +215,7 @@ public class Audio{
 //
 //  if (strcmp(prefered_plugin_name, "none") == 0) {
 //    /* We explicitly choose none plugin, silently skip the code below */
-//    util.freelog(LOG_VERBOSE, "Proceeding with sound support disabled");
+//    util.freelog(Log.LOG_VERBOSE, "Proceeding with sound support disabled");
 //    tagfile = null;
 //    return;
 //  }
@@ -236,7 +236,7 @@ public class Audio{
 //    util.freelog(LOG_FATAL, "No sound spec-file given!");
 //    exit(EXIT_FAILURE);
 //  }
-//  util.freelog(LOG_VERBOSE, "Initializing sound using %s...", spec_name);
+//  util.freelog(Log.LOG_VERBOSE, "Initializing sound using %s...", spec_name);
 //  filename = soundspec_fullname(spec_name);
 //  if (!filename) {
 //    util.freelog(Log.LOG_ERROR, ("Cannot find sound spec-file \"%s\"."), spec_name);
@@ -315,7 +315,7 @@ public class Audio{
 //  if (tagfile) {
 //    soundfile = secfile_lookup_str_default(tagfile, "-", "files.%s", tag);
 //    if (strcmp(soundfile, "-") == 0) {
-//      util.freelog(LOG_VERBOSE, "No sound file for tag %s (file %s)", tag,
+//      util.freelog(Log.LOG_VERBOSE, "No sound file for tag %s (file %s)", tag,
 //	      soundfile);
 //    } else {
 //      fullpath = datafilename(soundfile);
@@ -341,7 +341,7 @@ public class Audio{
 //
 //  /* try playing primary tag first, if not go to alternative tag */
 //  if (!audio_play_tag(tag, false) && !audio_play_tag(alt_tag, false)) {
-//    util.freelog(LOG_VERBOSE, "Neither of tags %s or %s found", tag,
+//    util.freelog(Log.LOG_VERBOSE, "Neither of tags %s or %s found", tag,
 //	    pretty_alt_tag);
 //  }
 //}
@@ -359,13 +359,13 @@ public class Audio{
 //
 //  /* try playing primary tag first, if not go to alternative tag */
 //  if (!audio_play_tag(tag, true) && !audio_play_tag(alt_tag, true)) {
-//    util.freelog(LOG_VERBOSE, "Neither of tags %s or %s found", tag,
+//    util.freelog(Log.LOG_VERBOSE, "Neither of tags %s or %s found", tag,
 //	    pretty_alt_tag);
 //  }
 //}
 //
 ///**************************************************************************
-//  Stop looping sound. Music should die down in a few seconds.
+//  Stop looping sound. Music should util.die down in a few seconds.
 //**************************************************************************/
 //void audio_stop()
 //{
@@ -399,7 +399,7 @@ public class Audio{
 //  static char buffer[100];
 //  int i;
 //
-//  sz_strlcpy(buffer, "[");
+//  buffer = String.format( "[");
 //
 //  for (i = 0; i < num_plugins_used; i++) {
 //    sz_strlcat(buffer, plugins[i].name);

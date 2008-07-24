@@ -283,7 +283,7 @@ public class Civclient{
 //
 //  /* after log_init: */
 //
-//  sz_strlcpy(default_user_name, user_username());
+//  default_user_name = String.format( user_username());
 //  if (!is_valid_username(default_user_name)) {
 //    char buf[sizeof(default_user_name)];
 //

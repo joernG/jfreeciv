@@ -410,7 +410,7 @@ public class Gui_main{
 //
 ///**************************************************************************
 // creates the toggle button necessary to detach and reattach the widget
-// and returns a vbox in which you fill your goodies.
+// and returns a vbox in which you fill your gooutil.dies.
 //**************************************************************************/
 //static GtkWidget *detached_widget_fill(GtkWidget *ahbox)
 //{

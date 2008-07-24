@@ -243,7 +243,7 @@ public class Aidiplomat{
 //
 ///**************************************************************************
 //  Check if something is on our receiving end for some nasty diplomat
-//  business! Note that punit may die or be moved during this function. We
+//  business! Note that punit may util.die or be moved during this function. We
 //  must be adjacent to target city.
 //
 //  We try to make embassy first, and abort if we already have one and target

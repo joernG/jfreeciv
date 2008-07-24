@@ -224,7 +224,7 @@ public class Mapgen_topology{
 //	    "Requested size of %d is too big for this topology.",
 //	    Map.map.size);
 //  }
-//  util.freelog(LOG_VERBOSE,
+//  util.freelog(Log.LOG_VERBOSE,
 //	  "Creating a map of size %d x %d = %d tiles (%d requested).",
 //	  Map.map.xsize, Map.map.ysize, Map.map.xsize * Map.map.ysize, Map.map.size * 1000);
 //}

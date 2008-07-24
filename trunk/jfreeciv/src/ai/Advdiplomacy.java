@@ -1226,7 +1226,7 @@ public class Advdiplomacy{
 //             target.name);
 //      break;
 //    default:
-//      die("Unknown pact type");
+//      util.die("Unknown pact type");
 //      break;
 //    }
 //  }

@@ -181,7 +181,7 @@ public class Timing{
 //     static timer t = null; 
 //     t = renew_timer_start(t, TIMER_CPU, TIMER_USE);
 //     ... stuff ...
-//     util.freelog(LOG_VERBOSE, "That took %g seconds.", read_timer_seconds(t));
+//     util.freelog(Log.LOG_VERBOSE, "That took %g seconds.", read_timer_seconds(t));
 //     ... never free t ...
 //  }
 //***********************************************************************/

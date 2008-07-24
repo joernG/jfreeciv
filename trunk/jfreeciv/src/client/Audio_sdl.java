@@ -63,7 +63,7 @@ public class Audio_sdl{
 //    }
 //
 //    Mix_PlayMusic(mus, -1);	/* -1 means loop forever */
-//    util.freelog(LOG_VERBOSE, "Playing file %s on music channel", fullpath);
+//    util.freelog(Log.LOG_VERBOSE, "Playing file %s on music channel", fullpath);
 //    /* in case we did a my_stop() recently; add volume controls later */
 //    Mix_VolumeMusic(MIX_MAX_VOLUME);
 //
@@ -89,11 +89,11 @@ public class Audio_sdl{
 //       channel found */
 //    i = Mix_PlayChannel(-1, wave, 0);
 //    if (i < 0) {
-//      util.freelog(LOG_VERBOSE, "No available sound channel to play %s.", tag);
+//      util.freelog(Log.LOG_VERBOSE, "No available sound channel to play %s.", tag);
 //      Mix_FreeChunk(wave);
 //      return false;
 //    }
-//    util.freelog(LOG_VERBOSE, "Playing file %s on channel %d", fullpath, i);
+//    util.freelog(Log.LOG_VERBOSE, "Playing file %s on channel %d", fullpath, i);
 //    /* free previous sample on this channel. it will by definition no
 //       longer be playing by the time we get here */
 //    if (samples[i].wave) {
@@ -118,7 +118,7 @@ public class Audio_sdl{
 //}
 //
 ///**************************************************************************
-//  Wait for audio to die on all channels.
+//  Wait for audio to util.die on all channels.
 //  WARNING: If a channel is looping, it will NEVER exit! Always call
 //  music_stop() first!
 //**************************************************************************/
@@ -221,8 +221,8 @@ public class Audio_sdl{
 //{
 //  struct audio_plugin self;
 //
-//  sz_strlcpy(self.name, "sdl");
-//  sz_strlcpy(self.descr, "Simple DirectMedia Library (SDL) mixer plugin");
+//  self.name = String.format( "sdl");
+//  self.descr = String.format( "Simple DirectMedia Library (SDL) mixer plugin");
 //  self.init = my_init;
 //  self.shutdown = my_shutdown;
 //  self.stop = my_stop;

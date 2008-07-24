@@ -73,7 +73,7 @@ public class Idex{
 //	    pcity.id, (void*)pcity, pcity.name,
 //	    old.id, (void*)old, old.name);
 //    if (IDEX_DIE) {
-//      die("byebye");
+//      util.die("byebye");
 //    }
 //  }
 //}
@@ -92,7 +92,7 @@ public class Idex{
 //	    punit.id, (void*)punit, unit_name(punit.type),
 //	    old.id, (void*)old, unit_name(old.type));
 //    if (IDEX_DIE) {
-//      die("byebye");
+//      util.die("byebye");
 //    }
 //  }
 //}
@@ -110,7 +110,7 @@ public class Idex{
 //    util.freelog(LOG_IDEX_ERR, "IDEX: city unreg missing: %d %p %s",
 //	    pcity.id, (void*)pcity, pcity.name);
 //    if (IDEX_DIE) {
-//      die("byebye");
+//      util.die("byebye");
 //    }
 //  } else if (old != pcity) {
 //    /* error */
@@ -119,7 +119,7 @@ public class Idex{
 //	    pcity.id, (void*)pcity, pcity.name,
 //	    old.id, (void*)old, old.name);
 //    if (IDEX_DIE) {
-//      die("byebye");
+//      util.die("byebye");
 //    }
 //  }
 //}
@@ -137,7 +137,7 @@ public class Idex{
 //    util.freelog(LOG_IDEX_ERR, "IDEX: unit unreg missing: %d %p %s",
 //	    punit.id, (void*)punit, unit_name(punit.type));
 //    if (IDEX_DIE) {
-//      die("byebye");
+//      util.die("byebye");
 //    }
 //  } else if (old != punit) {
 //    /* error */
@@ -146,7 +146,7 @@ public class Idex{
 //	    punit.id, (void*)punit, unit_name(punit.type),
 //	    old.id, (void*)old, unit_name(old.type));
 //    if (IDEX_DIE) {
-//      die("byebye");
+//      util.die("byebye");
 //    }
 //  }
 //}

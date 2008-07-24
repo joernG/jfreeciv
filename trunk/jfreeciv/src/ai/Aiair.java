@@ -118,7 +118,7 @@ public class Aiair{
 //  /* Determine cost of enemy units */
 //  victim_cost = stack_cost(pdefender);
 //
-//  /* Missile would die 100% so we adjust the victim_cost -- GB */
+//  /* Missile would util.die 100% so we adjust the victim_cost -- GB */
 //  if (unit_flag(punit, F_MISSILE)) {
 //    victim_cost -= unit_build_shield_cost(punit.type);
 //  }
@@ -331,7 +331,7 @@ public class Aiair{
 //       * tile to attack from */
 //      assert(punit.goto_tile != null);
 //      if (!ai_unit_goto(punit, punit.goto_tile)) {
-//        return; /* died */
+//        return; /* util.died */
 //      }
 //
 //      /* goto would be aborted: "Aborting GOTO for AI attack procedures"

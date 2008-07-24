@@ -604,7 +604,7 @@ public class Combat{
 //}
 //
 ///**************************************************************************
-//  Is it a city/fortress/air base or will the whole stack die in an attack
+//  Is it a city/fortress/air base or will the whole stack util.die in an attack
 //**************************************************************************/
 //boolean is_stack_vulnerable(final tile ptile)
 //{

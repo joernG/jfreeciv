@@ -175,7 +175,7 @@ public class Packhand{
 //  close_connection_dialog();
 //
 //  if (you_can_join) {
-//    util.freelog(LOG_VERBOSE, "join game accept:%s", message);
+//    util.freelog(Log.LOG_VERBOSE, "join game accept:%s", message);
 //    aconnection.established = true;
 //    aconnection.id = conn_id;
 //    agents_game_joined();
@@ -1688,7 +1688,7 @@ public class Packhand{
 //  if (!pinfo.used) {
 //    /* Forget the connection */
 //    if (!pconn) {
-//      util.freelog(LOG_VERBOSE, "Server removed unknown connection %d", pinfo.id);
+//      util.freelog(Log.LOG_VERBOSE, "Server removed unknown connection %d", pinfo.id);
 //      return;
 //    }
 //    client_remove_cli_conn(pconn);
@@ -1702,7 +1702,7 @@ public class Packhand{
 //       ? get_player(pinfo.player_num) : null);
 //    
 //    if (!pconn) {
-//      util.freelog(LOG_VERBOSE, "Server reports new connection %d %s",
+//      util.freelog(Log.LOG_VERBOSE, "Server reports new connection %d %s",
 //	      pinfo.id, pinfo.username);
 //
 //      pconn = fc_calloc(1, sizeof(struct connection));
@@ -2934,7 +2934,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_server_shutdown()
 //{
-//  util.freelog(LOG_VERBOSE, "server shutdown");
+//  util.freelog(Log.LOG_VERBOSE, "server shutdown");
 //}
 //
 ///**************************************************************************

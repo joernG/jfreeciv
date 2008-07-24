@@ -531,14 +531,14 @@ public class Common_types{
 //  }
 //  if (!found) {
 //    if (string.length() != 1) {
-//      die("key description '%s' can't be parsed", orig);
+//      util.die("key description '%s' can't be parsed", orig);
 //    }
 //    result.type = BE_KEY_NORMAL;
 //    result.key = string[0];
 //  }
 //
 //  if (!ct_key_is_valid(result)) {
-//    die("key description '%s' isn't valid", orig);
+//    util.die("key description '%s' isn't valid", orig);
 //  }
 //  return result;
 //}

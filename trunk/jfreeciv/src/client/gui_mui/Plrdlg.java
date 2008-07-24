@@ -119,15 +119,15 @@ public class Plrdlg{
 //      if (game.players[i].is_connected)
 //      {
 //	if (game.players[i].turn_done)
-//	  sz_strlcpy(statebuf, "done");
+//	  statebuf = String.format( "done");
 //	else
-//	  sz_strlcpy(statebuf, "moving");
+//	  statebuf = String.format( "moving");
 //      }
 //      else
 //	statebuf[0] = '\0';
 //    }
 //    else
-//      sz_strlcpy(statebuf, "R.I.P");
+//      statebuf = String.format( "R.I.P");
 //
 //    if (game.players[i].ai.control)
 //      namebuf = util.my_snprintf( "*%-15s", game.players[i].name);
@@ -138,7 +138,7 @@ public class Plrdlg{
 //
 //    /* text for diplstate type and turns -- not applicable if this is me */
 //    if (i == game.player_idx) {
-//      sz_strlcpy(dsbuf, "-");
+//      dsbuf = String.format( "-");
 //    } else {
 //      pds = pplayer_get_diplstate(game.player_ptr, get_player(i));
 //      if (pds.type == DS_CEASEFIRE) {

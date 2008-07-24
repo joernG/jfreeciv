@@ -1531,7 +1531,7 @@ public class Mapview{
 //      }
 //    }
 //    if (!widget) {
-//      die("Can't find action button for '%s'. Define it in 'mapview.prop'.", 
+//      util.die("Can't find action button for '%s'. Define it in 'mapview.prop'.", 
 //	  actions_shown.action[i].name);
 //    }
 //    

@@ -178,12 +178,12 @@ public class Connectdlg{
 //      }
 //      if(!pList || (pList && !pList.foo_list_size()))
 //      {
-//        my_snprintf(errbuf, n_errbuf, "No LAN Server Found");
+//        errbuf = String.format "No LAN Server Found");
 //        finish_lanserver_scan();
 //        pList = null;
 //      }
 //    } else {
-//      my_snprintf(errbuf, n_errbuf, "LAN network scan error");
+//      errbuf = String.format "LAN network scan error");
 //    }
 //    return pList;
 //  }
@@ -598,7 +598,7 @@ public class Connectdlg{
 //{
 //  char *tmp = convert_to_chars(pWidget.string16.text);
 //  if(tmp) {
-//    my_snprintf(password, MAX_LEN_NAME, "%s", tmp);
+//    password = String.format "%s", tmp);
 //    FREE(tmp);
 //  }
 //  return -1;
@@ -756,7 +756,7 @@ public class Connectdlg{
 //  char *tmp = convert_to_chars(pWidget.string16.text);
 //  
 //  if(tmp) {
-//    my_snprintf(password, MAX_LEN_NAME, "%s", tmp);
+//    password = String.format "%s", tmp);
 //    FREE(tmp);
 //    set_wstate(pWidget.prev, FC_WS_NORMAL);
 //    redraw_edit(pWidget.prev);
@@ -986,7 +986,7 @@ public class Connectdlg{
 //    case AUTH_NEWUSER_RETRY:
 //      popup_new_user_passwd_dialog(message);
 //    break;
-//    case AUTH_LOGIN_FIRST:
+//    case authentication_type.AUTH_LOGIN_FIRST:
 //    /* if we magically have a password already present in 'password'
 //     * then, use that and skip the password entry dialog */
 //    if (password[0] != '\0') {

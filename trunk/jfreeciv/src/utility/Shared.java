@@ -553,7 +553,7 @@ public static final String textyear(int year)
 //     int n = sizeof(buf);
 //     char *p = buf;
 //
-//     my_snprintf(p, n, "foo%p", p);
+//     p = String.format "foo%p", p);
 //     p = end_of_strn(p, &n);
 //     mystrlcpy(p, "yyy", n);
 //***************************************************************************/
@@ -625,7 +625,7 @@ public static final String textyear(int year)
 //  should only be called for code errors - user errors (like not being able
 //  to find a tileset) should just exit rather than dumping core.
 //***************************************************************************/
-//void real_die(final String file, int line, final String format)
+//void real_util.die(final String file, int line, final String format)
 //{
 //  va_list ap;
 //
@@ -657,7 +657,7 @@ public static final String textyear(int year)
 //    char *env = getenv("HOME");
 //    if (env) {
 //      home_dir = mystrdup(env);	        /* never free()d */
-//      util.freelog(LOG_VERBOSE, "HOME is %s", home_dir);
+//      util.freelog(Log.LOG_VERBOSE, "HOME is %s", home_dir);
 //    } else {
 //#ifdef WIN32_NATIVE
 //      home_dir=fc_malloc(PATH_MAX);
@@ -705,8 +705,8 @@ public static final String textyear(int year)
 //
 //    if (env) {
 //      username = env;
-//      if (is_ascii_name(username)) {
-//	util.freelog(LOG_VERBOSE, "USER username is %s", username);
+//      if (util.isLetter(username)) {
+//	util.freelog(Log.LOG_VERBOSE, "USER username is %s", username);
 //	return username;
 //      }
 //    }
@@ -720,8 +720,8 @@ public static final String textyear(int year)
 //
 //    if (pwent) {
 //      username = pwent.pw_name;
-//      if (is_ascii_name(username)) {
-//	util.freelog(LOG_VERBOSE, "getpwuid username is %s", username);
+//      if (util.isLetter(username)) {
+//	util.freelog(Log.LOG_VERBOSE, "getpwuid username is %s", username);
 //	return username;
 //      }
 //    }
@@ -736,8 +736,8 @@ public static final String textyear(int year)
 //
 //    if (GetUserName(name, &length)) {
 //      username = name;
-//      if (is_ascii_name(username)) {
-//	util.freelog(LOG_VERBOSE, "GetUserName username is %s", username);
+//      if (util.isLetter(username)) {
+//	util.freelog(Log.LOG_VERBOSE, "GetUserName username is %s", username);
 //	return username;
 //      }
 //    }
@@ -745,12 +745,12 @@ public static final String textyear(int year)
 //#endif
 //
 //#ifdef ALWAYS_ROOT
-//  sz_strlcpy(username, "name");
+//  username = String.format( "name");
 //#else
-//  my_snprintf(username, MAX_LEN_NAME, "name%d", (int)getuid());
+//  username = String.format "name%d", (int)getuid());
 //#endif
-//  util.freelog(LOG_VERBOSE, "fake username is %s", username);
-//  assert(is_ascii_name(username));
+//  util.freelog(Log.LOG_VERBOSE, "fake username is %s", username);
+//  assert(util.isLetter(username));
 //  return username;
 //}
 //
@@ -815,14 +815,14 @@ public static final String textyear(int year)
 //	char *home = user_home_dir();
 //
 //	if (!home) {
-//	  util.freelog(LOG_VERBOSE,
+//	  util.freelog(Log.LOG_VERBOSE,
 //		  "No HOME, skipping data path component %s", tok);
 //	  i = 0;
 //	} else {
 //	  int len = home.length() + i;	   /* +1 -1 */
 //	  char *tmp = fc_malloc(len);
 //
-//	  my_snprintf(tmp, len, "%s%s", home, tok + 1);
+//	  tmp = String.format "%s%s", home, tok + 1);
 //	  tok = tmp;
 //	  i = -1;		/* flag to free tok below */
 //	}
@@ -835,7 +835,7 @@ public static final String textyear(int year)
 //      num++;
 //      dirs = fc_realloc(dirs, num * sizeof(char*));
 //      dirs[num - 1] = mystrdup(tok);
-//      util.freelog(LOG_VERBOSE, "Data path component (%d): %s", num - 1, tok);
+//      util.freelog(Log.LOG_VERBOSE, "Data path component (%d): %s", num - 1, tok);
 //      if (i == -1) {
 //	free(tok);
 //	tok = null;
@@ -888,7 +888,7 @@ public static final String textyear(int year)
 //    dir = opendir(dirs[dir_num]);
 //    if (!dir) {
 //      if (errno == ENOENT) {
-//	util.freelog(LOG_VERBOSE, "Skipping non-existing data directory %s.",
+//	util.freelog(Log.LOG_VERBOSE, "Skipping non-existing data directory %s.",
 //		dirs[dir_num]);
 //      } else {
 //	util.freelog(Log.LOG_ERROR, "Could not read data directory %s: %s.",
@@ -995,13 +995,13 @@ public static final String textyear(int year)
 //    size_t len = strlen(dirs[i]) + filename.length() + 2;
 //    
 //    astr_minsize(&realfile, len);
-//    my_snprintf(realfile.str, len, "%s/%s", dirs[i], filename);
+//    realfile.str = String.format "%s/%s", dirs[i], filename);
 //    if (stat(realfile.str, &buf) == 0) {
 //      return realfile.str;
 //    }
 //  }
 //
-//  util.freelog(LOG_VERBOSE, "Could not find readable file \"%s\" in data path.",
+//  util.freelog(Log.LOG_VERBOSE, "Could not find readable file \"%s\" in data path.",
 //	  filename);
 //
 //  return null;
@@ -1056,7 +1056,7 @@ public static final String textyear(int year)
 //    if (subpath) {
 //      path = util.my_snprintf( "%s/%s", dirs[dir_num], subpath);
 //    } else {
-//      sz_strlcpy(path, dirs[dir_num]);
+//      path = String.format( dirs[dir_num]);
 //    }
 //
 //    /* Open the directory for reading. */
@@ -1079,7 +1079,7 @@ public static final String textyear(int year)
 //	size_t len = path.length() + filename.length() + 2;
 //
 //	fullname = fc_malloc(len);
-//	my_snprintf(fullname, len, "%s/%s", path, filename);
+//	fullname = String.format "%s/%s", path, filename);
 //
 //	if (stat(fullname, &buf) == 0) {
 //	  file = fc_malloc(sizeof(*file));
@@ -1130,7 +1130,7 @@ public static final String textyear(int year)
 //
 //
 ///***************************************************************************
-//  As datafilename(), above, except die with an appropriate log
+//  As datafilename(), above, except util.die with an appropriate log
 //  message if we can't find the file in the datapath.
 //***************************************************************************/
 //char *datafilename_required(final String filename)
@@ -1256,11 +1256,11 @@ public static void init_nls()
 }
 
 ///***************************************************************************
-//  If we have root privileges, die with an error.
+//  If we have root privileges, util.die with an error.
 //  (Eg, for security reasons.)
 //  Param argv0 should be argv[0] or similar; fallback is
 //  used instead if argv0 is null.
-//  But don't die on systems where the user is always root...
+//  But don't util.die on systems where the user is always root...
 //  (a general test for this would be better).
 //  Doesn't use util.freelog() because gets called before logging is setup.
 //***************************************************************************/
@@ -1418,7 +1418,7 @@ public static void init_nls()
 //void interpret_tilde(char* buf, size_t buf_size, final char* filename)
 //{
 //  if (filename[0] == '~' && filename[1] == '/') {
-//    my_snprintf(buf, buf_size, "%s/%s", user_home_dir(), filename + 2);
+//    buf = String.format "%s/%s", user_home_dir(), filename + 2);
 //  } else if (filename[0] == '~' && filename[1] == '\0') {
 //    strncpy(buf, user_home_dir(), buf_size);
 //  } else  {

@@ -315,10 +315,10 @@ public class Registry{
 //    for (entry pentry : psection.entries.data) {
 //      if (pentry.used == 0) {
 //	if (any == 0 && filename) {
-//	  util.freelog(LOG_VERBOSE, "Unused entries in file %s:", filename);
+//	  util.freelog(Log.LOG_VERBOSE, "Unused entries in file %s:", filename);
 //	  any = 1;
 //	}
-//	util.freelog(LOG_VERBOSE, "  unused entry: %s.%s",
+//	util.freelog(Log.LOG_VERBOSE, "  unused entry: %s.%s",
 //		psection.name, pentry.name);
 //      }
 //    }
@@ -413,9 +413,9 @@ public class Registry{
 //  sb = sf.sb;
 //
 //  if (filename) {
-//    util.freelog(LOG_VERBOSE, "Reading registry from \"%s\"", filename);
+//    util.freelog(Log.LOG_VERBOSE, "Reading registry from \"%s\"", filename);
 //  } else {
-//    util.freelog(LOG_VERBOSE, "Reading registry");
+//    util.freelog(Log.LOG_VERBOSE, "Reading registry");
 //  }
 //
 //  while(!inf_at_eof(inf)) {
@@ -472,12 +472,12 @@ public class Registry{
 //
 //	if (i < num_columns) {
 //	  astr_minsize(&entry_name, base_name.n + 10 + columns.p[i].n);
-//	  my_snprintf(entry_name.str, entry_name.n_alloc, "%s%d.%s",
+//	  entry_name.str = String.format "%s%d.%s",
 //		      base_name.str, table_lineno, columns.p[i].str);
 //	} else {
 //	  astr_minsize(&entry_name,
 //		       base_name.n + 20 + columns.p[num_columns - 1].n);
-//	  my_snprintf(entry_name.str, entry_name.n_alloc, "%s%d.%s,%d",
+//	  entry_name.str = String.format "%s%d.%s,%d",
 //		      base_name.str, table_lineno,
 //		      columns.p[num_columns - 1].str,
 //		      (int) (i - num_columns + 1));
@@ -547,7 +547,7 @@ public class Registry{
 //	pentry = new_entry(sb, base_name.str, tok);
 //      } else {
 //	astr_minsize(&entry_name, base_name.n + 20);
-//	my_snprintf(entry_name.str, entry_name.n_alloc,
+//	entry_name.str = String.format
 //		    "%s,%d", base_name.str, i);
 //	pentry = new_entry(sb, entry_name.str, tok);
 //      }
@@ -597,7 +597,7 @@ public class Registry{
 //}
 //
 ///**************************************************************************
-//  Load a section_file, but disallow (die on) duplicate entries.
+//  Load a section_file, but disallow (util.die on) duplicate entries.
 //**************************************************************************/
 //boolean section_file_load_nodup(section_file my_section_file,
 //			    final String filename)
@@ -1064,7 +1064,7 @@ public class Registry{
 //
 ///**************************************************************************
 //  As secfile_lookup_int(), but return a specified default value if the
-//  entry does not exist.  If the entry exists as a string, then die.
+//  entry does not exist.  If the entry exists as a string, then util.die.
 //**************************************************************************/
 //int secfile_lookup_int_default(section_file my_section_file,
 //			       int def, final String path)
@@ -1126,7 +1126,7 @@ public class Registry{
 //
 ///**************************************************************************
 //  As secfile_lookup_bool(), but return a specified default value if the
-//  entry does not exist.  If the entry exists as a string, then die.
+//  entry does not exist.  If the entry exists as a string, then util.die.
 //**************************************************************************/
 //boolean secfile_lookup_bool_default(section_file my_section_file,
 //				 boolean def, final String path)
@@ -1159,7 +1159,7 @@ public class Registry{
 //
 ///**************************************************************************
 //  As secfile_lookup_str(), but return a specified default (char*) if the
-//  entry does not exist.  If the entry exists as an int, then die.
+//  entry does not exist.  If the entry exists as an int, then util.die.
 //**************************************************************************/
 //char *secfile_lookup_str_default(section_file my_section_file, 
 //				 final String def, final String path)
@@ -1244,7 +1244,7 @@ public class Registry{
 //
 //  () mystrlcpy(sec_name, fullpath,
 //		   Math.min(pdelim - fullpath + 1, sizeof(sec_name)));
-//  sz_strlcpy(ent_name, pdelim+1);
+//  ent_name = String.format( pdelim+1);
 //
 //  psection = find_section_by_name(my_section_file, sec_name);
 //  if (psection) {
@@ -1285,7 +1285,7 @@ public class Registry{
 //  }
 //  () mystrlcpy(sec_name, fullpath,
 //		   Math.min(pdelim - fullpath + 1, sizeof(sec_name)));
-//  sz_strlcpy(ent_name, pdelim+1);
+//  ent_name = String.format( pdelim+1);
 //  my_section_file.num_entries++;
 //  
 //  if(sec_name.length()==0 || ent_name.length()==0) {

@@ -50,7 +50,7 @@ void init_game_seed()
 //  if (game.seed == 0) {
 //    /* We strip the high bit for now because neither game file nor
 //       server options can handle unsigned ints yet. - Cedric */
-//    game.seed = time(null) & (MAX_UINT32 >> 1);
+//    game.seed = new Date() & (MAX_UINT32 >> 1);
 //  }
 // 
 //  if (!myrand_is_init()) {
@@ -644,7 +644,7 @@ public void srv_init()
 //
 //  section_file_free(&file);
 //
-//  util.freelog(LOG_VERBOSE, "Save time: %g seconds (%g apparent)",
+//  util.freelog(Log.LOG_VERBOSE, "Save time: %g seconds (%g apparent)",
 //	  read_timer_seconds_free(timer_cpu),
 //	  read_timer_seconds_free(timer_user));
 //}
@@ -785,7 +785,7 @@ public void srv_init()
 //    struct data_out dout;
 //
 //    util.freelog(Log.LOG_ERROR,
-//	    "Warning: rejecting old client %s", conn_description(pconn));
+//	    "Warning: rejecting old client %s", pconn.conn_description());
 //
 //    dio_output_init(&dout, buffer, sizeof(buffer));
 //    dio_put_uint16(&dout, 0);
@@ -834,7 +834,7 @@ public void srv_init()
 //
 //  if (!pconn.established) {
 //    util.freelog(Log.LOG_ERROR, "Received game packet from unaccepted connection %s",
-//	    conn_description(pconn));
+//	    pconn.conn_description());
 //    return true;
 //  }
 //  
@@ -856,7 +856,7 @@ public void srv_init()
 //  if(!pplayer) {
 //    /* don't support these yet */
 //    util.freelog(Log.LOG_ERROR, "Received packet from non-player connection %s",
-// 	    conn_description(pconn));
+// 	    pconn.conn_description());
 //    return true;
 //  }
 //
@@ -890,7 +890,7 @@ public void srv_init()
 //
 //  if (!server_handle_packet(type, packet, pplayer, pconn)) {
 //    util.freelog(Log.LOG_ERROR, "Received unknown packet %d from %s",
-//	    type, conn_description(pconn));
+//	    type, pconn.conn_description());
 //  }
 //
 //  if (Srv_main.server_state == RUN_GAME_STATE) {
@@ -953,12 +953,12 @@ public void srv_init()
 //				   final String name,
 //				   char *error_buf, size_t bufsz)
 //{
-//  connection pconn = find_conn_by_user(pplayer.username);
+//  connection pconn = Connection.find_conn_by_user(pplayer.username);
 //
 //  /* An empty name is surely not allowed. */
 //  if (name.length() == 0) {
 //    if (error_buf) {
-//      my_snprintf(error_buf, bufsz, "Please choose a non-blank name.");
+//      error_buf = String.format "Please choose a non-blank name.");
 //    }
 //    return false;
 //  }
@@ -967,7 +967,7 @@ public void srv_init()
 //  for(player other_player: game.players){
 //    if (other_player.nation == nation) {
 //      if (error_buf) {
-//	my_snprintf(error_buf, bufsz, "That nation is already in use.");
+//	error_buf = String.format "That nation is already in use.");
 //      }
 //      return false;
 //    } else {
@@ -983,7 +983,7 @@ public void srv_init()
 //      if (other_player.player_no != pplayer.player_no
 //	  && mystrcasecmp(other_player.name, name) == 0) {
 //	if (error_buf) {
-//	  my_snprintf(error_buf, bufsz,
+//	  error_buf = String.format
 //		      ("Another player already has the name '%s'.  Please " +
 //			"choose another name."), name);
 //	}
@@ -1002,10 +1002,10 @@ public void srv_init()
 //   * confusing garbage names in multi-player games. */
 //    /* FIXME: is there a better way to determine if a *player* has hack
 //     * access? */
-//  if (!is_ascii_name(name)
+//  if (!util.isLetter(name)
 //      && (!pconn || pconn.access_level != ALLOW_HACK)) {
 //    if (error_buf) {
-//      my_snprintf(error_buf, bufsz, ("Please choose a name containing " +
+//      error_buf = String.format ("Please choose a name containing " +
 //				      "only ASCII characters."));
 //    }
 //    return false;
@@ -1440,7 +1440,7 @@ public void srv_init()
 //    lsend_packet_thaw_hint(&game.game_connections);
 //
 //    /* Before sniff (human player activites), report time to now: */
-//    util.freelog(LOG_VERBOSE, "End/start-turn server/ai activities: %g seconds",
+//    util.freelog(Log.LOG_VERBOSE, "End/start-turn server/ai activities: %g seconds",
 //	    read_timer_seconds(eot_timer));
 //
 //    /* Do auto-saves just before starting sniff_packets(), so that

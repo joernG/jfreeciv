@@ -130,7 +130,7 @@ public class Audio_alsa{
 //    return -1;
 //  }
 //  if (rrate != (unsigned) file_rate) {
-//    util.freelog(LOG_VERBOSE, "ALSA: asked for rate %u, got %u",
+//    util.freelog(Log.LOG_VERBOSE, "ALSA: asked for rate %u, got %u",
 //            (unsigned) file_rate, rrate);
 //  }
 //  snd_pcm_hw_params_set_period_time_near(sound_handle, hwparams,
@@ -293,7 +293,7 @@ public class Audio_alsa{
 //  afSetVirtualChannels(new_handle, AF_DEFAULT_TRACK, 2);
 //  new_rate = afGetRate(new_handle, AF_DEFAULT_TRACK);
 //  new_fcount = afGetFrameCount(new_handle, AF_DEFAULT_TRACK);
-//  util.freelog(LOG_VERBOSE, "ALSA: %s: rate %f, %d frames", fullpath,
+//  util.freelog(Log.LOG_VERBOSE, "ALSA: %s: rate %f, %d frames", fullpath,
 //          new_rate, (int) new_fcount);
 //
 //  snd_pcm_drop_free(sound_handle);
@@ -348,8 +348,8 @@ public class Audio_alsa{
 //{
 //  struct audio_plugin self;
 //
-//  sz_strlcpy(self.name, "alsa");
-//  sz_strlcpy(self.descr, "ALSA plugin");
+//  self.name = String.format( "alsa");
+//  self.descr = String.format( "ALSA plugin");
 //  self.init = my_init;
 //  self.shutdown = my_shutdown;
 //  self.stop = my_stop;

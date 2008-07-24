@@ -368,7 +368,7 @@ public class Inputfile{
 //  if (!inf.cur_line.str.equals(include_prefix)) {
 //    return false;
 //  }
-//  /* from here, the include-line must be well formed or we die */
+//  /* from here, the include-line must be well formed or we util.die */
 //  /* keep inf.cur_line_pos accurate just so error messages are useful */
 //
 //  /* skip any whitespace: */
@@ -506,7 +506,7 @@ public class Inputfile{
 //      break;
 //    }
 //    if (line.n != line.n_alloc) {
-//      util.freelog(LOG_VERBOSE, "inputfile: expect missing newline at EOF");
+//      util.freelog(Log.LOG_VERBOSE, "inputfile: expect missing newline at EOF");
 //    }
 //    astr_minsize(line, line.n*2);
 //  }
@@ -792,10 +792,10 @@ public class Inputfile{
 //  if (*c == '\0')
 //    return null;
 //
-//  if (*c == '-' || my_isdigit(*c)) {
+//  if (*c == '-' || Character.isDigit(*c)) {
 //    /* a number: */
 //    start = c++;
-//    while(*c != '\0' && my_isdigit(*c)) {
+//    while(*c != '\0' && Character.isDigit(*c)) {
 //      c++;
 //    }
 //    /* check that the trailing stuff is ok: */

@@ -1282,7 +1282,7 @@ public class Settlers{
 //  }
 //  }
 //  if (timer_in_use(t)) {
-//    util.freelog(LOG_VERBOSE, "%s's autosettlers consumed %g milliseconds.",
+//    util.freelog(Log.LOG_VERBOSE, "%s's autosettlers consumed %g milliseconds.",
 // 	    pplayer.name, 1000.0*read_timer_seconds(t));
 //  }
 //}

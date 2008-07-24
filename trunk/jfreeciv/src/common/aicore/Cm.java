@@ -1868,7 +1868,7 @@ public class Cm{
 //  case NUM_STATS:
 //    break;
 //  }
-//  die("Unknown stat value in cm_get_stat_name: %d", stat);
+//  util.die("Unknown stat value in cm_get_stat_name: %d", stat);
 //  return null;
 //}
 //

@@ -149,7 +149,7 @@ public class Chatline{
 //    add_to_chat_list(pUniStr, n);
 //  } else {
 //    char message[MAX_LEN_MSG];
-//    my_snprintf(message , MAX_LEN_MSG, "%s" , astring);
+//    message = String.format "%s" , astring);
 //    
 //    add_notify_window(message, -1, -1, event_type.E_NOEVENT);
 //  }

@@ -73,7 +73,7 @@ public class Finddomain{
 //
 //     and six parts for the CEN syntax:
 //
-//	language[_territory][+audience][+special][,[sponsor][_revision]]
+//	language[_territory][+auutil.dience][+special][,[sponsor][_revision]]
 //
 //     Beside the first part all of them are allowed to be missing.  If
 //     the full specified locale is not found, the less specific one are
@@ -85,7 +85,7 @@ public class Finddomain{
 //		(4) codeset
 //		(5) normalized codeset
 //		(6) territory
-//		(7) audience/modifier
+//		(7) auutil.dience/modifier
 //   */
 //
 //  /* If we have already tested for this locale entry there has to

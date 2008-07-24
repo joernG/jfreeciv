@@ -181,8 +181,8 @@ public class Shared_H {
 //	int cat_snprintf(char *str, size_t n, final char *format, ...)
 //	     fc__attribute((__format__ (__printf__, 3, 4)));
 //
-//	#define die(...) real_die(__FILE__, __LINE__, __VA_ARGS__)
-//	void real_die(final char *file, int line, final char *format, ...)
+//	#define util.die(...) real_util.die(__FILE__, __LINE__, __VA_ARGS__)
+//	void real_util.die(final char *file, int line, final char *format, ...)
 //	      fc__attribute((__format__ (__printf__, 3, 4)));
 //
 //	/**************************************************************************

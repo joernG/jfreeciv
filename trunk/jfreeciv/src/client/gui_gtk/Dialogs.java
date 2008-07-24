@@ -1717,7 +1717,7 @@ public class Dialogs{
 //  char unique_name[MAX_LEN_NAME];
 //  
 //  /* weirdness happens by not doing it this way */
-//  sz_strlcpy(unique_name, 
+//  unique_name = String.format( 
 //             gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(leader_name).entry)));
 //
 //  gtk_signal_handler_block_by_func(GTK_OBJECT(GTK_COMBO(leader_name).list), 

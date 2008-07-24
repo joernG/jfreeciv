@@ -76,7 +76,7 @@ public class Gamehand{
 //  if (map_has_special(ptile, S_HUT)) {
 //    map_clear_special(ptile, S_HUT);
 //    update_tile_knowledge(ptile);
-//    util.freelog(LOG_VERBOSE, "Removed hut on start position for %s",
+//    util.freelog(Log.LOG_VERBOSE, "Removed hut on start position for %s",
 //	    pplayer.name);
 //  }
 //
@@ -157,12 +157,12 @@ public class Gamehand{
 //   * desired players. */
 //
 //  /* First set up some data fields. */
-//  util.freelog(LOG_VERBOSE, "Placing players at start positions.");
+//  util.freelog(Log.LOG_VERBOSE, "Placing players at start positions.");
 //  for (i = 0; i < Map.map.num_start_positions; i++) {
 //    int n = Map.map.start_positions[i].nation;
 //
 //    pos_used[i] = false;
-//    util.freelog(LOG_VERBOSE, "%3d : (%2d,%2d) : %d : %s",
+//    util.freelog(Log.LOG_VERBOSE, "%3d : (%2d,%2d) : %d : %s",
 //	    i, Map.map.start_positions[i].tile.x,
 //	    Map.map.start_positions[i].tile.y,
 //	    n, (n >= 0 ? Nation.get_nation_name(n) : ""));
@@ -172,12 +172,12 @@ public class Gamehand{
 //  }
 //
 //  /* Second, assign a nation to a start position for that nation. */
-//  util.freelog(LOG_VERBOSE, "Assigning matching nations.");
+//  util.freelog(Log.LOG_VERBOSE, "Assigning matching nations.");
 //  for(player pplayer: game.players){
 //    for (i = 0; i < Map.map.num_start_positions; i++) {
 //      assert(pplayer.nation != NO_NATION_SELECTED);
 //      if (pplayer.nation == Map.map.start_positions[i].nation) {
-//	util.freelog(LOG_VERBOSE, "Start_pos %d matches player %d (%s).",
+//	util.freelog(Log.LOG_VERBOSE, "Start_pos %d matches player %d (%s).",
 //		i, pplayer.player_no, Nation.get_nation_name(pplayer.nation));
 //	start_pos[pplayer.player_no] = i;
 //	pos_used[i] = true;
@@ -187,7 +187,7 @@ public class Gamehand{
 //  }
 //
 //  /* Third, assign players randomly to the remaining start positions. */
-//  util.freelog(LOG_VERBOSE, "Assigning random nations.");
+//  util.freelog(Log.LOG_VERBOSE, "Assigning random nations.");
 //  for(player pplayer: game.players){
 //    if (start_pos[pplayer.player_no] == NO_START_POS) {
 //      int which = myrand(Map.map.num_start_positions - num_used);
@@ -195,7 +195,7 @@ public class Gamehand{
 //      for (i = 0; i < Map.map.num_start_positions; i++) {
 //	if (!pos_used[i]) {
 //	  if (which == 0) {
-//	    util.freelog(LOG_VERBOSE,
+//	    util.freelog(Log.LOG_VERBOSE,
 //		    "Randomly assigning player %d (%s) to pos %d.",
 //		    pplayer.player_no, Nation.get_nation_name(pplayer.nation), i);
 //	    start_pos[pplayer.player_no] = i;
@@ -421,7 +421,7 @@ public class Gamehand{
 //    int seconds_to_turndone = game.turn_start + game.timeout - new Date(); //time(null);
 //
 //    if (seconds_to_turndone < game.timeoutaddenemymove){
-//      game.turn_start = time(null) - game.timeout + game.timeoutaddenemymove;
+//      game.turn_start = new Date() - game.timeout + game.timeoutaddenemymove;
 //      send_game_info(null);
 //    }	
 //  }

@@ -265,12 +265,12 @@ public class Cityrepdata{
 //static final String cr_entry_output(final city pcity)
 //{
 //  static char buf[32];
-//  int goldie;
+//  int golutil.die;
 //
-//  goldie = city_gold_surplus(pcity, pcity.tax_total);
+//  golutil.die = city_gold_surplus(pcity, pcity.tax_total);
 //  buf = util.my_snprintf( "%s%d/%d/%d",
-//	      (goldie < 0) ? "-" : (goldie > 0) ? "+" : "",
-//	      (goldie < 0) ? (-goldie) : goldie,
+//	      (golutil.die < 0) ? "-" : (golutil.die > 0) ? "+" : "",
+//	      (golutil.die < 0) ? (-golutil.die) : golutil.die,
 //	      pcity.luxury_total,
 //	      pcity.science_total);
 //  return buf;

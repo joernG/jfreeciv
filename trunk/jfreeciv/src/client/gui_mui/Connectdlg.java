@@ -59,8 +59,8 @@ public class Connectdlg{
 //{
 //  char errbuf [512];
 //
-//  sz_strlcpy(user_name, getstring(connect_name_string));
-//  sz_strlcpy(server_host, getstring(connect_host_string));
+//  user_name = String.format( getstring(connect_name_string));
+//  server_host = String.format( getstring(connect_host_string));
 //  server_port = xget(connect_port_string, MUIA_String_Integer);
 //
 //  if(connect_to_server(user_name, server_host, server_port,

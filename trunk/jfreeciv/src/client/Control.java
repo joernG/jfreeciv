@@ -1429,7 +1429,7 @@ public class Control{
 //  if (punit && hover_state != HOVER_NONE) {
 //    switch (hover_state) {
 //    case HOVER_NONE:
-//      die("well; shouldn't get here :)");
+//      util.die("well; shouldn't get here :)");
 //    case HOVER_GOTO:
 //      do_unit_goto(ptile);
 //      break;

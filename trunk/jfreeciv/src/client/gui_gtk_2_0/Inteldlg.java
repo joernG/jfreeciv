@@ -353,11 +353,11 @@ public class Inteldlg{
 //		get_ruler_title(p.government, p.is_male, p.nation), p.name);
 //	    break;
 //	  case LABEL_GOVERNMENT:
-//	    sz_strlcpy(buf, get_government_name(p.government));
+//	    buf = String.format( get_government_name(p.government));
 //	    break;
 //	  case LABEL_CAPITAL:
 //	    pcity = p.find_palace();
-//	    sz_strlcpy(buf, (!pcity) ? "(Unknown)" : pcity.name);
+//	    buf = String.format( (!pcity) ? "(Unknown)" : pcity.name);
 //	    break;
 //	  case LABEL_GOLD:
 //	    buf = util.my_snprintf( "%d", p.economic.gold);

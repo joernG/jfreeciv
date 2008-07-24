@@ -535,7 +535,7 @@ public class Packets{
 //    int type, len;
 //
 //    assert(pc != null);
-//    from = util.my_snprintf( " from %s", conn_description(pc));
+//    from = util.my_snprintf( " from %s", pc.conn_description());
 //
 //    dio_input_rewind(din);
 //    dio_get_uint16(din, &len);
@@ -561,7 +561,7 @@ public class Packets{
 //    if (rem > 0) {
 //      /* This may be ok, eg a packet from a newer version with extra info
 //       * which we should just ignore */
-//      util.freelog(LOG_VERBOSE,
+//      util.freelog(Log.LOG_VERBOSE,
 //	      "received long packet (type %d, len %d, rem %lu)%s", type,
 //	      len, (unsigned long)rem, from);
 //    }

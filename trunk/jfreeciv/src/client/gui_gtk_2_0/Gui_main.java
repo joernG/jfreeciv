@@ -515,7 +515,7 @@ public class Gui_main{
 //
 ///**************************************************************************
 // creates the toggle button necessary to detach and reattach the widget
-// and returns a vbox in which you fill your goodies.
+// and returns a vbox in which you fill your gooutil.dies.
 //**************************************************************************/
 //static GtkWidget *detached_widget_fill(GtkWidget *ahbox)
 //{
@@ -1228,7 +1228,7 @@ public class Gui_main{
 //  gtk_tree_path_free(path);
 //
 //  gtk_tree_model_get(GTK_TREE_MODEL(conn_model), &it, 0, &name, -1);
-//  pconn = find_conn_by_user(name);
+//  pconn = Connection.find_conn_by_user(name);
 //
 //  /* Show popup. */
 //  popup = gtk_window_new(GTK_WINDOW_POPUP);

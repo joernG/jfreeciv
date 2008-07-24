@@ -96,7 +96,7 @@ public class Transparentstringclass{
 //    switch (ti.ti_Tag) {
 //    case MUIA_TransparentString_Contents:
 //      if (ti.ti_Data) {
-//	sz_strlcpy(data.edit_buffer, (char *) ti.ti_Data);
+//	data.edit_buffer = String.format( (char *) ti.ti_Data);
 //      } else {
 //	data.edit_buffer[0] = 0;
 //	data.cursor_pos = 0;

@@ -316,7 +316,7 @@ public class Repodlgs_common{
 //  int count = 0, gold = 0;
 //
 //  if (!can_client_issue_orders()) {
-//    my_snprintf(message, message_sz, "You cannot sell improvements.");
+//    message = String.format "You cannot sell improvements.");
 //    return;
 //  }
 //
@@ -332,10 +332,10 @@ public class Repodlgs_common{
 //  } }
 //
 //  if (count > 0) {
-//    my_snprintf(message, message_sz, "Sold %d %s for %d gold.",
+//    message = String.format "Sold %d %s for %d gold.",
 //		count, get_improvement_name(impr), gold);
 //  } else {
-//    my_snprintf(message, message_sz, "No %s could be sold.",
+//    message = String.format "No %s could be sold.",
 //		get_improvement_name(impr));
 //  }
 //}
@@ -354,12 +354,12 @@ public class Repodlgs_common{
 //
 //  if (!can_client_issue_orders()) {
 //    /* TRANS: Obscure observer error. */
-//    my_snprintf(message, message_sz, "You cannot disband units.");
+//    message = String.format "You cannot disband units.");
 //    return;
 //  }
 //
 //  if (unit_type_flag(type, F_UNDISBANDABLE)) {
-//    my_snprintf(message, message_sz, "%s cannot be disbanded.",
+//    message = String.format "%s cannot be disbanded.",
 //		unit_name(type));
 //    return;
 //  }
@@ -380,10 +380,10 @@ public class Repodlgs_common{
 //  } }
 //
 //  if (count > 0) {
-//    my_snprintf(message, message_sz, "Disbanded %d %s.",
+//    message = String.format "Disbanded %d %s.",
 //		count, unit_name(type));
 //  } else {
-//    my_snprintf(message, message_sz, "No %s could be disbanded.",
+//    message = String.format "No %s could be disbanded.",
 //		unit_name(type));
 //  }
 //}

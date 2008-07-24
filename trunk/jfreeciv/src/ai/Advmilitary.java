@@ -214,7 +214,7 @@ public class Advmilitary{
 //  } }
 //
 //  if (defense > 1<<12) {
-//    CITY_LOG(LOG_VERBOSE, pcity, "Overflow danger in assess_defense_quadratic:" +
+//    CITY_LOG(Log.LOG_VERBOSE, pcity, "Overflow danger in assess_defense_quadratic:" +
 //             " %d", defense);
 //    if (defense > 1<<15) {
 //      defense = 1<<15; /* more defense than we know what to do with! */

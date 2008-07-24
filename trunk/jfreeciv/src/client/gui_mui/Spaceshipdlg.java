@@ -264,7 +264,7 @@ public class Spaceshipdlg{
 //
 //  if (pship.state == spaceship_state.SSHIP_LAUNCHED)
 //  {
-//    sz_strlcpy(arrival, Shared.textyear((int) (pship.launch_year
+//    arrival = String.format( Shared.textyear((int) (pship.launch_year
 //				    + (int) pship.travel_time)));
 //  }
 //  buf = util.my_snprintf(

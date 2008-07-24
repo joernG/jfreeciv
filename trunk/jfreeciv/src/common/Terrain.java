@@ -105,7 +105,7 @@ public class Terrain{
 //    }
 //  } terrain_type_iterate_end;
 //
-//  die("Reached end of get_flag_terrain!");
+//  util.die("Reached end of get_flag_terrain!");
 //  return T_NONE;
 //}
 //

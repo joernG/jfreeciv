@@ -223,7 +223,7 @@ public class Helpdlg{
 //  text[0] = label;
 //  if ( advances[tech].req[0] == A_LAST && advances[tech].req[1] == A_LAST )
 //  {
-//    sz_strlcpy(label, "Removed");
+//    label = String.format( "Removed");
 //    bg = COLOR_STD_RED;
 //    l = gtk_ctree_insert_node(ctree, parent, null, text, 10,
 //				null, null, null, null, true, true);

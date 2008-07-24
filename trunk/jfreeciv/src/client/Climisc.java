@@ -244,49 +244,49 @@ public class Climisc{
 //
 //  switch(pclause.type) {
 //  case CLAUSE_ADVANCE:
-//    my_snprintf(buf, bufsiz, "The %s give %s",
+//    buf = String.format "The %s give %s",
 //		Nation.get_nation_name_plural(pclause.from.nation),
 //		get_tech_name(game.player_ptr, pclause.value));
 //    break;
 //  case CLAUSE_CITY:
 //    pcity = find_city_by_id(pclause.value);
 //    if (pcity) {
-//      my_snprintf(buf, bufsiz, "The %s give %s",
+//      buf = String.format "The %s give %s",
 //                  Nation.get_nation_name_plural(pclause.from.nation),
 //		  pcity.name);
 //    } else {
-//      my_snprintf(buf, bufsiz,"The %s give unknown city.",
+//      buf = String.format"The %s give unknown city.",
 //                  Nation.get_nation_name_plural(pclause.from.nation));
 //    }
 //    break;
 //  case CLAUSE_GOLD:
-//    my_snprintf(buf, bufsiz, "The %s give %d gold",
+//    buf = String.format "The %s give %d gold",
 //		Nation.get_nation_name_plural(pclause.from.nation),
 //		pclause.value);
 //    break;
 //  case CLAUSE_MAP:
-//    my_snprintf(buf, bufsiz, "The %s give their worldmap",
+//    buf = String.format "The %s give their worldmap",
 //		Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  case CLAUSE_SEAMAP:
-//    my_snprintf(buf, bufsiz, "The %s give their seamap",
+//    buf = String.format "The %s give their seamap",
 //		Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  case CLAUSE_CEASEFIRE:
-//    my_snprintf(buf, bufsiz, "The parties agree on a cease-fire");
+//    buf = String.format "The parties agree on a cease-fire");
 //    break;
 //  case CLAUSE_PEACE:
-//    my_snprintf(buf, bufsiz, "The parties agree on a peace");
+//    buf = String.format "The parties agree on a peace");
 //    break;
 //  case CLAUSE_ALLIANCE:
-//    my_snprintf(buf, bufsiz, "The parties create an alliance");
+//    buf = String.format "The parties create an alliance");
 //    break;
 //  case CLAUSE_VISION:
-//    my_snprintf(buf, bufsiz, "The %s gives shared vision",
+//    buf = String.format "The %s gives shared vision",
 //		Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  case CLAUSE_EMBASSY:
-//    my_snprintf(buf, bufsiz, "The %s gives an embassy",
+//    buf = String.format "The %s gives an embassy",
 //                Nation.get_nation_name_plural(pclause.from.nation));
 //    break;
 //  default:

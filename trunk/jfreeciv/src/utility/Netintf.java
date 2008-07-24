@@ -206,7 +206,7 @@ public class Netintf{
 //#ifdef HAVE_FDOPEN
 //  fp = fdopen(sock, "r+b");
 //  if (fwrite(buf, 1, size, fp) != size) {
-//    die("socket %d: write error", sock);
+//    util.die("socket %d: write error", sock);
 //  }
 //  fflush(fp);
 //
@@ -242,7 +242,7 @@ public class Netintf{
 //
 //    while ((n = my_readsocket(sock, tmp, sizeof(tmp))) > 0) {
 //      if (fwrite(tmp, 1, n, fp) != n) {
-//	die("socket %d: write error", sock);
+//	util.die("socket %d: write error", sock);
 //      }
 //    }
 //    fflush(fp);

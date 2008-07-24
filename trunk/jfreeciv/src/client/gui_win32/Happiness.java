@@ -196,14 +196,14 @@ public class Happiness{
 //    penalty = 0;
 //  }
 //
-//  my_snprintf(bptr, nleft,
+//  bptr = String.format
 //              "Cities: %d total, %d over threshold of %d cities.\n",
 //              cities, excess, basis);
 //  bptr = end_of_strn(bptr, &nleft);
 //
-//  my_snprintf(bptr, nleft, "%d content before penalty with ", content);
+//  bptr = String.format "%d content before penalty with ", content);
 //  bptr = end_of_strn(bptr, &nleft);
-//  my_snprintf(bptr, nleft, "%d additional unhappy citizens.", penalty);
+//  bptr = String.format "%d additional unhappy citizens.", penalty);
 //  bptr = end_of_strn(bptr, &nleft);
 //
 //  SetWindowText(pdialog.mod_label[CITIES], buf);
@@ -220,7 +220,7 @@ public class Happiness{
 //  int nleft = sizeof(buf);
 //  city pcity = pdialog.pcity;
 //
-//  my_snprintf(bptr, nleft, "Luxury: %d total.",
+//  bptr = String.format "Luxury: %d total.",
 //              pcity.luxury_total);
 //
 //  SetWindowText(pdialog.mod_label[LUXURIES], buf);
@@ -248,28 +248,28 @@ public class Happiness{
 //  int mlmax = g.martial_law_max;
 //  int uhcfac = g.unit_happy_cost_factor;
 //
-//  my_snprintf(bptr, nleft, "Units: ");
+//  bptr = String.format "Units: ");
 //  bptr = end_of_strn(bptr, &nleft);
 //
 //  if (mlmax > 0) {
-//    my_snprintf(bptr, nleft, "Martial law in effect (");
+//    bptr = String.format "Martial law in effect (");
 //    bptr = end_of_strn(bptr, &nleft);
 //
 //    if (mlmax == 100)
-//      my_snprintf(bptr, nleft, "no maximum, ");
+//      bptr = String.format "no maximum, ");
 //    else
-//      my_snprintf(bptr, nleft, PL("%d unit maximum, ",
+//      bptr = String.format PL("%d unit maximum, ",
 //                                   "%d units maximum", mlmax), mlmax);
 //    bptr = end_of_strn(bptr, &nleft);
 //
-//    my_snprintf(bptr, nleft, "%d per unit). ", g.martial_law_per);
+//    bptr = String.format "%d per unit). ", g.martial_law_per);
 //  }
 //  else if (uhcfac > 0) {
-//    my_snprintf(bptr, nleft,
+//    bptr = String.format
 //                "Military units in the field may cause unhappiness. ");
 //  }
 //  else {
-//    my_snprintf(bptr, nleft,
+//    bptr = String.format
 //                "Military units have no happiness effect. ");
 //  }
 //

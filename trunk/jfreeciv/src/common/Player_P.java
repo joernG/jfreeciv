@@ -455,7 +455,7 @@ public class Player_P{
 //    } else if (pplayer.economic.luxury < maxrate) {
 //      pplayer.economic.luxury += 10;
 //    } else {
-//      die("byebye");
+//      util.die("byebye");
 //    }
 //    surplus -= 10;
 //  }
@@ -589,7 +589,7 @@ public class Player_P{
 //  if (type < DS_LAST) {
 //    return Q_(ds_names[type]);
 //  }
-//  die("Bad diplstate_type in diplstate_text: %d", type);
+//  util.die("Bad diplstate_type in diplstate_text: %d", type);
 //  return null;
 //}
 
@@ -739,8 +739,8 @@ public class Player_P{
 //boolean is_valid_username(final String name)
 //{
 //  return (name.length() > 0
-//	  && !my_isdigit(name[0])
-//	  && is_ascii_name(name)
+//	  && !Character.isDigit(name[0])
+//	  && util.isLetter(name)
 //	  && mystrcasecmp(name, ANON_USER_NAME) != 0);
 //}
 }

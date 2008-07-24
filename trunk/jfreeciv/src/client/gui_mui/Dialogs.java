@@ -1516,7 +1516,7 @@ public class Dialogs{
 //  packet.is_male = !selected_sex;
 //  packet.city_style = styles_basic_index[selected_style];
 //
-//  sz_strlcpy(packet.name, (char*)s);
+//  packet.name = String.format( (char*)s);
 //  
 //  if (packet.name.length() == 0) {
 //    append_output_window("You must type a legal name.");

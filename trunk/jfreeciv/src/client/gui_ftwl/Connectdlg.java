@@ -57,8 +57,8 @@ public class Connectdlg{
 //{
 //  char errbuf[512];
 //
-//  sz_strlcpy(user_name, te_edit_get_current_value(screen, "username"));
-//  sz_strlcpy(server_host, te_edit_get_current_value(screen, "server"));
+//  user_name = String.format( te_edit_get_current_value(screen, "username"));
+//  server_host = String.format( te_edit_get_current_value(screen, "server"));
 //  sscanf(te_edit_get_current_value(screen, "port"), "%d", &server_port);
 //
 //  if (connect_to_server(user_name, server_host, server_port,

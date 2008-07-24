@@ -227,7 +227,7 @@ public class Citydlg_common{
 //     * be extended to return the longer of the two; in the meantime
 //     * translators can fudge it by changing this "filler" string. 
 //     */
-//    my_snprintf(buffer, buffer_len, Q"?filler:XXX/XXX XXX turns");
+//    buffer = String.format Q"?filler:XXX/XXX XXX turns");
 //    return;
 //  }
 //
@@ -242,7 +242,7 @@ public class Citydlg_common{
 //  }
 //
 //  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
-//    my_snprintf(buffer, buffer_len, "%3d gold per turn",
+//    buffer = String.format "%3d gold per turn",
 //		MAX(0, pcity.shield_surplus));
 //  } else {
 //    char time[50];
@@ -260,9 +260,9 @@ public class Citydlg_common{
 //    }
 //
 //    if (concise_city_production) {
-//      my_snprintf(buffer, buffer_len, "%3d/%3d:%s", stock, cost, time);
+//      buffer = String.format "%3d/%3d:%s", stock, cost, time);
 //    } else {
-//      my_snprintf(buffer, buffer_len, "%3d/%3d %s", stock, cost, time);
+//      buffer = String.format "%3d/%3d %s", stock, cost, time);
 //    }
 //  }
 //}
@@ -283,7 +283,7 @@ public class Citydlg_common{
 //				     city pcity)
 //{
 //  if (!is_unit && building_has_effect(id, EFT_PROD_TO_GOLD)) {
-//    my_snprintf(buffer, buffer_len, "%s (XX) %d/turn",
+//    buffer = String.format "%s (XX) %d/turn",
 //		get_impr_name_ex(pcity, id), MAX(0, pcity.shield_surplus));
 //  } else {
 //    int turns = city_turns_to_build(pcity, id, is_unit, true);
@@ -299,11 +299,11 @@ public class Citydlg_common{
 //    }
 //
 //    if (turns < 999) {
-//      my_snprintf(buffer, buffer_len,
+//      buffer = String.format
 //		  PL("%s (%d) %d turn", "%s (%d) %d turns", turns),
 //		  name, cost, turns);
 //    } else {
-//      my_snprintf(buffer, buffer_len, "%s (%d) never", name, cost);
+//      buffer = String.format "%s (%d) never", name, cost);
 //    }
 //  }
 //}

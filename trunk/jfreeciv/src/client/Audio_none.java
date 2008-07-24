@@ -76,8 +76,8 @@ public class Audio_none{
 //{
 //  struct audio_plugin self;
 //
-//  sz_strlcpy(self.name, "none");
-//  sz_strlcpy(self.descr, "/dev/null plugin");
+//  self.name = String.format( "none");
+//  self.descr = String.format( "/dev/null plugin");
 //  self.init = my_init;
 //  self.shutdown = my_shutdown;
 //  self.stop = my_stop;

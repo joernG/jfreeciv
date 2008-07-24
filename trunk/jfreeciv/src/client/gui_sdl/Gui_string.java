@@ -102,7 +102,7 @@ public class Gui_string{
 //	    FREE(UniTexts[count]);
 //            count++;
 //	  } while(UniTexts[count]);
-//	  die("TTF_SizeUNICODE return ERROR !");
+//	  util.die("TTF_SizeUNICODE return ERROR !");
 //        }
 //        w = MAX(w, ww);
 //        h += hh;
@@ -111,7 +111,7 @@ public class Gui_string{
 //      }
 //    } else {  
 //      if (TTF_SizeUNICODE(pString16.font, pString16.text, &w, &h) < 0) {
-//	die("TTF_SizeUNICODE return ERROR !");
+//	util.die("TTF_SizeUNICODE return ERROR !");
 //      }
 //    }
 //   
@@ -427,7 +427,7 @@ public class Gui_string{
 //	  change_ptsize16(pString, pString.ptsize - 1);
 //	  pText = create_text_surf_from_str16(pString);
 //	} else {
-//	  /* die */
+//	  /* util.die */
 //          assert(pText != null);
 //	}
 //      }
@@ -522,7 +522,7 @@ public class Gui_string{
 //	  change_ptsize16(pString, pString.ptsize - 1);
 //	  w = str16size(pString).w;
 //	} else {
-//	  die("Can't convert string to final width");
+//	  util.die("Can't convert string to final width");
 //	}
 //      }  
 //      
@@ -597,7 +597,7 @@ public class Gui_string{
 //  if(!pFont_with_FullPath) {
 //    char *path = datafilename(FONT_NAME);
 //    if(!path) {
-//      die(("Couldn't find stdfont.ttf file. Please link/copy/move any" +
+//      util.die(("Couldn't find stdfont.ttf file. Please link/copy/move any" +
 //            "unicode ttf font to data dir as stdfont.ttf"));
 //    }
 //    pFont_with_FullPath = mystrdup(path);
