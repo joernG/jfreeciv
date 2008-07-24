@@ -36,7 +36,7 @@ public class Wldlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //
 //
 //#include "graphics.h"
@@ -702,17 +702,17 @@ public class Wldlg{
 //
 ///*
 // * Add global worklist to city worklist starting from last free entry.
-// * Add only avilable targets in current game state.
+// * Add only avilable targets in current Game.game state.
 // * If global worklist have more targets that city worklist have free
 // * elements then we adding only first part of global worklist.
 // */
 //static void add_global_worklist(GUI pWidget)
 //{
-//  if(!worklist_is_empty(&game.player_ptr.worklists[MAX_ID - pWidget.ID])) {
+//  if(!worklist_is_empty(&Game.game.player_ptr.worklists[MAX_ID - pWidget.ID])) {
 //    SDL_Surface *pDest = pWidget.dst;
 //    int count, firstfree;
 //    GUI pBuf = pEditor.pWork.pEndActiveWidgetList;
-//    worklist pWorkList = &game.player_ptr.worklists[MAX_ID - pWidget.ID];
+//    worklist pWorkList = &Game.game.player_ptr.worklists[MAX_ID - pWidget.ID];
 //      
 //    /* find first free element in worklist */
 //    for(count = 0; count < MAX_LEN_WORKLIST; count++) {
@@ -735,7 +735,7 @@ public class Wldlg{
 //	break;
 //      }
 //      
-//      /* global worklist can have targets unavilable in current state of game
+//      /* global worklist can have targets unavilable in current state of Game.game
 //         then we must remove those targets from new city worklist */
 //      if(((pWorkList.wlefs[count] == WEF_UNIT) &&
 //	  !can_eventually_build_unit(pEditor.pCity, pWorkList.wlids[count])) ||
@@ -796,18 +796,18 @@ public class Wldlg{
 //
 ///*
 // * Clear city worklist and copy here global worklist.
-// * Copy only avilable targets in current game state.
+// * Copy only avilable targets in current Game.game state.
 // * If all targets are unavilable then leave city worklist untouched.
 // */
 //static void set_global_worklist(GUI pWidget)
 //{
-//  if(!worklist_is_empty(&game.player_ptr.worklists[MAX_ID - pWidget.ID])) {
+//  if(!worklist_is_empty(&Game.game.player_ptr.worklists[MAX_ID - pWidget.ID])) {
 //    SDL_Surface *pDest = pWidget.dst;
 //    int count, target , wl_count;
 //    boolean is_unit;
 //    GUI pBuf = pEditor.pWork.pEndActiveWidgetList;
 //    struct worklist wl ,
-//	      *pWorkList = &game.player_ptr.worklists[MAX_ID - pWidget.ID];
+//	      *pWorkList = &Game.game.player_ptr.worklists[MAX_ID - pWidget.ID];
 //    
 //    /* clear tmp worklist */
 //    init_worklist(&wl);
@@ -821,7 +821,7 @@ public class Wldlg{
 //	break;
 //      }
 //      
-//      /* global worklist can have targets unavilable in current state of game
+//      /* global worklist can have targets unavilable in current state of Game.game
 //         then we must remove those targets from new city worklist */
 //      if(((pWorkList.wlefs[count] == WEF_UNIT) &&
 //	  !can_eventually_build_unit(pEditor.pCity, pWorkList.wlids[count])) ||
@@ -1339,9 +1339,9 @@ public class Wldlg{
 //  if(pCity) {
 //    count = 0;
 //    for (i = 0; i < MAX_NUM_WORKLISTS; i++) {
-//      if (game.player_ptr.worklists[i].is_valid) {
+//      if (Game.game.player_ptr.worklists[i].is_valid) {
 //        pBuf = create_iconlabel_from_chars(null, pDest, 
-//      		game.player_ptr.worklists[i].name, 10,
+//      		Game.game.player_ptr.worklists[i].name, 10,
 //					      WF_DRAW_THEME_TRANSPARENT);
 //        set_wstate(pBuf, FC_WS_NORMAL);
 //        add_to_gui_list(MAX_ID - i, pBuf);
@@ -1394,9 +1394,9 @@ public class Wldlg{
 //  pStr.bgcol = color;
 //    
 //  impr_type_iterate(imp) {
-//    can_build = can_player_build_improvement(game.player_ptr, imp);
+//    can_build = can_player_build_improvement(Game.game.player_ptr, imp);
 //    can_eventually_build =
-//	could_player_eventually_build_improvement(game.player_ptr, imp);
+//	could_player_eventually_build_improvement(Game.game.player_ptr, imp);
 //    
 //    /* If there's a city, can the city build the improvement? */
 //    if (pCity) {
@@ -1422,7 +1422,7 @@ public class Wldlg{
 //        if (wonder_obsolete(imp)) {
 //          state = "Obsolete";
 //        } else {
-//          if (game.global_wonders[imp] != 0) {
+//          if (Game.game.global_wonders[imp] != 0) {
 //	    state = "Built";
 //          } else {
 //	    state = "Wonder";
@@ -1534,9 +1534,9 @@ public class Wldlg{
 //  } impr_type_iterate_end;
 //  /* ------------------------------ */
 //  unit_type_iterate(un) {
-//    can_build = can_player_build_unit(game.player_ptr, un);
+//    can_build = can_player_build_unit(Game.game.player_ptr, un);
 //    can_eventually_build =
-//	can_player_eventually_build_unit(game.player_ptr, un);
+//	can_player_eventually_build_unit(Game.game.player_ptr, un);
 //
 //    /* If there's a city, can the city build the unit? */
 //    if (pCity) {

@@ -377,7 +377,7 @@ public class Audio{
 //**************************************************************************/
 //void audio_shutdown()
 //{
-//  /* avoid infinite loop at end of game */
+//  /* avoid infinite loop at end of Game.game */
 //  audio_stop();
 //
 //  audio_play_sound("e_game_quit", null);

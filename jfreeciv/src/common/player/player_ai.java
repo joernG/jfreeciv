@@ -1,5 +1,6 @@
 package common.player;
 import static utility.shared.Shared_H.*;
+import utility.shared.Shared_H;
 
 public class player_ai {
 	/*
@@ -34,7 +35,7 @@ public class player_ai {
 		  public int warmth; /* threat of global warming */
 		  public int barbarian_type;
 
-		  public int[] love = new int[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+		  public int[] love = new int[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS];
 //		};
 
 }

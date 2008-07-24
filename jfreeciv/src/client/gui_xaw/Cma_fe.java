@@ -41,7 +41,7 @@ public class Cma_fe{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "Map.map.h"
 //#include "mem.h"

@@ -965,7 +965,7 @@ public class Wldlg{
 //static void targets_type_rotate_callback(GtkWidget * w, int col,
 //					 gpointer data)
 //{
-//  if (game.player_ptr.worklists[0].is_valid) {
+//  if (Game.game.player_ptr.worklists[0].is_valid) {
 //    are_worklists_first ^= 1;
 //  }
 //
@@ -1021,7 +1021,7 @@ public class Wldlg{
 //
 //  /* target is a global worklist id */
 //  if (wid_is_worklist(wid)) {
-//    player pplr = city_owner(peditor.pcity);
+//    player pplr = City.city_owner(peditor.pcity);
 //    worklist pwl = &pplr.worklists[wid_id(wid)];
 //
 //    copy_worklist_to_editor(pwl, peditor, where);
@@ -1333,7 +1333,7 @@ public class Wldlg{
 //static void targets_list_update(worklist_editor peditor)
 //{
 //  int i = 0, wids_used = 0;
-//  player pplr = game.player_ptr;
+//  player pplr = Game.game.player_ptr;
 //  int advanced_tech;
 //  char *row[COLUMNS];
 //  char buf[COLUMNS][BUFFER_SIZE];
@@ -1349,7 +1349,7 @@ public class Wldlg{
 //			    are_worklists_first, advanced_tech);
 //  peditor.worklist_avail_wids[wids_used] = WORKLIST_END;
 //
-//  if (!game.player_ptr.worklists[0].is_valid)
+//  if (!Game.game.player_ptr.worklists[0].is_valid)
 //    gtk_clist_column_title_passive(GTK_CLIST(peditor.avail), 0);
 //  else
 //    gtk_clist_column_title_active(GTK_CLIST(peditor.avail), 0);

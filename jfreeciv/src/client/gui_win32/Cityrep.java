@@ -27,7 +27,7 @@ public class Cityrep{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "packets.h"
 //#include "shared.h"
 //#include "support.h"
@@ -189,8 +189,8 @@ public class Cityrep{
 //				int *selitems,
 //				int selcount, int *idcount)
 //{
-//  cid cids[U_LAST + B_LAST];
-//  struct item items[U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //  int item, cids_used, num_selected_cities = 0;
 //  city *selected_cities = null;
 //
@@ -724,10 +724,10 @@ public class Cityrep{
 //  fcwin_box vbox;
 //  fcwin_box hbox;
 //  int selid;
-//  cid cids[B_LAST + U_LAST];
+//  cid cids[B_LAST + unittype.U_LAST];
 //  int cids_used;
 //  cid selected_cid;
-//  struct item items[U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //  int id,i;
 //  HWND hDlg;
 //  HWND hLst;
@@ -1145,7 +1145,7 @@ public class Cityrep{
 //    }
 //  /* FIXME restore old selection */
 //  ListBox_ResetContent(GetDlgItem(hCityRep,ID_CITYREP_LIST));
-//  for (city pcity : game.player_ptr.cities.data) {
+//  for (city pcity : Game.game.player_ptr.cities.data) {
 //    get_city_text(pcity, row, sizeof(buf[0]));
 //    full_row[0]=0;
 //    for(i=0; i<NUM_CREPORT_COLS; i++)

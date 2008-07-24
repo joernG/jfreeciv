@@ -25,7 +25,7 @@ public class Graphics{
 //#include <gdk_imlib.h>
 //#include <gtk/gtk.h>
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "shared.h"
@@ -395,13 +395,13 @@ public class Graphics{
 //
 //  /* If we're using flags, put one on the tile */
 //  if(!solid_color_behind_units)  {
-//    Sprite flag=get_nation_by_plr(game.player_ptr).flag_sprite;
+//    Sprite flag=get_nation_by_plr(Game.game.player_ptr).flag_sprite;
 //
 //    gtk_pixcomm_copyto(GTK_PIXCOMM(pixcomm), flag, 0, 0, false);
 //  }
 //
 //  /* Finally, put a picture of the unit in the tile */
-//  if(i<game.num_unit_types) {
+//  if(i<Game.game.num_unit_types) {
 //    Sprite s=get_unit_type(i).sprite;
 //
 //    gtk_pixcomm_copyto(GTK_PIXCOMM(pixcomm), s, 0, 0, false);

@@ -47,9 +47,9 @@ public class Civserver {
 				fc_fprintf(System.err,
 				" -d, --debug NUM\tSet debug log level (0 to 3)\n");
 //			#endif
-			fc_fprintf(System.err, " -f, --file FILE\tLoad saved game FILE\n");
+			fc_fprintf(System.err, " -f, --file FILE\tLoad saved Game.game FILE\n");
 			fc_fprintf(System.err,
-			" -g, --Gamelog.gamelog FILE\tUse FILE as game logfile\n");
+			" -g, --Gamelog.gamelog FILE\tUse FILE as Game.game logfile\n");
 			fc_fprintf(System.err,
 			" -h, --help\t\tPrint a summary of the options\n");
 			fc_fprintf(System.err, " -l, --log FILE\tUse FILE as logfile\n");
@@ -63,13 +63,13 @@ public class Civserver {
 			fc_fprintf(System.err, (" -q, --quitidle TIME\tQuit if no players " +
 			"for TIME seconds\n"));
 			fc_fprintf(System.err, (" -e, --exit-on-end\t" +
-			"When a game ends, exit instead of restarting\n"));
+			"When a Game.game ends, exit instead of restarting\n"));
 			fc_fprintf(System.err,
 			" -s, --saves DIR\tSave games to directory DIR\n");
 			fc_fprintf(System.err,
 			" -S, --Serverid ID\tSets the server id to ID\n");
 			fc_fprintf(System.err,
-			" -P, --Ppm\t\tSave ppms of the map when saving the game.\n");
+			" -P, --Ppm\t\tSave ppms of the map when saving the Game.game.\n");
 			fc_fprintf(System.err, " -r, --read FILE\tRead startup script FILE\n");
 			fc_fprintf(System.err, " -v, --version\t\tPrint the version number\n");
 			fc_fprintf(System.err, "Report bugs to <%s>.\n", BUG_EMAIL_ADDRESS);

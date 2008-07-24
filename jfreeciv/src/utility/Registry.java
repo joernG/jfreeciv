@@ -1661,7 +1661,7 @@ public class Registry{
 //    return null;
 //  }
 //
-//  *num = entry_list_size(&psection.entries);
+//  *num = psection.entries.foo_list_size();
 //
 //  if (*num == 0) {
 //    return null;

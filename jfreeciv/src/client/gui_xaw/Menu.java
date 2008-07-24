@@ -105,7 +105,7 @@ public class Menu{
 //  MenuEntry entries;
 //};
 //
-//static Menu menus[MENU_LAST];
+//static Menu menus[MENunittype.U_LAST];
 //
 //static struct MenuEntry game_menu_entries[]={
 //    { { N"Local Options", 0        },      "", MENU_GAME_OPTIONS, 0 },
@@ -291,8 +291,8 @@ public class Menu{
 //
 //    punit=get_unit_in_focus();
 //
-//    for(i=0; i<game.nplayers; i++) {
-//      if (city_list_size(&game.players[i].cities)) {
+//    for(i=0; i<Game.game.nplayers; i++) {
+//      if (city_list_size(&Game.game.players[i].cities)) {
 //	any_cities = true;
 //	break;
 //      }
@@ -321,7 +321,7 @@ public class Menu{
 //    government_iterate(gov) {
 //      Widget w;
 //
-//      if (gov.index == game.government_when_anarchy) {
+//      if (gov.index == Game.game.government_when_anarchy) {
 //	continue;
 //      }
 //
@@ -329,7 +329,7 @@ public class Menu{
 //				menus[MENU_GOVERNMENT].shell, null, 0);
 //      XtAddCallback(w, XtNcallback, revolution_menu_callback,
 //		    (XtPointer)gov.index);
-//      XtSetSensitive(w, can_change_to_government(game.player_ptr,
+//      XtSetSensitive(w, can_change_to_government(Game.game.player_ptr,
 //						 gov.index));
 //
 //      government_widgets[i] = w;
@@ -362,10 +362,10 @@ public class Menu{
 //    menu_entry_sensitive(MENU_GAME, MENU_GAME_DISCONNECT, 1);
 //
 //    menu_entry_sensitive(MENU_REPORT, MENU_REPORT_SPACESHIP,
-//			 (game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
+//			 (Game.game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
 //
 //    if (punit && can_client_issue_orders()) {
-//      Terrain_type_id  ttype;
+//      int  ttype;
 //      tile_type       tinfo;
 //
 //      ttype = punit.tile.terrain;
@@ -455,8 +455,8 @@ public class Menu{
 //			  TEXT_ORDER_IRRIGATE_CHANGE_TO,
 //			  (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //      }
-//      else if (map_has_special(punit.tile, S_IRRIGATION) &&
-//	       player_knows_techs_with_flag(game.player_ptr, TF_FARMLAND)) {
+//      else if (Map.map_has_special(punit.tile, S_IRRIGATION) &&
+//	       player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND)) {
 //	menu_entry_rename(MENU_ORDER, MENU_ORDER_IRRIGATE,
 //			  TEXT_ORDER_IRRIGATE_FARMLAND, null);
 //      } else {
@@ -492,7 +492,7 @@ public class Menu{
 //			  TEXT_ORDER_POLLUTION_POLLUTION, null);
 //      }
 //
-//      if (map_has_special(punit.tile, S_ROAD)) {
+//      if (Map.map_has_special(punit.tile, Terrain_H.S_ROAD)) {
 //	menu_entry_rename(MENU_ORDER, MENU_ORDER_ROAD,
 //			  TEXT_ORDER_ROAD_RAILROAD, null);
 //      } else {
@@ -558,7 +558,7 @@ public class Menu{
 //    popup_rates_dialog();
 //    break;
 //  case MENU_GOVERNMENT_WORKLISTS:
-//    popup_worklists_dialog(game.player_ptr);
+//    popup_worklists_dialog(Game.game.player_ptr);
 //    break;
 //  case MENU_GOVERNMENT_REVOLUTION:
 //    popup_revolution_dialog(-1);
@@ -572,7 +572,7 @@ public class Menu{
 //static void revolution_menu_callback(Widget w, XtPointer client_data,
 //				     XtPointer garbage)
 //{
-//  if (game.player_ptr.revolution_finishes == -1) {
+//  if (Game.game.player_ptr.revolution_finishes == -1) {
 //    popup_revolution_dialog(XTPOINTER_TO_INT(client_data));
 //  } else {
 //    /* Player already has a revolution and should just choose a government */
@@ -810,7 +810,7 @@ public class Menu{
 //    send_report_request(REPORT_DEMOGRAPHIC);
 //    break;
 //   case MENU_REPORT_SPACESHIP:
-//    popup_spaceship_dialog(game.player_ptr);
+//    popup_spaceship_dialog(Game.game.player_ptr);
 //    break;
 //  }
 //}

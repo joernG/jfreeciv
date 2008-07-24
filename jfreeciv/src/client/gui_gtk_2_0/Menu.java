@@ -525,7 +525,7 @@ public class Menu{
 //    send_report_request(REPORT_DEMOGRAPHIC);
 //    break;
 //   case MENU_REPORT_SPACESHIP:
-//    popup_spaceship_dialog(game.player_ptr);
+//    popup_spaceship_dialog(Game.game.player_ptr);
 //    break;
 //  }
 //}
@@ -1109,7 +1109,7 @@ public class Menu{
 //static final String get_tile_change_menu_text(tile ptile,
 //					     enum unit_activity activity)
 //{
-//  Terrain_type_id old_terrain = ptile.terrain;
+//  int old_terrain = ptile.terrain;
 //  enum int old_special = ptile.special;
 //  tile_type ptype = get_tile_type(ptile.terrain);
 //  final String text;
@@ -1194,7 +1194,7 @@ public class Menu{
 //
 //      /* add new government entries. */
 //      government_iterate(g) {
-//        if (g.index != game.government_when_anarchy) {
+//        if (g.index != Game.game.government_when_anarchy) {
 //          GtkWidget *item, *image;
 //          Sprite gsprite;
 //	  char buf[256];
@@ -1211,7 +1211,7 @@ public class Menu{
 //          g_signal_connect(item, "activate",
 //            G_CALLBACK(government_callback), GINT_TO_POINTER(g.index));
 //
-//          if (!can_change_to_government(game.player_ptr, g.index)) {
+//          if (!can_change_to_government(Game.game.player_ptr, g.index)) {
 //            gtk_widget_set_sensitive(item, false);
 //	  }
 //
@@ -1227,7 +1227,7 @@ public class Menu{
 //    menus_set_sensitive("<main>/_Orders", can_client_issue_orders());
 //
 //    menus_set_sensitive("<main>/_Government/_Tax Rates",
-//			game.rgame.changable_tax
+//			Game.game.rgame.changable_tax
 //                        && can_client_issue_orders());
 //    menus_set_sensitive("<main>/_Government/_Worklists",
 //			can_client_issue_orders());
@@ -1235,10 +1235,10 @@ public class Menu{
 //			can_client_issue_orders());
 //
 //    menus_set_sensitive("<main>/_Reports/S_paceship",
-//			(game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
+//			(Game.game.player_ptr.spaceship.state!=spaceship_state.SSHIP_NONE));
 //
 //    menus_set_active("<main>/_View/Map _Grid", draw_map_grid);
-//    menus_set_sensitive("<main>/_View/National _Borders", game.borders > 0);
+//    menus_set_sensitive("<main>/_View/National _Borders", Game.game.borders > 0);
 //    menus_set_active("<main>/_View/National _Borders", draw_borders);
 //    menus_set_active("<main>/_View/City _Names", draw_city_names);
 //    menus_set_sensitive("<main>/_View/City G_rowth", draw_city_names);
@@ -1271,7 +1271,7 @@ public class Menu{
 //      final String transfmt = "Transf_orm to %s";
 //      char irrtext[128], mintext[128], transtext[128];
 //      final String roadtext;
-//      Terrain_type_id  ttype;
+//      int  ttype;
 //      tile_type       tinfo;
 //
 //      irrtext = String.format( "Build _Irrigation");
@@ -1354,7 +1354,7 @@ public class Menu{
 //      if (unit_flag(punit, F_TRADE_ROUTE))
 //	menus_rename("<main>/_Orders/Build _Road", "Make Trade _Route");
 //      else if (unit_flag(punit, F_SETTLERS)) {
-//	if (map_has_special(punit.tile, S_ROAD)) {
+//	if (Map.map_has_special(punit.tile, Terrain_H.S_ROAD)) {
 //	  roadtext = "Build _Railroad";
 //	  road_activity=ACTIVITY_RAILROAD;  
 //	} 
@@ -1374,8 +1374,8 @@ public class Menu{
 //	irrtext = util.my_snprintf( irrfmt,
 //		    get_tile_change_menu_text(punit.tile,
 //					      ACTIVITY_IRRIGATE));
-//      } else if (map_has_special(punit.tile, S_IRRIGATION)
-//		 && player_knows_techs_with_flag(game.player_ptr,
+//      } else if (Map.map_has_special(punit.tile, S_IRRIGATION)
+//		 && player_knows_techs_with_flag(Game.game.player_ptr,
 //						 TF_FARMLAND)) {
 //	irrtext = String.format( "Bu_ild Farmland");
 //      }

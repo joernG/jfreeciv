@@ -28,7 +28,7 @@ public class Finddlg{
 //#include "support.h"
 //#include "fcintl.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "player.h"
 //#include "Map.map.h"
 //
@@ -115,8 +115,8 @@ public class Finddlg{
 //  /* check that there are any cities to find */
 //  h = 0;
 //  i = 0;    
-//  while(!h && i<game.nplayers) {
-//    h = city_list_size(&game.players[i++].cities);
+//  while(!h && i<Game.game.nplayers) {
+//    h = city_list_size(&Game.game.players[i++].cities);
 //  }
 //  
 //  if (pFind_City_Dlg && !h) {
@@ -155,8 +155,8 @@ public class Finddlg{
 //  add_to_gui_list(ID_TERRAIN_ADV_DLG_EXIT_BUTTON, pBuf);
 //  /* ---------- */
 //  
-//  for(i=0; i<game.nplayers; i++) {
-//    city_list_iterate(game.players[i].cities, pCity) {
+//  for(i=0; i<Game.game.nplayers; i++) {
+//    city_list_iterate(Game.game.players[i].cities, pCity) {
 //    
 //      cBuf = util.my_snprintf( "%s (%d)",pCity.name, pCity.size);
 //      

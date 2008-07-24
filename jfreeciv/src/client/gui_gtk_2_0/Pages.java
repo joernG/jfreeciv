@@ -27,7 +27,7 @@ public class Pages{
 //
 //#include "dataio.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "shared.h"
@@ -78,7 +78,7 @@ public class Pages{
 //  if (is_server_running() || client_start_server()) {
 //    char buf[512];
 //
-//    /* Send new game defaults. */
+//    /* Send new Game.game defaults. */
 //    send_chat("/set aifill 5");
 //
 //    buf = util.my_snprintf( "/%s", skill_level_names[0]);
@@ -868,7 +868,7 @@ public class Pages{
 //static GtkWidget *start_aifill_spin;
 //
 ///**************************************************************************
-//  request the game options dialog.
+//  request the Game.game options dialog.
 //**************************************************************************/
 //static void game_options_callback(GtkWidget *w, gpointer data)
 //{
@@ -902,7 +902,7 @@ public class Pages{
 //}
 //
 ///**************************************************************************
-//  start game callback.
+//  start Game.game callback.
 //**************************************************************************/
 //static void start_start_callback(GtkWidget *w, gpointer data)
 //{
@@ -951,7 +951,7 @@ public class Pages{
 //  gtk_table_set_col_spacings(GTK_TABLE(table), 12);
 //  gtk_box_pack_start(GTK_BOX(vbox), table, false, false, 0);
 //
-//  spin = gtk_spin_button_new_with_range(1, MAX_NUM_PLAYERS, 1);
+//  spin = gtk_spin_button_new_with_range(1, Shared_H.MAX_NUM_PLAYERS, 1);
 //  start_aifill_spin = spin;
 //  gtk_spin_button_set_digits(GTK_SPIN_BUTTON(spin), 0);
 //  gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(spin), 
@@ -1070,7 +1070,7 @@ public class Pages{
 //
 //
 ///**************************************************************************
-//  this regenerates the player information from a loaded game on the server.
+//  this regenerates the player information from a loaded Game.game on the server.
 //**************************************************************************/
 //void handle_game_load(packet_game_load packet)
 //{
@@ -1083,7 +1083,7 @@ public class Pages{
 //}
 //
 ///**************************************************************************
-//  loads the currently selected game.
+//  loads the currently selected Game.game.
 //**************************************************************************/
 //static void load_callback()
 //{
@@ -1105,7 +1105,7 @@ public class Pages{
 //}
 //
 ///**************************************************************************
-//  call the default GTK+ requester for saved game loading.
+//  call the default GTK+ requester for saved Game.game loading.
 //**************************************************************************/
 //static void load_browse_callback(GtkWidget *w, gpointer data)
 //{
@@ -1374,7 +1374,7 @@ public class Pages{
 //
 //
 ///**************************************************************************
-//  change the player name to that of the nation's leader and start the game.
+//  change the player name to that of the nation's leader and start the Game.game.
 //**************************************************************************/
 //static void nation_start_callback()
 //{
@@ -1440,7 +1440,7 @@ public class Pages{
 //{
 //  int i;
 //
-//  game.nplayers = packet.nplayers;
+//  Game.game.nplayers = packet.nplayers;
 //
 //  gtk_list_store_clear(nation_store);
 //
@@ -1584,7 +1584,7 @@ public class Pages{
 //  }
 //
 //  switch (old_page) {
-//  /* We aren't interested in showing a start page on game load or scenario. */
+//  /* We aren't interested in showing a start page on Game.game load or scenario. */
 //  case PAGE_SCENARIO:
 //  case PAGE_LOAD:
 //    if (new_page == PAGE_START) {

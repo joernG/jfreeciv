@@ -36,7 +36,7 @@ public class Dialogs{
 //#include <X11/Xaw/Toggle.h>     
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "Map.map.h"
@@ -192,7 +192,7 @@ public class Dialogs{
 //{
 //  /* try to find a free nation */
 //  while (1) {
-//    int race_toggle_index = myrand(game.playable_nation_count);
+//    int race_toggle_index = Rand.myrand(Game.game.playable_nation_count);
 //
 //    if (XtIsSensitive(races_toggles[race_toggle_index])) {
 //      x_simulate_button_click(races_toggles[race_toggle_index]);
@@ -449,11 +449,11 @@ public class Dialogs{
 //    popup_message_dialog(toplevel, "diplomatbribedialog",
 //                         "This unit cannot be bribed!",
 //                         diplomat_bribe_no_callback, 0, 0, null);
-//  } else if(game.player_ptr.economic.gold>=punit.bribe_cost) {
+//  } else if(Game.game.player_ptr.economic.gold>=punit.bribe_cost) {
 //    buf = util.my_snprintf(
 //		("Bribe unit for %d gold?\n" +
 //		  "Treasury contains %d gold."), 
-//		punit.bribe_cost, game.player_ptr.economic.gold);
+//		punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    popup_message_dialog(toplevel, "diplomatbribedialog", buf,
 //			 diplomat_bribe_yes_callback, 0, 0,
 //			 diplomat_bribe_no_callback, 0, 0,
@@ -462,7 +462,7 @@ public class Dialogs{
 //    buf = util.my_snprintf(
 //		("Bribing the unit costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
-//		punit.bribe_cost, game.player_ptr.economic.gold);
+//		punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    popup_message_dialog(toplevel, "diplomatnogolddialog", buf,
 //			 diplomat_bribe_no_callback, 0, 0,
 //			 null);
@@ -736,7 +736,7 @@ public class Dialogs{
 //  advance_type[j] = -1;
 //
 //  if (pvictim) { /* you don't want to know what lag can do -- Syela */
-//    for(i=A_FIRST; i<game.num_tech_types; i++) {
+//    for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
 //      if(get_invention(pvictim, i)==TECH_KNOWN && 
 //         (get_invention(pplayer, i)==TECH_UNKNOWN || 
 //          get_invention(pplayer, i)==TECH_REACHABLE)) {
@@ -747,7 +747,7 @@ public class Dialogs{
 //    }
 //    if(j > 0) {
 //      advances_can_steal[j] = "At Spy's Discretion";
-//      advance_type[j++] = game.num_tech_types;
+//      advance_type[j++] = Game.game.num_tech_types;
 //    }
 //  }
 //
@@ -863,7 +863,7 @@ public class Dialogs{
 //  player pvictim = null;
 //
 //  if(pvcity)
-//    pvictim = city_owner(pvcity);
+//    pvictim = City.city_owner(pvcity);
 //
 ///* it is concievable that pvcity will not be found, because something
 //has happened to the city during latency.  Therefore we must initialize
@@ -877,7 +877,7 @@ public class Dialogs{
 //    Dimension width, height;
 //    spy_tech_shell_is_modal=1;
 //
-//    create_advances_list(game.player_ptr, pvictim, spy_tech_shell_is_modal);
+//    create_advances_list(Game.game.player_ptr, pvictim, spy_tech_shell_is_modal);
 //    
 //    XtVaGetValues(toplevel, XtNwidth, &width, XtNheight, &height, null);
 //    
@@ -917,7 +917,7 @@ public class Dialogs{
 //    Dimension width, height;
 //    spy_sabotage_shell_is_modal=1;
 //
-//    create_improvements_list(game.player_ptr, pcity, spy_sabotage_shell_is_modal);
+//    create_improvements_list(Game.game.player_ptr, pcity, spy_sabotage_shell_is_modal);
 //    
 //    XtVaGetValues(toplevel, XtNwidth, &width, XtNheight, &height, null);
 //    
@@ -981,11 +981,11 @@ public class Dialogs{
 //		pcity.name);
 //    popup_message_dialog(toplevel, "diplomatnogolddialog", buf,
 //			 diplomat_incite_no_callback, 0, 0, null);
-//  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
+//  } else if (Game.game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
 //    buf = util.my_snprintf(
 //		("Incite a revolt for %d gold?\n" +
 //		  "Treasury contains %d gold."), 
-//		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//		pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //   diplomat_target_id = pcity.id;
 //   popup_message_dialog(toplevel, "diplomatrevoltdialog", buf,
 //			diplomat_incite_yes_callback, 0, 0,
@@ -995,7 +995,7 @@ public class Dialogs{
 //   buf = util.my_snprintf(
 //	       ("Inciting a revolt costs %d gold.\n" +
 //		 "Treasury contains %d gold."), 
-//	       pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//	       pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //   popup_message_dialog(toplevel, "diplomatnogolddialog", buf,
 //			diplomat_incite_no_callback, 0, 0,
 //			null);
@@ -1434,7 +1434,7 @@ public class Dialogs{
 //  Widget unit_select_all_command, unit_select_close_command;
 //  Widget firstcolumn=0,column=0;
 //  Pixel bg;
-//  unit unit_list[unit_list_size(&ptile.units)];
+//  unit unit_list[ptile.units.foo_list_size()];
 //
 //  XtSetSensitive(main_form, false);
 //
@@ -1450,7 +1450,7 @@ public class Dialogs{
 //  XtVaGetValues(unit_select_form, XtNbackground, &bg, null);
 //  XSetForeground(display, fill_bg_gc, bg);
 //
-//  n = Math.min(MAX_SELECT_UNITS, unit_list_size(&ptile.units));
+//  n = Math.min(MAX_SELECT_UNITS, ptile.units.foo_list_size());
 //  r = number_of_rows(n);
 //
 //  fill_tile_unit_list(ptile, unit_list);
@@ -1472,7 +1472,7 @@ public class Dialogs{
 //
 //    unit_select_ids[i]=punit.id;
 //
-//    pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
+//    pcity=player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //    
 //    buffer = util.my_snprintf( "%s(%s)\n%s", 
 //	    punittemp.name, 
@@ -1550,7 +1550,7 @@ public class Dialogs{
 //  XtDestroyWidget(unit_select_dialog_shell);
 //  
 //  for(i=0; i<unit_select_no; i++) {
-//    unit punit = player_find_unit_by_id(game.player_ptr,
+//    unit punit = player_find_unit_by_id(Game.game.player_ptr,
 //						unit_select_ids[i]);
 //    if(punit) {
 //      set_unit_focus(punit);
@@ -1572,7 +1572,7 @@ public class Dialogs{
 //  for(i=0; i<unit_select_no; i++) {
 //
 //    if(unit_select_commands[i]==w) {
-//      unit punit = player_find_unit_by_id(game.player_ptr,
+//      unit punit = player_find_unit_by_id(Game.game.player_ptr,
 //						  unit_select_ids[i]);
 //      if(punit) {
 //	set_unit_focus(punit);
@@ -1630,7 +1630,7 @@ public class Dialogs{
 //  XtWidgetGeometry geom;
 //
 //  maxracelen = 0;
-//  for(i=0; i<game.playable_nation_count; i++) {
+//  for(i=0; i<Game.game.playable_nation_count; i++) {
 //    len = strlen(Nation.get_nation_name(i));
 //    maxracelen = MAX(maxracelen, len);
 //  }
@@ -1656,11 +1656,11 @@ public class Dialogs{
 //					       null);   
 //
 //  free(races_toggles);
-//  races_toggles = fc_calloc(game.playable_nation_count,sizeof(Widget));
+//  races_toggles = fc_calloc(Game.game.playable_nation_count,sizeof(Widget));
 //  free(races_toggles_to_nations);
-//  races_toggles_to_nations = fc_calloc(game.playable_nation_count,sizeof(int));
+//  races_toggles_to_nations = fc_calloc(Game.game.playable_nation_count,sizeof(int));
 //
-//  for( i = 0; i < ((game.playable_nation_count-1)/per_row)+1; i++) {
+//  for( i = 0; i < ((Game.game.playable_nation_count-1)/per_row)+1; i++) {
 //    index = i * per_row;
 //    namebuf = util.my_snprintf( "racestoggle%d", index);
 //    if( i == 0 ) {
@@ -1685,7 +1685,7 @@ public class Dialogs{
 //
 //    for( j = 1; j < per_row; j++) {
 //      index = i * per_row + j;
-//      if( index >= game.playable_nation_count ) break;
+//      if( index >= Game.game.playable_nation_count ) break;
 //      namebuf = util.my_snprintf( "racestoggle%d", index);
 //      if( i == 0 ) {
 //	races_toggles[index] =
@@ -1769,8 +1769,8 @@ public class Dialogs{
 //				races_sex_toggles[0], 
 //				null));
 //
-//  /* find out styles that can be used at the game beginning */
-//  for(i=0,b_s_num=0; i<game.styles_count && i<64; i++) {
+//  /* find out styles that can be used at the Game.game beginning */
+//  for(i=0,b_s_num=0; i<Game.game.styles_count && i<64; i++) {
 //    if(city_styles[i].techreq == A_NONE) {
 //      city_style_idx[b_s_num] = i;
 //      city_style_ridx[i] = b_s_num;
@@ -1880,7 +1880,7 @@ public class Dialogs{
 //		races_quit_command_callback, null);
 //
 //
-//  for(i=0; i<game.playable_nation_count; i++) {
+//  for(i=0; i<Game.game.playable_nation_count; i++) {
 //    XtAddCallback(races_toggles[i], XtNcallback,
 //		  races_toggles_callback, INT_TO_XTPOINTER(i));
 //  }
@@ -1894,7 +1894,7 @@ public class Dialogs{
 //
 //  XtRealizeWidget(races_dialog_shell);
 //
-//  for(i=0; i<game.playable_nation_count; i++) {
+//  for(i=0; i<Game.game.playable_nation_count; i++) {
 //    races_toggles_to_nations[i] = i;
 //  }
 //  qsort(races_toggles_to_nations, i, sizeof(int), races_indirect_compare);
@@ -1902,12 +1902,12 @@ public class Dialogs{
 //  /* Build nation_to_race_toggle */
 //  free(nation_to_race_toggle);
 //  nation_to_race_toggle =
-//      fc_calloc(game.playable_nation_count, sizeof(int));
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//      fc_calloc(Game.game.playable_nation_count, sizeof(int));
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    nation_to_race_toggle[races_toggles_to_nations[i]] = i;
 //  }
 //
-//  for(i=0; i<game.playable_nation_count; i++) {
+//  for(i=0; i<Game.game.playable_nation_count; i++) {
 //    XtVaSetValues (races_toggles[i],
 //		   XtNlabel, (XtArgVal)Nation.get_nation_name(races_toggles_to_nations[i]),
 //		   null);
@@ -1938,11 +1938,11 @@ public class Dialogs{
 //{
 //  int i;
 //
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    XtSetSensitive(races_toggles[nation_to_race_toggle[i]], true);
 //  }
 //
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    int nation = i, selected_nation = -1;
 //
 //    if (!nations_used[i]) {
@@ -1992,7 +1992,7 @@ public class Dialogs{
 //			 races_leader_pick_menubutton,
 //			 null);
 //
-//  nation_count = game.nation_count;
+//  nation_count = Game.game.nation_count;
 //
 //  for(j=0; j<leader_count; j++) {
 //    entry =
@@ -2004,7 +2004,7 @@ public class Dialogs{
 //		  INT_TO_XTPOINTER(nation_count * j + race));
 //  }
 //
-//  races_leader_set_values(race, myrand(leader_count));
+//  races_leader_set_values(race, Rand.myrand(leader_count));
 //
 //  x_simulate_button_click
 //  (
@@ -2046,13 +2046,13 @@ public class Dialogs{
 //  int i;
 //  XtPointer dp, yadp;
 //
-//  if((game.playable_nation_count)==1)
+//  if((Game.game.playable_nation_count)==1)
 //    return 0;
 //
 //  if(!(dp=XawToggleGetCurrent(races_toggles[0])))
 //    return -1;
 //
-//  for(i=0; i<game.playable_nation_count; i++) {
+//  for(i=0; i<Game.game.playable_nation_count; i++) {
 //    XtVaGetValues(races_toggles[i], XtNradioData, &yadp, null);
 //    if(dp==yadp)
 //      return i;
@@ -2223,8 +2223,8 @@ public class Dialogs{
 //}
 //
 
-//  This function is called when the client disconnects or the game is
-//  over.  It should close all dialog windows for that game.
+//  This function is called when the client disconnects or the Game.game is
+//  over.  It should close all dialog windows for that Game.game.
 //***********************************************************************/
 //void popdown_all_game_dialogs()
 //{

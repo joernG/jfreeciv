@@ -1,7 +1,6 @@
 package common.unit;
 
-import static common.Game.game;
-import static common.unittype.unittype.U_LAST;
+import common.Game;
 import common.Unittype_P;
 import common.map.tile;
 import common.player.player;
@@ -68,7 +67,7 @@ public class unit {
 //	} orders;
 //	};
 	public player unit_owner() {
-		return (game.players[owner]);
+		return (Game.game.players[owner]);
 	}
 	public int move_rate() {
 		// TODO Auto-generated method stub
@@ -115,7 +114,7 @@ public class unit {
 	 **************************************************************************/
 	public static unittype get_unit_type(int id)
 	{
-		assert(id >= 0 && id < U_LAST && id < game.num_unit_types);
+		assert(id >= 0 && id < unittype.U_LAST && id < Game.game.num_unit_types);
 		return Unittype_P.unit_types[id];
 	}
 

@@ -28,7 +28,7 @@ public class Cityrep{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "mem.h"
 //#include "packets.h"
 //#include "shared.h"
@@ -236,8 +236,8 @@ public class Cityrep{
 //					    TestCityFunc test_func,
 //					    GtkSignalFunc callback)
 //{
-//  cid cids[U_LAST + B_LAST];
-//  struct item items[U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //  int item, cids_used, num_selected_cities = 0;
 //  city *selected_cities = null;
 //
@@ -473,7 +473,7 @@ public class Cityrep{
 //    int found;
 //
 //    found = 0;
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      if (!cma_is_city_under_agent(pcity, null)) {
 //	found = 1;
 //	break;
@@ -492,7 +492,7 @@ public class Cityrep{
 //     * take a lonnggg time.
 //     */
 //    found = 0;
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      if (cma_is_city_under_agent(pcity, &parameter) &&
 //	  cmafec_preset_get_index_of_parameter(&parameter) == -1) {
 //	found = 1;
@@ -512,7 +512,7 @@ public class Cityrep{
 //    /* only fill in presets that are being used. */
 //    for (i = 0; i < cmafec_preset_num(); i++) {
 //      found = 0;
-//      for (city pcity : game.player_ptr.cities.data) {
+//      for (city pcity : Game.game.player_ptr.cities.data) {
 //	if (cma_is_city_under_agent(pcity, &parameter) &&
 //	    cm_are_parameter_equal(&parameter,
 //				   cmafec_preset_get_parameter(i))) {
@@ -1005,10 +1005,10 @@ public class Cityrep{
 //  };
 //  static gchar **title[2];
 //  int i, j;
-//  cid cids[B_LAST + U_LAST];
+//  cid cids[B_LAST + unittype.U_LAST];
 //  int cids_used;
 //  cid selected_cid;
-//  struct item items[U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //  GtkWidget *button;
 //  GtkWidget *box;
 //  GtkWidget *scrollpane;
@@ -1263,7 +1263,7 @@ public class Cityrep{
 //    gtk_clist_freeze(GTK_CLIST(city_list));
 //    gtk_clist_clear(GTK_CLIST(city_list));
 //
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      get_city_text(pcity, row, sizeof(buf[0]));
 //      i=gtk_clist_append(GTK_CLIST(city_list), row);
 //      gtk_clist_set_row_data (GTK_CLIST(city_list), i, pcity);

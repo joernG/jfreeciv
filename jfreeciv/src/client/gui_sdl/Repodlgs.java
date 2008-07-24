@@ -38,7 +38,7 @@ public class Repodlgs{
 //
 //#include "fcintl.h"
 //#include "log.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "shared.h"
@@ -88,12 +88,12 @@ public class Repodlgs{
 //  					units_entry total)
 //{
 //  int time_to_build;
-//  memset(entries, '\0', U_LAST * sizeof(struct units_entry));
+//  memset(entries, '\0', unittype.U_LAST * sizeof(struct units_entry));
 //  memset(total, '\0', sizeof(struct units_entry));
-//  for(time_to_build = 0; time_to_build < U_LAST; time_to_build++) {
+//  for(time_to_build = 0; time_to_build < unittype.U_LAST; time_to_build++) {
 //    entries[time_to_build].soonest_completions = FC_INFINITY;
 //  }
-//  for (unit pUnit : game.player_ptr.units.data) {
+//  for (unit pUnit : Game.game.player_ptr.units.data) {
 //    (entries[pUnit.type].active_count)++;
 //    (total.active_count)++;
 //    if (pUnit.homecity) {
@@ -106,7 +106,7 @@ public class Repodlgs{
 //    }
 //  } }
 //    
-//  for (city pCity : game.player_ptr.cities.data) {
+//  for (city pCity : Game.game.player_ptr.cities.data) {
 //    if (pCity.is_building_unit &&
 //      (unit_type_exists(pCity.currently_building))) {
 //        (entries[pCity.currently_building].building_count)++;
@@ -187,14 +187,14 @@ public class Repodlgs{
 //  
 //  pUnits_Upg_Dlg = MALLOC(sizeof(struct SMALL_DLG));
 //
-//  ut2 = can_upgrade_unittype(game.player_ptr, ut1);
-//  value = unit_upgrade_price(game.player_ptr, ut1, ut2);
+//  ut2 = can_upgrade_unittype(Game.game.player_ptr, ut1);
+//  value = unit_upgrade_price(Game.game.player_ptr, ut1, ut2);
 //  
 //  cBuf = util.my_snprintf(
 //    	("Upgrade as many %s to %s as possible for %d gold each?\n" +
 //	  "Treasury contains %d gold."),
-//	unit_types[ut1].name, unit_types[ut2].name,
-//	value, game.player_ptr.economic.gold);
+//	Unittype_P.unit_types[ut1].name, Unittype_P.unit_types[ut2].name,
+//	value, Game.game.player_ptr.economic.gold);
 // 
 //  
 //  hh = WINDOW_TILE_HIGH + 1;
@@ -237,7 +237,7 @@ public class Repodlgs{
 //  
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //  
-//  if (game.player_ptr.economic.gold >= value) {
+//  if (Game.game.player_ptr.economic.gold >= value) {
 //    pBuf = create_themeicon_button_from_chars(pTheme.OK_Icon, pWindow.dst,
 //					      "Yes", 12, 0);
 //        
@@ -276,7 +276,7 @@ public class Repodlgs{
 //  pBuf = pWindow.prev;
 //  pBuf.size.y = pWindow.size.y + pWindow.size.h - pBuf.size.h - 10;
 //  
-//  if (game.player_ptr.economic.gold >= value) {
+//  if (Game.game.player_ptr.economic.gold >= value) {
 //    /* sell button */
 //    pBuf = pBuf.prev;
 //    pBuf.size.x = pWindow.size.x + (ww - (2 * pBuf.size.w + 10)) / 2;
@@ -447,7 +447,7 @@ public class Repodlgs{
 //  count = 0; 
 //  unit_type_iterate(i) {
 //    if ((units[i].active_count > 0) || (units[i].building_count > 0)) {
-//      upgrade = (can_upgrade_unittype(game.player_ptr, i) != -1);
+//      upgrade = (can_upgrade_unittype(Game.game.player_ptr, i) != -1);
 //      pUnit = get_unit_type(i);
 //	
 //      /* ----------- */
@@ -835,7 +835,7 @@ public class Repodlgs{
 //void activeunits_report_dialog_update()
 //{
 //  if(pUnitsDlg && !is_report_dialogs_frozen()) {
-//    struct units_entry units[U_LAST];
+//    struct units_entry units[unittype.U_LAST];
 //    struct units_entry units_total;
 //    GUI pWidget, *pBuf;
 //    boolean is_in_list = false;
@@ -877,7 +877,7 @@ public class Repodlgs{
 //      pBuf = pWidget;
 //      if ((units[i].active_count > 0) || (units[i].building_count > 0)) {
 //        if (i == MAX_ID - pBuf.ID) {
-//UPD:	  upgrade = (can_upgrade_unittype(game.player_ptr, i) != -1);
+//UPD:	  upgrade = (can_upgrade_unittype(Game.game.player_ptr, i) != -1);
 //	  pBuf = pBuf.prev;
 //	  if(upgrade) {
 //	    pBuf.string16.fgcol = sellect;
@@ -983,7 +983,7 @@ public class Repodlgs{
 //**************************************************************************/
 //void popup_activeunits_report_dialog(boolean make_modal)
 //{
-//  struct units_entry units[U_LAST];
+//  struct units_entry units[unittype.U_LAST];
 //  struct units_entry units_total;
 //    
 //  if(pUnitsDlg) {
@@ -1211,7 +1211,7 @@ public class Repodlgs{
 //      pMotion.dst_rate = (int *)pMotion.pHoriz_Dst.data.ptr;
 //      pMotion.tax = 100 - *pMotion.src_rate - *pMotion.dst_rate;
 //      if ((SDL_Client_Flags & CF_CHANGE_TAXRATE_SCI_BLOCK)) {
-//        if (pMotion.tax <= get_gov_pplayer(game.player_ptr).max_rate) {
+//        if (pMotion.tax <= get_gov_pplayer(Game.game.player_ptr).max_rate) {
 //	  pMotion.pHoriz_Dst = null;	/* tax */
 //	  pMotion.dst_rate = &pMotion.tax;
 //        } else {
@@ -1230,7 +1230,7 @@ public class Repodlgs{
 //      pMotion.dst_rate = (int *)pMotion.pHoriz_Dst.data.ptr;
 //      pMotion.tax = 100 - *pMotion.src_rate - *pMotion.dst_rate;
 //      if (SDL_Client_Flags & CF_CHANGE_TAXRATE_LUX_BLOCK) {
-//        if (pMotion.tax <= get_gov_pplayer(game.player_ptr).max_rate) {
+//        if (pMotion.tax <= get_gov_pplayer(Game.game.player_ptr).max_rate) {
 //	  /* tax */
 //	  pMotion.pHoriz_Dst = null;
 //	  pMotion.dst_rate = &pMotion.tax;
@@ -1253,7 +1253,7 @@ public class Repodlgs{
 //  }
 //
 //  pMotion.min = pHoriz_Src.next.size.x + pHoriz_Src.next.size.w + 2;
-//  pMotion.gov_max = get_gov_pplayer(game.player_ptr).max_rate;
+//  pMotion.gov_max = get_gov_pplayer(Game.game.player_ptr).max_rate;
 //  pMotion.max = pMotion.min + pMotion.gov_max * 1.5;
 //  pMotion.x = pHoriz_Src.size.x;
 //  
@@ -1300,9 +1300,9 @@ public class Repodlgs{
 //  /* Tax */
 //  tax = 100 - luxury - science;
 //  
-//  if(tax != game.player_ptr.economic.tax ||
-//    science != game.player_ptr.economic.science ||
-//    luxury != game.player_ptr.economic.luxury) {
+//  if(tax != Game.game.player_ptr.economic.tax ||
+//    science != Game.game.player_ptr.economic.science ||
+//    luxury != Game.game.player_ptr.economic.luxury) {
 //    dsend_packet_player_rates(&aconnection, tax, luxury, science);
 //  }
 //
@@ -1399,7 +1399,7 @@ public class Repodlgs{
 //  enable_economy_dlg();
 //  
 //  /* send sell */
-//  for (city pCity : game.player_ptr.cities.data) {
+//  for (city pCity : Game.game.player_ptr.cities.data) {
 //    if(!pCity.did_sell && city_got_building(pCity, imp)){
 //	count++;
 //
@@ -1462,7 +1462,7 @@ public class Repodlgs{
 //  total_count = pWidget.data.cont.id1;
 //  value = impr_sell_gold(imp);
 //  
-//  for (city pCity : game.player_ptr.cities.data) {
+//  for (city pCity : Game.game.player_ptr.cities.data) {
 //    if(!pCity.did_sell && city_got_building(pCity, imp)) {
 //	count++;
 //        gold += value;
@@ -1602,7 +1602,7 @@ public class Repodlgs{
 //  
 //    /* tresure */
 //    pBuf = pBuf.prev;
-//    cBuf = util.my_snprintf( "%d", game.player_ptr.economic.gold);
+//    cBuf = util.my_snprintf( "%d", Game.game.player_ptr.economic.gold);
 //    copy_chars_to_string16(pBuf.string16, cBuf);
 //    remake_label_size(pBuf);
 //  
@@ -1676,7 +1676,7 @@ public class Repodlgs{
 //  struct improvement_entry entries[B_LAST];
 //  SDL_Color color = {255,255,255,128};
 //  SDL_Rect dst;
-//  government pGov = get_gov_pplayer(game.player_ptr);
+//  government pGov = get_gov_pplayer(Game.game.player_ptr);
 //    
 //  if(pEconomyDlg) {
 //    return;
@@ -1704,7 +1704,7 @@ public class Repodlgs{
 //  
 //  /* ------------------------- */
 //  /* Total Treasury */
-//  cBuf = util.my_snprintf( "%d", game.player_ptr.economic.gold);
+//  cBuf = util.my_snprintf( "%d", Game.game.player_ptr.economic.gold);
 //
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
@@ -1718,7 +1718,7 @@ public class Repodlgs{
 //
 //  /* Tax Rate */
 //  /* it is important to leave 1 space at ending of this string */
-//  cBuf = util.my_snprintf( "%d%% " , game.player_ptr.economic.tax);
+//  cBuf = util.my_snprintf( "%d%% " , Game.game.player_ptr.economic.tax);
 //  pStr = create_str16_from_char(cBuf, 12);
 //  pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //  
@@ -1790,7 +1790,7 @@ public class Repodlgs{
 //
 //  pBuf.action = horiz_taxrate_callback;
 //  pBuf.data.ptr = MALLOC(sizeof(int));
-//  *(int *)pBuf.data.ptr = game.player_ptr.economic.luxury;
+//  *(int *)pBuf.data.ptr = Game.game.player_ptr.economic.luxury;
 //  w2 += 184;
 //  set_wstate(pBuf, FC_WS_NORMAL);
 //
@@ -1798,7 +1798,7 @@ public class Repodlgs{
 //  /* ---- */
 //  
 //  /* it is important to leave 1 space at ending of this string */
-//  cBuf = util.my_snprintf( "%d%% ", game.player_ptr.economic.luxury);
+//  cBuf = util.my_snprintf( "%d%% ", Game.game.player_ptr.economic.luxury);
 //  pStr = create_str16_from_char(cBuf, 11);
 //  pStr.style |= TTF_STYLE_BOLD;
 //
@@ -1831,7 +1831,7 @@ public class Repodlgs{
 //
 //  pBuf.action = horiz_taxrate_callback;
 //  pBuf.data.ptr = MALLOC(sizeof(int));
-//  *(int *)pBuf.data.ptr = game.player_ptr.economic.science;
+//  *(int *)pBuf.data.ptr = Game.game.player_ptr.economic.science;
 //  
 //  set_wstate(pBuf, FC_WS_NORMAL);
 //
@@ -1839,7 +1839,7 @@ public class Repodlgs{
 //  /* ---- */
 //  
 //  /* it is important to leave 1 space at ending of this string */
-//  cBuf = util.my_snprintf( "%d%% ", game.player_ptr.economic.science);
+//  cBuf = util.my_snprintf( "%d%% ", Game.game.player_ptr.economic.science);
 //  pStr = create_str16_from_char(cBuf, 11);
 //  pStr.style |= TTF_STYLE_BOLD;
 //
@@ -2148,7 +2148,7 @@ public class Repodlgs{
 //  /* lux scrollbar */
 //  pBuf = pBuf.prev;
 //  pBuf.size.x = pWindow.size.x + dst.x + 2
-//		  + (game.player_ptr.economic.luxury * 3) / 2;
+//		  + (Game.game.player_ptr.economic.luxury * 3) / 2;
 //  pBuf.size.y = pWindow.size.y + dst.y -1;
 //  
 //  /* lux rate */
@@ -2172,7 +2172,7 @@ public class Repodlgs{
 //  /* science scrollbar */
 //  pBuf = pBuf.prev;
 //  pBuf.size.x = pWindow.size.x + dst.x + 2
-//		  + (game.player_ptr.economic.science * 3) / 2;
+//		  + (Game.game.player_ptr.economic.science * 3) / 2;
 //  pBuf.size.y = pWindow.size.y + dst.y -1;
 //  
 //  /* science rate */
@@ -2278,9 +2278,9 @@ public class Repodlgs{
 //
 //SDL_Color * get_tech_color(Tech_Type_id tech_id)
 //{
-//  if (tech_is_available(game.player_ptr, tech_id))
+//  if (tech_is_available(Game.game.player_ptr, tech_id))
 //  {
-//    switch (get_invention(game.player_ptr, tech_id))
+//    switch (get_invention(Game.game.player_ptr, tech_id))
 //    {
 //      case TECH_UNKNOWN:
 //        return get_game_colorRGB(COLOR_STD_WHITE);
@@ -2326,7 +2326,7 @@ public class Repodlgs{
 //  pSurf = SDL_DisplayFormatAlpha(pTmp);
 //  FREESURFACE(pTmp);
 //  
-//  if (game.player_ptr.research.researching == tech_id)
+//  if (Game.game.player_ptr.research.researching == tech_id)
 //  {
 //    color.unused = 180;
 //  } else {
@@ -2493,7 +2493,7 @@ public class Repodlgs{
 //    char cBuf[128];
 //    SDL_String16 *pStr;
 //    SDL_Surface *pSurf, *pColb_Surface = pIcons.pBIG_Colb;
-//    int step, i, cost = total_bulbs_required(game.player_ptr);
+//    int step, i, cost = total_bulbs_required(Game.game.player_ptr);
 //    SDL_Rect dest, src;
 //    SDL_Color color;
 //    impr_type pImpr;
@@ -2504,8 +2504,8 @@ public class Repodlgs{
 //    GUI pWindow = pScienceDlg.pEndWidgetList;
 //    color = *get_game_colorRGB(COLOR_STD_WHITE);
 //      
-//    pWindow.prev.theme = get_tech_icon(game.player_ptr.research.researching);
-//    pWindow.prev.prev.theme = get_tech_icon(game.player_ptr.ai.tech_goal);
+//    pWindow.prev.theme = get_tech_icon(Game.game.player_ptr.research.researching);
+//    pWindow.prev.prev.theme = get_tech_icon(Game.game.player_ptr.ai.tech_goal);
 //    
 //    /* redraw Window */
 //    redraw_group(pWindow, pWindow, 0);
@@ -2517,7 +2517,7 @@ public class Repodlgs{
 //    redraw_group(pScienceDlg.pBeginWidgetList, pWindow.prev, 0);
 //    /* ------------------------------------- */
 //
-//    for (city pCity : game.player_ptr.cities.data) {
+//    for (city pCity : Game.game.player_ptr.cities.data) {
 //      curent_output += pCity.science_total;
 //    } }
 //
@@ -2529,7 +2529,7 @@ public class Repodlgs{
 //      char cBiernikujemy[64];
 //      turns_to_advance = (cost + curent_output - 1) / curent_output;
 //      turns_to_next_tech =
-//	    (cost - game.player_ptr.research.bulbs_researched +
+//	    (cost - Game.game.player_ptr.research.bulbs_researched +
 //		    curent_output - 1) / curent_output;
 //      
 //      cBiernikujemy = util.my_snprintf(
@@ -2565,9 +2565,9 @@ public class Repodlgs{
 //    /* ------------------------------------- */
 //
 //    cBuf = util.my_snprintf( "%s (%d/%d)",
-//	      get_tech_name(game.player_ptr,
-//			    game.player_ptr.research.researching),
-//	      game.player_ptr.research.bulbs_researched, cost);
+//	      get_tech_name(Game.game.player_ptr,
+//			    Game.game.player_ptr.research.researching),
+//	      Game.game.player_ptr.research.bulbs_researched, cost);
 //
 //    copy_chars_to_string16(pStr, cBuf);
 //    
@@ -2601,12 +2601,12 @@ public class Repodlgs{
 //    if (cost > 286)
 //    {
 //      cost =
-//        286.0 * ((float) game.player_ptr.research.bulbs_researched / cost);
+//        286.0 * ((float) Game.game.player_ptr.research.bulbs_researched / cost);
 //    }
 //    else
 //    {
 //      cost =
-//        (float)cost * ((float)game.player_ptr.research.bulbs_researched/cost);
+//        (float)cost * ((float)Game.game.player_ptr.research.bulbs_researched/cost);
 //    }
 //  
 //    dest.y += 2;
@@ -2622,7 +2622,7 @@ public class Repodlgs{
 //
 //    impr_type_iterate(imp) {
 //      pImpr = get_improvement_type(imp);
-//      if (pImpr.tech_req == game.player_ptr.research.researching) {
+//      if (pImpr.tech_req == Game.game.player_ptr.research.researching) {
 //        SDL_BlitSurface(GET_SURF(pImpr.sprite), null, pWindow.dst, &dest);
 //        dest.x += GET_SURF(pImpr.sprite).w + 1;
 //      }
@@ -2632,7 +2632,7 @@ public class Repodlgs{
 //
 //    unit_type_iterate(un) {
 //      pUnit = get_unit_type(un);
-//      if (pUnit.tech_requirement == game.player_ptr.research.researching) {
+//      if (pUnit.tech_requirement == Game.game.player_ptr.research.researching) {
 //	if (GET_SURF(pUnit.sprite).w > 64) {
 //	  float zoom = 64.0 / GET_SURF(pUnit.sprite).w;
 //	  SDL_Surface *pZoomed =
@@ -2658,14 +2658,14 @@ public class Repodlgs{
 //    dest.y += 10;
 //    /* -------------------------------- */
 //    /* Goals */
-//    if (game.player_ptr.ai.tech_goal != A_UNSET)
+//    if (Game.game.player_ptr.ai.tech_goal != A_UNSET)
 //    {
 //      steps =
-//        num_unknown_techs_for_goal(game.player_ptr,
-//				 game.player_ptr.ai.tech_goal);
+//        num_unknown_techs_for_goal(Game.game.player_ptr,
+//				 Game.game.player_ptr.ai.tech_goal);
 //      cBuf = util.my_snprintf( "%s ( %d %s )",
-//	      get_tech_name(game.player_ptr,
-//			    game.player_ptr.ai.tech_goal), steps,
+//	      get_tech_name(Game.game.player_ptr,
+//			    Game.game.player_ptr.ai.tech_goal), steps,
 //	      PL("step", "steps", steps));
 //
 //      copy_chars_to_string16(pStr, cBuf);
@@ -2680,7 +2680,7 @@ public class Repodlgs{
 //
 //      impr_type_iterate(imp) {
 //        pImpr = get_improvement_type(imp);
-//        if (pImpr.tech_req == game.player_ptr.ai.tech_goal) {
+//        if (pImpr.tech_req == Game.game.player_ptr.ai.tech_goal) {
 //          SDL_BlitSurface(GET_SURF(pImpr.sprite), null, pWindow.dst, &dest);
 //          dest.x += GET_SURF(pImpr.sprite).w + 1;
 //        }
@@ -2690,7 +2690,7 @@ public class Repodlgs{
 //
 //      unit_type_iterate(un) {
 //        pUnit = get_unit_type(un);
-//        if (pUnit.tech_requirement == game.player_ptr.ai.tech_goal) {
+//        if (pUnit.tech_requirement == Game.game.player_ptr.ai.tech_goal) {
 //	  if (GET_SURF(pUnit.sprite).w > 64) {
 //	    float zoom = 64.0 / GET_SURF(pUnit.sprite).w;
 //	    SDL_Surface *pZoomed =
@@ -2793,13 +2793,13 @@ public class Repodlgs{
 //  redraw_icon2(pWidget);
 //  flush_rect(pWidget.size);
 //    
-//  if (is_future_tech(game.player_ptr.research.researching)) {
+//  if (is_future_tech(Game.game.player_ptr.research.researching)) {
 //    return -1;
 //  }
 //    
-//  for (i = A_FIRST; i < game.num_tech_types; i++) {
-//    if (!tech_is_available(game.player_ptr, i)
-//       || get_invention(game.player_ptr, i) != TECH_REACHABLE) {
+//  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
+//    if (!tech_is_available(Game.game.player_ptr, i)
+//       || get_invention(Game.game.player_ptr, i) != TECH_REACHABLE) {
 //      continue;
 //    }
 //    count++;
@@ -2862,9 +2862,9 @@ public class Repodlgs{
 //  
 //  count = 0;
 //  h = col * max_row;
-//  for (i = A_FIRST; i < game.num_tech_types; i++) {
-//    if (!tech_is_available(game.player_ptr, i)
-//       || get_invention(game.player_ptr, i) != TECH_REACHABLE) {
+//  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
+//    if (!tech_is_available(Game.game.player_ptr, i)
+//       || get_invention(Game.game.player_ptr, i) != TECH_REACHABLE) {
 //      continue;
 //    }
 //    
@@ -2979,12 +2979,12 @@ public class Repodlgs{
 //  /* collect all techs which are reachable in under 11 steps
 //   * hist will hold afterwards the techid of the current choice
 //   */
-//  for (i = A_FIRST; i < game.num_tech_types; i++) {
-//    if (tech_is_available(game.player_ptr, i)
-//        && get_invention(game.player_ptr, i) != TECH_KNOWN
+//  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
+//    if (tech_is_available(Game.game.player_ptr, i)
+//        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
 //        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
-//	&& (num_unknown_techs_for_goal(game.player_ptr, i) < 11
-//	    || i == game.player_ptr.ai.tech_goal)) {
+//	&& (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
+//	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //      count++;
 //    }
 //  }
@@ -3049,12 +3049,12 @@ public class Repodlgs{
 //   */
 //  count = 0;
 //  h = col * max_row;
-//  for (i = A_FIRST; i < game.num_tech_types; i++) {
-//    if (tech_is_available(game.player_ptr, i)
-//        && get_invention(game.player_ptr, i) != TECH_KNOWN
+//  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
+//    if (tech_is_available(Game.game.player_ptr, i)
+//        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
 //        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
-//	&& ((num = num_unknown_techs_for_goal(game.player_ptr, i)) < 11
-//	    || i == game.player_ptr.ai.tech_goal)) {
+//	&& ((num = num_unknown_techs_for_goal(Game.game.player_ptr, i)) < 11
+//	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //    
 //      count++;
 //      cBuf = util.my_snprintf( "%s\n%d %s", advances[i].name, num,
@@ -3188,16 +3188,16 @@ public class Repodlgs{
 //  /* ------ */
 //
 //  count = 0;
-//  for (i = A_FIRST; i < game.num_tech_types; i++) {
-//    if (tech_is_available(game.player_ptr, i)
-//        && get_invention(game.player_ptr, i) != TECH_KNOWN
+//  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
+//    if (tech_is_available(Game.game.player_ptr, i)
+//        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
 //        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST) {
 //	count++;	  
 //    }
 //  }
 //
-//  if(game.player_ptr.research.researching != A_FUTURE) {
-//    pLogo = GET_SURF(advances[game.player_ptr.research.researching].sprite);
+//  if(Game.game.player_ptr.research.researching != A_FUTURE) {
+//    pLogo = GET_SURF(advances[Game.game.player_ptr.research.researching].sprite);
 //  } else {
 //    /* "Future Tech" icon */
 //    pLogo = pFuture_Tech_Icon;
@@ -3216,9 +3216,9 @@ public class Repodlgs{
 //  add_to_gui_list(ID_SCIENCE_DLG_CHANGE_REASARCH_BUTTON, pBuf);
 //
 //  /* ------ */
-//  if (game.player_ptr.ai.tech_goal != A_UNSET)
+//  if (Game.game.player_ptr.ai.tech_goal != A_UNSET)
 //  {
-//    pLogo = GET_SURF(advances[game.player_ptr.ai.tech_goal].sprite);
+//    pLogo = GET_SURF(advances[Game.game.player_ptr.ai.tech_goal].sprite);
 //  } else {
 //    /* "None" icon */
 //    pLogo = pNone_Tech_Icon;
@@ -3301,7 +3301,7 @@ public class Repodlgs{
 //*****************************************************************/
 //void popup_endgame_report_dialog(packet_endgame_report packet)
 //{
-//  char buffer[150 * MAX_NUM_PLAYERS];
+//  char buffer[150 * Shared_H.MAX_NUM_PLAYERS];
 //  int i;
 // 
 //  buffer[0] = '\0';

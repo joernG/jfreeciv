@@ -21,7 +21,7 @@ public class Player_H {
 		  public static  int H_HUTS = 128;       /* Doesn't know which unseen tiles have huts on them */
 		  public static  int H_FOG = 256;        /* Can't see through fog of war */
 		  public static  int H_NOPLANES = 512;   /* Doesn't build air units */
-		  public static  int H_MAP = 1024;       /* Only knows map_is_known tiles */
+		  public static  int H_MAP = 1024;       /* Only knows Maphand.map_is_known tiles */
 		  public static  int H_DIPLOMACY = 2048; /* Not very good at diplomacy */
 		  public static  int H_REVOLUTION = 4096; /* Cannot skip anarchy */
 //		};

@@ -106,7 +106,7 @@ public class Mapclass{
 //      text_obj = TextObject, MUIA_Text_Contents, s, End;
 //      DoMethod(group, OM_ADDMEMBER, text_obj);
 //
-//      if (Map.tile_has_special(ptile, S_HUT))
+//      if (Map.tile_has_special(ptile, Terrain_H.S_HUT))
 //      {
 //	text_obj = TextObject, MUIA_Text_Contents, "Minor Tribe Village", End;
 //	DoMethod(group, OM_ADDMEMBER, text_obj);
@@ -115,7 +115,7 @@ public class Mapclass{
 //      if ((pcity = map_get_city(xtile, ytile)))
 //      {
 //	s = util.my_snprintf( "City: %s(%s)", pcity.name,
-//		    get_nation_name(city_owner(pcity).nation));
+//		    get_nation_name(City.city_owner(pcity).nation));
 //	text_obj = TextObject, MUIA_Text_Contents, s, End;
 //
 //	if(text_obj)
@@ -141,10 +141,10 @@ public class Mapclass{
 //	char cn[64];
 //	unit_type ptype = punit.unit_type();
 //	cn[0] = '\0';
-//	if (punit.owner == game.player_idx)
+//	if (punit.owner == Game.game.player_idx)
 //	{
 //	  city pcity;
-//	  pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
+//	  pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //	  if (pcity)
 //	    cn = util.my_snprintf( "/%s", pcity.name);
 //	}
@@ -154,11 +154,11 @@ public class Mapclass{
 //	text_obj = TextObject, MUIA_Text_Contents, s, End;
 //	DoMethod(group, OM_ADDMEMBER, text_obj);
 //
-//	if (punit.owner == game.player_idx)
+//	if (punit.owner == Game.game.player_idx)
 //	{
 //	  char uc[64] = "";
-//	  if (unit_list_size(&ptile.units) >= 2)
-//	    uc = util.my_snprintf( "  (%d more)", unit_list_size(&ptile.units) - 1);
+//	  if (ptile.units.foo_list_size() >= 2)
+//	    uc = util.my_snprintf( "  (%d more)", ptile.units.foo_list_size() - 1);
 //
 //	  s = util.my_snprintf( "A:%d D:%d FP:%d HP:%d/%d%s%s", ptype.attack_strength,
 //		  ptype.defense_strength, ptype.firepower, punit.hp,
@@ -483,7 +483,7 @@ public class Mapclass{
 //
 //    pix = TextLength(rp,buffer,buffer.length());
 //
-//    if (draw_city_growth && pcity.owner == game.player_idx) {
+//    if (draw_city_growth && pcity.owner == Game.game.player_idx) {
 //      pix += TextLength(rp,buffer2,buffer2.length()) + 5;
 //    }
 //
@@ -495,7 +495,7 @@ public class Mapclass{
 //    Move(rp, _mleft(o) + x, _mtop(o) + y + 1);
 //    Text(rp, buffer, buffer.length());
 //
-//    if (draw_city_growth && pcity.owner == game.player_idx)
+//    if (draw_city_growth && pcity.owner == Game.game.player_idx)
 //    {
 //    	Move(rp, rp.cp_x + 5, rp.cp_y - 1);
 //	Text(rp, buffer2, buffer2.length());
@@ -505,7 +505,7 @@ public class Mapclass{
 //  }
 //
 //
-//  if (draw_city_productions && (pcity.owner==game.player_idx)) {
+//  if (draw_city_productions && (pcity.owner==Game.game.player_idx)) {
 //    get_city_mapview_production(pcity, buffer, sizeof(buffer));
 //
 //    x = canvas_x - TextLength(rp,buffer,buffer.length())/2;
@@ -1648,13 +1648,13 @@ public class Mapclass{
 //	{
 //	  boolean need_barlabel = false;
 //
-//	  if (pcity && pcity.owner == game.player_idx)
+//	  if (pcity && pcity.owner == Game.game.player_idx)
 //	  {
 //	    Map_MakeContextItem(menu_title, "Popup City", PACK_CITY_USERDATA(pcity, CITY_POPUP));
 //	    need_barlabel = true;
 //	  } else
 //	  {
-//	    if (punit && punit.owner == game.player_idx)
+//	    if (punit && punit.owner == Game.game.player_idx)
 //	    {
 //	      Speclists<Command> list;
 //	      NewList((List ) &list);
@@ -1703,8 +1703,8 @@ public class Mapclass{
 //		if (can_unit_do_activity(punit, ACTIVITY_IRRIGATE))
 //		{
 //		  static char irrtext[64];
-//		  if (map_has_special(punit.tile, S_IRRIGATION) &&
-//		      player_knows_techs_with_flag(game.player_ptr, TF_FARMLAND))
+//		  if (Map.map_has_special(punit.tile, S_IRRIGATION) &&
+//		      player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND))
 //		  {
 //		    irrtext = String.format( "Build Farmland");
 //		  }
@@ -1745,7 +1745,7 @@ public class Mapclass{
 //	    }
 //	  }
 //
-//	  if (unit_list_size(&ptile.units) > 1 && punit)
+//	  if (ptile.units.foo_list_size() > 1 && punit)
 //	  {
 //	    if (need_barlabel)
 //	    {
@@ -2976,7 +2976,7 @@ public class Mapclass{
 //	  }
 //	}
 //
-//	if (can_upgrade_unittype(game.player_ptr,punit.type) != -1)
+//	if (can_upgrade_unittype(Game.game.player_ptr,punit.type) != -1)
 //	{
 //	  if ((entry = MUI_MakeObject(MUIO_Menuitem, "Upgrade", null, MUIO_Menuitem_CopyStrings, 0)))
 //	  {

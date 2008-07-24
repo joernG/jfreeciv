@@ -31,9 +31,9 @@ public class server_arguments {
 	public boolean  save_ppm;
 	/* quit if there no players after a given time interval */
 	public int quitidle;
-	/* exit the server on game ending */
+	/* exit the server on Game.game ending */
 	public boolean  exit_on_end;
-	/* what kind of end game we should use */
+	/* what kind of end Game.game we should use */
 //	bv_draw draw;
 	/* authentication options */
 	public boolean  auth_enabled;            /* defaults to FALSE */

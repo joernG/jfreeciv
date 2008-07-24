@@ -214,8 +214,8 @@ public class Cityrep{
 //					     int size)
 //{
 //  GtkWidget *menu;
-//  cid cids[U_LAST + B_LAST];
-//  struct item items[U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //  int i, item, cids_used;
 //  char *row[4];
 //  char buf[4][64];
@@ -563,7 +563,7 @@ public class Cityrep{
 //    int found;
 //
 //    found = 0;
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      if (!cma_is_city_under_agent(pcity, null)) {
 //	found = 1;
 //	break;
@@ -582,7 +582,7 @@ public class Cityrep{
 //     * take a lonnggg time.
 //     */
 //    found = 0;
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      if (cma_is_city_under_agent(pcity, &parameter) &&
 //	  cmafec_preset_get_index_of_parameter(&parameter) == -1) {
 //	found = 1;
@@ -602,7 +602,7 @@ public class Cityrep{
 //    /* only fill in presets that are being used. */
 //    for (i = 0; i < cmafec_preset_num(); i++) {
 //      found = 0;
-//      for (city pcity : game.player_ptr.cities.data) {
+//      for (city pcity : Game.game.player_ptr.cities.data) {
 //	if (cma_is_city_under_agent(pcity, &parameter) &&
 //	    cm_are_parameter_equal(&parameter,
 //				   cmafec_preset_get_parameter(i))) {
@@ -1100,7 +1100,7 @@ public class Cityrep{
 //{
 //  if (city_dialog_shell && !is_report_dialogs_frozen()) {
 //
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      GtkTreeIter it;
 //
 //      gtk_list_store_append(city_model, &it);
@@ -1137,7 +1137,7 @@ public class Cityrep{
 //    /* update. */
 //    gtk_list_store_clear(city_model);
 //
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      gtk_list_store_append(city_model, &it);
 //      update_row(&it, pcity);
 //

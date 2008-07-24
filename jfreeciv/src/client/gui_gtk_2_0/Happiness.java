@@ -22,7 +22,7 @@ public class Happiness{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "mem.h"
 //#include "support.h"
@@ -219,11 +219,11 @@ public class Happiness{
 //  int nleft = sizeof(buf);
 //
 //  city pcity = pdialog.pcity;
-//  player pplayer = &game.players[pcity.owner];
+//  player pplayer = &Game.game.players[pcity.owner];
 //  government g = get_gov_pcity(pcity);
-//  int cities = city_list_size(&pplayer.cities);
-//  int content = game.unhappysize;
-//  int basis = game.cityfactor + g.empire_size_mod;
+//  int cities = pplayer.cities.foo_list_size();
+//  int content = Game.game.unhappysize;
+//  int basis = Game.game.cityfactor + g.empire_size_mod;
 //  int step = g.empire_size_inc;
 //  int excess = cities - basis;
 //  int penalty = 0;

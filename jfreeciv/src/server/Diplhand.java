@@ -24,7 +24,7 @@ public class Diplhand{
 //#include "diptreaty.h"
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -220,7 +220,7 @@ public class Diplhand{
 //					*player_accept);
 //
 //  if (ptreaty.accept0 && ptreaty.accept1) {
-//    int nclauses = clause_list_size(&ptreaty.clauses);
+//    int nclauses = ptreaty.clauses.foo_list_size();
 //
 //    dlsend_packet_diplomacy_cancel_meeting(&pplayer.connections,
 //					   pother.player_no,
@@ -331,10 +331,10 @@ public class Diplhand{
 //      switch (pclause.type) {
 //      case CLAUSE_EMBASSY:
 //        establish_embassy(pdest, pgiver); /* sic */
-//        notify_player_ex(pgiver, null, E_TREATY_SHARED_VISION,
+//        Plrhand.notify_player_ex(pgiver, null, E_TREATY_SHARED_VISION,
 //                         "Game: You gave an embassy to %s.",
 //                         pdest.name);
-//        notify_player_ex(pdest, null, E_TREATY_SHARED_VISION,
+//        Plrhand.notify_player_ex(pdest, null, E_TREATY_SHARED_VISION,
 //                         "Game: %s allowed you to create an embassy!",
 //                         pgiver.name);
 //        Gamelog.gamelog(GAMELOG_TREATY, GL_EMBASSY, pgiver, pdest);
@@ -351,7 +351,7 @@ public class Diplhand{
 //		  Nation.get_nation_name_plural(pgiver.nation));
 //          break;
 //        }
-//	notify_player_ex(pdest, null, E_TECH_GAIN,
+//	Plrhand.notify_player_ex(pdest, null, E_TECH_GAIN,
 //			 "Game: You are taught the knowledge of %s.",
 //			 get_tech_name(pdest, pclause.value));
 //
@@ -396,11 +396,11 @@ public class Diplhand{
 //	    break;
 //	  }
 //
-//	  notify_player_ex(pdest, pcity.tile, E_CITY_TRANSFER,
+//	  Plrhand.notify_player_ex(pdest, pcity.tile, E_CITY_TRANSFER,
 //			   "Game: You receive city of %s from %s.",
 //			   pcity.name, pgiver.name);
 //
-//	  notify_player_ex(pgiver, pcity.tile, E_CITY_LOST,
+//	  Plrhand.notify_player_ex(pgiver, pcity.tile, E_CITY_LOST,
 //			   "Game: You give city of %s to %s.",
 //			   pcity.name, pdest.name);
 //
@@ -414,10 +414,10 @@ public class Diplhand{
 //	pgiver.diplstates[pdest.player_no].turns_left=16;
 //	pdest.diplstates[pgiver.player_no].type=DS_CEASEFIRE;
 //	pdest.diplstates[pgiver.player_no].turns_left=16;
-//	notify_player_ex(pgiver, null, E_TREATY_CEASEFIRE,
+//	Plrhand.notify_player_ex(pgiver, null, E_TREATY_CEASEFIRE,
 //			 "Game: You agree on a cease-fire with %s.",
 //			 pdest.name);
-//	notify_player_ex(pdest, null, E_TREATY_CEASEFIRE,
+//	Plrhand.notify_player_ex(pdest, null, E_TREATY_CEASEFIRE,
 //			 "Game: You agree on a cease-fire with %s.",
 //			 pgiver.name);
 //        Gamelog.gamelog(GAMELOG_TREATY, GL_CEASEFIRE, pgiver, pdest);
@@ -430,10 +430,10 @@ public class Diplhand{
 //      case CLAUSE_PEACE:
 //	pgiver.diplstates[pdest.player_no].type=DS_PEACE;
 //	pdest.diplstates[pgiver.player_no].type=DS_PEACE;
-//	notify_player_ex(pgiver, null, E_TREATY_PEACE,
+//	Plrhand.notify_player_ex(pgiver, null, E_TREATY_PEACE,
 //			 "Game: You agree on a peace treaty with %s.",
 //			 pdest.name);
-//	notify_player_ex(pdest, null, E_TREATY_PEACE,
+//	Plrhand.notify_player_ex(pdest, null, E_TREATY_PEACE,
 //			 "Game: You agree on a peace treaty with %s.",
 //			 pgiver.name);
 //        Gamelog.gamelog(GAMELOG_TREATY, GL_PEACE, pgiver, pdest);
@@ -446,10 +446,10 @@ public class Diplhand{
 //      case CLAUSE_ALLIANCE:
 //	pgiver.diplstates[pdest.player_no].type=diplstate_type.DS_ALLIANCE;
 //	pdest.diplstates[pgiver.player_no].type=diplstate_type.DS_ALLIANCE;
-//	notify_player_ex(pgiver, null, E_TREATY_ALLIANCE,
+//	Plrhand.notify_player_ex(pgiver, null, E_TREATY_ALLIANCE,
 //			 "Game: You agree on an alliance with %s.",
 //			 pdest.name);
-//	notify_player_ex(pdest, null, E_TREATY_ALLIANCE,
+//	Plrhand.notify_player_ex(pdest, null, E_TREATY_ALLIANCE,
 //			 "Game: You agree on an alliance with %s.",
 //			 pgiver.name);
 //
@@ -459,10 +459,10 @@ public class Diplhand{
 //	break;
 //      case CLAUSE_VISION:
 //	give_shared_vision(pgiver, pdest);
-//	notify_player_ex(pgiver, null, E_TREATY_SHARED_VISION,
+//	Plrhand.notify_player_ex(pgiver, null, E_TREATY_SHARED_VISION,
 //			 "Game: You give shared vision to %s.",
 //			 pdest.name);
-//	notify_player_ex(pdest, null, E_TREATY_SHARED_VISION,
+//	Plrhand.notify_player_ex(pdest, null, E_TREATY_SHARED_VISION,
 //			 "Game: %s gives you shared vision.",
 //			 pgiver.name);
 //        Gamelog.gamelog(GAMELOG_TREATY, GL_VISION, pgiver, pdest);
@@ -478,8 +478,8 @@ public class Diplhand{
 //    treaty_list_unlink(&treaties, ptreaty);
 //    clear_treaty(ptreaty);
 //    free(ptreaty);
-//    send_player_info(pplayer, null);
-//    send_player_info(pother, null);
+//    Plrhand.send_player_info(pplayer, null);
+//    Plrhand.send_player_info(pother, null);
 //  }
 //}
 //
@@ -490,9 +490,9 @@ public class Diplhand{
 //{
 //  /* Establish the embassy. */
 //  pplayer.embassy |= (1 << aplayer.player_no);
-//  send_player_info(pplayer, pplayer);
-//  send_player_info(pplayer, aplayer);  /* update player dialog with embassy */
-//  send_player_info(aplayer, pplayer);  /* INFO_EMBASSY level info */
+//  Plrhand.send_player_info(pplayer, pplayer);
+//  Plrhand.send_player_info(pplayer, aplayer);  /* update player dialog with embassy */
+//  Plrhand.send_player_info(aplayer, pplayer);  /* INFO_EMBASSY level info */
 //}
 //
 ///**************************************************************************
@@ -571,7 +571,7 @@ public class Diplhand{
 //    if (type == CLAUSE_CITY) {
 //      city pcity = find_city_by_id(value);
 //
-//      if (pcity && !map_is_known_and_seen(pcity.tile, pother))
+//      if (pcity && !Maphand.map_is_known_and_seen(pcity.tile, pother))
 //	give_citymap_from_player_to_player(pcity, pplayer, pother);
 //    }
 //
@@ -679,7 +679,7 @@ public class Diplhand{
 //  if (!pplayer) {
 //    return;
 //  }
-//  for(player other_player: game.players){
+//  for(player other_player: Game.game.players){
 //    Treaty ptreaty = find_treaty(pplayer, other_player);
 //
 //    if (ptreaty) {
@@ -700,7 +700,7 @@ public class Diplhand{
 //**************************************************************************/
 //void cancel_all_meetings(player pplayer)
 //{
-//  for(player pplayer2: game.players){
+//  for(player pplayer2: Game.game.players){
 //    if (find_treaty(pplayer, pplayer2)) {
 //      really_diplomacy_cancel_meeting(pplayer, pplayer2);
 //    }

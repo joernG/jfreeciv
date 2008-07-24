@@ -32,7 +32,7 @@ public class Gotodlg{
 //#include <X11/Xaw/Viewport.h>
 //#include <X11/Xaw/Toggle.h>     
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
@@ -99,7 +99,7 @@ public class Gotodlg{
 //{
 //  Position x, y;
 //  Dimension width, height;
-//  Boolean no_player_cities = !(city_list_size(&game.player_ptr.cities));
+//  Boolean no_player_cities = !(Game.game.player_ptr.cities.foo_list_size());
 //
 //  if (!can_client_issue_orders()) {
 //    return;
@@ -212,18 +212,18 @@ public class Gotodlg{
 //  cleanup_goto_list();
 //
 //  if(all_cities) {
-//    for(i=0, ncities_total=0; i<game.nplayers; i++) {
-//      ncities_total+=city_list_size(&game.players[i].cities);
+//    for(i=0, ncities_total=0; i<Game.game.nplayers; i++) {
+//      ncities_total+=city_list_size(&Game.game.players[i].cities);
 //    }
 //  } else {
-//    ncities_total=city_list_size(&game.player_ptr.cities);
+//    ncities_total=Game.game.player_ptr.cities.foo_list_size();
 //  }
 //
 //  city_name_ptrs=fc_malloc(ncities_total*sizeof(char*));
 //  
-//  for(i=0, j=0; i<game.nplayers; i++) {
-//    if(!all_cities && i!=game.player_idx) continue;
-//    city_list_iterate(game.players[i].cities, pcity) {
+//  for(i=0, j=0; i<Game.game.nplayers; i++) {
+//    if(!all_cities && i!=Game.game.player_idx) continue;
+//    city_list_iterate(Game.game.players[i].cities, pcity) {
 //      char name[MAX_LEN_NAME+3];
 //      name = pcity.name;
 //      /* FIXME: should use unit_can_airlift_to(). */

@@ -1,5 +1,7 @@
 package server;
 
+import common.player.player;
+
 public class Stdinhand{
 //#ifdef HAVE_LIBREADLINE
 //#include <readline/readline.h>
@@ -15,7 +17,7 @@ public class Stdinhand{
 //#include "capability.h"
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -82,12 +84,12 @@ public class Stdinhand{
 //};
 //struct voting {
 //  char command[MAX_LEN_CONSOLE_LINE]; /* [0] == \0 if none in action */
-//  enum vote_type votes_cast[MAX_NUM_PLAYERS]; /* see enum above */
+//  enum vote_type votes_cast[Shared_H.MAX_NUM_PLAYERS]; /* see enum above */
 //  int vote_no; /* place in the queue */
 //  boolean full_turn; /* has a full turn begun for this vote yet? */
 //  int yes, no;
 //};
-//static struct voting votes[MAX_NUM_PLAYERS];
+//static struct voting votes[Shared_H.MAX_NUM_PLAYERS];
 //static int last_vote;
 //
 //static final char horiz_line[] =
@@ -163,7 +165,7 @@ public class Stdinhand{
 //{
 //  int i;
 //
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //    votes[i].command[0] = '\0';
 //    memset(votes[i].votes_cast, 0, sizeof(votes[i].votes_cast));
 //    votes[i].vote_no = -1;
@@ -190,15 +192,15 @@ public class Stdinhand{
 //  vote.yes = 0;
 //  vote.no = 0;
 //
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
-//    if (game.players[i].is_alive && game.players[i].is_connected) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
+//    if (Game.game.players[i].is_alive && Game.game.players[i].is_connected) {
 //      num_voters++;
 //    } else {
 //      /* Disqualify already given vote (eg if disconnected after voting) */
 //      vote.votes_cast[i] = VOTE_NONE;
 //    }
 //  }
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //    num_cast = (vote.votes_cast[i] > VOTE_NONE) ? num_cast + 1 : num_cast;
 //    vote.yes = (vote.votes_cast[i] == VOTE_YES) ? vote.yes + 1 : vote.yes;
 //    vote.no = (vote.votes_cast[i] == VOTE_NO) ? vote.no + 1 : vote.no;
@@ -241,12 +243,12 @@ public class Stdinhand{
 //  int i;
 //
 //  /* Check if any votes have passed */
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //    check_vote(&votes[i]);
 //  }
 //
 //  /* Update full turn info */
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //    votes[i].full_turn = true;
 //  }
 //}
@@ -297,7 +299,7 @@ public class Stdinhand{
 //
 ///**************************************************************************
 //  Whether the caller can set the specified option (assuming that
-//  the state of the game would allow changing the option at all).
+//  the state of the Game.game would allow changing the option at all).
 //  caller == null means console.
 //**************************************************************************/
 //static boolean may_set_option(connection caller, int option_idx)
@@ -314,7 +316,7 @@ public class Stdinhand{
 //
 ///**************************************************************************
 //  Whether the caller can set the specified option, taking into account
-//  access, and the game state.  caller == null means console.
+//  access, and the Game.game state.  caller == null means console.
 //**************************************************************************/
 //static boolean may_set_option_now(connection caller, int option_idx)
 //{
@@ -364,7 +366,7 @@ public class Stdinhand{
 //  }
 //
 //  if (rfc_status == C_OK) {
-//    for (conn pconn : game.est_connections.data) {
+//    for (conn pconn : Game.game.est_connections.data) {
 //      /* Do not tell caller, since he was told above! */
 //      if (pconn != caller) {
 //        Plrhand.notify_conn(&pconn.self, "Game: %s", line);
@@ -745,13 +747,13 @@ public class Stdinhand{
 //
 ///**************************************************************************
 //For command "save foo";
-//Save the game, with filename=arg, provided server state is ok.
+//Save the Game.game, with filename=arg, provided server state is ok.
 //**************************************************************************/
 //static boolean save_command(connection caller, char *arg, boolean check)
 //{
 //  if (Srv_main.server_state==SELECT_RACES_STATE) {
 //    cmd_reply(CMD_SAVE, caller, C_SYNTAX,
-//	      "The game cannot be saved before it is started.");
+//	      "The Game.game cannot be saved before it is started.");
 //    return false;
 //  } else if (!check) {
 //    save_game(arg);
@@ -776,7 +778,7 @@ public class Stdinhand{
 //    cmd_reply(CMD_AITOGGLE, caller, C_OK,
 //	      "%s is now under AI control.", pplayer.name);
 //    if (pplayer.ai.skill_level==0) {
-//      pplayer.ai.skill_level = game.skill_level;
+//      pplayer.ai.skill_level = Game.game.skill_level;
 //    }
 //    /* Set the skill level explicitly, because eg: the player skill
 //       level could have been set as AI, then toggled, then saved,
@@ -793,7 +795,7 @@ public class Stdinhand{
 //	      "%s is now under human control.", pplayer.name);
 //
 //    /* because the hard AI `cheats' with government rates but humans shouldn't */
-//    if (!game.is_new_game) {
+//    if (!Game.game.is_new_game) {
 //      check_player_government_rates(pplayer);
 //    }
 //    /* Remove hidden dialogs from clients. This way the player can initiate
@@ -802,8 +804,8 @@ public class Stdinhand{
 //  }
 //
 //  if (Srv_main.server_state == RUN_GAME_STATE) {
-//    send_player_info(pplayer, null);
-//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
+//    Plrhand.send_player_info(pplayer, null);
+//    Gamelog.gamelog(EGamelog.GAMELOG_PLAYER, pplayer);
 //  }
 //}
 //
@@ -827,14 +829,14 @@ public class Stdinhand{
 //}
 //
 ///****************************************************************************
-//  Return the number of non-observer players.  game.nplayers includes
+//  Return the number of non-observer players.  Game.game.nplayers includes
 //  observers so in some places this function should be called instead.
 //****************************************************************************/
 //static int get_num_nonobserver_players()
 //{
 //  int nplayers = 0;
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (!pplayer.is_observer) {
 //      nplayers++;
 //    }
@@ -854,14 +856,14 @@ public class Stdinhand{
 //  if (Srv_main.server_state!=server_states.PRE_GAME_STATE)
 //  {
 //    cmd_reply(CMD_CREATE, caller, C_SYNTAX,
-//	      "Can't add AI players once the game has begun.");
+//	      "Can't add AI players once the Game.game has begun.");
 //    return false;
 //  }
 //
-//  /* game.max_players is a limit on the number of non-observer players.
-//   * MAX_NUM_PLAYERS is a limit on all players. */
-//  if (get_num_nonobserver_players() >= game.max_players
-//      || game.nplayers >= MAX_NUM_PLAYERS) {
+//  /* Game.game.max_players is a limit on the number of non-observer players.
+//   * Shared_H.MAX_NUM_PLAYERS is a limit on all players. */
+//  if (get_num_nonobserver_players() >= Game.game.max_players
+//      || Game.game.nplayers >= Shared_H.MAX_NUM_PLAYERS) {
 //    cmd_reply(CMD_CREATE, caller, C_FAIL,
 //	      "Can't add more players, server is full.");
 //    return false;
@@ -901,13 +903,13 @@ public class Stdinhand{
 //    return true;
 //  }
 //
-//  pplayer = &game.players[game.nplayers];
-//  server_player_init(pplayer, false);
+//  pplayer = &Game.game.players[Game.game.nplayers];
+//  Plrhand.server_player_init(pplayer, false);
 //  pplayer.name = arg;
-//  pplayer.username = ANON_USER_NAME;
+//  pplayer.username = Player_H.ANON_USER_NAME;
 //  pplayer.was_created = true; /* must use /remove explicitly to remove */
 //
-//  game.nplayers++;
+//  Game.game.nplayers++;
 //
 //  Plrhand.notify_conn(null, "Game: %s has been added as an AI-controlled player.",
 //	      arg);
@@ -921,7 +923,7 @@ public class Stdinhand{
 //  }
 //
 //  pplayer.ai.control = true;
-//  set_ai_level_directer(pplayer, game.skill_level);
+//  set_ai_level_directer(pplayer, Game.game.skill_level);
 //  () send_server_info_to_metaserver(META_INFO);
 //  return true;
 //}
@@ -943,10 +945,10 @@ public class Stdinhand{
 //    return false;
 //  }
 //
-//  if (!(game.is_new_game && (Srv_main.server_state==server_states.PRE_GAME_STATE ||
+//  if (!(Game.game.is_new_game && (Srv_main.server_state==server_states.PRE_GAME_STATE ||
 //			     Srv_main.server_state==SELECT_RACES_STATE))) {
 //    cmd_reply(CMD_REMOVE, caller, C_FAIL,
-//	      "Players cannot be removed once the game has started.");
+//	      "Players cannot be removed once the Game.game has started.");
 //    return false;
 //  }
 //  if (check) {
@@ -958,7 +960,7 @@ public class Stdinhand{
 //  server_remove_player(pplayer);
 //  if (!caller || caller.used) {     /* may have removed self */
 //    cmd_reply(CMD_REMOVE, caller, C_OK,
-//	      "Removed player %s from the game.", name);
+//	      "Removed player %s from the Game.game.", name);
 //  }
 //  return true;
 //}
@@ -1034,11 +1036,11 @@ public class Stdinhand{
 //	cmdlevel_name(first_access_level));
 //
 //    fprintf(script_file, "%s\n",
-//        (game.skill_level == 1) ?       "away" :
-//	(game.skill_level == 2) ?	"novice" :
-//	(game.skill_level == 3) ?	"easy" :
-//	(game.skill_level == 5) ?	"medium" :
-//	(game.skill_level < 10) ?	"hard" :
+//        (Game.game.skill_level == 1) ?       "away" :
+//	(Game.game.skill_level == 2) ?	"novice" :
+//	(Game.game.skill_level == 3) ?	"easy" :
+//	(Game.game.skill_level == 5) ?	"medium" :
+//	(Game.game.skill_level < 10) ?	"hard" :
 //					"experimental");
 //
 //    if (*Srv_main.srvarg.metaserver_addr != '\0' &&
@@ -1076,7 +1078,7 @@ public class Stdinhand{
 //    }
 //
 //    /* rulesetdir */
-//    fprintf(script_file, "rulesetdir %s\n", game.rulesetdir);
+//    fprintf(script_file, "rulesetdir %s\n", Game.game.rulesetdir);
 //
 //    fclose(script_file);
 //
@@ -1134,7 +1136,7 @@ public class Stdinhand{
 //*********************************************************************/
 //static boolean a_connection_exists()
 //{
-//  return conn_list_size(&game.est_connections) > 0;
+//  return Game.game.est_connections.foo_list_size() > 0;
 //}
 //
 ///********************************************************************
@@ -1142,7 +1144,7 @@ public class Stdinhand{
 //*********************************************************************/
 //static boolean first_access_level_is_taken()
 //{
-//  for (conn pconn : game.est_connections.data) {
+//  for (conn pconn : Game.game.est_connections.data) {
 //    if (pconn.access_level >= first_access_level) {
 //      return true;
 //    }
@@ -1206,7 +1208,7 @@ public class Stdinhand{
 //
 //    cmd_reply(CMD_CMDLEVEL, caller, Erfc_status.C_COMMENT, "Command access levels in effect:");
 //
-//    for (conn pconn : game.est_connections.data) {
+//    for (conn pconn : Game.game.est_connections.data) {
 //      cmd_reply(CMD_CMDLEVEL, caller, Erfc_status.C_COMMENT, "cmdlevel %s %s",
 //		cmdlevel_name(pconn.access_level), pconn.username);
 //    }
@@ -1253,7 +1255,7 @@ public class Stdinhand{
 // 
 //  if (arg_name[0] == '\0') {
 //    /* no playername supplied: set for all connections, and set the default */
-//    for (conn pconn : game.est_connections.data) {
+//    for (conn pconn : Game.game.est_connections.data) {
 //      if (set_cmdlevel(caller, pconn, level)) {
 //	cmd_reply(CMD_CMDLEVEL, caller, C_OK,
 //		  "Command access level set to '%s' for connection %s.",
@@ -1387,10 +1389,10 @@ public class Stdinhand{
 //  int i = 0, ntokens;
 //  int *timeouts[4];
 //
-//  timeouts[0] = &game.timeoutint;
-//  timeouts[1] = &game.timeoutintinc;
-//  timeouts[2] = &game.timeoutinc;
-//  timeouts[3] = &game.timeoutincmult;
+//  timeouts[0] = &Game.game.timeoutint;
+//  timeouts[1] = &Game.game.timeoutintinc;
+//  timeouts[2] = &Game.game.timeoutinc;
+//  timeouts[3] = &Game.game.timeoutincmult;
 //
 //  buf = str;
 //  ntokens = get_tokens(buf, arg, 4, TOKEN_DELIMITERS);
@@ -1414,11 +1416,11 @@ public class Stdinhand{
 //
 //  cmd_reply(CMD_TIMEOUT, caller, C_OK, ("Dynamic timeout set to " +
 //					 "%d %d %d %d"),
-//	    game.timeoutint, game.timeoutintinc,
-//	    game.timeoutinc, game.timeoutincmult);
+//	    Game.game.timeoutint, Game.game.timeoutintinc,
+//	    Game.game.timeoutinc, Game.game.timeoutincmult);
 //
 //  /* if we set anything here, reset the counter */
-//  game.timeoutcounter = 1;
+//  Game.game.timeoutcounter = 1;
 //  return true;
 //}
 //
@@ -1594,7 +1596,7 @@ public class Stdinhand{
 //static boolean wall(char *str, boolean check)
 //{
 //  if (!check) {
-//    notify_conn_ex(&game.game_connections, null, E_MESSAGE_WALL,
+//    notify_conn_ex(&Game.game.game_connections, null, E_MESSAGE_WALL,
 // 		   "Server Operator: %s", str);
 //  }
 //  return true;
@@ -1740,19 +1742,18 @@ public class Stdinhand{
 //    send_packet_options_settable(dest, &packet);
 //  }
 //}
-//
-///******************************************************************
-//  Set an AI level and related quantities, with no feedback.
-//******************************************************************/
-//void set_ai_level_directer(player pplayer, int level)
-//{
-//  pplayer.ai.handicap = handicap_of_skill_level(level);
-//  pplayer.ai.fuzzy = fuzzy_of_skill_level(level);
-//  pplayer.ai.expand = expansionism_of_skill_level(level);
-//  pplayer.ai.science_cost = science_cost_of_skill_level(level);
-//  pplayer.ai.skill_level = level;
-//}
-//
+
+	/******************************************************************
+	 * Set an AI level and related quantities, with no feedback.
+	 ******************************************************************/
+	public static void set_ai_level_directer(player pplayer, int level) {
+//		pplayer.ai.handicap = handicap_of_skill_level(level);
+//		pplayer.ai.fuzzy = fuzzy_of_skill_level(level);
+//		pplayer.ai.expand = expansionism_of_skill_level(level);
+//		pplayer.ai.science_cost = science_cost_of_skill_level(level);
+		pplayer.ai.skill_level = level;
+	}
+
 ///******************************************************************
 //  Translate an AI level back to its CMD_* value.
 //  If we just used /set ailevel <num> we wouldn't have to do this - rp
@@ -1814,7 +1815,7 @@ public class Stdinhand{
 //    if (check) {
 //      return true;
 //    }
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      if (pplayer.ai.control) {
 //	set_ai_level_directer(pplayer, level);
 //        cmd_reply(cmd_of_level(level), caller, C_OK,
@@ -1822,7 +1823,7 @@ public class Stdinhand{
 //		pplayer.name, name_of_skill_level(level));
 //      }
 //    }
-//    game.skill_level = level;
+//    Game.game.skill_level = level;
 //    cmd_reply(cmd_of_level(level), caller, C_OK,
 //		"Default AI skill level set to '%s'.",
 //		name_of_skill_level(level));
@@ -1849,13 +1850,13 @@ public class Stdinhand{
 //    Plrhand.notify_conn(&caller.self, "Only players may use the away command.");
 //    return false;
 //  } else if (!caller.player.ai.control && !check) {
-//    Plrhand.notify_conn(&game.est_connections, "%s set to away mode.", 
+//    Plrhand.notify_conn(&Game.game.est_connections, "%s set to away mode.", 
 //                caller.player.name);
 //    set_ai_level_directer(caller.player, 1);
 //    caller.player.ai.control = true;
 //    cancel_all_meetings(caller.player);
 //  } else if (!check) {
-//    Plrhand.notify_conn(&game.est_connections, "%s returned to game.", 
+//    Plrhand.notify_conn(&Game.game.est_connections, "%s returned to Game.game.", 
 //                caller.player.name);
 //    caller.player.ai.control = false;
 //    /* We have to do it, because the client doesn't display 
@@ -2052,9 +2053,9 @@ public class Stdinhand{
 //  int ntokens = 0, i;
 //  boolean res = false;
 //
-//  if (Srv_main.server_state != server_states.PRE_GAME_STATE || !game.is_new_game) {
+//  if (Srv_main.server_state != server_states.PRE_GAME_STATE || !Game.game.is_new_game) {
 //    cmd_reply(CMD_TEAM, caller, C_SYNTAX,
-//              "Cannot change teams once game has begun.");
+//              "Cannot change teams once Game.game has begun.");
 //    return false;
 //  }
 //
@@ -2094,7 +2095,7 @@ public class Stdinhand{
 //    goto cleanup;
 //  }
 //  if (is_barbarian(pplayer)) {
-//    /* This can happen if we change team settings on a loaded game. */
+//    /* This can happen if we change team settings on a loaded Game.game. */
 //    cmd_reply(CMD_TEAM, caller, C_SYNTAX, "Cannot team a barbarian.");
 //    goto cleanup;
 //  }
@@ -2140,7 +2141,7 @@ public class Stdinhand{
 //  } else if (!str || str.length() == 0) {
 //    int j = 0;
 //
-//    for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//    for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //      voting vote = &votes[i];
 //
 //      if (vote.command[0] != '\0') {
@@ -2184,7 +2185,7 @@ public class Stdinhand{
 //      }
 //    }
 //    /* Ok, now try to find this vote */
-//    for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//    for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //      if (votes[i].vote_no == which) {
 //        vote = &votes[i];
 //      }
@@ -2231,7 +2232,7 @@ public class Stdinhand{
 //
 //  if (Srv_main.server_state != RUN_GAME_STATE) {
 //    cmd_reply(CMD_DEBUG, caller, C_SYNTAX,
-//              "Can only use this command once game has begun.");
+//              "Can only use this command once Game.game has begun.");
 //    return false;
 //  }
 //  if (check) {
@@ -2409,7 +2410,7 @@ public class Stdinhand{
 //  }
 //  if (!sset_is_changeable(cmd)) {
 //    cmd_reply(CMD_SET, caller, C_BOUNCE,
-//	      "This setting can't be modified after the game has started.");
+//	      "This setting can't be modified after the Game.game has started.");
 //    return false;
 //  }
 //
@@ -2501,19 +2502,19 @@ public class Stdinhand{
 //  if (!check && do_update) {
 //    send_server_info_to_metaserver(META_INFO);
 //    /* 
-//     * send any modified game parameters to the clients -- if sent
+//     * send any modified Game.game parameters to the clients -- if sent
 //     * before RUN_GAME_STATE, triggers a popdown_races_dialog() call
 //     * in client/packhand.c#handle_game_info() 
 //     */
 //    if (Srv_main.server_state == RUN_GAME_STATE) {
-//      send_game_info(null);
+//      Gamehand.send_game_info(null);
 //    }
 //  }
 //  return true;
 //}
 //
 ///**************************************************************************
-// check game.allow_take for permission to take or observe a player
+// check Game.game.allow_take for permission to take or observe a player
 //**************************************************************************/
 //static boolean is_allowed_to_take(player pplayer, boolean will_obs, 
 //                               char *msg)
@@ -2521,9 +2522,9 @@ public class Stdinhand{
 //  final String allow;
 //
 //  if (pplayer.is_observer) {
-//    if (!(allow = strchr(game.allow_take, (game.is_new_game ? 'O' : 'o')))) {
+//    if (!(allow = strchr(Game.game.allow_take, (Game.game.is_new_game ? 'O' : 'o')))) {
 //      if (will_obs) {
-//        mystrlcpy(msg, "Sorry, one can't observe globally in this game.",
+//        mystrlcpy(msg, "Sorry, one can't observe globally in this Game.game.",
 //                  MAX_LEN_MSG);
 //      } else {
 //        mystrlcpy(msg, ("Sorry, you can't take a global observer. Observe " +
@@ -2533,46 +2534,46 @@ public class Stdinhand{
 //      return false;
 //    }
 //  } else if (is_barbarian(pplayer)) {
-//    if (!(allow = strchr(game.allow_take, 'b'))) {
+//    if (!(allow = strchr(Game.game.allow_take, 'b'))) {
 //      if (will_obs) {
-//        mystrlcpy(msg, "Sorry, one can't observe barbarians in this game.",
+//        mystrlcpy(msg, "Sorry, one can't observe barbarians in this Game.game.",
 //                  MAX_LEN_MSG);
 //      } else {
-//        mystrlcpy(msg, "Sorry, one can't take barbarians in this game.",
+//        mystrlcpy(msg, "Sorry, one can't take barbarians in this Game.game.",
 //                  MAX_LEN_MSG);
 //      }
 //      return false;
 //    }
 //  } else if (!pplayer.is_alive) {
-//    if (!(allow = strchr(game.allow_take, 'd'))) {
+//    if (!(allow = strchr(Game.game.allow_take, 'd'))) {
 //      if (will_obs) {
-//        mystrlcpy(msg, "Sorry, one can't observe dead players in this game.",
+//        mystrlcpy(msg, "Sorry, one can't observe dead players in this Game.game.",
 //                  MAX_LEN_MSG);
 //      } else {
-//        mystrlcpy(msg, "Sorry, one can't take dead players in this game.",
+//        mystrlcpy(msg, "Sorry, one can't take dead players in this Game.game.",
 //                  MAX_LEN_MSG);
 //      }
 //      return false;
 //    }
 //  } else if (pplayer.ai.control) {
-//    if (!(allow = strchr(game.allow_take, (game.is_new_game ? 'A' : 'a')))) {
+//    if (!(allow = strchr(Game.game.allow_take, (Game.game.is_new_game ? 'A' : 'a')))) {
 //      if (will_obs) {
-//        mystrlcpy(msg, "Sorry, one can't observe AI players in this game.",
+//        mystrlcpy(msg, "Sorry, one can't observe AI players in this Game.game.",
 //                  MAX_LEN_MSG);
 //      } else {
-//        mystrlcpy(msg, "Sorry, one can't take AI players in this game.",
+//        mystrlcpy(msg, "Sorry, one can't take AI players in this Game.game.",
 //                  MAX_LEN_MSG);
 //      }
 //      return false;
 //    }
 //  } else { 
-//    if (!(allow = strchr(game.allow_take, (game.is_new_game ? 'H' : 'h')))) {
+//    if (!(allow = strchr(Game.game.allow_take, (Game.game.is_new_game ? 'H' : 'h')))) {
 //      if (will_obs) {
 //        mystrlcpy(msg, 
-//                  "Sorry, one can't observe human players in this game.",
+//                  "Sorry, one can't observe human players in this Game.game.",
 //                  MAX_LEN_MSG);
 //      } else {
-//        mystrlcpy(msg, "Sorry, one can't take human players in this game.",
+//        mystrlcpy(msg, "Sorry, one can't take human players in this Game.game.",
 //                  MAX_LEN_MSG);
 //      }
 //      return false;
@@ -2582,19 +2583,19 @@ public class Stdinhand{
 //  allow++;
 //
 //  if (will_obs && (*allow == '2' || *allow == '3')) {
-//    mystrlcpy(msg, "Sorry, one can't observe in this game.", MAX_LEN_MSG);
+//    mystrlcpy(msg, "Sorry, one can't observe in this Game.game.", MAX_LEN_MSG);
 //    return false;
 //  }
 //
 //  if (!will_obs && *allow == '4') {
-//    mystrlcpy(msg, "Sorry, one can't take players in this game.",
+//    mystrlcpy(msg, "Sorry, one can't take players in this Game.game.",
 //              MAX_LEN_MSG);
 //    return false;
 //  }
 //
 //  if (!will_obs && pplayer.is_connected && (*allow == '1' || *allow == '3')) {
 //    mystrlcpy(msg, ("Sorry, one can't take players already connected " +
-//                     "in this game."), MAX_LEN_MSG);
+//                     "in this Game.game."), MAX_LEN_MSG);
 //    return false;
 //  }
 //
@@ -2611,7 +2612,7 @@ public class Stdinhand{
 //  int i = 0, ntokens = 0;
 //  char buf[MAX_LEN_CONSOLE_LINE], *arg[2], msg[MAX_LEN_MSG];  
 //  boolean is_newgame = (Srv_main.server_state == server_states.PRE_GAME_STATE || 
-//                     Srv_main.server_state == SELECT_RACES_STATE) && game.is_new_game;
+//                     Srv_main.server_state == SELECT_RACES_STATE) && Game.game.is_new_game;
 //  
 //  enum m_pre_result result;
 //  connection pconn = null;
@@ -2668,7 +2669,7 @@ public class Stdinhand{
 //  /* if we have no pplayer, it means that we want to be a global observer */
 //  if (!pplayer) {
 //    /* check if a global  observer has already been created */
-//    for(player aplayer: game.players){
+//    for(player aplayer: Game.game.players){
 //      if (aplayer.is_observer) {
 //        pplayer = aplayer;
 //        break;
@@ -2677,17 +2678,17 @@ public class Stdinhand{
 //
 //    /* we need to create a new player */
 //    if (!pplayer) {
-//      if (game.nplayers >= MAX_NUM_PLAYERS) {
+//      if (Game.game.nplayers >= Shared_H.MAX_NUM_PLAYERS) {
 //        Plrhand.notify_conn(null, ("Game: A global observer cannot be created: too " +
 //			    "many regular players."));
 //        goto end;
 //      }
 //
-//      pplayer = &game.players[game.nplayers];
-//      server_player_init(pplayer, 
-//                         (Srv_main.server_state == RUN_GAME_STATE) || !game.is_new_game);
+//      pplayer = &Game.game.players[Game.game.nplayers];
+//      Plrhand.server_player_init(pplayer, 
+//                         (Srv_main.server_state == RUN_GAME_STATE) || !Game.game.is_new_game);
 //      pplayer.name = OBSERVER_NAME;
-//      pplayer.username = ANON_USER_NAME;
+//      pplayer.username = Player_H.ANON_USER_NAME;
 //
 //      pplayer.is_connected = false;
 //      pplayer.is_observer = true;
@@ -2697,18 +2698,18 @@ public class Stdinhand{
 //      pplayer.is_alive = false;
 //      pplayer.was_created = false;
 //
-//      if ((Srv_main.server_state == RUN_GAME_STATE) || !game.is_new_game) {
+//      if ((Srv_main.server_state == RUN_GAME_STATE) || !Game.game.is_new_game) {
 //        pplayer.nation = OBSERVER_NATION;
-//        init_tech(pplayer);
-//	give_initial_techs(pplayer);
+//        Plrhand.init_tech(pplayer);
+//	Plrhand.give_initial_techs(pplayer);
 //        map_know_and_see_all(pplayer);
 //      }
 //
-//      game.nplayers++;
+//      Game.game.nplayers++;
 //
-//      /* tell everyone that game.nplayers has been updated */
-//      send_game_info(null);
-//      send_player_info(pplayer, null);
+//      /* tell everyone that Game.game.nplayers has been updated */
+//      Gamehand.send_game_info(null);
+//      Plrhand.send_player_info(pplayer, null);
 //
 //      Plrhand.notify_conn(null, "Game: A global observer has been created");
 //    }
@@ -2747,7 +2748,7 @@ public class Stdinhand{
 //  /* if we want to switch players, reset the client */
 //  if (pconn.player && Srv_main.server_state == RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
-//    send_conn_info(&game.est_connections,  &pconn.self);
+//    send_conn_info(&Game.game.est_connections,  &pconn.self);
 //  }
 //
 //  /* if the connection is already attached to a player,
@@ -2765,23 +2766,23 @@ public class Stdinhand{
 //  } 
 //
 //  /* we don't want the connection's username on another player */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (!aplayer.username.equals(pconn.username)) {
-//      aplayer.username = ANON_USER_NAME;
+//      aplayer.username = Player_H.ANON_USER_NAME;
 //    }
 //  }
 //
 //  /* attach pconn to new player as an observer */
 //  pconn.observer = true; /* do this before attach! */
 //  attach_connection_to_player(pconn, pplayer);
-//  send_conn_info(&pconn.self, &game.est_connections);
+//  send_conn_info(&pconn.self, &Game.game.est_connections);
 //
 //  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    send_packet_freeze_hint(pconn);
 //    send_rulesets(&pconn.self);
 //    send_all_info(&pconn.self);
 //    send_game_state(&pconn.self, CLIENT_GAME_RUNNING_STATE);
-//    send_player_info(null, null);
+//    Plrhand.send_player_info(null, null);
 //    send_diplomatic_meetings(pconn);
 //    send_packet_thaw_hint(pconn);
 //    send_packet_start_turn(pconn);
@@ -2812,7 +2813,7 @@ public class Stdinhand{
 //  int i = 0, ntokens = 0;
 //  char buf[MAX_LEN_CONSOLE_LINE], *arg[2], msg[MAX_LEN_MSG];
 //  boolean is_newgame = (Srv_main.server_state == server_states.PRE_GAME_STATE || 
-//                     Srv_main.server_state == SELECT_RACES_STATE) && game.is_new_game;
+//                     Srv_main.server_state == SELECT_RACES_STATE) && Game.game.is_new_game;
 //
 //  enum m_pre_result match_result;
 //  connection pconn = null;
@@ -2887,11 +2888,11 @@ public class Stdinhand{
 //    goto end;
 //  }
 //
-//  /* if we want to switch players, reset the client if the game is running */
+//  /* if we want to switch players, reset the client if the Game.game is running */
 //  if (pconn.player && Srv_main.server_state == RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //    send_player_info_c(null, &pconn.self);
-//    send_conn_info(&game.est_connections,  &pconn.self);
+//    send_conn_info(&Game.game.est_connections,  &pconn.self);
 //  }
 //
 //  /* if we're taking another player with a user attached, 
@@ -2903,7 +2904,7 @@ public class Stdinhand{
 //      }
 //      Plrhand.notify_conn(&aconn.self, "being detached from %s.", pplayer.name);
 //      unattach_connection_from_player(aconn);
-//      send_conn_info(&aconn.self, &game.est_connections);
+//      send_conn_info(&aconn.self, &Game.game.est_connections);
 //    }
 //  } }
 //
@@ -2922,15 +2923,15 @@ public class Stdinhand{
 //  }
 //
 //  /* we don't want the connection's username on another player */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (!aplayer.username.equals(pconn.username)) {
-//      aplayer.username = ANON_USER_NAME;
+//      aplayer.username = Player_H.ANON_USER_NAME;
 //    }
 //  }
 //
 //  /* now attach to new player */
 //  attach_connection_to_player(pconn, pplayer);
-//  send_conn_info(&pconn.self, &game.est_connections);
+//  send_conn_info(&pconn.self, &Game.game.est_connections);
 // 
 //  /* if pplayer wasn't /created, and we're still in pregame, change its name */
 //  if (!pplayer.was_created && is_newgame) {
@@ -2942,20 +2943,20 @@ public class Stdinhand{
 //    send_rulesets(&pconn.self);
 //    send_all_info(&pconn.self);
 //    send_game_state(&pconn.self, CLIENT_GAME_RUNNING_STATE);
-//    send_player_info(null, null);
+//    Plrhand.send_player_info(null, null);
 //    send_diplomatic_meetings(pconn);
 //    send_packet_thaw_hint(pconn);
 //    send_packet_start_turn(pconn);
 //  }
 //
 //  /* aitoggle the player back to human if necessary. */
-//  if (pplayer.ai.control && game.auto_ai_toggle) {
+//  if (pplayer.ai.control && Game.game.auto_ai_toggle) {
 //    toggle_ai_player_direct(null, pplayer);
 //  }
 //
 //  /* yes this has to go after the toggle check */
 //  if (Srv_main.server_state == RUN_GAME_STATE) {
-//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
+//    Gamelog.gamelog(EGamelog.GAMELOG_PLAYER, pplayer);
 //  }
 //
 //  cmd_reply(CMD_TAKE, caller, C_OK, "%s now controls %s (%s, %s)", 
@@ -2984,7 +2985,7 @@ public class Stdinhand{
 //  connection pconn = null;
 //  player pplayer = null;
 //  boolean is_newgame = (Srv_main.server_state == server_states.PRE_GAME_STATE || 
-//                     Srv_main.server_state == SELECT_RACES_STATE) && game.is_new_game;
+//                     Srv_main.server_state == SELECT_RACES_STATE) && Game.game.is_new_game;
 //  boolean one_obs_among_many = false, res = false;
 //
 //  buf = str;
@@ -3027,7 +3028,7 @@ public class Stdinhand{
 //
 //  /* a special case for global observers: we don't want to remove the
 //   * observer player in pregame if someone else is also observing it */
-//  if (pplayer.is_observer && conn_list_size(&pplayer.connections) > 1) {
+//  if (pplayer.is_observer && pplayer.connections.foo_list_size() > 1) {
 //    one_obs_among_many = true;
 //  }
 //
@@ -3036,21 +3037,21 @@ public class Stdinhand{
 //    goto end;
 //  }
 //
-//  /* if we want to detach while the game is running, reset the client */
+//  /* if we want to detach while the Game.game is running, reset the client */
 //  if (Srv_main.server_state == RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
-//    send_game_info(&pconn.self);
+//    Gamehand.send_game_info(&pconn.self);
 //    send_player_info_c(null, &pconn.self);
-//    send_conn_info(&game.est_connections, &pconn.self);
+//    send_conn_info(&Game.game.est_connections, &pconn.self);
 //  }
 //
 //  /* actually do the detaching */
 //  unattach_connection_from_player(pconn);
-//  send_conn_info(&pconn.self, &game.est_connections);
+//  send_conn_info(&pconn.self, &Game.game.est_connections);
 //  cmd_reply(CMD_DETACH, caller, Erfc_status.C_COMMENT,
 //            "%s detaching from %s", pconn.username, pplayer.name);
 //
-//  /* only remove the player if the game is new and in pregame, 
+//  /* only remove the player if the Game.game is new and in pregame, 
 //   * the player wasn't /created, and no one is controlling it 
 //   * and we were observing but no one else was... */
 //  if (!pplayer.is_connected && !pplayer.was_created && is_newgame
@@ -3059,7 +3060,7 @@ public class Stdinhand{
 //    for (conn aconn : pplayer.connections.data) {
 //      if (aconn.observer) {
 //        unattach_connection_from_player(aconn);
-//        send_conn_info(&aconn.self, &game.est_connections);
+//        send_conn_info(&aconn.self, &Game.game.est_connections);
 //        Plrhand.notify_conn(&aconn.self, "detaching from %s.", pplayer.name);
 //      }
 //    } }
@@ -3067,22 +3068,22 @@ public class Stdinhand{
 //    /* actually do the removal */
 //    game_remove_player(pplayer);
 //    game_renumber_players(pplayer.player_no);
-//    player_init(&game.players[game.nplayers]);
+//    player_init(&Game.game.players[Game.game.nplayers]);
 //  }
 //
 //  if (!pplayer.is_connected) {
 //    /* aitoggle the player if no longer connected. */
-//    if (game.auto_ai_toggle && !pplayer.ai.control) {
+//    if (Game.game.auto_ai_toggle && !pplayer.ai.control) {
 //      toggle_ai_player_direct(null, pplayer);
 //    }
 //    /* reset username if in pregame. */
 //    if (is_newgame) {
-//      pplayer.username = ANON_USER_NAME;
+//      pplayer.username = Player_H.ANON_USER_NAME;
 //    }
 //  }
 //
 //  if (Srv_main.server_state == RUN_GAME_STATE) {
-//    Gamelog.gamelog(GAMELOG_PLAYER, pplayer);
+//    Gamelog.gamelog(EGamelog.GAMELOG_PLAYER, pplayer);
 //  }
 //
 //  end:;
@@ -3096,7 +3097,7 @@ public class Stdinhand{
 ///**************************************************************************
 //  After a /load is completed, a reply is sent to all connections to tell
 //  them about the load.  This information is used by the conndlg to
-//  set up the graphical interface for starting the game.
+//  set up the graphical interface for starting the Game.game.
 //**************************************************************************/
 //static void send_load_game_info(boolean load_successful)
 //{
@@ -3111,14 +3112,14 @@ public class Stdinhand{
 //  if (load_successful) {
 //    int i = 0;
 //
-//    for(player pplayer: game.players){
-//      if (game.nation_count && is_barbarian(pplayer)) {
+//    for(player pplayer: Game.game.players){
+//      if (Game.game.nation_count && is_barbarian(pplayer)) {
 //	continue;
 //      }
 //
 //      sz_strlcpy(packet.name[i], pplayer.name);
 //      sz_strlcpy(packet.username[i], pplayer.username);
-//      if (game.nation_count) {
+//      if (Game.game.nation_count) {
 //	sz_strlcpy(packet.nation_name[i], Nation.get_nation_name(pplayer.nation));
 //	sz_strlcpy(packet.nation_flag[i],
 //	    get_nation_by_plr(pplayer).flag_graphic_str);
@@ -3136,7 +3137,7 @@ public class Stdinhand{
 //    packet.nplayers = 0;
 //  }
 //
-//  lsend_packet_game_load(&game.est_connections, &packet);
+//  lsend_packet_game_load(&Game.game.est_connections, &packet);
 //}
 //
 ///**************************************************************************
@@ -3159,7 +3160,7 @@ public class Stdinhand{
 //  }
 //
 //  if (Srv_main.server_state != server_states.PRE_GAME_STATE) {
-//    cmd_reply(CMD_LOAD, caller, C_FAIL, ("Can't load a game while another " +
+//    cmd_reply(CMD_LOAD, caller, C_FAIL, ("Can't load a Game.game while another " +
 //                                          "is running."));
 //    send_load_game_info(false);
 //    return false;
@@ -3202,12 +3203,12 @@ public class Stdinhand{
 //
 //  /* attach connections to players. currently, this applies only 
 //   * to connections that have the correct username. Any attachments
-//   * made before the game load are unattached. */
-//  for (conn pconn : game.est_connections.data) {
+//   * made before the Game.game load are unattached. */
+//  for (conn pconn : Game.game.est_connections.data) {
 //    if (pconn.player) {
 //      unattach_connection_from_player(pconn);
 //    }
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      if (pconn.username.equals(pplayer.username)) {
 //        attach_connection_to_player(pconn, pplayer);
 //        break;
@@ -3225,7 +3226,7 @@ public class Stdinhand{
 //  char filename[512], *pfilename;
 //  if ((str == null) || (str.length()==0)) {
 //    cmd_reply(CMD_RULESETDIR, caller, C_SYNTAX,
-//             ("Current ruleset directory is \"%s\""), game.rulesetdir);
+//             ("Current ruleset directory is \"%s\""), Game.game.rulesetdir);
 //    return false;
 //  }
 //  filename = util.my_snprintf( "%s", str);
@@ -3238,7 +3239,7 @@ public class Stdinhand{
 //  if (!check) {
 //    cmd_reply(CMD_RULESETDIR, caller, C_OK, 
 //              ("Ruleset directory set to \"%s\""), str);
-//    game.rulesetdir = str;
+//    Game.game.rulesetdir = str;
 //  }
 //  return true;
 //}
@@ -3412,7 +3413,7 @@ public class Stdinhand{
 //
 //  if (!check && commands[cmd].game_level > ALLOW_INFO) {
 //    /*
-//     * this command will affect the game - inform all players.
+//     * this command will affect the Game.game - inform all players.
 //     * We quite purposely do not use access_level() here.
 //     *
 //     * use command,arg instead of str because of the trailing
@@ -3491,7 +3492,7 @@ public class Stdinhand{
 //      return true;
 //    } else {
 //      cmd_reply(cmd, caller, C_SYNTAX,
-//		"The game must be running before you can see the score.");
+//		"The Game.game must be running before you can see the score.");
 //      return false;
 //    }
 //  case CMD_WALL:
@@ -3528,12 +3529,12 @@ public class Stdinhand{
 //}
 //
 ///**************************************************************************
-//  End the game and accord victory to the listed players, if any.
+//  End the Game.game and accord victory to the listed players, if any.
 //**************************************************************************/
 //static boolean end_command(connection caller, char *str, boolean check)
 //{
 //  if (Srv_main.server_state == RUN_GAME_STATE) {
-//    char *arg[MAX_NUM_PLAYERS];
+//    char *arg[Shared_H.MAX_NUM_PLAYERS];
 //    int ntokens = 0, i;
 //    enum m_pre_result plr_result;
 //    boolean result = true;
@@ -3541,7 +3542,7 @@ public class Stdinhand{
 //
 //    if (str != null || str.length() > 0) {
 //      buf = str;
-//      ntokens = get_tokens(buf, arg, MAX_NUM_PLAYERS, TOKEN_DELIMITERS);
+//      ntokens = get_tokens(buf, arg, Shared_H.MAX_NUM_PLAYERS, TOKEN_DELIMITERS);
 //    }
 //    /* Ensure players exist */
 //    for (i = 0; i < ntokens; i++) {
@@ -3571,7 +3572,7 @@ public class Stdinhand{
 //    Srv_main.server_state = server_states.GAME_OVER_STATE;
 //    force_end_of_sniff = true;
 //    cmd_reply(CMD_END_GAME, caller, C_OK,
-//              ("Ending the game. The server will restart once all clients " +
+//              ("Ending the Game.game. The server will restart once all clients " +
 //              "have disconnected."));
 //
 //    cleanup:
@@ -3581,7 +3582,7 @@ public class Stdinhand{
 //    return true;
 //  } else {
 //    cmd_reply(CMD_END_GAME, caller, C_FAIL, 
-//              "Cannot end the game: no game running.");
+//              "Cannot end the Game.game: no Game.game running.");
 //    return false;
 //  }
 //}
@@ -3594,26 +3595,26 @@ public class Stdinhand{
 //  switch (Srv_main.server_state) {
 //  case server_states.PRE_GAME_STATE:
 //    /* Sanity check scenario */
-//    if (game.is_new_game && !check) {
+//    if (Game.game.is_new_game && !check) {
 //      if (Map.map.num_start_positions > 0
-//	  && game.max_players > Map.map.num_start_positions) {
+//	  && Game.game.max_players > Map.map.num_start_positions) {
 //	/* If we load a pre-generated map (i.e., a scenario) it is possible
 //	 * to increase the number of players beyond the number supported by
 //	 * the scenario.  The solution is a hack: cut the extra players
-//	 * when the game starts. */
+//	 * when the Game.game starts. */
 //	util.freelog(Log.LOG_VERBOSE, "Reduced maxplayers from %i to %i to fit " +
 //	        "to the number of start positions.",
-//		game.max_players, Map.map.num_start_positions);
-//	game.max_players = Map.map.num_start_positions;
+//		Game.game.max_players, Map.map.num_start_positions);
+//	Game.game.max_players = Map.map.num_start_positions;
 //      }
 //
-//      if (get_num_nonobserver_players() > game.max_players) {
+//      if (get_num_nonobserver_players() > Game.game.max_players) {
 //	/* Because of the way player ids are renumbered during
 //	   server_remove_player() this is correct */
-//        while (get_num_nonobserver_players() > game.max_players) {
+//        while (get_num_nonobserver_players() > Game.game.max_players) {
 //	  /* This may erronously remove observer players sometimes.  This
 //	   * is a bug but non-fatal. */
-//	  server_remove_player(get_player(game.max_players));
+//	  server_remove_player(get_player(Game.game.max_players));
 //        }
 //
 //	util.freelog(Log.LOG_VERBOSE,
@@ -3625,9 +3626,9 @@ public class Stdinhand{
 //    }
 //
 //    /* check min_players */
-//    if (get_num_nonobserver_players() < game.min_players) {
+//    if (get_num_nonobserver_players() < Game.game.min_players) {
 //      cmd_reply(CMD_START_GAME, caller, C_FAIL,
-//		"Not enough players, game will not start.");
+//		"Not enough players, Game.game will not start.");
 //      return false;
 //    } else if (check) {
 //      return true;
@@ -3649,7 +3650,7 @@ public class Stdinhand{
 //       * than once to remind other people to start (which is a good thing
 //       * until somebody does it too much and it gets labeled as spam). */
 //      caller.player.is_started = true;
-//      for(player pplayer: game.players){
+//      for(player pplayer: Game.game.players){
 //	if (pplayer.is_connected) {
 //	  if (pplayer.is_started) {
 //	    started++;
@@ -3659,30 +3660,30 @@ public class Stdinhand{
 //	}
 //      }
 //      if (started * 100 < (started + notstarted) * percent_required) {
-//	Plrhand.notify_conn(null, ("Waiting to start game: %d out of %d players " +
+//	Plrhand.notify_conn(null, ("Waiting to start Game.game: %d out of %d players " +
 //			    "are ready to start."),
 //		    started, started + notstarted);
 //	return true;
 //      }
-//      Plrhand.notify_conn(null, "All players are ready; starting game.");
+//      Plrhand.notify_conn(null, "All players are ready; starting Game.game.");
 //      start_game();
 //      return true;
 //    }
 //  case server_states.GAME_OVER_STATE:
 //    /* TRANS: given when /start is invoked during gameover. */
 //    cmd_reply(CMD_START_GAME, caller, C_FAIL,
-//              ("Cannot start the game: the game is waiting for all clients " +
+//              ("Cannot start the Game.game: the Game.game is waiting for all clients " +
 //              "to disconnect."));
 //    return false;
 //  case SELECT_RACES_STATE:
 //    /* TRANS: given when /start is invoked during nation selection. */
 //    cmd_reply(CMD_START_GAME, caller, C_FAIL,
-//              "Cannot start the game: it has already been started.");
+//              "Cannot start the Game.game: it has already been started.");
 //    return false;
 //  case RUN_GAME_STATE:
-//    /* TRANS: given when /start is invoked while the game is running. */
+//    /* TRANS: given when /start is invoked while the Game.game is running. */
 //    cmd_reply(CMD_START_GAME, caller, C_FAIL,
-//              "Cannot start the game: it is already running.");
+//              "Cannot start the Game.game: it is already running.");
 //    return false;
 //  }
 //  assert(false);
@@ -3717,7 +3718,7 @@ public class Stdinhand{
 //
 //  /* if we cut the connection, unassign the login name */
 //  if (pplayer) {
-//    pplayer.username = ANON_USER_NAME;
+//    pplayer.username = Player_H.ANON_USER_NAME;
 //  }
 //  return true;
 //}
@@ -3741,8 +3742,8 @@ public class Stdinhand{
 //      "For the impatient, the main commands to get going are:\n" +
 //      "  show   -  to see current options\n" +
 //      "  set    -  to set options\n" +
-//      "  start  -  to start the game once players have connected\n" +
-//      "  save   -  to save the current game\n" +
+//      "  start  -  to start the Game.game once players have connected\n" +
+//      "  save   -  to save the current Game.game\n" +
 //      "  quit   -  to exit");
 //
 //  static struct astring abuf = ASTRING_INIT;
@@ -3985,11 +3986,11 @@ public class Stdinhand{
 //  cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, horiz_line);
 //
 //
-//  if (game.nplayers == 0)
+//  if (Game.game.nplayers == 0)
 //    cmd_reply(CMD_LIST, caller, C_WARNING, "<no players>");
 //  else
 //  {
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //
 //      /* Low access level callers don't get to see barbarians in list: */
 //      if (is_barbarian(pplayer) && caller
@@ -4020,7 +4021,7 @@ public class Stdinhand{
 //	cat_snprintf(buf2, sizeof(buf2), ", difficulty level %s",
 //		     name_of_skill_level(pplayer.ai.skill_level));
 //      }
-//      if (!game.is_new_game) {
+//      if (!Game.game.is_new_game) {
 //	cat_snprintf(buf2, sizeof(buf2), ", nation %s",
 //		     Nation.Nation.get_nation_name_plural(pplayer.nation));
 //      }
@@ -4037,7 +4038,7 @@ public class Stdinhand{
 //      }
 //      buf = util.my_snprintf( "%s (%s)", pplayer.name, buf2);
 //      
-//      n = conn_list_size(&pplayer.connections);
+//      n = pplayer.connections.foo_list_size();
 //      if (n > 0) {
 //        cat_snprintf(buf, sizeof(buf), 
 //                     PL(" %d connection:", " %d connections:", n), n);
@@ -4075,11 +4076,11 @@ public class Stdinhand{
 //  cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, "List of connections to server:");
 //  cmd_reply(CMD_LIST, caller, Erfc_status.C_COMMENT, horiz_line);
 //
-//  if (game.all_connections.foo_list_size() == 0) {
+//  if (Game.game.all_connections.foo_list_size() == 0) {
 //    cmd_reply(CMD_LIST, caller, C_WARNING, "<no connections>");
 //  }
 //  else {
-//    for (conn pconn : game.all_connections.data) {
+//    for (conn pconn : Game.game.all_connections.data) {
 //      buf = String.format( pconn.conn_description());
 //      if (pconn.established) {
 //	cat_snprintf(buf, sizeof(buf), " command access level %s",
@@ -4177,19 +4178,19 @@ public class Stdinhand{
 //}
 //static char *player_generator(final String text, int state)
 //{
-//  return generic_generator(text, state, game.nplayers, playername_accessor);
+//  return generic_generator(text, state, Game.game.nplayers, playername_accessor);
 //}
 //
 ///**************************************************************************
-//The connection user names, from game.all_connections.
+//The connection user names, from Game.game.all_connections.
 //**************************************************************************/
 //static final String connection_name_accessor(int idx)
 //{
-//  return conn_list_get(&game.all_connections, idx).username;
+//  return conn_list_get(&Game.game.all_connections, idx).username;
 //}
 //static char *connection_generator(final String text, int state)
 //{
-//  return generic_generator(text, state, game.all_connections.foo_list_size(),
+//  return generic_generator(text, state, Game.game.all_connections.foo_list_size(),
 //			   connection_name_accessor);
 //}
 //
@@ -4219,7 +4220,7 @@ public class Stdinhand{
 //static char *cmdlevel_arg2_generator(final String text, int state)
 //{
 //  return generic_generator(text, state,
-//			   2 + game.all_connections.foo_list_size(),
+//			   2 + Game.game.all_connections.foo_list_size(),
 //			   cmdlevel_arg2_accessor);
 //}
 //
@@ -4538,10 +4539,10 @@ public class Stdinhand{
 //
 //  case SSET_RULES:
 //    /* Only change start params and most rules if we don't yet have a map,
-//     * or if we do have a map but its a scenario one (ie, the game has
+//     * or if we do have a map but its a scenario one (ie, the Game.game has
 //     * never actually been started).
 //     */
-//    return (map_is_empty() || game.is_new_game);
+//    return (map_is_empty() || Game.game.is_new_game);
 //  case SSET_RULES_FLEXIBLE:
 //  case SSET_META:
 //    /* These can always be changed: */

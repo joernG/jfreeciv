@@ -146,7 +146,7 @@ public class Mapctrl_common{
 //
 //      /*  Tile passed all tests; process it.
 //       */
-//      if (ptile.city && ptile.city.owner == game.player_idx) {
+//      if (ptile.city && ptile.city.owner == Game.game.player_idx) {
 //        ptile.client.hilite = HILITE_CITY;
 //        tiles_hilited_cities = true;
 //      }
@@ -299,7 +299,7 @@ public class Mapctrl_common{
 //      toggle_city_hilite(pcity, false); /* cityrep.c */
 //    }
 //  }
-//  else if (pcity && pcity.owner == game.player_idx) {
+//  else if (pcity && pcity.owner == Game.game.player_idx) {
 //    ptile.client.hilite = HILITE_CITY;
 //    tiles_hilited_cities = true;
 //    toggle_city_hilite(pcity, true);
@@ -340,7 +340,7 @@ public class Mapctrl_common{
 //  city pcity = ptile.city;
 //
 //  if (pcity) {
-//    if (pcity.owner != game.player_idx)  {
+//    if (pcity.owner != Game.game.player_idx)  {
 //      return;
 //    }
 //    clipboard = pcity.currently_building;
@@ -350,10 +350,10 @@ public class Mapctrl_common{
 //    if (!punit) {
 //      return;
 //    }
-//    if (!can_player_build_unit_direct(game.player_ptr, punit.type))  {
+//    if (!can_player_build_unit_direct(Game.game.player_ptr, punit.type))  {
 //      msg = util.my_snprintf(
 //      "Game: You don't know how to build %s!",
-//        unit_types[punit.type].name);
+//        Unittype_P.unit_types[punit.type].name);
 //      append_output_window(msg);
 //      return;
 //    }
@@ -363,7 +363,7 @@ public class Mapctrl_common{
 //  upgrade_canvas_clipboard();
 //
 //  msg = util.my_snprintf( "Game: Copy %s to clipboard.",
-//    clipboard_is_unit ? unit_types[clipboard].name :
+//    clipboard_is_unit ? Unittype_P.unit_types[clipboard].name :
 //    get_improvement_name(clipboard));
 //  append_output_window(msg);
 //}
@@ -383,14 +383,14 @@ public class Mapctrl_common{
 //    return;
 //  }
 //  if (!tiles_hilited_cities) {
-//    if (pcity && pcity.owner == game.player_idx) {
+//    if (pcity && pcity.owner == Game.game.player_idx) {
 //      clipboard_send_production_packet(pcity);
 //    }
 //    return;
 //  }
 //  else {
 //    connection_do_buffer(&aconnection);
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      if (is_city_hilited(pcity)) {
 //        clipboard_send_production_packet(pcity);
 //      }
@@ -422,7 +422,7 @@ public class Mapctrl_common{
 //void upgrade_canvas_clipboard()
 //{
 //  if (clipboard_is_unit)  {
-//    int u = can_upgrade_unittype(game.player_ptr, clipboard);
+//    int u = can_upgrade_unittype(Game.game.player_ptr, clipboard);
 //    if (u != -1)  {
 //      clipboard = u;
 //    }
@@ -438,7 +438,7 @@ public class Mapctrl_common{
 //
 //  if (keyboardless_goto_active && hover_state == HOVER_GOTO && ptile) {
 //    unit punit =
-//        player_find_unit_by_id(game.player_ptr, hover_unit);
+//        player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //
 //    do_unit_goto(ptile);
 //    set_hover_state(null, HOVER_NONE, ACTIVITY_LAST);
@@ -592,7 +592,7 @@ public class Mapctrl_common{
 //  }
 //
 //  new_state = (can_client_issue_orders()
-//	       && !game.player_ptr.turn_done && !agents_busy()
+//	       && !Game.game.player_ptr.turn_done && !agents_busy()
 //	       && !turn_done_sent);
 //  if (new_state == turn_done_state) {
 //    return;
@@ -606,7 +606,7 @@ public class Mapctrl_common{
 //
 //  if (turn_done_state) {
 //    if (waiting_for_end_turn
-//	|| (game.player_ptr.ai.control && !ai_manual_turn_done)) {
+//	|| (Game.game.player_ptr.ai.control && !ai_manual_turn_done)) {
 //      send_turn_done();
 //    } else {
 //      update_turn_done_button(true);

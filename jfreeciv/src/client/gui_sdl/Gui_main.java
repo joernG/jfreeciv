@@ -53,7 +53,7 @@ public class Gui_main{
 //
 //#include "gui_mem.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "version.h"
 //
@@ -211,7 +211,7 @@ public class Gui_main{
 //	    city pCity;
 //	    if((pUnit = get_unit_in_focus()) != null && 
 //	      (pCity = map_get_tile(pUnit.x, pUnit.y).city) != null &&
-//	      city_owner(pCity) == game.player_ptr) {
+//	      City.city_owner(pCity) == Game.game.player_ptr) {
 //	      popup_city_dialog(pCity, false);
 //	    } else {
 //	      disable_focus_animation();
@@ -252,7 +252,7 @@ public class Gui_main{
 //          return ID_ERROR;
 //	    
 //	  case SDLK_F12:
-//            popup_spaceship_dialog(game.player_ptr);
+//            popup_spaceship_dialog(Game.game.player_ptr);
 //          return ID_ERROR;
 //	  
 //	  default:
@@ -399,13 +399,13 @@ public class Gui_main{
 //
 //  if (get_client_state() == CLIENT_GAME_RUNNING_STATE) {
 //
-//    if (game.player_ptr.is_connected && game.player_ptr.is_alive
-//	&& !game.player_ptr.turn_done) {
+//    if (Game.game.player_ptr.is_connected && Game.game.player_ptr.is_alive
+//	&& !Game.game.player_ptr.turn_done) {
 //      int i, is_waiting, is_moving;
 //
-//      for (i = 0, is_waiting = 0, is_moving = 0; i < game.nplayers; i++)
-//	if (game.players[i].is_alive && game.players[i].is_connected) {
-//	  if (game.players[i].turn_done) {
+//      for (i = 0, is_waiting = 0, is_moving = 0; i < Game.game.nplayers; i++)
+//	if (Game.game.players[i].is_alive && Game.game.players[i].is_connected) {
+//	  if (Game.game.players[i].turn_done) {
 //	    is_waiting++;
 //	  } else {
 //	    is_moving++;
@@ -692,7 +692,7 @@ public class Gui_main{
 //  return ID;
 //}
 //
-///* ============ Freeciv native game function =========== */
+///* ============ Freeciv native Game.game function =========== */
 //
 ///**************************************************************************
 //  Do any necessary pre-initialization of the UI, if necessary.
@@ -768,7 +768,7 @@ public class Gui_main{
 //  flush_all();
 //  
 //  copy_chars_to_string16(pInit_String.string16,
-//  			"Waiting for the beginning of the game");
+//  			"Waiting for the beginning of the Game.game");
 //  
 //  init_gui_list(ID_WAITING_LABEL, pInit_String);
 //  
@@ -892,7 +892,7 @@ public class Gui_main{
 //  
 //  set_client_state(CLIENT_PRE_GAME_STATE);
 //
-//  /* Main game loop */
+//  /* Main Game.game loop */
 //  gui_event_loop(null, null, main_key_down_handler, main_key_up_handler,
 //  		 main_mouse_button_down_handler, null,
 //		 main_mouse_motion_handler);

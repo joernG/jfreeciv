@@ -11,7 +11,7 @@ import utility.Log;
 
 public class Gotohand {
 	// #include "combat.h"
-	// #include "game.h"
+	// #include "Game.game.h"
 	// #include "log.h"
 	// #include "Map.map.h"
 	// #include "mem.h"
@@ -269,7 +269,7 @@ public class Gotohand {
 	//
 	// if (pcity) {
 	// orig_tile = pcity.tile;
-	// pplayer = city_owner(pcity);
+	// pplayer = City.city_owner(pcity);
 	// } else {
 	// orig_tile = punit.tile;
 	// pplayer = punit.unit_owner();
@@ -302,13 +302,13 @@ public class Gotohand {
 	// if (WARMAP_COST(tile1) <= cost)
 	// continue; /* No need for all the calculations */
 	//
-	// if (is_ocean(map_get_terrain(tile1))) {
+	// if (Terrain_H.is_ocean(tile1.terrain)) {
 	// if (punit && ground_unit_transporter_capacity(tile1, pplayer) > 0)
 	// move_cost = Unit_H.SINGLE_MOVE;
 	// else
 	// continue;
-	// } else if (is_ocean(ptile.terrain)) {
-	// int base_cost = get_tile_type(map_get_terrain(tile1)).movement_cost *
+	// } else if (Terrain_H.is_ocean(ptile.terrain)) {
+	// int base_cost = get_tile_type(tile1.terrain).movement_cost *
 	// Unit_H.SINGLE_MOVE;
 	// move_cost = igter ? MOVE_COST_ROAD : Math.min(base_cost,
 	// punit.move_rate());
@@ -486,7 +486,7 @@ public class Gotohand {
 	// adjc_dir_iterate(src_tile, ptile, dir) {
 	// /* if we didn't come from there */
 	// if (!BV_ISSET(came_from, dir)
-	// && !is_ocean(map_get_terrain(ptile))
+	// && !Terrain_H.is_ocean(ptile.terrain)
 	// /* and there is an enemy there */
 	// && is_enemy_unit_tile(ptile, owner)) {
 	// /* then it counts in the zoc claculation */
@@ -619,7 +619,7 @@ public class Gotohand {
 	// if (move_type == SEA_MOVING) {
 	// pcargo = other_passengers(punit);
 	// if (pcargo)
-	// if (is_ocean(map_get_terrain(dest_tile)) ||
+	// if (Terrain_H.is_ocean(dest_tile.terrain) ||
 	// !Unit.is_non_allied_unit_tile(dest_tile, pcargo.unit_owner())
 	// || City.is_allied_city_tile(dest_tile, pcargo.unit_owner())
 	// || unit_flag(pcargo, F_MARINES)
@@ -653,12 +653,12 @@ public class Gotohand {
 	// excludes
 	// RR loops, ie you can't create a cycle with the same move_cost */
 	//
-	// if (is_ocean(pdesttile.terrain)) {
+	// if (Terrain_H.is_ocean(pdesttile.terrain)) {
 	// if (ground_unit_transporter_capacity(tile1, punit.unit_owner()) <= 0)
 	// continue;
 	// else
 	// move_cost = 3;
-	// } else if (is_ocean(psrctile.terrain)) {
+	// } else if (Terrain_H.is_ocean(psrctile.terrain)) {
 	// int base_cost = get_tile_type(pdesttile.terrain).movement_cost *
 	// Unit_H.SINGLE_MOVE;
 	// move_cost = igter ? 1 : Math.min(base_cost, punit.move_rate());
@@ -667,12 +667,12 @@ public class Gotohand {
 	// else
 	// move_cost = Math.min(psrctile.move_cost[dir], punit.move_rate());
 	//
-	// if (!pplayer.ai.control && !map_is_known(tile1, pplayer)) {
+	// if (!pplayer.ai.control && !Maphand.map_is_known(tile1, pplayer)) {
 	// /* Don't go into the unknown. 5*Unit_H.SINGLE_MOVE is an arbitrary deterrent. */
 	// move_cost = (restriction == GOTO_MOVE_STRAIGHTEST) ? Unit_H.SINGLE_MOVE :
 	// 5*Unit_H.SINGLE_MOVE;
 	// } else if (Unit.is_non_allied_unit_tile(pdesttile, punit.unit_owner())) {
-	// if (is_ocean(psrctile.terrain) && !unit_flag(punit, F_MARINES)) {
+	// if (Terrain_H.is_ocean(psrctile.terrain) && !unit_flag(punit, F_MARINES)) {
 	// continue; /* Attempting to attack from a ship */
 	// }
 	//
@@ -693,7 +693,7 @@ public class Gotohand {
 	// move_cost = Unit_H.SINGLE_MOVE;
 	// }
 	// } else if (is_non_allied_city_tile(pdesttile, punit.unit_owner())) {
-	// if (is_ocean(psrctile.terrain) && !unit_flag(punit, F_MARINES)) {
+	// if (Terrain_H.is_ocean(psrctile.terrain) && !unit_flag(punit, F_MARINES)) {
 	// continue; /* Attempting to attack from a ship */
 	// }
 	//
@@ -743,7 +743,7 @@ public class Gotohand {
 	// move_cost = 20 * Unit_H.SINGLE_MOVE;
 	// }
 	//
-	// if (!pplayer.ai.control && !map_is_known(tile1, pplayer))
+	// if (!pplayer.ai.control && !Maphand.map_is_known(tile1, pplayer))
 	// move_cost = (restriction == GOTO_MOVE_STRAIGHTEST) ? Unit_H.SINGLE_MOVE :
 	// 5*Unit_H.SINGLE_MOVE; /* arbitrary deterrent. */
 	//
@@ -764,7 +764,7 @@ public class Gotohand {
 	// if (pplayer.ai.control &&
 	// WARMAP_SEACOST(ptile) < punit.moves_left
 	// && total_cost < maxcost
-	// && total_cost >= punit.moves_left - (get_transporter_capacity(punit) >
+	// && total_cost >= punit.moves_left - (Unit.get_transporter_capacity(punit) >
 	// punit.unit_type().attack_strength ? 3 : 2)
 	// && enemies_at(punit, tile1)) {
 	// total_cost += punit.move_rate();
@@ -878,13 +878,13 @@ public class Gotohand {
 	// {
 	// boolean ai_always_see_map = !ai_handicap(pplayer, H_MAP);
 	//
-	// adjc_iterate(ptile, adjc_tile) {
+	// for(tile adjc_tile: util.adjc_tile_iterate(ptile)) {
 	// /* Is there land here, and if so can we see it? */
-	// if (!is_ocean(map_get_terrain(adjc_tile))
-	// && (ai_always_see_map || map_is_known(adjc_tile, pplayer))) {
+	// if (!Terrain_H.is_ocean(adjc_tile.terrain)
+	// && (ai_always_see_map || Maphand.map_is_known(adjc_tile, pplayer))) {
 	// return true;
 	// }
-	// } adjc_iterate_end;
+	// }
 	//
 	// return false;
 	// }
@@ -915,7 +915,7 @@ public class Gotohand {
 	// tile dest_tile)
 	// {
 	// #define UNIT_DEFENSE(punit, ptile, defence_multiplier) \
-	// ((get_virtual_defense_power(U_LAST, (punit).type, (ptile), false, 0) * \
+	// ((get_virtual_defense_power(unittype.U_LAST, (punit).type, (ptile), false, 0) * \
 	// (defence_multiplier)) / 2)
 	//
 	// #define UNIT_RATING(punit, ptile, defence_multiplier) \
@@ -946,7 +946,7 @@ public class Gotohand {
 	// */
 	// boolean do_full_check = afraid_of_sinking;
 	//
-	// if (is_ocean(map_get_terrain(punit.tile))) {
+	// if (Terrain_H.is_ocean(punit.tile.terrain)) {
 	// passenger = other_passengers(punit);
 	// } else {
 	// passenger = null;
@@ -1100,16 +1100,16 @@ public class Gotohand {
 	// * In case we change directions next turn, roads and railroads are
 	// * nice.
 	// */
-	// if (Map.tile_has_special(ptile, S_ROAD) || Map.tile_has_special(ptile,
-	// S_RAILROAD)) {
+	// if (Map.tile_has_special(ptile, Terrain_H.S_ROAD) || Map.tile_has_special(ptile,
+	// Terrain_H.S_RAILROAD)) {
 	// fitness[dir] += 10;
 	// }
 	//
 	// /*
 	// * What is around the tile we are about to step to?
 	// */
-	// adjc_iterate(ptile, adjtile) {
-	// if (!map_is_known(adjtile, pplayer)) {
+	// for(tile adjtile: util.adjc_tile_iterate(ptile)) {
+	// if (!Maphand.map_is_known(adjtile, pplayer)) {
 	// if (punit.moves_left < base_move_cost) {
 	// /* Avoid the unknown */
 	// fitness[dir] -=
@@ -1149,7 +1149,7 @@ public class Gotohand {
 	// } }
 	// }
 	// } /* end this-tile-is-seen else */
-	// } adjc_iterate_end;
+	// }
 	//    
 	// /*
 	// * Try to make triremes safe
@@ -1216,7 +1216,7 @@ public class Gotohand {
 	// * Find random direction out of the best ones selected.
 	// */
 	// for (;;) {
-	// int dir = myrand(8);
+	// int dir = Rand.myrand(8);
 	//
 	// if (fitness[dir] == best_fitness) {
 	// util.freelog(Log.LOG_DEBUG,
@@ -1244,7 +1244,7 @@ public class Gotohand {
 	// return true;
 	// }
 	//
-	// if (!(omni || map_is_known_and_seen(ptile, pplayer))) {
+	// if (!(omni || Maphand.map_is_known_and_seen(ptile, pplayer))) {
 	// /* The destination is in unknown -- assume sane */
 	// return true;
 	// }
@@ -1252,15 +1252,15 @@ public class Gotohand {
 	// switch (punit.unit_type().move_type) {
 	//
 	// case LAND_MOVING:
-	// if (is_ocean(map_get_terrain(ptile))) {
+	// if (Terrain_H.is_ocean(ptile.terrain)) {
 	// /* Going to a sea tile, the target should be next to our continent
 	// * and with a boat */
 	// if (ground_unit_transporter_capacity(ptile, pplayer) > 0) {
-	// adjc_iterate(ptile, tmp_tile) {
+	// for(tile tmp_tile: util.adjc_tile_iterate(ptile)) {
 	// if (map_get_continent(tmp_tile) == map_get_continent(punit.tile))
 	// /* The target is adjacent to our continent! */
 	// return true;
-	// } adjc_iterate_end;
+	// }
 	// }
 	// } else {
 	// /* Going to a land tile: better be our continent */
@@ -1269,18 +1269,18 @@ public class Gotohand {
 	// } else {
 	// /* Well, it's not our continent, but maybe we are on a boat
 	// * adjacent to the target continent? */
-	// adjc_iterate(punit.tile, tmp_tile) {
+	// for(tile tmp_tile: util.adjc_tile_iterate(punit.tile)) {
 	// if (map_get_continent(tmp_tile) == map_get_continent(ptile)) {
 	// return true;
 	// }
-	// } adjc_iterate_end;
+	// }
 	// }
 	// }
 	//      
 	// return false;
 	//
 	// case SEA_MOVING:
-	// if (is_ocean(map_get_terrain(ptile))
+	// if (Terrain_H.is_ocean(ptile.terrain)
 	// || is_ocean_near_tile(ptile)) {
 	// /* The target is sea or is accessible from sea
 	// * (allow for bombardment and visiting ports) */
@@ -1318,7 +1318,7 @@ public class Gotohand {
 		// if (Map.same_pos(punit.tile, dest_tile) ||
 		// !goto_is_sane(punit, dest_tile, false)) {
 		// punit.activity = unit_activity.ACTIVITY_IDLE;
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// if (Map.same_pos(punit.tile, dest_tile)) {
 		// return GR_ARRIVED;
 		// } else {
@@ -1327,7 +1327,7 @@ public class Gotohand {
 		// }
 
 		// if(punit.moves_left == 0) {
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// return GR_OUT_OF_MOVEPOINTS;
 		// }
 
@@ -1337,7 +1337,7 @@ public class Gotohand {
 		// move. */
 		// if (Map.same_pos(waypoint_tile, punit.tile)) {
 		// punit.done_moving = true;
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// return GR_WAITING; /* out of fuel */
 		// }
 		// } else {
@@ -1346,7 +1346,7 @@ public class Gotohand {
 		// pplayer.name, punit.unit_type().name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
 		// punit.activity = unit_activity.ACTIVITY_IDLE;
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// return GR_FAILED;
 		// }
 		// }
@@ -1381,10 +1381,10 @@ public class Gotohand {
 
 		// last_tile = Map.same_pos(ptile, punit.goto_tile);
 
-		// /* Call handle_unit_move_request for humans and ai_unit_move for AI
+		// /* Call Unithand.handle_unit_move_request for humans and ai_unit_move for AI
 		// */
 		// success = (!pplayer.ai.control
-		// && handle_unit_move_request(punit, ptile, false,
+		// && Unithand.handle_unit_move_request(punit, ptile, false,
 		// !(last_tile && trigger_special_ability)))
 		// || (pplayer.ai.control && ai_unit_move(punit, ptile));
 
@@ -1396,19 +1396,19 @@ public class Gotohand {
 		// /* failure other than ran out of movement during an
 		// attempt to utilize the rand() move feature */
 		// punit.activity=unit_activity.ACTIVITY_IDLE;
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// return GR_FAILED;
 		// }
 
 		// /* Don't attack more than once per goto */
 		// if (penemy && !pplayer.ai.control) {
 		// punit.activity = unit_activity.ACTIVITY_IDLE;
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// return GR_FOUGHT;
 		// }
 
 		// if(!Map.same_pos(ptile, punit.tile)) {
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// return GR_OUT_OF_MOVEPOINTS;
 		// }
 
@@ -1420,7 +1420,7 @@ public class Gotohand {
 		// pplayer.name, punit.unit_type().name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
 		// handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		// return GR_FAILED;
 		// }
 		// /** Finished moving the unit for this turn **/
@@ -1435,7 +1435,7 @@ public class Gotohand {
 		// status = GR_OUT_OF_MOVEPOINTS;
 		// }
 
-		// send_unit_info(null, punit);
+		// Unittools.send_unit_info(null, punit);
 		return status;
 	}
 
@@ -1455,7 +1455,7 @@ public class Gotohand {
 //			 * these we just assume cost = distance. (times 3 for road factor).
 //			 * (Could be wrong if there are things in the way.)
 //			 */
-//			return Unit_H.SINGLE_MOVE * real_map_distance(punit.tile, dest_tile);
+//			return Unit_H.SINGLE_MOVE * Map.real_map_distance(punit.tile, dest_tile);
 //		}
 //
 //		generate_warmap(null, punit);
@@ -1484,7 +1484,7 @@ public class Gotohand {
 	// */
 	//
 	// /* If the tile's unknown, we (may) assume it's safe. */
-	// if (ai_handicap(pplayer, H_MAP) && !map_is_known(ptile, pplayer)) {
+	// if (ai_handicap(pplayer, H_MAP) && !Maphand.map_is_known(ptile, pplayer)) {
 	// return AIR_ASSUMES_UNKNOWN_SAFE;
 	// }
 	//
@@ -1496,7 +1496,7 @@ public class Gotohand {
 	//
 	// /* If the tile's fogged we again (may) assume it's safe. */
 	// if (ai_handicap(pplayer, H_FOG) &&
-	// !map_is_known_and_seen(ptile, pplayer)) {
+	// !Maphand.map_is_known_and_seen(ptile, pplayer)) {
 	// return AIR_ASSUMES_FOGGED_SAFE;
 	// }
 	//
@@ -1520,7 +1520,7 @@ public class Gotohand {
 	 tile dest_tile, player pplayer)
 	 {
 		 tile ptile;
-		 // int dist, total_distance = real_map_distance(src_tile, dest_tile);
+		 // int dist, total_distance = Map.real_map_distance(src_tile, dest_tile);
 		 //
 		 // util.freelog(Log.LOG_DEBUG,
 		 // "air_can_move_between(moves=%d, src=(%i,%i), "
@@ -1562,14 +1562,14 @@ public class Gotohand {
 		 // }
 		 // if (dist == 1) {
 		 // /* Looks like the O(n) quicksearch worked. */
-		 // assert(real_map_distance(ptile, dest_tile) == 1);
+		 // assert(Map.real_map_distance(ptile, dest_tile) == 1);
 		 // return moves - total_distance * MOVE_COST_AIR;
 		 // }
 		 //
 		 // /*
 		 // * Finally, we do a full A* search if this isn't one of the specical
 		 // * cases from above. This is copied from find_the_shortest_path but
-		 // * we use real_map_distance as a minimum distance estimator for the
+		 // * we use Map.real_map_distance as a minimum distance estimator for the
 		 // * A* search. This distance estimator is used for the cost value in
 		 // * the queue, but is not stored in the warmap itself.
 		 //   *
@@ -1611,7 +1611,7 @@ public class Gotohand {
 		 //	WARMAP_COST(tile1) = cost;
 		 //
 		 //	/* Now for A* we find the minimum total cost. */
-		 //	cost += real_map_distance(tile1, dest_tile);
+		 //	cost += Map.real_map_distance(tile1, dest_tile);
 		 //	if (cost <= moves) {
 		 //	  add_to_maPqueue(cost, tile1);
 		 //	}

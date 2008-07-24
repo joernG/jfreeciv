@@ -18,7 +18,7 @@ public class Gotodlg{
 //#include <config.h>
 //#endif
 //
-//#include "game.h"
+//#include "Game.game.h"
 //
 //#include "civclient.h"
 //#include "control.h"

@@ -1,7 +1,5 @@
 package server;
-import static common.Game.game;
 import static server.Plrhand.notify_player;
-import static server.Plrhand.notify_player_ex;
 import port.util;
 import server.gamelog.EEndGameState;
 import server.gamelog.EGamelog;
@@ -11,6 +9,7 @@ import utility.Shared;
 import utility.Speclists;
 
 import common.Connection;
+import common.Game;
 import common.Nation;
 import common.Spaceship;
 import common.event_type;
@@ -102,15 +101,15 @@ public class Spacerace{
 	/***************************************************************************
 	 * Send details of src's spaceship (or spaceships of all players if src is
 	 * null) to specified destinations. If dest is null then
-	 * game.game_connections is used.
+	 * Game.game.game_connections is used.
 	 **************************************************************************/
 	void send_spaceship_info(player src, Speclists<Connection> dest)
 	{
 		int j;
 
-		if (null==dest) dest = game.game_connections;
+		if (null==dest) dest = Game.game.game_connections;
 
-		for(player pplayer: game.players){
+		for(player pplayer: Game.game.players){
 			if (null==src || pplayer == src) {
 				packet_spaceship_info info = new packet_spaceship_info();
 				player_spaceship ship = pplayer.spaceship;
@@ -168,10 +167,10 @@ public class Spacerace{
 		}
 
 		ship.state = spaceship_state.SSHIP_LAUNCHED;
-		ship.launch_year = game.year;
+		ship.launch_year = Game.game.year;
 		arrival = ship.launch_year + (int) ship.travel_time;
 
-		notify_player_ex(null, null, event_type.E_SPACESHIP,
+		Plrhand.notify_player_ex(null, null, event_type.E_SPACESHIP,
 				("Game: The %s have launched a spaceship!  "+
 				"It is estimated to arrive on Alpha Centauri in %s."),
 				Nation.get_nation_name_plural(pplayer.nation),
@@ -326,7 +325,7 @@ public class Spacerace{
 	 **************************************************************************/
 	void spaceship_lost(player pplayer)
 	{
-		notify_player_ex(null, null, event_type.E_SPACESHIP,
+		Plrhand.notify_player_ex(null, null, event_type.E_SPACESHIP,
 				("Game: Without guidance from the capital, the %s "+
 				"spaceship is lost!"),
 				Nation.get_nation_name(pplayer.nation));
@@ -342,12 +341,12 @@ public class Spacerace{
 		double arrival, best_arrival = 0.0;
 		player best_pplayer = null;
 
-		for(player pplayer: game.players){
+		for(player pplayer: Game.game.players){
 			player_spaceship ship = pplayer.spaceship;
 
 			if (ship.state == spaceship_state.SSHIP_LAUNCHED) {
 				arrival = ship.launch_year + ship.travel_time;
-				if (game.year >= (int)arrival
+				if (Game.game.year >= (int)arrival
 						&& (null==best_pplayer || arrival < best_arrival)) {
 					best_arrival = arrival;
 					best_pplayer = pplayer;
@@ -357,7 +356,7 @@ public class Spacerace{
 		if (best_pplayer!=null) {
 			best_pplayer.spaceship.state = spaceship_state.SSHIP_ARRIVED;
 			Srv_main.server_state = server_states.GAME_OVER_STATE;
-			notify_player_ex(null, null, event_type.E_SPACESHIP,
+			Plrhand.notify_player_ex(null, null, event_type.E_SPACESHIP,
 					("Game: The %s spaceship has arrived "+
 					"at Alpha Centauri."),
 					Nation.get_nation_name(best_pplayer.nation));

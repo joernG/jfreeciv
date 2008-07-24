@@ -27,7 +27,7 @@ public class Messagedlg{
 //
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "packets.h"
 //#include "player.h"
 //#include "shared.h"

@@ -32,7 +32,7 @@ public class Climisc{
 //#include "city.h"
 //#include "diptreaty.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "map.h"
 //#include "packets.h"
@@ -98,22 +98,22 @@ public class Climisc{
 //
 //  pcity = map_get_city(ptile);
 //  if (pcity) {
-//    if (can_player_see_units_in_city(game.player_ptr, pcity)) {
+//    if (can_player_see_units_in_city(Game.game.player_ptr, pcity)) {
 //      pcity.client.occupied =
-//	(unit_list_size(&pcity.tile.units) > 0);
+//	(pcity.tile.units.foo_list_size() > 0);
 //    }
 //
 //    refresh_city_dialog(pcity);
 //    util.freelog(Log.LOG_DEBUG, "map city %s, %s, (%d %d)", pcity.name,
-//	    get_nation_name(city_owner(pcity).nation),
+//	    get_nation_name(City.city_owner(pcity).nation),
 //	    TILE_XY(pcity.tile));
 //  }
 //
-//  pcity = player_find_city_by_id(game.player_ptr, hc);
+//  pcity = player_find_city_by_id(Game.game.player_ptr, hc);
 //  if (pcity) {
 //    refresh_city_dialog(pcity);
 //    util.freelog(Log.LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
-//	    get_nation_name(city_owner(pcity).nation),
+//	    get_nation_name(City.city_owner(pcity).nation),
 //	    TILE_XY(pcity.tile));
 //  }
 //
@@ -129,7 +129,7 @@ public class Climisc{
 //  tile ptile = pcity.tile;
 //
 //  util.freelog(Log.LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
-//	  get_nation_name(city_owner(pcity).nation), TILE_XY(ptile));
+//	  get_nation_name(City.city_owner(pcity).nation), TILE_XY(ptile));
 //
 //  /* Explicitly remove all improvements, to properly remove any global effects
 //     and to handle the preservation of "destroyed" effects. */
@@ -170,7 +170,7 @@ public class Climisc{
 //  append_output_window(buf);
 //
 //  connection_do_buffer(&aconnection);
-//  city_list_iterate (game.player_ptr.cities, pcity) {
+//  city_list_iterate (Game.game.player_ptr.cities, pcity) {
 //    if (((fr_is_unit &&
 //	  (pcity.is_building_unit) &&
 //	  (pcity.currently_building == fr_id)) ||
@@ -246,7 +246,7 @@ public class Climisc{
 //  case CLAUSE_ADVANCE:
 //    buf = String.format "The %s give %s",
 //		Nation.get_nation_name_plural(pclause.from.nation),
-//		get_tech_name(game.player_ptr, pclause.value));
+//		get_tech_name(Game.game.player_ptr, pclause.value));
 //    break;
 //  case CLAUSE_CITY:
 //    pcity = find_city_by_id(pclause.value);
@@ -304,8 +304,8 @@ public class Climisc{
 //int client_research_sprite()
 //{
 //  return (NUM_TILES_PROGRESS *
-//	  game.player_ptr.research.bulbs_researched) /
-//      (total_bulbs_required(game.player_ptr) + 1);
+//	  Game.game.player_ptr.research.bulbs_researched) /
+//      (total_bulbs_required(Game.game.player_ptr) + 1);
 //}
 //
 ///**************************************************************************
@@ -314,12 +314,12 @@ public class Climisc{
 //int client_warming_sprite()
 //{
 //  int index;
-//  if ((game.globalwarming <= 0) &&
-//      (game.heating < (NUM_TILES_PROGRESS / 2))) {
-//    index = MAX(0, game.heating);
+//  if ((Game.game.globalwarming <= 0) &&
+//      (Game.game.heating < (NUM_TILES_PROGRESS / 2))) {
+//    index = MAX(0, Game.game.heating);
 //  } else {
 //    index = Math.min(NUM_TILES_PROGRESS,
-//		(MAX(0, 4 + game.globalwarming) / 5) +
+//		(MAX(0, 4 + Game.game.globalwarming) / 5) +
 //		((NUM_TILES_PROGRESS / 2) - 1));
 //  }
 //  return index;
@@ -331,12 +331,12 @@ public class Climisc{
 //int client_cooling_sprite()
 //{
 //  int index;
-//  if ((game.nuclearwinter <= 0) &&
-//      (game.cooling < (NUM_TILES_PROGRESS / 2))) {
-//    index = MAX(0, game.cooling);
+//  if ((Game.game.nuclearwinter <= 0) &&
+//      (Game.game.cooling < (NUM_TILES_PROGRESS / 2))) {
+//    index = MAX(0, Game.game.cooling);
 //  } else {
 //    index = Math.min(NUM_TILES_PROGRESS,
-//		(MAX(0, 4 + game.nuclearwinter) / 5) +
+//		(MAX(0, 4 + Game.game.nuclearwinter) / 5) +
 //		((NUM_TILES_PROGRESS / 2) - 1));
 //  }
 //  return index;
@@ -358,17 +358,17 @@ public class Climisc{
 //  can_slide = false;
 //  if ((punit = get_unit_in_focus())) {
 //    center_tile_mapcanvas(punit.tile);
-//  } else if ((pcity = game.player_ptr.find_palace())) {
+//  } else if ((pcity = Game.game.player_ptr.find_palace())) {
 //    /* Else focus on the capital. */
 //    center_tile_mapcanvas(pcity.tile);
-//  } else if (city_list_size(&game.player_ptr.cities) > 0) {
+//  } else if (Game.game.player_ptr.cities.foo_list_size() > 0) {
 //    /* Just focus on any city. */
-//    pcity = city_list_get(&game.player_ptr.cities, 0);
+//    pcity = city_list_get(&Game.game.player_ptr.cities, 0);
 //    assert(pcity != null);
 //    center_tile_mapcanvas(pcity.tile);
-//  } else if (unit_list_size(&game.player_ptr.units) > 0) {
+//  } else if (Game.game.player_ptr.units.foo_list_size() > 0) {
 //    /* Just focus on any unit. */
-//    punit = unit_list_get(&game.player_ptr.units, 0);
+//    punit = unit_list_get(&Game.game.player_ptr.units, 0);
 //    assert(punit != null);
 //    center_tile_mapcanvas(punit.tile);
 //  } else {
@@ -443,7 +443,7 @@ public class Climisc{
 //  if (is_unit)
 //    return id + B_LAST;
 //  if (is_worklist)
-//    return id + B_LAST + U_LAST;
+//    return id + B_LAST + unittype.U_LAST;
 //  return id;
 //}
 //
@@ -454,7 +454,7 @@ public class Climisc{
 //{
 //  assert(wid != WORKLIST_END);
 //
-//  return (wid >= B_LAST && wid < B_LAST + U_LAST);
+//  return (wid >= B_LAST && wid < B_LAST + unittype.U_LAST);
 //}
 //
 ///**************************************************************************
@@ -464,7 +464,7 @@ public class Climisc{
 //{
 //  assert(wid != WORKLIST_END);
 //
-//  return (wid >= B_LAST + U_LAST);
+//  return (wid >= B_LAST + unittype.U_LAST);
 //}
 //
 ///**************************************************************************
@@ -474,8 +474,8 @@ public class Climisc{
 //{
 //  assert(wid != WORKLIST_END);
 //
-//  if (wid >= B_LAST + U_LAST)
-//    return wid - (B_LAST + U_LAST);
+//  if (wid >= B_LAST + unittype.U_LAST)
+//    return wid - (B_LAST + unittype.U_LAST);
 //  if (wid >= B_LAST)
 //    return wid - B_LAST;
 //  return wid;
@@ -618,8 +618,8 @@ public class Climisc{
 //{
 //  cid first = append_units ? B_LAST : 0;
 //  cid last = (append_units
-//	      ? game.num_unit_types + B_LAST
-//	      : game.num_impr_types);
+//	      ? Game.game.num_unit_types + B_LAST
+//	      : Game.game.num_impr_types);
 //  cid cid;
 //  int items_used = 0;
 //
@@ -631,7 +631,7 @@ public class Climisc{
 //      continue;
 //
 //    if (!change_prod) {
-//      for (city pcity : game.player_ptr.cities.data) {
+//      for (city pcity : Game.game.player_ptr.cities.data) {
 //	append |= test_func(pcity, cid);
 //      }
 //      }
@@ -658,12 +658,12 @@ public class Climisc{
 //**************************************************************************/
 //int collect_cids2(cid * dest_cids)
 //{
-//  boolean mapping[B_LAST + U_LAST];
+//  boolean mapping[B_LAST + unittype.U_LAST];
 //  int cids_used = 0;
 //  cid cid;
 //
 //  memset(mapping, 0, sizeof(mapping));
-//  for (city pcity : game.player_ptr.cities.data) {
+//  for (city pcity : Game.game.player_ptr.cities.data) {
 //    mapping[cid_encode_from_city(pcity)] = true;
 //  }
 //  }
@@ -686,14 +686,14 @@ public class Climisc{
 //  int cids_used = 0;
 //
 //  impr_type_iterate(id) {
-//    if (can_player_build_improvement(game.player_ptr, id)) {
+//    if (can_player_build_improvement(Game.game.player_ptr, id)) {
 //      dest_cids[cids_used] = cid_encode(false, id);
 //      cids_used++;
 //    }
 //  } impr_type_iterate_end;
 //
 //  unit_type_iterate(id) {
-//    if (can_player_build_unit(game.player_ptr, id)) {
+//    if (can_player_build_unit(Game.game.player_ptr, id)) {
 //      dest_cids[cids_used] = cid_encode(true, id);
 //      cids_used++;
 //    }
@@ -711,9 +711,9 @@ public class Climisc{
 //  int cids_used = 0;
 //
 //  impr_type_iterate(id) {
-//    boolean can_build = can_player_build_improvement(game.player_ptr, id);
+//    boolean can_build = can_player_build_improvement(Game.game.player_ptr, id);
 //    boolean can_eventually_build =
-//	can_player_eventually_build_improvement(game.player_ptr, id);
+//	can_player_eventually_build_improvement(Game.game.player_ptr, id);
 //
 //    /* If there's a city, can the city build the improvement? */
 //    if (pcity) {
@@ -730,9 +730,9 @@ public class Climisc{
 //  } impr_type_iterate_end;
 //
 //  unit_type_iterate(id) {
-//    boolean can_build = can_player_build_unit(game.player_ptr, id);
+//    boolean can_build = can_player_build_unit(Game.game.player_ptr, id);
 //    boolean can_eventually_build =
-//	can_player_eventually_build_unit(game.player_ptr, id);
+//	can_player_eventually_build_unit(Game.game.player_ptr, id);
 //
 //    /* If there's a city, can the city build the unit? */
 //    if (pcity) {
@@ -774,16 +774,16 @@ public class Climisc{
 //int collect_wids1(wid * dest_wids, city pcity, boolean wl_first, 
 //                  boolean advanced_tech)
 //{
-//  cid cids[U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + B_LAST];
 //  int item, cids_used, wids_used = 0;
-//  struct item items[U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //
 //  /* Fill in the global worklists now?                      */
 //  /* perhaps judicious use of goto would be good here? -mck */
-//  if (wl_first && game.player_ptr.worklists[0].is_valid && pcity) {
+//  if (wl_first && Game.game.player_ptr.worklists[0].is_valid && pcity) {
 //    int i;
 //    for (i = 0; i < MAX_NUM_WORKLISTS; i++) {
-//      if (game.player_ptr.worklists[i].is_valid) {
+//      if (Game.game.player_ptr.worklists[i].is_valid) {
 //	dest_wids[wids_used] = wid_encode(false, true, i);
 //	wids_used++;
 //      }
@@ -801,10 +801,10 @@ public class Climisc{
 //  }
 //
 //  /* we didn't fill in the global worklists above */
-//  if (!wl_first && game.player_ptr.worklists[0].is_valid && pcity) {
+//  if (!wl_first && Game.game.player_ptr.worklists[0].is_valid && pcity) {
 //    int i;
 //    for (i = 0; i < MAX_NUM_WORKLISTS; i++) {
-//      if (game.player_ptr.worklists[i].is_valid) {
+//      if (Game.game.player_ptr.worklists[i].is_valid) {
 //        dest_wids[wids_used] = wid_encode(false, true, i);
 //        wids_used++;
 //      }
@@ -821,7 +821,7 @@ public class Climisc{
 //{
 //  unit_list plist;
 //
-//  if (pcity.owner != game.player_idx) {
+//  if (pcity.owner != Game.game.player_idx) {
 //    plist = &pcity.info_units_supported;
 //  } else {
 //    plist = &pcity.units_supported;
@@ -837,7 +837,7 @@ public class Climisc{
 //{
 //  unit_list plist;
 //
-//  if (pcity.owner != game.player_idx) {
+//  if (pcity.owner != Game.game.player_idx) {
 //    plist = &pcity.info_units_present;
 //  } else {
 //    plist = &pcity.tile.units;
@@ -863,7 +863,7 @@ public class Climisc{
 //
 //  if (BOOL_VAL(where & MW_OUTPUT)
 //      || get_client_state() != CLIENT_GAME_RUNNING_STATE) {
-//    /* When the game isn't running, the messages dialog isn't present and
+//    /* When the Game.game isn't running, the messages dialog isn't present and
 //     * we want to send all messages to the chatline.  There shouldn't be
 //     * any problem with server spam in pregame anyway. */
 //    append_output_window_full(message, conn_id);
@@ -872,7 +872,7 @@ public class Climisc{
 //    add_notify_window(message, ptile, event);
 //  }
 //  if (BOOL_VAL(where & MW_POPUP) &&
-//      (!game.player_ptr.ai.control || ai_popup_windows)) {
+//      (!Game.game.player_ptr.ai.control || ai_popup_windows)) {
 //    popup_notify_goto_dialog("Popup Request", message, ptile);
 //  }
 //
@@ -968,7 +968,7 @@ public class Climisc{
 //enum known_type map_get_known(final tile ptile,
 //			      player pplayer)
 //{
-//  assert(pplayer == game.player_ptr);
+//  assert(pplayer == Game.game.player_ptr);
 //  return tile_get_known(ptile);
 //}
 //
@@ -987,7 +987,7 @@ public class Climisc{
 //  } else {
 //    pcity_near = null;
 //    pcity_near_dist = -1;
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      for (city pcity_current : pplayer.cities.data) {
 //        int dist = sq_map_distance(pcity_current.tile, punit.tile);
 //        if (pcity_near_dist == -1 || dist < pcity_near_dist
@@ -1028,7 +1028,7 @@ public class Climisc{
 //    return;
 //  }
 //
-//  if (game.player_ptr.economic.gold >= value) {
+//  if (Game.game.player_ptr.economic.gold >= value) {
 //    city_buy_production(pcity);
 //  } else {
 //    char buf[512];
@@ -1042,7 +1042,7 @@ public class Climisc{
 //
 //    buf = util.my_snprintf(
 //		"Game: %s costs %d gold and you only have %d gold.",
-//		name, value, game.player_ptr.economic.gold);
+//		name, value, Game.game.player_ptr.economic.gold);
 //    append_output_window(buf);
 //  }
 //}
@@ -1056,13 +1056,13 @@ public class Climisc{
 //    return;
 //  }
 //
-//  lux_end = game.player_ptr.economic.luxury;
-//  sci_end = lux_end + game.player_ptr.economic.science;
+//  lux_end = Game.game.player_ptr.economic.luxury;
+//  sci_end = lux_end + Game.game.player_ptr.economic.science;
 //  tax_end = 100;
 //
-//  lux = game.player_ptr.economic.luxury;
-//  sci = game.player_ptr.economic.science;
-//  tax = game.player_ptr.economic.tax;
+//  lux = Game.game.player_ptr.economic.luxury;
+//  sci = Game.game.player_ptr.economic.science;
+//  tax = Game.game.player_ptr.economic.tax;
 //
 //  i *= 10;
 //  if (i < lux_end) {

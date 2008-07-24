@@ -21,7 +21,7 @@ public class Happiness{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //
 //#include "gui_mem.h"

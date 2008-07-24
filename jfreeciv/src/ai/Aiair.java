@@ -186,12 +186,12 @@ public class Aiair{
 //  /* Let's find something to bomb */
 //  iterate_outward(ptile, max_dist, tile1) {
 //
-//    if (ai_handicap(pplayer, H_MAP) && !map_is_known(tile1, pplayer)) {
+//    if (ai_handicap(pplayer, H_MAP) && !Maphand.map_is_known(tile1, pplayer)) {
 //      /* The target tile is unknown */
 //      continue;
 //    }
 //    if (ai_handicap(pplayer, H_FOG) 
-//        && !map_is_known_and_seen(tile1, pplayer)) {
+//        && !Maphand.map_is_known_and_seen(tile1, pplayer)) {
 //      /* The tile is fogged */
 //      continue;
 //    }
@@ -339,7 +339,7 @@ public class Aiair{
 //      /* We could use ai_military_findvictim here, but I don't trust it... */
 //      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //      if (is_tiles_adjacent(punit.tile, punit.goto_tile)) {
-//        () handle_unit_move_request(punit, punit.goto_tile,
+//        () Unithand.handle_unit_move_request(punit, punit.goto_tile,
 //					true, false);
 //      }
 //    } else if (ai_find_strategic_airbase(punit, &dst_tile)) {

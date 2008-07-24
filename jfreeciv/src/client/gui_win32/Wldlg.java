@@ -28,7 +28,7 @@ public class Wldlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "gui_main.h"
 //#include "gui_stuff.h"
 //#include "helpdlg.h"
@@ -72,7 +72,7 @@ public class Wldlg{
 //  WorklistCancelCallback cancel_callback;
 //  wid worklist_wids[MAX_LEN_WORKLIST];
 //  /* maps from slot to wid; last one contains WORKLIST_END */
-//  wid worklist_avail_wids[B_LAST + U_LAST + MAX_NUM_WORKLISTS + 1];
+//  wid worklist_avail_wids[B_LAST + unittype.U_LAST + MAX_NUM_WORKLISTS + 1];
 //
 //};
 //
@@ -512,7 +512,7 @@ public class Wldlg{
 //  
 //  /* target is a global worklist id */
 //  if (wid_is_worklist(wid)) {
-//    player pplr = city_owner(peditor.pcity);
+//    player pplr = City.city_owner(peditor.pcity);
 //    worklist pwl = &pplr.worklists[wid_id(wid)];
 //
 //    copy_worklist_to_editor(pwl, peditor, where);
@@ -924,7 +924,7 @@ public class Wldlg{
 //static void targets_list_update(worklist_editor peditor)
 //{
 //  int i = 0, wids_used = 0;
-//  player pplr = game.player_ptr;
+//  player pplr = Game.game.player_ptr;
 //  int advanced_tech;
 //  char *row[COLUMNS];
 //  char buf[COLUMNS][BUFFER_SIZE];

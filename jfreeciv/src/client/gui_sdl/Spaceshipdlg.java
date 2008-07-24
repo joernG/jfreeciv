@@ -25,7 +25,7 @@ public class Spaceshipdlg{
 //#include <SDL/SDL.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "map.h"
 //
@@ -120,8 +120,8 @@ public class Spaceshipdlg{
 //  
 //  /* launch button */
 //  pBuf = pSpaceShp.pEndWidgetList.prev.prev;
-//  if(game.spacerace
-//     && pPlayer.player_no == game.player_idx
+//  if(Game.game.spacerace
+//     && pPlayer.player_no == Game.game.player_idx
 //     && pPlayer.spaceship.state == spaceship_state.SSHIP_STARTED
 //     && pPlayer.spaceship.success_rate > 0.0) {
 //    set_wstate(pBuf, FC_WS_NORMAL);

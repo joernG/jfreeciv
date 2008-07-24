@@ -27,7 +27,7 @@ public class Cityrep{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "packets.h"
 //#include "shared.h"
@@ -251,7 +251,7 @@ public class Cityrep{
 //    
 //  pLast = pBuf;
 //  count = 0; 
-//  for (city pCity : game.player_ptr.cities.data) {
+//  for (city pCity : Game.game.player_ptr.cities.data) {
 //    
 //    pStr = create_str16_from_char(pCity.name, 12);
 //    pStr.style |= TTF_STYLE_BOLD;
@@ -1092,7 +1092,7 @@ public class Cityrep{
 //  
 //    /* find if the lists are identical (if not then rebuild all) */
 //    pWidget = pCityRep.pEndActiveWidgetList;/* name of first city */
-//    for (city pCity : game.player_ptr.cities.data) {
+//    for (city pCity : Game.game.player_ptr.cities.data) {
 //      if (pCity.id == MAX_ID - pWidget.ID) {
 //        count = COL;
 //        while(count) {
@@ -1112,7 +1112,7 @@ public class Cityrep{
 //
 //    /* update widget city list (widget list is the same that city list) */
 //    pWidget = pCityRep.pEndActiveWidgetList;
-//    for (city pCity : game.player_ptr.cities.data) {
+//    for (city pCity : Game.game.player_ptr.cities.data) {
 //      pWidget = real_city_report_dialog_update_city(pWidget, pCity);  
 //    } }
 //

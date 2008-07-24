@@ -28,7 +28,7 @@ public class Plrdlg{
 //
 //#include "diptreaty.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "packets.h"
 //#include "nation.h"
 //#include "player.h"
@@ -153,7 +153,7 @@ public class Plrdlg{
 //      gtk_widget_set_sensitive(players_sship_command, false);
 //    }
 //
-//    switch (pplayer_get_diplstate(game.player_ptr, get_player(plrno)).type) {
+//    switch (pplayer_get_diplstate(Game.game.player_ptr, get_player(plrno)).type) {
 //    case diplstate_type.DS_WAR:
 //    case diplstate_type.DS_NO_CONTACT:
 //      gtk_widget_set_sensitive(players_war_command, false);
@@ -161,12 +161,12 @@ public class Plrdlg{
 //    default:
 //      gtk_widget_set_sensitive(players_war_command,
 //			       can_client_issue_orders()
-//			       && game.player_idx != plrno);
+//			       && Game.game.player_idx != plrno);
 //    }
 //
 //    gtk_widget_set_sensitive(players_vision_command,
 //			     can_client_issue_orders()
-//			     && gives_shared_vision(game.player_ptr, plr));
+//			     && gives_shared_vision(Game.game.player_ptr, plr));
 //
 //    gtk_widget_set_sensitive(players_meet_command, can_meet_with_player(plr));
 //    gtk_widget_set_sensitive(players_int_command, can_intel_with_player(plr));
@@ -560,7 +560,7 @@ public class Plrdlg{
 //    -1);
 //
 //   /* now add some eye candy ... */
-//   switch (pplayer_get_diplstate(game.player_ptr, plr).type) {
+//   switch (pplayer_get_diplstate(Game.game.player_ptr, plr).type) {
 //   case diplstate_type.DS_WAR:
 //     weight = PANGO_WEIGHT_NORMAL;
 //     style = PANGO_STYLE_ITALIC;
@@ -588,11 +588,11 @@ public class Plrdlg{
 //void update_players_dialog()
 //{
 //  if (players_dialog_shell && !is_plrdlg_frozen()) {
-//    gboolean exists[game.nplayers];
+//    gboolean exists[Game.game.nplayers];
 //    gint i;
 //    GtkTreeIter it, it_next;
 //
-//    for (i = 0; i < game.nplayers; i++) {
+//    for (i = 0; i < Game.game.nplayers; i++) {
 //      exists[i] = false;
 //    }
 //
@@ -621,7 +621,7 @@ public class Plrdlg{
 //      } while (more);
 //    }
 //
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      /* skip barbarians */
 //      if (!is_barbarian(pplayer)) {
 //	if (!exists[pplayer.player_no]) {
@@ -707,8 +707,8 @@ public class Plrdlg{
 //
 //    gtk_tree_model_get(model, &it, ncolumns - 1, &plrno, -1);
 //
-//    if (can_intel_with_player(&game.players[plrno])) {
-//      popup_intel_dialog(&game.players[plrno]);
+//    if (can_intel_with_player(&Game.game.players[plrno])) {
+//      popup_intel_dialog(&Game.game.players[plrno]);
 //    }
 //  }
 //}
@@ -725,7 +725,7 @@ public class Plrdlg{
 //    gint plrno;
 //
 //    gtk_tree_model_get(model, &it, ncolumns - 1, &plrno, -1);
-//    popup_spaceship_dialog(&game.players[plrno]);
+//    popup_spaceship_dialog(&Game.game.players[plrno]);
 //  }
 //}
 //

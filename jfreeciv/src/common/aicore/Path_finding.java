@@ -20,7 +20,7 @@ public class Path_finding{
 //
 //#include <assert.h>
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -209,11 +209,11 @@ public class Path_finding{
 //  }
 //
 //  if (params.get_zoc) {
-//    boolean my_zoc = (ptile.city || is_ocean(ptile.terrain)
+//    boolean my_zoc = (ptile.city || Terrain_H.is_ocean(ptile.terrain)
 //		   || params.get_zoc(params.owner, ptile));
 //    /* ZoC rules cannot prevent us from moving into/attacking an occupied 
 //     * tile.  Other rules can, but we don't care about them here. */ 
-//    boolean occupied = (unit_list_size(&ptile.units) > 0
+//    boolean occupied = (ptile.units.foo_list_size() > 0
 //                     || ptile.city);
 //
 //    /* 2 means can move unrestricted from/into it, 

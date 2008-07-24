@@ -22,7 +22,7 @@ public class Plrdlg_common{
 //
 //#include "connection.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "support.h"
 //
 //#include "climisc.h"
@@ -120,7 +120,7 @@ public class Plrdlg_common{
 //*******************************************************************/
 //static final String col_embassy(player player)
 //{
-//  return get_embassy_status(game.player_ptr, player);
+//  return get_embassy_status(Game.game.player_ptr, player);
 //}
 //
 ///******************************************************************
@@ -131,10 +131,10 @@ public class Plrdlg_common{
 //  static char buf[100];
 //  final player_diplstate pds;
 //
-//  if (player == game.player_ptr) {
+//  if (player == Game.game.player_ptr) {
 //    return "-";
 //  } else {
-//    pds = pplayer_get_diplstate(game.player_ptr, player);
+//    pds = pplayer_get_diplstate(Game.game.player_ptr, player);
 //    if (pds.type == DS_CEASEFIRE) {
 //      buf = util.my_snprintf( "%s (%d)",
 //		  diplstate_text(pds.type), pds.turns_left);
@@ -150,10 +150,10 @@ public class Plrdlg_common{
 //*******************************************************************/
 //static final String col_love(player player)
 //{
-//  if (player == game.player_ptr || !player.ai.control) {
+//  if (player == Game.game.player_ptr || !player.ai.control) {
 //    return "-";
 //  } else {
-//    return love_text(player.ai.love[game.player_ptr.player_no]);
+//    return love_text(player.ai.love[Game.game.player_ptr.player_no]);
 //  }
 //}
 //
@@ -162,7 +162,7 @@ public class Plrdlg_common{
 //*******************************************************************/
 //static final String col_vision(player player)
 //{
-//  return get_vision_status(game.player_ptr, player);
+//  return get_vision_status(Game.game.player_ptr, player);
 //}
 //
 ///******************************************************************

@@ -349,7 +349,7 @@ public class Citydlg_common{
 //
 //	if (is_wonder(id)) {
 //	  state = "Wonder";
-//	  if (game.global_wonders[id] != 0) {
+//	  if (Game.game.global_wonders[id] != 0) {
 //	    state = "Built";
 //	  }
 //	  if (wonder_obsolete(id)) {
@@ -458,7 +458,7 @@ public class Citydlg_common{
 //  unit pmyunit = null;
 //
 //  unit_list_iterate((*punit_list), punit) {
-//    if (game.player_idx == punit.owner) {
+//    if (Game.game.player_idx == punit.owner) {
 //      /* Activate this unit. */
 //      pmyunit = punit;
 //      request_new_unit_activity(punit, unit_activity.ACTIVITY_IDLE);

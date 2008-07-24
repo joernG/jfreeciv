@@ -31,7 +31,7 @@ public class Finddlg{
 //#include <X11/Xaw/List.h>
 //#include <X11/Xaw/Viewport.h>
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "mem.h"
 //#include "player.h"
 //
@@ -152,13 +152,13 @@ public class Finddlg{
 //{
 //  int i, j;
 //
-//  for(i=0, ncities_total=0; i<game.nplayers; i++)
-//    ncities_total+=city_list_size(&game.players[i].cities);
+//  for(i=0, ncities_total=0; i<Game.game.nplayers; i++)
+//    ncities_total+=city_list_size(&Game.game.players[i].cities);
 //
 //  city_name_ptrs=fc_malloc(ncities_total*sizeof(char*));
 //  
-//  for(i=0, j=0; i<game.nplayers; i++) {
-//    city_list_iterate(game.players[i].cities, pcity) 
+//  for(i=0, j=0; i<Game.game.nplayers; i++) {
+//    city_list_iterate(Game.game.players[i].cities, pcity) 
 //      *(city_name_ptrs+j++)=mystrdup(pcity.name);
 //    }
 //  }

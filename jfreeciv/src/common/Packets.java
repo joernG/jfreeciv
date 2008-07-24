@@ -250,9 +250,9 @@ public class Packets{
 //
 //    packet_counter++;
 //    if (packet_type == PACKET_START_TURN
-//	&& last_start_turn_seen != game.turn) {
+//	&& last_start_turn_seen != Game.game.turn) {
 //	start_turn_seen=true;
-//      last_start_turn_seen = game.turn;
+//      last_start_turn_seen = Game.game.turn;
 //    }
 //
 //    if ((packet_type ==
@@ -286,9 +286,9 @@ public class Packets{
 //      }
 //      util.freelog(Log.LOG_NORMAL,
 //	      "turn=%d; transmitted %d bytes in %d packets;average size " +
-//	      "per packet %d bytes", game.turn, sum, packet_counter,
+//	      "per packet %d bytes", Game.game.turn, sum, packet_counter,
 //	      sum / packet_counter);
-//      util.freelog(Log.LOG_NORMAL, "turn=%d; transmitted %d bytes", game.turn,
+//      util.freelog(Log.LOG_NORMAL, "turn=%d; transmitted %d bytes", Game.game.turn,
 //	      pc.statistics.bytes_send);
 //    }    
 //    if (clear) {

@@ -23,7 +23,7 @@ public class Citymap{
 //#include <assert.h>
 //
 //#include "city.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#ifdef DEBUG
 //#include "log.h"
 //#endif
@@ -64,11 +64,11 @@ public class Citymap{
 //{
 //  /* The citymap is reinitialized at the start of ever turn.  This includes
 //   * a call to realloc, which only really matters if this is the first turn
-//   * of the game (but it's easier than a separate function to do this). */
+//   * of the Game.game (but it's easier than a separate function to do this). */
 //  citymap = fc_realloc(citymap, Map_H.MAX_MAP_INDEX * sizeof(*citymap));
 //  memset(citymap, 0, Map_H.MAX_MAP_INDEX * sizeof(*citymap));
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      map_city_radius_iterate(pcity.tile, ptile) {
 //        if (ptile.worked) {

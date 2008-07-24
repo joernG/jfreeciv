@@ -26,7 +26,7 @@ public class Graphics{
 //
 //#include "gtkpixcomm.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "shared.h"

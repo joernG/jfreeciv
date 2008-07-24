@@ -182,7 +182,7 @@ public class Connectdlg{
 //  ShowWindow(start_dlg, SW_HIDE);
 //  ShowWindow(players_dlg, SW_SHOWNORMAL);
 //
-//  game.nplayers = packet.nplayers;
+//  Game.game.nplayers = packet.nplayers;
 //  ListView_DeleteAllItems(players_listview);
 //
 //  for (i = 0; i < packet.nplayers; i++) {

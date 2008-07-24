@@ -32,7 +32,7 @@ public class Mapview{
 //#include <proto/intuition.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"		/* government_graphic() */
 //#include "Map.map.h"
 //#include "player.h"
@@ -99,7 +99,7 @@ public class Mapview{
 //    anim_timer = renew_timer_start(anim_timer, TIMER_USER, TIMER_ACTIVE);
 //
 //    if (punit0.hp > hp0
-//	&& myrand((punit0.hp - hp0) + (punit1.hp - hp1)) < punit0.hp - hp0)
+//	&& Rand.myrand((punit0.hp - hp0) + (punit1.hp - hp1)) < punit0.hp - hp0)
 //      punit0.hp--;
 //    else if (punit1.hp > hp1)
 //      punit1.hp--;
@@ -191,24 +191,24 @@ public class Mapview{
 //  int d;
 //
 //  settextf(main_people_text, "Population: %s",
-//	   population_to_text(civ_population(game.player_ptr)));
-//  settextf(main_year_text, "Year: %s", Shared.textyear(game.year));
-//  settextf(main_gold_text, "Gold: %d", game.player_ptr.economic.gold);
+//	   population_to_text(civ_population(Game.game.player_ptr)));
+//  settextf(main_year_text, "Year: %s", Shared.textyear(Game.game.year));
+//  settextf(main_gold_text, "Gold: %d", Game.game.player_ptr.economic.gold);
 //  settextf(main_tax_text, "Tax:%d Lux:%d Sci:%d",
-//	   game.player_ptr.economic.tax,
-//	   game.player_ptr.economic.luxury,
-//	   game.player_ptr.economic.science);
+//	   Game.game.player_ptr.economic.tax,
+//	   Game.game.player_ptr.economic.luxury,
+//	   Game.game.player_ptr.economic.science);
 //
 //  set_indicator_icons(client_research_sprite(),
 //		      client_warming_sprite(),
 //		      client_cooling_sprite(),
-//		      game.player_ptr.government);
+//		      Game.game.player_ptr.government);
 //
 //  d = 0;
-//  for (; d < (game.player_ptr.economic.luxury) / 10; d++)
+//  for (; d < (Game.game.player_ptr.economic.luxury) / 10; d++)
 //    set(main_econ_sprite[d], MUIA_Sprite_Sprite, sprites.tax_luxury);
 //
-//  for (; d < (game.player_ptr.economic.science + game.player_ptr.economic.luxury) / 10; d++)
+//  for (; d < (Game.game.player_ptr.economic.science + Game.game.player_ptr.economic.luxury) / 10; d++)
 //    set(main_econ_sprite[d], MUIA_Sprite_Sprite, sprites.tax_science);
 //
 //  for (; d < 10; d++)
@@ -243,7 +243,7 @@ public class Mapview{
 //  {
 //    city pcity;
 //    int units = 0;
-//    pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
+//    pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //
 //    settextf(main_unitname_text, "%s%s", punit.unit_type().name,
 //	     (punit.veteran) ? " (veteran)" : "");
@@ -333,7 +333,7 @@ public class Mapview{
 //  set(main_sun_sprite, MUIA_Sprite_Sprite, sprites.warming[sol]);
 //  set(main_flake_sprite, MUIA_Sprite_Sprite, sprites.cooling[flake]);
 //
-//  if (game.government_count == 0)
+//  if (Game.game.government_count == 0)
 //  {
 //    /* not sure what to do here */
 //    /* HACK: the UNHAPPY citizen is used for the government

@@ -27,7 +27,7 @@ public class Repodlgs{
 //#include <gtk/gtk.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "shared.h"
@@ -78,7 +78,7 @@ public class Repodlgs{
 //  int is_impr;
 //  int type;
 //};
-//static struct economy_row economy_row_type[U_LAST + B_LAST];
+//static struct economy_row economy_row_type[unittype.U_LAST + B_LAST];
 //
 //static GtkWidget *economy_dialog_shell = null;
 //static GtkWidget *economy_label2;
@@ -93,7 +93,7 @@ public class Repodlgs{
 //static void activeunits_refresh_callback(GtkWidget * w, gpointer data);
 //static void activeunits_list_callback(GtkWidget * w, gint row, gint column);
 //static void activeunits_list_ucallback(GtkWidget * w, gint row, gint column);
-//static int activeunits_type[U_LAST];
+//static int activeunits_type[unittype.U_LAST];
 //static GtkWidget *activeunits_dialog_shell = null;
 //static GtkWidget *activeunits_label2;
 //static GtkWidget *activeunits_list;
@@ -275,10 +275,10 @@ public class Repodlgs{
 //    gtk_widget_set_sensitive(science_change_menu_button,
 //			     can_client_issue_orders());
 //    text = util.my_snprintf( "%d/%d",
-//		game.player_ptr.research.bulbs_researched,
-//		total_bulbs_required(game.player_ptr));
-//    pct=CLAMP((gfloat) game.player_ptr.research.bulbs_researched /
-//		total_bulbs_required(game.player_ptr), 0.0, 1.0);
+//		Game.game.player_ptr.research.bulbs_researched,
+//		total_bulbs_required(Game.game.player_ptr));
+//    pct=CLAMP((gfloat) Game.game.player_ptr.research.bulbs_researched /
+//		total_bulbs_required(Game.game.player_ptr), 0.0, 1.0);
 //
 //    gtk_progress_set_percentage(GTK_PROGRESS(science_current_label), pct);
 //    gtk_progress_set_format_string(GTK_PROGRESS(science_current_label), text);
@@ -301,7 +301,7 @@ public class Repodlgs{
 //    science_dialog_update();
 //  }
 //  else {  
-//    int steps = num_unknown_techs_for_goal(game.player_ptr, to);
+//    int steps = num_unknown_techs_for_goal(Game.game.player_ptr, to);
 //    char text[512];
 //
 //    text = util.my_snprintf(
@@ -352,7 +352,7 @@ public class Repodlgs{
 //    a_str=advances[a].name;
 //  } else {
 //    text_a = util.my_snprintf( "Future Tech. %d",
-//		a - game.num_tech_types);
+//		a - Game.game.num_tech_types);
 //    a_str=text_a;
 //  }
 //
@@ -360,7 +360,7 @@ public class Repodlgs{
 //    b_str=advances[b].name;
 //  } else {
 //    text_b = util.my_snprintf( "Future Tech. %d",
-//		b - game.num_tech_types);
+//		b - Game.game.num_tech_types);
 //    b_str=text_b;
 //  }
 //
@@ -393,8 +393,8 @@ public class Repodlgs{
 //  }
 //
 //  /* collect all researched techs in sorting_list */
-//  for(i=A_FIRST; i<game.num_tech_types; i++) {
-//    if ((get_invention(game.player_ptr, i)==TECH_KNOWN)) {
+//  for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
+//    if ((get_invention(Game.game.player_ptr, i)==TECH_KNOWN)) {
 //      sorting_list = g_list_append(sorting_list, GINT_TO_POINTER(i));
 //    }
 //  }
@@ -417,16 +417,16 @@ public class Repodlgs{
 //  popupmenu = gtk_menu_new();
 //
 //  text = util.my_snprintf( "%d/%d",
-//	      game.player_ptr.research.bulbs_researched,
-//	      total_bulbs_required(game.player_ptr));
+//	      Game.game.player_ptr.research.bulbs_researched,
+//	      total_bulbs_required(Game.game.player_ptr));
 //
-//  pct=CLAMP((gfloat) game.player_ptr.research.bulbs_researched /
-//	    total_bulbs_required(game.player_ptr), 0.0, 1.0);
+//  pct=CLAMP((gfloat) Game.game.player_ptr.research.bulbs_researched /
+//	    total_bulbs_required(Game.game.player_ptr), 0.0, 1.0);
 //
 //  gtk_progress_set_percentage(GTK_PROGRESS(science_current_label), pct);
 //  gtk_progress_set_format_string(GTK_PROGRESS(science_current_label), text);
 //
-//  if (game.player_ptr.research.researching == A_UNSET) {
+//  if (Game.game.player_ptr.research.researching == A_UNSET) {
 //    item = gtk_menu_item_new_with_label(advances[A_NONE].name);
 //    gtk_menu_shell_append(GTK_MENU_SHELL(popupmenu), item);
 //  }
@@ -435,19 +435,19 @@ public class Repodlgs{
 //   * hist will hold afterwards the techid of the current choice
 //   */
 //  hist=0;
-//  if (!is_future_tech(game.player_ptr.research.researching)) {
-//    for(i=A_FIRST; i<game.num_tech_types; i++) {
-//      if(get_invention(game.player_ptr, i)!=TECH_REACHABLE)
+//  if (!is_future_tech(Game.game.player_ptr.research.researching)) {
+//    for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
+//      if(get_invention(Game.game.player_ptr, i)!=TECH_REACHABLE)
 //	continue;
 //
-//      if (i==game.player_ptr.research.researching)
+//      if (i==Game.game.player_ptr.research.researching)
 //	hist=i;
 //      sorting_list = g_list_append(sorting_list, GINT_TO_POINTER(i));
 //    }
 //  } else {
 //    sorting_list = g_list_append(sorting_list,
-//				 GINT_TO_POINTER(game.num_tech_types + 1 +
-//						 game.player_ptr.
+//				 GINT_TO_POINTER(Game.game.num_tech_types + 1 +
+//						 Game.game.player_ptr.
 //						 future_tech));
 //  }
 //
@@ -457,12 +457,12 @@ public class Repodlgs{
 //    final gchar *data;
 //
 //    if (GPOINTER_TO_INT(g_list_nth_data(sorting_list, i)) <
-//	game.num_tech_types) {
+//	Game.game.num_tech_types) {
 //      data=advances[GPOINTER_TO_INT(g_list_nth_data(sorting_list, i))].name;
 //    } else {
 //      text = util.my_snprintf( "Future Tech. %d",
 //		  GPOINTER_TO_INT(g_list_nth_data(sorting_list, i))
-//		  - game.num_tech_types);
+//		  - Game.game.num_tech_types);
 //      data=text;
 //    }
 //
@@ -488,13 +488,13 @@ public class Repodlgs{
 //  gtk_widget_destroy(goalmenu);
 //  goalmenu = gtk_menu_new();
 //  
-//  steps = num_unknown_techs_for_goal(game.player_ptr,
-//				     game.player_ptr.ai.tech_goal);
+//  steps = num_unknown_techs_for_goal(Game.game.player_ptr,
+//				     Game.game.player_ptr.ai.tech_goal);
 //  text = util.my_snprintf( PL("(%d step)", "(%d steps)", steps),
 //	      steps);
 //  gtk_set_label(science_goal_label,text);
 //
-//  if (game.player_ptr.ai.tech_goal == A_UNSET) {
+//  if (Game.game.player_ptr.ai.tech_goal == A_UNSET) {
 //    item = gtk_menu_item_new_with_label(advances[A_NONE].name);
 //    gtk_menu_append(GTK_MENU(goalmenu), item);
 //  }
@@ -503,13 +503,13 @@ public class Repodlgs{
 //   * hist will hold afterwards the techid of the current choice
 //   */
 //  hist=0;
-//  for(i=A_FIRST; i<game.num_tech_types; i++) {
-//    if (tech_is_available(game.player_ptr, i)
-//        && get_invention(game.player_ptr, i) != TECH_KNOWN
+//  for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
+//    if (tech_is_available(Game.game.player_ptr, i)
+//        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
 //        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
-//        && (num_unknown_techs_for_goal(game.player_ptr, i) < 11
-//	    || i == game.player_ptr.ai.tech_goal)) {
-//      if (i==game.player_ptr.ai.tech_goal)
+//        && (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
+//	    || i == Game.game.player_ptr.ai.tech_goal)) {
+//      if (i==Game.game.player_ptr.ai.tech_goal)
 //	hist=i;
 //      sorting_list = g_list_append(sorting_list, GINT_TO_POINTER(i));
 //    }
@@ -668,11 +668,11 @@ public class Repodlgs{
 //  int i = economy_row_type[row].type;
 //  
 //  if (economy_row_type[row].is_impr == true) {
-//    boolean is_sellable = (i >= 0 && i < game.num_impr_types && !is_wonder(i));
+//    boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !is_wonder(i));
 //
 //    gtk_widget_set_sensitive(sellobsolete_command, is_sellable
 //			     && can_client_issue_orders()
-//			     && improvement_obsolete(game.player_ptr, i));
+//			     && improvement_obsolete(Game.game.player_ptr, i));
 //    gtk_widget_set_sensitive(sellall_command, is_sellable
 //			     && can_client_issue_orders());
 //  } else {
@@ -742,7 +742,7 @@ public class Repodlgs{
 //    gchar *row  [4];
 //    char economy_total[48];
 //    struct improvement_entry entries[B_LAST];
-//    struct unit_entry entries_units[U_LAST];
+//    struct unit_entry entries_units[unittype.U_LAST];
 //
 //    gtk_clist_freeze(GTK_CLIST(economy_list));
 //    gtk_clist_clear(GTK_CLIST(economy_list));
@@ -917,7 +917,7 @@ public class Repodlgs{
 //void activeunits_list_callback(GtkWidget *w, gint row, gint column)
 //{
 //  if ((unit_type_exists(activeunits_type[row])) &&
-//      (can_upgrade_unittype(game.player_ptr, activeunits_type[row]) != -1))
+//      (can_upgrade_unittype(Game.game.player_ptr, activeunits_type[row]) != -1))
 //    gtk_widget_set_sensitive(upgrade_command, can_client_issue_orders());
 //}
 //
@@ -955,16 +955,16 @@ public class Repodlgs{
 //  ut1 = activeunits_type[row];
 //  if (!(unit_type_exists (ut1)))
 //    return;
-//  /* puts(unit_types[ut1].name); */
+//  /* puts(Unittype_P.unit_types[ut1].name); */
 //
-//  ut2 = can_upgrade_unittype(game.player_ptr, activeunits_type[row]);
+//  ut2 = can_upgrade_unittype(Game.game.player_ptr, activeunits_type[row]);
 //
 //  buf = util.my_snprintf(
 //	  ("Upgrade as many %s to %s as possible for %d gold each?\n" +
 //	    "Treasury contains %d gold."),
-//	  unit_types[ut1].name, unit_types[ut2].name,
-//	  unit_upgrade_price(game.player_ptr, ut1, ut2),
-//	  game.player_ptr.economic.gold);
+//	  Unittype_P.unit_types[ut1].name, Unittype_P.unit_types[ut2].name,
+//	  unit_upgrade_price(Game.game.player_ptr, ut1, ut2),
+//	  Game.game.player_ptr.economic.gold);
 //
 //  popup_message_dialog(top_vbox, /*"upgradedialog" */
 //		       "Upgrade Obsolete Units", buf,
@@ -1006,7 +1006,7 @@ public class Repodlgs{
 //  if(is_report_dialogs_frozen()) return;
 //  if(activeunits_dialog_shell) {
 //    int    i, k, can;
-//    struct repoinfo unitarray[U_LAST];
+//    struct repoinfo unitarray[unittype.U_LAST];
 //    struct repoinfo unittotals;
 //    char   activeunits_total[100];
 //    gchar *row[AU_COL];
@@ -1020,7 +1020,7 @@ public class Repodlgs{
 //    }
 //
 //    memset(unitarray, '\0', sizeof(unitarray));
-//    for (unit punit : game.player_ptr.units.data) {
+//    for (unit punit : Game.game.player_ptr.units.data) {
 //      (unitarray[punit.type].active_count)++;
 //      if (punit.homecity) {
 //	unitarray[punit.type].upkeep_shield += punit.upkeep;
@@ -1029,7 +1029,7 @@ public class Repodlgs{
 //      }
 //    }
 //    }
-//    city_list_iterate(game.player_ptr.cities,pcity) {
+//    city_list_iterate(Game.game.player_ptr.cities,pcity) {
 //      if (pcity.is_building_unit &&
 //	  (unit_type_exists (pcity.currently_building)))
 //	(unitarray[pcity.currently_building].building_count)++;
@@ -1040,7 +1040,7 @@ public class Repodlgs{
 //    memset(&unittotals, '\0', sizeof(unittotals));
 //    unit_type_iterate(i) {
 //      if ((unitarray[i].active_count > 0) || (unitarray[i].building_count > 0)) {
-//	can = (can_upgrade_unittype(game.player_ptr, i) != -1);
+//	can = (can_upgrade_unittype(Game.game.player_ptr, i) != -1);
 //        my_snprintf(buf[0], sizeof(buf[0]), "%-27s", unit_name(i));
 //	my_snprintf(buf[1], sizeof(buf[1]), "%c", can ? '*': '-');
 //        my_snprintf(buf[2], sizeof(buf[2]), "%9d", unitarray[i].building_count);
@@ -1051,7 +1051,7 @@ public class Repodlgs{
 //
 //	gtk_clist_append( GTK_CLIST( activeunits_list ), row );
 //
-//	activeunits_type[k]=(unitarray[i].active_count > 0) ? i : U_LAST;
+//	activeunits_type[k]=(unitarray[i].active_count > 0) ? i : unittype.U_LAST;
 //	k++;
 //	unittotals.active_count += unitarray[i].active_count;
 //	unittotals.upkeep_shield += unitarray[i].upkeep_shield;

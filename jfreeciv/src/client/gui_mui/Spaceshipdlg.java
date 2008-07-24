@@ -116,8 +116,8 @@ public class Spaceshipdlg{
 //
 //  pship = &(pdialog.pplayer.spaceship);
 //
-//  if (game.spacerace
-//      && pplayer.player_no == game.player_idx
+//  if (Game.game.spacerace
+//      && pplayer.player_no == Game.game.player_idx
 //      && pship.state == spaceship_state.SSHIP_STARTED
 //      && pship.success_rate > 0)
 //  {

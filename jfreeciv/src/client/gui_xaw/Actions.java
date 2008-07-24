@@ -19,7 +19,7 @@ public class Actions{
 //#include <config.h>
 //#endif
 //
-//#include "game.h"
+//#include "Game.game.h"
 //
 //#include "chatline.h"
 //#include "citydlg.h"
@@ -293,7 +293,7 @@ public class Actions{
 //{
 //  if (can_client_change_view() &&
 //     is_menu_item_active(MENU_REPORT, MENU_REPORT_SPACESHIP))
-//    popup_spaceship_dialog(game.player_ptr);
+//    popup_spaceship_dialog(Game.game.player_ptr);
 //}
 //
 ///****************************************************************************
@@ -338,7 +338,7 @@ public class Actions{
 //{
 //  if (can_client_change_view()
 //      && is_menu_item_active(MENU_GOVERNMENT, MENU_GOVERNMENT_WORKLISTS)) {
-//    popup_worklists_dialog(game.player_ptr);
+//    popup_worklists_dialog(Game.game.player_ptr);
 //  }
 //}
 //

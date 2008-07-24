@@ -56,7 +56,7 @@ public class Settings{
 //    return true;
 //  }
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (!pplayer.ai.control && !pplayer.is_connected) {
 //      toggle_ai_player_direct(null, pplayer);
 //    }
@@ -67,7 +67,7 @@ public class Settings{
 //
 ///*************************************************************************
 //  Verify that a given allowtake string is valid.  See
-//  game.allow_take.
+//  Game.game.allow_take.
 //*************************************************************************/
 //static boolean allowtake_callback(final String value, final String*error_string)
 //{
@@ -109,7 +109,7 @@ public class Settings{
 //
 ///*************************************************************************
 //  Verify that a given startunits string is valid.  See
-//  game.start_units.
+//  Game.game.start_units.
 //*************************************************************************/
 //static boolean startunits_callback(final String value, final String*error_string)
 //{
@@ -151,7 +151,7 @@ public class Settings{
 //*************************************************************************/
 //static boolean maxplayers_callback(int value, final String*error_string)
 //{
-//  if (value < game.nplayers) {
+//  if (value < Game.game.nplayers) {
 //    *error_string =("Number of players is higher than requested value; " +
 //		     "Keeping old value.");
 //    return false;
@@ -340,20 +340,20 @@ public class Settings{
 //	  N("The same seed will always produce the same map; " +
 //	     "for zero (the default) a seed will be chosen based on " +
 //	     "the time to give a random Map.map. This setting is usually " +
-//	     "only of interest while debugging the game."), null, 
+//	     "only of interest while debugging the Game.game."), null, 
 //	  MAP_MIN_SEED, MAP_MAX_SEED, MAP_DEFAULT_SEED)
 //
 //  /* Map additional stuff: huts and specials.  gameseed also goes here
 //   * because huts and specials are the first time the gameseed gets used (?)
-//   * These are done when the game starts, so these are historical and
-//   * fixed after the game has started.
+//   * These are done when the Game.game starts, so these are historical and
+//   * fixed after the Game.game has started.
 //   */
-//  GEN_INT("gameseed", game.seed,
+//  GEN_INT("gameseed", Game.game.seed,
 //	  SSET_MAP_ADD, SSET_INTERNAL, SSET_RARE, SSET_SERVER_ONLY,
 //	  N"Game random seed",
 //	  N("For zero (the default) a seed will be chosen based " +
 //	     "on the time. This setting is usually " +
-//	     "only of interest while debugging the game"), null, 
+//	     "only of interest while debugging the Game.game"), null, 
 //	  GAME_MIN_SEED, GAME_MAX_SEED, GAME_DEFAULT_SEED)
 //
 //  GEN_INT("specials", Map.map.riches,
@@ -373,41 +373,41 @@ public class Settings{
 //	  MAP_MIN_HUTS, MAP_MAX_HUTS, MAP_DEFAULT_HUTS)
 //
 //  /* Options affecting numbers of players and AI players.  These only
-//   * affect the start of the game and can not be adjusted after that.
+//   * affect the start of the Game.game and can not be adjusted after that.
 //   * (Actually, minplayers does also affect reloads: you can't start a
-//   * reload game until enough players have connected (or are AI).)
+//   * reload Game.game until enough players have connected (or are AI).)
 //   */
-//  GEN_INT("minplayers", game.min_players,
+//  GEN_INT("minplayers", Game.game.min_players,
 //	  SSET_PLAYERS, SSET_INTERNAL, SSET_VITAL,
 //          SSET_TO_CLIENT,
 //	  N"Minimum number of players",
 //	  N("There must be at least this many players (connected " +
-//	     "human players or AI players) before the game can start."),
+//	     "human players or AI players) before the Game.game can start."),
 //	  null,
 //	  GAME_MIN_MIN_PLAYERS, GAME_MAX_MIN_PLAYERS, GAME_DEFAULT_MIN_PLAYERS)
 //
-//  GEN_INT("maxplayers", game.max_players,
+//  GEN_INT("maxplayers", Game.game.max_players,
 //	  SSET_PLAYERS, SSET_INTERNAL, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Maximum number of players",
 //          N("The maximal number of human and AI players who can be in " +
-//             "the game. When this number of players are connected in " +
+//             "the Game.game. When this number of players are connected in " +
 //             "the pregame state, any new players who try to connect " +
 //             "will be rejected."), maxplayers_callback,
 //	  GAME_MIN_MAX_PLAYERS, GAME_MAX_MAX_PLAYERS, GAME_DEFAULT_MAX_PLAYERS)
 //
-//  GEN_INT("aifill", game.aifill,
+//  GEN_INT("aifill", Game.game.aifill,
 //	  SSET_PLAYERS, SSET_INTERNAL, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Total number of players (including AI players)",
 //	  N("If there are fewer than this many players when the " +
-//	     "game starts, extra AI players will be created to " +
+//	     "Game.game starts, extra AI players will be created to " +
 //	     "increase the total number of players to the value of " +
 //	     "this option."), null, 
 //	  GAME_MIN_AIFILL, GAME_MAX_AIFILL, GAME_DEFAULT_AIFILL)
 //
-//  /* Game initialization parameters (only affect the first start of the game,
-//   * and not reloads).  Can not be changed after first start of game.
+//  /* Game initialization parameters (only affect the first start of the Game.game,
+//   * and not reloads).  Can not be changed after first start of Game.game.
 //   */
-//  GEN_STRING("startunits", game.start_units,
+//  GEN_STRING("startunits", Game.game.start_units,
 //	     SSET_GAME_INIT, SSET_SOCIOLOGY, SSET_VITAL, SSET_TO_CLIENT,
 //             N"List of players' initial units",
 //             N("This should be a string of characters, each of which " +
@@ -425,29 +425,29 @@ public class Settings{
 //		"    A   = Strong attack unit (eg., Catapult)\n"),
 //		startunits_callback, GAME_DEFAULT_START_UNITS)
 //
-//  GEN_INT("dispersion", game.dispersion,
+//  GEN_INT("dispersion", Game.game.dispersion,
 //	  SSET_GAME_INIT, SSET_SOCIOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Area where initial units are located",
 //	  N("This is the radius within " +
 //	     "which the initial units are dispersed."), null,
 //	  GAME_MIN_DISPERSION, GAME_MAX_DISPERSION, GAME_DEFAULT_DISPERSION)
 //
-//  GEN_INT("gold", game.gold,
+//  GEN_INT("gold", Game.game.gold,
 //	  SSET_GAME_INIT, SSET_ECONOMICS, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Starting gold per player", 
-//	  N("At the beginning of the game, each player is given this " +
+//	  N("At the beginning of the Game.game, each player is given this " +
 //	     "much gold."), null,
 //	  GAME_MIN_GOLD, GAME_MAX_GOLD, GAME_DEFAULT_GOLD)
 //
-//  GEN_INT("techlevel", game.tech,
+//  GEN_INT("techlevel", Game.game.tech,
 //	  SSET_GAME_INIT, SSET_SCIENCE, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Number of initial techs per player", 
-//	  N("At the beginning of the game, each player is given this " +
+//	  N("At the beginning of the Game.game, each player is given this " +
 //	     "many technologies. The technologies chosen are random for " +
 //	     "each player."), null,
 //	  GAME_MIN_TECHLEVEL, GAME_MAX_TECHLEVEL, GAME_DEFAULT_TECHLEVEL)
 //
-//  GEN_INT("researchcost", game.researchcost,
+//  GEN_INT("researchcost", Game.game.researchcost,
 //	  SSET_RULES, SSET_SCIENCE, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Points required to gain a new tech",
 //	  N("This affects how quickly players can research new " +
@@ -456,7 +456,7 @@ public class Settings{
 //	  GAME_MIN_RESEARCHCOST, GAME_MAX_RESEARCHCOST, 
 //	  GAME_DEFAULT_RESEARCHCOST)
 //
-//  GEN_INT("techpenalty", game.techpenalty,
+//  GEN_INT("techpenalty", Game.game.techpenalty,
 //	  SSET_RULES, SSET_SCIENCE, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Percentage penalty when changing tech",
 //	  N("If you change your current research technology, and you have " +
@@ -466,7 +466,7 @@ public class Settings{
 //	  GAME_MIN_TECHPENALTY, GAME_MAX_TECHPENALTY,
 //	  GAME_DEFAULT_TECHPENALTY)
 //
-//  GEN_INT("diplcost", game.diplcost,
+//  GEN_INT("diplcost", Game.game.diplcost,
 //	  SSET_RULES, SSET_SCIENCE, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Penalty when getting tech from treaty",
 //	  N("For each technology you gain from a diplomatic treaty, you " +
@@ -475,7 +475,7 @@ public class Settings{
 //	     "research points if this is non-zero."), null, 
 //	  GAME_MIN_DIPLCOST, GAME_MAX_DIPLCOST, GAME_DEFAULT_DIPLCOST)
 //
-//  GEN_INT("conquercost", game.conquercost,
+//  GEN_INT("conquercost", Game.game.conquercost,
 //	  SSET_RULES, SSET_SCIENCE, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Penalty when getting tech from conquering",
 //	  N("For each technology you gain by conquering an enemy city, you " +
@@ -485,7 +485,7 @@ public class Settings{
 //	  GAME_MIN_CONQUERCOST, GAME_MAX_CONQUERCOST,
 //	  GAME_DEFAULT_CONQUERCOST)
 //
-//  GEN_INT("freecost", game.freecost,
+//  GEN_INT("freecost", Game.game.freecost,
 //	  SSET_RULES, SSET_SCIENCE, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Penalty when getting a free tech",
 //	  N("For each technology you gain \"for free\" (other than " +
@@ -497,7 +497,7 @@ public class Settings{
 //	  null, 
 //	  GAME_MIN_FREECOST, GAME_MAX_FREECOST, GAME_DEFAULT_FREECOST)
 //
-//  GEN_INT("foodbox", game.foodbox,
+//  GEN_INT("foodbox", Game.game.foodbox,
 //	  SSET_RULES, SSET_ECONOMICS, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Food required for a city to grow",
 //	  N("This is the base amount of food required to grow a city. " +
@@ -506,7 +506,7 @@ public class Settings{
 //	  null,
 //	  GAME_MIN_FOODBOX, GAME_MAX_FOODBOX, GAME_DEFAULT_FOODBOX)
 //
-//  GEN_INT("aqueductloss", game.aqueductloss,
+//  GEN_INT("aqueductloss", Game.game.aqueductloss,
 //	  SSET_RULES, SSET_ECONOMICS, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Percentage food lost when need aqueduct",
 //	  N("If a city would expand, but it can't because it needs " +
@@ -520,9 +520,9 @@ public class Settings{
 //   * from being set illegally (notradesize > fulltradesize).  However this
 //   * provided a problem when setting them both through the client's settings
 //   * dialog, since they cannot both be set atomically.  So the callbacks were
-//   * removed and instead the game now knows how to deal with invalid
+//   * removed and instead the Game.game now knows how to deal with invalid
 //   * settings. */
-//  GEN_INT("fulltradesize", game.fulltradesize,
+//  GEN_INT("fulltradesize", Game.game.fulltradesize,
 //	  SSET_RULES, SSET_ECONOMICS, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Minimum city size to get full trade",
 //	  N("There is a trade penalty in all cities smaller than this. " +
@@ -533,7 +533,7 @@ public class Settings{
 //	  GAME_MIN_FULLTRADESIZE, GAME_MAX_FULLTRADESIZE, 
 //	  GAME_DEFAULT_FULLTRADESIZE)
 //
-//  GEN_INT("notradesize", game.notradesize,
+//  GEN_INT("notradesize", Game.game.notradesize,
 //	  SSET_RULES, SSET_ECONOMICS, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Maximum size of a city without trade",
 //	  N("Cities do not produce any trade at all unless their size " +
@@ -543,7 +543,7 @@ public class Settings{
 //	  GAME_MIN_NOTRADESIZE, GAME_MAX_NOTRADESIZE,
 //	  GAME_DEFAULT_NOTRADESIZE)
 //
-//  GEN_INT("unhappysize", game.unhappysize,
+//  GEN_INT("unhappysize", Game.game.unhappysize,
 //	  SSET_RULES, SSET_SOCIOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"City size before people become unhappy",
 //	  N("Before other adjustments, the first unhappysize citizens in a " +
@@ -552,7 +552,7 @@ public class Settings{
 //	  GAME_MIN_UNHAPPYSIZE, GAME_MAX_UNHAPPYSIZE,
 //	  GAME_DEFAULT_UNHAPPYSIZE)
 //
-//  GEN_BOOL("angrycitizen", game.angrycitizen,
+//  GEN_BOOL("angrycitizen", Game.game.angrycitizen,
 //	   SSET_RULES, SSET_SOCIOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Whether angry citizens are enabled",
 //	  N("Introduces angry citizens like in civilization II. Angry " +
@@ -561,7 +561,7 @@ public class Settings{
 //	     "cityfactor and governments."), null, 
 //	  GAME_DEFAULT_ANGRYCITIZEN)
 //
-//  GEN_INT("cityfactor", game.cityfactor,
+//  GEN_INT("cityfactor", Game.game.cityfactor,
 //	  SSET_RULES, SSET_SOCIOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Number of cities for higher unhappiness",
 //	  N("When the number of cities a player owns is greater than " +
@@ -571,7 +571,7 @@ public class Settings{
 //	     "smaller numbers of cities."), null, 
 //	  GAME_MIN_CITYFACTOR, GAME_MAX_CITYFACTOR, GAME_DEFAULT_CITYFACTOR)
 //
-//  GEN_INT("citymindist", game.citymindist,
+//  GEN_INT("citymindist", Game.game.citymindist,
 //	  SSET_RULES, SSET_SOCIOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Minimum distance between cities",
 //	  N("When a player founds a new city, it is checked if there is " +
@@ -583,7 +583,7 @@ public class Settings{
 //	  GAME_MIN_CITYMINDIST, GAME_MAX_CITYMINDIST,
 //	  GAME_DEFAULT_CITYMINDIST)
 //
-//  GEN_INT("rapturedelay", game.rapturedelay,
+//  GEN_INT("rapturedelay", Game.game.rapturedelay,
 //	  SSET_RULES, SSET_SOCIOLOGY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //          N"Number of turns between rapture effect",
 //          N("Sets the number of turns between rapture growth of a city. " +
@@ -593,21 +593,21 @@ public class Settings{
 //          GAME_MIN_RAPTUREDELAY, GAME_MAX_RAPTUREDELAY,
 //          GAME_DEFAULT_RAPTUREDELAY)
 //
-//  GEN_INT("razechance", game.razechance,
+//  GEN_INT("razechance", Game.game.razechance,
 //	  SSET_RULES, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Chance for conquered building destruction",
 //	  N("When a player conquers a city, each city improvement has this " +
 //	     "percentage chance to be destroyed."), null, 
 //	  GAME_MIN_RAZECHANCE, GAME_MAX_RAZECHANCE, GAME_DEFAULT_RAZECHANCE)
 //
-//  GEN_INT("civstyle", game.civstyle,
+//  GEN_INT("civstyle", Game.game.civstyle,
 //	  SSET_RULES, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //          N"civstyle is an obsolete setting",
 //          N("This setting is obsolete; it does nothing in the current " +
 //	     "version. It will be removed from future versions."), null,
 //	  GAME_MIN_CIVSTYLE, GAME_MAX_CIVSTYLE, GAME_DEFAULT_CIVSTYLE)
 //
-//  GEN_INT("occupychance", game.occupychance,
+//  GEN_INT("occupychance", Game.game.occupychance,
 //	  SSET_RULES, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Chance of moving into tile after attack",
 //	  N("If set to 0, combat is Civ1/2-style (when you attack, " +
@@ -619,7 +619,7 @@ public class Settings{
 //	  GAME_MIN_OCCUPYCHANCE, GAME_MAX_OCCUPYCHANCE, 
 //	  GAME_DEFAULT_OCCUPYCHANCE)
 //
-//  GEN_INT("killcitizen", game.killcitizen,
+//  GEN_INT("killcitizen", Game.game.killcitizen,
 //	  SSET_RULES, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Reduce city population after attack",
 //	  N("This flag indicates if city population is reduced " +
@@ -632,7 +632,7 @@ public class Settings{
 //	  GAME_MIN_KILLCITIZEN, GAME_MAX_KILLCITIZEN,
 //	  GAME_DEFAULT_KILLCITIZEN)
 //
-//  GEN_INT("wtowervision", game.watchtower_vision,
+//  GEN_INT("wtowervision", Game.game.watchtower_vision,
 //	  SSET_RULES, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Range of vision for units in a fortress",
 //	  N("If set to 1, it has no effect. " +
@@ -644,7 +644,7 @@ public class Settings{
 //	  GAME_MIN_WATCHTOWER_VISION, GAME_MAX_WATCHTOWER_VISION, 
 //	  GAME_DEFAULT_WATCHTOWER_VISION)
 //
-//  GEN_INT("wtowerevision", game.watchtower_extra_vision,
+//  GEN_INT("wtowerevision", Game.game.watchtower_extra_vision,
 //	  SSET_RULES, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Extra vision range for units in a fortress",
 //	  N("If set to 0, it has no " +
@@ -657,7 +657,7 @@ public class Settings{
 //	  GAME_MIN_WATCHTOWER_EXTRA_VISION, GAME_MAX_WATCHTOWER_EXTRA_VISION, 
 //	  GAME_DEFAULT_WATCHTOWER_EXTRA_VISION)
 //
-//  GEN_INT("borders", game.borders,
+//  GEN_INT("borders", Game.game.borders,
 //	  SSET_RULES, SSET_MILITARY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"National borders radius",
 //	  N("If this is set to greater than 0, then any land tiles " +
@@ -667,7 +667,7 @@ public class Settings{
 //	  null,
 //	  GAME_MIN_BORDERS, GAME_MAX_BORDERS, GAME_DEFAULT_BORDERS)
 //
-//  GEN_BOOL("happyborders", game.happyborders,
+//  GEN_BOOL("happyborders", Game.game.happyborders,
 //	   SSET_RULES, SSET_MILITARY, SSET_SITUATIONAL,
 //	   SSET_TO_CLIENT,
 //	   N"Units inside borders cause no unhappiness",
@@ -675,7 +675,7 @@ public class Settings{
 //	      "inside your own borders."), null,
 //	   GAME_DEFAULT_HAPPYBORDERS)
 //
-//  GEN_INT("diplomacy", game.diplomacy,
+//  GEN_INT("diplomacy", Game.game.diplomacy,
 //	  SSET_RULES, SSET_MILITARY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Ability to do diplomacy with other players",
 //	  N("0 = default; diplomacy is enabled for everyone.\n\n" +
@@ -686,7 +686,7 @@ public class Settings{
 //             "You can always do diplomacy with players on your team."), null,
 //	  GAME_MIN_DIPLOMACY, GAME_MAX_DIPLOMACY, GAME_DEFAULT_DIPLOMACY)
 //
-//  GEN_INT("citynames", game.allowed_city_names,
+//  GEN_INT("citynames", Game.game.allowed_city_names,
 //	  SSET_RULES, SSET_SOCIOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Allowed city names",
 //	  N("0 = There are no restrictions: players can have " +
@@ -694,7 +694,7 @@ public class Settings{
 //	     "1 = City names have to be unique to a player: " +
 //	     "one player can't have multiple cities with the same name.\n\n" +
 //	     "2 = City names have to be globally unique: " +
-//	     "all cities in a game have to have different names.\n\n" +
+//	     "all cities in a Game.game have to have different names.\n\n" +
 //	     "3 = Like setting 2, but a player isn't allowed to use a " +
 //	     "default city name of another nations unless it is a default " +
 //	     "for their nation also."),
@@ -702,20 +702,20 @@ public class Settings{
 //	  GAME_MIN_ALLOWED_CITY_NAMES, GAME_MAX_ALLOWED_CITY_NAMES, 
 //	  GAME_DEFAULT_ALLOWED_CITY_NAMES)
 //  
-//  /* Flexible rules: these can be changed after the game has started.
+//  /* Flexible rules: these can be changed after the Game.game has started.
 //   *
 //   * The distinction between "rules" and "flexible rules" is not always
 //   * clearcut, and some existing cases may be largely historical or
 //   * accidental.  However some generalizations can be made:
 //   *
-//   *   -- Low-level game mechanics should not be flexible (eg, rulesets).
-//   *   -- Options which would affect the game "state" (city production etc)
+//   *   -- Low-level Game.game mechanics should not be flexible (eg, rulesets).
+//   *   -- Options which would affect the Game.game "state" (city production etc)
 //   *      should not be flexible (eg, foodbox).
 //   *   -- Options which are explicitly sent to the client (eg, in
 //   *      packet_game_info) should probably not be flexible, or at
 //   *      least need extra care to be flexible.
 //   */
-//  GEN_INT("barbarians", game.barbarianrate,
+//  GEN_INT("barbarians", Game.game.barbarianrate,
 //	  SSET_RULES_FLEXIBLE, SSET_MILITARY, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Barbarian appearance frequency",
 //	  N("0 = no barbarians \n" +
@@ -726,14 +726,14 @@ public class Settings{
 //	  GAME_MIN_BARBARIANRATE, GAME_MAX_BARBARIANRATE, 
 //	  GAME_DEFAULT_BARBARIANRATE)
 //
-//  GEN_INT("onsetbarbs", game.onsetbarbarian,
+//  GEN_INT("onsetbarbs", Game.game.onsetbarbarian,
 //	  SSET_RULES_FLEXIBLE, SSET_MILITARY, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Barbarian onset year",
 //	  N"Barbarians will not appear before this year.", null,
 //	  GAME_MIN_ONSETBARBARIAN, GAME_MAX_ONSETBARBARIAN, 
 //	  GAME_DEFAULT_ONSETBARBARIAN)
 //
-//  GEN_INT("revolen", game.revolution_length,
+//  GEN_INT("revolen", Game.game.revolution_length,
 //	  SSET_RULES_FLEXIBLE, SSET_SOCIOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Length in turns of revolution",
 //	  N("When changing governments, a period of anarchy lasting this " +
@@ -743,7 +743,7 @@ public class Settings{
 //	  GAME_MIN_REVOLUTION_LENGTH, GAME_MAX_REVOLUTION_LENGTH, 
 //	  GAME_DEFAULT_REVOLUTION_LENGTH)
 //
-//  GEN_BOOL("fogofwar", game.fogofwar,
+//  GEN_BOOL("fogofwar", Game.game.fogofwar,
 //	   SSET_RULES_FLEXIBLE, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	   N"Whether to enable fog of war",
 //	   N("If this is set to 1, only those units and cities within " +
@@ -752,7 +752,7 @@ public class Settings{
 //	      "changes in tiles not observed."), null, 
 //	   GAME_DEFAULT_FOGOFWAR)
 //
-//  GEN_INT("diplchance", game.diplchance,
+//  GEN_INT("diplchance", Game.game.diplchance,
 //	  SSET_RULES_FLEXIBLE, SSET_MILITARY, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	  N"Chance in diplomat/spy contests",
 //	  /* xgettext:no-c-format */
@@ -767,14 +767,14 @@ public class Settings{
 //	     "non-veteran ones."), null, 
 //	  GAME_MIN_DIPLCHANCE, GAME_MAX_DIPLCHANCE, GAME_DEFAULT_DIPLCHANCE)
 //
-//  GEN_BOOL("spacerace", game.spacerace,
+//  GEN_BOOL("spacerace", Game.game.spacerace,
 //	   SSET_RULES_FLEXIBLE, SSET_SCIENCE, SSET_VITAL, SSET_TO_CLIENT,
 //	   N"Whether to allow space race",
 //	   N"If this option is set to 1, players can build spaceships.",
 //	   null, 
 //	   GAME_DEFAULT_SPACERACE)
 //
-//  GEN_INT("civilwarsize", game.civilwarsize,
+//  GEN_INT("civilwarsize", Game.game.civilwarsize,
 //	  SSET_RULES_FLEXIBLE, SSET_SOCIOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Minimum number of cities for civil war",
 //	  N("A civil war is triggered if a player has at least this " +
@@ -784,7 +784,7 @@ public class Settings{
 //	  GAME_MIN_CIVILWARSIZE, GAME_MAX_CIVILWARSIZE, 
 //	  GAME_DEFAULT_CIVILWARSIZE)
 //
-//  GEN_INT("contactturns", game.contactturns,
+//  GEN_INT("contactturns", Game.game.contactturns,
 //	  SSET_RULES_FLEXIBLE, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Turns until player contact is lost",
 //	  N("Players may meet for diplomacy this number of turns " +
@@ -795,7 +795,7 @@ public class Settings{
 //	  GAME_MIN_CONTACTTURNS, GAME_MAX_CONTACTTURNS, 
 //	  GAME_DEFAULT_CONTACTTURNS)
 //
-//  GEN_BOOL("savepalace", game.savepalace,
+//  GEN_BOOL("savepalace", Game.game.savepalace,
 //	   SSET_RULES_FLEXIBLE, SSET_MILITARY, SSET_RARE, SSET_TO_CLIENT,
 //	   N"Rebuild palace if capital is conquered",
 //	   N("If this is set to 1, then when the capital is conquered the " +
@@ -806,21 +806,21 @@ public class Settings{
 //	   null,
 //	   GAME_DEFAULT_SAVEPALACE)
 //
-//  GEN_BOOL("naturalcitynames", game.natural_city_names,
+//  GEN_BOOL("naturalcitynames", Game.game.natural_city_names,
 //           SSET_RULES_FLEXIBLE, SSET_SOCIOLOGY, SSET_RARE, SSET_TO_CLIENT,
 //           N"Whether to use natural city names",
 //           N("If enabled, the default city names will be determined based " +
 //              "on the surrounding terrain."),
 //           null, GAME_DEFAULT_NATURALCITYNAMES)
 //
-//  /* Meta options: these don't affect the internal rules of the game, but
+//  /* Meta options: these don't affect the internal rules of the Game.game, but
 //   * do affect players.  Also options which only produce extra server
-//   * "output" and don't affect the actual game.
+//   * "output" and don't affect the actual Game.game.
 //   * ("endyear" is here, and not RULES_FLEXIBLE, because it doesn't
-//   * affect what happens in the game, it just determines when the
+//   * affect what happens in the Game.game, it just determines when the
 //   * players stop playing and look at the score.)
 //   */
-//  GEN_STRING("allowtake", game.allow_take,
+//  GEN_STRING("allowtake", Game.game.allow_take,
 //	     SSET_META, SSET_NETWORK, SSET_RARE, SSET_TO_CLIENT,
 //             N"Players that users are allowed to take",
 //             N("This should be a string of characters, each of which " +
@@ -839,7 +839,7 @@ public class Settings{
 //                "player is the one which applies. Thus 'd' does not " +
 //                "include dead barbarians, 'a' does not include dead AI " +
 //                "players, and so on. Upper case letters apply before " +
-//                "the game has started, lower case letters afterwards.\n\n" +
+//                "the Game.game has started, lower case letters afterwards.\n\n" +
 //                "Each character above may be followed by one of the " +
 //                "following numbers to allow or restrict the manner " +
 //                "of connection:\n\n" +
@@ -856,20 +856,20 @@ public class Settings{
 //                "4 = No controller allowed, observers allowed;\n\n"),
 //                allowtake_callback, GAME_DEFAULT_ALLOW_TAKE)
 //
-//  GEN_BOOL("autotoggle", game.auto_ai_toggle,
+//  GEN_BOOL("autotoggle", Game.game.auto_ai_toggle,
 //	   SSET_META, SSET_NETWORK, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	   N"Whether AI-status toggles with connection",
 //	   N("If this is set to 1, AI status is turned off when a player " +
 //	      "connects, and on when a player disconnects."),
 //	   autotoggle_callback, GAME_DEFAULT_AUTO_AI_TOGGLE)
 //
-//  GEN_INT("endyear", game.end_year,
+//  GEN_INT("endyear", Game.game.end_year,
 //	  SSET_META, SSET_SOCIOLOGY, SSET_VITAL, SSET_TO_CLIENT,
-//	  N"Year the game ends", 
-//	  N"The game will end at the end of the given year.", null,
+//	  N"Year the Game.game ends", 
+//	  N"The Game.game will end at the end of the given year.", null,
 //	  GAME_MIN_END_YEAR, GAME_MAX_END_YEAR, GAME_DEFAULT_END_YEAR)
 //
-//  GEN_INT("timeout", game.timeout,
+//  GEN_INT("timeout", Game.game.timeout,
 //	  SSET_META, SSET_INTERNAL, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Maximum seconds per turn",
 //	  N("If all players have not hit \"Turn Done\" before this " +
@@ -880,14 +880,14 @@ public class Settings{
 //	     "\"timeoutincrease\" to have a dynamic timer."), null, 
 //	   GAME_MIN_TIMEOUT, GAME_MAX_TIMEOUT, GAME_DEFAULT_TIMEOUT)
 //
-//  GEN_INT("timeaddenemymove", game.timeoutaddenemymove,
+//  GEN_INT("timeaddenemymove", Game.game.timeoutaddenemymove,
 //        SSET_META, SSET_INTERNAL, SSET_VITAL, SSET_TO_CLIENT,
 //	  N"Timeout at least n seconds when enemy moved",
 //	  N("Any time a unit moves when in sight of an enemy player, " +
 //	     "the remaining timeout is set to this value if it was lower."),
 //	  null, 0, GAME_MAX_TIMEOUT, GAME_DEFAULT_TIMEOUTADDEMOVE)
 //  
-//  GEN_INT("nettimeout", game.tcptimeout,
+//  GEN_INT("nettimeout", Game.game.tcptimeout,
 //	  SSET_META, SSET_NETWORK, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Seconds to let a client's network connection block",
 //	  N("If a network connection is blocking for a time greater than " +
@@ -897,7 +897,7 @@ public class Settings{
 //	  null,
 //	  GAME_MIN_TCPTIMEOUT, GAME_MAX_TCPTIMEOUT, GAME_DEFAULT_TCPTIMEOUT)
 //
-//  GEN_INT("netwait", game.netwait,
+//  GEN_INT("netwait", Game.game.netwait,
 //	  SSET_META, SSET_NETWORK, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Max seconds for network buffers to drain",
 //	  N("The server will wait for up to the value of this " +
@@ -906,14 +906,14 @@ public class Settings{
 //	     "wait at all."), null, 
 //	  GAME_MIN_NETWAIT, GAME_MAX_NETWAIT, GAME_DEFAULT_NETWAIT)
 //
-//  GEN_INT("pingtime", game.pingtime,
+//  GEN_INT("pingtime", Game.game.pingtime,
 //	  SSET_META, SSET_NETWORK, SSET_RARE, SSET_TO_CLIENT,
 //	  N"Seconds between PINGs",
 //	  N("The civserver will poll the clients with a PING request " +
 //	     "each time this period elapses."), null, 
 //	  GAME_MIN_PINGTIME, GAME_MAX_PINGTIME, GAME_DEFAULT_PINGTIME)
 //
-//  GEN_INT("pingtimeout", game.pingtimeout,
+//  GEN_INT("pingtimeout", Game.game.pingtimeout,
 //	  SSET_META, SSET_NETWORK, SSET_RARE,
 //          SSET_TO_CLIENT,
 //	  N"Time to cut a client",
@@ -921,23 +921,23 @@ public class Settings{
 //	     "client is disconnected."), null, 
 //	  GAME_MIN_PINGTIMEOUT, GAME_MAX_PINGTIMEOUT, GAME_DEFAULT_PINGTIMEOUT)
 //
-//  GEN_BOOL("turnblock", game.turnblock,
+//  GEN_BOOL("turnblock", Game.game.turnblock,
 //	   SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_TO_CLIENT,
-//	   N"Turn-blocking game play mode",
-//	   N("If this is set to 1 the game turn is not advanced " +
+//	   N"Turn-blocking Game.game play mode",
+//	   N("If this is set to 1 the Game.game turn is not advanced " +
 //	      "until all players have finished their turn, including " +
 //	      "disconnected players."), null, 
 //	   GAME_DEFAULT_TURNBLOCK)
 //
-//  GEN_BOOL("fixedlength", game.fixedlength,
+//  GEN_BOOL("fixedlength", Game.game.fixedlength,
 //	   SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	   N"Fixed-length turns play mode",
-//	   N("If this is set to 1 the game turn will not advance " +
+//	   N("If this is set to 1 the Game.game turn will not advance " +
 //	      "until the timeout has expired, even if all players " +
 //	      "have clicked on \"Turn Done\"."), null,
 //	   false)
 //
-//  GEN_STRING("demography", game.demography,
+//  GEN_STRING("demography", Game.game.demography,
 //	     SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_TO_CLIENT,
 //	     N"What is in the Demographics report",
 //	     N("This should be a string of characters, each of which " +
@@ -962,10 +962,10 @@ public class Settings{
 //		"their capitalization is."),
 //	     is_valid_demography, GAME_DEFAULT_DEMOGRAPHY)
 //
-//  GEN_INT("saveturns", game.save_nturns,
+//  GEN_INT("saveturns", Game.game.save_nturns,
 //	  SSET_META, SSET_INTERNAL, SSET_VITAL, SSET_SERVER_ONLY,
 //	  N"Turns per auto-save",
-//	  N("The game will be automatically saved per this number of " +
+//	  N("The Game.game will be automatically saved per this number of " +
 //	     "turns. Zero means never auto-save."), null, 
 //	  0, 200, 10)
 //
@@ -973,7 +973,7 @@ public class Settings{
 //   * what they're missing out on if they didn't compile with zlib?  --dwp
 //   */
 //#ifdef HAVE_LIBZ
-//  GEN_INT("compress", game.save_compress_level,
+//  GEN_INT("compress", Game.game.save_compress_level,
 //	  SSET_META, SSET_INTERNAL, SSET_RARE, SSET_SERVER_ONLY,
 //	  N"Savegame compression level",
 //	  N("If non-zero, saved games will be compressed using zlib " +
@@ -984,7 +984,7 @@ public class Settings{
 //	  GAME_MIN_COMPRESS_LEVEL, GAME_MAX_COMPRESS_LEVEL,
 //	  GAME_DEFAULT_COMPRESS_LEVEL)
 //#else
-//  GEN_INT("compress", game.save_compress_level,
+//  GEN_INT("compress", Game.game.save_compress_level,
 //	  SSET_META, SSET_INTERNAL, SSET_RARE, SSET_SERVER_ONLY,
 //	  N"Savegame compression level",
 //	  N("If non-zero, saved games will be compressed using zlib " +
@@ -996,7 +996,7 @@ public class Settings{
 //	  GAME_NO_COMPRESS_LEVEL)
 //#endif
 //
-//  GEN_STRING("savename", game.save_name,
+//  GEN_STRING("savename", Game.game.save_name,
 //	     SSET_META, SSET_INTERNAL, SSET_VITAL, SSET_SERVER_ONLY,
 //	     N"Auto-save name prefix",
 //	     N("Automatically saved games will have name " +
@@ -1004,18 +1004,18 @@ public class Settings{
 //		"the <prefix> part."), null,
 //	     GAME_DEFAULT_SAVE_NAME)
 //
-//  GEN_BOOL("scorelog", game.scorelog,
+//  GEN_BOOL("scorelog", Game.game.scorelog,
 //	   SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_SERVER_ONLY,
 //	   N"Whether to log player statistics",
 //	   N("If this is set to 1, player statistics are appended to " +
 //	      "the file \"civscore.log\" every turn. These statistics " +
-//	      "can be used to create power graphs after the game."), null,
+//	      "can be used to create power graphs after the Game.game."), null,
 //	   GAME_DEFAULT_SCORELOG)
 //
 //  GEN_INT("Gamelog.gamelog", gamelog_level,
 //	  SSET_META, SSET_INTERNAL, SSET_SITUATIONAL, SSET_SERVER_ONLY,
-//	  N"Detail level for logging game events",
-//	  N("Only applies if the game log feature is enabled " +
+//	  N"Detail level for logging Game.game events",
+//	  N("Only applies if the Game.game log feature is enabled " +
 //	     "(with the -g command line option). " +
 //	     "Levels: 0=no logging, 20=standard logging, 30=detailed " +
 //	     "logging, 40=debuging logging."), null,

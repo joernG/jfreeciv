@@ -1,6 +1,7 @@
 package common;
 import static common.map.Map_H.*;
 import static utility.shared.Shared_H.*;
+import utility.Rand;
 
 import common.city.city;
 import common.map.Point;
@@ -70,7 +71,7 @@ public class Map{
 //enum int get_tile_infrastructure_set(final tile ptile)
 //{
 //  return (ptile.special
-//	  & (S_ROAD | S_RAILROAD | S_IRRIGATION | S_FARMLAND | S_MINE
+//	  & (Terrain_H.S_ROAD | Terrain_H.S_RAILROAD | S_IRRIGATION | S_FARMLAND | S_MINE
 //	     | S_FORTRESS | Terrain_H.S_AIRBASE));
 //}
 //
@@ -142,7 +143,7 @@ public class Map{
 //}
 //
 ///***************************************************************
-//  Returns 1 if we are at a stage of the game where the map
+//  Returns 1 if we are at a stage of the Game.game where the map
 //  has not yet been generated/loaded.
 //  (To be precise, returns 1 if map_allocate() has not yet been
 //  called.)
@@ -616,18 +617,19 @@ public class Map{
 //    return dx * dx + dy * dy;
 //  }
 //}
-//
-///***************************************************************
-//...
-//***************************************************************/
-//int real_map_distance(final tile tile0, final tile tile1)
-//{
+
+/***************************************************************
+...
+***************************************************************/
+public static int real_map_distance(final tile tile0, final tile tile1)
+{
 //  int dx, dy;
 //
 //  map_distance_vector(&dx, &dy, tile0, tile1);
 //  return map_vector_to_real_distance(dx, dy);
-//}
-//
+  return 0;
+}
+
 ///***************************************************************
 //...
 //***************************************************************/
@@ -657,12 +659,12 @@ public class Map{
 ///*************************************************************************
 //  This is used in mapgen for rivers going into ocen.  The name is 
 //  intentionally made awkward to prevent people from using it in place of
-//  is_ocean_near_tile
+//  Terrain_H.is_ocean_near_tile
 //*************************************************************************/
 //boolean is_cardinally_adj_to_ocean(final tile ptile)
 //{
-//  cardinal_adjc_iterate(ptile, tile1) {
-//    if (is_ocean(map_get_terrain(tile1))) {
+//  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//    if (Terrain_H.is_ocean(map_get_terrain(tile1))) {
 //      return true;
 //    }
 //  } cardinal_adjc_iterate_end;
@@ -675,12 +677,12 @@ public class Map{
 //****************************************************************************/
 //boolean is_safe_ocean(final tile ptile)
 //{
-//  adjc_iterate(ptile, tile1) {
-//    Terrain_type_id ter = map_get_terrain(tile1);
-//    if (!terrain_has_flag(ter, TER_UNSAFE_COAST) && ter != T_UNKNOWN) {
+//  for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//    int ter = map_get_terrain(tile1);
+//    if (!Terrain_H.terrain_has_flag(ter, TER_UNSAFE_COAST) && ter != T_UNKNOWN) {
 //      return true;
 //    }
-//  } adjc_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -692,7 +694,7 @@ public class Map{
 //boolean is_sea_usable(final tile ptile)
 //{
 //  map_city_radius_iterate(ptile, tile1) {
-//    if (!is_ocean(map_get_terrain(tile1))) {
+//    if (!Terrain_H.is_ocean(map_get_terrain(tile1))) {
 //      return true;
 //    }
 //  } map_city_radius_iterate_end;
@@ -752,9 +754,9 @@ public class Map{
 //  s[0] = '\0';
 //
 //  /* Since railroad requires road, Road/Railroad is redundant */
-//  if (contains_special(spe, S_RAILROAD))
+//  if (contains_special(spe, Terrain_H.S_RAILROAD))
 //    cat_snprintf(s, sizeof(s), "%s/", "Railroad");
-//  else if (contains_special(spe, S_ROAD))
+//  else if (contains_special(spe, Terrain_H.S_ROAD))
 //    cat_snprintf(s, sizeof(s), "%s/", "Road");
 //
 //  /* Likewise for farmland on irrigation */
@@ -786,8 +788,8 @@ public class Map{
 //{
 //  enum int prereq = S_NO_SPECIAL;
 //
-//  if (contains_special(spe, S_RAILROAD)) {
-//    prereq |= S_ROAD;
+//  if (contains_special(spe, Terrain_H.S_RAILROAD)) {
+//    prereq |= Terrain_H.S_ROAD;
 //  }
 //  if (contains_special(spe, S_FARMLAND)) {
 //    prereq |= S_IRRIGATION;
@@ -811,10 +813,10 @@ public class Map{
 //    return S_FORTRESS;
 //  if (contains_special(pset, Terrain_H.S_AIRBASE))
 //    return Terrain_H.S_AIRBASE;
-//  if (contains_special(pset, S_RAILROAD))
-//    return S_RAILROAD;
-//  if (contains_special(pset, S_ROAD))
-//    return S_ROAD;
+//  if (contains_special(pset, Terrain_H.S_RAILROAD))
+//    return Terrain_H.S_RAILROAD;
+//  if (contains_special(pset, Terrain_H.S_ROAD))
+//    return Terrain_H.S_ROAD;
 //  return S_NO_SPECIAL;
 //}
 //
@@ -823,13 +825,13 @@ public class Map{
 //***************************************************************/
 //boolean is_water_adjacent_to_tile(final tile ptile)
 //{
-//  if (is_ocean(ptile.terrain)
+//  if (Terrain_H.is_ocean(ptile.terrain)
 //      || tile_has_special(ptile, S_RIVER)
 //      || tile_has_special(ptile, S_IRRIGATION))
 //    return true;
 //
-//  cardinal_adjc_iterate(ptile, tile1) {
-//    if (is_ocean(tile1.terrain)
+//  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//    if (Terrain_H.is_ocean(tile1.terrain)
 //	|| tile_has_special(tile1, S_RIVER)
 //	|| tile_has_special(tile1, S_IRRIGATION))
 //      return true;
@@ -960,7 +962,7 @@ public class Map{
 //***************************************************************/
 //void map_irrigate_tile(tile ptile)
 //{
-//  Terrain_type_id now, result;
+//  int now, result;
 //  
 //  now = ptile.terrain;
 //  result = get_tile_type(now).irrigation_result;
@@ -973,7 +975,7 @@ public class Map{
 //    }
 //  } else if (result != T_NONE) {
 //    map_set_terrain(ptile, result);
-//    if (is_ocean(result)) {
+//    if (Terrain_H.is_ocean(result)) {
 //      clear_infrastructure(ptile);
 //      clear_dirtiness(ptile);
 //
@@ -991,7 +993,7 @@ public class Map{
 //***************************************************************/
 //void map_mine_tile(tile ptile)
 //{
-//  Terrain_type_id now, result;
+//  int now, result;
 //  
 //  now = ptile.terrain;
 //  result = get_tile_type(now).mining_result;
@@ -1000,7 +1002,7 @@ public class Map{
 //    map_set_special(ptile, S_MINE);
 //  } else if (result != T_NONE) {
 //    map_set_terrain(ptile, result);
-//    if (is_ocean(result)) {
+//    if (Terrain_H.is_ocean(result)) {
 //      clear_infrastructure(ptile);
 //      clear_dirtiness(ptile);
 //
@@ -1017,10 +1019,10 @@ public class Map{
 ///***************************************************************
 //...
 //***************************************************************/
-//void change_terrain(tile ptile, Terrain_type_id type)
+//void change_terrain(tile ptile, int type)
 //{
 //  map_set_terrain(ptile, type);
-//  if (is_ocean(type)) {
+//  if (Terrain_H.is_ocean(type)) {
 //    clear_infrastructure(ptile);
 //    clear_dirtiness(ptile);
 //    map_clear_special(ptile, S_RIVER);	/* FIXME: When rest of code can handle
@@ -1046,7 +1048,7 @@ public class Map{
 //***************************************************************/
 //void map_transform_tile(tile ptile)
 //{
-//  Terrain_type_id now, result;
+//  int now, result;
 //  
 //  now = ptile.terrain;
 //  result = get_tile_type(now).transform_result;
@@ -1094,23 +1096,23 @@ public class Map{
 //{
 //  boolean cardinal_move;
 //
-//  if (game.slow_invasions
+//  if (Game.game.slow_invasions
 //      && punit 
 //      && is_ground_unit(punit) 
-//      && is_ocean(t1.terrain)
-//      && !is_ocean(t2.terrain)) {
+//      && Terrain_H.is_ocean(t1.terrain)
+//      && !Terrain_H.is_ocean(t2.terrain)) {
 //    /* Ground units moving from sea to land lose all their movement
 //     * if "slowinvasions" server option is turned on. */
 //    return punit.moves_left;
 //  }
 //  if (punit && !is_ground_unit(punit))
 //    return Unit_H.SINGLE_MOVE;
-//  if (tile_has_special(t1, S_RAILROAD) && tile_has_special(t2, S_RAILROAD))
+//  if (tile_has_special(t1, Terrain_H.S_RAILROAD) && tile_has_special(t2, Terrain_H.S_RAILROAD))
 //    return MOVE_COST_RAIL;
 ///* return (punit.move_rate()/RAIL_MAX) */
 //  if (punit && unit_flag(punit, F_IGTER))
 //    return Unit_H.SINGLE_MOVE/3;
-//  if (tile_has_special(t1, S_ROAD) && tile_has_special(t2, S_ROAD))
+//  if (tile_has_special(t1, Terrain_H.S_ROAD) && tile_has_special(t2, Terrain_H.S_ROAD))
 //    return MOVE_COST_ROAD;
 //
 //  if (tile_has_special(t1, S_RIVER) && tile_has_special(t2, S_RIVER)) {
@@ -1158,21 +1160,21 @@ public class Map{
 //  assert(!is_server
 //	 || (tile0.terrain != T_UNKNOWN && tile1.terrain != T_UNKNOWN));
 //
-//  if (is_ocean(tile0.terrain) && is_ocean(tile1.terrain)) {
+//  if (Terrain_H.is_ocean(tile0.terrain) && Terrain_H.is_ocean(tile1.terrain)) {
 //    return MOVE_COST_FOR_VALID_SEA_STEP;
 //  }
 //
-//  if (is_ocean(tile0.terrain)
+//  if (Terrain_H.is_ocean(tile0.terrain)
 //      && (tile1.city || tile1.terrain == T_UNKNOWN)) {
 //    return MOVE_COST_FOR_VALID_SEA_STEP;
 //  }
 //
-//  if (is_ocean(tile1.terrain)
+//  if (Terrain_H.is_ocean(tile1.terrain)
 //      && (tile0.city || tile0.terrain == T_UNKNOWN)) {
 //    return MOVE_COST_FOR_VALID_SEA_STEP;
 //  }
 //
-//  if (is_ocean(tile0.terrain) || is_ocean(tile1.terrain)) {
+//  if (Terrain_H.is_ocean(tile0.terrain) || Terrain_H.is_ocean(tile1.terrain)) {
 //    return maxcost;
 //  }
 //
@@ -1252,7 +1254,7 @@ public class Map{
 //***************************************************************/
 //boolean is_tiles_adjacent(final tile tile0, final tile tile1)
 //{
-//  return real_map_distance(tile0, tile1) == 1;
+//  return Map.real_map_distance(tile0, tile1) == 1;
 //}
 //
 ///***************************************************************
@@ -1270,19 +1272,19 @@ public class Map{
 //{
 //  ptile.continent = val;
 //}
-//
+
+	/***************************************************************
+...
+	 ***************************************************************/
+	public static int map_get_terrain(tile ptile)
+	{
+		return ptile.terrain;
+	}
+
 ///***************************************************************
 //...
 //***************************************************************/
-//Terrain_type_id map_get_terrain(final tile ptile)
-//{
-//  return ptile.terrain;
-//}
-//
-///***************************************************************
-//...
-//***************************************************************/
-//void map_set_terrain(tile ptile, Terrain_type_id ter)
+//void map_set_terrain(tile ptile, int ter)
 //{
 //  ptile.terrain = ter;
 //}
@@ -1294,15 +1296,15 @@ public class Map{
 //{
 //  return ptile.special;
 //}
-//
-///***************************************************************
-// Returns true iff the given special is found at the given map
-// position.
-//***************************************************************/
-//boolean map_has_special(final tile ptile, enum int special)
-//{
-//  return contains_special(ptile.special, special);
-//}
+
+/***************************************************************
+ Returns true iff the given special is found at the given map
+ position.
+***************************************************************/
+public static boolean map_has_special(final tile ptile, int special)
+{
+  return contains_special(ptile.special, special);
+}
 
 	/***************************************************************************
 	 * Returns true iff the given tile has the given special.
@@ -1338,22 +1340,22 @@ public class Map{
 //{
 //  ptile.special |= spe;
 //
-//  if (contains_special(spe, S_ROAD) || contains_special(spe, S_RAILROAD)) {
+//  if (contains_special(spe, Terrain_H.S_ROAD) || contains_special(spe, Terrain_H.S_RAILROAD)) {
 //    reset_move_costs(ptile);
 //  }
 //}
-//
-///***************************************************************
-//...
-//***************************************************************/
-//void map_clear_special(tile ptile, enum int spe)
-//{
-//  ptile.special &= ~spe;
-//
-//  if (contains_special(spe, S_ROAD) || contains_special(spe, S_RAILROAD)) {
+
+/***************************************************************
+...
+***************************************************************/
+public static void map_clear_special(tile ptile, int spe)
+{
+  ptile.special &= ~spe;
+
+  if (contains_special(spe, Terrain_H.S_ROAD) || contains_special(spe, Terrain_H.S_RAILROAD)) {
 //    reset_move_costs(ptile);
-//  }
-//}
+  }
+}
 
 	/***************************************************************************
 	 * Remove any specials which may exist at these map co-ordinates.
@@ -1447,15 +1449,6 @@ public class Map{
 //
 //  return map_pos_to_tile(x, y);
 //}
-//
-///**************************************************************************
-//Returns the total number of (real) positions (or tiles) on the Map.map.
-//**************************************************************************/
-//int map_num_tiles()
-//{
-//  return Map.map.xsize * Map.map.ysize;
-//}
-//
 ///****************************************************************************
 //  Finds the difference between the two (unnormalized) positions, in
 //  cartesian (map) coordinates.  Most callers should use map_distance_vector
@@ -1504,7 +1497,7 @@ public class Map{
 //  direction; since units can travel diagonally this is the "real" distance
 //  a unit has to travel to get from point to point.
 //
-//  (See also: real_map_distance, map_distance, and sq_map_distance.)
+//  (See also: Map.real_map_distance, map_distance, and sq_map_distance.)
 //
 //  With the standard topology the ranges of the return value are:
 //    -Map.map.xsize/2 <= dx <= Map.map.xsize/2
@@ -1517,12 +1510,12 @@ public class Map{
 //  base_map_distance_vector(dx, dy,
 //			   tile0.x, tile0.y, tile1.x, tile1.y);
 //}
-//
-///**************************************************************************
-//Random neighbouring square.
-//**************************************************************************/
-//tile rand_neighbour(final tile ptile)
-//{
+
+/**************************************************************************
+Random neighbouring square.
+**************************************************************************/
+public static tile rand_neighbour(final tile ptile)
+{
 //  int n;
 //  tile tile1;
 //
@@ -1537,7 +1530,7 @@ public class Map{
 //  /* This clever loop by Trent Piepho will take no more than
 //   * 8 tries to find a valid direction. */
 //  for (n = 8; n > 0; n--) {
-//    enum direction8 choice = (enum direction8) myrand(n);
+//    enum direction8 choice = (enum direction8) Rand.myrand(n);
 //
 //    /* this neighbour's OK */
 //    tile1 = mapstep(ptile, dirs[choice]);
@@ -1551,20 +1544,21 @@ public class Map{
 //  }
 //
 //  assert(0!=1);			/* Are we on a 1x1 map with no wrapping??? */
-//  return null;
-//}
-//
-///**************************************************************************
-// Random square anywhere on the Map.map.  Only normal positions (for which
-// is_normal_map_pos returns true) will be found.
-//**************************************************************************/
-//tile rand_map_pos()
-//{
-//  int nat_x = myrand(Map.map.xsize), nat_y = myrand(Map.map.ysize);
-//
-//  return native_pos_to_tile(nat_x, nat_y);
-//}
-//
+  return null;
+}
+
+/**************************************************************************
+ Random square anywhere on the Map.map.  Only normal positions (for which
+ is_normal_map_pos returns true) will be found.
+ **************************************************************************/
+public static tile rand_map_pos()
+{
+	int nat_x = Rand.myrand(Map.map.xsize), nat_y = Rand.myrand(Map.map.ysize);
+
+//	return native_pos_to_tile(nat_x, nat_y);
+	return null;
+}
+
 ///**************************************************************************
 //  Give a random tile anywhere on the map for which the 'filter' function
 //  returns true.  Return false if none can be found.  The filter may be
@@ -1582,7 +1576,7 @@ public class Map{
 //  /* First do a few quick checks to find a spot.  The limit on number of
 //   * tries could use some tweaking. */
 //  do {
-//    ptile = Map.map.tiles + myrand(Map.map.xsize * Map.map.ysize);
+//    ptile = Map.map.tiles + Rand.myrand(Map.map.xsize * Map.map.ysize);
 //  } while (filter && !filter(ptile, data) && ++tries < max_tries);
 //
 //  /* If that fails, count all available spots and pick one.
@@ -1601,7 +1595,7 @@ public class Map{
 //      return null;
 //    }
 //
-//    return Map.map.tiles + positions[myrand(count)];
+//    return Map.map.tiles + positions[Rand.myrand(count)];
 //  } else {
 //    return ptile;
 //  }

@@ -1,7 +1,7 @@
 package server.gamelog;
 
 public enum EEndGameState {
-	/* end game states */
+	/* end Game.game states */
 //	enum {
 	  GL_NONE,
 	  GL_DRAW,

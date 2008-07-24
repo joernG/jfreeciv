@@ -77,7 +77,7 @@ public class Messagewin_common{
 //  }
 //
 //  if (!is_meswin_open() && messages_total > 0 &&
-//      (!game.player_ptr.ai.control || ai_popup_windows)) {
+//      (!Game.game.player_ptr.ai.control || ai_popup_windows)) {
 //    popup_meswin_dialog();
 //    change = false;
 //    return;
@@ -154,7 +154,7 @@ public class Messagewin_common{
 //    if (messages[i].location_ok) {
 //      city pcity = map_get_city(messages[i].tile);
 //
-//      messages[i].city_ok = (pcity && city_owner(pcity) == game.player_ptr);
+//      messages[i].city_ok = (pcity && City.city_owner(pcity) == Game.game.player_ptr);
 //    } else {
 //      messages[i].city_ok = false;
 //    }
@@ -203,7 +203,7 @@ public class Messagewin_common{
 //      center_tile_mapcanvas(ptile);
 //    }
 //
-//    if (pcity && city_owner(pcity) == game.player_ptr) {
+//    if (pcity && City.city_owner(pcity) == Game.game.player_ptr) {
 //      /* If the event was the city being destroyed, pcity will be null
 //       * and we'd better not try to pop it up.  It's also possible that
 //       * events will happen on enemy cities; we generally don't want to pop

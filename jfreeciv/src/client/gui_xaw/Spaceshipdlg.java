@@ -36,7 +36,7 @@ public class Spaceshipdlg{
 //#include "pixcomm.h"
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "mem.h"
 //#include "packets.h"
@@ -126,8 +126,8 @@ public class Spaceshipdlg{
 //
 //  pship=&(pdialog.pplayer.spaceship);
 //
-//  if(game.spacerace
-//     && pplayer.player_no == game.player_idx
+//  if(Game.game.spacerace
+//     && pplayer.player_no == Game.game.player_idx
 //     && pship.state == spaceship_state.SSHIP_STARTED
 //     && pship.success_rate > 0) {
 //    XtSetSensitive(pdialog.launch_command, true);

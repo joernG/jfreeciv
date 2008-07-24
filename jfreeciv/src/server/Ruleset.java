@@ -26,7 +26,7 @@ public class Ruleset{
 //#include "capability.h"
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "Map.map.h"
@@ -72,8 +72,8 @@ public class Ruleset{
 //			    final String entry, final String filename);
 //static char *lookup_helptext(section_file file, char *prefix);
 //
-//static Terrain_type_id lookup_terrain(char *name, 
-//                                             Terrain_type_id tthis);
+//static int lookup_terrain(char *name, 
+//                                             int tthis);
 //
 //static void load_tech_names(section_file file);
 //static void load_unit_names(section_file file);
@@ -145,7 +145,7 @@ public class Ruleset{
 //static void openload_ruleset_file(section_file file, final String whichset)
 //{
 //  char sfilename[512];
-//  char *dfilename = valid_ruleset_filename(game.rulesetdir, whichset);
+//  char *dfilename = valid_ruleset_filename(Game.game.rulesetdir, whichset);
 //
 //  if (!dfilename) {
 //    util.freelog(LOG_FATAL,
@@ -357,7 +357,7 @@ public class Ruleset{
 //    i = -1;
 //  } else {
 //    i = find_unit_type_by_name(sval);
-//    if (i==U_LAST) {
+//    if (i==unittype.U_LAST) {
 //      util.freelog((required?LOG_FATAL:Log.LOG_ERROR),
 //	   "for %s %s couldn't match unit_type \"%s\" (%s)",
 //	   (description?description:prefix), entry, sval, filename);
@@ -481,10 +481,10 @@ public class Ruleset{
 ///**************************************************************************
 //  Look up a terrain name in the tile_types array and return its index.
 //**************************************************************************/
-//static Terrain_type_id lookup_terrain(char *name, 
-//                                             Terrain_type_id tthis)
+//static int lookup_terrain(char *name, 
+//                                             int tthis)
 //{
-//  Terrain_type_id i;
+//  int i;
 //
 //  if (*name == '\0' || (0 == strcmp(name, "none")) 
 //      || (0 == strcmp(name, "no"))) {
@@ -536,7 +536,7 @@ public class Ruleset{
 //  sz_strlcpy(advances[A_NONE].name_orig, "None");
 //  advances[A_NONE].name = advances[A_NONE].name_orig;
 //
-//  game.num_tech_types = num_techs + 1; /* includes A_NONE */
+//  Game.game.num_tech_types = num_techs + 1; /* includes A_NONE */
 //
 //  a = &advances[A_FIRST];
 //  for (i = 0; i < num_techs; i++ ) {
@@ -711,19 +711,19 @@ public class Ruleset{
 //    util.freelog(LOG_FATAL, "No units?! (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  if(nval > U_LAST) {
+//  if(nval > unittype.U_LAST) {
 //    util.freelog(LOG_FATAL, "Too many units (%d, max %d) (%s)",
-//	    nval, U_LAST, filename);
+//	    nval, unittype.U_LAST, filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
-//  game.num_unit_types = nval;
+//  Game.game.num_unit_types = nval;
 //
 //  unit_type_iterate(i) {
 //    char *name = secfile_lookup_str(file, "%s.name", sec[i]);
 //
-//    name_strlcpy(unit_types[i].name_orig, name);
-//    unit_types[i].name = unit_types[i].name_orig;
+//    name_strlcpy(Unittype_P.unit_types[i].name_orig, name);
+//    Unittype_P.unit_types[i].name = Unittype_P.unit_types[i].name_orig;
 //  } unit_type_iterate_end;
 //
 //  free(sec);
@@ -760,7 +760,7 @@ public class Ruleset{
 //		  		"veteran_system.veteran_names");
 //
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //
 //    vnlist = secfile_lookup_str_vec(file, &vet_levels,
 //                                    "%s.veteran_names", sec[i]);
@@ -789,7 +789,7 @@ public class Ruleset{
 //  def_vblist = secfile_lookup_int_vec(file, &vet_levels_default,
 //                                      "veteran_system.veteran_power_fact");
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //    vblist = secfile_lookup_int_vec(file, &vet_levels,
 //                                    "%s.veteran_power_fact", sec[i]);
 //    CHECK_VETERAN_LIMIT
@@ -813,10 +813,10 @@ public class Ruleset{
 //                                      "veteran_system.veteran_raise_chance");
 //  CHECK_VETERAN_LIMIT
 //  for (i = 0; i < vet_levels_default; i++) {
-//    game.veteran_chance[i] = def_vblist[i];
+//    Game.game.veteran_chance[i] = def_vblist[i];
 //  }
 //  for (; i < MAX_VET_LEVELS; i++) {
-//    game.veteran_chance[i] = 0;
+//    Game.game.veteran_chance[i] = 0;
 //  }
 //  if (def_vblist) {
 //    free(def_vblist);
@@ -827,10 +827,10 @@ public class Ruleset{
 //                                    "veteran_system.veteran_work_raise_chance");
 //  CHECK_VETERAN_LIMIT
 //  for (i = 0; i < vet_levels_default; i++) {
-//    game.work_veteran_chance[i] = def_vblist[i];
+//    Game.game.work_veteran_chance[i] = def_vblist[i];
 //  }
 //  for (; i < MAX_VET_LEVELS; i++) {
-//    game.work_veteran_chance[i] = 0;
+//    Game.game.work_veteran_chance[i] = 0;
 //  }
 //  if (def_vblist) {
 //    free(def_vblist);
@@ -840,10 +840,10 @@ public class Ruleset{
 //  def_vblist = secfile_lookup_int_vec(file, &vet_levels_default,
 //  		  	"veteran_system.veteran_highseas_loss_pct");
 //  for (i = 0; i < vet_levels_default; i++) {
-//    game.trireme_loss_chance[i] = def_vblist[i];
+//    Game.game.trireme_loss_chance[i] = def_vblist[i];
 //  }
 //  for (; i < MAX_VET_LEVELS; i++) {
-//    game.trireme_loss_chance[i] = 50; /* default */
+//    Game.game.trireme_loss_chance[i] = 50; /* default */
 //  }
 //  if (def_vblist) {
 //    free(def_vblist);
@@ -853,7 +853,7 @@ public class Ruleset{
 //  def_vblist = secfile_lookup_int_vec(file, &vet_levels_default,
 //                                      "veteran_system.veteran_move_bonus");
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //    vblist = secfile_lookup_int_vec(file, &vet_levels,
 //  		  	"%s.veteran_move_bonus", sec[i]);
 //    CHECK_VETERAN_LIMIT
@@ -872,18 +872,18 @@ public class Ruleset{
 //    free(def_vblist);
 //  }
 //  
-//  /* Tech requirement is used to flag removed unit_types, which
+//  /* Tech requirement is used to flag removed Unittype_P.unit_types, which
 //     we might want to know for other fields.  After this we
 //     can use unit_type_exists()
 //  */
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //    u.tech_requirement = lookup_tech(file, sec[i], "tech_req",
 //				      false, filename, u.name);
 //  } unit_type_iterate_end;
 //  
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //    if (unit_type_exists(i)) {
 //      u.obsoleted_by = lookup_unit_type(file, sec[i],
 //					 "obsolete_by", false, filename, u.name);
@@ -895,7 +895,7 @@ public class Ruleset{
 //
 //  /* main stats: */
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //
 //    u.impr_requirement =
 //      find_improvement_by_name(secfile_lookup_str_default(file, "None", 
@@ -973,7 +973,7 @@ public class Ruleset{
 //  
 //  /* flags */
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //    BV_CLR_ALL(u.flags);
 //    assert(!unit_type_flag(i, F_LAST-1));
 //
@@ -996,7 +996,7 @@ public class Ruleset{
 //    
 //  /* roles */
 //  unit_type_iterate(i) {
-//    u = &unit_types[i];
+//    u = &Unittype_P.unit_types[i];
 //    BV_CLR_ALL(u.roles);
 //    
 //    slist = secfile_lookup_str_vec(file, &nval, "%s.roles", sec[i] );
@@ -1017,12 +1017,12 @@ public class Ruleset{
 //  } unit_type_iterate_end;
 //
 //  lookup_tech_list(file, "u_specials", "partisan_req",
-//		   game.rtech.partisan_req, filename);
+//		   Game.game.rtech.partisan_req, filename);
 //
 //  /* Some more consistency checking: */
 //  unit_type_iterate(i) {
 //    if (unit_type_exists(i)) {
-//      u = &unit_types[i];
+//      u = &Unittype_P.unit_types[i];
 //      if (!tech_exists(u.tech_requirement)) {
 //	util.freelog(Log.LOG_ERROR,
 //		"unit_type \"%s\" depends on removed tech \"%s\" (%s)",
@@ -1032,7 +1032,7 @@ public class Ruleset{
 //      if (u.obsoleted_by!=-1 && !unit_type_exists(u.obsoleted_by)) {
 //	util.freelog(Log.LOG_ERROR,
 //		"unit_type \"%s\" obsoleted by removed unit \"%s\" (%s)",
-//		u.name, unit_types[u.obsoleted_by].name, filename);
+//		u.name, Unittype_P.unit_types[u.obsoleted_by].name, filename);
 //	u.obsoleted_by = -1;
 //      }
 //    }
@@ -1066,52 +1066,52 @@ public class Ruleset{
 //    util.freelog(LOG_FATAL, "No role=firstbuild units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  if(num_role_units(L_BARBARIAN)==0) {
+//  if(num_role_units(unit_role_id.L_BARBARIAN)==0) {
 //    util.freelog(LOG_FATAL, "No role=barbarian units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  if(num_role_units(L_BARBARIAN_LEADER)==0) {
+//  if(num_role_units(unit_role_id.L_BARBARIAN_LEADER)==0) {
 //    util.freelog(LOG_FATAL, "No role=barbarian leader units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  if(num_role_units(L_BARBARIAN_BUILD)==0) {
+//  if(num_role_units(unit_role_id.L_BARBARIAN_BUILD)==0) {
 //    util.freelog(LOG_FATAL, "No role=barbarian build units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  if(num_role_units(L_BARBARIAN_BOAT)==0) {
+//  if(num_role_units(unit_role_id.L_BARBARIAN_BOAT)==0) {
 //    util.freelog(LOG_FATAL, "No role=barbarian ship units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  if(num_role_units(L_BARBARIAN_SEA)==0) {
+//  if(num_role_units(unit_role_id.L_BARBARIAN_SEA)==0) {
 //    util.freelog(LOG_FATAL, "No role=sea raider barbarian units? (%s)", filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  u = &unit_types[get_role_unit(L_BARBARIAN_BOAT,0)];
+//  u = &Unittype_P.unit_types[Unittype_P.get_role_unit(unit_role_id.L_BARBARIAN_BOAT,0)];
 //  if(u.move_type != SEA_MOVING) {
 //    util.freelog(LOG_FATAL, "Barbarian boat (%s) needs to be a sea unit (%s)",
 //            u.name, filename);
 //    exit(EXIT_FAILURE);
 //  }
 //
-//  /* pre-calculate game.rtech.nav (tech for non-trireme ferryboat) */
-//  game.rtech.nav = A_LAST;
+//  /* pre-calculate Game.game.rtech.nav (tech for non-trireme ferryboat) */
+//  Game.game.rtech.nav = A_LAST;
 //  for(i=0; i<num_role_units(L_FERRYBOAT); i++) {
-//    j = get_role_unit(L_FERRYBOAT,i);
+//    j = Unittype_P.get_role_unit(L_FERRYBOAT,i);
 //    if (!unit_type_flag(j, F_TRIREME)) {
 //      j = get_unit_type(j).tech_requirement;
 //      util.freelog(Log.LOG_DEBUG, "nav tech is %s", advances[j].name);
-//      game.rtech.nav = j;
+//      Game.game.rtech.nav = j;
 //      break;
 //    }
 //  }
 //
-//  /* pre-calculate game.rtech.u_partisan
+//  /* pre-calculate Game.game.rtech.u_partisan
 //     (tech for first partisan unit, or A_LAST */
 //  if (num_role_units(L_PARTISAN)==0) {
-//    game.rtech.u_partisan = A_LAST;
+//    Game.game.rtech.u_partisan = A_LAST;
 //  } else {
-//    j = get_role_unit(L_PARTISAN, 0);
-//    j = game.rtech.u_partisan = get_unit_type(j).tech_requirement;
+//    j = Unittype_P.get_role_unit(L_PARTISAN, 0);
+//    j = Game.game.rtech.u_partisan = get_unit_type(j).tech_requirement;
 //    util.freelog(Log.LOG_DEBUG, "partisan tech is %s", advances[j].name);
 //  }
 //
@@ -1146,7 +1146,7 @@ public class Ruleset{
 //    exit(EXIT_FAILURE);
 //  }
 //
-//  game.num_impr_types = nval;
+//  Game.game.num_impr_types = nval;
 //
 //  impr_type_iterate(i) {
 //    char *name = secfile_lookup_str(file, "%s.name", sec[i]);
@@ -1434,16 +1434,16 @@ public class Ruleset{
 //   * Hack to allow code that explicitly checks for Palace or City Walls
 //   * to work.
 //   */
-//  game.palace_building = get_building_for_effect(EFT_CAPITAL_CITY);
-//  if (game.palace_building == B_LAST) {
+//  Game.game.palace_building = get_building_for_effect(EFT_CAPITAL_CITY);
+//  if (Game.game.palace_building == B_LAST) {
 //    util.freelog(LOG_FATAL,
 //	    /* TRANS: Obscure ruleset error */
 //	    "Cannot find any palace building");
 //    exit(EXIT_FAILURE);
 //  }
 //
-//  game.land_defend_building = get_building_for_effect(EFT_LAND_DEFEND);
-//  if (game.land_defend_building == B_LAST) {
+//  Game.game.land_defend_building = get_building_for_effect(EFT_LAND_DEFEND);
+//  if (Game.game.land_defend_building == B_LAST) {
 //    util.freelog(LOG_FATAL,
 //	    /* TRANS: Obscure ruleset error */
 //	    "Cannot find any land defend building");
@@ -1470,30 +1470,30 @@ public class Ruleset{
 //    }
 //  } impr_type_iterate_end;
 //
-//  game.aqueduct_size = secfile_lookup_int(file, "b_special.aqueduct_size");
+//  Game.game.aqueduct_size = secfile_lookup_int(file, "b_special.aqueduct_size");
 //
 //  item = secfile_lookup_str(file, "b_special.default");
 //  if (*item != '\0') {
-//    game.default_building = find_improvement_by_name(item);
-//    if (game.default_building == B_LAST) {
+//    Game.game.default_building = find_improvement_by_name(item);
+//    if (Game.game.default_building == B_LAST) {
 //      util.freelog(Log.LOG_ERROR,
 //	      /* TRANS: Obscure ruleset error */
 //	      ("Bad value \"%s\" for b_special.default (%s)"),
 //	      item, filename);
 //    }
 //  } else {
-//    game.default_building = B_LAST;
+//    Game.game.default_building = B_LAST;
 //  }
 //
 //  /* FIXME: remove all of the following when gen-impr implemented... */
 //
-//  game.rtech.cathedral_plus =
+//  Game.game.rtech.cathedral_plus =
 //    lookup_tech(file, "b_special", "cathedral_plus", false, filename, null);
-//  game.rtech.cathedral_minus =
+//  Game.game.rtech.cathedral_minus =
 //    lookup_tech(file, "b_special", "cathedral_minus", false, filename, null);
-//  game.rtech.colosseum_plus =
+//  Game.game.rtech.colosseum_plus =
 //    lookup_tech(file, "b_special", "colosseum_plus", false, filename, null);
-//  game.rtech.temple_plus =
+//  Game.game.rtech.temple_plus =
 //    lookup_tech(file, "b_special", "temple_plus", false, filename, null);
 //
 //  free(sec);
@@ -1521,7 +1521,7 @@ public class Ruleset{
 //	    filename);
 //    exit(EXIT_FAILURE);
 //  }
-//  game.terrain_count = nval;
+//  Game.game.terrain_count = nval;
 //
 //  terrain_type_iterate(i) {
 //    char *name = secfile_lookup_str(file, "%s.terrain_name", sec[i]);
@@ -1787,29 +1787,29 @@ public class Ruleset{
 //
 //  sec = secfile_get_secnames_prefix(file, "government_", &nval);
 //
-//  game.default_government
+//  Game.game.default_government
 //    = lookup_government(file, "governments.default", filename);
 //  
-//  game.government_when_anarchy
+//  Game.game.government_when_anarchy
 //    = lookup_government(file, "governments.when_anarchy", filename);
 //  
-//  game.ai_goal_government
+//  Game.game.ai_goal_government
 //    = lookup_government(file, "governments.ai_goal", filename);
 //
 //  util.freelog(Log.LOG_DEBUG, "govs: def %d, anarchy %d, ai_goal %d",
-//	  game.default_government, game.government_when_anarchy,
-//	  game.ai_goal_government);
+//	  Game.game.default_government, Game.game.government_when_anarchy,
+//	  Game.game.ai_goal_government);
 //  
 //  /* Because player_init is called before rulesets are loaded we set
 //   * all players governments here, if they have not been previously
-//   * set (eg by loading game).
+//   * set (eg by loading Game.game).
 //   */
-//  for(i=0; i<MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS; i++) {
-//    if (game.players[i].government == G_MAGIC) {
-//      game.players[i].government = game.default_government;
+//  for(i=0; i<Shared_H.MAX_NUM_PLAYERS+Shared_H.MAX_NUM_BARBARIANS; i++) {
+//    if (Game.game.players[i].government == G_MAGIC) {
+//      Game.game.players[i].government = Game.game.default_government;
 //    }
-//    if (game.players[i].target_government == G_MAGIC) {
-//      game.players[i].target_government = game.default_government;
+//    if (Game.game.players[i].target_government == G_MAGIC) {
+//      Game.game.players[i].target_government = Game.game.default_government;
 //    }
 //  }
 //
@@ -1994,41 +1994,41 @@ public class Ruleset{
 //  struct packet_ruleset_control packet;
 //  int i;
 //
-//  packet.aqueduct_size = game.aqueduct_size;
-//  packet.add_to_size_limit = game.add_to_size_limit;
-//  packet.notradesize = game.notradesize;
-//  packet.fulltradesize = game.fulltradesize;
+//  packet.aqueduct_size = Game.game.aqueduct_size;
+//  packet.add_to_size_limit = Game.game.add_to_size_limit;
+//  packet.notradesize = Game.game.notradesize;
+//  packet.fulltradesize = Game.game.fulltradesize;
 //
-//  packet.rtech_cathedral_plus = game.rtech.cathedral_plus;
-//  packet.rtech_cathedral_minus = game.rtech.cathedral_minus;
-//  packet.rtech_colosseum_plus = game.rtech.colosseum_plus;
-//  packet.rtech_temple_plus = game.rtech.temple_plus;
+//  packet.rtech_cathedral_plus = Game.game.rtech.cathedral_plus;
+//  packet.rtech_cathedral_minus = Game.game.rtech.cathedral_minus;
+//  packet.rtech_colosseum_plus = Game.game.rtech.colosseum_plus;
+//  packet.rtech_temple_plus = Game.game.rtech.temple_plus;
 //
 //  for(i=0; i<MAX_NUM_TECH_LIST; i++) {
-//    packet.rtech_partisan_req[i] = game.rtech.partisan_req[i];
+//    packet.rtech_partisan_req[i] = Game.game.rtech.partisan_req[i];
 //  }
 //
-//  packet.government_count = game.government_count;
-//  packet.government_when_anarchy = game.government_when_anarchy;
-//  packet.default_government = game.default_government;
+//  packet.government_count = Game.game.government_count;
+//  packet.government_when_anarchy = Game.game.government_when_anarchy;
+//  packet.default_government = Game.game.default_government;
 //
-//  packet.num_unit_types = game.num_unit_types;
-//  packet.num_impr_types = game.num_impr_types;
-//  packet.num_tech_types = game.num_tech_types;
-//  packet.borders = game.borders;
-//  packet.happyborders = game.happyborders;
-//  packet.slow_invasions = game.slow_invasions;
+//  packet.num_unit_types = Game.game.num_unit_types;
+//  packet.num_impr_types = Game.game.num_impr_types;
+//  packet.num_tech_types = Game.game.num_tech_types;
+//  packet.borders = Game.game.borders;
+//  packet.happyborders = Game.game.happyborders;
+//  packet.slow_invasions = Game.game.slow_invasions;
 //
-//  packet.nation_count = game.nation_count;
-//  packet.playable_nation_count = game.playable_nation_count;
-//  packet.style_count = game.styles_count;
-//  packet.terrain_count = game.terrain_count;
+//  packet.nation_count = Game.game.nation_count;
+//  packet.playable_nation_count = Game.game.playable_nation_count;
+//  packet.style_count = Game.game.styles_count;
+//  packet.terrain_count = Game.game.terrain_count;
 //
 //  for(i = 0; i < MAX_NUM_TEAMS; i++) {
 //    sz_strlcpy(packet.team_name[i], team_get_by_id(i).name);
 //  }
 //
-//  packet.default_building = game.default_building;
+//  packet.default_building = Game.game.default_building;
 //
 //  lsend_packet_ruleset_control(dest, &packet);
 //}
@@ -2077,19 +2077,19 @@ public class Ruleset{
 //
 //  () section_file_lookup(file, "datafile.description");	/* unused */
 //
-//  sec = secfile_get_secnames_prefix(file, "nation", &game.nation_count);
-//  game.playable_nation_count = game.nation_count - 2;
-//  util.freelog(Log.LOG_VERBOSE, "There are %d nations defined", game.playable_nation_count);
+//  sec = secfile_get_secnames_prefix(file, "nation", &Game.game.nation_count);
+//  Game.game.playable_nation_count = Game.game.nation_count - 2;
+//  util.freelog(Log.LOG_VERBOSE, "There are %d nations defined", Game.game.playable_nation_count);
 //
-//  if (game.playable_nation_count < 0) {
+//  if (Game.game.playable_nation_count < 0) {
 //    util.freelog(LOG_FATAL,
 //	    "There must be at least one nation defined; number is %d",
-//	    game.playable_nation_count);
+//	    Game.game.playable_nation_count);
 //    exit(EXIT_FAILURE);
 //  }
-//  nations_alloc(game.nation_count);
+//  nations_alloc(Game.game.nation_count);
 //
-//  for( i=0; i<game.nation_count; i++) {
+//  for( i=0; i<Game.game.nation_count; i++) {
 //    char *name        = secfile_lookup_str(file, "%s.name", sec[i]);
 //    char *name_plural = secfile_lookup_str(file, "%s.plural", sec[i]);
 //    nation_type pl = get_nation_by_idx(i);
@@ -2208,7 +2208,7 @@ public class Ruleset{
 //	  } else {
 //	    /* "handled" tracks whether we find a match (for error handling) */
 //	    boolean handled = false;
-//	    Terrain_type_id type;
+//	    int type;
 //	
 //	    for (type = T_FIRST; type < T_COUNT && !handled; type++) {
 //              /*
@@ -2270,7 +2270,7 @@ public class Ruleset{
 //
 //  sec = secfile_get_secnames_prefix(file, "nation", &nval);
 //
-//  for( i=0; i<game.nation_count; i++) {
+//  for( i=0; i<Game.game.nation_count; i++) {
 //    pl = get_nation_by_idx(i);
 //
 //    /* nation leaders */
@@ -2483,7 +2483,7 @@ public class Ruleset{
 //	 ruleset file with variety of government ruleset files: */
 //      util.freelog(Log.LOG_VERBOSE, "Didn't match goal government name \"%s\" for %s",
 //	      temp_name, pl.name);
-//      val = game.government_when_anarchy;  /* flag value (no goal) (?) */
+//      val = Game.game.government_when_anarchy;  /* flag value (no goal) (?) */
 //    } else {
 //      val = gov.index;
 //    }
@@ -2509,12 +2509,12 @@ public class Ruleset{
 //  }
 //
 //  /* Calculate parent nations.  O(n^2) algorithm. */
-//  for (i = 0; i < game.nation_count; i++) {
-//    int parents[game.nation_count];
+//  for (i = 0; i < Game.game.nation_count; i++) {
+//    int parents[Game.game.nation_count];
 //    int count = 0;
 //
 //    pl = get_nation_by_idx(i);
-//    for (j = 0; j < game.nation_count; j++) {
+//    for (j = 0; j < Game.game.nation_count; j++) {
 //      nation_type p2 = get_nation_by_idx(j);
 //
 //      for (k = 0; p2.civilwar_nations[k] != NO_NATION_SELECTED; k++) {
@@ -2551,7 +2551,7 @@ public class Ruleset{
 //  city_styles_alloc(nval);
 //
 //  /* Get names, so can lookup for replacements: */
-//  for (i = 0; i < game.styles_count; i++) {
+//  for (i = 0; i < Game.game.styles_count; i++) {
 //    char *style_name = secfile_lookup_str(file, "%s.name", styles[i]);
 //    name_strlcpy(city_styles[i].name_orig, style_name);
 //    city_styles[i].name = city_styles[i].name_orig;
@@ -2582,29 +2582,29 @@ public class Ruleset{
 //  for (i = 0; i < nval; i++) {
 //    final String name = specialist_names[i];
 //
-//    sz_strlcpy(game.rgame.specialists[i].name, name);
-//    game.rgame.specialists[i].min_size
+//    sz_strlcpy(Game.game.rgame.specialists[i].name, name);
+//    Game.game.rgame.specialists[i].min_size
 //      = secfile_lookup_int(file, "specialist.%s_min_size", name);
-//    game.rgame.specialists[i].bonus
+//    Game.game.rgame.specialists[i].bonus
 //      = secfile_lookup_int(file, "specialist.%s_base_bonus", name);
 //    
 //  }
 //  free(specialist_names);
 //
-//  game.rgame.changable_tax = 
+//  Game.game.rgame.changable_tax = 
 //    secfile_lookup_bool_default(file, true, "specialist.changable_tax");
-//  game.rgame.forced_science = 
+//  Game.game.rgame.forced_science = 
 //    secfile_lookup_int_default(file, 0, "specialist.forced_science");
-//  game.rgame.forced_luxury = 
+//  Game.game.rgame.forced_luxury = 
 //    secfile_lookup_int_default(file, 100, "specialist.forced_luxury");
-//  game.rgame.forced_gold = 
+//  Game.game.rgame.forced_gold = 
 //    secfile_lookup_int_default(file, 0, "specialist.forced_gold");
-//  if (game.rgame.forced_science + game.rgame.forced_luxury
-//      + game.rgame.forced_gold != 100) {
+//  if (Game.game.rgame.forced_science + Game.game.rgame.forced_luxury
+//      + Game.game.rgame.forced_gold != 100) {
 //    util.freelog(LOG_FATAL, "Forced taxes do not add up in ruleset!");
 //    exit(EXIT_FAILURE);
 //  }
-//  if (game.rgame.specialists[SP_ELVIS].min_size > 0) {
+//  if (Game.game.rgame.specialists[SP_ELVIS].min_size > 0) {
 //    util.freelog(LOG_FATAL, "Elvises must be available without a " +
 //	    "city size restriction!");
 //    exit(EXIT_FAILURE);
@@ -2612,7 +2612,7 @@ public class Ruleset{
 //
 //  /* City Parameters */
 //
-//  game.add_to_size_limit =
+//  Game.game.add_to_size_limit =
 //    secfile_lookup_int_default(file, 9, "parameters.add_to_size_limit");
 //
 //  /* City Styles ... */
@@ -2620,7 +2620,7 @@ public class Ruleset{
 //  styles = secfile_get_secnames_prefix(file, "citystyle_", &nval);
 //
 //  /* Get rest: */
-//  for( i=0; i<game.styles_count; i++) {
+//  for( i=0; i<Game.game.styles_count; i++) {
 //    sz_strlcpy(city_styles[i].graphic, 
 //	       secfile_lookup_str(file, "%s.graphic", styles[i]));
 //    sz_strlcpy(city_styles[i].graphic_alt, 
@@ -2662,76 +2662,76 @@ public class Ruleset{
 //  final String filename;
 //  int *food_ini;
 //
-//  openload_ruleset_file(&file, "game");
+//  openload_ruleset_file(&file, "Game.game");
 //  filename = secfile_filename(&file);
 //  () check_ruleset_capabilities(&file, "+1.11.1", filename);
 //  () section_file_lookup(&file, "datafile.description");	/* unused */
 //
-//  game.rgame.min_city_center_food =
+//  Game.game.rgame.min_city_center_food =
 //    secfile_lookup_int(&file, "civstyle.min_city_center_food");
-//  game.rgame.min_city_center_shield =
+//  Game.game.rgame.min_city_center_shield =
 //    secfile_lookup_int(&file, "civstyle.min_city_center_shield");
-//  game.rgame.min_city_center_trade =
+//  Game.game.rgame.min_city_center_trade =
 //    secfile_lookup_int(&file, "civstyle.min_city_center_trade");
 //
 //  /* if the server variable citymindist is set (!= 0) the ruleset
 //     setting is overwritten by citymindist */
-//  if (game.citymindist == 0) {
-//    game.rgame.min_dist_bw_cities =
+//  if (Game.game.citymindist == 0) {
+//    Game.game.rgame.min_dist_bw_cities =
 //	secfile_lookup_int(&file, "civstyle.min_dist_bw_cities");
-//    if (game.rgame.min_dist_bw_cities < 1) {
+//    if (Game.game.rgame.min_dist_bw_cities < 1) {
 //      util.freelog(Log.LOG_ERROR, "Bad value %i for min_dist_bw_cities. Using 2.",
-//	      game.rgame.min_dist_bw_cities);
-//      game.rgame.min_dist_bw_cities = 2;
+//	      Game.game.rgame.min_dist_bw_cities);
+//      Game.game.rgame.min_dist_bw_cities = 2;
 //    }
 //  } else {
-//    game.rgame.min_dist_bw_cities = game.citymindist;
+//    Game.game.rgame.min_dist_bw_cities = Game.game.citymindist;
 //  }
 //
-//  game.rgame.init_vis_radius_sq =
+//  Game.game.rgame.init_vis_radius_sq =
 //    secfile_lookup_int(&file, "civstyle.init_vis_radius_sq");
 //
 //  sval = secfile_lookup_str(&file, "civstyle.hut_overflight" );
 //  if (mystrcasecmp(sval, "Nothing") == 0) {
-//    game.rgame.hut_overflight = OVERFLIGHT_NOTHING;
+//    Game.game.rgame.hut_overflight = OVERFLIGHT_NOTHING;
 //  } else if (mystrcasecmp(sval, "Frighten") == 0) {
-//    game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
+//    Game.game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
 //  } else {
 //    util.freelog(Log.LOG_ERROR, "Bad value %s for hut_overflight. Using " +
 //            "\"Frighten\".", sval);
-//    game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
+//    Game.game.rgame.hut_overflight = OVERFLIGHT_FRIGHTEN;
 //  }
 //
-//  game.rgame.pillage_select =
+//  Game.game.rgame.pillage_select =
 //      secfile_lookup_bool(&file, "civstyle.pillage_select");
 //
 //  sval = secfile_lookup_str(&file, "civstyle.nuke_contamination" );
 //  if (mystrcasecmp(sval, "Pollution") == 0) {
-//    game.rgame.nuke_contamination = CONTAMINATION_POLLUTION;
+//    Game.game.rgame.nuke_contamination = CONTAMINATION_POLLUTION;
 //  } else if (mystrcasecmp(sval, "Fallout") == 0) {
-//    game.rgame.nuke_contamination = CONTAMINATION_FALLOUT;
+//    Game.game.rgame.nuke_contamination = CONTAMINATION_FALLOUT;
 //  } else {
 //    util.freelog(Log.LOG_ERROR, "Bad value %s for nuke_contamination. Using " +
 //            "\"Pollution\".", sval);
-//    game.rgame.nuke_contamination = CONTAMINATION_POLLUTION;
+//    Game.game.rgame.nuke_contamination = CONTAMINATION_POLLUTION;
 //  }
 //
-//  food_ini = secfile_lookup_int_vec(&file, &game.rgame.granary_num_inis, 
+//  food_ini = secfile_lookup_int_vec(&file, &Game.game.rgame.granary_num_inis, 
 //				    "civstyle.granary_food_ini");
-//  if (game.rgame.granary_num_inis > MAX_GRANARY_INIS) {
+//  if (Game.game.rgame.granary_num_inis > MAX_GRANARY_INIS) {
 //    util.freelog(LOG_FATAL,
 //	    "Too many granary_food_ini entries; %d is the maximum!",
 //	    MAX_GRANARY_INIS);
 //    exit(EXIT_FAILURE);
-//  } else if (game.rgame.granary_num_inis == 0) {
+//  } else if (Game.game.rgame.granary_num_inis == 0) {
 //    util.freelog(Log.LOG_ERROR, "No values for granary_food_ini. Using 1.");
-//    game.rgame.granary_num_inis = 1;
-//    game.rgame.granary_food_ini[0] = 1;
+//    Game.game.rgame.granary_num_inis = 1;
+//    Game.game.rgame.granary_food_ini[0] = 1;
 //  } else {
 //    int i;
 //
 //    /* check for <= 0 entries */
-//    for (i = 0; i < game.rgame.granary_num_inis; i++) {
+//    for (i = 0; i < Game.game.rgame.granary_num_inis; i++) {
 //      if (food_ini[i] <= 0) {
 //	if (i == 0) {
 //	  food_ini[i] = 1;
@@ -2741,65 +2741,65 @@ public class Ruleset{
 //	util.freelog(Log.LOG_ERROR, "Bad value for granary_food_ini[%i]. Using %i.",
 //		i, food_ini[i]);
 //      }
-//      game.rgame.granary_food_ini[i] = food_ini[i];
+//      Game.game.rgame.granary_food_ini[i] = food_ini[i];
 //    }
 //  }
 //  free(food_ini);
 //
-//  game.rgame.granary_food_inc =
+//  Game.game.rgame.granary_food_inc =
 //    secfile_lookup_int(&file, "civstyle.granary_food_inc");
-//  if (game.rgame.granary_food_inc < 0) {
+//  if (Game.game.rgame.granary_food_inc < 0) {
 //    util.freelog(Log.LOG_ERROR, "Bad value %i for granary_food_inc. Using 100.",
-//	    game.rgame.granary_food_inc);
-//    game.rgame.granary_food_inc = 100;
+//	    Game.game.rgame.granary_food_inc);
+//    Game.game.rgame.granary_food_inc = 100;
 //  }
 //
-//  game.rgame.tech_cost_style =
+//  Game.game.rgame.tech_cost_style =
 //      secfile_lookup_int(&file, "civstyle.tech_cost_style");
-//  if (game.rgame.tech_cost_style < 0 || game.rgame.tech_cost_style > 2) {
+//  if (Game.game.rgame.tech_cost_style < 0 || Game.game.rgame.tech_cost_style > 2) {
 //    util.freelog(Log.LOG_ERROR, "Bad value %i for tech_cost_style. Using 0.",
-//	    game.rgame.tech_cost_style);
-//    game.rgame.tech_cost_style = 0;
+//	    Game.game.rgame.tech_cost_style);
+//    Game.game.rgame.tech_cost_style = 0;
 //  }
-//  game.rgame.tech_cost_double_year = 
+//  Game.game.rgame.tech_cost_double_year = 
 //      secfile_lookup_int_default(&file, 1, "civstyle.tech_cost_double_year");
 //
-//  game.rgame.tech_leakage =
+//  Game.game.rgame.tech_leakage =
 //      secfile_lookup_int(&file, "civstyle.tech_leakage");
-//  if (game.rgame.tech_leakage < 0 || game.rgame.tech_leakage > 3) {
+//  if (Game.game.rgame.tech_leakage < 0 || Game.game.rgame.tech_leakage > 3) {
 //    util.freelog(Log.LOG_ERROR, "Bad value %i for tech_leakage. Using 0.",
-//	    game.rgame.tech_leakage);
-//    game.rgame.tech_leakage = 0;
+//	    Game.game.rgame.tech_leakage);
+//    Game.game.rgame.tech_leakage = 0;
 //  }
 //
-//  if (game.rgame.tech_cost_style == 0 && game.rgame.tech_leakage != 0) {
+//  if (Game.game.rgame.tech_cost_style == 0 && Game.game.rgame.tech_leakage != 0) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "Only tech_leakage 0 supported with tech_cost_style 0.");
 //    util.freelog(Log.LOG_ERROR, "Switching to tech_leakage 0.");
-//    game.rgame.tech_leakage = 0;
+//    Game.game.rgame.tech_leakage = 0;
 //  }
 //    
 //  /* City incite cost */
-//  game.incite_cost.improvement_factor = 
+//  Game.game.incite_cost.improvement_factor = 
 //    secfile_lookup_int_default(&file, 1, "incite_cost.improvement_factor");
-//  game.incite_cost.unit_factor = 
+//  Game.game.incite_cost.unit_factor = 
 //    secfile_lookup_int_default(&file, 1, "incite_cost.unit_factor");
-//  game.incite_cost.total_factor = 
+//  Game.game.incite_cost.total_factor = 
 //    secfile_lookup_int_default(&file, 100, "incite_cost.total_factor");
 //
 //  /* Slow invasions */
-//  game.slow_invasions = 
+//  Game.game.slow_invasions = 
 //    secfile_lookup_bool_default(&file, GAME_DEFAULT_SLOW_INVASIONS,
 //                                "global_unit_options.slow_invasions");
 //  
 //  /* Load global initial items. */
 //  lookup_tech_list(&file, "options", "global_init_techs",
-//		   game.rgame.global_init_techs, filename);
+//		   Game.game.rgame.global_init_techs, filename);
 //  lookup_building_list(&file, "options", "global_init_buildings",
-//		       game.rgame.global_init_buildings, filename);
+//		       Game.game.rgame.global_init_buildings, filename);
 //
 //  /* Enable/Disable killstack */
-//  game.rgame.killstack = secfile_lookup_bool(&file, "combat_rules.killstack");
+//  Game.game.rgame.killstack = secfile_lookup_bool(&file, "combat_rules.killstack");
 //	
 //  section_file_check_unused(&file, filename);
 //  section_file_free(&file);
@@ -2817,7 +2817,7 @@ public class Ruleset{
 //  unit_type_iterate(utype_id) {
 //    unit_type u = get_unit_type(utype_id);
 //
-//    packet.id = u-unit_types;
+//    packet.id = u-Unittype_P.unit_types;
 //    packet.name = u.name_orig;
 //    packet.sound_move = u.sound_move;
 //    packet.sound_move_alt = u.sound_move_alt;
@@ -3120,7 +3120,7 @@ public class Ruleset{
 //  assert(sizeof(packet.init_techs) == sizeof(n.init_techs));
 //  assert(ARRAY_SIZE(packet.init_techs) == ARRAY_SIZE(n.init_techs));
 //
-//  for( k=0; k<game.nation_count; k++) {
+//  for( k=0; k<Game.game.nation_count; k++) {
 //    n = get_nation_by_idx(k);
 //    packet.id = k;
 //    packet.name = n.name_orig;
@@ -3150,7 +3150,7 @@ public class Ruleset{
 //  struct packet_ruleset_city city_p;
 //  int k;
 //
-//  for( k=0; k<game.styles_count; k++) {
+//  for( k=0; k<Game.game.styles_count; k++) {
 //    city_p.style_id = k;
 //    city_p.techreq = city_styles[k].techreq;
 //    city_p.replaced_by = city_styles[k].replaced_by;
@@ -3176,46 +3176,46 @@ public class Ruleset{
 //  struct packet_ruleset_game misc_p;
 //
 //  specialist_type_iterate(sp) {
-//    sz_strlcpy(misc_p.specialist_name[sp], game.rgame.specialists[sp].name);
-//    misc_p.specialist_min_size[sp] = game.rgame.specialists[sp].min_size;
-//    misc_p.specialist_bonus[sp] = game.rgame.specialists[sp].bonus;
+//    sz_strlcpy(misc_p.specialist_name[sp], Game.game.rgame.specialists[sp].name);
+//    misc_p.specialist_min_size[sp] = Game.game.rgame.specialists[sp].min_size;
+//    misc_p.specialist_bonus[sp] = Game.game.rgame.specialists[sp].bonus;
 //  } specialist_type_iterate_end;
-//  misc_p.changable_tax = game.rgame.changable_tax;
-//  misc_p.forced_science = game.rgame.forced_science;
-//  misc_p.forced_luxury = game.rgame.forced_luxury;
-//  misc_p.forced_gold = game.rgame.forced_gold;
-//  misc_p.min_city_center_food = game.rgame.min_city_center_food;
-//  misc_p.min_city_center_shield = game.rgame.min_city_center_shield;
-//  misc_p.min_city_center_trade = game.rgame.min_city_center_trade;
-//  misc_p.min_dist_bw_cities = game.rgame.min_dist_bw_cities;
-//  misc_p.init_vis_radius_sq = game.rgame.init_vis_radius_sq;
-//  misc_p.hut_overflight = game.rgame.hut_overflight;
-//  misc_p.pillage_select = game.rgame.pillage_select;
-//  misc_p.nuke_contamination = game.rgame.nuke_contamination;
+//  misc_p.changable_tax = Game.game.rgame.changable_tax;
+//  misc_p.forced_science = Game.game.rgame.forced_science;
+//  misc_p.forced_luxury = Game.game.rgame.forced_luxury;
+//  misc_p.forced_gold = Game.game.rgame.forced_gold;
+//  misc_p.min_city_center_food = Game.game.rgame.min_city_center_food;
+//  misc_p.min_city_center_shield = Game.game.rgame.min_city_center_shield;
+//  misc_p.min_city_center_trade = Game.game.rgame.min_city_center_trade;
+//  misc_p.min_dist_bw_cities = Game.game.rgame.min_dist_bw_cities;
+//  misc_p.init_vis_radius_sq = Game.game.rgame.init_vis_radius_sq;
+//  misc_p.hut_overflight = Game.game.rgame.hut_overflight;
+//  misc_p.pillage_select = Game.game.rgame.pillage_select;
+//  misc_p.nuke_contamination = Game.game.rgame.nuke_contamination;
 //  for (i = 0; i < MAX_GRANARY_INIS; i++) {
-//    misc_p.granary_food_ini[i] = game.rgame.granary_food_ini[i];
+//    misc_p.granary_food_ini[i] = Game.game.rgame.granary_food_ini[i];
 //  }
-//  misc_p.granary_num_inis = game.rgame.granary_num_inis;
-//  misc_p.granary_food_inc = game.rgame.granary_food_inc;
-//  misc_p.tech_cost_style = game.rgame.tech_cost_style;
-//  misc_p.tech_leakage = game.rgame.tech_leakage;
-//  misc_p.tech_cost_double_year = game.rgame.tech_cost_double_year;
+//  misc_p.granary_num_inis = Game.game.rgame.granary_num_inis;
+//  misc_p.granary_food_inc = Game.game.rgame.granary_food_inc;
+//  misc_p.tech_cost_style = Game.game.rgame.tech_cost_style;
+//  misc_p.tech_leakage = Game.game.rgame.tech_leakage;
+//  misc_p.tech_cost_double_year = Game.game.rgame.tech_cost_double_year;
 //
-//  memcpy(misc_p.trireme_loss_chance, game.trireme_loss_chance, 
-//         sizeof(game.trireme_loss_chance));
-//  memcpy(misc_p.work_veteran_chance, game.work_veteran_chance, 
-//         sizeof(game.work_veteran_chance));
-//  memcpy(misc_p.veteran_chance, game.veteran_chance, 
-//         sizeof(game.veteran_chance));
+//  memcpy(misc_p.trireme_loss_chance, Game.game.trireme_loss_chance, 
+//         sizeof(Game.game.trireme_loss_chance));
+//  memcpy(misc_p.work_veteran_chance, Game.game.work_veteran_chance, 
+//         sizeof(Game.game.work_veteran_chance));
+//  memcpy(misc_p.veteran_chance, Game.game.veteran_chance, 
+//         sizeof(Game.game.veteran_chance));
 //    
 //  assert(sizeof(misc_p.global_init_techs) ==
-//	 sizeof(game.rgame.global_init_techs));
+//	 sizeof(Game.game.rgame.global_init_techs));
 //  assert(ARRAY_SIZE(misc_p.global_init_techs) ==
-//	 ARRAY_SIZE(game.rgame.global_init_techs));
-//  memcpy(misc_p.global_init_techs, game.rgame.global_init_techs,
+//	 ARRAY_SIZE(Game.game.rgame.global_init_techs));
+//  memcpy(misc_p.global_init_techs, Game.game.rgame.global_init_techs,
 //	 sizeof(misc_p.global_init_techs));
 //
-//  misc_p.killstack = game.rgame.killstack;
+//  misc_p.killstack = Game.game.rgame.killstack;
 //  lsend_packet_ruleset_game(dest, &misc_p);
 //}
 //

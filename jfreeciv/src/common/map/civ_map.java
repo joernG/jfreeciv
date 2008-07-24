@@ -1,5 +1,6 @@
 package common.map;
 
+import common.Map;
 import common.city.iter_index;
 
 public class civ_map {
@@ -37,6 +38,15 @@ public class civ_map {
 //		    int nation; /* May be NO_NATION_SELECTED. */
 //		  } *start_positions;	/* allocated at runtime */
 //		};
+
+
+			/**************************************************************************
+		Returns the total number of (real) positions (or tiles) on the Map.map.
+			 **************************************************************************/
+			public int map_num_tiles()
+			{
+				return xsize * ysize;
+			}
 
 
 }

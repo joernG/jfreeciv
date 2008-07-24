@@ -23,7 +23,7 @@ public class Pf_tools{
 //
 //#include "mem.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //
 //#include "pf_tools.h"
 //
@@ -89,10 +89,10 @@ public class Pf_tools{
 //			    final tile ptile1,
 //			    pf_parameter param)
 //{
-//  if (is_ocean(ptile.terrain)) {
+//  if (Terrain_H.is_ocean(ptile.terrain)) {
 //    return Unit_H.SINGLE_MOVE;
 //  } else if (City.is_allied_city_tile(ptile, param.owner)
-//	     && is_ocean(ptile1.terrain)) {
+//	     && Terrain_H.is_ocean(ptile1.terrain)) {
 //    return Unit_H.SINGLE_MOVE;
 //  }
 //
@@ -107,13 +107,13 @@ public class Pf_tools{
 //			   final tile dest_tile,
 //			   pf_parameter param)
 //{
-//  if (is_ocean(src_tile.terrain)) {
+//  if (Terrain_H.is_ocean(src_tile.terrain)) {
 //    if (Unit.is_non_allied_unit_tile(src_tile, param.owner)) {
 //      return PF_IMPOSSIBLE_MC;
 //    }
 //    return Unit_H.SINGLE_MOVE;
 //  } else if (City.is_allied_city_tile(src_tile, param.owner)
-//	     && is_ocean(dest_tile.terrain)) {
+//	     && Terrain_H.is_ocean(dest_tile.terrain)) {
 //    return Unit_H.SINGLE_MOVE;
 //  }
 //
@@ -127,16 +127,16 @@ public class Pf_tools{
 //			    final tile ptile1,
 //			    pf_parameter param)
 //{
-//  Terrain_type_id terrain1 = ptile1.terrain;
+//  int terrain1 = ptile1.terrain;
 //  int move_cost;
 //
-//  if (is_ocean(terrain1)) {
+//  if (Terrain_H.is_ocean(terrain1)) {
 //    if (ground_unit_transporter_capacity(ptile1, param.owner) > 0) {
 //      move_cost = Unit_H.SINGLE_MOVE;
 //    } else {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
-//  } else if (is_ocean(ptile.terrain)) {
+//  } else if (Terrain_H.is_ocean(ptile.terrain)) {
 //    if (!BV_ISSET(param.unit_flags, F_MARINES)
 //        && (Unit.is_non_allied_unit_tile(ptile1, param.owner) 
 //            || is_non_allied_city_tile(ptile1, param.owner))) {
@@ -161,7 +161,7 @@ public class Pf_tools{
 //{
 //  int move_cost;
 //
-//  if (is_ocean(tgt_tile.terrain)) {
+//  if (Terrain_H.is_ocean(tgt_tile.terrain)) {
 //
 //    /* Any-to-Sea */
 //    if (ground_unit_transporter_capacity(tgt_tile, param.owner) > 0) {
@@ -169,7 +169,7 @@ public class Pf_tools{
 //    } else {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
-//  } else if (is_ocean(src_tile.terrain)) {
+//  } else if (Terrain_H.is_ocean(src_tile.terrain)) {
 //
 //    /* Sea-to-Land. */
 //    if (!Unit.is_non_allied_unit_tile(tgt_tile, param.owner)
@@ -209,9 +209,9 @@ public class Pf_tools{
 //  one, so we don't venture too far into the ocean ;)
 //
 //  Alternatively, we can change the flow to
-//  if (is_ocean(ptile.terrain)) {
+//  if (Terrain_H.is_ocean(ptile.terrain)) {
 //    move_cost = PF_IMPOSSIBLE_MC;
-//  } else if (is_ocean(terrain1)) {
+//  } else if (Terrain_H.is_ocean(terrain1)) {
 //    move_cost = Unit_H.SINGLE_MOVE;
 //  } else {
 //    move_cost = ptile.move_cost[dir];
@@ -222,12 +222,12 @@ public class Pf_tools{
 //			     final tile ptile1,
 //			     pf_parameter param)
 //{
-//  Terrain_type_id terrain1 = ptile1.terrain;
+//  int terrain1 = ptile1.terrain;
 //  int move_cost;
 //
-//  if (is_ocean(terrain1)) {
+//  if (Terrain_H.is_ocean(terrain1)) {
 //    move_cost = Unit_H.SINGLE_MOVE;
-//  } else if (is_ocean(ptile.terrain)) {
+//  } else if (Terrain_H.is_ocean(ptile.terrain)) {
 //    move_cost = get_tile_type(terrain1).movement_cost * Unit_H.SINGLE_MOVE;
 //  } else {
 //    move_cost = ptile.move_cost[dir];
@@ -245,11 +245,11 @@ public class Pf_tools{
 //			     final tile ptile,
 //			     pf_parameter param)
 //{
-//  int terrain0 = map_get_terrain(tile0);
+//  int terrain0 = tile0.terrain;
 //  int terrain1 = ptile.terrain;
 //  int move_cost = PF_IMPOSSIBLE_MC;
 //
-//  if (is_ocean(terrain1)) {
+//  if (Terrain_H.is_ocean(terrain1)) {
 //    if (ground_unit_transporter_capacity(ptile, param.owner) > 0) {
 //      /* Landing */
 //      move_cost = get_tile_type(terrain0).movement_cost * Unit_H.SINGLE_MOVE;
@@ -257,7 +257,7 @@ public class Pf_tools{
 //      /* Nothing to land from */
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
-//  } else if (is_ocean(terrain0)) {
+//  } else if (Terrain_H.is_ocean(terrain0)) {
 //    /* Boarding */
 //    move_cost = Unit_H.SINGLE_MOVE;
 //  } else {
@@ -277,13 +277,13 @@ public class Pf_tools{
 //{
 //  int move_cost;
 //
-//  if (is_ocean(ptile1.terrain)) {
+//  if (Terrain_H.is_ocean(ptile1.terrain)) {
 //    if (ground_unit_transporter_capacity(ptile1, param.owner) > 0) {
 //      move_cost = MOVE_COST_ROAD;
 //    } else {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
-//  } else if (is_ocean(ptile.terrain)) {
+//  } else if (Terrain_H.is_ocean(ptile.terrain)) {
 //    if (!BV_ISSET(param.unit_flags, F_MARINES)
 //        && (Unit.is_non_allied_unit_tile(ptile1, param.owner) 
 //            || is_non_allied_city_tile(ptile1, param.owner))) {
@@ -309,14 +309,14 @@ public class Pf_tools{
 //{
 //  int move_cost;
 //
-//  if (is_ocean(map_get_terrain(ptile))) {
+//  if (Terrain_H.is_ocean(ptile.terrain)) {
 //    if (ground_unit_transporter_capacity(ptile, param.owner) > 0) {
 //      /* Landing */
 //      move_cost = MOVE_COST_ROAD;
 //    } else {
 //      move_cost = PF_IMPOSSIBLE_MC;
 //    }
-//  } else if (is_ocean(map_get_terrain(tile0))) {
+//  } else if (Terrain_H.is_ocean(tile0.terrain)) {
 //    /* Boarding */
 //    move_cost = MOVE_COST_ROAD;
 //  } else {
@@ -338,7 +338,7 @@ public class Pf_tools{
 //				 enum known_type known,
 //				 pf_parameter param)
 //{
-//  if (map_get_terrain(ptile) == T_FOREST) {
+//  if (ptile.terrain == T_FOREST) {
 //    /* Willing to spend extra 2 turns to go around a forest tile */
 //    return PF_TURN_FACTOR * 2;
 //  }
@@ -358,7 +358,7 @@ public class Pf_tools{
 //					   enum known_type known,
 //					   pf_parameter param)
 //{
-//  if (is_ocean(ptile.terrain)) {
+//  if (Terrain_H.is_ocean(ptile.terrain)) {
 //    return TB_DONT_LEAVE;
 //  }
 //  return TB_NORMAL;
@@ -414,8 +414,8 @@ public class Pf_tools{
 //  /* We test TER_UNSAFE even though under the current ruleset there is no
 //   * way for a trireme to be on a TER_UNSAFE tile. */
 //  /* Unsafe or unsafe-ocean tiles without cities are dangerous. */
-//  return ((terrain_has_flag(ptile.terrain, TER_UNSAFE) 
-//	  || (is_ocean(ptile.terrain) && !is_safe_ocean(ptile)))
+//  return ((Terrain_H.terrain_has_flag(ptile.terrain, TER_UNSAFE) 
+//	  || (Terrain_H.is_ocean(ptile.terrain) && !is_safe_ocean(ptile)))
 //	  && ptile.city == null);
 //}
 //
@@ -426,7 +426,7 @@ public class Pf_tools{
 //			     pf_parameter param)
 //{
 //  /* Unsafe tiles without cities are dangerous. */
-//  return (terrain_has_flag(ptile.terrain, TER_UNSAFE)
+//  return (Terrain_H.terrain_has_flag(ptile.terrain, TER_UNSAFE)
 //	  && ptile.city == null);
 //}
 //

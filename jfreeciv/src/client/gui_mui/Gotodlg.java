@@ -32,7 +32,7 @@ public class Gotodlg{
 //#include <proto/utility.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "packets.h"
 //#include "player.h"
@@ -137,9 +137,9 @@ public class Gotodlg{
 //  set(goto_cities_listview, MUIA_NList_Quiet, true);
 //  DoMethod(goto_cities_listview, MUIM_NList_Clear);
 //
-//  for (i = 0; i < game.nplayers; i++)
+//  for (i = 0; i < Game.game.nplayers; i++)
 //  {
-//    city_list_iterate(game.players[i].cities, pcity)
+//    city_list_iterate(Game.game.players[i].cities, pcity)
 //      DoMethod(goto_cities_listview, MUIM_NList_InsertSingle, pcity, MUIV_NList_Insert_Bottom);
 //    }
 //  }

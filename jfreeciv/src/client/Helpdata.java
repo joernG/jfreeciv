@@ -30,7 +30,7 @@ public class Helpdata{
 //#include "astring.h"
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "government.h"
 //#include "log.h"
@@ -48,7 +48,7 @@ public class Helpdata{
 //  "Techs", "Terrain", "Governments", null
 //};
 //
-//#define MAX_LAST (MAX(MAX(MAX(A_LAST,B_LAST),U_LAST),T_COUNT))
+//#define MAX_LAST (MAX(MAX(MAX(A_LAST,B_LAST),unittype.U_LAST),T_COUNT))
 //
 //#define SPECLIST_TAG help
 //#define SPECLIST_TYPE struct help_item
@@ -259,7 +259,7 @@ public class Helpdata{
 //	    if (i != A_NONE && tech_exists(i)) {
 //	      pitem = new_help_item(current_type);
 //	      name = util.my_snprintf( " %s",
-//			  get_tech_name(game.player_ptr, i));
+//			  get_tech_name(Game.game.player_ptr, i));
 //	      pitem.topic = mystrdup(name);
 //	      pitem.text = mystrdup("");
 //	      help_list_insert_back(&category_nodes, pitem);
@@ -377,7 +377,7 @@ public class Helpdata{
 //int num_help_items()
 //{
 //  check_help_nodes_init();
-//  return help_list_size(&help_nodes);
+//  return help_nodes.foo_list_size();
 //}
 //
 ///****************************************************************
@@ -390,7 +390,7 @@ public class Helpdata{
 //  int size;
 //  
 //  check_help_nodes_init();
-//  size = help_list_size(&help_nodes);
+//  size = help_nodes.foo_list_size();
 //  if (pos < 0 || pos > size) {
 //    util.freelog(Log.LOG_ERROR, "Bad index %d to get_help_item (size %d)", pos, size);
 //    return null;
@@ -525,7 +525,7 @@ public class Helpdata{
 //  if (tech_exists(improvement_types[which].obsolete_by)) {
 //    my_snprintf(buf + buf.length(), bufsz - buf.length(),
 //		"* The discovery of %s will make %s obsolete.\n",
-//		get_tech_name(game.player_ptr,
+//		get_tech_name(Game.game.player_ptr,
 //			improvement_types[which].obsolete_by),
 //		improvement_types[which].name);
 //  }
@@ -535,15 +535,15 @@ public class Helpdata{
 //    int u;
 //    Tech_Type_id t;
 //
-//    u = get_role_unit(F_NUCLEAR, 0);
-//    assert(u < game.num_unit_types);
+//    u = Unittype_P.get_role_unit(F_NUCLEAR, 0);
+//    assert(u < Game.game.num_unit_types);
 //    t = get_unit_type(u).tech_requirement;
-//    assert(t < game.num_tech_types);
+//    assert(t < Game.game.num_tech_types);
 //
 //    my_snprintf(buf + buf.length(), bufsz - buf.length(),
 //		("* Allows all players with knowledge of %s " +
 //		  "to build %s units.\n"),
-//		get_tech_name(game.player_ptr, t), get_unit_type(u).name);
+//		get_tech_name(Game.game.player_ptr, t), get_unit_type(u).name);
 //    my_snprintf(buf + buf.length(), bufsz - buf.length(), "  ");
 //  }
 //
@@ -562,7 +562,7 @@ public class Helpdata{
 //       : req_buf = String.format( (s)))
 //
 //      if (b.tech_req != A_NONE) {
-//	req_append(get_tech_name(game.player_ptr, b.tech_req));
+//	req_append(get_tech_name(Game.game.player_ptr, b.tech_req));
 //      }
 //
 //      for (i = 0; b.terr_gate[i] != T_NONE; i++) {
@@ -590,7 +590,7 @@ public class Helpdata{
 //      if (u.tech_requirement != A_LAST) {
 //	my_snprintf(buf + buf.length(), bufsz - buf.length(),
 //		    "* Allows %s (with %s).\n", u.name,
-//		    get_tech_name(game.player_ptr, u.tech_requirement));
+//		    get_tech_name(Game.game.player_ptr, u.tech_requirement));
 //      } else {
 //	my_snprintf(buf + buf.length(), bufsz - buf.length(),
 //		    "* Allows %s.\n", u.name);
@@ -629,7 +629,7 @@ public class Helpdata{
 //  assert(bufsz > 0);
 //  buf[0] = '\0';
 //  techs_with_flag_iterate(flag, tech_id) {
-//    final String name = get_tech_name(game.player_ptr, tech_id);
+//    final String name = get_tech_name(Game.game.player_ptr, tech_id);
 //    
 //    if (buf[0] == '\0') {
 //      buf = String.format "%s", name);
@@ -667,7 +667,7 @@ public class Helpdata{
 //  }
 //  if (unit_type_flag(i, F_GAMELOSS)) {
 //    sprintf(buf + buf.length(),
-//	    "* Losing this unit will lose you the game!\n");
+//	    "* Losing this unit will lose you the Game.game!\n");
 //  }
 //  if (unit_type_flag(i, F_UNIQUE)) {
 //    sprintf(buf + buf.length(),
@@ -720,7 +720,7 @@ public class Helpdata{
 //  if (unit_type_flag(i, F_ADD_TO_CITY)) {
 //    sprintf(buf + buf.length(), ("* Can add on %d population to " +
 //				 "cities of no more than size %d.\n"),
-//	    unit_pop_value(i), game.add_to_size_limit - unit_pop_value(i));
+//	    unit_pop_value(i), Game.game.add_to_size_limit - unit_pop_value(i));
 //  }
 //  if (unit_type_flag(i, F_SETTLERS)) {
 //    char buf2[1024];
@@ -889,12 +889,12 @@ public class Helpdata{
 //    if (tech1 != A_LAST) {
 //      sprintf(buf + buf.length(),
 //	      "* The discovery of %s reduces the risk to 25%%.\n",
-//	      get_tech_name(game.player_ptr, tech1));
+//	      get_tech_name(Game.game.player_ptr, tech1));
 //    }
 //    if (tech2 != A_LAST) {
 //      sprintf(buf + buf.length(),
 //	      "* %s reduces the risk to 12%%.\n",
-//	      get_tech_name(game.player_ptr, tech2));
+//	      get_tech_name(Game.game.player_ptr, tech2));
 //    }
 //  }
 //  if (utype.fuel > 0) {
@@ -909,7 +909,7 @@ public class Helpdata{
 //
 //    n = num_role_units(F_CARRIER);
 //    for (j = 0; j < n; j++) {
-//      int id = get_role_unit(F_CARRIER, j);
+//      int id = Unittype_P.get_role_unit(F_CARRIER, j);
 //
 //      mystrlcpy(allowed_units[num_allowed_units],
 //		unit_name(id), sizeof(allowed_units[num_allowed_units]));
@@ -921,7 +921,7 @@ public class Helpdata{
 //      n = num_role_units(F_MISSILE_CARRIER);
 //
 //      for (j = 0; j < n; j++) {
-//	int id = get_role_unit(F_MISSILE_CARRIER, j);
+//	int id = Unittype_P.get_role_unit(F_MISSILE_CARRIER, j);
 //
 //	if (get_unit_type(id).transport_capacity > 0) {
 //	  mystrlcpy(allowed_units[num_allowed_units],
@@ -979,25 +979,25 @@ public class Helpdata{
 //  assert(buf&&user_text);
 //  strcpy(buf, user_text);
 //
-//  if (get_invention(game.player_ptr, i) != TECH_KNOWN) {
-//    if (get_invention(game.player_ptr, i) == TECH_REACHABLE) {
+//  if (get_invention(Game.game.player_ptr, i) != TECH_KNOWN) {
+//    if (get_invention(Game.game.player_ptr, i) == TECH_REACHABLE) {
 //      sprintf(buf + buf.length(),
 //	      "If we would now start with %s we would need %d bulbs.",
-//	      get_tech_name(game.player_ptr, i),
-//	      base_total_bulbs_required(game.player_ptr, i));
-//    } else if (tech_is_available(game.player_ptr, i)) {
+//	      get_tech_name(Game.game.player_ptr, i),
+//	      base_total_bulbs_required(Game.game.player_ptr, i));
+//    } else if (tech_is_available(Game.game.player_ptr, i)) {
 //      sprintf(buf + buf.length(),
 //	      ("To reach %s we need to obtain %d other " +
 //		"technologies first. The whole project " +
 //		"will require %d bulbs to complete."),
-//	      get_tech_name(game.player_ptr, i),
-//	      num_unknown_techs_for_goal(game.player_ptr, i) - 1,
-//	      total_bulbs_required_for_goal(game.player_ptr, i));
+//	      get_tech_name(Game.game.player_ptr, i),
+//	      num_unknown_techs_for_goal(Game.game.player_ptr, i) - 1,
+//	      total_bulbs_required_for_goal(Game.game.player_ptr, i));
 //    } else {
 //      sprintf(buf + buf.length(),
 //	      "You cannot research this technology.");
 //    }
-//    if (!techs_have_fixed_costs() && tech_is_available(game.player_ptr, i)) {
+//    if (!techs_have_fixed_costs() && tech_is_available(Game.game.player_ptr, i)) {
 //      sprintf(buf + buf.length(),
 //	      (" This number may vary depending on what " +
 //		"other players will research.\n"));
@@ -1015,7 +1015,7 @@ public class Helpdata{
 //  if (tech_flag(i, TF_BONUS_TECH)) {
 //    sprintf(buf + buf.length(), ("* The first player to research %s gets " +
 //				 "an immediate advance.\n"),
-//	    get_tech_name(game.player_ptr, i));
+//	    get_tech_name(Game.game.player_ptr, i));
 //  }
 //  if (tech_flag(i, TF_BOAT_FAST))
 //    sprintf(buf + buf.length(), "* Gives sea units one extra move.\n");
@@ -1028,13 +1028,13 @@ public class Helpdata{
 //  if (tech_flag(i, TF_POPULATION_POLLUTION_INC))
 //    sprintf(buf + buf.length(), ("* Increases the pollution generated by " +
 //				 "the population.\n"));
-//  if (game.rtech.cathedral_plus == i)
+//  if (Game.game.rtech.cathedral_plus == i)
 //    sprintf(buf + buf.length(), "* Improves the effect of Cathedrals.\n");
-//  if (game.rtech.cathedral_minus == i)
+//  if (Game.game.rtech.cathedral_minus == i)
 //    sprintf(buf + buf.length(), "* Reduces the effect of Cathedrals.\n");
-//  if (game.rtech.colosseum_plus == i)
+//  if (Game.game.rtech.colosseum_plus == i)
 //    sprintf(buf + buf.length(), "* Improves the effect of Colosseums.\n");
-//  if (game.rtech.temple_plus == i)
+//  if (Game.game.rtech.temple_plus == i)
 //    sprintf(buf + buf.length(), "* Improves the effect of Temples.\n");
 //
 //  if (tech_flag(i, TF_BRIDGE)) {
@@ -1095,28 +1095,28 @@ public class Helpdata{
 //    return;
 //  pt = get_tile_type(i);
 //
-//  if (terrain_has_flag(i, TER_NO_POLLUTION)) {
+//  if (Terrain_H.terrain_has_flag(i, TER_NO_POLLUTION)) {
 //    sprintf(buf + buf.length(),
 //	    "* Pollution cannot be generated on this terrain.");
 //    strcat(buf, "\n");
 //  }
-//  if (terrain_has_flag(i, TER_NO_CITIES)) {
+//  if (Terrain_H.terrain_has_flag(i, TER_NO_CITIES)) {
 //    sprintf(buf + buf.length(),
 //	    "* You cannot build cities on this terrain.");
 //    strcat(buf, "\n");
 //  }
-//  if (terrain_has_flag(i, TER_UNSAFE_COAST)
-//      && !is_ocean(i)) {
+//  if (Terrain_H.terrain_has_flag(i, TER_UNSAFE_COAST)
+//      && !Terrain_H.is_ocean(i)) {
 //    sprintf(buf + buf.length(),
 //	    "* The coastline of this terrain is unsafe.");
 //    strcat(buf, "\n");
 //  }
-//  if (terrain_has_flag(i, TER_UNSAFE)) {
+//  if (Terrain_H.terrain_has_flag(i, TER_UNSAFE)) {
 //    sprintf(buf + buf.length(),
 //	    "* This terrain is unsafe for units to travel on.");
 //    strcat(buf, "\n");
 //  }
-//  if (terrain_has_flag(i, TER_OCEANIC)) {
+//  if (Terrain_H.terrain_has_flag(i, TER_OCEANIC)) {
 //    sprintf(buf + buf.length(),
 //	    "* Land units cannot travel on oceanic terrains.");
 //    strcat(buf, "\n");

@@ -1,6 +1,5 @@
 package server;
 import static common.Connection.find_conn_by_user_prefix;
-import static common.Game.game;
 import static common.Player_P.find_player_by_name_prefix;
 import static common.Player_P.pplayers_allied;
 import static common.player.Player_H.ANON_PLAYER_NAME;
@@ -10,21 +9,11 @@ import utility.Speclists;
 import utility.shared.m_pre_result;
 
 import common.Connection;
+import common.Game;
 import common.event_type;
 import common.player.player;
 
 public class Handchat{
-//	#include "fcintl.h"
-//	#include "game.h"
-//	#include "packets.h"
-//	#include "player.h"
-//	#include "shared.h"
-//	#include "support.h"
-
-//	#include "stdinhand.h"
-
-//	#include "handchat.h"
-
 	/*
 	 * for form_chat_name() names
 	 */
@@ -204,7 +193,7 @@ public class Handchat{
 			 * FIXME: there should be a special case for the sender, like in
 			 * chat_msg_to_player_multi().
 			 */
-			for(player aplayer: game.players){
+			for(player aplayer: Game.game.players){
 				if (!pplayers_allied(pconn.player, aplayer)) {
 					continue;
 				}
@@ -319,7 +308,7 @@ public class Handchat{
 		/* global message: */
 		form_chat_name(pconn, sender_name, 0);
 		chat = my_snprintf("<%s> %s", sender_name, message);
-		dlsend_packet_chat_msg(game.est_connections, chat,
+		dlsend_packet_chat_msg(Game.game.est_connections, chat,
 				-1, -1, event_type.E_NOEVENT, pconn.id);
 	}
 

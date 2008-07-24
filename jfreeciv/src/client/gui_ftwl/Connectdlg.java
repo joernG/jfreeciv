@@ -43,7 +43,7 @@ public class Connectdlg{
 //static void try_to_autoconnect(void *data);
 //
 ///**************************************************************************
-//  this regenerates the player information from a loaded game on the server.
+//  this regenerates the player information from a loaded Game.game on the server.
 //**************************************************************************/
 //void handle_game_load(packet_game_load packet)
 //{

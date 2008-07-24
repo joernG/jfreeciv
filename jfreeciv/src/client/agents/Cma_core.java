@@ -179,7 +179,7 @@ public class Cma_core{
 //    return false;
 //  }
 //
-//  if (city_owner(pcity) != game.player_ptr) {
+//  if (City.city_owner(pcity) != Game.game.player_ptr) {
 //    cma_release_city(pcity);
 //    create_event(pcity.tile, E_CITY_CMA_RELEASE,
 //		 "CMA: You lost control of %s. Detaching from city.",
@@ -375,7 +375,7 @@ public class Cma_core{
 //
 //  util.freelog(HANDLE_CITY_LOG_LEVEL,
 //	  "handle_city(city='%s'(%d) pos=(%d,%d) owner=%s)", pcity.name,
-//	  pcity.id, TILE_XY(pcity.tile), city_owner(pcity).name);
+//	  pcity.id, TILE_XY(pcity.tile), City.city_owner(pcity).name);
 //
 //  util.freelog(HANDLE_CITY_LOG_LEVEL2, "START handle city='%s'(%d)",
 //	  pcity.name, pcity.id);
@@ -522,7 +522,7 @@ public class Cma_core{
 //  util.freelog(Log.LOG_DEBUG, "cma_put_city_under_agent(city='%s'(%d))",
 //	  pcity.name, pcity.id);
 //
-//  assert(city_owner(pcity) == game.player_ptr);
+//  assert(City.city_owner(pcity) == Game.game.player_ptr);
 //
 //  cma_set_parameter(ATTR_CITY_CMA_PARAMETER, pcity.id, parameter);
 //

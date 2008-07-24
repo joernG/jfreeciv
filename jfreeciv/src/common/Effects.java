@@ -29,7 +29,7 @@ public class Effects{
 //
 //#include "city.h"
 //#include "effects.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "improvement.h"
 //#include "Map.map.h"
@@ -249,9 +249,9 @@ public class Effects{
 //
 //  The sources caches could easily be extended by generalizing it to a set
 //  of arrays
-//    game.buildings[], pplayer.buildings[],
+//    Game.game.buildings[], pplayer.buildings[],
 //    pisland.builidngs[], pcity.buildings[]
-//  which would store the number of buildings of that type present by game,
+//  which would store the number of buildings of that type present by Game.game,
 //  player, island (continent) or city.  This would allow non-surviving effects
 //  to come from any building at any range.  However to allow surviving effects
 //  a second set of arrays would be needed.  This should enable basic support
@@ -466,7 +466,7 @@ public class Effects{
 //}
 //
 ///**************************************************************************
-//  Free the ruleset cache.  This should be called at the end of the game or
+//  Free the ruleset cache.  This should be called at the end of the Game.game or
 //  when the client disconnects from the server.  See ruleset_cache_init.
 //**************************************************************************/
 //void ruleset_cache_free()
@@ -658,7 +658,7 @@ public class Effects{
 //  effect_for (group pgroup : groups.data) {
 //    packet.name = pgroup.name;
 //
-//    packet.num_elements = effect_group_element_list_size(&pgroup.elements);
+//    packet.num_elements = effect_group_pgroup.elements.foo_list_size();
 //    for (i = 0; i < packet.num_elements; i++) {
 //      effect_group_element elt;
 //
@@ -791,7 +791,7 @@ public class Effects{
 //static int num_world_buildings_total(Impr_Type_id building)
 //{
 //  if (is_wonder(building)) {
-//    return (game.global_wonders[building] != 0) ? 1 : 0;
+//    return (Game.game.global_wonders[building] != 0) ? 1 : 0;
 //  } else {
 //    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
@@ -806,7 +806,7 @@ public class Effects{
 //static int num_world_buildings(Impr_Type_id id)
 //{
 //  if (is_wonder(id)) {
-//    return find_city_by_id(game.global_wonders[id]) ? 1 : 0;
+//    return find_city_by_id(Game.game.global_wonders[id]) ? 1 : 0;
 //  } else {
 //    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
@@ -822,7 +822,7 @@ public class Effects{
 //				Impr_Type_id building)
 //{
 //  if (is_wonder(building)) {
-//    if (player_find_city_by_id(pplayer, game.global_wonders[building])) {
+//    if (player_find_city_by_id(pplayer, Game.game.global_wonders[building])) {
 //      return 1;
 //    } else {
 //      return 0;
@@ -844,7 +844,7 @@ public class Effects{
 //  if (is_wonder(building)) {
 //    final city pcity;
 //
-//    pcity = player_find_city_by_id(pplayer, game.global_wonders[building]);
+//    pcity = player_find_city_by_id(pplayer, Game.game.global_wonders[building]);
 //    if (pcity && map_get_continent(pcity.tile) == continent) {
 //      return 1;
 //    }
@@ -1134,7 +1134,7 @@ public class Effects{
 //      /* We use TARGET_BUILDING as the lowest common denominator.  Note that
 //       * the building is its own target - but whether this is actually
 //       * checked depends on the range of the effect. */
-//      if (!is_effect_redundant(TARGET_BUILDING, city_owner(pcity), pcity,
+//      if (!is_effect_redundant(TARGET_BUILDING, City.city_owner(pcity), pcity,
 //			       building, building, peffect)) {
 //	return false;
 //      }
@@ -1248,7 +1248,7 @@ public class Effects{
 //int get_city_bonus(final city pcity, enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_CITY,
-//			 	  city_owner(pcity), pcity, B_LAST, null,
+//			 	  City.city_owner(pcity), pcity, B_LAST, null,
 //				  effect_type);
 //}
 //
@@ -1259,7 +1259,7 @@ public class Effects{
 //			enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_CITY,
-//				  city_owner(pcity), pcity, B_LAST, ptile,
+//				  City.city_owner(pcity), pcity, B_LAST, ptile,
 //				  effect_type);
 //}
 //
@@ -1270,7 +1270,7 @@ public class Effects{
 //		       enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_BUILDING,
-//				  city_owner(pcity), pcity, id, null,
+//				  City.city_owner(pcity), pcity, id, null,
 //				  effect_type);
 //}
 //
@@ -1298,7 +1298,7 @@ public class Effects{
 //    final city pcity, enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(sources, TARGET_CITY,
-//			 	  city_owner(pcity), pcity, B_LAST, null,
+//			 	  City.city_owner(pcity), pcity, B_LAST, null,
 //				  effect_type);
 //}
 //
@@ -1316,7 +1316,7 @@ public class Effects{
 //    int power = 0;
 //
 //    effect_list_iterate(*get_building_effects(bldg, effect_type), peffect) {
-//      if (is_effect_useful(TARGET_BUILDING, city_owner(pcity),
+//      if (is_effect_useful(TARGET_BUILDING, City.city_owner(pcity),
 //			   pcity, bldg, null, bldg, peffect)) {
 //	power += peffect.value;
 //      }

@@ -25,7 +25,7 @@ public class Shared_H {
 	public static final int MAX_NUM_PLAYERS = 30;
 	public static final int MAX_NUM_BARBARIANS = 2;
 	public static final int MAX_NUM_CONNECTIONS =(2 * (MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS));
-	public static final int MAX_NUM_ITEMS = 200;	/* eg, unit_types */
+	public static final int MAX_NUM_ITEMS = 200;	/* eg, Unittype_P.unit_types */
 	public static final int MAX_NUM_TECH_LIST = 10;
 	public static final int MAX_NUM_BUILDING_LIST = 10;
 	public static final int MAX_LEN_NAME = 32;

@@ -151,7 +151,7 @@ public class Inteldlg{
 //
 //    settextf(capital_text, "Capital: %s", (pcity == null) ? "(Unknown)" : pcity.name);
 //
-//    for (i = 1; i < game.num_tech_types; i++)
+//    for (i = 1; i < Game.game.num_tech_types; i++)
 //    {
 //      if (get_invention(p, i) == TECH_KNOWN)
 //      {

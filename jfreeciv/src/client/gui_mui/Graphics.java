@@ -920,11 +920,11 @@ public class Graphics{
 //
 //    if (draw_map_grid && !citymode) {
 //      int here_in_radius =
-//	player_in_city_radius(game.player_ptr, x, y);
+//	player_in_city_radius(Game.game.player_ptr, x, y);
 //      /* left side... */
 //      if ((map_get_tile(x-1, y)).known &&
 //	  (here_in_radius ||
-//	   player_in_city_radius(game.player_ptr, x-1, y))) {
+//	   player_in_city_radius(Game.game.player_ptr, x-1, y))) {
 //	SetAPen(rp,GetColorPen(COLOR_STD_WHITE));
 //      } else {
 //        SetAPen(rp,GetColorPen(COLOR_STD_BLACK));
@@ -935,7 +935,7 @@ public class Graphics{
 //      /* top side... */
 //      if((map_get_tile(x, y-1)).known &&
 //	 (here_in_radius ||
-//	  player_in_city_radius(game.player_ptr, x, y-1))) {
+//	  player_in_city_radius(Game.game.player_ptr, x, y-1))) {
 //	SetAPen(rp,GetColorPen(COLOR_STD_WHITE));
 //      } else {
 //	SetAPen(rp,GetColorPen(COLOR_STD_BLACK));
@@ -945,13 +945,13 @@ public class Graphics{
 //    }
 //
 //    if (draw_coastline && !draw_terrain) {
-//      Terrain_type_id t1 = map_get_terrain(x, y), t2;
+//      int t1 = Map.map_get_terrain(x, y), t2;
 //      int x1 = x-1, y1 = y;
 //      SetAPen(rp,GetColorPen(COLOR_STD_OCEAN));
 //      if (normalize_map_pos(&x1, &y1)) {
-//	t2 = map_get_terrain(x1, y1);
+//	t2 = Map.map_get_terrain(x1, y1);
 //	/* left side */
-//	if (is_ocean(t1) ^ is_ocean(t2)) {
+//	if (Terrain_H.is_ocean(t1) ^ Terrain_H.is_ocean(t2)) {
 //	  Move(rp, canvas_x, canvas_y);
 //	  Draw(rp, canvas_x, canvas_y + NORMAL_TILE_HEIGHT-1);
 //	}
@@ -959,8 +959,8 @@ public class Graphics{
 //      /* top side */
 //      x1 = x; y1 = y-1;
 //      if (normalize_map_pos(&x1, &y1)) {
-//	t2 = map_get_terrain(x1, y1);
-//	if (is_ocean(t1) ^ is_ocean(t2)) {
+//	t2 = Map.map_get_terrain(x1, y1);
+//	if (Terrain_H.is_ocean(t1) ^ Terrain_H.is_ocean(t2)) {
 //	  Move(rp, canvas_x, canvas_y);
 //	  Draw(rp, canvas_x + NORMAL_TILE_WIDTH-1, canvas_y);
 //	}
@@ -1256,7 +1256,7 @@ public class Graphics{
 //
 //    if (solid_color_behind_units && (pcity || punit))
 //    {
-//      if (pcity) color = player_color(city_owner(pcity));
+//      if (pcity) color = player_color(City.city_owner(pcity));
 //      else color = player_color(punit.unit_owner());
 //    } else color = COLOR_STD_BACKGROUND;
 //
@@ -1270,7 +1270,7 @@ public class Graphics{
 //  }
 //
 //  if (draw_terrain) {
-//    if (is_ocean(map_get_terrain(x, y))) { /* coasts */
+//    if (Terrain_H.is_ocean(Map.map_get_terrain(x, y))) { /* coasts */
 //      int dx, dy;
 //
 //      /* top */
@@ -1346,21 +1346,21 @@ public class Graphics{
 //  }
 //
 //  if (draw_coastline && !draw_terrain) {
-//    Terrain_type_id t1 = map_get_terrain(x, y), t2;
+//    int t1 = Map.map_get_terrain(x, y), t2;
 //    int x1, y1;
 //    SetAPen(rp,GetColorPen(COLOR_STD_OCEAN));
 //    x1 = x; y1 = y-1;
 //    if (normalize_map_pos(&x1, &y1)) {
-//      t2 = map_get_terrain(x1, y1);
-//      if (draw & D_M_R && (is_ocean(t1) ^ is_ocean(t2))) {
+//      t2 = Map.map_get_terrain(x1, y1);
+//      if (draw & D_M_R && (Terrain_H.is_ocean(t1) ^ Terrain_H.is_ocean(t2))) {
 //      	Move(rp, canvas_x + NORMAL_TILE_WIDTH/2, canvas_y);
 //      	Draw(rp, canvas_x + NORMAL_TILE_WIDTH, canvas_y+NORMAL_TILE_HEIGHT/2);
 //      }
 //    }
 //    x1 = x-1; y1 = y;
 //    if (normalize_map_pos(&x1, &y1)) {
-//      t2 = map_get_terrain(x1, y1);
-//      if (draw & D_M_L && (is_ocean(t1) ^ is_ocean(t2))) {
+//      t2 = Map.map_get_terrain(x1, y1);
+//      if (draw & D_M_L && (Terrain_H.is_ocean(t1) ^ Terrain_H.is_ocean(t2))) {
 //      	Move(rp, canvas_x, canvas_y + NORMAL_TILE_HEIGHT/2);
 //      	Draw(rp, canvas_x+NORMAL_TILE_WIDTH/2, canvas_y);
 //      }

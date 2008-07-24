@@ -53,9 +53,9 @@ public class Capstr{
 // * capability of the executable at the other end of the connection.
 // * So for the client, the capability of the server is in
 // * aconnection.capability, and for the server, the capabilities of 
-// * connected clients are in game.players[i].conn.capability
+// * connected clients are in Game.game.players[i].conn.capability
 // * The client now also knows the capabilities of other clients,
-// * via game.players[i].conn.capability.
+// * via Game.game.players[i].conn.capability.
 // *
 // * Note the connection struct is a parameter to the functions to send and
 // * receive packets, which may be convenient for adjusting how a packet is
@@ -79,7 +79,7 @@ public class Capstr{
 ///* +2.0 is the capability string for the 2.0.x release(s).
 // *
 // * "conn_ping_info" means the packet_conn_ping_info uses MAX_NUM_CONNECTIONS
-// * not MAX_NUM_PLAYERS.
+// * not Shared_H.MAX_NUM_PLAYERS.
 // *
 // * "username_info" means that the username is sent in the player_info packet
 // *

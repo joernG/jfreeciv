@@ -1,9 +1,8 @@
 package server;
 
-import static common.Game.*;
-
 import utility.Speclists;
 import common.Connection;
+import common.Game;
 import common.event_type;
 import common.map.tile;
 
@@ -16,7 +15,7 @@ public class Plrhand {
 	// void do_dipl_cost(player pplayer)
 	// {
 	// pplayer.research.bulbs_researched -=
-	// (total_bulbs_required(pplayer) * game.diplcost) / 100;
+	// (total_bulbs_required(pplayer) * Game.game.diplcost) / 100;
 	// pplayer.research.changed_from = -1;
 	// }
 	//
@@ -26,7 +25,7 @@ public class Plrhand {
 	// void do_free_cost(player pplayer)
 	// {
 	// pplayer.research.bulbs_researched -=
-	// (total_bulbs_required(pplayer) * game.freecost) / 100;
+	// (total_bulbs_required(pplayer) * Game.game.freecost) / 100;
 	// pplayer.research.changed_from = -1;
 	// }
 	//
@@ -36,7 +35,7 @@ public class Plrhand {
 	// void do_conquer_cost(player pplayer)
 	// {
 	// pplayer.research.bulbs_researched -=
-	// (total_bulbs_required(pplayer) * game.conquercost) / 100;
+	// (total_bulbs_required(pplayer) * Game.game.conquercost) / 100;
 	// pplayer.research.changed_from = -1;
 	// }
 	//
@@ -59,7 +58,7 @@ public class Plrhand {
 	// }
 	// }
 	// else {
-	// for(player pplayer: game.players){
+	// for(player pplayer: Game.game.players){
 	// for (city pcity : pplayer.cities.data) {
 	// send_city_turn_notifications(&pplayer.connections, pcity);
 	// } }
@@ -95,8 +94,8 @@ public class Plrhand {
 	// tech_type_iterate(i) {
 	// if (get_invention(pplayer, i) != TECH_KNOWN
 	// && tech_is_available(pplayer, i)
-	// && game.global_advances[i] >= mod) {
-	// notify_player_ex(pplayer, null, E_TECH_GAIN,
+	// && Game.game.global_advances[i] >= mod) {
+	// Plrhand.notify_player_ex(pplayer, null, E_TECH_GAIN,
 	// "Game: %s acquired from %s!",
 	// get_tech_name(pplayer, i), buf);
 	// Gamelog.gamelog(GAMELOG_TECH, pplayer, null, i, "steal");
@@ -123,10 +122,10 @@ public class Plrhand {
 	// ****************************************************************************/
 	// void kill_dying_players()
 	// {
-	// for(player pplayer: game.players){
+	// for(player pplayer: Game.game.players){
 	// if (pplayer.is_alive) {
-	// if (unit_list_size(&pplayer.units) == 0
-	// && city_list_size(&pplayer.cities) == 0) {
+	// if (pplayer.units.foo_list_size() == 0
+	// && pplayer.cities.foo_list_size() == 0) {
 	// pplayer.is_dying = true;
 	// }
 	// if (pplayer.is_dying) {
@@ -146,7 +145,7 @@ public class Plrhand {
 	// pplayer.is_alive = false;
 	//
 	// /* Remove shared vision from dead player to friends. */
-	// for(player aplayer: game.players){
+	// for(player aplayer: Game.game.players){
 	// if (gives_shared_vision(pplayer, aplayer)) {
 	// remove_shared_vision(pplayer, aplayer);
 	// }
@@ -164,15 +163,15 @@ public class Plrhand {
 	// "The feared barbarian leader %s is no more");
 	// return;
 	// } else {
-	// notify_player_ex(null, null, E_DESTROYED, "Game: The %s are no more!",
+	// Plrhand.notify_player_ex(null, null, E_DESTROYED, "Game: The %s are no more!",
 	// Nation.get_nation_name_plural(pplayer.nation));
 	// Gamelog.gamelog(GAMELOG_GENO, pplayer, "%s civilization destroyed");
 	// }
 	//
 	// /* Transfer back all cities not originally owned by player to their
 	// rightful owners, if they are still around */
-	// palace = game.savepalace;
-	// game.savepalace = false; /* moving it around is dumb */
+	// palace = Game.game.savepalace;
+	// Game.game.savepalace = false; /* moving it around is dumb */
 	// for (city pcity : pplayer.cities.data) {
 	// if ((pcity.original != pplayer.player_no)
 	// && (get_player(pcity.original).is_alive)) {
@@ -185,21 +184,21 @@ public class Plrhand {
 	//
 	// /* Remove all units that are still ours */
 	// for (unit punit : pplayer.units.data) {
-	// wipe_unit(punit);
+	// Unittools.wipe_unit(punit);
 	// }
 	//
 	// /* Destroy any remaining cities */
 	// for (city pcity : pplayer.cities.data) {
 	// remove_city(pcity);
 	// } }
-	// game.savepalace = palace;
+	// Game.game.savepalace = palace;
 	//
 	// /* Ensure this dead player doesn't win with a spaceship.
 	// * Now that would be truly unbelievably dumb - Per */
 	// spaceship_init(&pplayer.spaceship);
 	// send_spaceship_info(pplayer, null);
 	//
-	// send_player_info_c(pplayer, &game.est_connections);
+	// send_player_info_c(pplayer, &Game.game.est_connections);
 	// }
 	//
 	// /**************************************************************************
@@ -213,10 +212,10 @@ public class Plrhand {
 	// {
 	// boolean bonus_tech_hack = false;
 	// boolean was_first = false;
-	// boolean had_embassy[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+	// boolean had_embassy[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS];
 	// city pcity;
 	//
-	// for(player aplr: game.players){
+	// for(player aplr: Game.game.players){
 	// had_embassy[aplr.player_no]
 	// = (get_player_bonus(aplr, EFT_HAVE_EMBASSIES) > 0);
 	// }
@@ -230,7 +229,7 @@ public class Plrhand {
 	// get_tech_name(plr, tech_found), plr.name);
 	// util.freelog(Log.LOG_ERROR, "Report this bug at <bugs@freeciv.org>\n"
 	// "Here is some info you should attach:");
-	// for(player eplayer: game.players){
+	// for(player eplayer: Game.game.players){
 	// util.freelog(Log.LOG_ERROR,
 	// "Player %s(team %d): researching %s;\n bulbs_researched %d; "
 	// "techs_researched: %d; bulbs_last_turn: %d; Researched %s? %s",
@@ -258,19 +257,19 @@ public class Plrhand {
 	//
 	// plr.research.changed_from = -1;
 	// plr.research.techs_researched++;
-	// was_first = (game.global_advances[tech_found] == 0);
+	// was_first = (Game.game.global_advances[tech_found] == 0);
 	//
 	// if (was_first) {
 	// /* We used to have a Gamelog.gamelog() for first-researched, but not anymore. */
 	//
 	// /* Alert the owners of any wonders that have been made obsolete */
 	// impr_type_iterate(id) {
-	// if (game.global_wonders[id] != 0 && is_wonder(id) &&
+	// if (Game.game.global_wonders[id] != 0 && is_wonder(id) &&
 	// improvement_types[id].obsolete_by == tech_found &&
-	// (pcity = find_city_by_id(game.global_wonders[id]))) {
-	// notify_player_ex(city_owner(pcity), null, E_WONDER_OBSOLETE,
+	// (pcity = find_city_by_id(Game.game.global_wonders[id]))) {
+	// Plrhand.notify_player_ex(City.city_owner(pcity), null, E_WONDER_OBSOLETE,
 	// "Game: Discovery of %s OBSOLETES %s in %s!",
-	// get_tech_name(city_owner(pcity), tech_found),
+	// get_tech_name(City.city_owner(pcity), tech_found),
 	// get_improvement_name(id),
 	// pcity.name);
 	// }
@@ -279,7 +278,7 @@ public class Plrhand {
 	//
 	// government_iterate(gov) {
 	// if (tech_found == gov.required_tech) {
-	// notify_player_ex(plr, null, E_NEW_GOVERNMENT,
+	// Plrhand.notify_player_ex(plr, null, E_NEW_GOVERNMENT,
 	// ("Game: Discovery of %s makes the government form %s"
 	// " available. You may want to start a revolution."),
 	// get_tech_name(plr, tech_found), gov.name);
@@ -300,7 +299,7 @@ public class Plrhand {
 	// /* enhance vision of units inside a fortress */
 	// if (tech_flag(tech_found, TF_WATCHTOWER)) {
 	// for (unit punit : plr.units.data) {
-	// if (map_has_special(punit.tile, S_FORTRESS)
+	// if (Map.map_has_special(punit.tile, S_FORTRESS)
 	// && is_ground_unit(punit)) {
 	// unfog_area(plr, punit.tile, get_watchtower_vision(punit));
 	// fog_area(plr, punit.tile,
@@ -319,7 +318,7 @@ public class Plrhand {
 	// Tech_Type_id next_tech = choose_goal_tech(plr);
 	//
 	// if (next_tech != A_UNSET) {
-	// notify_player_ex(plr, null, E_TECH_LEARNED,
+	// Plrhand.notify_player_ex(plr, null, E_TECH_LEARNED,
 	// ("Game: Learned %s. "
 	// "Our scientists focus on %s, goal is %s."),
 	// get_tech_name(plr, tech_found),
@@ -337,7 +336,7 @@ public class Plrhand {
 	// if (plr.research.researching != A_UNSET
 	// && (!is_future_tech(plr.research.researching)
 	// || !is_future_tech(tech_found))) {
-	// notify_player_ex(plr, null, E_TECH_LEARNED,
+	// Plrhand.notify_player_ex(plr, null, E_TECH_LEARNED,
 	// ("Game: Learned %s. Scientists "
 	// "choose to research %s."),
 	// get_tech_name(plr, tech_found),
@@ -351,10 +350,10 @@ public class Plrhand {
 	// plr.future_tech++;
 	// buffer2 = util.my_snprintf( "Researching %s.",
 	// get_tech_name(plr, plr.research.researching));
-	// notify_player_ex(plr, null, E_TECH_LEARNED, "%s%s", buffer1,
+	// Plrhand.notify_player_ex(plr, null, E_TECH_LEARNED, "%s%s", buffer1,
 	// buffer2);
 	// } else {
-	// notify_player_ex(plr, null, E_TECH_LEARNED,
+	// Plrhand.notify_player_ex(plr, null, E_TECH_LEARNED,
 	// ("Game: Learned %s. Scientists "
 	// "do not know what to research next."),
 	// get_tech_name(plr, tech_found));
@@ -389,20 +388,20 @@ public class Plrhand {
 	// * Inform all players about new global advances to give them a
 	// * chance to obsolete buildings.
 	// */
-	// send_game_info(null);
+	// Gamehand.send_game_info(null);
 	//
 	// /*
 	// * Inform player about his new tech.
 	// */
-	// send_player_info(plr, plr);
+	// Plrhand.send_player_info(plr, plr);
 	//  
 	// /*
 	// * Update all cities if the new tech affects happiness.
 	// */
-	// if (tech_found == game.rtech.cathedral_plus
-	// || tech_found == game.rtech.cathedral_minus
-	// || tech_found == game.rtech.colosseum_plus
-	// || tech_found == game.rtech.temple_plus) {
+	// if (tech_found == Game.game.rtech.cathedral_plus
+	// || tech_found == Game.game.rtech.cathedral_minus
+	// || tech_found == Game.game.rtech.colosseum_plus
+	// || tech_found == Game.game.rtech.temple_plus) {
 	// for (city pcity : plr.cities.data) {
 	// city_refresh(pcity);
 	// send_city_info(plr, pcity);
@@ -413,11 +412,11 @@ public class Plrhand {
 	// * Send all player an updated info of the owner of the Marco Polo
 	// * Wonder if this wonder has become obsolete.
 	// */
-	// for(player owner: game.players){
+	// for(player owner: Game.game.players){
 	// if (had_embassy[owner.player_no]
 	// && get_player_bonus(owner, EFT_HAVE_EMBASSIES) == 0) {
-	// for(player other_player: game.players){
-	// send_player_info(owner, other_player);
+	// for(player other_player: Game.game.players){
+	// Plrhand.send_player_info(owner, other_player);
 	// }
 	// }
 	// }
@@ -428,19 +427,19 @@ public class Plrhand {
 	// return;
 	// }
 	//
-	// for(player aplayer: game.players){
+	// for(player aplayer: Game.game.players){
 	// if (plr != aplayer
 	// && players_on_same_team(aplayer, plr)
 	// && aplayer.is_alive
 	// && get_invention(aplayer, tech_found) != TECH_KNOWN) {
 	// if (tech_exists(plr.research.researching)) {
-	// notify_player_ex(aplayer, null, E_TECH_LEARNED,
+	// Plrhand.notify_player_ex(aplayer, null, E_TECH_LEARNED,
 	// ("Game: Learned %s in cooperation with %s. "
 	// "Scientists choose to research %s."),
 	// get_tech_name(aplayer, tech_found), plr.name,
 	// get_tech_name(plr, plr.research.researching));
 	// } else {
-	// notify_player_ex(aplayer, null, E_TECH_LEARNED,
+	// Plrhand.notify_player_ex(aplayer, null, E_TECH_LEARNED,
 	// ("Game: Learned %s in cooperation with %s. "
 	// "Scientists do not know what to research next."),
 	// get_tech_name(aplayer, tech_found), plr.name);
@@ -501,7 +500,7 @@ public class Plrhand {
 	// /* count our research contribution this turn */
 	// plr.research.bulbs_last_turn += bulbs;
 	//
-	// for(player pplayer: game.players){
+	// for(player pplayer: Game.game.players){
 	// if (pplayer == plr) {
 	// pplayer.research.bulbs_researched += bulbs;
 	// } else if (pplayer.diplstates[plr.player_no].type ==
@@ -568,7 +567,7 @@ public class Plrhand {
 	// if (researchable == 0) {
 	// return A_FUTURE;
 	// }
-	// chosen = myrand(researchable) + 1;
+	// chosen = Rand.myrand(researchable) + 1;
 	//  
 	// tech_type_iterate(i) {
 	// if (get_invention(plr, i) == TECH_REACHABLE) {
@@ -635,7 +634,7 @@ public class Plrhand {
 	// /* subtract a penalty because we changed subject */
 	// if (plr.research.bulbs_researched > 0) {
 	// plr.research.bulbs_researched -=
-	// ((plr.research.bulbs_researched * game.techpenalty) / 100);
+	// ((plr.research.bulbs_researched * Game.game.techpenalty) / 100);
 	// assert(plr.research.bulbs_researched >= 0);
 	// }
 	// } else if (tech == plr.research.changed_from) {
@@ -656,44 +655,44 @@ public class Plrhand {
 	// plr.ai.tech_goal = tech;
 	// }
 	// }
-	//
-	// /**************************************************************************
-	// Initializes tech data for the player
-	// **************************************************************************/
-	// void init_tech(player plr)
-	// {
-	// tech_type_iterate(i) {
-	// set_invention(plr, i, TECH_UNKNOWN);
-	// } tech_type_iterate_end;
-	// set_invention(plr, A_NONE, TECH_KNOWN);
-	//
-	// plr.research.techs_researched = 1;
-	//
-	// /* Mark the reachable techs */
-	// update_research(plr);
-	// if (choose_goal_tech(plr) == A_UNSET) {
-	// choose_random_tech(plr);
-	// }
-	// }
-	//  
-	// /**************************************************************************
-	// Gives initial techs to the player
-	// **************************************************************************/
-	// void give_initial_techs(struct player* plr)
-	// {
-	// nation_type nation = get_nation_by_plr(plr);
-	// int i;
-	// /*
-	// * Give game wide initial techs
-	// */
-	// for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
-	// if (game.rgame.global_init_techs[i] == A_LAST) {
-	// break;
-	// }
-	// found_new_tech(plr, game.rgame.global_init_techs[i], false, true,
-	// A_NONE);
-	// }
-	//
+
+	/**************************************************************************
+	 Initializes tech data for the player
+	 **************************************************************************/
+	public static void init_tech(player plr)
+	{
+//		tech_type_iterate(i) {
+//			set_invention(plr, i, TECH_UNKNOWN);
+//		} tech_type_iterate_end;
+//		set_invention(plr, A_NONE, TECH_KNOWN);
+//
+//		plr.research.techs_researched = 1;
+//
+//		/* Mark the reachable techs */
+//		update_research(plr);
+//		if (choose_goal_tech(plr) == A_UNSET) {
+//			choose_random_tech(plr);
+//		}
+	}
+
+	/**************************************************************************
+	 Gives initial techs to the player
+	 **************************************************************************/
+	public static void give_initial_techs(player plr)
+	{
+//		nation_type nation = get_nation_by_plr(plr);
+//		int i;
+//		/*
+//		 * Give Game.game wide initial techs
+//		 */
+//		for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
+//			if (Game.game.rgame.global_init_techs[i] == A_LAST) {
+//				break;
+//			}
+//			found_new_tech(plr, Game.game.rgame.global_init_techs[i], false, true,
+//					A_NONE);
+//		}
+//
 	// /*
 	// * Give nation specific initial techs
 	// */
@@ -703,8 +702,8 @@ public class Plrhand {
 	// }
 	// found_new_tech(plr, nation.init_techs[i], false, true, A_NONE);
 	// }
-	// }
-	//
+	}
+
 	// /**************************************************************************
 	// Gives a player random tech, which he hasn't researched yet.
 	// Returns the tech. Does not apply free cost.
@@ -746,7 +745,7 @@ public class Plrhand {
 	// return;
 	// } else {
 	// /* pick random tech */
-	// j = myrand(j) + 1;
+	// j = Rand.myrand(j) + 1;
 	// stolen_tech = A_NONE; /* avoid compiler warning */
 	// tech_type_iterate(i) {
 	// if (get_invention(pplayer, i) != TECH_KNOWN
@@ -763,12 +762,12 @@ public class Plrhand {
 	// }
 	// Gamelog.gamelog(GAMELOG_TECH, pplayer, target, stolen_tech, "steal");
 	//
-	// notify_player_ex(pplayer, null, E_TECH_GAIN,
+	// Plrhand.notify_player_ex(pplayer, null, E_TECH_GAIN,
 	// "Game: You steal %s from the %s.",
 	// get_tech_name(pplayer, stolen_tech),
 	// Nation.get_nation_name_plural(target.nation));
 	//
-	// notify_player_ex(target, null, E_ENEMY_DIPLOMAT_THEFT,
+	// Plrhand.notify_player_ex(target, null, E_ENEMY_DIPLOMAT_THEFT,
 	// "Game: The %s stole %s from you!",
 	// Nation.get_nation_name_plural(pplayer.nation),
 	// get_tech_name(pplayer, stolen_tech));
@@ -796,7 +795,7 @@ public class Plrhand {
 	// util.freelog(Log.LOG_ERROR, "received player_rates packet from %s before start",
 	// pplayer.name);
 	// notify_player(pplayer,
-	// "Game: Cannot change rates before game start.");
+	// "Game: Cannot change rates before Game.game start.");
 	// return;
 	// }
 	//	
@@ -828,7 +827,7 @@ public class Plrhand {
 	// Gamelog.gamelog(GAMELOG_RATECHANGE, pplayer);
 	// conn_list_do_buffer(&pplayer.connections);
 	// global_city_refresh(pplayer);
-	// send_player_info(pplayer, pplayer);
+	// Plrhand.send_player_info(pplayer, pplayer);
 	// conn_list_do_unbuffer(&pplayer.connections);
 	// }
 	// }
@@ -850,12 +849,12 @@ public class Plrhand {
 	// }
 	//
 	// /* choose_tech and send update for all players on the team. */
-	// for(player aplayer: game.players){
+	// for(player aplayer: Game.game.players){
 	// if (pplayer == aplayer
 	// || (pplayer.diplstates[aplayer.player_no].type == diplstate_type.DS_TEAM
 	// && aplayer.is_alive)) {
 	// choose_tech(aplayer, tech);
-	// send_player_info(aplayer, aplayer);
+	// Plrhand.send_player_info(aplayer, aplayer);
 	// }
 	// }
 	// }
@@ -882,10 +881,10 @@ public class Plrhand {
 	// }
 	//
 	// choose_tech_goal(pplayer, tech);
-	// send_player_info(pplayer, pplayer);
+	// Plrhand.send_player_info(pplayer, pplayer);
 	//
 	// /* Notify Team members */
-	// for(player aplayer: game.players){
+	// for(player aplayer: Game.game.players){
 	// if (pplayer != aplayer
 	// && pplayer.diplstates[aplayer.player_no].type == diplstate_type.DS_TEAM
 	// && aplayer.is_alive
@@ -904,11 +903,11 @@ public class Plrhand {
 	// {
 	// int government = pplayer.target_government;
 	//
-	// if (pplayer.target_government == game.government_when_anarchy) {
+	// if (pplayer.target_government == Game.game.government_when_anarchy) {
 	// assert(0!=1);
 	// return;
 	// }
-	// if (pplayer.revolution_finishes > game.turn) {
+	// if (pplayer.revolution_finishes > Game.game.turn) {
 	// assert(0!=1);
 	// return;
 	// }
@@ -919,8 +918,8 @@ public class Plrhand {
 	// util.freelog(Log.LOG_DEBUG,
 	// "Revolution finished for %s. Government is %s. Revofin %d (%d).",
 	// pplayer.name, get_government_name(government),
-	// pplayer.revolution_finishes, game.turn);
-	// notify_player_ex(pplayer, null, E_REVOLT_DONE,
+	// pplayer.revolution_finishes, Game.game.turn);
+	// Plrhand.notify_player_ex(pplayer, null, E_REVOLT_DONE,
 	// "Game: %s now governs the %s as a %s.",
 	// pplayer.name,
 	// Nation.get_nation_name_plural(pplayer.nation),
@@ -943,7 +942,7 @@ public class Plrhand {
 	//
 	// check_player_government_rates(pplayer);
 	// global_city_refresh(pplayer);
-	// send_player_info(pplayer, pplayer);
+	// Plrhand.send_player_info(pplayer, pplayer);
 	// }
 	//
 	// /**************************************************************************
@@ -952,7 +951,7 @@ public class Plrhand {
 	// **************************************************************************/
 	// static void start_revolution(player pplayer)
 	// {
-	// pplayer.government = game.government_when_anarchy;
+	// pplayer.government = Game.game.government_when_anarchy;
 	//
 	// /* Set revolution_finishes value. */
 	// if (pplayer.revolution_finishes > 0) {
@@ -960,33 +959,33 @@ public class Plrhand {
 	// } else if ((pplayer.ai.control && !ai_handicap(pplayer, H_REVOLUTION))
 	// || get_player_bonus(pplayer, EFT_NO_ANARCHY)) {
 	// /* AI players without the H_REVOLUTION handicap can skip anarchy */
-	// pplayer.revolution_finishes = game.turn;
-	// } else if (game.revolution_length == 0) {
-	// pplayer.revolution_finishes = game.turn + myrand(5) + 1;
+	// pplayer.revolution_finishes = Game.game.turn;
+	// } else if (Game.game.revolution_length == 0) {
+	// pplayer.revolution_finishes = Game.game.turn + Rand.myrand(5) + 1;
 	// } else {
-	// pplayer.revolution_finishes = game.turn + game.revolution_length;
+	// pplayer.revolution_finishes = Game.game.turn + Game.game.revolution_length;
 	// }
 	//
 	// util.freelog(Log.LOG_DEBUG,
 	// "Revolution started for %s. Target government is %s. "
 	// "Revofin %d (%d).",
 	// pplayer.name, get_government_name(pplayer.target_government),
-	// pplayer.revolution_finishes, game.turn);
-	// notify_player_ex(pplayer, null, E_REVOLT_START,
+	// pplayer.revolution_finishes, Game.game.turn);
+	// Plrhand.notify_player_ex(pplayer, null, E_REVOLT_START,
 	// "Game: The %s have incited a revolt!",
 	// Nation.get_nation_name_plural(pplayer.nation));
 	// Gamelog.gamelog(GAMELOG_REVOLT, pplayer);
 	//
 	// /* Now see if the revolution is instantaneous. */
-	// if (pplayer.revolution_finishes <= game.turn
-	// && pplayer.target_government != game.government_when_anarchy) {
+	// if (pplayer.revolution_finishes <= Game.game.turn
+	// && pplayer.target_government != Game.game.government_when_anarchy) {
 	// finish_revolution(pplayer);
 	// return;
 	// }
 	//
 	// check_player_government_rates(pplayer);
 	// global_city_refresh(pplayer);
-	// send_player_info(pplayer, pplayer);
+	// Plrhand.send_player_info(pplayer, pplayer);
 	// }
 	//
 	// /**************************************************************************
@@ -994,7 +993,7 @@ public class Plrhand {
 	// **************************************************************************/
 	// void handle_player_change_government(player pplayer, int government)
 	// {
-	// if (government < 0 || government >= game.government_count
+	// if (government < 0 || government >= Game.game.government_count
 	// || !can_change_to_government(pplayer, government)) {
 	// return;
 	// }
@@ -1007,13 +1006,13 @@ public class Plrhand {
 	// pplayer.name,
 	// get_government_name(pplayer.target_government),
 	// get_government_name(pplayer.government),
-	// pplayer.revolution_finishes, game.turn);
+	// pplayer.revolution_finishes, Game.game.turn);
 	//
-	// if (pplayer.government == game.government_when_anarchy) {
+	// if (pplayer.government == Game.game.government_when_anarchy) {
 	// /* Already having a revolution. */
 	// assert(pplayer.revolution_finishes >= 0);
-	// if (pplayer.revolution_finishes <= game.turn
-	// && government != game.government_when_anarchy) {
+	// if (pplayer.revolution_finishes <= Game.game.turn
+	// && government != Game.game.government_when_anarchy) {
 	// /* The revolution was already over. Now we should enter the new
 	// * government immediately. */
 	// finish_revolution(pplayer);
@@ -1029,7 +1028,7 @@ public class Plrhand {
 	// pplayer.name,
 	// get_government_name(pplayer.target_government),
 	// get_government_name(pplayer.government),
-	// game.turn, pplayer.revolution_finishes);
+	// Game.game.turn, pplayer.revolution_finishes);
 	// }
 	//
 	// /**************************************************************************
@@ -1061,10 +1060,10 @@ public class Plrhand {
 	// "target %s, revofin %d, turn %d.",
 	// pplayer.name, get_government_name(pplayer.government),
 	// get_government_name(pplayer.target_government),
-	// pplayer.revolution_finishes, game.turn);
-	// if (pplayer.government == game.government_when_anarchy
-	// && pplayer.revolution_finishes <= game.turn) {
-	// if (pplayer.target_government != game.government_when_anarchy) {
+	// pplayer.revolution_finishes, Game.game.turn);
+	// if (pplayer.government == Game.game.government_when_anarchy
+	// && pplayer.revolution_finishes <= Game.game.turn) {
+	// if (pplayer.target_government != Game.game.government_when_anarchy) {
 	// /* If the revolution is over and a target government is set, go into
 	// * the new government. */
 	// util.freelog(Log.LOG_DEBUG, "Update: finishing revolution for %s.",
@@ -1073,18 +1072,18 @@ public class Plrhand {
 	// } else {
 	// /* If the revolution is over but there's no target government set,
 	// * alert the player. */
-	// notify_player_ex(pplayer, null, E_REVOLT_DONE,
+	// Plrhand.notify_player_ex(pplayer, null, E_REVOLT_DONE,
 	// ("You should choose a new government from the "
 	// "government menu."));
 	// }
-	// } else if (pplayer.government != game.government_when_anarchy
-	// && pplayer.revolution_finishes < game.turn) {
+	// } else if (pplayer.government != Game.game.government_when_anarchy
+	// && pplayer.revolution_finishes < Game.game.turn) {
 	// /* Reset the revolution counter. If the player has another revolution
 	// * they'll have to re-enter anarchy. */
 	// util.freelog(Log.LOG_DEBUG, "Update: resetting revofin for %s.",
 	// pplayer.name);
 	// pplayer.revolution_finishes = -1;
-	// send_player_info(pplayer, pplayer);
+	// Plrhand.send_player_info(pplayer, pplayer);
 	// }
 	// }
 	//
@@ -1095,7 +1094,7 @@ public class Plrhand {
 	// **************************************************************************/
 	// void check_player_government_rates(player pplayer)
 	// {
-	// struct player_economic old_econ = pplayer.economic;
+	// player_economic old_econ = pplayer.economic;
 	// boolean changed = false;
 	// player_limit_to_government_rates(pplayer);
 	// if (pplayer.economic.tax != old_econ.tax) {
@@ -1133,8 +1132,8 @@ public class Plrhand {
 	// {
 	// /* The client needs updated diplomatic state, because it is used
 	// * during calculation of new states of occupied flags in cities */
-	// send_player_info(pplayer, null);
-	// send_player_info(pplayer2, null);
+	// Plrhand.send_player_info(pplayer, null);
+	// Plrhand.send_player_info(pplayer2, null);
 	// remove_allied_visibility(pplayer, pplayer2);
 	// remove_allied_visibility(pplayer2, pplayer);
 	// resolve_unit_stacks(pplayer, pplayer2, true);
@@ -1183,7 +1182,7 @@ public class Plrhand {
 	// return;
 	// }
 	// remove_shared_vision(pplayer, pplayer2);
-	// notify_player_ex(pplayer2, null, E_TREATY_BROKEN,
+	// Plrhand.notify_player_ex(pplayer2, null, E_TREATY_BROKEN,
 	// "%s no longer gives us shared vision!",
 	// pplayer.name);
 	// return;
@@ -1245,7 +1244,7 @@ public class Plrhand {
 	// if (pplayer.diplstates[pplayer2.player_no].has_reason_to_cancel > 0) {
 	// pplayer.diplstates[pplayer2.player_no].has_reason_to_cancel = 0;
 	// if (has_senate && !repeat) {
-	// notify_player_ex(pplayer, null, E_TREATY_BROKEN,
+	// Plrhand.notify_player_ex(pplayer, null, E_TREATY_BROKEN,
 	// ("The senate passes your bill because of the "
 	// "finalant provocations of the %s."),
 	// Nation.get_nation_name_plural(pplayer2.nation));
@@ -1257,12 +1256,12 @@ public class Plrhand {
 	// extend the govt rulesets to mimic this -- pt */
 	// else {
 	// pplayer.reputation = MAX(pplayer.reputation - reppenalty, 0);
-	// notify_player_ex(pplayer, null, E_TREATY_BROKEN,
+	// Plrhand.notify_player_ex(pplayer, null, E_TREATY_BROKEN,
 	// "Game: Your reputation is now %s.",
 	// reputation_text(pplayer.reputation));
 	// if (has_senate && pplayer.revolution_finishes < 0) {
-	// if (myrand(GAME_MAX_REPUTATION) > pplayer.reputation) {
-	// notify_player_ex(pplayer, null, E_ANARCHY,
+	// if (Rand.myrand(GAME_MAX_REPUTATION) > pplayer.reputation) {
+	// Plrhand.notify_player_ex(pplayer, null, E_ANARCHY,
 	// ("Game: The senate decides to dissolve "
 	// "rather than support your actions any longer."));
 	// handle_player_change_government(pplayer, pplayer.government);
@@ -1270,8 +1269,8 @@ public class Plrhand {
 	// }
 	// }
 	//
-	// send_player_info(pplayer, null);
-	// send_player_info(pplayer2, null);
+	// Plrhand.send_player_info(pplayer, null);
+	// Plrhand.send_player_info(pplayer2, null);
 	//
 	//
 	// if (old_type == diplstate_type.DS_ALLIANCE) {
@@ -1293,13 +1292,13 @@ public class Plrhand {
 	// check_city_workers(pplayer);
 	// check_city_workers(pplayer2);
 	//
-	// notify_player_ex(pplayer, null, E_TREATY_BROKEN,
+	// Plrhand.notify_player_ex(pplayer, null, E_TREATY_BROKEN,
 	// ("Game: The diplomatic state between the %s "
 	// "and the %s is now %s."),
 	// Nation.get_nation_name_plural(pplayer.nation),
 	// Nation.get_nation_name_plural(pplayer2.nation),
 	// diplstate_text(new_type));
-	// notify_player_ex(pplayer2, null, E_TREATY_BROKEN,
+	// Plrhand.notify_player_ex(pplayer2, null, E_TREATY_BROKEN,
 	// ("Game: %s cancelled the diplomatic agreement! "
 	// "The diplomatic state between the %s and the %s "
 	// "is now %s."), pplayer.name,
@@ -1308,7 +1307,7 @@ public class Plrhand {
 	// diplstate_text(new_type));
 	//
 	// /* Check fall-out of a war declaration. */
-	// for(player other: game.players){
+	// for(player other: Game.game.players){
 	// if (other.is_alive && other != pplayer && other != pplayer2
 	// && new_type == diplstate_type.DS_WAR && pplayers_allied(pplayer2, other)
 	// && pplayers_allied(pplayer, other)) {
@@ -1316,7 +1315,7 @@ public class Plrhand {
 	// /* If an ally declares war on another ally, break off your alliance
 	// * to the aggressor. This prevents in-alliance wars, which are not
 	// * permitted. */
-	// notify_player_ex(other, null, E_TREATY_BROKEN,
+	// Plrhand.notify_player_ex(other, null, E_TREATY_BROKEN,
 	// ("Game: %s has attacked your ally %s! "
 	// "You cancel your alliance to the aggressor."),
 	// pplayer.name, pplayer2.name);
@@ -1327,7 +1326,7 @@ public class Plrhand {
 	// /* We are in the same team as the agressor; we cannot break
 	// * alliance with him. We trust our team mate and break alliance
 	// * with the attacked player */
-	// notify_player_ex(other, null, E_TREATY_BROKEN,
+	// Plrhand.notify_player_ex(other, null, E_TREATY_BROKEN,
 	// ("Game: Your team mate %s declared war on %s. "
 	// "You are obligated to cancel alliance with %s."),
 	// pplayer.name,
@@ -1343,7 +1342,7 @@ public class Plrhand {
 	 * This is the basis for following notify_conn* and notify_player*
 	 * functions. Notify specified connections of an event of specified type
 	 * (from events.h) and specified (x,y) coords associated with the event.
-	 * Coords will only apply if game has started and the conn's player knows
+	 * Coords will only apply if Game.game has started and the conn's player knows
 	 * that tile (or pconn.player==null && pconn.observer). If coords are not
 	 * required, caller should specify (x,y) = (-1,-1); otherwise make sure that
 	 * the coordinates have been normalized. For generic event use
@@ -1362,7 +1361,7 @@ public class Plrhand {
 		// if (Srv_main.server_state >= RUN_GAME_STATE
 		// && ptile /* special case, see above */
 		// && ((!pconn.player && pconn.observer)
-		// || (pconn.player && map_is_known(ptile, pconn.player)))) {
+		// || (pconn.player && Maphand.map_is_known(ptile, pconn.player)))) {
 		// genmsg.x = ptile.x;
 		// genmsg.y = ptile.y;
 		// } else {
@@ -1395,7 +1394,7 @@ public class Plrhand {
 //	 va_list args;
 	
 	 if (null==dest) {
-	 dest = game.est_connections;
+	 dest = Game.game.est_connections;
 	 }
 //	 va_start(args, format);
 	 vnotify_conn_ex(dest, null, event_type.E_NOEVENT, format, args);
@@ -1405,9 +1404,9 @@ public class Plrhand {
 	/***************************************************************************
 	 * Similar to vnotify_conn_ex (see also), but takes player as "destination".
 	 * If player != null, sends to all connections for that player. If player ==
-	 * null, sends to all game connections, to support old code, but this
+	 * null, sends to all Game.game connections, to support old code, but this
 	 * feature may go away - should use notify_conn with explicitly
-	 * game.est_connections or game.game_connections as dest.
+	 * Game.game.est_connections or Game.game.game_connections as dest.
 	 **************************************************************************/
 	public static void notify_player_ex(final player pplayer, tile ptile,
 			event_type event, final String format, Object... msg) {
@@ -1417,7 +1416,7 @@ public class Plrhand {
 		if (pplayer != null) {
 			dest = pplayer.connections;
 		} else {
-			dest = game.game_connections;
+			dest = Game.game.game_connections;
 		}
 
 		// va_start(args, format);
@@ -1426,7 +1425,7 @@ public class Plrhand {
 	}
 
 	/***************************************************************************
-	 * Just like notify_player_ex, but no (x,y) nor event type.
+	 * Just like Plrhand.notify_player_ex, but no (x,y) nor event type.
 	 **************************************************************************/
 	public static void notify_player(final player pplayer, final String format,
 			Object... args) {
@@ -1436,7 +1435,7 @@ public class Plrhand {
 		if (pplayer != null) {
 			dest = (Speclists<Connection>) pplayer.connections;
 		} else {
-			dest = game.game_connections;
+			dest = Game.game.game_connections;
 		}
 
 		// va_start(args, format);
@@ -1463,7 +1462,7 @@ public class Plrhand {
 	// genmsg.event = event_type.E_NOEVENT;
 	// genmsg.conn_id = -1;
 	//
-	// for(player other_player: game.players){
+	// for(player other_player: Game.game.players){
 	// if (player_has_embassy(other_player, pplayer)
 	// && exclude != other_player
 	// && pplayer != other_player) {
@@ -1481,7 +1480,7 @@ public class Plrhand {
 	// **************************************************************************/
 	// void send_player_info_c(player src, Speclists<Connection> dest)
 	// {
-	// for(player pplayer: game.players){
+	// for(player pplayer: Game.game.players){
 	// if(!src || pplayer==src) {
 	// struct packet_player_info info;
 	//
@@ -1503,19 +1502,19 @@ public class Plrhand {
 	// }
 	// }
 	// }
-	//
-	// /**************************************************************************
-	// Convenience form of send_player_info_c.
-	// Send information about player src, or all players if src is null,
-	// to specified players dest (that is, to dest.connections).
-	// As convenience to old code, dest may be null meaning send to
-	// game.game_connections.
-	// **************************************************************************/
-	// void send_player_info(player src, player dest)
-	// {
+	
+	 /**************************************************************************
+	 Convenience form of send_player_info_c.
+	 Send information about player src, or all players if src is null,
+	 to specified players dest (that is, to dest.connections).
+	 As convenience to old code, dest may be null meaning send to
+	 Game.game.game_connections.
+	 **************************************************************************/
+	 public static void send_player_info(player src, player dest)
+	 {
 	// send_player_info_c(src, (dest ? &dest.connections :
-	// &game.game_connections));
-	// }
+	// &Game.game.game_connections));
+	 }
 	//
 	// /**************************************************************************
 	// Package player information that is always sent.
@@ -1536,7 +1535,7 @@ public class Plrhand {
 	// packet.is_alive=plr.is_alive;
 	// packet.is_connected=plr.is_connected;
 	// packet.ai=plr.ai.control;
-	// for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+	// for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 	// packet.love[i] = plr.ai.love[i];
 	// }
 	// packet.barbarian_type = plr.ai.barbarian_type;
@@ -1583,7 +1582,7 @@ public class Plrhand {
 	// packet.target_government = plr.target_government;
 	// packet.embassy = plr.embassy;
 	// packet.gives_shared_vision = plr.gives_shared_vision;
-	// for(i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+	// for(i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 	// packet.diplstates[i].type = plr.diplstates[i].type;
 	// packet.diplstates[i].turns_left = plr.diplstates[i].turns_left;
 	// packet.diplstates[i].contact_turns_left =
@@ -1604,7 +1603,7 @@ public class Plrhand {
 	// packet.gives_shared_vision = 1 << receiver.player_no;
 	// }
 	//
-	// for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+	// for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 	// packet.diplstates[i].type = DS_NEUTRAL;
 	// packet.diplstates[i].turns_left = 0;
 	// packet.diplstates[i].has_reason_to_cancel = 0;
@@ -1636,7 +1635,7 @@ public class Plrhand {
 	// /* Send most civ info about the player only to players who have an
 	// * embassy. */
 	// if (info_level >= INFO_EMBASSY) {
-	// for (i = A_FIRST; i < game.num_tech_types; i++) {
+	// for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
 	// packet.inventions[i] = plr.research.inventions[i].state + '0';
 	// }
 	// packet.inventions[i] = '\0';
@@ -1649,7 +1648,7 @@ public class Plrhand {
 	// packet.future_tech = plr.future_tech;
 	// packet.revolution_finishes = plr.revolution_finishes;
 	// } else {
-	// for (i = A_FIRST; i < game.num_tech_types; i++) {
+	// for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
 	// packet.inventions[i] = '0';
 	// }
 	// packet.inventions[i] = '\0';
@@ -1718,38 +1717,39 @@ public class Plrhand {
 	// }
 	//
 
-	// The initmap option is used because we don't want to initialize the map
-	// before the x and y sizes have been determined
-	// ***********************************************************************/
-	// void server_player_init(player pplayer, boolean initmap)
-	// {
-	// if (initmap) {
-	// player_map_allocate(pplayer);
-	// }
-	// pplayer.player_no = pplayer-game.players;
-	// pplayer.team = TEAM_NONE;
-	// ai_data_init(pplayer);
-	// }
-	//
+	/********************************************************************** 
+	The initmap option is used because we don't want to initialize the map
+	before the x and y sizes have been determined
+	***********************************************************************/
+	public static void server_player_init(player pplayer, boolean initmap)
+	{
+		//		if (initmap) {
+		//			player_map_allocate(pplayer);
+		//		}
+		//		pplayer.player_no = pplayer-Game.game.players;
+		//		pplayer.team = TEAM_NONE;
+		//		ai_data_init(pplayer);
+	}
+
 
 	// This function does _not_ close any connections attached to this player.
 	// cut_connection is used for that.
 	// ***********************************************************************/
 	// void server_remove_player(player pplayer)
 	// {
-	// /* Not allowed after a game has started */
-	// if (!(game.is_new_game && (Srv_main.server_state==server_states.PRE_GAME_STATE ||
+	// /* Not allowed after a Game.game has started */
+	// if (!(Game.game.is_new_game && (Srv_main.server_state==server_states.PRE_GAME_STATE ||
 	// Srv_main.server_state==SELECT_RACES_STATE))) {
-	// util.die("You can't remove players after the game has started!");
+	// util.die("You can't remove players after the Game.game has started!");
 	// }
 	//
 	// util.freelog(Log.LOG_NORMAL, "Removing player %s.", pplayer.name);
-	// notify_player(pplayer, "Game: You've been removed from the game!");
+	// notify_player(pplayer, "Game: You've been removed from the Game.game!");
 	//
-	// notify_conn(&game.est_connections,
-	// "Game: %s has been removed from the game.", pplayer.name);
+	// notify_conn(&Game.game.est_connections,
+	// "Game: %s has been removed from the Game.game.", pplayer.name);
 	//  
-	// dlsend_packet_player_remove(&game.game_connections, pplayer.player_no);
+	// dlsend_packet_player_remove(&Game.game.game_connections, pplayer.player_no);
 	//
 	// /* Note it is ok to remove the _current_ item in a list_iterate. */
 	// for (conn pconn : pplayer.connections.data) {
@@ -1776,12 +1776,12 @@ public class Plrhand {
 	// return;
 	// }
 	//
-	// pplayer1.diplstates[player2].contact_turns_left = game.contactturns;
-	// pplayer2.diplstates[player1].contact_turns_left = game.contactturns;
+	// pplayer1.diplstates[player2].contact_turns_left = Game.game.contactturns;
+	// pplayer2.diplstates[player1].contact_turns_left = Game.game.contactturns;
 	//
 	// if (pplayer_get_diplstate(pplayer1, pplayer2).type ==
 	// diplstate_type.DS_NO_CONTACT) {
-	// /* Set default new diplomatic state depending on game.diplomacy
+	// /* Set default new diplomatic state depending on Game.game.diplomacy
 	// * server setting. Default is zero, which gives DS_NEUTRAL. */
 	// enum diplstate_type dipstate = diplomacy_possible(pplayer1,pplayer2)
 	// ? DS_NEUTRAL : diplstate_type.DS_WAR;
@@ -1789,18 +1789,18 @@ public class Plrhand {
 	// pplayer1.diplstates[player2].type
 	// = pplayer2.diplstates[player1].type
 	// = dipstate;
-	// notify_player_ex(pplayer1, ptile,
+	// Plrhand.notify_player_ex(pplayer1, ptile,
 	// E_FIRST_CONTACT,
 	// "Game: You have made contact with the %s, ruled by %s.",
 	// Nation.get_nation_name_plural(pplayer2.nation), pplayer2.name);
-	// notify_player_ex(pplayer2, ptile,
+	// Plrhand.notify_player_ex(pplayer2, ptile,
 	// E_FIRST_CONTACT,
 	// "Game: You have made contact with the %s, ruled by %s.",
 	// Nation.get_nation_name_plural(pplayer1.nation), pplayer1.name);
-	// send_player_info(pplayer1, pplayer2);
-	// send_player_info(pplayer2, pplayer1);
-	// send_player_info(pplayer1, pplayer1);
-	// send_player_info(pplayer2, pplayer2);
+	// Plrhand.send_player_info(pplayer1, pplayer2);
+	// Plrhand.send_player_info(pplayer2, pplayer1);
+	// Plrhand.send_player_info(pplayer1, pplayer1);
+	// Plrhand.send_player_info(pplayer2, pplayer2);
 	//
 	// check_city_workers(pplayer1);
 	// check_city_workers(pplayer2);
@@ -1813,8 +1813,8 @@ public class Plrhand {
 	// || player_has_embassy(pplayer2, pplayer1)) {
 	// return; /* Avoid sending too much info over the network */
 	// }
-	// send_player_info(pplayer1, pplayer1);
-	// send_player_info(pplayer2, pplayer2);
+	// Plrhand.send_player_info(pplayer1, pplayer1);
+	// Plrhand.send_player_info(pplayer2, pplayer2);
 	// }
 	//
 	// /**************************************************************************
@@ -1822,21 +1822,21 @@ public class Plrhand {
 	// **************************************************************************/
 	// void maybe_make_contact(tile ptile, player pplayer)
 	// {
-	// square_iterate(ptile, 1, tile1) {
+	// for(tile tile1: util.square_tile_iterate(ptile, 1)) {
 	// city pcity = tile1.city;
 	// if (pcity) {
-	// make_contact(pplayer, city_owner(pcity), ptile);
+	// make_contact(pplayer, City.city_owner(pcity), ptile);
 	// }
 	// for (unit punit : tile1.units.data) {
 	// make_contact(pplayer, punit.unit_owner(), ptile);
 	// } }
-	// } square_iterate_end;
+	// }
 	// }
 	//
 	// /**************************************************************************
 	// To be used only by shuffle_players() and shuffled_player() below:
 	// **************************************************************************/
-	// static player shuffled_plr[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+	// static player shuffled_plr[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS];
 	// static int shuffled_nplayers = 0;
 	//
 	// /**************************************************************************
@@ -1847,31 +1847,31 @@ public class Plrhand {
 	// int i, pos;
 	// player tmp_plr;
 	//
-	// util.freelog(Log.LOG_DEBUG, "shuffling %d players", game.nplayers);
+	// util.freelog(Log.LOG_DEBUG, "shuffling %d players", Game.game.nplayers);
 	//
 	// /* Initialize array in unshuffled order: */
-	// for(i=0; i<game.nplayers; i++) {
-	// shuffled_plr[i] = &game.players[i];
+	// for(i=0; i<Game.game.nplayers; i++) {
+	// shuffled_plr[i] = &Game.game.players[i];
 	// }
 	//
 	// /* Now shuffle them: */
-	// for(i=0; i<game.nplayers-1; i++) {
+	// for(i=0; i<Game.game.nplayers-1; i++) {
 	// /* for each run: shuffled[ <i ] is already shuffled [Kero+dwp] */
-	// pos = i + myrand(game.nplayers-i);
+	// pos = i + Rand.myrand(Game.game.nplayers-i);
 	// tmp_plr = shuffled_plr[i];
 	// shuffled_plr[i] = shuffled_plr[pos];
 	// shuffled_plr[pos] = tmp_plr;
 	// }
 	//
 	// #ifdef DEBUG
-	// for (i = 0; i < game.nplayers; i++) {
+	// for (i = 0; i < Game.game.nplayers; i++) {
 	// util.freelog(Log.LOG_DEBUG, "Shuffling player %d as %d.",
 	// i, shuffled_plr[i].player_no);
 	// }
 	// #endif
 	//
 	// /* Record how many players there were when shuffled: */
-	// shuffled_nplayers = game.nplayers;
+	// shuffled_nplayers = Game.game.nplayers;
 	// }
 	//
 	// /**************************************************************************
@@ -1881,14 +1881,14 @@ public class Plrhand {
 	// {
 	// int i;
 	//
-	// for (i = 0; i < game.nplayers; i++) {
+	// for (i = 0; i < Game.game.nplayers; i++) {
 	// shuffled_plr[i] = get_player(shuffled_players[i]);
 	//
 	// util.freelog(Log.LOG_DEBUG, "Set shuffled player %d as %d.",
 	// i, shuffled_plr[i].player_no);
 	// }
 	//
-	// shuffled_nplayers = game.nplayers;
+	// shuffled_nplayers = Game.game.nplayers;
 	// }
 	//
 	// /**************************************************************************
@@ -1898,22 +1898,22 @@ public class Plrhand {
 	// **************************************************************************/
 	// player shuffled_player(int i)
 	// {
-	// assert(i>=0 && i<game.nplayers);
+	// assert(i>=0 && i<Game.game.nplayers);
 	//  
 	// if (shuffled_nplayers == 0) {
 	// util.freelog(Log.LOG_ERROR, "shuffled_player() called before shuffled");
-	// return &game.players[i];
+	// return &Game.game.players[i];
 	// }
 	// /* This shouldn't happen: */
-	// if (game.nplayers < shuffled_nplayers) {
+	// if (Game.game.nplayers < shuffled_nplayers) {
 	// util.freelog(Log.LOG_ERROR, "number of players shrunk between shuffles (%d < %d)",
-	// game.nplayers, shuffled_nplayers);
-	// return &game.players[i]; /* ?? */
+	// Game.game.nplayers, shuffled_nplayers);
+	// return &Game.game.players[i]; /* ?? */
 	// }
 	// if (i < shuffled_nplayers) {
 	// return shuffled_plr[i];
 	// } else {
-	// return &game.players[i];
+	// return &Game.game.players[i];
 	// }
 	// }
 	//
@@ -1926,7 +1926,7 @@ public class Plrhand {
 	// ****************************************************************************/
 	// static int pick_available_nation(int *choices)
 	// {
-	// int *nations_used, i, num_nations_avail = game.playable_nation_count,
+	// int *nations_used, i, num_nations_avail = Game.game.playable_nation_count,
 	// pick;
 	// int looking_for, pref_nations_avail = 0;
 	//
@@ -1934,9 +1934,9 @@ public class Plrhand {
 	// * 0: not available
 	// * 1: available
 	// * 2: preferred choice */
-	// nations_used = fc_calloc(game.playable_nation_count, sizeof(int));
+	// nations_used = fc_calloc(Game.game.playable_nation_count, sizeof(int));
 	//
-	// for (i = 0; i < game.playable_nation_count; i++) {
+	// for (i = 0; i < Game.game.playable_nation_count; i++) {
 	// nations_used[i] = 1; /* Available (for now) */
 	// }
 	//
@@ -1945,8 +1945,8 @@ public class Plrhand {
 	// nations_used[choices[i]] = 2; /* Preferred */
 	// }
 	//
-	// for(player other_player: game.players){
-	// if (other_player.nation < game.playable_nation_count) {
+	// for(player other_player: Game.game.players){
+	// if (other_player.nation < Game.game.playable_nation_count) {
 	// if (nations_used[other_player.nation] == 2) {
 	// pref_nations_avail--;
 	// }
@@ -1959,14 +1959,14 @@ public class Plrhand {
 	// assert(pref_nations_avail >= 0);
 	//
 	// if (pref_nations_avail == 0) {
-	// pick = myrand(num_nations_avail);
+	// pick = Rand.myrand(num_nations_avail);
 	// looking_for = 1; /* Use any available nation. */
 	// } else {
-	// pick = myrand(pref_nations_avail);
+	// pick = Rand.myrand(pref_nations_avail);
 	// looking_for = 2; /* Use a preferred nation only. */
 	// }
 	//
-	// for (i = 0; i < game.playable_nation_count; i++){
+	// for (i = 0; i < Game.game.playable_nation_count; i++){
 	// if (nations_used[i] == looking_for) {
 	// pick--;
 	//      
@@ -1988,8 +1988,8 @@ public class Plrhand {
 	// ***********************************************************************/
 	// static player split_player(player pplayer)
 	// {
-	// int newplayer = game.nplayers;
-	// player cplayer = &game.players[newplayer];
+	// int newplayer = Game.game.nplayers;
+	// player cplayer = &Game.game.players[newplayer];
 	// int *civilwar_nations = get_nation_civilwar(pplayer.nation);
 	//
 	// /* make a new player */
@@ -1998,18 +1998,18 @@ public class Plrhand {
 	// /* select a new name and nation for the copied player. */
 	// /* Rebel will always be an AI player */
 	// cplayer.nation = pick_available_nation(civilwar_nations);
-	// pick_ai_player_name(cplayer.nation, cplayer.name);
+	// Srv_main.pick_ai_player_name(cplayer.nation, cplayer.name);
 	//
-	// cplayer.username = ANON_USER_NAME;
+	// cplayer.username = Player_H.ANON_USER_NAME;
 	// cplayer.is_connected = false;
-	// cplayer.government = game.default_government;
-	// cplayer.target_government = game.default_government;
+	// cplayer.government = Game.game.default_government;
+	// cplayer.target_government = Game.game.default_government;
 	// assert(cplayer.revolution_finishes < 0);
 	// cplayer.capital = true;
 	//
 	// /* cplayer is not yet part of players_iterate which goes only
-	// to game.nplayers. */
-	// for(player other_player: game.players){
+	// to Game.game.nplayers. */
+	// for(player other_player: Game.game.players){
 	// /* Barbarians are at war with everybody */
 	// if (is_barbarian(other_player)) {
 	// cplayer.diplstates[other_player.player_no].type = diplstate_type.DS_WAR;
@@ -2032,13 +2032,13 @@ public class Plrhand {
 	// * pplayer will be sent later anyway
 	// */
 	// if (other_player != pplayer) {
-	// send_player_info(other_player, other_player);
+	// Plrhand.send_player_info(other_player, other_player);
 	// }
 	// }
 	// players_iterate_end;
 	//
-	// game.nplayers++;
-	// game.max_players = game.nplayers;
+	// Game.game.nplayers++;
+	// Game.game.max_players = Game.game.nplayers;
 	//
 	// /* Split the resources */
 	//  
@@ -2067,23 +2067,23 @@ public class Plrhand {
 	// cplayer.ai.maxbuycost = pplayer.ai.maxbuycost;
 	// cplayer.ai.handicap = pplayer.ai.handicap;
 	// cplayer.ai.warmth = pplayer.ai.warmth;
-	// set_ai_level_direct(cplayer, game.skill_level);
+	// set_ai_level_direct(cplayer, Game.game.skill_level);
 	//
 	// tech_type_iterate(i) {
 	// cplayer.ai.tech_want[i] = pplayer.ai.tech_want[i];
 	// } tech_type_iterate_end;
 	//  
 	// /* change the original player */
-	// if (pplayer.government != game.government_when_anarchy) {
-	// pplayer.government = game.government_when_anarchy;
-	// pplayer.revolution_finishes = game.turn + 1;
+	// if (pplayer.government != Game.game.government_when_anarchy) {
+	// pplayer.government = Game.game.government_when_anarchy;
+	// pplayer.revolution_finishes = Game.game.turn + 1;
 	// }
 	// pplayer.research.bulbs_researched = 0;
 	// pplayer.embassy = 0; /* all embassies destroyed */
 	//
 	// /* give splitted player the embassies to his team mates back, if any */
 	// if (pplayer.team != TEAM_NONE) {
-	// for(player pdest: game.players){
+	// for(player pdest: Game.game.players){
 	// if (pplayer.team == pdest.team
 	// && pplayer != pdest) {
 	// establish_embassy(pplayer, pdest);
@@ -2106,7 +2106,7 @@ public class Plrhand {
 	// assess_danger_player(pplayer);
 	// }
 	//
-	// Gamelog.gamelog(GAMELOG_PLAYER, cplayer);
+	// Gamelog.gamelog(EGamelog.GAMELOG_PLAYER, cplayer);
 	//  
 	// return cplayer;
 	// }
@@ -2140,7 +2140,7 @@ public class Plrhand {
 	// {
 	// /* Get base probabilities */
 	//
-	// int dice = myrand(100); /* Throw the dice */
+	// int dice = Rand.myrand(100); /* Throw the dice */
 	// int prob = get_government_civil_war_prob(pplayer.government);
 	//
 	// /* Now compute the contribution of the cities. */
@@ -2193,7 +2193,7 @@ public class Plrhand {
 	// int i, j;
 	// player cplayer;
 	//
-	// if (game.nplayers >= MAX_NUM_PLAYERS) {
+	// if (Game.game.nplayers >= Shared_H.MAX_NUM_PLAYERS) {
 	// /* No space to make additional player */
 	// util.freelog(Log.LOG_NORMAL, ("Could not throw %s into civil war - too many "
 	// "players"), pplayer.name);
@@ -2202,30 +2202,30 @@ public class Plrhand {
 	//
 	// cplayer = split_player(pplayer);
 	//
-	// /* So that clients get the correct game.nplayers: */
-	// send_game_info(null);
+	// /* So that clients get the correct Game.game.nplayers: */
+	// Gamehand.send_game_info(null);
 	//  
 	// /* Before units, cities, so clients know name of new nation
 	// * (for debugging etc).
 	// */
-	// send_player_info(cplayer, null);
-	// send_player_info(pplayer, null);
+	// Plrhand.send_player_info(cplayer, null);
+	// Plrhand.send_player_info(pplayer, null);
 	//  
 	// /* Now split the empire */
 	//
 	// util.freelog(Log.LOG_VERBOSE,
 	// "%s's nation is thrust into civil war, created AI player %s",
 	// pplayer.name, cplayer.name);
-	// notify_player_ex(pplayer, null, E_CIVIL_WAR,
+	// Plrhand.notify_player_ex(pplayer, null, E_CIVIL_WAR,
 	// ("Game: Your nation is thrust into civil war, "
 	// " %s is declared the leader of the rebel states."),
 	// cplayer.name);
 	//
-	// i = city_list_size(&pplayer.cities)/2; /* number to flip */
-	// j = city_list_size(&pplayer.cities); /* number left to process */
+	// i = pplayer.cities.foo_list_size()/2; /* number to flip */
+	// j = pplayer.cities.foo_list_size(); /* number left to process */
 	// for (city pcity : pplayer.cities.data) {
 	// if (!pcity.is_capital()) {
-	// if (i >= j || (i > 0 && myrand(2) == 1)) {
+	// if (i >= j || (i > 0 && Rand.myrand(2) == 1)) {
 	// /* Transfer city and units supported by this city to the new owner
 	//
 	// We do NOT resolve stack conflicts here, but rather later.
@@ -2236,7 +2236,7 @@ public class Plrhand {
 	// transfer_city(cplayer, pcity, -1, false, false, false);
 	// util.freelog(Log.LOG_VERBOSE, "%s declares allegiance to %s",
 	// pcity.name, cplayer.name);
-	// notify_player_ex(pplayer, pcity.tile, E_CITY_LOST,
+	// Plrhand.notify_player_ex(pplayer, pcity.tile, E_CITY_LOST,
 	// "Game: %s declares allegiance to %s.",
 	// pcity.name, cplayer.name);
 	// i--;
@@ -2258,7 +2258,7 @@ public class Plrhand {
 	// " and the upstart %s now holds power in %d "
 	// "rebel provinces."),
 	// pplayer.name, cplayer.name,
-	// city_list_size(&cplayer.cities));
+	// cplayer.cities.foo_list_size());
 	// }
 	//
 	// /**************************************************************************
@@ -2290,6 +2290,6 @@ public class Plrhand {
 	//
 	// check_for_full_turn_done();
 	//
-	// send_player_info(pplayer, null);
+	// Plrhand.send_player_info(pplayer, null);
 	// }
 }

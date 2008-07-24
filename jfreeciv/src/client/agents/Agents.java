@@ -183,7 +183,7 @@ public class Agents{
 //{
 //  call result;
 //
-//  if (call_list_size(&agents.calls) == 0) {
+//  if (agents.calls.foo_list_size() == 0) {
 //    return null;
 //  }
 //
@@ -519,7 +519,7 @@ public class Agents{
 //
 //  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_unit_changed(unit=%d) type=%s pos=(%d,%d) owner=%s",
-//	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
+//	  punit.id, Unittype_P.unit_types[punit.type].name, TILE_XY(punit.tile),
 //	  punit.unit_owner().name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
@@ -545,7 +545,7 @@ public class Agents{
 //
 //  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_new_unit(unit=%d) type=%s pos=(%d,%d) owner=%s",
-//	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
+//	  punit.id, Unittype_P.unit_types[punit.type].name, TILE_XY(punit.tile),
 //	  punit.unit_owner().name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
@@ -572,7 +572,7 @@ public class Agents{
 //
 //  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_remove_unit(unit=%d) type=%s pos=(%d,%d) owner=%s",
-//	  punit.id, unit_types[punit.type].name, TILE_XY(punit.tile),
+//	  punit.id, Unittype_P.unit_types[punit.type].name, TILE_XY(punit.tile),
 //	  punit.unit_owner().name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
@@ -598,7 +598,7 @@ public class Agents{
 //  int i;
 //
 //  util.freelog(Log.LOG_DEBUG, "A: agents_city_changed(city='%s'(%d)) owner=%s",
-//	  pcity.name, pcity.id, city_owner(pcity).name);
+//	  pcity.name, pcity.id, City.city_owner(pcity).name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -625,7 +625,7 @@ public class Agents{
 //  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_city_new(city='%s'(%d)) pos=(%d,%d) owner=%s",
 //	  pcity.name, pcity.id, TILE_XY(pcity.tile),
-//	  city_owner(pcity).name);
+//	  City.city_owner(pcity).name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -652,7 +652,7 @@ public class Agents{
 //  util.freelog(Log.LOG_DEBUG,
 //	  "A: agents_city_remove(city='%s'(%d)) pos=(%d,%d) owner=%s",
 //	  pcity.name, pcity.id, TILE_XY(pcity.tile),
-//	  city_owner(pcity).name);
+//	  City.city_owner(pcity).name);
 //
 //  for (i = 0; i < agents.entries_used; i++) {
 //    my_agent agent = &agents.entries[i];
@@ -812,7 +812,7 @@ public class Agents{
 //{
 //  int i;
 //
-//  if (!initialized || call_list_size(&agents.calls) > 0 || frozen_level > 0
+//  if (!initialized || agents.calls.foo_list_size() > 0 || frozen_level > 0
 //      || currently_running) {
 //    return true;
 //  }

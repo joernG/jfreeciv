@@ -22,7 +22,7 @@ public class Attribute{
 //
 //#include "dataio.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "hash.h"
 //#include "log.h"
 //#include "mem.h"
@@ -258,7 +258,7 @@ public class Attribute{
 //*****************************************************************************/
 //void attribute_flush()
 //{
-//  player pplayer = game.player_ptr;
+//  player pplayer = Game.game.player_ptr;
 //
 //  assert(attribute_hash != null);
 //
@@ -281,7 +281,7 @@ public class Attribute{
 //*****************************************************************************/
 //void attribute_restore()
 //{
-//  player pplayer = game.player_ptr;
+//  player pplayer = Game.game.player_ptr;
 //
 //  assert(attribute_hash != null);
 //

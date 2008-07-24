@@ -19,7 +19,7 @@ public class Aisupport{
 //#endif
 //
 //#include "city.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "player.h"
 //#include "shared.h"
@@ -38,11 +38,11 @@ public class Aisupport{
 //  int best_arrival = FC_INFINITY;
 //  enum spaceship_state best_state = spaceship_state.SSHIP_NONE;
 //
-//  if (game.spacerace == false) {
+//  if (Game.game.spacerace == false) {
 //    return null;
 //  }
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    player_spaceship ship = &pplayer.spaceship;
 //    int arrival = (int) ship.travel_time + ship.launch_year;
 //
@@ -78,8 +78,8 @@ public class Aisupport{
 //  if (pplayer == target
 //      || !target.is_alive
 //      || !pplayer.is_alive
-//      || city_list_size(&pplayer.cities) == 0
-//      || city_list_size(&target.cities) == 0) {
+//      || pplayer.cities.foo_list_size() == 0
+//      || target.cities.foo_list_size() == 0) {
 //    return 1;
 //  }
 //
@@ -88,7 +88,7 @@ public class Aisupport{
 //    int min_dist = FC_INFINITY;
 //
 //    for (city c2 : target.cities.data) {
-//      int dist = real_map_distance(c2.tile, pcity.tile);
+//      int dist = Map.real_map_distance(c2.tile, pcity.tile);
 //
 //      if (min_dist > dist) {
 //        min_dist = dist;

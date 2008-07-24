@@ -249,7 +249,7 @@ public class Gui_stuff{
 //
 ///**********************************************************************
 //  This function handles new windows which are subwindows to the
-//  toplevel window. It must be called on every dialog in the game,
+//  toplevel window. It must be called on every dialog in the Game.game,
 //  so fullscreen windows are handled properly by the window manager.
 //***********************************************************************/
 //void setup_dialog(GtkWidget *shell, GtkWidget *parent)

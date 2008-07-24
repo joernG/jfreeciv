@@ -25,7 +25,7 @@ public class Finddlg{
 //#include <gtk/gtk.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "player.h"
 //
 //#include "dialogs.h"
@@ -136,8 +136,8 @@ public class Finddlg{
 //
 //  gtk_list_store_clear(store);
 //
-//  for(i = 0; i < game.nplayers; i++) {
-//    city_list_iterate(game.players[i].cities, pcity) {
+//  for(i = 0; i < Game.game.nplayers; i++) {
+//    city_list_iterate(Game.game.players[i].cities, pcity) {
 //	GValue value = { 0, };
 //
 //	gtk_list_store_append(store, &it);

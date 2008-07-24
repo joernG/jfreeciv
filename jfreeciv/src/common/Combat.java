@@ -30,7 +30,7 @@ public class Combat{
 		}
 
 		/* 2. If there is a city there, can we attack it? */
-		if (pcity!=null && !pplayers_at_war(city_owner(pcity), pplayer)) {
+		if (pcity!=null && !pplayers_at_war(City.city_owner(pcity), pplayer)) {
 			return false;
 		}
 
@@ -60,8 +60,8 @@ public class Combat{
 	 **************************************************************************/
 	static boolean can_unit_attack_unit_at_tile(unit punit, unit pdefender,
 			final tile dest_tile) {
-//		Terrain_type_id fromtile = punit.tile.terrain;
-//		Terrain_type_id totile = dest_tile.terrain;
+//		int fromtile = punit.tile.terrain;
+//		int totile = dest_tile.terrain;
 //		city pcity = dest_tile.city;
 //
 //		/* 1. Can we attack _anything_ ? */
@@ -71,23 +71,23 @@ public class Combat{
 //
 //		/* 2. Only fighters can attack planes, except in city or airbase attacks */
 //		if (!unit_flag(punit, F_FIGHTER) && is_air_unit(pdefender)
-//				&& !(pcity || map_has_special(dest_tile, Terrain_H.S_AIRBASE))) {
+//				&& !(pcity || Map.map_has_special(dest_tile, Terrain_H.S_AIRBASE))) {
 //			return false;
 //		}
 //
 //		/* 3. Can't attack with ground unit from ocean, except for marines */
-//		if (is_ocean(fromtile) && is_ground_unit(punit)
+//		if (Terrain_H.is_ocean(fromtile) && is_ground_unit(punit)
 //				&& !unit_flag(punit, F_MARINES)) {
 //			return false;
 //		}
 //
 //		/* 4. Ground units cannot attack water units */
-//		if (is_ocean(totile) && is_ground_unit(punit)) {
+//		if (Terrain_H.is_ocean(totile) && is_ground_unit(punit)) {
 //			return false;
 //		}
 //
 //		/* 5. Shore bombardement can be done by certain units only */
-//		if (unit_flag(punit, F_NO_LAND_ATTACK) && !is_ocean(totile)) {
+//		if (unit_flag(punit, F_NO_LAND_ATTACK) && !Terrain_H.is_ocean(totile)) {
 //			return false;
 //		}
 
@@ -248,7 +248,7 @@ public class Combat{
 //
 //  /* In land bombardment both units have their firepower reduced to 1 */
 //  if (is_sailing_unit(attacker)
-//      && !is_ocean(map_get_terrain(defender.tile))
+//      && !Terrain_H.is_ocean(defender.tile.terrain)
 //      && is_ground_unit(defender)) {
 //    *att_fp = 1;
 //    *def_fp = 1;
@@ -298,7 +298,7 @@ public class Combat{
 //**************************************************************************/
 //boolean unit_on_fortress(unit punit)
 //{
-//  return map_has_special(punit.tile, S_FORTRESS);
+//  return Map.map_has_special(punit.tile, S_FORTRESS);
 //}
 //
 ///**************************************************************************
@@ -307,13 +307,13 @@ public class Combat{
 //city sdi_defense_close(player owner,
 //			       final tile ptile)
 //{
-//  square_iterate(ptile, 2, ptile1) {
+//  for(tile ptile1: util.square_tile_iterate(ptile, 2)) {
 //    city pcity = map_get_city(ptile1);
-//    if (pcity && (!pplayers_allied(city_owner(pcity), owner))
+//    if (pcity && (!pplayers_allied(City.city_owner(pcity), owner))
 //	&& get_city_bonus(pcity, EFT_NUKE_PROOF) > 0) {
 //      return pcity;
 //    }
-//  } square_iterate_end;
+//  }
 //
 //  return null;
 //}
@@ -362,7 +362,7 @@ public class Combat{
 //  int db, power = base_get_defense_power(punit);
 //
 //  db = get_tile_type(punit.tile.terrain).defense_bonus;
-//  if (map_has_special(punit.tile, S_RIVER)) {
+//  if (Map.map_has_special(punit.tile, S_RIVER)) {
 //    db += (db * terrain_control.river_defense_bonus) / 100;
 //  }
 //  power = (power * db) / 10;
@@ -435,7 +435,7 @@ public class Combat{
 //    }
 //  }
 //
-//  if (map_has_special(ptile, S_FORTRESS) && !pcity) {
+//  if (Map.map_has_special(ptile, S_FORTRESS) && !pcity) {
 //    defensepower +=
 //	(defensepower * terrain_control.fortress_defense_bonus) / 100;
 //  }
@@ -455,17 +455,17 @@ public class Combat{
 //			      final tile ptile,
 //			      boolean fortified, int veteran)
 //{
-//  int defensepower = unit_types[def_type].defense_strength;
-//  Terrain_type_id t = map_get_terrain(ptile);
+//  int defensepower = Unittype_P.unit_types[def_type].defense_strength;
+//  int t = ptile.terrain;
 //  int db;
 //
-//  if (unit_types[def_type].move_type == LAND_MOVING && is_ocean(t)) {
+//  if (Unittype_P.unit_types[def_type].move_type == LAND_MOVING && Terrain_H.is_ocean(t)) {
 //    /* Ground units on ship doesn't defend. */
 //    return 0;
 //  }
 //
 //  db = get_tile_type(t).defense_bonus;
-//  if (map_has_special(ptile, S_RIVER)) {
+//  if (Map.map_has_special(ptile, S_RIVER)) {
 //    db += (db * terrain_control.river_defense_bonus) / 100;
 //  }
 //  defensepower *= db;
@@ -561,13 +561,13 @@ public class Combat{
 //    }
 //  } }
 //
-//  if (unit_list_size(&ptile.units) > 0 && !bestdef) {
+//  if (ptile.units.foo_list_size() > 0 && !bestdef) {
 //    unit punit = unit_list_get(&ptile.units, 0);
 //
 //    util.freelog(Log.LOG_ERROR, "get_defender bug: %s's %s vs %s's %s (total %d" +
 //            " units) on %s at (%d,%d). ", attacker.unit_owner().name,
 //            attacker.unit_type().name, punit.unit_owner().name,
-//            punit.unit_type().name, unit_list_size(&ptile.units), 
+//            punit.unit_type().name, ptile.units.foo_list_size(), 
 //            get_terrain_name(ptile.terrain), ptile.x, ptile.y);
 //  }
 
@@ -609,8 +609,8 @@ public class Combat{
 //boolean is_stack_vulnerable(final tile ptile)
 //{
 //  return !(ptile.city != null
-//           || map_has_special(ptile, S_FORTRESS)
-//           || map_has_special(ptile, Terrain_H.S_AIRBASE)
-//           || !game.rgame.killstack);
+//           || Map.map_has_special(ptile, S_FORTRESS)
+//           || Map.map_has_special(ptile, Terrain_H.S_AIRBASE)
+//           || !Game.game.rgame.killstack);
 //}
 }

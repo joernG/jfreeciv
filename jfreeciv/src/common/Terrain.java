@@ -12,7 +12,7 @@ public class Terrain{
 ///***************************************************************
 //...
 //***************************************************************/
-//tile_type get_tile_type(Terrain_type_id type)
+//tile_type get_tile_type(int type)
 //{
 //  if (type < 0 || type >= T_COUNT) {
 //    /* HACK: return a dummy tile for out-of-range requests.  This is
@@ -30,9 +30,9 @@ public class Terrain{
 ///****************************************************************************
 //  Return the terrain type matching the name, or T_UNKNOWN if none matches.
 //****************************************************************************/
-//Terrain_type_id get_terrain_by_name(final String name)
+//int get_terrain_by_name(final String name)
 //{
-//  Terrain_type_id tt;
+//  int tt;
 //
 //  for (tt = T_FIRST; tt < T_COUNT; tt++) {
 //    if (0 == strcmp (tile_types[tt].terrain_name, name)) {
@@ -46,7 +46,7 @@ public class Terrain{
 ///***************************************************************
 //...
 //***************************************************************/
-//final String get_terrain_name(Terrain_type_id type)
+//final String get_terrain_name(int type)
 //{
 //  return get_tile_type(type).terrain_name;
 //}
@@ -84,18 +84,18 @@ public class Terrain{
 ///****************************************************************************
 //  Return a random terrain that has the specified flag.
 //****************************************************************************/
-//Terrain_type_id get_flag_terrain(enum terrain_flag_id flag)
+//int get_flag_terrain(enum terrain_flag_id flag)
 //{
 //  boolean has_flag[T_COUNT];
 //  int count = 0;
 //
 //  terrain_type_iterate(t) {
-//    if ((has_flag[t] = terrain_has_flag(t, flag))) {
+//    if ((has_flag[t] = Terrain_H.terrain_has_flag(t, flag))) {
 //      count++;
 //    }
 //  } terrain_type_iterate_end;
 //
-//  count = myrand(count);
+//  count = Rand.myrand(count);
 //  terrain_type_iterate(t) {
 //    if (has_flag[t]) {
 //      if (count == 0) {
@@ -149,13 +149,13 @@ public class Terrain{
 ///****************************************************************************
 //  Returns true iff any adjacent tile contains the given terrain.
 //****************************************************************************/
-//boolean is_terrain_near_tile(final tile ptile, Terrain_type_id t)
+//boolean is_terrain_near_tile(final tile ptile, int t)
 //{
-//  adjc_iterate(ptile, adjc_tile) {
+//  for(tile adjc_tile: util.adjc_tile_iterate(ptile)) {
 //    if (adjc_tile.terrain == t) {
 //      return true;
 //    }
-//  } adjc_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -165,12 +165,12 @@ public class Terrain{
 //****************************************************************************/
 //int count_terrain_near_tile(final tile ptile,
 //			    boolean cardinal_only, boolean percentage,
-//			    Terrain_type_id t)
+//			    int t)
 //{
 //  int count = 0, total = 0;
 //
 //  variable_adjc_iterate(ptile, adjc_tile, cardinal_only) {
-//    if (map_get_terrain(adjc_tile) == t) {
+//    if (adjc_tile.terrain == t) {
 //      count++;
 //    }
 //    total++;
@@ -187,11 +187,11 @@ public class Terrain{
 //****************************************************************************/
 //boolean is_special_near_tile(final tile ptile, enum int spe)
 //{
-//  adjc_iterate(ptile, adjc_tile) {
-//    if (map_has_special(adjc_tile, spe)) {
+//  for(tile adjc_tile: util.adjc_tile_iterate(ptile)) {
+//    if (Map.map_has_special(adjc_tile, spe)) {
 //      return true;
 //    }
-//  } adjc_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -206,7 +206,7 @@ public class Terrain{
 //  int count = 0, total = 0;
 //
 //  variable_adjc_iterate(ptile, adjc_tile, cardinal_only) {
-//    if (map_has_special(adjc_tile, spe)) {
+//    if (Map.map_has_special(adjc_tile, spe)) {
 //      count++;
 //    }
 //    total++;
@@ -224,11 +224,11 @@ public class Terrain{
 //boolean is_terrain_flag_near_tile(final tile ptile,
 //			       enum terrain_flag_id flag)
 //{
-//  adjc_iterate(ptile, adjc_tile) {
-//    if (terrain_has_flag(map_get_terrain(adjc_tile), flag)) {
+//  for(tile adjc_tile: util.adjc_tile_iterate(ptile)) {
+//    if (Terrain_H.terrain_has_flag(adjc_tile.terrain, flag)) {
 //      return true;
 //    }
-//  } adjc_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -243,7 +243,7 @@ public class Terrain{
 //  int count = 0, total = 0;
 //
 //  variable_adjc_iterate(ptile, adjc_tile, cardinal_only) {
-//    if (terrain_has_flag(map_get_terrain(adjc_tile), flag)) {
+//    if (Terrain_H.terrain_has_flag(adjc_tile.terrain, flag)) {
 //      count++;
 //    }
 //    total++;

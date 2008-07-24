@@ -100,9 +100,9 @@ public class Citydlg{
 //  
 //  int support_unit_ids[NUM_UNITS_SHOWN];
 //  int present_unit_ids[NUM_UNITS_SHOWN];
-//  int change_list_ids[B_LAST+1+U_LAST+1];
+//  int change_list_ids[B_LAST+1+unittype.U_LAST+1];
 //  int change_list_num_improvements;
-//  cid building_cids[B_LAST+U_LAST];
+//  cid building_cids[B_LAST+unittype.U_LAST];
 //  int is_modal;    
 //  int id_selected;
 //  int last_improvlist_seen[B_LAST];
@@ -199,7 +199,7 @@ public class Citydlg{
 //    refresh_happiness_box(pdialog.happiness);
 //    resize_city_dialog(pdialog);
 //  }
-//  if (pcity.owner==game.player_idx) {
+//  if (pcity.owner==Game.game.player_idx) {
 //    city_report_dialog_update_city(pcity);
 //    economy_report_dialog_update();   
 //    if (pdialog != null) {
@@ -231,8 +231,8 @@ public class Citydlg{
 //{
 //  LV_COLUMN lvc;
 //  int changed, total, item, cids_used;
-//  cid cids[U_LAST + B_LAST];
-//  struct item items[U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //  char buf[100];
 //
 //  /* Test if the list improvements of pcity has changed */
@@ -305,7 +305,7 @@ public class Citydlg{
 //      unitid=0;
 //  }
 // 
-//  if(pdialog.pcity.owner != game.player_idx) {
+//  if(pdialog.pcity.owner != Game.game.player_idx) {
 //    plist = &(pdialog.pcity.info_units_present);
 //  } else {
 //    plist = &(pdialog.pcity.tile.units);
@@ -361,7 +361,7 @@ public class Citydlg{
 //    if(i==NUM_UNITS_SHOWN)
 //      unitid=0;
 //  } 
-//  if(pdialog.pcity.owner != game.player_idx) {
+//  if(pdialog.pcity.owner != Game.game.player_idx) {
 //    plist = &(pdialog.pcity.info_units_supported);
 //  } else {
 //    plist = &(pdialog.pcity.units_supported);
@@ -917,10 +917,10 @@ public class Citydlg{
 //  }
 //  value=city_buy_cost(pdialog.pcity);
 // 
-//  if(game.player_ptr.economic.gold>=value) {
+//  if(Game.game.player_ptr.economic.gold>=value) {
 //    buf = util.my_snprintf(
 //            "Buy %s for %d gold?\nTreasury contains %d gold.",
-//            name, value, game.player_ptr.economic.gold);
+//            name, value, Game.game.player_ptr.economic.gold);
 // 
 //    popup_message_dialog(pdialog.mainwindow, /*"buydialog"*/ "Buy It!", buf,
 //                         "_Yes", buy_callback_yes, pdialog,
@@ -929,7 +929,7 @@ public class Citydlg{
 //  else {
 //    buf = util.my_snprintf(
 //            "%s costs %d gold.\nTreasury contains %d gold.",
-//            name, value, game.player_ptr.economic.gold);
+//            name, value, Game.game.player_ptr.economic.gold);
 // 
 //    popup_message_dialog(null, /*"buynodialog"*/ "Buy It!", buf,
 //                         "Darn", buy_callback_no, 0, 0);
@@ -1304,9 +1304,9 @@ public class Citydlg{
 // 
 //  destroy_message_dialog(w);
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data))) {
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data))) {
 //    set_unit_focus(punit);
-//    if((pcity=player_find_city_by_id(game.player_ptr, punit.homecity)))
+//    if((pcity=player_find_city_by_id(Game.game.player_ptr, punit.homecity)))
 //      if((pdialog=get_city_dialog(pcity)))
 //        CityDlgClose(pdialog);
 //  }
@@ -1329,7 +1329,7 @@ public class Citydlg{
 //{
 //  tile ptile = pdialog.pcity.tile;
 // 
-//  if(unit_list_size(&ptile.units))
+//  if(ptile.units.foo_list_size())
 //    popup_unit_select_dialog(ptile);
 //}
 //     
@@ -1343,7 +1343,7 @@ public class Citydlg{
 //{
 //  unit punit;
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data)))
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data)))
 //    request_unit_disband(punit);
 // 
 //  destroy_message_dialog(w);
@@ -1356,7 +1356,7 @@ public class Citydlg{
 //{
 //  unit punit;
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data)))
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data)))
 //    request_unit_change_homecity(punit);
 // 
 //  destroy_message_dialog(w);
@@ -1378,7 +1378,7 @@ public class Citydlg{
 //{
 //  unit punit;
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data)))
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data)))
 //    set_unit_focus(punit);
 //  destroy_message_dialog(w);
 //}
@@ -1394,7 +1394,7 @@ public class Citydlg{
 // 
 //  destroy_message_dialog(w);
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data))) {
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data))) {
 //    set_unit_focus(punit);
 //    if((pcity=map_get_city(punit.tile)))
 //      if((pdialog=get_city_dialog(pcity)))
@@ -1411,7 +1411,7 @@ public class Citydlg{
 //{
 //  unit punit;
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data)))
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data)))
 //    request_unit_sentry(punit);
 //  destroy_message_dialog(w);
 //}
@@ -1423,7 +1423,7 @@ public class Citydlg{
 //{
 //  unit punit;
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data)))
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data)))
 //    request_unit_fortify(punit);
 //  destroy_message_dialog(w);
 //}
@@ -1437,7 +1437,7 @@ public class Citydlg{
 //{
 //  unit punit;
 // 
-//  if((punit=player_find_unit_by_id(game.player_ptr, (size_t)data))) {
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, (size_t)data))) {
 //    request_unit_upgrade(punit);
 //  }
 //  destroy_message_dialog(w);
@@ -1457,7 +1457,7 @@ public class Citydlg{
 //*****************************************************************/       
 //static void upgrade_callback(HWND w, void * data)
 //{
-//  unit punit = player_find_unit_by_id(game.player_ptr,
+//  unit punit = player_find_unit_by_id(Game.game.player_ptr,
 //					      (size_t) data);
 //  char buf[512];
 //
@@ -1493,7 +1493,7 @@ public class Citydlg{
 //  city pcity;  
 //  HWND wd;
 //
-//  if((punit=player_find_unit_by_id(game.player_ptr, 
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, 
 //				   pdialog.support_unit_ids[n])) &&
 //     (pcity = find_city_by_id(punit.homecity))) {   
 //    wd = popup_message_dialog(null,
@@ -1523,7 +1523,7 @@ public class Citydlg{
 //  unit punit;
 //  city pcity;
 //  HWND wd;
-//  if((punit=player_find_unit_by_id(game.player_ptr, 
+//  if((punit=player_find_unit_by_id(Game.game.player_ptr, 
 //				   pdialog.present_unit_ids[n])) &&
 //     (pcity=map_get_city(punit.tile)) &&
 //     (pdialog=get_city_dialog(pcity))) {   
@@ -1561,7 +1561,7 @@ public class Citydlg{
 //     if (punit.homecity == pcity.id) {
 //       message_dialog_button_set_sensitive(wd,5, false);
 //     }
-//     if (can_upgrade_unittype(game.player_ptr,punit.type) == -1) {
+//     if (can_upgrade_unittype(Game.game.player_ptr,punit.type) == -1) {
 //       message_dialog_button_set_sensitive(wd,6, false);
 //     }        
 //   }
@@ -1963,7 +1963,7 @@ public class Citydlg{
 //{
 //  city pcity_sup, *pcity_pre;
 //  city_dialog pdialog;      
-//  pcity_sup=player_find_city_by_id(game.player_ptr, punit.homecity);
+//  pcity_sup=player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //  pcity_pre=map_get_city(punit.tile);     
 //  
 //  if(pcity_sup && (pdialog=get_city_dialog(pcity_sup)))     

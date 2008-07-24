@@ -32,7 +32,7 @@ public class Tilespec{
 //#include "astring.h"
 //#include "capability.h"
 //#include "fcintl.h"
-//#include "game.h" /* for fill_xxx */
+//#include "Game.game.h" /* for fill_xxx */
 //#include "government.h"
 //#include "hash.h"
 //#include "log.h"
@@ -426,7 +426,7 @@ public class Tilespec{
 //   * We free all old data in preparation for re-reading it.
 //   */
 //  tilespec_free_tiles();
-//  tilespec_free_city_tiles(game.styles_count);
+//  tilespec_free_city_tiles(Game.game.styles_count);
 //  tilespec_free_toplevel();
 //
 //  /* Step 2:  Read.
@@ -468,7 +468,7 @@ public class Tilespec{
 //  government_iterate(gov) {
 //    tilespec_setup_government(gov.index);
 //  } government_iterate_end;
-//  for (id = 0; id < game.nation_count; id++) {
+//  for (id = 0; id < Game.game.nation_count; id++) {
 //    tilespec_setup_nation_flag(id);
 //  }
 //  impr_type_iterate(imp_id) {
@@ -483,8 +483,8 @@ public class Tilespec{
 //
 //  /* tilespec_load_tiles reverts the city tile pointers to 0.  This
 //     is a workaround. */
-//  tilespec_alloc_city_tiles(game.styles_count);
-//  for (id = 0; id < game.styles_count; id++) {
+//  tilespec_alloc_city_tiles(Game.game.styles_count);
+//  for (id = 0; id < Game.game.styles_count; id++) {
 //    tilespec_setup_city_tiles(id);
 //  }
 //
@@ -493,7 +493,7 @@ public class Tilespec{
 //   * Do any necessary redraws.
 //   */
 //  if (state < CLIENT_GAME_RUNNING_STATE) {
-//    /* Unless the client state is playing a game or in gameover,
+//    /* Unless the client state is playing a Game.game or in gameover,
 //       we don't want/need to redraw. */
 //    return;
 //  }
@@ -1082,7 +1082,7 @@ public class Tilespec{
 //   * translate. */
 //  switch (citizen.type) {
 //  case CITIZEN_SPECIALIST:
-//    return game.rgame.specialists[citizen.spec_type].name;
+//    return Game.game.rgame.specialists[citizen.spec_type].name;
 //  case CITIZEN_HAPPY:
 //    return "happy";
 //  case CITIZEN_CONTENT:
@@ -1604,7 +1604,7 @@ public class Tilespec{
 //    = lookup_sprite_tag_alt(advances[id].graphic_str,
 //			    advances[id].graphic_alt,
 //			    false, "tech_type",
-//			    get_tech_name(game.player_ptr, id));
+//			    get_tech_name(Game.game.player_ptr, id));
 //
 //  /* should maybe do something if null, eg generic default? */
 //}
@@ -1613,7 +1613,7 @@ public class Tilespec{
 //  Set tile_type sprite values; should only happen after
 //  tilespec_load_tiles().
 //***********************************************************************/
-//void tilespec_setup_tile_type(Terrain_type_id terrain)
+//void tilespec_setup_tile_type(int terrain)
 //{
 //  tile_type tt = get_tile_type(terrain);
 //  terrain_drawing_data draw;
@@ -1859,7 +1859,7 @@ public class Tilespec{
 //***********************************************************************/
 //static Sprite get_city_nation_flag_sprite(city pcity)
 //{
-//  return get_nation_by_plr(city_owner(pcity)).flag_sprite;
+//  return get_nation_by_plr(City.city_owner(pcity)).flag_sprite;
 //}
 //
 ///**********************************************************************
@@ -1947,15 +1947,15 @@ public class Tilespec{
 //    tspecial_near  : specials of all adjacent terrain
 //**************************************************************************/
 //static void build_tile_data(tile ptile,
-//			    Terrain_type_id *ttype,
+//			    int *ttype,
 //			    enum int *tspecial,
-//			    Terrain_type_id *ttype_near,
+//			    int *ttype_near,
 //			    enum int *tspecial_near)
 //{
 //  enum direction8 dir;
 //
 //  *tspecial = map_get_special(ptile);
-//  *ttype = map_get_terrain(ptile);
+//  *ttype = ptile.terrain;
 //
 //  /* Loop over all adjacent tiles.  We should have an iterator for this. */
 //  for (dir = 0; dir < 8; dir++) {
@@ -1963,7 +1963,7 @@ public class Tilespec{
 //
 //    if (tile1 && tile_get_known(tile1) != TILE_UNKNOWN) {
 //      tspecial_near[dir] = map_get_special(tile1);
-//      ttype_near[dir] = map_get_terrain(tile1);
+//      ttype_near[dir] = tile1.terrain;
 //    } else {
 //      /* We draw the edges of the (known) map as if the same terrain just
 //       * continued off the edge of the Map.map. */
@@ -2201,14 +2201,14 @@ public class Tilespec{
 //   * whether road/rail is to be drawn in that direction.  draw_single_road
 //   * and draw_single_rail store whether we need an isolated road/rail to be
 //   * drawn. */
-//  road = contains_special(tspecial, S_ROAD);
-//  rail = contains_special(tspecial, S_RAILROAD);
+//  road = contains_special(tspecial, Terrain_H.S_ROAD);
+//  rail = contains_special(tspecial, Terrain_H.S_RAILROAD);
 //  draw_single_road = road && (!pcity || !draw_cities) && !rail;
 //  draw_single_rail = rail && (!pcity || !draw_cities);
 //  for (dir = 0; dir < 8; dir++) {
 //    /* Check if there is adjacent road/rail. */
-//    road_near[dir] = contains_special(tspecial_near[dir], S_ROAD);
-//    rail_near[dir] = contains_special(tspecial_near[dir], S_RAILROAD);
+//    road_near[dir] = contains_special(tspecial_near[dir], Terrain_H.S_ROAD);
+//    rail_near[dir] = contains_special(tspecial_near[dir], Terrain_H.S_RAILROAD);
 //
 //    /* Draw rail/road if there is a connection from this tile to the
 //     * adjacent tile.  But don't draw road if there is also a rail
@@ -2419,10 +2419,10 @@ public class Tilespec{
 //****************************************************************************/
 //static int fill_blending_sprite_array(drawn_sprite sprs,
 //				      tile ptile,
-//				      Terrain_type_id *ttype_near)
+//				      int *ttype_near)
 //{
 //  drawn_sprite saved_sprs = sprs;
-//  Terrain_type_id ttype = map_get_terrain(ptile);
+//  int ttype = ptile.terrain;
 //
 //  if (is_isometric && sprites.terrain[ttype].is_blended) {
 //    enum direction4 dir;
@@ -2438,7 +2438,7 @@ public class Tilespec{
 //     */
 //    for (dir = 0; dir < 4; dir++) {
 //      tile tile1 = mapstep(ptile, DIR4_TO_DIR8[dir]);
-//      Terrain_type_id other = ttype_near[DIR4_TO_DIR8[dir]];
+//      int other = ttype_near[DIR4_TO_DIR8[dir]];
 //
 //      if (!tile1
 //	  || tile_get_known(tile1) == TILE_UNKNOWN
@@ -2461,11 +2461,11 @@ public class Tilespec{
 //****************************************************************************/
 //static int fill_terrain_sprite_array(drawn_sprite sprs,
 //				     tile ptile,
-//				     Terrain_type_id *ttype_near)
+//				     int *ttype_near)
 //{
 //  drawn_sprite saved_sprs = sprs;
 //  Sprite sprite;
-//  Terrain_type_id ttype = ptile.terrain;
+//  int ttype = ptile.terrain;
 //  terrain_drawing_data draw = sprites.terrain[ttype];
 //  int l, i, tileno;
 //  tile adjc_tile;
@@ -2652,7 +2652,7 @@ public class Tilespec{
 //		      unit punit, city pcity,
 //		      boolean citymode)
 //{
-//  Terrain_type_id ttype, ttype_near[8];
+//  int ttype, ttype_near[8];
 //  enum int tspecial = S_NO_SPECIAL, tspecial_near[8];
 //  int tileno, dir;
 //  unit pfocus = get_unit_in_focus();
@@ -2672,7 +2672,7 @@ public class Tilespec{
 //    if (do_draw_unit) {
 //      ADD_BG(player_color(punit.unit_owner()));
 //    } else if (pcity && draw_cities) {
-//      ADD_BG(player_color(city_owner(pcity)));
+//      ADD_BG(player_color(City.city_owner(pcity)));
 //    }
 //  } else if (!draw_terrain) {
 //    if (ptile) {
@@ -2687,7 +2687,7 @@ public class Tilespec{
 //
 //    sprs += fill_terrain_sprite_array(sprs, ptile, ttype_near);
 //
-//    if (is_ocean(ttype) && draw_terrain) {
+//    if (Terrain_H.is_ocean(ttype) && draw_terrain) {
 //      for (dir = 0; dir < 4; dir++) {
 //	if (contains_special(tspecial_near[DIR4_TO_DIR8[dir]], S_RIVER)) {
 //	  ADD_SPRITE_SIMPLE(sprites.tx.river_outlet[dir]);
@@ -2707,7 +2707,7 @@ public class Tilespec{
 //	enum direction8 dir = cardinal_tileset_dirs[i];
 //
 //	if (contains_special(tspecial_near[dir], S_RIVER)
-//	    || is_ocean(ttype_near[dir])) {
+//	    || Terrain_H.is_ocean(ttype_near[dir])) {
 //	  tileno |= 1 << i;
 //	}
 //      }
@@ -2735,7 +2735,7 @@ public class Tilespec{
 //      ADD_SPRITE_SIMPLE(sprites.terrain[ttype].mine);
 //    }
 //    
-//    if (draw_specials && contains_special(tspecial, S_HUT)) {
+//    if (draw_specials && contains_special(tspecial, Terrain_H.S_HUT)) {
 //      ADD_SPRITE_SIMPLE(sprites.tx.village);
 //    }
 //  }
@@ -2751,7 +2751,7 @@ public class Tilespec{
 //      ADD_SPRITE(get_city_nation_flag_sprite(pcity),
 //		 DRAW_FULL, true, flag_offset_x, flag_offset_y);
 //    } else {
-//      ADD_BG(player_color(city_owner(pcity)));
+//      ADD_BG(player_color(City.city_owner(pcity)));
 //    }
 //    ADD_SPRITE_FULL(get_city_sprite(pcity));
 //    if (pcity.client.occupied) {
@@ -2796,7 +2796,7 @@ public class Tilespec{
 //  }
 //
 //  if (do_draw_unit) {
-//    boolean stacked = ptile && (unit_list_size(&ptile.units) > 1);
+//    boolean stacked = ptile && (ptile.units.foo_list_size() > 1);
 //    boolean backdrop = !pcity;
 //
 //    sprs += fill_unit_sprite_array(sprs, punit, stacked, backdrop);
@@ -2977,16 +2977,16 @@ public class Tilespec{
 //  if (tile_get_known(ptile) == TILE_UNKNOWN) {
 //    color=COLOR_STD_BLACK;
 //  } else if((pcity=map_get_city(ptile))) {
-//    if(pcity.owner==game.player_idx)
+//    if(pcity.owner==Game.game.player_idx)
 //      color=COLOR_STD_WHITE;
 //    else
 //      color=COLOR_STD_CYAN;
 //  } else if ((punit=find_visible_unit(ptile))) {
-//    if(punit.owner==game.player_idx)
+//    if(punit.owner==Game.game.player_idx)
 //      color=COLOR_STD_YELLOW;
 //    else
 //      color=COLOR_STD_RED;
-//  } else if (is_ocean(ptile.terrain)) {
+//  } else if (Terrain_H.is_ocean(ptile.terrain)) {
 //    if (tile_get_known(ptile) == TILE_KNOWN_FOGGED && draw_fog_of_war) {
 //      color = COLOR_STD_RACE4;
 //    } else {
@@ -3022,7 +3022,7 @@ public class Tilespec{
 //  if (!punit)
 //    return null;
 //
-//  if (citymode && punit.owner == game.player_idx)
+//  if (citymode && punit.owner == Game.game.player_idx)
 //    return null;
 //
 //  if (punit != pfocus

@@ -12,7 +12,7 @@ import common.unittype.unittype;
 public class Unittype_P {
 	// #include "astring.h"
 	// #include "fcintl.h"
-	// #include "game.h"
+	// #include "Game.game.h"
 	// #include "government.h"
 	// #include "mem.h"
 	// #include "player.h"
@@ -22,7 +22,7 @@ public class Unittype_P {
 
 	// #include "unittype.h"
 
-	public static unittype unit_types[] = new unittype[U_LAST];
+	public static unittype unit_types[] = new unittype[unittype.U_LAST];
 	/*
 	 * the unit_types array is now setup in: server/ruleset.c (for the server)
 	 * client/packhand.c (for the client)
@@ -47,13 +47,13 @@ public class Unittype_P {
 	static final String unit_class_names[] = { "Air", "Helicopter", "Land",
 			"Missile", "Nuclear", "Sea" };
 	 /***********************************************************************
-		 * Returns 1 if the unit_type "exists" in this game, 0 otherwise. A
+		 * Returns 1 if the unit_type "exists" in this Game.game, 0 otherwise. A
 		 * unit_type doesn't exist if one of: - id is out of range - the
 		 * unit_type has been flagged as removed by setting its tech_requirement
 		 * to A_LAST.
 		 **********************************************************************/
 //	boolean unit_type_exists(int id) {
-//		if (id < 0 || id >= U_LAST || id >= game.num_unit_types)
+//		if (id < 0 || id >= unittype.U_LAST || id >= Game.game.num_unit_types)
 //			return false;
 //		else
 //			return unit_types[id].tech_requirement != A_LAST;
@@ -288,7 +288,7 @@ public class Unittype_P {
 //	 }
 //	 /***********************************************************************
 //		 * Returns the unit type that has the given (translated) name. Returns
-//		 * U_LAST if none match.
+//		 * unittype.U_LAST if none match.
 //		 **********************************************************************/
 //	 int find_unit_type_by_name(final String name)
 //	 {
@@ -298,11 +298,11 @@ public class Unittype_P {
 //	 return i;
 //	 }
 //	 } unit_type_iterate_end;
-//	 return U_LAST;
+//	 return unittype.U_LAST;
 //	 }
 //	 /***********************************************************************
 //		 * Returns the unit type that has the given original (untranslated)
-//		 * name. Returns U_LAST if none match.
+//		 * name. Returns unittype.U_LAST if none match.
 //		 **********************************************************************/
 //	 int find_unit_type_by_name_orig(final String name_orig)
 //	 {
@@ -312,7 +312,7 @@ public class Unittype_P {
 //	 return i;
 //	 }
 //	 } unit_type_iterate_end;
-//	 return U_LAST;
+//	 return unittype.U_LAST;
 //	 }
 //	 /***********************************************************************
 //		 * Convert unit_move_type names to enum; case insensitive; returns 0 if
@@ -518,20 +518,21 @@ public class Unittype_P {
 //	 assert((role>=0 && role<F_LAST) || (role>=L_FIRST && role<L_LAST));
 //	 return n_with_role[role];
 //	 }
-//	 /***********************************************************************
-//		 * Return index-th unit with specified role/flag. Index -1 means (n-1),
-//		 * ie last one.
-//		 **********************************************************************/
-//	 int get_role_unit(int role, int index)
-//	 {
+	 /***********************************************************************
+		 * Return index-th unit with specified role/flag. Index -1 means (n-1),
+		 * ie last one.
+		 **********************************************************************/
+	 public static int get_role_unit(int role, int index)
+	 {
 //	 assert((role>=0 && role<F_LAST) || (role>=L_FIRST && role<L_LAST));
 //	 if (index==-1) index = n_with_role[role]-1;
 //	 assert(index>=0 && index<n_with_role[role]);
 //	 return with_role[role][index];
-//	 }
+		 return 0;
+	 }
 //	 /***********************************************************************
 //		 * Return "best" unit this city can build, with given role/flag. Returns
-//		 * U_LAST if none match. "Best" means highest unit type id.
+//		 * unittype.U_LAST if none match. "Best" means highest unit type id.
 //		 **********************************************************************/
 //	 int best_role_unit(city pcity, int role)
 //	 {
@@ -544,11 +545,11 @@ public class Unittype_P {
 //	 return u;
 //	 }
 //	 }
-//	 return U_LAST;
+//	 return unittype.U_LAST;
 //	 }
 //	 /***********************************************************************
 //		 * Return "best" unit the player can build, with given role/flag.
-//		 * Returns U_LAST if none match. "Best" means highest unit type id.
+//		 * Returns unittype.U_LAST if none match. "Best" means highest unit type id.
 //		 * 
 //		 * TODO: Cache the result per player?
 //		 **********************************************************************/
@@ -563,11 +564,11 @@ public class Unittype_P {
 //	 return utype;
 //	 }
 //	 }
-//	 return U_LAST;
+//	 return unittype.U_LAST;
 //	 }
 //	 /***********************************************************************
 //		 * Return first unit the player can build, with given role/flag. Returns
-//		 * U_LAST if none match. Used eg when placing starting units.
+//		 * unittype.U_LAST if none match. Used eg when placing starting units.
 //		 **********************************************************************/
 //	 int first_role_unit_for_player(player pplayer, int role)
 //	 {
@@ -580,7 +581,7 @@ public class Unittype_P {
 //	 return utype;
 //	 }
 //	 }
-//	 return U_LAST;
+//	 return unittype.U_LAST;
 //	 }
 //	 /***********************************************************************
 //		 * Frees the memory associated with this unit type.

@@ -24,7 +24,7 @@ public class Mapctrl{
 //
 //#include "combat.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "player.h"
 //#include "support.h"

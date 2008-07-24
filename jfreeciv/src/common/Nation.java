@@ -4,7 +4,7 @@ import utility.Log;
 
 public class Nation{
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "mem.h"
@@ -25,13 +25,13 @@ public class Nation{
 //static boolean bounds_check_nation_id(int nid, int loglevel,
 //				  final String func_name)
 //{
-//  if (game.nation_count==0) {
+//  if (Game.game.nation_count==0) {
 //    util.freelog(loglevel, "%s before nations setup", func_name);
 //    return false;
 //  }
-//  if (nid < 0 || nid >= game.nation_count) {
+//  if (nid < 0 || nid >= Game.game.nation_count) {
 //    util.freelog(loglevel, "Bad nation id %d (count %d) in %s",
-//	    nid, game.nation_count, func_name);
+//	    nid, Game.game.nation_count, func_name);
 //    return false;
 //  }
 //  return true;
@@ -44,7 +44,7 @@ public class Nation{
 //{
 //  int i;
 //
-//  for(i=0; i<game.nation_count; i++)
+//  for(i=0; i<Game.game.nation_count; i++)
 //     if(mystrcasecmp(name, get_nation_name (i)) == 0)
 //	return i;
 //
@@ -58,7 +58,7 @@ public class Nation{
 //{
 //  int i;
 //
-//  for(i=0; i<game.nation_count; i++)
+//  for(i=0; i<Game.game.nation_count; i++)
 //     if(mystrcasecmp(name, get_nation_name_orig (i)) == 0)
 //	return i;
 //
@@ -186,7 +186,7 @@ public class Nation{
 //void nations_alloc(int num)
 //{
 //  nations = (nation_type )fc_calloc(num, sizeof(struct nation_type));
-//  game.nation_count = num;
+//  Game.game.nation_count = num;
 //}
 //
 ///***************************************************************
@@ -240,13 +240,13 @@ public class Nation{
 //    return;
 //  }
 //
-//  for (nation = 0; nation < game.nation_count; nation++) {
+//  for (nation = 0; nation < Game.game.nation_count; nation++) {
 //    nation_free(nation);
 //  }
 //
 //  free(nations);
 //  nations = null;
-//  game.nation_count = 0;
+//  Game.game.nation_count = 0;
 //}
 //
 ///***************************************************************
@@ -322,7 +322,7 @@ public class Nation{
 //    return 0;
 //  }
 //  assert(pteam.id < MAX_NUM_TEAMS && pteam.id != TEAM_NONE);
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (pplayer.is_alive && pplayer.team == pteam.id) {
 //      count++;
 //    }
@@ -376,7 +376,7 @@ public class Nation{
 //  assert(pplayer.team < MAX_NUM_TEAMS && pplayer.team >= 0);
 //
 //  /* anyone else using my team? */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (aplayer.team == pplayer.team && aplayer != pplayer) {
 //      others = true;
 //      break;

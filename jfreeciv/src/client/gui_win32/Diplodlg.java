@@ -25,7 +25,7 @@ public class Diplodlg{
 //#include <windowsx.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -174,7 +174,7 @@ public class Diplodlg{
 //  plr0=plr?pdialog.treaty.plr1:pdialog.treaty.plr0;
 //  plr1=plr?pdialog.treaty.plr0:pdialog.treaty.plr1;
 //  menu=CreatePopupMenu();
-//  for(i=1, flag=0; i<game.num_tech_types; i++) {
+//  for(i=1, flag=0; i<Game.game.num_tech_types; i++) {
 //    if (get_invention(plr0, i) == TECH_KNOWN
 //        && (get_invention(plr1, i) == TECH_UNKNOWN  
 //            || get_invention(plr1, i) == TECH_REACHABLE)
@@ -209,7 +209,7 @@ public class Diplodlg{
 //  menu=CreatePopupMenu();
 //  plr0=plr?pdialog.treaty.plr1:pdialog.treaty.plr0;
 //  plr1=plr?pdialog.treaty.plr0:pdialog.treaty.plr1;
-//  n=city_list_size(&plr0.cities);
+//  n=plr0.cities.foo_list_size();
 //  if (n>0) {
 //    city_list_ptrs = fc_malloc(sizeof(struct city*)*n);
 //  } else {
@@ -583,7 +583,7 @@ public class Diplodlg{
 //*****************************************************************/
 //static Diplomacy_dialog create_diplomacy_dialog(int other_player_id)
 //{
-//  player plr0 = game.player_ptr, *plr1 = get_player(other_player_id);
+//  player plr0 = Game.game.player_ptr, *plr1 = get_player(other_player_id);
 //
 //  char buf[512];
 //  fcwin_box vbox;
@@ -689,7 +689,7 @@ public class Diplodlg{
 //*****************************************************************/
 //static Diplomacy_dialog find_diplomacy_dialog(int other_player_id)
 //{
-//  player plr0 = game.player_ptr, *plr1 = get_player(other_player_id);
+//  player plr0 = Game.game.player_ptr, *plr1 = get_player(other_player_id);
 //
 //  if(!dialog_list_list_has_been_initialised) {
 //    dialog_list_init(&dialog_list);
@@ -714,7 +714,7 @@ public class Diplodlg{
 //{
 //  Diplomacy_dialog pdialog;
 //
-//  if (game.player_ptr.ai.control) {
+//  if (Game.game.player_ptr.ai.control) {
 //    return;			/* Don't show if we are AI controlled. */
 //  }
 //
@@ -807,7 +807,7 @@ public class Diplodlg{
 //    return;
 //  }
 //
-//  while (dialog_list_size(&dialog_list) > 0) {
+//  while (dialog_list.foo_list_size() > 0) {
 //    close_diplomacy_dialog(dialog_list_get(&dialog_list, 0));
 //  }
 //}

@@ -70,7 +70,7 @@ public class Chatline_common{
 //  frozen_level++;
 //
 //  if (frozen_level == 1) {
-//    assert(remaining_list_size(&remains) == 0);
+//    assert(remains.foo_list_size() == 0);
 //  }
 //}
 //

@@ -1,7 +1,7 @@
 package common;
 
-import static utility.shared.Shared_H.*;
-import static common.Game.*;
+import static utility.shared.Shared_H.TEST_BIT;
+
 import common.city.city;
 import common.map.tile;
 import common.player.player;
@@ -12,7 +12,7 @@ public class City{
 //#include "log.h"
 //#include "support.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -256,7 +256,7 @@ public class City{
 //    default:						break;
 //    }
 //  } else if (is_wonder(id)) {
-//    if (game.global_wonders[id] != 0) {
+//    if (Game.game.global_wonders[id] != 0) {
 //      state = Q"?built:B";
 //    } else {
 //      state = Q"?wonder:w";
@@ -292,7 +292,7 @@ public class City{
 	 **************************************************************************/
 	public static player city_owner(final city pcity)
 	{
-		return (game.players[pcity.owner]);
+		return (Game.game.players[pcity.owner]);
 	}
 
 // /**************************************************************************
@@ -303,7 +303,7 @@ public class City{
 //boolean city_has_terr_spec_gate(final city pcity, Impr_Type_id id)
 //{
 //  impr_type impr;
-//  Terrain_type_id *terr_gate;
+//  int *terr_gate;
 //  enum int *spec_gate;
 //
 //  impr = get_improvement_type(id);
@@ -315,7 +315,7 @@ public class City{
 //  }
 //
 //  for (;*spec_gate!=S_NO_SPECIAL;spec_gate++) {
-//    if (map_has_special(pcity.tile, *spec_gate) ||
+//    if (Map.map_has_special(pcity.tile, *spec_gate) ||
 //        is_special_near_tile(pcity.tile, *spec_gate)) {
 //      return true;
 //    }
@@ -428,7 +428,7 @@ public class City{
 //  if (!can_build_unit_direct(pcity, id)) {
 //    return false;
 //  }
-//  while (unit_type_exists((id = unit_types[id].obsoleted_by))) {
+//  while (unit_type_exists((id = Unittype_P.unit_types[id].obsoleted_by))) {
 //    if (can_player_build_unit_direct(city_owner(pcity), id)) {
 //	return false;
 //    }
@@ -462,7 +462,7 @@ public class City{
 //boolean city_can_use_specialist(final city pcity,
 //			     Specialist_type_id type)
 //{
-//  return pcity.size >= game.rgame.specialists[type].min_size;
+//  return pcity.size >= Game.game.rgame.specialists[type].min_size;
 //}
 //
 ///****************************************************************************
@@ -522,7 +522,7 @@ public class City{
 //				 int city_x, int city_y, boolean is_celebrating)
 //{
 //  enum int spec_t = map_get_special(ptile);
-//  Terrain_type_id tile_t = ptile.terrain;
+//  int tile_t = ptile.terrain;
 //  int s;
 //
 //  if (contains_special(spec_t, S_SPECIAL_1)) {
@@ -537,7 +537,7 @@ public class City{
 //    s += get_tile_type(tile_t).mining_shield_incr;
 //  }
 //
-//  if (contains_special(spec_t, S_RAILROAD)) {
+//  if (contains_special(spec_t, Terrain_H.S_RAILROAD)) {
 //    s += (s * terrain_control.rail_shield_bonus) / 100;
 //  }
 //
@@ -571,7 +571,7 @@ public class City{
 //  }
 //
 //  if (pcity && is_city_center(city_x, city_y)) {
-//    s = MAX(s, game.rgame.min_city_center_shield);
+//    s = MAX(s, Game.game.rgame.min_city_center_shield);
 //  }
 //
 //  return s;
@@ -627,7 +627,7 @@ public class City{
 //			       int city_x, int city_y, boolean is_celebrating)
 //{
 //  enum int spec_t = map_get_special(ptile);
-//  Terrain_type_id tile_t = ptile.terrain;
+//  int tile_t = ptile.terrain;
 //  int t;
 //
 //  if (contains_special(spec_t, S_SPECIAL_1)) {
@@ -638,15 +638,15 @@ public class City{
 //    t = get_tile_type(tile_t).trade;
 //  }
 //
-//  if (contains_special(spec_t, S_RIVER) && !is_ocean(tile_t)) {
+//  if (contains_special(spec_t, S_RIVER) && !Terrain_H.is_ocean(tile_t)) {
 //    t += terrain_control.river_trade_incr;
 //  }
 //
-//  if (contains_special(spec_t, S_ROAD)) {
+//  if (contains_special(spec_t, Terrain_H.S_ROAD)) {
 //    t += get_tile_type(tile_t).road_trade_incr;
 //  }
 //
-//  if (contains_special(spec_t, S_RAILROAD)) {
+//  if (contains_special(spec_t, Terrain_H.S_RAILROAD)) {
 //    t += (t * terrain_control.rail_trade_bonus) / 100;
 //  }
 //
@@ -682,7 +682,7 @@ public class City{
 //  }
 //
 //  if (pcity && is_city_center(city_x, city_y)) {
-//    t = MAX(t, game.rgame.min_city_center_trade);
+//    t = MAX(t, Game.game.rgame.min_city_center_trade);
 //  }
 //
 //  return t;
@@ -736,7 +736,7 @@ public class City{
 //			      int city_x, int city_y, boolean is_celebrating)
 //{
 //  final enum int spec_t = map_get_special(ptile);
-//  final Terrain_type_id tile_t = ptile.terrain;
+//  final int tile_t = ptile.terrain;
 //  tile_type type = get_tile_type(tile_t);
 //  struct tile tile;
 //  int f;
@@ -769,7 +769,7 @@ public class City{
 //    f += type.irrigation_food_incr;
 //  }
 //
-//  if (contains_special(tile.special, S_RAILROAD)) {
+//  if (contains_special(tile.special, Terrain_H.S_RAILROAD)) {
 //    f += (f * terrain_control.rail_food_bonus) / 100;
 //  }
 //
@@ -801,7 +801,7 @@ public class City{
 //  }
 //
 //  if (pcity && is_city_center(city_x, city_y)) {
-//    f = MAX(f, game.rgame.min_city_center_food);
+//    f = MAX(f, Game.game.rgame.min_city_center_food);
 //  }
 //
 //  return f;
@@ -852,29 +852,29 @@ public class City{
 //**************************************************************************/
 //boolean city_can_be_built_here(final tile ptile, unit punit)
 //{
-//  if (terrain_has_flag(ptile.terrain, TER_NO_CITIES)) {
+//  if (Terrain_H.terrain_has_flag(ptile.terrain, TER_NO_CITIES)) {
 //    /* No cities on this terrain. */
 //    return false;
 //  }
 //
 //  if (punit) {
 //    enum unit_move_type move_type = punit.unit_type().move_type;
-//    Terrain_type_id t = ptile.terrain;
+//    int t = ptile.terrain;
 //
 //    /* We allow land units to build land cities and sea units to build
 //     * ocean cities. */
-//    if ((move_type == LAND_MOVING && is_ocean(t))
-//	|| (move_type == SEA_MOVING && !is_ocean(t))) {
+//    if ((move_type == LAND_MOVING && Terrain_H.is_ocean(t))
+//	|| (move_type == SEA_MOVING && !Terrain_H.is_ocean(t))) {
 //      return false;
 //    }
 //  }
 //
-//  /* game.rgame.min_dist_bw_cities minimum is 1, meaning adjacent is okay */
-//  square_iterate(ptile, game.rgame.min_dist_bw_cities - 1, ptile1) {
+//  /* Game.game.rgame.min_dist_bw_cities minimum is 1, meaning adjacent is okay */
+//  square_iterate(ptile, Game.game.rgame.min_dist_bw_cities - 1, ptile1) {
 //    if (ptile1.city) {
 //      return false;
 //    }
-//  } square_iterate_end;
+//  }
 //
 //  return true;
 //}
@@ -1006,7 +1006,7 @@ public class City{
 //{
 //  int i, tb;
 //
-//  /* Should this be real_map_distance? */
+//  /* Should this be Map.real_map_distance? */
 //  tb = map_distance(pc1.tile, pc2.tile) + 10;
 //  tb = (tb * (pc1.trade_prod + pc2.trade_prod)) / 24;
 //
@@ -1111,7 +1111,7 @@ public class City{
 //  government g = get_gov_pcity(pcity);
 //
 //  return (pcity.rapture > 0 && pcity.food_surplus > 0
-//	  && (pcity.rapture % game.rapturedelay) == 0
+//	  && (pcity.rapture % Game.game.rapturedelay) == 0
 //	  && government_has_flag(g, G_RAPTURE_CITY_GROWTH));
 //}
 //
@@ -1148,7 +1148,7 @@ public class City{
 ///**************************************************************************
 //Comparison function for qsort for city _pointers_, sorting by city name.
 //Args are really (struct city**), to sort an array of pointers.
-//(Compare with old_city_name_compare() in game.c, which use city_id's)
+//(Compare with old_city_name_compare() in Game.game.c, which use city_id's)
 //**************************************************************************/
 //int city_name_compare(final void *p1, final void *p2)
 //{
@@ -1239,12 +1239,12 @@ public class City{
 //{
 //  int i;
 //
-//  for (i = 0; i < game.styles_count; i++) {
+//  for (i = 0; i < Game.game.styles_count; i++) {
 //    if (strcmp(style_name, city_styles[i].name) == 0) {
 //      break;
 //    }
 //  }
-//  if (i < game.styles_count) {
+//  if (i < Game.game.styles_count) {
 //    return i;
 //  } else {
 //    return -1;
@@ -1258,12 +1258,12 @@ public class City{
 //{
 //  int i;
 //
-//  for (i = 0; i < game.styles_count; i++) {
+//  for (i = 0; i < Game.game.styles_count; i++) {
 //    if (strcmp(style_name, city_styles[i].name_orig) == 0) {
 //      break;
 //    }
 //  }
-//  if (i < game.styles_count) {
+//  if (i < Game.game.styles_count) {
 //    return i;
 //  } else {
 //    return -1;
@@ -1408,7 +1408,7 @@ public class City{
 //  } else {
 //    int max_size;
 //                                                                               
-//    max_size = game.aqueduct_size + get_city_bonus(pcity, EFT_SIZE_ADJ);
+//    max_size = Game.game.aqueduct_size + get_city_bonus(pcity, EFT_SIZE_ADJ);
 //    return (pop_size <= max_size);
 //  }
 //}
@@ -1480,11 +1480,11 @@ public class City{
 //**************************************************************************/
 //boolean is_friendly_city_near(player owner, final tile ptile)
 //{
-//  square_iterate(ptile, 3, ptile1) {
+//  for(tile ptile1: util.square_tile_iterate(ptile, 3)) {
 //    city  pcity = ptile1.city;
 //    if (pcity && pplayers_allied(owner, city_owner(pcity)))
 //      return true;
-//  } square_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -1514,16 +1514,16 @@ public class City{
 //****************************************************************************/
 //int city_granary_size(int city_size)
 //{
-//  int food_inis = game.rgame.granary_num_inis;
-//  int food_inc = game.rgame.granary_food_inc;
+//  int food_inis = Game.game.rgame.granary_num_inis;
+//  int food_inc = Game.game.rgame.granary_food_inc;
 //
 //  /* Granary sizes for the first food_inis citizens are given directly.
 //   * After that we increase the granary size by food_inc per citizen. */
 //  if (city_size > food_inis) {
-//    return (game.rgame.granary_food_ini[food_inis - 1] * game.foodbox +
-//	    food_inc * (city_size - food_inis) * game.foodbox / 100) ;
+//    return (Game.game.rgame.granary_food_ini[food_inis - 1] * Game.game.foodbox +
+//	    food_inc * (city_size - food_inis) * Game.game.foodbox / 100) ;
 //  } else {
-//    return game.rgame.granary_food_ini[city_size - 1] * game.foodbox;
+//    return Game.game.rgame.granary_food_ini[city_size - 1] * Game.game.foodbox;
 //  }
 //}
 //
@@ -1532,9 +1532,9 @@ public class City{
 //**************************************************************************/
 //static int content_citizens(player pplayer)
 //{
-//  int cities = city_list_size(&pplayer.cities);
-//  int content = game.unhappysize;
-//  int basis = game.cityfactor + get_gov_pplayer(pplayer).empire_size_mod;
+//  int cities = pplayer.cities.foo_list_size();
+//  int content = Game.game.unhappysize;
+//  int basis = Game.game.cityfactor + get_gov_pplayer(pplayer).empire_size_mod;
 //  int step = get_gov_pplayer(pplayer).empire_size_inc;
 //
 //  if (cities > basis) {
@@ -1623,18 +1623,18 @@ public class City{
 //  final int SCIENCE = 0, TAX = 1, LUXURY = 2;
 //  int rates[3], result[3];
 //
-//  if (game.rgame.changable_tax) {
+//  if (Game.game.rgame.changable_tax) {
 //    rates[SCIENCE] = pplayer.economic.science;
 //    rates[LUXURY] = pplayer.economic.luxury;
 //    rates[TAX] = 100 - rates[SCIENCE] - rates[LUXURY];
 //  } else {
-//    rates[SCIENCE] = game.rgame.forced_science;
-//    rates[LUXURY] = game.rgame.forced_luxury;
-//    rates[TAX] = game.rgame.forced_gold;
+//    rates[SCIENCE] = Game.game.rgame.forced_science;
+//    rates[LUXURY] = Game.game.rgame.forced_luxury;
+//    rates[TAX] = Game.game.rgame.forced_gold;
 //  }
 //  
 //  /* ANARCHY */
-//  if (get_gov_pplayer(pplayer).index == game.government_when_anarchy) {
+//  if (get_gov_pplayer(pplayer).index == Game.game.government_when_anarchy) {
 //    rates[SCIENCE] = 0;
 //    rates[LUXURY] = 100;
 //    rates[TAX] = 0;
@@ -1655,7 +1655,7 @@ public class City{
 //**************************************************************************/
 //boolean city_built_last_turn(final city pcity)
 //{
-//  return pcity.turn_last_built + 1 >= game.turn;
+//  return pcity.turn_last_built + 1 >= Game.game.turn;
 //}
 //
 ///**************************************************************************
@@ -1667,11 +1667,11 @@ public class City{
 //                 &pcity.luxury_total, &pcity.tax_total);
 //
 //  pcity.luxury_total += (pcity.specialists[SP_ELVIS]
-//			  * game.rgame.specialists[SP_ELVIS].bonus);
+//			  * Game.game.rgame.specialists[SP_ELVIS].bonus);
 //  pcity.science_total += (pcity.specialists[SP_SCIENTIST]
-//			   * game.rgame.specialists[SP_SCIENTIST].bonus);
+//			   * Game.game.rgame.specialists[SP_SCIENTIST].bonus);
 //  pcity.tax_total += (pcity.specialists[SP_TAXMAN]
-//			* game.rgame.specialists[SP_TAXMAN].bonus);
+//			* Game.game.rgame.specialists[SP_TAXMAN].bonus);
 //  pcity.tax_total += get_city_tithes_bonus(pcity);
 //}
 //
@@ -1715,7 +1715,7 @@ public class City{
 //  int specialists = city_specialists(pcity);
 //
 //  /* This is the number of citizens that may start out content, depending
-//   * on empire size and game's city unhappysize. This may be bigger than
+//   * on empire size and Game.game's city unhappysize. This may be bigger than
 //   * the size of the city, since this is a potential. */
 //  int content = content_citizens(city_owner(pcity));
 //
@@ -1724,7 +1724,7 @@ public class City{
 //
 //  /* Create angry citizens only if we have a negative number of possible
 //   * content citizens. This happens when empires grow really big. */
-//  if (game.angrycitizen == false) {
+//  if (Game.game.angrycitizen == false) {
 //    pcity.ppl_angry[0] = 0;
 //  } else {
 //    pcity.ppl_angry[0] = Math.min(MAX(0, -content), pcity.size - specialists);
@@ -2175,8 +2175,8 @@ public class City{
 //  int dist;
 //  unsigned int val;
 //  int trade_penalty;
-//  int notradesize = Math.min(game.notradesize, game.fulltradesize);
-//  int fulltradesize = MAX(game.notradesize, game.fulltradesize);
+//  int notradesize = Math.min(Game.game.notradesize, Game.game.fulltradesize);
+//  int fulltradesize = MAX(Game.game.notradesize, Game.game.fulltradesize);
 //
 //  if (pcity.size <= notradesize) {
 //    trade_penalty = trade;
@@ -2197,7 +2197,7 @@ public class City{
 //    if (!capital)
 //      dist = g.corruption_max_distance_cap;
 //    else {
-//      int tmp = real_map_distance(capital.tile, pcity.tile);
+//      int tmp = Map.real_map_distance(capital.tile, pcity.tile);
 //      dist = Math.min(g.corruption_max_distance_cap, tmp);
 //    }
 //  }
@@ -2234,7 +2234,7 @@ public class City{
 //    if (!capital) {
 //      dist = g.waste_max_distance_cap;
 //    } else {
-//      int tmp = real_map_distance(capital.tile, pcity.tile);
+//      int tmp = Map.real_map_distance(capital.tile, pcity.tile);
 //      dist = Math.min(g.waste_max_distance_cap, tmp);
 //    }
 //  }
@@ -2360,7 +2360,7 @@ public class City{
 //void city_styles_alloc(int num)
 //{
 //  city_styles = fc_calloc(num, sizeof(struct citystyle));
-//  game.styles_count = num;
+//  Game.game.styles_count = num;
 //}
 //
 ///**************************************************************************
@@ -2370,7 +2370,7 @@ public class City{
 //{
 //  free(city_styles);
 //  city_styles = null;
-//  game.styles_count = 0;
+//  Game.game.styles_count = 0;
 //}
 //
 ///**************************************************************************
@@ -2419,20 +2419,20 @@ public class City{
 //  {
 //    int u = best_role_unit(pcity, L_FIRSTBUILD);
 //
-//    if (u < U_LAST && u >= 0) {
+//    if (u < unittype.U_LAST && u >= 0) {
 //      pcity.is_building_unit = true;
 //      pcity.currently_building = u;
 //    } else {
 //      pcity.is_building_unit = false;
-//      pcity.currently_building = game.default_building;
+//      pcity.currently_building = Game.game.default_building;
 //    }
 //  }
-//  pcity.turn_founded = game.turn;
+//  pcity.turn_founded = Game.game.turn;
 //  pcity.did_buy = true;
 //  pcity.did_sell = false;
 //  pcity.airlift = false;
 //
-//  pcity.turn_last_built = game.turn;
+//  pcity.turn_last_built = Game.game.turn;
 //  pcity.changed_from_id = pcity.currently_building;
 //  pcity.changed_from_is_unit = pcity.is_building_unit;
 //  pcity.before_change_shields = 0;

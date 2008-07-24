@@ -113,7 +113,7 @@ public class Cityhand{
 //    city_refresh(pcity);
 //    sync_cities();
 //  } else {
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //		     "Game: You don't have a worker here."); 
 //  }
 //  sanity_check_city(pcity);
@@ -170,7 +170,7 @@ public class Cityhand{
 //			     Impr_Type_id id)
 //{  
 //  if (pcity.did_sell) {
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT, 
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT, 
 //		  "Game: You have already sold something here this turn.");
 //    return;
 //  }
@@ -179,7 +179,7 @@ public class Cityhand{
 //    return;
 //
 //  pcity.did_sell=true;
-//  notify_player_ex(pplayer, pcity.tile, E_IMP_SOLD,
+//  Plrhand.notify_player_ex(pplayer, pcity.tile, E_IMP_SOLD,
 //		   "Game: You sell %s in %s for %d gold.", 
 //		   get_improvement_name(id), pcity.name,
 //		   impr_sell_gold(id));
@@ -189,7 +189,7 @@ public class Cityhand{
 //
 //  /* If we sold the walls the other players should see it */
 //  send_city_info(null, pcity);
-//  send_player_info(pplayer, pplayer);
+//  Plrhand.send_player_info(pplayer, pplayer);
 //}
 //
 ///**************************************************************************
@@ -199,7 +199,7 @@ public class Cityhand{
 //{
 //  city pcity = player_find_city_by_id(pplayer, city_id);
 //
-//  if (!pcity || build_id >= game.num_impr_types) {
+//  if (!pcity || build_id >= Game.game.num_impr_types) {
 //    return;
 //  }
 //  really_handle_city_sell(pplayer, pcity, build_id);
@@ -215,34 +215,34 @@ public class Cityhand{
 //
 //  assert(pcity && player_owns_city(pplayer, pcity));
 // 
-//  if (pcity.turn_founded == game.turn) {
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
+//  if (pcity.turn_founded == Game.game.turn) {
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //		  "Game: Cannot buy in city created this turn.");
 //    return;
 //  }
 //
 //  if (!city_can_change_build(pcity)) {
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //		  "Game: You have already bought this turn.");
 //    return;
 //  }
 //
 //  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //    assert(!pcity.is_building_unit);
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //                     "Game: You don't buy %s!",
 //		     improvement_types[pcity.currently_building].name);
 //    return;
 //  }
 //
 //  if (pcity.is_building_unit && pcity.anarchy != 0) {
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT, 
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT, 
 //		     "Game: Can't buy units when city is in disorder.");
 //    return;
 //  }
 //
 //  if (pcity.is_building_unit) {
-//    name = unit_types[pcity.currently_building].name;
+//    name = Unittype_P.unit_types[pcity.currently_building].name;
 //    total = unit_build_shield_cost(pcity.currently_building);
 //  } else {
 //    name = get_improvement_name(pcity.currently_building);
@@ -273,12 +273,12 @@ public class Cityhand{
 //  city_refresh(pcity);
 //  
 //  conn_list_do_buffer(&pplayer.connections);
-//  notify_player_ex(pplayer, pcity.tile, 
+//  Plrhand.notify_player_ex(pplayer, pcity.tile, 
 //                   pcity.is_building_unit?E_UNIT_BUY:E_IMP_BUY,
 //		   "Game: %s bought in %s for %d gold.", 
 //		   name, pcity.name, cost);
 //  send_city_info(pplayer, pcity);
-//  send_player_info(pplayer,pplayer);
+//  Plrhand.send_player_info(pplayer,pplayer);
 //  conn_list_do_unbuffer(&pplayer.connections);
 //}
 //
@@ -355,7 +355,7 @@ public class Cityhand{
 //   if (!is_build_id_unit_id && !can_build_improvement(pcity, build_id))
 //     return;
 //  if (pcity.did_buy && pcity.shield_stock > 0) {
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //		     "Game: You have bought this turn, can't change.");
 //    return;
 //  }
@@ -381,7 +381,7 @@ public class Cityhand{
 //  }
 //
 //  if (!is_allowed_city_name(pplayer, name, message, sizeof(message))) {
-//    notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //		     "Game: %s",  message);
 //    return;
 //  }

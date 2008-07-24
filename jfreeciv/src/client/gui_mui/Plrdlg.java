@@ -31,7 +31,7 @@ public class Plrdlg{
 //#include <proto/graphics.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "packets.h"
 //#include "player.h"
 //#include "support.h"
@@ -106,19 +106,19 @@ public class Plrdlg{
 //    static char repbuf[32];
 //    final player_diplstate pds;
 //
-//    if (game.players[i].nturns_idle > 3)
+//    if (Game.game.players[i].nturns_idle > 3)
 //      idlebuf = util.my_snprintf(
 //		  PL("(idle %d turn)", "(idle %d turns)",
-//		      game.players[i].nturns_idle - 1),
-//		  game.players[i].nturns_idle - 1);
+//		      Game.game.players[i].nturns_idle - 1),
+//		  Game.game.players[i].nturns_idle - 1);
 //    else
 //      idlebuf[0] = '\0';
 //
-//    if (game.players[i].is_alive)
+//    if (Game.game.players[i].is_alive)
 //    {
-//      if (game.players[i].is_connected)
+//      if (Game.game.players[i].is_connected)
 //      {
-//	if (game.players[i].turn_done)
+//	if (Game.game.players[i].turn_done)
 //	  statebuf = String.format( "done");
 //	else
 //	  statebuf = String.format( "moving");
@@ -129,18 +129,18 @@ public class Plrdlg{
 //    else
 //      statebuf = String.format( "R.I.P");
 //
-//    if (game.players[i].ai.control)
-//      namebuf = util.my_snprintf( "*%-15s", game.players[i].name);
+//    if (Game.game.players[i].ai.control)
+//      namebuf = util.my_snprintf( "*%-15s", Game.game.players[i].name);
 //    else
-//      namebuf = util.my_snprintf( "%-16s", game.players[i].name);
+//      namebuf = util.my_snprintf( "%-16s", Game.game.players[i].name);
 //
 //
 //
 //    /* text for diplstate type and turns -- not applicable if this is me */
-//    if (i == game.player_idx) {
+//    if (i == Game.game.player_idx) {
 //      dsbuf = String.format( "-");
 //    } else {
-//      pds = pplayer_get_diplstate(game.player_ptr, get_player(i));
+//      pds = pplayer_get_diplstate(Game.game.player_ptr, get_player(i));
 //      if (pds.type == DS_CEASEFIRE) {
 //	dsbuf = util.my_snprintf( "%s (%d)",
 //		    diplstate_text(pds.type), pds.turns_left);
@@ -152,16 +152,16 @@ public class Plrdlg{
 //
 //    /* text for reputation */
 //    repbuf = util.my_snprintf(
-//		reputation_text(game.players[i].reputation));
+//		reputation_text(Game.game.players[i].reputation));
 //
 //    *array++ = namebuf;
-//    *array++ = Nation.get_nation_name(game.players[i].nation);
-//    *array++ = get_embassy_status(game.player_ptr, &game.players[i]);
+//    *array++ = Nation.get_nation_name(Game.game.players[i].nation);
+//    *array++ = get_embassy_status(Game.game.player_ptr, &Game.game.players[i]);
 //    *array++ = dsbuf;
-//    *array++ = get_vision_status(game.player_ptr, &game.players[i]);
+//    *array++ = get_vision_status(Game.game.player_ptr, &Game.game.players[i]);
 //    *array++ = repbuf;
 //    *array++ = statebuf;
-//    *array++ = (char*)player_addr_hack(&game.players[i]);  /* Fixme */
+//    *array++ = (char*)player_addr_hack(&Game.game.players[i]);  /* Fixme */
 //    *array = idlebuf;
 //  }
 //  else
@@ -198,19 +198,19 @@ public class Plrdlg{
 //    else
 //      set(player_spaceship_button, MUIA_Disabled, true);
 //
-//    switch (pplayer_get_diplstate(game.player_ptr, pplayer).type) {
+//    switch (pplayer_get_diplstate(Game.game.player_ptr, pplayer).type) {
 //      case diplstate_type.DS_WAR:
 //      case diplstate_type.DS_NO_CONTACT:
 //	   set(player_war_button, MUIA_Disabled, true);
 //           break;
 //
 //      default:
-//	   set(player_war_button, MUIA_Disabled, game.player_idx == playerno);
+//	   set(player_war_button, MUIA_Disabled, Game.game.player_idx == playerno);
 //           break;
 //    }
 //
 //    set(player_vision_button, MUIA_Disabled,
-//	!gives_shared_vision(game.player_ptr, pplayer));
+//	!gives_shared_vision(Game.game.player_ptr, pplayer));
 //
 //    set(player_meet_button, MUIA_Disabled, !can_meet_with_player(pplayer));
 //    set(player_intelligence_button, MUIA_Disabled,
@@ -234,8 +234,8 @@ public class Plrdlg{
 //  {
 //    playerno -= 100;
 //
-//    if (can_intel_with_player(&game.players[playerno])) {
-//      popup_intel_dialog(&game.players[playerno]);
+//    if (can_intel_with_player(&Game.game.players[playerno])) {
+//      popup_intel_dialog(&Game.game.players[playerno]);
 //    }
 //  }
 //}
@@ -252,8 +252,8 @@ public class Plrdlg{
 //  {
 //    playerno -= 100;
 //
-//    if (can_meet_with_player(&game.players[playerno])) {
-//      request_diplomacy_init_meeting(game.player_idx, playerno);
+//    if (can_meet_with_player(&Game.game.players[playerno])) {
+//      request_diplomacy_init_meeting(Game.game.player_idx, playerno);
 //    } else {
 //      append_output_window(("Game: You need an embassy to establish a " +
 //                             "diplomatic meeting."));
@@ -309,7 +309,7 @@ public class Plrdlg{
 //
 //  if(playerno)
 //  {
-//    popup_spaceship_dialog(&game.players[playerno-100]);
+//    popup_spaceship_dialog(&Game.game.players[playerno-100]);
 //  }
 //}
 //
@@ -371,9 +371,9 @@ public class Plrdlg{
 //
 //  set(player_players_listview, MUIA_NList_Quiet, true);
 //  DoMethod(player_players_listview, MUIM_NList_Clear);
-//  for (i = 0; i < game.nplayers; i++)
+//  for (i = 0; i < Game.game.nplayers; i++)
 //  {
-//    if(is_barbarian(&game.players[i]))
+//    if(is_barbarian(&Game.game.players[i]))
 //      continue;
 //
 //    DoMethod(player_players_listview, MUIM_NList_InsertSingle, i + 100, MUIV_NList_Insert_Bottom);

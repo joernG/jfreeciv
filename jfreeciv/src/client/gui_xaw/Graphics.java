@@ -30,7 +30,7 @@ public class Graphics{
 //#include <png.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "shared.h"
@@ -573,7 +573,7 @@ public class Graphics{
 //
 //  /* If we're using flags, put one on the tile */
 //  if(!solid_color_behind_units)  {
-//    Sprite flag=get_nation_by_plr(game.player_ptr).flag_sprite;
+//    Sprite flag=get_nation_by_plr(Game.game.player_ptr).flag_sprite;
 //
 //    XSetClipOrigin(display, civ_gc, 0,0);
 //    XSetClipMask(display, civ_gc, flag.mask);
@@ -583,7 +583,7 @@ public class Graphics{
 //  }
 //
 //  /* Finally, put a picture of the unit in the tile */
-//  if(i<game.num_unit_types) {
+//  if(i<Game.game.num_unit_types) {
 //    Sprite s=get_unit_type(i).sprite;
 //
 //    XSetClipOrigin(display,civ_gc,0,0);

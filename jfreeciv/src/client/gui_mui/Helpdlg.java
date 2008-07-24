@@ -33,7 +33,7 @@ public class Helpdlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "government.h"
 //#include "mem.h"
@@ -197,7 +197,7 @@ public class Helpdlg{
 //{
 //  ULONG bg;
 //
-//  switch(get_invention(game.player_ptr, tech))
+//  switch(get_invention(Game.game.player_ptr, tech))
 //  {
 //  case TECH_KNOWN:
 //    bg = GetColorRGB(COLOR_MUI_TECHKNOWN); /* green */
@@ -399,7 +399,7 @@ public class Helpdlg{
 //  }
 //  
 //  label = util.my_snprintf( "%s:%d", advances[tech].name,
-//	      num_unknown_techs_for_goal(game.player_ptr, tech));
+//	      num_unknown_techs_for_goal(Game.game.player_ptr, tech));
 //
 //  o = ColorTextObject,
 //      ButtonFrame,
@@ -612,7 +612,7 @@ public class Helpdlg{
 //
 //  create_help_page(HELP_IMPROVEMENT);
 //
-//  if (which < game.num_impr_types)
+//  if (which < Game.game.num_impr_types)
 //  {
 //    impr_type imp = &improvement_types[which];
 //
@@ -637,7 +637,7 @@ public class Helpdlg{
 //
 //  create_help_page(HELP_WONDER);
 //
-//  if (which < game.num_impr_types)
+//  if (which < Game.game.num_impr_types)
 //  {
 //    impr_type imp = &improvement_types[which];
 //
@@ -668,7 +668,7 @@ public class Helpdlg{
 //
 //  create_help_page(HELP_UNIT);
 //
-//  if (i < game.num_unit_types)
+//  if (i < Game.game.num_unit_types)
 //  {
 //    ULONG bg_color;
 //    unit_type utype = get_unit_type(i);
@@ -782,7 +782,7 @@ public class Helpdlg{
 //	} unit_type_iterate_end;
 //
 //
-//	for (j = 0; j < game.num_tech_types; j++) {
+//	for (j = 0; j < Game.game.num_tech_types; j++) {
 //	  Object *o, *button;
 //	  if (i == advances[j].req[0])
 //	  {

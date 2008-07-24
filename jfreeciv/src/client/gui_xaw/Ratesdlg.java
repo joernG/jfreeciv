@@ -31,7 +31,7 @@ public class Ratesdlg{
 //#include <X11/Xaw/Toggle.h>     
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "player.h"
@@ -93,8 +93,8 @@ public class Ratesdlg{
 //  XtVaSetValues(rates_dialog_shell, XtNx, x, XtNy, y, null);
 //
 //  buf = util.my_snprintf( "%s max rate: %d%%",
-//	  get_government_name(game.player_ptr.government),
-//	  get_government_max_rate(game.player_ptr.government));
+//	  get_government_name(Game.game.player_ptr.government),
+//	  get_government_max_rate(Game.game.player_ptr.government));
 //  xaw_set_label(rates_gov_label, buf);
 //  
 //  XtPopup(rates_dialog_shell, XtGrabNone);
@@ -206,9 +206,9 @@ public class Ratesdlg{
 //  rates_lux_value=-1;
 //  rates_sci_value=-1;
 //  
-//  rates_set_values(game.player_ptr.economic.tax, 0,
-//		   game.player_ptr.economic.luxury, 0,
-//		   game.player_ptr.economic.science, 0);
+//  rates_set_values(Game.game.player_ptr.economic.tax, 0,
+//		   Game.game.player_ptr.economic.luxury, 0,
+//		   Game.game.player_ptr.economic.science, 0);
 //}
 //
 //
@@ -257,7 +257,7 @@ public class Ratesdlg{
 //  XtVaGetValues(rates_lux_toggle, XtNstate, &lux_lock, null);
 //  XtVaGetValues(rates_sci_toggle, XtNstate, &sci_lock, null);
 //  
-//  maxrate=get_government_max_rate(game.player_ptr.government);
+//  maxrate=get_government_max_rate(Game.game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */
 //  tax=Math.min(tax, maxrate);
 //  lux=Math.min(lux, maxrate);

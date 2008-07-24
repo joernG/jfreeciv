@@ -27,7 +27,7 @@ public class Mapview{
 //#endif
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"		/* government_graphic() */
 //#include "log.h"
 //#include "Map.map.h"
@@ -115,32 +115,32 @@ public class Mapview{
 //  char buffer	[512];
 //  int  d;
 //
-//  gtk_frame_set_label( GTK_FRAME( main_frame_civ_name ), Nation.get_nation_name(game.player_ptr.nation) );
+//  gtk_frame_set_label( GTK_FRAME( main_frame_civ_name ), Nation.get_nation_name(Game.game.player_ptr.nation) );
 //
 //  buffer = util.my_snprintf(
 //	      ("Population: %s\nYear: %s\n" +
 //		"Gold: %d\nTax: %d Lux: %d Sci: %d"),
-//	      population_to_text(civ_population(game.player_ptr)),
-//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
-//	      game.player_ptr.economic.tax,
-//	      game.player_ptr.economic.luxury,
-//	      game.player_ptr.economic.science);
+//	      population_to_text(civ_population(Game.game.player_ptr)),
+//	      Shared.textyear(Game.game.year), Game.game.player_ptr.economic.gold,
+//	      Game.game.player_ptr.economic.tax,
+//	      Game.game.player_ptr.economic.luxury,
+//	      Game.game.player_ptr.economic.science);
 //
 //  gtk_set_label(main_label_info, buffer);
 //
 //  set_indicator_icons(client_research_sprite(),
 //		      client_warming_sprite(),
 //		      client_cooling_sprite(),
-//		      game.player_ptr.government);
+//		      Game.game.player_ptr.government);
 //
 //  d=0;
-//  for (; d < game.player_ptr.economic.luxury /10; d++) {
+//  for (; d < Game.game.player_ptr.economic.luxury /10; d++) {
 //    Sprite sprite = sprite = sprites.tax_luxury;
 //    gtk_pixmap_set(GTK_PIXMAP(econ_label[d]), sprite.pixmap, sprite.mask);
 //  }
 // 
-//  for (; d < (game.player_ptr.economic.science
-//	     + game.player_ptr.economic.luxury) / 10; d++) {
+//  for (; d < (Game.game.player_ptr.economic.science
+//	     + Game.game.player_ptr.economic.luxury) / 10; d++) {
 //    Sprite sprite = sprites.tax_science;
 //    gtk_pixmap_set(GTK_PIXMAP(econ_label[d]), sprite.pixmap, sprite.mask);
 //  }
@@ -168,7 +168,7 @@ public class Mapview{
 //  if (punit && get_client_state() != CLIENT_server_states.GAME_OVER_STATE) {
 //    char buffer[512];
 //    city pcity =
-//	player_find_city_by_id(game.player_ptr, punit.homecity);
+//	player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //    int infrastructure =
 //	get_tile_infrastructure_set(punit.tile);
 //    unit_type ptype = punit.unit_type();
@@ -246,7 +246,7 @@ public class Mapview{
 //  gtk_pixmap_set(GTK_PIXMAP(sun_label), sprites.warming[sol].pixmap, null);
 //  gtk_pixmap_set(GTK_PIXMAP(flake_label), sprites.cooling[flake].pixmap, null);
 //
-//  if (game.government_count==0) {
+//  if (Game.game.government_count==0) {
 //    /* HACK: the UNHAPPY citizen is used for the government
 //     * when we don't know any better. */
 //    struct citizen_type c = {.type = CITIZEN_UNHAPPY};
@@ -549,7 +549,7 @@ public class Mapview{
 //  *width = w + w2;
 //  *height = gdk_string_height(main_fontset, buffer) + 3;
 //
-//  if (draw_city_productions && (pcity.owner==game.player_idx)) {
+//  if (draw_city_productions && (pcity.owner==Game.game.player_idx)) {
 //    if (draw_city_names) {
 //      canvas_y += *height;
 //    }

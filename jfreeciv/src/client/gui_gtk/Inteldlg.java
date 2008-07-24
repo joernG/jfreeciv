@@ -24,7 +24,7 @@ public class Inteldlg{
 //#include <gtk/gtk.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "player.h"
@@ -156,9 +156,9 @@ public class Inteldlg{
 //
 //  gtk_clist_freeze(GTK_CLIST(list));
 //
-//  for(i=A_FIRST, j=0; i<game.num_tech_types; i++)
+//  for(i=A_FIRST, j=0; i<Game.game.num_tech_types; i++)
 //    if(get_invention(p, i)==TECH_KNOWN) {
-//      if(get_invention(game.player_ptr, i)==TECH_KNOWN) {
+//      if(get_invention(Game.game.player_ptr, i)==TECH_KNOWN) {
 //	sz_strlcpy(tech_list_names[j], advances[i].name);
 //      } else {
 //	my_snprintf(tech_list_names[j], sizeof(tech_list_names[j]),

@@ -30,7 +30,7 @@ public class Inteldlg{
 //#include <X11/Xaw/List.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "player.h"
@@ -270,9 +270,9 @@ public class Inteldlg{
 //			  XtNlabel, buf,
 //			  null);
 //
-//  for(i=A_FIRST, j=0; i<game.num_tech_types; i++)
+//  for(i=A_FIRST, j=0; i<Game.game.num_tech_types; i++)
 //    if (get_invention(pdialog.pplayer, i) == TECH_KNOWN) {
-//      if(get_invention(game.player_ptr, i)==TECH_KNOWN) {
+//      if(get_invention(Game.game.player_ptr, i)==TECH_KNOWN) {
 //	sz_strlcpy(tech_list_names[j], advances[i].name);
 //      } else {
 //	my_snprintf(tech_list_names[j], sizeof(tech_list_names[j]),
@@ -338,7 +338,7 @@ public class Inteldlg{
 //void intel_diplo_callback(Widget w, XtPointer client_data,
 //			  XtPointer call_data)
 //{
-//  popup_intel_diplo_dialog(&game.players[XTPOINTER_TO_INT(client_data)],
+//  popup_intel_diplo_dialog(&Game.game.players[XTPOINTER_TO_INT(client_data)],
 //			   false);
 //}
 //
@@ -474,13 +474,13 @@ public class Inteldlg{
 //{
 //  int i;
 //  Dimension width;
-//  static char *namelist_ptrs[MAX_NUM_PLAYERS];
-//  static char namelist_text[MAX_NUM_PLAYERS][72];
+//  static char *namelist_ptrs[Shared_H.MAX_NUM_PLAYERS];
+//  static char namelist_text[Shared_H.MAX_NUM_PLAYERS][72];
 //  final player_diplstate state;
 //
 //  if (pdialog.intel_diplo_dialog_shell) {
 //    i = 0;
-//    for(player other: game.players){
+//    for(player other: Game.game.players){
 //      if (other == pdialog.pplayer) {
 //	continue;
 //      }

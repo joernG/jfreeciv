@@ -26,7 +26,7 @@ public class Gotodlg{
 //#include <gtk/gtk.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "map.h"
 //#include "packets.h"
 //#include "player.h"
@@ -197,9 +197,9 @@ public class Gotodlg{
 //  
 //  row[0]=name;
 //
-//  for(i=0, j=0; i<game.nplayers; i++) {
-//    if(!all_cities && i!=game.player_idx) continue;
-//    city_list_iterate(game.players[i].cities, pcity) {
+//  for(i=0, j=0; i<Game.game.nplayers; i++) {
+//    if(!all_cities && i!=Game.game.player_idx) continue;
+//    city_list_iterate(Game.game.players[i].cities, pcity) {
 //      name = pcity.name;
 //      /* FIXME: should use unit_can_airlift_to(). */
 //      if (pcity.airlift) {

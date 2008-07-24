@@ -26,7 +26,7 @@ public class Aicity{
 //#include "effects.h"
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "Map.map.h"
@@ -116,11 +116,11 @@ public class Aicity{
 //  shields -= city_waste(acity, shields);
 //  get_tax_income(pplayer, trade, &sci, &lux, &tax);
 //  sci += (acity.specialists[SP_SCIENTIST]
-//	  * game.rgame.specialists[SP_SCIENTIST].bonus);
+//	  * Game.game.rgame.specialists[SP_SCIENTIST].bonus);
 //  lux += (acity.specialists[SP_ELVIS]
-//	  * game.rgame.specialists[SP_ELVIS].bonus);
+//	  * Game.game.rgame.specialists[SP_ELVIS].bonus);
 //  tax += (acity.specialists[SP_TAXMAN]
-//	  * game.rgame.specialists[SP_TAXMAN].bonus);
+//	  * Game.game.rgame.specialists[SP_TAXMAN].bonus);
 //
 //  built_impr_iterate(acity, i) {
 //    tax -= improvement_upkeep(acity, i);
@@ -166,7 +166,7 @@ public class Aicity{
 //  /* Add the improvement */
 //  city_add_improvement(pcity, id);
 //  if (is_wonder(id)) {
-//    game.global_wonders[id] = pcity.id;
+//    Game.game.global_wonders[id] = pcity.id;
 //  }
 //
 //  /* Stir, then compare notes */
@@ -177,7 +177,7 @@ public class Aicity{
 //  /* Restore */
 //  city_remove_improvement(pcity, id);
 //  if (is_wonder(id)) {
-//    game.global_wonders[id] = 0;
+//    Game.game.global_wonders[id] = 0;
 //  }
 //
 //  /* Ensure that we didn't inadvertantly move our palace */
@@ -204,12 +204,12 @@ public class Aicity{
 //static void adjust_building_want_by_effects(city pcity, 
 //                                            Impr_Type_id id)
 //{
-//  player pplayer = city_owner(pcity);
+//  player pplayer = City.city_owner(pcity);
 //  impr_type pimpr = get_improvement_type(id);
 //  int v = 0;
 //  int cities[EFR_LAST];
-//  int nplayers = game.nplayers
-//                 - game.nbarbarians
+//  int nplayers = Game.game.nplayers
+//                 - Game.game.nbarbarians
 //                 - team_count_members_alive(pplayer.team);
 //  ai_data ai = ai_data_get(pplayer);
 //  tile ptile = pcity.tile;
@@ -224,7 +224,7 @@ public class Aicity{
 //  }
 //
 //  /* Find number of cities per range.  */
-//  cities[EFR_PLAYER] = city_list_size(&pplayer.cities);
+//  cities[EFR_PLAYER] = pplayer.cities.foo_list_size();
 //  cities[EFR_WORLD] = cities[EFR_PLAYER]; /* kludge. */
 //
 //  cities[EFR_CONTINENT] = ai.stats.cities[ptile.continent];
@@ -271,7 +271,7 @@ public class Aicity{
 //          /* WAG evaluated effects */
 //	  case EFT_INCITE_DIST_PCT:
 //            if (palace) {
-//              v += real_map_distance(pcity.tile, palace.tile);
+//              v += Map.real_map_distance(pcity.tile, palace.tile);
 //            }
 //            break;
 //	  case EFT_MAKE_HAPPY:
@@ -300,13 +300,13 @@ public class Aicity{
 //	  case EFT_MAKE_CONTENT_MIL:
 //	    if (!government_has_flag(gov, G_NO_UNHAPPY_CITIZENS)) {
 //	      v += pcity.ppl_unhappy[4] * amount
-//		* MAX(unit_list_size(&pcity.units_supported)
+//		* MAX(pcity.units_supported.foo_list_size()
 //		    - gov.free_happy, 0) * 2;
 //	      v += c * MAX(amount + 2 - gov.free_happy, 1);
 //	    }
 //	    break;
 //	  case EFT_TECH_PARASITE:
-//	    v += (total_bulbs_required(pplayer) * (100 - game.freecost)
+//	    v += (total_bulbs_required(pplayer) * (100 - Game.game.freecost)
 //		* (nplayers - amount)) / (nplayers * amount * 100);
 //	    break;
 //	  case EFT_GROWTH_FOOD:
@@ -328,7 +328,7 @@ public class Aicity{
 //	    v += 20 + ai.stats.units.missiles * 5;
 //	    break;
 //	  case EFT_ENABLE_SPACE:
-//	    if (game.spacerace) {
+//	    if (Game.game.spacerace) {
 //	      v += 5;
 //	      if (ai.diplomacy.production_leader == pplayer) {
 //		v += 100;
@@ -337,7 +337,7 @@ public class Aicity{
 //	    break;
 //	  case EFT_GIVE_IMM_TECH:
 //	    if (!ai_wants_no_science(pplayer)) {
-//	      v += amount * (game.researchcost + 1);
+//	      v += amount * (Game.game.researchcost + 1);
 //	    }
 //	    break;
 //	  case EFT_HAVE_EMBASSIES:
@@ -351,7 +351,7 @@ public class Aicity{
 //	    break;
 //	  case EFT_NUKE_PROOF:
 //	    if (ai.threats.nuclear) {
-//	      v += pcity.size * unit_list_size(&ptile.units) * (capital + 1);
+//	      v += pcity.size * ptile.units.foo_list_size() * (capital + 1);
 //	    }
 //	    break;
 //	  case EFT_REVEAL_MAP:
@@ -365,16 +365,16 @@ public class Aicity{
 //	  case EFT_SIZE_ADJ: 
 //            if (!city_can_grow_to(pcity, pcity.size + 1)) {
 //	      v += pcity.food_surplus * ai.food_priority * amount;
-//              if (pcity.size == game.aqueduct_size) {
+//              if (pcity.size == Game.game.aqueduct_size) {
 //                v += 30 * pcity.food_surplus;
 //              }
 //	    }
-//	    v += c * amount * 4 / game.aqueduct_size;
+//	    v += c * amount * 4 / Game.game.aqueduct_size;
 //	    break;
 //	  case EFT_SS_STRUCTURAL:
 //	  case EFT_SS_COMPONENT:
 //	  case EFT_SS_MODULE:
-//	    if (game.spacerace
+//	    if (Game.game.spacerace
 //	        /* If someone has started building spaceship already or
 //		 * we have chance to win a spacerace */
 //	        && (ai.diplomacy.spacerace_leader
@@ -426,18 +426,18 @@ public class Aicity{
 //	    if (ai_handicap(pplayer, H_DEFENSIVE)) {
 //	      v += amount / 10; /* make AI slow */
 //	    }
-//            if (is_ocean(map_get_terrain(pcity.tile))) {
+//            if (Terrain_H.is_ocean(pcity.tile.terrain)) {
 //              v += ai.threats.ocean[-map_get_continent(pcity.tile)]
 //                   ? amount/5 : amount/20;
 //            } else {
-//              adjc_iterate(pcity.tile, tile2) {
-//                if (is_ocean(map_get_terrain(tile2))) {
+//              for(tile tile2: util.adjc_tile_iterate(pcity.tile)) {
+//                if (Terrain_H.is_ocean(tile2.terrain)) {
 //                  if (ai.threats.ocean[-map_get_continent(tile2)]) {
 //                    v += amount/5;
 //		    break;
 //                  }
 //                }
-//              } adjc_iterate_end;
+//              }
 //            }
 //	    v += (amount/20 + ai.threats.invasions - 1) * c; /* for wonder */
 //	    if (capital && ai.threats.invasions) {
@@ -471,9 +471,9 @@ public class Aicity{
 //	    break;
 //	  case EFT_NO_INCITE:
 //	    if (!government_has_flag(gov, G_UNBRIBABLE)) {
-//	      v += MAX((game.diplchance * 2 - game.incite_cost.total_factor) / 2
-//		  - game.incite_cost.improvement_factor * 5
-//		  - game.incite_cost.unit_factor * 5, 0);
+//	      v += MAX((Game.game.diplchance * 2 - Game.game.incite_cost.total_factor) / 2
+//		  - Game.game.incite_cost.improvement_factor * 5
+//		  - Game.game.incite_cost.unit_factor * 5, 0);
 //	    }
 //	    break;
 //          case EFT_REGEN_REPUTATION:
@@ -482,7 +482,7 @@ public class Aicity{
 //	          amount * 4;
 //            break;
 //	  case EFT_GAIN_AI_LOVE:
-//            for(player aplayer: game.players){
+//            for(player aplayer: Game.game.players){
 //              if (aplayer.ai.control) {
 //                if (ai_handicap(pplayer, H_DEFENSIVE)) {
 //                  v += amount / 10;
@@ -532,7 +532,7 @@ public class Aicity{
 //      continue;
 //    }
 //    for (city pcity : pplayer.cities.data) {
-//      if (pplayer.ai.control && pcity.ai.next_recalc > game.turn) {
+//      if (pplayer.ai.control && pcity.ai.next_recalc > Game.game.turn) {
 //        continue; /* do not recalc yet */
 //      } else {
 //        pcity.ai.building_want[id] = 0; /* do recalc */
@@ -551,10 +551,10 @@ public class Aicity{
 //
 //  /* Reset recalc counter */
 //  for (city pcity : pplayer.cities.data) {
-//    if (pcity.ai.next_recalc <= game.turn) {
+//    if (pcity.ai.next_recalc <= Game.game.turn) {
 //      /* This will spread recalcs out so that no one turn end is 
 //       * much longer than others */
-//      pcity.ai.next_recalc = game.turn + myrand(RECALC_SPEED) + RECALC_SPEED;
+//      pcity.ai.next_recalc = Game.game.turn + Rand.myrand(RECALC_SPEED) + RECALC_SPEED;
 //    }
 //  } }
 //}
@@ -577,7 +577,7 @@ public class Aicity{
 //  int distance;
 //  Continent_id wonder_continent;
 //  int freight = best_role_unit(pcity, F_HELP_WONDER);
-//  int moverate = (freight == U_LAST) ? Unit_H.SINGLE_MOVE
+//  int moverate = (freight == unittype.U_LAST) ? Unit_H.SINGLE_MOVE
 //                                     : get_unit_type(freight).move_rate;
 //
 //  if (!pcity.is_building_unit && is_wonder(pcity.currently_building)) {
@@ -615,8 +615,8 @@ public class Aicity{
 //  int i, bestattack = 0;
 //
 //  /* Choose the best unit among the basic ones */
-//  for(i = 0; i < num_role_units(L_BARBARIAN_BUILD); i++) {
-//    int iunit = get_role_unit(L_BARBARIAN_BUILD, i);
+//  for(i = 0; i < num_role_units(unit_role_id.L_BARBARIAN_BUILD); i++) {
+//    int iunit = Unittype_P.get_role_unit(unit_role_id.L_BARBARIAN_BUILD, i);
 //
 //    if (get_unit_type(iunit).attack_strength > bestattack) {
 //      bestunit = iunit;
@@ -625,10 +625,10 @@ public class Aicity{
 //  }
 //
 //  /* Choose among those made available through other civ's research */
-//  for(i = 0; i < num_role_units(L_BARBARIAN_BUILD_TECH); i++) {
-//    int iunit = get_role_unit(L_BARBARIAN_BUILD_TECH, i);
+//  for(i = 0; i < num_role_units(unit_role_id.L_BARBARIAN_BUILD_TECH); i++) {
+//    int iunit = Unittype_P.get_role_unit(unit_role_id.L_BARBARIAN_BUILD_TECH, i);
 //
-//    if (game.global_advances[get_unit_type(iunit).tech_requirement] != 0
+//    if (Game.game.global_advances[get_unit_type(iunit).tech_requirement] != 0
 //	&& get_unit_type(iunit).attack_strength > bestattack) {
 //      bestunit = iunit;
 //      bestattack = get_unit_type(iunit).attack_strength;
@@ -683,13 +683,13 @@ public class Aicity{
 //    CITY_LOG(Log.LOG_VERBOSE, pcity, "Falling back - didn't want to build solutil.diers," +
 //	     " settlers, or buildings");
 //    pcity.ai.choice.want = 1;
-//    if (best_role_unit(pcity, F_TRADE_ROUTE) != U_LAST) {
+//    if (best_role_unit(pcity, F_TRADE_ROUTE) != unittype.U_LAST) {
 //      pcity.ai.choice.choice = best_role_unit(pcity, F_TRADE_ROUTE);
 //      pcity.ai.choice.type = CT_NONMIL;
-//    } else if (can_build_improvement(pcity, game.default_building)) {
-//      pcity.ai.choice.choice = game.default_building;
+//    } else if (can_build_improvement(pcity, Game.game.default_building)) {
+//      pcity.ai.choice.choice = Game.game.default_building;
 //      pcity.ai.choice.type = CT_BUILDING;
-//    } else if (best_role_unit(pcity, F_SETTLERS) != U_LAST) {
+//    } else if (best_role_unit(pcity, F_SETTLERS) != unittype.U_LAST) {
 //      pcity.ai.choice.choice = best_role_unit(pcity, F_SETTLERS);
 //      pcity.ai.choice.type = CT_NONMIL;
 //    } else {
@@ -723,7 +723,7 @@ public class Aicity{
 //	    || pcity.currently_building != pcity.ai.choice.choice)) {
 //      notify_player_ex(null, pcity.tile, E_WONDER_STARTED,
 //		       "Game: The %s have started building The %s in %s.",
-//		       Nation.get_nation_name_plural(city_owner(pcity).nation),
+//		       Nation.get_nation_name_plural(City.city_owner(pcity).nation),
 //		       get_impr_name_ex(pcity, pcity.ai.choice.choice),
 //		       pcity.name);
 //      pcity.currently_building = pcity.ai.choice.choice;
@@ -770,7 +770,7 @@ public class Aicity{
 //**************************************************************************/
 //static void ai_upgrade_units(city pcity, int limit, boolean military)
 //{
-//  player pplayer = city_owner(pcity);
+//  player pplayer = City.city_owner(pcity);
 //  for (unit punit : pcity.tile.units.data) {
 //    int id = can_upgrade_unittype(pplayer, punit.type);
 //    if (military && (!is_military_unit(punit) || !is_ground_unit(punit))) {
@@ -790,9 +790,9 @@ public class Aicity{
 //      }
 //      if (pplayer.economic.gold - cost > real_limit) {
 //        CITY_LOG(LOG_BUY, pcity, "Upgraded %s to %s for %d (%s)",
-//                 punit.unit_type().name, unit_types[id].name, cost,
+//                 punit.unit_type().name, Unittype_P.unit_types[id].name, cost,
 //                 military ? "military" : "civilian");
-//        handle_unit_upgrade(city_owner(pcity), punit.id);
+//        handle_unit_upgrade(City.city_owner(pcity), punit.id);
 //      } else {
 //        increase_maxbuycost(pplayer, cost);
 //      }
@@ -885,8 +885,8 @@ public class Aicity{
 //             > pcity.food_stock + pcity.food_surplus) {
 //        /* Don't buy settlers in size 1 cities unless we grow next turn */
 //        continue;
-//      } else if (city_list_size(&pplayer.cities) > 6) {
-//          /* Don't waste precious money buying settlers late game
+//      } else if (pplayer.cities.foo_list_size() > 6) {
+//          /* Don't waste precious money buying settlers late Game.game
 //           * since this raises taxes, and we want science. Adjust this
 //           * again when our tax algorithm is smarter. */
 //          continue;
@@ -982,11 +982,11 @@ public class Aicity{
 //    /* Will record its findings in pcity.settler_want */ 
 //    contemplate_terrain_improvements(pcity);
 //
-//    if (pcity.ai.next_founder_want_recalc <= game.turn) {
+//    if (pcity.ai.next_founder_want_recalc <= Game.game.turn) {
 //      /* Will record its findings in pcity.founder_want */ 
 //      contemplate_new_city(pcity);
 //      /* Avoid recalculating all the time.. */
-//      pcity.ai.next_founder_want_recalc = game.turn + myrand(RECALC_SPEED) + RECALC_SPEED;
+//      pcity.ai.next_founder_want_recalc = Game.game.turn + Rand.myrand(RECALC_SPEED) + RECALC_SPEED;
 //    } 
 //  } }
 //
@@ -1011,14 +1011,14 @@ public class Aicity{
 //**************************************************************************/
 //static void ai_sell_obsolete_buildings(city pcity)
 //{
-//  player pplayer = city_owner(pcity);
+//  player pplayer = City.city_owner(pcity);
 //
 //  built_impr_iterate(pcity, i) {
 //    if(!is_wonder(i) 
 //       && !building_has_effect(i, EFT_LAND_DEFEND)
 //	      /* selling city walls is really, really dumb -- Syela */
 //       && (is_building_replaced(pcity, i)
-//	   || building_unwanted(city_owner(pcity), i))) {
+//	   || building_unwanted(City.city_owner(pcity), i))) {
 //      do_sell_building(pplayer, pcity, i);
 //      notify_player_ex(pplayer, pcity.tile, E_IMP_SOLD,
 //		       "Game: %s is selling %s (not needed) for %d.", 

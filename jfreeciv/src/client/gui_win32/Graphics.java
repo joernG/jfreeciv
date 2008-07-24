@@ -23,7 +23,7 @@ public class Graphics{
 //#include <windows.h>
 //#include <png.h>
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "shared.h"
