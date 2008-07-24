@@ -459,7 +459,7 @@ public class Pf_tools{
 //    parameter.get_MC = single_airmove;
 //    break;
 //  default:
-//    die("unknown move_type");
+//    util.die("unknown move_type");
 //  }
 //
 //  if (punit.unit_type().move_type == LAND_MOVING 
@@ -497,7 +497,7 @@ public class Pf_tools{
 //    parameter.get_MC = sea_overlap_move;
 //    break;
 //  default:
-//    die("Unsupported move_type");
+//    util.die("Unsupported move_type");
 //  }
 //
 //  parameter.get_zoc = null;
@@ -526,7 +526,7 @@ public class Pf_tools{
 //    parameter.get_MC = sea_attack_move;
 //    break;
 //  default:
-//    die("Unsupported move_type");
+//    util.die("Unsupported move_type");
 //  }
 //
 //  if (punit.unit_type().move_type == LAND_MOVING 

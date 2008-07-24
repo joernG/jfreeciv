@@ -94,7 +94,7 @@ public class Nation{
 //leader get_nation_leaders(int nation, int *dim)
 //{
 //  if (!bounds_check_nation_id(nation, LOG_FATAL, "get_nation_leader_names")) {
-//    die("wrong nation %d", nation);
+//    util.die("wrong nation %d", nation);
 //  }
 //  *dim = nations[nation].leader_count;
 //  return nations[nation].leaders;
@@ -164,7 +164,7 @@ public class Nation{
 //{
 //  assert(plr != null);
 //  if (!bounds_check_nation_id(plr.nation, LOG_FATAL, "get_nation_by_plr")) {
-//    die("wrong nation %d", plr.nation);
+//    util.die("wrong nation %d", plr.nation);
 //  }
 //  return &nations[plr.nation];
 //}
@@ -175,7 +175,7 @@ public class Nation{
 //nation_type get_nation_by_idx(int nation)
 //{
 //  if (!bounds_check_nation_id(nation, LOG_FATAL, "get_nation_by_idx")) {
-//    die("wrong nation %d", nation);
+//    util.die("wrong nation %d", nation);
 //  }
 //  return &nations[nation];
 //}
@@ -276,7 +276,7 @@ public class Nation{
 //int get_nation_city_style(int nation)
 //{
 //  if (!bounds_check_nation_id(nation, LOG_FATAL, "get_nation_city_style")) {
-//    die("wrong nation %d", nation);
+//    util.die("wrong nation %d", nation);
 //  }
 //  return nations[nation].city_style;
 //}
@@ -352,7 +352,7 @@ public class Nation{
 //    }
 //    /* check if too many teams */
 //    if (team_id == TEAM_NONE) {
-//      die("Impossible: Too many teams!");
+//      util.die("Impossible: Too many teams!");
 //    }
 //    /* add another team */
 //    teams[team_id].id = team_id;

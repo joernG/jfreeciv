@@ -88,7 +88,7 @@ public class Savegame{
 //									    \
 //      line[_nat_x] = (GET_XY_CHAR);                                         \
 //      if (!my_isprint(line[_nat_x] & 0x7f)) {                               \
-//          die("Trying to write invalid map "                                \
+//          util.die("Trying to write invalid map "                                \
 //              "data: '%c' %d", line[_nat_x], line[_nat_x]);                 \
 //      }                                                                     \
 //    }                                                                       \
@@ -218,7 +218,7 @@ public class Savegame{
 //  pch = strchr(hex_chars, ch);
 //
 //  if (!pch || ch == '\0') {
-//    die("Unknown hex value: '%c' %d", ch, ch);
+//    util.die("Unknown hex value: '%c' %d", ch, ch);
 //  }
 //  return (pch - hex_chars) << (halfbyte * 4);
 //}
@@ -541,7 +541,7 @@ public class Savegame{
 //
 //  if (Map.map.num_start_positions
 //      && Map.map.num_start_positions < game.max_players) {
-//    util.freelog(LOG_VERBOSE,
+//    util.freelog(Log.LOG_VERBOSE,
 //	    ("Number of starts (%d) are lower than max_players (%d)," +
 //	      " lowering max_players."),
 // 	    Map.map.num_start_positions, game.max_players);
@@ -1623,8 +1623,8 @@ public class Savegame{
 //                                                    plrno);
 //  if (is_barbarian(plr)) game.nbarbarians++;
 //
-//  sz_strlcpy(plr.name, secfile_lookup_str(file, "player%d.name", plrno));
-//  sz_strlcpy(plr.username,
+//  plr.name = String.format( secfile_lookup_str(file, "player%d.name", plrno));
+//  plr.username = String.format(
 //	     secfile_lookup_str_default(file, "", "player%d.username", plrno));
 //
 //  /* 1.15 and later versions store nations by name.  Try that first. */
@@ -1672,7 +1672,7 @@ public class Savegame{
 //  if (section_file_lookup(file, "player%d.team", plrno)) {
 //    char tmp[MAX_LEN_NAME];
 //
-//    sz_strlcpy(tmp, secfile_lookup_str(file, "player%d.team", plrno));
+//    tmp = String.format( secfile_lookup_str(file, "player%d.team", plrno));
 //    team_add_player(plr, tmp);
 //    plr.team = team_find_by_name(tmp);
 //  } else {
@@ -2122,7 +2122,7 @@ public class Savegame{
 //
 //	  if (ptile.worked) {
 //	    /* oops, inconsistent savegame; minimal fix: */
-//	    util.freelog(LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), " +
+//	    util.freelog(Log.LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), " +
 //		    "converting to elvis", pcity.name, x, y);
 //	    pcity.specialists[SP_ELVIS]++;
 //	    set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
@@ -2322,7 +2322,7 @@ public class Savegame{
 //
 //	pdcity = fc_malloc(sizeof(struct dumb_city));
 //	pdcity.id = secfile_lookup_int(file, "player%d.dc%d.id", plrno, j);
-//	sz_strlcpy(pdcity.name, secfile_lookup_str(file, "player%d.dc%d.name", plrno, j));
+//	pdcity.name = String.format( secfile_lookup_str(file, "player%d.dc%d.name", plrno, j));
 //	pdcity.size = secfile_lookup_int(file, "player%d.dc%d.size", plrno, j);
 //	pdcity.has_walls = secfile_lookup_bool(file, "player%d.dc%d.has_walls", plrno, j);    
 //	pdcity.occupied = secfile_lookup_bool_default(file, false,
@@ -3085,7 +3085,7 @@ public class Savegame{
 //                                                default_meta_message_string(),
 //                                                "game.metamessage"));
 //
-//    sz_strlcpy(Srv_main.srvarg.metaserver_addr,
+//    Srv_main.srvarg.metaserver_addr = String.format(
 //	       secfile_lookup_str_default(file, DEFAULT_META_SERVER_ADDR,
 //					  "game.metaserver"));
 //
@@ -3185,14 +3185,14 @@ public class Savegame{
 //      game.watchtower_vision = 1;
 //    }
 //
-//    sz_strlcpy(game.save_name,
+//    game.save_name = String.format(
 //	       secfile_lookup_str_default(file, GAME_DEFAULT_SAVE_NAME,
 //					  "game.save_name"));
 //
 //    game.aifill = secfile_lookup_int_default(file, 0, "game.aifill");
 //
 //    game.scorelog = secfile_lookup_bool_default(file, false, "game.scorelog");
-//    sz_strlcpy(game.id, secfile_lookup_str_default(file, "", "game.id"));
+//    game.id = String.format( secfile_lookup_str_default(file, "", "game.id"));
 //
 //    game.fogofwar = secfile_lookup_bool_default(file, false, "game.fogofwar");
 //    game.fogofwar_old = game.fogofwar;
@@ -3285,15 +3285,15 @@ public class Savegame{
 //
 //      game.rulesetdir = str;
 //    } else {
-//      sz_strlcpy(game.rulesetdir, 
+//      game.rulesetdir = String.format( 
 //	       secfile_lookup_str_default(file, string,
 //					  "game.rulesetdir"));
 //    }
 //
-//    sz_strlcpy(game.demography,
+//    game.demography = String.format(
 //	       secfile_lookup_str_default(file, GAME_DEFAULT_DEMOGRAPHY,
 //					  "game.demography"));
-//    sz_strlcpy(game.allow_take,
+//    game.allow_take = String.format(
 //	       secfile_lookup_str_default(file, GAME_DEFAULT_ALLOW_TAKE,
 //					  "game.allow_take"));
 //
@@ -3324,7 +3324,7 @@ public class Savegame{
 //	  }
 //	  game.start_units[i] = '\0';
 //	} else {
-//	  sz_strlcpy(game.start_units,
+//	  game.start_units = String.format(
 //		     secfile_lookup_str_default(file,
 //						GAME_DEFAULT_START_UNITS,
 //						"game.start_units"));

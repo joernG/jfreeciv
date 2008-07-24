@@ -634,12 +634,12 @@ public class Unithand{
 //
 //    /* Sanity checks */
 //    if (pplayers_non_attack(punit.unit_owner(), pdefender.unit_owner())) {
-//      die("Trying to attack a unit with which you have peace " +
+//      util.die("Trying to attack a unit with which you have peace " +
 //	  "or cease-fire at %i, %i", TILE_XY(pdefender.tile));
 //    }
 //    if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
 //	&& !(unit_flag(punit, F_NUCLEAR) && punit == pdefender)) {
-//      die("Trying to attack a unit with which you have alliance at %i, %i",
+//      util.die("Trying to attack a unit with which you have alliance at %i, %i",
 //	  TILE_XY(pdefender.tile));
 //    }
 //
@@ -702,12 +702,12 @@ public class Unithand{
 //
 //  /* Sanity checks */
 //  if (pplayers_non_attack(punit.unit_owner(), pdefender.unit_owner())) {
-//    die("Trying to attack a unit with which you have peace " +
+//    util.die("Trying to attack a unit with which you have peace " +
 //	"or cease-fire at %i, %i", TILE_XY(def_tile));
 //  }
 //  if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
 //      && !(unit_flag(punit, F_NUCLEAR) && punit == pdefender)) {
-//    die("Trying to attack a unit with which you have alliance at %i, %i",
+//    util.die("Trying to attack a unit with which you have alliance at %i, %i",
 //	TILE_XY(def_tile));
 //  }
 //
@@ -999,7 +999,7 @@ public class Unithand{
 //        } else if (target) {
 //          target_id = target.id;
 //        } else {
-//          die("Bug in unithand.c: no diplomat target.");
+//          util.die("Bug in unithand.c: no diplomat target.");
 //        }
 //	dlsend_packet_unit_diplomat_popup_dialog(player_reply_dest(pplayer),
 //						 punit.id, target_id);

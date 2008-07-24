@@ -55,7 +55,7 @@ public class Cityhand{
 //    return;
 //  }
 //
-//  util.freelog(LOG_VERBOSE, "handle_city_name_suggest_req(unit_pos=(%d,%d))",
+//  util.freelog(Log.LOG_VERBOSE, "handle_city_name_suggest_req(unit_pos=(%d,%d))",
 //	  punit.tile.x, punit.tile.y);
 //
 //  dlsend_packet_city_name_suggestion_info(&pplayer.connections, value, 

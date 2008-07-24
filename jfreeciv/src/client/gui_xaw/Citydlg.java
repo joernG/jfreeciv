@@ -202,7 +202,7 @@ public class Citydlg{
 //    pollution=pcity.pollution;
 //  }
 //
-//  my_snprintf(retbuf, n, "Pollution:    %3d", pollution);
+//  retbuf = String.format "Pollution:    %3d", pollution);
 //}
 //
 ///****************************************************************
@@ -222,7 +222,7 @@ public class Citydlg{
 //  }
 //
 //  /* We used to mark cities with a granary with a "*" here. */
-//  my_snprintf(retbuf, n, "Granary:  %3d/%-3d",
+//  retbuf = String.format "Granary:  %3d/%-3d",
 //	      foodstock, foodbox);
 //}
 //
@@ -250,7 +250,7 @@ public class Citydlg{
 //    tradesurplus=pcity.trade_prod;
 //  }
 //
-//  my_snprintf(retbuf, n,
+//  retbuf = String.format
 //	  ("Food:  %3d (%+-4d)\n" +
 //	    "Prod:  %3d (%+-4d)\n" +
 //	    "Trade: %3d (%+-4d)"),
@@ -279,7 +279,7 @@ public class Citydlg{
 //    scitotal=pcity.science_total;
 //  }
 //
-//  my_snprintf(retbuf, n, 
+//  retbuf = String.format 
 //	  ("Gold:  %3d (%+-4d)\n" +
 //	    "Lux:   %3d\n" +
 //	    "Sci:   %3d"),
@@ -1425,11 +1425,11 @@ public class Citydlg{
 //      x=1;
 //      total+=pdialog.pcity.trade_value[i];
 //      if((pcity=find_city_by_id(pdialog.pcity.trade[i]))) {
-//	my_snprintf(bptr, nleft, "%32s: %2d Trade/Year\n",
+//	bptr = String.format "%32s: %2d Trade/Year\n",
 //		    pcity.name, pdialog.pcity.trade_value[i]);
 //	bptr = end_of_strn(bptr, &nleft);
 //      } else {	
-//	my_snprintf(bptr, nleft, "%32s: %2d Trade/Year\n", "Unknown",
+//	bptr = String.format "%32s: %2d Trade/Year\n", "Unknown",
 //		    pdialog.pcity.trade_value[i]);
 //	bptr = end_of_strn(bptr, &nleft);
 //      }
@@ -1437,7 +1437,7 @@ public class Citydlg{
 //  if (!x) {
 //    mystrlcpy(bptr, "No trade routes exist.\n", nleft);
 //  } else {
-//    my_snprintf(bptr, nleft, "\nTotal trade %d Trade/Year\n", total);
+//    bptr = String.format "\nTotal trade %d Trade/Year\n", total);
 //  }
 //  
 //  popup_message_dialog(pdialog.shell, 

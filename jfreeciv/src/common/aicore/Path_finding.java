@@ -173,7 +173,7 @@ public class Path_finding{
 //      break;
 //    }
 //  default:
-//    die("unknown TM");
+//    util.die("unknown TM");
 //  }
 //  return cost;
 //}
@@ -519,7 +519,7 @@ public class Path_finding{
 //  /* Debug period only!  Please remove after PF is settled */
 //  if (pf_map.status[index] != NS_PROCESSED
 //      && !Map.same_pos(ptile, pf_map.tile)) {
-//    die("pf_finalruct_path to an unreached destination");
+//    util.die("pf_finalruct_path to an unreached destination");
 //    return;
 //  }
 //
@@ -536,7 +536,7 @@ public class Path_finding{
 //    pos.turn = -1;
 //    pos.moves_left = -1;
 //  } else {
-//    die("unknown TC");
+//    util.die("unknown TC");
 //  }
 //
 //  pos.dir_to_here = node.dir_to_here;
@@ -599,7 +599,7 @@ public class Path_finding{
 //  assert(!pf_map.params.is_pos_dangerous);
 //  if (pf_map.status[index] != NS_PROCESSED
 //      && !Map.same_pos(dest_tile, pf_map.tile)) {
-//    die("finalruct_path to an unreached destination");
+//    util.die("finalruct_path to an unreached destination");
 //    return null;
 //  }
 //
@@ -1061,7 +1061,7 @@ public class Path_finding{
 //
 //  if (pf_map.params.turn_mode != TM_BEST_TIME &&
 //      pf_map.params.turn_mode != TM_WORST_TIME) {
-//    die("illegal TM in path-finding with danger");
+//    util.die("illegal TM in path-finding with danger");
 //    return null;
 //  }
 //
@@ -1177,7 +1177,7 @@ public class Path_finding{
 //
 //  }
 //
-//  die("danger_get_path: cannot get to the starting point!");
+//  util.die("danger_get_path: cannot get to the starting point!");
 //  return null;
 //}
 //

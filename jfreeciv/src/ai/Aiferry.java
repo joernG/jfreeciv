@@ -511,7 +511,7 @@ public class Aiferry{
 //          && !Map.same_pos(punit.tile, bodyguard.tile)) {
 //        if (!goto_is_sane(bodyguard, punit.tile, true)
 //            || !ai_unit_goto(punit, punit.tile)) {
-//          /* Bodyguard can't get there or died en route */
+//          /* Bodyguard can't get there or util.died en route */
 //          punit.ai.bodyguard = BODYGUARD_WANTED;
 //          bodyguard = null;
 //        } else if (bodyguard.moves_left <= 0) {
@@ -531,7 +531,7 @@ public class Aiferry{
 //	handle_unit_load(pplayer, bodyguard.id, ferryboat.id);
 //      }
 //      if (!ai_unit_goto(ferryboat, beach_tile)) {
-//        /* died */
+//        /* util.died */
 //        return false;
 //      }
 //      if (!is_tiles_adjacent(ferryboat.tile, beach_tile)

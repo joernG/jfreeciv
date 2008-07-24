@@ -101,7 +101,7 @@ public class unit {
 //			break;
 //
 //		default:
-//			die("In common/unit.c:unit_move_rate: illegal move type %d",
+//			util.die("In common/unit.c:unit_move_rate: illegal move type %d",
 //					punit.unit_type().move_type);
 //		}
 //

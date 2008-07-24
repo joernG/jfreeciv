@@ -32,7 +32,7 @@ public class Startpos{
 //struct islands_data_type {
 //  Continent_id id;
 //  int size;
-//  int goodies;
+//  int gooutil.dies;
 //  int starters;
 //  int total;
 //};
@@ -149,7 +149,7 @@ public class Startpos{
 //{
 //  final islands_data_type A = A_, *B = B_;
 //
-//  return B.goodies - A.goodies;
+//  return B.gooutil.dies - A.gooutil.dies;
 //}
 //
 ///****************************************************************************
@@ -167,7 +167,7 @@ public class Startpos{
 //  for (nr = 1; nr <= Map.map.num_continents; nr++) {
 //    islands[nr].id = nr;
 //    islands[nr].size = get_continent_size(nr);
-//    islands[nr].goodies = 0;
+//    islands[nr].gooutil.dies = 0;
 //    islands[nr].starters = 0;
 //    islands[nr].total = 0;
 //  }
@@ -198,8 +198,8 @@ public class Startpos{
 //  int k, sum;
 //  struct start_filter_data data;
 //  int tile_value_aux[Map_H.MAX_MAP_INDEX], tile_value[Map_H.MAX_MAP_INDEX];
-//  int min_goodies_per_player = 2000;
-//  int total_goodies = 0;
+//  int min_gooutil.dies_per_player = 2000;
+//  int total_gooutil.dies = 0;
 //  /* this is factor is used to maximize land used in extreme little maps */
 //  float efactor =  game.nplayers / Map.map.size / 4; 
 //  boolean failure = false;
@@ -256,8 +256,8 @@ public class Startpos{
 //    if (!filter_starters(ptile, null)) {
 //      tile_value[ptile.index] = 0;
 //    } else {
-//      islands[map_get_continent(ptile)].goodies += tile_value[ptile.index];
-//      total_goodies += tile_value[ptile.index];
+//      islands[map_get_continent(ptile)].gooutil.dies += tile_value[ptile.index];
+//      total_gooutil.dies += tile_value[ptile.index];
 //    }
 //  }
 //
@@ -280,15 +280,15 @@ public class Startpos{
 //  }
 //
 //  if (mode == MT_ALL 
-//      && (islands[1].goodies < game.nplayers * min_goodies_per_player
-//	  || islands[1].goodies < total_goodies * (0.5 + 0.8 * efactor)
+//      && (islands[1].gooutil.dies < game.nplayers * min_gooutil.dies_per_player
+//	  || islands[1].gooutil.dies < total_gooutil.dies * (0.5 + 0.8 * efactor)
 //	  / (1 + efactor))) {
 //    mode = MT_VARIABLE;
 //  }
 //
 //  /* the variable way is the last posibility */
 //  if (mode == MT_VARIABLE) {
-//    min_goodies_per_player = total_goodies * (0.65 + 0.8 * efactor) 
+//    min_gooutil.dies_per_player = total_gooutil.dies * (0.65 + 0.8 * efactor) 
 //      / (1 + efactor)  / game.nplayers;
 //  }
 //
@@ -302,20 +302,20 @@ public class Startpos{
 //
 //    /* searh for best first island for fairness */    
 //    if ((mode == MT_SINGLE) || (mode == MT_2or3)) {
-//      float var_goodies, best = HUGE_VAL;
+//      float var_gooutil.dies, best = HUGE_VAL;
 //      int num_islands
 //	= (mode == MT_SINGLE) ? game.nplayers : (game.nplayers / 2);
 //
 //      for (nr = 1; nr <= 1 + Map.map.num_continents - num_islands; nr++) {
-//	if (islands[nr + num_islands - 1].goodies < min_goodies_per_player) {
+//	if (islands[nr + num_islands - 1].gooutil.dies < min_gooutil.dies_per_player) {
 //	  break;
 //	}
-//	var_goodies
-//	    = (islands[nr].goodies - islands[nr + num_islands - 1].goodies)
-//	    / (islands[nr + num_islands - 1].goodies);
+//	var_gooutil.dies
+//	    = (islands[nr].gooutil.dies - islands[nr + num_islands - 1].gooutil.dies)
+//	    / (islands[nr + num_islands - 1].gooutil.dies);
 //
-//	if (var_goodies < best * 0.9) {
-//	  best = var_goodies;
+//	if (var_gooutil.dies < best * 0.9) {
+//	  best = var_gooutil.dies;
 //	  first = nr;
 //	}
 //      }
@@ -339,8 +339,8 @@ public class Startpos{
 //      }
 //
 //      if (mode == MT_VARIABLE && to_place > 0) {
-//	islands[nr].starters = MAX(1, islands[nr].goodies 
-//				   / min_goodies_per_player);
+//	islands[nr].starters = MAX(1, islands[nr].gooutil.dies 
+//				   / min_gooutil.dies_per_player);
 //	to_place -= islands[nr].total = islands[nr].starters;
 //      }
 //    }
@@ -353,7 +353,7 @@ public class Startpos{
 //  for (k = 1; k <= Map.map.num_continents; k++) {
 //    sum += islands[islands_index[k]].starters;
 //    if (islands[islands_index[k]].starters != 0) {
-//      util.freelog(LOG_VERBOSE, "starters on isle %i", k);
+//      util.freelog(Log.LOG_VERBOSE, "starters on isle %i", k);
 //    }
 //  }
 //  assert(game.nplayers <= data.count + sum);
@@ -368,9 +368,9 @@ public class Startpos{
 //      Map.map.start_positions[data.count].tile = ptile;
 //      Map.map.start_positions[data.count].nation = NO_NATION_SELECTED;
 //      util.freelog(Log.LOG_DEBUG,
-//	      "Adding %d,%d as starting position %d, %d goodies on islands.",
+//	      "Adding %d,%d as starting position %d, %d gooutil.dies on islands.",
 //	      TILE_XY(ptile), data.count,
-//	      islands[islands_index[(int) map_get_continent(ptile)]].goodies);
+//	      islands[islands_index[(int) map_get_continent(ptile)]].gooutil.dies);
 //      data.count++;
 //
 //    } else {

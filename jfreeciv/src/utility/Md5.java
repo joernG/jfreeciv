@@ -1,28 +1,25 @@
 package utility;
 
 public class Md5{
-///**********************************************************************
-// Copyright (C) 1995, 1996, 2001, 2003 Free Software Foundation, Inc.
-//   This program is free software; you can redistribute it and/or modify
-//   it under the terms of the GNU General Public License as published by
-//   the Free Software Foundation; either version 2, or (at your option)
-//   any later version.
+	/* Structure to save state of computation between the single steps.  */
+//	struct md5_ctx
+	public class md5_ctx
+	{
+//	  md5_uint32 A;
+//	  md5_uint32 B;
+//	  md5_uint32 C;
+//	  md5_uint32 D;
 //
-//   This program is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU General Public License for more details.
-//
-//   Written by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
-//
-//   Added function to return digest in hex,
-//   M. Kaufman <kaufman@orion.physics.wisc edut>, 2004
-//***********************************************************************/
-//#ifdef HAVE_CONFIG_H
-//#include <config.h>
-//#endif
-//
-//#include "md5.h"
+//	  md5_uint32 total[2];
+//	  md5_uint32 buflen;
+	  char buffer [] =new char[128];
+	};
+	public static final int DIGEST_BITS  = 128;
+	public static final int  DIGEST_HEX_BYTES =(DIGEST_BITS / 4);
+	public static final int  DIGEST_BIN_BYTES =(DIGEST_BITS / 8);
+
+	public static final int  MAX_DIGEST_BIN_BYTES= DIGEST_BIN_BYTES;
+
 //
 //#include <sys/types.h>
 //
@@ -63,23 +60,23 @@ public class Md5{
 ///* This array contains the bytes used to pad the buffer to the next
 //   64-byte boundary.  (RFC 1321, 3.1: Step 1)  */
 //static final unsigned char fillbuf[64] = { 0x80, 0 /* , 0, 0, ...  */ };
+
+	/***************************************************************************
+	 * from a string, create an md5sum and store it in output in hex form
+	 **************************************************************************/
+	public static void create_md5sum(final String input, int len, char[] output)
+	{
+		char bin_buffer[] = new char[MAX_DIGEST_BIN_BYTES];
+//		size_t cnt;
+//		char *ptr = output;
 //
-///**************************************************************************
-// from a string, create an md5sum and store it in output in hex form
-//**************************************************************************/
-//void create_md5sum(final String input, int len, char output[DIGEST_HEX_BYTES])
-//{
-//  unsigned char bin_buffer[MAX_DIGEST_BIN_BYTES];
-//  size_t cnt;
-//  char *ptr = output;
+//		md5_buffer(input, len, bin_buffer);
 //
-//  md5_buffer(input, len, bin_buffer);
-//
-//  for (cnt = 0; cnt < (DIGEST_HEX_BYTES / 2); cnt++, ptr += 2) {
-//    sprintf(ptr, "%02x", bin_buffer[cnt]);
-//  }
-//}
-//
+//		for (cnt = 0; cnt < (Md5.DIGEST_HEX_BYTES / 2); cnt++, ptr += 2) {
+//			sprintf(ptr, "%02x", bin_buffer[cnt]);
+//		}
+	}
+
 ///**************************************************************************
 //  Initialize structure containing state of computation. 
 //  (RFC 1321, 3.3: Step 3)

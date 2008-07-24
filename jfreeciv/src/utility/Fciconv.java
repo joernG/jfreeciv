@@ -169,7 +169,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //    if (alloc) {
 //      return mystrdup(text);
 //    } else {
-//      my_snprintf(buf, bufsz, "%s", text);
+//      buf = String.format "%s", text);
 //      return buf;
 //    }
 //  }
@@ -206,7 +206,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //	  free(buf);
 //	  return mystrdup(text); /* The best we can do? */
 //	} else {
-//	  my_snprintf(buf, bufsz, "%s", text);
+//	  buf = String.format "%s", text);
 //	  return buf;
 //	}
 //      }
@@ -222,7 +222,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //    if (alloc) {
 //      /* Not enough space; try again. */
 //      buf[to_len - 1] = 0;
-//      util.freelog(LOG_VERBOSE, "   Result was '%s'.", buf);
+//      util.freelog(Log.LOG_VERBOSE, "   Result was '%s'.", buf);
 //
 //      free(buf);
 //      to_len *= 2;

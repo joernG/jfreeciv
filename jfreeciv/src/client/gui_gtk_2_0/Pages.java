@@ -498,7 +498,7 @@ public class Pages{
 //  case AUTH_NEWUSER_RETRY:
 //    set_connection_state(NEW_PASSWORD_TYPE);
 //    break;
-//  case AUTH_LOGIN_FIRST:
+//  case authentication_type.AUTH_LOGIN_FIRST:
 //    /* if we magically have a password already present in 'password'
 //     * then, use that and skip the password entry dialog */
 //    if (password[0] != '\0') {
@@ -531,8 +531,8 @@ public class Pages{
 //
 //  switch (connection_status) {
 //  case LOGIN_TYPE:
-//    sz_strlcpy(user_name, gtk_entry_get_text(GTK_ENTRY(network_login)));
-//    sz_strlcpy(server_host, gtk_entry_get_text(GTK_ENTRY(network_host)));
+//    user_name = String.format( gtk_entry_get_text(GTK_ENTRY(network_login)));
+//    server_host = String.format( gtk_entry_get_text(GTK_ENTRY(network_host)));
 //    server_port = atoi(gtk_entry_get_text(GTK_ENTRY(network_port)));
 //  
 //    if (connect_to_server(user_name, server_host, server_port,
@@ -545,9 +545,9 @@ public class Pages{
 //    break; 
 //  case NEW_PASSWORD_TYPE:
 //    if (w != network_password) {
-//      sz_strlcpy(password,
+//      password = String.format(
 //	  gtk_entry_get_text(GTK_ENTRY(network_password)));
-//      sz_strlcpy(reply.password,
+//      reply.password = String.format(
 //	  gtk_entry_get_text(GTK_ENTRY(network_confirm_password)));
 //      if (!reply.password.equals(password)) {
 //	password[0] = '\0';
@@ -563,7 +563,7 @@ public class Pages{
 //    }
 //    break;
 //  case ENTER_PASSWORD_TYPE:
-//    sz_strlcpy(reply.password,
+//    reply.password = String.format(
 //	gtk_entry_get_text(GTK_ENTRY(network_password)));
 //    send_packet_authentication_reply(&aconnection, &reply);
 //

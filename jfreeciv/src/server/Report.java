@@ -535,7 +535,7 @@ public class Report{
 //  static char buf[64];
 //
 //  if (buf = util.my_snprintf( "%s%s", int_to_text(val), uni) == -1) {
-//    die("String truncated in value_units()!");
+//    util.die("String truncated in value_units()!");
 //  }
 //
 //  return buf;
@@ -586,13 +586,13 @@ public class Report{
 //  assert(num > 0);
 //
 //  if ((num % 10) == 1 && num != 11) {
-//    buf = util.my_snprintf( fmt, num, "st");
+//    buf = util.fmt = String.format "st");
 //  } else if ((num % 10) == 2 && num != 12) {
-//    buf = util.my_snprintf( fmt, num, "nd");
+//    buf = util.fmt = String.format "nd");
 //  } else if ((num % 10) == 3 && num != 13) {
-//    buf = util.my_snprintf( fmt, num, "rd");
+//    buf = util.fmt = String.format "rd");
 //  } else {
-//    buf = util.my_snprintf( fmt, num, "th");
+//    buf = util.fmt = String.format "th");
 //  }
 //
 //  return buf;

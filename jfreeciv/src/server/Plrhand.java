@@ -118,7 +118,7 @@ public class Plrhand {
 	// Check all players to see if they are dying. Kill them if so.
 	//
 	// WARNING: do not call this while doing any handling of players, units,
-	// etc. If a player dies, all his units will be wiped and other data will
+	// etc. If a player util.dies, all his units will be wiped and other data will
 	// be overwritten.
 	// ****************************************************************************/
 	// void kill_dying_players()
@@ -1740,7 +1740,7 @@ public class Plrhand {
 	// /* Not allowed after a game has started */
 	// if (!(game.is_new_game && (Srv_main.server_state==server_states.PRE_GAME_STATE ||
 	// Srv_main.server_state==SELECT_RACES_STATE))) {
-	// die("You can't remove players after the game has started!");
+	// util.die("You can't remove players after the game has started!");
 	// }
 	//
 	// util.freelog(Log.LOG_NORMAL, "Removing player %s.", pplayer.name);
@@ -1754,7 +1754,7 @@ public class Plrhand {
 	// /* Note it is ok to remove the _current_ item in a list_iterate. */
 	// for (conn pconn : pplayer.connections.data) {
 	// if (!unattach_connection_from_player(pconn)) {
-	// die("player had a connection attached that didn't belong to it!");
+	// util.die("player had a connection attached that didn't belong to it!");
 	// }
 	// } }
 	//
@@ -1922,7 +1922,7 @@ public class Plrhand {
 	// NO_NATION_SELECTED-terminated choices list. If no available nations in
 	// this
 	// file were found, return a random nation. If no nations are available,
-	// die.
+	// util.die.
 	// ****************************************************************************/
 	// static int pick_available_nation(int *choices)
 	// {
@@ -2154,7 +2154,7 @@ public class Plrhand {
 	// }
 	// }
 	//
-	// util.freelog(LOG_VERBOSE, "Civil war chance for %s: prob %d, dice %d",
+	// util.freelog(Log.LOG_VERBOSE, "Civil war chance for %s: prob %d, dice %d",
 	// pplayer.name, prob, dice);
 	//  
 	// return(dice < prob);
@@ -2213,7 +2213,7 @@ public class Plrhand {
 	//  
 	// /* Now split the empire */
 	//
-	// util.freelog(LOG_VERBOSE,
+	// util.freelog(Log.LOG_VERBOSE,
 	// "%s's nation is thrust into civil war, created AI player %s",
 	// pplayer.name, cplayer.name);
 	// notify_player_ex(pplayer, null, E_CIVIL_WAR,
@@ -2234,7 +2234,7 @@ public class Plrhand {
 	// resolved stack conflicts for each city we would teleport the first
 	// of the units we met since the other would have another owner */
 	// transfer_city(cplayer, pcity, -1, false, false, false);
-	// util.freelog(LOG_VERBOSE, "%s declares allegiance to %s",
+	// util.freelog(Log.LOG_VERBOSE, "%s declares allegiance to %s",
 	// pcity.name, cplayer.name);
 	// notify_player_ex(pplayer, pcity.tile, E_CITY_LOST,
 	// "Game: %s declares allegiance to %s.",

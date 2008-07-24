@@ -184,7 +184,7 @@ public class Gui_main{
 //  init_character_encodings("ISO-8859-1", true);
 //
 //  if (!auto_connect) {
-//    die("Connection dialog not yet implemented. Start client using " +
+//    util.die("Connection dialog not yet implemented. Start client using " +
 //        "the -a option.");
 //  }
 //
@@ -232,7 +232,7 @@ public class Gui_main{
 //  be_init(&res, fullscreen);
 //  be_screen_get_size(&size);
 //  if (size.width != res.width || size.height != res.height) {
-//    die("Instead of the desired screen resolution (%dx%d) " +
+//    util.die("Instead of the desired screen resolution (%dx%d) " +
 //	"got (%dx%d). This may be a problem with the window-manager.",
 //	res.width, res.height, size.width, size.height);
 //  }

@@ -1,4 +1,4 @@
-package common.packets;
+package common.packet_gen;
 public enum authentication_type {
   AUTH_LOGIN_FIRST,   /* request a password for a returning user */
   AUTH_NEWUSER_FIRST, /* request a password for a new user */

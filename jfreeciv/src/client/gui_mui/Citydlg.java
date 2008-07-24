@@ -551,21 +551,21 @@ public class Citydlg{
 //    {
 //      if (which == 20000)
 //      {
-//	sz_strlcpy(name, "\33u\338Units\33n");
+//	name = String.format( "\33u\338Units\33n");
 //	info[0] = cost[0] = rounds[0] = 0;
 //      }
 //      else
 //      {
 //	if (which == 20001)
 //	{
-//	  sz_strlcpy(name, "\33u\338Improvements\33n");
+//	  name = String.format( "\33u\338Improvements\33n");
 //	  info[0] = cost[0] = rounds[0] = 0;
 //	}
 //	else
 //	{
 //	  /* Unit */
 //	  which -= 10000;
-//	  sz_strlcpy(name, unit_name(which));
+//	  name = String.format( unit_name(which));
 //
 //	  {
 //	    /* from unit.h get_unit_name() */
@@ -591,24 +591,24 @@ public class Citydlg{
 //    else
 //    {
 //      which--;
-//      sz_strlcpy(name, get_improvement_type(which).name);
+//      name = String.format( get_improvement_type(which).name);
 //      info[0] = 0;
 //
 //      {
 //	/* from city.c get_impr_name_ex() */
 //	if (wonder_replacement(pcity, which))
 //        {
-//          sz_strlcpy(info, "*");
+//          info = String.format( "*");
 //	}
 //	else
 //	{
 //	  if (is_wonder(which))
 //	  {
-//	    sz_strlcpy(info, "Wonder");
+//	    info = String.format( "Wonder");
 //	    if (game.global_wonders[which])
-//	      sz_strlcpy(info, "Built");
+//	      info = String.format( "Built");
 //	    if (wonder_obsolete(which))
-//	      sz_strlcpy(info, "Obsolete");
+//	      info = String.format( "Obsolete");
 //	  }
 //	}
 //      }
@@ -621,8 +621,8 @@ public class Citydlg{
 //      }
 //      else
 //      {
-//	sz_strlcpy(cost, "--");
-//	sz_strlcpy(rounds, "--");
+//	cost = String.format( "--");
+//	rounds = String.format( "--");
 //      }
 //    }
 //    *array++ = name;
@@ -2217,20 +2217,20 @@ public class Citydlg{
 //    penalty = 0;
 //  }
 //
-//  my_snprintf(bptr, nleft,
+//  bptr = String.format
 //	      "Cities: %d total, %d over threshold of %d cities.\n",
 //	      cities, excess, basis);
 //  bptr = end_of_strn(bptr, &nleft);
 //
-//  my_snprintf(bptr, nleft, "%d content before penalty with ", content);
+//  bptr = String.format "%d content before penalty with ", content);
 //  bptr = end_of_strn(bptr, &nleft);
-//  my_snprintf(bptr, nleft, "%d additional unhappy citizens.", penalty);
+//  bptr = String.format "%d additional unhappy citizens.", penalty);
 //  bptr = end_of_strn(bptr, &nleft);
 //
 //  settext(pdialog.happiness_citizen_text[0], buf);
 //
 //  /* LUXURY */
-//  my_snprintf(bptr, nleft, "Luxury: %d total (maximum %d usable). ",
+//  bptr = String.format "Luxury: %d total (maximum %d usable). ",
 //	      pcity.luxury_total, 2 * pcity.size);
 //
 //  settext(pdialog.happiness_citizen_text[1], buf);
@@ -2244,23 +2244,23 @@ public class Citydlg{
 //  /* UNITS */
 //  bptr = buf;
 //  nleft = sizeof(buf);
-//  my_snprintf(bptr, nleft, "Units: ");
+//  bptr = String.format "Units: ");
 //  bptr = end_of_strn(bptr, &nleft);
 //
 //  if (mlmax > 0) {
-//    my_snprintf(bptr, nleft, "Martial law in effect (");
+//    bptr = String.format "Martial law in effect (");
 //    bptr = end_of_strn(bptr, &nleft);
 //
 //    if (mlmax == 100)
-//      my_snprintf(bptr, nleft, "no maximum, ");
+//      bptr = String.format "no maximum, ");
 //    else
-//      my_snprintf(bptr, nleft, PL("%d unit maximum, ",
+//      bptr = String.format PL("%d unit maximum, ",
 //				   "%d units maximum", mlmax), mlmax);
 //    bptr = end_of_strn(bptr, &nleft);
 //
-//    my_snprintf(bptr, nleft, "%d per unit). ", g.martial_law_per);
+//    bptr = String.format "%d per unit). ", g.martial_law_per);
 //  } else {
-//    my_snprintf(bptr, nleft,
+//    bptr = String.format
 //		"Military units in the field may cause unhappiness. ");
 //  }
 //

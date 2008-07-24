@@ -65,7 +65,7 @@ public class Mapctrl{
 //    struct packet_unit_request packet;
 //
 //    packet.unit_id = punit.id;
-//    sz_strlcpy(packet.name, input_dialog_get_input(data.name));
+//    packet.name = String.format( input_dialog_get_input(data.name));
 //    send_packet_unit_request(&aconnection, &packet, PACKET_UNIT_BUILD_CITY);
 //  }
 //

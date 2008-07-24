@@ -275,9 +275,9 @@ public class Connectdlg{
 //  switch (dialog_config) {
 //  case LOGIN_TYPE:
 //    XtVaGetValues(iinput, XtNstring, &dp, null);
-//    sz_strlcpy(user_name, (char*)dp);
+//    user_name = String.format( (char*)dp);
 //    XtVaGetValues(ihost, XtNstring, &dp, null);
-//    sz_strlcpy(server_host, (char*)dp);
+//    server_host = String.format( (char*)dp);
 //    XtVaGetValues(iport, XtNstring, &dp, null);
 //    sscanf((char*)dp, "%d", &server_port);
 //  
@@ -295,14 +295,14 @@ public class Connectdlg{
 //    }
 //  case NEW_PASSWORD_TYPE:
 //    XtVaGetValues(iinput, XtNstring, &dp, null);
-//    sz_strlcpy(password, (char*)dp);
+//    password = String.format( (char*)dp);
 //    XtVaSetValues(imsg, XtNlabel, "Verify Password", null);
 //    XtVaSetValues(iinput, XtNstring, "", null);
 //    dialog_config = VERIFY_PASSWORD_TYPE;
 //    break;
 //  case VERIFY_PASSWORD_TYPE:
 //    XtVaGetValues(iinput, XtNstring, &dp, null);
-//    sz_strlcpy(reply.password, (char*)dp);
+//    reply.password = String.format( (char*)dp);
 //    if (!reply.password.equals(password)) {
 //      XtSetSensitive(connw, false);
 //      memset(password, 0, MAX_LEN_NAME);
@@ -319,7 +319,7 @@ public class Connectdlg{
 //  case ENTER_PASSWORD_TYPE:
 //    XtSetSensitive(connw, false);
 //    XtVaGetValues(iinput, XtNstring, &dp, null);
-//    sz_strlcpy(reply.password, (char*)dp);
+//    reply.password = String.format( (char*)dp);
 //    send_packet_authentication_reply(&aconnection, &reply);
 //    break;
 //  default:

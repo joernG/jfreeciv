@@ -175,7 +175,7 @@ public class Worklistclass{
 //      case  0:
 //            /* id is improvement */
 //            mystrlcpy(buf,get_improvement_info(id,pcity),64);
-//	    my_snprintf(buf2, 64, "%d", impr_build_shield_cost(id));
+//	    buf2 = String.format "%d", impr_build_shield_cost(id));
 //
 //	    *array++ = get_improvement_name(id);
 //	    *array++ = buf;
@@ -188,7 +188,7 @@ public class Worklistclass{
 //      case  1:
 //	    /* id is unit */
 //            mystrlcpy(buf,get_unit_info(id),64);
-//	    my_snprintf(buf2, 64, "%d", unit_build_shield_cost(id));
+//	    buf2 = String.format "%d", unit_build_shield_cost(id));
 //
 //	    *array++ = unit_name(id);
 //	    *array++ = buf;
@@ -201,7 +201,7 @@ public class Worklistclass{
 //	      player pplr = game.player_ptr;
 //              int entries = worklist_length(&pplr.worklists[entry.id]);
 //
-//	      my_snprintf(buf, 64, "%d %s", entries,
+//	      buf = String.format "%d %s", entries,
 //			  PL("entry", "entries", entries));
 //
 //	      *array++ = pplr.worklists[entry.id].name;

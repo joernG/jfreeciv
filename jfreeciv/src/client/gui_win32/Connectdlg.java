@@ -124,7 +124,7 @@ public class Connectdlg{
 //  case AUTH_NEWUSER_RETRY:
 //    dialog_config = NEW_PASSWORD_TYPE;
 //    break;
-//  case AUTH_LOGIN_FIRST:
+//  case authentication_type.AUTH_LOGIN_FIRST:
 //    /* if we magically have a password already present in 'password'
 //     * then, use that and skip the password entry dialog */
 //    if (password[0] != '\0') {

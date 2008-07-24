@@ -115,7 +115,7 @@ public class Colors{
 //
 //  if (default_depth == 1) { 
 //    /* Must be StaticGray, use black and white */
-//    util.freelog(LOG_VERBOSE, "found B/W display.");
+//    util.freelog(Log.LOG_VERBOSE, "found B/W display.");
 //    return BW_DISPLAY;
 //  }
 //
@@ -126,7 +126,7 @@ public class Colors{
 //  
 //
 ///*
-//  util.freelog(LOG_VERBOSE, "Found a %s class visual at default depth.",
+//  util.freelog(Log.LOG_VERBOSE, "Found a %s class visual at default depth.",
 //      visual_class[++i]);
 //*/
 //   
@@ -136,7 +136,7 @@ public class Colors{
 //     * here to try for a GrayScale visual if they
 //     * can use gray to advantage, before giving up
 //     * and using black and white */
-//    util.freelog(LOG_VERBOSE, "found grayscale(?) display.");
+//    util.freelog(Log.LOG_VERBOSE, "found grayscale(?) display.");
 //    return GRAYSCALE_DISPLAY;
 //  }
 //
@@ -148,11 +148,11 @@ public class Colors{
 //    * code will work (or fail in a controlled way) */
 //   /* Let's check just out of curiosity: */
 //  if (visual_info.visual != default_visual) {
-///*    util.freelog(LOG_VERBOSE, "Found: %s class visual at default depth",
+///*    util.freelog(Log.LOG_VERBOSE, "Found: %s class visual at default depth",
 //	visual_class[i]); */
 //  }
 //
-//  util.freelog(LOG_VERBOSE, "color system booted ok.");
+//  util.freelog(Log.LOG_VERBOSE, "color system booted ok.");
 //
 //  return COLOR_DISPLAY;
 //}

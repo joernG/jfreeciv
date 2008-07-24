@@ -77,8 +77,8 @@ public class Audio_winmm{
 //{
 //  struct audio_plugin self;
 //
-//  sz_strlcpy(self.name, "winmm");
-//  sz_strlcpy(self.descr, "WinMM plugin");
+//  self.name = String.format( "winmm");
+//  self.descr = String.format( "WinMM plugin");
 //  self.shutdown = my_stop;
 //  self.init = my_init;
 //  self.stop = my_stop;

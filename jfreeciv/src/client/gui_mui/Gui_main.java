@@ -1294,9 +1294,9 @@ public class Gui_main{
 //      } else if (map_has_special(punit.tile, S_IRRIGATION)
 //		 && player_knows_techs_with_flag(game.player_ptr,
 //						 TF_FARMLAND)) {
-//	sz_strlcpy(irrtext, "Build Farmland");
+//	irrtext = String.format( "Build Farmland");
 //      } else {
-//        sz_strlcpy(irrtext, "Build Irrigation");
+//        irrtext = String.format( "Build Irrigation");
 //      }
 //
 //      if ((tinfo.mining_result != T_NONE)
@@ -1304,7 +1304,7 @@ public class Gui_main{
 //	mintext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.mining_result)).terrain_name);
 //      } else {
-//        sz_strlcpy(mintext, "Build Mine");
+//        mintext = String.format( "Build Mine");
 //      }
 //
 //      if ((tinfo.transform_result != T_NONE)
@@ -1312,7 +1312,7 @@ public class Gui_main{
 //	transtext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.transform_result)).terrain_name);
 //      } else {
-//        sz_strlcpy(transtext, "Transform Terrain");
+//        transtext = String.format( "Transform Terrain");
 //      }
 //
 //      if (map_has_special(punit.tile, S_ROAD)) {

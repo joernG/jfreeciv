@@ -1890,7 +1890,7 @@ public class Gui_stuff{
 //    if(!pDlg.pBeginActiveWidgetList) {
 //      /* first element ( active list empty ) */
 //      if(dir) {
-//	die("Forbided List Operation");
+//	util.die("Forbided List Operation");
 //      }
 //      pNew_Widget.size.x = start_x;
 //      pNew_Widget.size.y = start_y;

@@ -173,7 +173,7 @@ public class Aiexplorer{
 //  int unknown = 0;
 //
 //  /* First do some checks that would make a tile completely non-desirable.
-//   * If we're a trireme and we could die at the given tile, or if there
+//   * If we're a trireme and we could util.die at the given tile, or if there
 //   * is a city on the tile, or if the tile is not accessible, or if the 
 //   * tile is on a different continent, or if we're a barbarian and
 //   * the tile has a hut, don't go there. */

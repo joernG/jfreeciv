@@ -51,7 +51,7 @@ public class player {
 	  public player_ai ai;
 	  public boolean was_created;                    /* if the player was /created */
 	  public boolean is_connected;		       /* observers don't count */
-//	  struct connection *current_conn;     /* non-null while handling packet */
+//	  Connection current_conn;     /* non-null while handling packet */
 	  public Speclists<Connection> connections;	       /* will replace conn */
 //	  struct worklist worklists[MAX_NUM_WORKLISTS];
 //	  struct player_tile *private_map;

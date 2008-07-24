@@ -251,39 +251,39 @@ public class Gamelog{
 //
 //    switch(num) {
 //    case GL_EMBASSY:
-//      sz_strlcpy(msg, "<m>Treaty - Embassy between the %s and the %s</m>");
+//      msg = String.format( "<m>Treaty - Embassy between the %s and the %s</m>");
 //      break;
 //    case GL_TECH:
-//      sz_strlcpy(msg, "<m>Treaty - Tech given to the %s from the %s</m>");
+//      msg = String.format( "<m>Treaty - Tech given to the %s from the %s</m>");
 //      break;
 //    case GL_GOLD:
-//      sz_strlcpy(msg, "<m>Treaty - Gold given to the %s from the %s</m>");
+//      msg = String.format( "<m>Treaty - Gold given to the %s from the %s</m>");
 //      break;
 //    case GL_MAP:
-//      sz_strlcpy(msg, "<m>Treaty - Map given to the %s from the %s</m>");
+//      msg = String.format( "<m>Treaty - Map given to the %s from the %s</m>");
 //      break;
 //    case GL_SEAMAP:
-//      sz_strlcpy(msg, "<m>Treaty - Seamap given to the %s from the %s</m>");
+//      msg = String.format( "<m>Treaty - Seamap given to the %s from the %s</m>");
 //      break;
 //    case GL_CITY:
 //      pcity = va_arg(args, city );
-//      sz_strlcpy(msg,
+//      msg = String.format(
 //                 "<m>Treaty - City (%s) given to the %s from the %s</m>");
 //      break;
 //    case GL_CEASEFIRE:
-//      sz_strlcpy(msg, "<m>Treaty - Ceasefire between the %s and the %s</m>");
+//      msg = String.format( "<m>Treaty - Ceasefire between the %s and the %s</m>");
 //      break;
 //    case GL_PEACE:
-//      sz_strlcpy(msg, "<m>Treaty - Peace between the %s and the %s</m>");
+//      msg = String.format( "<m>Treaty - Peace between the %s and the %s</m>");
 //      break;
 //    case GL_ALLIANCE:
-//      sz_strlcpy(msg, "<m>Treaty - Alliance between the %s and the %s</m>");
+//      msg = String.format( "<m>Treaty - Alliance between the %s and the %s</m>");
 //      break;
 //    case GL_TEAM:
-//      sz_strlcpy(msg, "<m>Treaty - Team between the %s and the %s</m>");
+//      msg = String.format( "<m>Treaty - Team between the %s and the %s</m>");
 //      break;
 //    case GL_VISION:
-//      sz_strlcpy(msg,
+//      msg = String.format(
 //                 "<m>Treaty - Shared Vision between the %s and the %s</m>");
 //      break;
 //    default:
@@ -378,7 +378,7 @@ public class Gamelog{
 //
 //    buf = util.my_snprintf(
 //                "<n>%d</n><name>%s</name>" +
-//                "<m>%s lost a game loss unit and died</m>",
+//                "<m>%s lost a game loss unit and util.died</m>",
 //                punit.unit_owner().player_no, unit_name(punit.type),
 //                Nation.get_nation_name_plural(punit.unit_owner().nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "gamel");

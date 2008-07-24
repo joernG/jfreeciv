@@ -120,7 +120,7 @@ public class Ruleset{
 //  if (dfilename)
 //    return dfilename;
 //
-//  util.freelog(LOG_VERBOSE, "Trying to load file from default ruleset directory " +
+//  util.freelog(Log.LOG_VERBOSE, "Trying to load file from default ruleset directory " +
 //	  "instead.");
 //  filename = util.my_snprintf( "default/%s.ruleset", whichset);
 //  dfilename = datafilename(filename);
@@ -200,7 +200,7 @@ public class Ruleset{
 ///**************************************************************************
 // Lookup a string prefix.entry in the file and return the corresponding
 // advances id.  If (!required), return A_LAST if match "Never" or can't match.
-// If (required), die if can't match.  Note the first tech should have
+// If (required), util.die if can't match.  Note the first tech should have
 // name "None" so that will always match.
 // If description is not null, it is used in the warning message
 // instead of prefix (eg pass unit.name instead of prefix="units2.u27")
@@ -336,7 +336,7 @@ public class Ruleset{
 ///**************************************************************************
 // Lookup a string prefix.entry in the file and return the corresponding
 // unit_type id.  If (!required), return -1 if match "None" or can't match.
-// If (required), die if can't match.
+// If (required), util.die if can't match.
 // If description is not null, it is used in the warning message
 // instead of prefix (eg pass unit.name instead of prefix="units2.u27")
 //**************************************************************************/
@@ -374,7 +374,7 @@ public class Ruleset{
 ///**************************************************************************
 // Lookup a string prefix.entry in the file and return the corresponding
 // Impr_Type_id.  If (!required), return B_LAST if match "None" or can't match.
-// If (required), die if can't match.
+// If (required), util.die if can't match.
 // If description is not null, it is used in the warning message
 // instead of prefix (eg pass impr.name instead of prefix="imprs2.b27")
 //**************************************************************************/
@@ -410,7 +410,7 @@ public class Ruleset{
 //
 ///**************************************************************************
 //  Lookup entry in the file and return the corresponding government index;
-//  dies if can't find/match.  filename is for error message.
+//  util.dies if can't find/match.  filename is for error message.
 //**************************************************************************/
 //static int lookup_government(section_file file, final String entry,
 //			     final String filename)
@@ -520,7 +520,7 @@ public class Ruleset{
 //
 //  /* The names: */
 //  sec = secfile_get_secnames_prefix(file, "advance_", &num_techs);
-//  util.freelog(LOG_VERBOSE, "%d advances (including possibly unused)", num_techs);
+//  util.freelog(Log.LOG_VERBOSE, "%d advances (including possibly unused)", num_techs);
 //  if(num_techs == 0) {
 //    util.freelog(LOG_FATAL, "No Advances?! (%s)", filename);
 //    exit(EXIT_FAILURE);
@@ -609,9 +609,9 @@ public class Ruleset{
 //    }
 //    free(slist);
 //
-//    sz_strlcpy(a.graphic_str,
+//    a.graphic_str = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.graphic", sec[i]));
-//    sz_strlcpy(a.graphic_alt,
+//    a.graphic_alt = String.format(
 //	       secfile_lookup_str_default(file, "-",
 //					  "%s.graphic_alt", sec[i]));
 //    
@@ -666,7 +666,7 @@ public class Ruleset{
 //
 //  /* Some more consistency checking: 
 //     Non-removed techs depending on removed techs is too
-//     broken to fix by default, so die.
+//     broken to fix by default, so util.die.
 //  */
 //  tech_type_iterate(i) {
 //    if (i != A_NONE && tech_exists(i)) {
@@ -706,7 +706,7 @@ public class Ruleset{
 //
 //  /* The names: */
 //  sec = secfile_get_secnames_prefix(file, "unit_", &nval);
-//  util.freelog(LOG_VERBOSE, "%d unit types (including possibly unused)", nval);
+//  util.freelog(Log.LOG_VERBOSE, "%d unit types (including possibly unused)", nval);
 //  if(nval == 0) {
 //    util.freelog(LOG_FATAL, "No units?! (%s)", filename);
 //    exit(EXIT_FAILURE);
@@ -910,22 +910,22 @@ public class Ruleset{
 //    }
 //    u.move_type = ival;
 //    
-//    sz_strlcpy(u.sound_move,
+//    u.sound_move = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.sound_move",
 //					  sec[i]));
-//    sz_strlcpy(u.sound_move_alt,
+//    u.sound_move_alt = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.sound_move_alt",
 //					  sec[i]));
-//    sz_strlcpy(u.sound_fight,
+//    u.sound_fight = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.sound_fight",
 //					  sec[i]));
-//    sz_strlcpy(u.sound_fight_alt,
+//    u.sound_fight_alt = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.sound_fight_alt",
 //					  sec[i]));
 //    
-//    sz_strlcpy(u.graphic_str,
+//    u.graphic_str = String.format(
 //	       secfile_lookup_str(file,"%s.graphic", sec[i]));
-//    sz_strlcpy(u.graphic_alt,
+//    u.graphic_alt = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.graphic_alt", sec[i]));
 //    
 //    u.build_cost =
@@ -1135,7 +1135,7 @@ public class Ruleset{
 //
 //  /* The names: */
 //  sec = secfile_get_secnames_prefix(file, "building_", &nval);
-//  util.freelog(LOG_VERBOSE, "%d improvement types (including possibly unused)", nval);
+//  util.freelog(Log.LOG_VERBOSE, "%d improvement types (including possibly unused)", nval);
 //  if (nval == 0) {
 //    util.freelog(LOG_FATAL, "No improvements?! (%s)", filename);
 //    exit(EXIT_FAILURE);
@@ -1417,14 +1417,14 @@ public class Ruleset{
 //      }
 //    }
 //
-//    sz_strlcpy(b.graphic_str,
+//    b.graphic_str = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.graphic", sec[i]));
-//    sz_strlcpy(b.graphic_alt,
+//    b.graphic_alt = String.format(
 //	    secfile_lookup_str_default(file, "-", "%s.graphic_alt", sec[i]));
 //
-//    sz_strlcpy(b.soundtag,
+//    b.soundtag = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.sound", sec[i]));
-//    sz_strlcpy(b.soundtag_alt,
+//    b.soundtag_alt = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.sound_alt",
 //					  sec[i]));
 //    b.helptext = lookup_helptext(file, sec[i]);
@@ -1612,9 +1612,9 @@ public class Ruleset{
 //    tile_type t = get_tile_type(i);
 //      char *s1_name, *s2_name, **slist;
 //
-//      sz_strlcpy(t.graphic_str,
+//      t.graphic_str = String.format(
 //		 secfile_lookup_str(file,"%s.graphic", sec[i]));
-//      sz_strlcpy(t.graphic_alt,
+//      t.graphic_alt = String.format(
 //		 secfile_lookup_str(file,"%s.graphic_alt", sec[i]));
 //
 //      t.identifier = secfile_lookup_str(file, "%s.identifier", sec[i])[0];
@@ -1820,9 +1820,9 @@ public class Ruleset{
 //    g.required_tech
 //      = lookup_tech(file, sec[i], "tech_req", false, filename, g.name);
 //    
-//    sz_strlcpy(g.graphic_str,
+//    g.graphic_str = String.format(
 //	       secfile_lookup_str(file, "%s.graphic", sec[i]));
-//    sz_strlcpy(g.graphic_alt,
+//    g.graphic_alt = String.format(
 //	       secfile_lookup_str(file, "%s.graphic_alt", sec[i]));
 //    
 //    g.martial_law_max = secfile_lookup_int(file, "%s.martial_law_max", sec[i]);
@@ -1937,10 +1937,10 @@ public class Ruleset{
 //    title = &(g.ruler_titles[0]);
 //
 //    title.nation = DEFAULT_TITLE;
-//    sz_strlcpy(title.male_title_orig,
+//    title.male_title_orig = String.format(
 //	       secfile_lookup_str(file, "%s.ruler_male_title", sec[i]));
 //    title.male_title = title.male_title_orig;
-//    sz_strlcpy(title.female_title_orig,
+//    title.female_title_orig = String.format(
 //	       secfile_lookup_str(file, "%s.ruler_female_title", sec[i]));
 //    title.female_title = title.female_title_orig;
 //  } government_iterate_end;
@@ -2079,7 +2079,7 @@ public class Ruleset{
 //
 //  sec = secfile_get_secnames_prefix(file, "nation", &game.nation_count);
 //  game.playable_nation_count = game.nation_count - 2;
-//  util.freelog(LOG_VERBOSE, "There are %d nations defined", game.playable_nation_count);
+//  util.freelog(Log.LOG_VERBOSE, "There are %d nations defined", game.playable_nation_count);
 //
 //  if (game.playable_nation_count < 0) {
 //    util.freelog(LOG_FATAL,
@@ -2328,9 +2328,9 @@ public class Ruleset{
 //
 //    /* Flags */
 //
-//    sz_strlcpy(pl.flag_graphic_str,
+//    pl.flag_graphic_str = String.format(
 //	       secfile_lookup_str(file, "%s.flag", sec[i]));
-//    sz_strlcpy(pl.flag_graphic_alt,
+//    pl.flag_graphic_alt = String.format(
 //	       secfile_lookup_str(file, "%s.flag_alt", sec[i]));
 //
 //    /* Ruler titles */
@@ -2354,16 +2354,16 @@ public class Ruleset{
 //	/* Truncation is handled by set_ruler_title(). */
 //	set_ruler_title(gov, i, male_name, female_name);
 //      } else {
-//	/* LOG_VERBOSE rather than Log.LOG_ERROR so that can use single nation
+//	/* Log.LOG_VERBOSE rather than Log.LOG_ERROR so that can use single nation
 //	   ruleset file with variety of government ruleset files: */
-//        util.freelog(LOG_VERBOSE,
+//        util.freelog(Log.LOG_VERBOSE,
 //		"Nation %s: government %s not found", pl.name, g);
 //      }
 //    }
 //
 //    /* City styles */
 //
-//    sz_strlcpy(temp_name,
+//    temp_name = String.format(
 //	       secfile_lookup_str_default(file, "-", "%s.city_style", sec[i]));
 //    pl.city_style = get_style_by_name(temp_name);
 //    if (pl.city_style == -1) {
@@ -2405,7 +2405,7 @@ public class Ruleset{
 //	 * But it can happen normally.  The civ1 compatability ruleset only
 //	 * uses the nations that were in civ1, so not all of the links will
 //	 * exist. */
-//	util.freelog(LOG_VERBOSE,
+//	util.freelog(Log.LOG_VERBOSE,
 //		"Civil war nation %s for nation %s not defined.",
 //		civilwar_nations[k], pl.name);
 //      }
@@ -2427,20 +2427,20 @@ public class Ruleset{
 //
 //    techs = secfile_lookup_str_vec(file, &dim, "%s.tech_goals", sec[i]);
 //    if( dim > MAX_NUM_TECH_GOALS ) {
-//      util.freelog(LOG_VERBOSE,
+//      util.freelog(Log.LOG_VERBOSE,
 //	      "Only %d techs can be used from %d defined for nation %s",
 //	      MAX_NUM_TECH_GOALS, dim, pl.name_plural);
 //      dim = MAX_NUM_TECH_GOALS;
 //    }
-//    /* Below LOG_VERBOSE rather than Log.LOG_ERROR so that can use single
+//    /* Below Log.LOG_VERBOSE rather than Log.LOG_ERROR so that can use single
 //       nation ruleset file with variety of tech ruleset files: */
 //    for( j=0; j<dim; j++) {
 //      val = find_tech_by_name(techs[j]);
 //      if(val == A_LAST) {
-//	util.freelog(LOG_VERBOSE, "Could not match tech goal \"%s\" for the %s",
+//	util.freelog(Log.LOG_VERBOSE, "Could not match tech goal \"%s\" for the %s",
 //		techs[j], pl.name_plural);
 //      } else if (!tech_exists(val)) {
-//	util.freelog(LOG_VERBOSE, "Goal tech \"%s\" for the %s doesn't exist",
+//	util.freelog(Log.LOG_VERBOSE, "Goal tech \"%s\" for the %s doesn't exist",
 //		techs[j], pl.name_plural);
 //	val = A_LAST;
 //      }
@@ -2451,7 +2451,7 @@ public class Ruleset{
 //    }
 //    util.freelog(Log.LOG_DEBUG, "%s %d tech goals", pl.name, j);
 //    if(j==0) {
-//      util.freelog(LOG_VERBOSE, "No valid goal techs for %s", pl.name);
+//      util.freelog(Log.LOG_VERBOSE, "No valid goal techs for %s", pl.name);
 //    }
 //    while( j < MAX_NUM_TECH_GOALS )
 //      pl.goals.tech[j++] = A_UNSET;
@@ -2459,29 +2459,29 @@ public class Ruleset{
 //
 //    /* AI wonder & government */
 //
-//    sz_strlcpy(temp_name, secfile_lookup_str(file, "%s.wonder", sec[i]));
+//    temp_name = String.format( secfile_lookup_str(file, "%s.wonder", sec[i]));
 //    val = find_improvement_by_name(temp_name);
-//    /* Below LOG_VERBOSE rather than Log.LOG_ERROR so that can use single
+//    /* Below Log.LOG_VERBOSE rather than Log.LOG_ERROR so that can use single
 //       nation ruleset file with variety of building ruleset files: */
 //    /* for any problems, leave as B_LAST */
 //    if(val == B_LAST) {
-//      util.freelog(LOG_VERBOSE, "Didn't match goal wonder \"%s\" for %s", temp_name, pl.name);
+//      util.freelog(Log.LOG_VERBOSE, "Didn't match goal wonder \"%s\" for %s", temp_name, pl.name);
 //    } else if(!improvement_exists(val)) {
-//      util.freelog(LOG_VERBOSE, "Goal wonder \"%s\" for %s doesn't exist", temp_name, pl.name);
+//      util.freelog(Log.LOG_VERBOSE, "Goal wonder \"%s\" for %s doesn't exist", temp_name, pl.name);
 //      val = B_LAST;
 //    } else if(!is_wonder(val)) {
-//      util.freelog(LOG_VERBOSE, "Goal wonder \"%s\" for %s not a wonder", temp_name, pl.name);
+//      util.freelog(Log.LOG_VERBOSE, "Goal wonder \"%s\" for %s not a wonder", temp_name, pl.name);
 //      val = B_LAST;
 //    }
 //    pl.goals.wonder = val;
 //    util.freelog(Log.LOG_DEBUG, "%s wonder goal %d %s", pl.name, val, temp_name);
 //
-//    sz_strlcpy(temp_name, secfile_lookup_str(file, "%s.government", sec[i]));
+//    temp_name = String.format( secfile_lookup_str(file, "%s.government", sec[i]));
 //    gov = find_government_by_name(temp_name);
 //    if(!gov) {
-//      /* LOG_VERBOSE rather than Log.LOG_ERROR so that can use single nation
+//      /* Log.LOG_VERBOSE rather than Log.LOG_ERROR so that can use single nation
 //	 ruleset file with variety of government ruleset files: */
-//      util.freelog(LOG_VERBOSE, "Didn't match goal government name \"%s\" for %s",
+//      util.freelog(Log.LOG_VERBOSE, "Didn't match goal government name \"%s\" for %s",
 //	      temp_name, pl.name);
 //      val = game.government_when_anarchy;  /* flag value (no goal) (?) */
 //    } else {
@@ -2978,11 +2978,11 @@ public class Ruleset{
 //      packet.shield_special_2 = t.shield_special_2;
 //      packet.trade_special_2 = t.trade_special_2;
 //
-//      sz_strlcpy(packet.graphic_str_special_1, t.special[0].graphic_str);
-//      sz_strlcpy(packet.graphic_alt_special_1, t.special[0].graphic_alt);
+//      packet.graphic_str_special_1 = String.format( t.special[0].graphic_str);
+//      packet.graphic_alt_special_1 = String.format( t.special[0].graphic_alt);
 //
-//      sz_strlcpy(packet.graphic_str_special_2, t.special[1].graphic_str);
-//      sz_strlcpy(packet.graphic_alt_special_2, t.special[1].graphic_alt);
+//      packet.graphic_str_special_2 = String.format( t.special[1].graphic_str);
+//      packet.graphic_alt_special_2 = String.format( t.special[1].graphic_alt);
 //
 //      packet.road_trade_incr = t.road_trade_incr;
 //      packet.road_time = t.road_time;
@@ -3155,11 +3155,11 @@ public class Ruleset{
 //    city_p.techreq = city_styles[k].techreq;
 //    city_p.replaced_by = city_styles[k].replaced_by;
 //
-//    sz_strlcpy(city_p.name, city_styles[k].name_orig);
-//    sz_strlcpy(city_p.graphic, city_styles[k].graphic);
-//    sz_strlcpy(city_p.graphic_alt, city_styles[k].graphic_alt);
-//    sz_strlcpy(city_p.citizens_graphic, city_styles[k].citizens_graphic);
-//    sz_strlcpy(city_p.citizens_graphic_alt,
+//    city_p.name = String.format( city_styles[k].name_orig);
+//    city_p.graphic = String.format( city_styles[k].graphic);
+//    city_p.graphic_alt = String.format( city_styles[k].graphic_alt);
+//    city_p.citizens_graphic = String.format( city_styles[k].citizens_graphic);
+//    city_p.citizens_graphic_alt = String.format(
 //			 city_styles[k].citizens_graphic_alt);
 //
 //    lsend_packet_ruleset_city(dest, &city_p);

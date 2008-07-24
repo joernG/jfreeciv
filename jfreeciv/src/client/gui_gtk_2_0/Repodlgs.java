@@ -1402,7 +1402,7 @@ public class Repodlgs{
 //    char buffer[MAX_LEN_MSG];
 //
 //    /* append the name of the option */
-//    my_snprintf(buffer, MAX_LEN_MSG, "/set %s ", gtk_widget_get_name(w));
+//    buffer = String.format "/set %s ", gtk_widget_get_name(w));
 //
 //    /* append the setting */
 //    if (GTK_IS_ENTRY(w)) {

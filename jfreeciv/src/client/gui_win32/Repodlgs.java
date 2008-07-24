@@ -91,7 +91,7 @@ public class Repodlgs{
 //  int hist, id, steps;
 //
 //  if (!science_dlg) return;            
-//  sz_strlcpy(text, get_report_title("Science"));
+//  text = String.format( get_report_title("Science"));
 //  sz_strlcat(text, science_dialog_text());
 //  SetWindowText(GetDlgItem(science_dlg,ID_SCIENCE_TOP),text);
 //  ListBox_ResetContent(GetDlgItem(science_dlg,ID_SCIENCE_LIST));
@@ -799,7 +799,7 @@ public class Repodlgs{
 //				      ID_OPTIONS_BASE + i)) == BST_CHECKED;
 //	    if (val != settable_options[i].val) {
 //	      char buffer[MAX_LEN_MSG];
-//	      my_snprintf(buffer, MAX_LEN_MSG, "/set %s %d",
+//	      buffer = String.format "/set %s %d",
 //			  settable_options[i].name, val);
 //	      send_chat(buffer);
 //	    }
@@ -811,7 +811,7 @@ public class Repodlgs{
 //	    val = atoi(buf);
 //	    if (val != settable_options[i].val) {
 //	      char buffer[MAX_LEN_MSG];
-//	      my_snprintf(buffer, MAX_LEN_MSG, "/set %s %d",
+//	      buffer = String.format "/set %s %d",
 //			  settable_options[i].name, val);
 //	      send_chat(buffer);
 //	    }	    
@@ -821,7 +821,7 @@ public class Repodlgs{
 //			 strval, 512);
 //	    if (strcmp(strval, settable_options[i].strval) != 0) {
 //	      char buffer[MAX_LEN_MSG];
-//	      my_snprintf(buffer, MAX_LEN_MSG, "/set %s %s",
+//	      buffer = String.format "/set %s %s",
 //			  settable_options[i].name, strval);
 //	      send_chat(buffer);
 //	    }
@@ -949,15 +949,15 @@ public class Repodlgs{
 //      /* integer */
 //      char buf[80];
 //      int length;
-//      my_snprintf(buf, 80, "%d", settable_options[i].max);
+//      buf = String.format "%d", settable_options[i].max);
 //      buf[79] = 0;
 //      length = buf.length();
-//      my_snprintf(buf, 80, "%d", settable_options[i].min);
+//      buf = String.format "%d", settable_options[i].min);
 //      buf[79] = 0;
 //      if (length < buf.length()) {
 //        length = buf.length();
 //      }
-//      my_snprintf(buf, 80, "%d", settable_options[i].val);
+//      buf = String.format "%d", settable_options[i].val);
 //      fcwin_box_add_edit(hbox, buf, length, ID_OPTIONS_BASE + i, 0, false,
 //			 true, 5);
 //    } else {

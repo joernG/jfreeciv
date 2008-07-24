@@ -539,7 +539,7 @@ public class Effects{
 //    problem = (T_UNKNOWN == data);
 //    break;
 //  default:
-//    die("for %s: unimplemented requirement type '%d'",
+//    util.die("for %s: unimplemented requirement type '%d'",
 //	get_improvement_name(source), req_type);
 //    return -1;
 //  }

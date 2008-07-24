@@ -31,7 +31,7 @@ public class Option {
 //			} else if (is_option("--meta", argv[inx]))
 //				server.Srv_main.srvarg.metaserver_no_send = false;
 //			else if ((option = get_option("--Metaserver", argv, &inx, argc))) {
-//				sz_strlcpy(server.server.Srv_main.srvarg.metaserver_addr, argv[inx]);
+//				server.server.Srv_main.srvarg.metaserver_addr = String.format( argv[inx]);
 //				/*
 //				 * --Metaserver implies
 //				 * --meta

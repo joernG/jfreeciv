@@ -288,7 +288,7 @@ public class Aiunit{
 //     break;
 // 
 //  default:
-//    die("ai/aiunit.c:unit_move_turns: illegal move type %d",
+//    util.die("ai/aiunit.c:unit_move_turns: illegal move type %d",
 //	punit.unit_type().move_type);
 //    move_time = 0;
 //  }
@@ -1770,7 +1770,7 @@ public class Aiunit{
 //   * FIXME: 2. would be more convenient if it returned false if we run out 
 //   * of moves too.*/
 //  if (!ai_military_rampage(punit, RAMPAGE_ANYTHING, RAMPAGE_ANYTHING)) {
-//    return; /* we died */
+//    return; /* we util.died */
 //  }
 //  
 //  if (punit.moves_left <= 0) {
@@ -1805,7 +1805,7 @@ public class Aiunit{
 //        }
 //        /* Either we're adjacent or we sitting on the tile. We might be
 //         * sitting on the tile if the enemy that _was_ sitting there 
-//         * attacked us and died _and_ we had enough movement to get there */
+//         * attacked us and util.died _and_ we had enough movement to get there */
 //        if (Map.same_pos(punit.tile, dest_tile)) {
 //          UNIT_LOG(Log.LOG_DEBUG, punit, "mil att made it . (%d,%d)",
 //                 dest_tile.x, dest_tile.y);
@@ -1973,14 +1973,14 @@ public class Aiunit{
 //                            RAMPAGE_FREE_CITY_OR_BETTER)) {
 //      UNIT_LOG(LOGLEVEL_RECOVERY, punit, "recovering hit points.");
 //    } else {
-//      return; /* we died heroically defending our city */
+//      return; /* we util.died heroically defending our city */
 //    }
 //  } else {
 //    /* goto to nearest city to recover hit points */
 //    /* just before, check to see if we can occupy an undefended enemy city */
 //    if (!ai_military_rampage(punit, RAMPAGE_FREE_CITY_OR_BETTER, 
 //                             RAMPAGE_FREE_CITY_OR_BETTER)) { 
-//      return; /* oops, we died */
+//      return; /* oops, we util.died */
 //    }
 //
 //    /* find city to stay and go there */
@@ -1988,7 +1988,7 @@ public class Aiunit{
 //    if (safe) {
 //      UNIT_LOG(LOGLEVEL_RECOVERY, punit, "going to %s to recover", safe.name);
 //      if (!ai_unit_goto(punit, safe.tile)) {
-//        util.freelog(LOGLEVEL_RECOVERY, "died trying to hide and recover");
+//        util.freelog(LOGLEVEL_RECOVERY, "util.died trying to hide and recover");
 //        return;
 //      }
 //    } else {
@@ -2141,7 +2141,7 @@ public class Aiunit{
 //    }
 //    if( !is_military_unit(punit)
 //	&& !unit_has_role(punit.type, L_BARBARIAN_LEADER)) {
-//      util.freelog(LOG_VERBOSE, "Barbarians picked up non-military unit.");
+//      util.freelog(Log.LOG_VERBOSE, "Barbarians picked up non-military unit.");
 //      return;
 //    }
 //  }

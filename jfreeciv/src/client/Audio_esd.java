@@ -189,8 +189,8 @@ public class Audio_esd{
 //{
 //  struct audio_plugin self;
 //
-//  sz_strlcpy(self.name, "esd");
-//  sz_strlcpy(self.descr, "ESound server plugin");
+//  self.name = String.format( "esd");
+//  self.descr = String.format( "ESound server plugin");
 //  self.init = my_init;
 //  self.shutdown = my_shutdown;
 //  self.stop = my_stop;

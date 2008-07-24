@@ -66,3 +66,12 @@ my_snprintf\s*\(\s*([a-zA-Z0-9\_\.]+)\s*\,\s*sizeof\([^\)]+\)\s*\,
     
 \"(\s*\n\/?\/?\s*)\"
         " +$1"
+sz_strlcpy\s*\(\s*([0-9a-zA-Z\_\.]+)\s*\,\s*([0-9a-zA-Z\_\.]+)\s*\)
+        sz_strlcpy(tmpname, username)
+    $1 = $2
+strncmp\s*\(\s*([0-9a-zA-Z\_\.]+)\s*\,\s*([0-9a-zA-Z\_\.]+)\s*\,\s*([0-9a-zA-Z\_\.]+)\s*\)\s*\!\=\s*0
+        strncmp(tmpname, username, MAX_LEN_NAME) != 0    
+    $1.equals($2)
+strncmp\s*\(\s*([0-9a-zA-Z\_\.]+)\s*\,\s*([0-9a-zA-Z\_\.]+)\s*\,\s*([0-9a-zA-Z\_\.]+)\s*\)\s*\=\=\s*0
+        strncmp(tmpname, username, MAX_LEN_NAME) == 0    
+    !$1.equals($2)

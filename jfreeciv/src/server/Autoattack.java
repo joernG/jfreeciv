@@ -292,7 +292,7 @@ public class Autoattack {
 		// auto_attack_player(pplayer);
 		// } shuffled_players_iterate_end;
 		// if (timer_in_use(t)) {
-		// util.freelog(LOG_VERBOSE, "autoattack consumed %g milliseconds.",
+		// util.freelog(Log.LOG_VERBOSE, "autoattack consumed %g milliseconds.",
 		// 1000.0*read_timer_seconds(t));
 		// }
 	}

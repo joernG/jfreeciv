@@ -344,7 +344,7 @@ public class Diplhand{
 //         * and try to give us the same tech at the same time. This
 //         * should be handled discreetly instead of giving a core dump. */
 //        if (get_invention(pdest, pclause.value) == TECH_KNOWN) {
-//	  util.freelog(LOG_VERBOSE,
+//	  util.freelog(Log.LOG_VERBOSE,
 //                  "The %s already know tech %s, that %s want to give them.",
 //		  Nation.get_nation_name_plural(pdest.nation),
 //		  get_tech_name(pplayer, pclause.value),

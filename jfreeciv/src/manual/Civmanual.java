@@ -121,7 +121,7 @@ public class Civmanual{
 //
 //    if (!is_reg_file_for_access(filename, true)
 //        || !(doc = fopen(filename, "w"))) {
-//      die("Could not write manual file %s.", filename);
+//      util.die("Could not write manual file %s.", filename);
 //      return false;
 //    }
 //

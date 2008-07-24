@@ -103,7 +103,7 @@ public class Gui_tilespec{
 //  case CITIZEN_ANGRY:
 //    return "angry";
 //  default:
-//    die("unknown citizen type %d", (int) citizen);
+//    util.die("unknown citizen type %d", (int) citizen);
 //  }
 //  return null;
 //}

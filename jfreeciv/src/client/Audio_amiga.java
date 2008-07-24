@@ -160,8 +160,8 @@ public class Audio_amiga{
 //{
 //  struct audio_plugin self;
 //
-//  sz_strlcpy(self.name, "amiga");
-//  sz_strlcpy(self.descr, "Amiga audio plugin");
+//  self.name = String.format( "amiga");
+//  self.descr = String.format( "Amiga audio plugin");
 //  self.init = my_init;
 //  self.shutdown = my_shutdown;
 //  self.stop = my_stop;

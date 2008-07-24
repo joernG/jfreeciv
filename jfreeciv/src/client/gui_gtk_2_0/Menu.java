@@ -1274,9 +1274,9 @@ public class Menu{
 //      Terrain_type_id  ttype;
 //      tile_type       tinfo;
 //
-//      sz_strlcpy(irrtext, "Build _Irrigation");
-//      sz_strlcpy(mintext, "Build _Mine");
-//      sz_strlcpy(transtext, "Transf_orm Terrain");
+//      irrtext = String.format( "Build _Irrigation");
+//      mintext = String.format( "Build _Mine");
+//      transtext = String.format( "Transf_orm Terrain");
 //      
 //      /* Enable the button for adding to a city in all cases, so we
 //	 get an eventual error message from the server if we try. */
@@ -1377,7 +1377,7 @@ public class Menu{
 //      } else if (map_has_special(punit.tile, S_IRRIGATION)
 //		 && player_knows_techs_with_flag(game.player_ptr,
 //						 TF_FARMLAND)) {
-//	sz_strlcpy(irrtext, "Bu_ild Farmland");
+//	irrtext = String.format( "Bu_ild Farmland");
 //      }
 //      if (tinfo.mining_result != T_NONE
 //	  && tinfo.mining_result != ttype) {

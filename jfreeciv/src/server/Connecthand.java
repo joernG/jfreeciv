@@ -52,7 +52,7 @@ public class Connecthand{
 //  packet.capability = our_capability;
 //  packet.message = util.my_snprintf( "%s Welcome",
 //              pconn.username);
-//  sz_strlcpy(packet.challenge_file, new_challenge_filename(pconn));
+//  packet.challenge_file = String.format( new_challenge_filename(pconn));
 //  packet.conn_id = pconn.id;
 //  send_packet_server_join_reply(pconn, &packet);
 //
@@ -111,7 +111,7 @@ public class Connecthand{
 //  } else if (Srv_main.server_state == server_states.PRE_GAME_STATE && game.is_new_game) {
 //    if (!attach_connection_to_player(pconn, null)) {
 //      Plrhand.notify_conn(dest, "Couldn't attach your Connection to new player.");
-//      util.freelog(LOG_VERBOSE, "%s is not attached to a player", pconn.username);
+//      util.freelog(Log.LOG_VERBOSE, "%s is not attached to a player", pconn.username);
 //    } else {
 //      pconn.player.name = pconn.username;
 //    }
@@ -171,7 +171,7 @@ public static void reject_new_connection(final String msg, Connection pconn)
 //  packet.challenge_file[0] = '\0';
 //  packet.conn_id = -1;
 //  send_packet_server_join_reply(pconn, &packet);
-//  util.freelog(Log.LOG_NORMAL, "Client rejected: %s.", conn_description(pconn));
+//  util.freelog(Log.LOG_NORMAL, "Client rejected: %s.", pconn.conn_description());
 //  flush_connection_send_buffer_all(pconn);
 }
 
@@ -191,8 +191,8 @@ public static void reject_new_connection(final String msg, Connection pconn)
 //  util.freelog(Log.LOG_NORMAL, "%s has client version %d.%d.%d%s",
 //          pconn.username, req.major_version, req.minor_version,
 //          req.patch_version, req.version_label);
-//  util.freelog(LOG_VERBOSE, "Client caps: %s", req.capability);
-//  util.freelog(LOG_VERBOSE, "Server caps: %s", our_capability);
+//  util.freelog(Log.LOG_VERBOSE, "Client caps: %s", req.capability);
+//  util.freelog(Log.LOG_VERBOSE, "Server caps: %s", our_capability);
 //  pconn.capability = req.capability;
 //  
 //  /* Make sure the server has every capability the client needs */
@@ -268,7 +268,7 @@ public static void reject_new_connection(final String msg, Connection pconn)
 //void lost_connection_to_client(Connection pconn)
 //{
 //  player pplayer = pconn.player;
-//  final String desc = conn_description(pconn);
+//  final String desc = pconn.conn_description();
 //
 //  util.freelog(Log.LOG_NORMAL, "Lost Connection: %s.", desc);
 //  

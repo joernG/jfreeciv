@@ -105,7 +105,7 @@ public class Sha{
 //  unit_list_init(&previous_units);
 //
 //  memset(&self, 0, sizeof(self));
-//  sz_strlcpy(self.name, "Simple Historian");
+//  self.name = String.format( "Simple Historian");
 //
 //  self.level = LAST_AGENT_LEVEL;
 //

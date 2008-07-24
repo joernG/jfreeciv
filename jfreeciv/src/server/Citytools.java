@@ -259,13 +259,13 @@ public class Citytools{
 //boolean is_allowed_city_name(player pplayer, final String city_name,
 //			  char *error_buf, size_t bufsz)
 //{
-//  connection pconn = find_conn_by_user(pplayer.username);
+//  connection pconn = Connection.find_conn_by_user(pplayer.username);
 //
 //  /* Mode 1: A city name has to be unique for each player. */
 //  if (game.allowed_city_names == 1 &&
 //      city_list_find_name(&pplayer.cities, city_name)) {
 //    if (error_buf) {
-//      my_snprintf(error_buf, bufsz, "You already have a city called %s.",
+//      error_buf = String.format "You already have a city called %s.",
 //		  city_name);
 //    }
 //    return false;
@@ -275,7 +275,7 @@ public class Citytools{
 //  if ((game.allowed_city_names == 2 || game.allowed_city_names == 3)
 //      && game_find_city_by_name(city_name)) {
 //    if (error_buf) {
-//      my_snprintf(error_buf, bufsz,
+//      error_buf = String.format
 //		  "A city called %s already exists.", city_name);
 //    }
 //    return false;
@@ -303,7 +303,7 @@ public class Citytools{
 //
 //    if (pother != null) {
 //      if (error_buf) {
-//	my_snprintf(error_buf, bufsz, ("Can't use %s as a city name. It is " +
+//	error_buf = String.format ("Can't use %s as a city name. It is " +
 //					"reserved for %s."),
 //		    city_name, Nation.get_nation_name_plural(pother.nation));
 //      }
@@ -318,10 +318,10 @@ public class Citytools{
 //   * We can even reach here for an AI player, if all the cities of the
 //   * original nation are exhausted and the backup nations have non-ascii
 //   * names in them. */
-//  if (!is_ascii_name(city_name)
+//  if (!util.isLetter(city_name)
 //      && (!pconn || pconn.access_level != ALLOW_HACK)) {
 //    if (error_buf) {
-//      my_snprintf(error_buf, bufsz,
+//      error_buf = String.format
 //		  ("%s is not a valid name. Only ASCII or " +
 //		    "ruleset names are allowed for cities."),
 //		  city_name);
@@ -372,7 +372,7 @@ public class Citytools{
 //   * New nations are just added onto the end.
 //   */
 //
-//  util.freelog(LOG_VERBOSE, "Suggesting city name for %s at (%d,%d)",
+//  util.freelog(Log.LOG_VERBOSE, "Suggesting city name for %s at (%d,%d)",
 //	  pplayer.name, ptile.x, ptile.y);
 //  
 //  memset(nations_selected, 0, sizeof(nations_selected));
@@ -439,7 +439,7 @@ public class Citytools{
 //  }
 //
 //  for (i = 1; i <= num_tiles; i++ ) {
-//    my_snprintf(tempname, MAX_LEN_NAME, "City no. %d", i);
+//    tempname = String.format "City no. %d", i);
 //    if (!game_find_city_by_name(tempname)) {
 //      return tempname;
 //    }
@@ -447,7 +447,7 @@ public class Citytools{
 //  
 //  /* This had better be impossible! */
 //  assert(false);
-//  sz_strlcpy(tempname, "A poorly-named city");
+//  tempname = String.format( "A poorly-named city");
 //  return tempname;
 //}
 //
@@ -552,7 +552,7 @@ public class Citytools{
 //  player to_player = city_owner(tocity);
 //
 //  if (from_player == to_player) {
-//    util.freelog(LOG_VERBOSE, "Changed homecity of %s's %s to %s",
+//    util.freelog(Log.LOG_VERBOSE, "Changed homecity of %s's %s to %s",
 //	    from_player.name, unit_name(punit.type), tocity.name);
 //    if (verbose) {
 //      notify_player(from_player, "Game: Changed homecity of %s to %s.",
@@ -561,7 +561,7 @@ public class Citytools{
 //  } else {
 //    city in_city = map_get_city(punit.tile);
 //    if (in_city) {
-//      util.freelog(LOG_VERBOSE, "Transfered %s in %s from %s to %s",
+//      util.freelog(Log.LOG_VERBOSE, "Transfered %s in %s from %s to %s",
 //	      unit_name(punit.type), in_city.name,
 //	      from_player.name, to_player.name);
 //      if (verbose) {
@@ -570,7 +570,7 @@ public class Citytools{
 //		      from_player.name, to_player.name);
 //      }
 //    } else {
-//      util.freelog(LOG_VERBOSE, "Transfered %s from %s to %s",
+//      util.freelog(Log.LOG_VERBOSE, "Transfered %s from %s to %s",
 //	      unit_name(punit.type),
 //	      from_player.name, to_player.name);
 //      if (verbose) {
@@ -647,7 +647,7 @@ public class Citytools{
 //    } else {
 //      /* The unit is lost.  Call notify_player (in all other cases it is
 //       * called autmatically). */
-//      util.freelog(LOG_VERBOSE, "Lost %s's %s at (%d,%d) when %s was lost.",
+//      util.freelog(Log.LOG_VERBOSE, "Lost %s's %s at (%d,%d) when %s was lost.",
 //	      vunit.unit_owner().name, unit_name(vunit.type),
 //	      vunit.tile.x, vunit.tile.y, pcity.name);
 //      if (verbose) {
@@ -829,7 +829,7 @@ public class Citytools{
 //  old_city_name = pcity.name;
 //  if (game.allowed_city_names == 1
 //      && city_list_find_name(&ptaker.cities, pcity.name)) {
-//    sz_strlcpy(pcity.name,
+//    pcity.name = String.format(
 //	       city_name_suggestion(ptaker, pcity.tile));
 //    notify_player_ex(ptaker, pcity.tile, event_type.E_NOEVENT,
 //		     ("You already had a city called %s." +
@@ -1095,7 +1095,7 @@ public class Citytools{
 //	&& city_owner(new_home_city) == pplayer) {
 //      /* unit is in another city: make that the new homecity,
 //	 unless that city is actually the same city (happens if disbanding) */
-//      util.freelog(LOG_VERBOSE, "Changed homecity of %s in %s",
+//      util.freelog(Log.LOG_VERBOSE, "Changed homecity of %s in %s",
 //	      unit_name(punit.type), new_home_city.name);
 //      notify_player(pplayer, "Game: Changed homecity of %s in %s.",
 //		    unit_name(punit.type), new_home_city.name);

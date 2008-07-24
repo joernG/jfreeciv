@@ -40,7 +40,7 @@ public class Mem{
 //static void handle_alloc_failure(size_t size, final String called_as,
 //				 int line, final String file)
 //{
-//  die("Out of memory trying to %s %lu bytes at line %d of %s.", called_as,
+//  util.die("Out of memory trying to %s %lu bytes at line %d of %s.", called_as,
 //      (unsigned long) size, line, file);
 //}
 //
@@ -58,7 +58,7 @@ public class Mem{
 //   * preventing a large number of smaller allocations. */
 //
 //  if (size == 0) {
-//    util.freelog(LOG_VERBOSE, "Warning: %s with size %lu at line %d of %s",
+//    util.freelog(Log.LOG_VERBOSE, "Warning: %s with size %lu at line %d of %s",
 //	    called_as, (unsigned long)size, line, file);
 //  }
 //}

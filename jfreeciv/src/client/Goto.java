@@ -436,7 +436,7 @@ public class Goto{
 //    /* No break */
 //    break;
 //  default:
-//    die("Invalid connect activity.");
+//    util.die("Invalid connect activity.");
 //  }
 //
 //  return activity_mc;
@@ -700,7 +700,7 @@ public class Goto{
 //   * move rate.
 //   *
 //   * FIXME: for units traveling across dangerous terrains with partial MP
-//   * (which is very rare) using TM_BEST_TIME could cause them to die. */
+//   * (which is very rare) using TM_BEST_TIME could cause them to util.die. */
 //  parameter.turn_mode = TM_BEST_TIME;
 //  parameter.start_tile = punit.tile;
 //
@@ -902,7 +902,7 @@ public class Goto{
 //  map = pf_create_map(&parameter);
 //  return_path = pf_get_path(map, goto_map.parts[0].start_tile);
 //  if (!return_path) {
-//    die("No return path found!");
+//    util.die("No return path found!");
 //  }
 //
 //  for (i = 0; i < goto_map.num_parts; i++) {
@@ -973,7 +973,7 @@ public class Goto{
 //      }
 //      break;
 //    default:
-//      die("Invalid connect activity.");
+//      util.die("Invalid connect activity.");
 //      break;
 //    }
 //

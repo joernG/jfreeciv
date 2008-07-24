@@ -1301,7 +1301,7 @@ public class Stdinhand{
 //		cmdlevel_name(level));
 //    }
 //  }
-//  else if ((ptarget = find_conn_by_user_prefix(arg_name, &match_result))) {
+//  else if ((ptarget = Connection.find_conn_by_user_prefix(arg_name, &match_result))) {
 //    if (set_cmdlevel(caller, ptarget, level)) {
 //      cmd_reply(CMD_CMDLEVEL, caller, C_OK,
 //		"Command access level set to '%s' for connection %s.",
@@ -1717,9 +1717,9 @@ public class Stdinhand{
 //    memset(&packet, 0, sizeof(packet));
 //
 //    packet.id = s++;
-//    sz_strlcpy(packet.name, settings[i].name);
-//    sz_strlcpy(packet.short_help, settings[i].short_help);
-//    sz_strlcpy(packet.extra_help, settings[i].extra_help);
+//    packet.name = String.format( settings[i].name);
+//    packet.short_help = String.format( settings[i].short_help);
+//    packet.extra_help = String.format( settings[i].extra_help);
 //
 //    packet.category = settings[i].category;
 //    packet.type = settings[i].type;
@@ -2088,7 +2088,7 @@ public class Stdinhand{
 //    goto cleanup;
 //  }
 //
-//  if (!is_ascii_name(arg[1])) {
+//  if (!util.isLetter(arg[1])) {
 //    cmd_reply(CMD_TEAM, caller, C_SYNTAX,
 //	      "Only ASCII characters are allowed for team names.");
 //    goto cleanup;
@@ -2638,7 +2638,7 @@ public class Stdinhand{
 //
 //  /* match connection if we're console, match a player if we're not */
 //  if (ntokens == 1) {
-//    if (!caller && !(pconn = find_conn_by_user_prefix(arg[0], &result))) {
+//    if (!caller && !(pconn = Connection.find_conn_by_user_prefix(arg[0], &result))) {
 //      cmd_reply_no_such_conn(CMD_OBSERVE, caller, arg[0], result);
 //      goto end;
 //    } else if (caller 
@@ -2650,7 +2650,7 @@ public class Stdinhand{
 //
 //  /* get connection name then player name */
 //  if (ntokens == 2) {
-//    if (!(pconn = find_conn_by_user_prefix(arg[0], &result))) {
+//    if (!(pconn = Connection.find_conn_by_user_prefix(arg[0], &result))) {
 //      cmd_reply_no_such_conn(CMD_OBSERVE, caller, arg[0], result);
 //      goto end;
 //    }
@@ -2843,7 +2843,7 @@ public class Stdinhand{
 //  }
 //
 //  if (ntokens == 2) {
-//    if (!(pconn = find_conn_by_user_prefix(arg[i], &match_result))) {
+//    if (!(pconn = Connection.find_conn_by_user_prefix(arg[i], &match_result))) {
 //      cmd_reply_no_such_conn(CMD_TAKE, caller, arg[i], match_result);
 //      goto end;
 //    }
@@ -2998,7 +2998,7 @@ public class Stdinhand{
 //
 //  /* match the connection if the argument was given */
 //  if (ntokens == 1 
-//      && !(pconn = find_conn_by_user_prefix(arg[0], &match_result))) {
+//      && !(pconn = Connection.find_conn_by_user_prefix(arg[0], &match_result))) {
 //    cmd_reply_no_such_conn(CMD_DETACH, caller, arg[0], match_result);
 //    goto end;
 //  }
@@ -3191,7 +3191,7 @@ public class Stdinhand{
 //  section_file_check_unused(&file, arg);
 //  section_file_free(&file);
 //
-//  util.freelog(LOG_VERBOSE, "Load time: %g seconds (%g apparent)",
+//  util.freelog(Log.LOG_VERBOSE, "Load time: %g seconds (%g apparent)",
 //          read_timer_seconds_free(loadtimer),
 //          read_timer_seconds_free(uloadtimer));
 //
@@ -3601,7 +3601,7 @@ public class Stdinhand{
 //	 * to increase the number of players beyond the number supported by
 //	 * the scenario.  The solution is a hack: cut the extra players
 //	 * when the game starts. */
-//	util.freelog(LOG_VERBOSE, "Reduced maxplayers from %i to %i to fit " +
+//	util.freelog(Log.LOG_VERBOSE, "Reduced maxplayers from %i to %i to fit " +
 //	        "to the number of start positions.",
 //		game.max_players, Map.map.num_start_positions);
 //	game.max_players = Map.map.num_start_positions;
@@ -3616,7 +3616,7 @@ public class Stdinhand{
 //	  server_remove_player(get_player(game.max_players));
 //        }
 //
-//	util.freelog(LOG_VERBOSE,
+//	util.freelog(Log.LOG_VERBOSE,
 //		"Had to cut down the number of players to the " +
 //		"number of map start positions, there must be " +
 //		"something wrong with the savegame or you " +
@@ -3699,7 +3699,7 @@ public class Stdinhand{
 //  connection ptarget;
 //  player pplayer;
 //
-//  ptarget = find_conn_by_user_prefix(name, &match_result);
+//  ptarget = Connection.find_conn_by_user_prefix(name, &match_result);
 //
 //  if (!ptarget) {
 //    cmd_reply_no_such_conn(CMD_CUT, caller, name, match_result);
@@ -3713,7 +3713,7 @@ public class Stdinhand{
 //  cmd_reply(CMD_CUT, caller, C_DISCONNECTED,
 //	    "Cutting connection %s.", ptarget.username);
 //  lost_connection_to_client(ptarget);
-//  close_connection(ptarget);
+//  ptarget.close_connection();
 //
 //  /* if we cut the connection, unassign the login name */
 //  if (pplayer) {
@@ -4080,7 +4080,7 @@ public class Stdinhand{
 //  }
 //  else {
 //    for (conn pconn : game.all_connections.data) {
-//      sz_strlcpy(buf, conn_description(pconn));
+//      buf = String.format( pconn.conn_description());
 //      if (pconn.established) {
 //	cat_snprintf(buf, sizeof(buf), " command access level %s",
 //		     cmdlevel_name(pconn.access_level));

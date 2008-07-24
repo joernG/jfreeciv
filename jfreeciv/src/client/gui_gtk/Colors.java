@@ -94,17 +94,17 @@ public class Colors{
 //
 //  if (visual.type == GDK_VISUAL_STATIC_GRAY) { 
 //    /* StaticGray, use black and white */
-//    util.freelog(LOG_VERBOSE, "found B/W display.");
+//    util.freelog(Log.LOG_VERBOSE, "found B/W display.");
 //    return BW_DISPLAY;
 //  }
 //
 //  if(visual.type < GDK_VISUAL_STATIC_COLOR) {
 //    /* No color visual available at default depth */
-//    util.freelog(LOG_VERBOSE, "found grayscale(?) display.");
+//    util.freelog(Log.LOG_VERBOSE, "found grayscale(?) display.");
 //    return GRAYSCALE_DISPLAY;
 //  }
 //
-//  util.freelog(LOG_VERBOSE, "color system booted ok.");
+//  util.freelog(Log.LOG_VERBOSE, "color system booted ok.");
 //
 //  return COLOR_DISPLAY;
 //}

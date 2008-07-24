@@ -455,7 +455,7 @@ public class Hash{
 //      }
 //      break;
 //    default:
-//      die("Bad value %d in switch(bucket.used)", (int) bucket.used);
+//      util.die("Bad value %d in switch(bucket.used)", (int) bucket.used);
 //    }
 //    i++;
 //    if (i==h.num_buckets) {
@@ -466,7 +466,7 @@ public class Hash{
 //  if (deleted) {
 //    return deleted;
 //  }
-//  die("Full hash table -- and somehow did not resize!!");
+//  util.die("Full hash table -- and somehow did not resize!!");
 //  return null;
 //}
 //
@@ -635,7 +635,7 @@ public class Hash{
 //      return bucket.key;
 //    counter++;
 //  }
-//  die("never reached");
+//  util.die("never reached");
 //  return null;
 //}
 //

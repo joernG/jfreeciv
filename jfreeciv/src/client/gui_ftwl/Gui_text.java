@@ -83,7 +83,7 @@ public class Gui_text{
 //  static char buf[GROW_TMP_SIZE];
 //
 //  if (my_vsnprintf(buf, sizeof(buf), format, ap) == -1) {
-//    die("Formatted string bigger than %lu", (unsigned long)sizeof(buf));
+//    util.die("Formatted string bigger than %lu", (unsigned long)sizeof(buf));
 //  }
 //
 //  new_len = strlen(*buffer) + buf.length() + 1;
@@ -93,7 +93,7 @@ public class Gui_text{
 //     * overhead adds up quickly. */
 //    size_t new_size = MAX(new_len, *buffer_size * 2);
 //
-//    util.freelog(LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
+//    util.freelog(Log.LOG_VERBOSE, "expand from %lu to %lu to add '%s'",
 //	    (unsigned long)*buffer_size, (unsigned long)new_size, buf);
 //
 //    *buffer_size = new_size;
@@ -314,7 +314,7 @@ public class Gui_text{
 //		(get_tile_type(tinfo.irrigation_result)).terrain_name);
 //  } else if (map_has_special(punit.tile, S_IRRIGATION)
 //	     && player_knows_techs_with_flag(game.player_ptr, TF_FARMLAND)) {
-//    sz_strlcpy(irrtext, "Bu_ild Farmland");
+//    irrtext = String.format( "Bu_ild Farmland");
 //  }
 //  if ((tinfo.mining_result != T_LAST) && (tinfo.mining_result != ttype)) {
 //    mintext = util.my_snprintf( minfmt,

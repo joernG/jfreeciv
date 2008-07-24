@@ -168,53 +168,53 @@ public class Meta{
 //
 //  switch(Srv_main.server_state) {
 //  case server_states.PRE_GAME_STATE:
-//    sz_strlcpy(state, "Pregame");
+//    state = String.format( "Pregame");
 //    break;
 //  case SELECT_RACES_STATE:
-//    sz_strlcpy(state, "Nation Select");
+//    state = String.format( "Nation Select");
 //    break;
 //  case RUN_GAME_STATE:
-//    sz_strlcpy(state, "Running");
+//    state = String.format( "Running");
 //    break;
 //  case server_states.GAME_OVER_STATE:
-//    sz_strlcpy(state, "Game Ended");
+//    state = String.format( "Game Ended");
 //    break;
 //  default:
-//    sz_strlcpy(state, "Unknown");
+//    state = String.format( "Unknown");
 //    break;
 //  }
 //
 //  /* get hostname */
 //  if (my_gethostname(host, sizeof(host)) != 0) {
-//    sz_strlcpy(host, "unknown");
+//    host = String.format( "unknown");
 //  }
 //
-//  my_snprintf(s, rest, "host=%s&port=%d&state=%s&", host, Srv_main.srvarg.port, state);
+//  s = String.format "host=%s&port=%d&state=%s&", host, Srv_main.srvarg.port, state);
 //  s = end_of_strn(s, &rest);
 //
 //  if (flag == META_GOODBYE) {
 //    mystrlcpy(s, "bye=1&", rest);
 //    s = end_of_strn(s, &rest);
 //  } else {
-//    my_snprintf(s, rest, "version=%s&", my_url_encode(VERSION_STRING));
+//    s = String.format "version=%s&", my_url_encode(VERSION_STRING));
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "patches=%s&", 
+//    s = String.format "patches=%s&", 
 //                my_url_encode(get_meta_patches_string()));
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "capability=%s&", my_url_encode(our_capability));
+//    s = String.format "capability=%s&", my_url_encode(our_capability));
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "topic=%s&",
+//    s = String.format "topic=%s&",
 //                my_url_encode(get_meta_topic_string()));
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "serverid=%s&",
+//    s = String.format "serverid=%s&",
 //                my_url_encode(Srv_main.srvarg.serverid));
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "message=%s&",
+//    s = String.format "message=%s&",
 //                my_url_encode(get_meta_message_string()));
 //    s = end_of_strn(s, &rest);
 //
@@ -228,34 +228,34 @@ public class Meta{
 //      for(player plr: game.players){
 //        boolean is_player_available = true;
 //        char type[15];
-//        connection pconn = find_conn_by_user(plr.username);
+//        connection pconn = Connection.find_conn_by_user(plr.username);
 //
 //        if (!plr.is_alive) {
-//          sz_strlcpy(type, "Dead");
+//          type = String.format( "Dead");
 //        } else if (is_barbarian(plr)) {
-//          sz_strlcpy(type, "Barbarian");
+//          type = String.format( "Barbarian");
 //        } else if (plr.ai.control) {
-//          sz_strlcpy(type, "A.I.");
+//          type = String.format( "A.I.");
 //        } else {
-//          sz_strlcpy(type, "Human");
+//          type = String.format( "Human");
 //        }
 //
-//        my_snprintf(s, rest, "plu[]=%s&", my_url_encode(plr.username));
+//        s = String.format "plu[]=%s&", my_url_encode(plr.username));
 //        s = end_of_strn(s, &rest);
 //
-//        my_snprintf(s, rest, "plt[]=%s&", type);
+//        s = String.format "plt[]=%s&", type);
 //        s = end_of_strn(s, &rest);
 //
-//        my_snprintf(s, rest, "pll[]=%s&", my_url_encode(plr.name));
+//        s = String.format "pll[]=%s&", my_url_encode(plr.name));
 //        s = end_of_strn(s, &rest);
 //
-//        my_snprintf(s, rest, "pln[]=%s&",
+//        s = String.format "pln[]=%s&",
 //                    my_url_encode(plr.nation != NO_NATION_SELECTED 
 //                                  ? Nation.get_nation_name_plural(plr.nation)
 //                                  : "none"));
 //        s = end_of_strn(s, &rest);
 //
-//        my_snprintf(s, rest, "plh[]=%s&",
+//        s = String.format "plh[]=%s&",
 //                    pconn ? my_url_encode(pconn.addr) : "");
 //        s = end_of_strn(s, &rest);
 //
@@ -284,45 +284,45 @@ public class Meta{
 //      }
 //
 //      /* send the number of available players. */
-//      my_snprintf(s, rest, "available=%d&", n);
+//      s = String.format "available=%d&", n);
 //      s = end_of_strn(s, &rest);
 //    }
 //
 //    /* send some variables: should be listed in inverted order
 //     * FIXME: these should be input from the settings array */
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("timeout"), game.timeout);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("year"), game.year);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("turn"), game.turn);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("endyear"), game.end_year);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("minplayers"), game.min_players);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("maxplayers"), game.max_players);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%s&",
+//    s = String.format "vn[]=%s&vv[]=%s&",
 //                my_url_encode("allowtake"), game.allow_take);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("generator"), Map.map.generator);
 //    s = end_of_strn(s, &rest);
 //
-//    my_snprintf(s, rest, "vn[]=%s&vv[]=%d&",
+//    s = String.format "vn[]=%s&vv[]=%d&",
 //                my_url_encode("size"), Map.map.size);
 //    s = end_of_strn(s, &rest);
 //  }

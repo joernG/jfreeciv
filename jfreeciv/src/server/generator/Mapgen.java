@@ -1147,7 +1147,7 @@ public class Mapgen{
 //	  break;
 //	default:
 //	  assert(0!=1);
-//	  die("The server couldn't allocate starting positions.");
+//	  util.die("The server couldn't allocate starting positions.");
 //      }
 //    }
 //
@@ -1651,7 +1651,7 @@ public class Mapgen{
 //      return false;
 //    }
 //    assert(starters >= 0);
-//    util.freelog(LOG_VERBOSE, "island %i", pstate.isleindex);
+//    util.freelog(Log.LOG_VERBOSE, "island %i", pstate.isleindex);
 //
 //    /* keep trying to place an island, and decrease the size of
 //     * the island we're trying to create until we succeed.
@@ -1670,7 +1670,7 @@ public class Mapgen{
 //      balance = 0;
 //    }
 //
-//    util.freelog(LOG_VERBOSE, "ini=%d, plc=%d, bal=%ld, tot=%ld",
+//    util.freelog(Log.LOG_VERBOSE, "ini=%d, plc=%d, bal=%ld, tot=%ld",
 //	    islemass, i, balance, checkmass);
 //
 //    i *= tilefactor;
@@ -1789,7 +1789,7 @@ public class Mapgen{
 //	 * Note that the big islands can get very small if necessary, and
 //	 * the smaller islands will not exist if we can't place them 
 //         * easily. */
-//	util.freelog(LOG_VERBOSE,
+//	util.freelog(Log.LOG_VERBOSE,
 //		"Island too small, trying again with all smaller islands.\n");
 //	midfrac += bigfrac * 0.01;
 //	smallfrac += bigfrac * 0.04;
@@ -1827,7 +1827,7 @@ public class Mapgen{
 //  height_map = null;
 //
 //  if (checkmass > Map.map.xsize + Map.map.ysize + totalweight) {
-//    util.freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
+//    util.freelog(Log.LOG_VERBOSE, "%ld mass left unplaced", checkmass);
 //  }
 //}
 //
@@ -1924,7 +1924,7 @@ public class Mapgen{
 //  if (j == 1500) {
 //    util.freelog(Log.LOG_NORMAL, "Generator 3 left %li landmass unplaced.", checkmass);
 //  } else if (checkmass > Map.map.xsize + Map.map.ysize) {
-//    util.freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
+//    util.freelog(Log.LOG_VERBOSE, "%ld mass left unplaced", checkmass);
 //  }
 //}
 //
@@ -1990,7 +1990,7 @@ public class Mapgen{
 //  height_map = null;
 //
 //  if (checkmass > Map.map.xsize + Map.map.ysize + totalweight) {
-//    util.freelog(LOG_VERBOSE, "%ld mass left unplaced", checkmass);
+//    util.freelog(Log.LOG_VERBOSE, "%ld mass left unplaced", checkmass);
 //  }
 //}
 //

@@ -110,7 +110,7 @@ public class Barbarian{
 //  }
 //
 //  if (newplayer >= MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS) {
-//    die("Too many players in server/barbarian.c");
+//    util.die("Too many players in server/barbarian.c");
 //  }
 //
 //  barbarians = &game.players[newplayer];
@@ -155,7 +155,7 @@ public class Barbarian{
 //    }
 //  }
 //
-//  util.freelog(LOG_VERBOSE, "Created barbarian %s, player %d",
+//  util.freelog(Log.LOG_VERBOSE, "Created barbarian %s, player %d",
 //          barbarians.name, barbarians.player_no);
 //  notify_player_ex(null, null, E_UPRISING,
 //                   ("Barbarians gain a leader by the name %s.  Dangerous " +

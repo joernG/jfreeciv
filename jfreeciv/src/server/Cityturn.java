@@ -1049,7 +1049,7 @@ public class Cityturn{
 //    notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
 //        "Game: %s is building %s, which is no longer available.",
 //        pcity.name, unit_name(pcity.currently_building));
-//    util.freelog(LOG_VERBOSE, "%s's %s tried build %s, which is not available",
+//    util.freelog(Log.LOG_VERBOSE, "%s's %s tried build %s, which is not available",
 //            pplayer.name, pcity.name, unit_name(pcity.currently_building));            
 //    return true;
 //  }

@@ -349,7 +349,7 @@ public class Gotohand {
 	// break;
 	// default:
 	// move_cost = 0; /* silence compiler warning */
-	// die("Bad/unimplemented move_type in really_generate_warmap().");
+	// util.die("Bad/unimplemented move_type in really_generate_warmap().");
 	// }
 	// } adjc_dir_iterate_end;
 	// }
@@ -797,7 +797,7 @@ public class Gotohand {
 	// default:
 	// move_cost = MAXCOST; /* silence compiler warning */
 	// total_cost = MAXCOST; /* silence compiler warning */
-	// die("Bad move_type in find_the_shortest_path().");
+	// util.die("Bad move_type in find_the_shortest_path().");
 	// } /****** end switch ******/
 	//
 	// /* Add the route to our warmap if it is worth keeping */
@@ -1192,7 +1192,7 @@ public class Gotohand {
 	// /*
 	// * We've got a trireme in the middle of the sea. With
 	// * best_fitness==DONT_SELECT_ME_FITNESS, it'll end its turn right
-	// * there and could very well die. We'll try to rescue.
+	// * there and could very well util.die. We'll try to rescue.
 	// */
 	// util.freelog(Log.LOG_DEBUG,
 	// "%s's trireme in trouble at (%d,%d), looking for coast",
@@ -1341,7 +1341,7 @@ public class Gotohand {
 		// return GR_WAITING; /* out of fuel */
 		// }
 		// } else {
-		// util.freelog(LOG_VERBOSE, "Did not find an airroute for "
+		// util.freelog(Log.LOG_VERBOSE, "Did not find an airroute for "
 		// "%s's %s at (%d, %d) . (%d, %d)",
 		// pplayer.name, punit.unit_type().name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
@@ -1389,7 +1389,7 @@ public class Gotohand {
 		// || (pplayer.ai.control && ai_unit_move(punit, ptile));
 
 		// if (!player_find_unit_by_id(pplayer, unit_id)) {
-		// return GR_DIED; /* unit died during goto! */
+		// return GR_DIED; /* unit util.died during goto! */
 		// }
 
 		// if (!success && punit.moves_left > 0) {
@@ -1415,7 +1415,7 @@ public class Gotohand {
 		// util.freelog(Log.LOG_DEBUG, "Moving on.");
 		// } while(!Map.same_pos(ptile, waypoint_tile));
 		// } else {
-		// util.freelog(LOG_VERBOSE, "Did not find the shortest path for "
+		// util.freelog(Log.LOG_VERBOSE, "Did not find the shortest path for "
 		// "%s's %s at (%d, %d) . (%d, %d)",
 		// pplayer.name, punit.unit_type().name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));

@@ -247,8 +247,8 @@ public class Menu{
 //  plus++;
 //  tab++;
 //  /* fkeys */
-//  if ((*plus == 'F') && (my_isdigit(plus[1]))) {
-//    if (my_isdigit(plus[2]))
+//  if ((*plus == 'F') && (Character.isDigit(plus[1]))) {
+//    if (Character.isDigit(plus[2]))
 //      newaccel.key=VK_F10+(plus[2]-'0');
 //    else
 //      newaccel.key=VK_F1+(plus[1]-'1');
@@ -1096,9 +1096,9 @@ public class Menu{
 //      Terrain_type_id  ttype;
 //      tile_type tinfo;
 //
-//      sz_strlcpy(irrtext, N"Build Irrigation" "\tI");
-//      sz_strlcpy(mintext, N"Build Mine" "\tM");
-//      sz_strlcpy(transtext, N"Transform Terrain" "\tO");
+//      irrtext = String.format( N"Build Irrigation" "\tI");
+//      mintext = String.format( N"Build Mine" "\tM");
+//      transtext = String.format( N"Transform Terrain" "\tO");
 //      
 //      /* Since the entire menu is disabled by default, enable the
 //	 items with no checks. */
@@ -1209,7 +1209,7 @@ public class Menu{
 //      } else if (map_has_special(punit.tile, S_IRRIGATION)
 //		 && player_knows_techs_with_flag(game.player_ptr,
 //						 TF_FARMLAND)) {
-//	sz_strlcpy(irrtext, N"Build Farmland" "\tI");
+//	irrtext = String.format( N"Build Farmland" "\tI");
 //      }
 //      if (tinfo.mining_result != T_NONE
 //	  && tinfo.mining_result != ttype) {

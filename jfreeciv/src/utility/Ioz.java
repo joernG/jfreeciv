@@ -131,7 +131,7 @@ public class Ioz{
 //    break;
 //  default:
 //    /* Should never happen */
-//    die("Internal error: Bad fz_fromFile method: %d", fp.method);
+//    util.die("Internal error: Bad fz_fromFile method: %d", fp.method);
 //  }
 //  return fp;
 //}
@@ -179,7 +179,7 @@ public class Ioz{
 //    break;
 //  default:
 //    /* Should never happen */
-//    die("Internal error: Bad fz_fclose method: %d", fp.method);
+//    util.die("Internal error: Bad fz_fclose method: %d", fp.method);
 //  }
 //  free(fp);
 //  return retval;
@@ -205,7 +205,7 @@ public class Ioz{
 //    break;
 //  default:
 //    /* Should never happen */
-//    die("Internal error: Bad fz_fgets method: %d", fp.method);
+//    util.die("Internal error: Bad fz_fgets method: %d", fp.method);
 //  }
 //  return retval;
 //}
@@ -248,7 +248,7 @@ public class Ioz{
 //    break;
 //  default:
 //    /* Should never happen */
-//    die("Internal error: Bad fz_fprintf method: %d", fp.method);
+//    util.die("Internal error: Bad fz_fprintf method: %d", fp.method);
 //  }
 //  va_end(ap);
 //  return retval;
@@ -276,7 +276,7 @@ public class Ioz{
 //    break;
 //  default:
 //    /* Should never happen */
-//    die("Internal error: Bad fz_ferror method: %d", fp.method);
+//    util.die("Internal error: Bad fz_ferror method: %d", fp.method);
 //  }
 //  return retval;
 //}
@@ -312,7 +312,7 @@ public class Ioz{
 //    break;
 //  default:
 //    /* Should never happen */
-//    die("Internal error: Bad fz_strerror method: %d", fp.method);
+//    util.die("Internal error: Bad fz_strerror method: %d", fp.method);
 //  }
 //  return retval;
 //}

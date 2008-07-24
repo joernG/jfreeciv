@@ -431,7 +431,7 @@ public class Tech{
 //	GAME_DEFAULT_RESEARCHCOST;
 //    break;
 //  default:
-//    die("Invalid tech_cost_style %d %d", game.rgame.tech_cost_style,
+//    util.die("Invalid tech_cost_style %d %d", game.rgame.tech_cost_style,
 //	tech_cost_style);
 //    cost = 0;
 //  }
@@ -497,7 +497,7 @@ public class Tech{
 //    break;
 //
 //  default:
-//    die("Invalid tech_leakage %d", game.rgame.tech_leakage);
+//    util.die("Invalid tech_leakage %d", game.rgame.tech_leakage);
 //  }
 //
 //  /* Assign a science penalty to the AI at easier skill levels.  This code

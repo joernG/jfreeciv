@@ -86,7 +86,7 @@ public class Unittools{
 //    /* Ruleset code should ensure there is at least one unit for each
 //     * possibly-required role, or check before calling this function.
 //     */
-//    die("No unit types in find_a_unit_type(%d,%d)!", role, role_tech);
+//    util.die("No unit types in find_a_unit_type(%d,%d)!", role, role_tech);
 //  }
 //  return which[myrand(num)];
 //}
@@ -145,7 +145,7 @@ public class Unittools{
 //  get_modified_firepower(attacker, defender,
 //			 &attack_firepower, &defense_firepower);
 //
-//  util.freelog(LOG_VERBOSE, "attack:%d, defense:%d, attack firepower:%d, defense firepower:%d",
+//  util.freelog(Log.LOG_VERBOSE, "attack:%d, defense:%d, attack firepower:%d, defense firepower:%d",
 //	  attackpower, defensepower, attack_firepower, defense_firepower);
 //
 //  if (bombard) {
@@ -308,7 +308,7 @@ public class Unittools{
 //    /* 4) Check for units on unsafe terrains. */
 //    if (unit_flag(punit, F_TRIREME)) {
 //      /* Triremes away from coast have a chance of death. */
-//      /* Note if a trireme died on a TER_UNSAFE terrain, this would
+//      /* Note if a trireme util.died on a TER_UNSAFE terrain, this would
 //       * erronously give the high seas message.  This is impossible under
 //       * the current rulesets. */
 //      int loss_chance = unit_loss_pct(pplayer, punit.tile, punit);
@@ -609,7 +609,7 @@ public class Unittools{
 //	if (what == S_FORTRESS) {
 //	  for (unit punit2 : punit.tile.units.data) {
 //            player owner = punit2.unit_owner();
-//            util.freelog(LOG_VERBOSE, "Watchtower pillaged!");
+//            util.freelog(Log.LOG_VERBOSE, "Watchtower pillaged!");
 //            if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
 //              if (is_ground_unit(punit2)) {
 //                /* Unfog (increase seen counter) first, fog (decrease counter)
@@ -642,7 +642,7 @@ public class Unittools{
 //      
 //      /* If a watchtower has been pillaged, reduce sight to normal */
 //      if (what_pillaged == S_FORTRESS) {
-//	util.freelog(LOG_VERBOSE, "Watchtower(2) pillaged!");
+//	util.freelog(Log.LOG_VERBOSE, "Watchtower(2) pillaged!");
 //	for (unit punit2 : punit.tile.units.data) {
 //          player owner = punit2.unit_owner();
 //          if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
@@ -798,7 +798,7 @@ public class Unittools{
 //
 //  if (unit_has_orders(punit)) {
 //    if (!execute_orders(punit)) {
-//      /* Unit died. */
+//      /* Unit util.died. */
 //      return;
 //    }
 //  }
@@ -842,7 +842,7 @@ public class Unittools{
 //	      && !Unit.is_non_allied_unit_tile(ptile2, punit2.unit_owner())) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    util.freelog(LOG_VERBOSE,
+//	    util.freelog(Log.LOG_VERBOSE,
 //		    "Moved %s's %s due to changing land to sea at (%d, %d).",
 //		    punit2.unit_owner().name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
@@ -863,7 +863,7 @@ public class Unittools{
 //						  punit2.unit_owner()) > 0) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    util.freelog(LOG_VERBOSE,
+//	    util.freelog(Log.LOG_VERBOSE,
 //		    "Embarked %s's %s due to changing land to sea at (%d, %d).",
 //		    punit2.unit_owner().name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.x);
@@ -878,7 +878,7 @@ public class Unittools{
 //	  }
 //	} adjc_iterate_end;
 //	/* if we get here we could not move punit2 */
-//	util.freelog(LOG_VERBOSE,
+//	util.freelog(Log.LOG_VERBOSE,
 //		"Disbanded %s's %s due to changing land to sea at (%d, %d).",
 //		punit2.unit_owner().name, unit_name(punit2.type),
 //		punit2.tile.x, punit2.tile.y);
@@ -900,7 +900,7 @@ public class Unittools{
 //	      && !Unit.is_non_allied_unit_tile(ptile2, punit2.unit_owner())) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    util.freelog(LOG_VERBOSE,
+//	    util.freelog(Log.LOG_VERBOSE,
 //		    "Moved %s's %s due to changing sea to land at (%d, %d).",
 //		    punit2.unit_owner().name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
@@ -920,7 +920,7 @@ public class Unittools{
 //	      && !Unit.is_non_allied_unit_tile(ptile2, punit2.unit_owner())) {
 //	    if (get_transporter_capacity(punit2) > 0)
 //	      sentry_transported_idle_units(punit2);
-//	    util.freelog(LOG_VERBOSE,
+//	    util.freelog(Log.LOG_VERBOSE,
 //		    "Docked %s's %s due to changing sea to land at (%d, %d).",
 //		    punit2.unit_owner().name, unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
@@ -935,7 +935,7 @@ public class Unittools{
 //	  }
 //	} adjc_iterate_end;
 //	/* if we get here we could not move punit2 */
-//	util.freelog(LOG_VERBOSE,
+//	util.freelog(Log.LOG_VERBOSE,
 //		"Disbanded %s's %s due to changing sea to land at (%d, %d).",
 //		punit2.unit_owner().name, unit_name(punit2.type),
 //		punit2.tile.x, punit2.tile.y);
@@ -961,7 +961,7 @@ public class Unittools{
 //    "" (if no cities known)
 //  There are two variants for the first case, one when something happens
 //  inside the city, otherwise when it happens "at" but "outside" the city.
-//  Eg, when an attacker fails, the attacker dies "at" the city, but
+//  Eg, when an attacker fails, the attacker util.dies "at" the city, but
 //  not "in" the city (since the attacker never made it in).
 //  Don't call this function directly; use the wrappers below.
 //**************************************************************************/
@@ -1190,7 +1190,7 @@ public class Unittools{
 //  tile src_tile = punit.tile, *dst_tile = pcity.tile;
 //
 //  if (pcity.owner == punit.owner){
-//    util.freelog(LOG_VERBOSE, "Teleported %s's %s from (%d, %d) to %s",
+//    util.freelog(Log.LOG_VERBOSE, "Teleported %s's %s from (%d, %d) to %s",
 //	    punit.unit_owner().name, unit_name(punit.type),
 //	    src_tile.x, src_tile.y, pcity.name);
 //    if (verbose) {
@@ -1532,7 +1532,7 @@ public class Unittools{
 //  /* Since settlers plot in new cities in the minimap before they
 //     are built, so that no two settlers head towards the same city
 //     spot, we need to ensure this reservation is cleared should
-//     the settler die on the way. */
+//     the settler util.die on the way. */
 //  if ((punit.unit_owner().ai.control || punit.ai.control)
 //      && punit.ai.ai_role != AIUNIT_NONE) {
 //    ai_unit_new_role(punit, AIUNIT_NONE, null);
@@ -1705,7 +1705,7 @@ public class Unittools{
 ///**************************************************************************
 //this is a highlevel routine
 //the unit has been killed in combat => all other units on the
-//tile dies unless ...
+//tile util.dies unless ...
 //**************************************************************************/
 //void kill_unit(unit pkiller, unit punit)
 //{
@@ -1747,7 +1747,7 @@ public class Unittools{
 //  } else { /* unitcount > 1 */
 //    int i;
 //    if (!(unitcount > 1)) {
-//      die("Error in kill_unit, unitcount is %i", unitcount);
+//      util.die("Error in kill_unit, unitcount is %i", unitcount);
 //    }
 //    /* initialize */
 //    for (i = 0; i<MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS; i++) {
@@ -1916,7 +1916,7 @@ public class Unittools{
 //  struct packet_unit_short_info packet;
 //
 //  if (punit.unit_owner() == pplayer) {
-//    /* The unit is about to die. No need to send an info. */
+//    /* The unit is about to util.die. No need to send an info. */
 //  } else {
 //    memset(&packet, 0, sizeof(packet));
 //    packet.id = punit.id;
@@ -2327,7 +2327,7 @@ public class Unittools{
 //
 ///**************************************************************************
 //  Get barbarians from hut, unless close to a city.
-//  Unit may die: returns 1 if unit is alive after, or 0 if it was killed.
+//  Unit may util.die: returns 1 if unit is alive after, or 0 if it was killed.
 //**************************************************************************/
 //static boolean hut_get_barbarians(unit punit)
 //{
@@ -2339,7 +2339,7 @@ public class Unittools{
 //    notify_player_ex(pplayer, punit.tile, E_HUT_BARB_CITY_NEAR,
 //		     "Game: An abandoned village is here.");
 //  } else {
-//    /* save coords and type in case unit dies */
+//    /* save coords and type in case unit util.dies */
 //    tile unit_tile = punit.tile;
 //    int type = punit.type;
 //
@@ -2904,7 +2904,7 @@ public class Unittools{
 //  function used to return a goto_result enumeration, declared in gotohand.h.
 //  But this enumeration was never checked by the caller and just lead to
 //  confusion.  All the caller really needs to know is if the unit lived or
-//  died; everything else is handled internally within execute_orders.)
+//  util.died; everything else is handled internally within execute_orders.)
 //
 //  If the orders are repeating the loop starts over at the beginning once it
 //  completes.  To avoid infinite loops on railroad we stop for this
@@ -3035,7 +3035,7 @@ public class Unittools{
 //	      dst_tile.x, dst_tile.y);
 //      res = handle_unit_move_request(punit, dst_tile, false, !last_order);
 //      if (!player_find_unit_by_id(pplayer, unitid)) {
-//	util.freelog(Log.LOG_DEBUG, "  unit died while moving.");
+//	util.freelog(Log.LOG_DEBUG, "  unit util.died while moving.");
 //	/* A player notification should already have been sent. */
 //	return false;
 //      }

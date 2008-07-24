@@ -1098,7 +1098,7 @@ public class Unit{
 //       return (text);
 //     }
 //   default:
-//    die("Unknown unit activity %d in unit_activity_text()", punit.activity);
+//    util.die("Unknown unit activity %d in unit_activity_text()", punit.activity);
 //  }
 //  return null;
 //}
@@ -1428,7 +1428,7 @@ public class Unit{
 //  case HELI_MOVING:
 //    return true;
 //  }
-//  die("Invalid move type");
+//  util.die("Invalid move type");
 //  return false;
 //}
 //
@@ -1458,7 +1458,7 @@ public class Unit{
 //  case HELI_MOVING:
 //    return Map.tile_has_special(punit.tile, Terrain_H.S_AIRBASE);
 //  }
-//  die("Invalid move type");
+//  util.die("Invalid move type");
 //  return true;
 //}
 //
@@ -1845,19 +1845,19 @@ public class Unit{
 //  case UR_OK:
 //    upgrade_cost = unit_upgrade_price(pplayer, from_unittype, to_unittype);
 //    /* This message is targeted toward the GUI callers. */
-//    my_snprintf(buf, bufsz, ("Upgrade %s to %s for %d gold?\n" +
+//    buf = String.format ("Upgrade %s to %s for %d gold?\n" +
 //			      "Treasury contains %d gold."),
 //		unit_types[from_unittype].name, unit_types[to_unittype].name,
 //		upgrade_cost, pplayer.economic.gold);
 //    break;
 //  case UR_NO_UNITTYPE:
-//    my_snprintf(buf, bufsz,
+//    buf = String.format
 //		"Sorry, cannot upgrade %s (yet).",
 //		unit_types[from_unittype].name);
 //    break;
 //  case UR_NO_MONEY:
 //    upgrade_cost = unit_upgrade_price(pplayer, from_unittype, to_unittype);
-//    my_snprintf(buf, bufsz,
+//    buf = String.format
 //		("Upgrading %s to %s costs %d gold.\n" +
 //		  "Treasury contains %d gold."),
 //		unit_types[from_unittype].name, unit_types[to_unittype].name,
@@ -1865,11 +1865,11 @@ public class Unit{
 //    break;
 //  case UR_NOT_IN_CITY:
 //  case UR_NOT_CITY_OWNER:
-//    my_snprintf(buf, bufsz,
+//    buf = String.format
 //		"You can only upgrade units in your cities.");
 //    break;
 //  case UR_NOT_ENOUGH_ROOM:
-//    my_snprintf(buf, bufsz,
+//    buf = String.format
 //		"Upgrading this %s would strand units it transports.",
 //		unit_types[from_unittype].name);
 //    break;
