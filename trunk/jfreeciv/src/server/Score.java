@@ -117,7 +117,7 @@ public class Score{
 //  if (turn == 0) {
 //    printf("Player Info...\n");
 //
-//    for (p = 0; p < game.nplayers; p++) {
+//    for (p = 0; p < Game.game.nplayers; p++) {
 //      printf(".know (%d)\n  ", p);
 //      WRITE_MAP_DATA("%c",
 //		     TEST_BIT(pcmap.claims[map_pos_to_index(x, y)].know,
@@ -144,7 +144,7 @@ public class Score{
 //
 //#endif
 //
-//static int no_owner = MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS;
+//static int no_owner = Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS;
 //
 ///**************************************************************************
 //  allocate and clear claim map; determine city radii
@@ -157,18 +157,18 @@ public class Score{
 //  pcmap.claims = fc_malloc(nbytes);
 //  memset(pcmap.claims, 0, nbytes);
 //
-//  nbytes = game.nplayers * sizeof(int);
+//  nbytes = Game.game.nplayers * sizeof(int);
 //  pcmap.player_landarea = fc_malloc(nbytes);
 //  memset(pcmap.player_landarea, 0, nbytes);
 //
-//  nbytes = game.nplayers * sizeof(int);
+//  nbytes = Game.game.nplayers * sizeof(int);
 //  pcmap.player_owndarea = fc_malloc(nbytes);
 //  memset(pcmap.player_owndarea, 0, nbytes);
 //
 //  nbytes = 2 * Map.map.xsize * Map.map.ysize * sizeof(*pcmap.edges);
 //  pcmap.edges = fc_malloc(nbytes);
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      map_city_radius_iterate(pcity.tile, tile1) {
 //	pcmap.claims[tile1.index].cities |= (1u << pcity.owner);
@@ -195,7 +195,7 @@ public class Score{
 //    pclaim = &pcmap.claims[i];
 //    ptile = &Map.map.tiles[i];
 //
-//    if (is_ocean(ptile.terrain)) {
+//    if (Terrain_H.is_ocean(ptile.terrain)) {
 //      /* pclaim.when = 0; */
 //      pclaim.whom = no_owner;
 //      /* pclaim.know = 0; */
@@ -217,7 +217,7 @@ public class Score{
 //      pcmap.player_landarea[owner]++;
 //      pcmap.player_owndarea[owner]++;
 //      pclaim.know = ptile.known;
-//    } else if (unit_list_size(&ptile.units) > 0) {
+//    } else if (ptile.units.foo_list_size() > 0) {
 //      owner = (unit_list_get(&ptile.units, 0)).owner;
 //      pclaim.when = turn + 1;
 //      pclaim.whom = owner;
@@ -264,7 +264,7 @@ public class Score{
 //      int owner = pcmap.claims[i].whom;
 //
 //      if (owner != no_owner) {
-//	adjc_iterate(ptile, tile1) {
+//	for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //	  int j = tile1.index;
 //	  claim_cell pclaim = &pcmap.claims[j];
 //
@@ -291,7 +291,7 @@ public class Score{
 //	      accum--;
 //	    }
 //	  }
-//	} adjc_iterate_end;
+//	}
 //      }
 //    }
 //
@@ -401,7 +401,7 @@ public class Score{
 //  pplayer.score.spaceship = 0;
 //
 //  if (is_barbarian(pplayer)) {
-//    if (pplayer.player_no == game.nplayers - 1) {
+//    if (pplayer.player_no == Game.game.nplayers - 1) {
 //      free_landarea_map(&cmap);
 //    }
 //    return;
@@ -435,7 +435,7 @@ public class Score{
 //  get_player_landarea(&cmap, pplayer, &landarea, &settledarea);
 //  pplayer.score.landarea = landarea;
 //  pplayer.score.settledarea = settledarea;
-//  if (pplayer.player_no == game.nplayers - 1) {
+//  if (pplayer.player_no == Game.game.nplayers - 1) {
 //    free_landarea_map(&cmap);
 //  }
 //
@@ -454,7 +454,7 @@ public class Score{
 //
 //  impr_type_iterate(i) {
 //    if (is_wonder(i)
-//	&& (pcity = find_city_by_id(game.global_wonders[i]))
+//	&& (pcity = find_city_by_id(Game.game.global_wonders[i]))
 //	&& player_owns_city(pplayer, pcity)) {
 //      pplayer.score.wonders++;
 //    }
@@ -510,7 +510,7 @@ public class Score{
 //
 //  /* the colors for each player. these were selected to give
 //   * the most differentiation between all players. YMMV. */
-//  int col[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS][3] = {
+//  int col[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS][3] = {
 //    {255,   0,   0}, {  0, 128,   0}, {255, 255, 255}, {255, 255,   0},
 //    {138,  43, 226}, {255, 140,   0}, {  0, 255, 255}, {139,  69,  19},
 //    {211, 211, 211}, {255, 215,   0}, {255,  20, 147}, {124, 252,   0},
@@ -529,7 +529,7 @@ public class Score{
 //
 //  /* put this file in the same place we put savegames */
 //  filename = util.my_snprintf(
-//              "%s%+05d.int.ppm", game.save_name, game.year);
+//              "%s%+05d.int.ppm", Game.game.save_name, Game.game.year);
 //
 //  /* Ensure the saves directory exists. */
 //  make_dir(Srv_main.srvarg.saves_pathname);
@@ -548,12 +548,12 @@ public class Score{
 //    return;
 //  }
 //
-//  fprintf(fp, "P3\n# version:2\n# gameid: %s\n", game.id);
-//  fprintf(fp, "# An intermediate map from saved Freeciv game %s%+05d\n",
-//          game.save_name, game.year);
+//  fprintf(fp, "P3\n# version:2\n# gameid: %s\n", Game.game.id);
+//  fprintf(fp, "# An intermediate map from saved Freeciv Game.game %s%+05d\n",
+//          Game.game.save_name, Game.game.year);
 //
 //
-//  for (i = 0; i < game.nplayers; i++) {
+//  for (i = 0; i < Game.game.nplayers; i++) {
 //    player pplayer = get_player(i);
 //    fprintf(fp, "# playerno:%d:color:#%02x%02x%02x:name:\"%s\"\n", 
 //            pplayer.player_no, col[i][0], col[i][1], col[i][2],
@@ -570,10 +570,10 @@ public class Score{
 //
 //       /* color for cities first, then units, then land */
 //       if (ptile.city) {
-//         color = col[city_owner(ptile.city).player_no];
-//       } else if (unit_list_size(&ptile.units) > 0) {
+//         color = col[City.city_owner(ptile.city).player_no];
+//       } else if (ptile.units.foo_list_size() > 0) {
 //         color = col[unit_owner(unit_list_get(&ptile.units, 0)).player_no];
-//       } else if (is_ocean(ptile.terrain)) {
+//       } else if (Terrain_H.is_ocean(ptile.terrain)) {
 //         color = watercol;
 //       } else {
 //         color = landcol;

@@ -26,7 +26,7 @@ public class Advdiplomacy{
 //#include "diptreaty.h"
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "packets.h"
@@ -126,7 +126,7 @@ public class Advdiplomacy{
 //    return 0;
 //  }
 //  worth = total_bulbs_required_for_goal(pplayer, tech) * 3;
-//  worth += MAX(pplayer.ai.tech_want[tech], 0) / MAX(game.turn, 1);
+//  worth += MAX(pplayer.ai.tech_want[tech], 0) / MAX(Game.game.turn, 1);
 //  if (get_invention(pplayer, tech) == TECH_REACHABLE) {
 //    worth /= 2;
 //  }
@@ -143,7 +143,7 @@ public class Advdiplomacy{
 //  if (pplayer.team != TEAM_NONE && pplayer.team == aplayer.team) {
 //    return true;
 //  }
-//  for(player eplayer: game.players){
+//  for(player eplayer: Game.game.players){
 //    if (eplayer == pplayer || eplayer == aplayer || !eplayer.is_alive) {
 //      continue;
 //    }
@@ -218,7 +218,7 @@ public class Advdiplomacy{
 //    }
 //
 //    /* Calculate in tech leak to our opponents, guess 50% chance */
-//    for(player eplayer: game.players){
+//    for(player eplayer: Game.game.players){
 //      if (eplayer == aplayer
 //          || eplayer == pplayer
 //          || !eplayer.is_alive
@@ -374,7 +374,7 @@ public class Advdiplomacy{
 //      /* Very silly algorithm 1: Sea map more worth if enemy has more
 //         cities. Reasoning is he has more use of seamap for settling
 //         new areas the more cities he has already. */
-//      worth -= 15 * city_list_size(&aplayer.cities);
+//      worth -= 15 * aplayer.cities.foo_list_size();
 //
 //      /* Make maps from novice player cheap */
 //      if (ai_handicap(pplayer, H_DIPLOMACY)) {
@@ -390,7 +390,7 @@ public class Advdiplomacy{
 //    } else {
 //      /* Very silly algorithm 2: Land map more worth the more cities
 //         we have, since we expose all of these to the enemy. */
-//      worth -= 50 * MAX(city_list_size(&pplayer.cities), 3);
+//      worth -= 50 * MAX(pplayer.cities.foo_list_size(), 3);
 //      /* Inflate numbers if not peace */
 //      if (!pplayers_in_peace(pplayer, aplayer)) {
 //        worth *= 4;
@@ -514,7 +514,7 @@ public class Advdiplomacy{
 //
 //  if (given_cities > 0) {
 //    /* alway keep at least two cities */
-//    if (city_list_size(&pplayer.cities) - given_cities <= 2) {
+//    if (pplayer.cities.foo_list_size() - given_cities <= 2) {
 //      return;
 //    }
 //  }
@@ -588,7 +588,7 @@ public class Advdiplomacy{
 //   * he or she offers us gifts. It is only a gift if _all_ the clauses
 //   * are beneficial to us. */
 //  if (total_balance > 0 && gift) {
-//    int i = total_balance / ((city_list_size(&pplayer.cities) * 50) + 1);
+//    int i = total_balance / ((pplayer.cities.foo_list_size() * 50) + 1);
 //
 //    i = Math.min(i, ai.diplomacy.love_incr * 150) * 10;
 //    pplayer.ai.love[aplayer.player_no] += i;
@@ -608,7 +608,7 @@ public class Advdiplomacy{
 //  ai_dip_intel adip = &ai.diplomacy.player_intel[aplayer.player_no];
 //
 //  /* Number of cities is a player's base potential. */
-//  kill_desire = city_list_size(&aplayer.cities);
+//  kill_desire = aplayer.cities.foo_list_size();
 //
 //  /* Count settlers in production for us, indicating our expansionism,
 //   * while counting all enemy settlers as (worst case) indicators of
@@ -637,7 +637,7 @@ public class Advdiplomacy{
 //  /* Spacerace loss we will not allow! */
 //  if (ship.state >= spaceship_state.SSHIP_STARTED) {
 //    /* add potential */
-//    kill_desire += city_list_size(&aplayer.cities);
+//    kill_desire += aplayer.cities.foo_list_size();
 //  }
 //  if (ai.diplomacy.spacerace_leader == aplayer) {
 //    ai.diplomacy.strategy = WIN_CAPITAL;
@@ -647,7 +647,7 @@ public class Advdiplomacy{
 //  /* Modify by which treaties we would have to break, and what
 //   * excuses we have to do so. FIXME: We only consider immediate
 //   * allies, but we might trigger a wider chain reaction. */
-//  for(player eplayer: game.players){
+//  for(player eplayer: Game.game.players){
 //    boolean cancel_excuse =
 //	pplayer.diplstates[eplayer.player_no].has_reason_to_cancel != 0;
 //    enum diplstate_type ds = pplayer_get_diplstate(pplayer, eplayer).type;
@@ -710,7 +710,7 @@ public class Advdiplomacy{
 //***********************************************************************/
 //void ai_diplomacy_calculate(player pplayer, ai_data ai)
 //{
-//  int war_desire[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+//  int war_desire[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS];
 //  int best_desire = 0;
 //  player target = null;
 //
@@ -723,7 +723,7 @@ public class Advdiplomacy{
 //
 //  /* Time to make love. If we've been wronged, hold off that love
 //   * for a while. Also, cool our head each turn with love_coeff. */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    int a = aplayer.player_no;
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[a];
 //
@@ -815,13 +815,13 @@ public class Advdiplomacy{
 //  }
 //
 //  /* Calculate average distances to other players' empires. */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    ai.diplomacy.player_intel[aplayer.player_no].distance = 
 //          player_distance_to_player(pplayer, aplayer);
 //  }
 //
 //  /* Calculate our desires, and find desired war target */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(pplayer, aplayer).type;
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[aplayer.player_no];
 //
@@ -883,8 +883,8 @@ public class Advdiplomacy{
 //      ai.diplomacy.countdown = 6; /* Take the time we need - WAG */
 //    }
 //    /* Don't reevaluate too often. */
-//    ai.diplomacy.timer = myrand(6) + 6 + ai.diplomacy.countdown;
-//    for(player aplayer: game.players){
+//    ai.diplomacy.timer = Rand.myrand(6) + 6 + ai.diplomacy.countdown;
+//    for(player aplayer: Game.game.players){
 //      ai.diplomacy.player_intel[aplayer.player_no].ally_patience = 0;
 //    }
 //  }
@@ -899,7 +899,7 @@ public class Advdiplomacy{
 //
 //  /* Only share techs with team mates */
 //  if (players_on_same_team(pplayer, aplayer)) {
-//    for (index = A_FIRST; index < game.num_tech_types; index++) {
+//    for (index = A_FIRST; index < Game.game.num_tech_types; index++) {
 //      if ((get_invention(pplayer, index) != TECH_KNOWN)
 //          && (get_invention(aplayer, index) == TECH_KNOWN)) {
 //       ai_diplomacy_suggest(aplayer, pplayer, CLAUSE_ADVANCE, index);
@@ -940,7 +940,7 @@ public class Advdiplomacy{
 //
 //  /* Continue war at least in this arbitrary number of turns to show 
 //   * some spine */
-//  ai.diplomacy.timer = myrand(4) + 3;
+//  ai.diplomacy.timer = Rand.myrand(4) + 3;
 //  if (pplayer.ai.love[target.player_no] < 0) {
 //    ai.diplomacy.timer -= pplayer.ai.love[target.player_no] / 10;
 //  } else {
@@ -968,7 +968,7 @@ public class Advdiplomacy{
 //
 //  /*** If we are greviously insulted, go to war immediately. ***/
 //
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (ai.diplomacy.acceptable_reputation > aplayer.reputation
 //        && pplayer.ai.love[aplayer.player_no] < 0
 //        && pplayer.diplstates[aplayer.player_no].has_reason_to_cancel >= 2) {
@@ -983,7 +983,7 @@ public class Advdiplomacy{
 //  /*** Stop other players from winning by space race ***/
 //
 //  if (ai.diplomacy.strategy != WIN_SPACE) {
-//    for(player aplayer: game.players){
+//    for(player aplayer: Game.game.players){
 //      ai_dip_intel adip =
 //                         &ai.diplomacy.player_intel[aplayer.player_no];
 //      player_spaceship ship = &aplayer.spaceship;
@@ -1009,7 +1009,7 @@ public class Advdiplomacy{
 //        pplayer.ai.love[aplayer.player_no] = -(BIG_NUMBER);
 //      } else if (ship.state == spaceship_state.SSHIP_STARTED 
 //		 && adip.warned_about_space == 0) {
-//        adip.warned_about_space = 10 + myrand(6);
+//        adip.warned_about_space = 10 + Rand.myrand(6);
 //        notify(aplayer, ("*%s (AI)* Your attempt to unilaterally " +
 //               "dominate outer space is highly offensive."), pplayer.name);
 //        notify(aplayer, ("*%s (AI)* If you do not stop finalructing your " +
@@ -1054,7 +1054,7 @@ public class Advdiplomacy{
 //
 //  /*** Declare war - against enemies of allies ***/
 //
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[aplayer.player_no];
 //
 //    if (aplayer.is_alive
@@ -1062,7 +1062,7 @@ public class Advdiplomacy{
 //        && !adip.is_allied_with_ally
 //        && !pplayers_at_war(pplayer, aplayer)
 //	&& (pplayer_get_diplstate(pplayer, aplayer).type != DS_CEASEFIRE || 
-//	    myrand(5) < 1)) {
+//	    Rand.myrand(5) < 1)) {
 //      notify(aplayer, ("*%s (AI)* Your aggression against my allies was " +
 //			"your last mistake!"), pplayer.name);
 //      ai_go_to_war(pplayer, ai, aplayer);
@@ -1071,7 +1071,7 @@ public class Advdiplomacy{
 //
 //  /*** Opportunism, Inc. Try to make peace with everyone else ***/
 //
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(pplayer, aplayer).type;
 //    ai_dip_intel adip = &ai.diplomacy.player_intel[aplayer.player_no];
 //    struct Clause clause;
@@ -1118,9 +1118,9 @@ public class Advdiplomacy{
 //     * we spam them with our gibbering chatter. */
 //    if (!aplayer.ai.control) {
 //      if (!pplayers_allied(pplayer, aplayer)) {
-//        adip.spam = myrand(4) + 3; /* Bugger allies often. */
+//        adip.spam = Rand.myrand(4) + 3; /* Bugger allies often. */
 //      } else {
-//        adip.spam = myrand(8) + 6; /* Others are less important. */
+//        adip.spam = Rand.myrand(8) + 6; /* Others are less important. */
 //      }
 //    }
 //

@@ -1,5 +1,7 @@
 package common;
 
+import common.terrian.terrain_flag_id;
+
 public class Terrain_H {
 //	enum special_river_move {
 //		  RMV_NORMAL=0, RMV_FAST_STRICT=1, RMV_FAST_RELAXED=2, RMV_FAST_ALWAYS=3
@@ -53,23 +55,10 @@ public class Terrain_H {
 //		/* The first terrain value and number of base terrains.  This is used in
 //		 * loops.  T_COUNT may eventually be turned into a variable. */
 //		#define T_FIRST 0
-//		#define T_COUNT (game.terrain_count)
+//		#define T_COUNT (Game.game.terrain_count)
 //
 //		/* A hard limit on the number of terrains; useful for static arrays. */
 //		#define MAX_NUM_TERRAINS MAX_NUM_ITEMS
-//
-//		/* Must match with terrain_flag_from_str in terrain.c. */
-//		enum terrain_flag_id {
-//		  TER_NO_BARBS, /* No barbarians summoned on this terrain. */
-//		  TER_NO_POLLUTION, /* This terrain cannot be polluted. */
-//		  TER_NO_CITIES, /* No cities on this terrain. */
-//		  TER_STARTER, /* Players will start on this terrain type. */
-//		  TER_CAN_HAVE_RIVER, /* Terrains with this type can have S_RIVER on them. */
-//		  TER_UNSAFE_COAST,/*this tile is not safe as coast, (all ocean / ice) */ 
-//		  TER_UNSAFE,  /*unsafe for all units (ice,...) */
-//		  TER_OCEANIC, /* This is an ocean terrain. */
-//		  TER_LAST
-//		};
 //		#define TER_FIRST (TER_NO_BARBS)
 //		#define TER_COUNT (TER_LAST)
 //		#define TER_MAX 64 /* Changing this breaks network compatability. */
@@ -77,4 +66,15 @@ public class Terrain_H {
 //		enum known_type {
 //		 TILE_UNKNOWN, TILE_KNOWN_FOGGED, TILE_KNOWN
 //		};
+		  /* Terrain-specific functions. */
+		  public static boolean is_ocean(int x) {
+			   return (terrain_has_flag((x), terrain_flag_id.TER_OCEANIC));
+		  }
+
+//		  #define terrain_has_flag(terr, flag)		\
+//		  BV_ISSET(get_tile_type(terr)->flags, flag)
+		  public static boolean terrain_has_flag(int terr, terrain_flag_id flag){
+			  //	  BV_ISSET(get_tile_type(terr)->flags, flag)
+			  return false;
+}
 }

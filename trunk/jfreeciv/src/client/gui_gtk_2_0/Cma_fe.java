@@ -24,7 +24,7 @@ public class Cma_fe{
 //
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "mem.h"
 //#include "support.h"
 //

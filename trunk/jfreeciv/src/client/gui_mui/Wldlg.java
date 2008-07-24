@@ -33,7 +33,7 @@ public class Wldlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "helpdlg.h"
 //#include "mem.h"
 //#include "packets.h"

@@ -25,7 +25,7 @@ public class Ratesdlg{
 //
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "player.h"
@@ -61,7 +61,7 @@ public class Ratesdlg{
 //  lux_lock=IsDlgButtonChecked(ratesdlg,ID_RATES_LUXURYLOCK);
 //  sci_lock=IsDlgButtonChecked(ratesdlg,ID_RATES_SCIENCELOCK);
 //  
-//  maxrate=get_government_max_rate(game.player_ptr.government);
+//  maxrate=get_government_max_rate(Game.game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */     
 //  tax=Math.min(tax, maxrate);
 //  lux=Math.min(lux, maxrate);
@@ -332,15 +332,15 @@ public class Ratesdlg{
 //    fcwin_box_add_box(vbox,hbox,true,true,10);
 //  
 //    buf = util.my_snprintf( "%s max rate: %d%%",
-//		get_government_name(game.player_ptr.government),
-//		get_government_max_rate(game.player_ptr.government)); 
+//		get_government_name(Game.game.player_ptr.government),
+//		get_government_max_rate(Game.game.player_ptr.government)); 
 //    SetWindowText(GetDlgItem(ratesdlg,ID_RATES_MAX),buf);
 //    ScrollBar_SetRange(GetDlgItem(ratesdlg,ID_RATES_TAX),0,10,true);
 //    ScrollBar_SetRange(GetDlgItem(ratesdlg,ID_RATES_LUXURY),0,10,true);
 //    ScrollBar_SetRange(GetDlgItem(ratesdlg,ID_RATES_SCIENCE),0,10,true);
-//    rates_set_values( game.player_ptr.economic.tax, 0,
-//		      game.player_ptr.economic.luxury, 0,
-//		      game.player_ptr.economic.science, 0 );          
+//    rates_set_values( Game.game.player_ptr.economic.tax, 0,
+//		      Game.game.player_ptr.economic.luxury, 0,
+//		      Game.game.player_ptr.economic.science, 0 );          
 //    
 //    fcwin_set_box(ratesdlg,vbox);
 //    ShowWindow(ratesdlg,SW_SHOWNORMAL);

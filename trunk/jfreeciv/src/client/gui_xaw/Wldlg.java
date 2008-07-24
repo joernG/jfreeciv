@@ -39,7 +39,7 @@ public class Wldlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "gui_main.h"
 //#include "gui_stuff.h"
 //#include "helpdlg.h"
@@ -91,9 +91,9 @@ public class Wldlg{
 //  char *worklist_names_ptrs[MAX_LEN_WORKLIST+1];
 //  char worklist_names[MAX_LEN_WORKLIST][200];
 //  int worklist_ids[MAX_LEN_WORKLIST];
-//  char *worklist_avail_names_ptrs[B_LAST+1+U_LAST+1+MAX_NUM_WORKLISTS+1+1];
-//  char worklist_avail_names[B_LAST+1+U_LAST+1+MAX_NUM_WORKLISTS+1][200];
-//  int worklist_avail_ids[B_LAST+1+U_LAST+1+MAX_NUM_WORKLISTS+1];
+//  char *worklist_avail_names_ptrs[B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1+1];
+//  char worklist_avail_names[B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1][200];
+//  int worklist_avail_ids[B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1];
 //  int worklist_avail_num_improvements;
 //  int worklist_avail_num_targets;
 //};
@@ -940,7 +940,7 @@ public class Wldlg{
 //
 //  if (retAvail.list_index >= pdialog.worklist_avail_num_targets) {
 //    /* target is a global worklist id */
-//    player pplr = city_owner(pdialog.pcity);
+//    player pplr = City.city_owner(pdialog.pcity);
 //    int wl_idx = pdialog.worklist_avail_ids[retAvail.list_index];
 //    worklist pwl = &pplr.worklists[wl_idx];
 //
@@ -1286,7 +1286,7 @@ public class Wldlg{
 //void worklist_populate_targets(worklist_dialog pdialog)
 //{
 //  int i, n;
-//  player pplr = game.player_ptr;
+//  player pplr = Game.game.player_ptr;
 //  Boolean b;
 //  int advanced_tech;
 //  int can_build, can_eventually_build;

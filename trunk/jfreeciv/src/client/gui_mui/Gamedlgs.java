@@ -29,7 +29,7 @@ public class Gamedlgs{
 //
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "player.h"
@@ -86,7 +86,7 @@ public class Gamedlgs{
 //  lux_lock = 0;
 //  sci_lock = 0;
 //
-//  maxrate = get_government_max_rate(game.player_ptr.government);
+//  maxrate = get_government_max_rate(Game.game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */
 //  tax = Math.min(tax, maxrate);
 //  lux = Math.min(lux, maxrate);
@@ -257,18 +257,18 @@ public class Gamedlgs{
 //
 //static void update_rates_dialog()
 //{
-//  int max_rate = get_government_max_rate(game.player_ptr.government);
+//  int max_rate = get_government_max_rate(Game.game.player_ptr.government);
 //  settextf(rates_title_text, "%s max rate: %d%%",
-//	   get_government_name(game.player_ptr.government),
+//	   get_government_name(Game.game.player_ptr.government),
 //	   max_rate);
 //
 //  set(rates_tax_slider, MUIA_Numeric_Max, max_rate / 10);
 //  set(rates_luxury_slider, MUIA_Numeric_Max, max_rate / 10);
 //  set(rates_science_slider, MUIA_Numeric_Max, max_rate / 10);
 //
-//  rates_set_values(game.player_ptr.economic.tax, 0,
-//		   game.player_ptr.economic.luxury, 0,
-//		   game.player_ptr.economic.science, 0);
+//  rates_set_values(Game.game.player_ptr.economic.tax, 0,
+//		   Game.game.player_ptr.economic.luxury, 0,
+//		   Game.game.player_ptr.economic.science, 0);
 //}
 //
 ///****************************************************************

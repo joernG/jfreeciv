@@ -28,7 +28,7 @@ public class Plrdlg{
 //
 //#include "fcintl.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "packets.h"
 //#include "nation.h"
 //#include "player.h"
@@ -179,9 +179,9 @@ public class Plrdlg{
 //
 //static boolean have_diplomat_info_about(player pPlayer)
 //{
-//  return (pPlayer == game.player_ptr ||
-//  	(pPlayer != game.player_ptr
-//	  && player_has_embassy(game.player_ptr, pPlayer)));
+//  return (pPlayer == Game.game.player_ptr ||
+//  	(pPlayer != Game.game.player_ptr
+//	  && player_has_embassy(Game.game.player_ptr, pPlayer)));
 //}
 //
 ///**************************************************************************
@@ -242,7 +242,7 @@ public class Plrdlg{
 //    					"State : %s\nIdle : %d %s"),
 //                   pPlayer.name, get_nation_name(pPlayer.nation),
 //		   team, reputation_text(pPlayer.reputation),
-//                   get_embassy_status(game.player_ptr, pPlayer),
+//                   get_embassy_status(Game.game.player_ptr, pPlayer),
 //		   state, idle, PL("turn", "turns", idle));
 //      
 //      copy_chars_to_string16(pPlayer0.string16, cBuf);
@@ -326,7 +326,7 @@ public class Plrdlg{
 //  }
 //  
 //  n = 0;
-//  for(i=0; i<game.nplayers; i++) {
+//  for(i=0; i<Game.game.nplayers; i++) {
 //    if(is_barbarian(get_player(i))) {
 //      continue;
 //    }
@@ -407,7 +407,7 @@ public class Plrdlg{
 //  } 
 //  /* ---------- */
 //  
-//  for(i=0; i<game.nplayers; i++) {
+//  for(i=0; i<Game.game.nplayers; i++) {
 //    pPlayer = get_player(i);
 //      
 //    if(is_barbarian(pPlayer)) {
@@ -590,7 +590,7 @@ public class Plrdlg{
 //      }
 //    break;
 //    default:
-//      if(pPlayer.player_no != game.player_idx) {
+//      if(pPlayer.player_no != Game.game.player_idx) {
 //        popup_diplomacy_dialog(pPlayer);
 //      }
 //    break;
@@ -643,15 +643,15 @@ public class Plrdlg{
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //  /* ---------- */
 //  
-//  for(i=0; i<game.nplayers; i++) {
-//    if(i != game.player_idx) {
+//  for(i=0; i<Game.game.nplayers; i++) {
+//    if(i != Game.game.player_idx) {
 //      pPlayer = get_player(i);
 //      
 //      if(!pPlayer.is_alive || is_barbarian(pPlayer)) {
 //        continue;
 //      }
 //      
-//      pDS = pplayer_get_diplstate(game.player_ptr, pPlayer);
+//      pDS = pplayer_get_diplstate(Game.game.player_ptr, pPlayer);
 //            
 //      if(pPlayer.ai.control) {
 //	state = "AI";

@@ -26,7 +26,7 @@ public class Gotodlg{
 //#include <SDL/SDL.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "packets.h"
 //#include "player.h"
@@ -117,13 +117,13 @@ public class Gotodlg{
 //  
 //  pLast = pAdd_Dock;
 //  
-//  for(i = 0; i < game.nplayers; i++) {
+//  for(i = 0; i < Game.game.nplayers; i++) {
 //    
-//    if (!TEST_BIT(all_players, game.players[i].player_no)) {
+//    if (!TEST_BIT(all_players, Game.game.players[i].player_no)) {
 //      continue;
 //    }
 //
-//    city_list_iterate(game.players[i].cities, pCity) {
+//    city_list_iterate(Game.game.players[i].cities, pCity) {
 //      
 //      /* FIXME: should use unit_can_airlift_to(). */
 //      if (!GOTO && !pcity.airlift) {
@@ -252,15 +252,15 @@ public class Gotodlg{
 //  
 //  col = 0;
 //  /* --------------------------------------------- */
-//  for(i = 0; i < game.nplayers; i++) {
-//    if(i != game.player_idx
+//  for(i = 0; i < Game.game.nplayers; i++) {
+//    if(i != Game.game.player_idx
 //      && pplayer_get_diplstate(
-//    		game.player_ptr, &game.players[i]).type == diplstate_type.DS_NO_CONTACT) {
+//    		Game.game.player_ptr, &Game.game.players[i]).type == diplstate_type.DS_NO_CONTACT) {
 //      continue;
 //    }
 //    
 //    pFlag = make_flag_surface_smaler(
-//    	GET_SURF(get_nation_by_idx(game.players[i].nation).flag_sprite));
+//    	GET_SURF(get_nation_by_idx(Game.game.players[i].nation).flag_sprite));
 //  
 //    if (pFlag.w > 15 || pFlag.h > 15) {
 //      float zoom = (float)(MAX(pFlag.w, pFlag.h)) / 15;
@@ -275,12 +275,12 @@ public class Gotodlg{
 //    FREESURFACE(pFlag);
 //    
 //    pBuf = create_checkbox(pWindow.dst,
-//      TEST_BIT(all_players, game.players[i].player_no),
+//      TEST_BIT(all_players, Game.game.players[i].player_no),
 //    	(WF_FREE_STRING|WF_FREE_THEME|WF_DRAW_THEME_TRANSPARENT|WF_WIDGET_HAS_INFO_LABEL));
 //    set_new_checkbox_theme(pBuf, pEnabled, pDisabled);
 //    
 //    pBuf.string16 = create_str16_from_char(
-//    			get_nation_by_idx(game.players[i].nation).name, 12);
+//    			get_nation_by_idx(Game.game.players[i].nation).name, 12);
 //    pBuf.string16.style &= ~SF_CENTER;
 //    set_wstate(pBuf, FC_WS_NORMAL);
 //    
@@ -363,7 +363,7 @@ public class Gotodlg{
 //  if (!can_client_issue_orders() || !get_unit_in_focus()) {
 //    return;
 //  }
-//  all_players = (1u << (game.player_ptr.player_no));
+//  all_players = (1u << (Game.game.player_ptr.player_no));
 //  popup_goto_airlift_dialog();
 //}
 //
@@ -375,7 +375,7 @@ public class Gotodlg{
 //  if (!can_client_issue_orders() || !get_unit_in_focus()) {
 //    return;
 //  }
-//  all_players = (1u << (game.player_ptr.player_no));
+//  all_players = (1u << (Game.game.player_ptr.player_no));
 //  GOTO = false;
 //  popup_goto_airlift_dialog();
 //}

@@ -4,12 +4,10 @@ import static common.City.is_city_option_set;
 import static common.Combat.can_unit_attack_all_at_tile;
 import static common.Combat.get_defender;
 import static common.Game.find_unit_by_id;
-import static common.Map.map;
 import static common.Map.map_get_city;
 import static common.Map.normalize_map_pos;
 import static common.Player_P.ai_handicap;
 import static common.Player_P.can_player_see_unit;
-import static common.Unit.get_transporter_capacity;
 import static common.Unit.is_enemy_unit_tile;
 import static common.Unit.is_military_unit;
 import static common.Unit.set_unit_activity;
@@ -23,12 +21,12 @@ import static common.player.Player_H.H_TARGETS;
 import static server.Gotohand.calculate_move_cost;
 import static server.Plrhand.notify_player_ex;
 import static server.Unithand.handle_unit_activity_request;
-import static server.Unittools.send_unit_info;
 import port.util;
 import utility.Log;
 import utility.Speclists;
 
 import common.Map;
+import common.Unit;
 import common.event_type;
 import common.city.city;
 import common.city.city_options;
@@ -162,7 +160,7 @@ public class Autoattack {
 			 * perhaps there is a better algorithm in the ai-package -- fisch
 			 */
 			score = (enemy.unit_type().defense_strength + (enemy.hp / 2)
-					+ (get_transporter_capacity(enemy) > 0 ? 1 : 0));
+					+ (Unit.get_transporter_capacity(enemy) > 0 ? 1 : 0));
 
 			if(null==best_enemy || score >= best_score) {
 				best_score = score;
@@ -178,7 +176,7 @@ public class Autoattack {
 
 		if((enemy.unit_type().defense_strength) >
 		punit.unit_type().attack_strength*1.5) {
-			notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
+			Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 					("Game: Auto-Attack: %s's %s found a too " +
 					"tough enemy (%s)"),
 					pcity.name, unit_name(punit.type),
@@ -214,7 +212,7 @@ public class Autoattack {
 		set_unit_activity(punit, unit_activity.ACTIVITY_GOTO);
 		punit.goto_tile = enemy.tile;
 
-		send_unit_info(null, punit);
+		Unittools.send_unit_info(null, punit);
 		Gotohand.do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
 
 		punit = find_unit_by_id(id);
@@ -222,7 +220,7 @@ public class Autoattack {
 		if (punit!=null) {
 			set_unit_activity(punit, unit_activity.ACTIVITY_GOTO);
 			punit.goto_tile = pcity.tile;
-			send_unit_info(null, punit);
+			Unittools.send_unit_info(null, punit);
 
 			Gotohand.do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
 
@@ -288,7 +286,7 @@ public class Autoattack {
 		// t = renew_timer_start(t, TIMER_CPU, TIMER_DEBUG);
 		//
 		// /* re-use shuffle order from civserver.c */
-		// shuffled_for(player pplayer: game.players){
+		// shuffled_for(player pplayer: Game.game.players){
 		// auto_attack_player(pplayer);
 		// } shuffled_players_iterate_end;
 		// if (timer_in_use(t)) {

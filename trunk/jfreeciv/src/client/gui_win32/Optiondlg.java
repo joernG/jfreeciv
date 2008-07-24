@@ -23,7 +23,7 @@ public class Optiondlg{
 //#include <windowsx.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "support.h"
 //#include "options.h"
 //

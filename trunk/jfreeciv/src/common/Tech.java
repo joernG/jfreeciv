@@ -24,7 +24,7 @@ public class Tech{
 //#include <math.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"		/* free */
 //#include "player.h"
@@ -73,7 +73,7 @@ public class Tech{
 //  pplayer.research.inventions[tech].state = value;
 //
 //  if (value == TECH_KNOWN) {
-//    game.global_advances[tech]++;
+//    Game.game.global_advances[tech]++;
 //    improvements_update_obsolete();
 //  }
 //}
@@ -204,7 +204,7 @@ public class Tech{
 //
 //  tech_type_iterate(i) {
 //    if (i == A_NONE) {
-//      /* This is set when the game starts, but not everybody finds out
+//      /* This is set when the Game.game starts, but not everybody finds out
 //       * right away. */
 //      set_invention(pplayer, i, TECH_KNOWN);
 //    } else if (!tech_is_available(pplayer, i)) {
@@ -280,7 +280,7 @@ public class Tech{
 //}
 //
 ///**************************************************************************
-//Returns 1 if the tech "exists" in this game, 0 otherwise.
+//Returns 1 if the tech "exists" in this Game.game, 0 otherwise.
 //A tech doesn't exist if one of:
 //- id is out of range
 //- the tech has been flagged as removed by setting its req values
@@ -289,7 +289,7 @@ public class Tech{
 //**************************************************************************/
 //boolean tech_exists(Tech_Type_id id)
 //{
-//  if (id < 0 || id >= game.num_tech_types) {
+//  if (id < 0 || id >= Game.game.num_tech_types) {
 //    return false;
 //  } else {
 //    return advances[id].req[0] != A_LAST && advances[id].req[1] != A_LAST;
@@ -358,7 +358,7 @@ public class Tech{
 //Tech_Type_id find_tech_by_flag(int index, enum tech_flag_id flag)
 //{
 //  Tech_Type_id i;
-//  for(i=index;i<game.num_tech_types;i++)
+//  for(i=index;i<Game.game.num_tech_types;i++)
 //  {
 //    if(tech_flag(i,flag)) return i;
 //  }
@@ -380,10 +380,10 @@ public class Tech{
 //
 ///**************************************************************************
 // Function to determine cost for technology. Equation is determined
-// from game.rgame.tech_cost_style and game.rgame.tech_leakage.
+// from Game.game.rgame.tech_cost_style and Game.game.rgame.tech_leakage.
 //
 // tech_cost_style:
-// 0 - Civ (I|II) style. Every new tech add game.researchcost to the
+// 0 - Civ (I|II) style. Every new tech add Game.game.researchcost to the
 //     cost of the next tech.
 // 1 - Cost of technology is 
 //       MAX((1 + parents) * (researchcost / 2) * sqrt(1 + parents), researchcost)
@@ -402,7 +402,7 @@ public class Tech{
 //**************************************************************************/
 //int base_total_bulbs_required(player pplayer, Tech_Type_id tech)
 //{
-//  int cost, tech_cost_style = game.rgame.tech_cost_style;
+//  int cost, tech_cost_style = Game.game.rgame.tech_cost_style;
 //
 //  if (!is_future_tech(tech) && get_invention(pplayer, tech) == TECH_KNOWN) {
 //    /* A non-future tech which is already known costs nothing. */
@@ -421,28 +421,28 @@ public class Tech{
 //
 //  switch (tech_cost_style) {
 //  case 0:
-//    cost = pplayer.research.techs_researched * game.researchcost;
+//    cost = pplayer.research.techs_researched * Game.game.researchcost;
 //    break;
 //  case 1:
 //    cost = techcoststyle1[tech];
 //    break;
 //  case 2:
-//    cost = (advances[tech].preset_cost * game.researchcost) /
+//    cost = (advances[tech].preset_cost * Game.game.researchcost) /
 //	GAME_DEFAULT_RESEARCHCOST;
 //    break;
 //  default:
-//    util.die("Invalid tech_cost_style %d %d", game.rgame.tech_cost_style,
+//    util.die("Invalid tech_cost_style %d %d", Game.game.rgame.tech_cost_style,
 //	tech_cost_style);
 //    cost = 0;
 //  }
 //
 //  /* Research becomes more expensive this year and after. */
-//  if (game.rgame.tech_cost_double_year != 0
-//      && game.year >= game.rgame.tech_cost_double_year) {
+//  if (Game.game.rgame.tech_cost_double_year != 0
+//      && Game.game.year >= Game.game.rgame.tech_cost_double_year) {
 //    cost *= 2;
 //  }
 //
-//  switch (game.rgame.tech_leakage) {
+//  switch (Game.game.rgame.tech_leakage) {
 //  case 0:
 //    /* no change */
 //    break;
@@ -451,7 +451,7 @@ public class Tech{
 //    {
 //      int players = 0, players_with_tech_and_embassy = 0;
 //
-//      for(player other: game.players){
+//      for(player other: Game.game.players){
 //	players++;
 //	if (get_invention(other, tech) == TECH_KNOWN
 //	    && player_has_embassy(pplayer, other)) {
@@ -467,7 +467,7 @@ public class Tech{
 //    {
 //      int players = 0, players_with_tech = 0;
 //
-//      for(player other: game.players){
+//      for(player other: Game.game.players){
 //	players++;
 //	if (get_invention(other, tech) == TECH_KNOWN) {
 //	  players_with_tech++;
@@ -482,7 +482,7 @@ public class Tech{
 //    {
 //      int players = 0, players_with_tech = 0;
 //
-//      for(player other: game.players){
+//      for(player other: Game.game.players){
 //	if (is_barbarian(other)) {
 //	  continue;
 //	}
@@ -497,7 +497,7 @@ public class Tech{
 //    break;
 //
 //  default:
-//    util.die("Invalid tech_leakage %d", game.rgame.tech_leakage);
+//    util.die("Invalid tech_leakage %d", Game.game.rgame.tech_leakage);
 //  }
 //
 //  /* Assign a science penalty to the AI at easier skill levels.  This code
@@ -572,8 +572,8 @@ public class Tech{
 //  tech_type_iterate(tech) {
 //    techcoststyle1[tech] = MAX((advances[tech].num_reqs + 1)
 //                               * sqrt(advances[tech].num_reqs + 1)
-//                               * (game.researchcost / 2),
-//                               game.researchcost);
+//                               * (Game.game.researchcost / 2),
+//                               Game.game.researchcost);
 //  } tech_type_iterate_end;
 //}
 //
@@ -635,13 +635,13 @@ public class Tech{
 //
 ///**************************************************************************
 // Returns true if the costs for the given technology will stay finalant
-// during the game. false otherwise.
+// during the Game.game. false otherwise.
 //**************************************************************************/
 //boolean techs_have_fixed_costs()
 //{
-//  return ((game.rgame.tech_cost_style == 1
-//	   || game.rgame.tech_cost_style == 2)
-//	  && game.rgame.tech_leakage == 0);
+//  return ((Game.game.rgame.tech_cost_style == 1
+//	   || Game.game.rgame.tech_cost_style == 2)
+//	  && Game.game.rgame.tech_leakage == 0);
 //}
 //
 ///***************************************************************
@@ -667,7 +667,7 @@ public class Tech{
 //{
 //  Tech_Type_id i;
 //
-//  for (i = A_FIRST; i < game.num_tech_types; i++) {
+//  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
 //    tech_free(i);
 //  }
 //}

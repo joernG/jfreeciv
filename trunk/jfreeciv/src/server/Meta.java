@@ -128,7 +128,7 @@ public class Meta{
 //*************************************************************************/
 //static void metaserver_failed()
 //{
-//  con_puts(C_METAERROR, "Not reporting to the metaserver in this game.");
+//  con_puts(C_METAERROR, "Not reporting to the metaserver in this Game.game.");
 //  con_flush();
 //
 //  server_close_meta();
@@ -225,7 +225,7 @@ public class Meta{
 //    } else {
 //      n = 0; /* a counter for players_available */
 //
-//      for(player plr: game.players){
+//      for(player plr: Game.game.players){
 //        boolean is_player_available = true;
 //        char type[15];
 //        connection pconn = Connection.find_conn_by_user(plr.username);
@@ -262,15 +262,15 @@ public class Meta{
 //        /* is this player available to take?
 //         * TODO: there's some duplication here with 
 //         * stdinhand.c:is_allowed_to_take() */
-//        if (is_barbarian(plr) && !strchr(game.allow_take, 'b')) {
+//        if (is_barbarian(plr) && !strchr(Game.game.allow_take, 'b')) {
 //          is_player_available = false;
-//        } else if (!plr.is_alive && !strchr(game.allow_take, 'd')) {
+//        } else if (!plr.is_alive && !strchr(Game.game.allow_take, 'd')) {
 //          is_player_available = false;
 //        } else if (plr.ai.control
-//            && !strchr(game.allow_take, (game.is_new_game ? 'A' : 'a'))) {
+//            && !strchr(Game.game.allow_take, (Game.game.is_new_game ? 'A' : 'a'))) {
 //          is_player_available = false;
 //        } else if (!plr.ai.control
-//            && !strchr(game.allow_take, (game.is_new_game ? 'H' : 'h'))) {
+//            && !strchr(Game.game.allow_take, (Game.game.is_new_game ? 'H' : 'h'))) {
 //          is_player_available = false;
 //        }
 //
@@ -291,31 +291,31 @@ public class Meta{
 //    /* send some variables: should be listed in inverted order
 //     * FIXME: these should be input from the settings array */
 //    s = String.format "vn[]=%s&vv[]=%d&",
-//                my_url_encode("timeout"), game.timeout);
+//                my_url_encode("timeout"), Game.game.timeout);
 //    s = end_of_strn(s, &rest);
 //
 //    s = String.format "vn[]=%s&vv[]=%d&",
-//                my_url_encode("year"), game.year);
+//                my_url_encode("year"), Game.game.year);
 //    s = end_of_strn(s, &rest);
 //
 //    s = String.format "vn[]=%s&vv[]=%d&",
-//                my_url_encode("turn"), game.turn);
+//                my_url_encode("turn"), Game.game.turn);
 //    s = end_of_strn(s, &rest);
 //
 //    s = String.format "vn[]=%s&vv[]=%d&",
-//                my_url_encode("endyear"), game.end_year);
+//                my_url_encode("endyear"), Game.game.end_year);
 //    s = end_of_strn(s, &rest);
 //
 //    s = String.format "vn[]=%s&vv[]=%d&",
-//                my_url_encode("minplayers"), game.min_players);
+//                my_url_encode("minplayers"), Game.game.min_players);
 //    s = end_of_strn(s, &rest);
 //
 //    s = String.format "vn[]=%s&vv[]=%d&",
-//                my_url_encode("maxplayers"), game.max_players);
+//                my_url_encode("maxplayers"), Game.game.max_players);
 //    s = end_of_strn(s, &rest);
 //
 //    s = String.format "vn[]=%s&vv[]=%s&",
-//                my_url_encode("allowtake"), game.allow_take);
+//                my_url_encode("allowtake"), Game.game.allow_take);
 //    s = end_of_strn(s, &rest);
 //
 //    s = String.format "vn[]=%s&vv[]=%d&",

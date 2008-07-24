@@ -36,7 +36,7 @@ public class Cityrep{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "packets.h"
@@ -323,8 +323,8 @@ public class Cityrep{
 //
 //  if(ret.list_index!=XAW_LIST_NONE && 
 //     (pcity=cities_in_list[ret.list_index])) {
-//    cid cids[U_LAST + B_LAST];
-//    struct item items[U_LAST + B_LAST];
+//    cid cids[unittype.U_LAST + B_LAST];
+//    struct item items[unittype.U_LAST + B_LAST];
 //    int cids_used = 0;
 //    size_t i;
 //
@@ -516,7 +516,7 @@ public class Cityrep{
 //    static char **city_list_text = null;
 //    final String report_title;
 //
-//    n = city_list_size(&game.player_ptr.cities);
+//    n = Game.game.player_ptr.cities.foo_list_size();
 //    util.freelog(Log.LOG_DEBUG, "%d cities in report", n);
 //    if(n_alloc == 0 || n > n_alloc) {
 //      int j, n_prev = n_alloc;
@@ -548,7 +548,7 @@ public class Cityrep{
 //     * having to find city corresponding to id for each comparison.
 //     */
 //    i=0;
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      cities_in_list[i++] = pcity;
 //    } }
 //    assert(i==n);
@@ -773,12 +773,12 @@ public class Cityrep{
 //  } w;
 //
 //  int fr_count;
-//  char *fr_list[U_LAST + B_LAST];
-//  cid fr_cids[U_LAST + B_LAST];
+//  char *fr_list[unittype.U_LAST + B_LAST];
+//  cid fr_cids[unittype.U_LAST + B_LAST];
 //
 //  int to_count;
-//  char *to_list[U_LAST + B_LAST];
-//  cid to_cids[U_LAST + B_LAST];
+//  char *to_list[unittype.U_LAST + B_LAST];
+//  cid to_cids[unittype.U_LAST + B_LAST];
 //
 //  int fr_index;
 //  int to_index;
@@ -1078,8 +1078,8 @@ public class Cityrep{
 //					    XtPointer call_data)
 //{
 //  chgall_data state = (chgall_data ) client_data;
-//  cid cids[U_LAST + B_LAST];
-//  struct item items[U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //  int i;
 //
 //  state.fr_count = collect_cids2(cids);

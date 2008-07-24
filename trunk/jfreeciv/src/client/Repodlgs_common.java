@@ -21,7 +21,7 @@ public class Repodlgs_common{
 //#include <assert.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "mem.h"		/* free */
 //#include "support.h"		/* my_snprintf */
@@ -53,7 +53,7 @@ public class Repodlgs_common{
 //  impr_type_iterate(impr_id) {
 //    if (!is_wonder(impr_id)) {
 //      int count = 0, cost = 0;
-//      for (city pcity : game.player_ptr.cities.data) {
+//      for (city pcity : Game.game.player_ptr.cities.data) {
 //	if (city_got_building(pcity, impr_id)) {
 //	  count++;
 //	  cost += improvement_upkeep(pcity, impr_id);
@@ -74,7 +74,7 @@ public class Repodlgs_common{
 //      /* Currently there is no building expense under anarchy.  It's
 //       * not a good idea to hard-code this in the client, but what
 //       * else can we do? */
-//      if (game.player_ptr.government != game.government_when_anarchy) {
+//      if (Game.game.player_ptr.government != Game.game.government_when_anarchy) {
 //        *total_cost += cost;
 //      }
 //    }
@@ -82,7 +82,7 @@ public class Repodlgs_common{
 //
 //  *total_income = 0;
 //
-//  for (city pcity : game.player_ptr.cities.data) {
+//  for (city pcity : Game.game.player_ptr.cities.data) {
 //    *total_income += pcity.tax_total;
 //    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
 //      *total_income += MAX(0, pcity.shield_surplus);
@@ -102,7 +102,7 @@ public class Repodlgs_common{
 //
 //  unit_type_iterate(utype) {
 //    unittype = get_unit_type(utype);
-//    cost = utype_gold_cost(unittype, get_gov_pplayer(game.player_ptr));
+//    cost = utype_gold_cost(unittype, get_gov_pplayer(Game.game.player_ptr));
 //
 //    if (cost == 0) {
 //      continue;
@@ -111,7 +111,7 @@ public class Repodlgs_common{
 //    count = 0;
 //    partial_cost = 0;
 //
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      for (unit punit : pcity.units_supported.data) {
 //
 //	if (punit.type == utype) {
@@ -320,10 +320,10 @@ public class Repodlgs_common{
 //    return;
 //  }
 //
-//  for (city pcity : game.player_ptr.cities.data) {
+//  for (city pcity : Game.game.player_ptr.cities.data) {
 //    if (!pcity.did_sell && city_got_building(pcity, impr)
 //	&& (!obsolete_only
-//	    || improvement_obsolete(game.player_ptr, impr)
+//	    || improvement_obsolete(Game.game.player_ptr, impr)
 //	    || is_building_replaced(pcity, impr))) {
 //      count++;
 //      gold += impr_sell_gold(impr);
@@ -364,7 +364,7 @@ public class Repodlgs_common{
 //    return;
 //  }
 //
-//  for (city pcity : game.player_ptr.cities.data) {
+//  for (city pcity : Game.game.player_ptr.cities.data) {
 //    /* Only supported units are disbanded.  Units with no homecity have no
 //     * cost and are not disbanded. */
 //    for (unit punit : pcity.units_supported.data) {
@@ -372,7 +372,7 @@ public class Repodlgs_common{
 //
 //      if (punit.type == type
 //	  && (!in_cities_only
-//	      || (incity && city_owner(incity) == game.player_ptr))) {
+//	      || (incity && City.city_owner(incity) == Game.game.player_ptr))) {
 //	count++;
 //	request_unit_disband(punit);
 //      }

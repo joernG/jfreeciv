@@ -24,7 +24,7 @@ public class Options{
 //
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "registry.h"
@@ -528,14 +528,14 @@ public class Options{
 //
 //  /* load global worklists */
 //  for (i = 0; i < MAX_NUM_WORKLISTS; i++) {
-//    game.player_ptr.worklists[i].is_valid =
+//    Game.game.player_ptr.worklists[i].is_valid =
 //	secfile_lookup_bool_default(&sf, false,
 //				    "worklists.worklist%d.is_valid", i);
-//    strcpy(game.player_ptr.worklists[i].name,
+//    strcpy(Game.game.player_ptr.worklists[i].name,
 //           secfile_lookup_str_default(&sf, "",
 //                                      "worklists.worklist%d.name", i));
 //    load_global_worklist(&sf, "worklists.worklist%d", i, 
-//                         &(game.player_ptr.worklists[i]));
+//                         &(Game.game.player_ptr.worklists[i]));
 //  }
 //
 //  section_file_free(&sf);
@@ -600,13 +600,13 @@ public class Options{
 //
 //  /* insert global worklists */
 //  for(i = 0; i < MAX_NUM_WORKLISTS; i++){
-//    if (game.player_ptr.worklists[i].is_valid) {
-//      secfile_insert_bool(&sf, game.player_ptr.worklists[i].is_valid,
+//    if (Game.game.player_ptr.worklists[i].is_valid) {
+//      secfile_insert_bool(&sf, Game.game.player_ptr.worklists[i].is_valid,
 //			  "worklists.worklist%d.is_valid", i);
-//      secfile_insert_str(&sf, game.player_ptr.worklists[i].name,
+//      secfile_insert_str(&sf, Game.game.player_ptr.worklists[i].name,
 //                         "worklists.worklist%d.name", i);
 //      save_global_worklist(&sf, "worklists.worklist%d", i, 
-//                           &(game.player_ptr.worklists[i]));
+//                           &(Game.game.player_ptr.worklists[i]));
 //    }
 //  }
 //

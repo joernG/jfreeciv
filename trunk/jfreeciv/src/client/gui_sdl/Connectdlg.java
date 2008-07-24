@@ -931,7 +931,7 @@ public class Connectdlg{
 //static int quit_callback(GUI pWidget)
 //{
 //  close_connection_dialog();
-//  return 0;/* exit from main game loop */
+//  return 0;/* exit from main Game.game loop */
 //}
 //
 ///**************************************************************************

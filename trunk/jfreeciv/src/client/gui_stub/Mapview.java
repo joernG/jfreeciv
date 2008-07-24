@@ -19,7 +19,7 @@ public class Mapview{
 //#endif
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "support.h"
 //
 //#include "civclient.h"
@@ -44,11 +44,11 @@ public class Mapview{
 //		"Year: %s\n" +
 //		"Gold %d\n" +
 //		"Tax: %d Lux: %d Sci: %d"),
-//	      population_to_text(civ_population(game.player_ptr)),
-//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
-//	      game.player_ptr.economic.tax,
-//	      game.player_ptr.economic.luxury,
-//	      game.player_ptr.economic.science);
+//	      population_to_text(civ_population(Game.game.player_ptr)),
+//	      Shared.textyear(Game.game.year), Game.game.player_ptr.economic.gold,
+//	      Game.game.player_ptr.economic.tax,
+//	      Game.game.player_ptr.economic.luxury,
+//	      Game.game.player_ptr.economic.science);
 //
 //  /* ... */
 //}

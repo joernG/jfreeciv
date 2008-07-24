@@ -37,7 +37,7 @@ public class Worklistclass{
 //
 //#include "civclient.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "support.h"
 //#include "tech.h"
@@ -110,7 +110,7 @@ public class Worklistclass{
 //
 //  if (is_wonder(id))
 //  {
-//    if (game.global_wonders[id])
+//    if (Game.game.global_wonders[id])
 //      return "Built";
 //    if (wonder_obsolete(id))
 //      return "Obsolete";
@@ -152,7 +152,7 @@ public class Worklistclass{
 //  if (entry)
 //  {
 //    city pcity = data.pcity;
-//    player pplr = game.player_ptr;
+//    player pplr = Game.game.player_ptr;
 //
 //    switch (entry.type)
 //    {
@@ -198,7 +198,7 @@ public class Worklistclass{
 //      case  2:
 //            {
 //              /* Worklist */
-//	      player pplr = game.player_ptr;
+//	      player pplr = Game.game.player_ptr;
 //              int entries = worklist_length(&pplr.worklists[entry.id]);
 //
 //	      buf = String.format "%d %s", entries,
@@ -347,7 +347,7 @@ public class Worklistclass{
 //	  city pcity = data.pcity;
 //	  if (pcity)
 //	  {
-//	    player pplr = city_owner(pcity);
+//	    player pplr = City.city_owner(pcity);
 //	    worklist pwl = &pplr.worklists[wid_id(entry.wid)];
 //	    int i;
 //
@@ -401,7 +401,7 @@ public class Worklistclass{
 //	  if (pcity)
 //	  {
 //	    int i;
-//	    player pplr = city_owner(pcity);
+//	    player pplr = City.city_owner(pcity);
 //	    worklist pwl = &pplr.worklists[entry.id];
 //	    for (i=0; i < MAX_LEN_WORKLIST && pwl.wlefs[i] != WEF_END; i++)
 //	    {
@@ -461,7 +461,7 @@ public class Worklistclass{
 //  boolean show_advanced_targets;
 //
 //  
-//  wid worklist_avail_wids[B_LAST + U_LAST + MAX_NUM_WORKLISTS + 1];
+//  wid worklist_avail_wids[B_LAST + unittype.U_LAST + MAX_NUM_WORKLISTS + 1];
 //};
 //
 //
@@ -469,7 +469,7 @@ public class Worklistclass{
 //void worklist_populate_targets(Worklist_Data data)
 //{
 //  int i;
-//  player pplr = game.player_ptr;
+//  player pplr = Game.game.player_ptr;
 //  int advanced_tech;
 //  int can_build, can_eventually_build;
 //  struct worklist_entry entry;
@@ -566,7 +566,7 @@ public class Worklistclass{
 //static void targets_list_update(Worklist_Data data)
 //{
 //  int i = 0, wids_used = 0;
-//  player pplr = game.player_ptr;
+//  player pplr = Game.game.player_ptr;
 //  int advanced_tech;
 //  struct worklist_entry entry;
 //
@@ -579,7 +579,7 @@ public class Worklistclass{
 //
 //// checkout what this means
 //#if 0
-//  if (!game.player_ptr.worklists[0].is_valid)
+//  if (!Game.game.player_ptr.worklists[0].is_valid)
 //    gtk_clist_column_title_passive(GTK_CLIST(peditor.avail), 0);
 //  else
 //    gtk_clist_column_title_active(GTK_CLIST(peditor.avail), 0);

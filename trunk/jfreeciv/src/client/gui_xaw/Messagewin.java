@@ -31,7 +31,7 @@ public class Messagewin{
 //#include <X11/Xaw/Viewport.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "map.h"
 //#include "mem.h"
 //#include "packets.h"

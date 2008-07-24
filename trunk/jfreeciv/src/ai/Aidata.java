@@ -21,7 +21,7 @@ public class Aidata{
 //#include "aisupport.h"
 //#include "city.h"
 //#include "effects.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "Map.map.h"
@@ -45,10 +45,10 @@ public class Aidata{
 //
 //#include "aidata.h"
 //
-//static struct ai_data aidata[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+//static struct ai_data aidata[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS];
 //
 ///**************************************************************************
-//  Precalculates some important data about the improvements in the game
+//  Precalculates some important data about the improvements in the Game.game
 //  that we use later in ai/aicity.c.  We mark improvements as 'calculate'
 //  if we want to run a full test on them, as 'estimate' if we just want
 //  to do some guesses on them, or as 'unused' is they are useless to us.
@@ -188,7 +188,7 @@ public class Aidata{
 //  ai.threats.ocean     = fc_calloc(ai.num_oceans + 1, sizeof(boolean));
 //  ai.threats.igwall    = false;
 //
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (!is_player_dangerous(pplayer, aplayer)) {
 //      continue;
 //    }
@@ -217,16 +217,16 @@ public class Aidata{
 //        /* The idea is that while our enemies don't have any offensive
 //         * seaborne units, we don't have to worry. Go on the offensive! */
 //        if (punit.unit_type().attack_strength > 1) {
-//	  if (is_ocean(map_get_terrain(punit.tile))) {
+//	  if (Terrain_H.is_ocean(punit.tile.terrain)) {
 //	    Continent_id continent = map_get_continent(punit.tile);
 //	    ai.threats.ocean[-continent] = true;
 //	  } else {
-//	    adjc_iterate(punit.tile, tile2) {
-//	      if (is_ocean(map_get_terrain(tile2))) {
+//	    for(tile tile2: util.adjc_tile_iterate(punit.tile)) {
+//	      if (Terrain_H.is_ocean(tile2.terrain)) {
 //	        Continent_id continent = map_get_continent(tile2);
 //	        ai.threats.ocean[-continent] = true;
 //	      }
-//	    } adjc_iterate_end;
+//	    }
 //	  }
 //        } 
 //        continue;
@@ -253,7 +253,7 @@ public class Aidata{
 //
 //    /* Check for nuke capability */
 //    for (i = 0; i < nuke_units; i++) {
-//      int nuke = get_role_unit(F_NUCLEAR, i);
+//      int nuke = Unittype_P.get_role_unit(F_NUCLEAR, i);
 //      if (can_player_build_unit_direct(aplayer, nuke)) { 
 //        ai.threats.nuclear = 1;
 //      }
@@ -272,9 +272,9 @@ public class Aidata{
 //  for(tile ptile :  Map.map.tiles){
 //    Continent_id continent = map_get_continent(ptile);
 //
-//    if (is_ocean(ptile.terrain)) {
+//    if (Terrain_H.is_ocean(ptile.terrain)) {
 //      if (ai.explore.sea_done && ai_handicap(pplayer, H_TARGETS) 
-//          && !map_is_known(ptile, pplayer)) {
+//          && !Maphand.map_is_known(ptile, pplayer)) {
 //	/* We're not done there. */
 //        ai.explore.sea_done = false;
 //        ai.explore.ocean[-continent] = true;
@@ -286,14 +286,14 @@ public class Aidata{
 //      /* we don't need more explaining, we got the point */
 //      continue;
 //    }
-//    if (map_has_special(ptile, S_HUT) 
+//    if (Map.map_has_special(ptile, Terrain_H.S_HUT) 
 //        && (!ai_handicap(pplayer, H_HUTS)
-//             || map_is_known(ptile, pplayer))) {
+//             || Maphand.map_is_known(ptile, pplayer))) {
 //      ai.explore.land_done = false;
 //      ai.explore.continent[continent] = true;
 //      continue;
 //    }
-//    if (ai_handicap(pplayer, H_TARGETS) && !map_is_known(ptile, pplayer)) {
+//    if (ai_handicap(pplayer, H_TARGETS) && !Maphand.map_is_known(ptile, pplayer)) {
 //      /* this AI must explore */
 //      ai.explore.land_done = false;
 //      ai.explore.continent[continent] = true;
@@ -309,12 +309,12 @@ public class Aidata{
 //    ai.stats.cities[(int)map_get_continent(pcity.tile)]++;
 //    ai.stats.average_production += pcity.shield_surplus;
 //  } }
-//  ai.stats.average_production /= MAX(1, city_list_size(&pplayer.cities));
+//  ai.stats.average_production /= MAX(1, pplayer.cities.foo_list_size());
 //  BV_CLR_ALL(ai.stats.diplomat_reservations);
 //  for (unit punit : pplayer.units.data) {
 //    tile ptile = punit.tile;
 //
-//    if (!is_ocean(ptile.terrain) && unit_flag(punit, F_SETTLERS)) {
+//    if (!Terrain_H.is_ocean(ptile.terrain) && unit_flag(punit, F_SETTLERS)) {
 //      ai.stats.workers[(int)map_get_continent(punit.tile)]++;
 //    }
 //    if (unit_flag(punit, F_DIPLOMAT) && punit.ai.ai_role == AIUNIT_ATTACK) {
@@ -346,7 +346,7 @@ public class Aidata{
 //  /* Set per-player variables. We must set all players, since players 
 //   * can be created during a turn, and we don't want those to have 
 //   * invalid values. */
-//  for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //    player aplayer = get_player(i);
 //
 //    ai.diplomacy.player_intel[i].is_allied_with_enemy = null;
@@ -356,12 +356,12 @@ public class Aidata{
 //    /* Determine who is the leader of our alliance. That is,
 //     * whoever has the more cities. */
 //    if (pplayers_allied(pplayer, aplayer)
-//        && city_list_size(&aplayer.cities) > ally_strength) {
-//      ally_strength = city_list_size(&aplayer.cities);
+//        && aplayer.cities.foo_list_size() > ally_strength) {
+//      ally_strength = aplayer.cities.foo_list_size();
 //      ally_strongest = aplayer;
 //    }
 //
-//    for(player check_pl: game.players){
+//    for(player check_pl: Game.game.players){
 //      if (check_pl == pplayer
 //          || check_pl == aplayer
 //          || !check_pl.is_alive) {
@@ -387,7 +387,7 @@ public class Aidata{
 //  ai.diplomacy.spacerace_leader = player_leading_spacerace();
 //  
 //  ai.diplomacy.production_leader = null;
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (ai.diplomacy.production_leader == null
 //        || ai.diplomacy.production_leader.score.mfg < aplayer.score.mfg) {
 //      ai.diplomacy.production_leader = aplayer;
@@ -424,7 +424,7 @@ public class Aidata{
 //   * are not tracking, start tracking by setting cur_pos. If we are, 
 //   * fill prev_pos with previous cur_pos. This way we get the 
 //   * necessary coordinates to calculate a probably trajectory. */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (!aplayer.is_alive || aplayer == pplayer) {
 //      continue;
 //    }
@@ -486,10 +486,10 @@ public class Aidata{
 //
 //  ai.govt_reeval = 0;
 //  ai.government_want = fc_realloc(ai.government_want,
-//				   ((game.government_count + 1)
+//				   ((Game.game.government_count + 1)
 //				    * sizeof(*ai.government_want)));
 //  memset(ai.government_want, 0,
-//	 (game.government_count + 1) * sizeof(*ai.government_want));
+//	 (Game.game.government_count + 1) * sizeof(*ai.government_want));
 //
 //  ai.diplomacy.target = null;
 //  ai.diplomacy.strategy = WIN_OPEN;
@@ -502,7 +502,7 @@ public class Aidata{
 //  ai.diplomacy.req_love_for_ceasefire = 0;
 //  ai.diplomacy.alliance_leader = pplayer;
 //
-//  for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //    ai.diplomacy.player_intel[i].spam = i % 5; /* pseudorandom */
 //    ai.diplomacy.player_intel[i].distance = 1;
 //    ai.diplomacy.player_intel[i].ally_patience = 0;

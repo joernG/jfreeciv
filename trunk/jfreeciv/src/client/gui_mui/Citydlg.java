@@ -33,7 +33,7 @@ public class Citydlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "government.h"
 //#include "Map.map.h"
@@ -374,7 +374,7 @@ public class Citydlg{
 //      city_dialog pdialog = (city_dialog ) ITERATOR_PTR(myiter);
 //
 //      refresh_this_city_dialog(pdialog);
-//      if (pcity.owner != game.player_idx)
+//      if (pcity.owner != Game.game.player_idx)
 //      {
 //	/* Set the buttons we do not want live while a Diplomat investigates */
 //	set(pdialog.buy_button, MUIA_Disabled, true);
@@ -390,7 +390,7 @@ public class Citydlg{
 //    }
 //  }
 //
-//  if (pcity.owner == game.player_idx)
+//  if (pcity.owner == Game.game.player_idx)
 //  {
 //    city_report_dialog_update_city(pcity);
 //    economy_report_dialog_update();
@@ -405,7 +405,7 @@ public class Citydlg{
 //  city pcity_sup, *pcity_pre;
 //  city_dialog pdialog;
 //
-//  pcity_sup = player_find_city_by_id(game.player_ptr, punit.homecity);
+//  pcity_sup = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //  pcity_pre = map_get_city(punit.tile);
 //
 //  if (pcity_sup && (pdialog = get_city_dialog(pcity_sup)))
@@ -605,7 +605,7 @@ public class Citydlg{
 //	  if (is_wonder(which))
 //	  {
 //	    info = String.format( "Wonder");
-//	    if (game.global_wonders[which])
+//	    if (Game.game.global_wonders[which])
 //	      info = String.format( "Built");
 //	    if (wonder_obsolete(which))
 //	      info = String.format( "Obsolete");
@@ -786,7 +786,7 @@ public class Citydlg{
 //  city_dialog pdialog = *ppdialog;
 //  tile ptile = map_get_tile(pdialog.pcity.tile);
 //
-//  if (unit_list_size(&ptile.units))
+//  if (ptile.units.foo_list_size())
 //    popup_unit_select_dialog(ptile);
 //}
 //
@@ -958,10 +958,10 @@ public class Citydlg{
 //
 //  value = city_buy_cost(pdialog.pcity);
 //
-//  if (game.player_ptr.economic.gold >= value)
+//  if (Game.game.player_ptr.economic.gold >= value)
 //  {
 //    buf = util.my_snprintf( "Buy %s for %d gold?\nTreasury contains %d gold.",
-//	    name, value, game.player_ptr.economic.gold);
+//	    name, value, Game.game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(pdialog.wnd, "Buy It!", buf,
 //			 "_Yes", city_buy_yes, pdialog.pcity,
@@ -971,7 +971,7 @@ public class Citydlg{
 //  else
 //  {
 //    buf = util.my_snprintf( "%s costs %d gold.\nTreasury contains %d gold.",
-//	    name, value, game.player_ptr.economic.gold);
+//	    name, value, Game.game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(pdialog.wnd, "Buy It!", buf,
 //			 "_Darn", message_close, 0,
@@ -1397,7 +1397,7 @@ public class Citydlg{
 //  pdialog.imprv_disphook.h_Entry = (HOOKFUNC) city_imprv_display;
 //  pdialog.imprv_disphook.h_Data = pdialog;
 //
-//  if (pcity.owner == game.player_idx)
+//  if (pcity.owner == Game.game.player_idx)
 //  {
 //    prev_button = MakeButton("_<");
 //    next_button = MakeButton("_>");
@@ -1911,7 +1911,7 @@ public class Citydlg{
 //  DoMethod(pdialog.supported_group, MUIM_Group_InitChange);
 //  DoMethod(pdialog.supported_group, MUIM_AutoGroup_DisposeChilds);
 //
-//  if(pdialog.pcity.owner != game.player_idx) {
+//  if(pdialog.pcity.owner != Game.game.player_idx) {
 //    plist = &(pdialog.pcity.info_units_supported);
 //  } else {
 //    plist = &(pdialog.pcity.units_supported);
@@ -1936,7 +1936,7 @@ public class Citydlg{
 //  DoMethod(pdialog.units_supported_group, MUIM_Group_InitChange);
 //  DoMethod(pdialog.units_supported_group, MUIM_AutoGroup_DisposeChilds);
 //
-//  if(pdialog.pcity.owner != game.player_idx) {
+//  if(pdialog.pcity.owner != Game.game.player_idx) {
 //    plist = &(pdialog.pcity.info_units_supported);
 //  } else {
 //    plist = &(pdialog.pcity.units_supported);
@@ -1971,7 +1971,7 @@ public class Citydlg{
 //  DoMethod(pdialog.present_group, MUIM_Group_InitChange);
 //  DoMethod(pdialog.present_group, MUIM_AutoGroup_DisposeChilds); 
 //
-//  if(pdialog.pcity.owner != game.player_idx) {
+//  if(pdialog.pcity.owner != Game.game.player_idx) {
 //    plist = &(pdialog.pcity.info_units_present);
 //  } else {
 //    plist = &(map_get_tile(pdialog.pcity.tile).units);
@@ -1997,7 +1997,7 @@ public class Citydlg{
 //  DoMethod(pdialog.units_present_group, MUIM_Group_InitChange);
 //  DoMethod(pdialog.units_present_group, MUIM_AutoGroup_DisposeChilds); 
 //
-//  if(pdialog.pcity.owner != game.player_idx) {
+//  if(pdialog.pcity.owner != Game.game.player_idx) {
 //    plist = &(pdialog.pcity.info_units_present);
 //  } else {
 //    plist = &(map_get_tile(pdialog.pcity.tile).units);
@@ -2194,11 +2194,11 @@ public class Citydlg{
 //  int i;
 //
 //  city pcity = pdialog.pcity;
-//  player pplayer = &game.players[pcity.owner];
+//  player pplayer = &Game.game.players[pcity.owner];
 //  government g = get_gov_pcity(pcity);
-//  int cities = city_list_size(&pplayer.cities);
-//  int content = game.unhappysize;
-//  int basis = game.cityfactor + g.empire_size_mod;
+//  int cities = pplayer.cities.foo_list_size();
+//  int content = Game.game.unhappysize;
+//  int basis = Game.game.cityfactor + g.empire_size_mod;
 //  int step = g.empire_size_inc;
 //  int excess = cities - basis;
 //  int penalty = 0;

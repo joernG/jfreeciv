@@ -64,7 +64,7 @@ public class Clinet{
 //#include "capstr.h"
 //#include "dataio.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "hash.h"
 //#include "log.h"
 //#include "mem.h"

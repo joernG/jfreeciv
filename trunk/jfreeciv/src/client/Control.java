@@ -120,7 +120,7 @@ public class Control{
 //{
 //  unit punit_old_focus = punit_focus;
 //
-//  if (punit && punit.owner != game.player_idx) {
+//  if (punit && punit.owner != Game.game.player_idx) {
 //    util.freelog(Log.LOG_ERROR, "Trying to focus on another player's unit!");
 //    return;
 //  }
@@ -236,7 +236,7 @@ public class Control{
 //
 //  if(!candidate) {
 //    /* First try for "waiting" units. */
-//    for (unit punit : game.player_ptr.units.data) {
+//    for (unit punit : Game.game.player_ptr.units.data) {
 //      if(punit.focus_status == FOCUS_WAIT) {
 //        punit.focus_status = FOCUS_AVAIL;
 //      }
@@ -288,7 +288,7 @@ public class Control{
 //  }
 //
 //  best_candidate = null;
-//  for (unit punit : game.player_ptr.units.data) {
+//  for (unit punit : Game.game.player_ptr.units.data) {
 //    if ((punit != punit_focus || accept_current)
 //      && punit.focus_status == FOCUS_AVAIL
 //      && punit.activity == unit_activity.ACTIVITY_IDLE
@@ -314,7 +314,7 @@ public class Control{
 //  unit panyowned = null, *panyother = null, *ptptother = null;
 //
 //  /* If no units here, return nothing. */
-//  if (unit_list_size(&ptile.units)==0) {
+//  if (ptile.units.foo_list_size()==0) {
 //    return null;
 //  }
 //
@@ -351,16 +351,16 @@ public class Control{
 //       4: any unit
 //     (always return first in stack). */
 //  unit_list_iterate(ptile.units, punit)
-//    if (punit.unit_owner() == game.player_ptr) {
+//    if (punit.unit_owner() == Game.game.player_ptr) {
 //      if (punit.transported_by == -1) {
-//        if (get_transporter_capacity(punit) > 0) {
+//        if (Unit.get_transporter_capacity(punit) > 0) {
 //	  return punit;
 //        } else if (!panyowned) {
 //	  panyowned = punit;
 //        }
 //      }
 //    } else if (!ptptother && punit.transported_by == -1) {
-//      if (get_transporter_capacity(punit) > 0) {
+//      if (Unit.get_transporter_capacity(punit) > 0) {
 //	ptptother = punit;
 //      } else if (!panyother) {
 //	panyother = punit;
@@ -506,11 +506,11 @@ public class Control{
 //    id = *p_id;
 //    free(p_id);
 //    p_id = null;
-//    punit = player_find_unit_by_id(game.player_ptr, id);
+//    punit = player_find_unit_by_id(Game.game.player_ptr, id);
 //
 //    if (punit && (unit_can_help_build_wonder_here(punit)
 //		  || unit_can_est_traderoute_here(punit))
-//	&& (!game.player_ptr.ai.control || ai_popup_windows)) {
+//	&& (!Game.game.player_ptr.ai.control || ai_popup_windows)) {
 //      city pcity_dest = map_get_city(punit.tile);
 //      city pcity_homecity = find_city_by_id(punit.homecity);
 //      if (pcity_dest && pcity_homecity) {
@@ -564,7 +564,7 @@ public class Control{
 //    victim_id = p_ids[1];
 //    free(p_ids);
 //    p_ids = null;
-//    pdiplomat = player_find_unit_by_id(game.player_ptr, diplomat_id);
+//    pdiplomat = player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
 //    pcity = find_city_by_id(victim_id);
 //    punit = find_unit_by_id(victim_id);
 //
@@ -639,7 +639,7 @@ public class Control{
 //boolean can_unit_do_connect(unit punit, enum unit_activity activity) 
 //{
 //  player pplayer = punit.unit_owner();
-//  Terrain_type_id terrain = map_get_terrain(punit.tile);
+//  int terrain = punit.tile.terrain;
 //  tile_type ttype = get_tile_type(terrain);
 //
 //  /* HACK: This code duplicates that in
@@ -653,7 +653,7 @@ public class Control{
 //  case ACTIVITY_ROAD:
 //    return terrain_control.may_road
 //      && unit_flag(punit, F_SETTLERS)
-//      && (Map.tile_has_special(punit.tile, S_ROAD)
+//      && (Map.tile_has_special(punit.tile, Terrain_H.S_ROAD)
 //	  || (ttype.road_time != 0
 //	      && (!Map.tile_has_special(punit.tile, S_RIVER)
 //		  || player_knows_techs_with_flag(pplayer, TF_BRIDGE))));
@@ -711,7 +711,7 @@ public class Control{
 //  tile ptile = punit.tile;
 //  unit plast = null;
 //
-//  if(get_transporter_capacity(punit) == 0) {
+//  if(Unit.get_transporter_capacity(punit) == 0) {
 //    append_output_window("Game: Only transporter units can be unloaded.");
 //    return;
 //  }
@@ -726,7 +726,7 @@ public class Control{
 //	request_new_unit_activity(pcargo, unit_activity.ACTIVITY_IDLE);
 //      }
 //
-//      if (pcargo.owner == game.player_idx) {
+//      if (pcargo.owner == Game.game.player_idx) {
 //	plast = pcargo;
 //      }
 //    }
@@ -764,7 +764,7 @@ public class Control{
 //    enum unit_activity activity = ACTIVITY_LAST;
 //    int turns = pf_last_position(path).turn;
 //
-//    if (punit.hp + turns * get_player_bonus(game.player_ptr,
+//    if (punit.hp + turns * get_player_bonus(Game.game.player_ptr,
 //					     EFT_UNIT_RECOVER)
 //	< punit.unit_type().hp) {
 //      activity = ACTIVITY_SENTRY;
@@ -799,7 +799,7 @@ public class Control{
 //void wakeup_sentried_units(tile ptile)
 //{
 //  for (unit punit : ptile.units.data) {
-//    if(punit.activity==ACTIVITY_SENTRY && game.player_idx==punit.owner) {
+//    if(punit.activity==ACTIVITY_SENTRY && Game.game.player_idx==punit.owner) {
 //      request_new_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //  }
@@ -1082,7 +1082,7 @@ public class Control{
 //  enum int would =
 //      what | map_get_infrastructure_prerequisite(what);
 //
-//  if ((game.rgame.pillage_select) &&
+//  if ((Game.game.rgame.pillage_select) &&
 //      ((pspresent & (~(psworking | would))) != S_NO_SPECIAL)) {
 //    popup_pillage_dialog(punit, (pspresent & (~psworking)));
 //  } else {
@@ -1370,7 +1370,7 @@ public class Control{
 //
 //  unit_list_unlink(&ptile.units, punit);
 //
-//  if (game.player_idx == punit.owner
+//  if (Game.game.player_idx == punit.owner
 //      && auto_center_on_unit
 //      && !unit_has_orders(punit)
 //      && punit.activity != unit_activity.ACTIVITY_GOTO
@@ -1423,7 +1423,7 @@ public class Control{
 //void do_map_click(tile ptile, enum quickselect_type qtype)
 //{
 //  city pcity = map_get_city(ptile);
-//  unit punit = player_find_unit_by_id(game.player_ptr, hover_unit);
+//  unit punit = player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //  boolean maybe_goto = false;
 //
 //  if (punit && hover_state != HOVER_NONE) {
@@ -1434,7 +1434,7 @@ public class Control{
 //      do_unit_goto(ptile);
 //      break;
 //    case HOVER_NUKE:
-//      if (Unit_H.SINGLE_MOVE * real_map_distance(punit.tile, ptile)
+//      if (Unit_H.SINGLE_MOVE * Map.real_map_distance(punit.tile, ptile)
 //	  > punit.moves_left) {
 //        append_output_window("Game: Too far for this unit.");
 //      } else {
@@ -1467,17 +1467,17 @@ public class Control{
 //    }
 //  }
 //  /* Otherwise use popups. */
-//  else if (pcity && can_player_see_city_internals(game.player_ptr, pcity)) {
+//  else if (pcity && can_player_see_city_internals(Game.game.player_ptr, pcity)) {
 //    popup_city_dialog(pcity, false);
 //  }
-//  else if (unit_list_size(&ptile.units) == 0 && !pcity
+//  else if (ptile.units.foo_list_size() == 0 && !pcity
 //           && punit_focus) {
 //    maybe_goto = keyboardless_goto;
 //  }
-//  else if (unit_list_size(&ptile.units) == 1
+//  else if (ptile.units.foo_list_size() == 1
 //      && !unit_list_get(&ptile.units, 0).occupy) {
 //    unit punit=unit_list_get(&ptile.units, 0);
-//    if(game.player_idx==punit.owner) {
+//    if(Game.game.player_idx==punit.owner) {
 //      if(can_unit_do_activity(punit, unit_activity.ACTIVITY_IDLE)) {
 //        maybe_goto = keyboardless_goto;
 //	set_unit_focus_and_select(punit);
@@ -1487,7 +1487,7 @@ public class Control{
 //      popup_unit_select_dialog(ptile);
 //    }
 //  }
-//  else if(unit_list_size(&ptile.units) > 0) {
+//  else if(ptile.units.foo_list_size() > 0) {
 //    /* The stack list is always popped up, even if it includes enemy units.
 //     * If the server doesn't want the player to know about them it shouldn't
 //     * tell him!  The previous behavior would only pop up the stack if you
@@ -1511,7 +1511,7 @@ public class Control{
 //static unit quickselect(tile ptile,
 //                          enum quickselect_type qtype)
 //{
-//  int listsize = unit_list_size(&ptile.units);
+//  int listsize = ptile.units.foo_list_size();
 //  unit panytransporter = null,
 //              *panymovesea  = null, *panysea  = null,
 //              *panymoveland = null, *panyland = null,
@@ -1523,7 +1523,7 @@ public class Control{
 //    return null;
 //  } else if (listsize == 1) {
 //    unit punit = unit_list_get(&ptile.units, 0);
-//    return (game.player_idx == punit.owner) ? punit : null;
+//    return (Game.game.player_idx == punit.owner) ? punit : null;
 //  }
 //
 //  /*  Quickselect priorities. Units with moves left
@@ -1540,12 +1540,12 @@ public class Control{
 //   */
 //
 //    for (unit punit : ptile.units.data) {
-//  if(game.player_idx != punit.owner || punit == punit_focus) {
+//  if(Game.game.player_idx != punit.owner || punit == punit_focus) {
 //    continue;
 //  }
 //  if (qtype == SELECT_SEA) {
 //    /* Transporter. */
-//    if (get_transporter_capacity(punit)) {
+//    if (Unit.get_transporter_capacity(punit)) {
 //      if (punit.moves_left > 0) {
 //        return punit;
 //      } else if (!panytransporter) {
@@ -1627,7 +1627,7 @@ public class Control{
 //**************************************************************************/
 //void do_unit_goto(tile ptile)
 //{
-//  unit punit = player_find_unit_by_id(game.player_ptr, hover_unit);
+//  unit punit = player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //
 //  if (hover_unit == 0 || hover_state != HOVER_GOTO)
 //    return;
@@ -1730,7 +1730,7 @@ public class Control{
 //      popped = goto_pop_waypoint();
 //
 //  if (hover_state != HOVER_NONE && !popped) {
-//    unit punit = player_find_unit_by_id(game.player_ptr, hover_unit);
+//    unit punit = player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //
 //    set_hover_state(null, HOVER_NONE, ACTIVITY_LAST);
 //    update_unit_info_label(punit);
@@ -1746,7 +1746,7 @@ public class Control{
 //**************************************************************************/
 //void key_center_capital()
 //{
-//  city capital = game.player_ptr.find_palace();
+//  city capital = Game.game.player_ptr.find_palace();
 //
 //  if (capital)  {
 //    /* Center on the tile, and pop up the crosshair overlay. */
@@ -1770,7 +1770,7 @@ public class Control{
 //**************************************************************************/
 //void key_recall_previous_focus_unit()
 //{
-//  unit punit = player_find_unit_by_id(game.player_ptr,
+//  unit punit = player_find_unit_by_id(Game.game.player_ptr,
 //                                              previous_focus_id);
 //  if (punit) {
 //    set_unit_focus_and_select(punit);

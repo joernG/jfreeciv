@@ -25,7 +25,7 @@ public class Cm{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "hash.h"
 //#include "log.h"
@@ -259,7 +259,7 @@ public class Cm{
 //
 //
 ///****************************************************************************
-//  Initialize the CM data at the start of each game.  Note the citymap
+//  Initialize the CM data at the start of each Game.game.  Note the citymap
 //  indices will not have been initialized yet (cm_init_citymap is called
 //  when they are).
 //****************************************************************************/
@@ -280,7 +280,7 @@ public class Cm{
 ///****************************************************************************
 //  Initialize the CM citymap data.  This function is called when the
 //  city map indices are generated (basically when the topology is set,
-//  shortly after the start of the game).
+//  shortly after the start of the Game.game).
 //****************************************************************************/
 //void cm_init_citymap()
 //{
@@ -296,7 +296,7 @@ public class Cm{
 //}
 //
 ///****************************************************************************
-//  Called at the end of a game to free any CM data.
+//  Called at the end of a Game.game to free any CM data.
 //****************************************************************************/
 //void cm_free()
 //{
@@ -953,7 +953,7 @@ public class Cm{
 //    if (city_can_use_specialist(pcity, pairs[i].spec)) {
 //      type.spec = pairs[i].spec;
 //      type.production[pairs[i].stat]
-//        = game.rgame.specialists[pairs[i].spec].bonus;
+//        = Game.game.rgame.specialists[pairs[i].spec].bonus;
 //
 //      tile_type_lattice_add(lattice, &type, 0, 0);
 //

@@ -34,7 +34,7 @@ public class Helpdlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "government.h"
 //#include "mem.h"
@@ -257,7 +257,7 @@ public class Helpdlg{
 //  char *bg="";
 //  char label[MAX_LEN_NAME+3];
 //  
-//  type = (tech==A_LAST) ? TECH_UNKNOWN : get_invention(game.player_ptr, tech);
+//  type = (tech==A_LAST) ? TECH_UNKNOWN : get_invention(Game.game.player_ptr, tech);
 //  switch(type) {
 //    case TECH_UNKNOWN:
 //      bg=TREE_NODE_UNKNOWN_TECH_BG;
@@ -285,7 +285,7 @@ public class Helpdlg{
 //  
 //  label = util.my_snprintf(
 //	      "%s:%d", advances[tech].name,
-//	      num_unknown_techs_for_goal(game.player_ptr, tech));
+//	      num_unknown_techs_for_goal(Game.game.player_ptr, tech));
 //
 //  if(parent) {
 //    l=XtVaCreateManagedWidget("treenode", 
@@ -750,7 +750,7 @@ public class Helpdlg{
 //  
 //  create_help_page(HELP_IMPROVEMENT);
 //  
-//  if (which<game.num_impr_types) {
+//  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
 //    sprintf(buf, "%d ", impr_build_shield_cost(which));
 //    xaw_set_label(help_improvement_cost_data, buf);
@@ -785,7 +785,7 @@ public class Helpdlg{
 //  
 //  create_help_page(HELP_WONDER);
 //
-//  if (which<game.num_impr_types) {
+//  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
 //    sprintf(buf, "%d ", impr_build_shield_cost(which));
 //    xaw_set_label(help_improvement_cost_data, buf);
@@ -808,7 +808,7 @@ public class Helpdlg{
 //    xaw_set_label(help_improvement_cost_data, "0 ");
 //    xaw_set_label(help_improvement_req_data, "(Never)");
 //    xaw_set_label(help_wonder_obsolete_data, "None");
-//    create_tech_tree(help_tech_tree, 0, game.num_tech_types, 3); 
+//    create_tech_tree(help_tech_tree, 0, Game.game.num_tech_types, 3); 
 //  }
 //  set_title_topic(pitem);
 //  helptext_building(buf, sizeof(buf), which, pitem.text);
@@ -824,7 +824,7 @@ public class Helpdlg{
 //  char *buf = &long_buffer[0];
 //  
 //  create_help_page(HELP_UNIT);
-//  if (i<game.num_unit_types) {
+//  if (i<Game.game.num_unit_types) {
 //    unit_type utype = get_unit_type(i);
 //    sprintf(buf, "%d ", unit_build_shield_cost(i));
 //    xaw_set_label(help_unit_cost_data, buf);
@@ -867,7 +867,7 @@ public class Helpdlg{
 //    xaw_set_label(help_unit_hp_data, "0 ");
 //    xaw_set_label(help_unit_visrange_data, "0 ");
 //    xaw_set_label(help_improvement_req_data, "(Never)");
-//    create_tech_tree(help_tech_tree, 0, game.num_tech_types, 3);
+//    create_tech_tree(help_tech_tree, 0, Game.game.num_tech_types, 3);
 //    xaw_set_label(help_wonder_obsolete_data, "None");
 //    XtVaSetValues(help_text, XtNstring, pitem.text, null);
 //  }
@@ -905,7 +905,7 @@ public class Helpdlg{
 //		get_unit_type(j).name);
 //    } unit_type_iterate_end;
 //
-//    for (j = 0; j < game.num_tech_types; j++) {
+//    for (j = 0; j < Game.game.num_tech_types; j++) {
 //      if(i==advances[j].req[0]) {
 //	if(advances[j].req[1]==A_NONE)
 //	  sprintf(buf+buf.length(), "Allows %s.\n", 
@@ -926,7 +926,7 @@ public class Helpdlg{
 //  }
 //  else {
 //    create_help_page(HELP_TECH);
-//    create_tech_tree(help_tech_tree, 0, game.num_tech_types, 3);
+//    create_tech_tree(help_tech_tree, 0, Game.game.num_tech_types, 3);
 //    strcpy(buf, pitem.text);
 //  }
 //  wordwrap_string(buf, 68);

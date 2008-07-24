@@ -469,7 +469,7 @@ public class Gui_main{
 //      popup_find_dialog();
 //      break;
 //    case MENU_KINGDOM_WORKLISTS:
-//      popup_worklists_dialog(game.player_ptr);
+//      popup_worklists_dialog(Game.game.player_ptr);
 //      break;
 //
 //    case MENU_KINGDOM_REVOLUTION:
@@ -648,7 +648,7 @@ public class Gui_main{
 //      send_report_request(REPORT_WONDERS_OF_THE_WORLD);
 //      break;
 //    case MENU_REPORT_SPACESHIP:
-//      popup_spaceship_dialog(game.player_ptr);
+//      popup_spaceship_dialog(Game.game.player_ptr);
 //      break;
 //
 //    case MENU_HELP_CONTROLS:
@@ -742,12 +742,12 @@ public class Gui_main{
 //
 //  i = (size_t) * number;
 //
-//  lux_end = game.player_ptr.economic.luxury;
-//  sci_end = lux_end + game.player_ptr.economic.science;
+//  lux_end = Game.game.player_ptr.economic.luxury;
+//  sci_end = lux_end + Game.game.player_ptr.economic.science;
 //
-//  packet.luxury = game.player_ptr.economic.luxury;
-//  packet.science = game.player_ptr.economic.science;
-//  packet.tax = game.player_ptr.economic.tax;
+//  packet.luxury = Game.game.player_ptr.economic.luxury;
+//  packet.science = Game.game.player_ptr.economic.science;
+//  packet.tax = Game.game.player_ptr.economic.tax;
 //
 //  i *= 10;
 //  if (i < lux_end)
@@ -1205,9 +1205,9 @@ public class Gui_main{
 //    int any_cities = false;
 //    punit = get_unit_in_focus();
 //
-//    for (i = 0; i < game.nplayers; i++)
+//    for (i = 0; i < Game.game.nplayers; i++)
 //    {
-//      if (city_list_size(&game.players[i].cities))
+//      if (city_list_size(&Game.game.players[i].cities))
 //      {
 //	any_cities = true;
 //	break;
@@ -1224,14 +1224,14 @@ public class Gui_main{
 //    menu_title_sensitive(MENU_KINGDOM_WORKLISTS, can_client_issue_orders());
 //    menu_title_sensitive(MENU_KINGDOM_REVOLUTION, can_client_issue_orders());
 //
-//    menu_entry_sensitive(MENU_REPORT_SPACESHIP, (game.player_ptr.spaceship.state != spaceship_state.SSHIP_NONE));
+//    menu_entry_sensitive(MENU_REPORT_SPACESHIP, (Game.game.player_ptr.spaceship.state != spaceship_state.SSHIP_NONE));
 //
 //    if (punit && can_client_issue_orders()) {
 //      final String chgfmt = "Change to %s";
 //      static char irrtext[64];
 //      static char mintext[64];
 //      static char transtext[64];
-//      Terrain_type_id ttype;
+//      int ttype;
 //      tile_type tinfo;
 //
 //      set(main_menu, MUIA_Window_Menustrip, null);
@@ -1291,8 +1291,8 @@ public class Gui_main{
 //	  && (tinfo.irrigation_result != ttype)) {
 //	irrtext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.irrigation_result)).terrain_name);
-//      } else if (map_has_special(punit.tile, S_IRRIGATION)
-//		 && player_knows_techs_with_flag(game.player_ptr,
+//      } else if (Map.map_has_special(punit.tile, S_IRRIGATION)
+//		 && player_knows_techs_with_flag(Game.game.player_ptr,
 //						 TF_FARMLAND)) {
 //	irrtext = String.format( "Build Farmland");
 //      } else {
@@ -1315,7 +1315,7 @@ public class Gui_main{
 //        transtext = String.format( "Transform Terrain");
 //      }
 //
-//      if (map_has_special(punit.tile, S_ROAD)) {
+//      if (Map.map_has_special(punit.tile, Terrain_H.S_ROAD)) {
 //	menu_entry_rename(MENU_ORDER_ROAD, "Build Railroad", false);
 //      } else {
 //	menu_entry_rename(MENU_ORDER_ROAD, "Build Road", false);

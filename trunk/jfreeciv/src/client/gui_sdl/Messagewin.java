@@ -35,7 +35,7 @@ public class Messagewin{
 //#include "events.h"
 //#include "fcintl.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "map.h"
 //
 //#include "gui_mem.h"

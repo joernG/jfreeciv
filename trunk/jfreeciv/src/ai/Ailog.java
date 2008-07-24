@@ -74,7 +74,7 @@ public class Ailog{
 //
 //  cat_snprintf(buffer, sizeof(buffer), buffer2);
 //  if (pplayer.debug) {
-//    Plrhand.notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&Game.game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}
@@ -97,7 +97,7 @@ public class Ailog{
 //  }
 //
 //  buffer = util.my_snprintf( "%s's %s(%d,%d) [s%d d%d u%d g%d] ",
-//              city_owner(pcity).name, pcity.name,
+//              City.city_owner(pcity).name, pcity.name,
 //              pcity.tile.x, pcity.tile.y, pcity.size,
 //              pcity.ai.danger, pcity.ai.urgency,
 //              pcity.ai.grave_danger);
@@ -108,7 +108,7 @@ public class Ailog{
 //
 //  cat_snprintf(buffer, sizeof(buffer), buffer2);
 //  if (pcity.debug) {
-//    Plrhand.notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&Game.game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}
@@ -164,7 +164,7 @@ public class Ailog{
 //
 //  cat_snprintf(buffer, sizeof(buffer), buffer2);
 //  if (punit.debug || messwin) {
-//    Plrhand.notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&Game.game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}
@@ -208,7 +208,7 @@ public class Ailog{
 //	      s, id, ptile.x, ptile.y);
 //  cat_snprintf(buffer, sizeof(buffer), msg);
 //  if (punit.debug) {
-//    Plrhand.notify_conn(&game.est_connections, buffer);
+//    Plrhand.notify_conn(&Game.game.est_connections, buffer);
 //  }
 //  util.freelog(minlevel, buffer);
 //}

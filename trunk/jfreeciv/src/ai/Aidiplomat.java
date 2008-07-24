@@ -22,7 +22,7 @@ public class Aidiplomat{
 //
 //#include "city.h"
 //#include "combat.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "mem.h"
@@ -109,7 +109,7 @@ public class Aidiplomat{
 //  if (def != 0 && pcity.ai.diplomat_threat && !pcity.ai.has_diplomat) {
 //    int u = best_role_unit(pcity, F_DIPLOMAT);
 //
-//    if (u < U_LAST) {
+//    if (u < unittype.U_LAST) {
 //       util.freelog(LOG_DIPLOMAT_BUILD, 
 //               "A defensive diplomat will be built in city %s.", pcity.name);
 //       choice.want = 16000; /* diplomat more important than soldiers */
@@ -120,10 +120,10 @@ public class Aidiplomat{
 //      /* We don't know diplomats yet... */
 //      util.freelog(LOG_DIPLOMAT_BUILD,
 //              "A defensive diplomat is wanted badly in city %s.", pcity.name);
-//      u = get_role_unit(F_DIPLOMAT, 0);
+//      u = Unittype_P.get_role_unit(F_DIPLOMAT, 0);
 //      /* 3000 is a just a large number, but not hillariously large as the
 //         previously used one. This is important for diplomacy later - Per */
-//      if (u != U_LAST) {
+//      if (u != unittype.U_LAST) {
 //        pplayer.ai.tech_want[get_unit_type(u).tech_requirement] += 3000;
 //      }
 //    }
@@ -141,7 +141,7 @@ public class Aidiplomat{
 //  int u = best_role_unit(pcity, F_DIPLOMAT);
 //  ai_data ai = ai_data_get(pplayer);
 //
-//  if (u >= U_LAST) {
+//  if (u >= unittype.U_LAST) {
 //    /* We don't know diplomats yet! */
 //    return;
 //  }
@@ -176,7 +176,7 @@ public class Aidiplomat{
 //      return;
 //    }
 //    incite_cost = city_incite_cost(pplayer, acity);
-//    if (HOSTILE_PLAYER(pplayer, ai, city_owner(acity))
+//    if (HOSTILE_PLAYER(pplayer, ai, City.city_owner(acity))
 //        && (incite_cost < INCITE_IMPOSSIBLE_COST)
 //        && (incite_cost < pplayer.economic.gold - pplayer.ai.est_upkeep)) {
 //      /* incite gain (FIXME: we should count wonders too but need to
@@ -189,9 +189,9 @@ public class Aidiplomat{
 //      gain_incite *= SHIELD_WEIGHTING; /* WAG cost to take city otherwise */
 //      gain_incite -= incite_cost * TRADE_WEIGHTING;
 //    }
-//    if (city_owner(acity).research.techs_researched <
+//    if (City.city_owner(acity).research.techs_researched <
 //             pplayer.research.techs_researched
-//             && !pplayers_allied(pplayer, city_owner(acity))) {
+//             && !pplayers_allied(pplayer, City.city_owner(acity))) {
 //      /* tech theft gain */
 //      gain_theft = total_bulbs_required(pplayer) * TRADE_WEIGHTING;
 //    }
@@ -199,7 +199,7 @@ public class Aidiplomat{
 //    loss = unit_build_shield_cost(u) * SHIELD_WEIGHTING;
 //
 //    /* Probability to succeed, assuming no defending diplomat */
-//    p_success = game.diplchance;
+//    p_success = Game.game.diplchance;
 //    /* Probability to lose our unit */
 //    p_failure = (unit_type_flag(u, F_SPY) ? 100 - p_success : 100);
 //
@@ -218,11 +218,11 @@ public class Aidiplomat{
 //    want = military_amortize(pplayer, pcity, want, time_to_dest, 
 //                             unit_build_shield_cost(u));
 //
-//    if (!player_has_embassy(pplayer, city_owner(acity))
+//    if (!player_has_embassy(pplayer, City.city_owner(acity))
 //        && want < 99) {
 //        util.freelog(LOG_DIPLOMAT_BUILD,
 //                "A diplomat desired in %s to establish an embassy with %s " +
-//                "in %s", pcity.name, city_owner(acity).name, acity.name);
+//                "in %s", pcity.name, City.city_owner(acity).name, acity.name);
 //        want = 99;
 //    }
 //    if (want > choice.want) {
@@ -253,7 +253,7 @@ public class Aidiplomat{
 //static void ai_diplomat_city(unit punit, city ctarget)
 //{
 //  player pplayer = punit.unit_owner();
-//  player tplayer = city_owner(ctarget);
+//  player tplayer = City.city_owner(ctarget);
 //  int count_impr = count_sabotagable_improvements(ctarget);
 //  int count_tech = count_stealable_techs(pplayer, tplayer);
 //  int gold_avail = pplayer.economic.gold - 2 * pplayer.ai.est_upkeep;
@@ -335,7 +335,7 @@ public class Aidiplomat{
 //    if (!acity) {
 //      continue;
 //    }
-//    aplayer = city_owner(acity);
+//    aplayer = City.city_owner(acity);
 //
 //    /* sneaky way of avoiding foul diplomat capture  -AJS */
 //    has_embassy = player_has_embassy(pplayer, aplayer) || punit.foul;
@@ -394,7 +394,7 @@ public class Aidiplomat{
 //    if (!acity) {
 //      continue;
 //    }
-//    aplayer = city_owner(acity);
+//    aplayer = City.city_owner(acity);
 //    if (aplayer != pplayer) {
 //      continue;
 //    }
@@ -453,7 +453,7 @@ public class Aidiplomat{
 //
 //    if (!pvictim
 //        || !HOSTILE_PLAYER(pplayer, ai, pvictim.unit_owner())
-//        || unit_list_size(&ptile.units) > 1
+//        || ptile.units.foo_list_size() > 1
 //        || map_get_city(pos.tile)
 //        || government_has_flag(get_gov_pplayer(pvictim.unit_owner()),
 //                               G_UNBRIBABLE)) {
@@ -531,7 +531,7 @@ public class Aidiplomat{
 //
 ///**************************************************************************
 //  If we are the only diplomat in a threatened city, defend against enemy 
-//  actions. The passive defense is set by game.diplchance.  The active 
+//  actions. The passive defense is set by Game.game.diplchance.  The active 
 //  defense is to bribe units which end their move nearby. Our next trick is 
 //  to look for enemy cities on our continent and do our diplomat things.
 //
@@ -583,12 +583,12 @@ public class Aidiplomat{
 //        && ctarget) {
 //      if (Map.same_pos(ctarget.tile, punit.tile)) {
 //        failure = true;
-//      } else if (pplayers_allied(pplayer, city_owner(ctarget))
+//      } else if (pplayers_allied(pplayer, City.city_owner(ctarget))
 //          && punit.ai.ai_role == AIUNIT_ATTACK
-//          && player_has_embassy(pplayer, city_owner(ctarget))) {
+//          && player_has_embassy(pplayer, City.city_owner(ctarget))) {
 //        /* We probably incited this city with another diplomat */
 //        failure = true;
-//      } else if (!pplayers_allied(pplayer, city_owner(ctarget))
+//      } else if (!pplayers_allied(pplayer, City.city_owner(ctarget))
 //                 && punit.ai.ai_role == AIUNIT_DEFEND_HOME) {
 //        /* We probably lost the city */
 //        failure = true;
@@ -663,7 +663,7 @@ public class Aidiplomat{
 //    if (path && ai_unit_execute_path(punit, path) && punit.moves_left > 0) {
 //      /* Check if we can do something with our destination now. */
 //      if (punit.ai.ai_role == AIUNIT_ATTACK) {
-//        int dist  = real_map_distance(punit.tile, punit.goto_tile);
+//        int dist  = Map.real_map_distance(punit.tile, punit.goto_tile);
 //        UNIT_LOG(LOG_DIPLOMAT, punit, "attack, dist %d to %s",
 //                 dist, ctarget ? ctarget.name : "(none)");
 //        if (dist == 1) {

@@ -93,21 +93,21 @@ public class Connectdlg_common{
 //if the user selects the multi- player mode, then a packet_req_join_game 
 //packet is sent to the server. It is either successful or not. The end.
 //
-//If the user selects a single- player mode (either a new game or a save game) 
+//If the user selects a single- player mode (either a new Game.game or a save Game.game) 
 //then: 
 //   1. the packet_req_join_game is sent.
 //   2. on receipt, if we can join, then a challenge packet is sent to the
 //      server, so we can get hack level control.
 //   3. if we can't get hack, then we get dumped to multi- player mode. If
 //      we can, then:
-//      a. for a new game, we send a series of packet_generic_message packets
-//         with commands to start the game.
-//      b. for a saved game, we send the load command with a 
+//      a. for a new Game.game, we send a series of packet_generic_message packets
+//         with commands to start the Game.game.
+//      b. for a saved Game.game, we send the load command with a 
 //         packet_generic_message, then we send a PACKET_PLAYER_LIST_REQUEST.
-//         the response to this request will tell us if the game was loaded or
+//         the response to this request will tell us if the Game.game was loaded or
 //         not. if not, then we send another load command. if so, then we send
 //         a series of packet_generic_message packets with commands to start 
-//         the game.
+//         the Game.game.
 //**************************************************************************/ 
 //
 ///************************************************************************** 
@@ -147,7 +147,7 @@ public class Connectdlg_common{
 //       * doesn't kill the server prematurely.  In particular, killing the
 //       * server in the middle of a save can have disasterous results.  This
 //       * method tells the server to quit on its own.  This is safer from a
-//       * game perspective, but more dangerous because if the kill fails the
+//       * Game.game perspective, but more dangerous because if the kill fails the
 //       * server will be left running.
 //       *
 //       * Another potential problem is because this function is called atexit
@@ -382,7 +382,7 @@ public class Connectdlg_common{
 //
 //  /* We set the topology to match the view.
 //   *
-//   * When a typical player launches a game, he wants the map orientation to
+//   * When a typical player launches a Game.game, he wants the map orientation to
 //   * match the tileset orientation.  So if you use an isometric tileset you
 //   * get an iso-map and for a classic tileset you get a classic Map.map.  In
 //   * both cases the map wraps in the X direction by default.
@@ -415,7 +415,7 @@ public class Connectdlg_common{
 //  int i;
 //
 //  for (i = 0; i < n - 1; i++) {
-//    str[i] = chars[myrand(sizeof(chars) - 1)];
+//    str[i] = chars[Rand.myrand(sizeof(chars) - 1)];
 //  }
 //  str[i] = '\0';
 //}
@@ -508,7 +508,7 @@ public class Connectdlg_common{
 //}
 //
 ///**************************************************************** 
-//send server commands to start a saved game.
+//send server commands to start a saved Game.game.
 //*****************************************************************/ 
 //void send_start_saved_game()
 //{   
@@ -523,7 +523,7 @@ public class Connectdlg_common{
 //}
 //
 ///**************************************************************** 
-//send server command to save game.
+//send server command to save Game.game.
 //*****************************************************************/ 
 //void send_save_game(char *filename)
 //{   

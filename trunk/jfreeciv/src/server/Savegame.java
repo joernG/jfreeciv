@@ -34,7 +34,7 @@ public class Savegame{
 //
 //#include "capability.h"
 //#include "city.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "idex.h"
 //#include "Map.map.h"
@@ -151,7 +151,7 @@ public class Savegame{
 //        util.freelog(Log.LOG_ERROR, ("The save file contains incomplete "           \
 //                "map data.  This can happen with old saved "                \
 //                "games, or it may indicate an invalid saved "               \
-//                "game file.  Proceed at your own risk."));                  \
+//                "Game.game file.  Proceed at your own risk."));                  \
 //        if(!_line) {                                                        \
 //          /* TRANS: Error message. */                                       \
 //          util.freelog(Log.LOG_ERROR, "Reason: line not found");                  \
@@ -227,7 +227,7 @@ public class Savegame{
 //  Dereferences the terrain character.  See tile_types[].identifier
 //    example: char2terrain('a') => T_ARCTIC
 //****************************************************************************/
-//static Terrain_type_id char2terrain(char ch)
+//static int char2terrain(char ch)
 //{
 //  if (ch == UNKNOWN_TERRAIN_IDENTIFIER) {
 //    return T_UNKNOWN;
@@ -247,7 +247,7 @@ public class Savegame{
 //  References the terrain character.  See tile_types[].identifier
 //    example: terrain2char(T_ARCTIC) => 'a'
 //****************************************************************************/
-//static char terrain2char(Terrain_type_id terr)
+//static char terrain2char(int terr)
 //{
 //  if (terr == T_UNKNOWN) {
 //    return UNKNOWN_TERRAIN_IDENTIFIER;
@@ -540,12 +540,12 @@ public class Savegame{
 //  
 //
 //  if (Map.map.num_start_positions
-//      && Map.map.num_start_positions < game.max_players) {
+//      && Map.map.num_start_positions < Game.game.max_players) {
 //    util.freelog(Log.LOG_VERBOSE,
 //	    ("Number of starts (%d) are lower than max_players (%d)," +
 //	      " lowering max_players."),
-// 	    Map.map.num_start_positions, game.max_players);
-//    game.max_players = Map.map.num_start_positions;
+// 	    Map.map.num_start_positions, Game.game.max_players);
+//    Game.game.max_players = Map.map.num_start_positions;
 //  }
 //}
 //
@@ -617,7 +617,7 @@ public class Savegame{
 //   */
 //
 //  map_tiles_load(file);
-//  if (secfile_lookup_bool_default(file, true, "game.save_starts")) {
+//  if (secfile_lookup_bool_default(file, true, "Game.game.save_starts")) {
 //    map_startpos_load(file);
 //  } else {
 //    Map.map.num_start_positions = 0;
@@ -637,7 +637,7 @@ public class Savegame{
 //		secfile_lookup_str_default(file, null, "Map.map.f%03d", nat_y),
 //		ptile.special |= ascii_hex2bin(ch, 3));
 //
-//  if (secfile_lookup_bool_default(file, true, "game.save_known")) {
+//  if (secfile_lookup_bool_default(file, true, "Game.game.save_known")) {
 //
 //    /* get 4-bit segments of the first half of the 32-bit "known" field */
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
@@ -688,8 +688,8 @@ public class Savegame{
 //  /* Old freecivs expect Map.map.is_earth to be present in the savegame. */
 //  secfile_insert_bool(file, false, "Map.map.is_earth");
 //
-//  secfile_insert_bool(file, game.save_options.save_starts, "game.save_starts");
-//  if (game.save_options.save_starts) {
+//  secfile_insert_bool(file, Game.game.save_options.save_starts, "Game.game.save_starts");
+//  if (Game.game.save_options.save_starts) {
 //    for (i=0; i<Map.map.num_start_positions; i++) {
 //      tile ptile = Map.map.start_positions[i].tile;
 //
@@ -739,8 +739,8 @@ public class Savegame{
 //  SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.n%03d",
 //		       bin2ascii_hex(ptile.special, 2));
 //
-//  secfile_insert_bool(file, game.save_options.save_known, "game.save_known");
-//  if (game.save_options.save_known) {
+//  secfile_insert_bool(file, Game.game.save_options.save_known, "Game.game.save_known");
+//  if (Game.game.save_options.save_known) {
 //    /* put the top 4 bits (bits 12-15) of special flags */
 //    SAVE_NORMAL_MAP_DATA(ptile, file, "Map.map.f%03d",
 //			 bin2ascii_hex(ptile.special, 3));
@@ -909,7 +909,7 @@ public class Savegame{
 //  final char** types;
 //  int num_types, i;
 //
-//  if (strcmp(game.rulesetdir, "civ1") == 0) {
+//  if (strcmp(Game.game.rulesetdir, "civ1") == 0) {
 //    types = old_civ1_unit_types;
 //    num_types = ARRAY_SIZE(old_civ1_unit_types);
 //  } else {
@@ -939,7 +939,7 @@ public class Savegame{
 //    exit(EXIT_FAILURE);
 //  }
 //  /* Different rulesets had different unit names. */
-//  if (strcmp(game.rulesetdir, "civ1") == 0) {
+//  if (strcmp(Game.game.rulesetdir, "civ1") == 0) {
 //    if (id >= ARRAY_SIZE(old_civ1_unit_types)) {
 //      util.freelog(Log.LOG_ERROR, "Wrong unit type id value (%d)", id);
 //      exit(EXIT_FAILURE);
@@ -1046,7 +1046,7 @@ public class Savegame{
 //  technology_name = advances[tech].name_orig;
 //  
 //  /* this is the only place where civ1 was different from 1.14.1 defaults */
-//  if (strcmp(game.rulesetdir, "civ1") == 0
+//  if (strcmp(Game.game.rulesetdir, "civ1") == 0
 //      && mystrcasecmp(technology_name, "Religion") == 0) {
 //    return 83;
 //  }
@@ -1085,7 +1085,7 @@ public class Savegame{
 //    exit(EXIT_FAILURE);
 //  }
 //
-//  if (strcmp(game.rulesetdir, "civ1") == 0 && id == 83) {
+//  if (strcmp(Game.game.rulesetdir, "civ1") == 0 && id == 83) {
 //    return "Religion";
 //  }
 //  
@@ -1213,7 +1213,7 @@ public class Savegame{
 //  final char** names;
 //  int num_names, i;
 //
-//  if (strcmp(game.rulesetdir, "civ2") == 0) {
+//  if (strcmp(Game.game.rulesetdir, "civ2") == 0) {
 //    names = old_civ2_governments;
 //    num_names = ARRAY_SIZE(old_civ2_governments);
 //  } else {
@@ -1243,7 +1243,7 @@ public class Savegame{
 //    exit(EXIT_FAILURE);
 //  }
 //  /* Different rulesets had different governments. */
-//  if (strcmp(game.rulesetdir, "civ2") == 0) {
+//  if (strcmp(Game.game.rulesetdir, "civ2") == 0) {
 //    if (id >= ARRAY_SIZE(old_civ2_governments)) {
 //      util.freelog(Log.LOG_ERROR, "Wrong government type id value (%d)", id);
 //      exit(EXIT_FAILURE);
@@ -1302,7 +1302,7 @@ public class Savegame{
 //	}
 //
 //	type = find_unit_type_by_name_orig(name);
-//	if (type == U_LAST) {
+//	if (type == unittype.U_LAST) {
 //	  util.freelog(Log.LOG_ERROR, "Unknown unit type '%s' in worklist",
 //		  name);
 //	  exit(EXIT_FAILURE);
@@ -1416,7 +1416,7 @@ public class Savegame{
 //    }
 //    
 //    type = find_unit_type_by_name_orig(type_name);
-//    if (type == U_LAST) {
+//    if (type == unittype.U_LAST) {
 //      util.freelog(Log.LOG_ERROR, "Unknown unit type '%s' in player%d section",
 //              type_name, plrno);
 //      exit(EXIT_FAILURE);
@@ -1575,14 +1575,14 @@ public class Savegame{
 //       * watchtowers? */
 //      int range = punit.unit_type().vision_range;
 //
-//      square_iterate(punit.tile, range, tile1) {
+//      for(tile tile1: util.square_tile_iterate(punit.tile, range)) {
 //	map_set_known(tile1, plr);
-//      } square_iterate_end;
+//      }
 //    }
 //
 //    /* allocate the unit's contribution to fog of war */
 //    if (unit_profits_of_watchtower(punit)
-//	&& map_has_special(punit.tile, S_FORTRESS)) {
+//	&& Map.map_has_special(punit.tile, S_FORTRESS)) {
 //      unfog_area(punit.unit_owner(), punit.tile,
 //		 get_watchtower_vision(punit));
 //    } else {
@@ -1616,12 +1616,12 @@ public class Savegame{
 //  int id;
 //  int target_no;
 //
-//  server_player_init(plr, true);
+//  Plrhand.server_player_init(plr, true);
 //  ai = ai_data_get(plr);
 //
 //  plr.ai.barbarian_type = secfile_lookup_int_default(file, 0, "player%d.ai.is_barbarian",
 //                                                    plrno);
-//  if (is_barbarian(plr)) game.nbarbarians++;
+//  if (is_barbarian(plr)) Game.game.nbarbarians++;
 //
 //  plr.name = String.format( secfile_lookup_str(file, "player%d.name", plrno));
 //  plr.username = String.format(
@@ -1664,9 +1664,9 @@ public class Savegame{
 //    exit(EXIT_FAILURE);
 //  }
 //
-//  /* Add techs from game and nation, but ignore game.tech. */
-//  init_tech(plr);
-//  give_initial_techs(plr);
+//  /* Add techs from Game.game and nation, but ignore Game.game.tech. */
+//  Plrhand.init_tech(plr);
+//  Plrhand.give_initial_techs(plr);
 //
 //  /* not all players have teams */
 //  if (section_file_lookup(file, "player%d.team", plrno)) {
@@ -1679,7 +1679,7 @@ public class Savegame{
 //    plr.team = TEAM_NONE;
 //  }
 //  if (is_barbarian(plr)) {
-//    plr.nation=game.nation_count-1;
+//    plr.nation=Game.game.nation_count-1;
 //  }
 //
 //  /* government */
@@ -1739,7 +1739,7 @@ public class Savegame{
 //  plr.is_observer=secfile_lookup_bool_default(file, false, 
 //                                               "player%d.is_observer", plrno);
 //  plr.ai.control = secfile_lookup_bool(file, "player%d.ai.control", plrno);
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //    plr.ai.love[i]
 //         = secfile_lookup_int_default(file, 1, "player%d.ai%d.love", plrno, i);
 //    ai.diplomacy.player_intel[i].spam 
@@ -1758,7 +1758,7 @@ public class Savegame{
 //  /* Diplomacy target is saved as player number or -1 if none */ 
 //  target_no = secfile_lookup_int_default(file, -1,
 //                                         "player%d.ai.target", plrno);
-//  ai.diplomacy.target = target_no == -1 ? null : &game.players[target_no];
+//  ai.diplomacy.target = target_no == -1 ? null : &Game.game.players[target_no];
 //  plr.ai.tech_goal = load_technology(file, "player%d.ai.tech_goal", plrno);
 //  if (plr.ai.tech_goal == A_NONE) {
 //    /* Old servers (1.14.1) saved both A_UNSET and A_NONE by 0
@@ -1772,14 +1772,14 @@ public class Savegame{
 //  plr.ai.expand = 100;		/* set later */
 //  plr.ai.science_cost = 100;	/* set later */
 //  plr.ai.skill_level =
-//    secfile_lookup_int_default(file, game.skill_level,
+//    secfile_lookup_int_default(file, Game.game.skill_level,
 //			       "player%d.ai.skill_level", plrno);
 //  if (plr.ai.control && plr.ai.skill_level==0) {
 //    plr.ai.skill_level = GAME_OLD_DEFAULT_SKILL_LEVEL;
 //  }
 //  if (plr.ai.control) {
 //    /* Set AI parameters */
-//    set_ai_level_directer(plr, plr.ai.skill_level);
+//    Stdinhand.set_ai_level_directer(plr, plr.ai.skill_level);
 //  }
 //
 //  plr.economic.gold=secfile_lookup_int(file, "player%d.gold", plrno);
@@ -1851,14 +1851,14 @@ public class Savegame{
 //						plrno);
 //
 //    if (revolution == 0) {
-//      if (plr.government != game.government_when_anarchy) {
+//      if (plr.government != Game.game.government_when_anarchy) {
 //        revolution = -1;
 //      } else {
 //        /* some old savegames may be buggy */
-//        revolution = game.turn + 1;
+//        revolution = Game.game.turn + 1;
 //      }
 //    } else {
-//      revolution = game.turn + revolution;
+//      revolution = Game.game.turn + revolution;
 //    }
 //    plr.revolution_finishes
 //      = secfile_lookup_int_default(file, revolution,
@@ -1869,7 +1869,7 @@ public class Savegame{
 //
 //  plr.reputation=secfile_lookup_int_default(file, GAME_DEFAULT_REPUTATION,
 //					     "player%d.reputation", plrno);
-//  for (i=0; i < game.nplayers; i++) {
+//  for (i=0; i < Game.game.nplayers; i++) {
 //    plr.diplstates[i].type = 
 //      secfile_lookup_int_default(file, diplstate_type.DS_WAR,
 //				 "player%d.diplstate%d.type", plrno, i);
@@ -1886,7 +1886,7 @@ public class Savegame{
 //  }
 //  /* We don't need this info, but savegames carry it anyway.
 //     To avoid getting "unused" warnings we touch the values like this. */
-//  for (i=game.nplayers; i<MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS; i++) {
+//  for (i=Game.game.nplayers; i<Shared_H.MAX_NUM_PLAYERS+Shared_H.MAX_NUM_BARBARIANS; i++) {
 //    secfile_lookup_int_default(file, DS_NEUTRAL,
 //			       "player%d.diplstate%d.type", plrno, i);
 //    secfile_lookup_int_default(file, 0,
@@ -1898,7 +1898,7 @@ public class Savegame{
 //			   "player%d.diplstate%d.contact_turns_left", plrno, i);
 //  }
 //  /* Sanity check alliances, prevent allied-with-ally-of-enemy */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (plr.is_alive
 //        && aplayer.is_alive
 //        && pplayers_allied(plr, aplayer)
@@ -1982,7 +1982,7 @@ public class Savegame{
 //    specialist_type_iterate(sp) {
 //      pcity.specialists[sp]
 //	= secfile_lookup_int(file, "player%d.c%d.n%s", plrno, i,
-//			     game.rgame.specialists[sp].name);
+//			     Game.game.rgame.specialists[sp].name);
 //    } specialist_type_iterate_end;
 //
 //    for (j = 0; j < NUM_TRADEROUTES; j++)
@@ -2072,7 +2072,7 @@ public class Savegame{
 //    j = secfile_lookup_int(file, "player%d.c%d.did_buy", plrno, i);
 //    pcity.did_buy = (j != 0);
 //    if (j == -1 && pcity.turn_founded == -2) {
-//      pcity.turn_founded = game.turn;
+//      pcity.turn_founded = Game.game.turn;
 //    }
 //
 //    pcity.did_sell =
@@ -2094,7 +2094,7 @@ public class Savegame{
 //    }
 //    
 //    /* adding the cities contribution to fog-of-war */
-//    map_unfog_pseudo_city_area(&game.players[plrno], pcity.tile);
+//    map_unfog_pseudo_city_area(&Game.game.players[plrno], pcity.tile);
 //
 //    unit_list_init(&pcity.units_supported);
 //
@@ -2259,10 +2259,10 @@ public class Savegame{
 //     2) fog of war was on (otherwise the private map wasn't saved)
 //     3) is not from a "unit only" fog of war save file
 //  */
-//  if (secfile_lookup_int_default(file, -1, "game.fogofwar") != -1
-//      && game.fogofwar == true
+//  if (secfile_lookup_int_default(file, -1, "Game.game.fogofwar") != -1
+//      && Game.game.fogofwar == true
 //      && secfile_lookup_int_default(file, -1,"player%d.total_ncities", plrno) != -1
-//      && secfile_lookup_bool_default(file, true, "game.save_private_map")) {
+//      && secfile_lookup_bool_default(file, true, "Game.game.save_private_map")) {
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str(file, "player%d.map_t%03d",
 //				     plrno, nat_y),
@@ -2340,7 +2340,7 @@ public class Savegame{
 //    /* This shouldn't be neccesary if the savegame was consistent, but there
 //       is a bug in some pre-1.11 savegames. Anyway, it can't hurt */
 //    for(tile ptile :  Map.map.tiles){
-//      if (map_is_known_and_seen(ptile, plr)) {
+//      if (Maphand.map_is_known_and_seen(ptile, plr)) {
 //	update_player_tile_knowledge(plr, ptile);
 //	reality_check_city(plr, ptile);
 //	if (map_get_city(ptile)) {
@@ -2354,7 +2354,7 @@ public class Savegame{
 //       players private knowledge is set to be what he could see
 //       without fog of war */
 //    for(tile ptile :  Map.map.tiles){
-//      if (map_is_known(ptile, plr)) {
+//      if (Maphand.map_is_known(ptile, plr)) {
 //	city pcity = map_get_city(ptile);
 //	update_player_tile_last_seen(plr, ptile);
 //	update_player_tile_knowledge(plr, ptile);
@@ -2466,7 +2466,7 @@ public class Savegame{
 //  secfile_insert_bool(file, plr.is_alive, "player%d.is_alive", plrno);
 //  secfile_insert_bool(file, plr.is_observer, "player%d.is_observer", plrno);
 //  secfile_insert_bool(file, plr.ai.control, "player%d.ai.control", plrno);
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //    secfile_insert_int(file, plr.ai.love[i],
 //                       "player%d.ai%d.love", plrno, i);
 //    secfile_insert_int(file, ai.diplomacy.player_intel[i].spam, 
@@ -2522,10 +2522,10 @@ public class Savegame{
 //    if (plr.revolution_finishes < 0) {
 //      /* No revolution. */
 //      revolution = 0;
-//    } else if (plr.revolution_finishes <= game.turn) {
+//    } else if (plr.revolution_finishes <= Game.game.turn) {
 //      revolution = 1; /* Approximation. */
 //    } else {
-//      revolution = plr.revolution_finishes - game.turn;
+//      revolution = plr.revolution_finishes - Game.game.turn;
 //    }
 //    secfile_insert_int(file, revolution, "player%d.revolution", plrno);
 //  }
@@ -2545,11 +2545,11 @@ public class Savegame{
 //  tech_type_iterate(tech_id) {
 //    invs[tech_id] = (get_invention(plr, tech_id) == TECH_KNOWN) ? '1' : '0';
 //  } tech_type_iterate_end;
-//  invs[game.num_tech_types] = '\0';
+//  invs[Game.game.num_tech_types] = '\0';
 //  secfile_insert_str(file, invs, "player%d.invs_new", plrno);
 //
 //  secfile_insert_int(file, plr.reputation, "player%d.reputation", plrno);
-//  for (i = 0; i < MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS+Shared_H.MAX_NUM_BARBARIANS; i++) {
 //    secfile_insert_int(file, plr.diplstates[i].type,
 //		       "player%d.diplstate%d.type", plrno, i);
 //    secfile_insert_int(file, plr.diplstates[i].turns_left,
@@ -2561,9 +2561,9 @@ public class Savegame{
 //  }
 //
 //  {
-//    char vision[MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS+1];
+//    char vision[Shared_H.MAX_NUM_PLAYERS+Shared_H.MAX_NUM_BARBARIANS+1];
 //
-//    for (i=0; i < MAX_NUM_PLAYERS+MAX_NUM_BARBARIANS; i++)
+//    for (i=0; i < Shared_H.MAX_NUM_PLAYERS+Shared_H.MAX_NUM_BARBARIANS; i++)
 //      vision[i] = gives_shared_vision(plr, get_player(i)) ? '1' : '0';
 //    vision[i] = '\0';
 //    secfile_insert_str(file, vision, "player%d.gives_shared_vision", plrno);
@@ -2597,9 +2597,9 @@ public class Savegame{
 //    }
 //  }
 //
-//  secfile_insert_int(file, unit_list_size(&plr.units), "player%d.nunits", 
+//  secfile_insert_int(file, plr.units.foo_list_size(), "player%d.nunits", 
 //		     plrno);
-//  secfile_insert_int(file, city_list_size(&plr.cities), "player%d.ncities", 
+//  secfile_insert_int(file, plr.cities.foo_list_size(), "player%d.ncities", 
 //		     plrno);
 //
 //  i = -1;
@@ -2730,7 +2730,7 @@ public class Savegame{
 //    specialist_type_iterate(sp) {
 //      secfile_insert_int(file, pcity.specialists[sp],
 //			 "player%d.c%d.n%s", plrno, i,
-//			 game.rgame.specialists[sp].name);
+//			 Game.game.rgame.specialists[sp].name);
 //    } specialist_type_iterate_end;
 //
 //    for (j = 0; j < NUM_TRADEROUTES; j++)
@@ -2770,7 +2770,7 @@ public class Savegame{
 //    secfile_insert_int(file, pcity.anarchy, "player%d.c%d.anarchy", plrno,i);
 //    secfile_insert_int(file, pcity.rapture, "player%d.c%d.rapture", plrno,i);
 //    secfile_insert_bool(file, pcity.was_happy, "player%d.c%d.was_happy", plrno,i);
-//    if (pcity.turn_founded == game.turn) {
+//    if (pcity.turn_founded == Game.game.turn) {
 //      j = -1;
 //    } else {
 //      assert(pcity.did_buy == true || pcity.did_buy == false);
@@ -2831,7 +2831,7 @@ public class Savegame{
 //    impr_type_iterate(id) {
 //      buf[id] = (pcity.improvements[id] != I_NONE) ? '1' : '0';
 //    } impr_type_iterate_end;
-//    buf[game.num_impr_types] = '\0';
+//    buf[Game.game.num_impr_types] = '\0';
 //    secfile_insert_str(file, buf, "player%d.c%d.improvements_new", plrno, i);    
 //
 //    worklist_save(file, "player%d.c%d", plrno, i, &pcity.worklist);
@@ -2844,8 +2844,8 @@ public class Savegame{
 //
 //  /********** Put the players private map **********/
 // /* Otherwise the player can see all, and there's no reason to save the private Map.map. */
-//  if (game.fogofwar
-//      && game.save_options.save_private_map) {
+//  if (Game.game.fogofwar
+//      && Game.game.save_options.save_private_map) {
 //
 //    /* put the terrain type */
 //    SAVE_PLAYER_MAP_DATA(ptile, file,"player%d.map_t%03d", plrno, 
@@ -2956,7 +2956,7 @@ public class Savegame{
 //{
 //  int j;
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    /* to avoid junk values for unsupported units: */
 //    for (unit punit : pplayer.units.data) {
 //      punit.ord_city = 0;
@@ -2983,7 +2983,7 @@ public class Savegame{
 //***************************************************************/
 //static void apply_unit_ordering()
 //{
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      unit_list_sort_ord_city(&pcity.units_supported);
 //    }
@@ -3053,9 +3053,9 @@ public class Savegame{
 //  int technology_order_size = 0;
 //  final char* name;
 //
-//  game.version = secfile_lookup_int_default(file, 0, "game.version");
+//  Game.game.version = secfile_lookup_int_default(file, 0, "Game.game.version");
 //  tmp_Srv_main.server_state = (enum server_states)
-//    secfile_lookup_int_default(file, RUN_GAME_STATE, "game.Srv_main.server_state");
+//    secfile_lookup_int_default(file, RUN_GAME_STATE, "Game.game.Srv_main.server_state");
 //
 //  savefile_options = secfile_lookup_str(file, "savefile.options");
 //  if (has_capability("improvement_order", savefile_options)) {
@@ -3068,7 +3068,7 @@ public class Savegame{
 //  }
 //
 //  /* we require at least version 1.9.0 */
-//  if (10900 > game.version) {
+//  if (10900 > Game.game.version) {
 //    util.freelog(LOG_FATAL,
 //	    "Savegame too old, at least version 1.9.0 required.");
 //    exit(EXIT_FAILURE);
@@ -3077,188 +3077,188 @@ public class Savegame{
 //  {
 //    set_meta_patches_string(secfile_lookup_str_default(file, 
 //                                                default_meta_patches_string(),
-//                                                "game.metapatches"));
+//                                                "Game.game.metapatches"));
 //    set_meta_topic_string(secfile_lookup_str_default(file, 
 //                                                default_meta_topic_string(),
-//                                                "game.metatopic"));
+//                                                "Game.game.metatopic"));
 //    set_meta_message_string(secfile_lookup_str_default(file, 
 //                                                default_meta_message_string(),
-//                                                "game.metamessage"));
+//                                                "Game.game.metamessage"));
 //
 //    Srv_main.srvarg.metaserver_addr = String.format(
 //	       secfile_lookup_str_default(file, DEFAULT_META_SERVER_ADDR,
-//					  "game.metaserver"));
+//					  "Game.game.metaserver"));
 //
-//    game.gold          = secfile_lookup_int(file, "game.gold");
-//    game.tech          = secfile_lookup_int(file, "game.tech");
-//    game.skill_level   = secfile_lookup_int(file, "game.skill_level");
-//    if (game.skill_level==0)
-//      game.skill_level = GAME_OLD_DEFAULT_SKILL_LEVEL;
+//    Game.game.gold          = secfile_lookup_int(file, "Game.game.gold");
+//    Game.game.tech          = secfile_lookup_int(file, "Game.game.tech");
+//    Game.game.skill_level   = secfile_lookup_int(file, "Game.game.skill_level");
+//    if (Game.game.skill_level==0)
+//      Game.game.skill_level = GAME_OLD_DEFAULT_SKILL_LEVEL;
 //
-//    game.timeout       = secfile_lookup_int(file, "game.timeout");
-//    game.timeoutint = secfile_lookup_int_default(file,
+//    Game.game.timeout       = secfile_lookup_int(file, "Game.game.timeout");
+//    Game.game.timeoutint = secfile_lookup_int_default(file,
 //						 GAME_DEFAULT_TIMEOUTINT,
-//						 "game.timeoutint");
-//    game.timeoutintinc =
+//						 "Game.game.timeoutint");
+//    Game.game.timeoutintinc =
 //	secfile_lookup_int_default(file, GAME_DEFAULT_TIMEOUTINTINC,
-//				   "game.timeoutintinc");
-//    game.timeoutinc =
+//				   "Game.game.timeoutintinc");
+//    Game.game.timeoutinc =
 //	secfile_lookup_int_default(file, GAME_DEFAULT_TIMEOUTINC,
-//				   "game.timeoutinc");
-//    game.timeoutincmult =
+//				   "Game.game.timeoutinc");
+//    Game.game.timeoutincmult =
 //	secfile_lookup_int_default(file, GAME_DEFAULT_TIMEOUTINCMULT,
-//				   "game.timeoutincmult");
-//    game.timeoutcounter =
-//	secfile_lookup_int_default(file, 1, "game.timeoutcounter");
+//				   "Game.game.timeoutincmult");
+//    Game.game.timeoutcounter =
+//	secfile_lookup_int_default(file, 1, "Game.game.timeoutcounter");
 //
-//    game.timeoutaddenemymove =
-//        secfile_lookup_int_default(file, game.timeoutaddenemymove, 
-//			           "game.timeoutaddenemymove");
+//    Game.game.timeoutaddenemymove =
+//        secfile_lookup_int_default(file, Game.game.timeoutaddenemymove, 
+//			           "Game.game.timeoutaddenemymove");
 //    
-//    game.end_year      = secfile_lookup_int(file, "game.end_year");
-//    game.researchcost  = secfile_lookup_int_default(file, 0, "game.researchcost");
-//    if (game.researchcost == 0)
-//      game.researchcost = secfile_lookup_int(file, "game.techlevel");
+//    Game.game.end_year      = secfile_lookup_int(file, "Game.game.end_year");
+//    Game.game.researchcost  = secfile_lookup_int_default(file, 0, "Game.game.researchcost");
+//    if (Game.game.researchcost == 0)
+//      Game.game.researchcost = secfile_lookup_int(file, "Game.game.techlevel");
 //
-//    game.year          = secfile_lookup_int(file, "game.year");
+//    Game.game.year          = secfile_lookup_int(file, "Game.game.year");
 //
 //    if (has_capability("turn", savefile_options)) {
-//      game.turn = secfile_lookup_int(file, "game.turn");
+//      Game.game.turn = secfile_lookup_int(file, "Game.game.turn");
 //    } else {
-//      game.turn = -2;
+//      Game.game.turn = -2;
 //    }
 //
-//    game.min_players   = secfile_lookup_int(file, "game.min_players");
-//    game.max_players   = secfile_lookup_int(file, "game.max_players");
-//    game.nplayers      = secfile_lookup_int(file, "game.nplayers");
-//    game.globalwarming = secfile_lookup_int(file, "game.globalwarming");
-//    game.warminglevel  = secfile_lookup_int(file, "game.warminglevel");
-//    game.nuclearwinter = secfile_lookup_int_default(file, 0, "game.nuclearwinter");
-//    game.coolinglevel  = secfile_lookup_int_default(file, 8, "game.coolinglevel");
-//    game.notradesize   = secfile_lookup_int_default(file, 0, "game.notradesize");
-//    game.fulltradesize = secfile_lookup_int_default(file, 1, "game.fulltradesize");
-//    game.unhappysize   = secfile_lookup_int(file, "game.unhappysize");
-//    game.angrycitizen  = secfile_lookup_bool_default(file, false, "game.angrycitizen");
+//    Game.game.min_players   = secfile_lookup_int(file, "Game.game.min_players");
+//    Game.game.max_players   = secfile_lookup_int(file, "Game.game.max_players");
+//    Game.game.nplayers      = secfile_lookup_int(file, "Game.game.nplayers");
+//    Game.game.globalwarming = secfile_lookup_int(file, "Game.game.globalwarming");
+//    Game.game.warminglevel  = secfile_lookup_int(file, "Game.game.warminglevel");
+//    Game.game.nuclearwinter = secfile_lookup_int_default(file, 0, "Game.game.nuclearwinter");
+//    Game.game.coolinglevel  = secfile_lookup_int_default(file, 8, "Game.game.coolinglevel");
+//    Game.game.notradesize   = secfile_lookup_int_default(file, 0, "Game.game.notradesize");
+//    Game.game.fulltradesize = secfile_lookup_int_default(file, 1, "Game.game.fulltradesize");
+//    Game.game.unhappysize   = secfile_lookup_int(file, "Game.game.unhappysize");
+//    Game.game.angrycitizen  = secfile_lookup_bool_default(file, false, "Game.game.angrycitizen");
 //
-//    if (game.version >= 10100) {
-//      game.cityfactor  = secfile_lookup_int(file, "game.cityfactor");
-//      game.diplcost    = secfile_lookup_int(file, "game.diplcost");
-//      game.freecost    = secfile_lookup_int(file, "game.freecost");
-//      game.conquercost = secfile_lookup_int(file, "game.conquercost");
-//      game.foodbox     = secfile_lookup_int(file, "game.foodbox");
-//      game.techpenalty = secfile_lookup_int(file, "game.techpenalty");
-//      game.razechance  = secfile_lookup_int(file, "game.razechance");
+//    if (Game.game.version >= 10100) {
+//      Game.game.cityfactor  = secfile_lookup_int(file, "Game.game.cityfactor");
+//      Game.game.diplcost    = secfile_lookup_int(file, "Game.game.diplcost");
+//      Game.game.freecost    = secfile_lookup_int(file, "Game.game.freecost");
+//      Game.game.conquercost = secfile_lookup_int(file, "Game.game.conquercost");
+//      Game.game.foodbox     = secfile_lookup_int(file, "Game.game.foodbox");
+//      Game.game.techpenalty = secfile_lookup_int(file, "Game.game.techpenalty");
+//      Game.game.razechance  = secfile_lookup_int(file, "Game.game.razechance");
 //
 //      /* suppress warnings about unused entries in old savegames: */
-//      () section_file_lookup(file, "game.rail_food");
-//      () section_file_lookup(file, "game.rail_prod");
-//      () section_file_lookup(file, "game.rail_trade");
-//      () section_file_lookup(file, "game.farmfood");
+//      () section_file_lookup(file, "Game.game.rail_food");
+//      () section_file_lookup(file, "Game.game.rail_prod");
+//      () section_file_lookup(file, "Game.game.rail_trade");
+//      () section_file_lookup(file, "Game.game.farmfood");
 //    }
-//    if (game.version >= 10300) {
-//      game.civstyle = secfile_lookup_int_default(file, 0, "game.civstyle");
-//      game.save_nturns = secfile_lookup_int(file, "game.save_nturns");
+//    if (Game.game.version >= 10300) {
+//      Game.game.civstyle = secfile_lookup_int_default(file, 0, "Game.game.civstyle");
+//      Game.game.save_nturns = secfile_lookup_int(file, "Game.game.save_nturns");
 //    }
 //
-//    game.citymindist  = secfile_lookup_int_default(file,
-//      GAME_DEFAULT_CITYMINDIST, "game.citymindist");
+//    Game.game.citymindist  = secfile_lookup_int_default(file,
+//      GAME_DEFAULT_CITYMINDIST, "Game.game.citymindist");
 //
-//    game.rapturedelay  = secfile_lookup_int_default(file,
-//      GAME_DEFAULT_RAPTUREDELAY, "game.rapturedelay");
+//    Game.game.rapturedelay  = secfile_lookup_int_default(file,
+//      GAME_DEFAULT_RAPTUREDELAY, "Game.game.rapturedelay");
 //
 //    /* National borders setting. */
-//    game.borders = secfile_lookup_int_default(file, 0, "game.borders");
-//    game.happyborders = secfile_lookup_bool_default(file, false, 
-//						    "game.happyborders");
+//    Game.game.borders = secfile_lookup_int_default(file, 0, "Game.game.borders");
+//    Game.game.happyborders = secfile_lookup_bool_default(file, false, 
+//						    "Game.game.happyborders");
 //
 //    /* Diplomacy. */
-//    game.diplomacy = secfile_lookup_int_default(file, GAME_DEFAULT_DIPLOMACY, 
-//                                                "game.diplomacy");
+//    Game.game.diplomacy = secfile_lookup_int_default(file, GAME_DEFAULT_DIPLOMACY, 
+//                                                "Game.game.diplomacy");
 //
 //    if (has_capability("watchtower", savefile_options)) {
-//      game.watchtower_extra_vision =
-//	  secfile_lookup_int_default(file, 0, "game.watchtower_extra_vision");
-//      game.watchtower_vision =
-//	  secfile_lookup_int_default(file, 1, "game.watchtower_vision");
+//      Game.game.watchtower_extra_vision =
+//	  secfile_lookup_int_default(file, 0, "Game.game.watchtower_extra_vision");
+//      Game.game.watchtower_vision =
+//	  secfile_lookup_int_default(file, 1, "Game.game.watchtower_vision");
 //    } else {
-//      game.watchtower_extra_vision = 0;
-//      game.watchtower_vision = 1;
+//      Game.game.watchtower_extra_vision = 0;
+//      Game.game.watchtower_vision = 1;
 //    }
 //
-//    game.save_name = String.format(
+//    Game.game.save_name = String.format(
 //	       secfile_lookup_str_default(file, GAME_DEFAULT_SAVE_NAME,
-//					  "game.save_name"));
+//					  "Game.game.save_name"));
 //
-//    game.aifill = secfile_lookup_int_default(file, 0, "game.aifill");
+//    Game.game.aifill = secfile_lookup_int_default(file, 0, "Game.game.aifill");
 //
-//    game.scorelog = secfile_lookup_bool_default(file, false, "game.scorelog");
-//    game.id = String.format( secfile_lookup_str_default(file, "", "game.id"));
+//    Game.game.scorelog = secfile_lookup_bool_default(file, false, "Game.game.scorelog");
+//    Game.game.id = String.format( secfile_lookup_str_default(file, "", "Game.game.id"));
 //
-//    game.fogofwar = secfile_lookup_bool_default(file, false, "game.fogofwar");
-//    game.fogofwar_old = game.fogofwar;
+//    Game.game.fogofwar = secfile_lookup_bool_default(file, false, "Game.game.fogofwar");
+//    Game.game.fogofwar_old = Game.game.fogofwar;
 //  
-//    game.civilwarsize =
+//    Game.game.civilwarsize =
 //      secfile_lookup_int_default(file, GAME_DEFAULT_CIVILWARSIZE,
-//				 "game.civilwarsize");
-//    game.contactturns =
+//				 "Game.game.civilwarsize");
+//    Game.game.contactturns =
 //      secfile_lookup_int_default(file, GAME_DEFAULT_CONTACTTURNS,
-//				 "game.contactturns");
+//				 "Game.game.contactturns");
 //  
 //    if(has_capability("diplchance_percent", savefile_options)) {
-//      game.diplchance = secfile_lookup_int_default(file, game.diplchance,
-//						   "game.diplchance");
+//      Game.game.diplchance = secfile_lookup_int_default(file, Game.game.diplchance,
+//						   "Game.game.diplchance");
 //    } else {
-//      game.diplchance = secfile_lookup_int_default(file, 3, /* old default */
-//						   "game.diplchance");
-//      if (game.diplchance < 2) {
-//	game.diplchance = GAME_MAX_DIPLCHANCE;
-//      } else if (game.diplchance > 10) {
-//	game.diplchance = GAME_MIN_DIPLCHANCE;
+//      Game.game.diplchance = secfile_lookup_int_default(file, 3, /* old default */
+//						   "Game.game.diplchance");
+//      if (Game.game.diplchance < 2) {
+//	Game.game.diplchance = GAME_MAX_DIPLCHANCE;
+//      } else if (Game.game.diplchance > 10) {
+//	Game.game.diplchance = GAME_MIN_DIPLCHANCE;
 //      } else {
-//	game.diplchance = 100 - (10 * (game.diplchance - 1));
+//	Game.game.diplchance = 100 - (10 * (Game.game.diplchance - 1));
 //      }
 //    }
-//    game.aqueductloss = secfile_lookup_int_default(file, game.aqueductloss,
-//						   "game.aqueductloss");
-//    game.killcitizen = secfile_lookup_int_default(file, game.killcitizen,
-//						  "game.killcitizen");
-//    game.savepalace = secfile_lookup_bool_default(file,game.savepalace,
-//						"game.savepalace");
-//    game.turnblock = secfile_lookup_bool_default(file,game.turnblock,
-//						"game.turnblock");
-//    game.fixedlength = secfile_lookup_bool_default(file,game.fixedlength,
-//						  "game.fixedlength");
-//    game.barbarianrate = secfile_lookup_int_default(file, game.barbarianrate,
-//						    "game.barbarians");
-//    game.onsetbarbarian = secfile_lookup_int_default(file, game.onsetbarbarian,
-//						     "game.onsetbarbs");
-//    game.revolution_length
-//      = secfile_lookup_int_default(file, game.revolution_length,
-//				   "game.revolen");
-//    game.nbarbarians = 0; /* counted in player_load for compatibility with 
+//    Game.game.aqueductloss = secfile_lookup_int_default(file, Game.game.aqueductloss,
+//						   "Game.game.aqueductloss");
+//    Game.game.killcitizen = secfile_lookup_int_default(file, Game.game.killcitizen,
+//						  "Game.game.killcitizen");
+//    Game.game.savepalace = secfile_lookup_bool_default(file,Game.game.savepalace,
+//						"Game.game.savepalace");
+//    Game.game.turnblock = secfile_lookup_bool_default(file,Game.game.turnblock,
+//						"Game.game.turnblock");
+//    Game.game.fixedlength = secfile_lookup_bool_default(file,Game.game.fixedlength,
+//						  "Game.game.fixedlength");
+//    Game.game.barbarianrate = secfile_lookup_int_default(file, Game.game.barbarianrate,
+//						    "Game.game.barbarians");
+//    Game.game.onsetbarbarian = secfile_lookup_int_default(file, Game.game.onsetbarbarian,
+//						     "Game.game.onsetbarbs");
+//    Game.game.revolution_length
+//      = secfile_lookup_int_default(file, Game.game.revolution_length,
+//				   "Game.game.revolen");
+//    Game.game.nbarbarians = 0; /* counted in player_load for compatibility with 
 //			     1.10.0 */
-//    game.occupychance = secfile_lookup_int_default(file, game.occupychance,
-//						   "game.occupychance");
-//    game.seed = secfile_lookup_int_default(file, game.seed,
-//					   "game.randseed");
-//    game.allowed_city_names =
-//	secfile_lookup_int_default(file, game.allowed_city_names,
-//				   "game.allowed_city_names"); 
+//    Game.game.occupychance = secfile_lookup_int_default(file, Game.game.occupychance,
+//						   "Game.game.occupychance");
+//    Game.game.seed = secfile_lookup_int_default(file, Game.game.seed,
+//					   "Game.game.randseed");
+//    Game.game.allowed_city_names =
+//	secfile_lookup_int_default(file, Game.game.allowed_city_names,
+//				   "Game.game.allowed_city_names"); 
 //
-//    if(game.civstyle == 1) {
+//    if(Game.game.civstyle == 1) {
 //      string = "civ1";
 //    } else {
 //      string = "default";
-//      game.civstyle = GAME_DEFAULT_CIVSTYLE;
+//      Game.game.civstyle = GAME_DEFAULT_CIVSTYLE;
 //    }
 //
 //    if (!has_capability("rulesetdir", savefile_options)) {
 //      char *str2, *str =
-//	  secfile_lookup_str_default(file, "default", "game.ruleset.techs");
+//	  secfile_lookup_str_default(file, "default", "Game.game.ruleset.techs");
 //
 //      if (strcmp("classic",
 //		 secfile_lookup_str_default(file, "default",
-//					    "game.ruleset.terrain")) == 0) {
+//					    "Game.game.ruleset.terrain")) == 0) {
 //	util.freelog(LOG_FATAL, ("The savegame uses the classic terrain " +
 //			     "ruleset which is no longer supported."));
 //	exit(EXIT_FAILURE);
@@ -3274,64 +3274,64 @@ public class Savegame{
 //			      str, str2, str); \
 //      }
 //
-//      T("game.ruleset.units");
-//      T("game.ruleset.buildings");
-//      T("game.ruleset.terrain");
-//      T("game.ruleset.governments");
-//      T("game.ruleset.nations");
-//      T("game.ruleset.cities");
-//      T("game.ruleset.game");
+//      T("Game.game.ruleset.units");
+//      T("Game.game.ruleset.buildings");
+//      T("Game.game.ruleset.terrain");
+//      T("Game.game.ruleset.governments");
+//      T("Game.game.ruleset.nations");
+//      T("Game.game.ruleset.cities");
+//      T("Game.game.ruleset.Game.game");
 //#undef T
 //
-//      game.rulesetdir = str;
+//      Game.game.rulesetdir = str;
 //    } else {
-//      game.rulesetdir = String.format( 
+//      Game.game.rulesetdir = String.format( 
 //	       secfile_lookup_str_default(file, string,
-//					  "game.rulesetdir"));
+//					  "Game.game.rulesetdir"));
 //    }
 //
-//    game.demography = String.format(
+//    Game.game.demography = String.format(
 //	       secfile_lookup_str_default(file, GAME_DEFAULT_DEMOGRAPHY,
-//					  "game.demography"));
-//    game.allow_take = String.format(
+//					  "Game.game.demography"));
+//    Game.game.allow_take = String.format(
 //	       secfile_lookup_str_default(file, GAME_DEFAULT_ALLOW_TAKE,
-//					  "game.allow_take"));
+//					  "Game.game.allow_take"));
 //
-//    game.spacerace = secfile_lookup_bool_default(file, game.spacerace,
-//						"game.spacerace");
+//    Game.game.spacerace = secfile_lookup_bool_default(file, Game.game.spacerace,
+//						"Game.game.spacerace");
 //
-//    game.auto_ai_toggle = secfile_lookup_bool_default(file, game.auto_ai_toggle,
-//						     "game.auto_ai_toggle");
+//    Game.game.auto_ai_toggle = secfile_lookup_bool_default(file, Game.game.auto_ai_toggle,
+//						     "Game.game.auto_ai_toggle");
 //
-//    game.heating=0;
-//    game.cooling=0;
+//    Game.game.heating=0;
+//    Game.game.cooling=0;
 //
 //    load_rulesets();
 //  }
 //
 //  {
-//    if (game.version >= 10300) {
+//    if (Game.game.version >= 10300) {
 //      {
 //	if (!has_capability("startunits", savefile_options)) {
-//	  int settlers = secfile_lookup_int(file, "game.settlers");
-//	  int explorer = secfile_lookup_int(file, "game.explorer");
+//	  int settlers = secfile_lookup_int(file, "Game.game.settlers");
+//	  int explorer = secfile_lookup_int(file, "Game.game.explorer");
 //	  int i;
 //	  for (i = 0; settlers > 0 && i < (MAX_LEN_STARTUNIT - 1) ; i++, settlers--) {
-//	    game.start_units[i] = 'c';
+//	    Game.game.start_units[i] = 'c';
 //	  }
 //	  for (; explorer > 0 && i < (MAX_LEN_STARTUNIT - 1) ; i++, explorer--) {
-//	    game.start_units[i] = 'x';
+//	    Game.game.start_units[i] = 'x';
 //	  }
-//	  game.start_units[i] = '\0';
+//	  Game.game.start_units[i] = '\0';
 //	} else {
-//	  game.start_units = String.format(
+//	  Game.game.start_units = String.format(
 //		     secfile_lookup_str_default(file,
 //						GAME_DEFAULT_START_UNITS,
-//						"game.start_units"));
+//						"Game.game.start_units"));
 //	}
-//	game.dispersion =
+//	Game.game.dispersion =
 //	  secfile_lookup_int_default(file, GAME_DEFAULT_DISPERSION,
-//				     "game.dispersion");
+//				     "Game.game.dispersion");
 //      }
 //
 //      Map.map.topology_id = secfile_lookup_int_default(file, MAP_ORIGINAL_TOPO,
@@ -3398,7 +3398,7 @@ public class Savegame{
 //     1) if the block exists at all.
 //     2) if it is saved. */
 //  if (section_file_lookup(file, "random.index_J")
-//      && secfile_lookup_bool_default(file, true, "game.save_random")) {
+//      && secfile_lookup_bool_default(file, true, "Game.game.save_random")) {
 //    RANDOM_STATE rstate;
 //    rstate.j = secfile_lookup_int(file,"random.index_J");
 //    rstate.k = secfile_lookup_int(file,"random.index_K");
@@ -3412,13 +3412,13 @@ public class Savegame{
 //	     &rstate.v[7*i+4], &rstate.v[7*i+5], &rstate.v[7*i+6]);
 //    }
 //    rstate.is_init = true;
-//    set_myrand_state(rstate);
+//    set_Rand.myrand_state(rstate);
 //  } else {
 //    /* mark it */
-//    () secfile_lookup_bool_default(file, true, "game.save_random");
+//    () secfile_lookup_bool_default(file, true, "Game.game.save_random");
 //
-//    /* We're loading a running game without a seed (which is okay, if it's
-//     * a scenario).  We need to generate the game seed now because it will
+//    /* We're loading a running Game.game without a seed (which is okay, if it's
+//     * a scenario).  We need to generate the Game.game seed now because it will
 //     * be needed later during the load. */
 //    if (tmp_Srv_main.server_state == RUN_GAME_STATE) {
 //      init_game_seed();
@@ -3426,31 +3426,31 @@ public class Savegame{
 //  }
 //
 //
-//  game.is_new_game = !secfile_lookup_bool_default(file, true,
-//						  "game.save_players");
+//  Game.game.is_new_game = !secfile_lookup_bool_default(file, true,
+//						  "Game.game.save_players");
 //
-//  if (!game.is_new_game) { /* If new game, this is done in srv_main.c */
+//  if (!Game.game.is_new_game) { /* If new Game.game, this is done in srv_main.c */
 //    /* Initialise lists of improvements with World and Island equiv_ranges */
-//    improvement_status_init(game.improvements,
-//			    ARRAY_SIZE(game.improvements));
+//    improvement_status_init(Game.game.improvements,
+//			    ARRAY_SIZE(Game.game.improvements));
 //  }
 //
 //  map_load(file);
 //
-//  if (!game.is_new_game) {
+//  if (!Game.game.is_new_game) {
 //    /* destroyed wonders: */
 //    string = secfile_lookup_str_default(file, null,
-//                                        "game.destroyed_wonders_new");
+//                                        "Game.game.destroyed_wonders_new");
 //    if (!string) {
 //      /* old savegames */
 //      string = secfile_lookup_str_default(file, "",
-//                                          "game.destroyed_wonders");
+//                                          "Game.game.destroyed_wonders");
 //      for (k = 0; string[k]; k++) {
 //        if (string[k] == '1') {
 //	  name = old_impr_type_name(k);
 //	  id = find_improvement_by_name_orig(name);
 //	  if (id != -1) {
-//	    game.global_wonders[id] = -1;
+//	    Game.game.global_wonders[id] = -1;
 //	  }
 //	}
 //      }
@@ -3459,7 +3459,7 @@ public class Savegame{
 //        if (string[k] == '1') {
 //	  id = find_improvement_by_name_orig(improvement_order[k]);
 //	  if (id != -1) {
-//            game.global_wonders[id] = -1;
+//            Game.game.global_wonders[id] = -1;
 //	  }
 //	}
 //      }
@@ -3469,8 +3469,8 @@ public class Savegame{
 //     * are added. */
 //    allot_island_improvs();
 //
-//    for (i = 0; i < game.nplayers; i++) {
-//      player_load(&game.players[i], i, file, improvement_order,
+//    for (i = 0; i < Game.game.nplayers; i++) {
+//      player_load(&Game.game.players[i], i, file, improvement_order,
 //		  improvement_order_size, technology_order,
 //		  technology_order_size); 
 //    }
@@ -3489,18 +3489,18 @@ public class Savegame{
 //
 //    /* Since the cities must be placed on the map to put them on the
 //       player map we do this afterwards */
-//    for(i=0; i<game.nplayers; i++) {
-//      player_map_load(&game.players[i], i, file); 
+//    for(i=0; i<Game.game.nplayers; i++) {
+//      player_map_load(&Game.game.players[i], i, file); 
 //    }
 //
 //    /* We do this here since if the did it in player_load, player 1
 //       would try to unfog (unloaded) player 2's map when player 1's units
 //       were loaded */
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      pplayer.really_gives_vision = 0;
 //      pplayer.gives_shared_vision = 0;
 //    }
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      char *vision;
 //      int plrno = pplayer.player_no;
 //
@@ -3508,7 +3508,7 @@ public class Savegame{
 //					  "player%d.gives_shared_vision",
 //					  plrno);
 //      if (vision) {
-//	for(player pplayer2: game.players){
+//	for(player pplayer2: Game.game.players){
 //	  if (vision[pplayer2.player_no] == '1') {
 //	    give_shared_vision(pplayer, pplayer2);
 //	  }
@@ -3523,7 +3523,7 @@ public class Savegame{
 //    map_calculate_borders();
 //
 //    /* Make sure everything is consistent. */
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      for (unit punit : pplayer.units.data) {
 //	if (!can_unit_continue_current_activity(punit)) {
 //	  util.freelog(Log.LOG_ERROR, "ERROR: Unit doing illegal activity in savegame!");
@@ -3536,16 +3536,16 @@ public class Savegame{
 //      } }
 //    }
 //  } else {
-//    game.nplayers = 0;
+//    Game.game.nplayers = 0;
 //  }
 //
 //  if (secfile_lookup_int_default(file, -1,
-//				 "game.shuffled_player_%d", 0) >= 0) {
-//    int shuffled_players[game.nplayers];
+//				 "Game.game.shuffled_player_%d", 0) >= 0) {
+//    int shuffled_players[Game.game.nplayers];
 //
-//    for (i = 0; i < game.nplayers; i++) {
+//    for (i = 0; i < Game.game.nplayers; i++) {
 //      shuffled_players[i]
-//	= secfile_lookup_int(file, "game.shuffled_player_%d", i);
+//	= secfile_lookup_int(file, "Game.game.shuffled_player_%d", i);
 //    }
 //    set_shuffled_players(shuffled_players);
 //  } else {
@@ -3554,20 +3554,20 @@ public class Savegame{
 //    shuffle_players();
 //  }
 //
-//  if (!game.is_new_game) {
+//  if (!Game.game.is_new_game) {
 //    /* Set active city improvements/wonders and their effects */
 //    improvements_update_obsolete();
 //  }
 //
-//  game.player_idx=0;
-//  game.player_ptr=&game.players[0];  
+//  Game.game.player_idx=0;
+//  Game.game.player_ptr=&Game.game.players[0];  
 //
 //  /* Fix ferrying sanity */
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (unit punit : pplayer.units.data) {
 //      unit ferry = find_unit_by_id(punit.transported_by);
 //
-//      if (is_ocean(map_get_terrain(punit.tile))
+//      if (Terrain_H.is_ocean(punit.tile.terrain)
 //          && is_ground_unit(punit) && !ferry) {
 //        util.freelog(Log.LOG_ERROR, "Removing %s's unferried %s in ocean at (%d, %d)",
 //                pplayer.name, unit_name(punit.type), TILE_XY(punit.tile));
@@ -3579,13 +3579,13 @@ public class Savegame{
 //  /* Fix stacking issues.  We don't rely on the savegame preserving
 //   * alliance invariants (old savegames often did not) so if there are any
 //   * unallied units on the same tile we just bounce them. */
-//  for(player pplayer: game.players){
-//    for(player aplayer: game.players){
+//  for(player pplayer: Game.game.players){
+//    for(player aplayer: Game.game.players){
 //      resolve_unit_stacks(pplayer, aplayer, true);
 //    }
 //  }
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    calc_civ_score(pplayer);
 //  }
 //
@@ -3603,22 +3603,22 @@ public class Savegame{
 //  char temp[B_LAST+1];
 //
 //  version = MAJOR_VERSION *10000 + MINOR_VERSION *100 + PATCH_VERSION; 
-//  secfile_insert_int(file, version, "game.version");
+//  secfile_insert_int(file, version, "Game.game.version");
 //
-//  /* Game state: once the game is no longer a new game (ie, has been
+//  /* Game state: once the Game.game is no longer a new Game.game (ie, has been
 //   * started the first time), it should always be considered a running
-//   * game for savegame purposes:
+//   * Game.game for savegame purposes:
 //   */
-//  secfile_insert_int(file, (int) (game.is_new_game ? Srv_main.server_state :
-//				  RUN_GAME_STATE), "game.Srv_main.server_state");
+//  secfile_insert_int(file, (int) (Game.game.is_new_game ? Srv_main.server_state :
+//				  RUN_GAME_STATE), "Game.game.Srv_main.server_state");
 //  
-//  secfile_insert_str(file, get_meta_patches_string(), "game.metapatches");
-//  secfile_insert_str(file, get_meta_topic_string(), "game.metatopic");
-//  secfile_insert_str(file, get_meta_message_string(), "game.metamessage");
-//  secfile_insert_str(file, meta_addr_port(), "game.metaserver");
+//  secfile_insert_str(file, get_meta_patches_string(), "Game.game.metapatches");
+//  secfile_insert_str(file, get_meta_topic_string(), "Game.game.metatopic");
+//  secfile_insert_str(file, get_meta_message_string(), "Game.game.metamessage");
+//  secfile_insert_str(file, meta_addr_port(), "Game.game.metaserver");
 //  
 //  options = SAVEFILE_OPTIONS;
-//  if (game.is_new_game) {
+//  if (Game.game.is_new_game) {
 //    if (Map.map.num_start_positions>0) {
 //      sz_strlcat(options, " startpos");
 //    }
@@ -3632,23 +3632,23 @@ public class Savegame{
 //  secfile_insert_str(file, options, "savefile.options");
 //  /* Save improvement order in savegame, so we are not dependent on
 //   * ruleset order.
-//   * If the game isn't started improvements aren't loaded
+//   * If the Game.game isn't started improvements aren't loaded
 //   * so we can not save the order.
 //   */
-//  if (game.num_impr_types > 0) {
-//    final char* buf[game.num_impr_types];
+//  if (Game.game.num_impr_types > 0) {
+//    final char* buf[Game.game.num_impr_types];
 //    impr_type_iterate(id) {
 //      buf[id] = get_improvement_name_orig(id);
 //    } impr_type_iterate_end;
-//    secfile_insert_str_vec(file, buf, game.num_impr_types,
+//    secfile_insert_str_vec(file, buf, Game.game.num_impr_types,
 //                           "savefile.improvement_order");
 //  }
 //  
 //  /* Save technology order in savegame, so we are not dependent on ruleset
-//   * order. If the game isn't started advances aren't loaded 
+//   * order. If the Game.game isn't started advances aren't loaded 
 //   * so we can not save the order. */
-//  if (game.num_tech_types > 0) {
-//    final char* buf[game.num_tech_types];
+//  if (Game.game.num_tech_types > 0) {
+//    final char* buf[Game.game.num_tech_types];
 //    tech_type_iterate(tech) {
 //      if (tech == A_NONE) {
 //        buf[tech] = "A_NONE";
@@ -3656,79 +3656,79 @@ public class Savegame{
 //        buf[tech] = advances[tech].name_orig;
 //      }
 //    } tech_type_iterate_end;
-//    secfile_insert_str_vec(file, buf, game.num_tech_types,
+//    secfile_insert_str_vec(file, buf, Game.game.num_tech_types,
 //                           "savefile.technology_order");
 //  }
 //  
-//  secfile_insert_int(file, game.gold, "game.gold");
-//  secfile_insert_int(file, game.tech, "game.tech");
-//  secfile_insert_int(file, game.skill_level, "game.skill_level");
-//  secfile_insert_int(file, game.timeout, "game.timeout");
-//  secfile_insert_int(file, game.timeoutint, "game.timeoutint");
-//  secfile_insert_int(file, game.timeoutintinc, "game.timeoutintinc");
-//  secfile_insert_int(file, game.timeoutinc, "game.timeoutinc");
-//  secfile_insert_int(file, game.timeoutincmult, "game.timeoutincmult"); 
-//  secfile_insert_int(file, game.timeoutcounter, "game.timeoutcounter"); 
-//  secfile_insert_int(file, game.timeoutaddenemymove,
-//		     "game.timeoutaddenemymove");
-//  secfile_insert_int(file, game.end_year, "game.end_year");
-//  secfile_insert_int(file, game.year, "game.year");
-//  secfile_insert_int(file, game.turn, "game.turn");
-//  secfile_insert_int(file, game.researchcost, "game.researchcost");
-//  secfile_insert_int(file, game.min_players, "game.min_players");
-//  secfile_insert_int(file, game.max_players, "game.max_players");
-//  secfile_insert_int(file, game.nplayers, "game.nplayers");
-//  secfile_insert_int(file, game.globalwarming, "game.globalwarming");
-//  secfile_insert_int(file, game.warminglevel, "game.warminglevel");
-//  secfile_insert_int(file, game.nuclearwinter, "game.nuclearwinter");
-//  secfile_insert_int(file, game.coolinglevel, "game.coolinglevel");
-//  secfile_insert_int(file, game.notradesize, "game.notradesize");
-//  secfile_insert_int(file, game.fulltradesize, "game.fulltradesize");
-//  secfile_insert_int(file, game.unhappysize, "game.unhappysize");
-//  secfile_insert_bool(file, game.angrycitizen, "game.angrycitizen");
-//  secfile_insert_int(file, game.cityfactor, "game.cityfactor");
-//  secfile_insert_int(file, game.citymindist, "game.citymindist");
-//  secfile_insert_int(file, game.civilwarsize, "game.civilwarsize");
-//  secfile_insert_int(file, game.contactturns, "game.contactturns");
-//  secfile_insert_int(file, game.rapturedelay, "game.rapturedelay");
-//  secfile_insert_int(file, game.diplcost, "game.diplcost");
-//  secfile_insert_int(file, game.freecost, "game.freecost");
-//  secfile_insert_int(file, game.conquercost, "game.conquercost");
-//  secfile_insert_int(file, game.foodbox, "game.foodbox");
-//  secfile_insert_int(file, game.techpenalty, "game.techpenalty");
-//  secfile_insert_int(file, game.razechance, "game.razechance");
-//  secfile_insert_int(file, game.civstyle, "game.civstyle");
-//  secfile_insert_int(file, game.save_nturns, "game.save_nturns");
-//  secfile_insert_str(file, game.save_name, "game.save_name");
-//  secfile_insert_int(file, game.aifill, "game.aifill");
-//  secfile_insert_bool(file, game.scorelog, "game.scorelog");
-//  secfile_insert_str(file, game.id, "game.id");
-//  secfile_insert_bool(file, game.fogofwar, "game.fogofwar");
-//  secfile_insert_bool(file, game.spacerace, "game.spacerace");
-//  secfile_insert_bool(file, game.auto_ai_toggle, "game.auto_ai_toggle");
-//  secfile_insert_int(file, game.diplchance, "game.diplchance");
-//  secfile_insert_int(file, game.aqueductloss, "game.aqueductloss");
-//  secfile_insert_int(file, game.killcitizen, "game.killcitizen");
-//  secfile_insert_bool(file, game.turnblock, "game.turnblock");
-//  secfile_insert_bool(file, game.savepalace, "game.savepalace");
-//  secfile_insert_bool(file, game.fixedlength, "game.fixedlength");
-//  secfile_insert_int(file, game.barbarianrate, "game.barbarians");
-//  secfile_insert_int(file, game.onsetbarbarian, "game.onsetbarbs");
-//  secfile_insert_int(file, game.revolution_length, "game.revolen");
-//  secfile_insert_int(file, game.occupychance, "game.occupychance");
-//  secfile_insert_str(file, game.demography, "game.demography");
-//  secfile_insert_str(file, game.allow_take, "game.allow_take");
-//  secfile_insert_int(file, game.borders, "game.borders");
-//  secfile_insert_bool(file, game.happyborders, "game.happyborders");
-//  secfile_insert_int(file, game.diplomacy, "game.diplomacy");
-//  secfile_insert_int(file, game.watchtower_vision, "game.watchtower_vision");
-//  secfile_insert_int(file, game.watchtower_extra_vision, "game.watchtower_extra_vision");
-//  secfile_insert_int(file, game.allowed_city_names, "game.allowed_city_names");
+//  secfile_insert_int(file, Game.game.gold, "Game.game.gold");
+//  secfile_insert_int(file, Game.game.tech, "Game.game.tech");
+//  secfile_insert_int(file, Game.game.skill_level, "Game.game.skill_level");
+//  secfile_insert_int(file, Game.game.timeout, "Game.game.timeout");
+//  secfile_insert_int(file, Game.game.timeoutint, "Game.game.timeoutint");
+//  secfile_insert_int(file, Game.game.timeoutintinc, "Game.game.timeoutintinc");
+//  secfile_insert_int(file, Game.game.timeoutinc, "Game.game.timeoutinc");
+//  secfile_insert_int(file, Game.game.timeoutincmult, "Game.game.timeoutincmult"); 
+//  secfile_insert_int(file, Game.game.timeoutcounter, "Game.game.timeoutcounter"); 
+//  secfile_insert_int(file, Game.game.timeoutaddenemymove,
+//		     "Game.game.timeoutaddenemymove");
+//  secfile_insert_int(file, Game.game.end_year, "Game.game.end_year");
+//  secfile_insert_int(file, Game.game.year, "Game.game.year");
+//  secfile_insert_int(file, Game.game.turn, "Game.game.turn");
+//  secfile_insert_int(file, Game.game.researchcost, "Game.game.researchcost");
+//  secfile_insert_int(file, Game.game.min_players, "Game.game.min_players");
+//  secfile_insert_int(file, Game.game.max_players, "Game.game.max_players");
+//  secfile_insert_int(file, Game.game.nplayers, "Game.game.nplayers");
+//  secfile_insert_int(file, Game.game.globalwarming, "Game.game.globalwarming");
+//  secfile_insert_int(file, Game.game.warminglevel, "Game.game.warminglevel");
+//  secfile_insert_int(file, Game.game.nuclearwinter, "Game.game.nuclearwinter");
+//  secfile_insert_int(file, Game.game.coolinglevel, "Game.game.coolinglevel");
+//  secfile_insert_int(file, Game.game.notradesize, "Game.game.notradesize");
+//  secfile_insert_int(file, Game.game.fulltradesize, "Game.game.fulltradesize");
+//  secfile_insert_int(file, Game.game.unhappysize, "Game.game.unhappysize");
+//  secfile_insert_bool(file, Game.game.angrycitizen, "Game.game.angrycitizen");
+//  secfile_insert_int(file, Game.game.cityfactor, "Game.game.cityfactor");
+//  secfile_insert_int(file, Game.game.citymindist, "Game.game.citymindist");
+//  secfile_insert_int(file, Game.game.civilwarsize, "Game.game.civilwarsize");
+//  secfile_insert_int(file, Game.game.contactturns, "Game.game.contactturns");
+//  secfile_insert_int(file, Game.game.rapturedelay, "Game.game.rapturedelay");
+//  secfile_insert_int(file, Game.game.diplcost, "Game.game.diplcost");
+//  secfile_insert_int(file, Game.game.freecost, "Game.game.freecost");
+//  secfile_insert_int(file, Game.game.conquercost, "Game.game.conquercost");
+//  secfile_insert_int(file, Game.game.foodbox, "Game.game.foodbox");
+//  secfile_insert_int(file, Game.game.techpenalty, "Game.game.techpenalty");
+//  secfile_insert_int(file, Game.game.razechance, "Game.game.razechance");
+//  secfile_insert_int(file, Game.game.civstyle, "Game.game.civstyle");
+//  secfile_insert_int(file, Game.game.save_nturns, "Game.game.save_nturns");
+//  secfile_insert_str(file, Game.game.save_name, "Game.game.save_name");
+//  secfile_insert_int(file, Game.game.aifill, "Game.game.aifill");
+//  secfile_insert_bool(file, Game.game.scorelog, "Game.game.scorelog");
+//  secfile_insert_str(file, Game.game.id, "Game.game.id");
+//  secfile_insert_bool(file, Game.game.fogofwar, "Game.game.fogofwar");
+//  secfile_insert_bool(file, Game.game.spacerace, "Game.game.spacerace");
+//  secfile_insert_bool(file, Game.game.auto_ai_toggle, "Game.game.auto_ai_toggle");
+//  secfile_insert_int(file, Game.game.diplchance, "Game.game.diplchance");
+//  secfile_insert_int(file, Game.game.aqueductloss, "Game.game.aqueductloss");
+//  secfile_insert_int(file, Game.game.killcitizen, "Game.game.killcitizen");
+//  secfile_insert_bool(file, Game.game.turnblock, "Game.game.turnblock");
+//  secfile_insert_bool(file, Game.game.savepalace, "Game.game.savepalace");
+//  secfile_insert_bool(file, Game.game.fixedlength, "Game.game.fixedlength");
+//  secfile_insert_int(file, Game.game.barbarianrate, "Game.game.barbarians");
+//  secfile_insert_int(file, Game.game.onsetbarbarian, "Game.game.onsetbarbs");
+//  secfile_insert_int(file, Game.game.revolution_length, "Game.game.revolen");
+//  secfile_insert_int(file, Game.game.occupychance, "Game.game.occupychance");
+//  secfile_insert_str(file, Game.game.demography, "Game.game.demography");
+//  secfile_insert_str(file, Game.game.allow_take, "Game.game.allow_take");
+//  secfile_insert_int(file, Game.game.borders, "Game.game.borders");
+//  secfile_insert_bool(file, Game.game.happyborders, "Game.game.happyborders");
+//  secfile_insert_int(file, Game.game.diplomacy, "Game.game.diplomacy");
+//  secfile_insert_int(file, Game.game.watchtower_vision, "Game.game.watchtower_vision");
+//  secfile_insert_int(file, Game.game.watchtower_extra_vision, "Game.game.watchtower_extra_vision");
+//  secfile_insert_int(file, Game.game.allowed_city_names, "Game.game.allowed_city_names");
 //
 //  /* old (1.14.1) servers need to have these server variables.  The values
 //   * don't matter, though. */
-//  secfile_insert_int(file, 2, "game.settlers");
-//  secfile_insert_int(file, 1, "game.explorer");
+//  secfile_insert_int(file, 2, "Game.game.settlers");
+//  secfile_insert_int(file, 1, "Game.game.explorer");
 //  secfile_insert_int(file, 30, "Map.map.mountains");
 //  secfile_insert_int(file, 35, "Map.map.grass");
 //  secfile_insert_int(file, 5, "Map.map.swampsize");
@@ -3738,7 +3738,7 @@ public class Savegame{
 //
 //  if (true) {
 //    /* Now always save these, so the server options reflect the
-//     * actual values used at the start of the game.
+//     * actual values used at the start of the Game.game.
 //     * The first two used to be saved as "Map.map.xsize" and "Map.map.ysize"
 //     * when server_states.PRE_GAME_STATE, but I'm standardizing on width,height --dwp
 //     */
@@ -3746,8 +3746,8 @@ public class Savegame{
 //    secfile_insert_int(file, Map.map.size, "Map.map.size");
 //    secfile_insert_int(file, Map.map.xsize, "Map.map.width");
 //    secfile_insert_int(file, Map.map.ysize, "Map.map.height");
-//    secfile_insert_str(file, game.start_units, "game.start_units");
-//    secfile_insert_int(file, game.dispersion, "game.dispersion");
+//    secfile_insert_str(file, Game.game.start_units, "Game.game.start_units");
+//    secfile_insert_int(file, Game.game.dispersion, "Game.game.dispersion");
 //    secfile_insert_int(file, Map.map.seed, "Map.map.seed");
 //    secfile_insert_int(file, Map.map.landpercent, "Map.map.landpercent");
 //    secfile_insert_int(file, Map.map.riches, "Map.map.riches");
@@ -3762,11 +3762,11 @@ public class Savegame{
 //    secfile_insert_bool(file, Map.map.separatepoles, "Map.map.separatepoles");
 //  } 
 //
-//  secfile_insert_int(file, game.seed, "game.randseed");
+//  secfile_insert_int(file, Game.game.seed, "Game.game.randseed");
 //  
-//  if (myrand_is_init() && game.save_options.save_random) {
-//    RANDOM_STATE rstate = get_myrand_state();
-//    secfile_insert_int(file, 1, "game.save_random");
+//  if (Rand.myrand_is_init() && Game.game.save_options.save_random) {
+//    RANDOM_STATE rstate = get_Rand.myrand_state();
+//    secfile_insert_int(file, 1, "Game.game.save_random");
 //    assert(rstate.is_init);
 //
 //    secfile_insert_int(file, rstate.j, "random.index_J");
@@ -3785,57 +3785,57 @@ public class Savegame{
 //      secfile_insert_str(file, vec, name);
 //    }
 //  } else {
-//    secfile_insert_int(file, 0, "game.save_random");
+//    secfile_insert_int(file, 0, "Game.game.save_random");
 //  }
 //
-//  secfile_insert_str(file, game.rulesetdir, "game.rulesetdir");
+//  secfile_insert_str(file, Game.game.rulesetdir, "Game.game.rulesetdir");
 //
 //  if (!map_is_empty()) {
 //    map_save(file);
 //  }
 //  
-//  if ((Srv_main.server_state == server_states.PRE_GAME_STATE) && game.is_new_game) {
+//  if ((Srv_main.server_state == server_states.PRE_GAME_STATE) && Game.game.is_new_game) {
 //    return; /* want to save scenarios as well */
 //  }
 //
-//  secfile_insert_bool(file, game.save_options.save_players,
-//		      "game.save_players");
-//  if (game.save_options.save_players) {
+//  secfile_insert_bool(file, Game.game.save_options.save_players,
+//		      "Game.game.save_players");
+//  if (Game.game.save_options.save_players) {
 //    /* 1.14 servers depend on improvement order in ruleset. Here we
 //     * are trying to simulate 1.14.1 default order
 //     */
 //    init_old_improvement_bitvector(temp);
 //    impr_type_iterate(id) {
-//      if (is_wonder(id) && game.global_wonders[id] != 0
-//	  && !find_city_by_id(game.global_wonders[id])) {
+//      if (is_wonder(id) && Game.game.global_wonders[id] != 0
+//	  && !find_city_by_id(Game.game.global_wonders[id])) {
 //        add_improvement_into_old_bitvector(temp, id);
 //      } 
 //    } impr_type_iterate_end;
-//    secfile_insert_str(file, temp, "game.destroyed_wonders");
+//    secfile_insert_str(file, temp, "Game.game.destroyed_wonders");
 //    
 //    /* Save destroyed wonders as bitvector. Note that improvement order
 //     * is saved in savefile.improvement_order
 //     */
 //    impr_type_iterate(id) {
-//      if (is_wonder(id) && game.global_wonders[id] != 0
-//	  && !find_city_by_id(game.global_wonders[id])) {
+//      if (is_wonder(id) && Game.game.global_wonders[id] != 0
+//	  && !find_city_by_id(Game.game.global_wonders[id])) {
 //	temp[id] = '1';
 //      } else {
 //        temp[id] = '0';
 //      }
 //    } impr_type_iterate_end;
-//    temp[game.num_impr_types] = '\0';
-//    secfile_insert_str(file, temp, "game.destroyed_wonders_new");
+//    temp[Game.game.num_impr_types] = '\0';
+//    secfile_insert_str(file, temp, "Game.game.destroyed_wonders_new");
 //
 //    calc_unit_ordering();
 //
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      player_save(pplayer, pplayer.player_no, file);
 //    }
 //
-//    for (i = 0; i < game.nplayers; i++) {
+//    for (i = 0; i < Game.game.nplayers; i++) {
 //      secfile_insert_int(file, shuffled_player(i).player_no,
-//			 "game.shuffled_player_%d", i);
+//			 "Game.game.shuffled_player_%d", i);
 //    }
 //  }
 //}

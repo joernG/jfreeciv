@@ -134,7 +134,7 @@ public class Optiondlg{
 //    case SDL_BUTTON_LEFT:
 //      pEdited_WorkList_Name = pWidget;
 //      popup_worklist_editor(null,
-//		  &game.player_ptr.worklists[MAX_ID - pWidget.ID]);
+//		  &Game.game.player_ptr.worklists[MAX_ID - pWidget.ID]);
 //    break;
 //    case SDL_BUTTON_MIDDLE:
 //      /* nothing */
@@ -145,16 +145,16 @@ public class Optiondlg{
 //      boolean scroll = (pOption_Dlg.pADlg.pActiveWidgetList != null);
 //      
 //      for(; i < MAX_NUM_WORKLISTS; i++) {
-//	if (!game.player_ptr.worklists[i].is_valid) {
+//	if (!Game.game.player_ptr.worklists[i].is_valid) {
 //      	  break;
 //	}
 //	if (i + 1 < MAX_NUM_WORKLISTS &&
-//	    game.player_ptr.worklists[i + 1].is_valid) {
-//	  copy_worklist(&game.player_ptr.worklists[i],
-//			  &game.player_ptr.worklists[i + 1]);
+//	    Game.game.player_ptr.worklists[i + 1].is_valid) {
+//	  copy_worklist(&Game.game.player_ptr.worklists[i],
+//			  &Game.game.player_ptr.worklists[i + 1]);
 //	} else {
-//	  game.player_ptr.worklists[i].is_valid = false;
-//	  strcpy(game.player_ptr.worklists[i].name, "\n");
+//	  Game.game.player_ptr.worklists[i].is_valid = false;
+//	  strcpy(Game.game.player_ptr.worklists[i].name, "\n");
 //	}
 //      
 //      }
@@ -174,7 +174,7 @@ public class Optiondlg{
 //      
 //      /* find if that was no empty list */
 //      for (i = 0; i < MAX_NUM_WORKLISTS; i++)
-//        if (!game.player_ptr.worklists[i].is_valid)
+//        if (!Game.game.player_ptr.worklists[i].is_valid)
 //          break;
 //
 //      /* No more worklist slots free. */
@@ -216,7 +216,7 @@ public class Optiondlg{
 //  /* Find the next free worklist for this player */
 //
 //  for (j = 0; j < MAX_NUM_WORKLISTS; j++)
-//    if (!game.player_ptr.worklists[j].is_valid)
+//    if (!Game.game.player_ptr.worklists[j].is_valid)
 //      break;
 //
 //  /* No more worklist slots free.  (!!!Maybe we should tell the user?) */
@@ -225,13 +225,13 @@ public class Optiondlg{
 //  }
 //  
 //  /* Validate this slot. */
-//  init_worklist(&game.player_ptr.worklists[j]);
-//  game.player_ptr.worklists[j].is_valid = true;
-//  strcpy(game.player_ptr.worklists[j].name, "empty worklist");
+//  init_worklist(&Game.game.player_ptr.worklists[j]);
+//  Game.game.player_ptr.worklists[j].is_valid = true;
+//  strcpy(Game.game.player_ptr.worklists[j].name, "empty worklist");
 //  
 //  /* create list element */
 //  pNew_WorkList_Widget = create_iconlabel_from_chars(null, pWidget.dst, 
-//      		game.player_ptr.worklists[j].name, 12, WF_DRAW_THEME_TRANSPARENT);
+//      		Game.game.player_ptr.worklists[j].name, 12, WF_DRAW_THEME_TRANSPARENT);
 //  pNew_WorkList_Widget.ID = MAX_ID - j;
 //  pNew_WorkList_Widget.string16.style |= SF_CENTER;
 //  set_wstate(pNew_WorkList_Widget, FC_WS_NORMAL);
@@ -258,7 +258,7 @@ public class Optiondlg{
 //  
 //  /* find if that was last empty list */
 //  for (j = 0; j < MAX_NUM_WORKLISTS; j++)
-//    if (!game.player_ptr.worklists[j].is_valid)
+//    if (!Game.game.player_ptr.worklists[j].is_valid)
 //      break;
 //
 //  /* No more worklist slots free. */
@@ -322,9 +322,9 @@ public class Optiondlg{
 //  
 //  /* ----------------------------- */
 //  for (i = 0; i < MAX_NUM_WORKLISTS; i++) {
-//    if (game.player_ptr.worklists[i].is_valid) {
+//    if (Game.game.player_ptr.worklists[i].is_valid) {
 //      pBuf = create_iconlabel_from_chars(null, pWindow.dst, 
-//      		game.player_ptr.worklists[i].name, 12,
+//      		Game.game.player_ptr.worklists[i].name, 12,
 //					      WF_DRAW_THEME_TRANSPARENT);
 //      set_wstate(pBuf, FC_WS_NORMAL);
 //      add_to_gui_list(MAX_ID - i, pBuf);
@@ -1964,7 +1964,7 @@ public class Optiondlg{
 //    sdl_dirty_rect(pOptions_Button.size);
 //    
 //#if 0
-//    /* hide "waiting for game start" label */
+//    /* hide "waiting for Game.game start" label */
 //    pOptions_Button = get_widget_pointer_form_main_list(ID_WAITING_LABEL);
 //    area = pOptions_Button.size;
 //    SDL_BlitSurface(pOptions_Button.gfx, null, pOptions_Button.dst, &area);
@@ -2273,7 +2273,7 @@ public class Optiondlg{
 //    /* this is no null when inside worklist editors */
 //    if(pEdited_WorkList_Name) {
 //      copy_chars_to_string16(pEdited_WorkList_Name.string16,
-//        game.player_ptr.worklists[MAX_ID - pEdited_WorkList_Name.ID].name);
+//        Game.game.player_ptr.worklists[MAX_ID - pEdited_WorkList_Name.ID].name);
 //      pEdited_WorkList_Name = null;
 //    }
 //  

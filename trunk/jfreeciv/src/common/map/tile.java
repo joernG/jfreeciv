@@ -24,15 +24,18 @@ public class tile {
 	  public int x, y; /* Cartesian (map) coordinates of the tile. */
 	  public int nat_x, nat_y; /* Native coordinates of the tile. */
 	  public int index; /* Index coordinate of the tile. */
-//	  Terrain_type_id terrain;
+	  public int terrain;
 //	  public int special;
 	  public int special;
 	  public city city;
 //	  Speclists<unit> units;
 	  public Speclists<unit> units;
-//	  unsigned int known;   /* A bitvector on the server side, an
-//				   enum known_type on the client side.
-//				   Player_no is index */
+//	  unsigned int known;   
+	/*
+	 * A bitvector on the server side, an enum known_type on the client side.
+	 * Player_no is index
+	 */
+	  public int known;
 //	  int assigned; /* these can save a lot of CPU usage -- Syela */
 //	  struct city *worked;      /* city working tile, or NULL if none */
 //	  Continent_id continent;

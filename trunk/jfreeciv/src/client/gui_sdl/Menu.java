@@ -946,7 +946,7 @@ public class Menu{
 //      city pHomecity;
 //      int time;
 //      tile pTile = map_get_tile(pUnit.x, pUnit.y);
-//      Terrain_type_id terrain = pTile.terrain;
+//      int terrain = pTile.terrain;
 //      
 //      if (!counter) {
 //	local_show(ID_UNIT_ORDER_GOTO);
@@ -1230,7 +1230,7 @@ public class Menu{
 //	local_hide(ID_UNIT_ORDER_RETURN);
 //      }
 //      
-//      if (pTile.city && can_upgrade_unittype(game.player_ptr, pUnit.type) != -1) {
+//      if (pTile.city && can_upgrade_unittype(Game.game.player_ptr, pUnit.type) != -1) {
 //	local_show(ID_UNIT_ORDER_UPGRADE);
 //      } else {
 //	local_hide(ID_UNIT_ORDER_UPGRADE);

@@ -299,7 +299,7 @@ public class Widget{
 //*************************************************************************/
 //void handle_destroyed_widgets()
 //{
-//  if (widget_list_size(&deferred_destroyed_widgets) == 0) {
+//  if (deferred_destroyed_widgets.foo_list_size() == 0) {
 //    return;
 //  }
 //

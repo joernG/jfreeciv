@@ -139,7 +139,7 @@ public class Text{
 //  char trade[16];
 //  int x, before_penalty;
 //  
-//  government gov = get_gov_pplayer(game.player_ptr);
+//  government gov = get_gov_pplayer(Game.game.player_ptr);
 //  
 //  x = get_food_tile(ptile);
 //  before_penalty = gov.food_before_penalty;
@@ -200,14 +200,14 @@ public class Text{
 //  add_line("Terrain: %s",  map_get_tile_info_text(ptile));
 //  add_line("Food/Prod/Trade: %s",
 //	   map_get_tile_fpt_text(ptile));
-//  if (Map.tile_has_special(ptile, S_HUT)) {
+//  if (Map.tile_has_special(ptile, Terrain_H.S_HUT)) {
 //    add_line("Minor Tribe Village");
 //  }
-//  if (game.borders > 0 && !pcity) {
+//  if (Game.game.borders > 0 && !pcity) {
 //    player owner = map_get_owner(ptile);
-//    player_diplstate ds = game.player_ptr.diplstates;
+//    player_diplstate ds = Game.game.player_ptr.diplstates;
 //
-//    if (owner == game.player_ptr){
+//    if (owner == Game.game.player_ptr){
 //      add_line("Our Territory");
 //    } else if (owner) {
 //      if (ds[owner.player_no].type == DS_CEASEFIRE) {
@@ -232,10 +232,10 @@ public class Text{
 //  if (pcity) {
 //    /* Look at city owner, not tile owner (the two should be the same, if
 //     * borders are in use). */
-//    player owner = city_owner(pcity);
-//    player_diplstate ds = game.player_ptr.diplstates;
+//    player owner = City.city_owner(pcity);
+//    player_diplstate ds = Game.game.player_ptr.diplstates;
 //
-//    if (owner == game.player_ptr){
+//    if (owner == Game.game.player_ptr){
 //      /* TRANS: "City: Warsaw (Polish)" */
 //      add_line("City: %s (%s)", pcity.name,
 //	       Nation.get_nation_name(owner.nation));
@@ -284,15 +284,15 @@ public class Text{
 //  }
 //  if (punit && !pcity) {
 //    player owner = punit.unit_owner();
-//    player_diplstate ds = game.player_ptr.diplstates;
+//    player_diplstate ds = Game.game.player_ptr.diplstates;
 //    unit_type ptype = punit.unit_type();
 //    char vet[1024] = "";
 //
-//    if (owner == game.player_ptr){
+//    if (owner == Game.game.player_ptr){
 //      city pcity;
 //      char tmp[64] = {0};
 //
-//      pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
+//      pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //      if (pcity) {
 //	tmp = util.my_snprintf( "/%s", pcity.name);
 //      }
@@ -352,10 +352,10 @@ public class Text{
 //	     ptype.attack_strength, 
 //	     ptype.defense_strength, ptype.firepower, punit.hp, 
 //	     ptype.hp, vet);
-//    if (owner == game.player_ptr
-//	&& unit_list_size(&ptile.units) >= 2) {
+//    if (owner == Game.game.player_ptr
+//	&& ptile.units.foo_list_size() >= 2) {
 //      /* TRANS: "5 more" units on this tile */
-//      add("  (%d more)", unit_list_size(&ptile.units) - 1);
+//      add("  (%d more)", ptile.units.foo_list_size() - 1);
 //    }
 //  } 
 //  RETURN;
@@ -433,7 +433,7 @@ public class Text{
 //{
 //  int pcity_near_dist;
 //  city pcity =
-//      player_find_city_by_id(game.player_ptr, punit.homecity);
+//      player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //  city pcity_near = get_nearest_city(punit, &pcity_near_dist);
 //  unit_type ptype = punit.unit_type();
 //  INIT;
@@ -464,12 +464,12 @@ public class Text{
 //final String science_dialog_text()
 //{
 //  int turns_to_advance;
-//  player plr = game.player_ptr;
+//  player plr = Game.game.player_ptr;
 //  int ours = 0, theirs = 0;
 //  INIT;
 //
 //  /* Sum up science */
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(plr, pplayer).type;
 //
 //    if (plr == pplayer) {
@@ -513,12 +513,12 @@ public class Text{
 //  INIT;
 //
 //  add_line("Population: %s",
-//	     population_to_text(civ_population(game.player_ptr)));
-//  add_line("Year: %s", Shared.textyear(game.year));
-//  add_line("Gold: %d", game.player_ptr.economic.gold);
-//  add_line("Tax: %d Lux: %d Sci: %d", game.player_ptr.economic.tax,
-//	   game.player_ptr.economic.luxury,
-//	   game.player_ptr.economic.science);
+//	     population_to_text(civ_population(Game.game.player_ptr)));
+//  add_line("Year: %s", Shared.textyear(Game.game.year));
+//  add_line("Gold: %d", Game.game.player_ptr.economic.gold);
+//  add_line("Tax: %d Lux: %d Sci: %d", Game.game.player_ptr.economic.tax,
+//	   Game.game.player_ptr.economic.luxury,
+//	   Game.game.player_ptr.economic.science);
 //  RETURN;
 //}
 //
@@ -552,7 +552,7 @@ public class Text{
 //   * GUI widgets may be confused and try to resize themselves. */
 //  if (punit) {
 //    city pcity =
-//	player_find_city_by_id(game.player_ptr, punit.homecity);
+//	player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //    int infrastructure =
 //	get_tile_infrastructure_set(punit.tile);
 //
@@ -589,10 +589,10 @@ public class Text{
 //
 //  add(("Shows your progress in researching " +
 //	"the current technology.\n%s: %d/%d."),
-//      get_tech_name(game.player_ptr,
-//		    game.player_ptr.research.researching),
-//      game.player_ptr.research.bulbs_researched,
-//      total_bulbs_required(game.player_ptr));
+//      get_tech_name(Game.game.player_ptr,
+//		    Game.game.player_ptr.research.researching),
+//      Game.game.player_ptr.research.bulbs_researched,
+//      total_bulbs_required(Game.game.player_ptr));
 //  RETURN;
 //}
 //
@@ -631,7 +631,7 @@ public class Text{
 //  INIT;
 //
 //  add("Shows your current government:\n%s.",
-//      get_government_name(game.player_ptr.government));
+//      get_government_name(Game.game.player_ptr.government));
 //  RETURN;
 //}
 //
@@ -695,7 +695,7 @@ public class Text{
 //{
 //  INIT;
 //
-//  if (game.timeout <= 0) {
+//  if (Game.game.timeout <= 0) {
 //    add("%s", Q"?timeout:off");
 //  } else {
 //    add("%s", format_duration(seconds_to_turndone));
@@ -741,7 +741,7 @@ public class Text{
 //{
 //  INIT;
 //
-//  if (conn_list_size(&pplayer.connections) > 0
+//  if (pplayer.connections.foo_list_size() > 0
 //      && conn_list_get(&pplayer.connections, 0).ping_time != -1.0) {
 //    double ping_time_in_ms =
 //	1000 * conn_list_get(&pplayer.connections, 0).ping_time;
@@ -766,14 +766,14 @@ public class Text{
 //
 //  /* TRANS: "Republic of the Polish" */
 //  add_line("%s of the %s",
-//	   get_government_name(game.player_ptr.government),
-//	   Nation.Nation.get_nation_name_plural(game.player_ptr.nation));
+//	   get_government_name(Game.game.player_ptr.government),
+//	   Nation.Nation.get_nation_name_plural(Game.game.player_ptr.nation));
 //
 //  add_line("%s %s: %s",
-//	   get_ruler_title(game.player_ptr.government,
-//			   game.player_ptr.is_male,
-//			   game.player_ptr.nation), game.player_ptr.name,
-//	   Shared.textyear(game.year));
+//	   get_ruler_title(Game.game.player_ptr.government,
+//			   Game.game.player_ptr.is_male,
+//			   Game.game.player_ptr.nation), Game.game.player_ptr.name,
+//	   Shared.textyear(Game.game.year));
 //  RETURN;
 //}
 //

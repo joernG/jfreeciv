@@ -32,7 +32,7 @@ public class Civclient{
 //#include "diptreaty.h"
 //#include "fciconv.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "idex.h"
 //#include "log.h"
 //#include "Map.map.h"
@@ -292,15 +292,15 @@ public class Civclient{
 //      default_user_name = buf;
 //    } else {
 //      default_user_name = util.my_snprintf(
-//		  "player%d", myrand(10000));
+//		  "player%d", Rand.myrand(10000));
 //    }
 //  }
 //
 //  /* initialization */
 //
-//  conn_list_init(&game.all_connections);
-//  conn_list_init(&game.est_connections);
-//  conn_list_init(&game.game_connections);
+//  conn_list_init(&Game.game.all_connections);
+//  conn_list_init(&Game.game.est_connections);
+//  conn_list_init(&Game.game.game_connections);
 //
 //  ui_init();
 //  charsets_init();
@@ -435,7 +435,7 @@ public class Civclient{
 //}
 //
 ///**************************************************************************
-// called whenever client is changed to pre-game state.
+// called whenever client is changed to pre-Game.game state.
 //**************************************************************************/
 //void client_game_init()
 //{
@@ -467,9 +467,9 @@ public class Civclient{
 //
 //  if (newstate == CLIENT_server_states.GAME_OVER_STATE) {
 //    /*
-//     * Extra kludge for end-game handling of the CMA.
+//     * Extra kludge for end-Game.game handling of the CMA.
 //     */
-//    for (city pcity : game.player_ptr.cities.data) {
+//    for (city pcity : Game.game.player_ptr.cities.data) {
 //      if (cma_is_city_under_agent(pcity, null)) {
 //        cma_release_city(pcity);
 //      }
@@ -481,9 +481,9 @@ public class Civclient{
 //
 //  if (client_state != newstate) {
 //
-//    /* If changing from pre-game state to _either_ select race
+//    /* If changing from pre-Game.game state to _either_ select race
 //       or running state, then we have finished getting ruleset data,
-//       and should translate data, for joining running game or for
+//       and should translate data, for joining running Game.game or for
 //       selecting nations.  (Want translated nation names in nation
 //       select dialog.)
 //    */
@@ -500,7 +500,7 @@ public class Civclient{
 //      load_ruleset_specific_options();
 //      create_event(null, E_GAME_START, "Game started.");
 //      precalc_tech_data();
-//      update_research(game.player_ptr);
+//      update_research(Game.game.player_ptr);
 //      role_unit_precalcs();
 //      boot_help_texts();	/* reboot */
 //      can_slide = false;
@@ -560,21 +560,21 @@ public class Civclient{
 //  if (pconn.player) {
 //    conn_list_unlink(&pconn.player.connections, pconn);
 //  }
-//  conn_list_unlink(&game.all_connections, pconn);
-//  conn_list_unlink(&game.est_connections, pconn);
-//  conn_list_unlink(&game.game_connections, pconn);
+//  conn_list_unlink(&Game.game.all_connections, pconn);
+//  conn_list_unlink(&Game.game.est_connections, pconn);
+//  conn_list_unlink(&Game.game.game_connections, pconn);
 //  assert(pconn != &aconnection);
 //  free(pconn);
 //}
 //
 ///**************************************************************************
 //  Remove (and free) all connections from all connection lists in client.
-//  Assumes game.all_connections is properly maintained with all connections.
+//  Assumes Game.game.all_connections is properly maintained with all connections.
 //**************************************************************************/
 //void client_remove_all_cli_conn()
 //{
-//  while (game.all_connections.foo_list_size() > 0) {
-//    connection pconn = conn_list_get(&game.all_connections, 0);
+//  while (Game.game.all_connections.foo_list_size() > 0) {
+//    connection pconn = conn_list_get(&Game.game.all_connections, 0);
 //    client_remove_cli_conn(pconn);
 //  }
 //}
@@ -619,11 +619,11 @@ public class Civclient{
 //    return;
 //  }
 //
-//  if (game.player_ptr.is_connected && game.player_ptr.is_alive &&
-//      !game.player_ptr.turn_done) {
+//  if (Game.game.player_ptr.is_connected && Game.game.player_ptr.is_alive &&
+//      !Game.game.player_ptr.turn_done) {
 //    int is_waiting = 0, is_moving = 0;
 //
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      if (pplayer.is_alive && pplayer.is_connected) {
 //	if (pplayer.turn_done) {
 //	  is_waiting++;
@@ -669,7 +669,7 @@ public class Civclient{
 //**************************************************************************/
 //boolean can_meet_with_player(player pplayer)
 //{
-//  return (could_meet_with_player(game.player_ptr, pplayer)
+//  return (could_meet_with_player(Game.game.player_ptr, pplayer)
 //          && can_client_issue_orders());
 //}
 //
@@ -679,7 +679,7 @@ public class Civclient{
 //**************************************************************************/
 //boolean can_intel_with_player(player pplayer)
 //{
-//  return could_intel_with_player(game.player_ptr, pplayer);
+//  return could_intel_with_player(Game.game.player_ptr, pplayer);
 //}
 //
 ///**************************************************************************

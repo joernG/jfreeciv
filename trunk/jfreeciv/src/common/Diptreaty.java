@@ -18,7 +18,7 @@ public class Diptreaty{
 //#include <config.h>
 //#endif
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "player.h"
@@ -26,19 +26,19 @@ public class Diptreaty{
 //#include "diptreaty.h"
 //
 ///**************************************************************************
-//  Returns true iff pplayer could do diplomancy in the game at all.
+//  Returns true iff pplayer could do diplomancy in the Game.game at all.
 //  These values are set by player in stdinhand.c.
 //**************************************************************************/
 //boolean diplomacy_possible(player pplayer, player aplayer)
 //{
-//  return  (game.diplomacy == 0      /* Unlimited diplomacy */
-//	   || (game.diplomacy == 1  /* Human diplomacy only */
+//  return  (Game.game.diplomacy == 0      /* Unlimited diplomacy */
+//	   || (Game.game.diplomacy == 1  /* Human diplomacy only */
 //	       && !pplayer.ai.control 
 //	       && !aplayer.ai.control)
-//	   || (game.diplomacy == 2  /* AI diplomacy only */
+//	   || (Game.game.diplomacy == 2  /* AI diplomacy only */
 //	       && pplayer.ai.control
 //	       && aplayer.ai.control)
-//	   || (game.diplomacy == 3  /* Team diplomacy only */
+//	   || (Game.game.diplomacy == 3  /* Team diplomacy only */
 //	       && players_on_same_team(pplayer, aplayer)));
 //}
 //

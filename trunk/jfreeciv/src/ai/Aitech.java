@@ -20,7 +20,7 @@ public class Aitech{
 //
 //#include <string.h>
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "player.h"
@@ -50,7 +50,7 @@ public class Aitech{
 //  Impr_Type_id building = get_nation_by_plr(plr).goals.wonder;
 //  
 //  if (improvement_exists(building)
-//      && game.global_wonders[building] == 0
+//      && Game.game.global_wonders[building] == 0
 //      && !wonder_obsolete(building)) {
 //    Tech_Type_id tech = improvement_types[building].tech_req;
 //
@@ -119,7 +119,7 @@ public class Aitech{
 //			   ai_tech_choice goal)
 //{
 //  Tech_Type_id newtech, newgoal;
-//  int num_cities_nonzero = MAX(1, city_list_size(&pplayer.cities));
+//  int num_cities_nonzero = MAX(1, pplayer.cities.foo_list_size());
 //  int values[A_LAST];
 //  int goal_values[A_LAST];
 //
@@ -249,7 +249,7 @@ public class Aitech{
 //      int steps = num_unknown_techs_for_goal(pplayer, hint.tech);
 //
 //      pplayer.ai.tech_want[hint.tech] += 
-//	city_list_size(&pplayer.cities)
+//	pplayer.cities.foo_list_size()
 //	* (hint.turns_factor * steps + hint.final_factor);
 //      if (hint.get_first) {
 //	break;
@@ -273,7 +273,7 @@ public class Aitech{
 //  int penalty = (pplayer.got_tech ? 0 : pplayer.research.bulbs_researched);
 //
 //  /* If there are humans in our team, they will choose the techs */
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    final player_diplstate ds = pplayer_get_diplstate(pplayer, aplayer);
 //
 //    if (ds.type == diplstate_type.DS_TEAM) {

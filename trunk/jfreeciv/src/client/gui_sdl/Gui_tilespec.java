@@ -263,7 +263,7 @@ public class Gui_tilespec{
 //
 ///**********************************************************************
 //  Set city citizens icons sprite value; should only happen after
-//  start of game (city style struct was filled ).
+//  start of Game.game (city style struct was filled ).
 //***********************************************************************/
 //void reload_citizens_icons(int style)
 //{

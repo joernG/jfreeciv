@@ -87,7 +87,7 @@ public class Goto{
 //static int connect_initial;
 //
 
-//  Called once per game.
+//  Called once per Game.game.
 //***********************************************************************/
 //void init_client_goto()
 //{
@@ -406,7 +406,7 @@ public class Goto{
 //    if (ttype.irrigation_time == 0) {
 //      return -1;
 //    }
-//    if (map_has_special(ptile, S_MINE)) {
+//    if (Map.map_has_special(ptile, S_MINE)) {
 //      /* Don't overwrite mines. */
 //      return -1;
 //    }
@@ -419,7 +419,7 @@ public class Goto{
 //    break;
 //  case ACTIVITY_RAILROAD:
 //  case ACTIVITY_ROAD:
-//    if (!Map.tile_has_special(ptile, S_ROAD)) {
+//    if (!Map.tile_has_special(ptile, Terrain_H.S_ROAD)) {
 //      if (ttype.road_time == 0
 //	  || (Map.tile_has_special(ptile, S_RIVER)
 //	      && !player_knows_techs_with_flag(pplayer, TF_BRIDGE))) {
@@ -429,7 +429,7 @@ public class Goto{
 //      activity_mc += ttype.road_time;
 //    }
 //    if (connect_activity == ACTIVITY_ROAD 
-//        || Map.tile_has_special(ptile, S_RAILROAD)) {
+//        || Map.tile_has_special(ptile, Terrain_H.S_RAILROAD)) {
 //      break;
 //    }
 //    activity_mc += ttype.rail_time;
@@ -449,11 +449,11 @@ public class Goto{
 //static boolean is_non_allied_city_adjacent(player pplayer,
 //					final tile ptile)
 //{
-//  adjc_iterate(ptile, tile1) {
+//  for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    if (is_non_allied_city_tile(tile1, pplayer)) {
 //      return true;
 //    }
-//  } adjc_iterate_end;
+//  }
 //  
 //  return false;
 //}
@@ -503,11 +503,11 @@ public class Goto{
 //
 //  /* Special cases: get_MC function doesn't know that we would have built
 //   * a road (railroad) on src tile by that time */
-//  if (map_has_special(dest_tile, S_ROAD)) {
+//  if (Map.map_has_special(dest_tile, Terrain_H.S_ROAD)) {
 //    move_cost = MOVE_COST_ROAD;
 //  }
 //  if (connect_activity == ACTIVITY_RAILROAD
-//      && map_has_special(dest_tile, S_RAILROAD)) {
+//      && Map.map_has_special(dest_tile, Terrain_H.S_RAILROAD)) {
 //    move_cost = MOVE_COST_RAIL;
 //  }
 //
@@ -948,7 +948,7 @@ public class Goto{
 //  for (i = 0; i < path.length; i++) {
 //    switch (activity) {
 //    case ACTIVITY_IRRIGATE:
-//      if (!map_has_special(old_tile, S_IRRIGATION)) {
+//      if (!Map.map_has_special(old_tile, S_IRRIGATION)) {
 //	/* Assume the unit can irrigate or we wouldn't be here. */
 //	p.orders[p.length] = ORDER_ACTIVITY;
 //	p.activity[p.length] = ACTIVITY_IRRIGATE;
@@ -957,14 +957,14 @@ public class Goto{
 //      break;
 //    case ACTIVITY_ROAD:
 //    case ACTIVITY_RAILROAD:
-//      if (!map_has_special(old_tile, S_ROAD)) {
+//      if (!Map.map_has_special(old_tile, Terrain_H.S_ROAD)) {
 //	/* Assume the unit can build the road or we wouldn't be here. */
 //	p.orders[p.length] = ORDER_ACTIVITY;
 //	p.activity[p.length] = ACTIVITY_ROAD;
 //	p.length++;
 //      }
 //      if (activity == ACTIVITY_RAILROAD) {
-//	if (!map_has_special(old_tile, S_RAILROAD)) {
+//	if (!Map.map_has_special(old_tile, Terrain_H.S_RAILROAD)) {
 //	  /* Assume the unit can build the rail or we wouldn't be here. */
 //	  p.orders[p.length] = ORDER_ACTIVITY;
 //	  p.activity[p.length] = ACTIVITY_RAILROAD;
@@ -1109,7 +1109,7 @@ public class Goto{
 //  pf_map map;
 //  pf_path path = null;
 //
-//  if ((pcity = City.is_allied_city_tile(punit.tile, game.player_ptr))) {
+//  if ((pcity = City.is_allied_city_tile(punit.tile, Game.game.player_ptr))) {
 //    /* We're already on a city - don't go anywhere. */
 //    return null;
 //  }
@@ -1122,7 +1122,7 @@ public class Goto{
 //
 //    pf_next_get_position(map, &pos);
 //
-//    if ((pcity = City.is_allied_city_tile(pos.tile, game.player_ptr))) {
+//    if ((pcity = City.is_allied_city_tile(pos.tile, Game.game.player_ptr))) {
 //      break;
 //    }
 //  }

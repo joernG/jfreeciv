@@ -21,7 +21,7 @@ public class Sanitycheck{
 //#include <assert.h>
 //
 //#include "city.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "Map.map.h"
 //#include "player.h"
@@ -41,11 +41,11 @@ public class Sanitycheck{
 //static void check_specials()
 //{
 //  for(tile ptile :  Map.map.tiles){
-//    Terrain_type_id terrain = map_get_terrain(ptile);
+//    int terrain = ptile.terrain;
 //    enum int special = map_get_special(ptile);
 //
-//    if (contains_special(special, S_RAILROAD))
-//      assert(contains_special(special, S_ROAD));
+//    if (contains_special(special, Terrain_H.S_RAILROAD))
+//      assert(contains_special(special, Terrain_H.S_ROAD));
 //    if (contains_special(special, S_FARMLAND))
 //      assert(contains_special(special, S_IRRIGATION));
 //    if (contains_special(special, S_SPECIAL_1))
@@ -66,7 +66,7 @@ public class Sanitycheck{
 //static void check_fow()
 //{
 //  for(tile ptile :  Map.map.tiles){
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      player_tile plr_tile = map_get_player_tile(ptile, pplayer);
 //      /* underflow of unsigned int */
 //      assert(plr_tile.seen < 60000);
@@ -74,7 +74,7 @@ public class Sanitycheck{
 //      assert(plr_tile.pending_seen < 60000);
 //
 //      assert(plr_tile.own_seen <= plr_tile.seen);
-//      if (map_is_known(ptile, pplayer)) {
+//      if (Maphand.map_is_known(ptile, pplayer)) {
 //	assert(plr_tile.pending_seen == 0);
 //      }
 //    }
@@ -87,14 +87,14 @@ public class Sanitycheck{
 //static void check_misc()
 //{
 //  int nbarbs = 0;
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (is_barbarian(pplayer)) {
 //      nbarbs++;
 //    }
 //  }
-//  assert(nbarbs == game.nbarbarians);
+//  assert(nbarbs == Game.game.nbarbarians);
 //
-//  assert(game.nplayers <= MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
+//  assert(Game.game.nplayers <= Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS);
 //}
 //
 ///**************************************************************************
@@ -116,20 +116,20 @@ public class Sanitycheck{
 //    index_to_native_pos(&x, &y, ptile.index);
 //    assert(x == ptile.nat_x && y == ptile.nat_y);
 //
-//    if (is_ocean(map_get_terrain(ptile))) {
+//    if (Terrain_H.is_ocean(ptile.terrain)) {
 //      assert(cont < 0);
-//      adjc_iterate(ptile, tile1) {
-//	if (is_ocean(map_get_terrain(tile1))) {
+//      for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//	if (Terrain_H.is_ocean(tile1.terrain)) {
 //	  assert(map_get_continent(tile1) == cont);
 //	}
-//      } adjc_iterate_end;
+//      }
 //    } else {
 //      assert(cont > 0);
-//      adjc_iterate(ptile, tile1) {
-//	if (!is_ocean(map_get_terrain(tile1))) {
+//      for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//	if (!Terrain_H.is_ocean(tile1.terrain)) {
 //	  assert(map_get_continent(tile1) == cont);
 //	}
-//      } adjc_iterate_end;
+//      }
 //    }
 //
 //    if (pcity) {
@@ -144,7 +144,7 @@ public class Sanitycheck{
 //	assert(pplayers_allied(punit.unit_owner(), punit2.unit_owner()));
 //      } }
 //      if (pcity) {
-//	assert(pplayers_allied(punit.unit_owner(), city_owner(pcity)));
+//	assert(pplayers_allied(punit.unit_owner(), City.city_owner(pcity)));
 //      }
 //    } }
 //  }
@@ -156,10 +156,10 @@ public class Sanitycheck{
 //void real_sanity_check_city(city pcity, final String file, int line)
 //{
 //  int workers = 0;
-//  player pplayer = city_owner(pcity);
+//  player pplayer = City.city_owner(pcity);
 //
 //  assert(pcity.size >= 1);
-//  assert(!terrain_has_flag(map_get_terrain(pcity.tile),
+//  assert(!Terrain_H.terrain_has_flag(pcity.tile.terrain,
 //			   TER_NO_CITIES));
 //
 //  for (unit punit : pcity.units_supported.data) {
@@ -188,7 +188,7 @@ public class Sanitycheck{
 //		  "empty but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
-//	if (game.borders > 0
+//	if (Game.game.borders > 0
 //	    && owner && owner.player_no != pcity.owner) {
 //	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "empty but in enemy territory!",
@@ -212,7 +212,7 @@ public class Sanitycheck{
 //		  "worked but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
-//	if (game.borders > 0
+//	if (Game.game.borders > 0
 //	    && owner && owner.player_no != pcity.owner) {
 //	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "worked but in enemy territory!",
@@ -256,9 +256,9 @@ public class Sanitycheck{
 //**************************************************************************/
 //static void check_cities()
 //{
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
-//      assert(city_owner(pcity) == pplayer);
+//      assert(City.city_owner(pcity) == pplayer);
 //
 //      sanity_check_city(pcity);
 //    } }
@@ -288,7 +288,7 @@ public class Sanitycheck{
 //...
 //**************************************************************************/
 //static void check_units() {
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (unit punit : pplayer.units.data) {
 //      tile ptile = punit.tile;
 //      city pcity;
@@ -299,7 +299,7 @@ public class Sanitycheck{
 //      if (punit.homecity != 0) {
 //	pcity = player_find_city_by_id(pplayer, punit.homecity);
 //	assert(pcity != null);
-//	assert(city_owner(pcity) == pplayer);
+//	assert(City.city_owner(pcity) == pplayer);
 //      }
 //
 //      if (!can_unit_continue_current_activity(punit)) {
@@ -312,7 +312,7 @@ public class Sanitycheck{
 //
 //      pcity = map_get_city(ptile);
 //      if (pcity) {
-//	assert(pplayers_allied(city_owner(pcity), pplayer));
+//	assert(pplayers_allied(City.city_owner(pcity), pplayer));
 //      }
 //
 //      assert(punit.moves_left >= 0);
@@ -341,13 +341,13 @@ public class Sanitycheck{
 //
 //      /* Check for ground units in the ocean. */
 //      if (!pcity
-//	  && is_ocean(map_get_terrain(ptile))
+//	  && Terrain_H.is_ocean(ptile.terrain)
 //	  && is_ground_unit(punit)) {
 //        assert(punit.transported_by != -1);
 //        assert(!is_ground_unit(transporter));
 //        assert(is_ground_units_transport(transporter));
 //      } else if (!pcity
-//                 && !is_ocean(map_get_terrain(ptile))
+//                 && !Terrain_H.is_ocean(ptile.terrain)
 //	         && is_sailing_unit(punit)) {
 //        assert(punit.transported_by != -1);
 //        assert(!is_sailing_unit(transporter));
@@ -356,7 +356,7 @@ public class Sanitycheck{
 //
 //      /* Check for over-full transports. */
 //      assert(get_transporter_occupancy(punit)
-//	     <= get_transporter_capacity(punit));
+//	     <= Unit.get_transporter_capacity(punit));
 //    } }
 //  }
 //}
@@ -368,7 +368,7 @@ public class Sanitycheck{
 //{
 //  int player_no;
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    int found_palace = 0;
 //
 //    if (!pplayer.is_alive) {
@@ -384,7 +384,7 @@ public class Sanitycheck{
 //      assert(found_palace <= 1);
 //    } }
 //
-//    for(player pplayer2: game.players){
+//    for(player pplayer2: Game.game.players){
 //      assert(pplayer.diplstates[pplayer2.player_no].type
 //	     == pplayer2.diplstates[pplayer.player_no].type);
 //      if (pplayer.diplstates[pplayer2.player_no].type == DS_CEASEFIRE) {
@@ -394,13 +394,13 @@ public class Sanitycheck{
 //    }
 //
 //    if (pplayer.revolution_finishes == -1) {
-//      if (pplayer.government == game.government_when_anarchy) {
+//      if (pplayer.government == Game.game.government_when_anarchy) {
 //        util.freelog(LOG_FATAL, "%s's government is anarchy but does not finish",
 //                pplayer.name);
 //      }
-//      assert(pplayer.government != game.government_when_anarchy);
-//    } else if (pplayer.revolution_finishes > game.turn) {
-//      assert(pplayer.government == game.government_when_anarchy);
+//      assert(pplayer.government != Game.game.government_when_anarchy);
+//    } else if (pplayer.revolution_finishes > Game.game.turn) {
+//      assert(pplayer.government == Game.game.government_when_anarchy);
 //    } else {
 //      /* Things may vary in this case depending on when the sanity_check
 //       * call is made.  No better check is possible. */
@@ -408,13 +408,13 @@ public class Sanitycheck{
 //  }
 //
 //  /* Sanity checks on living and dead players. */
-//  for (player_no = 0; player_no < ARRAY_SIZE(game.players); player_no++) {
-//    player pplayer = &game.players[player_no];
+//  for (player_no = 0; player_no < ARRAY_SIZE(Game.game.players); player_no++) {
+//    player pplayer = &Game.game.players[player_no];
 //
 //    if (!pplayer.is_alive) {
 //      /* Dead players' units and cities are disbanded in kill_player(). */
-//      assert(unit_list_size(&pplayer.units) == 0);
-//      assert(city_list_size(&pplayer.cities) == 0);
+//      assert(pplayer.units.foo_list_size() == 0);
+//      assert(pplayer.cities.foo_list_size() == 0);
 //    }
 //
 //    /* Dying players shouldn't be left around.  But they are. */

@@ -389,7 +389,7 @@ public class Widget_core{
 //  widget_list_insert(&deferred_destroyed_widgets, widget);
 //  parent_needs_paint(widget);
 //  // FIXME this is unsafe if
-//  // widget_list_size(&deferred_destroyed_widgets) > 1
+//  // deferred_destroyed_widgets.foo_list_size() > 1
 //}
 //
 ///*************************************************************************

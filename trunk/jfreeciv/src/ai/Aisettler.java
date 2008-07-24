@@ -23,7 +23,7 @@ public class Aisettler{
 //#include <assert.h>
 //
 //#include "city.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -142,7 +142,7 @@ public class Aisettler{
 //    boolean city_center = is_city_center(i, j);
 //
 //    if (reserved < 0
-//        || (handicap && !map_is_known(ptile, pplayer))
+//        || (handicap && !Maphand.map_is_known(ptile, pplayer))
 //        || ptile.worked != null) {
 //      /* Tile is reserved or we can't see it */
 //      result.citymap[i][j].shield = 0;
@@ -228,7 +228,7 @@ public class Aisettler{
 //    /* Corruption and waste of a size one city deducted. Notice that we
 //     * don't do this if 'fulltradesize' is changed, since then we'd
 //     * never make cities. */
-//    if (game.fulltradesize == 1) {
+//    if (Game.game.fulltradesize == 1) {
 //      result.corruption = ai.science_priority
 //	* city_corruption(pcity, 
 //			  result.citymap[result.o_x][result.o_y].trade
@@ -295,8 +295,8 @@ public class Aisettler{
 //{
 //  /* Defense modification (as tie breaker mostly) */
 //  int defense_bonus = 
-//            get_tile_type(map_get_terrain(result.tile)).defense_bonus;
-//  if (map_has_special(result.tile, S_RIVER)) {
+//            get_tile_type(result.tile.terrain).defense_bonus;
+//  if (Map.map_has_special(result.tile, S_RIVER)) {
 //    defense_bonus +=
 //        (defense_bonus * terrain_control.river_defense_bonus) / 100;
 //  }
@@ -386,23 +386,23 @@ public class Aisettler{
 //
 //  if (!city_can_be_built_here(ptile, punit)
 //      || (ai_handicap(pplayer, H_MAP)
-//          && !map_is_known(ptile, pplayer))) {
+//          && !Maphand.map_is_known(ptile, pplayer))) {
 //    return;
 //  }
 //
 //  /* Check if another settler has taken a spot within mindist */
-//  square_iterate(ptile, game.rgame.min_dist_bw_cities-1, tile1) {
+//  square_iterate(ptile, Game.game.rgame.min_dist_bw_cities-1, tile1) {
 //    if (citymap_is_reserved(tile1)) {
 //      return;
 //    }
-//  } square_iterate_end;
+//  }
 //
 //  if (enemies_at(punit, ptile)) {
 //    return;
 //  }
 //
 //  if (pcity && (pcity.size + unit_pop_value(punit.type)
-//		> game.add_to_size_limit)) {
+//		> Game.game.add_to_size_limit)) {
 //    /* Can't exceed population limit. */
 //    return;
 //  }
@@ -476,7 +476,7 @@ public class Aisettler{
 //    int turns;
 //    tile ptile = pos.tile;
 //
-//    if (is_ocean(ptile.terrain)) {
+//    if (Terrain_H.is_ocean(ptile.terrain)) {
 //      continue; /* This can happen if there is a ferry near shore. */
 //    }
 //    if (boat_cost == 0
@@ -485,7 +485,7 @@ public class Aisettler{
 //       * likelihood go away next turn, or even in a few nanoseconds. */
 //      continue;
 //    }
-//    if (game.borders > 0
+//    if (Game.game.borders > 0
 //        && ptile.owner != null
 //        && ptile.owner != pplayer
 //        && pplayers_in_peace(ptile.owner, pplayer)) {
@@ -523,7 +523,7 @@ public class Aisettler{
 //     * further step away. */
 //    if (best.result > RESULT_IS_ENOUGH
 //        && turns > parameter.move_rate /* sic -- yeah what an explanation! */
-//        && best_turn < turns /*+ game.rgame.min_dist_bw_cities*/) {
+//        && best_turn < turns /*+ Game.game.rgame.min_dist_bw_cities*/) {
 //      break;
 //    }
 //  } pf_iterator_end;
@@ -582,11 +582,11 @@ public class Aisettler{
 //      int boattype
 //        = best_role_unit_for_player(pplayer, L_FERRYBOAT);
 //
-//      if (boattype == U_LAST) {
+//      if (boattype == unittype.U_LAST) {
 //        /* Sea travel not possible yet. Bump tech want for ferries. */
-//        int boattype = get_role_unit(L_FERRYBOAT, 0);
-//        if (boattype != U_LAST) {
-//          Tech_Type_id tech_req = unit_types[boattype].tech_requirement;
+//        int boattype = Unittype_P.get_role_unit(L_FERRYBOAT, 0);
+//        if (boattype != unittype.U_LAST) {
+//          Tech_Type_id tech_req = Unittype_P.unit_types[boattype].tech_requirement;
 //
 //          pplayer.ai.tech_want[tech_req] += FERRY_TECH_WANT;
 //          return;

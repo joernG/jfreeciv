@@ -36,7 +36,7 @@ public class Dialogs{
 //#include "combat.h"
 //#include "fcintl.h"
 //#include "log.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "Map.map.h"
 //
@@ -151,8 +151,8 @@ public class Dialogs{
 //
 //
 
-//  This function is called when the client disconnects or the game is
-//  over.  It should close all dialog windows for that game.
+//  This function is called when the client disconnects or the Game.game is
+//  over.  It should close all dialog windows for that Game.game.
 //***********************************************************************/
 //void popdown_all_game_dialogs()
 //{
@@ -417,27 +417,27 @@ public class Dialogs{
 //    
 //  pUnit_Upgrade_Dlg = MALLOC(sizeof(struct SMALL_DLG));
 //
-//  ut2 = can_upgrade_unittype(game.player_ptr, ut1);
+//  ut2 = can_upgrade_unittype(Game.game.player_ptr, ut1);
 //  
 //  if (ut2 != -1) {
-//    value = unit_upgrade_price(game.player_ptr, ut1, ut2);
+//    value = unit_upgrade_price(Game.game.player_ptr, ut1, ut2);
 //  
-//    if (game.player_ptr.economic.gold >= value) {
+//    if (Game.game.player_ptr.economic.gold >= value) {
 //      cBuf = util.my_snprintf(
 //    	      ("Upgrade %s to %s for %d gold?\n" +
 //                "Treasury contains %d gold."),
-//	  unit_types[ut1].name, unit_types[ut2].name,
-//	  value, game.player_ptr.economic.gold);
+//	  Unittype_P.unit_types[ut1].name, Unittype_P.unit_types[ut2].name,
+//	  value, Game.game.player_ptr.economic.gold);
 //    } else {
 //      cBuf = util.my_snprintf(
 //          ("Upgrading %s to %s costs %d gold.\n" +
 //            "Treasury contains %d gold."),
-//          unit_types[ut1].name, unit_types[ut2].name,
-//          value, game.player_ptr.economic.gold);
+//          Unittype_P.unit_types[ut1].name, Unittype_P.unit_types[ut2].name,
+//          value, Game.game.player_ptr.economic.gold);
 //    }
 //  } else {
 //    cBuf = util.my_snprintf(
-//        "Sorry: cannot upgrade %s.", unit_types[ut1].name);
+//        "Sorry: cannot upgrade %s.", Unittype_P.unit_types[ut1].name);
 //  }
 //  
 //  hh = WINDOW_TILE_HIGH + 1;
@@ -480,7 +480,7 @@ public class Dialogs{
 //  
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //  
-//  if ((ut2 != -1) && (game.player_ptr.economic.gold >= value)) {
+//  if ((ut2 != -1) && (Game.game.player_ptr.economic.gold >= value)) {
 //    pBuf = create_themeicon_button_from_chars(pTheme.OK_Icon, pWindow.dst,
 //					      "Upgrade", 12, 0);
 //        
@@ -521,7 +521,7 @@ public class Dialogs{
 //  pBuf = pWindow.prev;
 //  pBuf.size.y = pWindow.size.y + pWindow.size.h - pBuf.size.h - 10;
 //  
-//  if ((ut2 != -1) && (game.player_ptr.economic.gold >= value)) {
+//  if ((ut2 != -1) && (Game.game.player_ptr.economic.gold >= value)) {
 //    /* sell button */
 //    pBuf = pBuf.prev;
 //    pBuf.size.x = pWindow.size.x + (ww - (2 * pBuf.size.w + 10)) / 2;
@@ -586,7 +586,7 @@ public class Dialogs{
 //**************************************************************************/
 //static int unit_select_callback( GUI pWidget )
 //{
-//  unit pUnit = player_find_unit_by_id(game.player_ptr,
+//  unit pUnit = player_find_unit_by_id(Game.game.player_ptr,
 //                                   MAX_ID - pWidget.ID);
 //
 //  popdown_unit_select_dialog();
@@ -628,7 +628,7 @@ public class Dialogs{
 //  
 //  public static final int NUM_SEEN = 20;
 //  
-//  n = unit_list_size(&ptile.units);
+//  n = ptile.units.foo_list_size();
 //  
 //  if (!n || pUnit_Select_Dlg) {
 //    return;
@@ -667,7 +667,7 @@ public class Dialogs{
 //    pUnit = unit_list_get(&ptile.units, i);
 //    pUnitType = pUnit.unit_type();
 //        
-//    if(pUnit.owner == game.player_idx) {
+//    if(pUnit.owner == Game.game.player_idx) {
 //      cBuf = util.my_snprintf( "Contact %s (%d / %d) %s(%d,%d,%d) %s",
 //            pUnit.veteran ? "Veteran" : "" ,
 //            pUnit.hp, pUnitType.hp,
@@ -703,7 +703,7 @@ public class Dialogs{
 //    
 //    w = MAX(w, pBuf.size.w);
 //    h += pBuf.size.h;
-//    if(pUnit.owner == game.player_idx) {
+//    if(pUnit.owner == Game.game.player_idx) {
 //      set_wstate(pBuf, FC_WS_NORMAL);
 //    }
 //    
@@ -913,7 +913,7 @@ public class Dialogs{
 //		map_get_tile_fpt_text(x, y),
 //    		sdl_get_tile_defense_info_text(pTile));
 //        
-//    if (Map.tile_has_special(pTile, S_HUT))
+//    if (Map.tile_has_special(pTile, Terrain_H.S_HUT))
 //    { 
 //      sz_strlcat(cBuf, "\nMinor Tribe Village");
 //    }
@@ -926,14 +926,14 @@ public class Dialogs{
 //      }
 //    }
 //    
-//    if (game.borders > 0 && !pTile.city) {
-//      player_diplstate ds = game.player_ptr.diplstates;
+//    if (Game.game.borders > 0 && !pTile.city) {
+//      player_diplstate ds = Game.game.player_ptr.diplstates;
 //      final String diplo_nation_plural_adjectives[DS_LAST] =
 //    			{Q"?nation:Neutral", Q"?nation:Hostile",
 //     			"" /* unused, DS_CEASEFIRE*/, Q"?nation:Peaceful",
 //			  Q"?nation:Friendly", Q"?nation:Mysterious"};
 //			  
-//      if (pTile.owner == game.player_ptr){
+//      if (pTile.owner == Game.game.player_ptr){
 //        cat_snprintf(cBuf, sizeof(cBuf), "\nOur Territory");
 //      } else if (pTile.owner) {
 //        if (ds[pTile.owner.player_no].type == DS_CEASEFIRE){
@@ -956,8 +956,8 @@ public class Dialogs{
 //    if (pTile.city) {
 //      /* Look at city owner, not tile owner (the two should be the same, if
 //       * borders are in use). */
-//      player pOwner = city_owner(pTile.city);
-//      player_diplstate ds = game.player_ptr.diplstates;
+//      player pOwner = City.city_owner(pTile.city);
+//      player_diplstate ds = Game.game.player_ptr.diplstates;
 //      final String diplo_city_adjectives[DS_LAST] =
 //    		{Q"?city:Neutral", Q"?city:Hostile",
 //     		"" /*unused, DS_CEASEFIRE */, Q"?city:Peaceful",
@@ -967,7 +967,7 @@ public class Dialogs{
 //      if (city_got_citywalls(pTile.city)) {
 //        cat_snprintf(cBuf, sizeof(cBuf), " with City Walls");
 //      }		  
-//      if (pOwner && pOwner != game.player_ptr) {
+//      if (pOwner && pOwner != Game.game.player_ptr) {
 //	if (ds[pOwner.player_no].type == DS_CEASEFIRE) {
 //	  int turns = ds[pOwner.player_no].turns_left;
 //
@@ -1180,7 +1180,7 @@ public class Dialogs{
 //  if (pUnit) {
 //    tile ptile = map_get_tile(pUnit.x, pUnit.y);
 //    for (unit punit : ptile.units.data) {
-//      if (game.player_idx == punit.owner && (punit.activity == unit_activity.ACTIVITY_IDLE)
+//      if (Game.game.player_idx == punit.owner && (punit.activity == unit_activity.ACTIVITY_IDLE)
 //	 && !punit.ai.control && can_unit_do_activity(punit, ACTIVITY_SENTRY)) {
 //        request_new_unit_activity(punit, ACTIVITY_SENTRY);
 //      }
@@ -1275,7 +1275,7 @@ public class Dialogs{
 //  
 //  pTile = map_get_tile(x, y);
 //  pCity = pTile.city;
-//  n = unit_list_size(&pTile.units);
+//  n = pTile.units.foo_list_size();
 //  pFocus_Unit = get_unit_in_focus();
 //  
 //  if (!n && !pCity && !pFocus_Unit)
@@ -1337,7 +1337,7 @@ public class Dialogs{
 //  h += pBuf.size.h;
 //
 //  /* ---------- */  
-//  if (pCity && pCity.owner == game.player_idx)
+//  if (pCity && pCity.owner == Game.game.player_idx)
 //  {
 //    /* separator */
 //    pBuf = create_iconlabel(null, pWindow.dst, null, WF_FREE_THEME);
@@ -1443,12 +1443,12 @@ public class Dialogs{
 //#endif
 //
 //    if(can_unit_paradrop(pFocus_Unit) && pTile.known &&
-//      !(is_ocean(pTile.terrain) && is_ground_unit(pFocus_Unit)) &&
-//      !(is_sailing_unit(pFocus_Unit) && (!is_ocean(pTile.terrain) || !pCity)) &&
-//      !(((pCity && pplayers_non_attack(game.player_ptr, city_owner(pCity))) 
-//      || is_non_attack_unit_tile(pTile, game.player_ptr))) &&
+//      !(Terrain_H.is_ocean(pTile.terrain) && is_ground_unit(pFocus_Unit)) &&
+//      !(is_sailing_unit(pFocus_Unit) && (!Terrain_H.is_ocean(pTile.terrain) || !pCity)) &&
+//      !(((pCity && pplayers_non_attack(Game.game.player_ptr, City.city_owner(pCity))) 
+//      || is_non_attack_unit_tile(pTile, Game.game.player_ptr))) &&
 //      (pFocus_Unit.unit_type().paratroopers_range >=
-//	    real_map_distance(pFocus_Unit.x, pFocus_Unit.y, x, y))) {
+//	    Map.real_map_distance(pFocus_Unit.x, pFocus_Unit.y, x, y))) {
 //	      
 //      create_active_iconlabel(pBuf, pWindow.dst, pStr, "Paradrop here",
 //						    paradrop_here_callback);
@@ -1496,7 +1496,7 @@ public class Dialogs{
 //	  continue;
 //	}
 //        pUnitType = pUnit.unit_type();
-//        if(pUnit.owner == game.player_idx) {
+//        if(pUnit.owner == Game.game.player_idx) {
 //          cBuf = util.my_snprintf(
 //            "Activate %s (%d / %d) %s (%d,%d,%d) %s",
 //            pUnit.veteran ? "Veteran" : "" ,
@@ -1610,8 +1610,8 @@ public class Dialogs{
 //      pUnit = unit_list_get(&pTile.units, 0);
 //      pUnitType = pUnit.unit_type();
 //      if (pUnit != pFocus_Unit) {
-//        if ((pCity && pCity.owner == game.player_idx) ||
-//	   (pUnit.owner == game.player_idx))
+//        if ((pCity && pCity.owner == Game.game.player_idx) ||
+//	   (pUnit.owner == Game.game.player_idx))
 //        {
 //          cBuf = util.my_snprintf(
 //            "Activate %s (%d / %d) %s (%d,%d,%d) %s",
@@ -2106,7 +2106,7 @@ public class Dialogs{
 //  
 //  if(pVcity)
 //  {
-//    pVictim = city_owner(pVcity);
+//    pVictim = City.city_owner(pVcity);
 //  }
 //  
 //  if (pDiplomat_Dlg || !pVictim) {
@@ -2115,11 +2115,11 @@ public class Dialogs{
 //  }
 //  
 //  count = 0;
-//  for(i=A_FIRST; i<game.num_tech_types; i++) {
-//    if (tech_is_available(game.player_ptr, i)
+//  for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
+//    if (tech_is_available(Game.game.player_ptr, i)
 //      && get_invention(pVictim, i)==TECH_KNOWN
-//      && (get_invention(game.player_ptr, i)==TECH_UNKNOWN
-//      || get_invention(game.player_ptr, i)==TECH_REACHABLE)) {
+//      && (get_invention(Game.game.player_ptr, i)==TECH_UNKNOWN
+//      || get_invention(Game.game.player_ptr, i)==TECH_REACHABLE)) {
 //	count++;
 //      }
 //  }
@@ -2130,7 +2130,7 @@ public class Dialogs{
 //    int target_id = pVcity.id;
 //
 //    remove_locked_buffer();
-//    request_diplomat_action(DIPLOMAT_STEAL, id, target_id, game.num_tech_types);
+//    request_diplomat_action(DIPLOMAT_STEAL, id, target_id, Game.game.num_tech_types);
 //    return -1;
 //  }
 //    
@@ -2195,11 +2195,11 @@ public class Dialogs{
 //  
 //  count = 0;
 //  h = col * max_row;
-//  for(i=A_FIRST; i<game.num_tech_types; i++) {
-//    if (tech_is_available(game.player_ptr, i)
+//  for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
+//    if (tech_is_available(Game.game.player_ptr, i)
 //      && get_invention(pVictim, i)==TECH_KNOWN
-//      && (get_invention(game.player_ptr, i)==TECH_UNKNOWN
-//      || get_invention(game.player_ptr, i)==TECH_REACHABLE)) {
+//      && (get_invention(Game.game.player_ptr, i)==TECH_UNKNOWN
+//      || get_invention(Game.game.player_ptr, i)==TECH_REACHABLE)) {
 //    
 //      count++;  
 //      copy_chars_to_string16(pStr, advances[i].name);
@@ -2230,7 +2230,7 @@ public class Dialogs{
 //  pBuf.action = spy_steal_callback;
 //  pBuf.data.cont = pCont;
 //    
-//  add_to_gui_list(MAX_ID - game.num_tech_types, pBuf);
+//  add_to_gui_list(MAX_ID - Game.game.num_tech_types, pBuf);
 //  count++;
 //  
 //  /* --------------------------------------------------------- */
@@ -3024,10 +3024,10 @@ public class Dialogs{
 //    w = MAX(w , pBuf.size.w);
 //    h += pBuf.size.h;
 //    
-//  } else if (game.player_ptr.economic.gold >= pCity.incite_revolt_cost) {
+//  } else if (Game.game.player_ptr.economic.gold >= pCity.incite_revolt_cost) {
 //    cBuf = util.my_snprintf(
 //		"Incite a revolt for %d gold?\nTreasury contains %d gold.", 
-//		pCity.incite_revolt_cost, game.player_ptr.economic.gold);
+//		pCity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //    
 //    create_active_iconlabel(pBuf, pWindow.dst, pStr, cBuf, null);
 //        
@@ -3076,7 +3076,7 @@ public class Dialogs{
 //    cBuf = util.my_snprintf(
 //		("Inciting a revolt costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
-//		pCity.incite_revolt_cost, game.player_ptr.economic.gold);
+//		pCity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //    
 //    create_active_iconlabel(pBuf, pWindow.dst, pStr, cBuf, null);
 //        
@@ -3220,10 +3220,10 @@ public class Dialogs{
 //  add_to_gui_list(ID_BRIBE_DLG_WINDOW, pWindow);
 //  pBribe_Dlg.pEndWidgetList = pWindow;
 //  
-//  if(game.player_ptr.economic.gold >= pUnit.bribe_cost) {
+//  if(Game.game.player_ptr.economic.gold >= pUnit.bribe_cost) {
 //    cBuf = util.my_snprintf(
 //		"Bribe unit for %d gold?\nTreasury contains %d gold.", 
-//		pUnit.bribe_cost, game.player_ptr.economic.gold);
+//		pUnit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    
 //    create_active_iconlabel(pBuf, pWindow.dst, pStr, cBuf, null);
 //  
@@ -3270,7 +3270,7 @@ public class Dialogs{
 //    cBuf = util.my_snprintf(
 //		("Bribing the unit costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
-//		pUnit.bribe_cost, game.player_ptr.economic.gold);
+//		pUnit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    
 //    create_active_iconlabel(pBuf, pWindow.dst, pStr, cBuf, null);
 //  
@@ -4048,7 +4048,7 @@ public class Dialogs{
 //  leader leaders = get_nation_leaders(nation, &dim);
 //  
 //    
-//  pSetup.selected_leader = myrand(dim);
+//  pSetup.selected_leader = Rand.myrand(dim);
 //  copy_chars_to_string16(pSetup.pName_Edit.string16,
 //  				leaders[pSetup.selected_leader].name);
 //  
@@ -4127,7 +4127,7 @@ public class Dialogs{
 //
 //  /* fill list */
 //  pText_Class = null;
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    
 //    nation_type pNation = get_nation_by_idx(i);
 //    
@@ -4196,7 +4196,7 @@ public class Dialogs{
 //  pNationDlg.pBeginActiveWidgetList = pWidget;
 //  pNationDlg.pBeginWidgetList = pWidget;
 //    
-//  if(game.playable_nation_count > TARGETS_ROW * TARGETS_COL) {
+//  if(Game.game.playable_nation_count > TARGETS_ROW * TARGETS_COL) {
 //      pNationDlg.pActiveWidgetList = pNationDlg.pEndActiveWidgetList;
 //      create_vertical_scrollbar(pNationDlg,
 //		    		TARGETS_COL, TARGETS_ROW, true, true);
@@ -4206,7 +4206,7 @@ public class Dialogs{
 //    
 //  /* nation name */
 //  
-//  pSetup.nation = myrand(game.playable_nation_count);
+//  pSetup.nation = Rand.myrand(Game.game.playable_nation_count);
 //  pSetup.nation_city_style = get_nation_city_style(pSetup.nation);
 //  
 //  copy_chars_to_string16(pStr, get_nation_by_idx(pSetup.nation).name_plural);
@@ -4267,7 +4267,7 @@ public class Dialogs{
 //
 //  /* ---------------------------------------------------------- */
 //  i = 0;
-//  while (i < game.styles_count) {
+//  while (i < Game.game.styles_count) {
 //    if (city_styles[i].techreq == A_NONE) {
 //      pWidget = create_icon2(GET_SURF(sprites.city.tile[i][2]),
 //			pWindow.dst, WF_DRAW_THEME_TRANSPARENT);
@@ -4286,7 +4286,7 @@ public class Dialogs{
 //
 //  len += 3;
 //
-//  for (; (i < game.styles_count && i < 64); i++) {
+//  for (; (i < Game.game.styles_count && i < 64); i++) {
 //    if (city_styles[i].techreq == A_NONE) {
 //      pWidget = create_icon2(GET_SURF(sprites.city.tile[i][2]),
 //				pWindow.dst, WF_DRAW_THEME_TRANSPARENT);
@@ -4450,7 +4450,7 @@ public class Dialogs{
 //  boolean change = false;
 //  GUI pNat;
 //
-//  for (nation = 0; nation < game.playable_nation_count; nation++) {
+//  for (nation = 0; nation < Game.game.playable_nation_count; nation++) {
 //    if (nations_used[nation]) {
 //      util.freelog(Log.LOG_DEBUG,"  [%d]: %d = %s", nation, nations_used[nation],
 //	      get_nation_name(nation));
@@ -4466,7 +4466,7 @@ public class Dialogs{
 //  
 //  if (change) {
 //    do {
-//      pSetup.nation = myrand(game.playable_nation_count);
+//      pSetup.nation = Rand.myrand(Game.game.playable_nation_count);
 //      pNat = get_widget_pointer_form_main_list(MAX_ID - pSetup.nation);
 //    } while(get_wstate(pNat) == FC_WS_DISABLED);
 //    if (get_wstate(pSetup.pName_Edit) == FC_WS_PRESSED) {

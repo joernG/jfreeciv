@@ -15,7 +15,7 @@ import common.unit.unit;
 public class Player_P{
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "idex.h"
 //#include "improvement.h"
@@ -40,7 +40,7 @@ public class Player_P{
 //***************************************************************/
 //boolean pplayer_can_ally(player p1, player p2)
 //{
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    enum diplstate_type ds = pplayer_get_diplstate(p1, pplayer).type;
 //    if (pplayer != p1
 //        && pplayer != p2
@@ -76,19 +76,19 @@ public class Player_P{
 //}
 //
 ///***************************************************************
-//In the server you must use server_player_init
+//In the server you must use Plrhand.server_player_init
 //***************************************************************/
 //void player_init(player plr)
 //{
 //  int i;
 //
-//  plr.player_no=plr-game.players;
+//  plr.player_no=plr-Game.game.players;
 //
 //  plr.name = ANON_PLAYER_NAME;
-//  plr.username = ANON_USER_NAME;
+//  plr.username = Player_H.ANON_USER_NAME;
 //  plr.is_male = true;
-//  plr.government=game.default_government;
-//  plr.target_government = game.default_government;
+//  plr.government=Game.game.default_government;
+//  plr.target_government = Game.game.default_government;
 //  plr.nation = NO_NATION_SELECTED;
 //  plr.team = TEAM_NONE;
 //  plr.is_started = false;
@@ -105,7 +105,7 @@ public class Player_P{
 //  plr.is_dying = false;
 //  plr.embassy=0;
 //  plr.reputation=GAME_DEFAULT_REPUTATION;
-//  for(i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//  for(i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //    plr.diplstates[i].type = diplstate_type.DS_NO_CONTACT;
 //    plr.diplstates[i].has_reason_to_cancel = 0;
 //    plr.diplstates[i].contact_turns_left = 0;
@@ -137,10 +137,10 @@ public class Player_P{
 //
 //  if (Map.map.num_continents > 0) {
 //    plr.island_improv = fc_malloc((Map.map.num_continents + 1) * 
-//                                   game.num_impr_types * sizeof(Impr_Status));
+//                                   Game.game.num_impr_types * sizeof(Impr_Status));
 //    for (i = 1; i <= Map.map.num_continents; i++) {
-//      improvement_status_init(&plr.island_improv[i * game.num_impr_types],
-//                              game.num_impr_types);
+//      improvement_status_init(&plr.island_improv[i * Game.game.num_impr_types],
+//                              Game.game.num_impr_types);
 //    }
 //  }
 //
@@ -167,7 +167,7 @@ public class Player_P{
 //***************************************************************/
 //player find_player_by_name(final String name)
 //{
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (mystrcasecmp(name, pplayer.name) == 0) {
 //      return pplayer;
 //    }
@@ -182,7 +182,7 @@ public class Player_P{
 	 * fills *result with characterisation of match/non-match (see shared.[ch])
 	 **************************************************************************/
 	static final String pname_accessor(int i) {
-		return game.players[i].name;
+		return Game.game.players[i].name;
 	}
 
 	/***************************************************************************
@@ -193,7 +193,7 @@ public class Player_P{
 	{
 		int ind;
 
-//		*result = match_prefix(pname_accessor, game.nplayers, MAX_LEN_NAME-1,
+//		*result = match_prefix(pname_accessor, Game.game.nplayers, MAX_LEN_NAME-1,
 //				mystrncasecmp, name, &ind);
 //
 //		if (*result < m_pre_result.M_PRE_AMBIGUOUS) {
@@ -209,7 +209,7 @@ public class Player_P{
 //***************************************************************/
 //player find_player_by_user(final String name)
 //{
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (mystrcasecmp(name, pplayer.username) == 0) {
 //      return pplayer;
 //    }
@@ -260,9 +260,9 @@ public class Player_P{
 		// /* Hiding units may only be seen by adjacent allied units or cities.
 		// */
 		// /* FIXME: shouldn't a check for shared vision be done here? */
-		// adjc_iterate(ptile, ptile1) {
+		// for(tile ptile1: util.adjc_tile_iterate(ptile)) {
 		// city pcity = map_get_city(ptile1);
-		// if (pcity && pplayers_allied(city_owner(pcity), pplayer)) {
+		// if (pcity && pplayers_allied(City.city_owner(pcity), pplayer)) {
 		// return true;
 		// }
 		// for (unit punit2 : ptile1.units.data) {
@@ -270,7 +270,7 @@ public class Player_P{
 		// return true;
 		//		}
 		//		} }
-		//		} adjc_iterate_end;
+		//		}
 
 		return false;
 	}
@@ -308,7 +308,7 @@ public class Player_P{
 //				  city pcity)
 //{
 //  return (can_player_see_city_internals(pplayer, pcity)
-//	  || pplayers_allied(pplayer, city_owner(pcity)));
+//	  || pplayers_allied(pplayer, City.city_owner(pcity)));
 //}
 //
 ///****************************************************************************
@@ -319,7 +319,7 @@ public class Player_P{
 //boolean can_player_see_city_internals(player pplayer,
 //				   city pcity)
 //{
-//  return (pplayer == city_owner(pcity));
+//  return (pplayer == City.city_owner(pcity));
 //}
 //
 ///***************************************************************
@@ -505,7 +505,7 @@ public class Player_P{
 //boolean ai_fuzzy(player pplayer, boolean normal_decision)
 //{
 //  if (!pplayer.ai.control || pplayer.ai.fuzzy == 0) return normal_decision;
-//  if (myrand(1000) >= pplayer.ai.fuzzy) return normal_decision;
+//  if (Rand.myrand(1000) >= pplayer.ai.fuzzy) return normal_decision;
 //  return !normal_decision;
 //}
 //
@@ -741,6 +741,6 @@ public class Player_P{
 //  return (name.length() > 0
 //	  && !Character.isDigit(name[0])
 //	  && util.isLetter(name)
-//	  && mystrcasecmp(name, ANON_USER_NAME) != 0);
+//	  && mystrcasecmp(name, Player_H.ANON_USER_NAME) != 0);
 //}
 }

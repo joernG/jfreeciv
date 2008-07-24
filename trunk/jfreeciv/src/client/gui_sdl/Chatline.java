@@ -338,7 +338,7 @@ public class Chatline{
 //    
 //      hide_scrollbar(pConnDlg.pUsers_Dlg.pScroll);
 //      create = true;
-//      for (conn pconn : game.est_connections.data) {
+//      for (conn pconn : Game.game.est_connections.data) {
 //      
 //        copy_chars_to_string16(pStr, pconn.username);
 //      
@@ -455,7 +455,7 @@ public class Chatline{
 //  
 //  pConnDlg.pChat_Dlg = MALLOC(sizeof(struct ADVANCED_DLG));
 //    
-//  n = conn_list_size(&game.est_connections);
+//  n = Game.game.est_connections.foo_list_size();
 //  
 //  {  
 //    char cBuf[256];   

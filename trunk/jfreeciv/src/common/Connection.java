@@ -524,12 +524,12 @@ public class Connection{
 //	}
 
 	/***************************************************************
-	Find connection by exact user name, from game.all_connections,
+	Find connection by exact user name, from Game.game.all_connections,
 	case-insensitve.  Returns null if not found.
 	 ***************************************************************/
 	public static Connection find_conn_by_user(final String user_name)
 	{
-		for (Connection pconn : game.all_connections.data) {
+		for (Connection pconn : Game.game.all_connections.data) {
 			if (user_name.equals(pconn.username)) {
 				return pconn;
 			}
@@ -545,7 +545,7 @@ public class Connection{
 //	match/non-match (see shared.[ch])
 //	***************************************************************/
 //	static final String connection_accessor(int i) {
-//	return conn_list_get(&game.all_connections, i).username;
+//	return conn_list_get(&Game.game.all_connections, i).username;
 //	}
 
 	public static Connection find_conn_by_user_prefix(final String user_name,
@@ -554,25 +554,25 @@ public class Connection{
 		int ind  = 0;
 
 //		result = match_prefix(connection_accessor,
-//				game.all_connections.foo_list_size(),
+//				Game.game.all_connections.foo_list_size(),
 //				MAX_LEN_NAME-1, mystrncasecmp, user_name, &ind);
 
 		if (result.ordinal() < m_pre_result.M_PRE_AMBIGUOUS.ordinal()) {
-			return game.all_connections.foo_list_get(ind);
+			return Game.game.all_connections.foo_list_get(ind);
 		} else {
 			return null;
 		}
 	}
 
 //	/***************************************************************
-//	Find connection by id, from game.all_connections.
+//	Find connection by id, from Game.game.all_connections.
 //	Returns null if not found.
 //	Number of connections will always be relatively small given
 //	current implementation, so linear search should be fine.
 //	***************************************************************/
 //	connection find_conn_by_id(int id)
 //	{
-//	for (conn pconn : game.all_connections.data) {
+//	for (conn pconn : Game.game.all_connections.data) {
 //	if (pconn.id == id) {
 //	return pconn;
 //	}
@@ -659,9 +659,9 @@ public class Connection{
 		// timer_list_unlink_all(pconn.server.ping_timers);
 		//
 		// /* safe to do these even if not in lists: */
-		// conn_list_unlink(&game.all_connections, pconn);
-		// conn_list_unlink(&game.est_connections, pconn);
-		// conn_list_unlink(&game.game_connections, pconn);
+		// conn_list_unlink(&Game.game.all_connections, pconn);
+		// conn_list_unlink(&Game.game.est_connections, pconn);
+		// conn_list_unlink(&Game.game.game_connections, pconn);
 		//
 		// pconn.player = null;
 		// pconn.access_level = ALLOW_NONE;

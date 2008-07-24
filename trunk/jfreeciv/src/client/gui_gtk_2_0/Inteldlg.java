@@ -24,7 +24,7 @@ public class Inteldlg{
 //#include <gtk/gtk.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "player.h"
@@ -310,7 +310,7 @@ public class Inteldlg{
 //      diplstates[i] = it;
 //    }
 //
-//    for(player other: game.players){
+//    for(player other: Game.game.players){
 //      final player_diplstate state;
 //      GtkTreeIter it;
 //      GValue v = { 0, };
@@ -330,14 +330,14 @@ public class Inteldlg{
 //    /* techs tab. */
 //    gtk_list_store_clear(pdialog.techs);
 //
-//    for(i=A_FIRST; i<game.num_tech_types; i++)
+//    for(i=A_FIRST; i<Game.game.num_tech_types; i++)
 //      if(get_invention(p, i)==TECH_KNOWN) {
 //	GtkTreeIter it;
 //
 //	gtk_list_store_append(pdialog.techs, &it);
 //
 //	gtk_list_store_set(pdialog.techs, &it,
-//			   0, (get_invention(game.player_ptr, i)!=TECH_KNOWN),
+//			   0, (get_invention(Game.game.player_ptr, i)!=TECH_KNOWN),
 //			   1, get_tech_name(p, i),
 //			   -1);
 //      }

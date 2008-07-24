@@ -36,7 +36,7 @@ public class Diplodlg{
 //#include <X11/Xaw/Viewport.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "map.h"
 //#include "mem.h"
@@ -223,7 +223,7 @@ public class Diplodlg{
 //{
 //  Diplomacy_dialog pdialog = find_diplomacy_dialog(other_player_id);
 //
-//  if (game.player_ptr.ai.control) {
+//  if (Game.game.player_ptr.ai.control) {
 //    return;			/* Don't show if we are AI controlled. */
 //  }
 //
@@ -231,7 +231,7 @@ public class Diplodlg{
 //    Position x, y;
 //    Dimension width, height;
 //
-//    pdialog = create_diplomacy_dialog(game.player_ptr,
+//    pdialog = create_diplomacy_dialog(Game.game.player_ptr,
 //				      get_player(other_player_id));
 //    XtVaGetValues(toplevel, XtNwidth, &width, XtNheight, &height, null);
 //    XtTranslateCoords(toplevel, (Position) width / 10,
@@ -251,7 +251,7 @@ public class Diplodlg{
 //{
 //  int i, flag;
 //  
-//  for(i=A_FIRST, flag=0; i<game.num_tech_types; i++) {
+//  for(i=A_FIRST, flag=0; i<Game.game.num_tech_types; i++) {
 //    if (get_invention(plr0, i) == TECH_KNOWN
 //        && (get_invention(plr1, i) == TECH_UNKNOWN
 //	    || get_invention(plr1, i) == TECH_REACHABLE)
@@ -279,7 +279,7 @@ public class Diplodlg{
 //static int fill_diplomacy_city_menu(Widget popupmenu, 
 //				    player plr0, player plr1)
 //{
-//  int i = 0, j = 0, n = city_list_size(&plr0.cities);
+//  int i = 0, j = 0, n = plr0.cities.foo_list_size();
 //  city *city_list_ptrs;
 //  if (n>0) {
 //    city_list_ptrs = fc_malloc(sizeof(struct city*)*n);
@@ -693,7 +693,7 @@ public class Diplodlg{
 //  int giver = (choice >> 24) & 0xff, dest = (choice >> 16) & 0xff, other;
 //  int tech = choice & 0xffff;
 //
-//  if (giver == game.player_idx) {
+//  if (giver == Game.game.player_idx) {
 //    other = dest;
 //  } else {
 //    other = giver;
@@ -714,7 +714,7 @@ public class Diplodlg{
 //  int giver = (choice >> 24) & 0xff, dest = (choice >> 16) & 0xff, other;
 //  int city = choice & 0xffff;
 //
-//  if (giver == game.player_idx) {
+//  if (giver == Game.game.player_idx) {
 //    other = dest;
 //  } else {
 //    other = giver;
@@ -894,7 +894,7 @@ public class Diplodlg{
 //*****************************************************************/
 //static Diplomacy_dialog find_diplomacy_dialog(int other_player_id)
 //{
-//  player plr0 = game.player_ptr, *plr1 = get_player(other_player_id);
+//  player plr0 = Game.game.player_ptr, *plr1 = get_player(other_player_id);
 //
 //  if (!dialog_list_list_has_been_initialised) {
 //    dialog_list_init(&dialog_list);
@@ -953,7 +953,7 @@ public class Diplodlg{
 //}
 //
 ///*****************************************************************
-//  Close all dialogs, for when client disconnects from game.
+//  Close all dialogs, for when client disconnects from Game.game.
 //*****************************************************************/
 //void close_all_diplomacy_dialogs()
 //{
@@ -961,7 +961,7 @@ public class Diplodlg{
 //    return;
 //  }
 //
-//  while (dialog_list_size(&dialog_list) > 0) {
+//  while (dialog_list.foo_list_size() > 0) {
 //    close_diplomacy_dialog(dialog_list_get(&dialog_list, 0));
 //  }
 //}

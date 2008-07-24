@@ -79,7 +79,7 @@ public class Gamelog{
 //  char buf2[5000];
 //
 //  buf2 = util.my_snprintf( "<%s y=\"%d\" t=\"%d\">%s</%s>", element,
-//              game.year, game.turn, buf, element);
+//              Game.game.year, Game.game.turn, buf, element);
 //  
 //  mystrlcpy(buf, buf2, len);
 //}
@@ -100,7 +100,7 @@ public class Gamelog{
     int
   GAMELOG_MAP
     none
-  GAMELOG_PLAYER
+  EGamelog.GAMELOG_PLAYER
     player 
   GAMELOG_TEAM
     team 
@@ -211,10 +211,10 @@ public class Gamelog{
 //
 //    buf = util.my_snprintf( "<n>%d</n><name>%s</name>" +
 //                "<x>%d</x><y>%d</y><m>%s (%d,%d) founded by the %s</m>",
-//                city_owner(pcity).player_no,
+//                City.city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
-//                Nation.get_nation_name_plural(city_owner(pcity).nation));
+//                Nation.get_nation_name_plural(City.city_owner(pcity).nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "cityf");
 //    break;
 //  case GAMELOG_LOSECITY:
@@ -238,10 +238,10 @@ public class Gamelog{
 //
 //    buf = util.my_snprintf( "<n>%d</n><name>%s</name>" +
 //                "<x>%d</x><y>%d</y><m>%s (%d, %d) disbanded by the %s</m>",
-//                city_owner(pcity).player_no,
+//                City.city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
-//                Nation.get_nation_name_plural(city_owner(pcity).nation));
+//                Nation.get_nation_name_plural(City.city_owner(pcity).nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "cityd");
 //    break;
 //  case GAMELOG_TREATY:
@@ -378,7 +378,7 @@ public class Gamelog{
 //
 //    buf = util.my_snprintf(
 //                "<n>%d</n><name>%s</name>" +
-//                "<m>%s lost a game loss unit and util.died</m>",
+//                "<m>%s lost a Game.game loss unit and util.died</m>",
 //                punit.unit_owner().player_no, unit_name(punit.type),
 //                Nation.get_nation_name_plural(punit.unit_owner().nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "gamel");
@@ -390,11 +390,11 @@ public class Gamelog{
 //    buf = util.my_snprintf(
 //                "<n1>%d</n1><n2>%d</n2><name>%s</name><x>%d</x><y>%d</y>" +
 //                "<m>%s establish an embassy in %s (%s) (%d,%d)</m>",
-//                pplayer.player_no, city_owner(pcity).player_no,
+//                pplayer.player_no, City.city_owner(pcity).player_no,
 //                pcity.name, pcity.tile.x, pcity.tile.y,
 //                Nation.get_nation_name_plural(pplayer.nation),
 //                pcity.name,
-//                Nation.get_nation_name_plural(city_owner(pcity).nation),
+//                Nation.get_nation_name_plural(City.city_owner(pcity).nation),
 //                pcity.tile.x, pcity.tile.y);
 //    gamelog_put_prefix(buf, sizeof(buf), "embassy");
 //    break;
@@ -405,16 +405,16 @@ public class Gamelog{
 //    buf = util.my_snprintf(
 //                "<n>%d</n><city>%s</city><u>%d</u>" +
 //                "<w>%d</w><name>%s</name><m>%s build %s in %s</m>",
-//                city_owner(pcity).player_no, pcity.name,
+//                City.city_owner(pcity).player_no, pcity.name,
 //                pcity.is_building_unit ? 1 : 0,
 //                (!pcity.is_building_unit 
 //                 && is_wonder(pcity.currently_building)) ? 1 : 0,
 //                pcity.is_building_unit ? 
-//                  unit_types[pcity.currently_building].name :
+//                  Unittype_P.unit_types[pcity.currently_building].name :
 //                  get_impr_name_ex(pcity, pcity.currently_building),
-//                Nation.get_nation_name_plural(city_owner(pcity).nation),
+//                Nation.get_nation_name_plural(City.city_owner(pcity).nation),
 //                pcity.is_building_unit ? 
-//                  unit_types[pcity.currently_building].name :
+//                  Unittype_P.unit_types[pcity.currently_building].name :
 //                  get_impr_name_ex(pcity, pcity.currently_building),
 //                pcity.name);
 //    gamelog_put_prefix(buf, sizeof(buf), "build");
@@ -457,13 +457,13 @@ public class Gamelog{
 //      buf = util.my_snprintf( "<n>%d</n><cities>%d</cities>" +
 //                  "<pop>%d</pop><food>%d</food><prod>%d</prod>" +
 //                  "<trade>%d</trade><settlers>%d</settlers><units>%d</units>",
-//                  pplayer.player_no, city_list_size(&pplayer.cities),
+//                  pplayer.player_no, pplayer.cities.foo_list_size(),
 //                  total_player_citizens(pplayer), food, shields, trade, 
-//                  settlers, unit_list_size(&pplayer.units));
+//                  settlers, pplayer.units.foo_list_size());
 //    }
 //    gamelog_put_prefix(buf, sizeof(buf), "info");
 //    break;
-//  case GAMELOG_PLAYER:
+//  case EGamelog.GAMELOG_PLAYER:
 //    pplayer = va_arg(args, player );
 //
 //    buf = util.my_snprintf( "<n>%d</n><u>%s</u><c>%d</c>" +
@@ -480,7 +480,7 @@ public class Gamelog{
 //
 //    buf = util.my_snprintf( "<id>%d</id><name>%s</name>",
 //                                  pteam.id, pteam.name);
-//    for(player aplayer: game.players){
+//    for(player aplayer: Game.game.players){
 //      if (aplayer.team == pteam.id) {
 //        cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //      }
@@ -517,7 +517,7 @@ public class Gamelog{
 //      break;
 //    case GL_ALLIEDWIN:
 //      buf = util.my_snprintf( "<type>%s</type>", endgame_strings[num]);
-//      for(player aplayer: game.players){
+//      for(player aplayer: Game.game.players){
 //        if (aplayer.is_alive) {
 //          cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //        }
@@ -527,7 +527,7 @@ public class Gamelog{
 //    case GL_TEAMWIN:
 //      pteam = va_arg(args, team );
 //      buf = util.my_snprintf( "<type>%s</type>", endgame_strings[num]);
-//      for(player aplayer: game.players){
+//      for(player aplayer: Game.game.players){
 //        if (aplayer.team == pteam.id) {
 //          cat_snprintf(buf, sizeof(buf), "<n>%d</n>", aplayer.player_no);
 //        }
@@ -550,7 +550,7 @@ public class Gamelog{
 //        for (nat_x = 0; nat_x < Map.map.xsize; nat_x++) {
 //          tile ptile = native_pos_to_tile(nat_x, nat_y);
 //
-//          mapline[i++] = is_ocean(map_get_terrain(ptile)) ? ' ' : '.';
+//          mapline[i++] = Terrain_H.is_ocean(ptile.terrain) ? ' ' : '.';
 //        }
 //        mapline[i++] = '\n';
 //      }
@@ -591,16 +591,16 @@ public class Gamelog{
 //}
 //
 ///**************************************************************************
-//  Every time we save the game, we also output to the Gamelog.gamelog the score
+//  Every time we save the Game.game, we also output to the Gamelog.gamelog the score
 //  and status info.
 //**************************************************************************/
 //static void gamelog_status(char *buffer, int len) {
 //
 //  int i, count = 0, highest = -1;
 //  player highest_plr = null;
-//  struct player_score_entry size[game.nplayers], rank[game.nplayers];
+//  struct player_score_entry size[Game.game.nplayers], rank[Game.game.nplayers];
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (!is_barbarian(pplayer)) {
 //      rank[count].value = get_civ_score(pplayer);
 //      rank[count].idx = pplayer.player_no;
@@ -616,7 +616,7 @@ public class Gamelog{
 //
 //  /* Draws and team victories */
 //  count = 0;
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (!is_barbarian(pplayer)) {
 //      if ((BV_ISSET_ANY(Srv_main.srvarg.draw)
 //           && BV_ISSET(Srv_main.srvarg.draw, pplayer.player_no))
@@ -633,7 +633,7 @@ public class Gamelog{
 //
 //  for (i = 0; i < count; i++) {
 //    cat_snprintf(buffer, len, "<plr><no>%d</no><r>%d</r><s>%d</s></plr>",
-//		 game.players[rank[i].idx].player_no,
+//		 Game.game.players[rank[i].idx].player_no,
 //                 rank[i].value, size[rank[i].idx].value);
 //  }
 //}

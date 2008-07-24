@@ -40,7 +40,7 @@ public enum Eunit_flag_id {
 	  F_ADD_TO_CITY,      /* unit can add to city population */
 	  F_FANATIC,          /* Only Fundamentalist government can build
 				 these units */
-	  F_GAMELOSS,         /* Losing this unit means losing the game */
+	  F_GAMELOSS,         /* Losing this unit means losing the Game.game */
 	  F_UNIQUE,           /* A player can only have one unit of this type */
 	  F_UNBRIBABLE,       /* Cannot be bribed */
 	  F_UNDISBANDABLE,    /* Cannot be disbanded, won't easily go away */

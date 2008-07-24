@@ -28,7 +28,7 @@ public class Dialogs{
 //#include <gdk/gdkkeysyms.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "Map.map.h"
 //#include "log.h"
@@ -239,7 +239,7 @@ public class Dialogs{
 //
 //    pcity = map_get_city(ptile);
 //    gtk_widget_set_sensitive(popcity_command,
-//      (pcity && city_owner(pcity) == game.player_ptr));
+//      (pcity && City.city_owner(pcity) == Game.game.player_ptr));
 //  }
 //
 //  g_object_set_data(G_OBJECT(shell), "tile", ptile);
@@ -285,11 +285,11 @@ public class Dialogs{
 //                                 GTK_STOCK_OK, null, null, null);
 //    gtk_window_present(GTK_WINDOW(shell));
 //    return;
-//  } else if (game.player_ptr.economic.gold >= punit.bribe_cost) {
+//  } else if (Game.game.player_ptr.economic.gold >= punit.bribe_cost) {
 //    shell = gtk_message_dialog_new(null, 0,
 //      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO,
 //      "Bribe unit for %d gold?\nTreasury contains %d gold.",
-//      punit.bribe_cost, game.player_ptr.economic.gold);
+//      punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    gtk_window_set_title(GTK_WINDOW(shell), "Bribe Enemy Unit");
 //    setup_dialog(shell, toplevel);
 //  } else {
@@ -297,7 +297,7 @@ public class Dialogs{
 //      0,
 //      GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE,
 //      "Bribing the unit costs %d gold.\nTreasury contains %d gold.",
-//      punit.bribe_cost, game.player_ptr.economic.gold);
+//      punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    gtk_window_set_title(GTK_WINDOW(shell), "Traitors Demand Too Much!");
 //    setup_dialog(shell, toplevel);
 //  }
@@ -485,7 +485,7 @@ public class Dialogs{
 //    GtkTreeIter it;
 //    GValue value = { 0, };
 //
-//    for(i=A_FIRST; i<game.num_tech_types; i++) {
+//    for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
 //      if(get_invention(pvictim, i)==TECH_KNOWN && 
 //	 (get_invention(pplayer, i)==TECH_UNKNOWN || 
 //	  get_invention(pplayer, i)==TECH_REACHABLE)) {
@@ -493,7 +493,7 @@ public class Dialogs{
 //
 //	g_value_init(&value, G_TYPE_STRING);
 //	g_value_set_static_string(&value,
-//				  get_tech_name(game.player_ptr, i));
+//				  get_tech_name(Game.game.player_ptr, i));
 //	gtk_list_store_set_value(store, &it, 0, &value);
 //	g_value_unset(&value);
 //	gtk_list_store_set(store, &it, 1, i, -1);
@@ -506,7 +506,7 @@ public class Dialogs{
 //    g_value_set_static_string(&value, "At Spy's Discretion");
 //    gtk_list_store_set_value(store, &it, 0, &value);
 //    g_value_unset(&value);
-//    gtk_list_store_set(store, &it, 1, game.num_tech_types, -1);
+//    gtk_list_store_set(store, &it, 1, Game.game.num_tech_types, -1);
 //  }
 //
 //  gtk_dialog_set_response_sensitive(GTK_DIALOG(spy_tech_shell),
@@ -662,14 +662,14 @@ public class Dialogs{
 //  player pvictim = null;
 //
 //  if(pvcity)
-//    pvictim = city_owner(pvcity);
+//    pvictim = City.city_owner(pvcity);
 //
 ///* it is concievable that pvcity will not be found, because something
 //has happened to the city during latency.  Therefore we must initialize
 //pvictim to null and account for !pvictim in create_advances_list. -- Syela */
 //  
 //  if(!spy_tech_shell){
-//    create_advances_list(game.player_ptr, pvictim);
+//    create_advances_list(Game.game.player_ptr, pvictim);
 //    gtk_window_present(GTK_WINDOW(spy_tech_shell));
 //  }
 //  gtk_widget_destroy(diplomat_dialog);
@@ -696,7 +696,7 @@ public class Dialogs{
 //void popup_sabotage_dialog(city pcity)
 //{
 //  if(!spy_sabotage_shell){
-//    create_improvements_list(game.player_ptr, pcity);
+//    create_improvements_list(Game.game.player_ptr, pcity);
 //    gtk_window_present(GTK_WINDOW(spy_sabotage_shell));
 //  }
 //}
@@ -739,12 +739,12 @@ public class Dialogs{
 //      pcity.name);
 //    gtk_window_set_title(GTK_WINDOW(shell), "City can't be incited!");
 //  setup_dialog(shell, toplevel);
-//  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
+//  } else if (Game.game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
 //    shell = gtk_message_dialog_new(null,
 //      0,
 //      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO,
 //      "Incite a revolt for %d gold?\nTreasury contains %d gold.",
-//      pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//      pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //    gtk_window_set_title(GTK_WINDOW(shell), "Incite a Revolt!");
 //    setup_dialog(shell, toplevel);
 //  } else {
@@ -752,7 +752,7 @@ public class Dialogs{
 //      0,
 //      GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE,
 //      "Inciting a revolt costs %d gold.\nTreasury contains %d gold.",
-//      pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//      pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //    gtk_window_set_title(GTK_WINDOW(shell), "Traitors Demand Too Much!");
 //    setup_dialog(shell, toplevel);
 //  }
@@ -1024,7 +1024,7 @@ public class Dialogs{
 //{
 //  static GtkWidget *shell = null;
 //
-//  if (game.player_ptr.revolution_finishes == -1) {
+//  if (Game.game.player_ptr.revolution_finishes == -1) {
 //    if (!shell) {
 //      shell = gtk_message_dialog_new(null,
 //	  0,
@@ -1264,7 +1264,7 @@ public class Dialogs{
 //  gtk_tree_model_get_iter(GTK_TREE_MODEL(unit_select_store), &it, path);
 //  gtk_tree_model_get(GTK_TREE_MODEL(unit_select_store), &it, 0, &id, -1);
 // 
-//  if ((punit = player_find_unit_by_id(game.player_ptr, id))) {
+//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, id))) {
 //    set_unit_focus(punit);
 //  }
 //
@@ -1365,7 +1365,7 @@ public class Dialogs{
 //      unit pmyunit = null;
 //
 //      for (unit punit : ptile.units.data) {
-//        if (game.player_idx == punit.owner) {
+//        if (Game.game.player_idx == punit.owner) {
 //          pmyunit = punit;
 //
 //          /* Activate this unit. */
@@ -1390,7 +1390,7 @@ public class Dialogs{
 //  case SELECT_UNIT_SENTRY:
 //    {
 //      for (unit punit : ptile.units.data) {
-//        if (game.player_idx == punit.owner) {
+//        if (Game.game.player_idx == punit.owner) {
 //          if ((punit.activity == unit_activity.ACTIVITY_IDLE) &&
 //              !punit.ai.control &&
 //              can_unit_do_activity(punit, ACTIVITY_SENTRY)) {
@@ -1625,7 +1625,7 @@ public class Dialogs{
 //  gtk_tree_view_append_column(GTK_TREE_VIEW(list), column);
 //
 //  /* Populate nation list store. */
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    nation_type nation;
 //    SPRITE *s;
 //    GdkPixbuf *img;
@@ -1737,7 +1737,7 @@ public class Dialogs{
 //  gtk_table_set_row_spacing(GTK_TABLE(table), 1, 12);
 //
 //  /* Populate city style store. */
-//  for (i = 0; i < game.styles_count; i++) {
+//  for (i = 0; i < Game.game.styles_count; i++) {
 //    GdkPixbuf *img;
 //    SPRITE *s;
 //    int last;
@@ -1819,7 +1819,7 @@ public class Dialogs{
 //    gtk_widget_destroy(races_shell);
 //  }
 //
-//  /* We're probably starting a new game, maybe with a new ruleset.
+//  /* We're probably starting a new Game.game, maybe with a new ruleset.
 //     So we warn the worklist dialog. */
 //  blank_max_unit_size();
 //}
@@ -1885,7 +1885,7 @@ public class Dialogs{
 //  if (unique) {
 //    gtk_entry_set_text(GTK_ENTRY(text), name);
 //  } else {
-//    i = myrand(nleaders);
+//    i = Rand.myrand(nleaders);
 //    gtk_entry_set_text(GTK_ENTRY(text), g_list_nth_data(items, i));
 //  }
 //
@@ -1903,13 +1903,13 @@ public class Dialogs{
 //  model = gtk_tree_view_get_model(GTK_TREE_VIEW(races_nation_list));
 //
 //  /* This has a possibility of infinite loop in case
-//   * game.playable_nation_count < game.nplayers. */
+//   * Game.game.playable_nation_count < Game.game.nplayers. */
 //  while (true) {
 //    GtkTreePath *path;
 //    GtkTreeIter it;
 //    int nation;
 //
-//    nation = myrand(game.playable_nation_count);
+//    nation = Rand.myrand(Game.game.playable_nation_count);
 //
 //    path = gtk_tree_path_new();
 //    gtk_tree_path_append_index(path, nation);
@@ -1997,7 +1997,7 @@ public class Dialogs{
 //      
 //      /* Select city style for chosen nation. */
 //      cs = get_nation_city_style(selected_nation);
-//      for (i = 0, j = 0; i < game.styles_count; i++) {
+//      for (i = 0, j = 0; i < Game.game.styles_count; i++) {
 //        if (city_styles[i].techreq != A_NONE) {
 //	  continue;
 //	}
@@ -2145,8 +2145,8 @@ public class Dialogs{
 //}
 //
 
-//  This function is called when the client disconnects or the game is
-//  over.  It should close all dialog windows for that game.
+//  This function is called when the client disconnects or the Game.game is
+//  over.  It should close all dialog windows for that Game.game.
 //***********************************************************************/
 //void popdown_all_game_dialogs()
 //{

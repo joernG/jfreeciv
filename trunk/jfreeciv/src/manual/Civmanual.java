@@ -35,7 +35,7 @@ public class Civmanual{
 //
 //#include "capability.h"
 //#include "events.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "improvement.h"
 //#include "Map.map.h"
 //#include "player.h"
@@ -152,9 +152,9 @@ public class Civmanual{
 //	  fprintf(doc, "Can only be used in server console. ");
 //	}
 //	if (sset_is_changeable(i)) {
-//	  fprintf(doc, "Can be changed during a game. ");
+//	  fprintf(doc, "Can be changed during a Game.game. ");
 //	} else {
-//	  fprintf(doc, "Can <b>not</b> be changed during a game. ");
+//	  fprintf(doc, "Can <b>not</b> be changed during a Game.game. ");
 //	}
 //	fprintf(doc, "</p>\n\n");
 //	switch (op.type) {

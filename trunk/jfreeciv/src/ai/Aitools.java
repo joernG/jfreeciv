@@ -1,5 +1,9 @@
 package ai;
 
+import common.city.city;
+import common.map.tile;
+import common.player.player;
+
 public class Aitools{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -22,7 +26,7 @@ public class Aitools{
 //
 //#include "city.h"
 //#include "combat.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "Map.map.h"
@@ -169,12 +173,12 @@ public class Aitools{
 //    }
 //  } }
 //  dcity = map_get_city(dest_tile);
-//  if (dcity && HOSTILE_PLAYER(pplayer, ai, city_owner(dcity))) {
+//  if (dcity && HOSTILE_PLAYER(pplayer, ai, City.city_owner(dcity))) {
 //    /* Assume enemy will build another defender, add it's attack strength */
 //    int d_type = ai_choose_defender_versus(dcity, punit.type);
 //    danger += 
 //      unittype_att_rating(d_type, do_make_unit_veteran(dcity, d_type), 
-//                          Unit_H.SINGLE_MOVE, unit_types[d_type].hp);
+//                          Unit_H.SINGLE_MOVE, Unittype_P.unit_types[d_type].hp);
 //  }
 //  danger *= POWER_DIVIDER;
 //
@@ -482,7 +486,7 @@ public class Aitools{
 //  assert(is_tiles_adjacent(punit.tile, ptile));
 //
 //  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
-//  () handle_unit_move_request(punit, ptile, false, false);
+//  Unithand.handle_unit_move_request(punit, ptile, false, false);
 //  alive = (find_unit_by_id(sanity) != null);
 //
 //  if (alive && Map.same_pos(ptile, punit.tile)
@@ -520,7 +524,7 @@ public class Aitools{
 //  }
 //
 //  /* barbarians shouldn't enter huts */
-//  if (is_barbarian(pplayer) && Map.tile_has_special(ptile, S_HUT)) {
+//  if (is_barbarian(pplayer) && Map.tile_has_special(ptile, Terrain_H.S_HUT)) {
 //    return false;
 //  }
 //
@@ -545,7 +549,7 @@ public class Aitools{
 //
 //  /* go */
 //  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
-//  () handle_unit_move_request(punit, ptile, false, true);
+//  Unithand.handle_unit_move_request(punit, ptile, false, true);
 //
 //  /* handle the results */
 //  if (find_unit_by_id(sanity) && Map.same_pos(ptile, punit.tile)) {
@@ -556,22 +560,22 @@ public class Aitools{
 //  }
 //  return false;
 //}
-//
-///**************************************************************************
-//This looks for the nearest city:
-//If (x,y) is the land, it looks for cities only on the same continent
-//unless (everywhere != 0)
-//If (enemy != 0) it looks only for enemy cities
-//If (pplayer != null) it looks for cities known to pplayer
-//**************************************************************************/
-//city dist_nearest_city(player pplayer, tile ptile,
-//                               boolean everywhere, boolean enemy)
-//{ 
-//  city pc=null;
+
+/**************************************************************************
+This looks for the nearest city:
+If (x,y) is the land, it looks for cities only on the same continent
+unless (everywhere != 0)
+If (enemy != 0) it looks only for enemy cities
+If (pplayer != null) it looks for cities known to pplayer
+**************************************************************************/
+public static city dist_nearest_city(player pplayer, tile ptile,
+                               boolean everywhere, boolean enemy)
+{ 
+  city pc=null;
 //  int best_dist = -1;
 //  Continent_id con = map_get_continent(ptile);
 //
-//  for(player pplay: game.players){
+//  for(player pplay: Game.game.players){
 //    /* If "enemy" is set, only consider cities whose owner we're at
 //     * war with. */
 //    if (enemy && pplayer && !pplayers_at_war(pplayer, pplay)) {
@@ -579,24 +583,24 @@ public class Aitools{
 //    }
 //
 //    for (city pcity : pplay.cities.data) {
-//      int city_dist = real_map_distance(ptile, pcity.tile);
+//      int city_dist = Map.real_map_distance(ptile, pcity.tile);
 //
 //      /* Find the closest city known to the player with a matching
 //       * continent. */
 //      if ((best_dist == -1 || city_dist < best_dist)
 //	  && (everywhere || con == 0
 //	      || con == map_get_continent(pcity.tile))
-//	  && (!pplayer || map_is_known(pcity.tile, pplayer))) {
+//	  && (!pplayer || Maphand.map_is_known(pcity.tile, pplayer))) {
 //	best_dist = city_dist;
 //        pc = pcity;
 //      }
 //    } }
 //  }
 //
-//  return(pc);
-//}
-//
-//
+  return(pc);
+}
+
+
 ///**************************************************************************
 //  Calculate the value of the target unit including the other units which
 //  will util.die in a successful attack
@@ -673,10 +677,10 @@ public class Aitools{
 //  if (cur.want > best.want) {
 //    util.freelog(Log.LOG_DEBUG, "Overriding choice (%s, %d) with (%s, %d)",
 //	    (best.type == CT_BUILDING ? 
-//	     get_improvement_name(best.choice) : unit_types[best.choice].name), 
+//	     get_improvement_name(best.choice) : Unittype_P.unit_types[best.choice].name), 
 //	    best.want, 
 //	    (cur.type == CT_BUILDING ? 
-//	     get_improvement_name(cur.choice) : unit_types[cur.choice].name), 
+//	     get_improvement_name(cur.choice) : Unittype_P.unit_types[cur.choice].name), 
 //	    cur.want);
 //    best.choice =cur.choice;
 //    best.want = cur.want;
@@ -691,7 +695,7 @@ public class Aitools{
 //**************************************************************************/
 //static boolean is_building_other_wonder(city pcity)
 //{
-//  player pplayer = city_owner(pcity);
+//  player pplayer = City.city_owner(pcity);
 //
 //  for (city acity : pplayer.cities.data) {
 //    if (pcity != acity
@@ -718,7 +722,7 @@ public class Aitools{
 //  int want=0;
 //  player plr;
 //        
-//  plr = city_owner(pcity);
+//  plr = City.city_owner(pcity);
 //     
 //  /* too bad plr.score isn't kept up to date. */
 //  city_list_iterate(plr.cities, acity)

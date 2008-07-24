@@ -18,7 +18,7 @@ public class Dialogs{
 //#include <config.h>
 //#endif
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //
 //#include "dialogs.h"
@@ -165,8 +165,8 @@ public class Dialogs{
 //}
 //
 ///**************************************************************************
-//  This function is called when the client disconnects or the game is
-//  over.  It should close all dialog windows for that game.
+//  This function is called when the client disconnects or the Game.game is
+//  over.  It should close all dialog windows for that Game.game.
 //**************************************************************************/
 //void popdown_all_game_dialogs()
 //{

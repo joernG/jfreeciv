@@ -28,7 +28,7 @@ public class Plrdlg{
 //
 //#include "diptreaty.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "nation.h"
 //#include "packets.h"
@@ -61,13 +61,13 @@ public class Plrdlg{
 //static GtkWidget *players_sship_command;
 //
 ///* the sortable columns need two indexes */
-//static int listindex_to_playerindex[MAX_NUM_PLAYERS];
-//static int playerindex_to_listindex[MAX_NUM_PLAYERS];
+//static int listindex_to_playerindex[Shared_H.MAX_NUM_PLAYERS];
+//static int playerindex_to_listindex[Shared_H.MAX_NUM_PLAYERS];
 //
 ///* a simple macro that makes an often used finalruct look readable */
 //#define LI_2_PI(no) *(int*)(gtk_clist_get_row_data(GTK_CLIST(players_list), no))
 //
-//static SPRITE *flags[MAX_NUM_PLAYERS];
+//static SPRITE *flags[Shared_H.MAX_NUM_PLAYERS];
 //
 //static void create_players_dialog();
 //static void players_button_callback(GtkWidget *w, gpointer data);
@@ -151,7 +151,7 @@ public class Plrdlg{
 //  GtkWidget *sw;
 //
 //  /* initialises the indexes, necessary for update_players_dialog */
-//  for (i = 0; i < MAX_NUM_PLAYERS; i++) {
+//  for (i = 0; i < Shared_H.MAX_NUM_PLAYERS; i++) {
 //    playerindex_to_listindex[i] = -1;
 //    listindex_to_playerindex[i] = -1;
 //  }
@@ -283,7 +283,7 @@ public class Plrdlg{
 //   * nation and color never change. */
 //  if (update == 0) {
 //    /* the playername */
-//    namebuf = util.my_snprintf( "%-16s", game.players[i].name);
+//    namebuf = util.my_snprintf( "%-16s", Game.game.players[i].name);
 //    row[0] = namebuf;
 //
 //    /* since flag is a pixmap, this can be empty */
@@ -291,28 +291,28 @@ public class Plrdlg{
 //    row[1] = flagbuf;
 //
 //    /* the nation */
-//    row[2] = (char *) Nation.get_nation_name(game.players[i].nation);
+//    row[2] = (char *) Nation.get_nation_name(Game.game.players[i].nation);
 //
 //    /* the nation color, empty since it's a block of color (no text). */
 //    row[3] = colbuf;
 //
 //    /* the team */
-//    if (game.players[i].team != TEAM_NONE) {
-//      row[4] = (char *) team_get_by_id(game.players[i].team).name;
+//    if (Game.game.players[i].team != TEAM_NONE) {
+//      row[4] = (char *) team_get_by_id(Game.game.players[i].team).name;
 //    } else {
 //      row[4] = (char *) "";
 //    }
 //  }
 //
 //  /* text for name, plus AI marker */
-//  aibuf[0] = (game.players[i].ai.control ? '*' : '\0');
+//  aibuf[0] = (Game.game.players[i].ai.control ? '*' : '\0');
 //  aibuf[1] = '\0';
 //
 //  /* text for diplstate type and turns -- not applicable if this is me */
-//  if (i == game.player_idx) {
+//  if (i == Game.game.player_idx) {
 //    strcpy(dsbuf, "-");
 //  } else {
-//    pds = pplayer_get_diplstate(game.player_ptr, get_player(i));
+//    pds = pplayer_get_diplstate(Game.game.player_ptr, get_player(i));
 //    if (pds.type == DS_CEASEFIRE) {
 //      dsbuf = util.my_snprintf( "%s (%d)",
 //		  diplstate_text(pds.type), pds.turns_left);
@@ -322,9 +322,9 @@ public class Plrdlg{
 //  }
 //
 //  /* text for state */
-//  if (game.players[i].is_alive) {
-//    if (game.players[i].is_connected) {
-//      if (game.players[i].turn_done) {
+//  if (Game.game.players[i].is_alive) {
+//    if (Game.game.players[i].is_connected) {
+//      if (Game.game.players[i].turn_done) {
 //	statebuf = String.format( "done");
 //      } else {
 //	statebuf = String.format( "moving");
@@ -337,29 +337,29 @@ public class Plrdlg{
 //  }
 //
 //  /* text for idleness */
-//  if (game.players[i].nturns_idle > 3) {
+//  if (Game.game.players[i].nturns_idle > 3) {
 //    idlebuf = util.my_snprintf(
 //		PL("(idle %d turn)", "(idle %d turns)",
-//		    game.players[i].nturns_idle - 1),
-//		game.players[i].nturns_idle - 1);
+//		    Game.game.players[i].nturns_idle - 1),
+//		Game.game.players[i].nturns_idle - 1);
 //  } else {
 //    idlebuf[0] = '\0';
 //  }
 //
 //  /* text for reputation */
 //  repbuf = util.my_snprintf(
-//	      reputation_text(game.players[i].reputation));
+//	      reputation_text(Game.game.players[i].reputation));
 //
 //  /* assemble the whole lot */
 //  row[5] = aibuf;
-//  row[6] = get_embassy_status(game.player_ptr, &game.players[i]);
+//  row[6] = get_embassy_status(Game.game.player_ptr, &Game.game.players[i]);
 //  row[7] = dsbuf;
-//  row[8] = get_vision_status(game.player_ptr, &game.players[i]);
+//  row[8] = get_vision_status(Game.game.player_ptr, &Game.game.players[i]);
 //  row[9] = repbuf;
 //  row[10] = statebuf;
-//  row[11] = (char *) player_addr_hack(&game.players[i]);	/* Fixme */
+//  row[11] = (char *) player_addr_hack(&Game.game.players[i]);	/* Fixme */
 //  row[12] = idlebuf;
-//  row[13] = get_ping_time_text(&game.players[i]);
+//  row[13] = get_ping_time_text(&Game.game.players[i]);
 //}
 //
 //public static final int MIN_DIMENSION = 5;
@@ -372,7 +372,7 @@ public class Plrdlg{
 //  int start_x, start_y, end_x, end_y, flag_h, flag_w, newflag_h, newflag_w;
 //  SPRITE *flag, *croped, *scaled;
 //
-//  flag = get_nation_by_plr(&game.players[playerindex]).flag_sprite;
+//  flag = get_nation_by_plr(&Game.game.players[playerindex]).flag_sprite;
 //  if (!flag) {
 //    flags[playerindex] = null;
 //    return;
@@ -425,11 +425,11 @@ public class Plrdlg{
 //
 //    gtk_clist_freeze(GTK_CLIST(players_list));
 //
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      int i = pplayer.player_no;
 //
 //      /* skip barbarians */
-//      if (is_barbarian(&game.players[i])) {
+//      if (is_barbarian(&Game.game.players[i])) {
 //	continue;
 //      }
 //      row = playerindex_to_listindex[i];
@@ -466,7 +466,7 @@ public class Plrdlg{
 //      }
 //
 //      /* now add some eye candy ... */
-//      switch (pplayer_get_diplstate(game.player_ptr, get_player(i)).type) {
+//      switch (pplayer_get_diplstate(Game.game.player_ptr, get_player(i)).type) {
 //      case diplstate_type.DS_WAR:
 //	state_col = colors_standard[COLOR_STD_RED];
 //	break;
@@ -507,7 +507,7 @@ public class Plrdlg{
 //void players_list_callback(GtkWidget * w, gint row, gint column)
 //{
 //  int player_index = LI_2_PI(row);
-//  player pplayer = &game.players[player_index];
+//  player pplayer = &Game.game.players[player_index];
 //
 //  if (pplayer.spaceship.state != spaceship_state.SSHIP_NONE)
 //    gtk_widget_set_sensitive(players_sship_command, true);
@@ -515,7 +515,7 @@ public class Plrdlg{
 //    gtk_widget_set_sensitive(players_sship_command, false);
 //
 //  switch (pplayer_get_diplstate
-//	  (game.player_ptr, get_player(player_index)).type) {
+//	  (Game.game.player_ptr, get_player(player_index)).type) {
 //  case diplstate_type.DS_WAR:
 //  case diplstate_type.DS_NO_CONTACT:
 //    gtk_widget_set_sensitive(players_war_command, false);
@@ -523,12 +523,12 @@ public class Plrdlg{
 //  default:
 //    gtk_widget_set_sensitive(players_war_command,
 //			     can_client_issue_orders()
-//			     && game.player_idx != player_index);
+//			     && Game.game.player_idx != player_index);
 //  }
 //
 //  gtk_widget_set_sensitive(players_vision_command,
 //			   can_client_issue_orders()
-//			   && gives_shared_vision(game.player_ptr, pplayer));
+//			   && gives_shared_vision(Game.game.player_ptr, pplayer));
 //
 //  gtk_widget_set_sensitive(players_meet_command,
 //                           can_meet_with_player(pplayer));
@@ -565,7 +565,7 @@ public class Plrdlg{
 //  row = GPOINTER_TO_INT(selection.data);
 //  player_index = LI_2_PI(row);
 //
-//  if (can_meet_with_player(&game.players[player_index])) {
+//  if (can_meet_with_player(&Game.game.players[player_index])) {
 //    dsend_packet_diplomacy_init_meeting_req(&aconnection, player_index);
 //  } else {
 //    append_output_window(("Game: You need an embassy to " +
@@ -621,8 +621,8 @@ public class Plrdlg{
 //  row = GPOINTER_TO_INT(selection.data);
 //  player_index = LI_2_PI(row);
 //
-//  if (can_intel_with_player(&game.players[player_index])) {
-//    popup_intel_dialog(&game.players[player_index]);
+//  if (can_intel_with_player(&Game.game.players[player_index])) {
+//    popup_intel_dialog(&Game.game.players[player_index]);
 //  }
 //}
 //
@@ -641,6 +641,6 @@ public class Plrdlg{
 //  row = GPOINTER_TO_INT(selection.data);
 //  player_index = LI_2_PI(row);
 //
-//  popup_spaceship_dialog(&game.players[player_index]);
+//  popup_spaceship_dialog(&Game.game.players[player_index]);
 //}
 }

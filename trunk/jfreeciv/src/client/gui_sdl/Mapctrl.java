@@ -30,7 +30,7 @@ public class Mapctrl{
 //#include <SDL/SDL.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "map.h"
 //#include "player.h"
 //#include "support.h"
@@ -1880,7 +1880,7 @@ public class Mapctrl{
 //	  popup_advanced_terrain_dialog(col, row);
 //	} else {
 //	  if(((pCity = map_get_tile(col, row).city) != null) &&
-//	    (pCity.owner == game.player_idx)) {
+//	    (pCity.owner == Game.game.player_idx)) {
 //	    if(LCTRL) {
 //	      popup_worklist_editor(pCity, &(pCity.worklist));
 //	    } else {

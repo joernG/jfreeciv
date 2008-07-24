@@ -1,7 +1,7 @@
 package common.game;
 
-import static utility.shared.Shared_H.*;
 import utility.Speclists;
+import utility.shared.Shared_H;
 
 import common.Connection;
 import common.player.player;
@@ -53,10 +53,10 @@ public class civ_game {
 //		  char *startmessage;
 		  public int player_idx;
 //		  struct player *player_ptr;
-		  public player[]  players = new player[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+		  public player[]  players = new player[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS];
 		  public Speclists<Connection> all_connections;        /* including not yet established */
 		  public Speclists<Connection> est_connections;        /* all established client conns */
-		  public Speclists<Connection> game_connections;       /* involved in game; send map etc */
+		  public Speclists<Connection> game_connections;       /* involved in Game.game; send map etc */
 //		  public int global_advances[A_LAST];             /* a counter */
 //		  public int global_wonders[B_LAST];              /* contains city id's */
 //		         /* global_wonders[] may also be (-1), or the id of a city
@@ -144,7 +144,7 @@ public class civ_game {
 //		    public int partisan_req[MAX_NUM_TECH_LIST];       /* all required for uprisings */
 //		  } rtech;
 //
-//		  /* values from game.ruleset */
+//		  /* values from Game.game.ruleset */
 //		  struct {
 //		    struct {
 //		      char name[MAX_LEN_NAME];
@@ -169,7 +169,7 @@ public class civ_game {
 //		    public int tech_leakage;
 //		    public int tech_cost_double_year;
 //
-//		    /* Items given to all players at game start.  Server only. */
+//		    /* Items given to all players at Game.game start.  Server only. */
 //		    public int global_init_techs[MAX_NUM_TECH_LIST];
 //		    public int global_init_buildings[MAX_NUM_BUILDING_LIST];
 //

@@ -193,7 +193,7 @@ public class Mapgen{
 //				int thill, int my_height)
 //{
 //  int higher_than_me = 0;
-//  square_iterate(ptile, 2, tile1) {
+//  for(tile tile1: util.square_tile_iterate(ptile, 2)) {
 //    if (hmap(tile1) > thill) {
 //      return false;
 //    }
@@ -205,7 +205,7 @@ public class Mapgen{
 //	return false;
 //      }
 //    }
-//  } square_iterate_end;
+//  }
 //
 //  if ((thill - hmap_shore_level) * higher_than_me  > 
 //      (my_height - hmap_shore_level) * 4) {
@@ -223,11 +223,11 @@ public class Mapgen{
 //static boolean terrain_is_too_high(tile ptile,
 //				int thill, int my_height)
 //{
-//  square_iterate(ptile, 1, tile1) {
+//  for(tile tile1: util.square_tile_iterate(ptile, 1)) {
 //    if (hmap(tile1) + (hmap_max_level - hmap_mountain_level) / 5 < thill) {
 //      return false;
 //    }
-//  } square_iterate_end;
+//  }
 //  return true;
 //}
 //
@@ -247,12 +247,12 @@ public class Mapgen{
 //  for(tile ptile :  Map.map.tiles){
 //    if (not_placed(ptile) &&
 //	((hmap_mountain_level < hmap(ptile) && 
-//	  (myrand(10) > 5 
+//	  (Rand.myrand(10) > 5 
 //	   || !terrain_is_too_high(ptile, hmap_mountain_level, hmap(ptile))))
 //	 || terrain_is_too_flat(ptile, hmap_mountain_level, hmap(ptile)))) {
 //      /* Randomly place hills and mountains on "high" tiles.  But don't
 //       * put hills near the poles (they're too green). */
-//      if (myrand(100) > 70 || tmap_is(ptile, TT_NHOT)) {
+//      if (Rand.myrand(100) > 70 || tmap_is(ptile, TT_NHOT)) {
 //	map_set_terrain(ptile, T_MOUNTAINS);
 //	map_set_placed(ptile);
 //      } else {
@@ -273,7 +273,7 @@ public class Mapgen{
 //  for(tile ptile :  Map.map.tiles){  
 //    if (tmap_is(ptile, TT_FROZEN)
 //	|| (tmap_is(ptile, TT_COLD)
-//	    && (myrand(10) > 7)
+//	    && (Rand.myrand(10) > 7)
 //	    && is_temperature_type_near(ptile, TT_FROZEN))) { 
 //      map_set_terrain(ptile, T_ARCTIC);
 //    }
@@ -288,12 +288,12 @@ public class Mapgen{
 //  if (!Map.map.separatepoles) {
 //    return true;
 //  }
-//  adjc_iterate(ptile, tile1) {
-//    if (!is_ocean(map_get_terrain(tile1)) && 
+//  for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//    if (!Terrain_H.is_ocean(tile1.terrain) && 
 //        map_get_continent(tile1) != 0) {
 //      return false;
 //    }
-//  } adjc_iterate_end;
+//  }
 //  return true;
 //}
 //
@@ -308,7 +308,7 @@ public class Mapgen{
 //	ok_for_separate_poles(ptile))
 //	||
 //	(tmap_is(ptile, TT_COLD ) &&
-//	 (myrand(10) > 7) &&
+//	 (Rand.myrand(10) > 7) &&
 //	 is_temperature_type_near(ptile, TT_FROZEN) &&
 //	 ok_for_separate_poles(ptile))) {
 //      map_set_terrain(ptile, T_UNKNOWN);
@@ -321,7 +321,7 @@ public class Mapgen{
 //  Recursively generate terrains.
 //**************************************************************************/
 //static void place_terrain(tile ptile, int diff, 
-//                           Terrain_type_id ter, int *to_be_placed,
+//                           int ter, int *to_be_placed,
 //			   wetness_c        wc,
 //			   temperature_type tc,
 //			   miscellaneous_c  mc)
@@ -334,7 +334,7 @@ public class Mapgen{
 //  map_set_placed(ptile);
 //  (*to_be_placed)--;
 //  
-//  cardinal_adjc_iterate(ptile, tile1) {
+//  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    int Delta = abs(map_colatitude(tile1) - map_colatitude(ptile)) / L_UNIT
 //	+ abs(hmap(tile1) - (hmap(ptile))) /  H_UNIT;
 //    if (not_placed(tile1) 
@@ -342,7 +342,7 @@ public class Mapgen{
 //	&& test_wetness(tile1, wc)
 // 	&& test_miscellaneous(tile1, mc)
 //	&& Delta < diff 
-//	&& myrand(10) > 4) {
+//	&& Rand.myrand(10) > 4) {
 //	place_terrain(tile1, diff - 1 - Delta, ter, to_be_placed, wc, tc, mc);
 //    }
 //  } cardinal_adjc_iterate_end;
@@ -360,7 +360,7 @@ public class Mapgen{
 //  } else if (tmap_is(ptile, TT_COLD)) {
 //    map_set_terrain(ptile, T_TUNDRA); 
 //  } else {
-//    if (myrand(100) > 50) {
+//    if (Rand.myrand(100) > 50) {
 //      map_set_terrain(ptile, T_GRASSLAND);
 //    } else {
 //      map_set_terrain(ptile, T_PLAINS);
@@ -475,7 +475,7 @@ public class Mapgen{
 //    return 1;
 //
 //  /* any un-blocked? */
-//  cardinal_adjc_iterate(ptile, tile1) {
+//  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    if (!TEST_BIT(rmap(tile1), RS_BLOCKED))
 //      return 0;
 //  } cardinal_adjc_iterate_end;
@@ -496,8 +496,8 @@ public class Mapgen{
 //*********************************************************************/
 //static int river_test_highlands(tile ptile)
 //{
-//  return (((map_get_terrain(ptile) == T_HILLS) ? 1 : 0) +
-//	  ((map_get_terrain(ptile) == T_MOUNTAINS) ? 2 : 0));
+//  return (((ptile.terrain == T_HILLS) ? 1 : 0) +
+//	  ((ptile.terrain == T_MOUNTAINS) ? 2 : 0));
 //}
 //
 ///*********************************************************************
@@ -530,7 +530,7 @@ public class Mapgen{
 //*********************************************************************/
 //static int river_test_swamp(tile ptile)
 //{
-//  return (map_get_terrain(ptile) != T_SWAMP) ? 1 : 0;
+//  return (ptile.terrain != T_SWAMP) ? 1 : 0;
 //}
 //
 ///*********************************************************************
@@ -559,7 +559,7 @@ public class Mapgen{
 //
 //  rmap(ptile) |= (1u << RS_BLOCKED);
 //
-//  cardinal_adjc_iterate(ptile, tile1) {
+//  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    rmap(tile1) |= (1u << RS_BLOCKED);
 //  } cardinal_adjc_iterate_end;
 //}
@@ -694,7 +694,7 @@ public class Mapgen{
 //    /* We arbitrarily make rivers end at the poles. */
 //    if (count_special_near_tile(ptile, true, true, S_RIVER) > 0
 //	|| count_ocean_near_tile(ptile, true, true) > 0
-//        || (map_get_terrain(ptile) == T_ARCTIC 
+//        || (ptile.terrain == T_ARCTIC 
 //	    && map_colatitude(ptile) < 0.8 * COLD_LEVEL)) { 
 //
 //      util.freelog(Log.LOG_DEBUG,
@@ -761,7 +761,7 @@ public class Mapgen{
 //    /* One or more valid directions: choose randomly. */
 //    util.freelog(Log.LOG_DEBUG, "mapgen.c: Had to let the random number" +
 //	    " generator select a direction for a river.");
-//    direction = myrand(num_valid_directions);
+//    direction = Rand.myrand(num_valid_directions);
 //    util.freelog(Log.LOG_DEBUG, "mapgen.c: direction: %d", direction);
 //
 //    /* Find the direction that the random number generator selected. */
@@ -794,7 +794,7 @@ public class Mapgen{
 //  int desirable_riverlength =
 //    river_pct *
 //      /* The size of the map (poles counted in river_pct). */
-//      map_num_tiles() *
+//      Map.map.map_num_tiles() *
 //      /* Rivers need to be on land only. */
 //      Map.map.landpercent /
 //      /* Adjustment value. Tested by me. Gives no rivers with 'set
@@ -830,10 +830,10 @@ public class Mapgen{
 //     */
 //    if (
 //	/* Don't start a river on ocean. */
-//	!is_ocean(map_get_terrain(ptile))
+//	!Terrain_H.is_ocean(ptile.terrain)
 //
 //	/* Don't start a river on river. */
-//	&& !map_has_special(ptile, S_RIVER)
+//	&& !Map.map_has_special(ptile, S_RIVER)
 //
 //	/* Don't start a river on a tile is surrounded by > 1 river +
 //	   ocean tile. */
@@ -849,22 +849,22 @@ public class Mapgen{
 //
 //	/* Don't start a river on hills unless it is hard to find
 //	   somewhere else to start it. */
-//	&& (map_get_terrain(ptile) != T_HILLS
+//	&& (ptile.terrain != T_HILLS
 //	    || iteration_counter >= RIVERS_MAXTRIES / 10 * 6)
 //
 //	/* Don't start a river on mountains unless it is hard to find
 //	   somewhere else to start it. */
-//	&& (map_get_terrain(ptile) != T_MOUNTAINS
+//	&& (ptile.terrain != T_MOUNTAINS
 //	    || iteration_counter >= RIVERS_MAXTRIES / 10 * 7)
 //
 //	/* Don't start a river on arctic unless it is hard to find
 //	   somewhere else to start it. */
-//	&& (map_get_terrain(ptile) != T_ARCTIC
+//	&& (ptile.terrain != T_ARCTIC
 //	    || iteration_counter >= RIVERS_MAXTRIES / 10 * 8)
 //
 //	/* Don't start a river on desert unless it is hard to find
 //	   somewhere else to start it. */
-//	&& (map_get_terrain(ptile) != T_DESERT
+//	&& (ptile.terrain != T_DESERT
 //	    || iteration_counter >= RIVERS_MAXTRIES / 10 * 9)) {
 //
 //      /* Reset river_map before making a new river. */
@@ -881,9 +881,9 @@ public class Mapgen{
 //      if (make_river(ptile)) {
 //	whole_map_iterate(tile1) {
 //	  if (TEST_BIT(rmap(tile1), RS_RIVER)) {
-//	    Terrain_type_id t = map_get_terrain(tile1);
+//	    int t = tile1.terrain;
 //
-//	    if (!terrain_has_flag(t, TER_CAN_HAVE_RIVER)) {
+//	    if (!Terrain_H.terrain_has_flag(t, TER_CAN_HAVE_RIVER)) {
 //	      /* We have to change the terrain to put a river here. */
 //	      t = get_flag_terrain(TER_CAN_HAVE_RIVER);
 //	      map_set_terrain(tile1, t);
@@ -954,16 +954,16 @@ public class Mapgen{
 //**************************************************************************/
 //static boolean is_tiny_island(tile ptile) 
 //{
-//  Terrain_type_id t = map_get_terrain(ptile);
+//  int t = ptile.terrain;
 //
-//  if (is_ocean(t) || t == T_ARCTIC) {
+//  if (Terrain_H.is_ocean(t) || t == T_ARCTIC) {
 //    /* The arctic check is needed for iso-maps: the poles may not have
 //     * any cardinally adjacent land tiles, but that's okay. */
 //    return false;
 //  }
 //
-//  cardinal_adjc_iterate(ptile, tile1) {
-//    if (!is_ocean(map_get_terrain(tile1))) {
+//  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//    if (!Terrain_H.is_ocean(tile1.terrain)) {
 //      return false;
 //    }
 //  } cardinal_adjc_iterate_end;
@@ -979,7 +979,7 @@ public class Mapgen{
 //  for(tile ptile :  Map.map.tiles){
 //    if (is_tiny_island(ptile)) {
 //      map_set_terrain(ptile, T_OCEAN);
-//      map_clear_special(ptile, S_RIVER);
+//      Map.map_clear_special(ptile, S_RIVER);
 //      map_set_continent(ptile, 0);
 //    }
 //  }
@@ -1000,11 +1000,11 @@ public class Mapgen{
 //  } terrain_type_iterate_end;
 //
 //  for(tile ptile :  Map.map.tiles){
-//    Terrain_type_id t = map_get_terrain(ptile);
+//    int t = ptile.terrain;
 //
 //    assert(t >= 0 && t < T_COUNT);
 //    terrain_count[t]++;
-//    if (!is_ocean(t)) {
+//    if (!Terrain_H.is_ocean(t)) {
 //      total++;
 //    }
 //  }
@@ -1032,10 +1032,10 @@ public class Mapgen{
 //void map_fractal_generate(boolean autosize)
 //{
 //  /* save the current random state: */
-//  RANDOM_STATE rstate = get_myrand_state();
+//  RANDOM_STATE rstate = get_Rand.myrand_state();
 // 
 //  if (Map.map.seed==0)
-//    Map.map.seed = (myrand(MAX_UINT32) ^ time(null)) & (MAX_UINT32 >> 1);
+//    Map.map.seed = (Rand.myrand(MAX_UINT32) ^ time(null)) & (MAX_UINT32 >> 1);
 //
 //  mysrand(Map.map.seed);
 //
@@ -1066,12 +1066,12 @@ public class Mapgen{
 //    if (Map.map.generator == 2) {
 //      make_pseudofractal1_hmap(1 + ((Map.map.startpos == 0
 //				     || Map.map.startpos == 3)
-//				    ? 0 : game.nplayers));
+//				    ? 0 : Game.game.nplayers));
 //    }
 //
 //    if (Map.map.generator == 1) {
 //      make_random_hmap(MAX(1, 1 + SQSIZE 
-//			   - (Map.map.startpos ? game.nplayers / 4 : 0)));
+//			   - (Map.map.startpos ? Game.game.nplayers / 4 : 0)));
 //    }
 //
 //    /* if hmap only generator make anything else */
@@ -1099,7 +1099,7 @@ public class Mapgen{
 //  }
 //
 //  /* restore previous random state: */
-//  set_myrand_state(rstate);
+//  set_Rand.myrand_state(rstate);
 //  destroy_tmap();
 //
 //  /* We don't want random start positions in a scenario which already
@@ -1193,11 +1193,11 @@ public class Mapgen{
 //****************************************************************************/
 //static boolean near_safe_tiles(tile ptile)
 //{
-//  square_iterate(ptile, 1, tile1) {
-//    if (!terrain_has_flag(map_get_terrain(tile1), TER_UNSAFE_COAST)) {
+//  for(tile tile1: util.square_tile_iterate(ptile, 1)) {
+//    if (!Terrain_H.terrain_has_flag(tile1.terrain, TER_UNSAFE_COAST)) {
 //      return true;
 //    }	
-//  } square_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -1213,16 +1213,16 @@ public class Mapgen{
 //
 //  create_placed_map(); /* here it means placed huts */
 //
-//  while (number * map_num_tiles() >= 2000 && count++ < map_num_tiles() * 2) {
+//  while (number * Map.map.map_num_tiles() >= 2000 && count++ < Map.map.map_num_tiles() * 2) {
 //
 //    /* Add a hut.  But not on a polar area, on an ocean, or too close to
 //     * another hut. */
 //    if ((ptile = rand_map_pos_characteristic(WC_ALL, TT_NFROZEN, MC_NONE))) {
-//      if (is_ocean(map_get_terrain(ptile))) {
+//      if (Terrain_H.is_ocean(ptile.terrain)) {
 //	map_set_placed(ptile); /* not good for a hut */
 //      } else {
 //	number--;
-//	map_set_special(ptile, S_HUT);
+//	map_set_special(ptile, Terrain_H.S_HUT);
 //	set_placed_near_pos(ptile, 3);
 //      }
 //    }
@@ -1236,12 +1236,12 @@ public class Mapgen{
 //****************************************************************************/
 //static boolean is_special_close(tile ptile)
 //{
-//  square_iterate(ptile, 1, tile1) {
-//    if (map_has_special(tile1, S_SPECIAL_1)
-//	|| map_has_special(tile1, S_SPECIAL_2)) {
+//  for(tile tile1: util.square_tile_iterate(ptile, 1)) {
+//    if (Map.map_has_special(tile1, S_SPECIAL_1)
+//	|| Map.map_has_special(tile1, S_SPECIAL_2)) {
 //      return true;
 //    }
-//  } square_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -1251,25 +1251,25 @@ public class Mapgen{
 //****************************************************************************/
 //static void add_specials(int prob)
 //{
-//  Terrain_type_id ttype;
+//  int ttype;
 //
 //  whole_map_iterate(ptile)  {
-//    ttype = map_get_terrain(ptile);
-//    if (!is_ocean(ttype)
+//    ttype = ptile.terrain;
+//    if (!Terrain_H.is_ocean(ttype)
 //	&& !is_special_close(ptile) 
-//	&& myrand(1000) < prob) {
+//	&& Rand.myrand(1000) < prob) {
 //      if (get_tile_type(ttype).special_1_name[0] != '\0'
 //	  && (get_tile_type(ttype).special_2_name[0] == '\0'
-//	      || (myrand(100) < 50))) {
+//	      || (Rand.myrand(100) < 50))) {
 //	map_set_special(ptile, S_SPECIAL_1);
 //      } else if (get_tile_type(ttype).special_2_name[0] != '\0') {
 //	map_set_special(ptile, S_SPECIAL_2);
 //      }
-//    } else if (is_ocean(ttype) && near_safe_tiles(ptile) 
-//	       && myrand(1000) < prob && !is_special_close(ptile)) {
+//    } else if (Terrain_H.is_ocean(ttype) && near_safe_tiles(ptile) 
+//	       && Rand.myrand(1000) < prob && !is_special_close(ptile)) {
 //      if (get_tile_type(ttype).special_1_name[0] != '\0'
 //	  && (get_tile_type(ttype).special_2_name[0] == '\0'
-//	      || (myrand(100) < 50))) {
+//	      || (Rand.myrand(100) < 50))) {
 //        map_set_special(ptile, S_SPECIAL_1);
 //      } else if (get_tile_type(ttype).special_2_name[0] != '\0') {
 //	map_set_special(ptile, S_SPECIAL_2);
@@ -1302,8 +1302,8 @@ public class Mapgen{
 //  assert((pstate.s - pstate.n) > 0);
 //  assert((pstate.s - pstate.n) < Map.map.ysize);
 //
-//  xn = pstate.w + myrand(pstate.e - pstate.w);
-//  yn = pstate.n + myrand(pstate.s - pstate.n);
+//  xn = pstate.w + Rand.myrand(pstate.e - pstate.w);
+//  yn = pstate.n + Rand.myrand(pstate.s - pstate.n);
 //
 //  return native_pos_to_tile(xn, yn);
 //}
@@ -1314,10 +1314,10 @@ public class Mapgen{
 //static void fill_island(int coast, long int *bucket,
 //			int warm0_weight, int warm1_weight,
 //			int cold0_weight, int cold1_weight,
-//			Terrain_type_id warm0,
-//			Terrain_type_id warm1,
-//			Terrain_type_id cold0,
-//			Terrain_type_id cold1,
+//			int warm0,
+//			int warm1,
+//			int cold0,
+//			int cold1,
 //			final gen234_state final pstate)
 //{
 //  int i, k, capac;
@@ -1349,18 +1349,18 @@ public class Mapgen{
 //      if ( ( i*3>k*2 
 //	     || is_terrain_near_tile(ptile, warm0) 
 //	     || is_terrain_near_tile(ptile, warm1) 
-//	     || myrand(100)<50 
+//	     || Rand.myrand(100)<50 
 //	     || is_terrain_near_tile(ptile, cold0) 
 //	     || is_terrain_near_tile(ptile, cold1) 
 //	     )
-//	   &&( !is_cardinally_adj_to_ocean(ptile) || myrand(100) < coast )) {
+//	   &&( !is_cardinally_adj_to_ocean(ptile) || Rand.myrand(100) < coast )) {
 //	if (map_colatitude(ptile) < COLD_LEVEL) {
-//	  map_set_terrain(ptile, (myrand(cold0_weight
+//	  map_set_terrain(ptile, (Rand.myrand(cold0_weight
 //					+ cold1_weight) < cold0_weight) 
 //			  ? cold0 : cold1);
 //	  map_set_placed(ptile);
 //	} else {
-//	  map_set_terrain(ptile, (myrand(warm0_weight
+//	  map_set_terrain(ptile, (Rand.myrand(warm0_weight
 //					+ warm1_weight) < warm0_weight) 
 //			  ? warm0 : warm1);
 //	  map_set_placed(ptile);
@@ -1403,8 +1403,8 @@ public class Mapgen{
 //	 the second lets it avoid the coast: */
 //      if ((i * 3 > k * 2 
 //	   || count_special_near_tile(ptile, false, true, S_RIVER) > 0
-//	   || myrand(100) < 50)
-//	  && (!is_cardinally_adj_to_ocean(ptile) || myrand(100) < coast)) {
+//	   || Rand.myrand(100) < 50)
+//	  && (!is_cardinally_adj_to_ocean(ptile) || Rand.myrand(100) < coast)) {
 //	if (is_water_adjacent_to_tile(ptile)
 //	    && count_ocean_near_tile(ptile, false, true) < 50
 //            && count_special_near_tile(ptile, false, true, S_RIVER) < 35) {
@@ -1423,11 +1423,11 @@ public class Mapgen{
 //static boolean is_near_land(tile ptile)
 //{
 //  /* Note this function may sometimes be called on land tiles. */
-//  adjc_iterate(ptile, tile1) {
-//    if (!is_ocean(map_get_terrain(tile1))) {
+//  for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//    if (!Terrain_H.is_ocean(tile1.terrain)) {
 //      return true;
 //    }
-//  } adjc_iterate_end;
+//  }
 //
 //  return false;
 //}
@@ -1442,7 +1442,7 @@ public class Mapgen{
 //  int i=0, xn, yn;
 //  tile ptile;
 //
-//  ptile = rand_map_pos();
+//  ptile = Map.rand_map_pos();
 //
 //  /* this helps a lot for maps with high landmass */
 //  for (yn = pstate.n, xn = pstate.w;
@@ -1510,7 +1510,7 @@ public class Mapgen{
 //{
 //  int count = 0;
 //
-//  cardinal_adjc_iterate(ptile, tile1) {
+//  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    if (hmap(tile1) != 0) {
 //      count++;
 //    }
@@ -1539,7 +1539,7 @@ public class Mapgen{
 //  while (i > 0 && tries-.0) {
 //    ptile = get_random_map_position_from_state(pstate);
 //
-//    if ((!near_singularity(ptile) || myrand(50) < 25 ) 
+//    if ((!near_singularity(ptile) || Rand.myrand(50) < 25 ) 
 //	&& hmap(ptile) == 0 && count_card_adjc_elevated_tiles(ptile) > 0) {
 //      hmap(ptile) = 1;
 //      i--;
@@ -1576,7 +1576,7 @@ public class Mapgen{
 //	    islemass-i, islemass);
 //  }
 //  
-//  tries = map_num_tiles() / 4;	/* on a 40x60 map, there are 2400 places */
+//  tries = Map.map.map_num_tiles() / 4;	/* on a 40x60 map, there are 2400 places */
 //  while (!(j = place_island(pstate)) && (--tries) > 0) {
 //    /* nothing */
 //  }
@@ -1616,11 +1616,11 @@ public class Mapgen{
 //    i = river_pct + mountain_pct + desert_pct + forest_pct + swamp_pct;
 //    i = (i <= 90) ? 100 : i * 11 / 10;
 //    tilefactor = pstate.totalmass / i;
-//    riverbuck = -(long int) myrand(pstate.totalmass);
-//    mountbuck = -(long int) myrand(pstate.totalmass);
-//    desertbuck = -(long int) myrand(pstate.totalmass);
-//    forestbuck = -(long int) myrand(pstate.totalmass);
-//    swampbuck = -(long int) myrand(pstate.totalmass);
+//    riverbuck = -(long int) Rand.myrand(pstate.totalmass);
+//    mountbuck = -(long int) Rand.myrand(pstate.totalmass);
+//    desertbuck = -(long int) Rand.myrand(pstate.totalmass);
+//    forestbuck = -(long int) Rand.myrand(pstate.totalmass);
+//    swampbuck = -(long int) Rand.myrand(pstate.totalmass);
 //    lastplaced = pstate.totalmass;
 //  } else {
 //
@@ -1763,7 +1763,7 @@ public class Mapgen{
 //
 //  pstate.totalmass = ((Map.map.ysize - 6 - spares) * Map.map.landpercent 
 //                       * (Map.map.xsize - spares)) / 100;
-//  totalweight = 100 * game.nplayers;
+//  totalweight = 100 * Game.game.nplayers;
 //
 //  assert(!placed_map_is_initialized());
 //
@@ -1778,7 +1778,7 @@ public class Mapgen{
 //    initworld(pstate);
 //    
 //    /* Create one big island for each player. */
-//    for (i = game.nplayers; i > 0; i--) {
+//    for (i = Game.game.nplayers; i > 0; i--) {
 //      if (!make_island(bigfrac * pstate.totalmass / totalweight,
 //                      1, pstate, 95)) {
 //	/* we couldn't make an island at least 95% as big as we wanted,
@@ -1814,10 +1814,10 @@ public class Mapgen{
 //
 //  /* Now place smaller islands, but don't worry if they're small,
 //   * or even non-existent. One medium and one small per player. */
-//  for (i = game.nplayers; i > 0; i--) {
+//  for (i = Game.game.nplayers; i > 0; i--) {
 //    make_island(midfrac * pstate.totalmass / totalweight, 0, pstate, DMSIS);
 //  }
-//  for (i = game.nplayers; i > 0; i--) {
+//  for (i = Game.game.nplayers; i > 0; i--) {
 //    make_island(smallfrac * pstate.totalmass / totalweight, 0, pstate, DMSIS);
 //  }
 //
@@ -1854,11 +1854,11 @@ public class Mapgen{
 //      ((Map.map.ysize - 6 - spares) * Map.map.landpercent * (Map.map.xsize - spares)) /
 //      100;
 //
-//  bigislands= game.nplayers;
+//  bigislands= Game.game.nplayers;
 //
 //  landmass = (Map.map.xsize * (Map.map.ysize - 6) * Map.map.landpercent)/100;
 //  /* subtracting the arctics */
-//  if (landmass > 3 * Map.map.ysize + game.nplayers * 3){
+//  if (landmass > 3 * Map.map.ysize + Game.game.nplayers * 3){
 //    landmass -= 3 * Map.map.ysize;
 //  }
 //
@@ -1867,7 +1867,7 @@ public class Mapgen{
 //  if (islandmass < 4 * maxmassdiv6) {
 //    islandmass = (landmass)/(2 * bigislands);
 //  }
-//  if (islandmass < 3 * maxmassdiv6 && game.nplayers * 2 < landmass) {
+//  if (islandmass < 3 * maxmassdiv6 && Game.game.nplayers * 2 < landmass) {
 //    islandmass= (landmass)/(bigislands);
 //  }
 //
@@ -1904,15 +1904,15 @@ public class Mapgen{
 //  while (pstate.isleindex <= MAP_NCONT - 20 && checkmass > islandmass &&
 //         ++j < 1500) {
 //      if (j < 1000) {
-//	size = myrand((islandmass+1)/2+1)+islandmass/2;
+//	size = Rand.myrand((islandmass+1)/2+1)+islandmass/2;
 //      } else {
-//	size = myrand((islandmass+1)/2+1);
+//	size = Rand.myrand((islandmass+1)/2+1);
 //      }
 //      if (size < 2) {
 //        size=2;
 //      }
 //
-//      make_island(size, (pstate.isleindex - 2 <= game.nplayers) ? 1 : 0,
+//      make_island(size, (pstate.isleindex - 2 <= Game.game.nplayers) ? 1 : 0,
 //		  pstate, DMSIS);
 //  }
 //
@@ -1943,7 +1943,7 @@ public class Mapgen{
 //
 //  /* no islands with mass >> sqr(min(xsize,ysize)) */
 //
-//  if (game.nplayers < 2 || Map.map.landpercent > 80) {
+//  if (Game.game.nplayers < 2 || Map.map.landpercent > 80) {
 //    Map.map.startpos = 1;
 //    return;
 //  }
@@ -1963,12 +1963,12 @@ public class Mapgen{
 //      100;
 //
 //  /*!PS: The weights NEED to sum up to totalweight (dammit) */
-//  totalweight = (30 + bigweight) * game.nplayers;
+//  totalweight = (30 + bigweight) * Game.game.nplayers;
 //
 //  initworld(pstate);
 //
-//  i = game.nplayers / 2;
-//  if ((game.nplayers % 2) == 1) {
+//  i = Game.game.nplayers / 2;
+//  if ((Game.game.nplayers % 2) == 1) {
 //    make_island(bigweight * 3 * pstate.totalmass / totalweight, 3, 
 //		pstate, DMSIS);
 //  } else {
@@ -1978,10 +1978,10 @@ public class Mapgen{
 //    make_island(bigweight * 2 * pstate.totalmass / totalweight, 2,
 //		pstate, DMSIS);
 //  }
-//  for (i = game.nplayers; i > 0; i--) {
+//  for (i = Game.game.nplayers; i > 0; i--) {
 //    make_island(20 * pstate.totalmass / totalweight, 0, pstate, DMSIS);
 //  }
-//  for (i = game.nplayers; i > 0; i--) {
+//  for (i = Game.game.nplayers; i > 0; i--) {
 //    make_island(10 * pstate.totalmass / totalweight, 0, pstate, DMSIS);
 //  }
 //  make_plains();  

@@ -32,7 +32,7 @@ public class Cityrep{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "packets.h"
 //#include "shared.h"
 //#include "unit.h"
@@ -417,7 +417,7 @@ public class Cityrep{
 //  set(cityrep_listview, MUIA_NList_Quiet, true);
 //  DoMethod(cityrep_listview, MUIM_NList_Clear);
 //
-//  city_list_iterate(game.player_ptr.cities, pcity)
+//  city_list_iterate(Game.game.player_ptr.cities, pcity)
 //  {
 //    DoMethod(cityrep_listview, MUIM_NList_InsertSingle, pcity, MUIV_NList_Insert_Sorted);
 //  }

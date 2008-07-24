@@ -27,7 +27,7 @@ public class Dialogs{
 // 
 //#include "capability.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "Map.map.h"
 //#include "log.h"
@@ -270,7 +270,7 @@ public class Dialogs{
 //		   ID_RACESDLG_STYLE_BASE+b_s_num-1,selected_style);
 //  if (id!=(selected_nation+ID_RACESDLG_NATION_BASE)) 
 //    CheckRadioButton(races_dlg,ID_RACESDLG_NATION_BASE,
-//		     ID_RACESDLG_NATION_BASE+game.playable_nation_count-1,
+//		     ID_RACESDLG_NATION_BASE+Game.game.playable_nation_count-1,
 //		     selected_nation+ID_RACESDLG_NATION_BASE);   
 //}
 //
@@ -293,7 +293,7 @@ public class Dialogs{
 //**************************************************************************/
 //static void select_random_race(HWND hWnd)
 //{
-//  selected_nation=myrand(game.playable_nation_count);
+//  selected_nation=Rand.myrand(Game.game.playable_nation_count);
 //  update_nation_info();
 //  update_radio_buttons(0);
 //}
@@ -310,7 +310,7 @@ public class Dialogs{
 //  for (j = 0; j < leader_num; j++) {
 //    ComboBox_AddString(GetDlgItem(hWnd,ID_RACESDLG_LEADER), leaders[j].name);
 //  }
-//  selected_leader=myrand(leader_num);
+//  selected_leader=Rand.myrand(leader_num);
 //  ComboBox_SetCurSel(GetDlgItem(hWnd,ID_RACESDLG_LEADER),selected_leader);
 //  SetWindowText(GetDlgItem(hWnd,ID_RACESDLG_LEADER),
 //		leaders[selected_leader].name);
@@ -407,7 +407,7 @@ public class Dialogs{
 //	    selected_style=id;
 //	    update_radio_buttons(id);
 //	  } else if ((id>=ID_RACESDLG_NATION_BASE)&&
-//		     (id<ID_RACESDLG_NATION_BASE+game.playable_nation_count)) {
+//		     (id<ID_RACESDLG_NATION_BASE+Game.game.playable_nation_count)) {
 //	    selected_nation=id-ID_RACESDLG_NATION_BASE;
 //	    update_nation_info();
 //	    if (!name_edited) {
@@ -448,7 +448,7 @@ public class Dialogs{
 //  struct genlist nation_list;
 //  genlist_link myiter;
 //  genlist_init(&nation_list);
-//  for(i=0; i<game.playable_nation_count; i++) { 
+//  for(i=0; i<Game.game.playable_nation_count; i++) { 
 //    /* Don't use a null pointer */
 //    genlist_insert(&nation_list,(void *)(i+ID_RACESDLG_NATION_BASE),0);
 //  }
@@ -528,7 +528,7 @@ public class Dialogs{
 //  fcwin_box_add_groupbox(vbox,"Select your city style",grp_box,WS_GROUP,
 //			 false,false,5);
 //  hbox=fcwin_hbox_new(races_dlg,true);
-//  for(i=0,b_s_num=0; i<game.styles_count && i<64; i++) {
+//  for(i=0,b_s_num=0; i<Game.game.styles_count && i<64; i++) {
 //    if(city_styles[i].techreq == A_NONE) {
 //      city_style_idx[b_s_num] = i;
 //      city_style_ridx[i] = b_s_num;
@@ -638,7 +638,7 @@ public class Dialogs{
 //	  break;
 //	case UNITSELECT_READY_ALL:
 //	  for(i=0; i<unit_select_no; i++) {
-//	    unit punit = player_find_unit_by_id(game.player_ptr,
+//	    unit punit = player_find_unit_by_id(Game.game.player_ptr,
 //							unit_select_ids[i]);
 //	    if(punit) {
 //	      set_unit_focus(punit);
@@ -649,9 +649,9 @@ public class Dialogs{
 //	  id-=UNITSELECT_UNITS_BASE;
 //	  if ((id>=0)&&(id<100))
 //	    {
-//	      unit punit=player_find_unit_by_id(game.player_ptr,
+//	      unit punit=player_find_unit_by_id(Game.game.player_ptr,
 //							unit_select_ids[id]);
-//	      if(punit && punit.owner == game.player_idx) {
+//	      if(punit && punit.owner == Game.game.player_idx) {
 //		set_unit_focus(punit);
 //	      }   
 //	    }
@@ -712,7 +712,7 @@ public class Dialogs{
 //  RECT rc,rc2;
 //  HBITMAP old;
 //  HDC unitsel_dc;
-//  unit unit_list[unit_list_size(&ptile.units)];
+//  unit unit_list[ptile.units.foo_list_size()];
 //  
 //  fill_tile_unit_list(ptile, unit_list);
 //  
@@ -735,7 +735,7 @@ public class Dialogs{
 //    return;
 //  hdc=GetDC(unit_select_main);
 //  unitsel_dc=CreateCompatibleDC(null);
-//  n=unit_list_size(&ptile.units);
+//  n=ptile.units.foo_list_size();
 //  r=number_of_rows(n);
 //  c=number_of_columns(n);
 //  max_width=0;
@@ -746,7 +746,7 @@ public class Dialogs{
 //      unit_type punittemp=punit.unit_type();
 //      city pcity;
 //      unit_select_ids[i]=punit.id;
-//      pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
+//      pcity=player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //      buffer = util.my_snprintf( "%s(%s)\n%s",
 //		  punittemp.name,
 //		  pcity ? pcity.name : "",
@@ -774,7 +774,7 @@ public class Dialogs{
 //      unit punit=unit_list[i];
 //      unit_type punittemp=punit.unit_type();
 //      city pcity;
-//      pcity=player_find_city_by_id(game.player_ptr, punit.homecity);
+//      pcity=player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //      buffer = util.my_snprintf( "%s(%s)\n%s",
 //		  punittemp.name,
 //		  pcity ? pcity.name : "",
@@ -854,11 +854,11 @@ public class Dialogs{
 //{
 //  int i;
 //
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    EnableWindow(GetDlgItem(races_dlg, ID_RACESDLG_NATION_BASE + i), true);
 //  }
 //
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    int nation = i;
 //
 //    if (!nations_used[i]) {
@@ -904,7 +904,7 @@ public class Dialogs{
 //*****************************************************************/
 //void popup_revolution_dialog(int government)
 //{
-//  if (game.player_ptr.revolution_finishes < game.turn) {
+//  if (Game.game.player_ptr.revolution_finishes < Game.game.turn) {
 //    popup_message_dialog(null, "Revolution!",
 //			 "You say you wanna revolution?",
 //			 "_Yes",revolution_callback_yes, government,
@@ -1104,7 +1104,7 @@ public class Dialogs{
 //  
 //  if (pvictim) { /* you don't want to know what lag can do -- Syela */
 //    
-//    for(i=A_FIRST; i<game.num_tech_types; i++) {
+//    for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
 //      if(get_invention(pvictim, i)==TECH_KNOWN && 
 //         (get_invention(pplayer, i)==TECH_UNKNOWN || 
 //          get_invention(pplayer, i)==TECH_REACHABLE)) {
@@ -1115,7 +1115,7 @@ public class Dialogs{
 //    
 //    if(j > 0) {
 //      ListBox_AddString(lb,"At Spy's Discretion");
-//      advance_type[j++] = game.num_tech_types;
+//      advance_type[j++] = Game.game.num_tech_types;
 //    }
 //  }
 //  if(j == 0) {
@@ -1188,7 +1188,7 @@ public class Dialogs{
 //  player pvictim = null;
 //
 //  if(pvcity)
-//    pvictim = city_owner(pvcity);
+//    pvictim = City.city_owner(pvcity);
 //
 ///* it is concievable that pvcity will not be found, because something
 //has happened to the city during latency.  Therefore we must initialize
@@ -1218,7 +1218,7 @@ public class Dialogs{
 //    fcwin_box_add_button(hbox,"Steal",IDOK,0,true,true,10);
 //    EnableWindow(GetDlgItem(spy_tech_dialog,IDOK),false);
 //    fcwin_box_add_box(vbox,hbox,false,false,5);
-//    create_advances_list(game.player_ptr, pvictim, lb);
+//    create_advances_list(Game.game.player_ptr, pvictim, lb);
 //    fcwin_set_box(spy_tech_dialog,vbox);
 //    ShowWindow(spy_tech_dialog,SW_SHOWNORMAL);
 //  }
@@ -1288,10 +1288,10 @@ public class Dialogs{
 //    popup_message_dialog(root_window, "Ooops...",
 //                         "This unit cannot be bribed!",
 //                         diplomat_bribe_no_callback, 0, 0);
-//  } else if(game.player_ptr.economic.gold>=punit.bribe_cost) {
+//  } else if(Game.game.player_ptr.economic.gold>=punit.bribe_cost) {
 //    buf = util.my_snprintf(
 //                "Bribe unit for %d gold?\nTreasury contains %d gold.", 
-//                punit.bribe_cost, game.player_ptr.economic.gold);
+//                punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    popup_message_dialog(root_window, /*"diplomatbribedialog"*/("Bribe Enemy Unit"
 //), buf,
 //                        "_Yes", diplomat_bribe_yes_callback, 0,
@@ -1300,7 +1300,7 @@ public class Dialogs{
 //    buf = util.my_snprintf(
 //                ("Bribing the unit costs %d gold.\n" +
 //                  "Treasury contains %d gold."), 
-//                punit.bribe_cost, game.player_ptr.economic.gold);
+//                punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //    popup_message_dialog(root_window, /*"diplomatnogolddialog"*/
 //	    	"Traitors Demand Too Much!", buf, "Darn",
 //		diplomat_bribe_no_callback, 0, 0);
@@ -1417,7 +1417,7 @@ public class Dialogs{
 //    fcwin_box_add_button(hbox,"Sabotage",IDOK,0,true,true,10);
 //    EnableWindow(GetDlgItem(spy_sabotage_dialog,IDOK),false);
 //    fcwin_box_add_box(vbox,hbox,false,false,5);
-//    create_improvements_list(game.player_ptr, pcity, lb);
+//    create_improvements_list(Game.game.player_ptr, pcity, lb);
 //    fcwin_set_box(spy_sabotage_dialog,vbox);
 //    ShowWindow(spy_sabotage_dialog,SW_SHOWNORMAL);
 //  }
@@ -1472,10 +1472,10 @@ public class Dialogs{
 //		pcity.name);
 //    popup_message_dialog(root_window, "City can't be incited!", buf,
 //			 "Darn", diplomat_incite_no_callback, 0, 0);
-//  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
+//  } else if (Game.game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
 //    buf = util.my_snprintf(
 //		"Incite a revolt for %d gold?\nTreasury contains %d gold.", 
-//		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//		pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //   diplomat_target_id = pcity.id;
 //   popup_message_dialog(root_window, /*"diplomatrevoltdialog"*/"Incite a Revolt!", buf,
 //		       "_Yes", diplomat_incite_yes_callback, 0,
@@ -1484,7 +1484,7 @@ public class Dialogs{
 //    buf = util.my_snprintf(
 //		("Inciting a revolt costs %d gold.\n" +
 //		  "Treasury contains %d gold."), 
-//		pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//		pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //   popup_message_dialog(root_window, /*"diplomatnogolddialog"*/"Traitors Demand Too Much!", buf,
 //		       "Darn", diplomat_incite_no_callback, 0, 
 //		       0);

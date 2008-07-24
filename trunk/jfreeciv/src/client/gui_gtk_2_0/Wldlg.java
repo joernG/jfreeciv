@@ -28,7 +28,7 @@ public class Wldlg{
 //#include "city.h"
 //#include "citydlg_common.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "gui_main.h"
 //#include "gui_stuff.h"
 //#include "helpdlg.h"
@@ -114,7 +114,7 @@ public class Wldlg{
 //    return;
 //  }
 //
-//  plr = game.player_ptr;
+//  plr = Game.game.player_ptr;
 //
 //  gtk_list_store_clear(worklists_store);
 //  
@@ -141,7 +141,7 @@ public class Wldlg{
 //  GtkTreeModel *model;
 //  GtkTreeIter it;
 //
-//  plr = game.player_ptr;
+//  plr = Game.game.player_ptr;
 //
 //  for (i = 0; i < MAX_NUM_WORKLISTS; i++) {
 //    if (!plr.worklists[i].is_valid) {
@@ -215,7 +215,7 @@ public class Wldlg{
 //  gtk_tree_model_get_iter(GTK_TREE_MODEL(worklists_store), &it, path);
 //  
 //  gtk_tree_model_get(GTK_TREE_MODEL(worklists_store), &it, 1, &pos, -1);
-//  plr = game.player_ptr;
+//  plr = Game.game.player_ptr;
 //
 //  sz_strlcpy(plr.worklists[pos].name, text);
 //  gtk_list_store_set(worklists_store, &it, 0, text, -1);
@@ -473,7 +473,7 @@ public class Wldlg{
 //  gint pos;
 //  worklist pwl;
 //
-//  plr = game.player_ptr;
+//  plr = Game.game.player_ptr;
 //  pos = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(item), "pos"));
 //
 //  pwl = &plr.worklists[pos];
@@ -510,7 +510,7 @@ public class Wldlg{
 //
 //  gtk_container_foreach(GTK_CONTAINER(menu),
 //			(GtkCallback) gtk_widget_destroy, null);
-//  plr = game.player_ptr;
+//  plr = Game.game.player_ptr;
 //
 //  for (i = 0; i < MAX_NUM_WORKLISTS; i++) {
 //    if (plr.worklists[i].is_valid) {
@@ -871,7 +871,7 @@ public class Wldlg{
 //  /* update widget sensitivity. */
 //  if (gtk_tree_selection_get_selected(selection, null, null)) {
 //    if (can_client_issue_orders()
-//	&& ptr.pcity && city_owner(ptr.pcity) == game.player_ptr) {
+//	&& ptr.pcity && City.city_owner(ptr.pcity) == Game.game.player_ptr) {
 //      gtk_widget_set_sensitive(ptr.change_cmd, true);
 //      gtk_widget_set_sensitive(ptr.prepend_cmd, true);
 //      gtk_widget_set_sensitive(ptr.append_cmd, true);
@@ -973,7 +973,7 @@ public class Wldlg{
 //    g_object_set(rend, "text", row[column], null);
 //
 //    if (!is_unit && *pcity) {
-//      plr = city_owner(*pcity);
+//      plr = City.city_owner(*pcity);
 //      useless = improvement_obsolete(plr, id)
 //	|| improvement_redundant(plr, *pcity, id, false);
 //      g_object_set(rend, "strikethrough", useless, null);
@@ -1299,9 +1299,9 @@ public class Wldlg{
 //  worklist_data ptr;
 //  worklist pwl, queue;
 //
-//  cid cids[U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + B_LAST];
 //  int i, cids_used;
-//  struct item items[U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + B_LAST];
 //
 //  boolean selected;
 //  gint id;
@@ -1393,7 +1393,7 @@ public class Wldlg{
 //  /* update widget sensitivity. */
 //  if (ptr.pcity) {
 //    if ((can_client_issue_orders() &&
-//	 city_owner(ptr.pcity) == game.player_ptr)) {
+//	 City.city_owner(ptr.pcity) == Game.game.player_ptr)) {
 //      gtk_widget_set_sensitive(ptr.add_cmd, true);
 //      gtk_widget_set_sensitive(ptr.dst_view, true);
 //    } else {

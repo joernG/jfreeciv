@@ -42,7 +42,7 @@ public class Gui_main{
 //
 //#include "fciconv.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "map.h"
@@ -498,7 +498,7 @@ public class Gui_main{
 //    return;
 //  punit=find_unit_by_id(unit_ids[i]);
 //  if(punit) { /* should always be true at this point */
-//    if (punit.owner == game.player_idx) {  /* may be non-true if alliance */
+//    if (punit.owner == Game.game.player_idx) {  /* may be non-true if alliance */
 //      set_unit_focus(punit);
 //    }
 //  }
@@ -716,19 +716,19 @@ public class Gui_main{
 //		  "Tax:%d Lux:%d Sci:%d\n" +
 //		  "Researching %s: %d/%d\n" +
 //		  "Government: %s"),
-//		population_to_text(civ_population(game.player_ptr)),
-//		Shared.textyear(game.year), game.turn,
-//		game.player_ptr.economic.gold,
-//		player_get_expected_income(game.player_ptr),
-//		game.player_ptr.economic.tax,
-//		game.player_ptr.economic.luxury,
-//		game.player_ptr.economic.science,
-//		(game.player_ptr.research.researching == A_UNSET) ?
+//		population_to_text(civ_population(Game.game.player_ptr)),
+//		Shared.textyear(Game.game.year), Game.game.turn,
+//		Game.game.player_ptr.economic.gold,
+//		player_get_expected_income(Game.game.player_ptr),
+//		Game.game.player_ptr.economic.tax,
+//		Game.game.player_ptr.economic.luxury,
+//		Game.game.player_ptr.economic.science,
+//		(Game.game.player_ptr.research.researching == A_UNSET) ?
 //		  advances[A_NONE].name :
-//		  advances[game.player_ptr.research.researching].name,
-//		game.player_ptr.research.bulbs_researched,
-//		total_bulbs_required(game.player_ptr),
-//		get_government_name(game.player_ptr.government));
+//		  advances[Game.game.player_ptr.research.researching].name,
+//		Game.game.player_ptr.research.bulbs_researched,
+//		total_bulbs_required(Game.game.player_ptr),
+//		get_government_name(Game.game.player_ptr.government));
 //
 //    p=XtCreatePopupShell("popupinfo", 
 //			 overrideShellWidgetClass, 

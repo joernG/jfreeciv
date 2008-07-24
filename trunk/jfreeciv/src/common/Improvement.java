@@ -20,7 +20,7 @@ public class Improvement{
 //
 //#include <assert.h>
 //
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -117,7 +117,7 @@ public class Improvement{
 //}
 //
 ///**************************************************************************
-//Returns 1 if the improvement_type "exists" in this game, 0 otherwise.
+//Returns 1 if the improvement_type "exists" in this Game.game, 0 otherwise.
 //An improvement_type doesn't exist if one of:
 //- id is out of range;
 //- the improvement_type has been flagged as removed by setting its
@@ -127,10 +127,10 @@ public class Improvement{
 //**************************************************************************/
 //boolean improvement_exists(Impr_Type_id id)
 //{
-//  if (id<0 || id>=B_LAST || id>=game.num_impr_types)
+//  if (id<0 || id>=B_LAST || id>=Game.game.num_impr_types)
 //    return false;
 //
-//  if (!game.spacerace
+//  if (!Game.game.spacerace
 //      && (building_has_effect(id, EFT_SS_STRUCTURAL)
 //	  || building_has_effect(id, EFT_SS_COMPONENT)
 //	  || building_has_effect(id, EFT_SS_MODULE))) {
@@ -257,7 +257,7 @@ public class Improvement{
 //  if (improvement_types[id].is_wonder) {
 //    /* a wonder is obsolete, as soon as *any* player researched the
 //       obsolete tech */
-//   return game.global_advances[improvement_types[id].obsolete_by] != 0;
+//   return Game.game.global_advances[improvement_types[id].obsolete_by] != 0;
 //  }
 //
 //  return (get_invention(pplayer, improvement_types[id].obsolete_by)
@@ -290,11 +290,11 @@ public class Improvement{
 //
 //    if (cont > 0 && pplayer.island_improv) {
 //      equiv_list[IR_ISLAND] =
-//                          &pplayer.island_improv[cont * game.num_impr_types];
+//                          &pplayer.island_improv[cont * Game.game.num_impr_types];
 //    }
 //  }
 //
-//  equiv_list[IR_WORLD] = game.improvements;
+//  equiv_list[IR_WORLD] = Game.game.improvements;
 //}
 //
 ///**************************************************************************
@@ -352,7 +352,7 @@ public class Improvement{
 //void improvement_status_init(Impr_Status * improvements, size_t elements)
 //{
 //  /* 
-//   * Since this function is called with elements!=game.num_impr_types
+//   * Since this function is called with elements!=Game.game.num_impr_types
 //   * impr_type_iterate can't used here.
 //   */
 //  Impr_Type_id i;
@@ -410,7 +410,7 @@ public class Improvement{
 //
 //  if (is_wonder(id)) {
 //    /* Can't build wonder if already built */
-//    if (game.global_wonders[id] != 0) return false;
+//    if (Game.game.global_wonders[id] != 0) return false;
 //  }
 //
 //  return true;
@@ -460,7 +460,7 @@ public class Improvement{
 //  range = improvement_types[id].equiv_range;
 //
 //  /* Get the relevant improvement list */
-//  fill_ranges_improv_lists(equiv_list, pcity, city_owner(pcity));
+//  fill_ranges_improv_lists(equiv_list, pcity, City.city_owner(pcity));
 //  improvements = equiv_list[range];
 //
 //  if (improvements) {
@@ -477,23 +477,23 @@ public class Improvement{
 //{
 //  int i;
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    pplayer.island_improv = fc_realloc(pplayer.island_improv,
 //                                        (Map.map.num_continents + 1)
-//                                        * game.num_impr_types
+//                                        * Game.game.num_impr_types
 //                                        * sizeof(Impr_Status));
 //  
 //    /* We index into this array with the continent number, so don't use zero */
 //    for (i = 1; i <= Map.map.num_continents; i++) {
-//      improvement_status_init(&pplayer.island_improv[i * game.num_impr_types],
-//                              game.num_impr_types);
+//      improvement_status_init(&pplayer.island_improv[i * Game.game.num_impr_types],
+//                              Game.game.num_impr_types);
 //    } 
 //
 //    /* Fill the lists with existent improvements with Island equiv_range */
 //    for (city pcity : pplayer.cities.data) {
 //      Continent_id cont = map_get_continent(pcity.tile);
 //      Impr_Status *improvs = 
-//                           &pplayer.island_improv[cont * game.num_impr_types];
+//                           &pplayer.island_improv[cont * Game.game.num_impr_types];
 //
 //      built_impr_iterate(pcity, id) {
 //        if (improvement_types[id].equiv_range != IR_ISLAND) {
@@ -523,7 +523,7 @@ public class Improvement{
 //{   
 //  boolean did_mark = false;
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      built_impr_iterate(pcity, i) {
 //        if (improvement_obsolete(pplayer, i)) {
@@ -570,7 +570,7 @@ public class Improvement{
 //      continue;                                                              \
 //    }                                                                        \
 //                                                                             \
-//    if (improvement_redundant(city_owner(_pcity), (_pcity), i, false)) {     \
+//    if (improvement_redundant(City.city_owner(_pcity), (_pcity), i, false)) {     \
 //      util.freelog(Log.LOG_DEBUG,"%s in %s is redundant",                             \
 //              improvement_types[i].name, (_pcity).name);                    \
 //      mark_improvement((_pcity), i, I_REDUNDANT);                            \
@@ -590,7 +590,7 @@ public class Improvement{
 //    CHECK_CITY_IMPR(pcity);
 //    break;
 //  case IR_WORLD:
-//    for(player plr: game.players){
+//    for(player plr: Game.game.players){
 //      for (city pcity2 : plr.cities.data) {
 //        CHECK_CITY_IMPR(pcity2);
 //      } }

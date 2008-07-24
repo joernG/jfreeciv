@@ -30,7 +30,7 @@ public class Diplodlg{
 //#include <proto/muimaster.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "Map.map.h"
 //#include "mem.h"
@@ -158,9 +158,9 @@ public class Diplodlg{
 //{
 //  Diplomacy_dialog pdialog;
 //  
-//  if((pdialog=find_diplomacy_dialog(&game.players[pa.plrno0],
-//				&game.players[pa.plrno1]))) {
-//    if(pa.plrno_from==game.player_idx)
+//  if((pdialog=find_diplomacy_dialog(&Game.game.players[pa.plrno0],
+//				&Game.game.players[pa.plrno1]))) {
+//    if(pa.plrno_from==Game.game.player_idx)
 //      pdialog.treaty.accept0=!pdialog.treaty.accept0;
 //    else
 //      pdialog.treaty.accept1=!pdialog.treaty.accept1;
@@ -173,8 +173,8 @@ public class Diplodlg{
 //*****************************************************************/
 //void handle_diplomacy_init_meeting(packet_diplomacy_info pa)
 //{
-//  popup_diplomacy_dialog(&game.players[pa.plrno0], 
-//			 &game.players[pa.plrno1]);
+//  popup_diplomacy_dialog(&Game.game.players[pa.plrno0], 
+//			 &Game.game.players[pa.plrno1]);
 //}
 //
 ///****************************************************************
@@ -184,8 +184,8 @@ public class Diplodlg{
 //{
 //  Diplomacy_dialog pdialog;
 //  
-//  if((pdialog=find_diplomacy_dialog(&game.players[pa.plrno0],
-//				    &game.players[pa.plrno1])))
+//  if((pdialog=find_diplomacy_dialog(&Game.game.players[pa.plrno0],
+//				    &Game.game.players[pa.plrno1])))
 //    close_diplomacy_dialog(pdialog);
 //}
 //
@@ -196,9 +196,9 @@ public class Diplodlg{
 //{
 //  Diplomacy_dialog pdialog;
 //  
-//  if((pdialog=find_diplomacy_dialog(&game.players[pa.plrno0],
-//				&game.players[pa.plrno1]))) {
-//    add_clause(&pdialog.treaty, &game.players[pa.plrno_from],
+//  if((pdialog=find_diplomacy_dialog(&Game.game.players[pa.plrno0],
+//				&Game.game.players[pa.plrno1]))) {
+//    add_clause(&pdialog.treaty, &Game.game.players[pa.plrno_from],
 //	       pa.clause_type, pa.value);
 //    update_diplomacy_dialog(pdialog);
 //  }
@@ -211,9 +211,9 @@ public class Diplodlg{
 //{
 //  Diplomacy_dialog pdialog;
 //
-//  if((pdialog=find_diplomacy_dialog(&game.players[pa.plrno0],
-//				&game.players[pa.plrno1]))) {
-//    remove_clause(&pdialog.treaty, &game.players[pa.plrno_from],
+//  if((pdialog=find_diplomacy_dialog(&Game.game.players[pa.plrno0],
+//				&Game.game.players[pa.plrno1]))) {
+//    remove_clause(&pdialog.treaty, &Game.game.players[pa.plrno_from],
 //		  pa.clause_type, pa.value);
 //    
 //    update_diplomacy_dialog(pdialog);
@@ -257,7 +257,7 @@ public class Diplodlg{
 //  int i, flag;
 //  Object *entry;
 //
-//  for(i=1, flag=0; i<game.num_tech_types; i++)
+//  for(i=1, flag=0; i<Game.game.num_tech_types; i++)
 //  {
 //    if (get_invention(plr0, i) == TECH_KNOWN 
 //        && (get_invention(plr1, i) == TECH_UNKNOWN
@@ -350,7 +350,7 @@ public class Diplodlg{
 //static void diplomacy_accept_treaty(Diplomacy_data data)
 //{
 //  Diplomacy_dialog pdialog=data.pdialog;
-//  request_diplomacy_accept_treaty(&pdialog.treaty, game.player_idx);
+//  request_diplomacy_accept_treaty(&pdialog.treaty, Game.game.player_idx);
 //}
 //
 ///****************************************************************
@@ -379,7 +379,7 @@ public class Diplodlg{
 //  Diplomacy_dialog pdialog = data.pdialog;
 //  int amount = xget(data.obj, MUIA_String_Integer);
 //
-//  if(amount>=0 && amount<=game.players[data.playerno].economic.gold)
+//  if(amount>=0 && amount<=Game.game.players[data.playerno].economic.gold)
 //  {
 //    request_diplomacy_create_clause(&pdialog.treaty, CLAUSE_GOLD, data.playerno,amount);
 //  } else append_output_window("Game: Invalid amount of gold specified.");
@@ -736,7 +736,7 @@ public class Diplodlg{
 //}
 //
 ///*****************************************************************
-//  Close all dialogs, for when client disconnects from game.
+//  Close all dialogs, for when client disconnects from Game.game.
 //*****************************************************************/
 //void close_all_diplomacy_dialogs()
 //{
@@ -746,7 +746,7 @@ public class Diplodlg{
 //    return;
 //  }
 //
-//  while (dialog_list_size(&dialog_list) > 0) {
+//  while (dialog_list.foo_list_size() > 0) {
 //    close_diplomacy_dialog(dialog_list_get(&dialog_list, 0));
 //  }
 //}

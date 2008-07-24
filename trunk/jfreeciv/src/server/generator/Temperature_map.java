@@ -49,11 +49,11 @@ public class Temperature_map{
 //****************************************************************/
 //boolean is_temperature_type_near(final tile ptile, temperature_type tt) 
 //{
-//  adjc_iterate(ptile, tile1) {
+//  for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    if (BOOL_VAL(tmap(tile1) & (tt))) {
 //      return true;
 //    };
-//  } adjc_iterate_end;
+//  }
 //  return false;
 //}
 //
@@ -77,7 +77,7 @@ public class Temperature_map{
 //  int i;
 //
 //  /* if map is defined this is not changed */
-//  /* TO DO load if from scenario game with tmap */
+//  /* TO DO load if from scenario Game.game with tmap */
 //  assert(temperature_map == null); /* to debug, never load a this time */
 //  if (temperature_map != null) {
 //    return;

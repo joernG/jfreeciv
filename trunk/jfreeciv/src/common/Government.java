@@ -1,5 +1,8 @@
 package common;
 
+import common.city.city;
+import common.government.government;
+
 public class Government{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -133,8 +136,8 @@ public class Government{
 //****************************************************************************/
 //government get_government(int gov)
 //{
-//  assert(game.government_count > 0 && gov >= 0
-//	 && gov < game.government_count);
+//  assert(Game.game.government_count > 0 && gov >= 0
+//	 && gov < Game.game.government_count);
 //  assert(governments[gov].index == gov);
 //  return &governments[gov];
 //}
@@ -147,17 +150,18 @@ public class Government{
 //  assert(pplayer != null);
 //  return get_government(pplayer.government);
 //}
-//
-///****************************************************************************
-//  Return the government of the player who owns the city.
-//****************************************************************************/
-//government get_gov_pcity(final city pcity)
-//{
-//  assert(pcity != null);
-//  return get_gov_pplayer(city_owner(pcity));
-//}
-//
-//
+
+/****************************************************************************
+  Return the government of the player who owns the city.
+****************************************************************************/
+public static government get_gov_pcity(final city pcity)
+{
+  assert(pcity != null);
+//  return get_gov_pplayer(City.city_owner(pcity));
+  return null;
+}
+
+
 ///***************************************************************
 //...
 //***************************************************************/
@@ -194,7 +198,7 @@ public class Government{
 //{
 //  if(type == G_MAGIC)
 //    return 100;
-//  if(type >= 0 && type < game.government_count)
+//  if(type >= 0 && type < Game.game.government_count)
 //    return governments[type].max_rate;
 //  return 50;
 //}
@@ -204,7 +208,7 @@ public class Government{
 //***************************************************************/
 //int get_government_civil_war_prob(int type)
 //{
-//  if(type >= 0 && type < game.government_count)
+//  if(type >= 0 && type < Game.game.government_count)
 //    return governments[type].civil_war;
 //  return 0;
 //}
@@ -214,7 +218,7 @@ public class Government{
 //***************************************************************/
 //final String get_government_name(int type)
 //{
-//  if(type >= 0 && type < game.government_count)
+//  if(type >= 0 && type < Game.game.government_count)
 //    return governments[type].name;
 //  return "";
 //}
@@ -229,8 +233,8 @@ public class Government{
 //{
 //  int req;
 //
-//  assert(game.government_count > 0 &&
-//	 government >= 0 && government < game.government_count);
+//  assert(Game.game.government_count > 0 &&
+//	 government >= 0 && government < Game.game.government_count);
 //
 //  req = governments[government].required_tech;
 //  if (!tech_is_available(pplayer, req)) {
@@ -275,7 +279,7 @@ public class Government{
 //  int index;
 //
 //  governments = fc_calloc(num, sizeof(struct government));
-//  game.government_count = num;
+//  Game.game.government_count = num;
 //
 //  for (index = 0; index < num; index++) {
 //    governments[index].index = index;
@@ -304,6 +308,6 @@ public class Government{
 //  } government_iterate_end;
 //  free(governments);
 //  governments = null;
-//  game.government_count = 0;
+//  Game.game.government_count = 0;
 //}
 }

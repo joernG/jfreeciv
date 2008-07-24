@@ -101,7 +101,7 @@ public class Colors{
 //};
 //
 ///**************************************************************************
-//  Initialize colors for the game.
+//  Initialize colors for the Game.game.
 //**************************************************************************/
 //void init_color_system()
 //{

@@ -77,7 +77,7 @@ public class Height_map{
 //  int i = 0;
 //  height_map = fc_malloc (sizeof(int) * Map_H.MAX_MAP_INDEX);
 //
-//  INITIALIZE_ARRAY(height_map, Map_H.MAX_MAP_INDEX, myrand(1000 * smooth) );
+//  INITIALIZE_ARRAY(height_map, Map_H.MAX_MAP_INDEX, Rand.myrand(1000 * smooth) );
 //
 //  for (; i < smooth; i++) {
 //    smooth_int_map(height_map, true);
@@ -127,18 +127,18 @@ public class Height_map{
 //  }
 //
 //  set_midpoints((x0 + x1) / 2, y0,
-//		(val[0][0] + val[1][0]) / 2 + myrand(step) - step / 2);
+//		(val[0][0] + val[1][0]) / 2 + Rand.myrand(step) - step / 2);
 //  set_midpoints((x0 + x1) / 2,  y1wrap,
-//		(val[0][1] + val[1][1]) / 2 + myrand(step) - step / 2);
+//		(val[0][1] + val[1][1]) / 2 + Rand.myrand(step) - step / 2);
 //  set_midpoints(x0, (y0 + y1)/2,
-//		(val[0][0] + val[0][1]) / 2 + myrand(step) - step / 2);  
+//		(val[0][0] + val[0][1]) / 2 + Rand.myrand(step) - step / 2);  
 //  set_midpoints(x1wrap,  (y0 + y1) / 2,
-//		(val[1][0] + val[1][1]) / 2 + myrand(step) - step / 2);  
+//		(val[1][0] + val[1][1]) / 2 + Rand.myrand(step) - step / 2);  
 //
 //  /* set middle to average of midpoints plus a random factor, if not set */
 //  set_midpoints((x0 + x1) / 2, (y0 + y1) / 2,
 //		((val[0][0] + val[0][1] + val[1][0] + val[1][1]) / 4
-//		 + myrand(step) - step / 2));
+//		 + Rand.myrand(step) - step / 2));
 //
 //#undef set_midpoints
 //
@@ -196,7 +196,7 @@ public class Height_map{
 //    for (yn = 0; yn < ydiv2; yn++) {
 //      do_in_map_pos(ptile, (xn * xmax / xdiv), (yn * ymax / ydiv)) {
 //	/* set initial points */
-//	hmap(ptile) = myrand(2 * step) - (2 * step) / 2;
+//	hmap(ptile) = Rand.myrand(2 * step) - (2 * step) / 2;
 //
 //	if (near_singularity(ptile)) {
 //	  /* avoid edges (topological singularities) */
@@ -205,7 +205,7 @@ public class Height_map{
 //
 //	if (map_colatitude(ptile) <= ICE_BASE_LEVEL / 2 ) {
 //	  /* separate poles and avoid too much land at poles */
-//	  hmap(ptile) -= myrand(avoidedge);
+//	  hmap(ptile) -= Rand.myrand(avoidedge);
 //	}
 //      } do_in_map_pos_end;
 //    }
@@ -221,7 +221,7 @@ public class Height_map{
 //
 //  /* put in some random fuzz */
 //  for(tile ptile :  Map.map.tiles){
-//    hmap(ptile) = 8 * hmap(ptile) + myrand(4) - 2;
+//    hmap(ptile) = 8 * hmap(ptile) + Rand.myrand(4) - 2;
 //  }
 //
 //  adjust_int_map(height_map, hmap_max_level);

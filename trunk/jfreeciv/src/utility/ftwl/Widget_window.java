@@ -323,7 +323,7 @@ public class Widget_window{
 //*************************************************************************/
 //void remove_all_from_window(sw_widget widget)
 //{
-//  while (widget_list_size(&widget.data.window.children) > 0) {
+//  while (widget.data.window.children.foo_list_size() > 0) {
 //    sw_window_remove(widget_list_get(&widget.data.window.children, 0));
 //  }
 //}
@@ -659,7 +659,7 @@ public class Widget_window{
 //  start_timer(timer1);
 //  for (widget widget : windows_back_to_front.data) {
 //    update_window(widget);
-//    regions += region_list_size(&widget.data.window.to_flush);
+//    regions += widget.data.window.to_flush.foo_list_size();
 //  } }
 //  stop_timer(timer1);
 //
@@ -711,7 +711,7 @@ public class Widget_window{
 //
 //  if(DEBUG_PAINT_ALL)
 //  printf("%%%%%%%% starting flushing of %d regions\n",
-//	 region_list_size(&normalized_regions));
+//	 normalized_regions.foo_list_size());
 //
 //#if DUMP_UPDATES
 //  sprintf(filename,"whole-c%03d-r000-before.ppm",call);

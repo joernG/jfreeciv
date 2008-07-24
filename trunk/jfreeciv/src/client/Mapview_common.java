@@ -96,8 +96,8 @@ public class Mapview_common{
 //    return COLOR_STD_BLACK;
 //  }
 //
-//  pos1_is_in_city_radius = player_in_city_radius(game.player_ptr, tile1);
-//  pos2_is_in_city_radius = player_in_city_radius(game.player_ptr, tile2);
+//  pos1_is_in_city_radius = player_in_city_radius(Game.game.player_ptr, tile1);
+//  pos2_is_in_city_radius = player_in_city_radius(Game.game.player_ptr, tile2);
 //
 //  if (!pos1_is_in_city_radius && !pos2_is_in_city_radius) {
 //    return COLOR_STD_BLACK;
@@ -1308,7 +1308,7 @@ public class Mapview_common{
 //  player this_owner = map_get_owner(ptile), *adjc_owner;
 //  int start_x, start_y, end_x, end_y;
 //
-//  if (!draw_borders || game.borders == 0) {
+//  if (!draw_borders || Game.game.borders == 0) {
 //    return;
 //  }
 //
@@ -1428,7 +1428,7 @@ public class Mapview_common{
 //				tile ptile,
 //				int canvas_x, int canvas_y)
 //{
-//  Terrain_type_id t1 = map_get_terrain(ptile), t2;
+//  int t1 = ptile.terrain, t2;
 //
 //  if (!draw_coastline || draw_terrain || t1 == T_UNKNOWN) {
 //    return;
@@ -1439,8 +1439,8 @@ public class Mapview_common{
 //
 //    if (get_tile_boundaries(dir, 0, 1,
 //			    &start_x, &start_y, &end_x, &end_y)) {
-//      t2 = map_get_terrain(adjc_tile);
-//      if (t2 != T_UNKNOWN && (is_ocean(t1) ^ is_ocean(t2))) {
+//      t2 = adjc_tile.terrain;
+//      if (t2 != T_UNKNOWN && (Terrain_H.is_ocean(t1) ^ Terrain_H.is_ocean(t2))) {
 //	canvas_put_line(pcanvas, COLOR_STD_OCEAN, LINE_NORMAL,
 //			canvas_x + start_x, canvas_y + start_y,
 //			end_x - start_x, end_y - start_y);
@@ -1891,7 +1891,7 @@ public class Mapview_common{
 //
 //    anim_timer = renew_timer_start(anim_timer, TIMER_USER, TIMER_ACTIVE);
 //
-//    if (myrand(diff0 + diff1) < diff0) {
+//    if (Rand.myrand(diff0 + diff1) < diff0) {
 //      punit0.hp--;
 //      refresh_tile_mapcanvas(punit0.tile, false);
 //    } else {
@@ -2050,7 +2050,7 @@ public class Mapview_common{
 //  }
 //
 //  if (pcity) {
-//    if (pcity.owner == game.player_idx) {
+//    if (pcity.owner == Game.game.player_idx) {
 //      /* rule a */
 //      return pcity;
 //    } else {
@@ -2064,7 +2064,7 @@ public class Mapview_common{
 //
 //  city_map_checked_iterate(ptile, city_x, city_y, tile1) {
 //    pcity = map_get_city(tile1);
-//    if (pcity && pcity.owner == game.player_idx
+//    if (pcity && pcity.owner == Game.game.player_idx
 //	&& get_worker_city(pcity, CITY_MAP_SIZE - 1 - city_x,
 //			   CITY_MAP_SIZE - 1 - city_y) == C_TILE_EMPTY) {
 //      /*
@@ -2094,7 +2094,7 @@ public class Mapview_common{
 //
 //    if (tile1) {
 //      for (unit psettler : tile1.units.data) {
-//	if (psettler.owner == game.player_idx
+//	if (psettler.owner == Game.game.player_idx
 //	    && unit_flag(psettler, F_CITIES)
 //	    && city_can_be_built_here(psettler.tile, psettler)) {
 //	  if (!closest_settler) {
@@ -2227,7 +2227,7 @@ public class Mapview_common{
 //
 //  name_buffer = String.format pcity.name);
 //
-//  if (draw_city_growth && pcity.owner == game.player_idx) {
+//  if (draw_city_growth && pcity.owner == Game.game.player_idx) {
 //    int turns = city_turns_to_grow(pcity);
 //
 //    if (turns == 0) {

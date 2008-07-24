@@ -205,7 +205,7 @@ public class Aiferry{
 //
 //  if (boats != ai.stats.available_boats) {
 //    util.freelog(Log.LOG_ERROR, "Player[%d] in turn %d: boats miscounted.",
-//	    pplayer.player_no, game.turn);
+//	    pplayer.player_no, Game.game.turn);
 //    aiferry_print_stats(pplayer);
 //  }
 //#endif /* DEBUG_FERRY_STATS */
@@ -236,10 +236,10 @@ public class Aiferry{
 //{
 //  int move_cost;
 //
-//  if (is_ocean(tgt_tile.terrain)) {
+//  if (Terrain_H.is_ocean(tgt_tile.terrain)) {
 //    /* Any-to-Sea */
 //    move_cost = 0;
-//  } else if (is_ocean(src_tile.terrain)) {
+//  } else if (Terrain_H.is_ocean(src_tile.terrain)) {
 //    /* Sea-to-Land */
 //    move_cost = PF_IMPOSSIBLE_MC;
 //  } else {
@@ -257,7 +257,7 @@ public class Aiferry{
 //static int sea_move(final tile ptile, enum known_type known,
 //                    pf_parameter param)
 //{
-//  if (is_ocean(ptile.terrain)) {
+//  if (Terrain_H.is_ocean(ptile.terrain)) {
 //    /* Approximately TURN_FACTOR / average ferry move rate 
 //     * we can pass a better guess of the move rate through param.data
 //     * but we don't know which boat we will find out there */
@@ -286,7 +286,7 @@ public class Aiferry{
 //	  && boat.owner == punit.owner
 //	  && (boat.ai.passenger == FERRY_AVAILABLE
 //	      || boat.ai.passenger == punit.id)
-//	  && (get_transporter_capacity(boat) 
+//	  && (Unit.get_transporter_capacity(boat) 
 //	      - get_transporter_occupancy(boat) >= cap));
 //}
 //
@@ -325,7 +325,7 @@ public class Aiferry{
 //  search_map = pf_create_map(&param);
 //
 //  pf_iterator(search_map, pos) {
-//    int radius = (is_ocean(pos.tile.terrain) ? 1 : 0);
+//    int radius = (Terrain_H.is_ocean(pos.tile.terrain) ? 1 : 0);
 //
 //    if (pos.turn + pos.total_EC/PF_TURN_FACTOR > best_turns) {
 //      /* Won't find anything better */
@@ -333,7 +333,7 @@ public class Aiferry{
 //      break;
 //    }
 //    
-//    square_iterate(pos.tile, radius, ptile) {
+//    for(tile ptile: util.square_tile_iterate(pos.tile, radius)) {
 //      for (unit aunit : ptile.units.data) {
 //        if (is_boat_free(aunit, punit, cap)) {
 //          /* Turns for the unit to get to rendezvous pnt */
@@ -357,7 +357,7 @@ public class Aiferry{
 //          }
 //        }
 //      } }
-//    } square_iterate_end;
+//    }
 //  } pf_iterator_end;
 //  pf_destroy_map(search_map);
 //
@@ -373,13 +373,13 @@ public class Aiferry{
 //{
 //  UNIT_LOG(LOGLEVEL_FINDFERRY, punit, "asked find_ferry_nearby for a boat");
 //
-//  square_iterate(punit.tile, 1, ptile) {
+//  for(tile ptile: util.square_tile_iterate(punit.tile, 1)) {
 //    for (unit aunit : ptile.units.data) {
 //      if (is_boat_free(aunit, punit, cap)) {
 //        return aunit.id;
 //      }
 //    } }
-//  } square_iterate_end;
+//  }
 //
 //  return 0;
 //}
@@ -734,7 +734,7 @@ public class Aiferry{
 //
 //  /* Check if we are an empty barbarian boat and so not needed */
 //  if (is_barbarian(pplayer) && get_transporter_occupancy(punit) == 0) {
-//    wipe_unit(punit);
+//    Unittools.wipe_unit(punit);
 //    return;
 //  }
 //
@@ -748,7 +748,7 @@ public class Aiferry{
 //      /* If the passenger-in-charge is adjacent, we should wait for it to 
 //       * board.  We will pass control to it later. */
 //      if (!psngr 
-//	  || real_map_distance(punit.tile, psngr.tile) > 1) {
+//	  || Map.real_map_distance(punit.tile, psngr.tile) > 1) {
 //	UNIT_LOG(LOGLEVEL_FERRY, punit, 
 //		 "recorded passenger[%d] is not on board, checking for others",
 //		 punit.ai.passenger);

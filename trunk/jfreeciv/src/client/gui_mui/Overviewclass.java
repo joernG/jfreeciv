@@ -38,7 +38,7 @@ public class Overviewclass{
 //
 //#include "civclient.h"
 //#include "map.h"
-//#include "game.h"
+//#include "Game.game.h"
 //
 //#include "control.h"
 //
@@ -159,7 +159,7 @@ public class Overviewclass{
 //  {
 //    if ((punit = find_visible_unit(ptile)))
 //    {
-//      if (punit.owner == game.player_idx)
+//      if (punit.owner == Game.game.player_idx)
 //      {
 //	return data.pen_meunit;
 //      }
@@ -172,7 +172,7 @@ public class Overviewclass{
 //    {
 //      if ((pcity = map_get_city(x, y)))
 //      {
-//	if (pcity.owner == game.player_idx)
+//	if (pcity.owner == Game.game.player_idx)
 //	{
 //	  return data.pen_mecity;
 //	}
@@ -183,7 +183,7 @@ public class Overviewclass{
 //      }
 //      else
 //      {
-//	if (is_ocean(ptile.terrain)) {
+//	if (Terrain_H.is_ocean(ptile.terrain)) {
 //	  return data.pen_ocean;
 //	}
 //	else

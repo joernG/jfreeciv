@@ -21,7 +21,7 @@ public class Aihand{
 //#include <assert.h>
 //
 //#include "city.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "map.h"
@@ -71,7 +71,7 @@ public class Aihand{
 //**************************************************************************/
 //static void ai_manage_spaceship(player pplayer)
 //{
-//  if (game.spacerace) {
+//  if (Game.game.spacerace) {
 //    if (pplayer.spaceship.state == spaceship_state.SSHIP_STARTED) {
 //      ai_spaceship_autoplace(pplayer, &pplayer.spaceship);
 //      /* if we have built the best possible spaceship  -- AJS 19990610 */
@@ -229,7 +229,7 @@ public class Aihand{
 //          "celeb=(%d/%d)", pplayer.name, pplayer.economic.science,
 //          pplayer.economic.luxury, pplayer.economic.tax,
 //          player_get_expected_income(pplayer), can_celebrate, total_cities);
-//  send_player_info(pplayer, pplayer);
+//  Plrhand.send_player_info(pplayer, pplayer);
 //}
 //
 ///**************************************************************************
@@ -265,7 +265,7 @@ public class Aihand{
 //      int val = 0;
 //      int dist;
 //
-//      if (gov.index == game.government_when_anarchy) {
+//      if (gov.index == Game.game.government_when_anarchy) {
 //        continue; /* pointless */
 //      }
 //      pplayer.government = gov.index;
@@ -319,7 +319,7 @@ public class Aihand{
 //      generic_city_refresh(acity, true, null);
 //      auto_arrange_workers(acity);
 //    } }
-//    ai.govt_reeval = CLIP(5, city_list_size(&pplayer.cities), 20);
+//    ai.govt_reeval = CLIP(5, pplayer.cities.foo_list_size(), 20);
 //  }
 //  ai.govt_reeval--;
 //

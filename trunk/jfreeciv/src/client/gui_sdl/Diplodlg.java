@@ -23,7 +23,7 @@ public class Diplodlg{
 //
 //#include "fcintl.h"
 //
-//#include "game.h"
+//#include "Game.game.h"
 //
 //#include "gui_mem.h"
 //#include "player.h"
@@ -144,7 +144,7 @@ public class Diplodlg{
 //  int len = pClauses_Dlg.pScroll.pUp_Left_Button.size.w;
 //     
 //  Cl.type = type;
-//  Cl.from = &game.players[giver];
+//  Cl.from = &Game.game.players[giver];
 //  Cl.value = value;
 //  
 //  client_diplomacy_clause_string(cBuf, sizeof(cBuf), &Cl);
@@ -177,7 +177,7 @@ public class Diplodlg{
 //  pBuf = create_iconlabel(null, pWindow.dst, pStr,
 //   (WF_FREE_DATA|WF_DRAW_TEXT_LABEL_WITH_SPACE|WF_DRAW_THEME_TRANSPARENT));
 //      
-//  if(giver != game.player_idx) {
+//  if(giver != Game.game.player_idx) {
 //     pBuf.string16.style |= SF_CENTER_RIGHT;  
 //  }
 //
@@ -489,7 +489,7 @@ public class Diplodlg{
 //  height = 0;
 //  
 //  /* Pacts. */
-//  if (game.player_ptr == pPlayer0 && type != diplstate_type.DS_ALLIANCE) {
+//  if (Game.game.player_ptr == pPlayer0 && type != diplstate_type.DS_ALLIANCE) {
 //    
 //    pBuf = create_iconlabel_from_chars(null, pWindow.dst,
 //			  "Pacts", 12, WF_DRAW_THEME_TRANSPARENT);
@@ -630,7 +630,7 @@ public class Diplodlg{
 //    boolean flag = false;
 //    int i;
 //    
-//    for (i = 1; i < game.num_tech_types; i++) {
+//    for (i = 1; i < Game.game.num_tech_types; i++) {
 //      if (get_invention(pPlayer0, i) == TECH_KNOWN &&
 //         tech_is_available(pPlayer1, i) &&
 //	(get_invention(pPlayer1, i) == TECH_UNKNOWN || 
@@ -663,7 +663,7 @@ public class Diplodlg{
 //    }
 //    
 //    if(flag) {
-//      for (; i < game.num_tech_types; i++) {
+//      for (; i < Game.game.num_tech_types; i++) {
 //	if (get_invention(pPlayer0, i) == TECH_KNOWN &&
 //	   tech_is_available(pPlayer1, i) &&
 //	  (get_invention(pPlayer1, i) == TECH_UNKNOWN || 
@@ -696,7 +696,7 @@ public class Diplodlg{
 //			      - Kris Bubendorfer
 //  *****************************************************************/
 //  {
-//    int i = 0, j = 0, n = city_list_size(&pPlayer0.cities);
+//    int i = 0, j = 0, n = pPlayer0.cities.foo_list_size();
 //    city *city_list_ptrs;
 //
 //    if (n > 0) {
@@ -804,8 +804,8 @@ public class Diplodlg{
 //void handle_diplomacy_init_meeting(int counterpart, int initiated_from)
 //{
 //  if(!pClauses_Dlg) {
-//    player pPlayer0 = &game.players[game.player_idx];
-//    player pPlayer1 = &game.players[counterpart];
+//    player pPlayer0 = &Game.game.players[Game.game.player_idx];
+//    player pPlayer1 = &Game.game.players[counterpart];
 //    CONTAINER pCont = MALLOC(sizeof(struct CONTAINER));
 //    int hh, ww = 0;
 //    char cBuf[128];
@@ -816,9 +816,9 @@ public class Diplodlg{
 //    
 //    pClauses_Dlg = MALLOC(sizeof(struct ADVANCED_DLG));
 //    
-//    /*if(game.player_idx != pPlayer0.player_no) {
+//    /*if(Game.game.player_idx != pPlayer0.player_no) {
 //      pPlayer0 = pPlayer1;
-//      pPlayer1 = game.player_idx;
+//      pPlayer1 = Game.game.player_idx;
 //    }*/
 //        
 //    pCont.id0 = pPlayer0.player_no;
@@ -990,7 +990,7 @@ public class Diplodlg{
 //}
 //
 ///**************************************************************************
-//  Close all open diplomacy dialogs, for when client disconnects from game.
+//  Close all open diplomacy dialogs, for when client disconnects from Game.game.
 //**************************************************************************/
 //void close_all_diplomacy_dialogs()
 //{
@@ -1181,10 +1181,10 @@ public class Diplodlg{
 //void popup_diplomacy_dialog(player pPlayer)
 //{
 //  enum diplstate_type type =
-//		  pplayer_get_diplstate(game.player_ptr, pPlayer).type;
+//		  pplayer_get_diplstate(Game.game.player_ptr, pPlayer).type;
 //  
 //  if(!can_meet_with_player(pPlayer)) {
-//    if(type == diplstate_type.DS_WAR || pPlayer == game.player_ptr) {
+//    if(type == diplstate_type.DS_WAR || pPlayer == Game.game.player_ptr) {
 //      flush_dirty();
 //      return;
 //    } else {
@@ -1260,7 +1260,7 @@ public class Diplodlg{
 //      button_w = MAX(button_w , pBuf.size.w);
 //      button_h = MAX(button_h , pBuf.size.h);
 //    
-//      shared = gives_shared_vision(game.player_ptr, pPlayer);
+//      shared = gives_shared_vision(Game.game.player_ptr, pPlayer);
 //      
 //      if(shared) {
 //        /* shared vision */

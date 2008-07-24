@@ -105,7 +105,7 @@ public class Repodlgs{
 //			 XtPointer call_data);
 //void activeunits_list_callback(Widget w, XtPointer client_data, 
 //                           XtPointer call_data);
-//static int activeunits_type[U_LAST];
+//static int activeunits_type[unittype.U_LAST];
 //
 //static Widget activeunits_dialog_shell;
 //static Widget activeunits_label, activeunits_label2;
@@ -207,22 +207,22 @@ public class Repodlgs{
 //  char goal_text[512];
 //  final String report_title;
 //  
-//  if (game.player_ptr.research.researching == A_UNSET) {
+//  if (Game.game.player_ptr.research.researching == A_UNSET) {
 //    current_text = util.my_snprintf(
 //		"Researching %s: %d/%d",
 //		advances[A_NONE].name,
-//		game.player_ptr.research.bulbs_researched,
-//		total_bulbs_required(game.player_ptr));
+//		Game.game.player_ptr.research.bulbs_researched,
+//		total_bulbs_required(Game.game.player_ptr));
 //  } else {
 //    current_text = util.my_snprintf(
 //		"Researching %s: %d/%d",
-//		get_tech_name(game.player_ptr,
-//			      game.player_ptr.research.researching),
-//		game.player_ptr.research.bulbs_researched,
-//		total_bulbs_required(game.player_ptr));
+//		get_tech_name(Game.game.player_ptr,
+//			      Game.game.player_ptr.research.researching),
+//		Game.game.player_ptr.research.bulbs_researched,
+//		total_bulbs_required(Game.game.player_ptr));
 //  }
 //
-//  if (game.player_ptr.ai.tech_goal == A_UNSET) {
+//  if (Game.game.player_ptr.ai.tech_goal == A_UNSET) {
 //    goal_text = util.my_snprintf(
 //		"Goal: %s (%d steps)",
 //		advances[A_NONE].name,
@@ -230,13 +230,13 @@ public class Repodlgs{
 //  } else {
 //    goal_text = util.my_snprintf(
 //		"Goal: %s (%d steps)",
-//		advances[game.player_ptr.ai.tech_goal].name,
-//		num_unknown_techs_for_goal(game.player_ptr,
-//					   game.player_ptr.ai.tech_goal));
+//		advances[Game.game.player_ptr.ai.tech_goal].name,
+//		num_unknown_techs_for_goal(Game.game.player_ptr,
+//					   Game.game.player_ptr.ai.tech_goal));
 //  }
 //  
-//  for(i=A_FIRST, j=0; i<game.num_tech_types; i++)
-//    if(get_invention(game.player_ptr, i)==TECH_KNOWN) {
+//  for(i=A_FIRST, j=0; i<Game.game.num_tech_types; i++)
+//    if(get_invention(Game.game.player_ptr, i)==TECH_KNOWN) {
 //      tech_list_names_ptrs[j]=advances[i].name;
 //      j++;
 //    }
@@ -320,8 +320,8 @@ public class Repodlgs{
 //				null);
 //
 //  
-//  for(i=A_FIRST, flag=0; i<game.num_tech_types; i++)
-//    if(get_invention(game.player_ptr, i)==TECH_REACHABLE) {
+//  for(i=A_FIRST, flag=0; i<Game.game.num_tech_types; i++)
+//    if(get_invention(Game.game.player_ptr, i)==TECH_REACHABLE) {
 //      Widget entry=
 //      XtVaCreateManagedWidget(advances[i].name, smeBSBObjectClass, 
 //			      popupmenu, null);
@@ -333,12 +333,12 @@ public class Repodlgs{
 //  if(!flag)
 //    XtSetSensitive(science_change_menu_button, false);
 //  
-// for(i=A_FIRST, flag=0; i<game.num_tech_types; i++)
-//    if (tech_is_available(game.player_ptr, i)
-//        && get_invention(game.player_ptr, i) != TECH_KNOWN
+// for(i=A_FIRST, flag=0; i<Game.game.num_tech_types; i++)
+//    if (tech_is_available(Game.game.player_ptr, i)
+//        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
 //        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
-//        && (num_unknown_techs_for_goal(game.player_ptr, i) < 11
-//	    || i == game.player_ptr.ai.tech_goal)) {
+//        && (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
+//	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //      Widget entry=
 //      XtVaCreateManagedWidget(advances[i].name, smeBSBObjectClass, 
 //			      goalmenu, null);
@@ -468,24 +468,24 @@ public class Repodlgs{
 //    xaw_set_label(science_label, report_title);
 //    free((void *) report_title);
 //
-//    if (game.player_ptr.research.researching == A_UNSET) {
+//    if (Game.game.player_ptr.research.researching == A_UNSET) {
 //      text = util.my_snprintf(
 //		  "Researching %s: %d/%d",
 //		  advances[A_NONE].name,
-//		  game.player_ptr.research.bulbs_researched,
-//		  total_bulbs_required(game.player_ptr));
+//		  Game.game.player_ptr.research.bulbs_researched,
+//		  total_bulbs_required(Game.game.player_ptr));
 //    } else {
 //      text = util.my_snprintf(
 //		  "Researching %s: %d/%d",
-//		  get_tech_name(game.player_ptr,
-//				game.player_ptr.research.researching),
-//		  game.player_ptr.research.bulbs_researched,
-//		  total_bulbs_required(game.player_ptr));
+//		  get_tech_name(Game.game.player_ptr,
+//				Game.game.player_ptr.research.researching),
+//		  Game.game.player_ptr.research.bulbs_researched,
+//		  total_bulbs_required(Game.game.player_ptr));
 //    }
 //
 //    xaw_set_label(science_current_label, text);
 //
-//    if (game.player_ptr.ai.tech_goal == A_UNSET) {
+//    if (Game.game.player_ptr.ai.tech_goal == A_UNSET) {
 //      text = util.my_snprintf(
 //		  "Goal: %s (%d steps)",
 //		  advances[A_NONE].name,
@@ -493,15 +493,15 @@ public class Repodlgs{
 //    } else {
 //      text = util.my_snprintf(
 //		  "Goal: %s (%d steps)",
-//		  advances[game.player_ptr.ai.tech_goal].name,
-//		  num_unknown_techs_for_goal(game.player_ptr,
-//					    game.player_ptr.ai.tech_goal));
+//		  advances[Game.game.player_ptr.ai.tech_goal].name,
+//		  num_unknown_techs_for_goal(Game.game.player_ptr,
+//					    Game.game.player_ptr.ai.tech_goal));
 //    }
 //
 //    xaw_set_label(science_goal_label, text);
 //
-//    for(i=A_FIRST, j=0; i<game.num_tech_types; i++)
-//      if(get_invention(game.player_ptr, i)==TECH_KNOWN) {
+//    for(i=A_FIRST, j=0; i<Game.game.num_tech_types; i++)
+//      if(get_invention(Game.game.player_ptr, i)==TECH_KNOWN) {
 //	tech_list_names_ptrs[j]=advances[i].name;
 //	j++;
 //      }
@@ -517,8 +517,8 @@ public class Repodlgs{
 //				   science_change_menu_button, 
 //				   null);
 //    
-//      for(i=A_FIRST, flag=0; i<game.num_tech_types; i++)
-//      if(get_invention(game.player_ptr, i)==TECH_REACHABLE) {
+//      for(i=A_FIRST, flag=0; i<Game.game.num_tech_types; i++)
+//      if(get_invention(Game.game.player_ptr, i)==TECH_REACHABLE) {
 //	Widget entry=
 //	  XtVaCreateManagedWidget(advances[i].name, smeBSBObjectClass, 
 //				  popupmenu, null);
@@ -537,12 +537,12 @@ public class Repodlgs{
 //				  science_goal_menu_button, 
 //				  null);
 //    
-//    for(i=A_FIRST, flag=0; i<game.num_tech_types; i++)
-//      if (tech_is_available(game.player_ptr, i)
-//	  && get_invention(game.player_ptr, i) != TECH_KNOWN
+//    for(i=A_FIRST, flag=0; i<Game.game.num_tech_types; i++)
+//      if (tech_is_available(Game.game.player_ptr, i)
+//	  && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
 //	  && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
-//	  && (num_unknown_techs_for_goal(game.player_ptr, i) < 11
-//	      || i == game.player_ptr.ai.tech_goal)) {
+//	  && (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
+//	      || i == Game.game.player_ptr.ai.tech_goal)) {
 //	Widget entry=
 //	  XtVaCreateManagedWidget(advances[i].name, smeBSBObjectClass, 
 //				  goalmenu, null);
@@ -691,10 +691,10 @@ public class Repodlgs{
 //  if (ret.list_index != XAW_LIST_NONE) {
 //    /* The user has selected an improvement type. */
 //    int i = economy_improvement_type[ret.list_index];
-//    boolean is_sellable = (i >= 0 && i < game.num_impr_types && !is_wonder(i));
+//    boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !is_wonder(i));
 //
 //    XtSetSensitive(sellobsolete_command, is_sellable
-//		   && improvement_obsolete(game.player_ptr, i));
+//		   && improvement_obsolete(Game.game.player_ptr, i));
 //    XtSetSensitive(sellall_command, is_sellable);
 //  } else {
 //    /* No selection has been made. */
@@ -938,7 +938,7 @@ public class Repodlgs{
 //  may_upgrade =
 //    ((inx != XAW_LIST_NONE) &&
 //     (unit_type_exists (activeunits_type[inx])) &&
-//     (can_upgrade_unittype (game.player_ptr, activeunits_type[inx]) != -1));
+//     (can_upgrade_unittype (Game.game.player_ptr, activeunits_type[inx]) != -1));
 //
 //  XtSetSensitive (upgrade_command, may_upgrade);
 //}
@@ -979,17 +979,17 @@ public class Repodlgs{
 //    if (!(unit_type_exists (ut1))) {
 //      return;
 //    }
-//    /* puts(unit_types[ut1].name); */
+//    /* puts(Unittype_P.unit_types[ut1].name); */
 //
-//    ut2 = can_upgrade_unittype(game.player_ptr,
+//    ut2 = can_upgrade_unittype(Game.game.player_ptr,
 //			       activeunits_type[ret.list_index]);
 //
 //    buf = util.my_snprintf(
 //	    ("Upgrade as many %s to %s as possible for %d gold each?\n" +
 //	      "Treasury contains %d gold."),
-//	    unit_types[ut1].name, unit_types[ut2].name,
-//	    unit_upgrade_price(game.player_ptr, ut1, ut2),
-//	    game.player_ptr.economic.gold);
+//	    Unittype_P.unit_types[ut1].name, Unittype_P.unit_types[ut2].name,
+//	    unit_upgrade_price(Game.game.player_ptr, ut1, ut2),
+//	    Game.game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(toplevel, "upgradedialog", buf,
 //			 upgrade_callback_yes,
@@ -1040,9 +1040,9 @@ public class Repodlgs{
 //  if(activeunits_dialog_shell) {
 //    int k;
 //    Dimension width; 
-//    static char *activeunits_list_names_ptrs[U_LAST+1];
-//    static char activeunits_list_names[U_LAST][200];
-//    struct repoinfo unitarray[U_LAST];
+//    static char *activeunits_list_names_ptrs[unittype.U_LAST+1];
+//    static char activeunits_list_names[unittype.U_LAST][200];
+//    struct repoinfo unitarray[unittype.U_LAST];
 //    struct repoinfo unittotals;
 //    final String report_title;
 //    char activeunits_total[100];
@@ -1052,7 +1052,7 @@ public class Repodlgs{
 //    free((void *) report_title);
 //
 //    memset(unitarray, '\0', sizeof(unitarray));
-//    for (unit punit : game.player_ptr.units.data) {
+//    for (unit punit : Game.game.player_ptr.units.data) {
 //      (unitarray[punit.type].active_count)++;
 //      if (punit.homecity) {
 //	unitarray[punit.type].upkeep_shield += punit.upkeep;
@@ -1060,7 +1060,7 @@ public class Repodlgs{
 //      }
 //    }
 //    }
-//    city_list_iterate(game.player_ptr.cities,pcity) {
+//    city_list_iterate(Game.game.player_ptr.cities,pcity) {
 //      if (pcity.is_building_unit &&
 //	  (unit_type_exists (pcity.currently_building)))
 //	(unitarray[pcity.currently_building].building_count)++;
@@ -1077,14 +1077,14 @@ public class Repodlgs{
 //	   sizeof(activeunits_list_names[k]),
 //	   "%-27s%c%9d%9d%9d%9d",
 //	   unit_name(i),
-//	   can_upgrade_unittype(game.player_ptr, i) != -1 ? '*': '-',
+//	   can_upgrade_unittype(Game.game.player_ptr, i) != -1 ? '*': '-',
 //	   unitarray[i].building_count,
 //	   unitarray[i].active_count,
 //	   unitarray[i].upkeep_shield,
 //	   unitarray[i].upkeep_food
 //	  );
 //	activeunits_list_names_ptrs[k]=activeunits_list_names[k];
-//	activeunits_type[k]=(unitarray[i].active_count > 0) ? i : U_LAST;
+//	activeunits_type[k]=(unitarray[i].active_count > 0) ? i : unittype.U_LAST;
 //	k++;
 //	unittotals.active_count += unitarray[i].active_count;
 //	unittotals.upkeep_shield += unitarray[i].upkeep_shield;
@@ -1123,7 +1123,7 @@ public class Repodlgs{
 //*****************************************************************/
 //void popup_endgame_report_dialog(packet_endgame_report packet)
 //{
-//  char buffer[150 * MAX_NUM_PLAYERS];
+//  char buffer[150 * Shared_H.MAX_NUM_PLAYERS];
 //  int i;
 // 
 //  buffer[0] = '\0';

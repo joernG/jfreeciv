@@ -82,7 +82,7 @@ public class Utilities{
 //void set_all_ocean_tiles_placed() 
 //{
 //  for(tile ptile :  Map.map.tiles){
-//    if (is_ocean(map_get_terrain(ptile))) {
+//    if (Terrain_H.is_ocean(ptile.terrain)) {
 //      map_set_placed(ptile);
 //    }
 //  }
@@ -93,9 +93,9 @@ public class Utilities{
 //****************************************************************************/
 //void set_placed_near_pos(tile ptile, int dist)
 //{
-//  square_iterate(ptile, dist, tile1) {
+//  for(tile tile1: util.square_tile_iterate(ptile, dist)) {
 //    map_set_placed(tile1);
-//  } square_iterate_end;
+//  }
 //}
 //
 ///**************************************************************************

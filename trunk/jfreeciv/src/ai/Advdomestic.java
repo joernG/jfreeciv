@@ -21,7 +21,7 @@ public class Advdomestic{
 //#include <string.h>
 //
 //#include "city.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "log.h"
 //#include "Map.map.h"
@@ -51,7 +51,7 @@ public class Advdomestic{
 //static void ai_choose_help_wonder(city pcity,
 //				  ai_choice choice)
 //{
-//  player pplayer = city_owner(pcity);
+//  player pplayer = City.city_owner(pcity);
 //  /* Continent where the city is --- we won't be aiding any wonder 
 //   * finalruction on another continent */
 //  Continent_id continent = map_get_continent(pcity.tile);
@@ -89,10 +89,10 @@ public class Advdomestic{
 //  for (city acity : pplayer.cities.data) {  
 //    unit_type = best_role_unit(pcity, F_HELP_WONDER);
 //    
-//    if (unit_type == U_LAST) {
+//    if (unit_type == unittype.U_LAST) {
 //      /* We cannot build such units yet
 //       * but we will consider it to stimulate science */
-//      unit_type = get_role_unit(F_HELP_WONDER, 0);
+//      unit_type = Unittype_P.get_role_unit(F_HELP_WONDER, 0);
 //    }
 //
 //    /* If we are building wonder there, the city is on same continent, we
@@ -161,7 +161,7 @@ public class Advdomestic{
 //  /* Find out desire for settlers (terrain improvers) */
 //  unit_type = best_role_unit(pcity, F_SETTLERS);
 //
-//  if (unit_type != U_LAST
+//  if (unit_type != unittype.U_LAST
 //      && est_food > utype_food_cost(get_unit_type(unit_type), gov)) {
 //    /* The settler want is calculated in settlers.c called from
 //     * ai_manage_cities.  The expand value is the % that the AI should
@@ -186,7 +186,7 @@ public class Advdomestic{
 //  /* Basically, copied from above and adjusted. -- jjm */
 //  unit_type = best_role_unit(pcity, F_CITIES);
 //
-//  if (unit_type != U_LAST
+//  if (unit_type != unittype.U_LAST
 //      && est_food >= utype_food_cost(get_unit_type(unit_type), gov)) {
 //    /* founder_want calculated in settlers.c, called from ai_manage_cities(). */
 //    int want = pcity.ai.founder_want;

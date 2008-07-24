@@ -28,7 +28,7 @@ public class Helpdlg{
 // 
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "government.h"
 //#include "mem.h"
@@ -494,7 +494,7 @@ public class Helpdlg{
 //    SetWindowText(help_ilabel[1], "0");
 //    SetWindowText(help_ilabel[3], "0");
 //    SetWindowText(help_ilabel[5], "(Never)");
-///*    create_tech_tree(help_improvement_tree, 0, game.num_tech_types, 3);*/
+///*    create_tech_tree(help_improvement_tree, 0, Game.game.num_tech_types, 3);*/
 //  }
 //  helptext_building(buf, sizeof(buf), which, pitem.text);
 //  set_help_text(buf);
@@ -532,7 +532,7 @@ public class Helpdlg{
 //    SetWindowText(help_ilabel[1], "0");
 //    SetWindowText(help_ilabel[3], "(Never)");
 //    SetWindowText(help_ilabel[5], "None");
-///*    create_tech_tree(help_improvement_tree, 0, game.num_tech_types, 3); */
+///*    create_tech_tree(help_improvement_tree, 0, Game.game.num_tech_types, 3); */
 //  }
 // 
 //  helptext_building(buf, sizeof(buf), which, pitem.text);
@@ -669,11 +669,11 @@ public class Helpdlg{
 //  
 //  /* If we're using flags, put one on the tile */
 //  if(!solid_color_behind_units)  {
-//    Sprite flag=get_nation_by_plr(game.player_ptr).flag_sprite;
+//    Sprite flag=get_nation_by_plr(Game.game.player_ptr).flag_sprite;
 //    draw_sprite(flag,hdc,unitpos.x,unitpos.y);
 //  }
 //  /* Finally, put a picture of the unit in the tile */
-//  if(i<game.num_unit_types) {
+//  if(i<Game.game.num_unit_types) {
 //    Sprite s=get_unit_type(i).sprite;
 //    draw_sprite(s,hdc,unitpos.x,unitpos.y);
 //  }
@@ -689,7 +689,7 @@ public class Helpdlg{
 //  char *buf = &long_buffer[0];
 //  create_help_page(HELP_UNIT);
 //  unit_num=i;
-//  if (i<game.num_unit_types) {
+//  if (i<Game.game.num_unit_types) {
 //    unit_type utype = get_unit_type(i);
 //    sprintf(buf, "%d", unit_build_shield_cost(i));
 //    SetWindowText(help_ulabel[0][1], buf);
@@ -788,7 +788,7 @@ public class Helpdlg{
 //			   0,false,false,5);
 //    } unit_type_iterate_end;
 //
-//    for (j = 0; j < game.num_tech_types; j++) {
+//    for (j = 0; j < Game.game.num_tech_types; j++) {
 //      if(i==advances[j].req[0]) {
 //        if(advances[j].req[1]==A_NONE) {
 //	  hbox=fcwin_hbox_new(helpdlg_win,false);

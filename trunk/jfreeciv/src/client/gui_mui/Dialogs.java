@@ -219,10 +219,10 @@ public class Dialogs{
 //{
 //  char buf[128];
 //  
-//  if(game.player_ptr.economic.gold>=punit.bribe_cost)
+//  if(Game.game.player_ptr.economic.gold>=punit.bribe_cost)
 //  {
 //    buf = util.my_snprintf("Bribe unit for %d gold?\nTreasury contains %d gold.",
-//                punit.bribe_cost, game.player_ptr.economic.gold);
+//                punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(main_wnd, "Bribe Enemy Unit", buf,
 //                         "Yes", diplomat_bribe_yes, 0,
@@ -231,7 +231,7 @@ public class Dialogs{
 //  } else
 //  {
 //    buf = util.my_snprintf( "Bribing the unit costs %d gold.\nTreasury contains %d gold.",
-//                punit.bribe_cost, game.player_ptr.economic.gold);
+//                punit.bribe_cost, Game.game.player_ptr.economic.gold);
 //
 //    popup_message_dialog(main_wnd, "Traitors Demand Too Much!", buf,
 //                         "Darn", message_close,0,
@@ -298,7 +298,7 @@ public class Dialogs{
 //  if(which)
 //  {
 //    int tech = which-100;
-//    if (tech == game.num_tech_types) *array = "At Spy's Discretion";
+//    if (tech == Game.game.num_tech_types) *array = "At Spy's Discretion";
 //    else *array = advances[which-100].name;
 //  }
 //  else
@@ -344,7 +344,7 @@ public class Dialogs{
 //    {
 //      /* you don't want to know what lag can do -- Syela */
 //      int any_tech = false;
-//      for(i=A_FIRST; i<game.num_tech_types; i++)
+//      for(i=A_FIRST; i<Game.game.num_tech_types; i++)
 //      {
 //        if(get_invention(pvictim, i)==TECH_KNOWN && (get_invention(pplayer, i)==TECH_UNKNOWN || get_invention(pplayer, i)==TECH_REACHABLE))
 //        {
@@ -354,7 +354,7 @@ public class Dialogs{
 //      }
 //
 //      if (any_tech)
-//	DoMethod(listview, MUIM_NList_InsertSingle, 100+game.num_tech_types,MUIV_NList_Insert_Bottom);
+//	DoMethod(listview, MUIM_NList_InsertSingle, 100+Game.game.num_tech_types,MUIV_NList_Insert_Bottom);
 //    }
 //
 //    DoMethod(wnd,MUIM_Notify, MUIA_Window_CloseRequest, true, app, 5, MUIM_CallHook, &civstandard_hook, spy_close, wnd, listview);
@@ -487,9 +487,9 @@ public class Dialogs{
 //		pcity.name);
 //    popup_message_dialog(main_wnd, "City can't be incited!", buf,
 //			 "Darn", diplomat_incite_no, 0, 0);
-//  } else if (game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
+//  } else if (Game.game.player_ptr.economic.gold >= pcity.incite_revolt_cost) {
 //    buf = util.my_snprintf("Incite a revolt for %d gold?\nTreasury contains %d gold.",
-//            pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//            pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //    diplomat_target_id = pcity.id;
 //
 //    popup_message_dialog(main_wnd, "Incite a Revolt!", buf,
@@ -500,7 +500,7 @@ public class Dialogs{
 //  } else
 //  {
 //    buf = util.my_snprintf( "Inciting a revolt costs %d gold.\nTreasury contains %d gold.",
-//                pcity.incite_revolt_cost, game.player_ptr.economic.gold);
+//                pcity.incite_revolt_cost, Game.game.player_ptr.economic.gold);
 //    popup_message_dialog(main_wnd, "Traitors Demand Too Much!", buf,
 //                         "Darn", diplomat_incite_no,0,
 //                         0);
@@ -691,8 +691,8 @@ public class Dialogs{
 //
 //  if(pvcity)
 //  {
-//    pvictim = city_owner(pvcity);
-//    create_advances_list(game.player_ptr, pvictim);
+//    pvictim = City.city_owner(pvcity);
+//    create_advances_list(Game.game.player_ptr, pvictim);
 //  }
 //}
 //
@@ -1314,7 +1314,7 @@ public class Dialogs{
 //{
 //  unit punit = *ppunit;
 //
-//  if(punit && punit.owner == game.player_idx) {
+//  if(punit && punit.owner == Game.game.player_idx) {
 //    set_unit_focus_and_select(punit);
 //  }
 //  set(unitsel_wnd, MUIA_Window_Open, false);
@@ -1330,7 +1330,7 @@ public class Dialogs{
 //  if(ptile)
 //  {
 //    int n,i;
-//    n=unit_list_size(&ptile.units);
+//    n=ptile.units.foo_list_size();
 //
 //    if(n)
 //    {
@@ -1386,7 +1386,7 @@ public class Dialogs{
 //    DoMethod(readyall_button, MUIM_KillNotify, MUIA_Pressed);
 //    DoMethod(readyall_button, MUIM_Notify, MUIA_Pressed, false, app, 4, MUIM_CallHook, &civstandard_hook, unitsel_ready_all, ptile);
 //
-//    n=unit_list_size(&ptile.units);
+//    n=ptile.units.foo_list_size();
 //
 //    DoMethod(window_group, MUIM_Group_InitChange);
 //    if(unit_group)
@@ -1408,7 +1408,7 @@ public class Dialogs{
 //        Object *o;
 //        Object *unit_obj;
 //
-//        pcity = player_find_city_by_id(game.player_ptr, punit.homecity);
+//        pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //
 //        buffer = util.my_snprintf("%s%s\n%s\n%s", punittemp.name,
 //               (punit.veteran) ? " (veteran)" : "", unit_activity_text(punit),pcity ? pcity.name : "");
@@ -1599,7 +1599,7 @@ public class Dialogs{
 //
 //    styles_basic_nums = 0;
 //
-//    for(i=0;i<game.styles_count && i<64;i++)
+//    for(i=0;i<Game.game.styles_count && i<64;i++)
 //    {
 //      if(city_styles[i].techreq == A_NONE)
 //      {
@@ -1667,7 +1667,7 @@ public class Dialogs{
 //    if(nations_wnd)
 //    {
 //      DoMethod(nations_nation_listview, MUIM_List_Clear);
-//      for(i=0;i<game.playable_nation_count && i<64;i++)
+//      for(i=0;i<Game.game.playable_nation_count && i<64;i++)
 //	DoMethod(nations_nation_listview, MUIM_List_InsertSingle, Nation.get_nation_name(i), MUIV_List_Insert_Sorted);
 //
 //      DoMethod(nations_nation_listview, MUIM_Notify, MUIA_List_Active, MUIV_EveryTime, app, 3, MUIM_CallHook, &civstandard_hook, nations_nation_active);
@@ -1740,26 +1740,26 @@ public class Dialogs{
 //  int value;
 //
 //  ut1 = punit.type;
-//  ut2 = can_upgrade_unittype(game.player_ptr,ut1);
+//  ut2 = can_upgrade_unittype(Game.game.player_ptr,ut1);
 //
 //  if (ut2 == -1)
 //  {
 //    /* this shouldn't generally happen, but it is conceivable */
 //    buf = util.my_snprintf(
-//		"Sorry: cannot upgrade %s.", unit_types[ut1].name);
+//		"Sorry: cannot upgrade %s.", Unittype_P.unit_types[ut1].name);
 //    popup_message_dialog( main_wnd, "Upgrade Unit!", buf,
 //			  "_Darn", message_close, 0,
 //			  null);
 //  } else
 //  {
-//    value = unit_upgrade_price(game.player_ptr, ut1, ut2);
+//    value = unit_upgrade_price(Game.game.player_ptr, ut1, ut2);
 //
-//    if (game.player_ptr.economic.gold>=value)
+//    if (Game.game.player_ptr.economic.gold>=value)
 //    {
 //      buf = util.my_snprintf( ("Upgrade %s to %s for %d gold?\n" +
 //	         "Treasury contains %d gold."),
-//	         unit_types[ut1].name, unit_types[ut2].name,
-//	         value, game.player_ptr.economic.gold);
+//	         Unittype_P.unit_types[ut1].name, Unittype_P.unit_types[ut2].name,
+//	         value, Game.game.player_ptr.economic.gold);
 //      popup_message_dialog(main_wnd, "Upgrade Obsolete Units", buf,
 //			   "_Yes", upgrade_yes, punit.id,
 //			   "_No", message_close, 0,
@@ -1768,8 +1768,8 @@ public class Dialogs{
 //    {
 //	buf = util.my_snprintf( ("Upgrading %s to %s costs %d gold.\n" +
 //	       "Treasury contains %d gold."),
-//	       unit_types[ut1].name, unit_types[ut2].name,
-//	       value, game.player_ptr.economic.gold);
+//	       Unittype_P.unit_types[ut1].name, Unittype_P.unit_types[ut2].name,
+//	       value, Game.game.player_ptr.economic.gold);
 //	popup_message_dialog(main_wnd,
 //			     "Upgrade Unit!", buf,
 //			     "_Darn", message_close, 0,

@@ -42,9 +42,9 @@ public class Aiexplorer{
 //{
 //  int sum;
 //
-//  if (map_is_known(ptile, pplayer)) {
+//  if (Maphand.map_is_known(ptile, pplayer)) {
 //    /* we've seen the tile already. */
-//    return (is_ocean(map_get_terrain(ptile)) ? 100 : 0);
+//    return (Terrain_H.is_ocean(ptile.terrain) ? 100 : 0);
 //  }
 //  
 //  /* Now we're going to do two things at once. We're going to see if
@@ -55,20 +55,20 @@ public class Aiexplorer{
 //   * the centre tile. */
 //  sum = 50;
 //  adjc_dir_iterate(ptile, ptile1, dir) {
-//    if (map_is_known(ptile1, pplayer)) {
+//    if (Maphand.map_is_known(ptile1, pplayer)) {
 //      if (is_cardinal_dir(dir)) {
 //	/* If a tile is cardinally adjacent, we can tell if the 
 //	 * central tile is ocean or not by the appearance of
 //	 * the adjacent tile. So, given that we can tell, 
 //	 * it's fair to look at the actual tile. */
-//        return (is_ocean(map_get_terrain(ptile)) ? 100 : 0);
+//        return (Terrain_H.is_ocean(ptile.terrain) ? 100 : 0);
 //      } else {
 //	/* We're diagonal to the tile in question. So we can't
 //	 * be sure what the central tile is, but the central
 //	 * tile is likely to be the same as the nearby tiles. 
 //	 * If all 4 are water, return 90; if all 4 are land, 
 //	 * return 10. */
-//        sum += (is_ocean(map_get_terrain(ptile1)) ? 10 : -10);
+//        sum += (Terrain_H.is_ocean(ptile1.terrain) ? 10 : -10);
 //      }
 //    }
 //  } adjc_dir_iterate_end;
@@ -85,7 +85,7 @@ public class Aiexplorer{
 //  int likely = 50;
 //  int t;
 //
-//  adjc_iterate(ptile, ptile1) {
+//  for(tile ptile1: util.adjc_tile_iterate(ptile)) {
 //    if ((t = likely_ocean(ptile1, pplayer)) == 0) {
 //      return true;
 //    }
@@ -95,7 +95,7 @@ public class Aiexplorer{
 //     * approach zero. */
 //    likely += (50 - t) / 8;
 //    
-//  } adjc_iterate_end;
+//  }
 //
 //  return (likely > 50);
 //}
@@ -180,7 +180,7 @@ public class Aiexplorer{
 //  if ((unit_flag(punit, F_TRIREME) && 
 //       is_likely_trireme_loss(pplayer, ptile))
 //      || map_get_city(ptile)
-//      || (is_barbarian(pplayer) && map_has_special(ptile, S_HUT))) {
+//      || (is_barbarian(pplayer) && Map.map_has_special(ptile, Terrain_H.S_HUT))) {
 //    return 0;
 //  }
 //
@@ -198,10 +198,10 @@ public class Aiexplorer{
 //    known_ocean_score = KNOWN_SAME_TER_SCORE;
 //  }
 //
-//  square_iterate(ptile, range, ptile1) {
+//  for(tile ptile1: util.square_tile_iterate(ptile, range)) {
 //    int ocean = likely_ocean(ptile1, pplayer);
 //
-//    if (!map_is_known(ptile1, pplayer)) {
+//    if (!Maphand.map_is_known(ptile1, pplayer)) {
 //      unknown++;
 //
 //      /* FIXME: we should add OWN_CITY_SCORE to desirable if the tile 
@@ -221,7 +221,7 @@ public class Aiexplorer{
 //                      + (100 - ocean) * known_land_score);
 //      }
 //    }
-//  } square_iterate_end;
+//  }
 //
 //  if (unknown <= 0) {
 //    /* We make sure we'll uncover at least one unexplored tile. */
@@ -229,8 +229,8 @@ public class Aiexplorer{
 //  }
 //
 //  if ((!pplayer.ai.control || !ai_handicap(pplayer, H_HUTS))
-//      && map_is_known(ptile, pplayer)
-//      && map_has_special(ptile, S_HUT)) {
+//      && Maphand.map_is_known(ptile, pplayer)
+//      && Map.map_has_special(ptile, Terrain_H.S_HUT)) {
 //    /* we want to explore huts whenever we can,
 //     * even if doing so will not uncover any tiles. */
 //    desirable += HUT_SCORE;
@@ -289,7 +289,7 @@ public class Aiexplorer{
 //    pf_next_get_position(map, &pos);
 //    
 //    /* Our callback should insure this. */
-//    assert(map_is_known(pos.tile, pplayer));
+//    assert(Maphand.map_is_known(pos.tile, pplayer));
 //    
 //    desirable = explorer_desirable(pos.tile, pplayer, punit);
 //

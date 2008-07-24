@@ -27,7 +27,7 @@ public class Gamedlgs{
 //
 //#include "events.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "player.h"
@@ -77,7 +77,7 @@ public class Gamedlgs{
 //  lux_lock	= GTK_TOGGLE_BUTTON(rates_lux_toggle).active;
 //  sci_lock	= GTK_TOGGLE_BUTTON(rates_sci_toggle).active;
 //
-//  maxrate=get_government_max_rate(game.player_ptr.government);
+//  maxrate=get_government_max_rate(Game.game.player_ptr.government);
 //  /* This's quite a simple-minded "double check".. */
 //  tax=Math.min(tax, maxrate);
 //  lux=Math.min(lux, maxrate);
@@ -337,9 +337,9 @@ public class Gamedlgs{
 //      gtk_signal_connect_after( GTK_OBJECT( rates_sci_adj ), "value_changed",
 //        GTK_SIGNAL_FUNC( rates_changed_callback ), null );
 //
-//  rates_set_values( game.player_ptr.economic.tax, 0,
-//        	    game.player_ptr.economic.luxury, 0,
-//        	    game.player_ptr.economic.science, 0 );
+//  rates_set_values( Game.game.player_ptr.economic.tax, 0,
+//        	    Game.game.player_ptr.economic.luxury, 0,
+//        	    Game.game.player_ptr.economic.science, 0 );
 //  return;
 //}
 //
@@ -357,8 +357,8 @@ public class Gamedlgs{
 //    create_rates_dialog();
 //
 //    buf = util.my_snprintf( "%s max rate: %d%%",
-//	get_government_name(game.player_ptr.government),
-//	get_government_max_rate(game.player_ptr.government));
+//	get_government_name(Game.game.player_ptr.government),
+//	get_government_max_rate(Game.game.player_ptr.government));
 //    gtk_set_label(rates_gov_label, buf);
 //   
 //    gtk_widget_show( rates_dialog_shell );

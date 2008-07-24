@@ -27,7 +27,7 @@ public class Cma_fec{
 //#include <string.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "mem.h"
 //#include "support.h"
@@ -58,7 +58,7 @@ public class Cma_fec{
 //static boolean preset_list_has_been_initialized = false;
 //
 ///****************************************************************************
-// Is called if the game removes a city. It will clear the 
+// Is called if the Game.game removes a city. It will clear the 
 // "fe parameter" attribute to reduce the size of the savegame.   
 //*****************************************************************************/
 //static void city_remove(int city_id)
@@ -195,7 +195,7 @@ public class Cma_fec{
 //{
 //  int i;
 //
-//  for (i = 0; i < preset_list_size(&preset_list); i++) {
+//  for (i = 0; i < preset_list.foo_list_size(); i++) {
 //    cma_preset ppreset = preset_list_get(&preset_list, i);
 //    if (cm_are_parameter_equal(&ppreset.parameter, parameter)) {
 //      return i;
@@ -209,7 +209,7 @@ public class Cma_fec{
 //**************************************************************************/
 //int cmafec_preset_num()
 //{
-//  return preset_list_size(&preset_list);
+//  return preset_list.foo_list_size();
 //}
 //
 ///**************************************************************************

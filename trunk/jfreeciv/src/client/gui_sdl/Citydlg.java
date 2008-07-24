@@ -36,7 +36,7 @@ public class Citydlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "map.h"
 //#include "improvement.h"
 //#include "log.h"
@@ -199,7 +199,7 @@ public class Citydlg{
 //static int city_dlg_callback(GUI pWindow)
 //{  
 //  if (!cma_is_city_under_agent(pCityDlg.pCity, null)
-//     && city_owner(pCityDlg.pCity) == game.player_ptr) {
+//     && City.city_owner(pCityDlg.pCity) == Game.game.player_ptr) {
 //       
 //    /* check elvis area */
 //    if (pCityDlg.specs[0]
@@ -407,7 +407,7 @@ public class Citydlg{
 //  unit_type pUType;
 //  Uint16 ww, i, hh;
 //
-//  pUnit = player_find_unit_by_id(game.player_ptr, MAX_ID - pButton.ID);
+//  pUnit = player_find_unit_by_id(Game.game.player_ptr, MAX_ID - pButton.ID);
 //  
 //  if(!pUnit || !can_client_issue_orders()) {
 //    return -1;
@@ -551,7 +551,7 @@ public class Citydlg{
 //    }
 //    /* ----- */
 //    
-//    if (can_upgrade_unittype(game.player_ptr, pUnit.type) != -1) {
+//    if (can_upgrade_unittype(Game.game.player_ptr, pUnit.type) != -1) {
 //      /* Upgrade unit */
 //      pBuf = create_icon_button_from_chars(null, pWindow.dst,
 //					    "Upgrade unit", 12, 0);
@@ -751,7 +751,7 @@ public class Citydlg{
 //      set_wflag(pBuf, WF_HIDDEN);
 //    }
 //  
-//    if (pCityDlg.pCity.owner == game.player_idx) {    
+//    if (pCityDlg.pCity.owner == Game.game.player_idx) {    
 //      set_wstate(pBuf, FC_WS_NORMAL);
 //    }
 //    
@@ -1204,16 +1204,16 @@ public class Citydlg{
 //
 //  value = city_buy_cost(pCity);
 //  if(!pCity.did_buy) {
-//    if (game.player_ptr.economic.gold >= value) {
+//    if (Game.game.player_ptr.economic.gold >= value) {
 //      cBuf = util.my_snprintf(
 //		("Buy %s for %d gold?\n" +
 //		  "Treasury contains %d gold."),
-//		name, value, game.player_ptr.economic.gold);
+//		name, value, Game.game.player_ptr.economic.gold);
 //    } else {
 //      cBuf = util.my_snprintf(
 //		("%s costs %d gold.\n" +
 //		  "Treasury contains %d gold."),
-//		name, value, game.player_ptr.economic.gold);
+//		name, value, Game.game.player_ptr.economic.gold);
 //    }
 //  } else {
 //    cBuf = util.my_snprintf(
@@ -1254,7 +1254,7 @@ public class Citydlg{
 //
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //
-//  if (!pCity.did_buy && game.player_ptr.economic.gold >= value) {
+//  if (!pCity.did_buy && Game.game.player_ptr.economic.gold >= value) {
 //    pBuf = create_themeicon_button_from_chars(pTheme.OK_Icon, pWindow.dst,
 //					      "Yes", 12, 0);
 //
@@ -1324,7 +1324,7 @@ public class Citydlg{
 //  pBuf = pWindow.prev;
 //  pBuf.size.y = pWindow.size.y + dst.y;
 //  
-//  if (!pCity.did_buy && game.player_ptr.economic.gold >= value) {
+//  if (!pCity.did_buy && Game.game.player_ptr.economic.gold >= value) {
 //    /* yes */
 //    pBuf = pBuf.prev;
 //    pBuf.size.x = pWindow.size.x +
@@ -1912,11 +1912,11 @@ public class Citydlg{
 //static int next_prev_city_dlg_callback(GUI pButton)
 //{
 //  int i, dir, non_open_size, size =
-//      city_list_size(&game.player_ptr.cities);
+//      Game.game.player_ptr.cities.foo_list_size();
 //  city *array;
 //
 //  assert(size >= 1);
-//  assert(pCityDlg.pCity.owner == game.player_idx);
+//  assert(pCityDlg.pCity.owner == Game.game.player_idx);
 //
 //  if (size == 1) {
 //    return -1;
@@ -1938,7 +1938,7 @@ public class Citydlg{
 //
 //  non_open_size = 0;
 //  for (i = 0; i < size; i++) {
-//    array[non_open_size++] = city_list_get(&game.player_ptr.cities, i);
+//    array[non_open_size++] = city_list_get(&Game.game.player_ptr.cities, i);
 //  }
 //
 //  assert(non_open_size > 0);
@@ -2068,7 +2068,7 @@ public class Citydlg{
 //  unit_list pList;
 //  int size;
 //
-//  if (pCityDlg.pCity.owner != game.player_idx) {
+//  if (pCityDlg.pCity.owner != Game.game.player_idx) {
 //    pList = &(pCityDlg.pCity.info_units_supported);
 //  } else {
 //    pList = &(pCityDlg.pCity.units_supported);
@@ -2129,7 +2129,7 @@ public class Citydlg{
 //
 //  int size;
 //
-//  if (pCityDlg.pCity.owner != game.player_idx) {
+//  if (pCityDlg.pCity.owner != Game.game.player_idx) {
 //    pList = &(pCityDlg.pCity.info_units_present);
 //  } else {
 //    pList = &(map_get_tile(pCityDlg.pCity.x, pCityDlg.pCity.y).units);
@@ -3639,7 +3639,7 @@ public class Citydlg{
 //  SDL_Surface *pLogo = null;
 //  SDL_String16 *pStr = null;
 //  impr_type pImpr = null;
-//  player pOwner = city_owner(pCity);
+//  player pOwner = City.city_owner(pCity);
 //    
 //  if(!pCityDlg.pImprv) {
 //    pCityDlg.pImprv = MALLOC(sizeof(struct ADVANCED_DLG));
@@ -3681,7 +3681,7 @@ public class Citydlg{
 //    pBuf.action = sell_imprvm_dlg_callback;
 //
 //    if (!pCityDlg.pCity.did_sell
-//        && !pImpr.is_wonder && (pOwner == game.player_ptr)) {
+//        && !pImpr.is_wonder && (pOwner == Game.game.player_ptr)) {
 //      set_wstate(pBuf, FC_WS_NORMAL);
 //    }
 //
@@ -3763,7 +3763,7 @@ public class Citydlg{
 //  SDL_Surface *pLogo = null;
 //  SDL_String16 *pStr = null;
 //  int cs;
-//  player pOwner = city_owner(pCity);
+//  player pOwner = City.city_owner(pCity);
 //    
 //  if (pCityDlg) {
 //    return;
@@ -3875,7 +3875,7 @@ public class Citydlg{
 //  pCityDlg.pResource_Map = pBuf;
 //
 //  pBuf.action = resource_map_city_dlg_callback;
-//  if (!cma_is_city_under_agent(pCity, null) && (pOwner == game.player_ptr)) {
+//  if (!cma_is_city_under_agent(pCity, null) && (pOwner == Game.game.player_ptr)) {
 //    set_wstate(pBuf, FC_WS_NORMAL);
 //  }
 //  pBuf.size.x =
@@ -3884,7 +3884,7 @@ public class Citydlg{
 //  add_to_gui_list(ID_CITY_DLG_RESOURCE_MAP, pBuf);  
 //  /* -------- */
 //  
-//  if (pOwner == game.player_ptr) {
+//  if (pOwner == Game.game.player_ptr) {
 //    pBuf = create_themeicon(pTheme.Options_Icon, pWindow.dst,
 //			  (WF_WIDGET_HAS_INFO_LABEL |
 //			   WF_DRAW_THEME_TRANSPARENT));

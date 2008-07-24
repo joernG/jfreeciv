@@ -188,9 +188,9 @@ public class Gotodlg{
 //  ListBox_ResetContent(list);
 //  Button_SetState(GetDlgItem(goto_dialog,ID_ALL),show_all_cities);
 //
-//  for(i=0; i<game.nplayers; i++) {
-//    if(!show_all_cities && i!=game.player_idx) continue;
-//    city_list_iterate(game.players[i].cities, pcity) {
+//  for(i=0; i<Game.game.nplayers; i++) {
+//    if(!show_all_cities && i!=Game.game.player_idx) continue;
+//    city_list_iterate(Game.game.players[i].cities, pcity) {
 //      name = pcity.name;
 //      /* FIXME: should use unit_can_airlift_to(). */
 //      if (pcity.airlift) {

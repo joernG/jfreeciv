@@ -28,7 +28,7 @@ public class Helpdlg{
 //
 //#include "city.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "mem.h"
 //#include "shared.h"
@@ -208,13 +208,13 @@ public class Helpdlg{
 //    return;
 //  }
 //
-//  switch (get_invention(game.player_ptr, tech)) {
+//  switch (get_invention(Game.game.player_ptr, tech)) {
 //  case TECH_UNKNOWN:	      bg = COLOR_STD_RED;	      break;
 //  case TECH_KNOWN:	      bg = COLOR_STD_GROUND;	      break;
 //  case TECH_REACHABLE:        bg = COLOR_STD_YELLOW;	      break;
 //  default:		      bg = COLOR_STD_WHITE;	      break;
 //  }
-//  turns_to_tech = num_unknown_techs_for_goal(game.player_ptr, tech);
+//  turns_to_tech = num_unknown_techs_for_goal(Game.game.player_ptr, tech);
 //
 //  /* l is the original in the tree. */
 //  original = !help_advances[tech];
@@ -223,7 +223,7 @@ public class Helpdlg{
 //  help_advances[tech] = true;
 //
 //  g_value_init(&value, G_TYPE_STRING);
-//  g_value_set_static_string(&value, get_tech_name(game.player_ptr, tech));
+//  g_value_set_static_string(&value, get_tech_name(Game.game.player_ptr, tech));
 //  gtk_tree_store_set_value(tstore, &l, 0, &value);
 //  g_value_unset(&value);
 //
@@ -259,7 +259,7 @@ public class Helpdlg{
 //
 //  gtk_tree_model_get_iter(GTK_TREE_MODEL(tstore), &it, path);
 //  gtk_tree_model_get(GTK_TREE_MODEL(tstore), &it, 2, &tech, -1);
-//  select_help_item_string(get_tech_name(game.player_ptr, tech), HELP_TECH);
+//  select_help_item_string(get_tech_name(Game.game.player_ptr, tech), HELP_TECH);
 //}
 //
 ///**************************************************************************
@@ -686,7 +686,7 @@ public class Helpdlg{
 //  
 //  create_help_page(HELP_IMPROVEMENT);
 //  
-//  if (which<game.num_impr_types) {
+//  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
 //    sprintf(buf, "%d", impr_build_shield_cost(which));
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[1]), buf);
@@ -696,7 +696,7 @@ public class Helpdlg{
 //      gtk_label_set_text(GTK_LABEL(help_ilabel[5]), "(Never)");
 //    } else {
 //      gtk_label_set_text(GTK_LABEL(help_ilabel[5]),
-//			 get_tech_name(game.player_ptr, imp.tech_req));
+//			 get_tech_name(Game.game.player_ptr, imp.tech_req));
 //    }
 ///*    create_tech_tree(help_improvement_tree, 0, imp.tech_req, 3);*/
 //  }
@@ -704,7 +704,7 @@ public class Helpdlg{
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[1]), "0");
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[3]), "0");
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[5]), "(Never)");
-///*    create_tech_tree(help_improvement_tree, 0, game.num_tech_types, 3);*/
+///*    create_tech_tree(help_improvement_tree, 0, Game.game.num_tech_types, 3);*/
 //  }
 //  gtk_widget_show(help_itable);
 //
@@ -723,7 +723,7 @@ public class Helpdlg{
 //
 //  create_help_page(HELP_WONDER);
 //
-//  if (which<game.num_impr_types) {
+//  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
 //    sprintf(buf, "%d", impr_build_shield_cost(which));
 //    gtk_label_set_text(GTK_LABEL(help_wlabel[1]), buf);
@@ -731,11 +731,11 @@ public class Helpdlg{
 //      gtk_label_set_text(GTK_LABEL(help_wlabel[3]), "(Never)");
 //    } else {
 //      gtk_label_set_text(GTK_LABEL(help_wlabel[3]),
-//			 get_tech_name(game.player_ptr, imp.tech_req));
+//			 get_tech_name(Game.game.player_ptr, imp.tech_req));
 //    }
 //    if (tech_exists(imp.obsolete_by)) {
 //      gtk_label_set_text(GTK_LABEL(help_wlabel[5]),
-//			 get_tech_name(game.player_ptr, imp.obsolete_by));
+//			 get_tech_name(Game.game.player_ptr, imp.obsolete_by));
 //    } else {
 //      gtk_label_set_text(GTK_LABEL(help_wlabel[5]), "(Never)");
 //    }
@@ -746,7 +746,7 @@ public class Helpdlg{
 //    gtk_label_set_text(GTK_LABEL(help_wlabel[1]), "0");
 //    gtk_label_set_text(GTK_LABEL(help_wlabel[3]), "(Never)");
 //    gtk_label_set_text(GTK_LABEL(help_wlabel[5]), "None");
-///*    create_tech_tree(help_improvement_tree, 0, game.num_tech_types, 3); */
+///*    create_tech_tree(help_improvement_tree, 0, Game.game.num_tech_types, 3); */
 //  }
 //  gtk_widget_show(help_wtable);
 //
@@ -765,7 +765,7 @@ public class Helpdlg{
 //
 //  create_help_page(HELP_UNIT);
 //
-//  if (i<game.num_unit_types) {
+//  if (i<Game.game.num_unit_types) {
 //    unit_type utype = get_unit_type(i);
 //    sprintf(buf, "%d", unit_build_shield_cost(i));
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[0][1]), buf);
@@ -786,7 +786,7 @@ public class Helpdlg{
 //      gtk_label_set_text(GTK_LABEL(help_ulabel[4][1]), "(Never)");
 //    } else {
 //      gtk_label_set_text(GTK_LABEL(help_ulabel[4][1]),
-//			 get_tech_name(game.player_ptr,
+//			 get_tech_name(Game.game.player_ptr,
 //				       utype.tech_requirement));
 //    }
 ///*    create_tech_tree(help_improvement_tree, 0, utype.tech_requirement, 3);*/
@@ -932,14 +932,14 @@ public class Helpdlg{
 //      gtk_widget_show_all(hbox);
 //    } unit_type_iterate_end;
 //
-//    for (j = 0; j < game.num_tech_types; j++) {
+//    for (j = 0; j < Game.game.num_tech_types; j++) {
 //      if(i==advances[j].req[0]) {
 //	if(advances[j].req[1]==A_NONE) {
 //          hbox = gtk_hbox_new(false, 0);
 //          gtk_container_add(GTK_CONTAINER(help_vbox), hbox);
 //          w = gtk_label_new("Allows");
 //          gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
-//          w = help_slink_new(get_tech_name(game.player_ptr, j), HELP_TECH);
+//          w = help_slink_new(get_tech_name(Game.game.player_ptr, j), HELP_TECH);
 //          gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
 //          gtk_widget_show_all(hbox);
 //	}
@@ -948,11 +948,11 @@ public class Helpdlg{
 //          gtk_container_add(GTK_CONTAINER(help_vbox), hbox);
 //          w = gtk_label_new("Allows");
 //          gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
-//          w = help_slink_new(get_tech_name(game.player_ptr, j), HELP_TECH);
+//          w = help_slink_new(get_tech_name(Game.game.player_ptr, j), HELP_TECH);
 //          gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
 //          w = gtk_label_new("with");
 //          gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
-//          w = help_slink_new(get_tech_name(game.player_ptr,
+//          w = help_slink_new(get_tech_name(Game.game.player_ptr,
 //					   advances[j].req[1]), HELP_TECH);
 //          gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
 //          w = gtk_label_new(Q"?techhelp:");
@@ -965,11 +965,11 @@ public class Helpdlg{
 //        gtk_container_add(GTK_CONTAINER(help_vbox), hbox);
 //        w = gtk_label_new("Allows");
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
-//        w = help_slink_new(get_tech_name(game.player_ptr, j), HELP_TECH);
+//        w = help_slink_new(get_tech_name(Game.game.player_ptr, j), HELP_TECH);
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
 //        w = gtk_label_new("with");
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
-//        w = help_slink_new(get_tech_name(game.player_ptr,
+//        w = help_slink_new(get_tech_name(Game.game.player_ptr,
 //					 advances[j].req[0]), HELP_TECH);
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
 //        w = gtk_label_new(Q"?techhelp:");

@@ -2270,9 +2270,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2289,9 +2289,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2308,9 +2308,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2327,9 +2327,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2346,9 +2346,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2365,9 +2365,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2384,9 +2384,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2403,9 +2403,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2422,9 +2422,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2441,9 +2441,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2460,9 +2460,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2479,9 +2479,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2498,9 +2498,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -2517,9 +2517,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nscores > MAX_NUM_PLAYERS) {
+//      if(real_packet->nscores > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nscores = MAX_NUM_PLAYERS;
+//        real_packet->nscores = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nscores; i++) {
 //        {
@@ -9171,7 +9171,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        dio_get_diplstate(&din, &real_packet->diplstates[i]);
 //      }
 //    }
@@ -9290,7 +9290,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        {
 //      int readin;
 //    
@@ -9388,10 +9388,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS != MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
+//      differ = (Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS != Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//        for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //          if (!are_diplstates_equal(&old->diplstates[i], &real_packet->diplstates[i])) {
 //            differ = true;
 //            break;
@@ -9468,10 +9468,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS != MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
+//      differ = (Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS != Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//        for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //          if (old->love[i] != real_packet->love[i]) {
 //            differ = true;
 //            break;
@@ -9527,7 +9527,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        dio_put_diplstate(&dout, &real_packet->diplstates[i]);
 //      }
 //    } 
@@ -9581,7 +9581,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        dio_put_sint16(&dout, real_packet->love[i]);
 //      }
 //    } 
@@ -9729,7 +9729,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        dio_get_diplstate(&din, &real_packet->diplstates[i]);
 //      }
 //    }
@@ -9848,7 +9848,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        {
 //      int readin;
 //    
@@ -9942,10 +9942,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS != MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
+//      differ = (Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS != Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//        for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //          if (!are_diplstates_equal(&old->diplstates[i], &real_packet->diplstates[i])) {
 //            differ = true;
 //            break;
@@ -10022,10 +10022,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS != MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS);
+//      differ = (Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS != Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//        for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //          if (old->love[i] != real_packet->love[i]) {
 //            differ = true;
 //            break;
@@ -10078,7 +10078,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        dio_put_diplstate(&dout, &real_packet->diplstates[i]);
 //      }
 //    } 
@@ -10132,7 +10132,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      for (i = 0; i < MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS; i++) {
+//      for (i = 0; i < Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS; i++) {
 //        dio_put_sint16(&dout, real_packet->love[i]);
 //      }
 //    } 
@@ -19484,9 +19484,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->connections > MAX_NUM_PLAYERS) {
+//      if(real_packet->connections > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->connections = MAX_NUM_PLAYERS;
+//        real_packet->connections = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->connections; i++) {
 //        {
@@ -19503,9 +19503,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->connections > MAX_NUM_PLAYERS) {
+//      if(real_packet->connections > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->connections = MAX_NUM_PLAYERS;
+//        real_packet->connections = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->connections; i++) {
 //        int tmp;
@@ -26777,9 +26777,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
+//      if(real_packet->nplayers > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nplayers = MAX_NUM_PLAYERS;
+//        real_packet->nplayers = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
 //        dio_get_string(&din, real_packet->name[i], sizeof(real_packet->name[i]));
@@ -26791,9 +26791,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
+//      if(real_packet->nplayers > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nplayers = MAX_NUM_PLAYERS;
+//        real_packet->nplayers = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
 //        dio_get_string(&din, real_packet->username[i], sizeof(real_packet->username[i]));
@@ -26805,9 +26805,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
+//      if(real_packet->nplayers > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nplayers = MAX_NUM_PLAYERS;
+//        real_packet->nplayers = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
 //        dio_get_string(&din, real_packet->nation_name[i], sizeof(real_packet->nation_name[i]));
@@ -26819,9 +26819,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
+//      if(real_packet->nplayers > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nplayers = MAX_NUM_PLAYERS;
+//        real_packet->nplayers = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
 //        dio_get_string(&din, real_packet->nation_flag[i], sizeof(real_packet->nation_flag[i]));
@@ -26833,9 +26833,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
+//      if(real_packet->nplayers > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nplayers = MAX_NUM_PLAYERS;
+//        real_packet->nplayers = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
 //        dio_get_bool8(&din, &real_packet->is_alive[i]);
@@ -26847,9 +26847,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      if(real_packet->nplayers > MAX_NUM_PLAYERS) {
+//      if(real_packet->nplayers > Shared_H.MAX_NUM_PLAYERS) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: truncation array");
-//        real_packet->nplayers = MAX_NUM_PLAYERS;
+//        real_packet->nplayers = Shared_H.MAX_NUM_PLAYERS;
 //      }
 //      for (i = 0; i < real_packet->nplayers; i++) {
 //        dio_get_bool8(&din, &real_packet->is_ai[i]);

@@ -28,7 +28,7 @@ public class Helpdlg{
 //#include "city.h"
 //#include "fcintl.h"
 //#include "log.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "genlist.h"
 //#include "government.h"
 //
@@ -1003,7 +1003,7 @@ public class Helpdlg{
 //  pDock = pBuf;
 //  
 //  targets_count = 0;
-//  for(i=A_FIRST; i<game.num_tech_types; i++)
+//  for(i=A_FIRST; i<Game.game.num_tech_types; i++)
 //  {
 //    if ((targets_count<6)
 //      && (advances[i].req[0] == tech || advances[i].req[1] == tech))
@@ -1599,7 +1599,7 @@ public class Helpdlg{
 //  }
 //  
 //  targets_count = 0;
-//  for(i=A_FIRST; i<game.num_tech_types; i++)
+//  for(i=A_FIRST; i<Game.game.num_tech_types; i++)
 //  {
 //    if ((targets_count<6)
 //      && (advances[i].req[0] == tech || advances[i].req[1] == tech))
@@ -1839,7 +1839,7 @@ public class Helpdlg{
 //    pStr.style |= (TTF_STYLE_BOLD | SF_CENTER);
 //    
 //    h = 0;
-//    for(i=A_FIRST; i<game.num_tech_types; i++)
+//    for(i=A_FIRST; i<Game.game.num_tech_types; i++)
 //    {
 //      if (tech_exists(i))
 //      {

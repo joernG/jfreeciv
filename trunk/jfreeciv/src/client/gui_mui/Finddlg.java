@@ -32,7 +32,7 @@ public class Finddlg{
 //#include <proto/utility.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "player.h"
 //#include "mapview.h"
 //#include "gui_main.h"
@@ -54,9 +54,9 @@ public class Finddlg{
 //  set(find_cities_listview, MUIA_NList_Quiet, true);
 //  DoMethod(find_cities_listview, MUIM_NList_Clear);
 //
-//  for (i = 0; i < game.nplayers; i++)
+//  for (i = 0; i < Game.game.nplayers; i++)
 //  {
-//    city_list_iterate(game.players[i].cities, pcity)
+//    city_list_iterate(Game.game.players[i].cities, pcity)
 //      DoMethod(find_cities_listview, MUIM_NList_InsertSingle, pcity.name, MUIV_NList_Insert_Bottom);
 //    }
 //  }

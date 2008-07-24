@@ -177,10 +177,10 @@ public class Inteldlg{
 //  col = w / (GET_SURF(advances[A_FIRST].sprite).w + 4);
 //  n = 0;
 //  pLast = pBuf;
-//  for(i = A_FIRST; i<game.num_tech_types; i++) {
+//  for(i = A_FIRST; i<Game.game.num_tech_types; i++) {
 //    if(get_invention(pPlayer, i) == TECH_KNOWN &&
-//      tech_is_available(game.player_ptr, i) &&
-//      get_invention(game.player_ptr, i) != TECH_KNOWN) {
+//      tech_is_available(Game.game.player_ptr, i) &&
+//      get_invention(Game.game.player_ptr, i) != TECH_KNOWN) {
 //      
 //      pBuf = create_icon2(GET_SURF(advances[i].sprite), pWindow.dst,
 //	(WF_DRAW_THEME_TRANSPARENT|WF_WIDGET_HAS_INFO_LABEL|WF_FREE_STRING));

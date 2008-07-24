@@ -8,7 +8,7 @@ public class Commands{
 	**************************************************************************/
 //	struct command {
 	  public String name;       /* name - will be matched by unique prefix   */
-	  cmdlevel_id game_level; /* access level to use the command, in-game  */
+	  cmdlevel_id game_level; /* access level to use the command, in-Game.game  */
 	  cmdlevel_id pregame_level; /* access level to use, in pregame */
 	  public String synopsis;	  /* one or few-line summary of usage */
 	  public String short_help; /* one line (about 70 chars) description */
@@ -19,7 +19,7 @@ public class Commands{
 	   match is used.  Arrange order to:
 	   - allow old commands 's', 'h', 'l', 'q', 'c' to work.
 	   - reduce harm for ambiguous cases, where "harm" includes inconvenience,
-	     eg accidently removing a player in a running game.
+	     eg accidently removing a player in a running Game.game.
 	*/
 	enum command_id {
 	  /* old one-letter commands: */
@@ -83,15 +83,15 @@ public class Commands{
 public static final Commands commands[] = {
   new Commands("start",	cmdlevel_id.ALLOW_INFO, cmdlevel_id.ALLOW_INFO,
    "start",
-   "Start the game, or restart after loading a savegame.",
-   ("This command starts the game.  When starting a new game, " +
+   "Start the Game.game, or restart after loading a savegame.",
+   ("This command starts the Game.game.  When starting a new Game.game, " +
       "it should be used after all human players have connected, and " +
       "AI players have been created (if required), and any desired "+
       "changes to initial server options have been made.  "+
       "After 'start', each human player will be able to "+
-      "choose their nation, and then the game will begin.  "+
+      "choose their nation, and then the Game.game will begin.  "+
       "This command is also required after loading a savegame "+
-      "for the game to recommence.  Once the game is running this command "+
+      "for the Game.game to recommence.  Once the Game.game is running this command "+
       "is no longer available, since it would have no effect.")
   ),
 
@@ -122,15 +122,15 @@ public static final Commands commands[] = {
 ),
   new Commands("quit",	cmdlevel_id.ALLOW_HACK, cmdlevel_id.ALLOW_HACK,
    "quit",
-   "Quit the game and shutdown the server.", null
+   "Quit the Game.game and shutdown the server.", null
 ),
   new Commands("cut",	cmdlevel_id.ALLOW_CTRL, cmdlevel_id.ALLOW_CTRL,
    /* TRANS: translate text between <> only */
    "cut <connection-name>",
    "Cut a client's connection to server.",
    ("Cut specified client's connection to the server, removing that client "+
-      "from the game.  If the game has not yet started that client's player "+
-      "is removed from the game, otherwise there is no effect on the player.  "+
+      "from the Game.game.  If the Game.game has not yet started that client's player "+
+      "is removed from the Game.game, otherwise there is no effect on the player.  "+
       "Note that this command now takes connection names, not player names.")
 ),
  new Commands("explain",	cmdlevel_id.ALLOW_INFO, cmdlevel_id.ALLOW_INFO,
@@ -242,7 +242,7 @@ public static final Commands commands[] = {
   new Commands("take",    cmdlevel_id.ALLOW_INFO, cmdlevel_id.ALLOW_INFO,
    /* TRANS: translate text between [] and <> only */
    "take [connection-name] <player-name>",
-   "Take over a player's place in the game.",
+   "Take over a player's place in the Game.game.",
    ("Only the console and connections with cmdlevel 'hack' can force "+
       "other connections to take over a player. If you're not one of these, "+
       "only the <player-name> argument is allowed")
@@ -250,7 +250,7 @@ public static final Commands commands[] = {
   new Commands("observe",    cmdlevel_id.ALLOW_INFO, cmdlevel_id.ALLOW_INFO,
    /* TRANS: translate text between [] only */
    "observe [connection-name] [player-name]",
-   "Observe a player or the whole game.",
+   "Observe a player or the whole Game.game.",
    ("Only the console and connections with cmdlevel 'hack' can force "+
       "other connections to observe a player. If you're not one of these, "+
       "only the [player-name] argument is allowed. If the console gives no "+
@@ -268,7 +268,7 @@ public static final Commands commands[] = {
    /* TRANS: translate text between <> only */
    "create <player-name>",
    "Create an AI player with a given name.",
-   ("The 'create' command is only available before the game has "+
+   ("The 'create' command is only available before the Game.game has "+
       "been started.")
 ),
   new Commands("away",	cmdlevel_id.ALLOW_INFO, cmdlevel_id.ALLOW_INFO,
@@ -336,7 +336,7 @@ public static final Commands commands[] = {
       "to users via the client chatline.  The available levels are:\n"+
       "    none  -  no commands\n"+
       "    info  -  informational commands only\n"+
-      "    ctrl  -  commands that affect the game and users\n"+
+      "    ctrl  -  commands that affect the Game.game and users\n"+
       "    hack  -  *all* commands - dangerous!\n"+
       "With no arguments, the current command access levels are reported.\n"+
       "With a single argument, the level is set for all existing "+
@@ -369,23 +369,23 @@ public static final Commands commands[] = {
   new Commands("endgame",	cmdlevel_id.ALLOW_CTRL, cmdlevel_id.ALLOW_CTRL,
    /* TRANS: translate text between <> only */
    "endgame <player1 player2 player3 ...>",
-   "End the game.  If players are listed, these win the game.",
-   ("This command ends the game immediately and credits the given players, "+
+   "End the Game.game.  If players are listed, these win the Game.game.",
+   ("This command ends the Game.game immediately and credits the given players, "+
       "if any, with winning it.")
 ),
   new Commands("remove",	cmdlevel_id.ALLOW_CTRL, cmdlevel_id.ALLOW_INFO,
    /* TRANS: translate text between <> only */
    "remove <player-name>",
-   "Fully remove player from game.",
-   ("This *completely* removes a player from the game, including "+
+   "Fully remove player from Game.game.",
+   ("This *completely* removes a player from the Game.game, including "+
       "all cities and units etc.  Use with care!")
 ),
   new Commands("save",	cmdlevel_id.ALLOW_HACK, cmdlevel_id.ALLOW_HACK,
    /* TRANS: translate text between <> only */
    ("save\n"+
       "save <file-name>"),
-   "Save game to file.",
-   ("Save the current game to file <file-name>.  If no file-name "+
+   "Save Game.game to file.",
+   ("Save the current Game.game to file <file-name>.  If no file-name "+
       "argument is given saves to \"<auto-save name prefix><year>m.sav[.gz]\".\n"+
       "To reload a savegame created by 'save', start the server with "+
       "the command-line argument:\n"+
@@ -396,8 +396,8 @@ public static final Commands commands[] = {
    /* TRANS: translate text between <> only */
    ("load\n"+
       "load <file-name>"),
-   "Load game from file.",
-   ("Load a game from <file-name>. Any current data including players, "+
+   "Load Game.game from file.",
+   ("Load a Game.game from <file-name>. Any current data including players, "+
       "rulesets and server options are lost.\n")
 ),
   new Commands("read",	cmdlevel_id.ALLOW_HACK, cmdlevel_id.ALLOW_HACK,

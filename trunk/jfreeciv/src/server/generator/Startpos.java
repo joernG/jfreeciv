@@ -44,7 +44,7 @@ public class Startpos{
 //****************************************************************************/
 //static int get_tile_value(tile ptile)
 //{
-//  Terrain_type_id old_terrain;
+//  int old_terrain;
 //  enum int old_special;
 //  int value, irrig_bonus, mine_bonus;
 //
@@ -56,7 +56,7 @@ public class Startpos{
 //  old_terrain = ptile.terrain;
 //  old_special = ptile.special;
 //
-//  map_set_special(ptile, S_ROAD);
+//  map_set_special(ptile, Terrain_H.S_ROAD);
 //  map_irrigate_tile(ptile);
 //  irrig_bonus = (get_food_tile(ptile)
 //		 + get_shields_tile(ptile)
@@ -64,7 +64,7 @@ public class Startpos{
 //
 //  ptile.terrain = old_terrain;
 //  ptile.special = old_special;
-//  map_set_special(ptile, S_ROAD);
+//  map_set_special(ptile, Terrain_H.S_ROAD);
 //  map_mine_tile(ptile);
 //  mine_bonus = (get_food_tile(ptile)
 //		+ get_shields_tile(ptile)
@@ -92,7 +92,7 @@ public class Startpos{
 //  - Non-suitable terrain;
 //  - On a hut;
 //  - Too close to another starter on the same continent:
-//    'dist' is too close (real_map_distance)
+//    'dist' is too close (Map.real_map_distance)
 //    'nr' is the number of other start positions in
 //    Map.map.start_positions to check for too closeness.
 //**************************************************************************/
@@ -114,7 +114,7 @@ public class Startpos{
 //  }
 //
 //  /* Don't start on a hut. */
-//  if (map_has_special(ptile, S_HUT)) {
+//  if (Map.map_has_special(ptile, Terrain_H.S_HUT)) {
 //    return false;
 //  }
 //
@@ -133,9 +133,9 @@ public class Startpos{
 //    tile tile1 = Map.map.start_positions[i].tile;
 //
 //    if ((map_get_continent(ptile) == map_get_continent(tile1)
-//	 && (real_map_distance(ptile, tile1) * 1000 / pdata.min_value
+//	 && (Map.real_map_distance(ptile, tile1) * 1000 / pdata.min_value
 //	     <= (sqrt(cont_size / island.total))))
-//	|| (real_map_distance(ptile, tile1) * 1000 / pdata.min_value < 5)) {
+//	|| (Map.real_map_distance(ptile, tile1) * 1000 / pdata.min_value < 5)) {
 //      return false;
 //    }
 //  }
@@ -178,7 +178,7 @@ public class Startpos{
 //****************************************************************************/
 //static boolean filter_starters(final tile ptile, final void *data)
 //{
-//  return terrain_has_flag(map_get_terrain(ptile), TER_STARTER);
+//  return Terrain_H.terrain_has_flag(ptile.terrain, TER_STARTER);
 //}
 //
 ///**************************************************************************
@@ -201,7 +201,7 @@ public class Startpos{
 //  int min_gooutil.dies_per_player = 2000;
 //  int total_gooutil.dies = 0;
 //  /* this is factor is used to maximize land used in extreme little maps */
-//  float efactor =  game.nplayers / Map.map.size / 4; 
+//  float efactor =  Game.game.nplayers / Map.map.size / 4; 
 //  boolean failure = false;
 //  boolean is_tmap = temperature_is_initialized();
 //
@@ -271,16 +271,16 @@ public class Startpos{
 //
 //  /* If we can't place starters according to the first choice, change the
 //   * choice. */
-//  if (mode == MT_SINGLE && Map.map.num_continents < game.nplayers + 3) {
+//  if (mode == MT_SINGLE && Map.map.num_continents < Game.game.nplayers + 3) {
 //    mode = MT_2or3;
 //  }
 //
-//  if (mode == MT_2or3 && Map.map.num_continents < game.nplayers / 2 + 4) {
+//  if (mode == MT_2or3 && Map.map.num_continents < Game.game.nplayers / 2 + 4) {
 //    mode = MT_VARIABLE;
 //  }
 //
 //  if (mode == MT_ALL 
-//      && (islands[1].gooutil.dies < game.nplayers * min_gooutil.dies_per_player
+//      && (islands[1].gooutil.dies < Game.game.nplayers * min_gooutil.dies_per_player
 //	  || islands[1].gooutil.dies < total_gooutil.dies * (0.5 + 0.8 * efactor)
 //	  / (1 + efactor))) {
 //    mode = MT_VARIABLE;
@@ -289,11 +289,11 @@ public class Startpos{
 //  /* the variable way is the last posibility */
 //  if (mode == MT_VARIABLE) {
 //    min_gooutil.dies_per_player = total_gooutil.dies * (0.65 + 0.8 * efactor) 
-//      / (1 + efactor)  / game.nplayers;
+//      / (1 + efactor)  / Game.game.nplayers;
 //  }
 //
 //  { 
-//    int nr, to_place = game.nplayers, first = 1;
+//    int nr, to_place = Game.game.nplayers, first = 1;
 //
 //    /* inizialize islands_index */
 //    for (nr = 1; nr <= Map.map.num_continents; nr++) {
@@ -304,7 +304,7 @@ public class Startpos{
 //    if ((mode == MT_SINGLE) || (mode == MT_2or3)) {
 //      float var_gooutil.dies, best = HUGE_VAL;
 //      int num_islands
-//	= (mode == MT_SINGLE) ? game.nplayers : (game.nplayers / 2);
+//	= (mode == MT_SINGLE) ? Game.game.nplayers : (Game.game.nplayers / 2);
 //
 //      for (nr = 1; nr <= 1 + Map.map.num_continents - num_islands; nr++) {
 //	if (islands[nr + num_islands - 1].gooutil.dies < min_gooutil.dies_per_player) {
@@ -334,7 +334,7 @@ public class Startpos{
 //	to_place--;
 //      }
 //      if (mode == MT_2or3 && to_place > 0 && nr >= first) {
-//	islands[nr].starters = 2 + (nr == 1 ? (game.nplayers % 2) : 0);
+//	islands[nr].starters = 2 + (nr == 1 ? (Game.game.nplayers % 2) : 0);
 //	to_place -= islands[nr].total = islands[nr].starters;
 //      }
 //
@@ -356,13 +356,13 @@ public class Startpos{
 //      util.freelog(Log.LOG_VERBOSE, "starters on isle %i", k);
 //    }
 //  }
-//  assert(game.nplayers <= data.count + sum);
+//  assert(Game.game.nplayers <= data.count + sum);
 //
 //  /* now search for the best place and set start_positions */
 //  Map.map.start_positions = fc_realloc(Map.map.start_positions,
-//				   game.nplayers
+//				   Game.game.nplayers
 //				   * sizeof(*Map.map.start_positions));
-//  while (data.count < game.nplayers) {
+//  while (data.count < Game.game.nplayers) {
 //    if ((ptile = rand_map_pos_filtered(&data, is_valid_start_pos))) {
 //      islands[islands_index[(int) map_get_continent(ptile)]].starters--;
 //      Map.map.start_positions[data.count].tile = ptile;
@@ -386,7 +386,7 @@ public class Startpos{
 //      }
 //    }
 //  }
-//  Map.map.num_start_positions = game.nplayers;
+//  Map.map.num_start_positions = Game.game.nplayers;
 //
 //  free(islands);
 //  free(islands_index);

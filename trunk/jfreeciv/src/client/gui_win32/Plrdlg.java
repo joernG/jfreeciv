@@ -29,7 +29,7 @@ public class Plrdlg{
 //
 //#include "diptreaty.h"
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "packets.h"
 //#include "nation.h"
 //#include "player.h"
@@ -68,7 +68,7 @@ public class Plrdlg{
 //*******************************************************************/
 //static void players_meet(int player_index)
 //{
-//  if (can_meet_with_player(&game.players[player_index])) {
+//  if (can_meet_with_player(&Game.game.players[player_index])) {
 //    dsend_packet_diplomacy_init_meeting_req(&aconnection, player_index);
 //
 //  } else {
@@ -100,8 +100,8 @@ public class Plrdlg{
 //*******************************************************************/
 //static void players_intel(int player_index)
 //{
-//  if (can_intel_with_player(&game.players[player_index])) {
-//    popup_intel_dialog(&game.players[player_index]);
+//  if (can_intel_with_player(&Game.game.players[player_index])) {
+//    popup_intel_dialog(&Game.game.players[player_index]);
 //  } 
 //}
 //
@@ -110,7 +110,7 @@ public class Plrdlg{
 //*******************************************************************/
 //static void players_sship(int player_index)
 //{
-//  popup_spaceship_dialog(&game.players[player_index]);
+//  popup_spaceship_dialog(&Game.game.players[player_index]);
 //}
 //
 ///* 
@@ -126,23 +126,23 @@ public class Plrdlg{
 //  /* we cassume that neither name nor the nation of a player changes */
 //  if (update == 0) {
 //    /* the playername */
-//    namebuf = util.my_snprintf( "%-16s", game.players[i].name);
+//    namebuf = util.my_snprintf( "%-16s", Game.game.players[i].name);
 //    row[0] = namebuf;
 //
 //
 //    /* the nation */
-//    row[1] = get_nation_name(game.players[i].nation);
+//    row[1] = get_nation_name(Game.game.players[i].nation);
 //  }
 //
 //  /* text for name, plus AI marker */
-//  aibuf[0] = (game.players[i].ai.control ? '*' : '\0');
+//  aibuf[0] = (Game.game.players[i].ai.control ? '*' : '\0');
 //  aibuf[1] = '\0';
 //
 //  /* text for diplstate type and turns -- not applicable if this is me */
-//  if (i == game.player_idx) {
+//  if (i == Game.game.player_idx) {
 //    strcpy(dsbuf, "-");
 //  } else {
-//    pds = pplayer_get_diplstate(game.player_ptr, get_player(i));
+//    pds = pplayer_get_diplstate(Game.game.player_ptr, get_player(i));
 //    if (pds.type == DS_CEASEFIRE) {
 //      dsbuf = util.my_snprintf( "%s (%d)",
 //		  diplstate_text(pds.type), pds.turns_left);
@@ -152,9 +152,9 @@ public class Plrdlg{
 //  }
 //
 //  /* text for state */
-//  if (game.players[i].is_alive) {
-//    if (game.players[i].is_connected) {
-//      if (game.players[i].turn_done) {
+//  if (Game.game.players[i].is_alive) {
+//    if (Game.game.players[i].is_connected) {
+//      if (Game.game.players[i].turn_done) {
 //	statebuf = String.format( "done");
 //      } else {
 //	statebuf = String.format( "moving");
@@ -167,27 +167,27 @@ public class Plrdlg{
 //  }
 //
 //  /* text for idleness */
-//  if (game.players[i].nturns_idle > 3) {
+//  if (Game.game.players[i].nturns_idle > 3) {
 //    idlebuf = util.my_snprintf(
 //		PL("(idle %d turn)", "(idle %d turns)",
-//		    game.players[i].nturns_idle - 1),
-//		game.players[i].nturns_idle - 1);
+//		    Game.game.players[i].nturns_idle - 1),
+//		Game.game.players[i].nturns_idle - 1);
 //  } else {
 //    idlebuf[0] = '\0';
 //  }
 //
 //  /* text for reputation */
 //  repbuf = util.my_snprintf(
-//	      reputation_text(game.players[i].reputation));
+//	      reputation_text(Game.game.players[i].reputation));
 //
 //  /* assemble the whole lot */
 //  row[2] = aibuf;
-//  row[3] = get_embassy_status(game.player_ptr, &game.players[i]);
+//  row[3] = get_embassy_status(Game.game.player_ptr, &Game.game.players[i]);
 //  row[4] = dsbuf;
-//  row[5] = get_vision_status(game.player_ptr, &game.players[i]);
+//  row[5] = get_vision_status(Game.game.player_ptr, &Game.game.players[i]);
 //  row[6] = repbuf;
 //  row[7] = statebuf;
-//  row[8] = (char *) player_addr_hack(&game.players[i]);	/* Fixme */
+//  row[8] = (char *) player_addr_hack(&Game.game.players[i]);	/* Fixme */
 //  row[9] = idlebuf;
 //}
 //
@@ -214,7 +214,7 @@ public class Plrdlg{
 // ******************************************************************/
 //static void enable_buttons(int player_index)
 //{
-//  player pplayer=&game.players[player_index];
+//  player pplayer=&Game.game.players[player_index];
 //  if (pplayer.spaceship.state!=spaceship_state.SSHIP_NONE)
 //    EnableWindow(GetDlgItem(players_dialog,ID_PLAYERS_SSHIP),
 //		 true);
@@ -222,7 +222,7 @@ public class Plrdlg{
 //    EnableWindow(GetDlgItem(players_dialog,ID_PLAYERS_SSHIP),
 //		 false);
 //  switch (pplayer_get_diplstate
-//	  (game.player_ptr, get_player(player_index)).type) {
+//	  (Game.game.player_ptr, get_player(player_index)).type) {
 //  case diplstate_type.DS_WAR:
 //  case diplstate_type.DS_NO_CONTACT:
 //    EnableWindow(GetDlgItem(players_dialog,ID_PLAYERS_WAR), false);
@@ -232,7 +232,7 @@ public class Plrdlg{
 //  }
 //  
 //  EnableWindow(GetDlgItem(players_dialog, ID_PLAYERS_VISION),
-//	       gives_shared_vision(game.player_ptr, pplayer));
+//	       gives_shared_vision(Game.game.player_ptr, pplayer));
 //
 //  EnableWindow(GetDlgItem(players_dialog, ID_PLAYERS_MEET),
 //               can_meet_with_player(pplayer));
@@ -404,7 +404,7 @@ public class Plrdlg{
 //    int i,row;
 //    lv=GetDlgItem(players_dialog,ID_PLAYERS_LIST);
 //    ListView_DeleteAllItems(lv);
-//    for (i = 0; i < game.nplayers; i++) {
+//    for (i = 0; i < Game.game.nplayers; i++) {
 //      build_row(row_texts, i, 0);
 //      row=fcwin_listview_add_row(lv,i,NUM_COLUMNS, (char **)row_texts);
 //      lvi.iItem=row;

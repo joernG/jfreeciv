@@ -21,7 +21,7 @@ public class Mapview{
 //#include <stdio.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "log.h"
 //#include "Map.map.h"
 //#include "registry.h"
@@ -369,7 +369,7 @@ public class Mapview{
 //  line1_b = ct_string_clone4(style.growth_template, buffer2,
 //			    enum_color_to_be_color(color));
 //
-//  if (draw_city_productions && (pcity.owner == game.player_idx)) {
+//  if (draw_city_productions && (pcity.owner == Game.game.player_idx)) {
 //    get_city_mapview_production(pcity, buffer, sizeof(buffer));
 //    line2 =
 //	ct_string_clone4(style.prod_template, buffer,
@@ -745,7 +745,7 @@ public class Mapview{
 //
 //  ptile = get_focus_tile();
 //  for (unit aunit : ptile.units.data) {
-//    if (game.player_idx == aunit.owner) {
+//    if (Game.game.player_idx == aunit.owner) {
 //      set_unit_focus(aunit);
 //      break;
 //    }
@@ -1201,26 +1201,26 @@ public class Mapview{
 //  }
 //
 //  if (strcmp(id, "year") == 0) {
-//    return Shared.textyear(game.year);
+//    return Shared.textyear(Game.game.year);
 //  } else if (strcmp(id, "gold") == 0) {
 //    buffer = util.my_snprintf(
-//		"%d", game.player_ptr.economic.gold);
+//		"%d", Game.game.player_ptr.economic.gold);
 //    return buffer;
 //  } else if (strcmp(id, "nation_name") == 0) {
-//      return Nation.get_nation_name_plural(game.player_ptr.nation);
+//      return Nation.get_nation_name_plural(Game.game.player_ptr.nation);
 //  } else if (strcmp(id, "population") == 0) {
-//      return population_to_text(civ_population(game.player_ptr));
+//      return population_to_text(civ_population(Game.game.player_ptr));
 //  } else if (strcmp(id, "general") == 0) {
 //      buffer = util.my_snprintf(
 //		  ("Population: %s\n" +
 //		"Year: %s\n" +
 //		"Gold %d\n" +
 //		"Tax: %d Lux: %d Sci: %d"),
-//	      population_to_text(civ_population(game.player_ptr)),
-//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
-//	      game.player_ptr.economic.tax,
-//	      game.player_ptr.economic.luxury,
-//	      game.player_ptr.economic.science);
+//	      population_to_text(civ_population(Game.game.player_ptr)),
+//	      Shared.textyear(Game.game.year), Game.game.player_ptr.economic.gold,
+//	      Game.game.player_ptr.economic.tax,
+//	      Game.game.player_ptr.economic.luxury,
+//	      Game.game.player_ptr.economic.science);
 //      return buffer;
 //  } else if (strcmp(id, "focus_item") == 0) {
 //      return tile_list.item[tile_list.selected].info_text;
@@ -1230,11 +1230,11 @@ public class Mapview{
 //		"Year: %s " +
 //		"Gold %d " +
 //		"Tax: %d Lux: %d Sci: %d"),
-//	      population_to_text(civ_population(game.player_ptr)),
-//	      Shared.textyear(game.year), game.player_ptr.economic.gold,
-//	      game.player_ptr.economic.tax,
-//	      game.player_ptr.economic.luxury,
-//	      game.player_ptr.economic.science);
+//	      population_to_text(civ_population(Game.game.player_ptr)),
+//	      Shared.textyear(Game.game.year), Game.game.player_ptr.economic.gold,
+//	      Game.game.player_ptr.economic.tax,
+//	      Game.game.player_ptr.economic.luxury,
+//	      Game.game.player_ptr.economic.science);
 //      return buffer;
 //#endif
 //  } else {
@@ -1480,7 +1480,7 @@ public class Mapview{
 //    city pcity = item.pcity;
 //    int i;
 //
-//    if (game.player_ptr.economic.gold >= city_buy_cost(pcity)) {
+//    if (Game.game.player_ptr.economic.gold >= city_buy_cost(pcity)) {
 //      ADD("city_buy");
 //    } else {
 //      ADD_DIS("city_buy");

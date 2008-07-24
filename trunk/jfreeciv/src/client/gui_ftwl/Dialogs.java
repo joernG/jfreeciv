@@ -19,7 +19,7 @@ public class Dialogs{
 //#endif
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "government.h"
 //#include "packets.h"
 //#include "rand.h"
@@ -88,7 +88,7 @@ public class Dialogs{
 //{
 //  /* try to find a free nation */
 //  while (1) {
-//    int index = myrand(game.playable_nation_count);
+//    int index = Rand.myrand(Game.game.playable_nation_count);
 //
 //    if (sw_list_is_row_enabled(nations_list, index)) {
 //      sw_list_set_selected_row(nations_list, index, true);
@@ -106,7 +106,7 @@ public class Dialogs{
 //  
 //  get_nation_leaders(selected_nation, &leader_count);
 //
-//  i = myrand(leader_count);
+//  i = Rand.myrand(leader_count);
 //  sw_list_set_selected_row(leaders_list, i, true);
 //}
 //
@@ -216,7 +216,7 @@ public class Dialogs{
 //  label = sw_label_create_text(root_window, string);
 //  sw_list_set_item(leaders_sex_list, 0, 1, label);
 //
-//  for (i = 0; i < game.playable_nation_count; i++) {
+//  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    nation_type nation = get_nation_by_idx(i);
 //
 //    button = sw_button_create(nations_window, null,
@@ -348,8 +348,8 @@ public class Dialogs{
 //}
 //
 ///**************************************************************************
-//  This function is called when the client disconnects or the game is
-//  over.  It should close all dialog windows for that game.
+//  This function is called when the client disconnects or the Game.game is
+//  over.  It should close all dialog windows for that Game.game.
 //**************************************************************************/
 //void popdown_all_game_dialogs()
 //{

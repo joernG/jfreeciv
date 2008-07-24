@@ -22,7 +22,7 @@ public class Aihunt{
 //
 //#include "city.h"
 //#include "combat.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "log.h"
 //#include "pf_tools.h"
@@ -268,7 +268,7 @@ public class Aihunt{
 //  assert(!is_barbarian(pplayer));
 //  assert(pplayer.is_alive);
 //
-//  for(player aplayer: game.players){
+//  for(player aplayer: Game.game.players){
 //    if (!aplayer.is_alive || !is_player_dangerous(pplayer, aplayer)) {
 //      continue;
 //    }
@@ -280,7 +280,7 @@ public class Aihunt{
 //
 //      if (ptile.city
 //          || TEST_BIT(target.ai.hunted, pplayer.player_no)
-//          || (!is_ocean(ptile.terrain) && is_sailing_unit(punit))
+//          || (!Terrain_H.is_ocean(ptile.terrain) && is_sailing_unit(punit))
 //          || (!is_sailing_unit(target) && is_sailing_unit(punit))
 //          || (is_sailing_unit(target) && !is_sailing_unit(punit))
 //          || !goto_is_sane(punit, target.tile, true)) {
@@ -288,8 +288,8 @@ public class Aihunt{
 //        continue;
 //      }
 //      if (target.ai.cur_pos && target.ai.prev_pos) {
-//        dist1 = real_map_distance(punit.tile, *target.ai.cur_pos);
-//        dist2 = real_map_distance(punit.tile, *target.ai.prev_pos);
+//        dist1 = Map.real_map_distance(punit.tile, *target.ai.cur_pos);
+//        dist2 = Map.real_map_distance(punit.tile, *target.ai.prev_pos);
 //      } else {
 //        dist1 = dist2 = 0;
 //      }
@@ -329,7 +329,7 @@ public class Aihunt{
 //      }
 //      stackthreat *= 9; /* WAG */
 //      stackthreat += stackcost;
-//      stackthreat /= real_map_distance(punit.tile, target.tile) + 1;
+//      stackthreat /= Map.real_map_distance(punit.tile, target.tile) + 1;
 //      UNIT_LOG(LOGLEVEL_HUNT, punit, "considering hunting %s's %s(%d, %d) id " +
 //               "id %d with want %d, dist1 %d, dist2 %d", 
 //               defender.unit_owner().name, defender.unit_type().name, 

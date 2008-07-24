@@ -26,7 +26,7 @@ public class Gotodlg{
 //#include <gdk/gdkkeysyms.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "Map.map.h"
 //#include "packets.h"
 //#include "player.h"
@@ -249,11 +249,11 @@ public class Gotodlg{
 //
 //  gtk_list_store_clear(store);
 //
-//  for(i = 0, j = 0; i < game.nplayers; i++) {
-//    if (!all_cities && i != game.player_idx)
+//  for(i = 0, j = 0; i < Game.game.nplayers; i++) {
+//    if (!all_cities && i != Game.game.player_idx)
 //      continue;
 //
-//    city_list_iterate(game.players[i].cities, pcity) {
+//    city_list_iterate(Game.game.players[i].cities, pcity) {
 //      gtk_list_store_append(store, &it);
 //
 //      /* FIXME: should use unit_can_airlift_to(). */

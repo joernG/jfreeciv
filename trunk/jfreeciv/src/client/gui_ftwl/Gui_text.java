@@ -169,10 +169,10 @@ public class Gui_text{
 //
 //  switch (activity) {
 //  case ACTIVITY_ROAD:
-//    map_set_special(ptile, S_ROAD);
+//    map_set_special(ptile, Terrain_H.S_ROAD);
 //    break;
 //  case ACTIVITY_RAILROAD:
-//    map_set_special(ptile, S_RAILROAD);
+//    map_set_special(ptile, Terrain_H.S_RAILROAD);
 //    break;
 //  case ACTIVITY_MINE:
 //    map_mine_tile(ptile);
@@ -312,8 +312,8 @@ public class Gui_text{
 //      && (tinfo.irrigation_result != ttype)) {
 //    irrtext = util.my_snprintf( irrfmt,
 //		(get_tile_type(tinfo.irrigation_result)).terrain_name);
-//  } else if (map_has_special(punit.tile, S_IRRIGATION)
-//	     && player_knows_techs_with_flag(game.player_ptr, TF_FARMLAND)) {
+//  } else if (Map.map_has_special(punit.tile, S_IRRIGATION)
+//	     && player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND)) {
 //    irrtext = String.format( "Bu_ild Farmland");
 //  }
 //  if ((tinfo.mining_result != T_LAST) && (tinfo.mining_result != ttype)) {
@@ -358,7 +358,7 @@ public class Gui_text{
 //
 //    add_line("Buy production");
 //    add_line("Cost: %d (%d in treasury)",
-//	     city_buy_cost(pcity), game.player_ptr.economic.gold);
+//	     city_buy_cost(pcity), Game.game.player_ptr.economic.gold);
 //    add_line("Producting: %s (%d turns)", name,
 //	     city_turns_to_build(pcity, pcity.currently_building,
 //				 pcity.is_building_unit, true));
@@ -375,7 +375,7 @@ public class Gui_text{
 //****************************************************************************/
 //final String mapview_get_city_tooltip_text(city pcity)
 //{
-//  player owner = city_owner(pcity);
+//  player owner = City.city_owner(pcity);
 //  INIT;
 //
 //  add_line("%s", pcity.name);
@@ -388,7 +388,7 @@ public class Gui_text{
 //****************************************************************************/
 //final String mapview_get_city_info_text(city pcity)
 //{
-//  player owner = city_owner(pcity);
+//  player owner = City.city_owner(pcity);
 //  INIT;
 //
 //  add_line("City: %s (%s)", pcity.name,
@@ -406,7 +406,7 @@ public class Gui_text{
 //{
 //  unit_type ptype = punit.unit_type();
 //  city pcity =
-//      player_find_city_by_id(game.player_ptr, punit.homecity);
+//      player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //  INIT;
 //
 //  add("%s", ptype.name);
@@ -437,9 +437,9 @@ public class Gui_text{
 //    char tmp[64] = { 0 };
 //    unit_type ptype = punit.unit_type();
 //
-//    if (punit.owner == game.player_idx) {
+//    if (punit.owner == Game.game.player_idx) {
 //      city pcity =
-//	  player_find_city_by_id(game.player_ptr, punit.homecity);
+//	  player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //
 //      if (pcity){
 //	tmp = util.my_snprintf( "/%s", pcity.name);
@@ -447,7 +447,7 @@ public class Gui_text{
 //    }
 //    add_line("Unit: %s(%s%s)", ptype.name,
 //	     get_nation_name(punit.unit_owner().nation), tmp);
-//    if (punit.owner != game.player_idx) {
+//    if (punit.owner != Game.game.player_idx) {
 //      unit apunit = get_unit_in_focus();
 //
 //      if (apunit) {

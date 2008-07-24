@@ -1,5 +1,7 @@
 package server;
 
+import common.unit.unit;
+
 public class Citytools{
 ///**********************************************************************
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -117,7 +119,7 @@ public class Citytools{
 //using its own internal algorithm.  Lower priority values are
 //more desired, and all priorities are non-negative.
 //
-//This function takes into account game.natural_city_names, and
+//This function takes into account Game.game.natural_city_names, and
 //should be able to deal with any future options we want to add.
 //*****************************************************************/
 //static int evaluate_city_name_priority(tile ptile,
@@ -127,7 +129,7 @@ public class Citytools{
 //  /* Lower values mean higher priority. */
 //  float priority = (float)default_priority;
 //  int goodness;
-//  Terrain_type_id type;
+//  int type;
 //
 //  /* Increasing this value will increase the difference caused by
 //     (non-)matching terrain.  A matching terrain is mult_factor
@@ -142,7 +144,7 @@ public class Citytools{
 //   * it elewhere because this localizes everything to this
 //   * function, even though it's a bit inefficient.
 //   */
-//  if (!game.natural_city_names) {
+//  if (!Game.game.natural_city_names) {
 //    return default_priority;
 //  }
 //
@@ -161,7 +163,7 @@ public class Citytools{
 //   */
 //
 //  priority += 10.0;
-//  priority *= 10.0 + myrand(5);
+//  priority *= 10.0 + Rand.myrand(5);
 //
 //  /*
 //   * The terrain priority in the city_name struct will be either
@@ -174,7 +176,7 @@ public class Citytools{
 //   * we _only_ multiplied (or divided), then cities that had more
 //   * terrain labels would have their priorities hurt (or helped).
 //   */
-//  goodness = map_has_special(ptile, S_RIVER) ?
+//  goodness = Map.map_has_special(ptile, S_RIVER) ?
 //	      city_name.river : -city_name.river;
 //  if (goodness > 0) {
 //    priority /= mult_factor;
@@ -262,7 +264,7 @@ public class Citytools{
 //  connection pconn = Connection.find_conn_by_user(pplayer.username);
 //
 //  /* Mode 1: A city name has to be unique for each player. */
-//  if (game.allowed_city_names == 1 &&
+//  if (Game.game.allowed_city_names == 1 &&
 //      city_list_find_name(&pplayer.cities, city_name)) {
 //    if (error_buf) {
 //      error_buf = String.format "You already have a city called %s.",
@@ -272,7 +274,7 @@ public class Citytools{
 //  }
 //
 //  /* Modes 2,3: A city name has to be globally unique. */
-//  if ((game.allowed_city_names == 2 || game.allowed_city_names == 3)
+//  if ((Game.game.allowed_city_names == 2 || Game.game.allowed_city_names == 3)
 //      && game_find_city_by_name(city_name)) {
 //    if (error_buf) {
 //      error_buf = String.format
@@ -291,10 +293,10 @@ public class Citytools{
 //   * player's default city names.  Note the name will already have been
 //   * allowed if it is in this player's default city names list.
 //   */
-//  if (game.allowed_city_names == 3) {
+//  if (Game.game.allowed_city_names == 3) {
 //    player pother = null;
 //
-//    for(player player2: game.players){
+//    for(player player2: Game.game.players){
 //      if (player2 != pplayer && is_default_city_name(city_name, player2)) {
 //	pother = player2;
 //	break;
@@ -345,8 +347,8 @@ public class Citytools{
 //char *city_name_suggestion(player pplayer, tile ptile)
 //{
 //  int i = 0, j;
-//  boolean nations_selected[game.nation_count];
-//  int nation_list[game.nation_count], n;
+//  boolean nations_selected[Game.game.nation_count];
+//  int nation_list[Game.game.nation_count], n;
 //  int queue_size;
 //
 //  static final int num_tiles = Map_H.MAP_MAX_WIDTH * Map_H.MAP_MAX_HEIGHT; 
@@ -381,14 +383,14 @@ public class Citytools{
 //  nation_list[0] = pplayer.nation;
 //  nations_selected[pplayer.nation] = true;
 //
-//  while (i < game.nation_count) {
+//  while (i < Game.game.nation_count) {
 //    for (; i < queue_size; i++) {
 //      nation_type nation;
 //      char *name;
 //
 //      {
 //	/* Pick a random nation from the queue. */
-//	final int which = i + myrand(queue_size - i);
+//	final int which = i + Rand.myrand(queue_size - i);
 //	final int tmp = nation_list[i];
 //
 //	nation_list[i] = nation_list[which];
@@ -428,7 +430,7 @@ public class Citytools{
 //    }
 //
 //    /* Append all remaining nations. */
-//    for (n = 0; n < game.nation_count; n++) {
+//    for (n = 0; n < Game.game.nation_count; n++) {
 //      if (!nations_selected[n]) {
 //	nation_list[queue_size] = n;
 //	nations_selected[n] = true;
@@ -464,7 +466,7 @@ public class Citytools{
 //**************************************************************************/
 //city find_city_wonder(Impr_Type_id id)
 //{
-//  return (find_city_by_id(game.global_wonders[id]));
+//  return (find_city_by_id(Game.game.global_wonders[id]));
 //}
 //
 ///**************************************************************************
@@ -549,7 +551,7 @@ public class Citytools{
 //			  boolean verbose)
 //{
 //  player from_player = punit.unit_owner();
-//  player to_player = city_owner(tocity);
+//  player to_player = City.city_owner(tocity);
 //
 //  if (from_player == to_player) {
 //    util.freelog(Log.LOG_VERBOSE, "Changed homecity of %s's %s to %s",
@@ -584,7 +586,7 @@ public class Citytools{
 //  /* FIXME: Creating a new unit and deleting the old one is a gross hack.
 //   * instead we should make the change on the existing unit, even though
 //   * it's more work. */
-//  () create_unit_full(to_player, punit.tile, punit.type,
+//  Unittools.create_unit_full(to_player, punit.tile, punit.type,
 //			  punit.veteran, tocity.id, punit.moves_left,
 //			  punit.hp,
 //			  find_unit_by_id(punit.transported_by));
@@ -618,11 +620,11 @@ public class Citytools{
 //  /* Transfer enemy units in the city to the new owner.
 //   * Only relevant if we are transferring to another player. */
 //  if (pplayer != pvictim) {
-//    unit_list_iterate_safe((ptile).units, vunit)  {
+//	for(unit vunit: (ptile).units.data){
 //      /* Don't transfer units already owned by new city-owner --wegge */ 
 //      if (vunit.unit_owner() == pvictim) {
 //	transfer_unit(vunit, pcity, verbose);
-//	wipe_unit(vunit);
+//	Unittools.wipe_unit(vunit);
 //	unit_list_unlink(units, vunit);
 //      } else if (!pplayers_allied(pplayer, vunit.unit_owner())) {
 //        /* the owner of vunit is allied to pvictim but not to pplayer */
@@ -633,15 +635,16 @@ public class Citytools{
 //
 //  /* Any remaining units supported by the city are either given new home
 //     cities or maybe destroyed */
-//  unit_list_iterate_safe(*units, vunit) {
+//  unit_list_iterate_safe(*vunit, vunit) {
+//	for(unit vunit: vunit){
 //    city new_home_city = map_get_city(vunit.tile);
 //    if (new_home_city && new_home_city != exclude_city
-//	&& city_owner(new_home_city) == vunit.unit_owner()) {
+//	&& City.city_owner(new_home_city) == vunit.unit_owner()) {
 //      /* unit is in another city: make that the new homecity,
 //	 unless that city is actually the same city (happens if disbanding) */
 //      transfer_unit(vunit, new_home_city, verbose);
 //    } else if (kill_outside == -1
-//	       || real_map_distance(vunit.tile, ptile) <= kill_outside) {
+//	       || Map.real_map_distance(vunit.tile, ptile) <= kill_outside) {
 //      /* else transfer to specified city. */
 //      transfer_unit(vunit, pcity, verbose);
 //    } else {
@@ -651,7 +654,7 @@ public class Citytools{
 //	      vunit.unit_owner().name, unit_name(vunit.type),
 //	      vunit.tile.x, vunit.tile.y, pcity.name);
 //      if (verbose) {
-//	notify_player_ex(vunit.unit_owner(), vunit.tile,
+//	Plrhand.notify_player_ex(vunit.unit_owner(), vunit.tile,
 //			 E_UNIT_LOST,
 //			 "Game: %s lost along with control of %s.",
 //			 unit_name(vunit.type), pcity.name);
@@ -662,7 +665,7 @@ public class Citytools{
 //       no cargo deletion => no trouble with "units" list.
 //       In cases where the cargo can be left without transport the calling
 //       function should take that into account. */
-//    wipe_unit(vunit);
+//    Unittools.wipe_unit(vunit);
 //  }
 //}
 //
@@ -683,10 +686,10 @@ public class Citytools{
 //  int dist = -1;
 //  city rcity = null;
 //  city_list_iterate(pplayer.cities, pcity)
-//    if ((real_map_distance(ptile, pcity.tile) < dist || dist == -1) &&
+//    if ((Map.real_map_distance(ptile, pcity.tile) < dist || dist == -1) &&
 //        (!sea_required || is_ocean_near_tile(pcity.tile)) &&
 //        (!pexclcity || (pexclcity != pcity))) {
-//      dist = real_map_distance(ptile, pcity.tile);
+//      dist = Map.real_map_distance(ptile, pcity.tile);
 //      rcity = pcity;
 //    }
 //  }
@@ -696,23 +699,23 @@ public class Citytools{
 //
 ///**************************************************************************
 //  called when a player conquers a city, remove buildings (not wonders and 
-//  always palace) with game.razechance% chance, barbarians destroy more
+//  always palace) with Game.game.razechance% chance, barbarians destroy more
 //  set the city's shield stock to 0
 //**************************************************************************/
 //static void raze_city(city pcity)
 //{
-//  int razechance = game.razechance;
+//  int razechance = Game.game.razechance;
 //
 //  /* We don't use city_remove_improvement here as the global effects
 //     stuff has already been handled by transfer_city */
-//  pcity.improvements[game.palace_building] = I_NONE;
+//  pcity.improvements[Game.game.palace_building] = I_NONE;
 //
 //  /* land barbarians are more likely to destroy city improvements */
-//  if (is_land_barbarian(city_owner(pcity)))
+//  if (is_land_barbarian(City.city_owner(pcity)))
 //    razechance += 30;
 //
 //  built_impr_iterate(pcity, i) {
-//    if (!is_wonder(i) && (myrand(100) < razechance)) {
+//    if (!is_wonder(i) && (Rand.myrand(100) < razechance)) {
 //      pcity.improvements[i]=I_NONE;
 //    }
 //  } built_impr_iterate_end;
@@ -741,7 +744,7 @@ public class Citytools{
 //      /* refresh regardless; either it lost a trade route or
 //	 the trade route revenue changed. */
 //      city_refresh(oldtradecity);
-//      send_city_info(city_owner(oldtradecity), oldtradecity);
+//      send_city_info(City.city_owner(oldtradecity), oldtradecity);
 //    }
 //  }
 //}
@@ -752,7 +755,7 @@ public class Citytools{
 //static void build_free_palace(player pplayer,
 //			       final String final old_capital_name)
 //{
-//  int size = city_list_size(&pplayer.cities);
+//  int size = pplayer.cities.foo_list_size();
 //  city pnew_capital;
 //
 //  if (size == 0) {
@@ -762,9 +765,9 @@ public class Citytools{
 //
 //  assert(pplayer.find_palace() == null);
 //
-//  pnew_capital = city_list_get(&pplayer.cities, myrand(size));
+//  pnew_capital = city_list_get(&pplayer.cities, Rand.myrand(size));
 //
-//  city_add_improvement(pnew_capital, game.palace_building);
+//  city_add_improvement(pnew_capital, Game.game.palace_building);
 //
 //  /*
 //   * send_player_cities will recalculate all cities and send them to
@@ -795,9 +798,9 @@ public class Citytools{
 //{
 //  int i;
 //  Speclists<unit> old_city_units;
-//  player pgiver = city_owner(pcity);
+//  player pgiver = City.city_owner(pcity);
 //  int old_trade_routes[NUM_TRADEROUTES];
-//  boolean had_palace = pcity.improvements[game.palace_building] != I_NONE;
+//  boolean had_palace = pcity.improvements[Game.game.palace_building] != I_NONE;
 //  char old_city_name[MAX_LEN_NAME];
 //
 //  assert(pgiver != ptaker);
@@ -810,7 +813,7 @@ public class Citytools{
 //    /* otherwise we might delete the homecity from under the unit
 //       in the client. */
 //    punit.homecity = 0;
-//    send_unit_info(null, punit);
+//    Unittools.send_unit_info(null, punit);
 //  } }
 //  unit_list_unlink_all(&pcity.units_supported);
 //  unit_list_init(&pcity.units_supported);
@@ -827,11 +830,11 @@ public class Citytools{
 //  map_unfog_pseudo_city_area(ptaker, pcity.tile);
 //
 //  old_city_name = pcity.name;
-//  if (game.allowed_city_names == 1
+//  if (Game.game.allowed_city_names == 1
 //      && city_list_find_name(&ptaker.cities, pcity.name)) {
 //    pcity.name = String.format(
 //	       city_name_suggestion(ptaker, pcity.tile));
-//    notify_player_ex(ptaker, pcity.tile, event_type.E_NOEVENT,
+//    Plrhand.notify_player_ex(ptaker, pcity.tile, event_type.E_NOEVENT,
 //		     ("You already had a city called %s." +
 //		       " The city was renamed to %s."), old_city_name,
 //		     pcity.name);
@@ -920,22 +923,22 @@ public class Citytools{
 //
 //  if (terrain_control.may_road
 //      && player_knows_techs_with_flag (ptaker, TF_RAILROAD)
-//      && !map_has_special(pcity.tile, S_RAILROAD)) {
+//      && !Map.map_has_special(pcity.tile, Terrain_H.S_RAILROAD)) {
 //    notify_player(ptaker,
 //		  ("Game: The people in %s are stunned by your" +
 //		    " technological insight!\n" +
 //		    "      Workers spontaneously gather and upgrade" +
 //		    " the city with railroads."),
 //		  pcity.name);
-//    map_set_special(pcity.tile, S_RAILROAD);
-//    update_tile_knowledge(pcity.tile);
+//    map_set_special(pcity.tile, Terrain_H.S_RAILROAD);
+//    Maphand.update_tile_knowledge(pcity.tile);
 //  }
 //
 //  map_fog_pseudo_city_area(pgiver, pcity.tile);
 //
 //  /* Build a new palace for free if the player lost her capital and
 //     savepalace is on. */
-//  if (had_palace && game.savepalace) {
+//  if (had_palace && Game.game.savepalace) {
 //    build_free_palace(pgiver, pcity.name);
 //  }
 //
@@ -956,14 +959,14 @@ public class Citytools{
 //  util.freelog(Log.LOG_DEBUG, "Creating city %s", name);
 //
 //  if (terrain_control.may_road) {
-//    map_set_special(ptile, S_ROAD);
+//    map_set_special(ptile, Terrain_H.S_ROAD);
 //    if (player_knows_techs_with_flag(pplayer, TF_RAILROAD)) {
-//      map_set_special(ptile, S_RAILROAD);
-//      update_tile_knowledge(ptile);
+//      map_set_special(ptile, Terrain_H.S_RAILROAD);
+//      Maphand.update_tile_knowledge(ptile);
 //    }
 //  }
 //
-//  /* It is possible that update_tile_knowledge() already sent tile information
+//  /* It is possible that Maphand.update_tile_knowledge() already sent tile information
 //   * to some players, but we don't want to make any special handling for
 //   * those cases.  The network code may prevent asecond packet from being
 //   * sent anyway. */
@@ -979,10 +982,10 @@ public class Citytools{
 //    pplayer.capital = true;
 //
 //    for (i = 0; i < MAX_NUM_BUILDING_LIST; i++) {
-//      if (game.rgame.global_init_buildings[i] == B_LAST) {
+//      if (Game.game.rgame.global_init_buildings[i] == B_LAST) {
 //	break;
 //      }
-//      city_add_improvement(pcity, game.rgame.global_init_buildings[i]);
+//      city_add_improvement(pcity, Game.game.rgame.global_init_buildings[i]);
 //    }
 //    for (i = 0; i < MAX_NUM_BUILDING_LIST; i++) {
 //      if (nation.init_buildings[i] == B_LAST) {
@@ -1021,7 +1024,7 @@ public class Citytools{
 //  city_refresh(pcity);
 //
 //  /* Put vision back to normal, if fortress acted as a watchtower */
-//  if (map_has_special(ptile, S_FORTRESS)) {
+//  if (Map.map_has_special(ptile, S_FORTRESS)) {
 //    unit_list_iterate((ptile).units, punit) {
 //      player owner = punit.unit_owner();
 //      if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
@@ -1032,12 +1035,12 @@ public class Citytools{
 //    }
 //    }
 //  }
-//  map_clear_special(ptile, S_FORTRESS);
-//  update_tile_knowledge(ptile);
+//  Map.map_clear_special(ptile, S_FORTRESS);
+//  Maphand.update_tile_knowledge(ptile);
 //
 //  reset_move_costs(ptile);
-///* I stupidly thought that setting S_ROAD took care of this, but of course
-//the city_id isn't set when S_ROAD is set, so reset_move_costs doesn't allow
+///* I stupidly thought that setting Terrain_H.S_ROAD took care of this, but of course
+//the city_id isn't set when Terrain_H.S_ROAD is set, so reset_move_costs doesn't allow
 //sea movement at the point it's called.  This led to a problem with the
 //warmap (but not the GOTOmap warmap) which meant the AI was very reluctant
 //to use ferryboats.  I really should have identified this sooner. -- Syela */
@@ -1046,9 +1049,9 @@ public class Citytools{
 //  send_city_info(null, pcity);
 //  sync_cities(); /* Will also send pcity. */
 //
-//  notify_player_ex(pplayer, ptile, E_CITY_BUILD,
+//  Plrhand.notify_player_ex(pplayer, ptile, E_CITY_BUILD,
 //		   "Game: You have founded %s", pcity.name);
-//  maybe_make_contact(ptile, city_owner(pcity));
+//  maybe_make_contact(ptile, City.city_owner(pcity));
 //
 //  unit_list_iterate((ptile).units, punit) {
 //    city home = find_city_by_id(punit.homecity);
@@ -1061,7 +1064,7 @@ public class Citytools{
 //    /* Update happiness (the unit may no longer cause unrest). */
 //    if (home) {
 //      city_refresh(home);
-//      send_city_info(city_owner(home), home);
+//      send_city_info(City.city_owner(home), home);
 //    }
 //  } }
 //  sanity_check_city(pcity);
@@ -1075,9 +1078,9 @@ public class Citytools{
 //void remove_city(city pcity)
 //{
 //  int o;
-//  player pplayer = city_owner(pcity);
+//  player pplayer = City.city_owner(pcity);
 //  tile ptile = pcity.tile;
-//  boolean had_palace = pcity.improvements[game.palace_building] != I_NONE;
+//  boolean had_palace = pcity.improvements[Game.game.palace_building] != I_NONE;
 //  char *city_name = mystrdup(pcity.name);
 //
 //  built_impr_iterate(pcity, i) {
@@ -1092,19 +1095,19 @@ public class Citytools{
 //
 //    if (new_home_city
 //	&& new_home_city != pcity
-//	&& city_owner(new_home_city) == pplayer) {
+//	&& City.city_owner(new_home_city) == pplayer) {
 //      /* unit is in another city: make that the new homecity,
 //	 unless that city is actually the same city (happens if disbanding) */
 //      util.freelog(Log.LOG_VERBOSE, "Changed homecity of %s in %s",
 //	      unit_name(punit.type), new_home_city.name);
 //      notify_player(pplayer, "Game: Changed homecity of %s in %s.",
 //		    unit_name(punit.type), new_home_city.name);
-//      () create_unit_full(city_owner(new_home_city), ptile,
+//      Unittools.create_unit_full(City.city_owner(new_home_city), ptile,
 //			      punit.type, punit.veteran, new_home_city.id,
 //			      punit.moves_left, punit.hp, null);
 //    }
 //
-//    wipe_unit(punit);
+//    Unittools.wipe_unit(punit);
 //  }
 //
 //  ptile = pcity.tile;
@@ -1121,12 +1124,12 @@ public class Citytools{
 //
 //    handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //    moved = false;
-//    adjc_iterate(ptile, tile1) {
-//      if (is_ocean(map_get_terrain(tile1))) {
+//    for(tile tile1: util.adjc_tile_iterate(ptile)) {
+//      if (Terrain_H.is_ocean(tile1.terrain)) {
 //	if (could_unit_move_to_tile(punit, tile1) == 1) {
-//	  moved = handle_unit_move_request(punit, tile1, false, true);
+//	  moved = Unithand.handle_unit_move_request(punit, tile1, false, true);
 //	  if (moved) {
-//	    notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
+//	    Plrhand.notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
 //			     ("Game: Moved %s out of disbanded city %s " +
 //			       "to avoid being landlocked."),
 //			     punit.unit_type().name, pcity.name);
@@ -1134,14 +1137,14 @@ public class Citytools{
 //	  }
 //	}
 //      }
-//    } adjc_iterate_end;
+//    }
 //  OUT:
 //    if (!moved) {
-//      notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
+//      Plrhand.notify_player_ex(punit.unit_owner(), null, event_type.E_NOEVENT,
 //		       ("Game: When %s was disbanded your %s could not " +
 //			 "get out, and it was therefore stranded."),
 //		       pcity.name, punit.unit_type().name);
-//      wipe_unit(punit);
+//      Unittools.wipe_unit(punit);
 //    }
 //    /* We just messed with the unit list. Avoid trouble by starting over.
 //       Note that the problem is reduced by one unit, so no loop trouble. */
@@ -1167,8 +1170,8 @@ public class Citytools{
 //  game_remove_city(pcity);
 //  map_update_borders_city_destroyed(ptile);
 //
-//  for(player other_player: game.players){
-//    if (map_is_known_and_seen(ptile, other_player)) {
+//  for(player other_player: Game.game.players){
+//    if (Maphand.map_is_known_and_seen(ptile, other_player)) {
 //      reality_check_city(other_player, ptile);
 //    }
 //  }
@@ -1191,7 +1194,7 @@ public class Citytools{
 //
 //  /* Build a new palace for free if the player lost her capital and
 //     savepalace is on. */
-//  if (had_palace && game.savepalace) {
+//  if (had_palace && Game.game.savepalace) {
 //    build_free_palace(pplayer, city_name);
 //  }
 //
@@ -1208,7 +1211,7 @@ public class Citytools{
 //  boolean do_civil_war = false;
 //  int coins;
 //  player pplayer = punit.unit_owner();
-//  player cplayer = city_owner(pcity);
+//  player cplayer = City.city_owner(pcity);
 //
 //  /* If not at war, may peacefully enter city. Or, if we cannot occupy
 //   * the city, this unit entering will not trigger the effects below. */
@@ -1230,10 +1233,10 @@ public class Citytools{
 //  }
 //  
 //  if (pcity.is_capital()
-//      && city_list_size(&cplayer.cities) >= game.civilwarsize
-//      && game.nplayers < game.playable_nation_count
-//      && game.civilwarsize < GAME_MAX_CIVILWARSIZE
-//      && get_num_human_and_ai_players() < MAX_NUM_PLAYERS
+//      && cplayer.cities.foo_list_size() >= Game.game.civilwarsize
+//      && Game.game.nplayers < Game.game.playable_nation_count
+//      && Game.game.civilwarsize < GAME_MAX_CIVILWARSIZE
+//      && get_num_human_and_ai_players() < Shared_H.MAX_NUM_PLAYERS
 //      && civil_war_triggered(cplayer)) {
 //    do_civil_war = true;
 //  }
@@ -1243,12 +1246,12 @@ public class Citytools{
 //   * the city will be destroyed.
 //   */
 //  if (pcity.size <= 1) {
-//    notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT,
 //		     "Game: You destroy %s completely.", pcity.name);
-//    notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
+//    Plrhand.notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
 //		     "Game: %s has been destroyed by %s.", 
 //		     pcity.name, pplayer.name);
-//    Gamelog.gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "destroyed");
+//    Gamelog.gamelog(GAMELOG_LOSECITY, City.city_owner(pcity), pplayer, pcity, "destroyed");
 //    remove_city(pcity);
 //    if (do_civil_war) {
 //      civil_war(cplayer);
@@ -1257,32 +1260,32 @@ public class Citytools{
 //  }
 //
 //  coins = cplayer.economic.gold;
-//  coins = myrand((coins / 20) + 1) + (coins * (pcity.size)) / 200;
+//  coins = Rand.myrand((coins / 20) + 1) + (coins * (pcity.size)) / 200;
 //  pplayer.economic.gold += coins;
 //  cplayer.economic.gold -= coins;
-//  send_player_info(cplayer, cplayer);
+//  Plrhand.send_player_info(cplayer, cplayer);
 //  if (pcity.original != pplayer.player_no) {
-//    notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT, 
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT, 
 //		     ("Game: You conquer %s, your lootings accumulate" +
 //		       " to %d gold!"), 
 //		     pcity.name, coins);
-//    notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
+//    Plrhand.notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
 //		     ("Game: %s conquered %s and looted %d gold" +
 //		       " from the city."),
 //		     pplayer.name, pcity.name, coins);
-//    Gamelog.gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "conquered");
+//    Gamelog.gamelog(GAMELOG_LOSECITY, City.city_owner(pcity), pplayer, pcity, "conquered");
 //  } else {
-//    notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT, 
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, E_UNIT_WIN_ATT, 
 //		     ("Game: You have liberated %s!" +
 //		       " Lootings accumulate to %d gold."),
 //		     pcity.name, coins);
 //    
-//    notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
+//    Plrhand.notify_player_ex(cplayer, pcity.tile, E_CITY_LOST, 
 //		     ("Game: %s liberated %s and looted %d gold" +
 //		       " from the city."),
 //		     pplayer.name, pcity.name, coins);
 //
-//    Gamelog.gamelog(GAMELOG_LOSECITY, city_owner(pcity), pplayer, pcity, "liberated");
+//    Gamelog.gamelog(GAMELOG_LOSECITY, City.city_owner(pcity), pplayer, pcity, "liberated");
 //  }
 //
 //  get_a_tech(pplayer, cplayer);
@@ -1292,7 +1295,7 @@ public class Citytools{
 //   * the size is reduced. */
 //  transfer_city(pplayer, pcity , 0, true, true, true);
 //  city_reduce_size(pcity, 1);
-//  send_player_info(pplayer, pplayer); /* Update techs */
+//  Plrhand.send_player_info(pplayer, pplayer); /* Update techs */
 //
 //  if (do_civil_war) {
 //    civil_war(cplayer);
@@ -1310,7 +1313,7 @@ public class Citytools{
 //
 //  for (i = 0; i < NUM_TRADEROUTES; i++) {
 //    city other = find_city_by_id(pcity.trade[i]);
-//    if (other && city_owner(other) == pplayer) {
+//    if (other && City.city_owner(other) == pplayer) {
 //      return true;
 //    }
 //  }
@@ -1358,13 +1361,13 @@ public class Citytools{
 //**************************************************************************/
 //void refresh_dumb_city(city pcity)
 //{
-//  for(player pplayer: game.players){
-//    if (map_is_known_and_seen(pcity.tile, pplayer)
+//  for(player pplayer: Game.game.players){
+//    if (Maphand.map_is_known_and_seen(pcity.tile, pplayer)
 //	|| player_has_traderoute_with_city(pplayer, pcity)) {
 //      if (update_dumb_city(pplayer, pcity)) {
 //	struct packet_city_short_info packet;
 //
-//	if (city_owner(pcity) != pplayer) {
+//	if (City.city_owner(pcity) != pplayer) {
 //	  /* Don't send the short_city information to someone who can see the
 //	   * city's internals.  Doing so would really confuse the client. */
 //	  package_dumb_city(pplayer, pcity.tile, &packet);
@@ -1388,20 +1391,20 @@ public class Citytools{
 //**************************************************************************/
 //static void broadcast_city_info(city pcity)
 //{
-//  player powner = city_owner(pcity);
+//  player powner = City.city_owner(pcity);
 //  struct packet_city_info packet;
 //  struct packet_city_short_info sc_pack;
 //
 //  /* Send to everyone who can see the city. */
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (can_player_see_city_internals(pplayer, pcity)) {
-//      if (!nocity_send || pplayer != city_owner(pcity)) {
+//      if (!nocity_send || pplayer != City.city_owner(pcity)) {
 //	update_dumb_city(powner, pcity);
 //	package_city(pcity, &packet, false);
 //	lsend_packet_city_info(&powner.connections, &packet);
 //      }
 //    } else {
-//      if (map_is_known_and_seen(pcity.tile, pplayer)
+//      if (Maphand.map_is_known_and_seen(pcity.tile, pplayer)
 //	  || player_has_traderoute_with_city(pplayer, pcity)) {
 //	update_dumb_city(pplayer, pcity);
 //	package_dumb_city(pplayer, pcity.tile, &sc_pack);
@@ -1413,7 +1416,7 @@ public class Citytools{
 //  /* send to non-player observers:
 //   * should these only get dumb_city type info?
 //   */
-//  for (conn pconn : game.game_connections.data) {
+//  for (conn pconn : Game.game.game_connections.data) {
 //    if (!pconn.player && pconn.observer) {
 //      package_city(pcity, &packet, false);
 //      send_packet_city_info(pconn, &packet);
@@ -1470,10 +1473,10 @@ public class Citytools{
 //  if (Srv_main.server_state != RUN_GAME_STATE && Srv_main.server_state != server_states.GAME_OVER_STATE)
 //    return;
 //
-//  if (dest == city_owner(pcity) && nocity_send)
+//  if (dest == City.city_owner(pcity) && nocity_send)
 //    return;
 //
-//  if (!dest || dest == city_owner(pcity))
+//  if (!dest || dest == City.city_owner(pcity))
 //    pcity.synced = true;
 //  if (!dest) {
 //    broadcast_city_info(pcity);
@@ -1513,7 +1516,7 @@ public class Citytools{
 //  if (!pcity)
 //    pcity = map_get_city(ptile);
 //  if (pcity)
-//    powner = city_owner(pcity);
+//    powner = City.city_owner(pcity);
 //
 //  if (powner && powner == pviewer) {
 //    /* send info to owner */
@@ -1535,10 +1538,10 @@ public class Citytools{
 //	lsend_packet_city_info(dest, &packet);
 //      }
 //    } else {
-//      if (!map_is_known(ptile, pviewer)) {
-//	show_area(pviewer, ptile, 0);
+//      if (!Maphand.map_is_known(ptile, pviewer)) {
+//	Maphand.show_area(pviewer, ptile, 0);
 //      }
-//      if (map_is_known_and_seen(ptile, pviewer)) {
+//      if (Maphand.map_is_known_and_seen(ptile, pviewer)) {
 //	if (pcity) {		/* it's there and we see it; update and send */
 //	  update_dumb_city(pviewer, pcity);
 //	  package_dumb_city(pviewer, ptile, &sc_pack);
@@ -1656,7 +1659,7 @@ public class Citytools{
 //  /* pcity.occupied isn't used at the server, so we go straight to the
 //   * unit list to check the occupied status. */
 //  boolean occupied =
-//    (unit_list_size(&pcity.tile.units) > 0);
+//    (pcity.tile.units.foo_list_size() > 0);
 //  boolean happy = city_happy(pcity), unhappy = city_unhappy(pcity);
 // 
 //  if (pdcity
@@ -1792,7 +1795,7 @@ public class Citytools{
 //****************************************************************************/
 //void building_lost(city pcity, Impr_Type_id id)
 //{
-//  player owner = city_owner(pcity);
+//  player owner = City.city_owner(pcity);
 //  boolean was_capital = pcity.is_capital();
 //
 //  city_remove_improvement(pcity,id);
@@ -1827,7 +1830,7 @@ public class Citytools{
 //       because the worklist advances, then the wonder was completed -- 
 //       don't announce that the player has *stopped* building that wonder. 
 //       */
-//    notify_player_ex(null, pcity.tile, E_WONDER_STOPPED,
+//    Plrhand.notify_player_ex(null, pcity.tile, E_WONDER_STOPPED,
 //		     "Game: The %s have stopped building The %s in %s.",
 //		     Nation.get_nation_name_plural(pplayer.nation),
 //		     get_impr_name_ex(pcity, pcity.currently_building),
@@ -1844,7 +1847,7 @@ public class Citytools{
 //
 //  /* What's the name of the target? */
 //  if (is_unit)
-//    name = unit_types[pcity.currently_building].name;
+//    name = Unittype_P.unit_types[pcity.currently_building].name;
 //  else
 //    name = improvement_types[pcity.currently_building].name;
 //
@@ -1860,12 +1863,12 @@ public class Citytools{
 //  /* FIXME: this may give bad grammar when translated if the 'source'
 //   * string can have multiple values. */
 //  if (event != event_type.E_NOEVENT) {
-//    notify_player_ex(pplayer, pcity.tile, event,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, event,
 //		     /* TRANS: "<city> is building <production><source>." */
 //		     "Game: %s is building %s%s.",
 //		     pcity.name, name, source);
 //  } else {
-//    notify_player_ex(pplayer, pcity.tile, E_CITY_PRODUCTION_CHANGED,
+//    Plrhand.notify_player_ex(pplayer, pcity.tile, E_CITY_PRODUCTION_CHANGED,
 //		     /* TRANS: "<city> is building <production>." */
 //		     "Game: %s is building %s.", 
 //		     pcity.name, name);
@@ -1874,7 +1877,7 @@ public class Citytools{
 //  /* If the city is building a wonder, tell the rest of the world
 //     about it. */
 //  if (!pcity.is_building_unit && is_wonder(pcity.currently_building)) {
-//    notify_player_ex(null, pcity.tile, E_WONDER_STARTED,
+//    Plrhand.notify_player_ex(null, pcity.tile, E_WONDER_STARTED,
 //		     "Game: The %s have started building The %s in %s.",
 //		     Nation.get_nation_name_plural(pplayer.nation),
 //		     get_impr_name_ex(pcity, pcity.currently_building),
@@ -1904,12 +1907,12 @@ public class Citytools{
 //    return false;
 //  }
 //  
-//  if (is_enemy_unit_tile(ptile, city_owner(pcity))
+//  if (is_enemy_unit_tile(ptile, City.city_owner(pcity))
 //      && !is_city_center(city_x, city_y)) {
 //    return false;
 //  }
 //
-//  if (!map_is_known(ptile, city_owner(pcity))) {
+//  if (!Maphand.map_is_known(ptile, City.city_owner(pcity))) {
 //    return false;
 //  }
 //
@@ -2065,7 +2068,7 @@ public class Citytools{
 //  if (nocity_send)
 //    return;
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      /* sending will set synced to 1. */
 //      if (!pcity.synced)
@@ -2099,11 +2102,11 @@ public class Citytools{
 //**************************************************************************/
 //void city_landlocked_sell_coastal_improvements(tile ptile)
 //{
-//  adjc_iterate(ptile, tile1) {
+//  for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    city pcity = map_get_city(tile1);
 //
 //    if (pcity && !is_ocean_near_tile(tile1)) {
-//      player pplayer = city_owner(pcity);
+//      player pplayer = City.city_owner(pcity);
 //
 //      /* Sell all buildings (but not Wonders) that must be next to the ocean */
 //      built_impr_iterate(pcity, impr) {
@@ -2113,15 +2116,15 @@ public class Citytools{
 //          continue;
 //        }
 //
-//        while (!is_ocean(improvement_types[impr].terr_gate[i])
+//        while (!Terrain_H.is_ocean(improvement_types[impr].terr_gate[i])
 //               && improvement_types[impr].terr_gate[i] != T_NONE) {
 //          i++;
 //        }
 //
-//        if (is_ocean(improvement_types[impr].terr_gate[i])
+//        if (Terrain_H.is_ocean(improvement_types[impr].terr_gate[i])
 //            && !city_has_terr_spec_gate(pcity, impr)) {
 //          do_sell_building(pplayer, pcity, impr);
-//          notify_player_ex(pplayer, tile1, E_IMP_SOLD,
+//          Plrhand.notify_player_ex(pplayer, tile1, E_IMP_SOLD,
 //                           ("Game: You sell %s in %s (now landlocked)" +
 //                             " for %d gold."),
 //                           get_improvement_name(impr), pcity.name,
@@ -2129,6 +2132,6 @@ public class Citytools{
 //        }
 //      } built_impr_iterate_end;
 //    }
-//  } adjc_iterate_end;
+//  }
 //}
 }

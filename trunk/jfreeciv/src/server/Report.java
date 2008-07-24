@@ -149,7 +149,7 @@ public class Report{
 //	  ((final player_score_entry )a).value);
 //}
 //
-//static final String greatness[MAX_NUM_PLAYERS] = {
+//static final String greatness[Shared_H.MAX_NUM_PLAYERS] = {
 //  N"Magnificent",  N"Glorious", N"Great", N"Decent",
 //  N"Mediocre", N"Hilarious", N"Worthless", N"Pathetic",
 //  N"Useless", "Useless", "Useless", "Useless", "Useless", "Useless",
@@ -166,9 +166,9 @@ public class Report{
 //  int i, j = 0, rank = 0;
 //  char buffer[4096];
 //  char title[1024];
-//  struct player_score_entry size[game.nplayers];
+//  struct player_score_entry size[Game.game.nplayers];
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (pplayer.is_alive && !is_barbarian(pplayer)) {
 //      switch(which_news) {
 //      case HISTORIAN_RICHEST:
@@ -205,8 +205,8 @@ public class Report{
 //		 Nation.get_nation_name_plural(size[i].player.nation));
 //  }
 //  title = util.my_snprintf( _(historian_message[which_news]),
-//    _(historian_name[myrand(ARRAY_SIZE(historian_name))]));
-//  page_conn_etype(&game.game_connections, "Historian Publishes!",
+//    _(historian_name[Rand.myrand(ARRAY_SIZE(historian_name))]));
+//  page_conn_etype(&Game.game.game_connections, "Historian Publishes!",
 //		  title, buffer, E_BROADCAST_REPORT);
 //}
 //
@@ -243,7 +243,7 @@ public class Report{
 //    size[i].city = null;
 //  }
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
 //      int value_of_pcity = pcity.size + nr_wonders(pcity) * WONDER_FACTOR;
 //
@@ -263,14 +263,14 @@ public class Report{
 //    if (!size[i].city) {
 //	/* 
 //	 * pcity may be null if there are less then NUM_BEST_CITIES in
-//	 * the whole game.
+//	 * the whole Game.game.
 //	 */
 //      break;
 //    }
 //
 //    cat_snprintf(buffer, sizeof(buffer),
 //		 "%2d: The %s City of %s of size %d, ", i + 1,
-//		 get_nation_name(city_owner(size[i].city).nation),
+//		 get_nation_name(City.city_owner(size[i].city).nation),
 //		 size[i].city.name, size[i].city.size);
 //
 //    wonders = nr_wonders(size[i].city);
@@ -302,8 +302,8 @@ public class Report{
 //      if (pcity) {
 //	cat_snprintf(buffer, sizeof(buffer), "%s in %s (%s)\n",
 //		     get_impr_name_ex(pcity, i), pcity.name,
-//		     get_nation_name(city_owner(pcity).nation));
-//      } else if(game.global_wonders[i] != 0) {
+//		     get_nation_name(City.city_owner(pcity).nation));
+//      } else if(Game.game.global_wonders[i] != 0) {
 //	cat_snprintf(buffer, sizeof(buffer), "%s has been DESTROYED\n",
 //		     get_improvement_type(i).name);
 //      }
@@ -312,7 +312,7 @@ public class Report{
 //
 //  impr_type_iterate(i) {
 //    if (is_wonder(i)) {
-//      for(player pplayer: game.players){
+//      for(player pplayer: Game.game.players){
 //	for (city pcity : pplayer.cities.data) {
 //	  if (pcity.currently_building == i && !pcity.is_building_unit) {
 //	    cat_snprintf(buffer, sizeof(buffer),
@@ -617,7 +617,7 @@ public class Report{
 //    int basis = prow.get_value(pplayer);
 //    int place = 1;
 //
-//    for(player other: game.players){
+//    for(player other: Game.game.players){
 //      if (other.is_alive && !is_barbarian(other) &&
 //	  ((prow.greater_values_are_better
 //	    && prow.get_value(other) > basis)
@@ -634,7 +634,7 @@ public class Report{
 //    player best_player = pplayer;
 //    int best_value = prow.get_value(pplayer);
 //
-//    for(player other: game.players){
+//    for(player other: Game.game.players){
 //      if (other.is_alive && !is_barbarian(other)) {
 //	int value = prow.get_value(other);
 //
@@ -656,7 +656,7 @@ public class Report{
 //
 ///*************************************************************************
 //  Verify that a given demography string is valid.  See
-//  game.demography.
+//  Game.game.demography.
 //
 //  Other settings callback functions are in settings.c, but this one uses
 //  static values from this file so it's done separately.
@@ -719,14 +719,14 @@ public class Report{
 //
 //  selcols = 0;
 //  for (i = 0; i < ARRAY_SIZE(coltable); i++) {
-//    if (strchr(game.demography, coltable[i].key)) {
+//    if (strchr(Game.game.demography, coltable[i].key)) {
 //      selcols |= (1u << coltable[i].flag);
 //    }
 //  }
 //
 //  anyrows = false;
 //  for (i = 0; i < ARRAY_SIZE(rowtable); i++) {
-//    if (strchr(game.demography, rowtable[i].key)) {
+//    if (strchr(Game.game.demography, rowtable[i].key)) {
 //      anyrows = true;
 //      break;
 //    }
@@ -744,7 +744,7 @@ public class Report{
 //
 //  buffer[0] = '\0';
 //  for (i = 0; i < ARRAY_SIZE(rowtable); i++) {
-//    if (strchr(game.demography, rowtable[i].key)) {
+//    if (strchr(Game.game.demography, rowtable[i].key)) {
 //      final String name = _(rowtable[i].name);
 //
 //      cat_snprintf(buffer, sizeof(buffer), "%s", name);
@@ -804,9 +804,9 @@ public class Report{
 //	return false;
 //      }
 //      mystrlcpy(id, line + strlen("id "), MAX_ID_LEN);
-//      if (strcmp(id, game.id) != 0) {
-//	util.freelog(Log.LOG_ERROR, "IDs don't match! game='%s' scorelog='%s'",
-//		game.id, id);
+//      if (strcmp(id, Game.game.id) != 0) {
+//	util.freelog(Log.LOG_ERROR, "IDs don't match! Game.game='%s' scorelog='%s'",
+//		Game.game.id, id);
 //	return false;
 //      }
 //    }
@@ -859,7 +859,7 @@ public class Report{
 //    return false;
 //  }
 //
-//  if (*last_turn + 1 != game.turn) {
+//  if (*last_turn + 1 != Game.game.turn) {
 //    util.freelog(Log.LOG_ERROR, "Scorelog doesn't match savegame!");
 //    return false;
 //  }
@@ -875,9 +875,9 @@ public class Report{
 //  static final char logname[] = "civscore.log";
 //  static FILE *fp = null;
 //  static boolean disabled = false;
-//  static char player_names[MAX_NUM_PLAYERS +
-//			   MAX_NUM_BARBARIANS][MAX_LEN_NAME];
-//  static char *player_name_ptrs[MAX_NUM_PLAYERS + MAX_NUM_BARBARIANS];
+//  static char player_names[Shared_H.MAX_NUM_PLAYERS +
+//			   Shared_H.MAX_NUM_BARBARIANS][MAX_LEN_NAME];
+//  static char *player_name_ptrs[Shared_H.MAX_NUM_PLAYERS + Shared_H.MAX_NUM_BARBARIANS];
 //  static int last_turn = -1;
 //
 //  /* 
@@ -937,7 +937,7 @@ public class Report{
 //  }
 //
 //  if (!fp) {
-//    if (game.year == GAME_START_YEAR) {
+//    if (Game.game.year == GAME_START_YEAR) {
 //      oper = SL_CREATE;
 //    } else {
 //      fp = fopen(logname, "r");
@@ -968,7 +968,7 @@ public class Report{
 //	      "# <http://www.freeciv.org/lxr/source/doc/README.scorelog?v=cvs>.\n" +
 //	      "\n");
 //
-//      fprintf(fp, "id %s\n", game.id);
+//      fprintf(fp, "id %s\n", Game.game.id);
 //      for (i = 0; i<ARRAY_SIZE(score_tags); i++) {
 //	fprintf(fp, "tag %d %s\n", i, score_tags[i].name);
 //      }
@@ -988,33 +988,33 @@ public class Report{
 //
 //#define GOOD_PLAYER(p) ((p).is_alive)
 //
-//  if (game.turn > last_turn) {
-//    fprintf(fp, "turn %d %d %s\n", game.turn, game.year, Shared.textyear(game.year));
-//    last_turn = game.turn;
+//  if (Game.game.turn > last_turn) {
+//    fprintf(fp, "turn %d %d %s\n", Game.game.turn, Game.game.year, Shared.textyear(Game.game.year));
+//    last_turn = Game.game.turn;
 //  }
 //
 //  for (i = 0; i < ARRAY_SIZE(player_names); i++) {
 //    if (strlen(player_names[i]) > 0 && !GOOD_PLAYER(get_player(i))) {
-//      fprintf(fp, "delplayer %d %d\n", game.turn - 1, i);
+//      fprintf(fp, "delplayer %d %d\n", Game.game.turn - 1, i);
 //      player_names[i][0] = '\0';
 //    }
 //  }
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (GOOD_PLAYER(pplayer)
 //	&& strlen(player_names[pplayer.player_no]) == 0) {
-//      fprintf(fp, "addplayer %d %d %s\n", game.turn, pplayer.player_no,
+//      fprintf(fp, "addplayer %d %d %s\n", Game.game.turn, pplayer.player_no,
 //	      pplayer.name);
 //      mystrlcpy(player_name_ptrs[pplayer.player_no], pplayer.name,
 //		MAX_LEN_NAME);
 //    }
 //  }
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (GOOD_PLAYER(pplayer)
 //	&& strcmp(player_names[pplayer.player_no], pplayer.name) != 0) {
-//      fprintf(fp, "delplayer %d %d\n", game.turn - 1, pplayer.player_no);
-//      fprintf(fp, "addplayer %d %d %s\n", game.turn, pplayer.player_no,
+//      fprintf(fp, "delplayer %d %d\n", Game.game.turn - 1, pplayer.player_no);
+//      fprintf(fp, "addplayer %d %d %s\n", Game.game.turn, pplayer.player_no,
 //	      pplayer.name);
 //      mystrlcpy(player_names[pplayer.player_no], pplayer.name,
 //		MAX_LEN_NAME);
@@ -1022,12 +1022,12 @@ public class Report{
 //  }
 //
 //  for (i = 0; i<ARRAY_SIZE(score_tags); i++) {
-//    for(player pplayer: game.players){
+//    for(player pplayer: Game.game.players){
 //      if (!GOOD_PLAYER(pplayer)) {
 //	continue;
 //      }
 //
-//      fprintf(fp, "data %d %d %d %d\n", game.turn, i, pplayer.player_no,
+//      fprintf(fp, "data %d %d %d %d\n", Game.game.turn, i, pplayer.player_no,
 //	      score_tags[i].get_value(pplayer));
 //    }
 //  }
@@ -1056,11 +1056,11 @@ public class Report{
 //  static enum historian_type report = HISTORIAN_FIRST;
 //  static int time_to_report=20;
 //
-//  if (game.scorelog) {
+//  if (Game.game.scorelog) {
 //    log_civ_score();
 //  }
 //
-//  if (game.nplayers == 1) {
+//  if (Game.game.nplayers == 1) {
 //    return;
 //  }
 //
@@ -1070,7 +1070,7 @@ public class Report{
 //    return;
 //  }
 //
-//  time_to_report=myrand(20) + 20;
+//  time_to_report=Rand.myrand(20) + 20;
 //
 //  historian_generic(report);
 //  
@@ -1081,15 +1081,15 @@ public class Report{
 //}
 //
 ///**************************************************************************
-// Inform clients about player scores during a game.
+// Inform clients about player scores during a Game.game.
 //**************************************************************************/
 //void report_progress_scores()
 //{
 //  int i, j = 0;
 //  char buffer[4096];
-//  struct player_score_entry size[game.nplayers];
+//  struct player_score_entry size[Game.game.nplayers];
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (!is_barbarian(pplayer)) {
 //      size[j].value = get_civ_score(pplayer);
 //      size[j].player = pplayer;
@@ -1109,21 +1109,21 @@ public class Report{
 //		 Nation.get_nation_name_plural(size[i].player.nation),
 //		 size[i].value);
 //  }
-//  page_conn(&game.game_connections,
+//  page_conn(&Game.game.game_connections,
 //	    "Progress Scores:",
 //	    "The Greatest Civilizations in the world.", buffer);
 //}
 //
 ///**************************************************************************
-//  Inform clients about player scores and statistics when the game ends.
+//  Inform clients about player scores and statistics when the Game.game ends.
 //**************************************************************************/
 //void report_final_scores()
 //{
 //  int i, j = 0;
-//  struct player_score_entry size[game.nplayers];
+//  struct player_score_entry size[Game.game.nplayers];
 //  struct packet_endgame_report packet;
 //
-//  for(player pplayer: game.players){
+//  for(player pplayer: Game.game.players){
 //    if (!is_barbarian(pplayer)) {
 //      size[j].value = get_civ_score(pplayer);
 //      size[j].player = pplayer;
@@ -1151,7 +1151,7 @@ public class Report{
 //    packet.spaceship[i] = get_spaceship(size[i].player); 
 //  }  
 //
-//  lsend_packet_endgame_report(&game.game_connections, &packet);
+//  lsend_packet_endgame_report(&Game.game.game_connections, &packet);
 //}	
 //
 ///**************************************************************************

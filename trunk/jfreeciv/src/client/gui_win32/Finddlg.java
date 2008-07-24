@@ -25,7 +25,7 @@ public class Finddlg{
 //#include <windowsx.h>
 //
 //#include "fcintl.h"
-//#include "game.h"
+//#include "Game.game.h"
 //#include "player.h"
 //#include "gui_main.h"
 //#include "gui_stuff.h"
@@ -46,8 +46,8 @@ public class Finddlg{
 //  int i,id;
 //  ListBox_ResetContent(GetDlgItem(finddialog,ID_FINDCITY_LIST));
 //   
-//  for(i=0; i<game.nplayers; i++) {
-//    city_list_iterate(game.players[i].cities, pcity);
+//  for(i=0; i<Game.game.nplayers; i++) {
+//    city_list_iterate(Game.game.players[i].cities, pcity);
 //    id=ListBox_AddString(GetDlgItem(finddialog,ID_FINDCITY_LIST),pcity.name);
 //    ListBox_SetItemData(GetDlgItem(finddialog,ID_FINDCITY_LIST),id,i);
 //    
