@@ -87,7 +87,7 @@ public class Repodlgs{
 //                            XtPointer call_data);
 //void economy_list_callback(Widget w, XtPointer client_data,
 //                         XtPointer call_data);
-//static int economy_improvement_type[B_LAST];
+//static int economy_improvement_type[Improvement.B_LAST];
 //
 //static Widget economy_dialog_shell;
 //static Widget economy_label, economy_label2;
@@ -198,7 +198,7 @@ public class Repodlgs{
 //{
 //  Widget science_form;
 //  Widget  close_command;
-//  final static char *tech_list_names_ptrs[A_LAST + 1];
+//  final static char *tech_list_names_ptrs[Tech_H.A_LAST + 1];
 //  int j, flag, num_list;
 //  size_t i;
 //  Dimension width;
@@ -336,7 +336,7 @@ public class Repodlgs{
 // for(i=A_FIRST, flag=0; i<Game.game.num_tech_types; i++)
 //    if (tech_is_available(Game.game.player_ptr, i)
 //        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
-//        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
+//        && advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST
 //        && (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
 //	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //      Widget entry=
@@ -459,7 +459,7 @@ public class Repodlgs{
 //  if(is_report_dialogs_frozen()) return;
 //  if(science_dialog_shell) {
 //    char text[512];
-//    static final String tech_list_names_ptrs[A_LAST + 1];
+//    static final String tech_list_names_ptrs[Tech_H.A_LAST + 1];
 //    int j, flag;
 //    size_t i;
 //    final String report_title;
@@ -540,7 +540,7 @@ public class Repodlgs{
 //    for(i=A_FIRST, flag=0; i<Game.game.num_tech_types; i++)
 //      if (tech_is_available(Game.game.player_ptr, i)
 //	  && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
-//	  && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
+//	  && advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST
 //	  && (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
 //	      || i == Game.game.player_ptr.ai.tech_goal)) {
 //	Widget entry=
@@ -691,10 +691,10 @@ public class Repodlgs{
 //  if (ret.list_index != XAW_LIST_NONE) {
 //    /* The user has selected an improvement type. */
 //    int i = economy_improvement_type[ret.list_index];
-//    boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !is_wonder(i));
+//    boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !Improvement.is_wonder(i));
 //
 //    XtSetSensitive(sellobsolete_command, is_sellable
-//		   && improvement_obsolete(Game.game.player_ptr, i));
+//		   && Improvement.improvement_obsolete(Game.game.player_ptr, i));
 //    XtSetSensitive(sellall_command, is_sellable);
 //  } else {
 //    /* No selection has been made. */
@@ -747,11 +747,11 @@ public class Repodlgs{
 //  if(economy_dialog_shell) {
 //    int i, entries_used, tax, total;
 //    Dimension width; 
-//    static char *economy_list_names_ptrs[B_LAST+1];
-//    static char economy_list_names[B_LAST][200];
+//    static char *economy_list_names_ptrs[Improvement.B_LAST+1];
+//    static char economy_list_names[Improvement.B_LAST][200];
 //    final String report_title;
 //    char economy_total[48];
-//    struct improvement_entry entries[B_LAST];
+//    struct improvement_entry entries[Improvement.B_LAST];
 //    
 //    report_title=get_centered_report_title("Economy");
 //    xaw_set_label(economy_label, report_title);
@@ -1076,7 +1076,7 @@ public class Repodlgs{
 //	   activeunits_list_names[k],
 //	   sizeof(activeunits_list_names[k]),
 //	   "%-27s%c%9d%9d%9d%9d",
-//	   unit_name(i),
+//	   Unittype_P.unit_name(i),
 //	   can_upgrade_unittype(Game.game.player_ptr, i) != -1 ? '*': '-',
 //	   unitarray[i].building_count,
 //	   unitarray[i].active_count,

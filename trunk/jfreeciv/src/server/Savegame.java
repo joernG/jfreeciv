@@ -252,7 +252,7 @@ public class Savegame{
 //  if (terr == T_UNKNOWN) {
 //    return UNKNOWN_TERRAIN_IDENTIFIER;
 //  } else {
-//    assert(terr >= T_FIRST && terr < T_COUNT);
+//    assert(terr >= Terrain_H.T_FIRST && terr < Terrain_H.T_COUNT);
 //    return get_tile_type(terr).identifier;
 //  }
 //}
@@ -512,7 +512,7 @@ public class Savegame{
 //      }
 //      
 //      nation_id = find_nation_by_name_orig(nation);
-//      if (nation_id == NO_NATION_SELECTED) {
+//      if (nation_id == Nation_H.NO_NATION_SELECTED) {
 //	util.freelog(Log.LOG_NORMAL,
 //	        "Warning: Unknown nation %s for starting position no %d",
 //		nation,
@@ -580,7 +580,7 @@ public class Savegame{
 //				"Map.map.spec_sprite_%d_%d",
 //				ptile.nat_x, ptile.nat_y);
 //    if (ptile.spec_sprite) {
-//      ptile.spec_sprite = mystrdup(ptile.spec_sprite);
+//      ptile.spec_sprite = (ptile.spec_sprite);
 //    }
 //  }
 //}
@@ -600,7 +600,7 @@ public class Savegame{
 //     and extract the rivers overlay from them. */
 //  LOAD_MAP_DATA(ch, line, ptile,
 //		secfile_lookup_str_default(file, null, "Map.map.n%03d", line),
-//		ptile.special |= (ascii_hex2bin(ch, 2) & S_RIVER));
+//		ptile.special |= (ascii_hex2bin(ch, 2) & Terrain_H.S_RIVER));
 //  Map.map.have_rivers_overlay = true;
 //}
 //
@@ -696,7 +696,7 @@ public class Savegame{
 //      secfile_insert_int(file, ptile.nat_x, "Map.map.r%dsx", i);
 //      secfile_insert_int(file, ptile.nat_y, "Map.map.r%dsy", i);
 //
-//      if (Map.map.start_positions[i].nation != NO_NATION_SELECTED) {
+//      if (Map.map.start_positions[i].nation != Nation_H.NO_NATION_SELECTED) {
 //	final String nation = 
 //	  get_nation_name_orig(Map.map.start_positions[i].nation);
 //
@@ -918,7 +918,7 @@ public class Savegame{
 //  }
 //
 //  for (i = 0; i < num_types; i++) {
-//    if (mystrcasecmp(unit_name_orig(type), types[i]) == 0) {
+//    if (mystrcasecmp(Unittype_P.unit_name_orig(type), types[i]) == 0) {
 //      return i;
 //    }
 //  }
@@ -1162,7 +1162,7 @@ public class Savegame{
 //  }
 //  
 //  id = find_tech_by_name_orig(name);
-//  if (id == A_LAST) {
+//  if (id == Tech_H.A_LAST) {
 //    util.freelog(Log.LOG_ERROR, "Unknown technology (%s)", name);
 //    exit(EXIT_FAILURE);    
 //  }
@@ -1317,7 +1317,7 @@ public class Savegame{
 //	}
 //
 //	type = find_improvement_by_name_orig(name);
-//	if (type == B_LAST) {
+//	if (type == Improvement.B_LAST) {
 //	  util.freelog(Log.LOG_ERROR, "Unknown improvement type '%s' in worklist",
 //	           name);
 //	}
@@ -1326,7 +1326,7 @@ public class Savegame{
 //
 //      if ((pwl.wlefs[i] <= WEF_END) || (pwl.wlefs[i] >= WEF_LAST) ||
 //	  ((pwl.wlefs[i] == WEF_UNIT) && !unit_type_exists(pwl.wlids[i])) ||
-//	  ((pwl.wlefs[i] == WEF_IMPR) && !improvement_exists(pwl.wlids[i]))) {
+//	  ((pwl.wlefs[i] == WEF_IMPR) && !Improvement.improvement_exists(pwl.wlids[i]))) {
 //	pwl.wlefs[i] = WEF_END;
 //	pwl.wlids[i] = 0;
 //	end = true;
@@ -1369,7 +1369,7 @@ public class Savegame{
 //	name = old_impr_type_name(id);
 //	pwl.wlefs[i] = WEF_IMPR;
 //	pwl.wlids[i] = find_improvement_by_name_orig(name);
-//	end = !improvement_exists(pwl.wlids[i]);
+//	end = !Improvement.improvement_exists(pwl.wlids[i]);
 //      }
 //    }
 //  }
@@ -1386,7 +1386,7 @@ public class Savegame{
 //  enum unit_activity activity;
 //  char *savefile_options = secfile_lookup_str(file, "savefile.options");
 //
-//  unit_list_init(&plr.units);
+//  plr.units.foo_list_init();
 //  nunits = secfile_lookup_int(file, "player%d.nunits", plrno);
 //  if (!plr.is_alive && nunits > 0) {
 //    nunits = 0; /* Some old savegames may be buggy. */
@@ -1439,7 +1439,7 @@ public class Savegame{
 //					 plrno, i);
 //
 //    if ((pcity = Game.find_city_by_id(punit.homecity))) {
-//      unit_list_insert(&pcity.units_supported, punit);
+//      &pcity.units_supported.foo_list_insert(punit);
 //    }
 //    
 //    punit.moves_left
@@ -1582,17 +1582,17 @@ public class Savegame{
 //
 //    /* allocate the unit's contribution to fog of war */
 //    if (unit_profits_of_watchtower(punit)
-//	&& Map.map_has_special(punit.tile, S_FORTRESS)) {
-//      unfog_area(punit.unit_owner(), punit.tile,
-//		 get_watchtower_vision(punit));
+//	&& Map.map_has_special(punit.tile, Terrain_H.S_FORTRESS)) {
+//      Maphand.unfog_area(punit.unit_owner(), punit.tile,
+//		 Unittools.get_watchtower_vision(punit));
 //    } else {
-//      unfog_area(punit.unit_owner(), punit.tile,
+//      Maphand.unfog_area(punit.unit_owner(), punit.tile,
 //		 punit.unit_type().vision_range);
 //    }
 //
 //    unit_list_insert_back(&plr.units, punit);
 //
-//    unit_list_insert(&punit.tile.units, punit);
+//    &punit.tile.units.foo_list_insert(punit);
 //  }
 //}
 //
@@ -1658,7 +1658,7 @@ public class Savegame{
 //    }
 //  }
 //  plr.nation = find_nation_by_name_orig(p);
-//  if (plr.nation == NO_NATION_SELECTED) {
+//  if (plr.nation == Nation_H.NO_NATION_SELECTED) {
 //    util.freelog(LOG_FATAL, "Nation %s (used by %s) isn't available.",
 //	    p, plr.name);
 //    exit(EXIT_FAILURE);
@@ -1670,7 +1670,7 @@ public class Savegame{
 //
 //  /* not all players have teams */
 //  if (section_file_lookup(file, "player%d.team", plrno)) {
-//    char tmp[MAX_LEN_NAME];
+//    String tmp;
 //
 //    tmp = String.format( secfile_lookup_str(file, "player%d.team", plrno));
 //    team_add_player(plr, tmp);
@@ -1823,7 +1823,7 @@ public class Savegame{
 //      if (p[k] == '1') {
 //	name = old_tech_name(k);
 //	id = find_tech_by_name_orig(name);
-//	if (id != A_LAST) {
+//	if (id != Tech_H.A_LAST) {
 //	  set_invention(plr, id, TECH_KNOWN);
 //	}
 //      }
@@ -1832,7 +1832,7 @@ public class Savegame{
 //    for (k = 0; k < technology_order_size && p[k]; k++) {
 //      if (p[k] == '1') {
 //	id = find_tech_by_name_orig(technology_order[k]);
-//	if (id != A_LAST) {
+//	if (id != Tech_H.A_LAST) {
 //	  set_invention(plr, id, TECH_KNOWN);
 //	}
 //      }
@@ -1901,7 +1901,7 @@ public class Savegame{
 //  for(player aplayer: Game.game.players){
 //    if (plr.is_alive
 //        && aplayer.is_alive
-//        && pplayers_allied(plr, aplayer)
+//        && Player_P.pplayers_allied(plr, aplayer)
 //        && !pplayer_can_ally(plr, aplayer)) {
 //      util.freelog(Log.LOG_ERROR, ("Illegal alliance structure detected: " +
 //              "%s's alliance to %s reduced to peace treaty."),
@@ -1963,12 +1963,12 @@ public class Savegame{
 //    final char* name;
 //    int id, k;
 //
-//    pcity = create_city_virtual(plr, ptile,
+//    pcity = City.create_city_virtual(plr, ptile,
 //                      secfile_lookup_str(file, "player%d.c%d.name", plrno, i));
 //
 //    pcity.id=secfile_lookup_int(file, "player%d.c%d.id", plrno, i);
 //    alloc_id(pcity.id);
-//    idex_register_city(pcity);
+//    Idex.idex_register_city(pcity);
 //    
 //    if (section_file_lookup(file, "player%d.c%d.original", plrno, i))
 //      pcity.original = secfile_lookup_int(file, "player%d.c%d.original", 
@@ -1985,7 +1985,7 @@ public class Savegame{
 //			     Game.game.rgame.specialists[sp].name);
 //    } specialist_type_iterate_end;
 //
-//    for (j = 0; j < NUM_TRADEROUTES; j++)
+//    for (j = 0; j < City_H.NUM_TRADEROUTES; j++)
 //      pcity.trade[j]=secfile_lookup_int(file, "player%d.c%d.traderoute%d",
 //					 plrno, i, j);
 //    
@@ -2096,11 +2096,11 @@ public class Savegame{
 //    /* adding the cities contribution to fog-of-war */
 //    map_unfog_pseudo_city_area(&Game.game.players[plrno], pcity.tile);
 //
-//    unit_list_init(&pcity.units_supported);
+//    pcity.units_supported.foo_list_init();
 //
-//    /* Initialize pcity.city_map[][], using set_worker_city() so that
+//    /* Initialize pcity.city_map[][], using City.set_worker_city() so that
 //       ptile.worked gets initialized correctly.  The pre-initialisation
-//       to city_tile_type.C_TILE_EMPTY is necessary because set_worker_city() accesses
+//       to city_tile_type.C_TILE_EMPTY is necessary because City.set_worker_city() accesses
 //       the existing value to possibly adjust ptile.worked, so need to
 //       initialize a non-worked value so ptile.worked (possibly already
 //       set from neighbouring city) does not get unset for city_tile_type.C_TILE_EMPTY
@@ -2110,29 +2110,29 @@ public class Savegame{
 //    for(y=0; y<City_H.CITY_MAP_SIZE; y++) {
 //      for(x=0; x<City_H.CITY_MAP_SIZE; x++) {
 //	pcity.city_map[x][y] =
-//	    City.is_valid_city_coords(x, y) ? city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE;
+//	    City.City.is_valid_city_coords(x, y) ? city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE;
 //	if (*p == '0') {
-//	  set_worker_city(pcity, x, y,
-//			  city_map_to_map(pcity, x, y) ?
+//	  City.set_worker_city(pcity, x, y,
+//			  City.city_map_to_map(pcity, x, y) ?
 //			  city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE);
 //	} else if (*p=='1') {
 //	  tile ptile;
 //
-//	  ptile = city_map_to_map(pcity, x, y);
+//	  ptile = City.city_map_to_map(pcity, x, y);
 //
 //	  if (ptile.worked) {
 //	    /* oops, inconsistent savegame; minimal fix: */
 //	    util.freelog(Log.LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), " +
 //		    "converting to elvis", pcity.name, x, y);
 //	    pcity.specialists[specialist_type.SP_ELVIS]++;
-//	    set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
+//	    City.set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	  } else {
-//	    set_worker_city(pcity, x, y, city_tile_type.C_TILE_WORKER);
+//	    City.set_worker_city(pcity, x, y, city_tile_type.C_TILE_WORKER);
 //	  }
 //	} else {
 //	  assert(*p == '2');
-//	  if (City.is_valid_city_coords(x, y)) {
-//	    set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
+//	  if (City.City.is_valid_city_coords(x, y)) {
+//	    City.set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	  }
 //	  assert(pcity.city_map[x][y] == city_tile_type.C_TILE_UNAVAILABLE);
 //	}
@@ -2183,7 +2183,7 @@ public class Savegame{
 //    pcity.ai.urgency = secfile_lookup_int_default(file, 0, 
 //				"player%d.c%d.ai.urgency", plrno, i);
 //
-//    map_set_city(pcity.tile, pcity);
+//    Map.map_set_city(pcity.tile, pcity);
 //
 //    city_list_insert_back(&plr.cities, pcity);
 //  }
@@ -2266,46 +2266,46 @@ public class Savegame{
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str(file, "player%d.map_t%03d",
 //				     plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).terrain =
+//		  Maphand.map_get_player_tile(ptile, plr).terrain =
 //		  char2terrain(ch));
 //
 //    /* get 4-bit segments of 12-bit "special" field. */
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str(file, "player%d.map_l%03d",
 //				     plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).special =
+//		  Maphand.map_get_player_tile(ptile, plr).special =
 //		  ascii_hex2bin(ch, 0));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str(file, "player%d.map_u%03d",
 //				     plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).special |=
+//		  Maphand.map_get_player_tile(ptile, plr).special |=
 //		  ascii_hex2bin(ch, 1));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str_default
 //		  (file, null, "player%d.map_n%03d", plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).special |=
+//		  Maphand.map_get_player_tile(ptile, plr).special |=
 //		  ascii_hex2bin(ch, 2));
 //
 //    /* get 4-bit segments of 16-bit "updated" field */
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str
 //		  (file, "player%d.map_ua%03d", plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).last_updated =
+//		  Maphand.map_get_player_tile(ptile, plr).last_updated =
 //		  ascii_hex2bin(ch, 0));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str
 //		  (file, "player%d.map_ub%03d", plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).last_updated |=
+//		  Maphand.map_get_player_tile(ptile, plr).last_updated |=
 //		  ascii_hex2bin(ch, 1));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str
 //		  (file, "player%d.map_uc%03d", plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).last_updated |=
+//		  Maphand.map_get_player_tile(ptile, plr).last_updated |=
 //		  ascii_hex2bin(ch, 2));
 //    LOAD_MAP_DATA(ch, nat_y, ptile,
 //		  secfile_lookup_str
 //		  (file, "player%d.map_ud%03d", plrno, nat_y),
-//		  map_get_player_tile(ptile, plr).last_updated |=
+//		  Maphand.map_get_player_tile(ptile, plr).last_updated |=
 //		  ascii_hex2bin(ch, 3));
 //
 //    {
@@ -2332,7 +2332,7 @@ public class Savegame{
 //	pdcity.unhappy = secfile_lookup_bool_default(file, false,
 //					"player%d.dc%d.unhappy", plrno, j);
 //	pdcity.owner = secfile_lookup_int(file, "player%d.dc%d.owner", plrno, j);
-//	map_get_player_tile(ptile, plr).city = pdcity;
+//	Maphand.map_get_player_tile(ptile, plr).city = pdcity;
 //	alloc_id(pdcity.id);
 //      }
 //    }
@@ -2343,8 +2343,8 @@ public class Savegame{
 //      if (Maphand.map_is_known_and_seen(ptile, plr)) {
 //	update_player_tile_knowledge(plr, ptile);
 //	reality_check_city(plr, ptile);
-//	if (map_get_city(ptile)) {
-//	  update_dumb_city(plr, map_get_city(ptile));
+//	if (Map.map_get_city(ptile)) {
+//	  update_dumb_city(plr, Map.map_get_city(ptile));
 //	}
 //      }
 //    }
@@ -2355,7 +2355,7 @@ public class Savegame{
 //       without fog of war */
 //    for(tile ptile :  Map.map.tiles){
 //      if (Maphand.map_is_known(ptile, plr)) {
-//	city pcity = map_get_city(ptile);
+//	city pcity = Map.map_get_city(ptile);
 //	update_player_tile_last_seen(plr, ptile);
 //	update_player_tile_knowledge(plr, ptile);
 //	if (pcity)
@@ -2390,7 +2390,7 @@ public class Savegame{
 //    if (pwl.wlefs[i] == WEF_UNIT) {
 //      secfile_insert_int(file, old_int(pwl.wlids[i]), idpath,
 //			 plrno, wlinx, i);
-//      secfile_insert_str(file, unit_name_orig(pwl.wlids[i]), namepath, plrno,
+//      secfile_insert_str(file, Unittype_P.unit_name_orig(pwl.wlids[i]), namepath, plrno,
 //			 wlinx, i);
 //    } else if (pwl.wlefs[i] == WEF_IMPR) {
 //      secfile_insert_int(file, pwl.wlids[i], idpath, plrno, wlinx, i);
@@ -2421,7 +2421,7 @@ public class Savegame{
 //			section_file file)
 //{
 //  int i;
-//  char invs[A_LAST+1];
+//  char invs[Tech_H.A_LAST+1];
 //  player_spaceship ship = &plr.spaceship;
 //  ai_data ai = ai_data_get(plr);
 //  government gov;
@@ -2619,7 +2619,7 @@ public class Savegame{
 //    secfile_insert_int(file, old_int(punit.type),
 //		       "player%d.u%d.type",
 //		       plrno, i);
-//    secfile_insert_str(file, unit_name_orig(punit.type),
+//    secfile_insert_str(file, Unittype_P.unit_name_orig(punit.type),
 //		       "player%d.u%d.type_by_name",
 //		       plrno, i);
 //    secfile_insert_int(file, punit.activity, "player%d.u%d.activity",
@@ -2733,7 +2733,7 @@ public class Savegame{
 //			 Game.game.rgame.specialists[sp].name);
 //    } specialist_type_iterate_end;
 //
-//    for (j = 0; j < NUM_TRADEROUTES; j++)
+//    for (j = 0; j < City_H.NUM_TRADEROUTES; j++)
 //      secfile_insert_int(file, pcity.trade[j], "player%d.c%d.traderoute%d", 
 //			 plrno, i, j);
 //    
@@ -2748,7 +2748,7 @@ public class Savegame{
 //    if (pcity.changed_from_is_unit) {
 //      secfile_insert_int(file, old_int(pcity.changed_from_id),
 //		         "player%d.c%d.changed_from_id", plrno, i);
-//      secfile_insert_str(file, unit_name_orig(pcity.changed_from_id),
+//      secfile_insert_str(file, Unittype_P.unit_name_orig(pcity.changed_from_id),
 //                         "player%d.c%d.changed_from_name", plrno, i);
 //    } else {
 //      secfile_insert_int(file, old_impr_type_id(pcity.changed_from_id),
@@ -2804,7 +2804,7 @@ public class Savegame{
 //    if (pcity.is_building_unit) {
 //      secfile_insert_int(file, old_int(pcity.currently_building), 
 //		         "player%d.c%d.currently_building", plrno, i);
-//      secfile_insert_str(file, unit_name_orig(pcity.currently_building),
+//      secfile_insert_str(file, Unittype_P.unit_name_orig(pcity.currently_building),
 //                         "player%d.c%d.currently_building_name", plrno, i);
 //    } else {
 //      secfile_insert_int(file, old_impr_type_id(pcity.currently_building),
@@ -2818,19 +2818,19 @@ public class Savegame{
 //     * are trying to simulate 1.14.1 default order
 //     */
 //    init_old_improvement_bitvector(buf);
-//    impr_type_iterate(id) {
-//      if (pcity.improvements[id] != I_NONE) {
+//    for (int id = 0; id < Game.game.num_impr_types; id++) {
+//      if (pcity.improvements[id] != Improvement.I_NONE) {
 //        add_improvement_into_old_bitvector(buf, id);
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //    secfile_insert_str(file, buf, "player%d.c%d.improvements", plrno, i);
 //
 //    /* Save improvement list as bitvector. Note that improvement order
 //     * is saved in savefile.improvement_order.
 //     */
-//    impr_type_iterate(id) {
-//      buf[id] = (pcity.improvements[id] != I_NONE) ? '1' : '0';
-//    } impr_type_iterate_end;
+//    for (int id = 0; id < Game.game.num_impr_types; id++) {
+//      buf[id] = (pcity.improvements[id] != Improvement.I_NONE) ? '1' : '0';
+//    } ;
 //    buf[Game.game.num_impr_types] = '\0';
 //    secfile_insert_str(file, buf, "player%d.c%d.improvements_new", plrno, i);    
 //
@@ -2849,32 +2849,32 @@ public class Savegame{
 //
 //    /* put the terrain type */
 //    SAVE_PLAYER_MAP_DATA(ptile, file,"player%d.map_t%03d", plrno, 
-//			 terrain2char(map_get_player_tile
+//			 terrain2char(Maphand.map_get_player_tile
 //				      (ptile, plr).terrain));
 //
 //    /* put 4-bit segments of 12-bit "special flags" field */
 //    SAVE_PLAYER_MAP_DATA(ptile, file,"player%d.map_l%03d", plrno,
-//			 bin2ascii_hex(map_get_player_tile(ptile, plr).
+//			 bin2ascii_hex(Maphand.map_get_player_tile(ptile, plr).
 //				       special, 0));
 //    SAVE_PLAYER_MAP_DATA(ptile, file, "player%d.map_u%03d", plrno,
-//			 bin2ascii_hex(map_get_player_tile(ptile, plr).
+//			 bin2ascii_hex(Maphand.map_get_player_tile(ptile, plr).
 //				       special, 1));
 //    SAVE_PLAYER_MAP_DATA(ptile, file, "player%d.map_n%03d", plrno,
-//			 bin2ascii_hex(map_get_player_tile(ptile, plr).
+//			 bin2ascii_hex(Maphand.map_get_player_tile(ptile, plr).
 //				       special, 2));
 //
 //    /* put 4-bit segments of 16-bit "updated" field */
 //    SAVE_PLAYER_MAP_DATA(ptile, file,"player%d.map_ua%03d", plrno,
-//			 bin2ascii_hex(map_get_player_tile
+//			 bin2ascii_hex(Maphand.map_get_player_tile
 //				       (ptile, plr).last_updated, 0));
 //    SAVE_PLAYER_MAP_DATA(ptile, file, "player%d.map_ub%03d", plrno,
-//			 bin2ascii_hex(map_get_player_tile
+//			 bin2ascii_hex(Maphand.map_get_player_tile
 //				       (ptile, plr).last_updated, 1));
 //    SAVE_PLAYER_MAP_DATA(ptile, file,"player%d.map_uc%03d", plrno,
-//			 bin2ascii_hex(map_get_player_tile
+//			 bin2ascii_hex(Maphand.map_get_player_tile
 //				       (ptile, plr).last_updated, 2));
 //    SAVE_PLAYER_MAP_DATA(ptile, file, "player%d.map_ud%03d", plrno,
-//			 bin2ascii_hex(map_get_player_tile
+//			 bin2ascii_hex(Maphand.map_get_player_tile
 //				       (ptile, plr).last_updated, 3));
 //
 //    if (true) {
@@ -2882,7 +2882,7 @@ public class Savegame{
 //      i = 0;
 //      
 //      for(tile ptile :  Map.map.tiles){
-//	if ((pdcity = map_get_player_tile(ptile, plr).city)) {
+//	if ((pdcity = Maphand.map_get_player_tile(ptile, plr).city)) {
 //	  secfile_insert_int(file, pdcity.id, "player%d.dc%d.id", plrno,
 //			     i);
 //	  secfile_insert_int(file, ptile.nat_x,
@@ -3000,12 +3000,15 @@ public class Savegame{
 //***************************************************************/
 //static void check_city(city pcity)
 //{
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(x, y)) {
 //    boolean res = city_can_work_tile(pcity, x, y);
 //    switch (pcity.city_map[x][y]) {
 //    case city_tile_type.C_TILE_EMPTY:
 //      if (!res) {
-//	set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
+//	City.set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	util.freelog(Log.LOG_DEBUG, "unavailable tile marked as empty!");
 //      }
 //      break;
@@ -3014,13 +3017,13 @@ public class Savegame{
 //	tile ptile;
 //
 //	pcity.specialists[specialist_type.SP_ELVIS]++;
-//	set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
+//	City.set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	util.freelog(Log.LOG_DEBUG, "Worked tile was unavailable!");
 //
-//	ptile = city_map_to_map(pcity, x, y);
+//	ptile = City.city_map_to_map(pcity, x, y);
 //
 //	map_city_radius_iterate(ptile, tile2) {
-//	  city pcity2 = map_get_city(tile2);
+//	  city pcity2 = Map.map_get_city(tile2);
 //	  if (pcity2)
 //	    check_city(pcity2);
 //	} map_city_radius_iterate_end;
@@ -3028,12 +3031,12 @@ public class Savegame{
 //      break;
 //    case city_tile_type.C_TILE_UNAVAILABLE:
 //      if (res) {
-//	set_worker_city(pcity, x, y, city_tile_type.C_TILE_EMPTY);
+//	City.set_worker_city(pcity, x, y, city_tile_type.C_TILE_EMPTY);
 //	util.freelog(Log.LOG_DEBUG, "Empty tile Marked as unavailable!");
 //      }
 //      break;
 //    }
-//  } city_map_iterate_end;
+//  } };
 //
 //  Cityturn.city_refresh(pcity);
 //}
@@ -3055,7 +3058,7 @@ public class Savegame{
 //
 //  Game.game.version = secfile_lookup_int_default(file, 0, "Game.game.version");
 //  tmp_Srv_main.server_state = (enum server_states)
-//    secfile_lookup_int_default(file, RUN_GAME_STATE, "Game.game.Srv_main.server_state");
+//    secfile_lookup_int_default(file, server_states.RUN_GAME_STATE, "Game.game.Srv_main.server_state");
 //
 //  savefile_options = secfile_lookup_str(file, "savefile.options");
 //  if (has_capability("improvement_order", savefile_options)) {
@@ -3420,7 +3423,7 @@ public class Savegame{
 //    /* We're loading a running Game.game without a seed (which is okay, if it's
 //     * a scenario).  We need to generate the Game.game seed now because it will
 //     * be needed later during the load. */
-//    if (tmp_Srv_main.server_state == RUN_GAME_STATE) {
+//    if (tmp_Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //      init_game_seed();
 //    }
 //  }
@@ -3525,7 +3528,7 @@ public class Savegame{
 //    /* Make sure everything is consistent. */
 //    for(player pplayer: Game.game.players){
 //      for (unit punit : pplayer.units.data) {
-//	if (!can_unit_continue_current_activity(punit)) {
+//	if (!Unit.can_unit_continue_current_activity(punit)) {
 //	  util.freelog(Log.LOG_ERROR, "ERROR: Unit doing illegal activity in savegame!");
 //	  punit.activity = unit_activity.ACTIVITY_IDLE;
 //	}
@@ -3565,13 +3568,13 @@ public class Savegame{
 //  /* Fix ferrying sanity */
 //  for(player pplayer: Game.game.players){
 //    for (unit punit : pplayer.units.data) {
-//      unit ferry = find_unit_by_id(punit.transported_by);
+//      unit ferry = Game.find_unit_by_id(punit.transported_by);
 //
 //      if (Terrain_H.is_ocean(punit.tile.terrain)
 //          && is_ground_unit(punit) && !ferry) {
 //        util.freelog(Log.LOG_ERROR, "Removing %s's unferried %s in ocean at (%d, %d)",
-//                pplayer.name, unit_name(punit.type), TILE_XY(punit.tile));
-//        bounce_unit(punit, true);
+//                pplayer.name, Unittype_P.unit_name(punit.type), TILE_XY(punit.tile));
+//        Unittools.bounce_unit(punit, true);
 //      }
 //    }
 //  }
@@ -3581,7 +3584,7 @@ public class Savegame{
 //   * unallied units on the same tile we just bounce them. */
 //  for(player pplayer: Game.game.players){
 //    for(player aplayer: Game.game.players){
-//      resolve_unit_stacks(pplayer, aplayer, true);
+//      Unittools.resolve_unit_stacks(pplayer, aplayer, true);
 //    }
 //  }
 //
@@ -3600,7 +3603,7 @@ public class Savegame{
 //  int i;
 //  int version;
 //  char options[512];
-//  char temp[B_LAST+1];
+//  char temp[Improvement.B_LAST+1];
 //
 //  version = MAJOR_VERSION *10000 + MINOR_VERSION *100 + PATCH_VERSION; 
 //  secfile_insert_int(file, version, "Game.game.version");
@@ -3610,7 +3613,7 @@ public class Savegame{
 //   * Game.game for savegame purposes:
 //   */
 //  secfile_insert_int(file, (int) (Game.game.is_new_game ? Srv_main.server_state :
-//				  RUN_GAME_STATE), "Game.game.Srv_main.server_state");
+//				  server_states.RUN_GAME_STATE), "Game.game.Srv_main.server_state");
 //  
 //  secfile_insert_str(file, get_meta_patches_string(), "Game.game.metapatches");
 //  secfile_insert_str(file, get_meta_topic_string(), "Game.game.metatopic");
@@ -3637,9 +3640,9 @@ public class Savegame{
 //   */
 //  if (Game.game.num_impr_types > 0) {
 //    final char* buf[Game.game.num_impr_types];
-//    impr_type_iterate(id) {
+//    for (int id = 0; id < Game.game.num_impr_types; id++) {
 //      buf[id] = Improvement.get_improvement_name_orig(id);
-//    } impr_type_iterate_end;
+//    } ;
 //    secfile_insert_str_vec(file, buf, Game.game.num_impr_types,
 //                           "savefile.improvement_order");
 //  }
@@ -3805,25 +3808,25 @@ public class Savegame{
 //     * are trying to simulate 1.14.1 default order
 //     */
 //    init_old_improvement_bitvector(temp);
-//    impr_type_iterate(id) {
-//      if (is_wonder(id) && Game.game.global_wonders[id] != 0
+//    for (int id = 0; id < Game.game.num_impr_types; id++) {
+//      if (Improvement.is_wonder(id) && Game.game.global_wonders[id] != 0
 //	  && !Game.find_city_by_id(Game.game.global_wonders[id])) {
 //        add_improvement_into_old_bitvector(temp, id);
 //      } 
-//    } impr_type_iterate_end;
+//    } ;
 //    secfile_insert_str(file, temp, "Game.game.destroyed_wonders");
 //    
 //    /* Save destroyed wonders as bitvector. Note that improvement order
 //     * is saved in savefile.improvement_order
 //     */
-//    impr_type_iterate(id) {
-//      if (is_wonder(id) && Game.game.global_wonders[id] != 0
+//    for (int id = 0; id < Game.game.num_impr_types; id++) {
+//      if (Improvement.is_wonder(id) && Game.game.global_wonders[id] != 0
 //	  && !Game.find_city_by_id(Game.game.global_wonders[id])) {
 //	temp[id] = '1';
 //      } else {
 //        temp[id] = '0';
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //    temp[Game.game.num_impr_types] = '\0';
 //    secfile_insert_str(file, temp, "Game.game.destroyed_wonders_new");
 //

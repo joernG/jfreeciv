@@ -4,6 +4,7 @@ import utility.Speclists;
 
 import common.Connection;
 import common.Game;
+import common.city.city;
 import common.map.tile;
 import common.player.player;
 import common.unit.unit;
@@ -113,7 +114,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //
 //    plr = get_player(punit.owner);
 //
-//    if (is_ground_unittype(punit.type)) {
+//    if (Unittype_P.is_ground_unittype(punit.type)) {
 //      mod += get_player_bonus(plr, EFT_LAND_VET_COMBAT);
 //    }
 //
@@ -201,13 +202,13 @@ public static int find_a_unit_type(int role, int role_tech)
 //    return;
 //  }
 //
-//  unit_list_init(&candidates);
+//  candidates.foo_list_init();
 //
 //  for (unit punit : pplayer.units.data) {
 //    /* We have to be careful not to strand units at sea, for example by
 //     * upgrading a frigate to an ironclad while it was carrying a unit. */
 //    if (test_unit_upgrade(punit, true) == UR_OK) {
-//      unit_list_insert(&candidates, punit);	/* Potential candidate :) */
+//      &candidates.foo_list_insert(punit);	/* Potential candidate :) */
 //    }
 //  } }
 //
@@ -218,7 +219,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //    unit punit = unit_list_get(&candidates, candidate_to_upgrade);
 //    int upgrade_type = can_upgrade_unittype(pplayer, punit.type);
 //
-//    notify_player(pplayer,
+//    Plrhand.notify_player(pplayer,
 //		  "Game: %s was upgraded for free to %s%s.",
 //		  punit.unit_type().name,
 //		  get_unit_type(upgrade_type).name,
@@ -233,7 +234,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //    upgrades--;
 //  }
 //
-//  unit_list_unlink_all(&candidates);
+//candidates.foo_list_unlink_all();
 //}
 //
 ///***************************************************************************
@@ -243,9 +244,12 @@ public static int find_a_unit_type(int role, int role_tech)
 //{
 //  int potential_gold = 0;
 //
-//  built_impr_iterate(pcity, pimpr) {
-//    potential_gold += Improvement.impr_sell_gold(pimpr);
-//  } built_impr_iterate_end;
+//for (int impr = 0; impr < Game.game.num_impr_types; impr++) {
+//	if((pcity).improvements[impr] == Improvement.I_NONE) {
+//		continue;
+//	}
+//    potential_gold += Improvement.impr_sell_gold(impr);
+//  } ;
 //
 //  for (unit punit : pcity.units_supported.data) {
 //
@@ -254,7 +258,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //       * improvements will not help so we will have to disband */
 //      assert(pplayer.economic.gold + potential_gold >= 0);
 //      
-//      Plrhand.notify_player_ex(pplayer, null, E_UNIT_LOST,
+//      Plrhand.notify_player_ex(pplayer, null, event_type.E_UNIT_LOST,
 //		       "Not enough gold. %s disbanded",
 //		       punit.unit_type().name);
 //      wipe_unit(punit);
@@ -299,9 +303,9 @@ public static int find_a_unit_type(int role, int role_tech)
 //      /* This should usually only happen for heli units,
 //	 but if any other units get 0 hp somehow, catch
 //	 them too.  --dwp  */
-//      Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_LOST, 
+//      Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_UNIT_LOST, 
 //          "Game: Your %s has run out of hit points.", 
-//          unit_name(punit.type));
+//          Unittype_P.unit_name(punit.type));
 //      Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "out of hp");
 //      wipe_unit(punit);
 //      continue; /* Continue iterating... */
@@ -316,9 +320,9 @@ public static int find_a_unit_type(int role, int role_tech)
 //      int loss_chance = unit_loss_pct(pplayer, punit.tile, punit);
 //
 //      if (Rand.myrand(100) < loss_chance) {
-//        Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_LOST, 
+//        Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_UNIT_LOST, 
 //                         "Game: Your %s has been lost on the high seas.",
-//                         unit_name(punit.type));
+//                         Unittype_P.unit_name(punit.type));
 //        Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "lost at sea");
 //        wipe_unit(punit);
 //        continue; /* Continue iterating... */
@@ -327,7 +331,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //	  Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_BECAME_VET,
 //                           ("Game: Your %s survived on the high seas " +
 //	                   "and became more experienced!"), 
-//                           unit_name(punit.type));
+//                           Unittype_P.unit_name(punit.type));
 //        }
 //      }
 //    } else if (!(is_air_unit(punit) || is_heli_unit(punit))
@@ -335,9 +339,9 @@ public static int find_a_unit_type(int role, int role_tech)
 //					       punit.tile, punit))) {
 //      /* All units may have a chance of dying if they are on TER_UNSAFE
 //       * terrain. */
-//      Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_LOST,
+//      Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_UNIT_LOST,
 //		       "Game: Your %s has been lost on unsafe terrain.",
-//		       unit_name(punit.type));
+//		       Unittype_P.unit_name(punit.type));
 //      Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "unsafe terrain");
 //      wipe_unit(punit);
 //      continue;			/* Continue iterating... */
@@ -364,7 +368,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //	    () do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
 //	    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT, 
 //			     "Game: Your %s has returned to refuel.",
-//			     unit_name(punit.type));
+//			     Unittype_P.unit_name(punit.type));
 //	    goto OUT;
 //	  }
 //	} iterate_outward_end;
@@ -376,7 +380,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //
 //      /* 7) Automatically refuel air units in cities, airbases, and
 //       *    transporters (carriers). */
-//      if (map_get_city(punit.tile)
+//      if (Map.map_get_city(punit.tile)
 //	  || Map.map_has_special(punit.tile, Terrain_H.S_AIRBASE)
 //	  || punit.transported_by != -1) {
 //	punit.fuel=punit.unit_type().fuel;
@@ -388,9 +392,9 @@ public static int find_a_unit_type(int role, int role_tech)
 //  for (unit punit : pplayer.units.data) {
 //    if (is_air_unit(punit) && punit.fuel <= 0
 //        && punit.unit_type().fuel > 0) {
-//      Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_LOST, 
+//      Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_UNIT_LOST, 
 //		       "Game: Your %s has run out of fuel.",
-//		       unit_name(punit.type));
+//		       Unittype_P.unit_name(punit.type));
 //      Gamelog.gamelog(GAMELOG_UNITLOSS, punit, null, "fuel");
 //      wipe_unit(punit);
 //    } 
@@ -418,7 +422,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  punit.hp += get_player_bonus(pplayer, EFT_UNIT_RECOVER);
 //
 //  if(is_heli_unit(punit)) {
-//    city pcity = map_get_city(punit.tile);
+//    city pcity = Map.map_get_city(punit.tile);
 //    if(!pcity && !Map.map_has_special(punit.tile, Terrain_H.S_AIRBASE)
 //       && punit.transported_by == -1) {
 //      punit.hp-=punit.unit_type().hp/10;
@@ -475,13 +479,13 @@ public static int find_a_unit_type(int role, int role_tech)
 //    hp=punit.unit_type().hp/4;
 //  else
 //    hp=0;
-//  if((pcity=map_get_city(punit.tile))) {
-//    if ((get_city_bonus(pcity, EFT_LAND_REGEN) > 0
+//  if((pcity=Map.map_get_city(punit.tile))) {
+//    if ((Effects.get_city_bonus(pcity, EFT_LAND_REGEN) > 0
 //	 && is_ground_unit(punit))
-//	|| (get_city_bonus(pcity, EFT_AIR_REGEN) > 0
+//	|| (Effects.get_city_bonus(pcity, EFT_AIR_REGEN) > 0
 //	    && (is_air_unit(punit) || is_heli_unit(punit)))
-//	|| (get_city_bonus(pcity, EFT_SEA_REGEN) > 0
-//	    && is_sailing_unit(punit))) {
+//	|| (Effects.get_city_bonus(pcity, EFT_SEA_REGEN) > 0
+//	    && Unit.is_sailing_unit(punit))) {
 //      hp=punit.unit_type().hp;
 //    }
 //    else
@@ -537,7 +541,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //      || unit_flag(punit, F_NO_VETERAN)) {
 //    return false;
 //  }
-//  if (unit_flag(punit, F_SETTLERS)
+//  if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)
 //      && Rand.myrand(100) < Game.game.work_veteran_chance[punit.veteran]) {
 //    punit.veteran++;
 //    return true;
@@ -570,7 +574,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //    if (activity != ACTIVITY_FORTIFYING && activity != ACTIVITY_SENTRY
 //       && maybe_settler_become_veteran(punit)) {
 //      Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_BECAME_VET,
-//	"Game: Your %s became more experienced!", unit_name(punit.type));
+//	"Game: Your %s became more experienced!", Unittype_P.unit_name(punit.type));
 //    }
 //    
 //  }
@@ -587,7 +591,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //
 //    assert(punit.activity == ACTIVITY_EXPLORE); 
 //    if (!more_to_explore) {
-//      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//      Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //    send_unit_info(null, punit);
 //    return;
@@ -608,18 +612,18 @@ public static int find_a_unit_type(int role, int role_tech)
 //	}
 //
 //	/* If a watchtower has been pillaged, reduce sight to normal */
-//	if (what == S_FORTRESS) {
+//	if (what == Terrain_H.S_FORTRESS) {
 //	  for (unit punit2 : punit.tile.units.data) {
 //            player owner = punit2.unit_owner();
 //            util.freelog(Log.LOG_VERBOSE, "Watchtower pillaged!");
-//            if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
+//            if (Player_P.player_knows_techs_with_flag(owner, tech_flag_id.TF_WATCHTOWER)) {
 //              if (is_ground_unit(punit2)) {
 //                /* Unfog (increase seen counter) first, fog (decrease counter)
 //                 * later, so tiles that are within vision range both before and
 //                 * after are not even temporarily marked fogged. */
-//                unfog_area(owner, punit2.tile,
+//                Maphand.unfog_area(owner, punit2.tile,
 //                           punit2.unit_type().vision_range);
-//                fog_area(owner, punit2.tile,
+//                Maphand.fog_area(owner, punit2.tile,
 //                         get_watchtower_vision(punit2));
 //              }
 //            }
@@ -643,18 +647,18 @@ public static int find_a_unit_type(int role, int role_tech)
 //      Maphand.update_tile_knowledge(punit.tile);
 //      
 //      /* If a watchtower has been pillaged, reduce sight to normal */
-//      if (what_pillaged == S_FORTRESS) {
+//      if (what_pillaged == Terrain_H.S_FORTRESS) {
 //	util.freelog(Log.LOG_VERBOSE, "Watchtower(2) pillaged!");
 //	for (unit punit2 : punit.tile.units.data) {
 //          player owner = punit2.unit_owner();
-//          if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
+//          if (Player_P.player_knows_techs_with_flag(owner, tech_flag_id.TF_WATCHTOWER)) {
 //            if (is_ground_unit(punit2)) {
 //              /* Unfog (increase seen counter) first, fog (decrease counter)
 //               * later, so tiles that are within vision range both before and
 //               * after are not even temporarily marked fogged. */
-//              unfog_area(owner, punit2.tile,
+//              Maphand.unfog_area(owner, punit2.tile,
 //                         punit2.unit_type().vision_range);
-//              fog_area(owner, punit2.tile,
+//              Maphand.fog_area(owner, punit2.tile,
 //                       get_watchtower_vision(punit2));
 //            }
 //          }
@@ -683,19 +687,19 @@ public static int find_a_unit_type(int role, int role_tech)
 //  if (activity==ACTIVITY_FORTRESS) {
 //    if (total_activity (punit.tile, ACTIVITY_FORTRESS)
 //	>= map_build_fortress_time(punit.tile)) {
-//      map_set_special(punit.tile, S_FORTRESS);
+//      Map.map_set_special(punit.tile, Terrain_H.S_FORTRESS);
 //      unit_activity_done = true;
 //      /* watchtower becomes effective */
 //      for (unit punit : ptile.units.data) {
 //        player owner = punit.unit_owner();
-//        if (player_knows_techs_with_flag(owner, TF_WATCHTOWER)) {
+//        if (Player_P.player_knows_techs_with_flag(owner, tech_flag_id.TF_WATCHTOWER)) {
 //	  if (is_ground_unit(punit)) {
 //            /* Unfog (increase seen counter) first, fog (decrease counter)
 //             * later, so tiles that are within vision range both before and
 //             * after are not even temporarily marked fogged. */
-//	    unfog_area(owner, punit.tile,
+//	    Maphand.unfog_area(owner, punit.tile,
 //		       get_watchtower_vision(punit));
-//	    fog_area(owner, punit.tile,
+//	    Maphand.fog_area(owner, punit.tile,
 //		     punit.unit_type().vision_range);
 //	  }
 //	}
@@ -707,7 +711,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  if (activity==ACTIVITY_AIRBASE) {
 //    if (total_activity (punit.tile, ACTIVITY_AIRBASE)
 //	>= map_build_airbase_time(punit.tile)) {
-//      map_set_special(punit.tile, Terrain_H.S_AIRBASE);
+//      Map.map_set_special(punit.tile, Terrain_H.S_AIRBASE);
 //      unit_activity_done = true;
 //    }
 //  }
@@ -726,7 +730,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //    if (total_activity (punit.tile, ACTIVITY_ROAD)
 //	+ total_activity (punit.tile, ACTIVITY_RAILROAD) >=
 //        map_build_road_time(punit.tile)) {
-//      map_set_special(punit.tile, Terrain_H.S_ROAD);
+//      Map.map_set_special(punit.tile, Terrain_H.S_ROAD);
 //      unit_activity_done = true;
 //    }
 //  }
@@ -734,7 +738,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  if (activity==ACTIVITY_RAILROAD) {
 //    if (total_activity (punit.tile, ACTIVITY_RAILROAD)
 //	>= map_build_rail_time(punit.tile)) {
-//      map_set_special(punit.tile, Terrain_H.S_RAILROAD);
+//      Map.map_set_special(punit.tile, Terrain_H.S_RAILROAD);
 //      unit_activity_done = true;
 //    }
 //  }
@@ -775,8 +779,8 @@ public static int find_a_unit_type(int role, int role_tech)
 //  if (check_adjacent_units) {
 //    for(tile ptile2: util.adjc_tile_iterate(punit.tile)) {
 //      for (unit punit2 : ptile2.units.data) {
-//        if (!can_unit_continue_current_activity(punit2)) {
-//          handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
+//        if (!Unit.can_unit_continue_current_activity(punit2)) {
+//          Unithand.handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //        }
 //      } }
 //    }
@@ -808,9 +812,9 @@ public static int find_a_unit_type(int role, int role_tech)
 //  send_unit_info(null, punit);
 //
 //  for (unit punit2 : ptile.units.data) {
-//    if (!can_unit_continue_current_activity(punit2))
+//    if (!Unit.can_unit_continue_current_activity(punit2))
 //    {
-//      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
+//      Unithand.handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //    }
 //  } }
 //
@@ -846,15 +850,15 @@ public static int find_a_unit_type(int role, int role_tech)
 //	      sentry_transported_idle_units(punit2);
 //	    util.freelog(Log.LOG_VERBOSE,
 //		    "Moved %s's %s due to changing land to sea at (%d, %d).",
-//		    punit2.unit_owner().name, unit_name(punit2.type),
+//		    punit2.unit_owner().name, Unittype_P.unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
 //	    Plrhand.notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
 //			     ("Game: Moved your %s due to changing" +
-//			       " land to sea."), unit_name(punit2.type));
+//			       " land to sea."), Unittype_P.unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
+//	      Unithand.handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	}
@@ -867,27 +871,27 @@ public static int find_a_unit_type(int role, int role_tech)
 //	      sentry_transported_idle_units(punit2);
 //	    util.freelog(Log.LOG_VERBOSE,
 //		    "Embarked %s's %s due to changing land to sea at (%d, %d).",
-//		    punit2.unit_owner().name, unit_name(punit2.type),
+//		    punit2.unit_owner().name, Unittype_P.unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.x);
 //	    Plrhand.notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
 //			     ("Game: Embarked your %s due to changing" +
-//			       " land to sea."), unit_name(punit2.type));
+//			       " land to sea."), Unittype_P.unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
+//	      Unithand.handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	}
 //	/* if we get here we could not move punit2 */
 //	util.freelog(Log.LOG_VERBOSE,
 //		"Disbanded %s's %s due to changing land to sea at (%d, %d).",
-//		punit2.unit_owner().name, unit_name(punit2.type),
+//		punit2.unit_owner().name, Unittype_P.unit_name(punit2.type),
 //		punit2.tile.x, punit2.tile.y);
 //	Plrhand.notify_player_ex(punit2.unit_owner(),
-//			 punit2.tile, E_UNIT_LOST,
+//			 punit2.tile, event_type.E_UNIT_LOST,
 //			 ("Game: Disbanded your %s due to changing" +
-//			   " land to sea."), unit_name(punit2.type));
+//			   " land to sea."), Unittype_P.unit_name(punit2.type));
 //	wipe_unit_spec_safe(punit2, false);
 //	goto START;
 //      }
@@ -895,7 +899,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //    break;
 //  case OLC_OCEAN_TO_LAND:
 //    for (unit punit2 : ptile.units.data) {
-//      if (is_sailing_unit(punit2)) {
+//      if (Unit.is_sailing_unit(punit2)) {
 //	/* look for nearby water */
 //	for(tile ptile2: util.adjc_tile_iterate(punit.tile)) {
 //	  if (Terrain_H.is_ocean(ptile2.terrain)
@@ -904,15 +908,15 @@ public static int find_a_unit_type(int role, int role_tech)
 //	      sentry_transported_idle_units(punit2);
 //	    util.freelog(Log.LOG_VERBOSE,
 //		    "Moved %s's %s due to changing sea to land at (%d, %d).",
-//		    punit2.unit_owner().name, unit_name(punit2.type),
+//		    punit2.unit_owner().name, Unittype_P.unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
 //	    Plrhand.notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
 //			     ("Game: Moved your %s due to changing" +
-//			       " sea to land."), unit_name(punit2.type));
+//			       " sea to land."), Unittype_P.unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
+//	      Unithand.handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	}
@@ -924,27 +928,27 @@ public static int find_a_unit_type(int role, int role_tech)
 //	      sentry_transported_idle_units(punit2);
 //	    util.freelog(Log.LOG_VERBOSE,
 //		    "Docked %s's %s due to changing sea to land at (%d, %d).",
-//		    punit2.unit_owner().name, unit_name(punit2.type),
+//		    punit2.unit_owner().name, Unittype_P.unit_name(punit2.type),
 //		    punit2.tile.x, punit2.tile.y);
 //	    Plrhand.notify_player_ex(punit2.unit_owner(),
 //			     punit2.tile, E_UNIT_RELOCATED,
 //			     ("Game: Docked your %s due to changing" +
-//			       " sea to land."), unit_name(punit2.type));
+//			       " sea to land."), Unittype_P.unit_name(punit2.type));
 //	    () move_unit(punit2, ptile2, 0);
 //	    if (punit2.activity == ACTIVITY_SENTRY)
-//	      handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
+//	      Unithand.handle_unit_activity_request(punit2, unit_activity.ACTIVITY_IDLE);
 //	    goto START;
 //	  }
 //	}
 //	/* if we get here we could not move punit2 */
 //	util.freelog(Log.LOG_VERBOSE,
 //		"Disbanded %s's %s due to changing sea to land at (%d, %d).",
-//		punit2.unit_owner().name, unit_name(punit2.type),
+//		punit2.unit_owner().name, Unittype_P.unit_name(punit2.type),
 //		punit2.tile.x, punit2.tile.y);
 //	Plrhand.notify_player_ex(punit2.unit_owner(),
-//			 punit2.tile, E_UNIT_LOST,
+//			 punit2.tile, event_type.E_UNIT_LOST,
 //			 ("Game: Disbanded your %s due to changing" +
-//			   " sea to land."), unit_name(punit2.type));
+//			   " sea to land."), Unittype_P.unit_name(punit2.type));
 //	wipe_unit_spec_safe(punit2, false);
 //	goto START;
 //      }
@@ -972,7 +976,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  static char buffer[MAX_LEN_NAME+64];
 //  city incity, *nearcity;
 //
-//  incity = map_get_city(ptile);
+//  incity = Map.map_get_city(ptile);
 //  if (incity) {
 //    if (use_at) {
 //      buffer = util.my_snprintf( " at %s", incity.name);
@@ -1104,8 +1108,8 @@ public static int find_a_unit_type(int role, int role_tech)
 //  3) The player must know about communism and gunpowder
 //  4) the player must run either a democracy or a communist society.
 //**************************************************************************/
-//void make_partisans(city pcity)
-//{
+public static void make_partisans(city pcity)
+{
 //  player pplayer;
 //  int i, partisans;
 //
@@ -1116,13 +1120,13 @@ public static int find_a_unit_type(int role, int role_tech)
 //      || pcity.original != pcity.owner)
 //    return;
 //
-//  if (!government_has_flag(get_gov_pcity(pcity), G_INSPIRES_PARTISANS))
+//  if (!Government.government_has_flag(Government.get_gov_pcity(pcity), G_INSPIRES_PARTISANS))
 //    return;
 //  
 //  pplayer = City.city_owner(pcity);
 //  for(i=0; i<MAX_NUM_TECH_LIST; i++) {
 //    int tech = Game.game.rtech.partisan_req[i];
-//    if (tech == A_LAST) break;
+//    if (tech == Tech_H.A_LAST) break;
 //    if (get_invention(pplayer, tech) != TECH_KNOWN) return;
 //    /* Was A_COMMUNISM and A_GUNPOWDER */
 //  }
@@ -1132,7 +1136,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //    partisans = 8;
 //  
 //  place_partisans(pcity,partisans);
-//}
+}
 //
 ///**************************************************************************
 //Are there dangerous enemies at or adjacent to (x, y)?
@@ -1147,7 +1151,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  player pplayer = punit.unit_owner();
 //  city pcity = ptile.city;
 //
-//  if (pcity && pplayers_allied(City.city_owner(pcity), punit.unit_owner())
+//  if (pcity && Player_P.pplayers_allied(City.city_owner(pcity), punit.unit_owner())
 //      && !Unit.is_non_allied_unit_tile(ptile, pplayer)) {
 //    /* We will be safe in a friendly city */
 //    return false;
@@ -1155,8 +1159,8 @@ public static int find_a_unit_type(int role, int role_tech)
 //
 //  /* Calculate how well we can defend at (x,y) */
 //  db = get_tile_type(ptile.terrain).defense_bonus;
-//  if (Map.map_has_special(ptile, S_RIVER))
-//    db += (db * terrain_control.river_defense_bonus) / 100;
+//  if (Map.map_has_special(ptile, Terrain_H.S_RIVER))
+//    db += (db * Map.terrain_control.river_defense_bonus) / 100;
 //  d = unit_def_rating_basic_sq(punit) * db;
 //
 //  for(tile ptile1: util.adjc_tile_iterate(ptile)) {
@@ -1166,7 +1170,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //      continue;
 //    }
 //    for (unit enemy : ptile1.units.data) {
-//      if (pplayers_at_war(enemy.unit_owner(), punit.unit_owner()) 
+//      if (Player_P.pplayers_at_war(enemy.unit_owner(), punit.unit_owner()) 
 //          && can_unit_attack_unit_at_tile(enemy, punit, ptile)
 //          && can_unit_attack_all_at_tile(enemy, ptile)) {
 //	a += unit_att_rating(enemy);
@@ -1193,12 +1197,12 @@ public static int find_a_unit_type(int role, int role_tech)
 //
 //  if (pcity.owner == punit.owner){
 //    util.freelog(Log.LOG_VERBOSE, "Teleported %s's %s from (%d, %d) to %s",
-//	    punit.unit_owner().name, unit_name(punit.type),
+//	    punit.unit_owner().name, Unittype_P.unit_name(punit.type),
 //	    src_tile.x, src_tile.y, pcity.name);
 //    if (verbose) {
 //      Plrhand.notify_player_ex(punit.unit_owner(), pcity.tile, event_type.E_NOEVENT,
 //		       "Game: Teleported your %s to %s.",
-//		       unit_name(punit.type), pcity.name);
+//		       Unittype_P.unit_name(punit.type), pcity.name);
 //    }
 //
 //    /* Silently free orders since they won't be applicable anymore. */
@@ -1211,14 +1215,14 @@ public static int find_a_unit_type(int role, int role_tech)
 //  return false;
 //}
 //
-///**************************************************************************
-//  Teleport or remove a unit due to stack conflict.
-//**************************************************************************/
-//void bounce_unit(unit punit, boolean verbose)
-//{
+/**************************************************************************
+  Teleport or remove a unit due to stack conflict.
+**************************************************************************/
+public static void bounce_unit(unit punit, boolean verbose)
+{
 //  player pplayer = punit.unit_owner();
 //  city pcity = find_closest_owned_city(pplayer, punit.tile,
-//                                               is_sailing_unit(punit), null);
+//                                               Unit.is_sailing_unit(punit), null);
 //
 //  if (pcity) {
 //    () teleport_unit_to_city(punit, pcity, 0, verbose);
@@ -1227,13 +1231,13 @@ public static int find_a_unit_type(int role, int role_tech)
 //    if (verbose) {
 //      Plrhand.notify_player_ex(punit.unit_owner(), punit.tile, event_type.E_NOEVENT,
 //		       "Game: Disbanded your %s.",
-//		       unit_name(punit.type));
+//		       Unittype_P.unit_name(punit.type));
 //    }
 //    wipe_unit(punit);
 //  }
-//}
-//
-//
+}
+
+
 ///**************************************************************************
 //  Throw pplayer's units from non allied cities
 //
@@ -1245,7 +1249,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  for (unit punit : pplayer.units.data) {
 //    tile ptile = punit.tile;
 //
-//    if (ptile.city && !pplayers_allied(City.city_owner(ptile.city), pplayer)) {
+//    if (ptile.city && !Player_P.pplayers_allied(City.city_owner(ptile.city), pplayer)) {
 //      bounce_unit(punit, verbose);
 //    }
 //  }    
@@ -1288,15 +1292,15 @@ public static int find_a_unit_type(int role, int role_tech)
 //  If verbose is true, the unit owner gets messages about where each
 //  units goes.
 //**************************************************************************/
-//void resolve_unit_stacks(player pplayer, player aplayer,
-//                         boolean verbose)
-//{
+public static void resolve_unit_stacks(player pplayer, player aplayer,
+                         boolean verbose)
+{
 //  throw_units_from_illegal_cities(pplayer, verbose);
 //  throw_units_from_illegal_cities(aplayer, verbose);
 //  
 //  resolve_stack_conflicts(pplayer, aplayer, verbose);
 //  resolve_stack_conflicts(aplayer, pplayer, verbose);
-//}
+}
 //
 ///****************************************************************************
 //  When two players cancel an alliance, a lot of units that were visible may
@@ -1335,7 +1339,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //boolean is_airunit_refuel_point(tile ptile, player pplayer,
 //			     int type, boolean unit_is_on_tile)
 //{
-//  player_tile plrtile = map_get_player_tile(ptile, pplayer);
+//  player_tile plrtile = Maphand.map_get_player_tile(ptile, pplayer);
 //
 //  if ((City.is_allied_city_tile(ptile, pplayer)
 //       && !Unit.is_non_allied_unit_tile(ptile, pplayer))
@@ -1343,7 +1347,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //	  && !Unit.is_non_allied_unit_tile(ptile, pplayer)))
 //    return true;
 //
-//  if (unit_type_flag(type, F_MISSILE)) {
+//  if (Unittype_P.unit_type_flag(type, F_MISSILE)) {
 //    int cap = missile_carrier_capacity(ptile, pplayer, false);
 //    if (unit_is_on_tile)
 //      cap++;
@@ -1381,7 +1385,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  }
 //
 //  /* save old vision range */
-//  if (Map.map_has_special(punit.tile, S_FORTRESS)
+//  if (Map.map_has_special(punit.tile, Terrain_H.S_FORTRESS)
 //      && unit_profits_of_watchtower(punit))
 //    range = get_watchtower_vision(punit);
 //  else
@@ -1403,14 +1407,14 @@ public static int find_a_unit_type(int role, int role_tech)
 //   * later, so tiles that are within vision range both before and
 //   * after are not even temporarily marked fogged. */
 //
-//  if (Map.map_has_special(punit.tile, S_FORTRESS)
+//  if (Map.map_has_special(punit.tile, Terrain_H.S_FORTRESS)
 //      && unit_profits_of_watchtower(punit))
-//    unfog_area(pplayer, punit.tile, get_watchtower_vision(punit));
+//    Maphand.unfog_area(pplayer, punit.tile, get_watchtower_vision(punit));
 //  else
-//    unfog_area(pplayer, punit.tile,
+//    Maphand.unfog_area(pplayer, punit.tile,
 //	       get_unit_type(to_unit).vision_range);
 //
-//  fog_area(pplayer, punit.tile, range);
+//  Maphand.fog_area(pplayer, punit.tile, range);
 //
 //  send_unit_info(null, punit);
 //  Connection.conn_list_do_unbuffer(&pplayer.connections);
@@ -1441,14 +1445,14 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  city pcity;
 //
 //  /* Register unit */
-//  punit.id = get_next_id_number();
+//  punit.id = Srv_main.get_next_id_number();
 //  idex_register_unit(punit);
 //
 //  assert(ptile != null);
 //  punit.tile = ptile;
 //
 //  pcity = Game.find_city_by_id(homecity_id);
-//  if (unit_type_flag(type, F_NOHOME)) {
+//  if (Unittype_P.unit_type_flag(type, F_NOHOME)) {
 //    punit.homecity = 0; /* none */
 //  } else {
 //    punit.homecity = homecity_id;
@@ -1479,30 +1483,30 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //   * unable to establish an embassy. */
 //  punit.foul = (moves_left != -1 && unit_flag(punit, F_SPY));
 //
-//  unit_list_insert(&pplayer.units, punit);
-//  unit_list_insert(&ptile.units, punit);
-//  if (pcity && !unit_type_flag(type, F_NOHOME)) {
+//  &pplayer.units.foo_list_insert(punit);
+//  &ptile.units.foo_list_insert(punit);
+//  if (pcity && !Unittype_P.unit_type_flag(type, F_NOHOME)) {
 //    assert(City.city_owner(pcity) == pplayer);
-//    unit_list_insert(&pcity.units_supported, punit);
+//    &pcity.units_supported.foo_list_insert(punit);
 //    /* Refresh the unit's homecity. */
 //    Cityturn.city_refresh(pcity);
 //    Citytools.send_city_info(pplayer, pcity);
 //  }
 //
-//  if (Map.map_has_special(ptile, S_FORTRESS)
+//  if (Map.map_has_special(ptile, Terrain_H.S_FORTRESS)
 //      && unit_profits_of_watchtower(punit)) {
-//    unfog_area(pplayer, punit.tile, get_watchtower_vision(punit));
+//    Maphand.unfog_area(pplayer, punit.tile, get_watchtower_vision(punit));
 //  } else {
-//    unfog_area(pplayer, ptile, punit.unit_type().vision_range);
+//    Maphand.unfog_area(pplayer, ptile, punit.unit_type().vision_range);
 //  }
 //
 //  send_unit_info(null, punit);
-//  maybe_make_contact(ptile, punit.unit_owner());
+//  Plrhand.maybe_make_contact(ptile, punit.unit_owner());
 //  wakeup_neighbor_sentries(punit);
 //
 //  /* The unit may have changed the available tiles in nearby cities. */
 //  map_city_radius_iterate(ptile, ptile1) {
-//    city acity = map_get_city(ptile1);
+//    city acity = Map.map_get_city(ptile1);
 //
 //    if (acity) {
 //      update_city_tile_status_map(acity, ptile);
@@ -1521,7 +1525,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //**************************************************************************/
 //static void server_remove_unit(unit punit)
 //{
-//  city pcity = map_get_city(punit.tile);
+//  city pcity = Map.map_get_city(punit.tile);
 //  city phomecity = Game.find_city_by_id(punit.homecity);
 //  tile unit_tile = punit.tile;
 //  player unitowner = punit.unit_owner();
@@ -1551,11 +1555,11 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //  /* check if this unit had F_GAMELOSS flag */
 //  if (unit_flag(punit, F_GAMELOSS) && punit.unit_owner().is_alive) {
-//    notify_conn_ex(&Game.game.est_connections, punit.tile, E_UNIT_LOST,
+//    notify_conn_ex(&Game.game.est_connections, punit.tile, event_type.E_UNIT_LOST,
 //                   "Unable to defend %s, %s has lost the Game.game.",
-//                   unit_name(punit.type), punit.unit_owner().name);
-//    notify_player(punit.unit_owner(), ("Losing %s meant losing the Game.game! " +
-//                  "Be more careful next time!"), unit_name(punit.type));
+//                   Unittype_P.unit_name(punit.type), punit.unit_owner().name);
+//    Plrhand.notify_player(punit.unit_owner(), ("Losing %s meant losing the Game.game! " +
+//                  "Be more careful next time!"), Unittype_P.unit_name(punit.type));
 //    Gamelog.gamelog(GAMELOG_UNITGAMELOSS, punit);
 //    punit.unit_owner().is_dying = true;
 //  }
@@ -1568,7 +1572,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //  /* This unit may have blocked tiles of adjacent cities. Update them. */
 //  map_city_radius_iterate(unit_tile, ptile1) {
-//    city pcity = map_get_city(ptile1);
+//    city pcity = Map.map_get_city(ptile1);
 //    if (pcity) {
 //      update_city_tile_status_map(pcity, unit_tile);
 //    }
@@ -1630,7 +1634,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //   * There's no need to worry about air units; they can fly away. */
 //  if (wipe_cargo
 //      && Terrain_H.is_ocean(ptile.terrain)
-//      && !map_get_city(ptile)) {
+//      && !Map.map_get_city(ptile)) {
 //    city pcity = null;
 //    int capacity = ground_unit_transporter_capacity(ptile, pplayer);
 //
@@ -1664,7 +1668,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //	    }
 //	  }
 //	  if (!unit_flag(pcargo, F_UNDISBANDABLE) || !pcity) {
-//	    Plrhand.notify_player_ex(pplayer, ptile, E_UNIT_LOST,
+//	    Plrhand.notify_player_ex(pplayer, ptile, event_type.E_UNIT_LOST,
 //			     "Game: %s lost when %s was lost.",
 //			     pcargo.unit_type().name,
 //			     ptype.name);
@@ -1723,7 +1727,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //      && (punit.tile.units.foo_list_size() == 1)
 //      && (is_ground_unit(pkiller) || is_heli_unit(pkiller)) ) {
 //    ransom = (pplayer.economic.gold >= 100)?100:pplayer.economic.gold;
-//    Plrhand.notify_player_ex(destroyer, pkiller.tile, E_UNIT_WIN_ATT,
+//    Plrhand.notify_player_ex(destroyer, pkiller.tile, event_type.E_UNIT_WIN_ATT,
 //		     "Game: Barbarian leader captured, %d gold ransom paid.",
 //                     ransom);
 //    destroyer.economic.gold += ransom;
@@ -1734,16 +1738,16 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //  if (unitcount == 0) {
 //    unit_list_iterate(punit.tile.units, vunit)
-//      if (pplayers_at_war(pkiller.unit_owner(), vunit.unit_owner()))
+//      if (Player_P.pplayers_at_war(pkiller.unit_owner(), vunit.unit_owner()))
 //	unitcount++;
 //    }
 //  }
 //
 //  if (!is_stack_vulnerable(punit.tile) || unitcount == 1) {
-//    Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_LOST,
+//    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_UNIT_LOST,
 //		     "Game: %s lost to an attack by %s's %s%s.",
 //		     punit.unit_type().name, destroyer.name,
-//		     unit_name(pkiller.type), loc_str);
+//		     Unittype_P.unit_name(pkiller.type), loc_str);
 //
 //    Gamelog.gamelog(GAMELOG_UNITLOSS, punit, destroyer);
 //    wipe_unit(punit);
@@ -1759,33 +1763,33 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //    /* count killed units */
 //    unit_list_iterate(punit.tile.units, vunit)
-//      if (pplayers_at_war(pkiller.unit_owner(), vunit.unit_owner()))
+//      if (Player_P.pplayers_at_war(pkiller.unit_owner(), vunit.unit_owner()))
 //	num_killed[vunit.owner]++;
 //    }
 //
 //    /* inform the owners */
 //    for (i = 0; i<Shared_H.MAX_NUM_PLAYERS+Shared_H.MAX_NUM_BARBARIANS; i++) {
 //      if (num_killed[i]>0) {
-//	Plrhand.notify_player_ex(get_player(i), punit.tile, E_UNIT_LOST,
+//	Plrhand.notify_player_ex(get_player(i), punit.tile, event_type.E_UNIT_LOST,
 //			 PL("Game: You lost %d unit to an attack " +
 //			     "from %s's %s%s.",
 //			     "Game: You lost %d units to an attack " +
 //			     "from %s's %s%s.",
 //			     num_killed[i]), num_killed[i],
-//			 destroyer.name, unit_name(pkiller.type),
+//			 destroyer.name, Unittype_P.unit_name(pkiller.type),
 //			 loc_str);
 //      }
 //    }
 //
 //    /* remove the units */
 //    for (unit punit2 : punit.tile.units.data) {
-//      if (pplayers_at_war(pkiller.unit_owner(), punit2.unit_owner())) {
+//      if (Player_P.pplayers_at_war(pkiller.unit_owner(), punit2.unit_owner())) {
 //	Plrhand.notify_player_ex(punit2.unit_owner(), 
-//			 punit2.tile, E_UNIT_LOST,
+//			 punit2.tile, event_type.E_UNIT_LOST,
 //			 ("Game: %s lost to an attack" +
 //			   " from %s's %s."),
 //			 punit2.unit_type().name, destroyer.name,
-//			 unit_name(pkiller.type));
+//			 Unittype_P.unit_name(pkiller.type));
 //
 //        Gamelog.gamelog(GAMELOG_UNITLOSS, punit2, destroyer);
 //	wipe_unit_spec_safe(punit2, false);
@@ -1981,7 +1985,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 		// /* Then remove unit if necessary */
 		// unit_goes_out_of_sight(pplayer, punit);
 		// }
-		// if (pplayers_at_war(pplayer,punit.unit_owner())
+		// if (Player_P.pplayers_at_war(pplayer,punit.unit_owner())
 		// && !pplayer.ai.control) {
 		// /*
 		// * increase_timeout_because_unit_moved(pplayer) possible
@@ -2041,7 +2045,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  }
 //  }
 //  Connection.conn_list_do_unbuffer(dest);
-//  flush_packets();
+//  Sernet.flush_packets();
 //}
 //
 //
@@ -2072,19 +2076,19 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //**************************************************************************/
 //static void do_nuke_tile(player pplayer, tile ptile)
 //{
-//  city pcity = map_get_city(ptile);
+//  city pcity = Map.map_get_city(ptile);
 //
 //  for (unit punit : ptile.units.data) {
-//    Plrhand.notify_player_ex(punit.unit_owner(), ptile, E_UNIT_LOST,
+//    Plrhand.notify_player_ex(punit.unit_owner(), ptile, event_type.E_UNIT_LOST,
 //		     "Game: Your %s was nuked by %s.",
-//		     unit_name(punit.type),
+//		     Unittype_P.unit_name(punit.type),
 //		     pplayer == punit.unit_owner() ? "yourself" : pplayer.name);
 //    if (punit.unit_owner() != pplayer) {
 //      Plrhand.notify_player_ex(pplayer,
 //		       ptile, E_UNIT_WIN,
 //		       "Game: %s's %s was nuked.",
 //		       punit.unit_owner().name,
-//		       unit_name(punit.type));
+//		       Unittype_P.unit_name(punit.type));
 //    }
 //    wipe_unit_spec_safe(punit, false);
 //  } }
@@ -2103,18 +2107,18 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //		       pcity.name);
 //    }
 //
-//    city_reduce_size(pcity, pcity.size / 2);
+//    Cityturn.city_reduce_size(pcity, pcity.size / 2);
 //  }
 //
 //  if (!Terrain_H.is_ocean(ptile.terrain) && Rand.myrand(2) == 1) {
 //    if (Game.game.rgame.nuke_contamination == CONTAMINATION_POLLUTION) {
 //      if (!Map.map_has_special(ptile, S_POLLUTION)) {
-//	map_set_special(ptile, S_POLLUTION);
+//	Map.map_set_special(ptile, S_POLLUTION);
 //	Maphand.update_tile_knowledge(ptile);
 //      }
 //    } else {
 //      if (!Map.map_has_special(ptile, S_FALLOUT)) {
-//	map_set_special(ptile, S_FALLOUT);
+//	Map.map_set_special(ptile, S_FALLOUT);
 //	Maphand.update_tile_knowledge(ptile);
 //      }
 //    }
@@ -2178,7 +2182,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //  Plrhand.notify_player_ex(punit.unit_owner(), city2.tile, event_type.E_NOEVENT,
 //		   "Game: %s transported succesfully.",
-//		   unit_name(punit.type));
+//		   Unittype_P.unit_name(punit.type));
 //
 //  () move_unit(punit, city2.tile, punit.moves_left);
 //
@@ -2219,7 +2223,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    return false;
 //  }
 //
-//  if (Terrain_H.is_ocean(map_get_player_tile(ptile, pplayer).terrain)
+//  if (Terrain_H.is_ocean(Maphand.map_get_player_tile(ptile, pplayer).terrain)
 //      && is_ground_unit(punit)) {
 //    Plrhand.notify_player_ex(pplayer, ptile, event_type.E_NOEVENT,
 //                     "Game: This unit cannot paradrop into ocean.");
@@ -2253,7 +2257,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //    Maphand.show_area(pplayer, ptile, srange);
 //
-//    Plrhand.notify_player_ex(pplayer, ptile, E_UNIT_LOST,
+//    Plrhand.notify_player_ex(pplayer, ptile, event_type.E_UNIT_LOST,
 //                     ("Game: Your %s paradropped into the ocean " +
 //                       "and was lost."),
 //                     punit.unit_type().name);
@@ -2265,8 +2269,8 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //      || Unit.is_non_allied_unit_tile(ptile, pplayer)) {
 //    int srange = punit.unit_type().vision_range;
 //    Maphand.show_area(pplayer, ptile, srange);
-//    maybe_make_contact(ptile, pplayer);
-//    Plrhand.notify_player_ex(pplayer, ptile, E_UNIT_LOST_ATT,
+//    Plrhand.maybe_make_contact(ptile, pplayer);
+//    Plrhand.notify_player_ex(pplayer, ptile, event_type.E_UNIT_LOST_ATT,
 //                     ("Game: Your %s was killed by enemy units at the " +
 //                       "paradrop destination."),
 //                     punit.unit_type().name);
@@ -2354,7 +2358,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    } else {
 //      Plrhand.notify_player_ex(pplayer, unit_tile, E_HUT_BARB_KILLED,
 //		       "Game: Your %s has been killed by barbarians!",
-//		       unit_name(type));
+//		       Unittype_P.unit_name(type));
 //    }
 //  }
 //  return ok;
@@ -2373,7 +2377,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    create_city(pplayer, punit.tile,
 //		Citytools.city_name_suggestion(pplayer, punit.tile));
 //
-//    if (unit_flag(punit, F_CITIES) || unit_flag(punit, F_SETTLERS)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_CITIES) || unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //      /* In case city was found during autosettler activities */
 //      initialize_infrastructure_cache(pplayer);
 //    }
@@ -2385,7 +2389,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    Plrhand.notify_player_ex(pplayer, punit.tile, E_HUT_SETTLER,
 //		     ("Game: Friendly nomads are impressed by you," +
 //		       " and join you."));
-//     create_unit(pplayer, punit.tile, Unittype_P.get_role_unit(F_CITIES,0),
+//     create_unit(pplayer, punit.tile, Unittype_P.get_role_unit(Eunit_flag_id.F_CITIES,0),
 //		0, punit.homecity, -1);
 //  }
 //}
@@ -2482,7 +2486,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //****************************************************************************/
 //void unload_unit_from_transporter(unit punit)
 //{
-//  unit ptrans = find_unit_by_id(punit.transported_by);
+//  unit ptrans = Game.find_unit_by_id(punit.transported_by);
 //
 //  pull_unit_from_transporter(punit, ptrans);
 //  send_unit_info(null, punit);
@@ -2502,18 +2506,18 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //      enum unit_move_type move_type = penemy.unit_type().move_type;
 //      int terrain = ptile.terrain;
 //
-//      if (Map.map_has_special(ptile, S_FORTRESS)
+//      if (Map.map_has_special(ptile, Terrain_H.S_FORTRESS)
 //	  && unit_profits_of_watchtower(penemy))
 //	range = get_watchtower_vision(penemy);
 //      else
 //	range = penemy.unit_type().vision_range;
 //      
-//      if (!pplayers_allied(punit.unit_owner(), penemy.unit_owner())
+//      if (!Player_P.pplayers_allied(punit.unit_owner(), penemy.unit_owner())
 //	  && penemy.activity == ACTIVITY_SENTRY
 //	  && range >= Map.real_map_distance(punit.tile, ptile)
 //	  && can_player_see_unit(penemy.unit_owner(), punit)
 //	  /* on board transport; don't awaken */
-//	  && !(move_type == LAND_MOVING && Terrain_H.is_ocean(terrain))) {
+//	  && !(move_type == unit_move_type.LAND_MOVING && Terrain_H.is_ocean(terrain))) {
 //	set_unit_activity(penemy, unit_activity.ACTIVITY_IDLE);
 //	send_unit_info(null, penemy);
 //      }
@@ -2531,7 +2535,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //	  Plrhand.notify_player_ex(ppatrol.unit_owner(), ppatrol.tile, E_UNIT_ORDERS, 
 //			   ("Game: Your %s cancelled patrol order because it " +
 //			     "encountered a foreign unit."),
-//			   unit_name(ppatrol.type));
+//			   Unittype_P.unit_name(ppatrol.type));
 //	}
 //      }
 //    } }
@@ -2552,8 +2556,8 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //					  tile src_tile,
 //					  tile dst_tile)
 //{
-//  city fromcity = map_get_city(src_tile);
-//  city tocity = map_get_city(dst_tile);
+//  city fromcity = Map.map_get_city(src_tile);
+//  city tocity = Map.map_get_city(dst_tile);
 //  city homecity = null;
 //  player pplayer = punit.unit_owner();
 //  /*  government g = get_gov_pplayer(pplayer);*/
@@ -2570,7 +2574,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //     functions that only refreshed happiness. */
 //  if (!pplayer.ai.control) {
 //    /* might have changed owners or may be destroyed */
-//    tocity = map_get_city(dst_tile);
+//    tocity = Map.map_get_city(dst_tile);
 //
 //    if (tocity) { /* entering a city */
 //      if (tocity.owner == punit.owner) {
@@ -2599,10 +2603,10 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    if (homecity) {
 //      if ((Game.game.happyborders > 0 && src_tile.owner != dst_tile.owner)
 //          ||
-//	  (Map.map_has_special(dst_tile, S_FORTRESS)
+//	  (Map.map_has_special(dst_tile, Terrain_H.S_FORTRESS)
 //	   && is_friendly_city_near(punit.unit_owner(), dst_tile))
 //	  ||
-//          (Map.map_has_special(src_tile, S_FORTRESS) 
+//          (Map.map_has_special(src_tile, Terrain_H.S_FORTRESS) 
 //	   && is_friendly_city_near(punit.unit_owner(), src_tile))) {
 //        refresh_homecity = true;
 //      }
@@ -2620,7 +2624,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //  /* First check cities near the source. */
 //  map_city_radius_iterate(src_tile, tile1) {
-//    city pcity = map_get_city(tile1);
+//    city pcity = Map.map_get_city(tile1);
 //
 //    if (pcity && update_city_tile_status_map(pcity, src_tile)) {
 //      Cityturn.auto_arrange_workers(pcity);
@@ -2629,7 +2633,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  } map_city_radius_iterate_end;
 //  /* Then check cities near the destination. */
 //  map_city_radius_iterate(dst_tile, tile1) {
-//    city pcity = map_get_city(tile1);
+//    city pcity = Map.map_get_city(tile1);
 //    if (pcity && update_city_tile_status_map(pcity, dst_tile)) {
 //      Cityturn.auto_arrange_workers(pcity);
 //      Citytools.send_city_info(null, pcity);
@@ -2677,30 +2681,30 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    Speclists<unit> cargo_units;
 //
 //    /* First make a list of the units to be moved. */
-//    unit_list_init(&cargo_units);
+//    cargo_units.foo_list_init();
 //    for (unit pcargo : psrctile.units.data) {
 //      if (pcargo.transported_by == punit.id) {
 //	unit_list_unlink(&psrctile.units, pcargo);
-//	unit_list_insert(&cargo_units, pcargo);
+//	&cargo_units.foo_list_insert(pcargo);
 //      }
 //    } }
 //
 //    /* Insert them again. */
 //    for (unit pcargo : cargo_units.data) {
-//      unfog_area(pcargo.unit_owner(), pdesttile, pcargo.unit_type().vision_range);
+//      Maphand.unfog_area(pcargo.unit_owner(), pdesttile, pcargo.unit_type().vision_range);
 //
 //      /* Silently free orders since they won't be applicable anymore. */
 //      free_unit_orders(pcargo);
 //
 //      pcargo.tile = pdesttile;
 //
-//      unit_list_insert(&pdesttile.units, pcargo);
+//      &pdesttile.units.foo_list_insert(pcargo);
 //      check_unit_activity(pcargo);
 //      send_unit_info_to_onlookers(null, pcargo, psrctile, false);
-//      fog_area(pcargo.unit_owner(), psrctile, pcargo.unit_type().vision_range);
+//      Maphand.fog_area(pcargo.unit_owner(), psrctile, pcargo.unit_type().vision_range);
 //      handle_unit_move_consequences(pcargo, psrctile, pdesttile);
 //    } }
-//    unit_list_unlink_all(&cargo_units);
+//	cargo_units.foo_list_unlink_all();
 //  }
 //
 //  /* We first unfog the destination, then move the unit and send the
@@ -2711,24 +2715,24 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //  /* Enhance vision if unit steps into a fortress */
 //  if (unit_profits_of_watchtower(punit)
-//      && Map.tile_has_special(pdesttile, S_FORTRESS)) {
-//    unfog_area(pplayer, pdesttile, get_watchtower_vision(punit));
+//      && Map.tile_has_special(pdesttile, Terrain_H.S_FORTRESS)) {
+//    Maphand.unfog_area(pplayer, pdesttile, get_watchtower_vision(punit));
 //  } else {
-//    unfog_area(pplayer, pdesttile, punit.unit_type().vision_range);
+//    Maphand.unfog_area(pplayer, pdesttile, punit.unit_type().vision_range);
 //  }
 //
 //  unit_list_unlink(&psrctile.units, punit);
 //  punit.tile = pdesttile;
 //  punit.moved = true;
 //  if (punit.transported_by != -1) {
-//    ptransporter = find_unit_by_id(punit.transported_by);
+//    ptransporter = Game.find_unit_by_id(punit.transported_by);
 //    pull_unit_from_transporter(punit, ptransporter);
 //  }
 //  punit.moves_left = MAX(0, punit.moves_left - move_cost);
 //  if (punit.moves_left == 0) {
 //    punit.done_moving = true;
 //  }
-//  unit_list_insert(&pdesttile.units, punit);
+//  &pdesttile.units.foo_list_insert(punit);
 //  check_unit_activity(punit);
 //
 //  /*
@@ -2782,10 +2786,10 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    send_unit_info_to_onlookers(null, punit, punit.tile, true);
 //  }
 //  
-//  if ((pcity = map_get_city(psrctile))) {
+//  if ((pcity = Map.map_get_city(psrctile))) {
 //    refresh_dumb_city(pcity);
 //  }
-//  if ((pcity = map_get_city(pdesttile))) {
+//  if ((pcity = Map.map_get_city(pdesttile))) {
 //    refresh_dumb_city(pcity);
 //  }
 //
@@ -2795,10 +2799,10 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  reveal_hidden_units(pplayer, pdesttile);
 //
 //  if (unit_profits_of_watchtower(punit)
-//      && Map.tile_has_special(psrctile, S_FORTRESS)) {
-//    fog_area(pplayer, psrctile, get_watchtower_vision(punit));
+//      && Map.tile_has_special(psrctile, Terrain_H.S_FORTRESS)) {
+//    Maphand.fog_area(pplayer, psrctile, get_watchtower_vision(punit));
 //  } else {
-//    fog_area(pplayer, psrctile, punit.unit_type().vision_range);
+//    Maphand.fog_area(pplayer, psrctile, punit.unit_type().vision_range);
 //  }
 //
 //  /* Remove hidden units (like submarines) which aren't seen anymore. */
@@ -2819,7 +2823,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //
 //  handle_unit_move_consequences(punit, psrctile, pdesttile);
 //  wakeup_neighbor_sentries(punit);
-//  maybe_make_contact(pdesttile, punit.unit_owner());
+//  Plrhand.maybe_make_contact(pdesttile, punit.unit_owner());
 //
 //  Connection.conn_list_do_unbuffer(&pplayer.connections);
 //
@@ -2863,7 +2867,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  int range;
 //  player pplayer = punit.unit_owner();
 //
-//  if (Map.map_has_special(punit.tile, S_FORTRESS)
+//  if (Map.map_has_special(punit.tile, Terrain_H.S_FORTRESS)
 //      && unit_profits_of_watchtower(punit))
 //    range = get_watchtower_vision(punit);
 //  else
@@ -2872,10 +2876,10 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  for(tile ptile: util.square_tile_iterate(punit.tile, range)) {
 //    unit penemy =
 //	Unit.is_non_allied_unit_tile(ptile, pplayer);
-//    dumb_city pdcity = map_get_player_tile(ptile, pplayer).city;
+//    dumb_city pdcity = Maphand.map_get_player_tile(ptile, pplayer).city;
 //
 //    if ((penemy && can_player_see_unit(pplayer, penemy))
-//	|| (pdcity && !pplayers_allied(pplayer, get_player(pdcity.owner))
+//	|| (pdcity && !Player_P.pplayers_allied(pplayer, get_player(pdcity.owner))
 //	    && pdcity.occupied)) {
 //      cancel = true;
 //      break;
@@ -2883,7 +2887,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  }
 //
 //  if (cancel) {
-//    handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//    Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  }
 //
 //  return cancel;
@@ -2933,7 +2937,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  }
 //
 //  util.freelog(Log.LOG_DEBUG, "Executing orders for %s %d",
-//	  unit_name(punit.type), punit.id);   
+//	  Unittype_P.unit_name(punit.type), punit.id);   
 //
 //  /* Any time the orders are canceled we should give the player a message. */
 //
@@ -2957,7 +2961,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //      Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
 //		       ("Game: Orders for %s aborted as there " +
 //			 "are units nearby."),
-//		       unit_name(punit.type));
+//		       Unittype_P.unit_name(punit.type));
 //      return true;
 //    }
 //
@@ -3006,7 +3010,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //	Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
 //			 ("Game: Orders for %s aborted since they " +
 //			   "give an invalid activity."),
-//			 unit_name(punit.type));
+//			 Unittype_P.unit_name(punit.type));
 //	return true;
 //      }
 //      punit.done_moving = true;
@@ -3020,7 +3024,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //	Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
 //			 ("Game: Orders for %s aborted since they " +
 //			   "give an invalid location."),
-//			 unit_name(punit.type));
+//			 Unittype_P.unit_name(punit.type));
 //	return true;
 //      }
 //
@@ -3030,7 +3034,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //	Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
 //			 ("Game: Orders for %s aborted as there " +
 //			   "are units in the way."),
-//			 unit_name(punit.type));
+//			 Unittype_P.unit_name(punit.type));
 //	return true;
 //      }
 //
@@ -3056,7 +3060,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //	Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
 //			 ("Game: Orders for %s aborted because of " +
 //			   "failed move."),
-//			 unit_name(punit.type));
+//			 Unittype_P.unit_name(punit.type));
 //	return true;
 //      }
 //
@@ -3088,7 +3092,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //      cancel_orders(punit, "  client sent invalid order!");
 //      Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_ORDERS,
 //		       "Game: Your %s has invalid orders.",
-//		       unit_name(punit.type));
+//		       Unittype_P.unit_name(punit.type));
 //      return true;
 //    }
 //
@@ -3110,18 +3114,18 @@ public static unit create_unit_full(player pplayer, tile ptile,
 ///**************************************************************************
 //...
 //**************************************************************************/
-//int get_watchtower_vision(unit punit)
-//{
-//  int base_vision = punit.unit_type().vision_range;
-//
-//  assert(base_vision > 0);
-//  assert(Game.game.watchtower_vision > 0);
-//  assert(Game.game.watchtower_extra_vision >= 0);
-//
-//  return MAX(base_vision,
-//	     MAX(Game.game.watchtower_vision,
-//		 base_vision + Game.game.watchtower_extra_vision));
-//}
+public static int get_watchtower_vision(unit punit)
+{
+  int base_vision = punit.unit_type().vision_range;
+
+  assert(base_vision > 0);
+  assert(Game.game.watchtower_vision > 0);
+  assert(Game.game.watchtower_extra_vision >= 0);
+
+  return Math.max(base_vision,
+		  Math.max(Game.game.watchtower_vision,
+		 base_vision + Game.game.watchtower_extra_vision));
+}
 //
 ///**************************************************************************
 //...
@@ -3129,7 +3133,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //boolean unit_profits_of_watchtower(unit punit)
 //{
 //  return (is_ground_unit(punit)
-//	  && player_knows_techs_with_flag(punit.unit_owner(),
-//					  TF_WATCHTOWER));
+//	  && Player_P.player_knows_techs_with_flag(punit.unit_owner(),
+//					  tech_flag_id.TF_WATCHTOWER));
 //}
 }

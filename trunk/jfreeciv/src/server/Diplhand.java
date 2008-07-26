@@ -139,7 +139,7 @@ public class Diplhand{
 //	    util.freelog(Log.LOG_ERROR, "Treaty: The %s can't have tech %s",
 //                    Nation.get_nation_name_plural(pother.nation),
 //		    get_tech_name(pplayer, pclause.value));
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //                          "Game: The %s can't accept %s.",
 //                          Nation.get_nation_name_plural(pother.nation),
 //			  get_tech_name(pplayer, pclause.value));
@@ -151,7 +151,7 @@ public class Diplhand{
 //		    Nation.get_nation_name_plural(pplayer.nation),
 //		    get_tech_name(pplayer, pclause.value),
 //		    Nation.get_nation_name_plural(pother.nation));
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  "Game: You don't have tech %s, you can't accept treaty.",
 //			  get_tech_name(pplayer, pclause.value));
 //	    return;
@@ -160,19 +160,19 @@ public class Diplhand{
 //	case CLAUSE_CITY:
 //	  pcity = Game.find_city_by_id(pclause.value);
 //	  if (!pcity) { /* Can't find out cityname any more. */
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("City you are trying to give no longer exists, " +
 //			    "you can't accept treaty."));
 //	    return;
 //	  }
 //	  if (pcity.owner != pplayer.player_no) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  "You are not owner of %s, you can't accept treaty.",
 //			  pcity.name);
 //	    return;
 //	  }
 //	  if (pcity.is_capital()) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: Your capital (%s) is requested, " +
 //			    "you can't accept treaty."),
 //			  pcity.name);
@@ -181,14 +181,14 @@ public class Diplhand{
 //	  break;
 //	case CLAUSE_ALLIANCE:
 //          if (!pplayer_can_ally(pplayer, pother)) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: You are at war with one of %s's " +
 //			    "allies - an alliance with %s is impossible."),
 //			  pother.name, pother.name);
 //            return;
 //          }
 //          if (!pplayer_can_ally(pother, pplayer)) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: %s is at war with one of your allies " +
 //			    "- an alliance with %s is impossible."),
 //			  pother.name, pother.name);
@@ -197,7 +197,7 @@ public class Diplhand{
 //          break;
 //	case CLAUSE_GOLD:
 //	  if (pplayer.economic.gold < pclause.value) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: You don't have enough gold, " +
 //			    "you can't accept treaty."));
 //	    return;
@@ -229,12 +229,12 @@ public class Diplhand{
 //					   pplayer.player_no,
 // 					   pplayer.player_no);
 //
-//    notify_player(pplayer,
+//    Plrhand.notify_player(pplayer,
 //		  PL("Game: A treaty containing %d clause was agreed upon.",
 //		      "Game: A treaty containing %d clauses was agreed upon.",
 //		      nclauses),
 //		  nclauses);
-//    notify_player(pother,
+//    Plrhand.notify_player(pother,
 //		  PL("Game: A treaty containing %d clause was agreed upon.",
 //		      "Game: A treaty containing %d clauses was agreed upon.",
 //		      nclauses),
@@ -250,23 +250,23 @@ public class Diplhand{
 //	case CLAUSE_CITY:
 //	  pcity = Game.find_city_by_id(pclause.value);
 //	  if (!pcity) { /* Can't find out cityname any more. */
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: One of the cities %s is giving away is destroyed! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
-//	    notify_player(pother,
+//	    Plrhand.notify_player(pother,
 //			  ("Game: One of the cities %s is giving away is destroyed! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
 //	    goto cleanup;
 //	  }
 //	  if (pcity.owner != pother.player_no) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: The %s no longer control %s! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation),
 //			  pcity.name);
-//	    notify_player(pother,
+//	    Plrhand.notify_player(pother,
 //			  ("Game: The %s no longer control %s! " +
 //			    "Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation),
@@ -274,7 +274,7 @@ public class Diplhand{
 //	    goto cleanup;
 //	  }
 //	  if (pcity.is_capital()) {
-//	    notify_player(pother,
+//	    Plrhand.notify_player(pother,
 //			  ("Game: Your capital (%s) is requested, " +
 //			    "you can't accept treaty."), pcity.name);
 //	    goto cleanup;
@@ -285,11 +285,11 @@ public class Diplhand{
 //          /* We need to recheck this way since things might have
 //           * changed. */
 //          if (!pplayer_can_ally(pother, pplayer)) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: %s is at war with one of your " +
 //			    "allies - an alliance with %s is impossible."),
 //			  pother.name, pother.name);
-//	    notify_player(pother,
+//	    Plrhand.notify_player(pother,
 //			  ("Game: You are at war with one of %s's " +
 //			    "allies - an alliance with %s is impossible."),
 //			  pplayer.name, pplayer.name);
@@ -298,11 +298,11 @@ public class Diplhand{
 //          break;
 //	case CLAUSE_GOLD:
 //	  if (pother.economic.gold < pclause.value) {
-//	    notify_player(pplayer,
+//	    Plrhand.notify_player(pplayer,
 //			  ("Game: The %s don't have the promised amount " +
 //			    "of gold! Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
-//	    notify_player(pother,
+//	    Plrhand.notify_player(pother,
 //			  ("Game: The %s don't have the promised amount " +
 //			    "of gold! Treaty canceled!"),
 //			  Nation.get_nation_name_plural(pother.nation));
@@ -368,20 +368,20 @@ public class Diplhand{
 //	found_new_tech(pdest, pclause.value, false, true, A_NONE);
 //	break;
 //      case CLAUSE_GOLD:
-//	notify_player(pdest, "Game: You get %d gold.", pclause.value);
+//	Plrhand.notify_player(pdest, "Game: You get %d gold.", pclause.value);
 //	pgiver.economic.gold -= pclause.value;
 //	pdest.economic.gold += pclause.value;
 //        Gamelog.gamelog(GAMELOG_TREATY, GL_GOLD, pgiver, pdest);
 //	break;
 //      case CLAUSE_MAP:
 //	give_map_from_player_to_player(pgiver, pdest);
-//	notify_player(pdest, "Game: You receive %s's worldmap.",
+//	Plrhand.notify_player(pdest, "Game: You receive %s's worldmap.",
 //		      pgiver.name);
 //        Gamelog.gamelog(GAMELOG_TREATY, GL_MAP, pgiver, pdest);
 //	break;
 //      case CLAUSE_SEAMAP:
 //	give_seamap_from_player_to_player(pgiver, pdest);
-//	notify_player(pdest, "Game: You receive %s's seamap.",
+//	Plrhand.notify_player(pdest, "Game: You receive %s's seamap.",
 //		      pgiver.name);
 //        Gamelog.gamelog(GAMELOG_TREATY, GL_SEAMAP, pgiver, pdest);
 //	break;
@@ -400,11 +400,11 @@ public class Diplhand{
 //			   "Game: You receive city of %s from %s.",
 //			   pcity.name, pgiver.name);
 //
-//	  Plrhand.notify_player_ex(pgiver, pcity.tile, E_CITY_LOST,
+//	  Plrhand.notify_player_ex(pgiver, pcity.tile, event_type.E_CITY_LOST,
 //			   "Game: You give city of %s to %s.",
 //			   pcity.name, pdest.name);
 //
-//          Gamelog.gamelog(GAMELOG_LOSECITY, pgiver, pdest, pcity, "acquired");
+//          Gamelog.gamelog(EGamelog.GAMELOG_LOSECITY, pgiver, pdest, pcity, "acquired");
 //          Gamelog.gamelog(GAMELOG_TREATY, GL_CITY, pgiver, pdest, pcity);
 //	  transfer_city(pdest, pcity, -1, true, true, false);
 //	  break;
@@ -572,7 +572,7 @@ public class Diplhand{
 //      city pcity = Game.find_city_by_id(value);
 //
 //      if (pcity && !Maphand.map_is_known_and_seen(pcity.tile, pother))
-//	give_citymap_from_player_to_player(pcity, pplayer, pother);
+//	Maphand.give_citymap_from_player_to_player(pcity, pplayer, pother);
 //    }
 //
 //    dlsend_packet_diplomacy_create_clause(&pplayer.connections,
@@ -602,13 +602,13 @@ public class Diplhand{
 //    dlsend_packet_diplomacy_cancel_meeting(&pother.connections,
 //					   pplayer.player_no,
 //					   pplayer.player_no);
-//    notify_player(pother, "Game: %s canceled the meeting!", 
+//    Plrhand.notify_player(pother, "Game: %s canceled the meeting!", 
 //		  pplayer.name);
 //    /* Need to send to pplayer too, for multi-connects: */
 //    dlsend_packet_diplomacy_cancel_meeting(&pplayer.connections,
 //					   pother.player_no,
 //					   pplayer.player_no);
-//    notify_player(pplayer, "Game: Meeting with %s canceled.", 
+//    Plrhand.notify_player(pplayer, "Game: Meeting with %s canceled.", 
 //		  pother.name);
 //    treaty_list_unlink(&treaties, ptreaty);
 //    clear_treaty(ptreaty);
@@ -648,7 +648,7 @@ public class Diplhand{
 //  }
 //
 //  if (is_barbarian(pplayer) || is_barbarian(pother)) {
-//    notify_player(pplayer, "Your diplomatic envoy was decapitated!");
+//    Plrhand.notify_player(pplayer, "Your diplomatic envoy was decapitated!");
 //    return;
 //  }
 //
@@ -657,7 +657,7 @@ public class Diplhand{
 //
 //    ptreaty = fc_malloc(sizeof(struct Treaty));
 //    init_treaty(ptreaty, pplayer, pother);
-//    treaty_list_insert(&treaties, ptreaty);
+//    &treaties.foo_list_insert(ptreaty);
 //
 //    dlsend_packet_diplomacy_init_meeting(&pplayer.connections,
 //					 pother.player_no,

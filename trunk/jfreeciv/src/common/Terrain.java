@@ -1,5 +1,9 @@
 package common;
 
+import port.util;
+import common.map.tile;
+import common.terrian.terrain_flag_id;
+
 public class Terrain{
 //#include "mem.h"		/* free */
 //#include "rand.h"
@@ -14,13 +18,13 @@ public class Terrain{
 //***************************************************************/
 //tile_type get_tile_type(int type)
 //{
-//  if (type < 0 || type >= T_COUNT) {
+//  if (type < 0 || type >= Terrain_H.T_COUNT) {
 //    /* HACK: return a dummy tile for out-of-range requests.  This is
 //     * designed specifically to fix this problem in 2.0. */
 //    static struct tile_type t_void;
 //
 //#if 0 /* Currently this assertion triggers all the time. */
-//    assert(type >= 0 && type < T_COUNT);
+//    assert(type >= 0 && type < Terrain_H.T_COUNT);
 //#endif
 //    return &t_void;
 //  }
@@ -34,7 +38,7 @@ public class Terrain{
 //{
 //  int tt;
 //
-//  for (tt = T_FIRST; tt < T_COUNT; tt++) {
+//  for (tt = Terrain_H.T_FIRST; tt < Terrain_H.T_COUNT; tt++) {
 //    if (0 == strcmp (tile_types[tt].terrain_name, name)) {
 //      return tt;
 //    }
@@ -86,7 +90,7 @@ public class Terrain{
 //****************************************************************************/
 //int get_flag_terrain(enum terrain_flag_id flag)
 //{
-//  boolean has_flag[T_COUNT];
+//  boolean has_flag[Terrain_H.T_COUNT];
 //  int count = 0;
 //
 //  terrain_type_iterate(t) {
@@ -106,7 +110,7 @@ public class Terrain{
 //  } terrain_type_iterate_end;
 //
 //  util.die("Reached end of get_flag_terrain!");
-//  return T_NONE;
+//  return Terrain_H.T_NONE;
 //}
 //
 ///****************************************************************************
@@ -149,16 +153,16 @@ public class Terrain{
 ///****************************************************************************
 //  Returns true iff any adjacent tile contains the given terrain.
 //****************************************************************************/
-//boolean is_terrain_near_tile(final tile ptile, int t)
-//{
+public static boolean is_terrain_near_tile(final tile ptile, int t)
+{
 //  for(tile adjc_tile: util.adjc_tile_iterate(ptile)) {
 //    if (adjc_tile.terrain == t) {
 //      return true;
 //    }
 //  }
 //
-//  return false;
-//}
+  return false;
+}
 //
 ///****************************************************************************
 //  Return the number of adjacent tiles that have the given terrain.
@@ -221,17 +225,20 @@ public class Terrain{
 ///****************************************************************************
 //  Returns true iff any adjacent tile contains terrain with the given flag.
 //****************************************************************************/
-//boolean is_terrain_flag_near_tile(final tile ptile,
-//			       enum terrain_flag_id flag)
-//{
-//  for(tile adjc_tile: util.adjc_tile_iterate(ptile)) {
-//    if (Terrain_H.terrain_has_flag(adjc_tile.terrain, flag)) {
-//      return true;
-//    }
-//  }
-//
-//  return false;
-//}
+public static boolean is_terrain_flag_near_tile(final tile ptile){
+	return is_terrain_flag_near_tile(ptile, terrain_flag_id.TER_OCEANIC);
+}
+public static boolean is_terrain_flag_near_tile(final tile ptile,
+			       terrain_flag_id flag)
+{
+  for(tile adjc_tile: util.adjc_tile_iterate(ptile)) {
+    if (Terrain_H.terrain_has_flag(adjc_tile.terrain, flag)) {
+      return true;
+    }
+  }
+
+  return false;
+}
 //
 ///****************************************************************************
 //  Return the number of adjacent tiles that have terrain with the given flag.

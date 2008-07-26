@@ -656,7 +656,7 @@ public static final String textyear(int year)
 //  if (!init) {
 //    char *env = getenv("HOME");
 //    if (env) {
-//      home_dir = mystrdup(env);	        /* never free()d */
+//      home_dir = (env);	        /* never free()d */
 //      util.freelog(Log.LOG_VERBOSE, "HOME is %s", home_dir);
 //    } else {
 //#ifdef WIN32_NATIVE
@@ -686,7 +686,7 @@ public static final String textyear(int year)
 //***************************************************************************/
 //final String user_username()
 //{
-//  static char username[MAX_LEN_NAME];
+//  static String username;
 //
 //  /* This function uses a number of different methods to try to find a
 //   * username.  This username then has to be truncated to MAX_LEN_NAME
@@ -793,7 +793,7 @@ public static final String textyear(int year)
 //  }
 //  assert(path != null);
 //  
-//  path2 = mystrdup(path);	/* something we can strtok */
+//  path2 = (path);	/* something we can strtok */
 //    
 //  tok = strtok(path2, PATH_SEPARATOR);
 //  do {
@@ -834,7 +834,7 @@ public static final String textyear(int year)
 //       * is readable etc?  Don't currently. */
 //      num++;
 //      dirs = fc_realloc(dirs, num * sizeof(char*));
-//      dirs[num - 1] = mystrdup(tok);
+//      dirs[num - 1] = (tok);
 //      util.freelog(Log.LOG_VERBOSE, "Data path component (%d): %s", num - 1, tok);
 //      if (i == -1) {
 //	free(tok);
@@ -905,7 +905,7 @@ public static final String textyear(int year)
 //      if (len > suffix_len
 //	  && strcmp(suffix, entry.d_name + len - suffix_len) == 0) {
 //	/* Strdup the entry so we can safely write to it. */
-//	char *match = mystrdup(entry.d_name);
+//	char *match = (entry.d_name);
 //
 //	/* Make sure the list is big enough; grow exponentially to keep
 //	   finalant ammortized overhead. */
@@ -917,7 +917,7 @@ public static final String textyear(int year)
 //	/* Clip the suffix. */
 //	match[len - suffix_len] = '\0';
 //
-//	file_list[num_matches++] = mystrdup(match);
+//	file_list[num_matches++] = (match);
 //
 //	free(match);
 //      }
@@ -1070,7 +1070,7 @@ public static final String textyear(int year)
 //      datafile file;
 //      char *ptr;
 //      /* Strdup the entry so we can safely write to it. */
-//      char *filename = mystrdup(entry.d_name);
+//      char *filename = (entry.d_name);
 //
 //      /* Make sure the file name matches. */
 //      if ((ptr = strstr(filename, infix))) {
@@ -1087,8 +1087,8 @@ public static final String textyear(int year)
 //	  /* Clip the suffix. */
 //	  *ptr = '\0';
 //
-//	  file.name = mystrdup(filename);
-//	  file.fullname = mystrdup(fullname);
+//	  file.name = (filename);
+//	  file.fullname = (fullname);
 //	  file.mtime = buf.st_mtime;
 //
 //	  datafile_list_insert_back(&res, file);
@@ -1162,8 +1162,8 @@ public static void init_nls()
    * Setup the cached locale numeric formatting information. Defaults
    * are as appropriate for the US.
    */
-//  grouping = mystrdup("\3");
-//  grouping_sep = mystrdup(",");
+//  grouping = ("\3");
+//  grouping_sep = (",");
 //
 //#ifdef ENABLE_NLS
 //#ifdef WIN32_NATIVE
@@ -1250,7 +1250,7 @@ public static void init_nls()
 //      memcpy(grouping, lc.grouping, len);
 //    }
 //    free(grouping_sep);
-//    grouping_sep = mystrdup(lc.thousands_sep);
+//    grouping_sep = (lc.thousands_sep);
 //  }
 //#endif
 }
@@ -1402,9 +1402,9 @@ public static void init_nls()
 //  if (!init) {
 //    char *env = getenv("FREECIV_MULTICAST_GROUP");
 //    if (env) {
-//      group = mystrdup(env);	        
+//      group = (env);	        
 //    } else {
-//      group = mystrdup(default_multicast_group);
+//      group = (default_multicast_group);
 //    }
 //    init = true;
 //  }

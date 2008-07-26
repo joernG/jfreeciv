@@ -1,5 +1,8 @@
 package common;
 
+import common.nation.nation_type;
+import common.player.player;
+
 
 public class Nation{
 //#include "fcintl.h"
@@ -47,7 +50,7 @@ public class Nation{
 //     if(mystrcasecmp(name, get_nation_name (i)) == 0)
 //	return i;
 //
-//  return NO_NATION_SELECTED;
+//  return Nation_H.NO_NATION_SELECTED;
 //}
 //
 ///***************************************************************
@@ -61,7 +64,7 @@ public class Nation{
 //     if(mystrcasecmp(name, get_nation_name_orig (i)) == 0)
 //	return i;
 //
-//  return NO_NATION_SELECTED;
+//  return Nation_H.NO_NATION_SELECTED;
 //}
 
 	/***************************************************************************
@@ -101,7 +104,7 @@ public class Nation{
 //
 ///****************************************************************************
 //  Returns pointer to the preferred set of nations that can fork from the
-//  nation.  The array is terminated by a NO_NATION_SELECTED value.
+//  nation.  The array is terminated by a Nation_H.NO_NATION_SELECTED value.
 //****************************************************************************/
 //int* get_nation_civilwar(int nation)
 //{
@@ -159,25 +162,27 @@ public class Nation{
 // /***************************************************************
 //Returns pointer to a nation 
 //***************************************************************/
-//nation_type get_nation_by_plr(player plr)
-//{
+	public static nation_type get_nation_by_plr(player plr)
+{
 //  assert(plr != null);
 //  if (!bounds_check_nation_id(plr.nation, LOG_FATAL, "get_nation_by_plr")) {
 //    util.die("wrong nation %d", plr.nation);
 //  }
 //  return &nations[plr.nation];
-//}
-//
+	return null;
+}
+
 ///***************************************************************
 //  ...
 //***************************************************************/
-//nation_type get_nation_by_idx(int nation)
-//{
+public static nation_type get_nation_by_idx(int nation)
+{
 //  if (!bounds_check_nation_id(nation, LOG_FATAL, "get_nation_by_idx")) {
 //    util.die("wrong nation %d", nation);
 //  }
 //  return &nations[nation];
-//}
+	return null;
+}
 //
 ///***************************************************************
 // Allocate space for the given number of nations.

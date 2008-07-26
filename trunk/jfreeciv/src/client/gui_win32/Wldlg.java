@@ -72,7 +72,7 @@ public class Wldlg{
 //  WorklistCancelCallback cancel_callback;
 //  wid worklist_wids[MAX_LEN_WORKLIST];
 //  /* maps from slot to wid; last one contains WORKLIST_END */
-//  wid worklist_avail_wids[B_LAST + unittype.U_LAST + MAX_NUM_WORKLISTS + 1];
+//  wid worklist_avail_wids[Improvement.B_LAST + unittype.U_LAST + MAX_NUM_WORKLISTS + 1];
 //
 //};
 //
@@ -341,7 +341,7 @@ public class Wldlg{
 //  if (id >= 0) {
 //    if (is_unit) {
 //      popup_help_dialog_typed(get_unit_type(id).name, HELP_UNIT);
-//    } else if (is_wonder(id)) {
+//    } else if (Improvement.is_wonder(id)) {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_WONDER);
 //    } else {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_IMPROVEMENT);

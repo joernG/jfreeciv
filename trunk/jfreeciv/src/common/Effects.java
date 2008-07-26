@@ -328,13 +328,13 @@ public class Effects{
 //
 //    /* This array provides a full list of the effects of this type provided
 //     * by each building.  (It's not really a cache, it's the real data.) */
-//    Speclists<effect> buckets[B_LAST];
+//    Speclists<effect> buckets[Improvement.B_LAST];
 //  } effects[EFT_LAST];
 //
 //  /* This cache shows for each building, which effect types it provides. */
 //  struct {
 //    struct effect_type_vector types;
-//  } buildings[B_LAST];
+//  } buildings[Improvement.B_LAST];
 //} ruleset_cache;
 //
 //static struct effect_group_list groups;
@@ -394,7 +394,7 @@ public class Effects{
 //
 //  /* Create the group. */
 //  group = fc_malloc(sizeof(*group));
-//  group.name = mystrdup(name);
+//  group.name = (name);
 //  group.id = next_group_id++;
 //  effect_group_element_list_init(&group.elements);
 //
@@ -520,7 +520,7 @@ public class Effects{
 //    break;
 //  case REQ_TECH:
 //    data = find_tech_by_name(req_value);
-//    problem = (A_LAST == data);
+//    problem = (Tech_H.A_LAST == data);
 //    break;
 //  case REQ_GOV:
 //    pgov = find_government_by_name(req_value);
@@ -531,7 +531,7 @@ public class Effects{
 //    break;
 //  case REQ_BUILDING:
 //    data = find_improvement_by_name(req_value);
-//    problem = (B_LAST == data);
+//    problem = (Improvement.B_LAST == data);
 //    break;
 //  case REQ_SPECIAL:
 //    data = get_special_by_name(req_value);
@@ -755,23 +755,23 @@ public class Effects{
 //   * building instead. */
 //  building_vector_iterate(get_buildings_with_effect(effect_type), pbldg) {
 //    if (can_player_build_improvement(pplayer, *pbldg)
-//	&& !improvement_obsolete(pplayer, *pbldg)
-//	&& !is_wonder(*pbldg)) {
+//	&& !Improvement.improvement_obsolete(pplayer, *pbldg)
+//	&& !Improvement.is_wonder(*pbldg)) {
 //      return *pbldg;
 //    }
 //  } building_vector_iterate_end;
-//  return B_LAST;
+//  return Improvement.B_LAST;
 //}
 //
 ///**************************************************************************
-//  Get a building which grants this effect. Returns B_LAST if there is none.
+//  Get a building which grants this effect. Returns Improvement.B_LAST if there is none.
 //**************************************************************************/
 //int get_building_for_effect(enum effect_type effect_type)
 //{
 //  building_vector_iterate(get_buildings_with_effect(effect_type), pbldg) {
 //    return *pbldg;
 //  } building_vector_iterate_end;
-//  return B_LAST;
+//  return Improvement.B_LAST;
 //}
 //
 ///**************************************************************************
@@ -793,7 +793,7 @@ public class Effects{
 //**************************************************************************/
 //static int num_world_buildings_total(int building)
 //{
-//  if (is_wonder(building)) {
+//  if (Improvement.is_wonder(building)) {
 //    return (Game.game.global_wonders[building] != 0) ? 1 : 0;
 //  } else {
 //    util.freelog(Log.LOG_ERROR,
@@ -808,7 +808,7 @@ public class Effects{
 //**************************************************************************/
 //static int num_world_buildings(int id)
 //{
-//  if (is_wonder(id)) {
+//  if (Improvement.is_wonder(id)) {
 //    return Game.find_city_by_id(Game.game.global_wonders[id]) ? 1 : 0;
 //  } else {
 //    util.freelog(Log.LOG_ERROR,
@@ -824,7 +824,7 @@ public class Effects{
 //static int num_player_buildings(final player pplayer,
 //				int building)
 //{
-//  if (is_wonder(building)) {
+//  if (Improvement.is_wonder(building)) {
 //    if (Player_P.player_find_city_by_id(pplayer, Game.game.global_wonders[building])) {
 //      return 1;
 //    } else {
@@ -844,7 +844,7 @@ public class Effects{
 //static int num_continent_buildings(final player pplayer,
 //				   int continent, int building)
 //{
-//  if (is_wonder(building)) {
+//  if (Improvement.is_wonder(building)) {
 //    final city pcity;
 //
 //    pcity = Player_P.player_find_city_by_id(pplayer, Game.game.global_wonders[building]);
@@ -864,7 +864,7 @@ public class Effects{
 //**************************************************************************/
 //static int num_city_buildings(final city pcity, int id)
 //{
-//  return (city_got_building(pcity, id) ? 1 : 0);
+//  return (City.city_got_building(pcity, id) ? 1 : 0);
 //}
 //
 ///**************************************************************************
@@ -917,7 +917,7 @@ public class Effects{
 //    return 0;
 //  }
 //
-//  if (improvement_obsolete(target_player, source)) {
+//  if (Improvement.improvement_obsolete(target_player, source)) {
 //    return 0;
 //  }
 //
@@ -1241,19 +1241,20 @@ public class Effects{
 //		     enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_PLAYER,
-//				  pplayer, null, B_LAST, null,
+//				  pplayer, null, Improvement.B_LAST, null,
 //				  effect_type);
 //}
 //
 ///**************************************************************************
 //  Returns the effect bonus at a city.
 //**************************************************************************/
-//int get_city_bonus(final city pcity, enum effect_type effect_type)
-//{
+public static int get_city_bonus(final city pcity, effect_type effect_type)
+{
 //  return get_target_bonus_sources(null, TARGET_CITY,
-//			 	  City.city_owner(pcity), pcity, B_LAST, null,
+//			 	  City.city_owner(pcity), pcity, Improvement.B_LAST, null,
 //				  effect_type);
-//}
+	return 0;
+}
 //
 ///**************************************************************************
 //  Returns the effect bonus at a city tile.
@@ -1262,7 +1263,7 @@ public class Effects{
 //			enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_CITY,
-//				  City.city_owner(pcity), pcity, B_LAST, ptile,
+//				  City.city_owner(pcity), pcity, Improvement.B_LAST, ptile,
 //				  effect_type);
 //}
 //
@@ -1287,7 +1288,7 @@ public class Effects{
 //    final player pplayer, enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(sources, TARGET_PLAYER,
-//			  	  pplayer, null, B_LAST, null,
+//			  	  pplayer, null, Improvement.B_LAST, null,
 //				  effect_type);
 //}
 //
@@ -1301,7 +1302,7 @@ public class Effects{
 //    final city pcity, enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(sources, TARGET_CITY,
-//			 	  City.city_owner(pcity), pcity, B_LAST, null,
+//			 	  City.city_owner(pcity), pcity, Improvement.B_LAST, null,
 //				  effect_type);
 //}
 

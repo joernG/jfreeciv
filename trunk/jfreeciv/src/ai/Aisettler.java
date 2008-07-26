@@ -115,7 +115,7 @@ public class Aisettler{
 //                     ai_data ai,
 //                     cityresult result)
 //{
-//  city pcity = map_get_city(result.tile);
+//  city pcity = Map.map_get_city(result.tile);
 //  int sum = 0;
 //  boolean virtual_city = false;
 //  int curr_govt = pplayer.government;
@@ -133,7 +133,7 @@ public class Aisettler{
 //  result.result = -666;
 //
 //  if (!pcity) {
-//    pcity = create_city_virtual(pplayer, result.tile, "Virtuaville");
+//    pcity = City.create_city_virtual(pplayer, result.tile, "Virtuaville");
 //    virtual_city = true;
 //  }
 //
@@ -296,9 +296,9 @@ public class Aisettler{
 //  /* Defense modification (as tie breaker mostly) */
 //  int defense_bonus = 
 //            get_tile_type(result.tile.terrain).defense_bonus;
-//  if (Map.map_has_special(result.tile, S_RIVER)) {
+//  if (Map.map_has_special(result.tile, Terrain_H.S_RIVER)) {
 //    defense_bonus +=
-//        (defense_bonus * terrain_control.river_defense_bonus) / 100;
+//        (defense_bonus * Map.terrain_control.river_defense_bonus) / 100;
 //  }
 //
 //  return 100 / result.total * (100 / defense_bonus * DEFENSE_EMPHASIS);
@@ -309,7 +309,7 @@ public class Aisettler{
 //**************************************************************************/
 //static int naval_bonus(cityresult result, ai_data ai)
 //{
-//  boolean ocean_adjacent = is_ocean_near_tile(result.tile);
+//  boolean ocean_adjacent = Terrain.is_terrain_flag_near_tile(result.tile);
 //
 //  /* Adjust for ocean adjacency, which is nice */
 //  if (ocean_adjacent) {
@@ -377,7 +377,7 @@ public class Aisettler{
 //                              unit punit, tile ptile,
 //                              cityresult result)
 //{  
-//  city pcity = map_get_city(ptile);
+//  city pcity = Map.map_get_city(ptile);
 //
 //  assert(punit && ai && pplayer && result);
 //
@@ -571,12 +571,12 @@ public class Aisettler{
 //  if (look_for_boat) {
 //    int ferry_id = aiferry_find_boat(punit, 1, null);
 //
-//    ferry = find_unit_by_id(ferry_id);
+//    ferry = Game.find_unit_by_id(ferry_id);
 //  }
 //
 //  if (ferry 
-//      || (use_virt_boat && is_ocean_near_tile(punit.tile) 
-//          && map_get_city(punit.tile))) {
+//      || (use_virt_boat && Terrain.is_terrain_flag_near_tile(punit.tile) 
+//          && Map.map_get_city(punit.tile))) {
 //    if (!ferry) {
 //      /* No boat?  Get a virtual one! */
 //      int boattype

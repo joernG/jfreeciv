@@ -87,7 +87,7 @@ public class Finddlg{
 //	      city pcity;    
 //	      ListBox_GetText(GetDlgItem(hWnd,ID_FINDCITY_LIST),id,
 //			      city_name);
-//	      if ((pcity=game_find_city_by_name(city_name)))
+//	      if ((pcity=Game.game_find_city_by_name(city_name)))
 //		{
 //		  center_tile_mapcanvas(pcity.tile);
 //		}

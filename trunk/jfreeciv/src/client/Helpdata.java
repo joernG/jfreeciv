@@ -1,5 +1,7 @@
 package client;
 
+import common.Game;
+
 public class Helpdata{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -48,7 +50,7 @@ public class Helpdata{
 //  "Techs", "Terrain", "Governments", null
 //};
 //
-//#define MAX_LAST (MAX(MAX(MAX(A_LAST,B_LAST),unittype.U_LAST),T_COUNT))
+//#define MAX_LAST (MAX(MAX(MAX(Tech_H.A_LAST,Improvement.B_LAST),unittype.U_LAST),Terrain_H.T_COUNT))
 //
 //#define SPECLIST_TAG help
 //#define SPECLIST_TYPE struct help_item
@@ -108,7 +110,7 @@ public class Helpdata{
 //		      "Transform\n"));
 //    strcat(outbuf, "---------------------------------------------------" +
 //	   "------------\n");
-//    for (i = T_FIRST; i < T_COUNT; i++) {
+//    for (i = Terrain_H.T_FIRST; i < Terrain_H.T_COUNT; i++) {
 //      tile_type ptype = get_tile_type(i);
 //
 //      if (*(ptype.terrain_name) != '\0') {
@@ -119,15 +121,15 @@ public class Helpdata{
 //		ptype.road_time,
 //		ptype.irrigation_time,
 //		((ptype.irrigation_result == i
-//		  || ptype.irrigation_result == T_NONE) ? ""
+//		  || ptype.irrigation_result == Terrain_H.T_NONE) ? ""
 //		 : get_tile_type(ptype.irrigation_result).terrain_name),
 //		ptype.mining_time,
 //		((ptype.mining_result == i
-//		  || ptype.mining_result == T_NONE) ? ""
+//		  || ptype.mining_result == Terrain_H.T_NONE) ? ""
 //		 : get_tile_type(ptype.mining_result).terrain_name),
 //		ptype.transform_time,
 //		((ptype.transform_result == i
-//		 || ptype.transform_result == T_NONE) ? ""
+//		 || ptype.transform_result == Terrain_H.T_NONE) ? ""
 //		 : get_tile_type(ptype.transform_result).terrain_name));
 //      }
 //    }
@@ -248,9 +250,9 @@ public class Helpdata{
 //	  unit_type_iterate(i) {
 //	    if (unit_type_exists(i)) {
 //	      pitem = new_help_item(current_type);
-//	      name = util.my_snprintf( " %s", unit_name(i));
-//	      pitem.topic = mystrdup(name);
-//	      pitem.text = mystrdup("");
+//	      name = util.my_snprintf( " %s", Unittype_P.unit_name(i));
+//	      pitem.topic = (name);
+//	      pitem.text = ("");
 //	      help_list_insert_back(&category_nodes, pitem);
 //	    }
 //	  } unit_type_iterate_end;
@@ -260,64 +262,64 @@ public class Helpdata{
 //	      pitem = new_help_item(current_type);
 //	      name = util.my_snprintf( " %s",
 //			  get_tech_name(Game.game.player_ptr, i));
-//	      pitem.topic = mystrdup(name);
-//	      pitem.text = mystrdup("");
+//	      pitem.topic = (name);
+//	      pitem.text = ("");
 //	      help_list_insert_back(&category_nodes, pitem);
 //	    }
 //	  } tech_type_iterate_end;
 //	} else if (current_type == HELP_TERRAIN) {
-//	  for (i = T_FIRST; i < T_COUNT; i++) {
+//	  for (i = Terrain_H.T_FIRST; i < Terrain_H.T_COUNT; i++) {
 //	    tile_type ptype = get_tile_type(i);
 //
 //	    if (*(ptype.terrain_name) != '\0') {
 //	      pitem = new_help_item(current_type);
 //	      name = util.my_snprintf( " %s",
 //			  ptype.terrain_name);
-//	      pitem.topic = mystrdup(name);
-//	      pitem.text = mystrdup("");
+//	      pitem.topic = (name);
+//	      pitem.text = ("");
 //	      help_list_insert_back(&category_nodes, pitem);
 //	    }
 //	  }
 //	  /* Add special Civ2-style river help text if it's supplied. */
-//	  if (terrain_control.river_help_text) {
+//	  if (Map.terrain_control.river_help_text) {
 //	    pitem = new_help_item(HELP_TEXT);
 //	    /* TRANS: preserve single space at beginning */
-//	    pitem.topic = mystrdup(" Rivers");
-//	    strcpy(long_buffer, _(terrain_control.river_help_text));
+//	    pitem.topic = (" Rivers");
+//	    strcpy(long_buffer, _(Map.terrain_control.river_help_text));
 //	    wordwrap_string(long_buffer, 68);
-//	    pitem.text = mystrdup(long_buffer);
+//	    pitem.text = (long_buffer);
 //	    help_list_insert_back(&category_nodes, pitem);
 //	  }
 //	} else if (current_type == HELP_GOVERNMENT) {
 //	  government_iterate(gov) {
 //	    pitem = new_help_item(current_type);
 //	    name = util.my_snprintf( " %s", gov.name);
-//	    pitem.topic = mystrdup(name);
-//	    pitem.text = mystrdup("");
+//	    pitem.topic = (name);
+//	    pitem.text = ("");
 //	    help_list_insert_back(&category_nodes, pitem);
 //	  } government_iterate_end;
 //	} else if (current_type == HELP_IMPROVEMENT) {
-//	  impr_type_iterate(i) {
-//	    if (improvement_exists(i) && !is_wonder(i)) {
+//	  for (int i = 0; i < Game.game.num_impr_types; i++) {
+//	    if (improvement_exists(i) && !Improvement.is_wonder(i)) {
 //	      pitem = new_help_item(current_type);
 //	      name = util.my_snprintf( " %s",
-//			  improvement_types[i].name);
-//	      pitem.topic = mystrdup(name);
-//	      pitem.text = mystrdup("");
+//			  Improvement.improvement_types[i].name);
+//	      pitem.topic = (name);
+//	      pitem.text = ("");
 //	      help_list_insert_back(&category_nodes, pitem);
 //	    }
-//	  } impr_type_iterate_end;
+//	  } ;
 //	} else if (current_type == HELP_WONDER) {
-//	  impr_type_iterate(i) {
-//	    if (improvement_exists(i) && is_wonder(i)) {
+//	  for (int i = 0; i < Game.game.num_impr_types; i++) {
+//	    if (improvement_exists(i) && Improvement.is_wonder(i)) {
 //	      pitem = new_help_item(current_type);
 //	      name = util.my_snprintf( " %s",
-//			  improvement_types[i].name);
-//	      pitem.topic = mystrdup(name);
-//	      pitem.text = mystrdup("");
+//			  Improvement.improvement_types[i].name);
+//	      pitem.topic = (name);
+//	      pitem.text = ("");
 //	      help_list_insert_back(&category_nodes, pitem);
 //	    }
-//	  } impr_type_iterate_end;
+//	  } ;
 //	} else {
 //	  util.die("Bad current_type %d", current_type);
 //	}
@@ -333,7 +335,7 @@ public class Helpdata{
 //    /* It wasn't a "generate" node: */
 //    
 //    pitem = new_help_item(HELP_TEXT);
-//    pitem.topic = mystrdup(_(secfile_lookup_str(sf, "%s.name", sec[isec])));
+//    pitem.topic = (_(secfile_lookup_str(sf, "%s.name", sec[isec])));
 //    
 //    paras = secfile_lookup_str_vec(sf, &npara, "%s.text", sec[isec]);
 //    
@@ -352,7 +354,7 @@ public class Helpdata{
 //    free(paras);
 //    paras = null;
 //    wordwrap_string(long_buffer, 68);
-//    pitem.text=mystrdup(long_buffer);
+//    pitem.text=(long_buffer);
 //    help_list_insert_back(&help_nodes, pitem);
 //  }
 //
@@ -512,7 +514,7 @@ public class Helpdata{
 //char *helptext_building(char *buf, size_t bufsz, int which,
 //			final String user_text)
 //{
-//  impr_type imp = &improvement_types[which];
+//  impr_type imp = &Improvement.improvement_types[which];
 //  
 //  assert(buf);
 //  buf[0] = '\0';
@@ -522,12 +524,12 @@ public class Helpdata{
 //		"%s\n\n", _(imp.helptext));
 //  }
 //
-//  if (tech_exists(improvement_types[which].obsolete_by)) {
+//  if (tech_exists(Improvement.improvement_types[which].obsolete_by)) {
 //    my_snprintf(buf + buf.length(), bufsz - buf.length(),
 //		"* The discovery of %s will make %s obsolete.\n",
 //		get_tech_name(Game.game.player_ptr,
-//			improvement_types[which].obsolete_by),
-//		improvement_types[which].name);
+//			Improvement.improvement_types[which].obsolete_by),
+//		Improvement.improvement_types[which].name);
 //  }
 //
 //  if (building_has_effect(which, EFT_ENABLE_NUKE)
@@ -547,7 +549,7 @@ public class Helpdata{
 //    my_snprintf(buf + buf.length(), bufsz - buf.length(), "  ");
 //  }
 //
-//  impr_type_iterate(impr) {
+//  {for (int impr = 0; impr < Game.game.num_impr_types; impr++) {
 //    final impr_type b = get_improvement_type(impr);
 //
 //    if (improvement_exists(impr) && b.bldg_req == which) {
@@ -565,7 +567,7 @@ public class Helpdata{
 //	req_append(get_tech_name(Game.game.player_ptr, b.tech_req));
 //      }
 //
-//      for (i = 0; b.terr_gate[i] != T_NONE; i++) {
+//      for (i = 0; b.terr_gate[i] != Terrain_H.T_NONE; i++) {
 //	req_append(get_terrain_name(b.terr_gate[i]));
 //      }
 //      for (i = 0; b.spec_gate[i] != S_NO_SPECIAL; i++) {
@@ -581,13 +583,13 @@ public class Helpdata{
 //		    "* Allows %s.\n", b.name);
 //      }
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  unit_type_iterate(utype) {
 //    final unit_type u = get_unit_type(utype);
 //
 //    if (unit_type_exists(utype) && u.impr_requirement == which) {
-//      if (u.tech_requirement != A_LAST) {
+//      if (u.tech_requirement != Tech_H.A_LAST) {
 //	my_snprintf(buf + buf.length(), bufsz - buf.length(),
 //		    "* Allows %s (with %s).\n", u.name,
 //		    get_tech_name(Game.game.player_ptr, u.tech_requirement));
@@ -610,7 +612,7 @@ public class Helpdata{
 //{									    \
 //  Tech_Type_id tech_id = 0;						    \
 //									    \
-//  while ((tech_id = find_tech_by_flag(tech_id, (flag))) != A_LAST) {
+//  while ((tech_id = find_tech_by_flag(tech_id, (flag))) != Tech_H.A_LAST) {
 //
 //#define techs_with_flag_iterate_end		\
 //    tech_id++;					\
@@ -658,18 +660,18 @@ public class Helpdata{
 //  utype = get_unit_type(i);
 //  
 //  buf[0] = '\0';
-//  if (unit_type_flag(i, F_NOBUILD)) {
+//  if (Unittype_P.unit_type_flag(i, F_NOBUILD)) {
 //    sprintf(buf + buf.length(),
 //	    "* May not be built in cities.\n");
 //  }
-//  if (unit_type_flag(i, F_NOHOME)) {
+//  if (Unittype_P.unit_type_flag(i, F_NOHOME)) {
 //    sprintf(buf + buf.length(), "* Never has a home city.\n");
 //  }
-//  if (unit_type_flag(i, F_GAMELOSS)) {
+//  if (Unittype_P.unit_type_flag(i, F_GAMELOSS)) {
 //    sprintf(buf + buf.length(),
 //	    "* Losing this unit will lose you the Game.game!\n");
 //  }
-//  if (unit_type_flag(i, F_UNIQUE)) {
+//  if (Unittype_P.unit_type_flag(i, F_UNIQUE)) {
 //    sprintf(buf + buf.length(),
 //	    "* Each player may only have one of this type of unit.\n");
 //  }
@@ -678,12 +680,12 @@ public class Helpdata{
 //	    utype.pop_cost);
 //  }
 //  if (utype.transport_capacity>0) {
-//    if (unit_type_flag(i, F_CARRIER)) {
+//    if (Unittype_P.unit_type_flag(i, F_CARRIER)) {
 //      sprintf(buf + buf.length(),
 //	      PL("* Can carry and refuel %d air unit.\n",
 //		  "* Can carry and refuel %d air units.\n",
 //		  utype.transport_capacity), utype.transport_capacity);
-//    } else if (unit_type_flag(i, F_MISSILE_CARRIER)) {
+//    } else if (Unittype_P.unit_type_flag(i, F_MISSILE_CARRIER)) {
 //      sprintf(buf + buf.length(),
 //	      PL("* Can carry and refuel %d missile unit.\n",
 //		  "* Can carry and refuel %d missile units.\n",
@@ -695,7 +697,7 @@ public class Helpdata{
 //		  utype.transport_capacity), utype.transport_capacity);
 //    }
 //  }
-//  if (unit_type_flag(i, F_TRADE_ROUTE)) {
+//  if (Unittype_P.unit_type_flag(i, F_TRADE_ROUTE)) {
 //    /* TRANS: "Manhattan" distance is the distance along gridlines, with
 //     * no diagonals allowed. */
 //    sprintf(buf + buf.length(), ("* Can establish trade routes (must travel " +
@@ -703,26 +705,26 @@ public class Helpdata{
 //				 "tiles [in Manhattan distance] from this " +
 //				 "unit's home city).\n"));
 //  }
-//  if (unit_type_flag(i, F_HELP_WONDER)) {
+//  if (Unittype_P.unit_type_flag(i, F_HELP_WONDER)) {
 //    sprintf(buf + buf.length(),
 //	    "* Can help build wonders (adds %d production).\n",
 //	    utype.build_cost);
 //  }
-//  if (unit_type_flag(i, F_UNDISBANDABLE)) {
+//  if (Unittype_P.unit_type_flag(i, F_UNDISBANDABLE)) {
 //    sprintf(buf + buf.length(), "* May not be disbanded.\n");
 //  } else {
 //    sprintf(buf + buf.length(), ("* May be disbanded in a city to " +
 //				 "recover 50%% of the production cost.\n"));
 //  }
-//  if (unit_type_flag(i, F_CITIES)) {
+//  if (Unittype_P.unit_type_flag(i, Eunit_flag_id.F_CITIES)) {
 //    sprintf(buf + buf.length(), "* Can build new cities.\n");
 //  }
-//  if (unit_type_flag(i, F_ADD_TO_CITY)) {
+//  if (Unittype_P.unit_type_flag(i, F_ADD_TO_CITY)) {
 //    sprintf(buf + buf.length(), ("* Can add on %d population to " +
 //				 "cities of no more than size %d.\n"),
 //	    unit_pop_value(i), Game.game.add_to_size_limit - unit_pop_value(i));
 //  }
-//  if (unit_type_flag(i, F_SETTLERS)) {
+//  if (Unittype_P.unit_type_flag(i, Eunit_flag_id.F_SETTLERS)) {
 //    char buf2[1024];
 //
 //    /* Roads, rail, mines, irrigation. */
@@ -767,131 +769,131 @@ public class Helpdata{
 //    sprintf(buf + buf.length(),
 //	    "* Can clean nuclear fallout from tiles.\n");
 //  }
-//  if (unit_type_flag(i, F_TRANSFORM)) {
+//  if (Unittype_P.unit_type_flag(i, F_TRANSFORM)) {
 //    sprintf(buf + buf.length(), "* Can transform tiles.\n");
 //  }
-//  if (unit_type_flag(i, F_AIRBASE)) {
+//  if (Unittype_P.unit_type_flag(i, F_AIRBASE)) {
 //    sprintf(buf + buf.length(), "* Can build airbases.\n");
 //  }
-//  if (is_ground_unittype(i) && !unit_type_flag(i, F_SETTLERS)) {
+//  if (Unittype_P.is_ground_unittype(i) && !Unittype_P.unit_type_flag(i, Eunit_flag_id.F_SETTLERS)) {
 //    sprintf(buf + buf.length(),
 //	    "* May fortify, granting a 50%% defensive bonus.\n");
 //  }
-//  if (is_ground_unittype(i)) {
+//  if (Unittype_P.is_ground_unittype(i)) {
 //    sprintf(buf + buf.length(),
 //	    "* May pillage to destroy infrastructure from tiles.\n");
 //  }
-//  if (unit_type_flag(i, F_DIPLOMAT)) {
-//    if (unit_type_flag(i, F_SPY)) {
+//  if (Unittype_P.unit_type_flag(i, Eunit_flag_id.F_DIPLOMAT)) {
+//    if (Unittype_P.unit_type_flag(i, F_SPY)) {
 //      sprintf(buf + buf.length(), ("* Can perform diplomatic actions," +
 //				   " plus special spy abilities.\n"));
 //    } else {
 //      sprintf(buf + buf.length(), "* Can perform diplomatic actions.\n");
 //    }
 //  }
-//  if (unit_type_flag(i, F_SUPERSPY)) {
+//  if (Unittype_P.unit_type_flag(i, F_SUPERSPY)) {
 //    sprintf(buf + buf.length(), ("* Will never lose a " +
 //				 "diplomat-versus-diplomat fight.\n"));
 //  }
-//  if (unit_type_flag(i, F_UNBRIBABLE)) {
+//  if (Unittype_P.unit_type_flag(i, F_UNBRIBABLE)) {
 //    sprintf(buf + buf.length(), "* May not be bribed.\n");
 //  }
-//  if (unit_type_flag(i, F_FIGHTER)) {
+//  if (Unittype_P.unit_type_flag(i, F_FIGHTER)) {
 //    sprintf(buf + buf.length(), "* Can attack enemy air units.\n");
 //  }
-//  if (unit_type_flag(i, F_PARTIAL_INVIS)) {
+//  if (Unittype_P.unit_type_flag(i, F_PARTIAL_INVIS)) {
 //    sprintf(buf + buf.length(), ("* Is invisible except when next to an" +
 //				 " enemy unit or city.\n"));
 //  }
-//  if (unit_type_flag(i, F_NO_LAND_ATTACK)) {
+//  if (Unittype_P.unit_type_flag(i, F_NO_LAND_ATTACK)) {
 //    sprintf(buf + buf.length(), ("* Can only attack units on ocean squares" +
 //				 " (no land attacks).\n"));
 //  }
-//  if (unit_type_flag(i, F_MARINES)) {
+//  if (Unittype_P.unit_type_flag(i, F_MARINES)) {
 //    sprintf(buf + buf.length(),
 //	    ("* Can attack from aboard sea units: against" +
 //	      " enemy cities and onto land squares.\n"));
 //  }
-//  if (unit_type_flag(i, F_PARATROOPERS)) {
+//  if (Unittype_P.unit_type_flag(i, F_PARATROOPERS)) {
 //    sprintf(buf + buf.length(),
 //	    ("* Can be paradropped from a friendly city" +
 //	      " (Range: %d).\n"), utype.paratroopers_range);
 //  }
-//  if (unit_type_flag(i, F_PIKEMEN)) {
+//  if (Unittype_P.unit_type_flag(i, F_PIKEMEN)) {
 //    sprintf(buf + buf.length(), ("* Gets double defense against units" +
 //				 " specified as 'mounted'.\n"));
 //  }
-//  if (unit_type_flag(i, F_HORSE)) {
+//  if (Unittype_P.unit_type_flag(i, F_HORSE)) {
 //    sprintf(buf + buf.length(),
 //	    "* Counts as 'mounted' against certain defenders.\n");
 //  }
-//  if (unit_type_flag(i, F_MISSILE)) {
+//  if (Unittype_P.unit_type_flag(i, F_MISSILE)) {
 //    sprintf(buf + buf.length(),
 //	    "* A missile unit: gets used up in making an attack.\n");
-//  } else if(unit_type_flag(i, Eunit_flag_id.F_ONEATTACK)) {
+//  } else if(Unittype_P.unit_type_flag(i, Eunit_flag_id.F_ONEATTACK)) {
 //    sprintf(buf + buf.length(),
 //	    "* Making an attack ends this unit's turn.\n");
 //  }
-//  if (unit_type_flag(i, F_NUCLEAR)) {
+//  if (Unittype_P.unit_type_flag(i, F_NUCLEAR)) {
 //    sprintf(buf + buf.length(),
 //	    "* This unit's attack causes a nuclear explosion!\n");
 //  }
-//  if (unit_type_flag(i, F_CITYBUSTER)) {
+//  if (Unittype_P.unit_type_flag(i, F_CITYBUSTER)) {
 //    sprintf(buf + buf.length(),
 //	    "* Gets double firepower when attacking cities.\n");
 //  }
-//  if (unit_type_flag(i, F_IGWALL)) {
+//  if (Unittype_P.unit_type_flag(i, F_IGWALL)) {
 //    sprintf(buf + buf.length(), "* Ignores the effects of city walls.\n");
 //  }
-//  if (unit_type_flag(i, F_BOMBARDER)) {
+//  if (Unittype_P.unit_type_flag(i, F_BOMBARDER)) {
 //    sprintf(buf + buf.length(),
 //	    ("* Does bombard attacks (%d per turn).  These attacks will " +
 //	      "only damage (never kill) the defender but has no risk to " +
 //	      "the attacker.\n"), utype.bombard_rate);
 //  }
-//  if (unit_type_flag(i, F_AEGIS)) {
+//  if (Unittype_P.unit_type_flag(i, F_AEGIS)) {
 //    sprintf(buf + buf.length(),
 //	    "* Gets quintuple defence against missiles and aircraft.\n");
 //  }
-//  if (unit_type_flag(i, F_IGTER)) {
+//  if (Unittype_P.unit_type_flag(i, F_IGTER)) {
 //    sprintf(buf + buf.length(),
 //	    "* Ignores terrain effects (treats all squares as roads).\n");
 //  }
-//  if (unit_type_flag(i, F_IGTIRED)) {
+//  if (Unittype_P.unit_type_flag(i, F_IGTIRED)) {
 //    sprintf(buf + buf.length(),
 //	    ("* Attacks with full strength even if less than " +
 //	      "one movement left.\n"));
 //  }
-//  if (unit_type_flag(i, F_IGZOC)) {
+//  if (Unittype_P.unit_type_flag(i, F_IGZOC)) {
 //    sprintf(buf + buf.length(), "* Ignores zones of control.\n");
 //  }
-//  if (unit_type_flag(i, Eunit_flag_id.F_NONMIL)) {
+//  if (Unittype_P.unit_type_flag(i, Eunit_flag_id.F_NONMIL)) {
 //    sprintf(buf + buf.length(), ("* A non-military unit" +
 //				 " (cannot attack; no martial law).\n"));
 //  }
-//  if (unit_type_flag(i, F_FIELDUNIT)) {
+//  if (Unittype_P.unit_type_flag(i, F_FIELDUNIT)) {
 //    sprintf(buf + buf.length(), ("* A field unit: one unhappiness applies" +
 //				 " even when non-aggressive.\n"));
 //  }
-//  if (unit_type_flag(i, F_NO_VETERAN)) {
+//  if (Unittype_P.unit_type_flag(i, F_NO_VETERAN)) {
 //    sprintf(buf + buf.length(),
 //	    "* Will never achieve veteran status.\n");
 //  } else {
 //    sprintf(buf + buf.length(),
 //	    "* May become veteran through training or combat.\n");
 //  }
-//  if (unit_type_flag(i, F_TRIREME)) {
+//  if (Unittype_P.unit_type_flag(i, F_TRIREME)) {
 //    Tech_Type_id tech1 = find_tech_by_flag(0, TF_REDUCE_TRIREME_LOSS1);
 //    Tech_Type_id tech2 = find_tech_by_flag(0, TF_REDUCE_TRIREME_LOSS2);
 //    sprintf(buf + buf.length(),
 //	    ("* Must end turn in a city or next to land," +
 //	      " or has a 50%% risk of being lost at sea.\n"));
-//    if (tech1 != A_LAST) {
+//    if (tech1 != Tech_H.A_LAST) {
 //      sprintf(buf + buf.length(),
 //	      "* The discovery of %s reduces the risk to 25%%.\n",
 //	      get_tech_name(Game.game.player_ptr, tech1));
 //    }
-//    if (tech2 != A_LAST) {
+//    if (tech2 != Tech_H.A_LAST) {
 //      sprintf(buf + buf.length(),
 //	      "* %s reduces the risk to 12%%.\n",
 //	      get_tech_name(Game.game.player_ptr, tech2));
@@ -912,12 +914,12 @@ public class Helpdata{
 //      int id = Unittype_P.get_role_unit(F_CARRIER, j);
 //
 //      mystrlcpy(allowed_units[num_allowed_units],
-//		unit_name(id), sizeof(allowed_units[num_allowed_units]));
+//		Unittype_P.unit_name(id), sizeof(allowed_units[num_allowed_units]));
 //      num_allowed_units++;
 //      assert(num_allowed_units < ARRAY_SIZE(allowed_units));
 //    }
 //
-//    if (unit_type_flag(i, F_MISSILE)) {
+//    if (Unittype_P.unit_type_flag(i, F_MISSILE)) {
 //      n = num_role_units(F_MISSILE_CARRIER);
 //
 //      for (j = 0; j < n; j++) {
@@ -925,7 +927,7 @@ public class Helpdata{
 //
 //	if (get_unit_type(id).transport_capacity > 0) {
 //	  mystrlcpy(allowed_units[num_allowed_units],
-//		    unit_name(id), sizeof(allowed_units[num_allowed_units]));
+//		    Unittype_P.unit_name(id), sizeof(allowed_units[num_allowed_units]));
 //	  num_allowed_units++;
 //	  assert(num_allowed_units < ARRAY_SIZE(allowed_units));
 //	}
@@ -1038,14 +1040,14 @@ public class Helpdata{
 //    sprintf(buf + buf.length(), "* Improves the effect of Temples.\n");
 //
 //  if (tech_flag(i, TF_BRIDGE)) {
-//    final String units_str = get_units_with_flag_string(F_SETTLERS);
+//    final String units_str = get_units_with_flag_string(Eunit_flag_id.F_SETTLERS);
 //    sprintf(buf + buf.length(), ("* Allows %s to build roads on river " +
 //				 "squares.\n"), units_str);
 //    free((void *) units_str);
 //  }
 //
 //  if (tech_flag(i, TF_FORTRESS)) {
-//    final String units_str = get_units_with_flag_string(F_SETTLERS);
+//    final String units_str = get_units_with_flag_string(Eunit_flag_id.F_SETTLERS);
 //    sprintf(buf + buf.length(), "* Allows %s to build fortresses.\n",
 //	    units_str);
 //    free((void *) units_str);
@@ -1060,15 +1062,15 @@ public class Helpdata{
 //    }
 //  }
 //
-//  if (tech_flag(i, TF_RAILROAD)) {
-//    final String units_str = get_units_with_flag_string(F_SETTLERS);
+//  if (tech_flag(i, tech_flag_id.TF_RAILROAD)) {
+//    final String units_str = get_units_with_flag_string(Eunit_flag_id.F_SETTLERS);
 //    sprintf(buf + buf.length(),
 //	    "* Allows %s to upgrade roads to railroads.\n", units_str);
 //    free((void *) units_str);
 //  }
 //
 //  if (tech_flag(i, TF_FARMLAND)) {
-//    final String units_str = get_units_with_flag_string(F_SETTLERS);
+//    final String units_str = get_units_with_flag_string(Eunit_flag_id.F_SETTLERS);
 //    sprintf(buf + buf.length(),
 //	    "* Allows %s to upgrade irrigation to farmland.\n",
 //	    units_str);
@@ -1091,7 +1093,7 @@ public class Helpdata{
 //  
 //  buf[0] = '\0';
 //  
-//  if (i<0 || i>=T_COUNT)
+//  if (i<0 || i>=Terrain_H.T_COUNT)
 //    return;
 //  pt = get_tile_type(i);
 //

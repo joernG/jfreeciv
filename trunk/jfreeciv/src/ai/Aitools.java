@@ -1,5 +1,6 @@
 package ai;
 
+import common.Game;
 import common.city.city;
 import common.map.tile;
 import common.player.player;
@@ -97,7 +98,7 @@ public class Aitools{
 //    = &ai.diplomacy.player_intel[aplayer.player_no];
 //
 //  return (pplayer != aplayer)
-//         && ((pplayers_at_war(pplayer, aplayer)
+//         && ((Player_P.pplayers_at_war(pplayer, aplayer)
 //           || ai.diplomacy.target == aplayer
 //           || pplayer.diplstates[aplayer.player_no].has_reason_to_cancel != 0
 //           || ai.diplomacy.acceptable_reputation > aplayer.reputation
@@ -133,7 +134,7 @@ public class Aitools{
 //    } else {
 //      () ai_unit_move(punit, ptile);
 //    }
-//    if (!find_unit_by_id(id)) {
+//    if (!Game.find_unit_by_id(id)) {
 //      /* Died... */
 //      return false;
 //    }
@@ -172,7 +173,7 @@ public class Aitools{
 //      danger += unit_att_rating(aunit);
 //    }
 //  } }
-//  dcity = map_get_city(dest_tile);
+//  dcity = Map.map_get_city(dest_tile);
 //  if (dcity && HOSTILE_PLAYER(pplayer, ai, City.city_owner(dcity))) {
 //    /* Assume enemy will build another defender, add it's attack strength */
 //    int d_type = ai_choose_defender_versus(dcity, punit.type);
@@ -289,10 +290,10 @@ public class Aitools{
 //  CHECK_UNIT(punit);
 //  /* TODO: log error on Map.same_pos with punit.x|y */
 //  punit.goto_tile = ptile;
-//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_GOTO);
+//  Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_GOTO);
 //  result = do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
 //  if (result != GR_DIED) {
-//    handle_unit_activity_request(punit, activity);
+//    Unithand.handle_unit_activity_request(punit, activity);
 //    punit.goto_tile = old_tile; /* May be null. */
 //    return true;
 //  }
@@ -309,8 +310,8 @@ public class Aitools{
 //void ai_unit_new_role(unit punit, enum ai_unit_task task,
 //		      tile ptile)
 //{
-//  unit charge = find_unit_by_id(punit.ai.charge);
-//  unit bodyguard = find_unit_by_id(punit.ai.bodyguard);
+//  unit charge = Game.find_unit_by_id(punit.ai.charge);
+//  unit bodyguard = Game.find_unit_by_id(punit.ai.bodyguard);
 //
 //  /* If the unit is under (human) orders we shouldn't control it. */
 //  assert(!unit_has_orders(punit));
@@ -325,7 +326,7 @@ public class Aitools{
 //
 //  if (punit.activity == unit_activity.ACTIVITY_GOTO) {
 //    /* It would indicate we're going somewhere otherwise */
-//    handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//    Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  }
 //
 //  if (punit.ai.ai_role == AIUNIT_BUILD_CITY) {
@@ -334,7 +335,7 @@ public class Aitools{
 //
 //  if (punit.ai.ai_role == AIUNIT_HUNTER) {
 //    /* Clear victim's hunted bit - we're no longer chasing. */
-//    unit target = find_unit_by_id(punit.ai.target);
+//    unit target = Game.find_unit_by_id(punit.ai.target);
 //
 //    if (target) {
 //      target.ai.hunted &= ~(1 << punit.unit_owner().player_no);
@@ -360,12 +361,12 @@ public class Aitools{
 //  }
 //
 //  /* Reserve city spot, _unless_ we want to add ourselves to a city. */
-//  if (punit.ai.ai_role == AIUNIT_BUILD_CITY && !map_get_city(ptile)) {
+//  if (punit.ai.ai_role == AIUNIT_BUILD_CITY && !Map.map_get_city(ptile)) {
 //    citymap_reserve_city_spot(ptile, punit.id);
 //  }
 //  if (punit.ai.ai_role == AIUNIT_HUNTER) {
 //    /* Set victim's hunted bit - the hunt is on! */
-//    unit target = find_unit_by_id(punit.ai.target);
+//    unit target = Game.find_unit_by_id(punit.ai.target);
 //
 //    assert(target != null);
 //    target.ai.hunted |= (1 << punit.unit_owner().player_no);
@@ -423,14 +424,14 @@ public class Aitools{
 //**************************************************************************/
 //static void ai_unit_bodyguard_move(int unitid, tile ptile)
 //{
-//  unit bodyguard = find_unit_by_id(unitid);
+//  unit bodyguard = Game.find_unit_by_id(unitid);
 //  unit punit;
 //  player pplayer;
 //
 //  assert(bodyguard != null);
 //  pplayer = bodyguard.unit_owner();
 //  assert(pplayer != null);
-//  punit = find_unit_by_id(bodyguard.ai.charge);
+//  punit = Game.find_unit_by_id(bodyguard.ai.charge);
 //  assert(punit != null);
 //
 //  assert(punit.ai.bodyguard == bodyguard.id);
@@ -446,7 +447,7 @@ public class Aitools{
 //    return;
 //  }
 //
-//  handle_unit_activity_request(bodyguard, unit_activity.ACTIVITY_IDLE);
+//  Unithand.handle_unit_activity_request(bodyguard, unit_activity.ACTIVITY_IDLE);
 //  () ai_unit_move(bodyguard, ptile);
 //}
 //
@@ -459,7 +460,7 @@ public class Aitools{
 //{
 //  unit guard;
 //  if (punit.ai.bodyguard > BODYGUARD_NONE) {
-//    if ((guard = find_unit_by_id(punit.ai.bodyguard))) {
+//    if ((guard = Game.find_unit_by_id(punit.ai.bodyguard))) {
 //      if (guard.ai.charge != punit.id) {
 //        BODYGUARD_LOG(Log.LOG_VERBOSE, guard, "my charge didn't know about me!");
 //      }
@@ -485,15 +486,15 @@ public class Aitools{
 //  assert(punit.unit_owner().ai.control);
 //  assert(is_tiles_adjacent(punit.tile, ptile));
 //
-//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//  Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  Unithand.handle_unit_move_request(punit, ptile, false, false);
-//  alive = (find_unit_by_id(sanity) != null);
+//  alive = (Game.find_unit_by_id(sanity) != null);
 //
 //  if (alive && Map.same_pos(ptile, punit.tile)
 //      && has_bodyguard(punit)) {
 //    ai_unit_bodyguard_move(punit.ai.bodyguard, ptile);
 //    /* Clumsy bodyguard might trigger an auto-attack */
-//    alive = (find_unit_by_id(sanity) != null);
+//    alive = (Game.find_unit_by_id(sanity) != null);
 //  }
 //
 //  return alive;
@@ -517,7 +518,7 @@ public class Aitools{
 //  assert(is_tiles_adjacent(punit.tile, ptile));
 //
 //  /* if enemy, stop and let ai attack function take this case */
-//  if (is_enemy_unit_tile(ptile, pplayer)
+//  if (Unit.is_enemy_unit_tile(ptile, pplayer)
 //      || is_enemy_city_tile(ptile, pplayer)) {
 //    UNIT_LOG(Log.LOG_DEBUG, punit, "movement halted due to enemy presence");
 //    return false;
@@ -530,7 +531,7 @@ public class Aitools{
 //
 //  /* don't leave bodyguard behind */
 //  if (has_bodyguard(punit)
-//      && (bodyguard = find_unit_by_id(punit.ai.bodyguard))
+//      && (bodyguard = Game.find_unit_by_id(punit.ai.bodyguard))
 //      && Map.same_pos(punit.tile, bodyguard.tile)
 //      && bodyguard.moves_left == 0) {
 //    UNIT_LOG(LOGLEVEL_BODYGUARD, punit, "does not want to leave " +
@@ -548,11 +549,11 @@ public class Aitools{
 //  }
 //
 //  /* go */
-//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//  Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  Unithand.handle_unit_move_request(punit, ptile, false, true);
 //
 //  /* handle the results */
-//  if (find_unit_by_id(sanity) && Map.same_pos(ptile, punit.tile)) {
+//  if (Game.find_unit_by_id(sanity) && Map.same_pos(ptile, punit.tile)) {
 //    if (has_bodyguard(punit)) {
 //      ai_unit_bodyguard_move(punit.ai.bodyguard, ptile);
 //    }
@@ -578,7 +579,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //  for(player pplay: Game.game.players){
 //    /* If "enemy" is set, only consider cities whose owner we're at
 //     * war with. */
-//    if (enemy && pplayer && !pplayers_at_war(pplayer, pplay)) {
+//    if (enemy && pplayer && !Player_P.pplayers_at_war(pplayer, pplay)) {
 //      continue;
 //    }
 //
@@ -700,7 +701,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //  for (city acity : pplayer.cities.data) {
 //    if (pcity != acity
 //	&& !acity.is_building_unit
-//	&& is_wonder(acity.currently_building)
+//	&& Improvement.is_wonder(acity.currently_building)
 //	&& (map_get_continent(acity.tile)
 //	    == map_get_continent(pcity.tile))) {
 //      return true;
@@ -716,7 +717,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //**************************************************************************/
 //void ai_advisor_choose_building(city pcity, ai_choice choice)
 //{ /* I prefer the ai_choice as a return value; gcc prefers it as an arg -- Syela */
-//  int id = B_LAST;
+//  int id = Improvement.B_LAST;
 //  unsigned int danger = 0;
 //  int downtown = 0, cities = 0;
 //  int want=0;
@@ -725,20 +726,19 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //  plr = City.city_owner(pcity);
 //     
 //  /* too bad plr.score isn't kept up to date. */
-//  city_list_iterate(plr.cities, acity)
-//    danger += acity.ai.danger;
+//  for(city acity : plr.cities.data){//    danger += acity.ai.danger;
 //    downtown += acity.ai.downtown;
 //    cities++;
 //  }
 //
-//  impr_type_iterate(i) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
 //    if (!plr.ai.control
 //        && (get_building_for_effect(EFT_CAPITAL_CITY) == i
-//            || is_wonder(i))) {
+//            || Improvement.is_wonder(i))) {
 //      continue; /* Humans should not be advised to build wonders or palace */
 //    }
-//    if (!is_wonder(i)
-//	|| (!pcity.is_building_unit && is_wonder(pcity.currently_building)
+//    if (!Improvement.is_wonder(i)
+//	|| (!pcity.is_building_unit && Improvement.is_wonder(pcity.currently_building)
 //	    && pcity.shield_stock >= Improvement.impr_build_shield_cost(i) / 2)
 //	|| (!is_building_other_wonder(pcity)
 //	    /* otherwise caravans will be killed! */
@@ -760,7 +760,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //	}
 //      } /* id is the building we like the best */
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  if (want != 0) {
 //    util.freelog(Log.LOG_DEBUG, "AI_Chosen: %s with desire = %d for %s",
@@ -796,7 +796,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //  free_happy  = citygov_free_happy(pcity, g);
 //
 //  /* ??  This does the right thing for normal Republic and Democ -- dwp */
-//  free_happy += get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL);
+//  free_happy += Effects.get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL);
 //
 //  for (unit punit : pcity.units_supported.data) {
 //    int happy_cost = utype_happy_cost(punit.unit_type(), g);
@@ -817,7 +817,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //      continue;
 //    }
 //
-//    if (get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL_PER) > 0) {
+//    if (Effects.get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL_PER) > 0) {
 //      happy_cost--;
 //    }
 //    adjust_city_free_cost(&free_happy, &happy_cost);

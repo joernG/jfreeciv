@@ -1,5 +1,7 @@
 package server;
 
+import common.Game;
+
 public class Report{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -217,11 +219,14 @@ public class Report{
 //{
 //  int result = 0;
 //
-//  built_impr_iterate(pcity, i) {
-//    if (is_wonder(i)) {
+	//for (int i = 0; i < Game.game.num_impr_types; i++) {
+//	if((pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
+//    if (Improvement.is_wonder(i)) {
 //      result++;
 //    }
-//  } built_impr_iterate_end;
+//  } ;
 //
 //  return result;
 //}
@@ -295,23 +300,23 @@ public class Report{
 //
 //  buffer[0] = '\0';
 //
-//  impr_type_iterate(i) {
-//    if (is_wonder(i)) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
+//    if (Improvement.is_wonder(i)) {
 //      city pcity = find_city_wonder(i);
 //
 //      if (pcity) {
 //	cat_snprintf(buffer, sizeof(buffer), "%s in %s (%s)\n",
-//		     get_impr_name_ex(pcity, i), pcity.name,
+//		     City.get_impr_name_ex(pcity, i), pcity.name,
 //		     get_nation_name(City.city_owner(pcity).nation));
 //      } else if(Game.game.global_wonders[i] != 0) {
 //	cat_snprintf(buffer, sizeof(buffer), "%s has been DESTROYED\n",
 //		     get_improvement_type(i).name);
 //      }
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
-//  impr_type_iterate(i) {
-//    if (is_wonder(i)) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
+//    if (Improvement.is_wonder(i)) {
 //      for(player pplayer: Game.game.players){
 //	for (city pcity : pplayer.cities.data) {
 //	  if (pcity.currently_building == i && !pcity.is_building_unit) {
@@ -323,7 +328,7 @@ public class Report{
 //	} }
 //      }
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  page_conn(dest, "Traveler's Report:",
 //	    "Wonders of the World", buffer);
@@ -420,7 +425,7 @@ public class Report{
 //
 //  /* count up settlers */
 //  for (unit punit : pplayer.units.data) {
-//    if (unit_flag(punit, F_CITIES)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_CITIES)) {
 //      result++;
 //    }
 //  } }
@@ -825,7 +830,7 @@ public class Report{
 //
 //    if (strncmp(line, "addplayer ", strlen("addplayer ")) == 0) {
 //      int turn, plr_no;
-//      char plr_name[MAX_LEN_NAME];
+//      String plr_name;
 //
 //      if (sscanf
 //	  (line + strlen("addplayer "), "%d %d %s", &turn, &plr_no,

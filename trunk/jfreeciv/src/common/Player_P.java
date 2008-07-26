@@ -9,6 +9,7 @@ import common.map.tile;
 import common.player.diplstate_type;
 import common.player.player;
 import common.player.player_diplstate;
+import common.tech.tech_flag_id;
 import common.unit.unit;
 
 public class Player_P{
@@ -88,12 +89,12 @@ public static boolean player_owns_city(player pplayer, city pcity)
 //  plr.is_male = true;
 //  plr.government=Game.game.default_government;
 //  plr.target_government = Game.game.default_government;
-//  plr.nation = NO_NATION_SELECTED;
+//  plr.nation = Nation_H.NO_NATION_SELECTED;
 //  plr.team = TEAM_NONE;
 //  plr.is_started = false;
 //  plr.revolution_finishes = -1;
 //  plr.capital = false;
-//  unit_list_init(&plr.units);
+//  plr.units.foo_list_init();
 //  city_list_init(&plr.cities);
 //  Speclists<Connection>_init(&plr.connections);
 //  plr.current_conn = null;
@@ -245,7 +246,7 @@ public static boolean player_owns_city(player pplayer, city pcity)
 		// }
 
 		// /* Units in cities may be hidden. */
-		// pcity = map_get_city(ptile);
+		// pcity = Map.map_get_city(ptile);
 		// if (pcity && !can_player_see_units_in_city(pplayer, pcity)) {
 		// return false;
 		// }
@@ -260,7 +261,7 @@ public static boolean player_owns_city(player pplayer, city pcity)
 		// */
 		// /* FIXME: shouldn't a check for shared vision be done here? */
 		// for(tile ptile1: util.adjc_tile_iterate(ptile)) {
-		// city pcity = map_get_city(ptile1);
+		// city pcity = Map.map_get_city(ptile1);
 		// if (pcity && pplayers_allied(City.city_owner(pcity), pplayer)) {
 		// return true;
 		// }
@@ -309,17 +310,17 @@ public static boolean player_owns_city(player pplayer, city pcity)
 //  return (can_player_see_city_internals(pplayer, pcity)
 //	  || pplayers_allied(pplayer, City.city_owner(pcity)));
 //}
-//
-///****************************************************************************
-//  Return true iff the player can see the city's internals.  This means the
-//  full city packet is sent to the client, who should then be able to popup
-//  a dialog for it.
-//****************************************************************************/
-//boolean can_player_see_city_internals(player pplayer,
-//				   city pcity)
-//{
-//  return (pplayer == City.city_owner(pcity));
-//}
+
+/****************************************************************************
+  Return true iff the player can see the city's internals.  This means the
+  full city packet is sent to the client, who should then be able to popup
+  a dialog for it.
+****************************************************************************/
+public static boolean can_player_see_city_internals(player pplayer,
+				   city pcity)
+{
+  return (pplayer == City.city_owner(pcity));
+}
 
 	/***************************************************************
 	 * If the specified player owns the city with the specified id, return
@@ -357,7 +358,7 @@ public static boolean player_owns_city(player pplayer, city pcity)
 //{
 //  city pcity;
 //  map_city_radius_iterate(ptile, ptile1) {
-//    pcity = map_get_city(ptile1);
+//    pcity = Map.map_get_city(ptile1);
 //    if (pcity && (pcity.owner == pplayer.player_no))
 //      return true;
 //  } map_city_radius_iterate_end;
@@ -369,10 +370,10 @@ public static boolean player_owns_city(player pplayer, city pcity)
 // flag. Needs to be optimized later (e.g. int tech_flags[TF_LAST] in
 // struct player)
 //**************************************************************************/
-//int num_known_tech_with_flag(player pplayer, enum tech_flag_id flag)
-//{
-//  return pplayer.research.num_known_tech_with_flag[flag];
-//}
+static int num_known_tech_with_flag(player pplayer, tech_flag_id flag)
+{
+  return pplayer.research.num_known_tech_with_flag[flag.ordinal()];
+}
 //
 ///**************************************************************************
 //  Return the expected net income of the player this turn.  This includes
@@ -403,11 +404,11 @@ public static boolean player_owns_city(player pplayer, city pcity)
 // Returns true iff the player knows at least one tech which has the
 // given flag.
 //**************************************************************************/
-//boolean player_knows_techs_with_flag(player pplayer,
-//				 enum tech_flag_id flag)
-//{
-//  return num_known_tech_with_flag(pplayer, flag) > 0;
-//}
+public static boolean player_knows_techs_with_flag(player pplayer,
+				 tech_flag_id flag)
+{
+  return num_known_tech_with_flag(pplayer, flag) > 0;
+}
 //
 ///**************************************************************************
 //The following limits a player's rates to those that are acceptable for the
@@ -463,7 +464,7 @@ public static boolean player_owns_city(player pplayer, city pcity)
 //				   int id)
 //{
 //  int t;
-//  if (!improvement_exists(id)) return false;
+//  if (!Improvement.improvement_exists(id)) return false;
 //  t = get_improvement_type(id).tech_req;
 //  return (get_invention(pplayer, t) == TECH_KNOWN);
 //}

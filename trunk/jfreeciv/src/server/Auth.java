@@ -88,7 +88,7 @@ public class Auth {
 	 * true
 	 **************************************************************************/
 	boolean authenticate_user(Connection pconn, String username) {
-		// char tmpname[MAX_LEN_NAME] = "\0";
+		// String tmpname = "\0";
 		String tmpname = "";
 
 		/* assign the client a unique guest name/reject if guests aren't allowed */

@@ -7,6 +7,7 @@ import common.city.city;
 import common.map.Point;
 import common.map.civ_map;
 import common.map.tile;
+import common.packet_gen.packet_ruleset_terrain_control;
 
 public class Map{
 //#include "city.h"
@@ -23,10 +24,10 @@ public class Map{
 
 /* the very map */
 	public static civ_map map;
-//
-///* these are initialized from the terrain ruleset */
-//struct terrain_misc terrain_control;
-//
+
+	/* these are initialized from the terrain ruleset */
+	public static packet_ruleset_terrain_control terrain_control;
+
 ///* used to compute neighboring tiles.
 // *
 // * using
@@ -72,7 +73,7 @@ public class Map{
 //{
 //  return (ptile.special
 //	  & (Terrain_H.S_ROAD | Terrain_H.S_RAILROAD | S_IRRIGATION | S_FARMLAND | S_MINE
-//	     | S_FORTRESS | Terrain_H.S_AIRBASE));
+//	     | Terrain_H.S_FORTRESS | Terrain_H.S_AIRBASE));
 //}
 //
 ///***************************************************************
@@ -88,9 +89,9 @@ public class Map{
 //  tile_type ptype = get_tile_type(ptile.terrain);
 //
 //  s = ptype.terrain_name;
-//  if (tile_has_special(ptile, S_RIVER)) {
+//  if (tile_has_special(ptile, Terrain_H.S_RIVER)) {
 //    sz_strlcat(s, "/");
-//    sz_strlcat(s, get_special_name(S_RIVER));
+//    sz_strlcat(s, get_special_name(Terrain_H.S_RIVER));
 //  }
 //
 //  first = true;
@@ -336,7 +337,7 @@ public class Map{
 //  ptile.known    = 0;
 //  ptile.continent = 0;
 //  ptile.city     = null;
-//  unit_list_init(&ptile.units);
+//  ptile.units.foo_list_init();
 //  ptile.worked   = null; /* pointer to city working tile */
 //  ptile.assigned = 0; /* bitvector */
 //  ptile.owner    = null; /* Tile not claimed by any nation. */
@@ -457,7 +458,7 @@ public class Map{
 //***************************************************************/
 //static void tile_free(tile ptile)
 //{
-//  unit_list_unlink_all(&ptile.units);
+//	ptile.units.foo_list_unlink_all();
 //  if (ptile.spec_sprite) {
 //    free(ptile.spec_sprite);
 //    ptile.spec_sprite = null;
@@ -659,7 +660,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 ///*************************************************************************
 //  This is used in mapgen for rivers going into ocen.  The name is 
 //  intentionally made awkward to prevent people from using it in place of
-//  Terrain_H.is_ocean_near_tile
+//  Terrain.is_terrain_flag_near_tile
 //*************************************************************************/
 //boolean is_cardinally_adj_to_ocean(final tile ptile)
 //{
@@ -768,7 +769,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //  if (contains_special(spe, S_MINE))
 //    cat_snprintf(s, sizeof(s), "%s/", "Mine");
 //
-//  if (contains_special(spe, S_FORTRESS))
+//  if (contains_special(spe, Terrain_H.S_FORTRESS))
 //    cat_snprintf(s, sizeof(s), "%s/", "Fortress");
 //
 //  if (contains_special(spe, Terrain_H.S_AIRBASE))
@@ -809,8 +810,8 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //    return S_IRRIGATION;
 //  if (contains_special(pset, S_MINE))
 //    return S_MINE;
-//  if (contains_special(pset, S_FORTRESS))
-//    return S_FORTRESS;
+//  if (contains_special(pset, Terrain_H.S_FORTRESS))
+//    return Terrain_H.S_FORTRESS;
 //  if (contains_special(pset, Terrain_H.S_AIRBASE))
 //    return Terrain_H.S_AIRBASE;
 //  if (contains_special(pset, Terrain_H.S_RAILROAD))
@@ -826,13 +827,13 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //boolean is_water_adjacent_to_tile(final tile ptile)
 //{
 //  if (Terrain_H.is_ocean(ptile.terrain)
-//      || tile_has_special(ptile, S_RIVER)
+//      || tile_has_special(ptile, Terrain_H.S_RIVER)
 //      || tile_has_special(ptile, S_IRRIGATION))
 //    return true;
 //
 //  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
 //    if (Terrain_H.is_ocean(tile1.terrain)
-//	|| tile_has_special(tile1, S_RIVER)
+//	|| tile_has_special(tile1, Terrain_H.S_RIVER)
 //	|| tile_has_special(tile1, S_IRRIGATION))
 //      return true;
 //  } cardinal_adjc_iterate_end;
@@ -973,7 +974,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //    } else {
 //      map_set_special(ptile, S_IRRIGATION);
 //    }
-//  } else if (result != T_NONE) {
+//  } else if (result != Terrain_H.T_NONE) {
 //    map_set_terrain(ptile, result);
 //    if (Terrain_H.is_ocean(result)) {
 //      clear_infrastructure(ptile);
@@ -981,7 +982,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //
 //      /* FIXME: When rest of code can handle
 //       * rivers in oceans, don't clear this! */
-//      map_clear_special(ptile, S_RIVER);
+//      map_clear_special(ptile, Terrain_H.S_RIVER);
 //    }
 //    reset_move_costs(ptile);
 //  }
@@ -1000,7 +1001,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //  
 //  if (now == result) {
 //    map_set_special(ptile, S_MINE);
-//  } else if (result != T_NONE) {
+//  } else if (result != Terrain_H.T_NONE) {
 //    map_set_terrain(ptile, result);
 //    if (Terrain_H.is_ocean(result)) {
 //      clear_infrastructure(ptile);
@@ -1008,7 +1009,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //
 //      /* FIXME: When rest of code can handle
 //       * rivers in oceans, don't clear this! */
-//      map_clear_special(ptile, S_RIVER);
+//      map_clear_special(ptile, Terrain_H.S_RIVER);
 //    }
 //    reset_move_costs(ptile);
 //  }
@@ -1025,7 +1026,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //  if (Terrain_H.is_ocean(type)) {
 //    clear_infrastructure(ptile);
 //    clear_dirtiness(ptile);
-//    map_clear_special(ptile, S_RIVER);	/* FIXME: When rest of code can handle
+//    map_clear_special(ptile, Terrain_H.S_RIVER);	/* FIXME: When rest of code can handle
 //					   rivers in oceans, don't clear this! */
 //  }
 //
@@ -1053,7 +1054,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //  now = ptile.terrain;
 //  result = get_tile_type(now).transform_result;
 //  
-//  if (result != T_NONE) {
+//  if (result != Terrain_H.T_NONE) {
 //    change_terrain(ptile, result);
 //  }
 //}
@@ -1115,7 +1116,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //  if (tile_has_special(t1, Terrain_H.S_ROAD) && tile_has_special(t2, Terrain_H.S_ROAD))
 //    return MOVE_COST_ROAD;
 //
-//  if (tile_has_special(t1, S_RIVER) && tile_has_special(t2, S_RIVER)) {
+//  if (tile_has_special(t1, Terrain_H.S_RIVER) && tile_has_special(t2, Terrain_H.S_RIVER)) {
 //    cardinal_move = is_move_cardinal(t1, t2);
 //    switch (terrain_control.river_move_mode) {
 //    case RMV_NORMAL:
@@ -1202,8 +1203,8 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //  tiles in direction back to (x,y).  That is, call this when
 //  something has changed on (x,y), eg roads, city, transform, etc.
 //***************************************************************/
-//void reset_move_costs(tile ptile)
-//{
+public static void reset_move_costs(tile ptile)
+{
 //  int maxcost = 72; /* should be big enough without being TOO big */
 //
 //  debug_log_move_costs("Resetting move costs for", ptile);
@@ -1218,7 +1219,7 @@ public static int real_map_distance(final tile tile0, final tile tile1)
 //	tile_move_cost_ai(tile1, ptile, maxcost);
 //  } adjc_dir_iterate_end;
 //  debug_log_move_costs("Reset move costs for", ptile);
-//}
+}
 //
 ///***************************************************************
 //  Initialize tile.move_cost[] for all tiles, where move_cost[i]
@@ -1336,14 +1337,14 @@ public static boolean map_has_special(final tile ptile, int special)
 ///***************************************************************
 //...
 //***************************************************************/
-//void map_set_special(tile ptile, enum int spe)
-//{
+public static void map_set_special(tile ptile, int spe)
+{
 //  ptile.special |= spe;
 //
 //  if (contains_special(spe, Terrain_H.S_ROAD) || contains_special(spe, Terrain_H.S_RAILROAD)) {
 //    reset_move_costs(ptile);
 //  }
-//}
+}
 
 /***************************************************************
 ...

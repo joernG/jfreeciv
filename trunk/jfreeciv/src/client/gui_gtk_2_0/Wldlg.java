@@ -561,7 +561,7 @@ public class Wldlg{
 //
 //    if (is_unit) {
 //      popup_help_dialog_typed(get_unit_type(id).name, HELP_UNIT);
-//    } else if (is_wonder(id)) {
+//    } else if (Improvement.is_wonder(id)) {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_WONDER);
 //    } else {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_IMPROVEMENT);
@@ -974,7 +974,7 @@ public class Wldlg{
 //
 //    if (!is_unit && *pcity) {
 //      plr = City.city_owner(*pcity);
-//      useless = improvement_obsolete(plr, id)
+//      useless = Improvement.improvement_obsolete(plr, id)
 //	|| improvement_redundant(plr, *pcity, id, false);
 //      g_object_set(rend, "strikethrough", useless, null);
 //    } else {
@@ -1299,9 +1299,9 @@ public class Wldlg{
 //  worklist_data ptr;
 //  worklist pwl, queue;
 //
-//  cid cids[unittype.U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + Improvement.B_LAST];
 //  int i, cids_used;
-//  struct item items[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + Improvement.B_LAST];
 //
 //  boolean selected;
 //  gint id;

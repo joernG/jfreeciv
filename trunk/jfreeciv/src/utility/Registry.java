@@ -405,7 +405,7 @@ public class Registry{
 //  }
 //  section_file_init(sf);
 //  if (filename) {
-//    sf.filename = mystrdup(filename);
+//    sf.filename = (filename);
 //  } else {
 //    sf.filename = null;
 //  }

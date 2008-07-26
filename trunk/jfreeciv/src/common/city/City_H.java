@@ -31,23 +31,4 @@ public class City_H {
 	 */
 	public static final int MAX_CITY_SIZE			=		100;
 
-//	/*
-//	 * Iterate a city Map.map.  This iterates over all city positions in the
-//	 * city map (i.e., positions that are workable by the city) in unspecified
-//	 * order.
-//	 */
-//	#define city_map_iterate(x, y)						    \
-//	{									    \
-//	  int _itr;								    \
-//	  									    \
-//	  for (_itr = 0; _itr < CITY_MAP_SIZE * CITY_MAP_SIZE; _itr++) {	    \
-//	    final int x = _itr % CITY_MAP_SIZE, y = _itr / CITY_MAP_SIZE;	    \
-//	    									    \
-//	    if (City.is_valid_city_coords(x, y)) {
-//
-//	#define city_map_iterate_end			                            \
-//	    }									    \
-//	  }									    \
-//	}
-
 }

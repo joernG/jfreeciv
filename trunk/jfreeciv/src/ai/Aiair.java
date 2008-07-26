@@ -69,7 +69,7 @@ public class Aiair{
 //static boolean ai_should_we_air_attack_tile(unit punit,
 //					 tile ptile)
 //{
-//  city acity = map_get_city(ptile);
+//  city acity = Map.map_get_city(ptile);
 //
 //  /* For a virtual unit (punit.id == 0), all targets are good */
 //  /* TODO: There is a danger of producing too many units that will not 
@@ -196,7 +196,7 @@ public class Aiair{
 //      continue;
 //    }
 //
-//    if (is_enemy_unit_tile(tile1, pplayer)
+//    if (Unit.is_enemy_unit_tile(tile1, pplayer)
 //        && ai_should_we_air_attack_tile(punit, tile1)
 //	&& (Gotohand.air_can_move_between (max_dist, ptile, tile1, pplayer) >= 0)){
 //      int new_best = ai_evaluate_tile_for_air_attack(punit, tile1);
@@ -246,7 +246,7 @@ public class Aiair{
 //    if ((target_worth
 //	 = find_something_to_bomb(punit, get_refuel_tile(airbase))) > 0) {
 //      city base_city 
-//        = map_get_city(get_refuel_tile(airbase));
+//        = Map.map_get_city(get_refuel_tile(airbase));
 //     
 //      if (base_city && base_city.ai.grave_danger != 0) {
 //        /* Fly there immediately!! */
@@ -337,7 +337,7 @@ public class Aiair{
 //      /* goto would be aborted: "Aborting GOTO for AI attack procedures"
 //       * now actually need to attack */
 //      /* We could use ai_military_findvictim here, but I don't trust it... */
-//      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//      Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //      if (is_tiles_adjacent(punit.tile, punit.goto_tile)) {
 //        () Unithand.handle_unit_move_request(punit, punit.goto_tile,
 //					true, false);
@@ -345,18 +345,18 @@ public class Aiair{
 //    } else if (ai_find_strategic_airbase(punit, &dst_tile)) {
 //      util.freelog(Log.LOG_DEBUG, "%s will fly to (%i, %i) (%s) to fight there",
 //              punit.unit_type().name, dst_tile.x, dst_tile.y,
-//              (map_get_city(dst_tile) ? 
-//               map_get_city(dst_tile).name : ""));
+//              (Map.map_get_city(dst_tile) ? 
+//               Map.map_get_city(dst_tile).name : ""));
 //      punit.goto_tile = dst_tile;
 //      ai_unit_goto(punit, punit.goto_tile);
 //    } else {
 //      util.freelog(Log.LOG_DEBUG, "%s cannot find anything to kill and is staying put", 
 //              punit.unit_type().name);
-//      handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//      Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //    }
 //  }
 //
-//  if ((punit = find_unit_by_id(id)) != null && punit.moves_left > 0
+//  if ((punit = Game.find_unit_by_id(id)) != null && punit.moves_left > 0
 //      && punit.moves_left != moves) {
 //    /* We have moved this turn, might have ended up stuck out in the fields
 //     * so, as a safety measure, let's manage again */
@@ -387,12 +387,12 @@ public class Aiair{
 //    return false;
 //  }
 //
-//  if (!player_knows_techs_with_flag(pplayer, TF_BUILD_AIRBORNE)) {
+//  if (!Player_P.player_knows_techs_with_flag(pplayer, TF_BUILD_AIRBORNE)) {
 //    return false;
 //  }
 //
 //  unit_type_iterate(u_type) {
-//    if (get_unit_type(u_type).move_type != AIR_MOVING) continue;
+//    if (get_unit_type(u_type).move_type != unit_move_type.AIR_MOVING) continue;
 //    if (City.can_build_unit(pcity, u_type)) {
 //      unit virtual_unit = 
 //	create_unit_virtual(pplayer, pcity, u_type, 

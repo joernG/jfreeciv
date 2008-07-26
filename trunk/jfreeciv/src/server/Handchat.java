@@ -1,7 +1,6 @@
 package server;
 import static common.Connection.find_conn_by_user_prefix;
 import static common.Player_P.find_player_by_name_prefix;
-import static common.Player_P.pplayers_allied;
 import static common.player.Player_H.ANON_PLAYER_NAME;
 import static port.util.my_snprintf;
 import static server.Stdinhand.SERVER_COMMAND_PREFIX;
@@ -10,6 +9,7 @@ import utility.shared.m_pre_result;
 
 import common.Connection;
 import common.Game;
+import common.Player_P;
 import common.event_type;
 import common.player.player;
 
@@ -194,7 +194,7 @@ public class Handchat{
 			 * chat_msg_to_player_multi().
 			 */
 			for(player aplayer: Game.game.players){
-				if (!pplayers_allied(pconn.player, aplayer)) {
+				if (!Player_P.pplayers_allied(pconn.player, aplayer)) {
 					continue;
 				}
 				dlsend_packet_chat_msg(aplayer.connections, chat, -1, -1,

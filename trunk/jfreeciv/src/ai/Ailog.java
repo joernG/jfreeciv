@@ -133,7 +133,7 @@ public class Ailog{
 //  } else {
 //    /* Are we a virtual unit evaluated in a debug city?. */
 //    if (punit.id == 0) {
-//      city pcity = map_get_city(punit.tile);
+//      city pcity = Map.map_get_city(punit.tile);
 //
 //      if (pcity && pcity.debug) {
 //        minlevel = Log.LOG_NORMAL;
@@ -191,7 +191,7 @@ public class Ailog{
 //  }
 //
 //  pcity = Game.find_city_by_id(punit.ai.charge);
-//  pcharge = find_unit_by_id(punit.ai.charge);
+//  pcharge = Game.find_unit_by_id(punit.ai.charge);
 //  if (pcharge) {
 //    ptile = pcharge.tile;
 //    id = pcharge.id;

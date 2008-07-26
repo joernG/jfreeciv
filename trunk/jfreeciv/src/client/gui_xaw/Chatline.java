@@ -81,7 +81,7 @@ public class Chatline{
 //   * Now uses window's font size and width.  Assumes fixed-width font.  --jjm
 //   */
 //  String theoutput;
-//  char *newout, *rmcr, *astring2 = mystrdup(astring);
+//  char *newout, *rmcr, *astring2 = (astring);
 //
 //  XtVaGetValues(outputwindow_text, XtNstring, &theoutput, null);
 //  newout=fc_malloc(astring2.length()+theoutput.length()+2);

@@ -59,7 +59,7 @@ public class Mapgen{
 //static void adjust_terrain_param();
 //
 //public static final int RIVERS_MAXTRIES = 32767;
-//enum river_map_type {RS_BLOCKED = 0, RS_RIVER = 1};
+//enum river_map_type {RS_BLOCKED = 0, RTerrain_H.S_RIVER = 1};
 //
 ///* Array needed to mark tiles as blocked to prevent a river from
 //   falling into itself, and for storing rivers temporarly.
@@ -488,7 +488,7 @@ public class Mapgen{
 //*********************************************************************/
 //static int river_test_rivergrid(tile ptile)
 //{
-//  return (count_special_near_tile(ptile, true, false, S_RIVER) > 1) ? 1 : 0;
+//  return (count_special_near_tile(ptile, true, false, Terrain_H.S_RIVER) > 1) ? 1 : 0;
 //}
 //
 ///*********************************************************************
@@ -513,7 +513,7 @@ public class Mapgen{
 //*********************************************************************/
 //static int river_test_adjacent_river(tile ptile)
 //{
-//  return 100 - count_special_near_tile(ptile, true, true, S_RIVER);
+//  return 100 - count_special_near_tile(ptile, true, true, Terrain_H.S_RIVER);
 //}
 //
 ///*********************************************************************
@@ -685,14 +685,14 @@ public class Mapgen{
 //
 //  while (true) {
 //    /* Mark the current tile as river. */
-//    rmap(ptile) |= (1u << RS_RIVER);
+//    rmap(ptile) |= (1u << RTerrain_H.S_RIVER);
 //    util.freelog(Log.LOG_DEBUG,
 //	    "The tile at (%d, %d) has been marked as river in river_map.\n",
 //	    ptile.x, ptile.y);
 //
 //    /* Test if the river is done. */
 //    /* We arbitrarily make rivers end at the poles. */
-//    if (count_special_near_tile(ptile, true, true, S_RIVER) > 0
+//    if (count_special_near_tile(ptile, true, true, Terrain_H.S_RIVER) > 0
 //	|| count_ocean_near_tile(ptile, true, true) > 0
 //        || (ptile.terrain == T_ARCTIC 
 //	    && map_colatitude(ptile) < 0.8 * COLD_LEVEL)) { 
@@ -833,11 +833,11 @@ public class Mapgen{
 //	!Terrain_H.is_ocean(ptile.terrain)
 //
 //	/* Don't start a river on river. */
-//	&& !Map.map_has_special(ptile, S_RIVER)
+//	&& !Map.map_has_special(ptile, Terrain_H.S_RIVER)
 //
 //	/* Don't start a river on a tile is surrounded by > 1 river +
 //	   ocean tile. */
-//	&& (count_special_near_tile(ptile, true, false, S_RIVER)
+//	&& (count_special_near_tile(ptile, true, false, Terrain_H.S_RIVER)
 //	    + count_ocean_near_tile(ptile, true, false) <= 1)
 //
 //	/* Don't start a river on a tile that is surrounded by hills or
@@ -880,7 +880,7 @@ public class Mapgen{
 //      /* Try to make a river. If it is OK, apply it to the Map.map. */
 //      if (make_river(ptile)) {
 //	whole_map_iterate(tile1) {
-//	  if (TEST_BIT(rmap(tile1), RS_RIVER)) {
+//	  if (TEST_BIT(rmap(tile1), RTerrain_H.S_RIVER)) {
 //	    int t = tile1.terrain;
 //
 //	    if (!Terrain_H.terrain_has_flag(t, TER_CAN_HAVE_RIVER)) {
@@ -888,7 +888,7 @@ public class Mapgen{
 //	      t = get_flag_terrain(TER_CAN_HAVE_RIVER);
 //	      map_set_terrain(tile1, t);
 //	    }
-//	    map_set_special(tile1, S_RIVER);
+//	    Map.map_set_special(tile1, Terrain_H.S_RIVER);
 //	    current_riverlength++;
 //	    map_set_placed(tile1);
 //	    util.freelog(Log.LOG_DEBUG, "Applied a river to (%d, %d).",
@@ -979,7 +979,7 @@ public class Mapgen{
 //  for(tile ptile :  Map.map.tiles){
 //    if (is_tiny_island(ptile)) {
 //      map_set_terrain(ptile, T_OCEAN);
-//      Map.map_clear_special(ptile, S_RIVER);
+//      Map.map_clear_special(ptile, Terrain_H.S_RIVER);
 //      map_set_continent(ptile, 0);
 //    }
 //  }
@@ -992,7 +992,7 @@ public class Mapgen{
 //static void print_mapgen_map()
 //{
 //  final int loglevel = Log.LOG_DEBUG;
-//  int terrain_count[T_COUNT];
+//  int terrain_count[Terrain_H.T_COUNT];
 //  int total = 0;
 //
 //  terrain_type_iterate(t) {
@@ -1002,7 +1002,7 @@ public class Mapgen{
 //  for(tile ptile :  Map.map.tiles){
 //    int t = ptile.terrain;
 //
-//    assert(t >= 0 && t < T_COUNT);
+//    assert(t >= 0 && t < Terrain_H.T_COUNT);
 //    terrain_count[t]++;
 //    if (!Terrain_H.is_ocean(t)) {
 //      total++;
@@ -1222,7 +1222,7 @@ public class Mapgen{
 //	map_set_placed(ptile); /* not good for a hut */
 //      } else {
 //	number--;
-//	map_set_special(ptile, Terrain_H.S_HUT);
+//	Map.map_set_special(ptile, Terrain_H.S_HUT);
 //	set_placed_near_pos(ptile, 3);
 //      }
 //    }
@@ -1261,18 +1261,18 @@ public class Mapgen{
 //      if (get_tile_type(ttype).special_1_name[0] != '\0'
 //	  && (get_tile_type(ttype).special_2_name[0] == '\0'
 //	      || (Rand.myrand(100) < 50))) {
-//	map_set_special(ptile, S_SPECIAL_1);
+//	Map.map_set_special(ptile, S_SPECIAL_1);
 //      } else if (get_tile_type(ttype).special_2_name[0] != '\0') {
-//	map_set_special(ptile, S_SPECIAL_2);
+//	Map.map_set_special(ptile, S_SPECIAL_2);
 //      }
 //    } else if (Terrain_H.is_ocean(ttype) && near_safe_tiles(ptile) 
 //	       && Rand.myrand(1000) < prob && !is_special_close(ptile)) {
 //      if (get_tile_type(ttype).special_1_name[0] != '\0'
 //	  && (get_tile_type(ttype).special_2_name[0] == '\0'
 //	      || (Rand.myrand(100) < 50))) {
-//        map_set_special(ptile, S_SPECIAL_1);
+//        Map.map_set_special(ptile, S_SPECIAL_1);
 //      } else if (get_tile_type(ttype).special_2_name[0] != '\0') {
-//	map_set_special(ptile, S_SPECIAL_2);
+//	Map.map_set_special(ptile, S_SPECIAL_2);
 //      }
 //    }
 //  }
@@ -1347,11 +1347,11 @@ public class Mapgen{
 //      /* the first condition helps make terrain more contiguous,
 //	 the second lets it avoid the coast: */
 //      if ( ( i*3>k*2 
-//	     || is_terrain_near_tile(ptile, warm0) 
-//	     || is_terrain_near_tile(ptile, warm1) 
+//	     || Terrain.is_terrain_near_tile(ptile, warm0) 
+//	     || Terrain.is_terrain_near_tile(ptile, warm1) 
 //	     || Rand.myrand(100)<50 
-//	     || is_terrain_near_tile(ptile, cold0) 
-//	     || is_terrain_near_tile(ptile, cold1) 
+//	     || Terrain.is_terrain_near_tile(ptile, cold0) 
+//	     || Terrain.is_terrain_near_tile(ptile, cold1) 
 //	     )
 //	   &&( !is_cardinally_adj_to_ocean(ptile) || Rand.myrand(100) < coast )) {
 //	if (map_colatitude(ptile) < COLD_LEVEL) {
@@ -1402,13 +1402,13 @@ public class Mapgen{
 //      /* the first condition helps make terrain more contiguous,
 //	 the second lets it avoid the coast: */
 //      if ((i * 3 > k * 2 
-//	   || count_special_near_tile(ptile, false, true, S_RIVER) > 0
+//	   || count_special_near_tile(ptile, false, true, Terrain_H.S_RIVER) > 0
 //	   || Rand.myrand(100) < 50)
 //	  && (!is_cardinally_adj_to_ocean(ptile) || Rand.myrand(100) < coast)) {
 //	if (is_water_adjacent_to_tile(ptile)
 //	    && count_ocean_near_tile(ptile, false, true) < 50
-//            && count_special_near_tile(ptile, false, true, S_RIVER) < 35) {
-//	  map_set_special(ptile, S_RIVER);
+//            && count_special_near_tile(ptile, false, true, Terrain_H.S_RIVER) < 35) {
+//	  Map.map_set_special(ptile, Terrain_H.S_RIVER);
 //	  i--;
 //	}
 //      }

@@ -229,9 +229,9 @@ public class Civclient{
 //    fc_fprintf(stderr, "%s %s\n", freeciv_name_version(), client_string);
 //    exit(EXIT_SUCCESS);
 //   } else if ((option = get_option("--log",argv,&i,argc))) {
-//      logfile = mystrdup(option); /* never free()d */
+//      logfile = (option); /* never free()d */
 //   } else  if ((option = get_option("--read", argv, &i, argc)))
-//      scriptfile = mystrdup(option); /* never free()d */
+//      scriptfile = (option); /* never free()d */
 //   else if ((option = get_option("--name",argv,&i,argc)))
 //      user_name = option;
 //   else if ((option = get_option("--meta",argv,&i,argc)))

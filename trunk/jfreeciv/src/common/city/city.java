@@ -1,6 +1,7 @@
 package common.city;
 
 import utility.Speclists;
+import common.Improvement;
 import common.worklist;
 import common.map.tile;
 import common.unit.unit;
@@ -23,13 +24,13 @@ public class city {
 	 * units enfored martial order. ppl_*[4] is distribution after wonders.
 	 * (final result.)
 	 */
-	// public int ppl_happy[5], ppl_content[5], ppl_unhappy[5], ppl_angry[5];
+	 public int ppl_happy[]=new int[5], ppl_content[]=new int[5], ppl_unhappy[]=new int[5], ppl_angry[]=new int[5];
 	
 	 /* Specialists */
 	 public int specialists[] = new int [specialist_type.getSize()];
 	
-	// /* trade routes */
-	// public int trade[NUM_TRADEROUTES], trade_value[NUM_TRADEROUTES];
+	 /* trade routes */
+	 public int trade[]=new int[City_H.NUM_TRADEROUTES], trade_value[]=new int[City_H.NUM_TRADEROUTES];
 	
 	 /* the productions */
 	 public int food_prod, food_surplus;
@@ -53,14 +54,14 @@ public class city {
 	public boolean is_building_unit; /* boolean unit/improvement */
 	 public int currently_building;
 			  
-	// int improvements[B_LAST];
+	public int improvements[]=new int[Improvement.B_LAST];
 	
 	 public worklist worklist;
 	
 	public city_tile_type city_map[][] = new city_tile_type[City_H.CITY_MAP_SIZE][City_H.CITY_MAP_SIZE];
-	//
-	// Speclists<unit> units_supported;
-	//
+	
+	public Speclists<unit> units_supported;
+	
 	// struct {
 	// /* Only used at the client (the serer is omniscient). */
 	// bool occupied;
@@ -108,13 +109,15 @@ public class city {
 	 */
 	public boolean synced;
 	// struct {
-	// /* If > 0, workers will not be rearranged until they are unfrozen. */
-	// public int workers_frozen;
-	//
-	// /* If set, workers need to be arranged when the city is unfrozen. Only
-	// * set inside Cityturn.auto_arrange_workers. */
-	// bool needs_arrange;
-	// } server;
+	public class Tserver{
+		/* If > 0, workers will not be rearranged until they are unfrozen. */
+		public int workers_frozen;
+
+		/* If set, workers need to be arranged when the city is unfrozen. Only
+		 * set inside Cityturn.auto_arrange_workers. */
+		public boolean needs_arrange;
+	}
+	 public Tserver server;
 
 	public int turn_founded; /* In which turn was the city founded? */
 
@@ -122,8 +125,8 @@ public class city {
 	public Speclists<unit> info_units_supported;
 	public Speclists<unit> info_units_present;
 
-	// struct ai_city ai;
-	//		  bool debug;
+	public ai_city ai;
+	public		  boolean debug;
 	//		};
 	
 	/**************************************************************************
@@ -133,7 +136,7 @@ public class city {
 	public boolean is_capital()
 	{
 		//TODO
-//	  return (get_city_bonus(pcity, EFT_CAPITAL_CITY) != 0);
+//	  return (Effects.get_city_bonus(pcity, EFT_CAPITAL_CITY) != 0);
 		return false;
 	}
 	

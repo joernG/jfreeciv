@@ -511,7 +511,7 @@ public class Control{
 //    if (punit && (unit_can_help_build_wonder_here(punit)
 //		  || unit_can_est_traderoute_here(punit))
 //	&& (!Game.game.player_ptr.ai.control || ai_popup_windows)) {
-//      city pcity_dest = map_get_city(punit.tile);
+//      city pcity_dest = Map.map_get_city(punit.tile);
 //      city pcity_homecity = Game.find_city_by_id(punit.homecity);
 //      if (pcity_dest && pcity_homecity) {
 //	popup_caravan_dialog(punit, pcity_homecity, pcity_dest);
@@ -566,9 +566,9 @@ public class Control{
 //    p_ids = null;
 //    pdiplomat = Player_P.player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
 //    pcity = Game.find_city_by_id(victim_id);
-//    punit = find_unit_by_id(victim_id);
+//    punit = Game.find_unit_by_id(victim_id);
 //
-//    if (!pdiplomat || !unit_flag(pdiplomat, F_DIPLOMAT))
+//    if (!pdiplomat || !unit_flag(pdiplomat, Eunit_flag_id.F_DIPLOMAT))
 //      continue;
 //
 //    if (punit
@@ -651,24 +651,24 @@ public class Control{
 //   *     (b) it can be done by the unit at this tile. */
 //  switch (activity) {
 //  case ACTIVITY_ROAD:
-//    return terrain_control.may_road
-//      && unit_flag(punit, F_SETTLERS)
+//    return Map.terrain_control.may_road
+//      && unit_flag(punit, Eunit_flag_id.F_SETTLERS)
 //      && (Map.tile_has_special(punit.tile, Terrain_H.S_ROAD)
 //	  || (ttype.road_time != 0
-//	      && (!Map.tile_has_special(punit.tile, S_RIVER)
-//		  || player_knows_techs_with_flag(pplayer, TF_BRIDGE))));
+//	      && (!Map.tile_has_special(punit.tile, Terrain_H.S_RIVER)
+//		  || Player_P.player_knows_techs_with_flag(pplayer, TF_BRIDGE))));
 //  case ACTIVITY_RAILROAD:
 //    /* There is no check for existing road/rail; the connect is allowed
-//     * regardless. It is assumed that if you know the TF_RAILROAD flag
+//     * regardless. It is assumed that if you know the tech_flag_id.TF_RAILROAD flag
 //     * you must also know the TF_BRIDGE flag. */
-//    return (terrain_control.may_road
-//	    && unit_flag(punit, F_SETTLERS)
-//	    && player_knows_techs_with_flag(pplayer, TF_RAILROAD));
+//    return (Map.terrain_control.may_road
+//	    && unit_flag(punit, Eunit_flag_id.F_SETTLERS)
+//	    && Player_P.player_knows_techs_with_flag(pplayer, tech_flag_id.TF_RAILROAD));
 //  case ACTIVITY_IRRIGATE:
 //    /* Special case for irrigation: only irrigate to make S_IRRIGATION,
 //     * never to transform tiles. */
-//    return (terrain_control.may_irrigate
-//	    && unit_flag(punit, F_SETTLERS)
+//    return (Map.terrain_control.may_irrigate
+//	    && unit_flag(punit, Eunit_flag_id.F_SETTLERS)
 //	    && (Map.tile_has_special(punit.tile, S_IRRIGATION)
 //		|| (terrain == ttype.irrigation_result
 //		    && is_water_adjacent_to_tile(punit.tile)
@@ -889,7 +889,7 @@ public class Control{
 //**************************************************************************/
 //void request_unit_change_homecity(unit punit)
 //{
-//  city pcity=map_get_city(punit.tile);
+//  city pcity=Map.map_get_city(punit.tile);
 //  
 //  if (pcity) {
 //    dsend_packet_unit_change_homecity(&aconnection, punit.id, pcity.id);
@@ -901,7 +901,7 @@ public class Control{
 //**************************************************************************/
 //void request_unit_upgrade(unit punit)
 //{
-//  city pcity=map_get_city(punit.tile);
+//  city pcity=Map.map_get_city(punit.tile);
 //
 //  if (pcity) {
 //    dsend_packet_unit_upgrade(&aconnection, punit.id);
@@ -949,7 +949,7 @@ public class Control{
 //****************************************************************************/
 //void request_unit_unload(unit pcargo)
 //{
-//  unit ptrans = find_unit_by_id(pcargo.transported_by);
+//  unit ptrans = Game.find_unit_by_id(pcargo.transported_by);
 //
 //  if (can_client_issue_orders()
 //      && ptrans
@@ -968,7 +968,7 @@ public class Control{
 //**************************************************************************/
 //void request_unit_caravan_action(unit punit, enum packet_type action)
 //{
-//  if (!map_get_city(punit.tile)) {
+//  if (!Map.map_get_city(punit.tile)) {
 //    return;
 //  }
 //
@@ -1382,7 +1382,7 @@ public class Control{
 //  if (punit.transported_by == -1) {
 //    /* We have to refresh the tile before moving.  This will draw
 //     * the tile without the unit (because it was unlinked above). */
-//    if (unit_type_flag(punit.type, F_CITIES)
+//    if (Unittype_P.unit_type_flag(punit.type, Eunit_flag_id.F_CITIES)
 //	&& punit.client.colored) {
 //      /* For settlers with an overlay, redraw the entire area of the
 //       * overlay. */
@@ -1412,7 +1412,7 @@ public class Control{
 //    
 //  punit.tile = target_unit.tile;
 //
-//  unit_list_insert(&punit.tile.units, punit);
+//  &punit.tile.units.foo_list_insert(punit);
 //
 //  if (punit_focus == punit) update_menus();
 //}
@@ -1422,7 +1422,7 @@ public class Control{
 //**************************************************************************/
 //void do_map_click(tile ptile, enum quickselect_type qtype)
 //{
-//  city pcity = map_get_city(ptile);
+//  city pcity = Map.map_get_city(ptile);
 //  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //  boolean maybe_goto = false;
 //
@@ -1467,7 +1467,7 @@ public class Control{
 //    }
 //  }
 //  /* Otherwise use popups. */
-//  else if (pcity && can_player_see_city_internals(Game.game.player_ptr, pcity)) {
+//  else if (pcity && Player_P.can_player_see_city_internals(Game.game.player_ptr, pcity)) {
 //    popup_city_dialog(pcity, false);
 //  }
 //  else if (ptile.units.foo_list_size() == 0 && !pcity
@@ -1553,7 +1553,7 @@ public class Control{
 //      }
 //    }
 //    /* Any sea, pref. moves left. */
-//    else if (is_sailing_unit(punit)) {
+//    else if (Unit.is_sailing_unit(punit)) {
 //      if (punit.moves_left > 0) {
 //        if (!panymovesea) {
 //          panymovesea = punit;
@@ -1574,7 +1574,7 @@ public class Control{
 //        panyland = punit;
 //      }
 //    }
-//    else if (is_sailing_unit(punit)) {
+//    else if (Unit.is_sailing_unit(punit)) {
 //      if (punit.moves_left > 0) {
 //        panymovesea = punit;
 //      } else {
@@ -1827,7 +1827,7 @@ public class Control{
 //  city pcity;		/* need pcity.id */
 //  if (punit_focus
 //     && is_diplomat_unit(punit_focus)
-//     && (pcity = map_get_city(punit_focus.tile))
+//     && (pcity = Map.map_get_city(punit_focus.tile))
 //     && !diplomat_dialog_is_open()    /* confusing otherwise? */
 //     && diplomat_can_do_action(punit_focus, DIPLOMAT_ANY_ACTION,
 //			       punit_focus.tile))
@@ -1940,7 +1940,7 @@ public class Control{
 //**************************************************************************/
 //void key_unit_auto_attack()
 //{
-//  if (punit_focus && !unit_flag(punit_focus, F_SETTLERS) &&
+//  if (punit_focus && !unit_flag(punit_focus, Eunit_flag_id.F_SETTLERS) &&
 //      can_unit_do_auto(punit_focus)) {
 //    request_unit_auto(punit_focus);
 //  }
@@ -1962,7 +1962,7 @@ public class Control{
 //**************************************************************************/
 //void key_unit_auto_settle()
 //{
-//  if (punit_focus && unit_flag(punit_focus, F_SETTLERS) &&
+//  if (punit_focus && unit_flag(punit_focus, Eunit_flag_id.F_SETTLERS) &&
 //      can_unit_do_auto(punit_focus)) {
 //    request_unit_auto(punit_focus);
 //  }

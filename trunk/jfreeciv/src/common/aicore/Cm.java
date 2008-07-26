@@ -1,5 +1,7 @@
 package common.aicore;
 
+import common.city.City_H;
+
 public class Cm{
 
 // Freeciv - Copyright (C) 2002 - The Freeciv Project
@@ -639,14 +641,17 @@ public class Cm{
 //  /* Clear all specialists, and remove all workers from fields (except
 //   * the city center). */
 //  memset(&pcity.specialists, 0, sizeof(pcity.specialists));
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//		int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//		if (City.is_valid_city_coords(x, y)) {
 //    if (City.is_city_center(x, y)) {
 //      continue;
 //    }
 //    if (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER) {
 //      pcity.city_map[x][y] = city_tile_type.C_TILE_EMPTY;
 //    }
-//  } city_map_iterate_end;
+//  } };
 //
 //  /* Now for each tile type, find the right number of such tiles and set them
 //   * as worked.  For specialists we just increase the number of specialists
@@ -699,8 +704,8 @@ public class Cm{
 //  surplus[LUXURY] = pcity.luxury_total;
 //  surplus[SCIENCE] = pcity.science_total;
 //
-//  *disorder = city_unhappy(pcity);
-//  *happy = city_happy(pcity);
+//  *disorder = City.city_unhappy(pcity);
+//  *happy = City.city_happy(pcity);
 //}
 //
 ///****************************************************************************
@@ -858,7 +863,7 @@ public class Cm{
 //static void compute_tile_production(final city pcity, int x, int y,
 //				    cm_tile_type out)
 //{
-//  boolean is_celebrating = base_city_celebrating(pcity);
+//  boolean is_celebrating = base_City.city_celebrating(pcity);
 //
 //  out.production[FOOD]
 //    = base_city_get_food_tile(x, y, pcity, is_celebrating);
@@ -931,8 +936,8 @@ public class Cm{
 //};
 //final static struct spec_stat_pair pairs[specialist_type.getSize()] =  {
 //  { specialist_type.SP_ELVIS, LUXURY },
-//  { SP_SCIENTIST, SCIENCE },
-//  { SP_TAXMAN, GOLD }
+//  { specialist_type.SP_SCIENTIST, SCIENCE },
+//  { specialist_type.SP_TAXMAN, GOLD }
 //};
 //
 ///****************************************************************************
@@ -1554,7 +1559,7 @@ public class Cm{
 //  int x = CITY_MAP_RADIUS, y = CITY_MAP_RADIUS;
 //  int usage[NUM_STATS];
 //  city pcity = state.pcity;
-//  boolean is_celebrating = base_city_celebrating(pcity);
+//  boolean is_celebrating = base_City.city_celebrating(pcity);
 //  struct city backup;
 //
 //  /* make sure the city's numbers make sense (sometimes they don't,
@@ -1567,7 +1572,7 @@ public class Cm{
 //  /* If the city is content, then we know the food usage is just
 //   * prod-surplus; otherwise, we know it's at least 2*size but we
 //   * can't easily compute the settlers. */
-//  if (!city_unhappy(pcity)) {
+//  if (!City.city_unhappy(pcity)) {
 //    usage[FOOD] = pcity.food_prod - pcity.food_surplus;
 //  } else {
 //    usage[FOOD] = pcity.size * 2;
@@ -1588,7 +1593,7 @@ public class Cm{
 //   * pcity.shield_prod = (factories-waste) * production.
 //   * Therefore, shield_usage = pcity.shield_prod - pcity.shield_surplus
 //   */
-//  if (!city_unhappy(pcity)) {
+//  if (!City.city_unhappy(pcity)) {
 //    double sbonus;
 //
 //    usage[SHIELD] = pcity.shield_prod - pcity.shield_surplus;
@@ -1958,11 +1963,14 @@ public class Cm{
 //{
 //  int count = 0;
 //
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(x, y)) {
 //    if(result.worker_positions_used[x][y] && !City.is_city_center(x, y)) {
 //      count++;
 //    }
-//  } city_map_iterate_end;
+//  } };
 //  return count;
 //}
 //
@@ -1988,10 +1996,13 @@ public class Cm{
 //			      cm_result result)
 //{
 //  /* copy the map of where workers are */
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(x, y)) {
 //    result.worker_positions_used[x][y] =
 //      (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER);
-//  } city_map_iterate_end;
+//  } };
 //
 //  /* copy the specialist counts */
 //  specialist_type_iterate(spec) {
@@ -2131,8 +2142,8 @@ public class Cm{
 //  util.freelog(Log.LOG_NORMAL,
 //          "  size=%d, entertainers=%d, scientists=%d, taxmen=%d",
 //          pcity.size, pcity.specialists[specialist_type.SP_ELVIS],
-//          pcity.specialists[SP_SCIENTIST],
-//          pcity.specialists[SP_TAXMAN]);
+//          pcity.specialists[specialist_type.SP_SCIENTIST],
+//          pcity.specialists[specialist_type.SP_TAXMAN]);
 //  util.freelog(Log.LOG_NORMAL, "  workers at:");
 //  my_city_map_iterate(pcity, x, y) {
 //    if (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER) {
@@ -2179,7 +2190,7 @@ public class Cm{
 //    line[City_H.CITY_MAP_SIZE] = 0;
 //
 //    for (x = 0; x < City_H.CITY_MAP_SIZE; x++) {
-//      if (!City.is_valid_city_coords(x, y)) {
+//      if (!City.City.is_valid_city_coords(x, y)) {
 //        line[x] = '-';
 //      } else if (City.is_city_center(x, y)) {
 //        line[x] = 'c';

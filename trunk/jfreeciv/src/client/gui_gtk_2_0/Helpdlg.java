@@ -1,5 +1,7 @@
 package client.gui_gtk_2_0;
 
+import common.Game;
+
 public class Helpdlg{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -81,7 +83,7 @@ public class Helpdlg{
 //static GtkWidget *help_ulabel[5][5];
 //static GtkWidget *help_tlabel[4][5];
 //
-//static boolean help_advances[A_LAST];
+//static boolean help_advances[Tech_H.A_LAST];
 //
 //static GPtrArray *help_history;
 //static int	  help_history_pos;
@@ -189,7 +191,7 @@ public class Helpdlg{
 //  GtkTreeIter   l;
 //  GValue        value = { 0, };
 //
-//  if (advances[tech].req[0] == A_LAST && advances[tech].req[1] == A_LAST) {
+//  if (advances[tech].req[0] == Tech_H.A_LAST && advances[tech].req[1] == Tech_H.A_LAST) {
 //    bg = COLOR_STD_RED;
 //
 //    gtk_tree_store_append(tstore, &l, parent);
@@ -687,12 +689,12 @@ public class Helpdlg{
 //  create_help_page(HELP_IMPROVEMENT);
 //  
 //  if (which<Game.game.num_impr_types) {
-//    impr_type imp = &improvement_types[which];
+//    impr_type imp = &Improvement.improvement_types[which];
 //    sprintf(buf, "%d", Improvement.impr_build_shield_cost(which));
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[1]), buf);
 //    sprintf(buf, "%d", imp.upkeep);
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[3]), buf);
-//    if (imp.tech_req == A_LAST) {
+//    if (imp.tech_req == Tech_H.A_LAST) {
 //      gtk_label_set_text(GTK_LABEL(help_ilabel[5]), "(Never)");
 //    } else {
 //      gtk_label_set_text(GTK_LABEL(help_ilabel[5]),
@@ -724,10 +726,10 @@ public class Helpdlg{
 //  create_help_page(HELP_WONDER);
 //
 //  if (which<Game.game.num_impr_types) {
-//    impr_type imp = &improvement_types[which];
+//    impr_type imp = &Improvement.improvement_types[which];
 //    sprintf(buf, "%d", Improvement.impr_build_shield_cost(which));
 //    gtk_label_set_text(GTK_LABEL(help_wlabel[1]), buf);
-//    if (imp.tech_req == A_LAST) {
+//    if (imp.tech_req == Tech_H.A_LAST) {
 //      gtk_label_set_text(GTK_LABEL(help_wlabel[3]), "(Never)");
 //    } else {
 //      gtk_label_set_text(GTK_LABEL(help_wlabel[3]),
@@ -782,7 +784,7 @@ public class Helpdlg{
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[3][1]), helptext_unit_upkeep_str(i));
 //    sprintf(buf, "%d", utype.vision_range);
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[3][4]), buf);
-//    if(utype.tech_requirement==A_LAST) {
+//    if(utype.tech_requirement==Tech_H.A_LAST) {
 //      gtk_label_set_text(GTK_LABEL(help_ulabel[4][1]), "(Never)");
 //    } else {
 //      gtk_label_set_text(GTK_LABEL(help_ulabel[4][1]),
@@ -823,7 +825,7 @@ public class Helpdlg{
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[3][4]), "0");
 //
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[4][1]), "(Never)");
-///*    create_tech_tree(help_improvement_tree, 0, A_LAST, 3);*/
+///*    create_tech_tree(help_improvement_tree, 0, Tech_H.A_LAST, 3);*/
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[4][4]), "None");
 //
 //    gtk_text_buffer_set_text(help_text, buf, -1);
@@ -898,28 +900,28 @@ public class Helpdlg{
 //    gtk_box_pack_start(GTK_BOX(help_vbox), w, true, true, 5);
 //    gtk_widget_show(w);
 //
-//    impr_type_iterate(j) {
-//      if(i==improvement_types[j].tech_req) {
+//    for (int j = 0; j < Game.game.num_impr_types; j++) {
+//      if(i==Improvement.improvement_types[j].tech_req) {
 //        hbox = gtk_hbox_new(false, 0);
 //        gtk_container_add(GTK_CONTAINER(help_vbox), hbox);
 //        w = gtk_label_new("Allows");
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
-//        w = help_slink_new(improvement_types[j].name,
-//			  is_wonder(j)?HELP_WONDER:HELP_IMPROVEMENT);
+//        w = help_slink_new(Improvement.improvement_types[j].name,
+//			  Improvement.is_wonder(j)?HELP_WONDER:HELP_IMPROVEMENT);
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
 //        gtk_widget_show_all(hbox);
 //      }
-//      if(i==improvement_types[j].obsolete_by) {
+//      if(i==Improvement.improvement_types[j].obsolete_by) {
 //        hbox = gtk_hbox_new(false, 0);
 //        gtk_container_add(GTK_CONTAINER(help_vbox), hbox);
 //        w = gtk_label_new("Obsoletes");
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
-//        w = help_slink_new(improvement_types[j].name,
-//			  is_wonder(j)?HELP_WONDER:HELP_IMPROVEMENT);
+//        w = help_slink_new(Improvement.improvement_types[j].name,
+//			  Improvement.is_wonder(j)?HELP_WONDER:HELP_IMPROVEMENT);
 //        gtk_box_pack_start(GTK_BOX(hbox), w, false, false, 0);
 //        gtk_widget_show_all(hbox);
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //
 //    unit_type_iterate(j) {
 //      if(i!=get_unit_type(j).tech_requirement) continue;
@@ -992,7 +994,7 @@ public class Helpdlg{
 //
 //  create_help_page(HELP_TERRAIN);
 //
-//  if (i < T_COUNT) {
+//  if (i < Terrain_H.T_COUNT) {
 //    sprintf(buf, "%d/%d.%d",
 //	    ptype.movement_cost,
 //	    (int)(ptype.defense_bonus/10),
@@ -1052,7 +1054,7 @@ public class Helpdlg{
 //		ptype.irrigation_food_incr,
 //		ptype.irrigation_time);
 //      }
-//    } else if (ptype.irrigation_result != T_NONE) {
+//    } else if (ptype.irrigation_result != Terrain_H.T_NONE) {
 //      sprintf(buf, "%s / %d",
 //	      get_tile_type(ptype.irrigation_result).terrain_name,
 //	      ptype.irrigation_time);
@@ -1066,14 +1068,14 @@ public class Helpdlg{
 //		ptype.mining_shield_incr,
 //		ptype.mining_time);
 //      }
-//    } else if (ptype.mining_result != T_NONE) {
+//    } else if (ptype.mining_result != Terrain_H.T_NONE) {
 //      sprintf(buf, "%s / %d",
 //	      get_tile_type(ptype.mining_result).terrain_name,
 //	      ptype.mining_time);
 //    }
 //    gtk_label_set_text(GTK_LABEL(help_tlabel[3][1]), buf);
 //
-//    if (ptype.transform_result != T_NONE) {
+//    if (ptype.transform_result != Terrain_H.T_NONE) {
 //      sprintf(buf, "%s / %d",
 //	      get_tile_type(ptype.transform_result).terrain_name,
 //	       ptype.transform_time);
@@ -1129,12 +1131,12 @@ public class Helpdlg{
 //  switch(pitem.type) {
 //  case HELP_IMPROVEMENT:
 //    i = find_improvement_by_name(top);
-//    if(i!=B_LAST && is_wonder(i)) i = B_LAST;
+//    if(i!=Improvement.B_LAST && Improvement.is_wonder(i)) i = Improvement.B_LAST;
 //    help_update_improvement(pitem, top, i);
 //    break;
 //  case HELP_WONDER:
 //    i = find_improvement_by_name(top);
-//    if(i!=B_LAST && !is_wonder(i)) i = B_LAST;
+//    if(i!=Improvement.B_LAST && !Improvement.is_wonder(i)) i = Improvement.B_LAST;
 //    help_update_wonder(pitem, top, i);
 //    break;
 //  case HELP_UNIT:

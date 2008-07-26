@@ -6,6 +6,7 @@ import utility.Speclists;
 import utility.shared.m_pre_result;
 
 import common.connection.auth_status;
+import common.connection.cmdlevel_id;
 import common.player.player;
 
 public class Connection{
@@ -33,7 +34,7 @@ public class Connection{
 
 	public Speclists<Connection> self; /* list with this connection as single element */
 	
-	// char username[MAX_LEN_NAME];
+	// String username;
 	public String username;
 	// char addr[MAX_LEN_ADDR];
 	public String addr;
@@ -44,11 +45,11 @@ public class Connection{
 	// */
 	// char capability[MAX_LEN_CAPSTR];
 
-	// /*
-	// * "access_level" stores the access granted to the client
-	// * corresponding to this connection.
-	// */
-	// enum cmdlevel_id access_level;
+	 /*
+	 * "access_level" stores the access granted to the client
+	 * corresponding to this connection.
+	 */
+	 public cmdlevel_id access_level;
 
 	// /*
 	// * Something has occurred that means the connection should be
@@ -188,7 +189,7 @@ public class Connection{
 //	**************************************************************************/
 //	final String cmdlevel_name(enum cmdlevel_id lvl)
 //	{
-//	assert (lvl >= 0 && lvl < ALLOW_NUM);
+//	assert (lvl >= 0 && lvl < cmdlevel_id.ALLOW_NUM);
 //	return levelnames[lvl];
 //	}
 
@@ -203,13 +204,13 @@ public class Connection{
 //	enum cmdlevel_id i;
 //	size_t len = token.length();
 
-//	for (i = 0; i < ALLOW_NUM; i++) {
+//	for (i = 0; i < cmdlevel_id.ALLOW_NUM; i++) {
 //	if (strncmp(levelnames[i], token, len) == 0) {
 //	return i;
 //	}
 //	}
 
-//	return ALLOW_UNRECOGNIZED;
+//	return cmdlevel_id.ALLOW_UNRECOGNIZED;
 //	}
 
 
@@ -662,7 +663,7 @@ public class Connection{
 		// conn_list_unlink(&Game.game.game_connections, pconn);
 		//
 		// pconn.player = null;
-		// pconn.access_level = ALLOW_NONE;
+		// pconn.access_level = cmdlevel_id.ALLOW_NONE;
 		// connection_common_close(pconn);
 	}
 

@@ -41,7 +41,7 @@ public class Repodlgs_common{
 //
 ///****************************************************************
 //  Fills out the array of struct improvement_entry given by
-//  entries. The array must be able to hold at least B_LAST entries.
+//  entries. The array must be able to hold at least Improvement.B_LAST entries.
 //*****************************************************************/
 //void get_economy_report_data(improvement_entry entries,
 //			     int *num_entries_used, int *total_cost,
@@ -50,11 +50,11 @@ public class Repodlgs_common{
 //  *num_entries_used = 0;
 //  *total_cost = 0;
 //
-//  impr_type_iterate(impr_id) {
-//    if (!is_wonder(impr_id)) {
+//  for (int impr_id = 0; impr_id < Game.game.num_impr_types; impr_id++) {
+//    if (!Improvement.is_wonder(impr_id)) {
 //      int count = 0, cost = 0;
 //      for (city pcity : Game.game.player_ptr.cities.data) {
-//	if (city_got_building(pcity, impr_id)) {
+//	if (City.city_got_building(pcity, impr_id)) {
 //	  count++;
 //	  cost += improvement_upkeep(pcity, impr_id);
 //	}
@@ -78,7 +78,7 @@ public class Repodlgs_common{
 //        *total_cost += cost;
 //      }
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  *total_income = 0;
 //
@@ -237,7 +237,7 @@ public class Repodlgs_common{
 //  num_options_categories = packet.ncategories;
 //  
 //  for (i = 0; i < num_options_categories; i++) {
-//    options_categories[i] = mystrdup(packet.category_names[i]);
+//    options_categories[i] = (packet.category_names[i]);
 //  }
 //
 //  /* avoid a malloc of size 0 warning */
@@ -267,9 +267,9 @@ public class Repodlgs_common{
 //
 //  assert(i >= 0);
 //
-//  settable_options[i].name = mystrdup(packet.name);
-//  settable_options[i].short_help = mystrdup(packet.short_help);
-//  settable_options[i].extra_help = mystrdup(packet.extra_help);
+//  settable_options[i].name = (packet.name);
+//  settable_options[i].short_help = (packet.short_help);
+//  settable_options[i].extra_help = (packet.extra_help);
 //
 //  settable_options[i].type = packet.type;
 //  settable_options[i].category = packet.category;
@@ -290,8 +290,8 @@ public class Repodlgs_common{
 //    settable_options[i].default_strval = null;
 //    break;
 //  case SSET_STRING:
-//    settable_options[i].strval = mystrdup(packet.strval);
-//    settable_options[i].default_strval = mystrdup(packet.default_strval);
+//    settable_options[i].strval = (packet.strval);
+//    settable_options[i].default_strval = (packet.default_strval);
 //    break;
 //  default:
 //    assert(0!=1);
@@ -321,9 +321,9 @@ public class Repodlgs_common{
 //  }
 //
 //  for (city pcity : Game.game.player_ptr.cities.data) {
-//    if (!pcity.did_sell && city_got_building(pcity, impr)
+//    if (!pcity.did_sell && City.city_got_building(pcity, impr)
 //	&& (!obsolete_only
-//	    || improvement_obsolete(Game.game.player_ptr, impr)
+//	    || Improvement.improvement_obsolete(Game.game.player_ptr, impr)
 //	    || is_building_replaced(pcity, impr))) {
 //      count++;
 //      gold += Improvement.impr_sell_gold(impr);
@@ -358,9 +358,9 @@ public class Repodlgs_common{
 //    return;
 //  }
 //
-//  if (unit_type_flag(type, F_UNDISBANDABLE)) {
+//  if (Unittype_P.unit_type_flag(type, F_UNDISBANDABLE)) {
 //    message = String.format "%s cannot be disbanded.",
-//		unit_name(type));
+//		Unittype_P.unit_name(type));
 //    return;
 //  }
 //
@@ -368,7 +368,7 @@ public class Repodlgs_common{
 //    /* Only supported units are disbanded.  Units with no homecity have no
 //     * cost and are not disbanded. */
 //    for (unit punit : pcity.units_supported.data) {
-//      city incity = map_get_city(punit.tile);
+//      city incity = Map.map_get_city(punit.tile);
 //
 //      if (punit.type == type
 //	  && (!in_cities_only
@@ -381,10 +381,10 @@ public class Repodlgs_common{
 //
 //  if (count > 0) {
 //    message = String.format "Disbanded %d %s.",
-//		count, unit_name(type));
+//		count, Unittype_P.unit_name(type));
 //  } else {
 //    message = String.format "No %s could be disbanded.",
-//		unit_name(type));
+//		Unittype_P.unit_name(type));
 //  }
 //}
 }

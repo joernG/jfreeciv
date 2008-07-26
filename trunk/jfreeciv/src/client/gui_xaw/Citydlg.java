@@ -1,5 +1,7 @@
 package client.gui_xaw;
 
+import common.Game;
+
 public class Citydlg{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -124,12 +126,12 @@ public class Citydlg{
 //  
 //  int support_unit_base;
 //  int present_unit_base;
-//  char improvlist_names[B_LAST+1][64];
-//  char *improvlist_names_ptrs[B_LAST+1];
+//  char improvlist_names[Improvement.B_LAST+1][64];
+//  char *improvlist_names_ptrs[Improvement.B_LAST+1];
 //  
-//  char *change_list_names_ptrs[B_LAST+1+unittype.U_LAST+1+1];
-//  char change_list_names[B_LAST+1+unittype.U_LAST+1][200];
-//  int change_list_ids[B_LAST+1+unittype.U_LAST+1];
+//  char *change_list_names_ptrs[Improvement.B_LAST+1+unittype.U_LAST+1+1];
+//  char change_list_names[Improvement.B_LAST+1+unittype.U_LAST+1][200];
+//  int change_list_ids[Improvement.B_LAST+1+unittype.U_LAST+1];
 //  int change_list_num_improvements;
 //
 //  int is_modal;
@@ -400,7 +402,7 @@ public class Citydlg{
 //  city_dialog pdialog;
 //
 //  pcity_sup=Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
-//  pcity_pre=map_get_city(punit.tile);
+//  pcity_pre=Map.map_get_city(punit.tile);
 //  
 //  if(pcity_sup && (pdialog=get_city_dialog(pcity_sup)))
 //    city_dialog_update_supported_units(pdialog, 0);
@@ -497,7 +499,7 @@ public class Citydlg{
 //  Dimension widthPrev, borderPrev, internalPrev, spacePrev;
 //  Widget relative;
 //  struct citizen_type c = {.type = CITIZEN_SPECIALIST,
-//			   .spec_type = SP_TAXMAN};
+//			   .spec_type = specialist_type.SP_TAXMAN};
 //
 //  if (NORMAL_TILE_HEIGHT<45) dummy_improvement_list[5]=0;
 //
@@ -1057,9 +1059,9 @@ public class Citydlg{
 //  XtAddCallback(pdialog.cma_command, XtNcallback, cma_callback,
 //                (XtPointer)pdialog);
 //
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //
-//  for(i=0; i<B_LAST+1; i++)
+//  for(i=0; i<Improvement.B_LAST+1; i++)
 //    pdialog.improvlist_names_ptrs[i]=0;
 //
 //  XtRealizeWidget(pdialog.shell);
@@ -1155,7 +1157,7 @@ public class Citydlg{
 //
 //  if((punit=Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t)client_data)))  {
 //    set_unit_focus(punit);
-//    if((pcity=map_get_city(punit.tile)))
+//    if((pcity=Map.map_get_city(punit.tile)))
 //      if((pdialog=get_city_dialog(pcity)))
 //	city_dialog_update_present_units(pdialog, 0);
 //  }
@@ -1176,7 +1178,7 @@ public class Citydlg{
 //
 //  if((punit=Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t)client_data)))  {
 //    set_unit_focus(punit);
-//    if((pcity=map_get_city(punit.tile)))
+//    if((pcity=Map.map_get_city(punit.tile)))
 //      if((pdialog=get_city_dialog(pcity)))
 //	city_dialog_update_supported_units(pdialog, 0);
 //  }
@@ -1200,7 +1202,7 @@ public class Citydlg{
 //
 //  if((punit=Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t)client_data)))  {
 //    set_unit_focus(punit);
-//    if((pcity=map_get_city(punit.tile)))
+//    if((pcity=Map.map_get_city(punit.tile)))
 //      if((pdialog=get_city_dialog(pcity)))
 //	close_city_dialog(pdialog);
 //  }
@@ -1311,7 +1313,7 @@ public class Citydlg{
 //  XEvent *e = (XEvent*)call_data;
 //  
 //  if((punit=Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t)client_data)) &&
-//     (pcity=map_get_city(punit.tile)) &&
+//     (pcity=Map.map_get_city(punit.tile)) &&
 //     (pdialog=get_city_dialog(pcity))) {
 //    
 //    if(e.type==ButtonRelease && e.xbutton.button==Button2)  {
@@ -1419,7 +1421,7 @@ public class Citydlg{
 //	      pdialog.pcity.name);
 //  bptr = end_of_strn(bptr, &nleft);
 //  
-//  for (i = 0; i < NUM_TRADEROUTES; i++)
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++)
 //    if(pdialog.pcity.trade[i]) {
 //      city pcity;
 //      x=1;
@@ -1484,7 +1486,7 @@ public class Citydlg{
 //  xaw_set_label(pdialog.building_label,
 //		pcity.is_building_unit ?
 //		  get_unit_type(pcity.currently_building).name :
-//		  get_impr_name_ex(pcity, pcity.currently_building));
+//		  City.get_impr_name_ex(pcity, pcity.currently_building));
 //
 //  get_contents_of_progress(pdialog, buf, sizeof(buf));
 //  xaw_set_label(pdialog.progress_label, buf);
@@ -1801,16 +1803,19 @@ public class Citydlg{
 //{
 //  int n = 0, flag = 0;
 //
-//  built_impr_iterate(pdialog.pcity, i) {
+//	for (int i = 0; i < Game.game.num_impr_types; i++) {
+//		if((pdialog.pcity).improvements[i] == Improvement.I_NONE) {
+//			continue;
+//		}
 //    if (!pdialog.improvlist_names_ptrs[n] ||
 //	strcmp(pdialog.improvlist_names_ptrs[n],
-//	       get_impr_name_ex(pdialog.pcity, i)) != 0)
+//	       City.get_impr_name_ex(pdialog.pcity, i)) != 0)
 //      flag = 1;
 //    sz_strlcpy(pdialog.improvlist_names[n],
-//	       get_impr_name_ex(pdialog.pcity, i));
+//	       City.get_impr_name_ex(pdialog.pcity, i));
 //    pdialog.improvlist_names_ptrs[n] = pdialog.improvlist_names[n];
 //    n++;
-//  } built_impr_iterate_end;
+//  } ;
 //  
 //  if(pdialog.improvlist_names_ptrs[n]!=0) {
 //    pdialog.improvlist_names_ptrs[n]=0;
@@ -1894,7 +1899,7 @@ public class Citydlg{
 //    name=get_unit_type(pdialog.pcity.currently_building).name;
 //  }
 //  else {
-//    name=get_impr_name_ex(pdialog.pcity, pdialog.pcity.currently_building);
+//    name=City.get_impr_name_ex(pdialog.pcity, pdialog.pcity.currently_building);
 //  }
 //  value=City.city_buy_cost(pdialog.pcity);
 // 
@@ -2026,7 +2031,7 @@ public class Citydlg{
 //
 //    if (is_unit) {
 //      popup_help_dialog_typed(get_unit_type(idx).name, HELP_UNIT);
-//    } else if(is_wonder(idx)) {
+//    } else if(Improvement.is_wonder(idx)) {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(idx), HELP_WONDER);
 //    } else {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(idx), HELP_IMPROVEMENT);
@@ -2137,7 +2142,7 @@ public class Citydlg{
 //  XtSetSensitive(pdialog.shell, false);
 //
 //  n = 0;
-//  impr_type_iterate(i) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
 //    if(City.can_build_improvement(pdialog.pcity, i)) {
 //      get_city_dialog_production_full(pdialog.change_list_names[n],
 //                                      sizeof(pdialog.change_list_names[n]),
@@ -2145,7 +2150,7 @@ public class Citydlg{
 //      pdialog.change_list_names_ptrs[n]=pdialog.change_list_names[n];
 //      pdialog.change_list_ids[n++]=i;
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //  
 //  pdialog.change_list_num_improvements=n;
 //
@@ -2216,7 +2221,7 @@ public class Citydlg{
 //    /* Very special case: If we are currently building a wonder we
 //       allow the finalruction to continue, even if we the wonder is
 //       finished elsewhere, ie unbuildable. */
-//    if (k == 0 && !is_unit && is_wonder(id) && same_as_current_build) {
+//    if (k == 0 && !is_unit && Improvement.is_wonder(id) && same_as_current_build) {
 //      worklist_remove(pwl, k);
 //      break;
 //    }
@@ -2287,17 +2292,20 @@ public class Citydlg{
 //
 //  if(ret.list_index!=XAW_LIST_NONE) {
 //    int n = 0;
-//    built_impr_iterate(pdialog.pcity, i) {
+//	for (int i = 0; i < Game.game.num_impr_types; i++) {
+//	if((pdialog.pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
 //      if (n == ret.list_index) {
 //	char buf[512];
 //
-//	if (is_wonder(i)) {
+//	if (Improvement.is_wonder(i)) {
 //	  return;
 //	}
 //
 //	pdialog.sell_id = i;
 //	buf = util.my_snprintf( "Sell %s for %d gold?",
-//		    get_impr_name_ex(pdialog.pcity, i),
+//		    City.get_impr_name_ex(pdialog.pcity, i),
 //		    Improvement.impr_sell_gold(i));
 //
 //	popup_message_dialog(pdialog.shell, "selldialog", buf,
@@ -2307,7 +2315,7 @@ public class Citydlg{
 //	return;
 //      }
 //      n++;
-//    } built_impr_iterate_end;
+//    } ;
 //  }
 //}
 //

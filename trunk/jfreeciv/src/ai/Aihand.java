@@ -144,7 +144,7 @@ public class Aihand{
 //  /* TODO: In the future, we should check if we should 
 //   * celebrate for other reasons than growth. Currently 
 //   * this is ignored. Maybe we need ruleset AI hints. */
-//  if (government_has_flag(g, G_RAPTURE_CITY_GROWTH)) {
+//  if (Government.government_has_flag(g, G_RAPTURE_CITY_GROWTH)) {
 //    int luxrate = pplayer.economic.luxury;
 //    int scirate = pplayer.economic.science;
 //    struct cm_parameter cmp;
@@ -190,7 +190,7 @@ public class Aihand{
 //          if (cmr.found_a_valid) {
 //            apply_cmresult_to_city(pcity, &cmr);
 //            generic_city_refresh(pcity, true, null);
-//            if (!city_happy(pcity)) {
+//            if (!City.city_happy(pcity)) {
 //              CITY_LOG(Log.LOG_ERROR, pcity, "is NOT happy when it should be!");
 //            }
 //          }
@@ -285,23 +285,23 @@ public class Aihand{
 //      /* Bonuses for non-economic abilities. We increase val by
 //       * a very small amount here to choose govt in cases where
 //       * we have no cities yet. */
-//      if (government_has_flag(gov, G_BUILD_VETERAN_DIPLOMAT)) {
+//      if (Government.government_has_flag(gov, government_flag_id.G_BUILD_VETERAN_DIPLOMAT)) {
 //        bonus += 3; /* WAG */
 //      }
-//      if (government_has_flag(gov, G_REVOLUTION_WHEN_UNHAPPY)) {
+//      if (Government.government_has_flag(gov, G_REVOLUTION_WHEN_UNHAPPY)) {
 //        bonus -= 3; /* Not really a problem for us */ /* WAG */
 //      }
-//      if (government_has_flag(gov, G_UNBRIBABLE)) {
+//      if (Government.government_has_flag(gov, G_UNBRIBABLE)) {
 //        bonus += 5; /* WAG */
 //      }
-//      if (government_has_flag(gov, G_INSPIRES_PARTISANS)) {
+//      if (Government.government_has_flag(gov, G_INSPIRES_PARTISANS)) {
 //        bonus += 3; /* WAG */
 //      }
-//      if (government_has_flag(gov, G_RAPTURE_CITY_GROWTH)) {
+//      if (Government.government_has_flag(gov, G_RAPTURE_CITY_GROWTH)) {
 //        bonus += 5; /* WAG */
 //        val += 1;
 //      }
-//      if (government_has_flag(gov, G_FANATIC_TROOPS)) {
+//      if (Government.government_has_flag(gov, G_FANATIC_TROOPS)) {
 //        bonus += 3; /* WAG */
 //      }
 //      val += gov.trade_bonus + gov.shield_bonus + gov.food_bonus;

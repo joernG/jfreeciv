@@ -498,7 +498,7 @@ public class Cma_fe{
 //  fcwin_set_box(win, vbox);
 //  ensure_initialised_dialog_list();
 //  
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //  
 //  
 //  return pdialog;

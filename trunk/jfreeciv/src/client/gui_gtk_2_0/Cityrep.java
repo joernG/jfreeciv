@@ -214,8 +214,8 @@ public class Cityrep{
 //					     int size)
 //{
 //  GtkWidget *menu;
-//  cid cids[unittype.U_LAST + B_LAST];
-//  struct item items[unittype.U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + Improvement.B_LAST];
+//  struct item items[unittype.U_LAST + Improvement.B_LAST];
 //  int i, item, cids_used;
 //  char *row[4];
 //  char buf[4][64];
@@ -915,7 +915,7 @@ public class Cityrep{
 //    itree_get(&it, 0, &res, -1);
 //    pcity = res;
 //
-//    if (is_ocean_near_tile(pcity.tile)) {
+//    if (Terrain.is_terrain_flag_near_tile(pcity.tile)) {
 //      itree_select(city_selection, &it);
 //    }
 //  }
@@ -975,9 +975,9 @@ public class Cityrep{
 //
 //    if ( (which == TYPE_UNIT && pcity.is_building_unit)
 //         || (which == TYPE_NORMAL_IMPROVEMENT && !pcity.is_building_unit
-//             && !is_wonder(pcity.currently_building))
+//             && !Improvement.is_wonder(pcity.currently_building))
 //         || (which == TYPE_WONDER && !pcity.is_building_unit
-//             && is_wonder(pcity.currently_building)) ) {
+//             && Improvement.is_wonder(pcity.currently_building)) ) {
 //      itree_select(city_selection, &it);
 //    }
 //  }

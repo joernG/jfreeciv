@@ -1,6 +1,7 @@
 package common;
 
 import common.improvement.impr_type;
+import common.player.player;
 
 import utility.shared.Shared_H;
 
@@ -130,9 +131,9 @@ The improvement_types array is now setup in:
 //***************************************************************/
 //void improvements_free()
 //{
-//  impr_type_iterate(impr) {
+//  for (int impr = 0; impr < Game.game.num_impr_types; impr++) {
 //    improvement_free(impr);
-//  } impr_type_iterate_end;
+//  } ;
 //}
 //
 ///**************************************************************************
@@ -140,14 +141,14 @@ The improvement_types array is now setup in:
 //An improvement_type doesn't exist if one of:
 //- id is out of range;
 //- the improvement_type has been flagged as removed by setting its
-//  tech_req to A_LAST;
+//  tech_req to Tech_H.A_LAST;
 //- it is a space part, and the spacerace is not enabled.
 //Arguably this should be called improvement_type_exists, but that's too long.
 //**************************************************************************/
-//boolean improvement_exists(int id)
-//{
+public static boolean improvement_exists(int id)
+{
 //  if (id<0 || id>=B_LAST || id>=Game.game.num_impr_types)
-//    return false;
+    return false;
 //
 //  if (!Game.game.spacerace
 //      && (building_has_effect(id, EFT_SS_STRUCTURAL)
@@ -157,8 +158,8 @@ The improvement_types array is now setup in:
 //    return false;
 //  }
 //
-//  return (improvement_types[id].tech_req!=A_LAST);
-//}
+//  return (improvement_types[id].tech_req!=Tech_H.A_LAST);
+}
 
 	/**************************************************************************
 	 * ...
@@ -223,24 +224,24 @@ public static int impr_build_shield_cost(int id)
 		return improvement_types[id].build_cost;
 	}
 
-///**************************************************************************
-//...
-//**************************************************************************/
-//boolean is_wonder(int id)
-//{
-//  return (improvement_types[id].is_wonder);
-//}
-//
+/**************************************************************************
+...
+**************************************************************************/
+public static boolean is_wonder(int id)
+{
+  return (improvement_types[id].is_wonder);
+}
+
 ///**************************************************************************
 //Does a linear search of improvement_types[].name
 //Returns B_LAST if none match.
 //**************************************************************************/
 //int find_improvement_by_name(final String s)
 //{
-//  impr_type_iterate(i) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
 //    if (strcmp(improvement_types[i].name, s)==0)
 //      return i;
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  return B_LAST;
 //}
@@ -252,11 +253,11 @@ public static int impr_build_shield_cost(int id)
 //****************************************************************************/
 //int find_improvement_by_name_orig(final String s)
 //{
-//  impr_type_iterate(i) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
 //    if (mystrcasecmp(improvement_types[i].name_orig, s) == 0) {
 //      return i;
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  return B_LAST;
 //}
@@ -264,8 +265,8 @@ public static int impr_build_shield_cost(int id)
 ///**************************************************************************
 // Returns 1 if the improvement is obsolete, now also works for wonders
 //**************************************************************************/
-//boolean improvement_obsolete(final player pplayer, int id) 
-//{
+public static boolean improvement_obsolete(player pplayer, int id) 
+{
 //  if (!tech_exists(improvement_types[id].obsolete_by)) {
 //    return false;
 //  }
@@ -278,7 +279,8 @@ public static int impr_build_shield_cost(int id)
 //
 //  return (get_invention(pplayer, improvement_types[id].obsolete_by)
 //	  ==TECH_KNOWN);
-//}
+	return false;
+}
 //
 ///**************************************************************************
 // Fills in lists of improvements at all impr_ranges that might affect the
@@ -511,13 +513,16 @@ public static int impr_build_shield_cost(int id)
 //      int *improvs = 
 //                           &pplayer.island_improv[cont * Game.game.num_impr_types];
 //
-//      built_impr_iterate(pcity, id) {
-//        if (improvement_types[id].equiv_range != IR_ISLAND) {
+//for (int i = 0; i < Game.game.num_impr_types; i++) {
+//if((pcity).improvements[i] == I_NONE) {
+//	continue;
+//}
+//        if (improvement_types[i].equiv_range != IR_ISLAND) {
 //          continue;
 //        }
 //    
-//        improvs[id] = pcity.improvements[id];
-//      } built_impr_iterate_end;
+//        improvs[i] = pcity.improvements[i];
+//      } ;
 //    } }
 //  }
 //
@@ -541,14 +546,17 @@ public static int impr_build_shield_cost(int id)
 //
 //  for(player pplayer: Game.game.players){
 //    for (city pcity : pplayer.cities.data) {
-//      built_impr_iterate(pcity, i) {
+//for (int i = 0; i < game.num_impr_types; i++) {
+//if((pcity).improvements[i] == I_NONE) {
+//	continue;
+//}
 //        if (improvement_obsolete(pplayer, i)) {
 //          util.freelog(Log.LOG_DEBUG,"%s in %s is obsolete",
 //                  improvement_types[i].name, pcity.name);
 //          mark_improvement(pcity, i, I_OBSOLETE);
 //          did_mark = true;
 //        }
-//      } built_impr_iterate_end;
+//      } ;
 //    } }
 //  }
 //
@@ -581,7 +589,10 @@ public static int impr_build_shield_cost(int id)
 //{
 //#define CHECK_CITY_IMPR(_pcity)                                              \
 //{                                                                            \
-//  built_impr_iterate((_pcity), i) {                                          \
+//for (int impr = 0; impr < Game.game.num_impr_types; impr++) {
+//	if((_pcity).improvements[impr] == I_NONE) {
+//		continue;
+//	}
 //    if ((_pcity).improvements[i] == I_OBSOLETE) {                           \
 //      continue;                                                              \
 //    }                                                                        \
@@ -595,7 +606,7 @@ public static int impr_build_shield_cost(int id)
 //             improvement_types[i].name, (_pcity).name);                     \
 //      mark_improvement((_pcity), i, I_ACTIVE);                               \
 //    }                                                                        \
-//  } built_impr_iterate_end;                                                  \
+//  } ;                                                  \
 //}
 //
 //  switch (range) {

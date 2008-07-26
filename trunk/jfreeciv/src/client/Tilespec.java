@@ -314,7 +314,7 @@ public class Tilespec{
 //  free(fname);
 //
 //  if (dname) {
-//    return mystrdup(dname);
+//    return (dname);
 //  }
 //
 //  if (tileset_name.equals(tileset_default)) {
@@ -459,7 +459,7 @@ public class Tilespec{
 //    /* The ruleset data is not sent until this point. */
 //    return;
 //  }
-//  for (id = T_FIRST; id < T_COUNT; id++) {
+//  for (id = Terrain_H.T_FIRST; id < Terrain_H.T_COUNT; id++) {
 //    tilespec_setup_tile_type(id);
 //  }
 //  unit_type_iterate(id) {
@@ -471,9 +471,9 @@ public class Tilespec{
 //  for (id = 0; id < Game.game.nation_count; id++) {
 //    tilespec_setup_nation_flag(id);
 //  }
-//  impr_type_iterate(imp_id) {
-//    tilespec_setup_impr_type(imp_id);
-//  } impr_type_iterate_end;
+//  for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
+//    tilespec_setup_impr_type(imp);
+//  } ;
 //  tech_type_iterate(tech_id) {
 //    if (tech_id != A_NONE && tech_exists(tech_id)) {
 //      tilespec_setup_tech_type(tech_id);
@@ -657,17 +657,17 @@ public class Tilespec{
 //      ss.sf = sf;
 //      ss.sprite = null;
 //
-//      small_sprite_list_insert(&small_sprites, ss);
+//      small_&small_sprites.foo_list_insert(ss);
 //
 //      if (!duplicates_ok) {
 //        for (k = 0; k < num_tags; k++) {
-//          if (!hash_insert(sprite_hash, mystrdup(tags[k]), ss)) {
+//          if (!hash_insert(sprite_hash, (tags[k]), ss)) {
 //	    util.freelog(Log.LOG_ERROR, "warning: already have a sprite for %s", tags[k]);
 //          }
 //        }
 //      } else {
 //        for (k = 0; k < num_tags; k++) {
-//      () hash_replace(sprite_hash, mystrdup(tags[k]), ss);
+//      () hash_replace(sprite_hash, (tags[k]), ss);
 //        }
 //      }
 //
@@ -691,21 +691,21 @@ public class Tilespec{
 //    filename = secfile_lookup_str(file, "extra.sprites%d.file", i);
 //
 //    ss.ref_count = 0;
-//    ss.file = mystrdup(filename);
+//    ss.file = (filename);
 //    ss.sf = null;
 //    ss.sprite = null;
 //
-//    small_sprite_list_insert(&small_sprites, ss);
+//    small_&small_sprites.foo_list_insert(ss);
 //
 //    if (!duplicates_ok) {
 //      for (k = 0; k < num_tags; k++) {
-//	if (!hash_insert(sprite_hash, mystrdup(tags[k]), ss)) {
+//	if (!hash_insert(sprite_hash, (tags[k]), ss)) {
 //	  util.freelog(Log.LOG_ERROR, "warning: already have a sprite for %s", tags[k]);
 //	}
 //      }
 //    } else {
 //      for (k = 0; k < num_tags; k++) {
-//	() hash_replace(sprite_hash, mystrdup(tags[k]), ss);
+//	() hash_replace(sprite_hash, (tags[k]), ss);
 //      }
 //    }
 //    free(tags);
@@ -735,7 +735,7 @@ public class Tilespec{
 //    real_full_name = datafilename(full_name);
 //    free(full_name);
 //    if (real_full_name) {
-//      return mystrdup(real_full_name);
+//      return (real_full_name);
 //    }
 //  }
 //
@@ -869,12 +869,12 @@ public class Tilespec{
 //					     "tilespec.flag_offset_y");
 //
 //  c = secfile_lookup_str_default(file, "10x20", "tilespec.city_names_font");
-//  city_names_font = mystrdup(c);
+//  city_names_font = (c);
 //
 //  c =
 //      secfile_lookup_str_default(file, "8x16",
 //				 "tilespec.city_productions_font");
-//  city_productions_font_name = mystrdup(c);
+//  city_productions_font_name = (c);
 //
 //  c = secfile_lookup_str(file, "tilespec.main_intro_file");
 //  main_intro_filename = tilespec_gfx_filename(c);
@@ -901,7 +901,7 @@ public class Tilespec{
 //    layers[i].match_types = secfile_lookup_str_vec(file, &layers[i].count,
 //						   "layer%d.match_types", i);
 //    for (j = 0; j < layers[i].count; j++) {
-//      layers[i].match_types[j] = mystrdup(layers[i].match_types[j]);
+//      layers[i].match_types[j] = (layers[i].match_types[j]);
 //    }
 //  }
 //
@@ -923,7 +923,7 @@ public class Tilespec{
 //    int l, j;
 //
 //    memset(terr, 0, sizeof(*terr));
-//    terr.name = mystrdup(terrains[i] + strlen("terrain_"));
+//    terr.name = (terrains[i] + strlen("terrain_"));
 //    terr.is_blended = secfile_lookup_bool(file, "%s.is_blended",
 //					    terrains[i]);
 //    terr.num_layers = secfile_lookup_int(file, "%s.num_layers",
@@ -1023,7 +1023,7 @@ public class Tilespec{
 //    terr.mine_tag = secfile_lookup_str_default(file, null, "%s.mine_sprite",
 //						terrains[i]);
 //    if (terr.mine_tag) {
-//      terr.mine_tag = mystrdup(terr.mine_tag);
+//      terr.mine_tag = (terr.mine_tag);
 //    }
 //
 //    if (!hash_insert(terrain_hash, terr.name, terr)) {
@@ -1055,10 +1055,10 @@ public class Tilespec{
 //    util.freelog(Log.LOG_DEBUG, "spec file %s", spec_filenames[i]);
 //    
 //    sf.big_sprite = null;
-//    sf.file_name = mystrdup(datafilename_required(spec_filenames[i]));
+//    sf.file_name = (datafilename_required(spec_filenames[i]));
 //    scan_specfile(sf, duplicates_ok);
 //
-//    specfile_list_insert(&specfiles, sf);
+//    &specfiles.foo_list_insert(sf);
 //  }
 //  free(spec_filenames);
 //
@@ -1837,7 +1837,7 @@ public class Tilespec{
 //***********************************************************************/
 //void tilespec_setup_nation_flag(int id)
 //{
-//  nation_type nation = get_nation_by_idx(id);
+//  nation_type nation = Nation.get_nation_by_idx(id);
 //  char *tags[] = {nation.flag_graphic_str,
 //		  nation.flag_graphic_alt,
 //		  "f.unknown", null};
@@ -1859,7 +1859,7 @@ public class Tilespec{
 //***********************************************************************/
 //static Sprite get_city_nation_flag_sprite(city pcity)
 //{
-//  return get_nation_by_plr(City.city_owner(pcity)).flag_sprite;
+//  return Nation.get_nation_by_plr(City.city_owner(pcity)).flag_sprite;
 //}
 //
 ///**********************************************************************
@@ -1867,7 +1867,7 @@ public class Tilespec{
 //***********************************************************************/
 //static Sprite get_unit_nation_flag_sprite(unit punit)
 //{
-//  return get_nation_by_plr(punit.unit_owner()).flag_sprite;
+//  return Nation.get_nation_by_plr(punit.unit_owner()).flag_sprite;
 //}
 //
 ///**************************************************************************
@@ -1884,7 +1884,7 @@ public class Tilespec{
 //      break;
 //
 //  if (is_isometric) {
-//    if (city_got_citywalls(pcity))
+//    if (City.city_got_citywalls(pcity))
 //      return sprites.city.tile_wall[style][size-1];
 //    else
 //      return sprites.city.tile[style][size-1];
@@ -2689,7 +2689,7 @@ public class Tilespec{
 //
 //    if (Terrain_H.is_ocean(ttype) && draw_terrain) {
 //      for (dir = 0; dir < 4; dir++) {
-//	if (contains_special(tspecial_near[DIR4_TO_DIR8[dir]], S_RIVER)) {
+//	if (contains_special(tspecial_near[DIR4_TO_DIR8[dir]], Terrain_H.S_RIVER)) {
 //	  ADD_SPRITE_SIMPLE(sprites.tx.river_outlet[dir]);
 //	}
 //      }
@@ -2698,7 +2698,7 @@ public class Tilespec{
 //    sprs += fill_irrigation_sprite_array(sprs, tspecial, tspecial_near,
 //					 pcity);
 //
-//    if (draw_terrain && contains_special(tspecial, S_RIVER)) {
+//    if (draw_terrain && contains_special(tspecial, Terrain_H.S_RIVER)) {
 //      int i;
 //
 //      /* Draw rivers on top of irrigation. */
@@ -2706,7 +2706,7 @@ public class Tilespec{
 //      for (i = 0; i < num_cardinal_tileset_dirs; i++) {
 //	enum direction8 dir = cardinal_tileset_dirs[i];
 //
-//	if (contains_special(tspecial_near[dir], S_RIVER)
+//	if (contains_special(tspecial_near[dir], Terrain_H.S_RIVER)
 //	    || Terrain_H.is_ocean(ttype_near[dir])) {
 //	  tileno |= 1 << i;
 //	}
@@ -2725,7 +2725,7 @@ public class Tilespec{
 //      }
 //    }
 //
-//    if (draw_fortress_airbase && contains_special(tspecial, S_FORTRESS)
+//    if (draw_fortress_airbase && contains_special(tspecial, Terrain_H.S_FORTRESS)
 //	&& sprites.tx.fortress_back) {
 //      ADD_SPRITE_FULL(sprites.tx.fortress_back);
 //    }
@@ -2757,7 +2757,7 @@ public class Tilespec{
 //    if (pcity.client.occupied) {
 //      ADD_SPRITE_FULL(get_city_occupied_sprite(pcity));
 //    }
-//    if (!is_isometric && city_got_citywalls(pcity)) {
+//    if (!is_isometric && City.city_got_citywalls(pcity)) {
 //      /* In iso-view the city wall is a part of the city sprite. */
 //      ADD_SPRITE_SIMPLE(get_city_wall_sprite(pcity));
 //    }
@@ -2804,7 +2804,7 @@ public class Tilespec{
 //
 //  if (ptile) {
 //    if (is_isometric && draw_fortress_airbase
-//	&& contains_special(tspecial, S_FORTRESS)) {
+//	&& contains_special(tspecial, Terrain_H.S_FORTRESS)) {
 //      /* Draw fortress front in iso-view (non-iso view only has a fortress
 //       * back). */
 //      ADD_SPRITE_FULL(sprites.tx.fortress);
@@ -2976,7 +2976,7 @@ public class Tilespec{
 //
 //  if (tile_get_known(ptile) == TILE_UNKNOWN) {
 //    color=COLOR_STD_BLACK;
-//  } else if((pcity=map_get_city(ptile))) {
+//  } else if((pcity=Map.map_get_city(ptile))) {
 //    if(pcity.owner==Game.game.player_idx)
 //      color=COLOR_STD_WHITE;
 //    else

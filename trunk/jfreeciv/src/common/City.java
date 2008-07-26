@@ -1,10 +1,13 @@
 package common;
 
 import static utility.shared.Shared_H.TEST_BIT;
+import utility.Speclists;
 
+import common.city.City_H;
 import common.city.city;
 import common.city.city_tile_type;
 import common.city.specialist_type;
+import common.effects.effect_type;
 import common.map.tile;
 import common.player.player;
 
@@ -116,38 +119,39 @@ public static boolean is_valid_city_coords(final int city_x, final int city_y)
 //Finds the city map coordinate for a given map position and a
 //city. Returns whether the map position is inside of the city Map.map.
 //**************************************************************************/
-//boolean map_to_city_map(int *city_map_x, int *city_map_y,
-//		     final city final pcity,
-//		     final tile map_tile)
-//{
+public static boolean map_to_city_map(int city_map_x, int city_map_y,
+		     city pcity,
+		     tile map_tile)
+{
 //  return base_map_to_city_map(city_map_x, city_map_y, pcity.tile, map_tile);
-//}
+	return false;
+}
 //
 ///**************************************************************************
 //Finds the map position for a given city map coordinate of a certain
 //city. Returns true if the map position found is real.
 //**************************************************************************/
-//tile base_city_map_to_map(final tile city_tile,
-//				  int city_map_x, int city_map_y)
-//{
-//  int x, y;
-//
-//  assert(is_valid_city_coords(city_map_x, city_map_y));
-//  x = city_tile.x + city_map_x - City_H.CITY_MAP_SIZE / 2;
-//  y = city_tile.y + city_map_y - City_H.CITY_MAP_SIZE / 2;
-//
-//  return map_pos_to_tile(x, y);
-//}
+static tile base_city_map_to_map(final tile city_tile,
+				  int city_map_x, int city_map_y)
+{
+  int x, y;
+
+  assert(is_valid_city_coords(city_map_x, city_map_y));
+  x = city_tile.x + city_map_x - City_H.CITY_MAP_SIZE / 2;
+  y = city_tile.y + city_map_y - City_H.CITY_MAP_SIZE / 2;
+
+  return Map.map_pos_to_tile(x, y);
+}
 //
 ///**************************************************************************
 //Finds the map position for a given city map coordinate of a certain
 //city. Returns true if the map position found is real.
 //**************************************************************************/
-//tile city_map_to_map(final city final pcity,
-//			     int city_map_x, int city_map_y)
-//{
-//  return base_city_map_to_map(pcity.tile, city_map_x, city_map_y);
-//}
+public static tile city_map_to_map(final city pcity,
+			     int city_map_x, int city_map_y)
+{
+  return base_city_map_to_map(pcity.tile, city_map_x, city_map_y);
+}
 //
 ///**************************************************************************
 //  Compare two integer values, as required by qsort.
@@ -200,9 +204,12 @@ public static boolean is_valid_city_coords(final int city_x, final int city_y)
 //  iter_index array = city_map_iterate_outwards_indices;
 //
 //  city_tiles = 0;
-//  city_map_iterate(city_x, city_y) {
+//for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//int city_x = _itr % City_H.CITY_MAP_SIZE, city_y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//if (is_valid_city_coords(city_x, city_y)) {
 //    city_tiles++;
-//  } city_map_iterate_end;
+//  } };
 //
 //  /* Realloc is used because this function may be called multiple times. */
 //  array = fc_realloc(array, CITY_TILES * sizeof(*array));
@@ -237,9 +244,9 @@ public static boolean is_valid_city_coords(final int city_x, final int city_y)
 ///**************************************************************************
 //  Set the worker on the citymap.  Also sets the worked field in the Map.map.
 //**************************************************************************/
-//void set_worker_city(city pcity, int city_x, int city_y,
-//		     enum city_tile_type type)
-//{
+public static void set_worker_city(city pcity, int city_x, int city_y,
+		     city_tile_type type)
+{
 //  tile ptile;
 //
 //  if ((ptile = city_map_to_map(pcity, city_x, city_y))) {
@@ -255,7 +262,7 @@ public static boolean is_valid_city_coords(final int city_x, final int city_y)
 //    assert(type == city_tile_type.C_TILE_UNAVAILABLE);
 //    pcity.city_map[city_x][city_y] = type;
 //  }
-//}
+}
 //
 ///**************************************************************************
 //  Return the worker status of the given tile on the citymap for the given
@@ -285,8 +292,8 @@ public static city_tile_type get_worker_city(final city pcity,
 ///**************************************************************************
 //  Return the extended name of the building.
 //**************************************************************************/
-//final String get_impr_name_ex(final city pcity, int id)
-//{
+public final static String get_impr_name_ex(final city pcity, int id)
+{
 //  static char buffer[256];
 //  final String state = null;
 //
@@ -296,7 +303,7 @@ public static city_tile_type get_worker_city(final city pcity,
 //    case I_OBSOLETE:	state = Q"?obsolete:O";	break;
 //    default:						break;
 //    }
-//  } else if (is_wonder(id)) {
+//  } else if (Improvement.is_wonder(id)) {
 //    if (Game.game.global_wonders[id] != 0) {
 //      state = Q"?built:B";
 //    } else {
@@ -311,7 +318,8 @@ public static city_tile_type get_worker_city(final city pcity,
 //  } else {
 //    return Improvement.get_improvement_name(id);
 //  }
-//}
+	return null;
+}
 
 /**************************************************************************
   Return the cost (gold) to buy the current city production.
@@ -341,8 +349,8 @@ public static int city_buy_cost(final city pcity)
 // terr_gate (terrain) or spec_gate (specials), or if the building has no
 // terrain/special requirements.
 //**************************************************************************/
-//boolean city_has_terr_spec_gate(final city pcity, int id)
-//{
+public static boolean city_has_terr_spec_gate(final city pcity, int id)
+{
 //  impr_type impr;
 //  int *terr_gate;
 //  enum int *spec_gate;
@@ -351,7 +359,7 @@ public static int city_buy_cost(final city pcity)
 //  spec_gate = impr.spec_gate;
 //  terr_gate = impr.terr_gate;
 //
-//  if (*spec_gate == S_NO_SPECIAL && *terr_gate == T_NONE) {
+//  if (*spec_gate == S_NO_SPECIAL && *terr_gate == Terrain_H.T_NONE) {
 //    return true;
 //  }
 //
@@ -362,15 +370,15 @@ public static int city_buy_cost(final city pcity)
 //    }
 //  }
 //
-//  for (; *terr_gate != T_NONE; terr_gate++) {
+//  for (; *terr_gate != Terrain_H.T_NONE; terr_gate++) {
 //    if (pcity.tile.terrain == *terr_gate
-//        || is_terrain_near_tile(pcity.tile, *terr_gate)) {
+//        || Terrain.is_terrain_near_tile(pcity.tile, *terr_gate)) {
 //      return true;
 //    }
 //  }
 //
-//  return false;
-//}
+  return false;
+}
 //
 ///**************************************************************************
 //  Return whether given city can build given building, ignoring whether
@@ -392,7 +400,7 @@ public static int city_buy_cost(final city pcity)
 //    return false;
 //  }
 //
-//  if (building.bldg_req != B_LAST
+//  if (building.bldg_req != Improvement.B_LAST
 //      && !city_got_building(pcity, building.bldg_req)) {
 //    return false;
 //  }
@@ -409,7 +417,7 @@ public static boolean can_build_improvement(final city pcity, int id)
 //  if (!can_build_improvement_direct(pcity, id)) {
 //    return false;
 //  }
-//  if (improvement_obsolete(city_owner(pcity), id)) {
+//  if (Improvement.improvement_obsolete(city_owner(pcity), id)) {
 //    return false;
 //  }
   return true;
@@ -438,8 +446,8 @@ public static boolean can_build_improvement(final city pcity, int id)
 //  Return whether given city can build given unit, ignoring whether unit 
 //  is obsolete.
 //**************************************************************************/
-//boolean can_build_unit_direct(final city pcity, int id)
-//{
+public static boolean can_build_unit_direct(final city pcity, int id)
+{
 //  int impr_req;
 //
 //  if (!can_player_build_unit_direct(city_owner(pcity), id)) {
@@ -448,17 +456,17 @@ public static boolean can_build_improvement(final city pcity, int id)
 //
 //  /* Check to see if the unit has a building requirement. */
 //  impr_req = get_unit_type(id).impr_requirement;
-//  assert(impr_req <= B_LAST && impr_req >= 0);
-//  if (impr_req != B_LAST && !city_got_building(pcity, impr_req)) {
+//  assert(impr_req <= Improvement.B_LAST && impr_req >= 0);
+//  if (impr_req != Improvement.B_LAST && !city_got_building(pcity, impr_req)) {
 //    return false;
 //  }
 //
 //  /* You can't build naval units inland. */
-//  if (!is_ocean_near_tile(pcity.tile) && is_water_unit(id)) {
+//  if (!Terrain.is_terrain_flag_near_tile(pcity.tile) && Unittype_P.is_water_unit(id)) {
 //    return false;
 //  }
-//  return true;
-//}
+  return true;
+}
 
 /**************************************************************************
   Return whether given city can build given unit; returns 0 if unit is 
@@ -490,7 +498,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //  /* Some units can be built only in certain cities -- for instance,
 //     ships may be built only in cities adjacent to ocean. */
-//  if (!is_ocean_near_tile(pcity.tile) && is_water_unit(id)) {
+//  if (!Terrain.is_terrain_flag_near_tile(pcity.tile) && Unittype_P.is_water_unit(id)) {
 //    return false;
 //  }
 //
@@ -524,14 +532,14 @@ public static boolean can_build_unit(final city pcity, int id)
 ///**************************************************************************
 //  Return true if the city has this building in it.
 //**************************************************************************/
-//boolean city_got_building(final city pcity, int id) 
-//{
-//  if (!improvement_exists(id)) {
-//    return false;
-//  } else {
-//    return (pcity.improvements[id] != I_NONE);
-//  }
-//}
+	public static boolean city_got_building(final city pcity, int id) 
+{
+  if (!Improvement.improvement_exists(id)) {
+    return false;
+  } else {
+    return (pcity.improvements[id] != Improvement.I_NONE);
+  }
+}
 //
 ///**************************************************************************
 //  Return the upkeep (gold) needed each turn to upkeep the given improvement
@@ -539,16 +547,16 @@ public static boolean can_build_unit(final city pcity, int id)
 //**************************************************************************/
 //int improvement_upkeep(final city pcity, int i) 
 //{
-//  if (!improvement_exists(i))
+//  if (!Improvement.improvement_exists(i))
 //    return 0;
-//  if (is_wonder(i))
+//  if (Improvement.is_wonder(i))
 //    return 0;
-//  if (improvement_types[i].upkeep
+//  if (Improvement.improvement_types[i].upkeep
 //      <= get_building_bonus(pcity, i, EFT_UPKEEP_FREE)) {
 //    return 0;
 //  }
 //  
-//  return (improvement_types[i].upkeep);
+//  return (Improvement.improvement_types[i].upkeep);
 //}
 //
 ///**************************************************************************
@@ -577,11 +585,11 @@ public static boolean can_build_unit(final city pcity, int id)
 //  }
 //
 //  if (contains_special(spec_t, Terrain_H.S_RAILROAD)) {
-//    s += (s * terrain_control.rail_shield_bonus) / 100;
+//    s += (s * Map.terrain_control.rail_shield_bonus) / 100;
 //  }
 //
 //  if (pcity) {
-//    government g = get_gov_pcity(pcity);
+//    government g = Government.get_gov_pcity(pcity);
 //    int before_penalty = (is_celebrating ? g.celeb_shields_before_penalty
 //			  : g.shields_before_penalty);
 //
@@ -602,11 +610,11 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //  if (contains_special(spec_t, S_POLLUTION)) {
 //    /* The shields here are icky */
-//    s -= (s * terrain_control.pollution_shield_penalty) / 100;
+//    s -= (s * Map.terrain_control.pollution_shield_penalty) / 100;
 //  }
 //
 //  if (contains_special(spec_t, S_FALLOUT)) {
-//    s -= (s * terrain_control.fallout_shield_penalty) / 100;
+//    s -= (s * Map.terrain_control.fallout_shield_penalty) / 100;
 //  }
 //
 //  if (pcity && is_city_center(city_x, city_y)) {
@@ -677,8 +685,8 @@ public static boolean can_build_unit(final city pcity, int id)
 //    t = get_tile_type(tile_t).trade;
 //  }
 //
-//  if (contains_special(spec_t, S_RIVER) && !Terrain_H.is_ocean(tile_t)) {
-//    t += terrain_control.river_trade_incr;
+//  if (contains_special(spec_t, Terrain_H.S_RIVER) && !Terrain_H.is_ocean(tile_t)) {
+//    t += Map.terrain_control.river_trade_incr;
 //  }
 //
 //  if (contains_special(spec_t, Terrain_H.S_ROAD)) {
@@ -686,13 +694,13 @@ public static boolean can_build_unit(final city pcity, int id)
 //  }
 //
 //  if (contains_special(spec_t, Terrain_H.S_RAILROAD)) {
-//    t += (t * terrain_control.rail_trade_bonus) / 100;
+//    t += (t * Map.terrain_control.rail_trade_bonus) / 100;
 //  }
 //
 //  /* Civ1 specifically documents that Railroad trade increase is before 
 //   * Democracy/Republic [government in general now -- SKi] bonus  -AJS */
 //  if (pcity) {
-//    government g = get_gov_pcity(pcity);
+//    government g = Government.get_gov_pcity(pcity);
 //    int before_penalty = (is_celebrating ? g.celeb_trade_before_penalty
 //			  : g.trade_before_penalty);
 //
@@ -713,11 +721,11 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //  if (contains_special(spec_t, S_POLLUTION)) {
 //    /* The trade here is dirty */
-//    t -= (t * terrain_control.pollution_trade_penalty) / 100;
+//    t -= (t * Map.terrain_control.pollution_trade_penalty) / 100;
 //  }
 //
 //  if (contains_special(spec_t, S_FALLOUT)) {
-//    t -= (t * terrain_control.fallout_trade_penalty) / 100;
+//    t -= (t * Map.terrain_control.fallout_trade_penalty) / 100;
 //  }
 //
 //  if (pcity && is_city_center(city_x, city_y)) {
@@ -781,7 +789,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //  int f;
 //  final boolean auto_water = (pcity && is_city_center(city_x, city_y)
 //			   && tile_t == type.irrigation_result
-//			   && terrain_control.may_irrigate);
+//			   && Map.terrain_control.may_irrigate);
 //
 //  /* create dummy tile which has the city center bonuses. */
 //  tile.terrain = tile_t;
@@ -791,7 +799,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //    /* The center tile is auto-irrigated. */
 //    tile.special |= S_IRRIGATION;
 //
-//    if (player_knows_techs_with_flag(city_owner(pcity), TF_FARMLAND)) {
+//    if (Player_P.player_knows_techs_with_flag(city_owner(pcity), TF_FARMLAND)) {
 //      tile.special |= S_FARMLAND;
 //    }
 //  }
@@ -809,11 +817,11 @@ public static boolean can_build_unit(final city pcity, int id)
 //  }
 //
 //  if (contains_special(tile.special, Terrain_H.S_RAILROAD)) {
-//    f += (f * terrain_control.rail_food_bonus) / 100;
+//    f += (f * Map.terrain_control.rail_food_bonus) / 100;
 //  }
 //
 //  if (pcity) {
-//    government g = get_gov_pcity(pcity);
+//    government g = Government.get_gov_pcity(pcity);
 //    int before_penalty = (is_celebrating ? g.celeb_food_before_penalty
 //			  : g.food_before_penalty);
 //
@@ -833,10 +841,10 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //  if (contains_special(tile.special, S_POLLUTION)) {
 //    /* The food here is yucky */
-//    f -= (f * terrain_control.pollution_food_penalty) / 100;
+//    f -= (f * Map.terrain_control.pollution_food_penalty) / 100;
 //  }
 //  if (contains_special(tile.special, S_FALLOUT)) {
-//    f -= (f * terrain_control.fallout_food_penalty) / 100;
+//    f -= (f * Map.terrain_control.fallout_food_penalty) / 100;
 //  }
 //
 //  if (pcity && is_city_center(city_x, city_y)) {
@@ -902,8 +910,8 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //    /* We allow land units to build land cities and sea units to build
 //     * ocean cities. */
-//    if ((move_type == LAND_MOVING && Terrain_H.is_ocean(t))
-//	|| (move_type == SEA_MOVING && !Terrain_H.is_ocean(t))) {
+//    if ((move_type == unit_move_type.LAND_MOVING && Terrain_H.is_ocean(t))
+//	|| (move_type == unit_move_type.SEA_MOVING && !Terrain_H.is_ocean(t))) {
 //      return false;
 //    }
 //  }
@@ -917,36 +925,37 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //  return true;
 //}
-//
-///**************************************************************************
-//  Return true iff the two cities are capable of trade; i.e., if a caravan
-//  from one city can enter the other to sell its goods.
-//
-//  See also can_establish_trade_route().
-//**************************************************************************/
-//boolean can_cities_trade(final city pc1, final city pc2)
-//{
-//  /* If you change the logic here, make sure to update the help in
-//   * helptext_unit(). */
-//  return (pc1 && pc2 && pc1 != pc2
+
+/**************************************************************************
+  Return true iff the two cities are capable of trade; i.e., if a caravan
+  from one city can enter the other to sell its goods.
+
+  See also can_establish_trade_route().
+**************************************************************************/
+public static boolean can_cities_trade(final city pc1, final city pc2)
+{
+  /* If you change the logic here, make sure to update the help in
+   * helptext_unit(). */
+//  return (pc1!=null && pc2!=null && pc1 != pc2
 //          && (pc1.owner != pc2.owner
 //	      || map_distance(pc1.tile, pc2.tile) > 8));
-//}
-//
-///**************************************************************************
-//  Find the worst (minimum) trade route the city has.  The value of the
-//  trade route is returned and its position (slot) is put into the slot
-//  variable.
-//**************************************************************************/
-//int get_city_min_trade_route(final city pcity, int *slot)
-//{
-//  int i, value = pcity.trade_value[0];
+	return false;
+}
+
+/**************************************************************************
+  Find the worst (minimum) trade route the city has.  The value of the
+  trade route is returned and its position (slot) is put into the slot
+  variable.
+**************************************************************************/
+public static int get_city_min_trade_route(final city pcity, int slot)
+{
+  int i, value = pcity.trade_value[0];
 //
 //  if (slot) {
 //    *slot = 0;
 //  }
 //  /* find min */
-//  for (i = 1; i < NUM_TRADEROUTES; i++) {
+//  for (i = 1; i < City_H.NUM_TRADEROUTES; i++) {
 //    if (value > pcity.trade_value[i]) {
 //      if (slot) {
 //	*slot = i;
@@ -954,18 +963,18 @@ public static boolean can_build_unit(final city pcity, int id)
 //      value = pcity.trade_value[i];
 //    }
 //  }
+
+  return value;
+}
 //
-//  return value;
-//}
-//
-///**************************************************************************
-//  Returns true iff the two cities can establish a trade route.  We look
-//  at the distance and ownership of the cities as well as their existing
-//  trade routes.  Should only be called if you already know that
-//  can_cities_trade().
-//**************************************************************************/
-//boolean can_establish_trade_route(final city pc1, final city pc2)
-//{
+/**************************************************************************
+  Returns true iff the two cities can establish a trade route.  We look
+  at the distance and ownership of the cities as well as their existing
+  trade routes.  Should only be called if you already know that
+  can_cities_trade().
+**************************************************************************/
+public static boolean can_establish_trade_route(final city pc1, final city pc2)
+{
 //  int trade = -1;
 //
 //  assert(can_cities_trade(pc1, pc2));
@@ -975,7 +984,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //    return false;
 //  }
 //    
-//  if (city_num_trade_routes(pc1) == NUM_TRADEROUTES) {
+//  if (city_num_trade_routes(pc1) == City_H.NUM_TRADEROUTES) {
 //    trade = trade_between_cities(pc1, pc2);
 //    /* can we replace traderoute? */
 //    if (get_city_min_trade_route(pc1, null) >= trade) {
@@ -983,7 +992,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //    }
 //  }
 //  
-//  if (city_num_trade_routes(pc2) == NUM_TRADEROUTES) {
+//  if (city_num_trade_routes(pc2) == City_H.NUM_TRADEROUTES) {
 //    if (trade == -1) {
 //      trade = trade_between_cities(pc1, pc2);
 //    }
@@ -993,8 +1002,8 @@ public static boolean can_build_unit(final city pcity, int id)
 //    }
 //  }  
 //
-//  return true;
-//}
+  return true;
+}
 //
 ///**************************************************************************
 //  Return the trade that exists between these cities, assuming they have a
@@ -1022,15 +1031,15 @@ public static boolean can_build_unit(final city pcity, int id)
 ///**************************************************************************
 // Return number of trade route city has
 //**************************************************************************/
-//int city_num_trade_routes(final city pcity)
-//{
-//  int i, n = 0;
+public static int city_num_trade_routes(final city pcity)
+{
+  int i, n = 0;
 //
-//  for (i = 0; i < NUM_TRADEROUTES; i++)
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++)
 //    if(pcity.trade[i] != 0) n++;
 //  
-//  return n;
-//}
+  return n;
+}
 //
 ///**************************************************************************
 //  Returns the revenue trade bonus - you get this when establishing a
@@ -1069,7 +1078,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //{
 //  int i;
 //  
-//  for (i = 0; i < NUM_TRADEROUTES; i++) {
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //    if (pc1.trade[i] == pc2.id || pc2.trade[i] == pc1.id) {
 //      /* Looks like they do have a traderoute. */
 //      return true;
@@ -1086,9 +1095,12 @@ public static boolean can_build_unit(final city pcity, int id)
 //{
 //  int cost = 0;
 //
-//  built_impr_iterate(pcity, i) {
+//	for (int i = 0; i < game.num_impr_types; i++) {
+//	if((pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
 //    cost += improvement_upkeep(pcity, i);
-//  } built_impr_iterate_end;
+//  } ;
 //
 //  for (unit punit : pcity.units_supported.data) {
 //    cost += punit.upkeep_gold;
@@ -1099,59 +1111,59 @@ public static boolean can_build_unit(final city pcity, int id)
 ///**************************************************************************
 // Whether a city has its own City Walls, or the same effect via a wonder.
 //**************************************************************************/
-//boolean city_got_citywalls(final city pcity)
-//{
-//  return (get_city_bonus(pcity, EFT_LAND_DEFEND) > 0);
-//}
+public static boolean city_got_citywalls(final city pcity)
+{
+  return (Effects.get_city_bonus(pcity, effect_type.EFT_LAND_DEFEND) > 0);
+}
 //
 ///**************************************************************************
 //  Return true iff the city is happy.  A happy city will start celebrating
 //  soon.
 //**************************************************************************/
-//boolean city_happy(final city pcity)
-//{
-//  return (pcity.ppl_happy[4] >= (pcity.size + 1) / 2 &&
-//	  pcity.ppl_unhappy[4] == 0 && pcity.ppl_angry[4] == 0);
-//}
+public static boolean city_happy(final city pcity)
+{
+  return (pcity.ppl_happy[4] >= (pcity.size + 1) / 2 &&
+	  pcity.ppl_unhappy[4] == 0 && pcity.ppl_angry[4] == 0);
+}
 //
 ///**************************************************************************
 //  Return true iff the city is unhappy.  An unhappy city will start
 //  revolting soon.
 //**************************************************************************/
-//boolean city_unhappy(final city pcity)
-//{
-//  return (pcity.ppl_happy[4] <
-//	  pcity.ppl_unhappy[4] + 2 * pcity.ppl_angry[4]);
-//}
-//
-///**************************************************************************
-//  Return true if the city was celebrating at the start of the turn.
-//**************************************************************************/
-//boolean base_city_celebrating(final city pcity)
-//{
-//  return (pcity.size >= get_gov_pcity(pcity).rapture_size
-//	  && pcity.was_happy);
-//}
-//
-///**************************************************************************
-//cities celebrate only after consecutive happy turns
-//**************************************************************************/
-//boolean city_celebrating(final city pcity)
-//{
-//  return base_city_celebrating(pcity) && city_happy(pcity);
-//}
-//
+public static boolean city_unhappy(final city pcity)
+{
+  return (pcity.ppl_happy[4] <
+	  pcity.ppl_unhappy[4] + 2 * pcity.ppl_angry[4]);
+}
+
+/**************************************************************************
+  Return true if the city was celebrating at the start of the turn.
+**************************************************************************/
+static boolean base_city_celebrating(final city pcity)
+{
+  return (pcity.size >= Government.get_gov_pcity(pcity).rapture_size
+	  && pcity.was_happy);
+}
+
+/**************************************************************************
+cities celebrate only after consecutive happy turns
+**************************************************************************/
+public static boolean city_celebrating(final city pcity)
+{
+  return base_city_celebrating(pcity) && city_happy(pcity);
+}
+
 ///**************************************************************************
 //.rapture is checked instead of city_celebrating() because this function is
 //called after .was_happy was updated.
 //**************************************************************************/
 //boolean city_rapture_grow(final city pcity)
 //{
-//  government g = get_gov_pcity(pcity);
+//  government g = Government.get_gov_pcity(pcity);
 //
 //  return (pcity.rapture > 0 && pcity.food_surplus > 0
 //	  && (pcity.rapture % Game.game.rapturedelay) == 0
-//	  && government_has_flag(g, G_RAPTURE_CITY_GROWTH));
+//	  && Government.government_has_flag(g, G_RAPTURE_CITY_GROWTH));
 //}
 //
 ///**************************************************************************
@@ -1173,16 +1185,16 @@ public static boolean can_build_unit(final city pcity, int id)
 ///**************************************************************************
 //...
 //**************************************************************************/
-//city city_list_find_name(city_list This, final String name)
-//{
-//  city_list_iterate(*This, pcity) {
-//    if (mystrcasecmp(name, pcity.name) == 0) {
-//      return pcity;
-//    }
-//  } }
-//
-//  return null;
-//}
+public static city city_list_find_name(Speclists<city> This, final String name)
+{
+	  for(city pcity: This.data){
+    if (name.equals(pcity.name)) {
+      return pcity;
+    }
+  } 
+
+  return null;
+}
 //
 ///**************************************************************************
 //Comparison function for qsort for city _pointers_, sorting by city name.
@@ -1337,24 +1349,24 @@ public static boolean can_build_unit(final city pcity, int id)
 // But only on the first switch that turn.  Also, if ever change back to
 // original improvement class of this turn, restore lost production.
 //**************************************************************************/
-//int city_change_production_penalty(final city pcity,
-//				   int target, boolean is_unit)
-//{
-//  int shield_stock_after_adjustment;
+public static int city_change_production_penalty(final city pcity,
+				   int target, boolean is_unit)
+{
+  int shield_stock_after_adjustment=0;
 //  enum production_class_type orig_class;
 //  enum production_class_type new_class;
 //  int unpenalized_shields = 0, penalized_shields = 0;
 //
 //  if (pcity.changed_from_is_unit)
 //    orig_class=TYPE_UNIT;
-//  else if (is_wonder(pcity.changed_from_id))
+//  else if (Improvement.is_wonder(pcity.changed_from_id))
 //    orig_class=TYPE_WONDER;
 //  else
 //    orig_class=TYPE_NORMAL_IMPROVEMENT;
 //
 //  if (is_unit)
 //    new_class=TYPE_UNIT;
-//  else if (is_wonder(target))
+//  else if (Improvement.is_wonder(target))
 //    new_class=TYPE_WONDER;
 //  else
 //    new_class=TYPE_NORMAL_IMPROVEMENT;
@@ -1390,8 +1402,8 @@ public static boolean can_build_unit(final city pcity, int id)
 //  shield_stock_after_adjustment =
 //    unpenalized_shields + penalized_shields / 2;
 //
-//  return shield_stock_after_adjustment;
-//}
+  return shield_stock_after_adjustment;
+}
 //
 ///**************************************************************************
 // Calculates the turns which are needed to build the requested
@@ -1442,12 +1454,12 @@ public static boolean can_build_unit(final city pcity, int id)
 //****************************************************************************/
 //boolean city_can_grow_to(final city pcity, int pop_size)
 //{
-//  if (get_city_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
+//  if (Effects.get_city_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
 //    return true;
 //  } else {
 //    int max_size;
 //                                                                               
-//    max_size = Game.game.aqueduct_size + get_city_bonus(pcity, EFT_SIZE_ADJ);
+//    max_size = Game.game.aqueduct_size + Effects.get_city_bonus(pcity, EFT_SIZE_ADJ);
 //    return (pop_size <= max_size);
 //  }
 //}
@@ -1460,7 +1472,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //{
 //  city pcity = ptile.city;
 //
-//  if (pcity && pplayers_at_war(pplayer, city_owner(pcity)))
+//  if (pcity && Player_P.pplayers_at_war(pplayer, city_owner(pcity)))
 //    return pcity;
 //  else
 //    return null;
@@ -1472,7 +1484,7 @@ public static boolean can_build_unit(final city pcity, int id)
 	public static city is_allied_city_tile(final tile ptile, player pplayer) {
 //		city pcity = ptile.city;
 //
-//		if (pcity && pplayers_allied(pplayer, city_owner(pcity)))
+//		if (pcity && Player_P.pplayers_allied(pplayer, city_owner(pcity)))
 //			return pcity;
 //		else
 			return null;
@@ -1500,7 +1512,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //{
 //  city pcity = ptile.city;
 //
-//  if (pcity && !pplayers_allied(pplayer, city_owner(pcity)))
+//  if (pcity && !Player_P.pplayers_allied(pplayer, city_owner(pcity)))
 //    return pcity;
 //  else
 //    return null;
@@ -1521,7 +1533,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //{
 //  for(tile ptile1: util.square_tile_iterate(ptile, 3)) {
 //    city  pcity = ptile1.city;
-//    if (pcity && pplayers_allied(owner, city_owner(pcity)))
+//    if (pcity && Player_P.pplayers_allied(owner, city_owner(pcity)))
 //      return true;
 //  }
 //
@@ -1592,7 +1604,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //**************************************************************************/
 //int get_city_shield_bonus(final city pcity)
 //{
-//  final int bonus = 100 + get_city_bonus(pcity, EFT_PROD_BONUS);
+//  final int bonus = 100 + Effects.get_city_bonus(pcity, EFT_PROD_BONUS);
 //
 //  return MAX(bonus, 0);
 //}
@@ -1602,7 +1614,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //**************************************************************************/
 //int get_city_tax_bonus(final city pcity)
 //{
-//  final int bonus = 100 + get_city_bonus(pcity, EFT_TAX_BONUS);
+//  final int bonus = 100 + Effects.get_city_bonus(pcity, EFT_TAX_BONUS);
 //
 //  return MAX(bonus, 0);
 //}
@@ -1612,7 +1624,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //**************************************************************************/
 //int get_city_luxury_bonus(final city pcity)
 //{
-//  final int bonus = 100 + get_city_bonus(pcity, EFT_LUXURY_BONUS);
+//  final int bonus = 100 + Effects.get_city_bonus(pcity, EFT_LUXURY_BONUS);
 //
 //  return MAX(bonus, 0);
 //}
@@ -1625,13 +1637,13 @@ public static boolean can_build_unit(final city pcity, int id)
 //{
 //  int tithes_bonus = 0;
 //
-//  if (!government_has_flag(get_gov_pcity(pcity), 
+//  if (!Government.government_has_flag(Government.get_gov_pcity(pcity), 
 //                           G_CONVERT_TITHES_TO_MONEY)) {
 //    return 0;
 //  }
 //
-//  tithes_bonus += get_city_bonus(pcity, EFT_MAKE_CONTENT);
-//  tithes_bonus += get_city_bonus(pcity, EFT_FORCE_CONTENT);
+//  tithes_bonus += Effects.get_city_bonus(pcity, EFT_MAKE_CONTENT);
+//  tithes_bonus += Effects.get_city_bonus(pcity, EFT_FORCE_CONTENT);
 //
 //  return tithes_bonus;
 //}
@@ -1643,9 +1655,9 @@ public static boolean can_build_unit(final city pcity, int id)
 //{
 //  int science_bonus;
 //
-//  science_bonus = 100 + get_city_bonus(pcity, EFT_SCIENCE_BONUS);
+//  science_bonus = 100 + Effects.get_city_bonus(pcity, EFT_SCIENCE_BONUS);
 //
-//  if (government_has_flag(get_gov_pcity(pcity), G_REDUCED_RESEARCH)) {
+//  if (Government.government_has_flag(Government.get_gov_pcity(pcity), G_REDUCED_RESEARCH)) {
 //    science_bonus /= 2;
 //  }
 //
@@ -1707,10 +1719,10 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //  pcity.luxury_total += (pcity.specialists[specialist_type.SP_ELVIS]
 //			  * Game.game.rgame.specialists[specialist_type.SP_ELVIS].bonus);
-//  pcity.science_total += (pcity.specialists[SP_SCIENTIST]
-//			   * Game.game.rgame.specialists[SP_SCIENTIST].bonus);
-//  pcity.tax_total += (pcity.specialists[SP_TAXMAN]
-//			* Game.game.rgame.specialists[SP_TAXMAN].bonus);
+//  pcity.science_total += (pcity.specialists[specialist_type.SP_SCIENTIST]
+//			   * Game.game.rgame.specialists[specialist_type.SP_SCIENTIST].bonus);
+//  pcity.tax_total += (pcity.specialists[specialist_type.SP_TAXMAN]
+//			* Game.game.rgame.specialists[specialist_type.SP_TAXMAN].bonus);
 //  pcity.tax_total += get_city_tithes_bonus(pcity);
 //}
 //
@@ -1859,7 +1871,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //  int faces = 0;
 //  happy_copy(pcity, 1);
 //
-//  faces += get_city_bonus(pcity, EFT_MAKE_CONTENT);
+//  faces += Effects.get_city_bonus(pcity, EFT_MAKE_CONTENT);
 //
 //  /* make people content (but not happy):
 //     get rid of angry first, then make unhappy content. */
@@ -1884,7 +1896,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //
 //  happy_copy(pcity, 3);
 //
-//  if ((mod = get_city_bonus(pcity, EFT_MAKE_HAPPY)) > 0) {
+//  if ((mod = Effects.get_city_bonus(pcity, EFT_MAKE_HAPPY)) > 0) {
 //    bonus += mod;
 //
 //    while (bonus > 0 && pcity.ppl_content[4] > 0) {
@@ -1896,7 +1908,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //    }
 //  }
 //
-//  bonus += get_city_bonus(pcity, EFT_FORCE_CONTENT);
+//  bonus += Effects.get_city_bonus(pcity, EFT_FORCE_CONTENT);
 //
 //  /* get rid of angry first, then make unhappy content */
 //  while (bonus > 0 && pcity.ppl_angry[4] > 0) {
@@ -1910,12 +1922,12 @@ public static boolean can_build_unit(final city pcity, int id)
 //    bonus--;
 //  }
 //
-//  if (get_city_bonus(pcity, EFT_NO_UNHAPPY) > 0) {
+//  if (Effects.get_city_bonus(pcity, EFT_NO_UNHAPPY) > 0) {
 //    pcity.ppl_content[4] += pcity.ppl_unhappy[4] + pcity.ppl_angry[4];
 //    pcity.ppl_unhappy[4] = 0;
 //    pcity.ppl_angry[4] = 0;
 //  }
-//  if (government_has_flag(get_gov_pcity(pcity), G_NO_UNHAPPY_CITIZENS)) {
+//  if (Government.government_has_flag(Government.get_gov_pcity(pcity), G_NO_UNHAPPY_CITIZENS)) {
 //    pcity.ppl_content[4] += pcity.ppl_unhappy[4] + pcity.ppl_angry[4];
 //    pcity.ppl_unhappy[4] = 0;
 //    pcity.ppl_angry[4] = 0;
@@ -1946,12 +1958,12 @@ public static boolean can_build_unit(final city pcity, int id)
 //  int mod, pollution;
 //
 //  /* Add one one pollution per shield, multipled by the bonus. */
-//  mod = 100 + get_city_bonus(pcity, EFT_POLLU_PROD_PCT);
+//  mod = 100 + Effects.get_city_bonus(pcity, EFT_POLLU_PROD_PCT);
 //  mod = MAX(0, mod);
 //  pollution = shield_total * mod / 100;
 //
 //  /* Add one 1/4 pollution per citizen per tech, multiplied by the bonus. */
-//  mod = 100 + get_city_bonus(pcity, EFT_POLLU_POP_PCT);
+//  mod = 100 + Effects.get_city_bonus(pcity, EFT_POLLU_POP_PCT);
 //  mod = MAX(0, mod);
 //  pollution += (pcity.size
 //		* num_known_tech_with_flag(pplayer,
@@ -1976,13 +1988,16 @@ public static boolean can_build_unit(final city pcity, int id)
 //  *trade = 0;
 //  *shields = 0;
 //  
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (is_valid_city_coords(x, y)) {
 //    if (get_worker_city(pcity, x, y) == city_tile_type.C_TILE_WORKER) {
 //      *food += base_city_get_food_tile(x, y, pcity, is_celebrating);
 //      *shields += base_city_get_shields_tile(x, y, pcity, is_celebrating);
 //      *trade += base_city_get_trade_tile(x, y, pcity, is_celebrating);
 //    }
-//  } city_map_iterate_end;
+//  } };
 //}
 //
 ///**************************************************************************
@@ -2000,7 +2015,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //  pcity.tile_trade = pcity.trade_prod;
 //  pcity.food_surplus = pcity.food_prod - pcity.size * 2;
 //
-//  for (i = 0; i < NUM_TRADEROUTES; i++) {
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //    pcity.trade_value[i] =
 //	trade_between_cities(pcity, Game.find_city_by_id(pcity.trade[i]));
 //    pcity.trade_prod += pcity.trade_value[i];
@@ -2019,7 +2034,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //	 		        void (*send_unit_info) (player pplayer,
 //						        unit punit))
 //{
-//  government g = get_gov_pcity(pcity);
+//  government g = Government.get_gov_pcity(pcity);
 //
 //  int free_happy = citygov_free_happy(pcity, g);
 //  int free_shield = citygov_free_shield(pcity, g);
@@ -2027,7 +2042,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //  int free_gold = citygov_free_gold(pcity, g);
 //
 //  /* ??  This does the right thing for normal Republic and Democ -- dwp */
-//  free_happy += get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL);
+//  free_happy += Effects.get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL);
 //
 //  happy_copy(pcity, 2);
 //
@@ -2100,7 +2115,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //      }
 //    }
 //    if (happy_cost > 0
-//	&& get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL_PER) > 0) {
+//	&& Effects.get_city_bonus(pcity, EFT_MAKE_CONTENT_MIL_PER) > 0) {
 //      happy_cost--;
 //    }
 //
@@ -2170,7 +2185,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //  if (refresh_trade_route_cities && pcity.tile_trade != prev_tile_trade) {
 //    int i;
 //
-//    for (i = 0; i < NUM_TRADEROUTES; i++) {
+//    for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //      city pcity2 = Game.find_city_by_id(pcity.trade[i]);
 //
 //      if (pcity2) {
@@ -2209,7 +2224,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //**************************************************************************/
 //int city_corruption(final city pcity, int trade)
 //{
-//  government g = get_gov_pcity(pcity);
+//  government g = Government.get_gov_pcity(pcity);
 //  city capital;
 //  int dist;
 //  unsigned int val;
@@ -2246,7 +2261,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //  /* Now calculate the final corruption.  Ordered to reduce integer
 //   * roundoff errors. */
 //  val = trade * MAX(dist, 1) * g.corruption_level;
-//  val -= (val * get_city_bonus(pcity, EFT_CORRUPT_PCT)) / 100;
+//  val -= (val * Effects.get_city_bonus(pcity, EFT_CORRUPT_PCT)) / 100;
 //  val /= 100 * 100; /* Level is a % multiplied by 100 */
 //  val = CLIP(trade_penalty, val, trade);
 //  return val;
@@ -2257,7 +2272,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //**************************************************************************/
 //int city_waste(final city pcity, int shields)
 //{
-//  government g = get_gov_pcity(pcity);
+//  government g = Government.get_gov_pcity(pcity);
 //  city capital;
 //  int dist;
 //  int shield_penalty = 0;
@@ -2282,7 +2297,7 @@ public static boolean can_build_unit(final city pcity, int id)
 //  val = shields * MAX(dist, 1) * g.waste_level;
 //  val /= 100 * 100; /* Level is a % multiplied by 100 */
 //
-//  val -= (val * get_city_bonus(pcity, EFT_WASTE_PCT)) / 100;
+//  val -= (val * Effects.get_city_bonus(pcity, EFT_WASTE_PCT)) / 100;
 //
 //  val = CLIP(shield_penalty, val, shields);
 //  return val;
@@ -2332,39 +2347,39 @@ public static int city_specialists(final city pcity)
 // arrays if the improvement has effects and/or an equiv_range that
 // extend outside of the city.
 //**************************************************************************/
-//void city_add_improvement(city pcity, int impr)
-//{
+public static void city_add_improvement(city pcity, int impr)
+{
 //  player pplayer = city_owner(pcity);
 //
-//  if (improvement_obsolete(pplayer, impr)) {
+//  if (Improvement.improvement_obsolete(pplayer, impr)) {
 //    mark_improvement(pcity, impr, I_OBSOLETE);
 //  } else {
-//    mark_improvement(pcity, impr, I_ACTIVE);
+//    mark_improvement(pcity, impr, Improvement.I_ACTIVE);
 //  }
 //
 //  improvements_update_redundant(pplayer, pcity, 
 //                                map_get_continent(pcity.tile),
-//                                improvement_types[impr].equiv_range);
-//}
+//                                Improvement.improvement_types[impr].equiv_range);
+}
 //
 ///**************************************************************************
 // Removes an improvement (and its effects) from a city, and updates the global
 // arrays if the improvement has effects and/or an equiv_range that
 // extend outside of the city.
 //**************************************************************************/
-//void city_remove_improvement(city pcity,int impr)
-//{
+public static void city_remove_improvement(city pcity,int impr)
+{
 //  player pplayer = city_owner(pcity);
 //  
 //  util.freelog(Log.LOG_DEBUG,"Improvement %s removed from city %s",
-//          improvement_types[impr].name, pcity.name);
+//          Improvement.improvement_types[impr].name, pcity.name);
 //  
-//  mark_improvement(pcity, impr, I_NONE);
+//  mark_improvement(pcity, impr, Improvement.I_NONE);
 //
 //  improvements_update_redundant(pplayer, pcity,
 //                                map_get_continent(pcity.tile),
-//                                improvement_types[impr].equiv_range);
-//}
+//                                Improvement.improvement_types[impr].equiv_range);
+}
 //
 ///**************************************************************************
 //Return the status (city_tile_type.C_TILE_EMPTY, city_tile_type.C_TILE_WORKER or city_tile_type.C_TILE_UNAVAILABLE)
@@ -2412,15 +2427,15 @@ public static int city_specialists(final city pcity)
 //  Game.game.styles_count = 0;
 //}
 //
-///**************************************************************************
-//  Create virtual skeleton for a city.  It does not register the city so 
-//  the id is set to 0.  All other values are more or less sane defaults.
-//**************************************************************************/
-//city create_city_virtual(player pplayer, tile ptile,
-//				 final String name)
-//{
+/**************************************************************************
+  Create virtual skeleton for a city.  It does not register the city so 
+  the id is set to 0.  All other values are more or less sane defaults.
+**************************************************************************/
+public static city create_city_virtual(player pplayer, tile ptile,
+				 final String name)
+{
 //  int i;
-//  city pcity;
+  city pcity = null;
 //
 //  pcity = fc_malloc(sizeof(struct city));
 //
@@ -2439,7 +2454,7 @@ public static int city_specialists(final city pcity)
 //  pcity.ppl_angry[4] = 0;
 //  pcity.was_happy = false;
 //  pcity.steal = 0;
-//  for (i = 0; i < NUM_TRADEROUTES; i++) {
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //    pcity.trade_value[i] = pcity.trade[i] = 0;
 //  }
 //  pcity.food_stock = 0;
@@ -2510,11 +2525,11 @@ public static int city_specialists(final city pcity)
 //  pcity.client.happy = pcity.client.unhappy = false;
 //  pcity.client.colored = false;
 //
-//  unit_list_init(&pcity.units_supported);
+//  pcity.units_supported.foo_list_init();
 //  pcity.debug = false;
-//
-//  return pcity;
-//}
+
+  return pcity;
+}
 //
 ///**************************************************************************
 //  Removes the virtual skeleton of a city. You should already have removed
@@ -2522,7 +2537,7 @@ public static int city_specialists(final city pcity)
 //**************************************************************************/
 //void remove_city_virtual(city pcity)
 //{
-//  unit_list_unlink_all(&pcity.units_supported);
+//	pcity.units_supported.foo_list_unlink_all();
 //  free(pcity);
 //}
 }

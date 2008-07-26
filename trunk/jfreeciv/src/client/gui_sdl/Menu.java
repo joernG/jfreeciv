@@ -206,7 +206,7 @@ public class Menu{
 //**************************************************************************/
 //static boolean has_city_airport(city pCity)
 //{
-//  return (pCity && city_got_building(pCity, B_AIRPORT));
+//  return (pCity && City.city_got_building(pCity, B_AIRPORT));
 //}
 //
 //static Uint16 redraw_order_widgets()
@@ -1001,10 +1001,10 @@ public class Menu{
 //	/* unit_can_est_traderoute_here(pUnit) */
 //      if (pTile.city && unit_flag(pUnit, F_TRADE_ROUTE)
 //        && (pHomecity = Game.find_city_by_id(pUnit.homecity))
-//	&& can_cities_trade(pHomecity, pTile.city)) {
+//	&& City.can_cities_trade(pHomecity, pTile.city)) {
 //	int revenue = get_caravan_enter_city_trade_bonus(pHomecity, pTile.city);
 //	
-//        if (can_establish_trade_route(pHomecity, pTile.city)) {
+//        if (City.can_establish_trade_route(pHomecity, pTile.city)) {
 //          cBuf = util.my_snprintf(
 //      		"Form Traderoute with %s ( %d R&G + %d trade ) (R)",
 //      		pHomecity.name, revenue,
@@ -1172,7 +1172,7 @@ public class Menu{
 //      }
 //
 //      if (can_unit_do_auto(pUnit)) {
-//	if (unit_flag(pUnit, F_SETTLERS)) {
+//	if (unit_flag(pUnit, Eunit_flag_id.F_SETTLERS)) {
 //	  if(pOrder_Automate_Unit_Button.theme != pTheme.OAutoSett_Icon) {
 //	    cBuf = util.my_snprintf("%s%s", "Auto-Settler", " (A)");
 //	    pOrder_Automate_Unit_Button.theme = pTheme.OAutoSett_Icon;

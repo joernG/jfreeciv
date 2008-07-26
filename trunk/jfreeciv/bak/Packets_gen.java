@@ -3545,7 +3545,7 @@ public class Packets_gen{
 //      if(i == 255) {
 //        break;
 //      }
-//      if(i > A_LAST) {
+//      if(i > Tech_H.A_LAST) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: ignoring intra array diff");
 //      } else {
 //        {
@@ -3566,7 +3566,7 @@ public class Packets_gen{
 //      if(i == 255) {
 //        break;
 //      }
-//      if(i > B_LAST) {
+//      if(i > Improvement.B_LAST) {
 //        util.freelog(Log.LOG_ERROR, "packets_gen.c: WARNING: ignoring intra array diff");
 //      } else {
 //        {
@@ -3726,10 +3726,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (A_LAST != A_LAST);
+//      differ = (Tech_H.A_LAST != Tech_H.A_LAST);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < A_LAST; i++) {
+//        for (i = 0; i < Tech_H.A_LAST; i++) {
 //          if (old->global_advances[i] != real_packet->global_advances[i]) {
 //            differ = true;
 //            break;
@@ -3742,10 +3742,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (B_LAST != B_LAST);
+//      differ = (Improvement.B_LAST != Improvement.B_LAST);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < B_LAST; i++) {
+//        for (i = 0; i < Improvement.B_LAST; i++) {
 //          if (old->global_wonders[i] != real_packet->global_wonders[i]) {
 //            differ = true;
 //            break;
@@ -3849,9 +3849,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      assert(A_LAST < 255);
+//      assert(Tech_H.A_LAST < 255);
 //
-//      for (i = 0; i < A_LAST; i++) {
+//      for (i = 0; i < Tech_H.A_LAST; i++) {
 //        if(old->global_advances[i] != real_packet->global_advances[i]) {
 //          dio_put_uint8(&dout, i);
 //          dio_put_uint8(&dout, real_packet->global_advances[i]);
@@ -3865,9 +3865,9 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      assert(B_LAST < 255);
+//      assert(Improvement.B_LAST < 255);
 //
-//      for (i = 0; i < B_LAST; i++) {
+//      for (i = 0; i < Improvement.B_LAST; i++) {
 //        if(old->global_wonders[i] != real_packet->global_wonders[i]) {
 //          dio_put_uint8(&dout, i);
 //          dio_put_uint16(&dout, real_packet->global_wonders[i]);
@@ -4745,185 +4745,6 @@ public class Packets_gen{
 //  
 //  return send_packet_chat_msg_req(pc, real_packet);
 //}
-//
-//#define hash_packet_city_remove_100 hash_final
-//
-//#define cmp_packet_city_remove_100 cmp_final
-//
-//BV_DEFINE(packet_city_remove_100_fields, 1);
-//
-//static struct packet_city_remove *receive_packet_city_remove_100(Connection pc, enum packet_type type)
-//{
-//  packet_city_remove_100_fields fields;
-//  struct packet_city_remove *old;
-//  struct hash_table **hash = &pc->phs.received[type];
-//  struct packet_city_remove *clone;
-//  RECEIVE_PACKET_START(packet_city_remove, real_packet);
-//
-//  DIO_BV_GET(&din, fields);
-//
-//
-//  if (!*hash) {
-//    *hash = hash_new(hash_packet_city_remove_100, cmp_packet_city_remove_100);
-//  }
-//  old = hash_delete_entry(*hash, real_packet);
-//
-//  if (old) {
-//    *real_packet = *old;
-//  } else {
-//    memset(real_packet, 0, sizeof(*real_packet));
-//  }
-//
-//  if (BV_ISSET(fields, 0)) {
-//    {
-//      int readin;
-//    
-//      dio_get_uint16(&din, &readin);
-//      real_packet->city_id = readin;
-//    }
-//  }
-//
-//  clone = fc_malloc(sizeof(*clone));
-//  *clone = *real_packet;
-//  if (old) {
-//    free(old);
-//  }
-//  hash_insert(*hash, clone, clone);
-//
-//  RECEIVE_PACKET_END(real_packet);
-//}
-//
-//static int send_packet_city_remove_100(Connection pc, final struct packet_city_remove *packet)
-//{
-//  final struct packet_city_remove *real_packet = packet;
-//  packet_city_remove_100_fields fields;
-//  struct packet_city_remove *old, *clone;
-//  boolean differ, old_from_hash, force_send_of_unchanged = true;
-//  struct hash_table **hash = &pc->phs.sent[PACKET_CITY_REMOVE];
-//  int different = 0;
-//  SEND_PACKET_START(PACKET_CITY_REMOVE);
-//
-//  if (!*hash) {
-//    *hash = hash_new(hash_packet_city_remove_100, cmp_packet_city_remove_100);
-//  }
-//  BV_CLR_ALL(fields);
-//
-//  old = hash_lookup_data(*hash, real_packet);
-//  old_from_hash = (old != null);
-//  if (!old) {
-//    old = fc_malloc(sizeof(*old));
-//    memset(old, 0, sizeof(*old));
-//    force_send_of_unchanged = true;
-//  }
-//
-//  differ = (old->city_id != real_packet->city_id);
-//  if(differ) {different++;}
-//  if(differ) {BV_SET(fields, 0);}
-//
-//  if (different == 0 && !force_send_of_unchanged) {
-//    return 0;
-//  }
-//
-//  DIO_BV_PUT(&dout, fields);
-//
-//  if (BV_ISSET(fields, 0)) {
-//    dio_put_uint16(&dout, real_packet->city_id);
-//  }
-//
-//
-//  if (old_from_hash) {
-//    hash_delete_entry(*hash, old);
-//  }
-//
-//  clone = old;
-//
-//  *clone = *real_packet;
-//  hash_insert(*hash, clone, clone);
-//  SEND_PACKET_END;
-//}
-//
-//static void ensure_valid_variant_packet_city_remove(Connection pc)
-//{
-//  int variant = -1;
-//
-//  if(pc->phs.variant[PACKET_CITY_REMOVE] != -1) {
-//    return;
-//  }
-//
-//  if(false) {
-//  } else if(true) {
-//    variant = 100;
-//  } else {
-//    util.die("unknown variant");
-//  }
-//  pc->phs.variant[PACKET_CITY_REMOVE] = variant;
-//}
-//
-//struct packet_city_remove *receive_packet_city_remove(Connection pc, enum packet_type type)
-//{
-//  if(!pc->used) {
-//    util.freelog(Log.LOG_ERROR,
-//	    "WARNING: trying to read data from the closed connection %s",
-//	    pc.conn_description());
-//    return null;
-//  }
-//  assert(pc->phs.variant != null);
-//  if(is_server) {
-//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_remove at the server.");
-//  }
-//  ensure_valid_variant_packet_city_remove(pc);
-//
-//  switch(pc->phs.variant[PACKET_CITY_REMOVE]) {
-//    case 100: return receive_packet_city_remove_100(pc, type);
-//    default: util.die("unknown variant"); return null;
-//  }
-//}
-//
-//int send_packet_city_remove(Connection pc, final struct packet_city_remove *packet)
-//{
-//  if(!pc->used) {
-//    util.freelog(Log.LOG_ERROR,
-//	    "WARNING: trying to send data to the closed connection %s",
-//	    pc.conn_description());
-//    return -1;
-//  }
-//  assert(pc->phs.variant != null);
-//  if(!is_server) {
-//    util.freelog(Log.LOG_ERROR, "Sending packet_city_remove from the client.");
-//  }
-//  ensure_valid_variant_packet_city_remove(pc);
-//
-//  switch(pc->phs.variant[PACKET_CITY_REMOVE]) {
-//    case 100: return send_packet_city_remove_100(pc, packet);
-//    default: util.die("unknown variant"); return -1;
-//  }
-//}
-//
-//void lsend_packet_city_remove(Speclists<conn> *dest, final struct packet_city_remove *packet)
-//{
-//  conn_list_iterate(*dest, pconn) {
-//    send_packet_city_remove(pconn, packet);
-//  } }
-//}
-//
-//int dsend_packet_city_remove(Connection pc, int city_id)
-//{
-//  struct packet_city_remove packet, *real_packet = &packet;
-//
-//  real_packet->city_id = city_id;
-//  
-//  return send_packet_city_remove(pc, real_packet);
-//}
-//
-//void dlsend_packet_city_remove(Speclists<conn> *dest, int city_id)
-//{
-//  struct packet_city_remove packet, *real_packet = &packet;
-//
-//  real_packet->city_id = city_id;
-//  
-//  lsend_packet_city_remove(dest, real_packet);
-//}
-//
 //static unsigned int hash_packet_city_info_100(final void *vkey, unsigned int num_buckets)
 //{
 //  final struct packet_city_info *key = (final struct packet_city_info *) vkey;
@@ -5166,7 +4987,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      for (i = 0; i < NUM_TRADEROUTES; i++) {
+//      for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //        {
 //      int readin;
 //    
@@ -5181,7 +5002,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //    
-//      for (i = 0; i < NUM_TRADEROUTES; i++) {
+//      for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //        {
 //      int readin;
 //    
@@ -5503,10 +5324,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (NUM_TRADEROUTES != NUM_TRADEROUTES);
+//      differ = (City_H.NUM_TRADEROUTES != City_H.NUM_TRADEROUTES);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < NUM_TRADEROUTES; i++) {
+//        for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //          if (old->trade[i] != real_packet->trade[i]) {
 //            differ = true;
 //            break;
@@ -5519,10 +5340,10 @@ public class Packets_gen{
 //
 //
 //    {
-//      differ = (NUM_TRADEROUTES != NUM_TRADEROUTES);
+//      differ = (City_H.NUM_TRADEROUTES != City_H.NUM_TRADEROUTES);
 //      if(!differ) {
 //        int i;
-//        for (i = 0; i < NUM_TRADEROUTES; i++) {
+//        for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //          if (old->trade_value[i] != real_packet->trade_value[i]) {
 //            differ = true;
 //            break;
@@ -5745,7 +5566,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      for (i = 0; i < NUM_TRADEROUTES; i++) {
+//      for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //        dio_put_uint16(&dout, real_packet->trade[i]);
 //      }
 //    } 
@@ -5755,7 +5576,7 @@ public class Packets_gen{
 //    {
 //      int i;
 //
-//      for (i = 0; i < NUM_TRADEROUTES; i++) {
+//      for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //        dio_put_uint8(&dout, real_packet->trade_value[i]);
 //      }
 //    } 
@@ -6141,53 +5962,6 @@ public class Packets_gen{
 //    util.die("unknown variant");
 //  }
 //  pc->phs.variant[PACKET_CITY_SHORT_INFO] = variant;
-//}
-//
-//struct packet_city_short_info *receive_packet_city_short_info(Connection pc, enum packet_type type)
-//{
-//  if(!pc->used) {
-//    util.freelog(Log.LOG_ERROR,
-//	    "WARNING: trying to read data from the closed connection %s",
-//	    pc.conn_description());
-//    return null;
-//  }
-//  assert(pc->phs.variant != null);
-//  if(is_server) {
-//    util.freelog(Log.LOG_ERROR, "Receiving packet_city_short_info at the server.");
-//  }
-//  ensure_valid_variant_packet_city_short_info(pc);
-//
-//  switch(pc->phs.variant[PACKET_CITY_SHORT_INFO]) {
-//    case 100: return receive_packet_city_short_info_100(pc, type);
-//    default: util.die("unknown variant"); return null;
-//  }
-//}
-//
-//int send_packet_city_short_info(Connection pc, final struct packet_city_short_info *packet)
-//{
-//  if(!pc->used) {
-//    util.freelog(Log.LOG_ERROR,
-//	    "WARNING: trying to send data to the closed connection %s",
-//	    pc.conn_description());
-//    return -1;
-//  }
-//  assert(pc->phs.variant != null);
-//  if(!is_server) {
-//    util.freelog(Log.LOG_ERROR, "Sending packet_city_short_info from the client.");
-//  }
-//  ensure_valid_variant_packet_city_short_info(pc);
-//
-//  switch(pc->phs.variant[PACKET_CITY_SHORT_INFO]) {
-//    case 100: return send_packet_city_short_info_100(pc, packet);
-//    default: util.die("unknown variant"); return -1;
-//  }
-//}
-//
-//void lsend_packet_city_short_info(Speclists<conn> *dest, final struct packet_city_short_info *packet)
-//{
-//  conn_list_iterate(*dest, pconn) {
-//    send_packet_city_short_info(pconn, packet);
-//  } }
 //}
 //
 //#define hash_packet_city_sell_100 hash_final
@@ -24279,7 +24053,7 @@ public class Packets_gen{
 //      real_packet->replaced_by = readin;
 //    }
 //  }
-//  real_packet->is_wonder = BV_ISSET(fields, 8);
+//  real_packet->Improvement.is_wonder = BV_ISSET(fields, 8);
 //  if (BV_ISSET(fields, 9)) {
 //    {
 //      int readin;
@@ -24495,9 +24269,9 @@ public class Packets_gen{
 //  if(differ) {different++;}
 //  if(differ) {BV_SET(fields, 7);}
 //
-//  differ = (old->is_wonder != real_packet->is_wonder);
+//  differ = (old->Improvement.is_wonder != real_packet->Improvement.is_wonder);
 //  if(differ) {different++;}
-//  if(packet->is_wonder) {BV_SET(fields, 8);}
+//  if(packet->Improvement.is_wonder) {BV_SET(fields, 8);}
 //
 //  differ = (old->equiv_range != real_packet->equiv_range);
 //  if(differ) {different++;}

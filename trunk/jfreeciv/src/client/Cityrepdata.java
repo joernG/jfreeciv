@@ -58,8 +58,8 @@ public class Cityrepdata{
 //static final String cr_entry_hstate_concise(final city pcity)
 //{
 //  static char buf[4];
-//  buf = util.my_snprintf( "%s", (city_celebrating(pcity) ? "*" :
-//				       (city_unhappy(pcity) ? "X" : " ")));
+//  buf = util.my_snprintf( "%s", (City.city_celebrating(pcity) ? "*" :
+//				       (City.city_unhappy(pcity) ? "X" : " ")));
 //  return buf;
 //}
 //
@@ -67,8 +67,8 @@ public class Cityrepdata{
 //{
 //  static char buf[16];
 //  buf = util.my_snprintf( "%s",
-//	      (city_celebrating(pcity) ? Q"?city_state:Rapture" :
-//	       (city_unhappy(pcity) ? Q"?city_state:Disorder" :
+//	      (City.city_celebrating(pcity) ? Q"?city_state:Rapture" :
+//	       (City.city_unhappy(pcity) ? Q"?city_state:Disorder" :
 //		Q"?city_state:Peace")));
 //  return buf;
 //}
@@ -125,14 +125,14 @@ public class Cityrepdata{
 //static final String cr_entry_scientists(final city pcity)
 //{
 //  static char buf[8];
-//  buf = util.my_snprintf( "%2d", pcity.specialists[SP_SCIENTIST]);
+//  buf = util.my_snprintf( "%2d", pcity.specialists[specialist_type.SP_SCIENTIST]);
 //  return buf;
 //}
 //
 //static final String cr_entry_taxmen(final city pcity)
 //{
 //  static char buf[8];
-//  buf = util.my_snprintf( "%2d", pcity.specialists[SP_TAXMAN]);
+//  buf = util.my_snprintf( "%2d", pcity.specialists[specialist_type.SP_TAXMAN]);
 //  return buf;
 //}
 //
@@ -350,7 +350,7 @@ public class Cityrepdata{
 //	
 //  if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //    buf = util.my_snprintf( "%s (%d/X/X/X)%s",
-//		get_impr_name_ex(pcity, pcity.currently_building),
+//		City.get_impr_name_ex(pcity, pcity.currently_building),
 //		MAX(0, pcity.shield_surplus), from_worklist);
 //  } else {
 //    int turns = city_turns_to_build(pcity, pcity.currently_building,
@@ -369,7 +369,7 @@ public class Cityrepdata{
 //      name = get_unit_type(pcity.currently_building).name;
 //      cost = Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //    } else {
-//      name = get_impr_name_ex(pcity, pcity.currently_building);
+//      name = City.get_impr_name_ex(pcity, pcity.currently_building);
 //      cost = Improvement.impr_build_shield_cost(pcity.currently_building);
 //    }
 //

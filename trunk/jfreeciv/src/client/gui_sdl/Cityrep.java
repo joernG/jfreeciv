@@ -258,13 +258,13 @@ public class Cityrep{
 //    pBuf = create_iconlabel(null, pWindow.dst, pStr,
 //			(WF_DRAW_THEME_TRANSPARENT|WF_SELLECT_WITHOUT_BAR));
 //    
-//    if (city_unhappy(pCity)) {
+//    if (City.city_unhappy(pCity)) {
 //      pBuf.string16.fgcol = *get_game_colorRGB(COLOR_STD_CITY_TRADE);
 //    } else {
-//      if (city_celebrating(pCity)) {
+//      if (City.city_celebrating(pCity)) {
 //	pBuf.string16.fgcol = *get_game_colorRGB(COLOR_STD_CITY_CELEB);
 //      } else {
-//        if (city_happy(pCity)) {
+//        if (City.city_happy(pCity)) {
 //	  pBuf.string16.fgcol = *get_game_colorRGB(COLOR_STD_CITY_HAPPY);
 //        }
 //      }
@@ -910,13 +910,13 @@ public class Cityrep{
 //  SDL_Rect dst;
 //    
 //  /* city name status */
-//  if (city_unhappy(pCity)) {
+//  if (City.city_unhappy(pCity)) {
 //    pWidget.string16.fgcol = *get_game_colorRGB(COLOR_STD_CITY_TRADE);
 //  } else {
-//    if (city_celebrating(pCity)) {
+//    if (City.city_celebrating(pCity)) {
 //      pWidget.string16.fgcol = *get_game_colorRGB(COLOR_STD_CITY_CELEB);
 //    } else {
-//      if (city_happy(pCity)) {
+//      if (City.city_happy(pCity)) {
 //	pWidget.string16.fgcol = *get_game_colorRGB(COLOR_STD_CITY_HAPPY);
 //      }
 //    }

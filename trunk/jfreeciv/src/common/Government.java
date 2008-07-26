@@ -2,6 +2,8 @@ package common;
 
 import common.city.city;
 import common.government.government;
+import common.government.government_flag_id;
+import common.player.player;
 
 public class Government{
 
@@ -62,7 +64,7 @@ public class Government{
 // *   basics).
 // */
 //
-//government governments = null;
+static government[] governments = null;
 //
 //struct ai_gov_tech_hint ai_gov_tech_hints[MAX_NUM_TECH_LIST];
 //
@@ -94,13 +96,14 @@ public class Government{
 ///****************************************************************************
 //  Returns true iff the given government has the given flag.
 //****************************************************************************/
-//boolean government_has_flag(final government gov,
-//			 enum government_flag_id flag)
-//{
+public static boolean government_has_flag(final government gov,
+			 government_flag_id flag)
+{
 //  assert(flag>=G_FIRST_FLAG && flag<G_LAST_FLAG);
 //  return TEST_BIT(gov.flags, flag);
-//}
-//
+return false;
+}
+
 ///****************************************************************************
 //  Does a linear search of the governments to find the one that matches the
 //  given (translated) name.  Returns null if none match.
@@ -130,26 +133,26 @@ public class Government{
 //
 //  return null;
 //}
-//
-///****************************************************************************
-//  Return the government with the given ID.
-//****************************************************************************/
-//government get_government(int gov)
-//{
-//  assert(Game.game.government_count > 0 && gov >= 0
-//	 && gov < Game.game.government_count);
-//  assert(governments[gov].index == gov);
-//  return &governments[gov];
-//}
-//
-///***************************************************************
-//...
-//***************************************************************/
-//government get_gov_pplayer(player pplayer)
-//{
-//  assert(pplayer != null);
-//  return get_government(pplayer.government);
-//}
+
+/****************************************************************************
+  Return the government with the given ID.
+****************************************************************************/
+static government get_government(int gov)
+{
+  assert(Game.game.government_count > 0 && gov >= 0
+	 && gov < Game.game.government_count);
+  assert(governments[gov].index == gov);
+  return governments[gov];
+}
+
+/***************************************************************
+...
+***************************************************************/
+static government get_gov_pplayer(player pplayer)
+{
+  assert(pplayer != null);
+  return get_government(pplayer.government);
+}
 
 /****************************************************************************
   Return the government of the player who owns the city.
@@ -157,8 +160,7 @@ public class Government{
 public static government get_gov_pcity(final city pcity)
 {
   assert(pcity != null);
-//  return get_gov_pplayer(City.city_owner(pcity));
-  return null;
+  return get_gov_pplayer(City.city_owner(pcity));
 }
 
 
@@ -190,29 +192,29 @@ public static government get_gov_pcity(final city pcity)
 //    return male ? "Mr." : "Ms.";
 //  }
 //}
-//
-///***************************************************************
-//...
-//***************************************************************/
-//int get_government_max_rate(int type)
-//{
+
+/***************************************************************
+...
+***************************************************************/
+int get_government_max_rate(int type)
+{
 //  if(type == G_MAGIC)
 //    return 100;
 //  if(type >= 0 && type < Game.game.government_count)
 //    return governments[type].max_rate;
-//  return 50;
-//}
-//
-///***************************************************************
-//Added for civil war probability computation - Kris Bubendorfer
-//***************************************************************/
-//int get_government_civil_war_prob(int type)
-//{
-//  if(type >= 0 && type < Game.game.government_count)
-//    return governments[type].civil_war;
-//  return 0;
-//}
-//
+  return 50;
+}
+
+/***************************************************************
+Added for civil war probability computation - Kris Bubendorfer
+***************************************************************/
+public static int get_government_civil_war_prob(int type)
+{
+  if(type >= 0 && type < Game.game.government_count)
+    return governments[type].civil_war;
+  return 0;
+}
+
 ///***************************************************************
 //...
 //***************************************************************/

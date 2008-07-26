@@ -414,10 +414,10 @@ public class Graphics{
 //  if (solid_unit_icon_bg) {
 //    /* Give tile a background color, based on the type of unit */
 //    switch (type.move_type) {
-//      case LAND_MOVING: bg_color = COLOR_STD_GROUND; break;
-//      case SEA_MOVING:  bg_color = COLOR_STD_OCEAN;  break;
-//      case HELI_MOVING: bg_color = COLOR_STD_YELLOW; break;
-//      case AIR_MOVING:  bg_color = COLOR_STD_CYAN;   break;
+//      case unit_move_type.LAND_MOVING: bg_color = COLOR_STD_GROUND; break;
+//      case unit_move_type.SEA_MOVING:  bg_color = COLOR_STD_OCEAN;  break;
+//      case unit_move_type.HELI_MOVING: bg_color = COLOR_STD_YELLOW; break;
+//      case unit_move_type.AIR_MOVING:  bg_color = COLOR_STD_CYAN;   break;
 //      default:	      bg_color = COLOR_STD_BLACK;  break;
 //    }
 //    canvas_put_rectangle(pcanvas, bg_color, 0, 0, width, height);

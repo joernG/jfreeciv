@@ -913,7 +913,7 @@ public class Menu{
 //   
 //  for (i = 0; i < nmenu_items; i++) {
 //    menu_items[i].path =
-//	mystrdup(translate_menu_path(menu_items[i].path, false));
+//	(translate_menu_path(menu_items[i].path, false));
 //  }
 //  
 //  gtk_item_factory_create_items(item_factory, nmenu_items, menu_items, null);
@@ -1168,7 +1168,7 @@ public class Menu{
 //	can_unit_load(punit, find_transporter_for_unit(punit,
 //						       punit.tile)));
 //      menus_set_sensitive("<main>/_Orders/Unload",
-//	(can_unit_unload(punit, find_unit_by_id(punit.transported_by))
+//	(can_unit_unload(punit, Game.find_unit_by_id(punit.transported_by))
 //	 && can_unit_exist_at_tile(punit, punit.tile)));
 //      menus_set_sensitive("<main>/_Orders/Wake up o_thers", 
 //			  is_unit_activity_on_tile(ACTIVITY_SENTRY,
@@ -1195,8 +1195,8 @@ public class Menu{
 //			  unit_flag(punit, F_NUCLEAR));
 //      if (unit_flag(punit, F_HELP_WONDER))
 //	menus_rename("<main>/_Orders/_Build City", "Help _Build Wonder");
-//      else if (unit_flag(punit, F_CITIES)) {
-//	if (map_get_city(punit.tile))
+//      else if (unit_flag(punit, Eunit_flag_id.F_CITIES)) {
+//	if (Map.map_get_city(punit.tile))
 //	  menus_rename("<main>/_Orders/_Build City", "Add to City (_B)");
 //	else
 //	  menus_rename("<main>/_Orders/_Build City", "_Build City");
@@ -1206,7 +1206,7 @@ public class Menu{
 // 
 //      if (unit_flag(punit, F_TRADE_ROUTE))
 //	menus_rename("<main>/_Orders/Build _Road", "Make Trade _Route");
-//      else if (unit_flag(punit, F_SETTLERS)) {
+//      else if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //	if (Map.map_has_special(punit.tile, Terrain_H.S_ROAD)) {
 //	  roadtext = "Build _Railroad";
 //	  road_activity=ACTIVITY_RAILROAD;  
@@ -1222,21 +1222,21 @@ public class Menu{
 //
 //      ttype = punit.tile.terrain;
 //      tinfo = get_tile_type(ttype);
-//      if (tinfo.irrigation_result != T_NONE
+//      if (tinfo.irrigation_result != Terrain_H.T_NONE
 //	  && tinfo.irrigation_result != ttype) {
 //	irrtext = util.my_snprintf( irrfmt,
 //		    (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //      } else if (Map.map_has_special(punit.tile, S_IRRIGATION)
-//		 && player_knows_techs_with_flag(Game.game.player_ptr,
+//		 && Player_P.player_knows_techs_with_flag(Game.game.player_ptr,
 //						 TF_FARMLAND)) {
 //	irrtext = String.format( "Bu_ild Farmland");
 //      }
-//      if (tinfo.mining_result != T_NONE
+//      if (tinfo.mining_result != Terrain_H.T_NONE
 //	  && tinfo.mining_result != ttype) {
 //	mintext = util.my_snprintf( minfmt,
 //		    (get_tile_type(tinfo.mining_result)).terrain_name);
 //      }
-//      if (tinfo.transform_result != T_NONE
+//      if (tinfo.transform_result != Terrain_H.T_NONE
 //	  && tinfo.transform_result != ttype) {
 //	transtext = util.my_snprintf( transfmt,
 //		    (get_tile_type(tinfo.transform_result)).terrain_name);
@@ -1256,7 +1256,7 @@ public class Menu{
 //      else
 //	menus_rename("<main>/_Orders/Clean _Pollution", "Clean _Pollution");
 //
-//      if (!unit_flag(punit, F_SETTLERS))
+//      if (!unit_flag(punit, Eunit_flag_id.F_SETTLERS))
 //	menus_rename("<main>/_Orders/_Auto Settler", "_Auto Attack");
 //      else
 //	menus_rename("<main>/_Orders/_Auto Settler", "_Auto Settler");

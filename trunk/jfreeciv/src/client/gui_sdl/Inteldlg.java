@@ -115,7 +115,7 @@ public class Inteldlg{
 //  add_to_gui_list(ID_BUTTON, pBuf);
 //  /* ---------- */
 //  
-//  pLogo = GET_SURF(get_nation_by_idx(pPlayer.nation).flag_sprite);
+//  pLogo = GET_SURF(Nation.get_nation_by_idx(pPlayer.nation).flag_sprite);
 //  pLogo = make_flag_surface_smaler(pLogo);
 //  
 //  pText1 = ZoomSurface(pLogo, 4.0 , 4.0, 1);

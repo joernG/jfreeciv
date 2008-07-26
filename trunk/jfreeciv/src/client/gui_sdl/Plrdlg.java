@@ -417,7 +417,7 @@ public class Plrdlg{
 //    pStr = create_string16(null, 0, 10);
 //    pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //   
-//    pLogo = GET_SURF(get_nation_by_idx(pPlayer.nation).flag_sprite);
+//    pLogo = GET_SURF(Nation.get_nation_by_idx(pPlayer.nation).flag_sprite);
 //    pLogo = make_flag_surface_smaler(pLogo);
 //    pZoomed = ZoomSurface(pLogo, 3.0 - n * 0.05, 3.0 - n * 0.05 , 1);
 //    SDL_SetColorKey(pZoomed, SDL_SRCCOLORKEY|SDL_RLEACCEL,
@@ -679,7 +679,7 @@ public class Plrdlg{
 //      pStr = create_str16_from_char(cBuf, 10);
 //      pStr.style |= TTF_STYLE_BOLD;
 //   
-//      pLogo = GET_SURF(get_nation_by_idx(pPlayer.nation).flag_sprite);
+//      pLogo = GET_SURF(Nation.get_nation_by_idx(pPlayer.nation).flag_sprite);
 //      pLogo = make_flag_surface_smaler(pLogo);
 //      
 //      pBuf = create_iconlabel(pLogo, pWindow.dst, pStr, 

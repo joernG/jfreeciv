@@ -4,8 +4,10 @@ import utility.Speclists;
 import utility.shared.Shared_H;
 
 import common.Connection;
+import common.Improvement;
 import common.city.specialist_type;
 import common.player.player;
+import common.tech.Tech_H;
 
 public class civ_game {
 //	struct civ_game {
@@ -58,11 +60,11 @@ public class civ_game {
 		  public Speclists<Connection> all_connections;        /* including not yet established */
 		  public Speclists<Connection> est_connections;        /* all established client conns */
 		  public Speclists<Connection> game_connections;       /* involved in Game.game; send map etc */
-//		  public int global_advances[A_LAST];             /* a counter */
-//		  public int global_wonders[B_LAST];              /* contains city id's */
+		  public int global_advances[] = new int[Tech_H.A_LAST];             /* a counter */
+		  public int global_wonders[] = new int[Improvement.B_LAST];              /* contains city id's */
 //		         /* global_wonders[] may also be (-1), or the id of a city
 //			    which no longer exists, if the wonder has been destroyed */
-//		  int improvements[B_LAST];        /* impr. with equiv_range==World */
+//		  int improvements[Improvement.B_LAST];        /* impr. with equiv_range==World */
 //
 		  public int heating; /* Number of polluted squares. */
 		  public int globalwarming; /* Total damage done. (counts towards a warming event.) */
@@ -74,7 +76,7 @@ public class civ_game {
 		  public int coolinglevel; /* If nuclearwpublic inter is higher than this number there is
 				       a chance of a cooling event. */
 
-//		  char save_name[MAX_LEN_NAME];
+//		  String save_name;
 		  public String save_name;
 		  public int save_nturns;
 		  public int save_compress_level;
@@ -121,13 +123,13 @@ public class civ_game {
 		  public int diplomacy;        /* who can do it */
 		  public boolean slow_invasions;  /* land units lose all movement landing on shores */
 
-//		  char rulesetdir[MAX_LEN_NAME];
-//		  public int firepower_factor;		/* See README.rulesets */
-//
-//		  int default_building;
-//		  int palace_building;
-//		  int land_defend_building;
-//
+		  String rulesetdir;
+		  public int firepower_factor;		/* See README.rulesets */
+
+		  public int default_building;
+		  public int palace_building;
+		  public int land_defend_building;
+
 //		  struct {
 //		    public int cathedral_plus;		/* eg Theology */
 //		    public int cathedral_minus;	/* eg Communism */
@@ -137,7 +139,7 @@ public class civ_game {
 //						   non-trireme ferryboat */
 //		    public int u_partisan;		/* convenience: tech_req for first
 //						   Partisan unit */
-//		    /* Following tech list is A_LAST terminated if shorter than
+//		    /* Following tech list is Tech_H.A_LAST terminated if shorter than
 //		       max len, and the techs listed are guaranteed to exist;
 //		       this could be better implemented as a new field in the
 //		       units.ruleset
@@ -173,7 +175,7 @@ public class civ_game {
 
 		    /* Items given to all players at Game.game start.  Server only. */
 		    public int global_init_techs[];//[MAX_NUM_TECH_LIST];
-		    public int global_init_buildings;//[MAX_NUM_BUILDING_LIST];
+		    public int global_init_buildings[];//[Shared_H.MAX_NUM_BUILDING_LIST];
 
 		    public boolean killstack;
 		  } 

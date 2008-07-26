@@ -91,7 +91,7 @@ public class Dialogs{
 //static Widget spy_steal_command;
 //
 //static int spy_tech_shell_is_modal;
-//static int advance_type[A_LAST+1];
+//static int advance_type[Tech_H.A_LAST+1];
 //static int steal_advance = 0;
 //
 ///******************************************************************/
@@ -100,7 +100,7 @@ public class Dialogs{
 //static Widget spy_sabotage_command;
 //
 //static int spy_sabotage_shell_is_modal;
-//static int improvement_type[B_LAST+1];
+//static int improvement_type[Improvement.B_LAST+1];
 //static int sabotage_improvement = 0;
 //
 ///******************************************************************/
@@ -433,7 +433,7 @@ public class Dialogs{
 //{
 //  destroy_message_dialog(w);
 //
-//  if (find_unit_by_id(diplomat_id) && find_unit_by_id(diplomat_target_id)) {
+//  if (Game.find_unit_by_id(diplomat_id) && Game.find_unit_by_id(diplomat_target_id)) {
 //    dsend_packet_unit_bribe_inq(&aconnection, diplomat_target_id);
 //  }
 //}
@@ -478,7 +478,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, -1);
@@ -496,7 +496,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_EMBASSY, diplomat_id,
 //			    diplomat_target_id, 0);
@@ -514,7 +514,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_INVESTIGATE, diplomat_id,
 //			    diplomat_target_id, 0);
@@ -544,7 +544,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(SPY_POISON, diplomat_id, diplomat_target_id, 0);
 //  }
@@ -561,7 +561,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, 0);
@@ -647,7 +647,7 @@ public class Dialogs{
 //    return;
 //  }
 //  
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, steal_advance);
@@ -671,7 +671,7 @@ public class Dialogs{
 //    return;
 //  }
 //  
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, sabotage_improvement + 1);
@@ -691,7 +691,7 @@ public class Dialogs{
 //  Dimension width1, width2; 
 //  int i, j;
 //
-//  static final String advances_can_steal[A_LAST+1]; 
+//  static final String advances_can_steal[Tech_H.A_LAST+1]; 
 //
 //  spy_tech_shell =
 //    I_T(XtVaCreatePopupShell("spystealtechpopup", 
@@ -776,7 +776,7 @@ public class Dialogs{
 //  Dimension width1, width2; 
 //  int j;
 //
-//  static final String improvements_can_sabotage[B_LAST+1]; 
+//  static final String improvements_can_sabotage[Improvement.B_LAST+1]; 
 //  
 //  spy_sabotage_shell =
 //    I_T(XtVaCreatePopupShell("spysabotageimprovementspopup", 
@@ -825,18 +825,21 @@ public class Dialogs{
 //  improvements_can_sabotage[j] = "City Production";
 //  improvement_type[j++] = -1;
 //
-//  built_impr_iterate(pcity, i) {
+//	for (int i = 0; i < game.num_impr_types; i++) {
+//	if((pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
 //    if (get_improvement_type(i).sabotage > 0) {
-//      improvements_can_sabotage[j] = get_impr_name_ex(pcity, i);
+//      improvements_can_sabotage[j] = City.get_impr_name_ex(pcity, i);
 //      improvement_type[j++] = i;
 //    }  
-//  } built_impr_iterate_end;
+//  } ;
 //
 //  if(j > 1) {
 //    improvements_can_sabotage[j] = "At Spy's Discretion";
-//    improvement_type[j++] = B_LAST;
+//    improvement_type[j++] = Improvement.B_LAST;
 //  } else {
-//    improvement_type[0] = B_LAST; /* fake "discretion", since must be production */
+//    improvement_type[0] = Improvement.B_LAST; /* fake "discretion", since must be production */
 //  }
 //
 //  improvements_can_sabotage[j] = null;
@@ -899,7 +902,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if(find_unit_by_id(diplomat_id) &&
+//  if(Game.find_unit_by_id(diplomat_id) &&
 //     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_GET_SABOTAGE_LIST, diplomat_id,
 //			    diplomat_target_id, 0);
@@ -964,7 +967,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if (find_unit_by_id(diplomat_id) && Game.find_city_by_id(diplomat_target_id)) {
+//  if (Game.find_unit_by_id(diplomat_id) && Game.find_city_by_id(diplomat_target_id)) {
 //    dsend_packet_city_incite_inq(&aconnection, diplomat_target_id);
 //  }
 //}
@@ -1016,7 +1019,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = false;
 //
-//  if( (punit=find_unit_by_id(diplomat_id))
+//  if( (punit=Game.find_unit_by_id(diplomat_id))
 //      && (pcity=Game.find_city_by_id(diplomat_target_id))
 //      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
@@ -1049,13 +1052,13 @@ public class Dialogs{
 //
 //  diplomat_id=punit.id;
 //
-//  if((pcity=map_get_city(dest_tile))){
+//  if((pcity=Map.map_get_city(dest_tile))){
 //    /* Spy/Diplomat acting against a city */
 //
 //    diplomat_target_id=pcity.id;
 //    buf = util.my_snprintf(
 //		"Your %s has arrived at %s.\nWhat is your command?",
-//		unit_name(punit.type), pcity.name);
+//		Unittype_P.unit_name(punit.type), pcity.name);
 //
 //    if(!unit_flag(punit, F_SPY)){
 //      shl=popup_message_dialog(toplevel, "diplomatdialog", buf,
@@ -1205,7 +1208,7 @@ public class Dialogs{
 //			   caravan_keep_moving_callback, 0, 0,
 //			   null);
 //  
-//  if (!can_cities_trade(phomecity, pdestcity))
+//  if (!City.can_cities_trade(phomecity, pdestcity))
 //    XtSetSensitive(XtNameToWidget(caravan_dialog, "*button0"), false);
 //  
 //  if(!unit_can_help_build_wonder(punit, pdestcity))
@@ -1274,7 +1277,7 @@ public class Dialogs{
 //  }
 //
 //  if (client_data) {
-//    unit punit = find_unit_by_id (unit_to_use_to_pillage);
+//    unit punit = Game.find_unit_by_id (unit_to_use_to_pillage);
 //    if (punit) {
 //      request_new_unit_activity_targeted(punit, ACTIVITY_PILLAGE,
 //					 XTPOINTER_TO_INT(client_data));
@@ -1624,7 +1627,7 @@ public class Dialogs{
 //{
 //  int per_row = 5;
 //  int i, j, len, maxracelen, index;
-//  char maxracename[MAX_LEN_NAME];
+//  String maxracename;
 //  char namebuf[64];
 //  int space;
 //  XtWidgetGeometry geom;

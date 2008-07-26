@@ -386,7 +386,7 @@ public class Widget_core{
 //void sw_widget_destroy(sw_widget widget)
 //{
 //  assert(widget);
-//  widget_list_insert(&deferred_destroyed_widgets, widget);
+//  &deferred_destroyed_widgets.foo_list_insert(widget);
 //  parent_needs_paint(widget);
 //  // FIXME this is unsafe if
 //  // deferred_destroyed_widgets.foo_list_size() > 1

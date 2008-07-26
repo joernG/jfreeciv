@@ -205,7 +205,7 @@ public class Citydlg{
 //    if (pCityDlg.specs[0]
 //       && is_in_rect_area(Main.event.motion.x, Main.event.motion.y,
 //					pCityDlg.specs_area[0])) {
-//      city_change_specialist(pCityDlg.pCity, specialist_type.SP_ELVIS, SP_TAXMAN);
+//      city_change_specialist(pCityDlg.pCity, specialist_type.SP_ELVIS, specialist_type.SP_TAXMAN);
 //      return -1;
 //    }
 //
@@ -213,7 +213,7 @@ public class Citydlg{
 //    if (pCityDlg.specs[1]
 //       && is_in_rect_area(Main.event.motion.x, Main.event.motion.y,
 //					pCityDlg.specs_area[1])) {
-//      city_change_specialist(pCityDlg.pCity, SP_TAXMAN, SP_SCIENTIST);
+//      city_change_specialist(pCityDlg.pCity, specialist_type.SP_TAXMAN, specialist_type.SP_SCIENTIST);
 //      return -1;
 //    }
 //
@@ -221,7 +221,7 @@ public class Citydlg{
 //    if (pCityDlg.specs[2]
 //       && is_in_rect_area(Main.event.motion.x, Main.event.motion.y,
 //					pCityDlg.specs_area[2])) {
-//      city_change_specialist(pCityDlg.pCity, SP_SCIENTIST, specialist_type.SP_ELVIS);
+//      city_change_specialist(pCityDlg.pCity, specialist_type.SP_SCIENTIST, specialist_type.SP_ELVIS);
 //      return -1;
 //    }
 //    
@@ -1199,7 +1199,7 @@ public class Citydlg{
 //  if (pCity.is_building_unit) {
 //    name = get_unit_type(pCity.currently_building).name;
 //  } else {
-//    name = get_impr_name_ex(pCity, pCity.currently_building);
+//    name = City.get_impr_name_ex(pCity, pCity.currently_building);
 //  }
 //
 //  value = City.city_buy_cost(pCity);
@@ -1444,7 +1444,7 @@ public class Citydlg{
 //  id = MAX_ID - 3000 - pImpr.ID;
 //
 //  cBuf = util.my_snprintf( "Sell %s for %d gold?",
-//	      get_impr_name_ex(pCityDlg.pCity, id),
+//	      City.get_impr_name_ex(pCityDlg.pCity, id),
 //	      Improvement.impr_sell_gold(id));
 //
 //
@@ -1635,7 +1635,7 @@ public class Citydlg{
 //    *canvas_y = city_y * SCALLED_TILE_HEIGHT;
 //  }
 //
-//  if (!City.is_valid_city_coords(city_x, city_y)) {
+//  if (!City.City.is_valid_city_coords(city_x, city_y)) {
 //    assert(false);
 //    return false;
 //  }
@@ -1673,7 +1673,7 @@ public class Citydlg{
 //  util.freelog(Log.LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
-//  return City.is_valid_city_coords(*city_x, *city_y);
+//  return City.City.is_valid_city_coords(*city_x, *city_y);
 //}
 //#else
 //
@@ -1715,7 +1715,7 @@ public class Citydlg{
 //  util.freelog(Log.LOG_DEBUG, "get_citymap_cr(pos=(%d,%d))=(%d,%d)",
 //	  map_x, map_y, *pCol, *pRow);
 //  
-//  return City.is_valid_city_coords(*pCol, *pRow);
+//  return City.City.is_valid_city_coords(*pCol, *pRow);
 //}
 //#endif
 //
@@ -1871,8 +1871,8 @@ public class Citydlg{
 //  {
 //    for (city_y = 0; city_y<City_H.CITY_MAP_SIZE; city_y++)
 //    {
-//      if (City.is_valid_city_coords(city_x, city_y)
-//	&& city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
+//      if (City.City.is_valid_city_coords(city_x, city_y)
+//	&& City.city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
 //	&& tile_get_known(map_x, map_y)
 //	&& sdl_city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y))
 //      {
@@ -2271,7 +2271,7 @@ public class Citydlg{
 //  step = 0;
 //  dest.x = pCityWindow.size.x + 10;
 //
-//  for (i = 0; i < NUM_TRADEROUTES; i++) {
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //    if (pCity.trade[i]) {
 //      step += pCity.trade_value[i];
 //
@@ -2370,8 +2370,8 @@ public class Citydlg{
 //
 //  count = (pCity.ppl_happy[4] + pCity.ppl_content[4]
 //	   + pCity.ppl_unhappy[4] + pCity.ppl_angry[4]
-//	   + pCity.specialists[specialist_type.SP_ELVIS] + pCity.specialists[SP_SCIENTIST]
-//	   + pCity.specialists[SP_TAXMAN]);
+//	   + pCity.specialists[specialist_type.SP_ELVIS] + pCity.specialists[specialist_type.SP_SCIENTIST]
+//	   + pCity.specialists[specialist_type.SP_TAXMAN]);
 //
 //  if (count * pIcons.pMale_Happy.w > 180) {
 //    step = (180 - pIcons.pMale_Happy.w) / (count - 1);
@@ -2450,15 +2450,15 @@ public class Citydlg{
 //	}
 //      }
 //
-//      if (pCity.specialists[SP_TAXMAN]) {
-//	for (i = 0; i < pCity.specialists[SP_TAXMAN]; i++) {
+//      if (pCity.specialists[specialist_type.SP_TAXMAN]) {
+//	for (i = 0; i < pCity.specialists[specialist_type.SP_TAXMAN]; i++) {
 //	  SDL_BlitSurface(pIcons.pSpec_Tax, null, pCityWindow.dst, &dest);
 //	  dest.x += step;
 //	}
 //      }
 //
-//      if (pCity.specialists[SP_SCIENTIST]) {
-//	for (i = 0; i < pCity.specialists[SP_SCIENTIST]; i++) {
+//      if (pCity.specialists[specialist_type.SP_SCIENTIST]) {
+//	for (i = 0; i < pCity.specialists[specialist_type.SP_SCIENTIST]; i++) {
 //	  SDL_BlitSurface(pIcons.pSpec_Sci, null, pCityWindow.dst, &dest);
 //	  dest.x += step;
 //	}
@@ -2478,7 +2478,7 @@ public class Citydlg{
 //	pSurf = null;
 //	count = 0;
 //
-//	if (city_got_building(pCity, B_TEMPLE)) {
+//	if (City.city_got_building(pCity, B_TEMPLE)) {
 //	  pTmp1 =
 //	    ZoomSurface(GET_SURF(get_improvement_type(B_TEMPLE).sprite),
 //			0.5, 0.5, 1);
@@ -2488,7 +2488,7 @@ public class Citydlg{
 //	  pTmp1 = null;
 //	}
 //
-//	if (city_got_building(pCity, B_COLOSSEUM)) {
+//	if (City.city_got_building(pCity, B_COLOSSEUM)) {
 //	  pTmp2 =
 //	    ZoomSurface(GET_SURF(get_improvement_type(B_COLOSSEUM).sprite),
 //			0.5, 0.5, 1);
@@ -2500,7 +2500,7 @@ public class Citydlg{
 //	  pTmp2 = null;
 //	}
 //
-//	if (city_got_building(pCity, B_CATHEDRAL) ||
+//	if (City.city_got_building(pCity, B_CATHEDRAL) ||
 //	    city_affected_by_wonder(pCity, B_MICHELANGELO)) {
 //	  pTmp3 =
 //	    ZoomSurface(GET_SURF(get_improvement_type(B_CATHEDRAL).sprite),
@@ -2656,7 +2656,7 @@ public class Citydlg{
 //
 //  refresh_city_names(pCity);
 //
-//  if ((city_unhappy(pCity) || city_celebrating(pCity) || city_happy(pCity) ||
+//  if ((City.city_unhappy(pCity) || City.city_celebrating(pCity) || City.city_happy(pCity) ||
 //      cma_is_city_under_agent(pCity, null))
 //      ^ ((SDL_Client_Flags & CF_CITY_STATUS_SPECIAL) == CF_CITY_STATUS_SPECIAL)) {
 //    /* city status was changed : NORMAL <. DISORDER, HAPPY, CELEBR. */
@@ -3170,7 +3170,7 @@ public class Citydlg{
 //  }
 //
 //  /* food stock */
-//  if (city_got_building(pCity, B_GRANARY)
+//  if (City.city_got_building(pCity, B_GRANARY)
 //      || city_affected_by_wonder(pCity, B_PYRAMIDS)) {
 //    /* with granary */
 //    /* stocks label */
@@ -3499,8 +3499,8 @@ public class Citydlg{
 //  /* Draw Citizens */
 //  count = (pCity.ppl_happy[4] + pCity.ppl_content[4]
 //	   + pCity.ppl_unhappy[4] + pCity.ppl_angry[4]
-//	   + pCity.specialists[specialist_type.SP_ELVIS] + pCity.specialists[SP_SCIENTIST]
-//	   + pCity.specialists[SP_TAXMAN]);
+//	   + pCity.specialists[specialist_type.SP_ELVIS] + pCity.specialists[specialist_type.SP_SCIENTIST]
+//	   + pCity.specialists[specialist_type.SP_TAXMAN]);
 //
 //  pBuf = get_citizen_surface(CITIZEN_ELVIS, 0);
 //  if (count > 13) {
@@ -3564,13 +3564,13 @@ public class Citydlg{
 //    pCityDlg.specs[0] = true;
 //  }
 //
-//  if (pCity.specialists[SP_TAXMAN]) {
+//  if (pCity.specialists[specialist_type.SP_TAXMAN]) {
 //    pBuf = get_citizen_surface(CITIZEN_TAXMAN, 0);
 //    pCityDlg.specs_area[1].x = dest.x;
 //    pCityDlg.specs_area[1].y = dest.y;
 //    pCityDlg.specs_area[1].w = pBuf.w;
 //    pCityDlg.specs_area[1].h = pBuf.h;
-//    for (i = 0; i < pCity.specialists[SP_TAXMAN]; i++) {
+//    for (i = 0; i < pCity.specialists[specialist_type.SP_TAXMAN]; i++) {
 //      SDL_BlitSurface(pBuf, null, pWindow.dst, &dest);
 //      dest.x += step;
 //      pCityDlg.specs_area[1].w += step;
@@ -3579,13 +3579,13 @@ public class Citydlg{
 //    pCityDlg.specs[1] = true;
 //  }
 //
-//  if (pCity.specialists[SP_SCIENTIST]) {
+//  if (pCity.specialists[specialist_type.SP_SCIENTIST]) {
 //    pBuf = get_citizen_surface(CITIZEN_SCIENTIST, 0);
 //    pCityDlg.specs_area[2].x = dest.x;
 //    pCityDlg.specs_area[2].y = dest.y;
 //    pCityDlg.specs_area[2].w = pBuf.w;
 //    pCityDlg.specs_area[2].h = pBuf.h;
-//    for (i = 0; i < pCity.specialists[SP_SCIENTIST]; i++) {
+//    for (i = 0; i < pCity.specialists[specialist_type.SP_SCIENTIST]; i++) {
 //      SDL_BlitSurface(pBuf, null, pWindow.dst, &dest);
 //      dest.x += step;
 //      pCityDlg.specs_area[2].w += step;
@@ -3659,11 +3659,14 @@ public class Citydlg{
 //  pBuf = pLast = pAdd_Dock;
 //  
 //  /* allock new */
-//  built_impr_iterate(pCity, imp) {
+//	for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
+//	if((pCity).improvements[imp] == Improvement.I_NONE) {
+//		continue;
+//	}
 //
 //    pImpr = get_improvement_type(imp);
 //
-//    pStr = create_str16_from_char(get_impr_name_ex(pCity, imp), 12);
+//    pStr = create_str16_from_char(City.get_impr_name_ex(pCity, imp), 12);
 //    pStr.fgcol = *get_game_colorRGB(COLOR_STD_WHITE);
 //    pStr.bgcol.unused = 128;/* 50% transp */
 //
@@ -3695,7 +3698,7 @@ public class Citydlg{
 //      set_wflag(pBuf, WF_HIDDEN);
 //    }
 //
-//  } built_impr_iterate_end;
+//  } ;
 //
 //  if (count) {
 //    pCityDlg.pImprv.pEndWidgetList = pLast.prev;
@@ -3731,13 +3734,13 @@ public class Citydlg{
 //	      "City of %s (Population %s citizens)", pCity.name,
 //	      population_to_text(city_population(pCity)));
 //
-//  if (city_unhappy(pCity)) {
+//  if (City.city_unhappy(pCity)) {
 //    mystrlcat(cBuf, " - DISORDER", sizeof(cBuf));
 //  } else {
-//    if (city_celebrating(pCity)) {
+//    if (City.city_celebrating(pCity)) {
 //      mystrlcat(cBuf, " - celebrating", sizeof(cBuf));
 //    } else {
-//      if (city_happy(pCity)) {
+//      if (City.city_happy(pCity)) {
 //	mystrlcat(cBuf, " - happy", sizeof(cBuf));
 //      }
 //    }
@@ -3988,8 +3991,8 @@ public class Citydlg{
 //  }
 //
 //  /* ===================================================== */
-//  if ((city_unhappy(pCity) || city_celebrating(pCity)
-//       || city_happy(pCity))) {
+//  if ((City.city_unhappy(pCity) || City.city_celebrating(pCity)
+//       || City.city_happy(pCity))) {
 //    SDL_Client_Flags |= CF_CITY_STATUS_SPECIAL;
 //  }
 //  /* ===================================================== */
@@ -4084,7 +4087,7 @@ public class Citydlg{
 //{
 //
 //  city pCity_sup = Game.find_city_by_id(pUnit.homecity);
-//  city pCity_pre = map_get_city(pUnit.x, pUnit.y);
+//  city pCity_pre = Map.map_get_city(pUnit.x, pUnit.y);
 //
 //  if (pCityDlg && ((pCityDlg.pCity == pCity_sup)
 //		   || (pCityDlg.pCity == pCity_pre))) {

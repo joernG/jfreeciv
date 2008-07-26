@@ -126,10 +126,10 @@ public class Mem{
 //}
 //
 ///***************************************************************
-// Function used by mystrdup macro, strdup() replacement
+// Function used by  macro, strdup() replacement
 // No need to check return value.
 //***************************************************************/
-//char *real_mystrdup(final String str, 
+//char *real_(final String str, 
 //		    final String called_as, int line, final String file)
 //{
 //  char *dest = fc_real_malloc(str.length()+1, called_as, line, file);

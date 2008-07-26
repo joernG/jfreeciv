@@ -257,7 +257,7 @@ public class Helpdlg{
 //  char *bg="";
 //  char label[MAX_LEN_NAME+3];
 //  
-//  type = (tech==A_LAST) ? TECH_UNKNOWN : get_invention(Game.game.player_ptr, tech);
+//  type = (tech==Tech_H.A_LAST) ? TECH_UNKNOWN : get_invention(Game.game.player_ptr, tech);
 //  switch(type) {
 //    case TECH_UNKNOWN:
 //      bg=TREE_NODE_UNKNOWN_TECH_BG;
@@ -270,8 +270,8 @@ public class Helpdlg{
 //      break;
 //  }
 //  
-//  if(tech==A_LAST ||
-//     (advances[tech].req[0]==A_LAST && advances[tech].req[1]==A_LAST))  {
+//  if(tech==Tech_H.A_LAST ||
+//     (advances[tech].req[0]==Tech_H.A_LAST && advances[tech].req[1]==Tech_H.A_LAST))  {
 //    label = String.format( "Removed");
 //    bg=TREE_NODE_REMOVED_TECH_BG;
 //    l=XtVaCreateManagedWidget("treenode", commandWidgetClass, 
@@ -751,12 +751,12 @@ public class Helpdlg{
 //  create_help_page(HELP_IMPROVEMENT);
 //  
 //  if (which<Game.game.num_impr_types) {
-//    impr_type imp = &improvement_types[which];
+//    impr_type imp = &Improvement.improvement_types[which];
 //    sprintf(buf, "%d ", Improvement.impr_build_shield_cost(which));
 //    xaw_set_label(help_improvement_cost_data, buf);
 //    sprintf(buf, "%d ", imp.upkeep);
 //    xaw_set_label(help_improvement_upkeep_data, buf);
-//    if (imp.tech_req == A_LAST) {
+//    if (imp.tech_req == Tech_H.A_LAST) {
 //      xaw_set_label(help_improvement_req_data, "(Never)");
 //    } else {
 //      xaw_set_label(help_improvement_req_data,
@@ -768,7 +768,7 @@ public class Helpdlg{
 //    xaw_set_label(help_improvement_cost_data, "0 ");
 //    xaw_set_label(help_improvement_upkeep_data, "0 ");
 //    xaw_set_label(help_improvement_req_data, "(Never)");
-//    create_tech_tree(help_tech_tree, 0, A_LAST, 3);
+//    create_tech_tree(help_tech_tree, 0, Tech_H.A_LAST, 3);
 //  }
 //  set_title_topic(pitem);
 //  helptext_building(buf, sizeof(buf), which, pitem.text);
@@ -786,10 +786,10 @@ public class Helpdlg{
 //  create_help_page(HELP_WONDER);
 //
 //  if (which<Game.game.num_impr_types) {
-//    impr_type imp = &improvement_types[which];
+//    impr_type imp = &Improvement.improvement_types[which];
 //    sprintf(buf, "%d ", Improvement.impr_build_shield_cost(which));
 //    xaw_set_label(help_improvement_cost_data, buf);
-//    if (imp.tech_req == A_LAST) {
+//    if (imp.tech_req == Tech_H.A_LAST) {
 //      xaw_set_label(help_improvement_req_data, "(Never)");
 //    } else {
 //      xaw_set_label(help_improvement_req_data,
@@ -841,7 +841,7 @@ public class Helpdlg{
 //    sprintf(buf, "%d ", utype.vision_range);
 //    xaw_set_label(help_unit_visrange_data, buf);
 //    xaw_set_label(help_unit_upkeep_data, helptext_unit_upkeep_str(i));
-//    if(utype.tech_requirement==A_LAST) {
+//    if(utype.tech_requirement==Tech_H.A_LAST) {
 //      xaw_set_label(help_improvement_req_data, "(Never)");
 //    } else {
 //      xaw_set_label(help_improvement_req_data,
@@ -890,14 +890,14 @@ public class Helpdlg{
 //    create_tech_tree(help_tech_tree, 0, i, 3);
 //    helptext_tech(buf, i, pitem.text);
 //
-//    impr_type_iterate(j) {
-//      if(i==improvement_types[j].tech_req) 
+//    for (int j = 0; j < Game.game.num_impr_types; j++) {
+//      if(i==Improvement.improvement_types[j].tech_req) 
 //	sprintf(buf+buf.length(), "Allows %s.\n",
-//		improvement_types[j].name);
-//      if(i==improvement_types[j].obsolete_by)
+//		Improvement.improvement_types[j].name);
+//      if(i==Improvement.improvement_types[j].obsolete_by)
 //	sprintf(buf+buf.length(), "Obsoletes %s.\n",
-//		improvement_types[j].name);
-//    } impr_type_iterate_end;
+//		Improvement.improvement_types[j].name);
+//    } ;
 //
 //    unit_type_iterate(j) {
 //      if(i==get_unit_type(j).tech_requirement) 
@@ -948,7 +948,7 @@ public class Helpdlg{
 //  helptext_terrain(buf, i, pitem.text);
 //  XtVaSetValues(help_text, XtNstring, buf, null);
 //
-//  if (i < T_COUNT)
+//  if (i < Terrain_H.T_COUNT)
 //    {
 //      sprintf (buf, "%d/%d.%d",
 //	       ptype.movement_cost,
@@ -1018,7 +1018,7 @@ public class Helpdlg{
 //		       ptype.irrigation_time);
 //	    }
 //	}
-//      else if (ptype.irrigation_result != T_NONE)
+//      else if (ptype.irrigation_result != Terrain_H.T_NONE)
 //	{
 //	  sprintf (buf, "%s / %d",
 //		   get_tile_type(ptype.irrigation_result).terrain_name,
@@ -1036,7 +1036,7 @@ public class Helpdlg{
 //		       ptype.mining_time);
 //	    }
 //	}
-//      else if (ptype.mining_result != T_NONE)
+//      else if (ptype.mining_result != Terrain_H.T_NONE)
 //	{
 //	  sprintf (buf, "%s / %d",
 //		   get_tile_type(ptype.mining_result).terrain_name,
@@ -1044,7 +1044,7 @@ public class Helpdlg{
 //	}
 //      xaw_set_label (help_terrain_mining_result_time_data, buf);
 //
-//      if (ptype.transform_result != T_NONE)
+//      if (ptype.transform_result != Terrain_H.T_NONE)
 //	{
 //	  sprintf (buf, "%s / %d",
 //		   get_tile_type(ptype.transform_result).terrain_name,
@@ -1091,12 +1091,12 @@ public class Helpdlg{
 //  switch(pitem.type) {
 //  case HELP_IMPROVEMENT:
 //    i = find_improvement_by_name(top);
-//    if(i!=B_LAST && is_wonder(i)) i = B_LAST;
+//    if(i!=Improvement.B_LAST && Improvement.is_wonder(i)) i = Improvement.B_LAST;
 //    help_update_improvement(pitem, top, i);
 //    break;
 //  case HELP_WONDER:
 //    i = find_improvement_by_name(top);
-//    if(i!=B_LAST && !is_wonder(i)) i = B_LAST;
+//    if(i!=Improvement.B_LAST && !Improvement.is_wonder(i)) i = Improvement.B_LAST;
 //    help_update_wonder(pitem, top, i);
 //    break;
 //  case HELP_UNIT:

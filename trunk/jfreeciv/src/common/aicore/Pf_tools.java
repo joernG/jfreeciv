@@ -34,7 +34,7 @@ public class Pf_tools{
 ///* ===================== Move Cost Callbacks ========================= */
 //
 ///*************************************************************
-//  A cost function for SEA_MOVING.  Allows shore bombardment.
+//  A cost function for unit_move_type.SEA_MOVING.  Allows shore bombardment.
 //  Should be used in conjunction with a TB callback which 
 //  prohibits going through an enemy city/tile.
 //*************************************************************/
@@ -52,7 +52,7 @@ public class Pf_tools{
 //}
 //
 ///*************************************************************
-//  Unit_H.SINGLE_MOVE cost function for AIR_MOVING
+//  Unit_H.SINGLE_MOVE cost function for unit_move_type.AIR_MOVING
 //*************************************************************/
 //static int single_airmove(final tile ptile, enum direction8 dir,
 //			  final tile ptile1,
@@ -62,7 +62,7 @@ public class Pf_tools{
 //}
 //
 ///*************************************************************
-//  A cost function for SEA_MOVING.  Does not allow shore 
+//  A cost function for unit_move_type.SEA_MOVING.  Does not allow shore 
 //  bombardment.
 //*************************************************************/
 //static int seamove_no_bombard(final tile ptile, enum direction8 dir,
@@ -441,28 +441,28 @@ public class Pf_tools{
 //  pft_fill_unit_default_parameter(parameter, punit);
 //
 //  switch (punit.unit_type().move_type) {
-//  case LAND_MOVING:
+//  case unit_move_type.LAND_MOVING:
 //    if (unit_flag(punit, F_IGTER)) {
 //      parameter.get_MC = igter_move_unit;
 //    } else {
 //      parameter.get_MC = normal_move_unit;
 //    }
 //    break;
-//  case SEA_MOVING:
+//  case unit_move_type.SEA_MOVING:
 //    if (unit_flag(punit, F_NO_LAND_ATTACK)) {
 //      parameter.get_MC = seamove_no_bombard;
 //    } else {
 //      parameter.get_MC = seamove;
 //    }
 //    break;
-//  case AIR_MOVING:
+//  case unit_move_type.AIR_MOVING:
 //    parameter.get_MC = single_airmove;
 //    break;
 //  default:
 //    util.die("unknown move_type");
 //  }
 //
-//  if (punit.unit_type().move_type == LAND_MOVING 
+//  if (punit.unit_type().move_type == unit_move_type.LAND_MOVING 
 //      && !unit_flag(punit, F_IGZOC)) {
 //    parameter.get_zoc = is_my_zoc;
 //  } else {
@@ -489,11 +489,11 @@ public class Pf_tools{
 //  pft_fill_unit_default_parameter(parameter, punit);
 //
 //  switch (punit.unit_type().move_type) {
-//  case LAND_MOVING:
+//  case unit_move_type.LAND_MOVING:
 //    parameter.get_MC = land_overlap_move;
 //    parameter.get_TB = dont_cross_ocean;
 //    break;
-//  case SEA_MOVING:
+//  case unit_move_type.SEA_MOVING:
 //    parameter.get_MC = sea_overlap_move;
 //    break;
 //  default:
@@ -519,17 +519,17 @@ public class Pf_tools{
 //  pft_fill_unit_default_parameter(parameter, punit);
 //
 //  switch (punit.unit_type().move_type) {
-//  case LAND_MOVING:
+//  case unit_move_type.LAND_MOVING:
 //    parameter.get_MC = land_attack_move;
 //    break;
-//  case SEA_MOVING:
+//  case unit_move_type.SEA_MOVING:
 //    parameter.get_MC = sea_attack_move;
 //    break;
 //  default:
 //    util.die("Unsupported move_type");
 //  }
 //
-//  if (punit.unit_type().move_type == LAND_MOVING 
+//  if (punit.unit_type().move_type == unit_move_type.LAND_MOVING 
 //      && !unit_flag(punit, F_IGZOC)) {
 //    parameter.get_zoc = is_my_zoc;
 //  } else {
@@ -549,7 +549,7 @@ public class Pf_tools{
 //  parameter.turn_mode = TM_CAPPED;
 //  if (is_air_unit(punit) || is_heli_unit(punit)) {
 //    parameter.unknown_MC = Unit_H.SINGLE_MOVE;
-//  } else if (is_sailing_unit(punit)) {
+//  } else if (Unit.is_sailing_unit(punit)) {
 //    parameter.unknown_MC = 2 * Unit_H.SINGLE_MOVE;
 //  } else {
 //    assert(is_ground_unit(punit));

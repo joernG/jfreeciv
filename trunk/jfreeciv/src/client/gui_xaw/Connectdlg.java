@@ -35,7 +35,7 @@ public class Connectdlg{
 //
 //#include "fcintl.h"
 //#include "log.h"
-//#include "mem.h"     /* mystrdup() */
+//#include "mem.h"     /* () */
 //#include "support.h"
 //#include "version.h"
 //
@@ -501,7 +501,7 @@ public class Connectdlg{
 //    server_list = get_lan_server_list();
 //    if (server_list == null) {
 //      if (num_lanservers_timer == 0) {
-//        *list = mystrdup(" ");;
+//        *list = (" ");;
 //        return 0;
 //      } else {
 //        return -1;
@@ -520,7 +520,7 @@ public class Connectdlg{
 //		pserver.host, pserver.port, pserver.version,
 //		_(pserver.state), pserver.nplayers, pserver.message);
 //    if (*list) free(*list);
-//    *list=mystrdup(line);
+//    *list=(line);
 //    list++;
 //  } }
 //

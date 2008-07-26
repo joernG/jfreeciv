@@ -1,5 +1,7 @@
 package server;
 
+import common.Game;
+
 public class Score{
 ///**********************************************************************
 // Freeciv - Copyright (C) 2003 - The Freeciv Project
@@ -414,8 +416,8 @@ public class Score{
 //    pplayer.score.content += pcity.ppl_content[4];
 //    pplayer.score.unhappy += pcity.ppl_unhappy[4];
 //    pplayer.score.angry += pcity.ppl_angry[4];
-//    pplayer.score.taxmen += pcity.specialists[SP_TAXMAN];
-//    pplayer.score.scientists += pcity.specialists[SP_SCIENTIST];
+//    pplayer.score.taxmen += pcity.specialists[specialist_type.SP_TAXMAN];
+//    pplayer.score.scientists += pcity.specialists[specialist_type.SP_SCIENTIST];
 //    pplayer.score.elvis += pcity.specialists[specialist_type.SP_ELVIS];
 //    pplayer.score.population += city_population(pcity);
 //    pplayer.score.cities++;
@@ -424,7 +426,7 @@ public class Score{
 //    pplayer.score.bnp += pcity.trade_prod;
 //    pplayer.score.mfg += pcity.shield_surplus;
 //
-//    bonus = CLIP(0, get_city_bonus(pcity, EFT_SCIENCE_BONUS), 100);
+//    bonus = CLIP(0, Effects.get_city_bonus(pcity, EFT_SCIENCE_BONUS), 100);
 //    pplayer.score.literacy += (city_population(pcity) * bonus) / 100;
 //  } }
 //
@@ -452,13 +454,13 @@ public class Score{
 //    }
 //  } unit_list_iterate_end
 //
-//  impr_type_iterate(i) {
-//    if (is_wonder(i)
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
+//    if (Improvement.is_wonder(i)
 //	&& (pcity = Game.find_city_by_id(Game.game.global_wonders[i]))
 //	&& Player_P.player_owns_city(pplayer, pcity)) {
 //      pplayer.score.wonders++;
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  /* How much should a spaceship be worth?
 //   * This gives 100 points per 10,000 citizens. */

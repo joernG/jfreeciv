@@ -55,7 +55,7 @@ public class Sha{
 //**************************************************************************/
 //static void sha_unit_change(int id)
 //{
-//  unit punit = find_unit_by_id(id);
+//  unit punit = Game.find_unit_by_id(id);
 //  unit pold_unit = unit_list_find(&previous_units, id);
 //
 //  util.freelog(Log.LOG_DEBUG, "sha got unit: %d", id);
@@ -69,14 +69,14 @@ public class Sha{
 //**************************************************************************/
 //static void sha_unit_new(int id)
 //{
-//  unit punit = find_unit_by_id(id);
+//  unit punit = Game.find_unit_by_id(id);
 //  unit pold_unit = create_unit_virtual(get_player(punit.owner),
 //					       null, 0, 0);
 //
 //  util.freelog(Log.LOG_DEBUG, "sha got unit: %d", id);
 //
 //  *pold_unit = *punit;
-//  unit_list_insert(&previous_units, pold_unit);
+//  &previous_units.foo_list_insert(pold_unit);
 //}
 //
 ///**************************************************************************
@@ -102,7 +102,7 @@ public class Sha{
 //  previous_tiles = fc_malloc(Map_H.MAX_MAP_INDEX * sizeof(*previous_tiles));
 //  memset(previous_tiles, 0, Map_H.MAX_MAP_INDEX * sizeof(*previous_tiles));
 //
-//  unit_list_init(&previous_units);
+//  previous_units.foo_list_init();
 //
 //  memset(&self, 0, sizeof(self));
 //  self.name = String.format( "Simple Historian");

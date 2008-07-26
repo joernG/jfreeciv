@@ -1,5 +1,7 @@
 package server;
 
+import common.game.Game_H;
+
 public class Settings{
 
 // Freeciv - Copyright (C) 1996-2004 - The Freeciv Project
@@ -781,7 +783,7 @@ public class Settings{
 //	     "many cities and the player's capital is captured. If " +
 //	     "this option is set to the maximum value, civil wars are " +
 //	     "turned off altogether."), null, 
-//	  GAME_MIN_CIVILWARSIZE, GAME_MAX_CIVILWARSIZE, 
+//	  GAME_MIN_CIVILWARSIZE, Game_H.GAME_MAX_CIVILWARSIZE, 
 //	  GAME_DEFAULT_CIVILWARSIZE)
 //
 //  GEN_INT("contactturns", Game.game.contactturns,

@@ -3,30 +3,27 @@ package server;
 import static common.City.is_city_option_set;
 import static common.Combat.can_unit_attack_all_at_tile;
 import static common.Combat.get_defender;
-import static common.Game.find_unit_by_id;
-import static common.Map.map_get_city;
 import static common.Map.normalize_map_pos;
 import static common.Player_P.ai_handicap;
 import static common.Player_P.can_player_see_unit;
-import static common.Unit.is_enemy_unit_tile;
 import static common.Unit.is_military_unit;
 import static common.Unit.set_unit_activity;
 import static common.Unit.unit_list_find;
 import static common.Unittype_P.get_unit_name;
 import static common.Unittype_P.unit_flag;
-import static common.Unittype_P.unit_name;
 import static common.city.City_H.CITYOPT_AUTOATTACK_BITS;
 import static common.map.Map_H.map_pos_to_index;
 import static common.player.Player_H.H_TARGETS;
 import static server.Gotohand.calculate_move_cost;
 import static server.Plrhand.notify_player_ex;
-import static server.Unithand.handle_unit_activity_request;
 import port.util;
 import utility.Log;
 import utility.Speclists;
 
+import common.Game;
 import common.Map;
 import common.Unit;
+import common.Unittype_P;
 import common.event_type;
 import common.city.city;
 import common.city.city_options;
@@ -73,7 +70,7 @@ public class Autoattack {
 
 		util.freelog(Log.LOG_DEBUG, "doing autoattack for %s (%d/%d) in %s," +
 				" range %d(%d), city_options %d",
-				unit_name(punit.type), punit.tile.x, punit.tile.y,
+				Unittype_P.unit_name(punit.type), punit.tile.x, punit.tile.y,
 				pcity.name,
 				range, punit.moves_left, pcity.city_options);
 
@@ -100,12 +97,12 @@ public class Autoattack {
 			if (Map.same_pos(punit.tile, ptile))
 				continue;
 
-			if (null!=map_get_city(ptile)) continue;
+			if (null!=Map.map_get_city(ptile)) continue;
 			/* don't attack enemy cities (or our own ;-) --dwp */
 
 			targets = (ptile.units);
 			if (targets.foo_list_size() == 0) continue;
-			if (null==is_enemy_unit_tile(ptile, pplayer))
+			if (null==Unit.is_enemy_unit_tile(ptile, pplayer))
 				continue;
 
 			util.freelog(Log.LOG_DEBUG,  "found enemy unit/stack at %d,%d",
@@ -114,7 +111,7 @@ public class Autoattack {
 			if (null==enemy) {
 				continue;
 			}
-			util.freelog(Log.LOG_DEBUG,  "defender is %s", unit_name(enemy.type));
+			util.freelog(Log.LOG_DEBUG,  "defender is %s", Unittype_P.unit_name(enemy.type));
 
 			if (!is_city_option_set(pcity, city_options.CITYO_ATT_LAND.ordinal()
 					+ enemy.unit_type().move_type.ordinal())) {
@@ -139,7 +136,7 @@ public class Autoattack {
 			 */
 			if (ai_handicap(pplayer, H_TARGETS)
 					&& !can_player_see_unit(pplayer, enemy)) {
-				util.freelog(Log.LOG_DEBUG, "can't see %s at (%d,%d)", unit_name(enemy.type),
+				util.freelog(Log.LOG_DEBUG, "can't see %s at (%d,%d)", Unittype_P.unit_name(enemy.type),
 						ptile.x, ptile.y);
 				continue;
 			}
@@ -151,7 +148,7 @@ public class Autoattack {
 			 */
 			if (!can_unit_attack_all_at_tile(punit, ptile)) {
 				util.freelog(Log.LOG_DEBUG, "%s at (%d,%d) cannot attack at (%d,%d)",
-						unit_name(punit.type), punit.tile.x, punit.tile.y,
+						Unittype_P.unit_name(punit.type), punit.tile.x, punit.tile.y,
 						ptile.x, ptile.y);
 				continue;
 			}
@@ -179,10 +176,10 @@ public class Autoattack {
 			Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 					("Game: Auto-Attack: %s's %s found a too " +
 					"tough enemy (%s)"),
-					pcity.name, unit_name(punit.type),
-					unit_name(enemy.type));
+					pcity.name, Unittype_P.unit_name(punit.type),
+					Unittype_P.unit_name(enemy.type));
 			punit.ai.control=false;
-			handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+			Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 			return null;
 		}
 
@@ -206,8 +203,8 @@ public class Autoattack {
 
 		notify_player_ex(pplayer, enemy.tile, event_type.E_NOEVENT,
 				"Game: Auto-Attack: %s's %s attacking %s's %s",
-				pcity.name, unit_name(punit.type),
-				enemy.unit_owner().name, unit_name(enemy.type));
+				pcity.name, Unittype_P.unit_name(punit.type),
+				enemy.unit_owner().name, Unittype_P.unit_name(enemy.type));
 
 		set_unit_activity(punit, unit_activity.ACTIVITY_GOTO);
 		punit.goto_tile = enemy.tile;
@@ -215,7 +212,7 @@ public class Autoattack {
 		Unittools.send_unit_info(null, punit);
 		Gotohand.do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
 
-		punit = find_unit_by_id(id);
+		punit = Game.find_unit_by_id(id);
 
 		if (punit!=null) {
 			set_unit_activity(punit, unit_activity.ACTIVITY_GOTO);
@@ -225,7 +222,7 @@ public class Autoattack {
 			Gotohand.do_unit_goto(punit, goto_move_restriction.GOTO_MOVE_ANY, false);
 
 			if (null!=unit_list_find(pcity.tile.units, id)) {
-				handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+				Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 			}
 		}
 

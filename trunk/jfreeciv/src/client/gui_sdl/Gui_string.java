@@ -600,7 +600,7 @@ public class Gui_string{
 //      util.die(("Couldn't find stdfont.ttf file. Please link/copy/move any" +
 //            "unicode ttf font to data dir as stdfont.ttf"));
 //    }
-//    pFont_with_FullPath = mystrdup(path);
+//    pFont_with_FullPath = (path);
 //    assert(pFont_with_FullPath != null);
 //  }
 //  

@@ -60,7 +60,7 @@ public class Repodlgs{
 //extern HINSTANCE freecivhinst;
 //extern HWND root_window;
 //extern struct connection aconnection;               
-//int economy_improvement_type[B_LAST];   
+//int economy_improvement_type[Improvement.B_LAST];   
 //int activeunits_type[unittype.U_LAST]; 
 //
 //public static final int ID_OPTIONS_BASE = 1000;
@@ -155,8 +155,8 @@ public class Repodlgs{
 //  tech_type_iterate(tech_id) {
 //    if (tech_is_available(Game.game.player_ptr, tech_id)
 //        && get_invention(Game.game.player_ptr, tech_id) != TECH_KNOWN
-//        && advances[tech_id].req[0] != A_LAST
-//	&& advances[tech_id].req[1] != A_LAST
+//        && advances[tech_id].req[0] != Tech_H.A_LAST
+//	&& advances[tech_id].req[1] != Tech_H.A_LAST
 //        && (num_unknown_techs_for_goal(Game.game.player_ptr, tech_id) < 11
 //	    || tech_id == Game.game.player_ptr.ai.tech_goal)) {
 //      id = ComboBox_AddString(GetDlgItem(science_dlg,ID_SCIENCE_GOAL),
@@ -328,7 +328,7 @@ public class Repodlgs{
 //  char   buf3 [64];     
 //  char *row[4];   
 //  char economy_total[48];
-//  struct improvement_entry entries[B_LAST];
+//  struct improvement_entry entries[Improvement.B_LAST];
 //
 //  if(is_report_dialogs_frozen()) return;      
 //  if(!economy_dlg) return;
@@ -641,7 +641,7 @@ public class Repodlgs{
 //      if ((unitarray[i].active_count > 0) || (unitarray[i].building_count > 0)) 
 //{
 //        can = (can_upgrade_unittype(Game.game.player_ptr, i) != -1);
-//        my_snprintf(buf[0], sizeof(buf[0]), "%s", unit_name(i));
+//        my_snprintf(buf[0], sizeof(buf[0]), "%s", Unittype_P.unit_name(i));
 //        my_snprintf(buf[1], sizeof(buf[1]), "%c", can ? '*': '-');
 //        my_snprintf(buf[2], sizeof(buf[2]), "%3d", unitarray[i].building_count);
 //        my_snprintf(buf[3], sizeof(buf[3]), "%3d", unitarray[i].active_count);

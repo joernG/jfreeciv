@@ -99,7 +99,7 @@ public class Messagewin{
 //	
 //    int x = pMsg.x;
 //    int y = pMsg.y;
-//    city pCity = map_get_city(x, y);
+//    city pCity = Map.map_get_city(x, y);
 //
 //    if (center_when_popup_city) {
 //      center_tile_mapcanvas(x, y);

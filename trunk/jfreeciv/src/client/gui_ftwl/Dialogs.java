@@ -117,7 +117,7 @@ public class Dialogs{
 //					   void *data)
 //{
 //  int row = sw_list_get_selected_row(nations_list);
-//  nation_type nation = get_nation_by_idx(row);
+//  nation_type nation = Nation.get_nation_by_idx(row);
 //  int leader_count, i;
 //  leader leaders = get_nation_leaders(row, &leader_count);
 //
@@ -217,7 +217,7 @@ public class Dialogs{
 //  sw_list_set_item(leaders_sex_list, 0, 1, label);
 //
 //  for (i = 0; i < Game.game.playable_nation_count; i++) {
-//    nation_type nation = get_nation_by_idx(i);
+//    nation_type nation = Nation.get_nation_by_idx(i);
 //
 //    button = sw_button_create(nations_window, null,
 //			      null, nation.flag_sprite, null);

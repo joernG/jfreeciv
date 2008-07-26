@@ -249,7 +249,7 @@ public class Helpdlg{
 //    putframe(pTmp, 0,0, pTmp.w - 1, pTmp.h - 1, 0xFF000000);
 //    
 //    h = 0;
-//    impr_type_iterate(type)
+//    for (int type = 0; type < Game.game.num_impr_types; type++) {
 //    {
 //      pBack = SDL_DisplayFormatAlpha(pTmp);
 //      copy_chars_to_string16(pStr, Improvement.get_improvement_name(type));
@@ -278,7 +278,7 @@ public class Helpdlg{
 //        set_wflag(pBuf, WF_HIDDEN);
 //      }
 //
-//    } impr_type_iterate_end;
+//    } ;
 //    
 //    FREESURFACE(pTmp);
 //    
@@ -330,7 +330,7 @@ public class Helpdlg{
 //  
 //  pBuf= create_iconlabel_from_chars(
 //	  ZoomSurface(GET_SURF(pImpr_type.sprite), 3.0, 3.0, 1),
-//	  pWindow.dst, get_impr_name_ex(null, impr),
+//	  pWindow.dst, City.get_impr_name_ex(null, impr),
 //					      24, WF_FREE_THEME);
 //
 //  pBuf.ID = ID_LABEL;
@@ -345,7 +345,7 @@ public class Helpdlg{
 //    pBuf.ID = ID_LABEL;
 //    DownAdd(pBuf, pDock);
 //    pDock = pBuf;
-//    if (!is_wonder(impr))
+//    if (!Improvement.is_wonder(impr))
 //    {
 //      sprintf(buffer, "%s %d", N"Upkeep:", pImpr_type.upkeep);
 //      pBuf = create_iconlabel_from_chars(null,
@@ -361,7 +361,7 @@ public class Helpdlg{
 //  DownAdd(pBuf, pDock);
 //  pDock = pBuf;
 //  
-//  if(pImpr_type.tech_req==A_LAST || pImpr_type.tech_req==A_NONE)
+//  if(pImpr_type.tech_req==Tech_H.A_LAST || pImpr_type.tech_req==A_NONE)
 //  {
 //    pBuf = create_iconlabel_from_chars(null,
 //		    pWindow.dst, "None", 12, 0);
@@ -385,7 +385,7 @@ public class Helpdlg{
 //  DownAdd(pBuf, pDock);
 //  pDock = pBuf;
 //  
-//  if(pImpr_type.obsolete_by==A_LAST || pImpr_type.obsolete_by==A_NONE)
+//  if(pImpr_type.obsolete_by==Tech_H.A_LAST || pImpr_type.obsolete_by==A_NONE)
 //  {
 //    pBuf = create_iconlabel_from_chars(null,
 //		    pWindow.dst, "None", 12, 0);
@@ -470,7 +470,7 @@ public class Helpdlg{
 //    pBuf = pBuf.prev;
 //    pBuf.size.x = pWindow.size.x + start_x;
 //    pBuf.size.y = start_y;
-//    if (!is_wonder(impr))
+//    if (!Improvement.is_wonder(impr))
 //    {
 //      pBuf = pBuf.prev;
 //      pBuf.size.x = pBuf.next.size.x + pBuf.next.size.w + 20;
@@ -752,7 +752,7 @@ public class Helpdlg{
 //  DownAdd(pBuf, pDock);
 //  pDock = pBuf;
 //  
-//  if(pUnit.tech_requirement==A_LAST || pUnit.tech_requirement==A_NONE)
+//  if(pUnit.tech_requirement==Tech_H.A_LAST || pUnit.tech_requirement==A_NONE)
 //  {
 //    pBuf = create_iconlabel_from_chars(null,
 //		    pWindow.dst, "None", 12, 0);
@@ -1080,14 +1080,14 @@ public class Helpdlg{
 //  
 //  
 //  imp_count = 0;
-//  impr_type_iterate(imp) {
+//  for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
 //    impr_type pImpr = get_improvement_type(imp);
 //    if (pImpr.tech_req == tech) {
 //      pBuf = create_iconlabel_from_chars(GET_SURF(pImpr.sprite),
 //	      pWindow.dst, Improvement.get_improvement_name(imp), 14,
 //	      WF_DRAW_THEME_TRANSPARENT|WF_SELLECT_WITHOUT_BAR);
 //      set_wstate(pBuf, FC_WS_NORMAL);
-//      if (is_wonder(imp))
+//      if (Improvement.is_wonder(imp))
 //      {
 //	pBuf.string16.fgcol = *get_game_colorRGB(COLOR_STD_CITY_LUX);
 //      }
@@ -1097,7 +1097,7 @@ public class Helpdlg{
 //      pDock = pBuf;
 //      imp_count++;
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //  
 //  unit_count = 0;
 //  unit_type_iterate(un) {

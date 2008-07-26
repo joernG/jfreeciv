@@ -58,8 +58,8 @@ public class Stdinhand{
 ///* Import */
 //#include "stdinhand_info.h"
 //
-//static enum cmdlevel_id default_access_level = ALLOW_INFO;
-//static enum cmdlevel_id   first_access_level = ALLOW_CTRL;
+//static enum cmdlevel_id default_access_level = cmdlevel_id.ALLOW_INFO;
+//static enum cmdlevel_id   first_access_level = cmdlevel_id.ALLOW_CTRL;
 //
 //static boolean cut_client_connection(connection caller, char *name,
 //                                  boolean check);
@@ -139,7 +139,7 @@ public class Stdinhand{
 //  If accept_ambiguity is true, return the first command in the
 //  enum list which matches, else return CMD_AMBIGOUS on ambiguity.
 //  (This is a trick to allow ambiguity to be handled in a flexible way
-//  without importing notify_player() messages inside this routine - rp)
+//  without importing Plrhand.notify_player() messages inside this routine - rp)
 //**************************************************************************/
 //static enum command_id command_named(final String token, boolean accept_ambiguity)
 //{
@@ -294,7 +294,7 @@ public class Stdinhand{
 //  if (!caller) {
 //    return false;  /* on the console, everything is allowed */
 //  }
-//  return (caller.access_level == ALLOW_NONE);
+//  return (caller.access_level == cmdlevel_id.ALLOW_NONE);
 //}
 //
 ///**************************************************************************
@@ -308,7 +308,7 @@ public class Stdinhand{
 //    return true;  /* on the console, everything is allowed */
 //  } else {
 //    int level = caller.access_level;
-//    return ((level == ALLOW_HACK)
+//    return ((level == cmdlevel_id.ALLOW_HACK)
 //	    || (level >= access_level(CMD_SET) 
 //                && sset_is_to_client(option_idx)));
 //  }
@@ -788,7 +788,7 @@ public class Stdinhand{
 //    cancel_all_meetings(pplayer);
 //    /* The following is sometimes necessary to avoid using
 //       uninitialized data... */
-//    if (Srv_main.server_state == RUN_GAME_STATE)
+//    if (Srv_main.server_state == server_states.RUN_GAME_STATE)
 //      assess_danger_player(pplayer);
 //  } else {
 //    cmd_reply(CMD_AITOGGLE, caller, C_OK,
@@ -803,7 +803,7 @@ public class Stdinhand{
 //    cancel_all_meetings(pplayer);
 //  }
 //
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    Plrhand.send_player_info(pplayer, null);
 //    Gamelog.gamelog(EGamelog.GAMELOG_PLAYER, pplayer);
 //  }
@@ -1224,7 +1224,7 @@ public class Stdinhand{
 //
 //  /* a level name was supplied; set the level */
 //
-//  if ((level = cmdlevel_named(arg_level)) == ALLOW_UNRECOGNIZED) {
+//  if ((level = cmdlevel_named(arg_level)) == cmdlevel_id.ALLOW_UNRECOGNIZED) {
 //    cmd_reply(CMD_CMDLEVEL, caller, C_SYNTAX,
 //	      ("Error: command access level must be one of" +
 //		" 'none', 'info', 'ctrl', or 'hack'."));
@@ -1677,7 +1677,7 @@ public class Stdinhand{
 //  struct packet_options_settable packet;
 //  int i, s = 0;
 //
-//  if (dest.access_level == ALLOW_NONE
+//  if (dest.access_level == cmdlevel_id.ALLOW_NONE
 //      || (which == 1 && Srv_main.server_state > server_states.PRE_GAME_STATE)) {
 //    report_server_options(&dest.self, which);
 //    return;
@@ -1691,7 +1691,7 @@ public class Stdinhand{
 //      continue;
 //    }
 //    if (settings[i].to_client == SSET_SERVER_ONLY
-//	&& dest.access_level != ALLOW_HACK) {
+//	&& dest.access_level != cmdlevel_id.ALLOW_HACK) {
 //      continue;
 //    }
 //    s++;
@@ -1713,7 +1713,7 @@ public class Stdinhand{
 //      continue;
 //    }
 //    if (settings[i].to_client == SSET_SERVER_ONLY
-//	&& dest.access_level != ALLOW_HACK) {
+//	&& dest.access_level != cmdlevel_id.ALLOW_HACK) {
 //      continue;
 //    }
 //    memset(&packet, 0, sizeof(packet));
@@ -2230,7 +2230,7 @@ public class Stdinhand{
 //			"<player> | city <x> <y> | units <x> <y> | " +
 //			"unit <id>>.");
 //
-//  if (Srv_main.server_state != RUN_GAME_STATE) {
+//  if (Srv_main.server_state != server_states.RUN_GAME_STATE) {
 //    cmd_reply(CMD_DEBUG, caller, C_SYNTAX,
 //              "Can only use this command once Game.game has begun.");
 //    return false;
@@ -2319,11 +2319,11 @@ public class Stdinhand{
 //      if (punit.debug) {
 //        punit.debug = false;
 //        cmd_reply(CMD_DEBUG, caller, C_OK, "%s's %s no longer debugged.",
-//                  punit.unit_owner().name, unit_name(punit.type));
+//                  punit.unit_owner().name, Unittype_P.unit_name(punit.type));
 //      } else {
 //        punit.debug = true;
 //        UNIT_LOG(Log.LOG_NORMAL, punit, "%s's %s debugged.",
-//                 punit.unit_owner().name, unit_name(punit.type));
+//                 punit.unit_owner().name, Unittype_P.unit_name(punit.type));
 //      }
 //    } }
 //  } else if (ntokens > 0 && strcmp(arg[0], "unit") == 0) {
@@ -2338,18 +2338,18 @@ public class Stdinhand{
 //      cmd_reply(CMD_DEBUG, caller, C_SYNTAX, "Value 2 must be integer.");
 //      goto cleanup;
 //    }
-//    if (!(punit = find_unit_by_id(id))) {
+//    if (!(punit = Game.find_unit_by_id(id))) {
 //      cmd_reply(CMD_DEBUG, caller, C_SYNTAX, "Unit %d does not exist.", id);
 //      goto cleanup;
 //    }
 //    if (punit.debug) {
 //      punit.debug = false;
 //      cmd_reply(CMD_DEBUG, caller, C_OK, "%s's %s no longer debugged.",
-//                punit.unit_owner().name, unit_name(punit.type));
+//                punit.unit_owner().name, Unittype_P.unit_name(punit.type));
 //    } else {
 //      punit.debug = true;
 //      UNIT_LOG(Log.LOG_NORMAL, punit, "%s's %s debugged.",
-//               punit.unit_owner().name, unit_name(punit.type));
+//               punit.unit_owner().name, Unittype_P.unit_name(punit.type));
 //    }
 //  } else {
 //    cmd_reply(CMD_DEBUG, caller, C_SYNTAX, usage);
@@ -2503,10 +2503,10 @@ public class Stdinhand{
 //    send_server_info_to_metaserver(META_INFO);
 //    /* 
 //     * send any modified Game.game parameters to the clients -- if sent
-//     * before RUN_GAME_STATE, triggers a popdown_races_dialog() call
+//     * before server_states.RUN_GAME_STATE, triggers a popdown_races_dialog() call
 //     * in client/packhand.c#handle_game_info() 
 //     */
-//    if (Srv_main.server_state == RUN_GAME_STATE) {
+//    if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //      Gamehand.send_game_info(null);
 //    }
 //  }
@@ -2604,7 +2604,7 @@ public class Stdinhand{
 //
 ///**************************************************************************
 // Observe another player. If we were already attached, detach 
-// (see detach_command()). The console and those with ALLOW_HACK can
+// (see detach_command()). The console and those with cmdlevel_id.ALLOW_HACK can
 // use the two-argument command and force others to observe.
 //**************************************************************************/
 //static boolean observe_command(connection caller, char *str, boolean check)
@@ -2631,7 +2631,7 @@ public class Stdinhand{
 //    goto end;
 //  } 
 //
-//  if (ntokens == 2 && (caller && caller.access_level != ALLOW_HACK)) {
+//  if (ntokens == 2 && (caller && caller.access_level != cmdlevel_id.ALLOW_HACK)) {
 //    cmd_reply(CMD_OBSERVE, caller, C_SYNTAX,
 //              "Usage: observe [player-name]");
 //    goto end;
@@ -2686,7 +2686,7 @@ public class Stdinhand{
 //
 //      pplayer = &Game.game.players[Game.game.nplayers];
 //      Plrhand.server_player_init(pplayer, 
-//                         (Srv_main.server_state == RUN_GAME_STATE) || !Game.game.is_new_game);
+//                         (Srv_main.server_state == server_states.RUN_GAME_STATE) || !Game.game.is_new_game);
 //      pplayer.name = OBSERVER_NAME;
 //      pplayer.username = Player_H.ANON_USER_NAME;
 //
@@ -2698,7 +2698,7 @@ public class Stdinhand{
 //      pplayer.is_alive = false;
 //      pplayer.was_created = false;
 //
-//      if ((Srv_main.server_state == RUN_GAME_STATE) || !Game.game.is_new_game) {
+//      if ((Srv_main.server_state == server_states.RUN_GAME_STATE) || !Game.game.is_new_game) {
 //        pplayer.nation = OBSERVER_NATION;
 //        Plrhand.init_tech(pplayer);
 //	Plrhand.give_initial_techs(pplayer);
@@ -2746,7 +2746,7 @@ public class Stdinhand{
 //  }
 //
 //  /* if we want to switch players, reset the client */
-//  if (pconn.player && Srv_main.server_state == RUN_GAME_STATE) {
+//  if (pconn.player && Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //    send_conn_info(&Game.game.est_connections,  &pconn.self);
 //  }
@@ -2777,7 +2777,7 @@ public class Stdinhand{
 //  attach_connection_to_player(pconn, pplayer);
 //  send_conn_info(&pconn.self, &Game.game.est_connections);
 //
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    send_packet_freeze_hint(pconn);
 //    send_rulesets(&pconn.self);
 //    send_all_info(&pconn.self);
@@ -2832,7 +2832,7 @@ public class Stdinhand{
 //    goto end;
 //  }
 //
-//  if (caller && caller.access_level != ALLOW_HACK && ntokens != 1) {
+//  if (caller && caller.access_level != cmdlevel_id.ALLOW_HACK && ntokens != 1) {
 //    cmd_reply(CMD_TAKE, caller, C_SYNTAX, "Usage: take <player-name>");
 //    goto end;
 //  }
@@ -2889,7 +2889,7 @@ public class Stdinhand{
 //  }
 //
 //  /* if we want to switch players, reset the client if the Game.game is running */
-//  if (pconn.player && Srv_main.server_state == RUN_GAME_STATE) {
+//  if (pconn.player && Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //    send_player_info_c(null, &pconn.self);
 //    send_conn_info(&Game.game.est_connections,  &pconn.self);
@@ -2899,7 +2899,7 @@ public class Stdinhand{
 //   * forcibly detach the user from the player. */
 //  for (conn aconn : pplayer.connections.data) {
 //    if (!aconn.observer) {
-//      if (Srv_main.server_state == RUN_GAME_STATE) {
+//      if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //        send_game_state(&aconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //      }
 //      Plrhand.notify_conn(&aconn.self, "being detached from %s.", pplayer.name);
@@ -2938,7 +2938,7 @@ public class Stdinhand{
 //    pplayer.name = pconn.username;
 //  }
 //
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    send_packet_freeze_hint(pconn);
 //    send_rulesets(&pconn.self);
 //    send_all_info(&pconn.self);
@@ -2955,7 +2955,7 @@ public class Stdinhand{
 //  }
 //
 //  /* yes this has to go after the toggle check */
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    Gamelog.gamelog(EGamelog.GAMELOG_PLAYER, pplayer);
 //  }
 //
@@ -3010,8 +3010,8 @@ public class Stdinhand{
 //  }
 //
 //  /* if pconn and caller are not the same, only continue 
-//   * if we're console, or we have ALLOW_HACK */
-//  if (pconn != caller  && caller && caller.access_level != ALLOW_HACK) {
+//   * if we're console, or we have cmdlevel_id.ALLOW_HACK */
+//  if (pconn != caller  && caller && caller.access_level != cmdlevel_id.ALLOW_HACK) {
 //    cmd_reply(CMD_DETACH, caller, C_FAIL, 
 //                "You can not detach other users.");
 //    goto end;
@@ -3038,7 +3038,7 @@ public class Stdinhand{
 //  }
 //
 //  /* if we want to detach while the Game.game is running, reset the client */
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    send_game_state(&pconn.self, CLIENT_server_states.PRE_GAME_STATE);
 //    Gamehand.send_game_info(&pconn.self);
 //    send_player_info_c(null, &pconn.self);
@@ -3082,7 +3082,7 @@ public class Stdinhand{
 //    }
 //  }
 //
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    Gamelog.gamelog(EGamelog.GAMELOG_PLAYER, pplayer);
 //  }
 //
@@ -3122,7 +3122,7 @@ public class Stdinhand{
 //      if (Game.game.nation_count) {
 //	sz_strlcpy(packet.nation_name[i], Nation.get_nation_name(pplayer.nation));
 //	sz_strlcpy(packet.nation_flag[i],
-//	    get_nation_by_plr(pplayer).flag_graphic_str);
+//	    Nation.get_nation_by_plr(pplayer).flag_graphic_str);
 //      } else { /* No nations picked */
 //	sz_strlcpy(packet.nation_name[i], "");
 //	sz_strlcpy(packet.nation_flag[i], "");
@@ -3358,8 +3358,8 @@ public class Stdinhand{
 //      && caller.player
 //      && !check
 //      && !caller.player.is_observer
-//      && caller.access_level == ALLOW_INFO
-//      && access_level(cmd) == ALLOW_CTRL) {
+//      && caller.access_level == cmdlevel_id.ALLOW_INFO
+//      && access_level(cmd) == cmdlevel_id.ALLOW_CTRL) {
 //    int idx = caller.player.player_no;
 //
 //    /* If we already have a vote going, cancel it in favour of the new
@@ -3390,8 +3390,8 @@ public class Stdinhand{
 //    }
 //  }
 //  if (caller
-//      && !(check && caller.access_level >= ALLOW_INFO 
-//           && access_level(cmd) == ALLOW_CTRL)
+//      && !(check && caller.access_level >= cmdlevel_id.ALLOW_INFO 
+//           && access_level(cmd) == cmdlevel_id.ALLOW_CTRL)
 //      && caller.access_level < access_level(cmd)) {
 //    cmd_reply(cmd, caller, C_FAIL,
 //	      "You are not allowed to use this command.");
@@ -3411,7 +3411,7 @@ public class Stdinhand{
 //  while(i>0 && my_isspace(arg[i]))
 //    arg[i--]='\0';
 //
-//  if (!check && commands[cmd].game_level > ALLOW_INFO) {
+//  if (!check && commands[cmd].game_level > cmdlevel_id.ALLOW_INFO) {
 //    /*
 //     * this command will affect the Game.game - inform all players.
 //     * We quite purposely do not use access_level() here.
@@ -3485,7 +3485,7 @@ public class Stdinhand{
 //  case CMD_RULESETDIR:
 //    return set_rulesetdir(caller, arg, check);
 //  case CMD_SCORE:
-//    if (Srv_main.server_state == RUN_GAME_STATE || Srv_main.server_state == server_states.GAME_OVER_STATE) {
+//    if (Srv_main.server_state == server_states.RUN_GAME_STATE || Srv_main.server_state == server_states.GAME_OVER_STATE) {
 //      if (!check) {
 //        report_progress_scores();
 //      }
@@ -3533,7 +3533,7 @@ public class Stdinhand{
 //**************************************************************************/
 //static boolean end_command(connection caller, char *str, boolean check)
 //{
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    char *arg[Shared_H.MAX_NUM_PLAYERS];
 //    int ntokens = 0, i;
 //    enum m_pre_result plr_result;
@@ -3680,7 +3680,7 @@ public class Stdinhand{
 //    cmd_reply(CMD_START_GAME, caller, C_FAIL,
 //              "Cannot start the Game.game: it has already been started.");
 //    return false;
-//  case RUN_GAME_STATE:
+//  case server_states.RUN_GAME_STATE:
 //    /* TRANS: given when /start is invoked while the Game.game is running. */
 //    cmd_reply(CMD_START_GAME, caller, C_FAIL,
 //              "Cannot start the Game.game: it is already running.");
@@ -3994,7 +3994,7 @@ public class Stdinhand{
 //
 //      /* Low access level callers don't get to see barbarians in list: */
 //      if (is_barbarian(pplayer) && caller
-//	  && (caller.access_level < ALLOW_CTRL)) {
+//	  && (caller.access_level < cmdlevel_id.ALLOW_CTRL)) {
 //	continue;
 //      }
 //
@@ -4204,7 +4204,7 @@ public class Stdinhand{
 //}
 //static char *cmdlevel_arg1_generator(final String text, int state)
 //{
-//  return generic_generator(text, state, ALLOW_NUM, cmdlevel_arg1_accessor);
+//  return generic_generator(text, state, cmdlevel_id.ALLOW_NUM, cmdlevel_arg1_accessor);
 //}
 //
 ///**************************************************************************

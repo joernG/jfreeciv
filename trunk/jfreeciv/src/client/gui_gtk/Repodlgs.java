@@ -78,7 +78,7 @@ public class Repodlgs{
 //  int is_impr;
 //  int type;
 //};
-//static struct economy_row economy_row_type[unittype.U_LAST + B_LAST];
+//static struct economy_row economy_row_type[unittype.U_LAST + Improvement.B_LAST];
 //
 //static GtkWidget *economy_dialog_shell = null;
 //static GtkWidget *economy_label2;
@@ -506,7 +506,7 @@ public class Repodlgs{
 //  for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
 //    if (tech_is_available(Game.game.player_ptr, i)
 //        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
-//        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
+//        && advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST
 //        && (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
 //	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //      if (i==Game.game.player_ptr.ai.tech_goal)
@@ -668,11 +668,11 @@ public class Repodlgs{
 //  int i = economy_row_type[row].type;
 //  
 //  if (economy_row_type[row].is_impr == true) {
-//    boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !is_wonder(i));
+//    boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !Improvement.is_wonder(i));
 //
 //    gtk_widget_set_sensitive(sellobsolete_command, is_sellable
 //			     && can_client_issue_orders()
-//			     && improvement_obsolete(Game.game.player_ptr, i));
+//			     && Improvement.improvement_obsolete(Game.game.player_ptr, i));
 //    gtk_widget_set_sensitive(sellall_command, is_sellable
 //			     && can_client_issue_orders());
 //  } else {
@@ -741,7 +741,7 @@ public class Repodlgs{
 //    char   buf3 [64];
 //    gchar *row  [4];
 //    char economy_total[48];
-//    struct improvement_entry entries[B_LAST];
+//    struct improvement_entry entries[Improvement.B_LAST];
 //    struct unit_entry entries_units[unittype.U_LAST];
 //
 //    gtk_clist_freeze(GTK_CLIST(economy_list));
@@ -774,7 +774,7 @@ public class Repodlgs{
 //
 //    for (i = 0; i < entries_used; i++) {
 //      buf0 = util.my_snprintf( "%-20s",
-//		  unit_name(entries_units[i].type));
+//		  Unittype_P.unit_name(entries_units[i].type));
 //      buf1 = util.my_snprintf( "%5d", entries_units[i].count);
 //      buf2 = util.my_snprintf( "%5d", entries_units[i].cost);
 //      buf3 = util.my_snprintf( "%6d", entries_units[i].total_cost);
@@ -1041,7 +1041,7 @@ public class Repodlgs{
 //    unit_type_iterate(i) {
 //      if ((unitarray[i].active_count > 0) || (unitarray[i].building_count > 0)) {
 //	can = (can_upgrade_unittype(Game.game.player_ptr, i) != -1);
-//        my_snprintf(buf[0], sizeof(buf[0]), "%-27s", unit_name(i));
+//        my_snprintf(buf[0], sizeof(buf[0]), "%-27s", Unittype_P.unit_name(i));
 //	my_snprintf(buf[1], sizeof(buf[1]), "%c", can ? '*': '-');
 //        my_snprintf(buf[2], sizeof(buf[2]), "%9d", unitarray[i].building_count);
 //        my_snprintf(buf[3], sizeof(buf[3]), "%9d", unitarray[i].active_count);

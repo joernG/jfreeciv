@@ -405,17 +405,17 @@ public class Menu{
 //	can_unit_load(punit, find_transporter_for_unit(punit,
 //						       punit.tile)));
 //      menu_entry_sensitive(MENU_ORDER, MENU_ORDER_UNLOAD,
-//	(can_unit_unload(punit, find_unit_by_id(punit.transported_by))
+//	(can_unit_unload(punit, Game.find_unit_by_id(punit.transported_by))
 //	 && can_unit_exist_at_tile(punit, punit.tile)));
 //      menu_entry_sensitive(MENU_ORDER, MENU_ORDER_WAKEUP_OTHERS, 
 //			   is_unit_activity_on_tile(ACTIVITY_SENTRY,
 //				punit.tile));
 //      menu_entry_sensitive(MENU_ORDER, MENU_ORDER_AUTO_SETTLER,
 //			   (can_unit_do_auto(punit)
-//			    && unit_flag(punit, F_SETTLERS)));
+//			    && unit_flag(punit, Eunit_flag_id.F_SETTLERS)));
 //      menu_entry_sensitive(MENU_ORDER, MENU_ORDER_AUTO_ATTACK, 
 //			   (can_unit_do_auto(punit)
-//			    && !unit_flag(punit, F_SETTLERS)));
+//			    && !unit_flag(punit, Eunit_flag_id.F_SETTLERS)));
 //      menu_entry_sensitive(MENU_ORDER, MENU_ORDER_DISBAND,
 //			   !unit_flag(punit, F_UNDISBANDABLE));
 //      menu_entry_sensitive(MENU_ORDER, MENU_ORDER_AUTO_EXPLORE, 
@@ -441,7 +441,7 @@ public class Menu{
 //      menu_entry_sensitive(MENU_ORDER, MENU_ORDER_NUKE,
 //                           unit_flag(punit, F_NUCLEAR));
 //
-//      if (unit_flag(punit, F_CITIES) && map_get_city(punit.tile)) {
+//      if (unit_flag(punit, Eunit_flag_id.F_CITIES) && Map.map_get_city(punit.tile)) {
 //	menu_entry_rename(MENU_ORDER, MENU_ORDER_BUILD_CITY,
 //			  TEXT_ORDER_CITY_ADD_TO, null);
 //      } else {
@@ -449,14 +449,14 @@ public class Menu{
 //			  TEXT_ORDER_CITY_BUILD, null);
 //      }
 //
-//      if ((tinfo.irrigation_result != T_NONE)
+//      if ((tinfo.irrigation_result != Terrain_H.T_NONE)
 //	  && (tinfo.irrigation_result != ttype)) {
 //	menu_entry_rename(MENU_ORDER, MENU_ORDER_IRRIGATE,
 //			  TEXT_ORDER_IRRIGATE_CHANGE_TO,
 //			  (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //      }
 //      else if (Map.map_has_special(punit.tile, S_IRRIGATION) &&
-//	       player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND)) {
+//	       Player_P.player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND)) {
 //	menu_entry_rename(MENU_ORDER, MENU_ORDER_IRRIGATE,
 //			  TEXT_ORDER_IRRIGATE_FARMLAND, null);
 //      } else {
@@ -464,7 +464,7 @@ public class Menu{
 //			  TEXT_ORDER_IRRIGATE_IRRIGATE, null);
 //      }
 //
-//      if ((tinfo.mining_result != T_NONE)
+//      if ((tinfo.mining_result != Terrain_H.T_NONE)
 //	  && (tinfo.mining_result != ttype)) {
 //	menu_entry_rename(MENU_ORDER, MENU_ORDER_MINE,
 //			  TEXT_ORDER_MINE_CHANGE_TO,
@@ -474,7 +474,7 @@ public class Menu{
 //			  TEXT_ORDER_MINE_MINE, null);
 //      }
 //
-//      if ((tinfo.transform_result != T_NONE)
+//      if ((tinfo.transform_result != Terrain_H.T_NONE)
 //	  && (tinfo.transform_result != ttype)) {
 //	menu_entry_rename(MENU_ORDER, MENU_ORDER_TRANSFORM,
 //			  TEXT_ORDER_TRANSFORM_TRANSFORM_TO,
@@ -683,7 +683,7 @@ public class Menu{
 //    break;
 //  case MENU_ORDER_POLLUTION: /* or MENU_ORDER_PARADROP */
 //    if((punit = get_unit_in_focus())) {
-//      if (unit_flag(punit, F_SETTLERS))
+//      if (unit_flag(punit, Eunit_flag_id.F_SETTLERS))
 //	key_unit_pollution();
 //      else
 //	key_unit_paradrop();

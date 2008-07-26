@@ -170,7 +170,7 @@ public class Overviewclass{
 //    }
 //    else
 //    {
-//      if ((pcity = map_get_city(x, y)))
+//      if ((pcity = Map.map_get_city(x, y)))
 //      {
 //	if (pcity.owner == Game.game.player_idx)
 //	{

@@ -1051,7 +1051,7 @@ public class Gui_main{
 //  if (unit_ids[i] == 0) /* no unit displayed at this place */
 //    return;
 //
-//  punit = find_unit_by_id(unit_ids[i]);
+//  punit = Game.find_unit_by_id(unit_ids[i]);
 //  if(punit) { /* should always be true at this point */
 //    if (punit.owner == Game.game.player_idx) {  /* may be non-true if alliance */
 //      set_unit_focus(punit);

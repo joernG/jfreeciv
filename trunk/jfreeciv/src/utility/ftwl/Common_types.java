@@ -127,11 +127,11 @@ public class Common_types{
 //{
 //  ct_string result = fc_malloc(sizeof(*result));
 //
-//  result.font = mystrdup(font);
+//  result.font = (font);
 //  result.font_size = size;
 //  result.foreground = foreground;
 //  result.background = background;
-//  result.text = mystrdup(text);
+//  result.text = (text);
 //  result.anti_alias = anti_alias;
 //  result.outline_width = outline_width;
 //  result.outline_color = outline_color;
@@ -153,7 +153,7 @@ public class Common_types{
 //  /* split the string */
 //  {
 //      int row;
-//      char *s, *tmp = mystrdup(result.text);
+//      char *s, *tmp = (result.text);
 //
 //      result.rows = 1;
 //      for (s = tmp; *s != '\0'; s++) {
@@ -169,10 +169,10 @@ public class Common_types{
 //
 //	if (end) {
 //	  *end = '\0';
-//	  result.row[row].text = mystrdup(s);
+//	  result.row[row].text = (s);
 //	  s = end + 1;
 //	} else {
-//	  result.row[row].text = mystrdup(s);
+//	  result.row[row].text = (s);
 //	}
 //	//printf("[%d]='%s'\n", row, result.row[row].text);
 //      }
@@ -270,7 +270,7 @@ public class Common_types{
 //  int columns;
 //
 //  for (columns = 100; columns > 1; columns--) {
-//    char *copy = mystrdup(orig.text);
+//    char *copy = (orig.text);
 //
 //    wordwrap_string(copy, columns);
 //    result = ct_string_clone3(orig, copy);

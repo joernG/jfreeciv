@@ -280,7 +280,7 @@ public class Wldlg{
 //  if(is_unit) {
 //    pStr = create_str16_from_char(get_unit_type(target).name, 10);
 //  } else {
-//    pStr = create_str16_from_char(get_impr_name_ex(pEditor.pCity, target), 10);
+//    pStr = create_str16_from_char(City.get_impr_name_ex(pEditor.pCity, target), 10);
 //  }
 //  pStr.style |= SF_CENTER;
 //  pBuf = create_iconlabel(null, pDest, pStr,
@@ -323,8 +323,8 @@ public class Wldlg{
 // */
 //static boolean are_the_same_class(int id_1, boolean is_id_1_unit, int id_2, boolean is_id_2_unit)
 //{
-//  boolean is_id_1_wonder = is_id_1_unit ? false : is_wonder(id_1);
-//  boolean is_id_2_wonder = is_id_2_unit ? false : is_wonder(id_2);
+//  boolean is_id_1_wonder = is_id_1_unit ? false : Improvement.is_wonder(id_1);
+//  boolean is_id_2_wonder = is_id_2_unit ? false : Improvement.is_wonder(id_2);
 //  return ((is_id_1_unit && is_id_2_unit) || (is_id_1_wonder && is_id_2_wonder) ||
 //  	(!is_id_1_unit && !is_id_1_wonder && !is_id_2_unit && !is_id_2_wonder));
 //}
@@ -345,7 +345,7 @@ public class Wldlg{
 //      }
 //    } else {
 //      pEditor.stock =
-//	  city_change_production_penalty(pEditor.pCity,
+//	  City.city_change_production_penalty(pEditor.pCity,
 //					      target, is_unit, false);
 //    }	  	  
 //  }
@@ -757,7 +757,7 @@ public class Wldlg{
 //      } else {
 //	pBuf = create_iconlabel(null, pDest,
 //		create_str16_from_char(
-//			get_impr_name_ex(pEditor.pCity,
+//			City.get_impr_name_ex(pEditor.pCity,
 //				pWorkList.wlids[count]), 10),
 //				   (WF_DRAW_THEME_TRANSPARENT|WF_FREE_DATA));
 //	pBuf.ID = MAX_ID - 1000 - pWorkList.wlids[count];
@@ -867,7 +867,7 @@ public class Wldlg{
 //	  pBuf.ID = MAX_ID - target;
 //        } else {
 //	  pBuf = create_iconlabel(null, pDest,
-//	  create_str16_from_char(get_impr_name_ex(pEditor.pCity, target), 10),
+//	  create_str16_from_char(City.get_impr_name_ex(pEditor.pCity, target), 10),
 //				(WF_DRAW_THEME_TRANSPARENT|WF_FREE_DATA));
 //	  pBuf.ID = MAX_ID -1000 - target;
 //        }
@@ -937,7 +937,7 @@ public class Wldlg{
 //    return pType.name;
 //  } else {
 //    *cost = Improvement.impr_build_shield_cost(id);
-//    return get_impr_name_ex(pCity, id);
+//    return City.get_impr_name_ex(pCity, id);
 //  }
 //}
 //
@@ -1297,7 +1297,7 @@ public class Wldlg{
 //    if(can_build) {
 //      pStr = create_str16_from_char(get_unit_type(turns).name, 10);
 //    } else {
-//      pStr = create_str16_from_char(get_impr_name_ex(pCity, turns), 10);
+//      pStr = create_str16_from_char(City.get_impr_name_ex(pCity, turns), 10);
 //    }
 //    pStr.style |= SF_CENTER;
 //    pBuf = create_iconlabel(null, pDest, pStr,
@@ -1393,7 +1393,7 @@ public class Wldlg{
 //  pStr.render = 3;
 //  pStr.bgcol = color;
 //    
-//  impr_type_iterate(imp) {
+//  for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
 //    can_build = can_player_build_improvement(Game.game.player_ptr, imp);
 //    can_eventually_build =
 //	could_player_eventually_build_improvement(Game.game.player_ptr, imp);
@@ -1418,7 +1418,7 @@ public class Wldlg{
 //      pText_Name = create_text_surf_smaller_that_w(pStr, pIcon.w - 4);
 //      SDL_SetAlpha(pText_Name, 0x0, 0x0);
 //  
-//      if (is_wonder(imp)) {
+//      if (Improvement.is_wonder(imp)) {
 //        if (wonder_obsolete(imp)) {
 //          state = "Obsolete";
 //        } else {
@@ -1531,7 +1531,7 @@ public class Wldlg{
 //      }
 //      count++;
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //  /* ------------------------------ */
 //  unit_type_iterate(un) {
 //    can_build = can_player_build_unit(Game.game.player_ptr, un);

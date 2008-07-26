@@ -119,7 +119,7 @@ public class Plrdlg{
 // */
 //static void build_row(final String*row, int i, int update)
 //{
-//  static char namebuf[MAX_LEN_NAME],  aibuf[2], dsbuf[32],
+//  static String namebuf,  aibuf[2], dsbuf[32],
 //      repbuf[32], statebuf[32], idlebuf[32];
 //  final player_diplstate pds;
 //

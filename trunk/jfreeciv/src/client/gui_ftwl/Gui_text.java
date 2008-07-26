@@ -169,10 +169,10 @@ public class Gui_text{
 //
 //  switch (activity) {
 //  case ACTIVITY_ROAD:
-//    map_set_special(ptile, Terrain_H.S_ROAD);
+//    Map.map_set_special(ptile, Terrain_H.S_ROAD);
 //    break;
 //  case ACTIVITY_RAILROAD:
-//    map_set_special(ptile, Terrain_H.S_RAILROAD);
+//    Map.map_set_special(ptile, Terrain_H.S_RAILROAD);
 //    break;
 //  case ACTIVITY_MINE:
 //    map_mine_tile(ptile);
@@ -195,7 +195,7 @@ public class Gui_text{
 //
 //  ptile.terrain = backup.terrain;
 //  ptile.special = backup.special;
-//  reset_move_costs(ptile);
+//  Map.reset_move_costs(ptile);
 //  /* hopefully everything is now back in place */
 //
 //  diff[0] = stats_after[0] - stats_before[0];
@@ -313,7 +313,7 @@ public class Gui_text{
 //    irrtext = util.my_snprintf( irrfmt,
 //		(get_tile_type(tinfo.irrigation_result)).terrain_name);
 //  } else if (Map.map_has_special(punit.tile, S_IRRIGATION)
-//	     && player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND)) {
+//	     && Player_P.player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND)) {
 //    irrtext = String.format( "Bu_ild Farmland");
 //  }
 //  if ((tinfo.mining_result != T_LAST) && (tinfo.mining_result != ttype)) {
@@ -353,7 +353,7 @@ public class Gui_text{
 //    if (pcity.is_building_unit) {
 //      name = get_unit_type(pcity.currently_building).name;
 //    } else {
-//      name = get_impr_name_ex(pcity, pcity.currently_building);
+//      name = City.get_impr_name_ex(pcity, pcity.currently_building);
 //    }
 //
 //    add_line("Buy production");
@@ -393,7 +393,7 @@ public class Gui_text{
 //
 //  add_line("City: %s (%s)", pcity.name,
 //	   get_nation_name(owner.nation));
-//  if (city_got_citywalls(pcity)) {
+//  if (City.city_got_citywalls(pcity)) {
 //    add(" with City Walls");
 //  }
 //  RETURN;

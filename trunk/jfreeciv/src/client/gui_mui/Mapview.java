@@ -222,7 +222,7 @@ public class Mapview{
 //**************************************************************************/
 //void activate_below_unit (int *id)
 //{
-//  unit punit = find_unit_by_id(*id);
+//  unit punit = Game.find_unit_by_id(*id);
 //  if (punit) set_unit_focus_and_select(punit);
 //}
 //

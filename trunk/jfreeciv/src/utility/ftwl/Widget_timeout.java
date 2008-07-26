@@ -104,7 +104,7 @@ public class Widget_timeout{
 //  id_counter++;
 //
 //  ensure_init();
-//  callback_list_insert(&callback_list, p);
+//  &callback_list.foo_list_insert(p);
 //  return p.id;
 //}
 //

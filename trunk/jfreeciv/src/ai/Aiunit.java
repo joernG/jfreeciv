@@ -1,5 +1,10 @@
 package ai;
 
+import common.map.tile;
+import common.unit.unit;
+
+import server.Barbarian;
+
 public class Aiunit{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -186,15 +191,15 @@ public class Aiunit{
 //  
 //  return true;
 //}
-//
-///**************************************************************************
-//  returns:
-//    0 if can't move
-//    1 if zoc_ok
-//   -1 if zoc could be ok?
-//**************************************************************************/
-//int could_unit_move_to_tile(unit punit, tile dest_tile)
-//{
+
+/**************************************************************************
+  returns:
+    0 if can't move
+    1 if zoc_ok
+   -1 if zoc could be ok?
+**************************************************************************/
+public static int could_unit_move_to_tile(unit punit, tile dest_tile)
+{
 //  enum unit_move_result result;
 //
 //  result =
@@ -210,9 +215,9 @@ public class Aiunit{
 //      return -1;
 //    }
 //  }
-//  return 0;
-//}
-//
+  return 0;
+}
+
 
 //  This is a much simplified form of assess_defense (see advmilitary.c),
 //  but which doesn't use pcity.ai.wallvalue and just returns a boolean
@@ -264,7 +269,7 @@ public class Aiunit{
 //  int move_rate = punit.move_rate();
 //
 //  switch (punit.unit_type().move_type) {
-//  case LAND_MOVING:
+//  case unit_move_type.LAND_MOVING:
 //  
 //   /* FIXME: IGTER units should have their move rates multiplied by 
 //    * igter_speedup. Note: actually, igter units should never have their 
@@ -277,12 +282,12 @@ public class Aiunit{
 //    move_time = WARMAP_COST(ptile) / move_rate;
 //    break;
 // 
-//  case SEA_MOVING:
+//  case unit_move_type.SEA_MOVING:
 //    move_time = WARMAP_SEACOST(ptile) / move_rate;
 //    break;
 // 
-//  case HELI_MOVING:
-//  case AIR_MOVING:
+//  case unit_move_type.HELI_MOVING:
+//  case unit_move_type.AIR_MOVING:
 //     move_time = Map.real_map_distance(punit.tile, ptile) 
 //                   * Unit_H.SINGLE_MOVE / move_rate;
 //     break;
@@ -319,9 +324,8 @@ public class Aiunit{
 //static city wonder_on_continent(player pplayer, 
 //					Continent_id cont)
 //{
-//  city_list_iterate(pplayer.cities, pcity) 
-//    if (!(pcity.is_building_unit) 
-//        && is_wonder(pcity.currently_building)
+//  for(city pcity : pplayer.cities.data){//    if (!(pcity.is_building_unit) 
+//        && Improvement.is_wonder(pcity.currently_building)
 //        && map_get_continent(pcity.tile) == cont) {
 //      return pcity;
 //  }
@@ -337,7 +341,7 @@ public class Aiunit{
 //**************************************************************************/
 //static boolean stay_and_defend(unit punit)
 //{
-//  city pcity = map_get_city(punit.tile);
+//  city pcity = Map.map_get_city(punit.tile);
 //  boolean has_defense = false;
 //  int mydef;
 //  int units = -2; /* WAG for grave danger threshold, seems to work */
@@ -534,7 +538,7 @@ public class Aiunit{
 //  for(tile ptile: util.square_tile_iterate(ptile0, 1)) {
 //    for (unit aunit : ptile.units.data) {
 //      if (aunit != punit
-//	  && pplayers_allied(punit.unit_owner(), aunit.unit_owner())) {
+//	  && Player_P.pplayers_allied(punit.unit_owner(), aunit.unit_owner())) {
 //        int val = unit_att_rating(aunit);
 //
 //        if (val != 0) {
@@ -632,19 +636,19 @@ public class Aiunit{
 //
 //        /* No need to amortize, our operation takes one turn. */
 //	UNIT_LOG(Log.LOG_DEBUG, punit, "Rampage: Desire %d to kill %s(%d,%d)",
-//		 desire, unit_name(pdef.type), TILE_XY(pdef.tile));
+//		 desire, Unittype_P.unit_name(pdef.type), TILE_XY(pdef.tile));
 //
 //        return MAX(0, desire);
 //      }
 //    }
 //    
 //  } else {
-//    city pcity = map_get_city(ptile);
+//    city pcity = Map.map_get_city(ptile);
 //    
 //    /* No defender... */
 //    
 //    /* ...and free foreign city waiting for us. Who would resist! */
-//    if (pcity && pplayers_at_war(pplayer, City.city_owner(pcity))
+//    if (pcity && Player_P.pplayers_at_war(pplayer, City.city_owner(pcity))
 //        && COULD_OCCUPY(punit)) {
 //      
 //      return -RAMPAGE_FREE_CITY_OR_BETTER;
@@ -781,7 +785,7 @@ public class Aiunit{
 //
 //  if (aunit && aunit.owner == punit.owner) {
 //    /* protect a unit */
-//    if (is_sailing_unit(aunit)) {
+//    if (Unit.is_sailing_unit(aunit)) {
 //      ptile = aunit.goto_tile;
 //    } else {
 //      ptile = aunit.tile;
@@ -855,8 +859,8 @@ public class Aiunit{
 //      if (ok > 0) {
 //	/* accessible beachhead with zoc-ok water tile nearby */
 //        ok = get_tile_type(t).defense_bonus;
-//	if (Map.map_has_special(tile1, S_RIVER))
-//	  ok += (ok * terrain_control.river_defense_bonus) / 100;
+//	if (Map.map_has_special(tile1, Terrain_H.S_RIVER))
+//	  ok += (ok * Map.terrain_control.river_defense_bonus) / 100;
 //        if (get_tile_type(t).movement_cost * Unit_H.SINGLE_MOVE <
 //            punit.move_rate())
 //	  ok *= 8;
@@ -903,7 +907,7 @@ public class Aiunit{
 //**************************************************************************/
 //static boolean unit_role_defender(int type)
 //{
-//  if (Unittype_P.unit_types[type].move_type != LAND_MOVING) {
+//  if (Unittype_P.unit_types[type].move_type != unit_move_type.LAND_MOVING) {
 //    return false; /* temporary kluge */
 //  }
 //  return (unit_has_role(type, L_DEFEND_GOOD));
@@ -961,7 +965,7 @@ public class Aiunit{
 //  } }
 //
 //  /* City bodyguard */
-//  if (punit.unit_type().move_type == LAND_MOVING) {
+//  if (punit.unit_type().move_type == unit_move_type.LAND_MOVING) {
 //   for (city mycity : pplayer.cities.data) {
 //    if (!goto_is_sane(punit, mycity.tile, true)
 //        || mycity.ai.urgency == 0) {
@@ -982,7 +986,7 @@ public class Aiunit{
 //
 //  UNIT_LOG(LOGLEVEL_BODYGUARD, punit, "look_for_charge, best=%d, " +
 //           "type=%s(%d,%d)", best * 100 / toughness, *acity ? (*acity).name
-//           : (*aunit ? unit_name((*aunit).type) : ""), 
+//           : (*aunit ? Unittype_P.unit_name((*aunit).type) : ""), 
 //           *acity ? (*acity).tile.x : (*aunit
 //					      ? (*aunit).tile.y : 0),
 //           *acity ? (*acity).tile.x : (*aunit
@@ -1045,7 +1049,7 @@ public class Aiunit{
 //  /* keep barbarians aggresive and primitive */
 //  if (is_barbarian(pplayer)) {
 //    if (can_unit_do_activity(punit, ACTIVITY_PILLAGE)
-//	&& is_land_barbarian(pplayer)) {
+//	&& Barbarian.is_land_barbarian(pplayer)) {
 //      /* land barbarians pillage */
 //      ai_unit_new_role(punit, AIUNIT_PILLAGE, null);
 //    } else {
@@ -1074,7 +1078,7 @@ public class Aiunit{
 //  /* ok, what if I'm somewhere new? - ugly, kludgy code by Syela */
 //  if (stay_and_defend(punit)) {
 //    UNIT_LOG(Log.LOG_DEBUG, punit, "stays to defend %s",
-//             map_get_city(punit.tile).name);
+//             Map.map_get_city(punit.tile).name);
 //    return;
 //  }
 //
@@ -1107,7 +1111,7 @@ public class Aiunit{
 //  }
 //
 ///* I'm not 100% sure this is the absolute best place for this... -- Syela */
-//  generate_warmap(map_get_city(punit.tile), punit);
+//  generate_warmap(Map.map_get_city(punit.tile), punit);
 ///* I need this in order to call unit_move_turns, here and in look_for_charge */
 //
 //  if (pcity && q > 0) {
@@ -1169,7 +1173,7 @@ public class Aiunit{
 //    UNIT_LOG(Log.LOG_DEBUG, punit, "go home to %s(%d,%d)",
 //             pcity.name, TILE_XY(pcity.tile)); 
 //    if (Map.same_pos(punit.tile, pcity.tile)) {
-//      UNIT_LOG(Log.LOG_DEBUG, punit, "go home successful; role AI_NONE");
+//      UNIT_LOG(Log.LOG_DEBUG, punit, "go home successful; role AImprovement.I_NONE");
 //      ai_unit_new_role(punit, AIUNIT_NONE, null);
 //
 //      /* aggro defense goes here -- Syela */
@@ -1195,12 +1199,12 @@ public class Aiunit{
 //                        unit boat, int boattype)
 //{
 //  switch(Unittype_P.unit_types[our_type].move_type) {
-//  case LAND_MOVING:
+//  case unit_move_type.LAND_MOVING:
 //    if (go_by_boat) {
 //      int boatspeed = Unittype_P.unit_types[boattype].move_rate;
 //      int move_time = (WARMAP_SEACOST(acity.tile)) / boatspeed;
 //      
-//      if (unit_type_flag(boattype, F_TRIREME) && move_time > 2) {
+//      if (Unittype_P.unit_type_flag(boattype, F_TRIREME) && move_time > 2) {
 //        /* FIXME: Should also check for LIGHTHOUSE */
 //        /* Return something prohibitive */
 //        return 999;
@@ -1210,7 +1214,7 @@ public class Aiunit{
 //        move_time += (WARMAP_COST(boat.tile) + speed - 1) / speed;
 //      }
 //      
-//      if (!unit_type_flag(our_type, F_MARINES)) {
+//      if (!Unittype_P.unit_type_flag(our_type, F_MARINES)) {
 //        /* Time to get off the boat (Marines do it from the vessel) */
 //        move_time += 1;
 //      }
@@ -1220,7 +1224,7 @@ public class Aiunit{
 //      /* We are walking */
 //      return (WARMAP_COST(acity.tile) + speed - 1) / speed;
 //    }
-//  case SEA_MOVING:
+//  case unit_move_type.SEA_MOVING:
 //    /* We are a boat: time to sail */
 //    return (WARMAP_SEACOST(acity.tile) + speed - 1) / speed;
 //  default: 
@@ -1243,10 +1247,10 @@ public class Aiunit{
 //  int dist;
 //
 //  switch(Unittype_P.unit_types[our_type].move_type) {
-//  case LAND_MOVING:
+//  case unit_move_type.LAND_MOVING:
 //    dist = WARMAP_COST(ptile);
 //    break;
-//  case SEA_MOVING:
+//  case unit_move_type.SEA_MOVING:
 //    dist = WARMAP_SEACOST(ptile);
 //    break;
 //  default:
@@ -1261,7 +1265,7 @@ public class Aiunit{
 //  if (dist > speed) { 
 //    /* Weird attempt to take into account enemy running away... */
 //    dist *= Unittype_P.unit_types[enemy_type].move_rate;
-//    if (unit_type_flag(enemy_type, F_IGTER)) {
+//    if (Unittype_P.unit_type_flag(enemy_type, F_IGTER)) {
 //      dist *= 3;
 //    }
 //  }
@@ -1296,7 +1300,7 @@ public class Aiunit{
 //  }
 //
 //  for(tile tile1: util.square_tile_iterate(ptile, radius)) {
-//    city pcity = map_get_city(tile1);
+//    city pcity = Map.map_get_city(tile1);
 //
 //    if (pcity
 //        && HOSTILE_PLAYER(pplayer, ai, City.city_owner(pcity))
@@ -1357,7 +1361,7 @@ public class Aiunit{
 //  /*** Very preliminary checks */
 //  *dest_tile = punit.tile;
 //
-//  if (!is_ground_unit(punit) && !is_sailing_unit(punit)) {
+//  if (!is_ground_unit(punit) && !Unit.is_sailing_unit(punit)) {
 //    /* Don't know what to do with them! */
 //    return 0;
 //  }
@@ -1377,7 +1381,7 @@ public class Aiunit{
 //  for(player aplayer: Game.game.players){
 //    /* See comment below in next usage of HOSTILE_PLAYER. */
 //    if ((punit.id == 0 && !HOSTILE_PLAYER(pplayer, ai, aplayer))
-//        || (punit.id != 0 && !pplayers_at_war(pplayer, aplayer))) {
+//        || (punit.id != 0 && !Player_P.pplayers_at_war(pplayer, aplayer))) {
 //      continue;
 //    }
 //    for (city acity : aplayer.cities.data) {
@@ -1398,7 +1402,7 @@ public class Aiunit{
 //    if (IS_ATTACKER(aunit)) {
 //      if (aunit.activity == unit_activity.ACTIVITY_GOTO) {
 //        invasion_funct(aunit, true, 0, (COULD_OCCUPY(aunit) ? 1 : 2));
-//        if ((pcity = map_get_city(aunit.goto_tile))) {
+//        if ((pcity = Map.map_get_city(aunit.goto_tile))) {
 //          pcity.ai.attack += unit_att_rating(aunit);
 //          pcity.ai.bcost += Unittype_P.unit_build_shield_cost(aunit.type);
 //        } 
@@ -1422,7 +1426,7 @@ public class Aiunit{
 //   * to avoid spreading out attacks too widely to be inefficient.
 //   */
 //
-//  pcity = map_get_city(punit.tile);
+//  pcity = Map.map_get_city(punit.tile);
 //
 //  if (pcity && (punit.id == 0 || pcity.id == punit.homecity)) {
 //    /* I would have thought unhappiness should be taken into account 
@@ -1441,7 +1445,7 @@ public class Aiunit{
 //  bcost_bal = build_cost_balanced(punit.type);
 //
 //  /* most flexible but costs milliseconds */
-//  generate_warmap(map_get_city(*dest_tile), punit);
+//  generate_warmap(Map.map_get_city(*dest_tile), punit);
 //
 //  if (is_ground_unit(punit)) {
 //    int boatid = find_boat(pplayer, &best_tile, 2);
@@ -1450,8 +1454,8 @@ public class Aiunit{
 //
 //  if (ferryboat) {
 //    boattype = ferryboat.type;
-//    really_generate_warmap(map_get_city(ferryboat.tile),
-//                           ferryboat, SEA_MOVING);
+//    really_generate_warmap(Map.map_get_city(ferryboat.tile),
+//                           ferryboat, unit_move_type.SEA_MOVING);
 //  } else {
 //    boattype = best_role_unit_for_player(pplayer, L_FERRYBOAT);
 //    if (boattype == unittype.U_LAST) {
@@ -1461,7 +1465,7 @@ public class Aiunit{
 //  }
 //
 //  if (is_ground_unit(punit) && punit.id == 0 
-//      && is_ocean_near_tile(punit.tile)) {
+//      && Terrain.is_terrain_flag_near_tile(punit.tile)) {
 //    harbor = true;
 //  }
 //
@@ -1471,7 +1475,7 @@ public class Aiunit{
 //     * players we want to make war with in the future. We do _not_ want
 //     * to do this when actually making attacks. */
 //    if ((punit.id == 0 && !HOSTILE_PLAYER(pplayer, ai, aplayer))
-//        || (punit.id != 0 && !pplayers_at_war(pplayer, aplayer))) {
+//        || (punit.id != 0 && !Player_P.pplayers_at_war(pplayer, aplayer))) {
 //      /* Not an enemy */
 //      continue;
 //    }
@@ -1499,7 +1503,7 @@ public class Aiunit{
 //        continue;
 //      }
 //      
-//      if (is_sailing_unit(punit) 
+//      if (Unit.is_sailing_unit(punit) 
 //          && WARMAP_SEACOST(acity.tile) >= maxd) {
 //        /* Too far to sail */
 //        continue;
@@ -1632,7 +1636,7 @@ public class Aiunit{
 //     * I am deliberately not adding ferryboat code to the unit_list_iterate. 
 //     * -- Syela */
 //    for (unit aunit : aplayer.units.data) {
-//      if (map_get_city(aunit.tile)) {
+//      if (Map.map_get_city(aunit.tile)) {
 //        /* already dealt with it */
 //        continue;
 //      }
@@ -1664,7 +1668,7 @@ public class Aiunit{
 //        continue;
 //      }
 //
-//      if (is_sailing_unit(punit)
+//      if (Unit.is_sailing_unit(punit)
 //          && (!goto_is_sane(punit, aunit.tile, true)
 //              || WARMAP_SEACOST(aunit.tile) >= maxd)) {
 //        /* Impossible or too far to sail */
@@ -1719,18 +1723,18 @@ public class Aiunit{
 //
 //  CHECK_UNIT(punit);
 //
-//  generate_warmap(map_get_city(punit.tile), punit);
+//  generate_warmap(Map.map_get_city(punit.tile), punit);
 //  for(player aplayer: Game.game.players){
-//    if (pplayers_allied(pplayer,aplayer)) {
+//    if (Player_P.pplayers_allied(pplayer,aplayer)) {
 //      for (city pcity : aplayer.cities.data) {
 //        if (ground) {
 //          cur = WARMAP_COST(pcity.tile);
-//          if (get_city_bonus(pcity, EFT_LAND_REGEN) > 0) {
+//          if (Effects.get_city_bonus(pcity, EFT_LAND_REGEN) > 0) {
 //            cur /= 3;
 //          }
 //        } else {
 //          cur = WARMAP_SEACOST(pcity.tile);
-//          if (get_city_bonus(pcity, EFT_SEA_REGEN) > 0) {
+//          if (Effects.get_city_bonus(pcity, EFT_SEA_REGEN) > 0) {
 //            cur /= 3;
 //          }
 //        }
@@ -1782,7 +1786,7 @@ public class Aiunit{
 //    if (stay_and_defend(punit)) {
 //      /* This city needs defending, don't go outside! */
 //      UNIT_LOG(Log.LOG_DEBUG, punit, "stayed to defend %s", 
-//               map_get_city(punit.tile).name);
+//               Map.map_get_city(punit.tile).name);
 //      return;
 //    }
 //
@@ -1837,14 +1841,14 @@ public class Aiunit{
 //    return;
 //  }
 //  pcity = find_nearest_safe_city(punit);
-//  if (is_sailing_unit(punit) && pcity) {
+//  if (Unit.is_sailing_unit(punit) && pcity) {
 //    /* Sail somewhere */
 //    () ai_unit_goto(punit, pcity.tile);
 //  } else if (!is_barbarian(pplayer)) {
 //    /* Nothing else to do, so try exploring. */
 //    if (ai_manage_explorer(punit)) {
 //      UNIT_LOG(Log.LOG_DEBUG, punit, "nothing else to do, so exploring");
-//    } else if (find_unit_by_id(id)) {
+//    } else if (Game.find_unit_by_id(id)) {
 //      UNIT_LOG(Log.LOG_DEBUG, punit, "nothing to do - no more exploring either");
 //    }
 //  } else {
@@ -1867,8 +1871,8 @@ public class Aiunit{
 //      }
 //    }
 //  }
-//  if ((punit = find_unit_by_id(id)) && punit.moves_left > 0) {
-//    city pcity = map_get_city(punit.tile);
+//  if ((punit = Game.find_unit_by_id(id)) && punit.moves_left > 0) {
+//    city pcity = Map.map_get_city(punit.tile);
 //
 //    if (pcity) {
 //      ai_unit_new_role(punit, AIUNIT_DEFEND_HOME, pcity.tile);
@@ -1923,8 +1927,8 @@ public class Aiunit{
 //         }
 //         city_list_iterate(pplayer.cities,pdest) {
 //           if (pcity
-//	       && can_cities_trade(pcity, pdest)
-//	       && can_establish_trade_route(pcity, pdest)
+//	       && City.can_cities_trade(pcity, pdest)
+//	       && City.can_establish_trade_route(pcity, pdest)
 //               && map_get_continent(pcity.tile) 
 //                                == map_get_continent(pdest.tile)) {
 //             tradeval=trade_between_cities(pcity, pdest);
@@ -1960,7 +1964,7 @@ public class Aiunit{
 //static void ai_manage_hitpoint_recovery(unit punit)
 //{
 //  player pplayer = punit.unit_owner();
-//  city pcity = map_get_city(punit.tile);
+//  city pcity = Map.map_get_city(punit.tile);
 //  city safe = null;
 //  unit_type punittype = get_unit_type(punit.type);
 //
@@ -2059,7 +2063,7 @@ public class Aiunit{
 //    ai_military_bodyguard(pplayer, punit);
 //    break;
 //  case AIUNIT_PILLAGE:
-//    handle_unit_activity_request(punit, ACTIVITY_PILLAGE);
+//    Unithand.handle_unit_activity_request(punit, ACTIVITY_PILLAGE);
 //    return; /* when you pillage, you have moves left, avoid later fortify */
 //  case AIUNIT_EXPLORE:
 //    () ai_manage_explorer(punit);
@@ -2075,12 +2079,12 @@ public class Aiunit{
 //  }
 //
 //  /* If we are still alive, either sentry or fortify. */
-//  if ((punit = find_unit_by_id(id))) {
+//  if ((punit = Game.find_unit_by_id(id))) {
 //    if (unit_list_find(&((punit.tile).units),
 //        punit.ai.ferryboat)) {
-//      handle_unit_activity_request(punit, ACTIVITY_SENTRY);
+//      Unithand.handle_unit_activity_request(punit, ACTIVITY_SENTRY);
 //    } else if (punit.activity == unit_activity.ACTIVITY_IDLE) {
-//      handle_unit_activity_request(punit, ACTIVITY_FORTIFYING);
+//      Unithand.handle_unit_activity_request(punit, ACTIVITY_FORTIFYING);
 //    }
 //  }
 //}
@@ -2103,7 +2107,7 @@ public class Aiunit{
 //  /* check if there is enemy nearby */
 //  for(tile ptile: util.square_tile_iterate(punit.tile, 3)) {
 //    if (is_enemy_city_tile(ptile, punit.unit_owner()) ||
-//	is_enemy_unit_tile(ptile, punit.unit_owner()))
+//	Unit.is_enemy_unit_tile(ptile, punit.unit_owner()))
 //      return false;
 //  }
 //  square_iterate_end;
@@ -2121,7 +2125,7 @@ public class Aiunit{
 //**************************************************************************/
 //void ai_manage_unit(player pplayer, unit punit)
 //{
-//  unit bodyguard = find_unit_by_id(punit.ai.bodyguard);
+//  unit bodyguard = Game.find_unit_by_id(punit.ai.bodyguard);
 //
 //  CHECK_UNIT(punit);
 //
@@ -2158,12 +2162,12 @@ public class Aiunit{
 //    return;
 //  }
 //
-//  if ((unit_flag(punit, F_DIPLOMAT))
+//  if ((unit_flag(punit, Eunit_flag_id.F_DIPLOMAT))
 //      || (unit_flag(punit, F_SPY))) {
 //    ai_manage_diplomat(pplayer, punit);
 //    return;
-//  } else if (unit_flag(punit, F_SETTLERS)
-//	     ||unit_flag(punit, F_CITIES)) {
+//  } else if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)
+//	     ||unit_flag(punit, Eunit_flag_id.F_CITIES)) {
 //    ai_manage_settler(pplayer, punit);
 //    return;
 //  } else if (unit_flag(punit, F_TRADE_ROUTE)
@@ -2193,7 +2197,7 @@ public class Aiunit{
 //    int id = punit.id;
 //    /* what else could this be? -- Syela */
 //    if (!ai_manage_explorer(punit)
-//        && find_unit_by_id(id)) {
+//        && Game.find_unit_by_id(id)) {
 //      ai_unit_new_role(punit, AIUNIT_DEFEND_HOME, null);
 //      ai_military_gohome(pplayer, punit);
 //    }
@@ -2288,11 +2292,11 @@ public class Aiunit{
 //  if (leader.moves_left == 0 || 
 //      (!Terrain_H.is_ocean(leader.tile.terrain) &&
 //       unit_list_size(&(leader.tile.units)) > 1) ) {
-//      handle_unit_activity_request(leader, ACTIVITY_SENTRY);
+//      Unithand.handle_unit_activity_request(leader, ACTIVITY_SENTRY);
 //      return;
 //  }
 //  /* the following takes much CPU time and could be avoided */
-//  generate_warmap(map_get_city(leader.tile), leader);
+//  generate_warmap(Map.map_get_city(leader.tile), leader);
 //
 //  /* duck under own units */
 //  for (unit aunit : pplayer.units.data) {
@@ -2329,7 +2333,7 @@ public class Aiunit{
 //	dist = WARMAP_COST(aunit.tile) - aunit.move_rate();
 //	if (dist < mindist) {
 //	  util.freelog(Log.LOG_DEBUG, "Barbarian leader: closest enemy is %s at %d, %d, dist %d",
-//                  unit_name(aunit.type), aunit.tile.x,
+//                  Unittype_P.unit_name(aunit.type), aunit.tile.x,
 //		  aunit.tile.y, dist);
 //	  mindist = dist;
 //	  closest_unit = aunit;
@@ -2339,7 +2343,7 @@ public class Aiunit{
 //  }
 //
 //  /* Disappearance - 33% chance on coast, when older than barbarian life span */
-//  if (is_ocean_near_tile(leader.tile) && leader.fuel == 0) {
+//  if (Terrain.is_terrain_flag_near_tile(leader.tile) && leader.fuel == 0) {
 //    if(Rand.myrand(3) == 0) {
 //      UNIT_LOG(Log.LOG_DEBUG, leader, "barbarian leader disappearing...");
 //      Unittools.wipe_unit(leader);
@@ -2348,12 +2352,12 @@ public class Aiunit{
 //  }
 //
 //  if (!closest_unit) {
-//    handle_unit_activity_request(leader, unit_activity.ACTIVITY_IDLE);
+//    Unithand.handle_unit_activity_request(leader, unit_activity.ACTIVITY_IDLE);
 //    UNIT_LOG(Log.LOG_DEBUG, leader, "Barbarian leader: no enemy.");
 //    return;
 //  }
 //
-//  generate_warmap(map_get_city(closest_unit.tile), closest_unit);
+//  generate_warmap(Map.map_get_city(closest_unit.tile), closest_unit);
 //
 //  do {
 //    tile last_tile;
@@ -2378,7 +2382,7 @@ public class Aiunit{
 //    if (Map.same_pos(leader.tile, safest_tile)) {
 //      UNIT_LOG(Log.LOG_DEBUG, leader, 
 //               "Barbarian leader: reached the safest position.");
-//      handle_unit_activity_request(leader, unit_activity.ACTIVITY_IDLE);
+//      Unithand.handle_unit_activity_request(leader, unit_activity.ACTIVITY_IDLE);
 //      return;
 //    }
 //
@@ -2409,10 +2413,10 @@ public class Aiunit{
 //  int i = 0;
 //
 //  unit_type_iterate(id) {
-//    if (unit_type_exists(id) && !unit_type_flag(id, Eunit_flag_id.F_NONMIL)
-//	&& !unit_type_flag(id, F_MISSILE)
-//	&& !unit_type_flag(id, F_NO_LAND_ATTACK)
-//        && get_unit_type(id).move_type != AIR_MOVING
+//    if (unit_type_exists(id) && !Unittype_P.unit_type_flag(id, Eunit_flag_id.F_NONMIL)
+//	&& !Unittype_P.unit_type_flag(id, F_MISSILE)
+//	&& !Unittype_P.unit_type_flag(id, F_NO_LAND_ATTACK)
+//        && get_unit_type(id).move_type != unit_move_type.AIR_MOVING
 //	&& get_unit_type(id).transport_capacity < 8) {
 //      simple_ai_types[i] = id;
 //      i++;

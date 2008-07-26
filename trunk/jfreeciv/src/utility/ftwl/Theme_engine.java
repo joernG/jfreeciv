@@ -74,7 +74,7 @@ public class Theme_engine{
 //  be_screen_get_size(&size);
 //  char filename[512];
 //
-//  current_theme = mystrdup(theme);
+//  current_theme = (theme);
 //  current_res = util.my_snprintf( "%dx%d", size.width,
 //	      size.height);
 //
@@ -471,7 +471,7 @@ public class Theme_engine{
 //
 //  for (i = 0; i < num; i++) {
 //    info_data data = fc_malloc(sizeof(*data));
-//    char *id = mystrdup(sec[i] + prefix.length());
+//    char *id = (sec[i] + prefix.length());
 //    boolean inserted;
 //
 //    data.is_text = true;
@@ -504,7 +504,7 @@ public class Theme_engine{
 //
 //  for (i = 0; i < num; i++) {
 //    info_data data = fc_malloc(sizeof(*data));
-//    char *id = mystrdup(sec[i] + prefix.length());
+//    char *id = (sec[i] + prefix.length());
 //    boolean inserted;
 //
 //    data.is_text = false;
@@ -549,7 +549,7 @@ public class Theme_engine{
 //    enum ws_alignment alignment;
 //    ct_string template, *string;
 //    sw_widget widget;
-//    char *id = mystrdup(strchr(sec[i], '_') + 1);
+//    char *id = (strchr(sec[i], '_') + 1);
 //    boolean inserted;
 //
 //    te_read_bounds_alignment(file, sec[i], &bounds, &alignment);
@@ -594,7 +594,7 @@ public class Theme_engine{
 //    enum ws_alignment alignment;
 //    ct_string string = null;
 //    sw_widget widget;
-//    char *id = mystrdup(strchr(sec[i], '_') + 1);
+//    char *id = (strchr(sec[i], '_') + 1);
 //    char *background;
 //    button_callback callback = fc_malloc(sizeof(*callback));
 //
@@ -675,8 +675,8 @@ public class Theme_engine{
 //    keybinding binding = fc_malloc(sizeof(*binding));
 //
 //    binding.key = ct_key_parse(key);
-//    binding.action = mystrdup(action);
-//    keybinding_list_insert(screen.keybindings, binding);
+//    binding.action = (action);
+//    screen.keybindings.foo_list_insert(binding);
 //  }
 //
 //  sw_window_set_key_notify(screen.window, my_key_handler, screen);

@@ -86,7 +86,7 @@ public class Connecthand{
 //  if ((pplayer = find_player_by_user(pconn.username))) {
 //    attach_connection_to_player(pconn, pplayer);
 //
-//    if (Srv_main.server_state == RUN_GAME_STATE) {
+//    if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //      /* Player and other info is only updated when the Game.game is running.
 //       * See the comment in lost_connection_to_client(). */
 //      send_packet_freeze_hint(pconn);
@@ -131,7 +131,7 @@ public class Connecthand{
 //  }
 //
 //  /* if need be, tell who we're waiting on to end the Game.game turn */
-//  if (Srv_main.server_state == RUN_GAME_STATE && Game.game.turnblock) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE && Game.game.turnblock) {
 //    for(player cplayer: Game.game.players){
 //      if (cplayer.is_alive
 //          && !cplayer.ai.control
@@ -145,7 +145,7 @@ public class Connecthand{
 //  }
 //
 //  /* if the Game.game is running, players can just view the Players menu? --dwp */
-//  if (Srv_main.server_state != RUN_GAME_STATE) {
+//  if (Srv_main.server_state != server_states.RUN_GAME_STATE) {
 //    show_players(pconn);
 //  }
 //
@@ -288,7 +288,7 @@ public static void reject_new_connection(final String msg, Connection pconn)
 //  unattach_connection_from_player(pconn);
 //
 //  send_conn_info_remove(&pconn.self, &Game.game.est_connections);
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    /* Player info is only updated when the Game.game is running; this must be
 //     * done consistently or the client will end up with inconsistent errors.
 //     * At other times, the conn info (send_conn_info) is used by the client

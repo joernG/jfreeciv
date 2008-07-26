@@ -272,7 +272,7 @@ public class Inteldlg{
 //
 //  gtk_widget_show_all(GTK_DIALOG(shell).vbox);
 //
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //
 //  return pdialog;
 //}

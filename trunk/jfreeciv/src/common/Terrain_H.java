@@ -1,5 +1,6 @@
 package common;
 
+import utility.shared.Shared_H;
 import common.terrian.terrain_flag_id;
 
 public class Terrain_H {
@@ -47,22 +48,22 @@ public class Terrain_H {
 //		   | S_MINE                 \
 //		   | S_FORTRESS             \
 //		   | S_AIRBASE)
-//
-//		#define T_NONE (-3) /* A special flag meaning no terrain type. */
-//		#define T_ANY (-2) /* A special flag that matches "any" terrain type. */
-//		#define T_UNKNOWN (-1) /* An unknown terrain. */
-//
-//		/* The first terrain value and number of base terrains.  This is used in
-//		 * loops.  T_COUNT may eventually be turned into a variable. */
-//		#define T_FIRST 0
-//		#define T_COUNT (Game.game.terrain_count)
-//
-//		/* A hard limit on the number of terrains; useful for static arrays. */
-//		#define MAX_NUM_TERRAINS Shared_H.MAX_NUM_ITEMS
-//		#define TER_FIRST (TER_NO_BARBS)
-//		#define TER_COUNT (TER_LAST)
-//		#define TER_MAX 64 /* Changing this breaks network compatability. */
-//
+
+		public static final int T_NONE = (-3); /* A special flag meaning no terrain type. */
+		public static final int T_ANY = (-2); /* A special flag that matches "any" terrain type. */
+		public static final int T_UNKNOWN = (-1); /* An unknown terrain. */
+
+		/* The first terrain value and number of base terrains.  This is used in
+		 * loops.  T_COUNT may eventually be turned into a variable. */
+		public static final int T_FIRST = 0;
+		public static final int T_COUNT = (Game.game.terrain_count);
+
+		/* A hard limit on the number of terrains; useful for static arrays. */
+		public static final int MAX_NUM_TERRAINS = Shared_H.MAX_NUM_ITEMS;
+//		public static final int TER_FIRST = (TER_NO_BARBS);
+//		public static final int TER_COUNT = (TER_LAST);
+		public static final int TER_MAX = 64; /* Changing this breaks network compatability. */
+
 //		enum known_type {
 //		 TILE_UNKNOWN, TILE_KNOWN_FOGGED, TILE_KNOWN
 //		};

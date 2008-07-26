@@ -76,7 +76,7 @@ public class Aiferry{
 //  ai.stats.available_boats = 0;
 // 
 //  for (unit punit : pplayer.units.data) {
-//    if (is_sailing_unit(punit) && is_ground_units_transport(punit)) {
+//    if (Unit.is_sailing_unit(punit) && is_ground_units_transport(punit)) {
 //      ai.stats.boats++;
 //      if (punit.ai.passenger == FERRY_AVAILABLE) {
 //	ai.stats.available_boats++;
@@ -103,7 +103,7 @@ public class Aiferry{
 //  util.freelog(Log.LOG_NORMAL, "Registered: %d free out of total %d",
 //	  ai.stats.available_boats, ai.stats.boats);
 //  for (unit punit : pplayer.units.data) {
-//    if (is_sailing_unit(punit) && is_ground_units_transport(punit)) {
+//    if (Unit.is_sailing_unit(punit) && is_ground_units_transport(punit)) {
 //      util.freelog(Log.LOG_NORMAL, "#%d. %s[%d], psngr=%d", 
 //	      n, punit.unit_type().name, punit.id, punit.ai.passenger);
 //      n++;
@@ -122,7 +122,7 @@ public class Aiferry{
 //
 //    ai.stats.passengers--;
 //  } else {
-//    unit ferry = find_unit_by_id(punit.ai.ferryboat);
+//    unit ferry = Game.find_unit_by_id(punit.ai.ferryboat);
 //    
 //    if (ferry && ferry.ai.passenger == punit.id) {
 //      /* punit doesn't want us anymore */
@@ -197,7 +197,7 @@ public class Aiferry{
 //  int boats = 0;
 //
 //  for (unit punit : pplayer.units.data) {
-//    if (is_sailing_unit(punit) && is_ground_units_transport(punit) 
+//    if (Unit.is_sailing_unit(punit) && is_ground_units_transport(punit) 
 //	&& punit.ai.passenger == FERRY_AVAILABLE) {
 //      boats++;
 //    }
@@ -412,7 +412,7 @@ public class Aiferry{
 //    UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, "will have to go to (%d,%d) by boat",
 //             TILE_XY(dest_tile));
 //
-//    if (!is_ocean_near_tile(punit.tile)) {
+//    if (!Terrain.is_terrain_flag_near_tile(punit.tile)) {
 //      pf_path path_to_ferry = null;
 //      
 //      boatid = aiferry_find_boat(punit, 2, &path_to_ferry);
@@ -422,7 +422,7 @@ public class Aiferry{
 //        return false;
 //      }
 //
-//      ferryboat = find_unit_by_id(boatid);
+//      ferryboat = Game.find_unit_by_id(boatid);
 //      UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, "found boat[%d](%d,%d), going there", 
 //	       boatid, TILE_XY(ferryboat.tile));
 //      /* The path can be amphibious so we will stop at the coast.  
@@ -435,7 +435,7 @@ public class Aiferry{
 //      pf_destroy_path(path_to_ferry);
 //    }
 //
-//    if (!is_ocean_near_tile(punit.tile)) {
+//    if (!Terrain.is_terrain_flag_near_tile(punit.tile)) {
 //      /* Still haven't reached the coast */
 //      return false;
 //    }
@@ -449,7 +449,7 @@ public class Aiferry{
 //    }
 //
 //    /* Ok, a boat found, try boarding it */
-//    ferryboat = find_unit_by_id(boatid);
+//    ferryboat = Game.find_unit_by_id(boatid);
 //    UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, "found a nearby boat[%d](%d,%d)",
 //	     ferryboat.id, TILE_XY(ferryboat.tile));
 //    /* Setting ferry now in hope it won't run away even 
@@ -475,12 +475,12 @@ public class Aiferry{
 //
 //  if (punit.transported_by > 0) {
 //    /* We are on a boat, ride it! */
-//    unit ferryboat = find_unit_by_id(punit.transported_by);
+//    unit ferryboat = Game.find_unit_by_id(punit.transported_by);
 //
 //    /* Check if we are the passenger-in-charge */
 //    if (is_boat_free(ferryboat, punit, 0)) {
 //      tile beach_tile;     /* Destination for the boat */
-//      unit bodyguard = find_unit_by_id(punit.ai.bodyguard);
+//      unit bodyguard = Game.find_unit_by_id(punit.ai.bodyguard);
 //
 //      UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, 
 //	       "got boat[%d](moves left: %d), going (%d,%d)",
@@ -490,7 +490,7 @@ public class Aiferry{
 //      /* If the location is not accessible directly from sea
 //       * or is defended and we are not marines, we will need a 
 //       * landing beach */
-//      if (!is_ocean_near_tile(dest_tile)
+//      if (!Terrain.is_terrain_flag_near_tile(dest_tile)
 //          ||((is_non_allied_city_tile(dest_tile, pplayer) 
 //              || Unit.is_non_allied_unit_tile(dest_tile, pplayer))
 //             && !unit_flag(punit, F_MARINES))) {
@@ -548,7 +548,7 @@ public class Aiferry{
 //    }
 //
 //    UNIT_LOG(LOGLEVEL_GOBYBOAT, punit, "Our boat has arrived");
-//    handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//    Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  }
 //
 //  return true;
@@ -657,7 +657,7 @@ public class Aiferry{
 //      break;
 //    }
 //
-//    pcity = map_get_city(pos.tile);
+//    pcity = Map.map_get_city(pos.tile);
 //    
 //    if (pcity && pcity.owner == pferry.owner
 //        && (pcity.ai.choice.need_boat 
@@ -726,7 +726,7 @@ public class Aiferry{
 //
 //  /* Try to recover hitpoints if we are in a city, before we do anything */
 //  if (punit.hp < punit.unit_type().hp 
-//      && (pcity = map_get_city(punit.tile))) {
+//      && (pcity = Map.map_get_city(punit.tile))) {
 //    UNIT_LOG(LOGLEVEL_FERRY, punit, "waiting in %s to recover hitpoints", 
 //             pcity.name);
 //    return;
@@ -743,7 +743,7 @@ public class Aiferry{
 //    tile ptile = punit.tile;
 //
 //    if (punit.ai.passenger > 0) {
-//      unit psngr = find_unit_by_id(punit.ai.passenger);
+//      unit psngr = Game.find_unit_by_id(punit.ai.passenger);
 //      
 //      /* If the passenger-in-charge is adjacent, we should wait for it to 
 //       * board.  We will pass control to it later. */
@@ -786,12 +786,12 @@ public class Aiferry{
 //
 //    if (punit.ai.passenger > 0) {
 //      int bossid = punit.ai.passenger;    /* Loop prevention */
-//      unit boss = find_unit_by_id(punit.ai.passenger);
+//      unit boss = Game.find_unit_by_id(punit.ai.passenger);
 //      int id = punit.id;                  /* To check if survived */
 //
 //      assert(boss != null);
 //
-//      if (unit_flag(boss, F_SETTLERS) || unit_flag(boss, F_CITIES)) {
+//      if (unit_flag(boss, Eunit_flag_id.F_SETTLERS) || unit_flag(boss, Eunit_flag_id.F_CITIES)) {
 //        /* Temporary hack: settlers all go in the end, forcing them 
 //         * earlier might mean uninitialised cache, so just wait for them */
 //        return;
@@ -801,10 +801,10 @@ public class Aiferry{
 //		boss.unit_type().name, boss.id);
 //      ai_manage_unit(pplayer, boss);
 //    
-//      if (!find_unit_by_id(id) || punit.moves_left <= 0) {
+//      if (!Game.find_unit_by_id(id) || punit.moves_left <= 0) {
 //        return;
 //      }
-//      if (find_unit_by_id(bossid)) {
+//      if (Game.find_unit_by_id(bossid)) {
 //	if (Map.same_pos(punit.tile, boss.tile)) {
 //	  /* The boss decided to stay put on the ferry. We aren't moving. */
 //	  return;
@@ -832,7 +832,7 @@ public class Aiferry{
 //
 //  UNIT_LOG(LOGLEVEL_FERRY, punit, "Ferryboat is not carrying anyone.");
 //  aiferry_make_available(punit);
-//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//  Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //  ai_unit_new_role(punit, AIUNIT_NONE, null);
 //  CHECK_UNIT(punit);
 //

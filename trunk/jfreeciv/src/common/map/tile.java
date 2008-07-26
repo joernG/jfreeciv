@@ -3,6 +3,7 @@ package common.map;
 import utility.Speclists;
 
 import common.city.city;
+import common.player.player;
 import common.unit.unit;
 
 public class tile {
@@ -36,14 +37,14 @@ public class tile {
 	 * Player_no is index
 	 */
 	  public int known;
-//	  int assigned; /* these can save a lot of CPU usage -- Syela */
-//	  struct city *worked;      /* city working tile, or NULL if none */
-//	  Continent_id continent;
-//	  signed char move_cost[8]; /* don't know if this helps! */
-//	  struct player *owner;     /* Player owning this tile, or NULL. */
+	  public int assigned; /* these can save a lot of CPU usage -- Syela */
+	  public city worked;      /* city working tile, or NULL if none */
+//	  public Continent_id continent;
+	  public int move_cost[]=new int [8]; /* don't know if this helps! */
+	  public player owner;     /* Player owning this tile, or NULL. */
 //	  struct {
 //	    /* Area Selection in client. */
-//	    enum tile_hilite hilite;
+//	    public tile_hilite hilite;
 //	  } client;
 //	  char *spec_sprite;
 //	};

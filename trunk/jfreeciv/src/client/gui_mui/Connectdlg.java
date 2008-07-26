@@ -121,12 +121,12 @@ public class Connectdlg{
 //  server newentry = (struct server*)AllocVec(sizeof(*newentry),0);
 //  if(newentry)
 //  {
-//    newentry.name = mystrdup(entry.name);
-//    newentry.port = mystrdup(entry.port);
-//    newentry.version = mystrdup(entry.version);
-//    newentry.status = mystrdup(entry.status);
-//    newentry.players = mystrdup(entry.players);
-//    newentry.metastring = mystrdup(entry.metastring);
+//    newentry.name = (entry.name);
+//    newentry.port = (entry.port);
+//    newentry.version = (entry.version);
+//    newentry.status = (entry.status);
+//    newentry.players = (entry.players);
+//    newentry.metastring = (entry.metastring);
 //  }
 //  return newentry;
 //}

@@ -257,7 +257,7 @@ public class Text{
 //		 diplo_city_adjectives[ds[owner.player_no].type]);
 //      }
 //    }
-//    if (city_got_citywalls(pcity)) {
+//    if (City.city_got_citywalls(pcity)) {
 //      /* TRANS: previous lines gave other information about the city. */
 //      add("%s"," with City Walls");
 //    }
@@ -266,8 +266,8 @@ public class Text{
 //      city hcity = Game.find_city_by_id(pfocus_unit.homecity);
 //
 //      if (unit_flag(pfocus_unit, F_TRADE_ROUTE)
-//	  && can_cities_trade(hcity, pcity)
-//	  && can_establish_trade_route(hcity, pcity)) {
+//	  && City.can_cities_trade(hcity, pcity)
+//	  && City.can_establish_trade_route(hcity, pcity)) {
 //	/* TRANS: "Trade from Warsaw: 5" */
 //	add_line("Trade from %s: %d",
 //		 hcity.name, trade_between_cities(hcity, pcity));
@@ -788,7 +788,7 @@ public class Text{
 //
 //  add_line("Buildings: ");
 //
-//  get_city_bonus_sources(&sources, pcity, EFT_MAKE_CONTENT);
+//  Effects.get_city_bonus_sources(&sources, pcity, EFT_MAKE_CONTENT);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
 //    add("%s. ", Improvement.get_improvement_name(src.building));
@@ -813,21 +813,21 @@ public class Text{
 //
 //  add_line("Wonders: ");
 //
-//  get_city_bonus_sources(&sources, pcity, EFT_MAKE_HAPPY);
+//  Effects.get_city_bonus_sources(&sources, pcity, EFT_MAKE_HAPPY);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
 //    add("%s. ", Improvement.get_improvement_name(src.building));
 //  } effect_source_vector_iterate_end;
 //  effect_source_vector_free(&sources);
 //
-//  get_city_bonus_sources(&sources, pcity, EFT_FORCE_CONTENT);
+//  Effects.get_city_bonus_sources(&sources, pcity, EFT_FORCE_CONTENT);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
 //    add("%s. ", Improvement.get_improvement_name(src.building));
 //  } effect_source_vector_iterate_end;
 //  effect_source_vector_free(&sources);
 //
-//  get_city_bonus_sources(&sources, pcity, EFT_NO_UNHAPPY);
+//  Effects.get_city_bonus_sources(&sources, pcity, EFT_NO_UNHAPPY);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
 //    add("%s. ", Improvement.get_improvement_name(src.building));

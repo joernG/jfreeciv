@@ -68,14 +68,14 @@ public class Settlers{
 //  city pcity;
 //
 //  assert(pplayer == punit.unit_owner());
-//  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//  Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //
 //  /* Free city reservations */
 //  ai_unit_new_role(punit, AIUNIT_NONE, null);
 //
 //  handle_unit_build_city(pplayer, punit.id,
 //			 Citytools.city_name_suggestion(pplayer, ptile));
-//  pcity = map_get_city(ptile);
+//  pcity = Map.map_get_city(ptile);
 //  if (!pcity) {
 //    util.freelog(Log.LOG_ERROR, "%s: Failed to build city at (%d, %d)", 
 //            pplayer.name, TILE_XY(ptile));
@@ -172,9 +172,9 @@ public class Settlers{
 ///* I'm still not sure this is exactly right -- Syela */
 //    unit_list_iterate(ptile.units, punit)
 //      if (myunit==punit) continue;
-//      if (!pplayers_allied(punit.unit_owner(), pplayer))
+//      if (!Player_P.pplayers_allied(punit.unit_owner(), pplayer))
 //        return true; /* oops, tile is occupied! */
-//      if (unit_flag(punit, F_SETTLERS) && unit_flag(myunit, F_SETTLERS))
+//      if (unit_flag(punit, Eunit_flag_id.F_SETTLERS) && unit_flag(myunit, Eunit_flag_id.F_SETTLERS))
 //        return true;
 //    }
 //    return false;
@@ -235,7 +235,7 @@ public class Settlers{
 //  }
 //  Map.map_clear_special(ptile, S_POLLUTION);
 //  goodness = city_tile_value(pcity, city_x, city_y, 0, 0);
-//  map_set_special(ptile, S_POLLUTION);
+//  Map.map_set_special(ptile, S_POLLUTION);
 //
 //  /* FIXME: need a better way to guarantee pollution is cleaned up. */
 //  goodness = (goodness + best + 50) * 2;
@@ -265,7 +265,7 @@ public class Settlers{
 //  }
 //  Map.map_clear_special(ptile, S_FALLOUT);
 //  goodness = city_tile_value(pcity, city_x, city_y, 0, 0);
-//  map_set_special(ptile, S_FALLOUT);
+//  Map.map_set_special(ptile, S_FALLOUT);
 //
 //  /* FIXME: need a better way to guarantee fallout is cleaned up. */
 //  if (!pplayer.ai.control) {
@@ -300,7 +300,7 @@ public class Settlers{
 //  }
 //
 //  special = map_get_special(ptile);
-//  if (contains_special(special, S_RIVER)
+//  if (contains_special(special, Terrain_H.S_RIVER)
 //      || contains_special(special, S_IRRIGATION)) {
 //    return true;
 //  }
@@ -353,7 +353,7 @@ public class Settlers{
 //  tile_type type = get_tile_type(old_terrain);
 //  int new_terrain = type.irrigation_result;
 //
-//  if (old_terrain != new_terrain && new_terrain != T_NONE) {
+//  if (old_terrain != new_terrain && new_terrain != Terrain_H.T_NONE) {
 //    /* Irrigation would change the terrain type, clearing the mine
 //     * in the process.  Calculate the benefit of doing so. */
 //    if (ptile.city && Terrain_H.terrain_has_flag(new_terrain, TER_NO_CITIES)) {
@@ -372,7 +372,7 @@ public class Settlers{
 //     * S_IRRIGATE on it replacing any S_MINE already there.  Calculate
 //     * the benefit of doing so. */
 //    Map.map_clear_special(ptile, S_MINE);
-//    map_set_special(ptile, S_IRRIGATION);
+//    Map.map_set_special(ptile, S_IRRIGATION);
 //    goodness = city_tile_value(pcity, city_x, city_y, 0, 0);
 //    ptile.special = old_special;
 //    assert(ptile.terrain == old_terrain);
@@ -380,12 +380,12 @@ public class Settlers{
 //  } else if (old_terrain == new_terrain
 //	     && Map.tile_has_special(ptile, S_IRRIGATION)
 //	     && !Map.tile_has_special(ptile, S_FARMLAND)
-//	     && player_knows_techs_with_flag(pplayer, TF_FARMLAND)
+//	     && Player_P.player_knows_techs_with_flag(pplayer, TF_FARMLAND)
 //	     && is_wet_or_is_wet_cardinal_around(pplayer, ptile)) {
 //    /* The tile is currently irrigated; irrigating it more puts an
 //     * S_FARMLAND on it.  Calculate the benefit of doing so. */
 //    assert(!Map.tile_has_special(ptile, S_MINE));
-//    map_set_special(ptile, S_FARMLAND);
+//    Map.map_set_special(ptile, S_FARMLAND);
 //    goodness = city_tile_value(pcity, city_x, city_y, 0, 0);
 //    Map.map_clear_special(ptile, S_FARMLAND);
 //    assert(ptile.terrain == old_terrain && ptile.special == old_special);
@@ -416,7 +416,7 @@ public class Settlers{
 //  tile_type type = get_tile_type(old_terrain);
 //  int new_terrain = type.mining_result;
 //
-//  if (old_terrain != new_terrain && new_terrain != T_NONE) {
+//  if (old_terrain != new_terrain && new_terrain != Terrain_H.T_NONE) {
 //    /* Mining would change the terrain type, clearing the irrigation
 //     * in the process.  Calculate the benefit of doing so. */
 //    if (ptile.city && Terrain_H.terrain_has_flag(new_terrain, TER_NO_CITIES)) {
@@ -436,7 +436,7 @@ public class Settlers{
 //     * the benefit of doing so. */
 //    Map.map_clear_special(ptile, S_IRRIGATION);
 //    Map.map_clear_special(ptile, S_FARMLAND);
-//    map_set_special(ptile, S_MINE);
+//    Map.map_set_special(ptile, S_MINE);
 //    goodness = city_tile_value(pcity, city_x, city_y, 0, 0);
 //    ptile.special = old_special;
 //    assert(ptile.terrain == old_terrain);
@@ -468,7 +468,7 @@ public class Settlers{
 //  tile_type type = get_tile_type(old_terrain);
 //  int new_terrain = type.transform_result;
 //
-//  if (old_terrain == new_terrain || new_terrain == T_NONE) {
+//  if (old_terrain == new_terrain || new_terrain == Terrain_H.T_NONE) {
 //    return -1;
 //  }
 //
@@ -649,11 +649,11 @@ public class Settlers{
 //  int goodness;
 //
 //  if (!Terrain_H.is_ocean(ptile.terrain)
-//      && (!Map.tile_has_special(ptile, S_RIVER)
-//	  || player_knows_techs_with_flag(pplayer, TF_BRIDGE))
+//      && (!Map.tile_has_special(ptile, Terrain_H.S_RIVER)
+//	  || Player_P.player_knows_techs_with_flag(pplayer, TF_BRIDGE))
 //      && !Map.tile_has_special(ptile, Terrain_H.S_ROAD)) {
 //
-//    /* HACK: calling map_set_special here will have side effects, so we
+//    /* HACK: calling Map.map_set_special here will have side effects, so we
 //     * have to set it manually. */
 //    assert((ptile.special & Terrain_H.S_ROAD) == 0);
 //    ptile.special |= Terrain_H.S_ROAD;
@@ -691,11 +691,11 @@ public class Settlers{
 //  enum int old_special;
 //
 //  if (!Terrain_H.is_ocean(ptile.terrain)
-//      && player_knows_techs_with_flag(pplayer, TF_RAILROAD)
+//      && Player_P.player_knows_techs_with_flag(pplayer, tech_flag_id.TF_RAILROAD)
 //      && !Map.tile_has_special(ptile, Terrain_H.S_RAILROAD)) {
 //    old_special = ptile.special;
 //
-//    /* HACK: calling map_set_special here will have side effects, so we
+//    /* HACK: calling Map.map_set_special here will have side effects, so we
 //     * have to set it manually. */
 //    ptile.special |= (Terrain_H.S_ROAD | Terrain_H.S_RAILROAD);
 //
@@ -832,10 +832,10 @@ public class Settlers{
 //
 //  if (punit.id == 0) {
 //    /* It is a virtual unit, so must start in a city... */
-//    city pcity = map_get_city(punit.tile);
+//    city pcity = Map.map_get_city(punit.tile);
 //
 //    /* The default is to lose 100%.  The growth bonus reduces this. */
-//    int foodloss_pct = 100 - get_city_bonus(pcity, EFT_GROWTH_FOOD);
+//    int foodloss_pct = 100 - Effects.get_city_bonus(pcity, EFT_GROWTH_FOOD);
 //
 //    foodloss_pct = CLIP(0, foodloss_pct, 100);
 //    assert(pcity != null);
@@ -872,7 +872,7 @@ public class Settlers{
 //				 enum unit_activity *best_act,
 //				 tile *best_tile)
 //{
-//  city mycity = map_get_city(punit.tile);
+//  city mycity = Map.map_get_city(punit.tile);
 //  player pplayer = punit.unit_owner();
 //  boolean in_use;			/* true if the target square is being used
 //				   by one of our cities */
@@ -885,7 +885,7 @@ public class Settlers{
 //				   so that newv=0 activities are not chosen */
 //  int food_upkeep        = unit_food_upkeep(punit);
 //  int food_cost          = unit_foodbox_cost(punit);
-//  boolean can_rr = player_knows_techs_with_flag(pplayer, TF_RAILROAD);
+//  boolean can_rr = Player_P.player_knows_techs_with_flag(pplayer, tech_flag_id.TF_RAILROAD);
 //
 //  int best_newv = 0;
 //  enemy_mask my_enemies = enemies[pplayer.player_no]; /* optimalization */
@@ -1045,7 +1045,7 @@ public class Settlers{
 //  result.result = 0;
 //
 //  assert(pplayer && punit);
-//  assert(unit_flag(punit, F_CITIES) || unit_flag(punit, F_SETTLERS));
+//  assert(unit_flag(punit, Eunit_flag_id.F_CITIES) || unit_flag(punit, Eunit_flag_id.F_SETTLERS));
 //
 //  /*** If we are on a city mission: Go where we should ***/
 //
@@ -1064,7 +1064,7 @@ public class Settlers{
 //      return; /* avoid recursion at all cost */
 //    } else {
 //      /* Go there */
-//      if ((!ai_gothere(pplayer, punit, ptile) && !find_unit_by_id(sanity))
+//      if ((!ai_gothere(pplayer, punit, ptile) && !Game.find_unit_by_id(sanity))
 //          || punit.moves_left <= 0) {
 //        return;
 //      }
@@ -1088,18 +1088,18 @@ public class Settlers{
 //
 //  /*** Try find some work ***/
 //
-//  if (unit_flag(punit, F_SETTLERS)) {
+//  if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //    best_impr = evaluate_improvements(punit, &best_act, &best_tile);
 //  }
 //
-//  if (unit_flag(punit, F_CITIES) && pplayer.ai.control) {
+//  if (unit_flag(punit, Eunit_flag_id.F_CITIES) && pplayer.ai.control) {
 //    find_best_city_placement(punit, &result, true, false);
 //    UNIT_LOG(LOG_SETTLER, punit, "city want %d (impr want %d)", result.result,
 //             best_impr);
 //    if (result.result > best_impr) {
-//      if (map_get_city(result.tile)) {
+//      if (Map.map_get_city(result.tile)) {
 //        UNIT_LOG(LOG_SETTLER, punit, "immigrates to %s (%d, %d)", 
-//                 map_get_city(result.tile).name, TILE_XY(result.tile));
+//                 Map.map_get_city(result.tile).name, TILE_XY(result.tile));
 //      } else {
 //        UNIT_LOG(LOG_SETTLER, punit, "makes city at (%d, %d)", 
 //                 TILE_XY(result.tile));
@@ -1146,7 +1146,7 @@ public class Settlers{
 //    }
 //    if (punit.moves_left > 0
 //        && Map.same_pos(best_tile, punit.tile)) {
-//      handle_unit_activity_request(punit, best_act);
+//      Unithand.handle_unit_activity_request(punit, best_act);
 //      Unittools.send_unit_info(null, punit);
 //      return;
 //    }
@@ -1167,7 +1167,10 @@ public class Settlers{
 //{
 //  int best = 0;
 //
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(x, y)) {
 //    if (City.is_city_center(x, y) 
 //	|| City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_WORKER 
 //	|| City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_EMPTY) {
@@ -1177,7 +1180,7 @@ public class Settlers{
 //	best = tmp;
 //      }
 //    }
-//  } city_map_iterate_end;
+//  } };
 //  return best;
 //}
 //
@@ -1193,7 +1196,10 @@ public class Settlers{
 //  for (city pcity : pplayer.cities.data) {
 //    int best = best_worker_tile_value(pcity);
 //
-//    city_map_iterate(city_x, city_y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int city_x = _itr % City_H.CITY_MAP_SIZE, city_y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(city_x, city_y)) {
 //      pcity.ai.detox[city_x][city_y] = -1;
 //      pcity.ai.derad[city_x][city_y] = -1;
 //      pcity.ai.mine[city_x][city_y] = -1;
@@ -1201,7 +1207,7 @@ public class Settlers{
 //      pcity.ai.transform[city_x][city_y] = -1;
 //      pcity.ai.road[city_x][city_y] = -1;
 //      pcity.ai.railroad[city_x][city_y] = -1;
-//    } city_map_iterate_end;
+//    } };
 //
 //    city_map_checked_iterate(pcity.tile,
 //			     city_x, city_y, ptile) {
@@ -1264,16 +1270,16 @@ public class Settlers{
 //   * from the human player and take precedence. */
 //  for (unit punit : pplayer.units.data) {
 //    if ((punit.ai.control || pplayer.ai.control)
-//	&& (unit_flag(punit, F_SETTLERS)
-//	    || unit_flag(punit, F_CITIES))
+//	&& (unit_flag(punit, Eunit_flag_id.F_SETTLERS)
+//	    || unit_flag(punit, Eunit_flag_id.F_CITIES))
 //	&& !unit_has_orders(punit)) {
 //      util.freelog(Log.LOG_DEBUG, "%s's settler at (%d, %d) is ai controlled.",
 //	      pplayer.name, TILE_XY(punit.tile)); 
 //      if (punit.activity == ACTIVITY_SENTRY) {
-//	handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//	Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //      }
 //      if (punit.activity == unit_activity.ACTIVITY_GOTO && punit.moves_left > 0) {
-//        handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//        Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //      }
 //      if (punit.activity == unit_activity.ACTIVITY_IDLE) {
 //        auto_settler_findwork(pplayer, punit);
@@ -1298,8 +1304,8 @@ public class Settlers{
 //  int i = 1<<pplayer.player_no;
 //  tile ptile;
 //  unit_list_iterate(pplayer.units, punit)
-//    if (unit_flag(punit, F_SETTLERS)
-//	|| unit_flag(punit, F_CITIES)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)
+//	|| unit_flag(punit, Eunit_flag_id.F_CITIES)) {
 //      if (punit.activity == unit_activity.ACTIVITY_GOTO) {
 //        ptile = punit.goto_tile;
 //        ptile.assigned = ptile.assigned | i; /* assigned for us only */
@@ -1337,7 +1343,7 @@ public class Settlers{
 //			  int distance, int s)
 //{
 //  for(tile tile1: util.square_tile_iterate(ptile, distance)) {
-//    if (s == 0 || Terrain_H.is_ocean_near_tile(tile1)) {
+//    if (s == 0 || Terrain.is_terrain_flag_near_tile(tile1)) {
 //      BV_SET(TERRITORY(tile1), player_no);
 //    }
 //  }
@@ -1361,7 +1367,7 @@ public class Settlers{
 //  unit_list_iterate(pplayer.units, punit)
 //    if (punit.unit_type().attack_strength != 0) {
 ///* I could argue that phalanxes aren't really a threat, but ... */
-//      if (is_sailing_unit(punit)) {
+//      if (Unit.is_sailing_unit(punit)) {
 //        assign_region(punit.tile, n, 1 + punit.unit_type().move_rate / Unit_H.SINGLE_MOVE, 1);
 //      } else if (is_ground_unit(punit)) {
 //        assign_region(punit.tile, n, 1 + punit.unit_type().move_rate /
@@ -1375,8 +1381,7 @@ public class Settlers{
 //      } 
 //    }
 //  }
-//  city_list_iterate(pplayer.cities, pcity)
-//    assign_region(pcity.tile, n, 3, 0);
+//  for(city pcity : pplayer.cities.data){//    assign_region(pcity.tile, n, 3, 0);
 //  }
 //}
 //
@@ -1405,7 +1410,7 @@ public class Settlers{
 //  for(player player1: Game.game.players){
 //    BV_CLR_ALL(enemies[player1.player_no]);
 //    for(player player2: Game.game.players){
-//      if (!pplayers_allied(player1, player2))
+//      if (!Player_P.pplayers_allied(player1, player2))
 //        BV_SET(enemies[player1.player_no], player2.player_no);
 //    }
 //  }
@@ -1429,10 +1434,10 @@ public class Settlers{
 //{
 //  player pplayer = City.city_owner(pcity);
 //  unit virtualunit;
-//  int unit_type = best_role_unit(pcity, F_CITIES); 
+//  int unit_type = best_role_unit(pcity, Eunit_flag_id.F_CITIES); 
 //
 //  if (unit_type == unittype.U_LAST) {
-//    util.freelog(Log.LOG_DEBUG, "No F_CITIES role unit available");
+//    util.freelog(Log.LOG_DEBUG, "No Eunit_flag_id.F_CITIES role unit available");
 //    return;
 //  }
 //
@@ -1444,7 +1449,7 @@ public class Settlers{
 //
 //  if (pplayer.ai.control) {
 //    struct cityresult result;
-//    boolean is_coastal = is_ocean_near_tile(pcity.tile);
+//    boolean is_coastal = Terrain.is_terrain_flag_near_tile(pcity.tile);
 //
 //    find_best_city_placement(virtualunit, &result, is_coastal, is_coastal);
 //
@@ -1465,7 +1470,7 @@ public class Settlers{
 //  Estimates the want for a terrain improver (aka worker) by creating a 
 //  virtual unit and feeding it to evaluate_improvements.
 //
-//  TODO: AI does not ship F_SETTLERS around, only F_CITIES - Per
+//  TODO: AI does not ship Eunit_flag_id.F_SETTLERS around, only Eunit_flag_id.F_CITIES - Per
 //**************************************************************************/
 //void contemplate_terrain_improvements(city pcity)
 //{
@@ -1476,10 +1481,10 @@ public class Settlers{
 //  enum unit_activity best_act;
 //  tile ptile = pcity.tile;
 //  ai_data ai = ai_data_get(pplayer);
-//  int unit_type = best_role_unit(pcity, F_SETTLERS);
+//  int unit_type = best_role_unit(pcity, Eunit_flag_id.F_SETTLERS);
 //
 //  if (unit_type == unittype.U_LAST) {
-//    util.freelog(Log.LOG_DEBUG, "No F_SETTLERS role unit available");
+//    util.freelog(Log.LOG_DEBUG, "No Eunit_flag_id.F_SETTLERS role unit available");
 //    return;
 //  }
 //
@@ -1498,7 +1503,7 @@ public class Settlers{
 //
 //  CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s with want %d to do %s at (%d,%d), " +
 //           "we have %d workers and %d cities on the continent",
-//	   unit_name(unit_type), want, get_activity_text(best_act),
+//	   Unittype_P.unit_name(unit_type), want, get_activity_text(best_act),
 //	   TILE_XY(best_tile),
 //           ai.stats.workers[ptile.continent], 
 //           ai.stats.cities[ptile.continent]);

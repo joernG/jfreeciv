@@ -178,7 +178,7 @@ public class Happiness{
 //
 //  city pcity = pdialog.pcity;
 //  player pplayer = &Game.game.players[pcity.owner];
-//  government g = get_gov_pcity(pcity);
+//  government g = Government.get_gov_pcity(pcity);
 //  int cities = pplayer.cities.foo_list_size();
 //  int content = Game.game.unhappysize;
 //  int basis = Game.game.cityfactor + g.empire_size_mod;
@@ -244,7 +244,7 @@ public class Happiness{
 //  char buf[512], *bptr = buf;
 //  int nleft = sizeof(buf);
 //  city pcity = pdialog.pcity;
-//  government g = get_gov_pcity(pcity);
+//  government g = Government.get_gov_pcity(pcity);
 //  int mlmax = g.martial_law_max;
 //  int uhcfac = g.unit_happy_cost_factor;
 //

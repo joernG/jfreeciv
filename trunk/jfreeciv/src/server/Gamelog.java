@@ -108,7 +108,7 @@ public class Gamelog{
     city 
   GAMELOG_FOUNDCITY
     city 
-  GAMELOG_LOSECITY
+  EGamelog.GAMELOG_LOSECITY
     player 
     player 
     city 
@@ -217,7 +217,7 @@ public class Gamelog{
 //                Nation.get_nation_name_plural(City.city_owner(pcity).nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "cityf");
 //    break;
-//  case GAMELOG_LOSECITY:
+//  case EGamelog.GAMELOG_LOSECITY:
 //    pplayer = va_arg(args, player );
 //    pplayer2 = va_arg(args, player );
 //    pcity = va_arg(args, city );
@@ -359,17 +359,17 @@ public class Gamelog{
 //                  "<n1>%d</n1><n2>%d</n2><name>%s</name>" +
 //                  "<m>%s lose %s to the %s</m>",
 //                  punit.unit_owner().player_no, pplayer.player_no,
-//                  unit_name(punit.type),
+//                  Unittype_P.unit_name(punit.type),
 //                  Nation.get_nation_name_plural(punit.unit_owner().nation),
-//                  unit_name(punit.type),
+//                  Unittype_P.unit_name(punit.type),
 //                  Nation.get_nation_name_plural(pplayer.nation));
 //    } else {
 //      word = va_arg(args, char *);
 //      buf = util.my_snprintf(
 //                  "<n1>%d</n1><name>%s</name><m>%s lose %s (%s)</m>",
-//                  punit.unit_owner().player_no, unit_name(punit.type),
+//                  punit.unit_owner().player_no, Unittype_P.unit_name(punit.type),
 //                  Nation.get_nation_name_plural(punit.unit_owner().nation),
-//                  unit_name(punit.type), word);
+//                  Unittype_P.unit_name(punit.type), word);
 //    }
 //    gamelog_put_prefix(buf, sizeof(buf), "unitl");
 //    break;
@@ -379,7 +379,7 @@ public class Gamelog{
 //    buf = util.my_snprintf(
 //                "<n>%d</n><name>%s</name>" +
 //                "<m>%s lost a Game.game loss unit and util.died</m>",
-//                punit.unit_owner().player_no, unit_name(punit.type),
+//                punit.unit_owner().player_no, Unittype_P.unit_name(punit.type),
 //                Nation.get_nation_name_plural(punit.unit_owner().nation));
 //    gamelog_put_prefix(buf, sizeof(buf), "gamel");
 //    break;
@@ -408,14 +408,14 @@ public class Gamelog{
 //                City.city_owner(pcity).player_no, pcity.name,
 //                pcity.is_building_unit ? 1 : 0,
 //                (!pcity.is_building_unit 
-//                 && is_wonder(pcity.currently_building)) ? 1 : 0,
+//                 && Improvement.is_wonder(pcity.currently_building)) ? 1 : 0,
 //                pcity.is_building_unit ? 
 //                  Unittype_P.unit_types[pcity.currently_building].name :
-//                  get_impr_name_ex(pcity, pcity.currently_building),
+//                  City.get_impr_name_ex(pcity, pcity.currently_building),
 //                Nation.get_nation_name_plural(City.city_owner(pcity).nation),
 //                pcity.is_building_unit ? 
 //                  Unittype_P.unit_types[pcity.currently_building].name :
-//                  get_impr_name_ex(pcity, pcity.currently_building),
+//                  City.get_impr_name_ex(pcity, pcity.currently_building),
 //                pcity.name);
 //    gamelog_put_prefix(buf, sizeof(buf), "build");
 //    break;
@@ -444,7 +444,7 @@ public class Gamelog{
 //      int food = 0, shields = 0, trade = 0, settlers = 0;
 //
 //      for (unit punit : pplayer.units.data) {
-//        if (unit_flag(punit, F_CITIES)) {
+//        if (unit_flag(punit, Eunit_flag_id.F_CITIES)) {
 //          settlers++;
 //        }
 //      } }

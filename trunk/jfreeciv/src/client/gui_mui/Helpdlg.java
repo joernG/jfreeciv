@@ -214,8 +214,8 @@ public class Helpdlg{
 //  return bg;
 //}
 //
-//public static final int TECHTYPE_NOTSET = A_LAST;+2
-//public static final int TECHTYPE_NONE = A_LAST;+1
+//public static final int TECHTYPE_NOTSET = Tech_H.A_LAST;+2
+//public static final int TECHTYPE_NONE = Tech_H.A_LAST;+1
 //
 ///****************************************************************
 // Returns a tech buttons text
@@ -224,7 +224,7 @@ public class Helpdlg{
 //{
 //  char *text;
 //
-//  if(tech == A_LAST)
+//  if(tech == Tech_H.A_LAST)
 //    text = "(Never)";
 //  else if(tech == TECHTYPE_NONE)
 //    text = "None";
@@ -614,7 +614,7 @@ public class Helpdlg{
 //
 //  if (which < Game.game.num_impr_types)
 //  {
-//    impr_type imp = &improvement_types[which];
+//    impr_type imp = &Improvement.improvement_types[which];
 //
 //    DoMethod(help_imprv_cost_text, MUIM_SetAsString,
 //	     MUIA_Text_Contents, "%ld", Improvement.impr_build_shield_cost(which));
@@ -639,7 +639,7 @@ public class Helpdlg{
 //
 //  if (which < Game.game.num_impr_types)
 //  {
-//    impr_type imp = &improvement_types[which];
+//    impr_type imp = &Improvement.improvement_types[which];
 //
 //    DoMethod(help_wonder_cost_text, MUIM_SetAsString,
 //	     MUIA_Text_Contents, "%ld", Improvement.impr_build_shield_cost(which));
@@ -650,7 +650,7 @@ public class Helpdlg{
 //  else
 //  {
 //    set(help_wonder_cost_text, MUIA_Text_Contents, "0");
-//    set(help_wonder_needs_button, MUIA_Text_Contents, A_LAST);
+//    set(help_wonder_needs_button, MUIA_Text_Contents, Tech_H.A_LAST);
 //    set(help_wonder_obsolete_button, MUIA_Text_Contents, TECHTYPE_NONE);
 //  }
 //
@@ -702,10 +702,10 @@ public class Helpdlg{
 //
 //    switch (get_unit_type(i).move_type)
 //    {
-//      case LAND_MOVING: bg_color = 0x0000c800; /* green */ break;
-//      case SEA_MOVING:  bg_color = 0x000000c8; /* blue */ break;
-//      case HELI_MOVING: bg_color = 0x00ffff00; /* yellow */ break;
-//      case AIR_MOVING:  bg_color = 0x0000ffc8; /* cyan */ break;
+//      case unit_move_type.LAND_MOVING: bg_color = 0x0000c800; /* green */ break;
+//      case unit_move_type.SEA_MOVING:  bg_color = 0x000000c8; /* blue */ break;
+//      case unit_move_type.HELI_MOVING: bg_color = 0x00ffff00; /* yellow */ break;
+//      case unit_move_type.AIR_MOVING:  bg_color = 0x0000ffc8; /* cyan */ break;
 //      default:          bg_color = 0x00000000; /* black */ break;
 //    }
 //
@@ -747,22 +747,22 @@ public class Helpdlg{
 //
 //      if (help_tech_group)
 //      {
-//	impr_type_iterate(j) {
+//	for (int j = 0; j < Game.game.num_impr_types; j++) {
 //	  Object *o, *button;
-//	  if (i != improvement_types[j].tech_req)
+//	  if (i != Improvement.improvement_types[j].tech_req)
 //	    continue;
 //
 //	  o = HGroup,
 //	    GroupSpacing(0),
 //	    Child, MakeLabel("Allows "),
-//	    Child, button = MakeHelpButton(improvement_types[j].name, is_wonder(j) ? HELP_WONDER : HELP_IMPROVEMENT),
-//	    Child, is_wonder(j) ? MakeLabel(" wonder") : MakeLabel(" improvement"),
+//	    Child, button = MakeHelpButton(Improvement.improvement_types[j].name, Improvement.is_wonder(j) ? HELP_WONDER : HELP_IMPROVEMENT),
+//	    Child, Improvement.is_wonder(j) ? MakeLabel(" wonder") : MakeLabel(" improvement"),
 //	    Child, HSpace(0),
 //	    End;
 //
 //	  if (o)
 //	    DoMethod(help_tech_group, OM_ADDMEMBER, o);
-//	} impr_type_iterate_end;
+//	} ;
 //
 //	unit_type_iterate(j) {
 //	  Object *o, *button;
@@ -852,7 +852,7 @@ public class Helpdlg{
 //
 //  create_help_page(HELP_TERRAIN);
 //
-//  if (i < T_COUNT)
+//  if (i < Terrain_H.T_COUNT)
 //  {
 //    tile_type tile = get_tile_type(i);
 //    char buf[256];
@@ -981,15 +981,15 @@ public class Helpdlg{
 //  {
 //  case HELP_IMPROVEMENT:
 //    i = find_improvement_by_name(top);
-//    if (i != B_LAST && is_wonder(i))
-//      i = B_LAST;
+//    if (i != Improvement.B_LAST && Improvement.is_wonder(i))
+//      i = Improvement.B_LAST;
 //    help_update_improvement(pitem, top, i);
 //    break;
 //
 //  case HELP_WONDER:
 //    i = find_improvement_by_name(top);
-//    if (i != B_LAST && !is_wonder(i))
-//      i = B_LAST;
+//    if (i != Improvement.B_LAST && !Improvement.is_wonder(i))
+//      i = Improvement.B_LAST;
 //    help_update_wonder(pitem, top, i);
 //    break;
 //

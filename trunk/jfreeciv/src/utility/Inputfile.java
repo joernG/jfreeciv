@@ -28,7 +28,7 @@ public class Inputfile{
 //  pointing to some data if the token was found, or null otherwise.
 //  The data pointed to should not be modified.  The retuned pointer
 //  is valid _only_ until another inputfile is performed.  (So should
-//  be used immediately, or mystrdup-ed etc.)
+//  be used immediately, or -ed etc.)
 //  
 //  The tokens recognised are as follows:
 //  (Single quotes are delimiters used here, but are not part of the
@@ -233,7 +233,7 @@ public class Inputfile{
 //  }
 //  util.freelog(Log.LOG_DEBUG, "inputfile: opened \"%s\" ok", filename);
 //  inf = inf_from_stream(fp, datafn);
-//  inf.filename = mystrdup(filename);
+//  inf.filename = (filename);
 //  return inf;
 //}
 //

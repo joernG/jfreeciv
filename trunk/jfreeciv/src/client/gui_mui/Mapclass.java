@@ -112,7 +112,7 @@ public class Mapclass{
 //	DoMethod(group, OM_ADDMEMBER, text_obj);
 //      }
 //
-//      if ((pcity = map_get_city(xtile, ytile)))
+//      if ((pcity = Map.map_get_city(xtile, ytile)))
 //      {
 //	s = util.my_snprintf( "City: %s(%s)", pcity.name,
 //		    get_nation_name(City.city_owner(pcity).nation));
@@ -121,7 +121,7 @@ public class Mapclass{
 //	if(text_obj)
 //	  DoMethod(group, OM_ADDMEMBER, text_obj);
 //
-//	if (city_got_citywalls(pcity)) {
+//	if (City.city_got_citywalls(pcity)) {
 //	  text_obj = TextObject, MUIA_Text_Contents, "with City Walls", End;
 //	  if (text_obj)
 //	    DoMethod(group, OM_ADDMEMBER, text_obj);
@@ -403,7 +403,7 @@ public class Mapclass{
 //
 //#define PACK_USERDATA(punit,command) ((punit?((punit.id+1) << 8):0) | command)
 //#define PACK_CITY_USERDATA(punit,command) ((punit?((punit.id+1) << 8):0) | command)
-//#define UNPACK_UNIT(packed) ((packed>>8)?(find_unit_by_id((packed >> 8)-1)):null)
+//#define UNPACK_UNIT(packed) ((packed>>8)?(Game.find_unit_by_id((packed >> 8)-1)):null)
 //#define UNPACK_CITY(packed) ((packed>>8)?(Game.find_city_by_id((packed >> 8)-1)):null)
 //#define UNPACK_COMMAND(packed) (packed&0xff)
 //
@@ -1109,8 +1109,10 @@ public class Mapclass{
 //
 //	SetAPen(_rp(o),color);
 //
-//	city_map_iterate(i, j)
-//	{
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int i = _itr % City_H.CITY_MAP_SIZE, j = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(i, j)) {
 //	  enum city_tile_type t = City.get_worker_city(pcity, i, j);
 //
 //	  if (!City.is_city_center(i, j))
@@ -1145,7 +1147,7 @@ public class Mapclass{
 //				 city_get_trade_tile(i, j, pcity),
 //				 _mleft(o), _mtop(o), x + i - 2, y + j - 2);
 //	  }
-//	} city_map_iterate_end;
+//	} };
 //
 //	MUI_RemoveClipping(muiRenderInfo(o), cliphandle);
 //	return 0;
@@ -1628,14 +1630,14 @@ public class Mapclass{
 //	Object *menu_title;
 //	static char title[256];
 //
-//	pcity = map_get_city(x, y);
+//	pcity = Map.map_get_city(x, y);
 //	punit = find_visible_unit(ptile);
 //	focus = get_unit_in_focus();
 //
 //	if (pcity)
 //	  title = util.my_snprintf( "City %s", pcity.name);
 //	else if (punit)
-//	  title = util.my_snprintf( "Unit %s", unit_name(punit.type));
+//	  title = util.my_snprintf( "Unit %s", Unittype_P.unit_name(punit.type));
 //	else
 //	  title = util.my_snprintf( "Tile %s", map_get_tile_info_text(x, y));
 //
@@ -1683,9 +1685,9 @@ public class Mapclass{
 //		  Map_InsertCommand(&list, "Sentry", PACK_USERDATA(punit, MENU_ORDER_SENTRY));
 //		if (can_unit_do_activity(punit, ACTIVITY_PILLAGE))
 //		  Map_InsertCommand(&list, "Pillage", PACK_USERDATA(punit, MENU_ORDER_PILLAGE));
-//		if (can_unit_do_auto(punit) && unit_flag(punit, F_SETTLERS))
+//		if (can_unit_do_auto(punit) && unit_flag(punit, Eunit_flag_id.F_SETTLERS))
 //		  Map_InsertCommand(&list, "Auto Settler", PACK_USERDATA(punit, MENU_ORDER_AUTO_SETTLER));
-//		if (can_unit_do_auto(punit) && !unit_flag(punit, F_SETTLERS))
+//		if (can_unit_do_auto(punit) && !unit_flag(punit, Eunit_flag_id.F_SETTLERS))
 //		  Map_InsertCommand(&list, "Auto Attack", PACK_USERDATA(punit, MENU_ORDER_AUTO_ATTACK));
 //		if (can_unit_do_activity(punit, ACTIVITY_EXPLORE))
 //		  Map_InsertCommand(&list, "Auto Explore", PACK_USERDATA(punit, MENU_ORDER_AUTO_EXPLORE));
@@ -1704,7 +1706,7 @@ public class Mapclass{
 //		{
 //		  static char irrtext[64];
 //		  if (Map.map_has_special(punit.tile, S_IRRIGATION) &&
-//		      player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND))
+//		      Player_P.player_knows_techs_with_flag(Game.game.player_ptr, TF_FARMLAND))
 //		  {
 //		    irrtext = String.format( "Build Farmland");
 //		  }
@@ -2214,10 +2216,10 @@ public class Mapclass{
 //	  LONG x2 = x1 + get_normal_tile_width() - 1;
 //	  LONG y2 = y1 + get_normal_tile_height() - 1;
 //
-//	  if (City.is_valid_city_coords(x, y)) {
+//	  if (City.City.is_valid_city_coords(x, y)) {
 //	    int tilex, tiley;
 //
-//	    if (city_map_to_map(&tilex, &tiley, pcity, x, y)
+//	    if (City.city_map_to_map(&tilex, &tiley, pcity, x, y)
 //		&& tile_get_known(tilex, tiley)) {
 //	      put_tile(_rp(o), tilex, tiley, x1, y1, 1);
 //
@@ -2922,14 +2924,14 @@ public class Mapclass{
 //      Object *menu_title;
 //
 //      context_menu = MenustripObject,
-//	  Child, menu_title = MenuObjectT(unit_name(punit.type)),
+//	  Child, menu_title = MenuObjectT(Unittype_P.unit_name(punit.type)),
 //	  End,
 //      End;
 //
 //      if (context_menu)
 //      {
 //      	Object *entry;
-//      	city pcity = map_get_city(punit.tile);
+//      	city pcity = Map.map_get_city(punit.tile);
 //
 //	if ((entry = MUI_MakeObject(MUIO_Menuitem, "Activate", null, MUIO_Menuitem_CopyStrings, 0)))
 //	{
@@ -3078,7 +3080,7 @@ public class Mapclass{
 //      Object *menu_title;
 //
 //      context_menu = MenustripObject,
-//	  Child, menu_title = MenuObjectT(unit_name(punit.type)),
+//	  Child, menu_title = MenuObjectT(Unittype_P.unit_name(punit.type)),
 //	      MUIA_Family_Child, MenuitemObject,
 //	          MUIA_Menuitem_Title, "Activate",
 //	          MUIA_UserData, PACK_USERDATA(punit, UNIT_ACTIVATE),

@@ -1,6 +1,4 @@
 package common;
-import static common.Player_P.pplayers_at_war;
-
 import common.city.city;
 import common.map.tile;
 import common.player.player;
@@ -29,13 +27,13 @@ public class Combat{
 		}
 
 		/* 2. If there is a city there, can we attack it? */
-		if (pcity!=null && !pplayers_at_war(City.city_owner(pcity), pplayer)) {
+		if (pcity!=null && !Player_P.pplayers_at_war(City.city_owner(pcity), pplayer)) {
 			return false;
 		}
 
 		/* 3. Are we allowed to attack _all_ units there? */
 		for (unit aunit : ptile.units.data) {
-			if (!pplayers_at_war(aunit.unit_owner(), pplayer)) {
+			if (!Player_P.pplayers_at_war(aunit.unit_owner(), pplayer)) {
 				/* Enemy hiding behind a human/diplomatic shield */
 				return false;
 			}
@@ -226,13 +224,13 @@ public class Combat{
 //
 //  /* Check CityBuster flag */
 //  if (unit_flag(attacker, F_CITYBUSTER)
-//      && map_get_city(defender.tile)) {
+//      && Map.map_get_city(defender.tile)) {
 //    *att_fp *= 2;
 //  }
 //
 //  /* pearl harbour - defender's firepower is reduced to one, 
 //   *                 attacker's is multiplied by two         */
-//  if (is_sailing_unit(defender) && map_get_city(defender.tile)) {
+//  if (Unit.is_sailing_unit(defender) && Map.map_get_city(defender.tile)) {
 //    *att_fp *= 2;
 //    *def_fp = 1;
 //  }
@@ -246,7 +244,7 @@ public class Combat{
 //  }
 //
 //  /* In land bombardment both units have their firepower reduced to 1 */
-//  if (is_sailing_unit(attacker)
+//  if (Unit.is_sailing_unit(attacker)
 //      && !Terrain_H.is_ocean(defender.tile.terrain)
 //      && is_ground_unit(defender)) {
 //    *att_fp = 1;
@@ -289,7 +287,7 @@ public class Combat{
 //{
 //  return (unit_ignores_citywalls(punit)
 //	  || is_air_unit(punit)
-//	  || is_sailing_unit(punit));
+//	  || Unit.is_sailing_unit(punit));
 //}
 //
 ///**************************************************************************
@@ -297,7 +295,7 @@ public class Combat{
 //**************************************************************************/
 //boolean unit_on_fortress(unit punit)
 //{
-//  return Map.map_has_special(punit.tile, S_FORTRESS);
+//  return Map.map_has_special(punit.tile, Terrain_H.S_FORTRESS);
 //}
 //
 ///**************************************************************************
@@ -307,9 +305,9 @@ public class Combat{
 //			       final tile ptile)
 //{
 //  for(tile ptile1: util.square_tile_iterate(ptile, 2)) {
-//    city pcity = map_get_city(ptile1);
-//    if (pcity && (!pplayers_allied(City.city_owner(pcity), owner))
-//	&& get_city_bonus(pcity, EFT_NUKE_PROOF) > 0) {
+//    city pcity = Map.map_get_city(ptile1);
+//    if (pcity && (!Player_P.pplayers_allied(City.city_owner(pcity), owner))
+//	&& Effects.get_city_bonus(pcity, EFT_NUKE_PROOF) > 0) {
 //      return pcity;
 //    }
 //  }
@@ -338,7 +336,7 @@ public class Combat{
 //  power = get_unit_type(type).attack_strength * POWER_FACTOR;
 //  power *= get_unit_type(type).veteran[veteran].power_fact;
 //
-//  if (!unit_type_flag(type, F_IGTIRED) && moves_left < Unit_H.SINGLE_MOVE) {
+//  if (!Unittype_P.unit_type_flag(type, F_IGTIRED) && moves_left < Unit_H.SINGLE_MOVE) {
 //    power = (power * moves_left) / Unit_H.SINGLE_MOVE;
 //  }
 //  return power;
@@ -361,8 +359,8 @@ public class Combat{
 //  int db, power = base_get_defense_power(punit);
 //
 //  db = get_tile_type(punit.tile.terrain).defense_bonus;
-//  if (Map.map_has_special(punit.tile, S_RIVER)) {
-//    db += (db * terrain_control.river_defense_bonus) / 100;
+//  if (Map.map_has_special(punit.tile, Terrain_H.S_RIVER)) {
+//    db += (db * Map.terrain_control.river_defense_bonus) / 100;
 //  }
 //  power = (power * db) / 10;
 //
@@ -395,51 +393,51 @@ public class Combat{
 //				  final tile ptile,
 //				  int defensepower, boolean fortified)
 //{
-//  city pcity = map_get_city(ptile);
+//  city pcity = Map.map_get_city(ptile);
 //  int mod;
 //
 //  if (unit_type_exists(att_type)) {
-//    if (unit_type_flag(def_type, F_PIKEMEN)
-//	&& unit_type_flag(att_type, F_HORSE)) {
+//    if (Unittype_P.unit_type_flag(def_type, F_PIKEMEN)
+//	&& Unittype_P.unit_type_flag(att_type, F_HORSE)) {
 //      defensepower *= 2;
 //    }
 //
-//    if (unit_type_flag(def_type, F_AEGIS) &&
+//    if (Unittype_P.unit_type_flag(def_type, F_AEGIS) &&
 //	(is_air_unittype(att_type) || is_heli_unittype(att_type))) {
 //      defensepower *= 5;
 //    }
 //         
 //    if (is_air_unittype(att_type) && pcity) {
-//      if ((mod = get_city_bonus(pcity, EFT_AIR_DEFEND)) > 0) {
+//      if ((mod = Effects.get_city_bonus(pcity, EFT_AIR_DEFEND)) > 0) {
 //	defensepower = defensepower * (100 + mod) / 100;
 //      }
-//      if ((mod = get_city_bonus(pcity, EFT_MISSILE_DEFEND)) > 0
-//	  && unit_type_flag(att_type, F_MISSILE)) {
+//      if ((mod = Effects.get_city_bonus(pcity, EFT_MISSILE_DEFEND)) > 0
+//	  && Unittype_P.unit_type_flag(att_type, F_MISSILE)) {
 //	defensepower = defensepower * (100 + mod) / 100;
 //      }
-//    } else if (is_water_unit(att_type) && pcity) {
-//      if ((mod = get_city_bonus(pcity, EFT_SEA_DEFEND)) > 0) {
+//    } else if (Unittype_P.is_water_unit(att_type) && pcity) {
+//      if ((mod = Effects.get_city_bonus(pcity, EFT_SEA_DEFEND)) > 0) {
 //	defensepower = defensepower * (100 + mod) / 100;
 //      }
 //    }
-//    if (!unit_type_flag(att_type, F_IGWALL)
-//	&& (is_ground_unittype(att_type) || is_heli_unittype(att_type))
+//    if (!Unittype_P.unit_type_flag(att_type, F_IGWALL)
+//	&& (Unittype_P.is_ground_unittype(att_type) || is_heli_unittype(att_type))
 //        && pcity
-//        && (mod = get_city_bonus(pcity, EFT_LAND_DEFEND)) > 0) {
+//        && (mod = Effects.get_city_bonus(pcity, effect_type.EFT_LAND_DEFEND)) > 0) {
 //      defensepower = defensepower * (100 + mod) / 100;
 //    }
 //
-//    if (unit_type_flag(att_type, F_FIGHTER) && is_heli_unittype(def_type)) {
+//    if (Unittype_P.unit_type_flag(att_type, F_FIGHTER) && is_heli_unittype(def_type)) {
 //      defensepower /= 2;
 //    }
 //  }
 //
-//  if (Map.map_has_special(ptile, S_FORTRESS) && !pcity) {
+//  if (Map.map_has_special(ptile, Terrain_H.S_FORTRESS) && !pcity) {
 //    defensepower +=
-//	(defensepower * terrain_control.fortress_defense_bonus) / 100;
+//	(defensepower * Map.terrain_control.fortress_defense_bonus) / 100;
 //  }
 //
-//  if ((pcity || fortified) && is_ground_unittype(def_type)) {
+//  if ((pcity || fortified) && Unittype_P.is_ground_unittype(def_type)) {
 //    defensepower = (defensepower * 3) / 2;
 //  }
 //
@@ -458,14 +456,14 @@ public class Combat{
 //  int t = ptile.terrain;
 //  int db;
 //
-//  if (Unittype_P.unit_types[def_type].move_type == LAND_MOVING && Terrain_H.is_ocean(t)) {
+//  if (Unittype_P.unit_types[def_type].move_type == unit_move_type.LAND_MOVING && Terrain_H.is_ocean(t)) {
 //    /* Ground units on ship doesn't defend. */
 //    return 0;
 //  }
 //
 //  db = get_tile_type(t).defense_bonus;
-//  if (Map.map_has_special(ptile, S_RIVER)) {
-//    db += (db * terrain_control.river_defense_bonus) / 100;
+//  if (Map.map_has_special(ptile, Terrain_H.S_RIVER)) {
+//    db += (db * Map.terrain_control.river_defense_bonus) / 100;
 //  }
 //  defensepower *= db;
 //  defensepower *= get_unit_type(def_type).veteran[veteran].power_fact;
@@ -587,7 +585,7 @@ public class Combat{
 //  for (unit attacker : ptile.units.data) {
 //    int build_cost = Unittype_P.unit_build_shield_cost(attacker.type);
 //
-//    if (pplayers_allied(defender.unit_owner(), attacker.unit_owner())) {
+//    if (Player_P.pplayers_allied(defender.unit_owner(), attacker.unit_owner())) {
 //      return null;
 //    }
 //    unit_a = (int) (100000 * (unit_win_chance(attacker, defender)));
@@ -608,7 +606,7 @@ public class Combat{
 //boolean is_stack_vulnerable(final tile ptile)
 //{
 //  return !(ptile.city != null
-//           || Map.map_has_special(ptile, S_FORTRESS)
+//           || Map.map_has_special(ptile, Terrain_H.S_FORTRESS)
 //           || Map.map_has_special(ptile, Terrain_H.S_AIRBASE)
 //           || !Game.game.rgame.killstack);
 //}

@@ -230,7 +230,7 @@ public class Spaceshipdlg{
 //  gtk_signal_connect(GTK_OBJECT(pdialog.launch_command), "clicked",
 //        GTK_SIGNAL_FUNC(spaceship_launch_callback), pdialog);
 //
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //
 //  gtk_widget_show_all(GTK_DIALOG(pdialog.shell).vbox);
 //  gtk_widget_show_all(GTK_DIALOG(pdialog.shell).action_area);

@@ -246,7 +246,7 @@ public class Spaceshipdlg{
 //
 //    DoMethod(app, OM_ADDMEMBER, pdialog.wnd);
 //
-//    dialog_list_insert(&dialog_list, pdialog);
+//    &dialog_list.foo_list_insert(pdialog);
 //    refresh_spaceship_dialog(pdialog.pplayer);
 //    return pdialog;
 //  }

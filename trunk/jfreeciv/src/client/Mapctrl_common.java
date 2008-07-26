@@ -1,5 +1,7 @@
 package client;
 
+import common.City;
+
 public class Mapctrl_common{
 
 // Freeciv - Copyright (C) 2002 - The Freeciv Poject
@@ -537,7 +539,7 @@ public class Mapctrl_common{
 //    city pcity = find_city_near_tile(ptile);
 //
 //    if (pcity && !cma_is_city_under_agent(pcity, null)) {
-//      if (!map_to_city_map(&city_x, &city_y, pcity, ptile)) {
+//      if (!City.map_to_city_map(&city_x, &city_y, pcity, ptile)) {
 //	assert(0!=1);
 //      }
 //
@@ -706,8 +708,8 @@ public class Mapctrl_common{
 //  } else {
 //    /* If the transporters aren't the same, put in order by the
 //     * transporters. */
-//    final unit ptrans1 = find_unit_by_id(punit1.transported_by);
-//    final unit ptrans2 = find_unit_by_id(punit2.transported_by);
+//    final unit ptrans1 = Game.find_unit_by_id(punit1.transported_by);
+//    final unit ptrans2 = Game.find_unit_by_id(punit2.transported_by);
 //
 //    if (!ptrans1) {
 //      ptrans1 = punit1;

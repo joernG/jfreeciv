@@ -120,14 +120,17 @@ public class Aisupport{
 //      }
 //    }
 //  } }
-//  built_impr_iterate(pcity, impr) {
-//    if (improvement_types[impr].is_wonder && !wonder_obsolete(impr)) {
-//      worth += Improvement.impr_sell_gold(impr);
+	//for (int i = 0; i < Game.game.num_impr_types; i++) {
+//	if((pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
+//    if (Improvement.improvement_types[i].Improvement.is_wonder && !wonder_obsolete(i)) {
+//      worth += Improvement.impr_sell_gold(i);
 //   } else {
-//      worth += Improvement.impr_sell_gold(impr) / 4;
+//      worth += Improvement.impr_sell_gold(i) / 4;
 //    }
-//  } built_impr_iterate_end;
-//  if (city_unhappy(pcity)) {
+//  } ;
+//  if (City.city_unhappy(pcity)) {
 //    worth *= 0.75;
 //  }
 //  return worth;

@@ -274,7 +274,7 @@ public class Plrdlg{
 // */
 //static void build_row(final String*row, int i, int update)
 //{
-//  static char namebuf[MAX_LEN_NAME], flagbuf[1], aibuf[2], dsbuf[32],
+//  static String namebuf, flagbuf[1], aibuf[2], dsbuf[32],
 //      repbuf[32], statebuf[32], idlebuf[32];
 //  static final String colbuf = "";
 //  final player_diplstate pds;
@@ -372,7 +372,7 @@ public class Plrdlg{
 //  int start_x, start_y, end_x, end_y, flag_h, flag_w, newflag_h, newflag_w;
 //  SPRITE *flag, *croped, *scaled;
 //
-//  flag = get_nation_by_plr(&Game.game.players[playerindex]).flag_sprite;
+//  flag = Nation.get_nation_by_plr(&Game.game.players[playerindex]).flag_sprite;
 //  if (!flag) {
 //    flags[playerindex] = null;
 //    return;
