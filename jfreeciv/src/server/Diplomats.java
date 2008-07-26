@@ -1,5 +1,7 @@
 package server;
 
+import common.Game;
+
 public class Diplomats{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -73,7 +75,7 @@ public class Diplomats{
 //  if (!pcity)
 //    return;
 //  cplayer = City.city_owner(pcity);
-//  if (!cplayer || !pplayers_at_war(pplayer, cplayer))
+//  if (!cplayer || !Player_P.pplayers_at_war(pplayer, cplayer))
 //    return;
 //
 //  util.freelog (Log.LOG_DEBUG, "poison: unit: %d", pdiplomat.id);
@@ -95,7 +97,7 @@ public class Diplomats{
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		     ("Game: Your %s could not poison the water" +
 //		       " supply in %s."),
-//		     unit_name(pdiplomat.type), pcity.name);
+//		     Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //    util.freelog (Log.LOG_DEBUG, "poison: target city too small");
 //    return;
 //  }
@@ -103,12 +105,12 @@ public class Diplomats{
 //  util.freelog (Log.LOG_DEBUG, "poison: succeeded");
 //
 //  /* Poison people! */
-//  city_reduce_size(pcity, 1);
+//  Cityturn.city_reduce_size(pcity, 1);
 //
 //  /* Notify everybody involved. */
 //  Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_POISON,
 //		   "Game: Your %s poisoned the water supply of %s.",
-//		   unit_name(pdiplomat.type), pcity.name);
+//		   Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //  Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_POISON,
 //		   ("Game: %s is suspected of poisoning the water supply" +
 //		     " of %s."), pplayer.name, pcity.name);
@@ -214,9 +216,9 @@ public class Diplomats{
 //  /* Send city improvements info to player. */
 //  p = packet.improvements;
 //
-//  impr_type_iterate(i) {
-//    *p++=city_got_building(pcity,i)?'1':'0';
-//  } impr_type_iterate_end;
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
+//    *p++=City.city_got_building(pcity,i)?'1':'0';
+//  } ;
 //
 //  *p='\0';
 //  packet.diplomat_id = pdiplomat.id;
@@ -260,12 +262,12 @@ public class Diplomats{
 //		     ("Game: Your %s was executed in %s on suspicion" +
 //		       " of spying.  The %s welcome future diplomatic" +
 //		       " efforts providing the Ambassador is reputable."),
-//		     unit_name(pdiplomat.type),
+//		     Unittype_P.unit_name(pdiplomat.type),
 //		     pcity.name, Nation.Nation.get_nation_name_plural(cplayer.nation));
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_FAILED,
 //		     ("You executed a %s the %s had sent to establish" +
 //		       " an embassy in %s for being untrustworthy"),
-//		     unit_name(pdiplomat.type),
+//		     Unittype_P.unit_name(pdiplomat.type),
 //		     Nation.Nation.get_nation_name_plural(pplayer.nation), pcity.name);
 //    Unittools.wipe_unit(pdiplomat);
 //    return;
@@ -275,7 +277,7 @@ public class Diplomats{
 //  if (is_barbarian (cplayer)) {
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		     "Game: Your %s was executed in %s by primitive %s.",
-//		     unit_name(pdiplomat.type),
+//		     Unittype_P.unit_name(pdiplomat.type),
 //		     pcity.name, Nation.Nation.get_nation_name_plural(cplayer.nation));
 //    Unittools.wipe_unit(pdiplomat);
 //    return;
@@ -334,7 +336,7 @@ public class Diplomats{
 //  if (!pvictim)
 //    return;
 //  uplayer = pvictim.unit_owner();
-//  if (!uplayer || pplayers_allied(pplayer, uplayer))
+//  if (!uplayer || Player_P.pplayers_allied(pplayer, uplayer))
 //    return;
 //
 //  util.freelog (Log.LOG_DEBUG, "sabotage-unit: unit: %d", pdiplomat.id);
@@ -347,8 +349,8 @@ public class Diplomats{
 //  if (pvictim.hp < 2) {
 //    Plrhand.notify_player_ex(pplayer, pvictim.tile, E_MY_DIPLOMAT_FAILED,
 //		     "Game: Your %s could not sabotage %s's %s.",
-//		     unit_name(pdiplomat.type),
-//		     pvictim.unit_owner().name, unit_name(pvictim.type));
+//		     Unittype_P.unit_name(pdiplomat.type),
+//		     pvictim.unit_owner().name, Unittype_P.unit_name(pvictim.type));
 //    util.freelog (Log.LOG_DEBUG, "sabotage-unit: unit has too few hit points");
 //    return;
 //  }
@@ -368,12 +370,12 @@ public class Diplomats{
 //  /* Notify everybody involved. */
 //  Plrhand.notify_player_ex(pplayer, pvictim.tile, E_MY_DIPLOMAT_SABOTAGE,
 //		   "Game: Your %s succeeded in sabotaging %s's %s.",
-//		   unit_name(pdiplomat.type),
-//		   pvictim.unit_owner().name, unit_name(pvictim.type));
+//		   Unittype_P.unit_name(pdiplomat.type),
+//		   pvictim.unit_owner().name, Unittype_P.unit_name(pvictim.type));
 //  Plrhand.notify_player_ex(uplayer, pvictim.tile,
 //		   E_ENEMY_DIPLOMAT_SABOTAGE,
 //		   "Game: Your %s was sabotaged by %s!",
-//		   unit_name(pvictim.type), pplayer.name);
+//		   Unittype_P.unit_name(pvictim.type), pplayer.name);
 //
 //  /* this may cause a diplomatic incident */
 //  maybe_cause_incident(SPY_SABOTAGE_UNIT, pplayer, pvictim, null);
@@ -411,7 +413,7 @@ public class Diplomats{
 //    return;
 //  uplayer = pvictim.unit_owner();
 //  /* We might make it allowable in peace with a loss of reputation */
-//  if (!uplayer || pplayers_allied(pplayer, uplayer))
+//  if (!uplayer || Player_P.pplayers_allied(pplayer, uplayer))
 //    return;
 //
 //  util.freelog (Log.LOG_DEBUG, "bribe-unit: unit: %d", pdiplomat.id);
@@ -424,7 +426,7 @@ public class Diplomats{
 //  }
 //
 //  /* Check for unit from a bribable government. */
-//  if (government_has_flag(get_gov_pplayer(pvictim.unit_owner()),
+//  if (Government.government_has_flag(get_gov_pplayer(pvictim.unit_owner()),
 //			  G_UNBRIBABLE)) {
 //    Plrhand.notify_player_ex(pplayer, pdiplomat.tile,
 //		     E_MY_DIPLOMAT_FAILED,
@@ -439,14 +441,14 @@ public class Diplomats{
 //		     E_MY_DIPLOMAT_FAILED,
 //		     ("Game: You don't have enough gold to" +
 //		       " bribe %s's %s."),
-//		     pvictim.unit_owner().name, unit_name(pvictim.type));
+//		     pvictim.unit_owner().name, Unittype_P.unit_name(pvictim.type));
 //    util.freelog (Log.LOG_DEBUG, "bribe-unit: not enough gold");
 //    return;
 //  }
 //
 //  if (unit_flag(pvictim, F_UNBRIBABLE)) {
 //    Plrhand.notify_player_ex(pplayer, pdiplomat.tile, E_MY_DIPLOMAT_FAILED,
-//		     "Game: You cannot bribe %s!", unit_name(pvictim.type));
+//		     "Game: You cannot bribe %s!", Unittype_P.unit_name(pvictim.type));
 //    return;
 //  }
 //
@@ -474,16 +476,16 @@ public class Diplomats{
 //    Plrhand.notify_player_ex(pplayer, pvictim.tile, E_MY_DIPLOMAT_BRIBE,
 //		     ("Game: Your %s succeeded in bribing %s's %s" +
 //		        " and became more experienced."),
-//		     unit_name(pdiplomat.type),
-//		     pvictim.unit_owner().name, unit_name(pvictim.type));
+//		     Unittype_P.unit_name(pdiplomat.type),
+//		     pvictim.unit_owner().name, Unittype_P.unit_name(pvictim.type));
 //  } else {
 //    Plrhand.notify_player_ex(pplayer, pvictim.tile, E_MY_DIPLOMAT_BRIBE,
-//		     "Game: Your %s succeeded in bribing %s's %s.",		     unit_name(pdiplomat.type),
-//		     pvictim.unit_owner().name, unit_name(pvictim.type));
+//		     "Game: Your %s succeeded in bribing %s's %s.",		     Unittype_P.unit_name(pdiplomat.type),
+//		     pvictim.unit_owner().name, Unittype_P.unit_name(pvictim.type));
 //  }
 //  Plrhand.notify_player_ex(uplayer, pvictim.tile, E_ENEMY_DIPLOMAT_BRIBE,
 //		   "Game: Your %s was bribed by %s.",
-//		   unit_name(pvictim.type), pplayer.name);
+//		   Unittype_P.unit_name(pvictim.type), pplayer.name);
 //
 //  /* This costs! */
 //  pplayer.economic.gold -= pvictim.bribe_cost;
@@ -581,10 +583,10 @@ public class Diplomats{
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		     ("Game: Your %s was caught in the attempt of" +
 //		       " stealing technology from %s."),
-//		     unit_name(pdiplomat.type), pcity.name);
+//		     Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_FAILED,
 //		     "Game: %s's %s failed to steal technology from %s.",
-//		     pplayer.name, unit_name(pdiplomat.type), pcity.name);
+//		     pplayer.name, Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //    /* this may cause a diplomatic incident */
 //    maybe_cause_incident(DIPLOMAT_STEAL, pplayer, null, pcity);
 //    Unittools.wipe_unit(pdiplomat);
@@ -655,7 +657,7 @@ public class Diplomats{
 //      Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		       ("Game: Your %s could not find the %s technology" +
 //			 " to steal in %s."),
-//		       unit_name(pdiplomat.type),
+//		       Unittype_P.unit_name(pdiplomat.type),
 //		       get_tech_name(pplayer, technology), pcity.name);
 //      diplomat_charge_movement (pdiplomat, pcity.tile);
 //      Unittools.send_unit_info (pplayer, pdiplomat);
@@ -675,12 +677,12 @@ public class Diplomats{
 //    /* Report it. */
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_THEFT,
 //		     "Game: Your %s stole Future Tech. %d from %s.",
-//		     unit_name(pdiplomat.type),
+//		     Unittype_P.unit_name(pdiplomat.type),
 //		     pplayer.future_tech, cplayer.name);
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_THEFT,
 //		     "Game: Future Tech. %d stolen by %s %s from %s.",
 //		     pplayer.future_tech, Nation.get_nation_name(pplayer.nation),
-//		     unit_name(pdiplomat.type), pcity.name);
+//		     Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //    util.freelog (Log.LOG_DEBUG, "steal-tech: stole future-tech %d",
 //	     pplayer.future_tech);
 //  } else {
@@ -692,11 +694,11 @@ public class Diplomats{
 //    /* Report it. */
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_THEFT,
 //		     "Game: Your %s stole %s from %s.",
-//		     unit_name(pdiplomat.type),
+//		     Unittype_P.unit_name(pdiplomat.type),
 //		     get_tech_name(pplayer, target), cplayer.name);
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_THEFT,
 //		     "Game: %s's %s stole %s from %s.",
-//		     pplayer.name, unit_name(pdiplomat.type),
+//		     pplayer.name, Unittype_P.unit_name(pdiplomat.type),
 //		     get_tech_name(cplayer, target), pcity.name);
 //    notify_embassies(pplayer, cplayer,
 //		     "Game: The %s have stolen %s from the %s.",
@@ -750,13 +752,13 @@ public class Diplomats{
 //  if (!pcity)
 //    return;
 //  cplayer = City.city_owner (pcity);
-//  if (!cplayer || pplayers_allied(cplayer, pplayer))
+//  if (!cplayer || Player_P.pplayers_allied(cplayer, pplayer))
 //    return;
 //
 //  util.freelog (Log.LOG_DEBUG, "incite: unit: %d", pdiplomat.id);
 //
 //  /* Check for city from a bribable government. */
-//  if (government_has_flag (get_gov_pcity (pcity), G_UNBRIBABLE)) {
+//  if (Government.government_has_flag (Government.get_gov_pcity (pcity), G_UNBRIBABLE)) {
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		     "Game: You can't subvert a city from this nation.");
 //    util.freelog (Log.LOG_DEBUG, "incite: city's government is unbribable");
@@ -764,7 +766,7 @@ public class Diplomats{
 //  }
 //
 //  /* See if the city is subvertable. */
-//  if (get_city_bonus(pcity, EFT_NO_INCITE) > 0) {
+//  if (Effects.get_city_bonus(pcity, EFT_NO_INCITE) > 0) {
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		     "Game: You can't subvert this city.");
 //    util.freelog (Log.LOG_DEBUG, "incite: city is protected");
@@ -796,12 +798,12 @@ public class Diplomats{
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		     ("Game: Your %s was caught in the attempt" +
 //		       " of inciting a revolt!"),
-//		     unit_name(pdiplomat.type));
+//		     Unittype_P.unit_name(pdiplomat.type));
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_FAILED,
 //		     ("Game: You caught %s %s attempting" +
 //		       " to incite a revolt in %s!"),
 //		     Nation.get_nation_name(pplayer.nation),
-//		     unit_name(pdiplomat.type), pcity.name);
+//		     Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //    Unittools.wipe_unit(pdiplomat);
 //    return;
 //  }
@@ -812,14 +814,14 @@ public class Diplomats{
 //
 //  /* City loses some population. */
 //  if (pcity.size > 1) {
-//    city_reduce_size(pcity, 1);
+//    Cityturn.city_reduce_size(pcity, 1);
 //  }
 //
 //  /* This costs! */
 //  pplayer.economic.gold -= revolt_cost;
 //
 //  /* Notify everybody involved. */
-//  Gamelog.gamelog(GAMELOG_LOSECITY, cplayer, pplayer, pcity, "incited to revolt");
+//  Gamelog.gamelog(EGamelog.GAMELOG_LOSECITY, cplayer, pplayer, pcity, "incited to revolt");
 //
 //  Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_INCITE,
 //		   "Game: Revolt incited in %s, you now rule the city!",
@@ -829,10 +831,10 @@ public class Diplomats{
 //		   pcity.name, Nation.get_nation_name(pplayer.nation));
 //
 //  pcity.shield_stock = 0;
-//  nullify_prechange_production(pcity);
+//  Cityturn.nullify_prechange_production(pcity);
 //
 //  /* You get a technology advance, too! */
-//  get_a_tech (pplayer, cplayer);
+//  Plrhand.get_a_tech (pplayer, cplayer);
 //
 //  /* this may cause a diplomatic incident */
 //  maybe_cause_incident(DIPLOMAT_INCITE, pplayer, null, pcity);
@@ -855,7 +857,7 @@ public class Diplomats{
 //
 ///**************************************************************************
 //  Sabotage enemy city's improvement or production.
-//  If "improvement" is B_LAST, sabotage a random improvement or production.
+//  If "improvement" is Improvement.B_LAST, sabotage a random improvement or production.
 //  Else, if "improvement" is -1, sabotage current production.
 //  Otherwise, sabotage the city improvement whose ID is "improvement".
 //  (Note: Only Spies can select what to sabotage.)
@@ -878,21 +880,21 @@ public class Diplomats{
 //  int count, which, target;
 //  final String prod;
 //  /* Twice as difficult if target is specified. */
-//  int success_prob = (improvement >= B_LAST ? Game.game.diplchance 
+//  int success_prob = (improvement >= Improvement.B_LAST ? Game.game.diplchance 
 //                      : Game.game.diplchance / 2); 
 //
 //  /* Fetch target city's player.  Sanity checks. */
 //  if (!pcity)
 //    return;
 //  cplayer = City.city_owner (pcity);
-//  if (!cplayer || !pplayers_at_war(pplayer, cplayer))
+//  if (!cplayer || !Player_P.pplayers_at_war(pplayer, cplayer))
 //    return;
 //
 //  util.freelog (Log.LOG_DEBUG, "sabotage: unit: %d", pdiplomat.id);
 //
 //  /* If not a Spy, do something random. */
 //  if (!unit_flag (pdiplomat, F_SPY))
-//    improvement = B_LAST;
+//    improvement = Improvement.B_LAST;
 //
 //  /* Check if the Diplomat/Spy succeeds against defending Diplomats/Spies. */
 //  if (!diplomat_infiltrate_tile(pplayer, cplayer, pdiplomat, 
@@ -907,12 +909,12 @@ public class Diplomats{
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		     ("Game: Your %s was caught in the attempt" +
 //		       " of industrial sabotage!"),
-//		     unit_name(pdiplomat.type));
+//		     Unittype_P.unit_name(pdiplomat.type));
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_SABOTAGE,
 //		     ("Game: You caught %s %s attempting" +
 //		       " sabotage in %s!"),
 //		     Nation.get_nation_name(pplayer.nation),
-//		     unit_name(pdiplomat.type), pcity.name);
+//		     Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //    Unittools.wipe_unit(pdiplomat);
 //    return;
 //  }
@@ -921,11 +923,14 @@ public class Diplomats{
 //
 //  /* Examine the city for improvements to sabotage. */
 //  count = 0;
-//  built_impr_iterate(pcity, index) {
-//    if (get_improvement_type(index).sabotage > 0) {
+//	for (int impr = 0; impr < Game.game.num_impr_types; impr++) {
+//		if((pcity).improvements[impr] == Improvement.I_NONE) {
+//			continue;
+//		}
+//    if (get_improvement_type(impr).sabotage > 0) {
 //      count++;
 //    }
-//  } built_impr_iterate_end;
+//  } ;
 //
 //  util.freelog (Log.LOG_DEBUG, "sabotage: count of improvements: %d", count);
 //
@@ -934,7 +939,7 @@ public class Diplomats{
 //    /* If told to sabotage production, do so. */
 //    target = -1;
 //    util.freelog (Log.LOG_DEBUG, "sabotage: specified target production: %d", target);
-//  } else if (improvement >= B_LAST) {
+//  } else if (improvement >= Improvement.B_LAST) {
 //    /*
 //     * Pick random:
 //     * 50/50 chance to pick production or some improvement.
@@ -944,7 +949,7 @@ public class Diplomats{
 //    if (count == 0 && pcity.shield_stock == 0) {
 //      Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		       ("Game: Your %s could not find anything to" +
-//			 " sabotage in %s."), unit_name(pdiplomat.type),
+//			 " sabotage in %s."), Unittype_P.unit_name(pdiplomat.type),
 //		       pcity.name);
 //      diplomat_charge_movement (pdiplomat, pcity.tile);
 //      Unittools.send_unit_info (pplayer, pdiplomat);
@@ -958,8 +963,11 @@ public class Diplomats{
 //      target = -1;
 //      which = Rand.myrand (count);
 //
-//      built_impr_iterate(pcity, index) {
-//	if (get_improvement_type(index).sabotage > 0) {
+//	for (int impr = 0; impr < Game.game.num_impr_types; impr++) {
+//		if((pcity).improvements[impr] == Improvement.I_NONE) {
+//			continue;
+//		}
+//	if (get_improvement_type(impr).sabotage > 0) {
 //	  if (which > 0) {
 //	    which--;
 //	  } else {
@@ -967,7 +975,7 @@ public class Diplomats{
 //	    break;
 //	  }
 //	}
-//      } built_impr_iterate_end;
+//      } ;
 //
 //      util.freelog (Log.LOG_DEBUG, "sabotage: random: targeted improvement: %d (%s)",
 //	       target, Improvement.get_improvement_name (target));
@@ -978,7 +986,7 @@ public class Diplomats{
 //     * If try for wonder or palace, complain, deduct movement cost and return.
 //     * If not available, say so, deduct movement cost and return.
 //     */
-//    if (city_got_building (pcity, improvement)) {
+//    if (City.city_got_building (pcity, improvement)) {
 //      if (get_improvement_type(improvement).sabotage > 0) {
 //	target = improvement;
 //	util.freelog (Log.LOG_DEBUG, "sabotage: specified target improvement: %d (%s)",
@@ -986,7 +994,7 @@ public class Diplomats{
 //      } else {
 //	Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //			 "Game: You cannot sabotage a %s!",
-//			 improvement_types[improvement].name);
+//			 Improvement.improvement_types[improvement].name);
 //	diplomat_charge_movement (pdiplomat, pcity.tile);
 //	Unittools.send_unit_info (pplayer, pdiplomat);
 //	util.freelog (Log.LOG_DEBUG, "sabotage: disallowed target improvement: %d (%s)",
@@ -996,7 +1004,7 @@ public class Diplomats{
 //    } else {
 //      Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		       ("Game: Your %s could not find the %s to" +
-//			 " sabotage in %s."), unit_name(pdiplomat.type),
+//			 " sabotage in %s."), Unittype_P.unit_name(pdiplomat.type),
 //		       Improvement.get_improvement_name(improvement), pcity.name);
 //      diplomat_charge_movement (pdiplomat, pcity.tile);
 //      Unittools.send_unit_info (pplayer, pdiplomat);
@@ -1012,17 +1020,17 @@ public class Diplomats{
 //
 //    /* Do it. */
 //    pcity.shield_stock = 0;
-//    nullify_prechange_production(pcity); /* Make it impossible to recover */
+//    Cityturn.nullify_prechange_production(pcity); /* Make it impossible to recover */
 //
 //    /* Report it. */
 //    if (pcity.is_building_unit)
-//      prod = unit_name (pcity.currently_building);
+//      prod = Unittype_P.unit_name (pcity.currently_building);
 //    else
 //      prod = Improvement.get_improvement_name (pcity.currently_building);
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_SABOTAGE,
 //		     ("Game: Your %s succeeded in destroying" +
 //		       " the production of %s in %s."),
-//		     unit_name(pdiplomat.type), prod, pcity.name);
+//		     Unittype_P.unit_name(pdiplomat.type), prod, pcity.name);
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_SABOTAGE,
 //		     ("Game: The production of %s was destroyed in %s," +
 //		       " %s are suspected."), prod, pcity.name,
@@ -1041,18 +1049,18 @@ public class Diplomats{
 //    vulnerability = get_improvement_type(target).sabotage;
 //
 //    vulnerability -= (vulnerability
-//		      * get_city_bonus(pcity, EFT_SPY_RESISTANT) / 100);
+//		      * Effects.get_city_bonus(pcity, EFT_SPY_RESISTANT) / 100);
 //    if (Rand.myrand(100) >= vulnerability) {
 //      /* Caught! */
 //      Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		       ("Game: Your %s was caught in the attempt" +
-//			 " of sabotage!"), unit_name(pdiplomat.type));
+//			 " of sabotage!"), Unittype_P.unit_name(pdiplomat.type));
 //      Plrhand.notify_player_ex(cplayer, pcity.tile,
 //		       E_ENEMY_DIPLOMAT_FAILED,
 //		       ("Game: You caught %s %s attempting" +
 //			 " to sabotage the %s in %s!"),
 //		       Nation.get_nation_name(pplayer.nation),
-//		       unit_name(pdiplomat.type),
+//		       Unittype_P.unit_name(pdiplomat.type),
 //		       Improvement.get_improvement_name(target), pcity.name);
 //      Unittools.wipe_unit(pdiplomat);
 //      util.freelog (Log.LOG_DEBUG, "sabotage: caught in capital or on city walls");
@@ -1062,7 +1070,7 @@ public class Diplomats{
 //    /* Report it. */
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_SABOTAGE,
 //		     "Game: Your %s destroyed the %s in %s.",
-//		     unit_name(pdiplomat.type),
+//		     Unittype_P.unit_name(pdiplomat.type),
 //		     Improvement.get_improvement_name(target), pcity.name);
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_SABOTAGE,
 //		     "Game: The %s destroyed the %s in %s.",
@@ -1128,10 +1136,10 @@ public class Diplomats{
 //  def += (def/5.0) * pdefender.veteran;
 //
 //  if (pdefender_tile.city) {
-//    def = def * (100 + get_city_bonus(pdefender_tile.city,
+//    def = def * (100 + Effects.get_city_bonus(pdefender_tile.city,
 //				      EFT_SPY_RESISTANT)) / 100;
 //  } else {
-//    if (Map.tile_has_special(pdefender_tile, S_FORTRESS)
+//    if (Map.tile_has_special(pdefender_tile, Terrain_H.S_FORTRESS)
 //       || Map.tile_has_special(pdefender_tile, Terrain_H.S_AIRBASE)) {
 //	def = (def * 5) / 4;/* +25% */ 
 //    }
@@ -1158,7 +1166,7 @@ public class Diplomats{
 //  /* We don't need a _safe iterate since no transporters should be
 //   * destroyed. */
 //  for (unit punit : ptile.units.data) {
-//    if (unit_flag(punit, F_DIPLOMAT) || unit_flag(punit, F_SUPERSPY)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_DIPLOMAT) || unit_flag(punit, F_SUPERSPY)) {
 //      /* A F_SUPERSPY unit may not acutally be a spy, but a superboss which 
 //         we cannot allow puny diplomats from getting the better of. Note that 
 //         diplomat_success_vs_defender(punit) is always true if the attacker
@@ -1170,11 +1178,11 @@ public class Diplomats{
 //
 //	Plrhand.notify_player_ex(cplayer, ptile, E_MY_DIPLOMAT_FAILED,
 //			 ("Game: Your %s has been eliminated defending %s" +
-//			   " against a %s."), unit_name(punit.type),
-//		(pcity ? pcity.name : ""), unit_name(pdiplomat.type));
+//			   " against a %s."), Unittype_P.unit_name(punit.type),
+//		(pcity ? pcity.name : ""), Unittype_P.unit_name(pdiplomat.type));
 //	Plrhand.notify_player_ex(pplayer, ptile, E_ENEMY_DIPLOMAT_FAILED,
 //		 "Game: An enemy %s has been eliminated defending %s.",
-//		unit_name(punit.type), (pcity ? pcity.name : ""));
+//		Unittype_P.unit_name(punit.type), (pcity ? pcity.name : ""));
 //
 //	Unittools.wipe_unit(punit);
 //        pdiplomat.moves_left = MAX(0, pdiplomat.moves_left - Unit_H.SINGLE_MOVE);
@@ -1189,7 +1197,7 @@ public class Diplomats{
 //	Plrhand.notify_player_ex(pplayer, ptile, E_MY_DIPLOMAT_FAILED,
 //			 ("Game: Your %s was eliminated" +
 //			   " by a defending %s."),
-//			 unit_name(pdiplomat.type), unit_name(punit.type));
+//			 Unittype_P.unit_name(pdiplomat.type), Unittype_P.unit_name(punit.type));
 //	if (vet) {
 //	  if (pcity) {
 //	    Plrhand.notify_player_ex(cplayer, ptile,
@@ -1197,7 +1205,7 @@ public class Diplomats{
 //			     ("Game: Eliminated %s %s while infiltrating " +
 //			       "%s. The defender became more experienced."),
 //			     Nation.get_nation_name(pplayer.nation),
-//			     unit_name(pdiplomat.type), pcity.name);
+//			     Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //	  } else {
 //	    Plrhand.notify_player_ex(cplayer, ptile,
 //			     E_ENEMY_DIPLOMAT_FAILED,
@@ -1205,7 +1213,7 @@ public class Diplomats{
 //			       "our troops. The defender became more " +
 //			       "experienced."),
 //			     Nation.get_nation_name(pplayer.nation),
-//			     unit_name(pdiplomat.type));
+//			     Unittype_P.unit_name(pdiplomat.type));
 //          }
 //        } else {
 //	  if (pcity) {
@@ -1213,14 +1221,14 @@ public class Diplomats{
 //			     E_ENEMY_DIPLOMAT_FAILED,
 //			     ("Game: Eliminated %s %s while infiltrating " +
 //			       "%s."), Nation.get_nation_name(pplayer.nation),
-//			     unit_name(pdiplomat.type), pcity.name);
+//			     Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //	  } else {
 //	    Plrhand.notify_player_ex(cplayer, ptile,
 //			     E_ENEMY_DIPLOMAT_FAILED,
 //			     ("Game: Eliminated %s %s while infiltrating " +
 //			       "our troops."),
 //			     Nation.get_nation_name(pplayer.nation),
-//			     unit_name(pdiplomat.type));
+//			     Unittype_P.unit_name(pdiplomat.type));
 //	  }
 //	}
 //	Unittools.wipe_unit(pdiplomat);
@@ -1273,12 +1281,12 @@ public class Diplomats{
 //		       ("Game: Your %s has successfully completed" +
 //			 " her mission and returned unharmed to %s" +
 //			 " and has become more experienced."),
-//		       unit_name(pdiplomat.type), spyhome.name);
+//		       Unittype_P.unit_name(pdiplomat.type), spyhome.name);
 //    } else {
 //      Plrhand.notify_player_ex(pplayer, ptile, E_MY_DIPLOMAT_ESCAPE,
 //		       ("Game: Your %s has successfully completed" +
 //			 " her mission and returned unharmed to %s."),
-//		       unit_name(pdiplomat.type), spyhome.name);
+//		       Unittype_P.unit_name(pdiplomat.type), spyhome.name);
 //    }
 //
 //    /* being teleported costs all movement */
@@ -1294,11 +1302,11 @@ public class Diplomats{
 //      Plrhand.notify_player_ex(pplayer, ptile, E_MY_DIPLOMAT_FAILED,
 //			 ("Game: Your %s was captured after completing" +
 //			   " her mission in %s."),
-//			 unit_name(pdiplomat.type), pcity.name);
+//			 Unittype_P.unit_name(pdiplomat.type), pcity.name);
 //    } else {
 //      Plrhand.notify_player_ex(pplayer, ptile, E_MY_DIPLOMAT_FAILED,
 //			 ("Game: Your %s was captured after completing" +
-//			   " her mission."), unit_name(pdiplomat.type));
+//			   " her mission."), Unittype_P.unit_name(pdiplomat.type));
 //    }
 //  }
 //
@@ -1324,7 +1332,7 @@ public class Diplomats{
 //    util.die("No victim in call to maybe_cause_incident()");
 //  }
 //
-//  if (!pplayers_at_war(offender, victim_player) &&
+//  if (!Player_P.pplayers_at_war(offender, victim_player) &&
 //      (Rand.myrand(GAME_MAX_REPUTATION) - offender.reputation >
 //       GAME_MAX_REPUTATION/2 - victim_player.reputation)) {
 //    enum diplstate_type ds = pplayer_get_diplstate(offender, victim_player).type;
@@ -1335,12 +1343,12 @@ public class Diplomats{
 //		       ("Game: You have caused an incident while bribing " +
 // 			 "%s's %s."),
 // 		       victim_player.name,
-// 		       unit_name(victim_unit.type));
+// 		       Unittype_P.unit_name(victim_unit.type));
 //      Plrhand.notify_player_ex(victim_player, victim_tile, E_DIPLOMATIC_INCIDENT,
 //		       ("Game: %s has caused an incident while bribing " +
 // 			 "your %s."),
 // 		       offender.name,
-// 		       unit_name(victim_unit.type));
+// 		       Unittype_P.unit_name(victim_unit.type));
 //      break;
 //    case DIPLOMAT_STEAL:
 //      Plrhand.notify_player_ex(offender, victim_tile, E_DIPLOMATIC_INCIDENT,
@@ -1436,7 +1444,7 @@ public class Diplomats{
 //  cost *= Unittype_P.unit_build_shield_cost(punit.type) / 10;
 //
 //  /* FIXME: This is a weird one - should be replaced */
-//  if (unit_flag(punit, F_CITIES)) 
+//  if (unit_flag(punit, Eunit_flag_id.F_CITIES)) 
 //    cost/=2;
 //
 //  /* Cost now contains the basic bribe cost.  We now reduce it by:
@@ -1458,7 +1466,7 @@ public class Diplomats{
 //  int count = 0;
 //
 //  unit_list_iterate((ptile).units, punit)
-//    if (unit_flag(punit, F_DIPLOMAT))
+//    if (unit_flag(punit, Eunit_flag_id.F_DIPLOMAT))
 //      count++;
 //  }
 //  return count;

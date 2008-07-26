@@ -417,7 +417,7 @@ public class Mapview{
 //    sw_widget_align_parent(label2, A_SW);
 //  }      
 //
-//  widget_list_insert(&city_descr_windows, window);
+//  &city_descr_windows.foo_list_insert(window);
 //  /* PORTME */
 //}
 //
@@ -770,12 +770,12 @@ public class Mapview{
 //    item.unselected = terrain_to_osda(ptile);
 //    item.selected = create_selected_osda(item.unselected);
 //    item.button = null;
-//    item.tooltip=mystrdup(mapview_get_terrain_tooltip_text(ptile));
-//    item.info_text=mystrdup(popup_info_text(ptile));
+//    item.tooltip=(mapview_get_terrain_tooltip_text(ptile));
+//    item.info_text=(popup_info_text(ptile));
 //  }
 //
-//  if(map_get_city(ptile)) {
-//      city pcity=map_get_city(ptile);
+//  if(Map.map_get_city(ptile)) {
+//      city pcity=Map.map_get_city(ptile);
 //    tile_list_item item = &tile_list.item[tile_list.items];
 //
 //    tile_list.items++;
@@ -785,8 +785,8 @@ public class Mapview{
 //    item.selected = create_selected_osda(item.unselected);
 //    item.button = null;
 //    item.pcity=pcity;
-//    item.tooltip = mystrdup(mapview_get_city_tooltip_text(pcity));
-//    item.info_text=mystrdup(mapview_get_city_info_text(pcity));
+//    item.tooltip = (mapview_get_city_tooltip_text(pcity));
+//    item.info_text=(mapview_get_city_info_text(pcity));
 //  }
 //
 //  for (unit punit : ptile.units.data) {
@@ -800,8 +800,8 @@ public class Mapview{
 //    item.button = null;
 //    item.punit=punit;
 //
-//    item.tooltip = mystrdup(mapview_get_unit_tooltip_text(punit));
-//    item.info_text=mystrdup(mapview_get_unit_info_text(punit));
+//    item.tooltip = (mapview_get_unit_tooltip_text(punit));
+//    item.info_text=(mapview_get_unit_info_text(punit));
 //  } }
 //
 //  if(tile_list.items>1) {
@@ -956,7 +956,7 @@ public class Mapview{
 //static boolean is_float(char *str, double *dest)
 //{
 //  char *p;
-//  char *copy = mystrdup(str);
+//  char *copy = (str);
 //  lconv locale_data;
 //  double res;
 //  int i;
@@ -1115,7 +1115,7 @@ public class Mapview{
 //    for (i = 0; i < num; i++) {
 //      ct_string string = null;
 //      sw_widget widget;
-//      char *id = mystrdup(strchr(sec[i], '_') + 1);
+//      char *id = (strchr(sec[i], '_') + 1);
 //      char *background;
 //      int order = secfile_lookup_int(file, "%s.order", sec[i]);
 //      be_key key;
@@ -1365,12 +1365,12 @@ public class Mapview{
 //}
 //
 //#define ADD(x) \
-//  actions_shown.action[actions_shown.actions].name=mystrdup(x);\
+//  actions_shown.action[actions_shown.actions].name=(x);\
 //  actions_shown.action[actions_shown.actions].enabled=true;\
 //  actions_shown.actions++;
 //
 //#define ADD_DIS(x) \
-//  actions_shown.action[actions_shown.actions].name=mystrdup(x);\
+//  actions_shown.action[actions_shown.actions].name=(x);\
 //  actions_shown.action[actions_shown.actions].enabled=false;\
 //  actions_shown.actions++;
 //
@@ -1415,7 +1415,7 @@ public class Mapview{
 //    X(ACTIVITY_TRANSFORM,  "unit_transform");
 //
 //    if (can_unit_do_auto(punit)) {
-//      if (unit_flag(punit, F_SETTLERS)) {
+//      if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //	ADD("unit_auto_settler");
 //      } else {
 //	ADD("unit_auto_attack");
@@ -1430,7 +1430,7 @@ public class Mapview{
 //    }
 //
 //    if (can_unit_add_or_build_city(punit)) {
-//      if (map_get_city(punit.tile)) {
+//      if (Map.map_get_city(punit.tile)) {
 //	ADD("unit_add_to_city");
 //      } else {
 //	ADD("unit_build_city");
@@ -1472,7 +1472,7 @@ public class Mapview{
 //    /* Add tooltips */
 //    for (i = 0; i < actions_shown.actions; i++) {
 //      actions_shown.action[i].tooltip =
-//	  mystrdup(mapview_get_unit_action_tooltip
+//	  (mapview_get_unit_action_tooltip
 //		   (punit, actions_shown.action[i].name,
 //		    format_shortcut(actions_shown.action[i].name)));
 //    }
@@ -1491,7 +1491,7 @@ public class Mapview{
 //    /* Add tooltips */
 //    for (i = 0; i < actions_shown.actions; i++) {
 //      actions_shown.action[i].tooltip =
-//	  mystrdup(mapview_get_city_action_tooltip
+//	  (mapview_get_city_action_tooltip
 //		   (pcity, actions_shown.action[i].name,
 //		    format_shortcut(actions_shown.action[i].name)));
 //    }

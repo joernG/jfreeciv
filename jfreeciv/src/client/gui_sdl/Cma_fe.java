@@ -686,8 +686,8 @@ public class Cma_fe{
 //
 //    for (i = 0;
 //      i < count - (result.specialists[specialist_type.SP_ELVIS]
-//		   + result.specialists[SP_SCIENTIST]
-//		   + result.specialists[SP_TAXMAN]); i++) {
+//		   + result.specialists[specialist_type.SP_SCIENTIST]
+//		   + result.specialists[specialist_type.SP_TAXMAN]); i++) {
 //      pText = get_citizen_surface(CITIZEN_CONTENT, i);
 //      SDL_BlitSurface(pText, null, pBuf.dst, &dst);
 //      dst.x += step;
@@ -700,13 +700,13 @@ public class Cma_fe{
 //    }
 //
 //    pText = get_citizen_surface(CITIZEN_TAXMAN, 0);
-//    for (i = 0; i < result.specialists[SP_TAXMAN]; i++) {
+//    for (i = 0; i < result.specialists[specialist_type.SP_TAXMAN]; i++) {
 //      SDL_BlitSurface(pText, null, pBuf.dst, &dst);
 //      dst.x += step;
 //    }
 //
 //    pText = get_citizen_surface(CITIZEN_SCIENTIST, 0);
-//    for (i = 0; i < result.specialists[SP_SCIENTIST]; i++) {
+//    for (i = 0; i < result.specialists[specialist_type.SP_SCIENTIST]; i++) {
 //      SDL_BlitSurface(pText, null, pBuf.dst, &dst);
 //      dst.x += step;
 //    }

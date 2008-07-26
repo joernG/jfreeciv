@@ -136,7 +136,7 @@ public class Gotodlg{
 //      pStr.style |= TTF_STYLE_BOLD;
 //   
 //      if(pCity.owner != owner) {
-//        pLogo = GET_SURF(get_nation_by_idx(
+//        pLogo = GET_SURF(Nation.get_nation_by_idx(
 //			get_player(pCity.owner).nation).flag_sprite);
 //        pLogo = make_flag_surface_smaler(pLogo);
 //      }
@@ -260,7 +260,7 @@ public class Gotodlg{
 //    }
 //    
 //    pFlag = make_flag_surface_smaler(
-//    	GET_SURF(get_nation_by_idx(Game.game.players[i].nation).flag_sprite));
+//    	GET_SURF(Nation.get_nation_by_idx(Game.game.players[i].nation).flag_sprite));
 //  
 //    if (pFlag.w > 15 || pFlag.h > 15) {
 //      float zoom = (float)(MAX(pFlag.w, pFlag.h)) / 15;
@@ -280,7 +280,7 @@ public class Gotodlg{
 //    set_new_checkbox_theme(pBuf, pEnabled, pDisabled);
 //    
 //    pBuf.string16 = create_str16_from_char(
-//    			get_nation_by_idx(Game.game.players[i].nation).name, 12);
+//    			Nation.get_nation_by_idx(Game.game.players[i].nation).name, 12);
 //    pBuf.string16.style &= ~SF_CENTER;
 //    set_wstate(pBuf, FC_WS_NORMAL);
 //    

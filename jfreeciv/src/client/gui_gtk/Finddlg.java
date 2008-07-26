@@ -176,7 +176,7 @@ public class Finddlg{
 //
 //    gtk_clist_get_text(GTK_CLIST(find_list), row, 0, &string);
 //
-//    if(string&&(pcity=game_find_city_by_name(string)))
+//    if(string&&(pcity=Game.game_find_city_by_name(string)))
 //      center_tile_mapcanvas(pcity.tile);
 //  }
 //  
@@ -202,7 +202,7 @@ public class Finddlg{
 //
 //  gtk_clist_get_text(GTK_CLIST(find_list), row, 0, &string);
 //
-//  if(string&&(pcity=game_find_city_by_name(string)))
+//  if(string&&(pcity=Game.game_find_city_by_name(string)))
 //	center_tile_mapcanvas(pcity.tile);
 //}
 }

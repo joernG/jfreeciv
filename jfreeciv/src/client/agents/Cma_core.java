@@ -108,8 +108,8 @@ public class Cma_core{
 //  T(disorder);
 //  T(happy);
 //  T(specialists[specialist_type.SP_ELVIS]);
-//  T(specialists[SP_SCIENTIST]);
-//  T(specialists[SP_TAXMAN]);
+//  T(specialists[specialist_type.SP_SCIENTIST]);
+//  T(specialists[specialist_type.SP_TAXMAN]);
 //
 //  for (stat = 0; stat < NUM_STATS; stat++) {
 //    T(surplus[stat]);

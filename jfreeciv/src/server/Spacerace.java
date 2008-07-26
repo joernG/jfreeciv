@@ -1,5 +1,4 @@
 package server;
-import static server.Plrhand.notify_player;
 import port.util;
 import server.gamelog.EEndGameState;
 import server.gamelog.EGamelog;
@@ -103,7 +102,7 @@ public class Spacerace{
 	 * null) to specified destinations. If dest is null then
 	 * Game.game.game_connections is used.
 	 **************************************************************************/
-	void send_spaceship_info(player src, Speclists<Connection> dest)
+	static void send_spaceship_info(player src, Speclists<Connection> dest)
 	{
 		int j;
 
@@ -151,18 +150,18 @@ public class Spacerace{
 		int arrival;
 
 		if (null==pplayer.find_palace()) {
-			notify_player(pplayer,
+			Plrhand.notify_player(pplayer,
 					("Game: You need to have a capital in order to launch "+
 					"your spaceship."));
 			return;
 		}
 		if (ship.state.ordinal() >= spaceship_state.SSHIP_LAUNCHED.ordinal()) {
-			notify_player(pplayer, "Game: Your spaceship is already launched!");
+			Plrhand.notify_player(pplayer, "Game: Your spaceship is already launched!");
 			return;
 		}
 		if (ship.state != spaceship_state.SSHIP_STARTED
 				|| ship.success_rate == 0.0) {
-			notify_player(pplayer, "Game: Your spaceship can't be launched yet!");
+			Plrhand.notify_player(pplayer, "Game: Your spaceship can't be launched yet!");
 			return;
 		}
 
@@ -188,12 +187,12 @@ public class Spacerace{
 		player_spaceship ship = pplayer.spaceship;
 
 		if (ship.state == spaceship_state.SSHIP_NONE) {
-			notify_player(pplayer, ("Game: Spaceship action received,"+
+			Plrhand.notify_player(pplayer, ("Game: Spaceship action received,"+
 			" but you don't have a spaceship!"));
 			return;
 		}
 		if (ship.state.ordinal() >= spaceship_state.SSHIP_LAUNCHED.ordinal()) {
-			notify_player(pplayer, ("Game: You can't modify your"+
+			Plrhand.notify_player(pplayer, ("Game: You can't modify your"+
 			" spaceship after launch!"));
 			return;
 		}
@@ -202,12 +201,12 @@ public class Spacerace{
 				return;
 			}
 			if (ship.num_spaceship_structurals_placed() >= ship.structurals) {
-				notify_player(pplayer, ("Game: You don't have any unplaced"+
+				Plrhand.notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Structurals!"));
 				return;
 			}
 			if (num!=0 && !ship.structure[Spaceship.structurals_info[num].required]) {
-				notify_player(pplayer, ("Game: That Space Structural"+
+				Plrhand.notify_player(pplayer, ("Game: That Space Structural"+
 				" would not be connected!"));
 				return;
 			}
@@ -221,12 +220,12 @@ public class Spacerace{
 				return;
 			}
 			if (ship.fuel + ship.propulsion >= ship.components) {
-				notify_player(pplayer, ("Game: You don't have any unplaced"+
+				Plrhand.notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Components!"));
 				return;
 			}
 			if (num > player_spaceship.NUM_SS_COMPONENTS/2) {
-				notify_player(pplayer, ("Game: Your spaceship already has"+
+				Plrhand.notify_player(pplayer, ("Game: Your spaceship already has"+
 				" the maximum number of Fuel Components!"));
 				return;
 			}
@@ -240,12 +239,12 @@ public class Spacerace{
 				return;
 			}
 			if (ship.fuel + ship.propulsion >= ship.components) {
-				notify_player(pplayer, ("Game: You don't have any unplaced"+
+				Plrhand.notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Components!"));
 				return;
 			}
 			if (num > player_spaceship.NUM_SS_COMPONENTS/2) {
-				notify_player(pplayer, ("Game: Your spaceship already has the"+
+				Plrhand.notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Propulsion Components!"));
 				return;
 			}
@@ -260,12 +259,12 @@ public class Spacerace{
 			}
 			if (ship.habitation + ship.life_support + ship.solar_panels
 					>= ship.modules) {
-				notify_player(pplayer, ("Game: You don't have any unplaced"+
+				Plrhand.notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Modules!"));
 				return;
 			}
 			if (num > player_spaceship.NUM_SS_MODULES/3) {
-				notify_player(pplayer, ("Game: Your spaceship already has the"+
+				Plrhand.notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Habitation Modules!"));
 				return;
 			}
@@ -280,12 +279,12 @@ public class Spacerace{
 			}
 			if (ship.habitation + ship.life_support + ship.solar_panels
 					>= ship.modules) {
-				notify_player(pplayer, ("Game: You don't have any unplaced"+
+				Plrhand.notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Modules!"));
 				return;
 			}
 			if (num > player_spaceship.NUM_SS_MODULES/3) {
-				notify_player(pplayer, ("Game: Your spaceship already has the"+
+				Plrhand.notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Life Support Modules!"));
 				return;
 			}
@@ -300,12 +299,12 @@ public class Spacerace{
 			}
 			if (ship.habitation + ship.life_support + ship.solar_panels
 					>= ship.modules) {
-				notify_player(pplayer, ("Game: You don't have any unplaced"+
+				Plrhand.notify_player(pplayer, ("Game: You don't have any unplaced"+
 				" Space Modules!"));
 				return;
 			}
 			if (num > player_spaceship.NUM_SS_MODULES/3) {
-				notify_player(pplayer, ("Game: Your spaceship already has the"+
+				Plrhand.notify_player(pplayer, ("Game: Your spaceship already has the"+
 				" maximum number of Solar Panel Modules!"));
 				return;
 			}
@@ -323,7 +322,7 @@ public class Spacerace{
 	/***************************************************************************
 	 * ...
 	 **************************************************************************/
-	void spaceship_lost(player pplayer)
+	static void spaceship_lost(player pplayer)
 	{
 		Plrhand.notify_player_ex(null, null, event_type.E_SPACESHIP,
 				("Game: Without guidance from the capital, the %s "+

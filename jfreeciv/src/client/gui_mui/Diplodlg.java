@@ -545,7 +545,7 @@ public class Diplodlg{
 //    Object *menu_strip;
 //    Object *menu_title;
 //
-//    dialog_list_insert(&dialog_list, pdialog);
+//    &dialog_list.foo_list_insert(pdialog);
 //    init_treaty(&pdialog.treaty, plr0, plr1);
 //
 //    pdialog.plr0_maps_menu = menu_strip = MenustripObject,

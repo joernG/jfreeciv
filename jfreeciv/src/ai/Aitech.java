@@ -47,12 +47,12 @@ public class Aitech{
 //**************************************************************************/
 //static Tech_Type_id get_wonder_tech(player plr)
 //{
-//  int building = get_nation_by_plr(plr).goals.wonder;
+//  int building = Nation.get_nation_by_plr(plr).goals.wonder;
 //  
-//  if (improvement_exists(building)
+//  if (Improvement.improvement_exists(building)
 //      && Game.game.global_wonders[building] == 0
 //      && !wonder_obsolete(building)) {
-//    Tech_Type_id tech = improvement_types[building].tech_req;
+//    Tech_Type_id tech = Improvement.improvement_types[building].tech_req;
 //
 //    if (tech_is_available(plr, tech) 
 //        && get_invention(plr, tech) != TECH_KNOWN) {
@@ -69,8 +69,8 @@ public class Aitech{
 //**************************************************************************/
 //static Tech_Type_id ai_next_tech_goal_default(player pplayer)
 //{
-//  nation_type prace = get_nation_by_plr(pplayer);
-//  int bestdist = A_LAST + 1;
+//  nation_type prace = Nation.get_nation_by_plr(pplayer);
+//  int bestdist = Tech_H.A_LAST + 1;
 //  int dist, i;
 //  Tech_Type_id goal = A_UNSET;
 //  Tech_Type_id tech;
@@ -120,8 +120,8 @@ public class Aitech{
 //{
 //  Tech_Type_id newtech, newgoal;
 //  int num_cities_nonzero = MAX(1, pplayer.cities.foo_list_size());
-//  int values[A_LAST];
-//  int goal_values[A_LAST];
+//  int values[Tech_H.A_LAST];
+//  int goal_values[Tech_H.A_LAST];
 //
 //  memset(values, 0, sizeof(values));
 //  memset(goal_values, 0, sizeof(goal_values));
@@ -241,7 +241,7 @@ public class Aitech{
 //  for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
 //    ai_gov_tech_hint hint = &ai_gov_tech_hints[i];
 //    
-//    if (hint.tech == A_LAST) {
+//    if (hint.tech == Tech_H.A_LAST) {
 //      break;
 //    }
 //    

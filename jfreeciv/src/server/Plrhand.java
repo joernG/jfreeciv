@@ -1,12 +1,19 @@
 package server;
 
+import port.util;
+import utility.Log;
+import utility.Rand;
 import utility.Speclists;
+import common.City;
 import common.Connection;
 import common.Game;
+import common.Government;
 import common.event_type;
+import common.city.city;
 import common.map.tile;
 
 import common.player.player;
+import common.unit.unit;
 
 public class Plrhand {
 	// /**************************************************************************
@@ -263,9 +270,9 @@ public class Plrhand {
 	// /* We used to have a Gamelog.gamelog() for first-researched, but not anymore. */
 	//
 	// /* Alert the owners of any wonders that have been made obsolete */
-	// impr_type_iterate(id) {
-	// if (Game.game.global_wonders[id] != 0 && is_wonder(id) &&
-	// improvement_types[id].obsolete_by == tech_found &&
+	// for (int id = 0; id < Game.game.num_impr_types; id++) {
+	// if (Game.game.global_wonders[id] != 0 && Improvement.is_wonder(id) &&
+	// Improvement.improvement_types[id].obsolete_by == tech_found &&
 	// (pcity = Game.find_city_by_id(Game.game.global_wonders[id]))) {
 	// Plrhand.notify_player_ex(City.city_owner(pcity), null, E_WONDER_OBSOLETE,
 	// "Game: Discovery of %s OBSOLETES %s in %s!",
@@ -273,7 +280,7 @@ public class Plrhand {
 	// Improvement.get_improvement_name(id),
 	// pcity.name);
 	// }
-	// } impr_type_iterate_end;
+	// } ;
 	// }
 	//
 	// government_iterate(gov) {
@@ -292,17 +299,17 @@ public class Plrhand {
 	// set_invention(plr, tech_found, TECH_KNOWN);
 	// update_research(plr);
 	// remove_obsolete_buildings(plr);
-	// if (tech_flag(tech_found,TF_RAILROAD)) {
+	// if (tech_flag(tech_found,tech_flag_id.TF_RAILROAD)) {
 	// upgrade_city_rails(plr, was_discovery);
 	// }
 	//
 	// /* enhance vision of units inside a fortress */
-	// if (tech_flag(tech_found, TF_WATCHTOWER)) {
+	// if (tech_flag(tech_found, tech_flag_id.TF_WATCHTOWER)) {
 	// for (unit punit : plr.units.data) {
-	// if (Map.map_has_special(punit.tile, S_FORTRESS)
+	// if (Map.map_has_special(punit.tile, Terrain_H.S_FORTRESS)
 	// && is_ground_unit(punit)) {
-	// unfog_area(plr, punit.tile, get_watchtower_vision(punit));
-	// fog_area(plr, punit.tile,
+	// Maphand.unfog_area(plr, punit.tile, Unittools.get_watchtower_vision(punit));
+	// Maphand.fog_area(plr, punit.tile,
 	// punit.unit_type().vision_range);
 	// }
 	// }
@@ -680,13 +687,13 @@ public class Plrhand {
 	 **************************************************************************/
 	public static void give_initial_techs(player plr)
 	{
-//		nation_type nation = get_nation_by_plr(plr);
+//		nation_type nation = Nation.get_nation_by_plr(plr);
 //		int i;
 //		/*
 //		 * Give Game.game wide initial techs
 //		 */
 //		for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
-//			if (Game.game.rgame.global_init_techs[i] == A_LAST) {
+//			if (Game.game.rgame.global_init_techs[i] == Tech_H.A_LAST) {
 //				break;
 //			}
 //			found_new_tech(plr, Game.game.rgame.global_init_techs[i], false, true,
@@ -697,7 +704,7 @@ public class Plrhand {
 	// * Give nation specific initial techs
 	// */
 	// for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
-	// if (nation.init_techs[i] == A_LAST) {
+	// if (nation.init_techs[i] == Tech_H.A_LAST) {
 	// break;
 	// }
 	// found_new_tech(plr, nation.init_techs[i], false, true, A_NONE);
@@ -717,13 +724,13 @@ public class Plrhand {
 	// return true;
 	// }
 	//
-	// /**************************************************************************
-	// If target has more techs than pplayer, pplayer will get a random of
-	// these, the clients will both be notified and the conquer cost
-	// penalty applied. Used for diplomats and city conquest.
-	// **************************************************************************/
-	// void get_a_tech(player pplayer, player target)
-	// {
+	 /**************************************************************************
+	 If target has more techs than pplayer, pplayer will get a random of
+	 these, the clients will both be notified and the conquer cost
+	 penalty applied. Used for diplomats and city conquest.
+	 **************************************************************************/
+	 public static void get_a_tech(player pplayer, player target)
+	 {
 	// Tech_Type_id stolen_tech;
 	// int j=0;
 	//
@@ -780,7 +787,7 @@ public class Plrhand {
 	//
 	// do_conquer_cost(pplayer);
 	// found_new_tech(pplayer, stolen_tech, false, true, A_NONE);
-	// }
+	 }
 	//
 	// /**************************************************************************
 	// Handle a client or AI request to change the tax/luxury/science rates.
@@ -791,7 +798,7 @@ public class Plrhand {
 	// {
 	// int maxrate;
 	//
-	// if (Srv_main.server_state != RUN_GAME_STATE) {
+	// if (Srv_main.server_state != server_states.RUN_GAME_STATE) {
 	// util.freelog(Log.LOG_ERROR, "received player_rates packet from %s before start",
 	// pplayer.name);
 	// notify_player(pplayer,
@@ -1136,7 +1143,7 @@ public class Plrhand {
 	// Plrhand.send_player_info(pplayer2, null);
 	// remove_allied_visibility(pplayer, pplayer2);
 	// remove_allied_visibility(pplayer2, pplayer);
-	// resolve_unit_stacks(pplayer, pplayer2, true);
+	// Unittools.resolve_unit_stacks(pplayer, pplayer2, true);
 	// }
 	//
 	//
@@ -1165,7 +1172,7 @@ public class Plrhand {
 	//
 	// old_type = pplayer.diplstates[other_player_id].type;
 	// pplayer2 = get_player(other_player_id);
-	// has_senate = government_has_flag(get_gov_pplayer(pplayer), G_HAS_SENATE);
+	// has_senate = Government.government_has_flag(get_gov_pplayer(pplayer), G_HAS_SENATE);
 	//
 	// /* can't break a pact with yourself */
 	// if (pplayer == pplayer2) {
@@ -1227,7 +1234,7 @@ public class Plrhand {
 	// Gamelog.gamelog(GAMELOG_DIPLSTATE, pplayer, pplayer2, new_type);
 	//
 	// /* If the old state was alliance, the players' units can share tiles
-	// illegally, and we need to call resolve_unit_stacks() */
+	// illegally, and we need to call Unittools.resolve_unit_stacks() */
 	// if (old_type == diplstate_type.DS_ALLIANCE) {
 	// update_players_after_alliance_breakup(pplayer, pplayer2);
 	// }
@@ -1276,7 +1283,7 @@ public class Plrhand {
 	// if (old_type == diplstate_type.DS_ALLIANCE) {
 	// /* Inform clients about units that have been hidden. Units in cities
 	// * and transporters are visible to allies but not visible once the
-	// * alliance is broken. We have to call this after resolve_unit_stacks
+	// * alliance is broken. We have to call this after Unittools.resolve_unit_stacks
 	// * because that function may change units' locations. It also sends
 	// * out new city info packets to tell the client about occupied cities,
 	// * so it should also come after the send_player_info calls above. */
@@ -1309,8 +1316,8 @@ public class Plrhand {
 	// /* Check fall-out of a war declaration. */
 	// for(player other: Game.game.players){
 	// if (other.is_alive && other != pplayer && other != pplayer2
-	// && new_type == diplstate_type.DS_WAR && pplayers_allied(pplayer2, other)
-	// && pplayers_allied(pplayer, other)) {
+	// && new_type == diplstate_type.DS_WAR && Player_P.pplayers_allied(pplayer2, other)
+	// && Player_P.pplayers_allied(pplayer, other)) {
 	// if (!players_on_same_team(pplayer, other)) {
 	// /* If an ally declares war on another ally, break off your alliance
 	// * to the aggressor. This prevents in-alliance wars, which are not
@@ -1358,14 +1365,14 @@ public class Plrhand {
 		// genmsg.conn_id = -1;
 		//
 		// conn_list_iterate(*dest, pconn) {
-		// if (Srv_main.server_state >= RUN_GAME_STATE
+		// if (Srv_main.server_state >= server_states.RUN_GAME_STATE
 		// && ptile /* special case, see above */
 		// && ((!pconn.player && pconn.observer)
 		// || (pconn.player && Maphand.map_is_known(ptile, pconn.player)))) {
 		// genmsg.x = ptile.x;
 		// genmsg.y = ptile.y;
 		// } else {
-		// assert(Srv_main.server_state < RUN_GAME_STATE || !is_normal_map_pos(-1, -1));
+		// assert(Srv_main.server_state < server_states.RUN_GAME_STATE || !is_normal_map_pos(-1, -1));
 		// genmsg.x = -1;
 		// genmsg.y = -1;
 		// }
@@ -1678,7 +1685,7 @@ public class Plrhand {
 	// * This may be an odd time to check these values but we can be sure
 	// * to have a consistent state here.
 	// */
-	// assert(Srv_main.server_state != RUN_GAME_STATE
+	// assert(Srv_main.server_state != server_states.RUN_GAME_STATE
 	// || ((tech_exists(plr.research.researching)
 	// && plr.research.researching != A_NONE)
 	// || is_future_tech(plr.research.researching)
@@ -1762,12 +1769,12 @@ public class Plrhand {
 	// game_renumber_players(pplayer.player_no);
 	// }
 	//
-	// /**************************************************************************
-	// Update contact info.
-	// **************************************************************************/
-	// void make_contact(player pplayer1, player pplayer2,
-	// tile ptile)
-	// {
+	 /**************************************************************************
+	 Update contact info.
+	 **************************************************************************/
+	 static void make_contact(player pplayer1, player pplayer2,
+	 tile ptile)
+	 {
 	// int player1 = pplayer1.player_no, player2 = pplayer2.player_no;
 	//
 	// if (pplayer1 == pplayer2
@@ -1815,23 +1822,23 @@ public class Plrhand {
 	// }
 	// Plrhand.send_player_info(pplayer1, pplayer1);
 	// Plrhand.send_player_info(pplayer2, pplayer2);
-	// }
-	//
-	// /**************************************************************************
-	// Check if we make contact with anyone.
-	// **************************************************************************/
-	// void maybe_make_contact(tile ptile, player pplayer)
-	// {
-	// for(tile tile1: util.square_tile_iterate(ptile, 1)) {
-	// city pcity = tile1.city;
-	// if (pcity) {
-	// make_contact(pplayer, City.city_owner(pcity), ptile);
-	// }
-	// for (unit punit : tile1.units.data) {
-	// make_contact(pplayer, punit.unit_owner(), ptile);
-	// } }
-	// }
-	// }
+	 }
+	
+	 /**************************************************************************
+	 Check if we make contact with anyone.
+	 **************************************************************************/
+	 static void maybe_make_contact(tile ptile, player pplayer)
+	 {
+		 for(tile tile1: util.square_tile_iterate(ptile, 1)) {
+			 city pcity = tile1.city;
+			 if (pcity!=null) {
+				 make_contact(pplayer, City.city_owner(pcity), ptile);
+			 }
+			 for (unit punit : tile1.units.data) {
+				 make_contact(pplayer, punit.unit_owner(), ptile);
+			 } 
+		 }
+	 }
 	//
 	// /**************************************************************************
 	// To be used only by shuffle_players() and shuffled_player() below:
@@ -1919,7 +1926,7 @@ public class Plrhand {
 	//
 	// /****************************************************************************
 	// This function return one of the nations available from the
-	// NO_NATION_SELECTED-terminated choices list. If no available nations in
+	// Nation_H.NO_NATION_SELECTED-terminated choices list. If no available nations in
 	// this
 	// file were found, return a random nation. If no nations are available,
 	// util.die.
@@ -1940,7 +1947,7 @@ public class Plrhand {
 	// nations_used[i] = 1; /* Available (for now) */
 	// }
 	//
-	// for (i = 0; choices[i] != NO_NATION_SELECTED; i++) {
+	// for (i = 0; choices[i] != Nation_H.NO_NATION_SELECTED; i++) {
 	// pref_nations_avail++;
 	// nations_used[choices[i]] = 2; /* Preferred */
 	// }
@@ -2136,30 +2143,31 @@ public class Plrhand {
 	// if a civil war is triggered.
 	// - Kris Bubendorfer
 	// ***********************************************************************/
-	// boolean civil_war_triggered(player pplayer)
-	// {
-	// /* Get base probabilities */
-	//
-	// int dice = Rand.myrand(100); /* Throw the dice */
-	// int prob = get_government_civil_war_prob(pplayer.government);
-	//
-	// /* Now compute the contribution of the cities. */
-	//  
-	// city_list_iterate(pplayer.cities, pcity)
-	// if (city_unhappy(pcity)) {
-	// prob += 5;
-	// }
-	// if (city_celebrating(pcity)) {
-	// prob -= 5;
-	// }
-	// }
-	//
-	// util.freelog(Log.LOG_VERBOSE, "Civil war chance for %s: prob %d, dice %d",
-	// pplayer.name, prob, dice);
-	//  
-	// return(dice < prob);
-	// }
-	//
+	 static boolean civil_war_triggered(player pplayer)
+	 {
+		 /* Get base probabilities */
+
+		 int dice = Rand.myrand(100); /* Throw the dice */
+		 int prob = Government.get_government_civil_war_prob(pplayer.government);
+
+		 /* Now compute the contribution of the cities. */
+
+		 for(city pcity : pplayer.cities.data){
+			 if (City.city_unhappy(pcity)) {
+				 prob += 5;
+			 }
+			 if (City.city_celebrating(pcity)) {
+				 prob -= 5;
+			 }
+		 }
+
+
+		 util.freelog(Log.LOG_VERBOSE, "Civil war chance for %s: prob %d, dice %d",
+				 pplayer.name, prob, dice);
+
+		 return(dice < prob);
+	 }
+	
 	// /**********************************************************************
 	// Capturing a nation's capital is a devastating blow. This function
 	// creates a new AI player, and randomly splits the original players
@@ -2188,8 +2196,8 @@ public class Plrhand {
 	// determined randomly.
 	// - Kris Bubendorfer
 	// ***********************************************************************/
-	// void civil_war(player pplayer)
-	// {
+	 public static void civil_war(player pplayer)
+	 {
 	// int i, j;
 	// player cplayer;
 	//
@@ -2236,7 +2244,7 @@ public class Plrhand {
 	// transfer_city(cplayer, pcity, -1, false, false, false);
 	// util.freelog(Log.LOG_VERBOSE, "%s declares allegiance to %s",
 	// pcity.name, cplayer.name);
-	// Plrhand.notify_player_ex(pplayer, pcity.tile, E_CITY_LOST,
+	// Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_CITY_LOST,
 	// "Game: %s declares allegiance to %s.",
 	// pcity.name, cplayer.name);
 	// i--;
@@ -2248,7 +2256,7 @@ public class Plrhand {
 	//
 	// i = 0;
 	//
-	// resolve_unit_stacks(pplayer, cplayer, false);
+	// Unittools.resolve_unit_stacks(pplayer, cplayer, false);
 	//
 	// notify_player(null,
 	// ("Game: The capture of %s's capital and the destruction "
@@ -2259,7 +2267,7 @@ public class Plrhand {
 	// "rebel provinces."),
 	// pplayer.name, cplayer.name,
 	// cplayer.cities.foo_list_size());
-	// }
+	 }
 	//
 	// /**************************************************************************
 	// The client has send as a chunk of the attribute block.

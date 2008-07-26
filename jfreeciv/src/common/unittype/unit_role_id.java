@@ -6,7 +6,7 @@ package common.unittype;
    in various circumstances, or "roles".
    Note that in some cases flags can act as roles, eg, we don't need
    a role for "settlers", because we can just use F_SETTLERS.
-   (Now have to consider F_CITIES too)
+   (Now have to consider Eunit_flag_id.F_CITIES too)
    So we make sure flag values and role values are distinct,
    so some functions can use them interchangably.
    See data/default/units.ruleset for documentation of their effects.

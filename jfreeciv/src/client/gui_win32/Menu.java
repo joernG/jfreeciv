@@ -113,7 +113,7 @@ public class Menu{
 //  IDM_ORDERS_IRRIGATE,
 //  IDM_ORDERS_MINE,
 //  IDM_ORDERS_TRANSFORM,
-//  IDM_ORDERS_FORTRESS,		/* shared with FORTIFY */
+//  IDM_ORDERTerrain_H.S_FORTRESS,		/* shared with FORTIFY */
 //  IDM_ORDERTerrain_H.S_AIRBASE, 
 //  IDM_ORDERS_POLLUTION,		/* shared with PARADROP */
 //  IDM_ORDERS_FALLOUT,
@@ -364,7 +364,7 @@ public class Menu{
 //  {N"Build _Irrigation"	"\tI",		IDM_ORDERS_IRRIGATE},
 //  {N"Build _Mine"		"\tM",		IDM_ORDERS_MINE},
 //  {N"Transf_orm to Hills"	"\tO",		IDM_ORDERS_TRANSFORM},
-//  {N"Build _Fortress"	"\tF",		IDM_ORDERS_FORTRESS},
+//  {N"Build _Fortress"	"\tF",		IDM_ORDERTerrain_H.S_FORTRESS},
 //  {N"Build Airbas_e"		"\tE",		IDM_ORDERTerrain_H.S_AIRBASE},
 //  {N"Clean _Pollution"	"\tP",		IDM_ORDERS_POLLUTION},
 //  {N"Clean _Nuclear Fallout" "\tN",		IDM_ORDERS_FALLOUT},
@@ -721,7 +721,7 @@ public class Menu{
 //    case IDM_ORDERS_TRANSFORM:
 //      key_unit_transform();
 //      break;
-//    case IDM_ORDERS_FORTRESS:
+//    case IDM_ORDERTerrain_H.S_FORTRESS:
 //      if (get_unit_in_focus()) {
 //	if (can_unit_do_activity(get_unit_in_focus(), ACTIVITY_FORTRESS)) {
 //	  key_unit_fortress();
@@ -757,7 +757,7 @@ public class Menu{
 //    case IDM_ORDERS_UNLOAD:
 //      if (get_unit_in_focus()) {
 //	unit punit = get_unit_in_focus();
-//	if (can_unit_unload(punit, find_unit_by_id(punit.transported_by))
+//	if (can_unit_unload(punit, Game.find_unit_by_id(punit.transported_by))
 //	 && can_unit_exist_at_tile(punit, punit.tile)) {
 //	  request_unit_unload(punit);
 //	} else if (get_transporter_occupancy(punit) > 0) {
@@ -1123,7 +1123,7 @@ public class Menu{
 //		     can_unit_do_activity(punit, ACTIVITY_MINE));
 //      my_enable_menu(menu, IDM_ORDERS_TRANSFORM,
 //		     can_unit_do_activity(punit, ACTIVITY_TRANSFORM));
-//      my_enable_menu(menu, IDM_ORDERS_FORTRESS,
+//      my_enable_menu(menu, IDM_ORDERTerrain_H.S_FORTRESS,
 //		     can_unit_do_activity(punit, ACTIVITY_FORTRESS)
 //		     || can_unit_do_activity(punit, ACTIVITY_FORTIFYING));
 //      my_enable_menu(menu, IDM_ORDERTerrain_H.S_AIRBASE,
@@ -1145,7 +1145,7 @@ public class Menu{
 //	can_unit_load(punit, find_transporter_for_unit(punit,
 //						       punit.tile)));
 //      my_enable_menu(menu, IDM_ORDERS_UNLOAD,
-//	(can_unit_unload(punit, find_unit_by_id(punit.transported_by))
+//	(can_unit_unload(punit, Game.find_unit_by_id(punit.transported_by))
 //	 && can_unit_exist_at_tile(punit, punit.tile)) 
 //	|| get_transporter_occupancy(punit) > 0);
 //      my_enable_menu(menu, IDM_ORDERS_WAKEUP_OTHERS,
@@ -1172,8 +1172,8 @@ public class Menu{
 //      if (unit_flag(punit, F_HELP_WONDER)) {
 //	my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Help Build Wonder" +
 //		       "\tB");
-//      } else if (unit_flag(punit, F_CITIES)) {
-//	if (map_get_city(punit.tile)) {
+//      } else if (unit_flag(punit, Eunit_flag_id.F_CITIES)) {
+//	if (Map.map_get_city(punit.tile)) {
 //	  my_rename_menu(menu, IDM_ORDERS_BUILD_CITY, N"Add to City" +
 //			 "\tB");
 //	} else {
@@ -1186,7 +1186,7 @@ public class Menu{
 // 
 //      if (unit_flag(punit, F_TRADE_ROUTE)) {
 //	my_rename_menu(menu, IDM_ORDERTerrain_H.S_ROAD, N"Make Trade Route" "\tR");
-//      } else if (unit_flag(punit, F_SETTLERS)) {
+//      } else if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //	if (Map.map_has_special(punit.tile, Terrain_H.S_ROAD)) {
 //	  roadtext = N"Build Railroad" "\tR";
 //	  road_activity = ACTIVITY_RAILROAD;  
@@ -1201,23 +1201,23 @@ public class Menu{
 //
 //      ttype = punit.tile.terrain;
 //      tinfo = get_tile_type(ttype);
-//      if (tinfo.irrigation_result != T_NONE
+//      if (tinfo.irrigation_result != Terrain_H.T_NONE
 //	  && tinfo.irrigation_result != ttype) {
 //	irrtext = util.my_snprintf( irrfmt,
 //		    (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //	sz_strlcat(irrtext, "\tI");
 //      } else if (Map.map_has_special(punit.tile, S_IRRIGATION)
-//		 && player_knows_techs_with_flag(Game.game.player_ptr,
+//		 && Player_P.player_knows_techs_with_flag(Game.game.player_ptr,
 //						 TF_FARMLAND)) {
 //	irrtext = String.format( N"Build Farmland" "\tI");
 //      }
-//      if (tinfo.mining_result != T_NONE
+//      if (tinfo.mining_result != Terrain_H.T_NONE
 //	  && tinfo.mining_result != ttype) {
 //	mintext = util.my_snprintf( minfmt,
 //		    (get_tile_type(tinfo.mining_result)).terrain_name);
 //	sz_strlcat(mintext, "\tM");
 //      }
-//      if (tinfo.transform_result != T_NONE
+//      if (tinfo.transform_result != Terrain_H.T_NONE
 //	  && tinfo.transform_result != ttype) {
 //	transtext = util.my_snprintf( transfmt,
 //		    (get_tile_type(tinfo.transform_result)).terrain_name);
@@ -1229,9 +1229,9 @@ public class Menu{
 //      my_rename_menu(menu, IDM_ORDERS_TRANSFORM, transtext);
 //
 //      if (can_unit_do_activity(punit, ACTIVITY_FORTIFYING)) {
-//	my_rename_menu(menu, IDM_ORDERS_FORTRESS, N"Fortify" "\tF");
+//	my_rename_menu(menu, IDM_ORDERTerrain_H.S_FORTRESS, N"Fortify" "\tF");
 //      } else {
-//	my_rename_menu(menu, IDM_ORDERS_FORTRESS, N"Build Fortress" +
+//	my_rename_menu(menu, IDM_ORDERTerrain_H.S_FORTRESS, N"Build Fortress" +
 //		       "\tF");
 //      }
 //
@@ -1242,7 +1242,7 @@ public class Menu{
 //		       "\tP");
 //      }
 //
-//      if (!unit_flag(punit, F_SETTLERS)) {
+//      if (!unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //	my_rename_menu(menu, IDM_ORDERS_AUTO_SETTLER, N"Auto Attack" +
 //		       "\tA");
 //      } else {

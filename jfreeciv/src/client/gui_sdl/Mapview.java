@@ -689,12 +689,12 @@ public class Mapview{
 //			  
 //	    cat_snprintf(buffer, sizeof(buffer), "\nCity of %s", pTile.city.name);
 //            	  
-//	    citywall = city_got_citywalls(pTile.city);
-//	    if (pplayers_allied(Game.game.player_ptr, pOwner)) {
+//	    citywall = City.city_got_citywalls(pTile.city);
+//	    if (Player_P.pplayers_allied(Game.game.player_ptr, pOwner)) {
 //	      barrack = (city_affected_by_wonder(pTile.city, B_SUNTZU) ||
-//	  		city_got_building(pTile.city, B_BARRACKS) || 
-//	  		city_got_building(pTile.city, B_BARRACKS2) ||
-//	  		city_got_building(pTile.city, B_BARRACKS3));
+//	  		City.city_got_building(pTile.city, B_BARRACKS) || 
+//	  		City.city_got_building(pTile.city, B_BARRACKS2) ||
+//	  		City.city_got_building(pTile.city, B_BARRACKS3));
 //	      airport = city_got_effect(pTile.city, B_AIRPORT);
 //	      port = city_got_effect(pTile.city, B_PORT);
 //	    }
@@ -2357,7 +2357,7 @@ public class Mapview{
 //  }
 //  
 //  /*** City and various terrain improvements ***/
-//  if (sdl_contains_special(special, S_FORTRESS) && draw_fortress_airbase) {
+//  if (sdl_contains_special(special, Terrain_H.S_FORTRESS) && draw_fortress_airbase) {
 //    SDL_BlitSurface(GET_SURF(sprites.tx.fortress_back),
 //					    null, pBufSurface, &des);
 //    des = dst;
@@ -2412,7 +2412,7 @@ public class Mapview{
 //    }
 //  }
 //
-//  if (sdl_contains_special(special, S_FORTRESS) && draw_fortress_airbase) {
+//  if (sdl_contains_special(special, Terrain_H.S_FORTRESS) && draw_fortress_airbase) {
 //    SDL_BlitSurface(GET_SURF(sprites.tx.fortress), null, pBufSurface, &des);
 //    des = dst;	  
 //  }
@@ -2511,7 +2511,7 @@ public class Mapview{
 //	next_x = pUnit.x;
 //	next_y = pUnit.y + 1;
 //	if(normalize_map_pos(&next_x, &next_y)) {
-//	  if(draw_cities && (pCity = map_get_city(next_x, next_y))) {
+//	  if(draw_cities && (pCity = Map.map_get_city(next_x, next_y))) {
 //	    put_city_pixmap_draw(pCity, pBlinkSurfaceB,
 //			  -HALF_NORMAL_TILE_WIDTH, HALF_NORMAL_TILE_HEIGHT);
 //	  } else {
@@ -2525,7 +2525,7 @@ public class Mapview{
 //	next_x = pUnit.x + 1;
 //	next_y = pUnit.y;
 //	if(normalize_map_pos(&next_x, &next_y)) {
-//	  if((pCity = map_get_city(next_x, next_y)) && draw_cities) {
+//	  if((pCity = Map.map_get_city(next_x, next_y)) && draw_cities) {
 //	    put_city_pixmap_draw(pCity, pBlinkSurfaceB,
 //			  HALF_NORMAL_TILE_WIDTH, HALF_NORMAL_TILE_HEIGHT);
 //	  } else {
@@ -2544,7 +2544,7 @@ public class Mapview{
 //	next_x = pUnit.x + 1;
 //	next_y = pUnit.y + 1;
 //	if(normalize_map_pos(&next_x, &next_y)) {
-//	  if(draw_cities && (pCity = map_get_city(next_x, next_y))) {
+//	  if(draw_cities && (pCity = Map.map_get_city(next_x, next_y))) {
 //	    put_city_pixmap_draw(pCity, pBlinkSurfaceB, 0, NORMAL_TILE_HEIGHT);
 //	  } else {
 //	    put_unit_pixmap_draw(get_drawable_unit(next_x, next_y, 0),
@@ -2992,8 +2992,8 @@ public class Mapview{
 //  for (city_x = 0; city_x<City_H.CITY_MAP_SIZE; city_x++)
 //  {
 //    for (city_y = 0; city_y<City_H.CITY_MAP_SIZE; city_y++) {
-//        if (City.is_valid_city_coords(city_x, city_y)
-//	  && city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
+//        if (City.City.is_valid_city_coords(city_x, city_y)
+//	  && City.city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
 //	  && tile_get_known(map_x, map_y)
 //	  && city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y)) {
 //	  draw_map_cell(pDest, canvas_x,
@@ -3076,8 +3076,8 @@ public class Mapview{
 //  for (city_x = 0; city_x<City_H.CITY_MAP_SIZE; city_x++)
 //  {
 //    for (city_y = 0; city_y<City_H.CITY_MAP_SIZE; city_y++) {
-//        if (City.is_valid_city_coords(city_x, city_y)
-//	  && city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
+//        if (City.City.is_valid_city_coords(city_x, city_y)
+//	  && City.city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
 //	  && tile_get_known(map_x, map_y)
 //	  && city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y)) {
 //	put_one_tile(&store, map_x, map_y,  canvas_x, canvas_y, 1);
@@ -3261,7 +3261,7 @@ public class Mapview{
 //  SDL_FillRect(pBuf, null, color);
 //  SDL_SetColorKey(pBuf, SDL_SRCCOLORKEY, color);
 //  
-//  for (terrain = T_FIRST; terrain < T_COUNT; terrain++) {
+//  for (terrain = Terrain_H.T_FIRST; terrain < Terrain_H.T_COUNT; terrain++) {
 //    
 //    if (terrain == T_RIVER || Terrain_H.is_ocean(terrain) || terrain == T_UNKNOWN)
 //    {
@@ -3331,7 +3331,7 @@ public class Mapview{
 //  int terrain;
 //  int i;
 //    
-//  for (terrain = T_FIRST; terrain < T_COUNT; terrain++) {
+//  for (terrain = Terrain_H.T_FIRST; terrain < Terrain_H.T_COUNT; terrain++) {
 //    for(i = 0; i < 4; i++)
 //    {
 //      FREESURFACE(pDithers[terrain][i]);
@@ -3348,7 +3348,7 @@ public class Mapview{
 //  int terrain;
 //  int i;
 //
-//  for (terrain = T_FIRST; terrain < T_COUNT; terrain++) {
+//  for (terrain = Terrain_H.T_FIRST; terrain < Terrain_H.T_COUNT; terrain++) {
 //    for(i = 0; i < 4; i++)
 //    {
 //      pDithers[terrain][i] = null;

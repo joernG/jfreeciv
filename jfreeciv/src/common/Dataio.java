@@ -378,7 +378,7 @@ public class Dataio{
 //
 //  for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
 //    dio_put_uint8(dout, value[i]);
-//    if (value[i] == A_LAST) {
+//    if (value[i] == Tech_H.A_LAST) {
 //      break;
 //    }
 //  }
@@ -627,13 +627,13 @@ public class Dataio{
 //
 //  for (i = 0; i < MAX_NUM_TECH_LIST; i++) {
 //    dio_get_uint8(din, &dest[i]);
-//    if (dest[i] == A_LAST) {
+//    if (dest[i] == Tech_H.A_LAST) {
 //      break;
 //    }
 //  }
 //
 //  for (; i < MAX_NUM_TECH_LIST; i++) {
-//    dest[i] = A_LAST;
+//    dest[i] = Tech_H.A_LAST;
 //  }
 //}
 //

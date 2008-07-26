@@ -592,7 +592,7 @@ public class Diplodlg{
 //  Diplomacy_dialog pdialog;
 //
 //  pdialog=fc_malloc(sizeof(struct Diplomacy_dialog));  
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //  pdialog.menu_shown=null;
 //  init_treaty(&pdialog.treaty, plr0, plr1);
 //

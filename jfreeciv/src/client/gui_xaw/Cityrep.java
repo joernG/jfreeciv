@@ -1,5 +1,7 @@
 package client.gui_xaw;
 
+import common.Game;
+
 public class Cityrep{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -323,8 +325,8 @@ public class Cityrep{
 //
 //  if(ret.list_index!=XAW_LIST_NONE && 
 //     (pcity=cities_in_list[ret.list_index])) {
-//    cid cids[unittype.U_LAST + B_LAST];
-//    struct item items[unittype.U_LAST + B_LAST];
+//    cid cids[unittype.U_LAST + Improvement.B_LAST];
+//    struct item items[unittype.U_LAST + Improvement.B_LAST];
 //    int cids_used = 0;
 //    size_t i;
 //
@@ -340,12 +342,12 @@ public class Cityrep{
 //				        city_change_command,
 //				        null);
 //
-//    impr_type_iterate(i) {
+//    for (int i = 0; i < Game.game.num_impr_types; i++) {
 //      if (City.can_build_improvement(pcity, i)) {
 //	cids[cids_used] = cid_encode(false, i);
 //	cids_used++;
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //
 //    unit_type_iterate(i) {
 //      if (City.can_build_unit(pcity, i)) {
@@ -773,12 +775,12 @@ public class Cityrep{
 //  } w;
 //
 //  int fr_count;
-//  char *fr_list[unittype.U_LAST + B_LAST];
-//  cid fr_cids[unittype.U_LAST + B_LAST];
+//  char *fr_list[unittype.U_LAST + Improvement.B_LAST];
+//  cid fr_cids[unittype.U_LAST + Improvement.B_LAST];
 //
 //  int to_count;
-//  char *to_list[unittype.U_LAST + B_LAST];
-//  cid to_cids[unittype.U_LAST + B_LAST];
+//  char *to_list[unittype.U_LAST + Improvement.B_LAST];
+//  cid to_cids[unittype.U_LAST + Improvement.B_LAST];
 //
 //  int fr_index;
 //  int to_index;
@@ -1078,14 +1080,14 @@ public class Cityrep{
 //					    XtPointer call_data)
 //{
 //  chgall_data state = (chgall_data ) client_data;
-//  cid cids[unittype.U_LAST + B_LAST];
-//  struct item items[unittype.U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + Improvement.B_LAST];
+//  struct item items[unittype.U_LAST + Improvement.B_LAST];
 //  int i;
 //
 //  state.fr_count = collect_cids2(cids);
 //  name_and_sort_items(cids, state.fr_count, items, false, null);
 //  for (i = 0; i < state.fr_count; i++) {
-//    state.fr_list[i] = mystrdup(items[i].descr);
+//    state.fr_list[i] = (items[i].descr);
 //    state.fr_cids[i] = items[i].cid;
 //  }
 //  XawListChange(state.w.fr, state.fr_list, state.fr_count, 0, false);
@@ -1093,7 +1095,7 @@ public class Cityrep{
 //  state.to_count = collect_cids3(cids);
 //  name_and_sort_items(cids, state.to_count, items, true, null);
 //  for (i = 0; i < state.to_count; i++) {
-//    state.to_list[i] = mystrdup(items[i].descr);
+//    state.to_list[i] = (items[i].descr);
 //    state.to_cids[i] = items[i].cid;
 //  }
 //  XawListChange(state.w.to, state.to_list, state.to_count, 0, false);

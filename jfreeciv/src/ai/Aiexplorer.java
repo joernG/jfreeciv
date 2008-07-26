@@ -179,7 +179,7 @@ public class Aiexplorer{
 //   * the tile has a hut, don't go there. */
 //  if ((unit_flag(punit, F_TRIREME) && 
 //       is_likely_trireme_loss(pplayer, ptile))
-//      || map_get_city(ptile)
+//      || Map.map_get_city(ptile)
 //      || (is_barbarian(pplayer) && Map.map_has_special(ptile, Terrain_H.S_HUT))) {
 //    return 0;
 //  }

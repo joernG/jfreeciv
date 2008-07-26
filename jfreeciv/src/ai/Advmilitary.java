@@ -57,7 +57,7 @@ public class Advmilitary{
 //
 //  simple_ai_unit_type_iterate(i) {
 //    m = Unittype_P.unit_types[i].move_type;
-//    if (City.can_build_unit(pcity, i) && (m == LAND_MOVING || m == SEA_MOVING)) {
+//    if (City.can_build_unit(pcity, i) && (m == unit_move_type.LAND_MOVING || m == unit_move_type.SEA_MOVING)) {
 //      j = get_virtual_defense_power(v, i, pcity.tile, false, false);
 //      if (j > best || (j == best && Unittype_P.unit_build_shield_cost(i) <=
 //                                    Unittype_P.unit_build_shield_cost(bestid))) {
@@ -169,11 +169,11 @@ public class Advmilitary{
 //  }
 //
 //  defense = get_defense_power(punit) * punit.hp;
-//  if (!is_sailing_unit(punit)) {
+//  if (!Unit.is_sailing_unit(punit)) {
 //    defense *= punit.unit_type().firepower;
 //    if (is_ground_unit(punit)) {
 //      if (pcity) {
-//        do_wall = (!igwall && city_got_citywalls(pcity));
+//        do_wall = (!igwall && City.city_got_citywalls(pcity));
 //        defense *= 3;
 //      }
 //    }
@@ -320,16 +320,16 @@ public class Advmilitary{
 //
 //  if (unit_flag(punit, F_NO_LAND_ATTACK)) return 0;
 //
-//  sailing = is_sailing_unit(punit);
-//  if (sailing && !is_ocean_near_tile(pcity.tile)) {
+//  sailing = Unit.is_sailing_unit(punit);
+//  if (sailing && !Terrain.is_terrain_flag_near_tile(pcity.tile)) {
 //    return 0;
 //  }
 //
 //  danger = unit_att_rating(punit);
-//  if (sailing && get_city_bonus(pcity, EFT_SEA_DEFEND) > 0) {
+//  if (sailing && Effects.get_city_bonus(pcity, EFT_SEA_DEFEND) > 0) {
 //    danger /= 2;
 //  }
-//  if (is_air_unit(punit) && get_city_bonus(pcity, EFT_AIR_DEFEND) > 0) {
+//  if (is_air_unit(punit) && Effects.get_city_bonus(pcity, EFT_AIR_DEFEND) > 0) {
 //    danger /= 2;
 //  }
 //
@@ -343,7 +343,7 @@ public class Advmilitary{
 //                           int move_rate)
 //{
 //  int distance = 0;
-//  unit ferry = find_unit_by_id(punit.transported_by);
+//  unit ferry = Game.find_unit_by_id(punit.transported_by);
 //
 //  if (Map.same_pos(punit.tile, pcity.tile)) {
 //    return 0;
@@ -351,7 +351,7 @@ public class Advmilitary{
 //
 //  if (is_tiles_adjacent(punit.tile, pcity.tile)) {
 //    distance = Unit_H.SINGLE_MOVE;
-//  } else if (is_sailing_unit(punit)) {
+//  } else if (Unit.is_sailing_unit(punit)) {
 //    distance = WARMAP_SEACOST(punit.tile);
 //  } else if (!is_ground_unit(punit)) {
 //    distance = Map.real_map_distance(punit.tile, pcity.tile)
@@ -460,7 +460,7 @@ public class Advmilitary{
 //  pcity.ai.has_diplomat = false;
 //
 //  for (unit punit : ptile.units.data) {
-//    if (unit_flag(punit, F_DIPLOMAT)) pcity.ai.has_diplomat = true;
+//    if (unit_flag(punit, Eunit_flag_id.F_DIPLOMAT)) pcity.ai.has_diplomat = true;
 //    if (unit_flag(punit, F_PIKEMEN)) pikemen = true;
 //  } }
 //
@@ -509,7 +509,7 @@ public class Advmilitary{
 //	}
 //      }
 //
-//      if (unit_flag(punit, F_DIPLOMAT) && (dist <= 2 * move_rate)) {
+//      if (unit_flag(punit, Eunit_flag_id.F_DIPLOMAT) && (dist <= 2 * move_rate)) {
 //	pcity.ai.diplomat_threat = true;
 //      }
 //
@@ -517,7 +517,7 @@ public class Advmilitary{
 //
 //      if (!igwall) {
 //        danger[1] += vulnerability * move_rate / MAX(dist, 1); /* walls */
-//      } else if (is_sailing_unit(punit)) {
+//      } else if (Unit.is_sailing_unit(punit)) {
 //        danger[2] += vulnerability * move_rate / MAX(dist, 1); /* coastal */
 //      } else if (is_air_unit(punit) && !unit_flag(punit, F_NUCLEAR)) {
 //        danger[3] += vulnerability * move_rate / MAX(dist, 1); /* SAM */
@@ -561,26 +561,26 @@ public class Advmilitary{
 //
 //  /* HACK: This needs changing if multiple improvements provide
 //   * this effect. */
-//  defender[0] = ai_find_source_building(pplayer, EFT_LAND_DEFEND);
+//  defender[0] = ai_find_source_building(pplayer, effect_type.EFT_LAND_DEFEND);
 //  defender[1] = ai_find_source_building(pplayer, EFT_SEA_DEFEND);
 //  defender[2] = ai_find_source_building(pplayer, EFT_AIR_DEFEND);
 //  defender[3] = ai_find_source_building(pplayer, EFT_MISSILE_DEFEND);
 //
-//  if (defender[0] != B_LAST) {
+//  if (defender[0] != Improvement.B_LAST) {
 //    ai_reevaluate_building(pcity, &pcity.ai.building_want[defender[0]],
 //	urgency, danger[1], assess_defense(pcity));
 //  }
-//  if (defender[1] != B_LAST) {
+//  if (defender[1] != Improvement.B_LAST) {
 //    ai_reevaluate_building(pcity, &pcity.ai.building_want[defender[1]],
 //	urgency, danger[2], 
 //	assess_defense_igwall(pcity));
 //  }
-//  if (defender[2] != B_LAST) {
+//  if (defender[2] != Improvement.B_LAST) {
 //    ai_reevaluate_building(pcity, &pcity.ai.building_want[defender[2]],
 //	urgency, danger[3], 
 //	assess_defense_igwall(pcity));
 //  }
-//  if (defender[3] != B_LAST) {
+//  if (defender[3] != Improvement.B_LAST) {
 //    ai_reevaluate_building(pcity, &pcity.ai.building_want[defender[3]],
 //	urgency, danger[4], 
 //	assess_defense_igwall(pcity));
@@ -604,8 +604,8 @@ public class Advmilitary{
 //
 //  /* Sea and helicopters often have their firepower set to 1 when
 //   * defending. We can't have such units as defenders. */
-//  if (Unittype_P.unit_types[i].move_type != SEA_MOVING
-//      && Unittype_P.unit_types[i].move_type != HELI_MOVING) {
+//  if (Unittype_P.unit_types[i].move_type != unit_move_type.SEA_MOVING
+//      && Unittype_P.unit_types[i].move_type != unit_move_type.HELI_MOVING) {
 //    /* Sea units get 1 firepower in Pearl Harbour,
 //     * and helicopters very bad against air units */
 //    desire *= get_unit_type(i).firepower;
@@ -613,10 +613,10 @@ public class Advmilitary{
 //  desire *= defense;
 //  desire += get_unit_type(i).move_rate / Unit_H.SINGLE_MOVE;
 //  desire += attack;
-//  if (unit_type_flag(i, F_PIKEMEN)) {
+//  if (Unittype_P.unit_type_flag(i, F_PIKEMEN)) {
 //    desire += desire / 2;
 //  }
-//  if (unit_type_flag(i, F_GAMELOSS)) {
+//  if (Unittype_P.unit_type_flag(i, F_GAMELOSS)) {
 //    desire /= 10; /* but might actually be worth it */
 //  }
 //  return desire;
@@ -635,22 +635,22 @@ public class Advmilitary{
 //  desire *= get_unit_type(i).firepower;
 //  desire *= attack;
 //  desire += defense;
-//  if (unit_type_flag(i, F_IGTER)) {
+//  if (Unittype_P.unit_type_flag(i, F_IGTER)) {
 //    desire += desire / 2;
 //  }
-//  if (unit_type_flag(i, F_GAMELOSS)) {
+//  if (Unittype_P.unit_type_flag(i, F_GAMELOSS)) {
 //    desire /= 10; /* but might actually be worth it */
 //  }
-//  if (unit_type_flag(i, F_CITYBUSTER)) {
+//  if (Unittype_P.unit_type_flag(i, F_CITYBUSTER)) {
 //    desire += desire / 2;
 //  }
-//  if (unit_type_flag(i, F_IGTIRED)) {
+//  if (Unittype_P.unit_type_flag(i, F_IGTIRED)) {
 //    desire += desire / 4;
 //  }
-//  if (unit_type_flag(i, F_MARINES)) {
+//  if (Unittype_P.unit_type_flag(i, F_MARINES)) {
 //    desire += desire / 4;
 //  }
-//  if (unit_type_flag(i, F_IGWALL)) {
+//  if (Unittype_P.unit_type_flag(i, F_IGWALL)) {
 //    desire += desire / 4;
 //  }
 //  return desire;
@@ -664,8 +664,8 @@ public class Advmilitary{
 //static void process_defender_want(player pplayer, city pcity,
 //                                  unsigned int danger, ai_choice choice)
 //{
-//  boolean walls = city_got_citywalls(pcity);
-//  boolean shore = is_ocean_near_tile(pcity.tile);
+//  boolean walls = City.city_got_citywalls(pcity);
+//  boolean shore = Terrain.is_terrain_flag_near_tile(pcity.tile);
 //  /* Technologies we would like to have. */
 //  int tech_desire[unittype.U_LAST];
 //  /* Our favourite unit. */
@@ -684,7 +684,7 @@ public class Advmilitary{
 //      /* How much we want the unit? */
 //      int desire = ai_unit_defence_desirability(unit_type);
 //
-//      if (unit_type_flag(unit_type, F_FIELDUNIT)) {
+//      if (Unittype_P.unit_type_flag(unit_type, F_FIELDUNIT)) {
 //        /* Causes unhappiness even when in defense, so not a good
 //         * idea for a defender, unless it is _really_ good */
 //       desire /= 2;
@@ -696,7 +696,7 @@ public class Advmilitary{
 //      if (City.can_build_unit(pcity, unit_type)) {
 //        /* We can build the unit now... */
 //      
-//        if (walls && move_type == LAND_MOVING) {
+//        if (walls && move_type == unit_move_type.LAND_MOVING) {
 //          desire *= pcity.ai.wallvalue;
 //          /* TODO: More use of POWER_FACTOR ! */
 //          desire /= POWER_FACTOR;
@@ -710,8 +710,8 @@ public class Advmilitary{
 //          best_unit_type = unit_type;
 //        }
 //        
-//      } else if (tech_dist > 0 && (shore || move_type == LAND_MOVING)
-//                 && Unittype_P.unit_types[unit_type].tech_requirement != A_LAST) {
+//      } else if (tech_dist > 0 && (shore || move_type == unit_move_type.LAND_MOVING)
+//                 && Unittype_P.unit_types[unit_type].tech_requirement != Tech_H.A_LAST) {
 //        /* We first need to develop the tech required by the unit... */
 //
 //        /* Cost (shield equivalent) of gaining these techs. */
@@ -723,7 +723,7 @@ public class Advmilitary{
 //        
 //        /* Contrary to the above, we don't care if walls are actually built 
 //         * - we're looking into the future now. */
-//        if (move_type == LAND_MOVING) {
+//        if (move_type == unit_move_type.LAND_MOVING) {
 //          desire *= pcity.ai.wallvalue;
 //          desire /= POWER_FACTOR;
 //        }
@@ -735,7 +735,7 @@ public class Advmilitary{
 //      }
 //  } simple_ai_unit_type_iterate_end;
 //  
-//  if (!walls && Unittype_P.unit_types[best_unit_type].move_type == LAND_MOVING) {
+//  if (!walls && Unittype_P.unit_types[best_unit_type].move_type == unit_move_type.LAND_MOVING) {
 //    best *= pcity.ai.wallvalue;
 //    best /= POWER_FACTOR;
 //  }
@@ -788,17 +788,17 @@ public class Advmilitary{
 //{
 //  player pplayer = City.city_owner(pcity);
 //  /* The enemy city.  acity == null means stray enemy unit */
-//  city acity = map_get_city(ptile);
-//  boolean shore = is_ocean_near_tile(pcity.tile);
+//  city acity = Map.map_get_city(ptile);
+//  boolean shore = Terrain.is_terrain_flag_near_tile(pcity.tile);
 //  int orig_move_type = Unittype_P.unit_types[best_choice.choice].move_type;
 //  int victim_count = 1;
 //  int needferry = 0;
 //  boolean unhap = ai_assess_military_unhappiness(pcity,
 //                                              get_gov_pplayer(pplayer));
 //
-//  assert(orig_move_type == SEA_MOVING || orig_move_type == LAND_MOVING);
+//  assert(orig_move_type == unit_move_type.SEA_MOVING || orig_move_type == unit_move_type.LAND_MOVING);
 //
-//  if (orig_move_type == LAND_MOVING && !boat && boattype < unittype.U_LAST) {
+//  if (orig_move_type == unit_move_type.LAND_MOVING && !boat && boattype < unittype.U_LAST) {
 //    /* cost of ferry */
 //    needferry = Unittype_P.unit_build_shield_cost(boattype);
 //  }
@@ -814,21 +814,21 @@ public class Advmilitary{
 //    int move_type = Unittype_P.unit_types[unit_type].move_type;
 //    int tech_dist;
 //    
-//    if (tech_req != A_LAST) {
+//    if (tech_req != Tech_H.A_LAST) {
 //      tech_dist = num_unknown_techs_for_goal(pplayer, tech_req);
 //    } else {
 //      tech_dist = 0;
 //    }
 //    
-//    if ((move_type == LAND_MOVING || (move_type == SEA_MOVING && shore))
-//        && tech_req != A_LAST
+//    if ((move_type == unit_move_type.LAND_MOVING || (move_type == unit_move_type.SEA_MOVING && shore))
+//        && tech_req != Tech_H.A_LAST
 //        && (tech_dist > 0 ||
 //            !City.can_build_unit_direct(pcity, Unittype_P.unit_types[unit_type].obsoleted_by))
 //        && Unittype_P.unit_types[unit_type].attack_strength > 0 /* or we'll get SIGFPE */
 //        && move_type == orig_move_type) {
 //      /* TODO: Case for Airport. -- Raahul */
-//      int will_be_veteran = (move_type == LAND_MOVING
-//	  || ai_find_source_building(pplayer, EFT_SEA_VETERAN) != B_LAST);
+//      int will_be_veteran = (move_type == unit_move_type.LAND_MOVING
+//	  || ai_find_source_building(pplayer, effect_type.EFT_SEA_VETERAN) != Improvement.B_LAST);
 //      /* Cost (shield equivalent) of gaining these techs. */
 //      /* FIXME? Katvrr advises that this should be weighted more heavily in big
 //       * danger. */
@@ -858,7 +858,7 @@ public class Advmilitary{
 //      
 //      attack *= attack;
 //
-//      if (unit_type_flag(unit_type, F_IGTER)) {
+//      if (Unittype_P.unit_type_flag(unit_type, F_IGTER)) {
 //        /* TODO: Use something like IGTER_MOVE_COST. -- Raahul */
 //        move_rate *= Unit_H.SINGLE_MOVE;
 //      }
@@ -882,10 +882,10 @@ public class Advmilitary{
 //       * (this is noted elsewhere as terrible bug making warships yoyoing) 
 //       * as the warships will go to enemy cities hoping that the enemy builds 
 //       * something for them to kill*/
-//      if (move_type != LAND_MOVING && vuln == 0) {
+//      if (move_type != unit_move_type.LAND_MOVING && vuln == 0) {
 //        desire = 0;
 //        
-//      } else if ((move_type == LAND_MOVING || move_type == HELI_MOVING)
+//      } else if ((move_type == unit_move_type.LAND_MOVING || move_type == unit_move_type.HELI_MOVING)
 //                 && acity && acity.ai.invasion == 2) {
 //        desire = bcost * SHIELD_WEIGHTING;
 //        
@@ -924,7 +924,7 @@ public class Advmilitary{
 //          
 //          CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s to build %s to punish %s@(%d,%d)" +
 //                   " with desire %d", get_tech_name(pplayer, tech_req), 
-//                   unit_name(unit_type), (acity ? acity.name : "enemy"),
+//                   Unittype_P.unit_name(unit_type), (acity ? acity.name : "enemy"),
 //                   TILE_XY(ptile), want);
 //
 //        } else if (want > best_choice.want) {
@@ -933,8 +933,8 @@ public class Advmilitary{
 //
 //            CITY_LOG(Log.LOG_DEBUG, pcity, "overriding %s(%d) with %s(%d)" +
 //                     " [attack=%d,value=%d,move_time=%d,vuln=%d,bcost=%d]",
-//                     unit_name(best_choice.choice), best_choice.want,
-//                     unit_name(unit_type), want, attack, value, move_time,
+//                     Unittype_P.unit_name(best_choice.choice), best_choice.want,
+//                     Unittype_P.unit_name(unit_type), want, attack, value, move_time,
 //                     vuln, bcost);
 //
 //            best_choice.choice = unit_type;
@@ -1009,7 +1009,7 @@ public class Advmilitary{
 //    return;
 //  }
 //
-//  if (!is_ground_unit(myunit) && !is_sailing_unit(myunit)) {
+//  if (!is_ground_unit(myunit) && !Unit.is_sailing_unit(myunit)) {
 //    util.freelog(Log.LOG_ERROR, "ERROR: Attempting to deal with non-trivial" +
 //            " unit_type in kill_something_with");
 //    return;
@@ -1017,7 +1017,7 @@ public class Advmilitary{
 //
 //  if (is_ground_unit(myunit)) {
 //    int boatid = find_boat(pplayer, &boat_tile, 2);
-//    ferryboat = Player_P.player_find_unit_by_id(pplayer, boatid);
+//    ferryboat = Player_P.player_Game.find_unit_by_id(pplayer, boatid);
 //  }
 //
 //  if (ferryboat) {
@@ -1032,7 +1032,7 @@ public class Advmilitary{
 //
 //  best_choice.want = find_something_to_kill(pplayer, myunit, &ptile);
 //
-//  acity = map_get_city(ptile);
+//  acity = Map.map_get_city(ptile);
 //
 //  if (myunit.id != 0) {
 //    util.freelog(Log.LOG_ERROR, "ERROR: Non-virtual unit in kill_something_with!");
@@ -1181,26 +1181,26 @@ public class Advmilitary{
 //
 //  /* Sanity */
 //  if (!is_unit_choice_type(choice.type)) return;
-//  if (unit_type_flag(choice.choice, Eunit_flag_id.F_NONMIL)) return;
+//  if (Unittype_P.unit_type_flag(choice.choice, Eunit_flag_id.F_NONMIL)) return;
 //  if (do_make_unit_veteran(pcity, choice.choice)) return;
 //
 //  move_type = get_unit_type(choice.choice).move_type;
 //  switch(move_type) {
-//  case LAND_MOVING:
-//    if ((id = ai_find_source_building(pplayer, EFT_LAND_VETERAN)) != B_LAST) {
+//  case unit_move_type.LAND_MOVING:
+//    if ((id = ai_find_source_building(pplayer, effect_type.EFT_LAND_VETERAN)) != Improvement.B_LAST) {
 //      choice.choice = id;
 //      choice.type = CT_BUILDING;
 //    }
 //    break;
-//  case SEA_MOVING:
-//    if ((id = ai_find_source_building(pplayer, EFT_SEA_VETERAN)) != B_LAST) {
+//  case unit_move_type.SEA_MOVING:
+//    if ((id = ai_find_source_building(pplayer, effect_type.EFT_SEA_VETERAN)) != Improvement.B_LAST) {
 //      choice.choice = id;
 //      choice.type = CT_BUILDING;
 //    }
 //    break;
-//  case HELI_MOVING:
-//  case AIR_MOVING:
-//    if ((id = ai_find_source_building(pplayer, EFT_AIR_VETERAN)) != B_LAST
+//  case unit_move_type.HELI_MOVING:
+//  case unit_move_type.AIR_MOVING:
+//    if ((id = ai_find_source_building(pplayer, effect_type.EFT_AIR_VETERAN)) != Improvement.B_LAST
 //        && pcity.shield_surplus > Improvement.impr_build_shield_cost(id) / 10) {
 //      /* Only build this if we have really high production */
 //      choice.choice = id;
@@ -1271,11 +1271,11 @@ public class Advmilitary{
 //
 //    /* HACK: This needs changing if multiple improvements provide
 //     * this effect. */
-//    land_id = ai_find_source_building(pplayer, EFT_LAND_DEFEND);
+//    land_id = ai_find_source_building(pplayer, effect_type.EFT_LAND_DEFEND);
 //    sea_id = ai_find_source_building(pplayer, EFT_SEA_DEFEND);
 //    air_id = ai_find_source_building(pplayer, EFT_AIR_DEFEND);
 //
-//    if (land_id != B_LAST
+//    if (land_id != Improvement.B_LAST
 //	&& pcity.ai.building_want[land_id] != 0 && our_def != 0 
 //        && City.can_build_improvement(pcity, land_id)
 //        && (danger < 101 || num_defenders > 1
@@ -1291,7 +1291,7 @@ public class Advmilitary{
 //      }
 //      choice.type = CT_BUILDING;
 //
-//    } else if (sea_id != B_LAST
+//    } else if (sea_id != Improvement.B_LAST
 //	       && pcity.ai.building_want[sea_id] != 0 && our_def != 0 
 //               && City.can_build_improvement(pcity, sea_id) 
 //               && (danger < 101 || num_defenders > 1) 
@@ -1304,7 +1304,7 @@ public class Advmilitary{
 //      }
 //      choice.type = CT_BUILDING;
 //
-//    } else if (air_id != B_LAST
+//    } else if (air_id != Improvement.B_LAST
 //	       && pcity.ai.building_want[air_id] != 0 && our_def != 0 
 //               && City.can_build_improvement(pcity, air_id) 
 //               && (danger < 101 || num_defenders > 1) 
@@ -1321,7 +1321,7 @@ public class Advmilitary{
 //      /* Consider building defensive units units */
 //      process_defender_want(pplayer, pcity, danger, choice);
 //      if (urgency == 0 && Unittype_P.unit_types[choice.choice].defense_strength == 1) {
-//        if (get_city_bonus(pcity, EFT_LAND_REGEN) > 0) {
+//        if (Effects.get_city_bonus(pcity, EFT_LAND_REGEN) > 0) {
 //          /* unlikely */
 //          choice.want = Math.min(49, danger);
 //        } else {
@@ -1344,7 +1344,7 @@ public class Advmilitary{
 //  }
 //
 //  /* Consider making a land bodyguard */
-//  unit_type = ai_choose_bodyguard(pcity, LAND_MOVING, L_DEFEND_GOOD);
+//  unit_type = ai_choose_bodyguard(pcity, unit_move_type.LAND_MOVING, L_DEFEND_GOOD);
 //  if (unit_type >= 0) {
 //    ai_unit_consider_bodyguard(pcity, unit_type, choice);
 //  }
@@ -1362,7 +1362,7 @@ public class Advmilitary{
 //  ai_choose_diplomat_offensive(pplayer, pcity, choice);
 //
 //  /* Consider making a sea bodyguard */
-//  unit_type = ai_choose_bodyguard(pcity, SEA_MOVING, L_DEFEND_GOOD);
+//  unit_type = ai_choose_bodyguard(pcity, unit_move_type.SEA_MOVING, L_DEFEND_GOOD);
 //  if (unit_type >= 0) {
 //    ai_unit_consider_bodyguard(pcity, unit_type, choice);
 //  }
@@ -1372,7 +1372,7 @@ public class Advmilitary{
 //
 //  /* Check if we want a sailing attacker. Have to put sailing first
 //     before we mung the seamap */
-//  unit_type = ai_choose_attacker(pcity, SEA_MOVING);
+//  unit_type = ai_choose_attacker(pcity, unit_move_type.SEA_MOVING);
 //  if (unit_type >= 0) {
 //    virtualunit = create_unit_virtual(pplayer, pcity, unit_type,
 //                                      do_make_unit_veteran(pcity, unit_type));
@@ -1381,7 +1381,7 @@ public class Advmilitary{
 //  }
 //
 //  /* Consider a land attacker */
-//  unit_type = ai_choose_attacker(pcity, LAND_MOVING);
+//  unit_type = ai_choose_attacker(pcity, unit_move_type.LAND_MOVING);
 //  if (unit_type >= 0) {
 //    virtualunit = create_unit_virtual(pplayer, pcity, unit_type, 1);
 //    kill_something_with(pplayer, pcity, virtualunit, choice);
@@ -1401,7 +1401,7 @@ public class Advmilitary{
 //             Unittype_P.unit_types[choice.choice].name, choice.want);
 //  } else {
 //    CITY_LOG(LOGLEVEL_BUILD, pcity, "military advisor choice: %s (want %d)",
-//             improvement_types[choice.choice].name, choice.want);
+//             Improvement.improvement_types[choice.choice].name, choice.want);
 //  }
 //}
 }

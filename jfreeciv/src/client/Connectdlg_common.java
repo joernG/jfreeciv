@@ -69,7 +69,7 @@ public class Connectdlg_common{
 //static pid_t server_pid = - 1;
 //#endif
 //
-//char player_name[MAX_LEN_NAME];
+//String player_name;
 //char *current_filename = null;
 //
 //static char challenge_fullname[MAX_LEN_PATH];

@@ -175,9 +175,9 @@ public class Gotodlg{
 //  if(len>3 && strcmp(string+len-3, "(A)")==0) {
 //    String name="";
 //    mystrlcpy(name, string, Math.min(sizeof(name),len-2));
-//    return game_find_city_by_name(name);
+//    return Game.game_find_city_by_name(name);
 //  }
-//  return game_find_city_by_name(string);
+//  return Game.game_find_city_by_name(string);
 //}
 //
 ///**************************************************************************

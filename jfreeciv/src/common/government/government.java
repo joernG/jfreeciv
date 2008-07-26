@@ -8,9 +8,9 @@ public class government {
 //	{
 	  public int   index;			/* index into governments[] array */
 //	  const char *name; /* Translated string - doesn't need freeing. */
-//	  char  name_orig[MAX_LEN_NAME]; /* untranslated copy */
-//	  char  graphic_str[MAX_LEN_NAME];
-//	  char  graphic_alt[MAX_LEN_NAME];
+//	  String name_orig; /* untranslated copy */
+//	  String graphic_str;
+//	  String graphic_alt;
 	  public int   required_tech;		/* tech required to change to this gov */
 //
 //	  struct ruler_title *ruler_titles;

@@ -2,6 +2,7 @@ package common;
 
 import common.city.city;
 import common.game.civ_game;
+import common.player.player;
 import common.unit.unit;
 
 public class Game{
@@ -59,8 +60,7 @@ public class Game{
 //int civ_population(player pplayer)
 //{
 //  int ppl=0;
-//  city_list_iterate(pplayer.cities, pcity)
-//    ppl+=city_population(pcity);
+//  for(city pcity : pplayer.cities.data){//    ppl+=city_population(pcity);
 //  }
 //  return ppl;
 //}
@@ -69,18 +69,18 @@ public class Game{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//city game_find_city_by_name(final String name)
-//{
-//  for(player pplayer: Game.game.players){
-//    city pcity = city_list_find_name(&pplayer.cities, name);
-//
-//    if (pcity) {
-//      return pcity;
-//    }
-//  }
-//
-//  return null;
-//}
+public static city game_find_city_by_name(final String name)
+{
+  for(player pplayer: Game.game.players){
+    city pcity = City.city_list_find_name(pplayer.cities, name);
+
+    if (pcity!=null) {
+      return pcity;
+    }
+  }
+
+  return null;
+}
 
 
 	/**************************************************************************
@@ -113,7 +113,7 @@ public class Game{
 //  util.freelog(Log.LOG_DEBUG, "game_remove_unit %d", punit.id);
 //  util.freelog(Log.LOG_DEBUG, "removing unit %d, %s %s (%d %d) hcity %d",
 //	  punit.id, Nation.get_nation_name(punit.unit_owner().nation),
-//	  unit_name(punit.type), punit.tile.x, punit.tile.y,
+//	  Unittype_P.unit_name(punit.type), punit.tile.x, punit.tile.y,
 //	  punit.homecity);
 //
 //  pcity = Player_P.player_find_city_by_id(punit.unit_owner(), punit.homecity);
@@ -138,24 +138,24 @@ public class Game{
 //  destroy_unit_virtual(punit);
 //}
 //
-///**************************************************************************
-//...
-//**************************************************************************/
-//void game_remove_city(city pcity)
-//{
+/**************************************************************************
+...
+**************************************************************************/
+public static void game_remove_city(city pcity)
+{
 //  util.freelog(Log.LOG_DEBUG, "game_remove_city %d", pcity.id);
 //  util.freelog(Log.LOG_DEBUG, "removing city %s, %s, (%d %d)", pcity.name,
 //	   Nation.get_nation_name(City.city_owner(pcity).nation), pcity.tile.x,
 //	  pcity.tile.y);
 //
 //  city_map_checked_iterate(pcity.tile, x, y, map_tile) {
-//    set_worker_city(pcity, x, y, city_tile_type.C_TILE_EMPTY);
+//    City.set_worker_city(pcity, x, y, city_tile_type.C_TILE_EMPTY);
 //  } city_map_checked_iterate_end;
 //  city_list_unlink(&City.city_owner(pcity).cities, pcity);
-//  map_set_city(pcity.tile, null);
+//  Map.map_set_city(pcity.tile, null);
 //  idex_unregister_city(pcity);
 //  remove_city_virtual(pcity);
-//}
+}
 //
 ///***************************************************************
 //...
@@ -255,9 +255,9 @@ public class Game{
 //  Game.game.government_when_anarchy = G_MAGIC;   /* flag */
 //  Game.game.ai_goal_government = G_MAGIC;        /* flag */
 //
-//  Game.game.default_building = B_LAST;
-//  Game.game.palace_building = B_LAST;
-//  Game.game.land_defend_building = B_LAST;
+//  Game.game.default_building = Improvement.B_LAST;
+//  Game.game.palace_building = Improvement.B_LAST;
+//  Game.game.land_defend_building = Improvement.B_LAST;
 //
 //  Game.game.demography = GAME_DEFAULT_DEMOGRAPHY;
 //  Game.game.allow_take = GAME_DEFAULT_ALLOW_TAKE;
@@ -275,13 +275,13 @@ public class Game{
 //  
 //  for(i=0; i<Shared_H.MAX_NUM_PLAYERS+Shared_H.MAX_NUM_BARBARIANS; i++)
 //    player_init(&Game.game.players[i]);
-//  for (i=0; i<A_LAST; i++)      /* Game.game.num_tech_types = 0 here */
+//  for (i=0; i<Tech_H.A_LAST; i++)      /* Game.game.num_tech_types = 0 here */
 //    Game.game.global_advances[i]=0;
-//  for (i=0; i<B_LAST; i++)      /* Game.game.num_impr_types = 0 here */
+//  for (i=0; i<Improvement.B_LAST; i++)      /* Game.game.num_impr_types = 0 here */
 //    Game.game.global_wonders[i]=0;
 //  Game.game.player_idx=0;
 //  Game.game.player_ptr=&Game.game.players[0];
-//  terrain_control.river_help_text[0] = '\0';
+//  Map.terrain_control.river_help_text[0] = '\0';
 //}
 //
 ///***************************************************************
@@ -333,11 +333,14 @@ public class Game{
 //{
 //  for(player plr: Game.game.players){
 //    for (city pcity : plr.cities.data) {
-//      built_impr_iterate(pcity, i) {
-//	if (is_wonder(i))
+//	for (int i = 0; i < game.num_impr_types; i++) {
+//	if((pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
+//	if (Improvement.is_wonder(i))
 //	  Game.game.global_wonders[i] = pcity.id;
-//      } built_impr_iterate_end;
-//    } }
+//      } ;
+//    }
 //  }
 //}
 //
@@ -367,10 +370,10 @@ public class Game{
 //  /* Count how many of the different spaceship parts we can build.  Note this
 //   * operates even if Enable_Space is not active. */
 //  if (Game.game.spacerace) {
-//    impr_type_iterate(impr) {
-//      Tech_Type_id t = improvement_types[impr].tech_req;
+//    for (int impr = 0; impr < Game.game.num_impr_types; impr++) {
+//      Tech_Type_id t = Improvement.improvement_types[impr].tech_req;
 //
-//      if (!improvement_exists(impr)) {
+//      if (!Improvement.improvement_exists(impr)) {
 //	continue;
 //      }
 //      if (building_has_effect(impr, EFT_SS_STRUCTURAL)
@@ -385,7 +388,7 @@ public class Game{
 //	  && tech_exists(t) && Game.game.global_advances[t] != 0) {
 //	space_parts[2] = 1;
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //  }
 //  spaceshipparts = space_parts[0] + space_parts[1] + space_parts[2];
 //
@@ -447,10 +450,9 @@ public class Game{
 //    game_remove_unit(punit);
 //  }
 //  assert(pplayer.units.foo_list_size() == 0);
-//  unit_list_unlink_all(&pplayer.units);
+//	pplayer.units.foo_list_unlink_all();
 //
-//  city_list_iterate(pplayer.cities, pcity) 
-//    game_remove_city(pcity);
+//  for(city pcity : pplayer.cities.data){//    game_remove_city(pcity);
 //  }
 //  assert(pplayer.cities.foo_list_size() == 0);
 //  city_list_unlink_all(&pplayer.cities);
@@ -502,16 +504,16 @@ public class Game{
 //{
 //  return player_id >= 0 && player_id < Game.game.nplayers;
 //}
-//
-///**************************************************************************
-//This function is used by is_wonder_useful to estimate if it is worthwhile
-//to build the great library.
-//**************************************************************************/
-//int get_num_human_and_ai_players()
-//{
-//  return Game.game.nplayers-Game.game.nbarbarians;
-//}
-//
+
+/**************************************************************************
+This function is used by is_wonder_useful to estimate if it is worthwhile
+to build the great library.
+**************************************************************************/
+public static int get_num_human_and_ai_players()
+{
+  return Game.game.nplayers-Game.game.nbarbarians;
+}
+
 ///***************************************************************
 //  For various data, copy eg .name to .name_orig and put
 //  translated version in .name
@@ -535,11 +537,11 @@ public class Game{
 //    tthis.name = Q_(tthis.name_orig);
 //  } unit_type_iterate_end;
 //
-//  impr_type_iterate(i) {
-//    impr_type tthis = &improvement_types[i];
+//  for (int j = 0; j < Game.game.num_impr_types; j++) {
+//    impr_type tthis = &Improvement.improvement_types[j];
 //
 //    tthis.name = Q_(tthis.name_orig);
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  terrain_type_iterate(i) {
 //    tile_type tthis = get_tile_type(i);
@@ -565,7 +567,7 @@ public class Game{
 //    }
 //  } government_iterate_end;
 //  for (i=0; i<Game.game.nation_count; i++) {
-//    nation_type tthis = get_nation_by_idx(i);
+//    nation_type tthis = Nation.get_nation_by_idx(i);
 //
 //    tthis.name = Q_(tthis.name_orig);
 //    tthis.name_plural = Q_(tthis.name_plural_orig);

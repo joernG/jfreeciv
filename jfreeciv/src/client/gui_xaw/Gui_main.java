@@ -355,10 +355,10 @@ public class Gui_main{
 //    civ_gc = XCreateGC(display, root_window, GCGraphicsExposures, &values);
 //
 //    free(city_names_font);
-//    city_names_font = mystrdup("-*-*-*-*-*--14-*");
+//    city_names_font = ("-*-*-*-*-*--14-*");
 //
 //    free(city_productions_font_name);
-//    city_productions_font_name = mystrdup("-*-*-*-*-*--14-*");
+//    city_productions_font_name = ("-*-*-*-*-*--14-*");
 //
 //    main_font_set = XCreateFontSet(display, city_names_font,
 //	&missing_charset_list_return,
@@ -496,7 +496,7 @@ public class Gui_main{
 //  assert(i>=0 && i<num_units_below);
 //  if (unit_ids[i] == 0) /* no unit displayed at this place */
 //    return;
-//  punit=find_unit_by_id(unit_ids[i]);
+//  punit=Game.find_unit_by_id(unit_ids[i]);
 //  if(punit) { /* should always be true at this point */
 //    if (punit.owner == Game.game.player_idx) {  /* may be non-true if alliance */
 //      set_unit_focus(punit);

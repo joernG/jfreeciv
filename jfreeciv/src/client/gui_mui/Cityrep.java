@@ -1,5 +1,7 @@
 package client.gui_mui;
 
+import common.Game;
+
 public class Cityrep{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -127,12 +129,12 @@ public class Cityrep{
 //
 //    flag = 0;
 //
-//    impr_type_iterate(i) {
+//    for (int i = 0; i < Game.game.num_impr_types; i++) {
 //      if (City.can_build_improvement(pcity, i))
 //      {
 //	flag = 1;
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //
 //    unit_type_iterate(i) {
 //      if (City.can_build_unit(pcity, i))
@@ -417,8 +419,7 @@ public class Cityrep{
 //  set(cityrep_listview, MUIA_NList_Quiet, true);
 //  DoMethod(cityrep_listview, MUIM_NList_Clear);
 //
-//  city_list_iterate(Game.game.player_ptr.cities, pcity)
-//  {
+//  for(city pcity : Game.game.player_ptr.cities.data){//  {
 //    DoMethod(cityrep_listview, MUIM_NList_InsertSingle, pcity, MUIV_NList_Insert_Sorted);
 //  }
 //  city_list_iterate_end

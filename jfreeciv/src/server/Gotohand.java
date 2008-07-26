@@ -197,14 +197,14 @@ public class Gotohand {
 	// init_queue();
 	//
 	// switch (move_type) {
-	// case LAND_MOVING:
-	// case HELI_MOVING:
-	// case AIR_MOVING:
+	// case unit_move_type.LAND_MOVING:
+	// case unit_move_type.HELI_MOVING:
+	// case unit_move_type.AIR_MOVING:
 	// assert(sizeof(*warmap.cost) == sizeof(char));
 	// memset(warmap.cost, MAXCOST, Map.map.xsize * Map.map.ysize);
 	// WARMAP_COST(orig_tile) = 0;
 	// break;
-	// case SEA_MOVING:
+	// case unit_move_type.SEA_MOVING:
 	// assert(sizeof(*warmap.seacost) == sizeof(char));
 	// memset(warmap.seacost, MAXCOST, Map.map.xsize * Map.map.ysize);
 	// WARMAP_SEACOST(orig_tile) = 0;
@@ -283,9 +283,9 @@ public class Gotohand {
 	// else
 	// igter = false;
 	//
-	// /* FIXME: Should this apply only to F_CITIES units? -- jjm */
+	// /* FIXME: Should this apply only to Eunit_flag_id.F_CITIES units? -- jjm */
 	// if (punit
-	// && unit_flag(punit, F_SETTLERS)
+	// && unit_flag(punit, Eunit_flag_id.F_SETTLERS)
 	// && punit.move_rate()==3)
 	// maxcost /= 2;
 	// /* (?) was punit.type == U_SETTLERS -- dwp */
@@ -293,12 +293,12 @@ public class Gotohand {
 	// while ((ptile = get_from_maPqueue())) {
 	// /* Just look up the cost value once. This is a minor optimization but
 	// * it makes a big difference since this code is called so much. */
-	// unsigned char cost = ((move_type == SEA_MOVING)
+	// unsigned char cost = ((move_type == unit_move_type.SEA_MOVING)
 	// ? WARMAP_SEACOST(ptile) : WARMAP_COST(ptile));
 	//
 	// adjc_dir_iterate(ptile, tile1, dir) {
 	// switch (move_type) {
-	// case LAND_MOVING:
+	// case unit_move_type.LAND_MOVING:
 	// if (WARMAP_COST(tile1) <= cost)
 	// continue; /* No need for all the calculations */
 	//
@@ -334,7 +334,7 @@ public class Gotohand {
 	// break;
 	//
 	//
-	// case SEA_MOVING:
+	// case unit_move_type.SEA_MOVING:
 	// move_cost = Unit_H.SINGLE_MOVE;
 	// move_cost += cost;
 	// if (WARMAP_SEACOST(tile1) > move_cost && move_cost < maxcost) {
@@ -385,7 +385,7 @@ public class Gotohand {
 	// * correct (warmap.(sea)cost[x][y] == 0), reuse it.
 	// */
 	// if (warmap.warunit == punit &&
-	// (is_sailing_unit(punit) ? (WARMAP_SEACOST(punit.tile) == 0)
+	// (Unit.is_sailing_unit(punit) ? (WARMAP_SEACOST(punit.tile) == 0)
 	// : (WARMAP_COST(punit.tile) == 0))) {
 	// return;
 	// }
@@ -397,15 +397,15 @@ public class Gotohand {
 	// warmap.warunit = punit;
 	//
 	// if (punit) {
-	// if (is_sailing_unit(punit)) {
-	// really_generate_warmap(pcity, punit, SEA_MOVING);
+	// if (Unit.is_sailing_unit(punit)) {
+	// really_generate_warmap(pcity, punit, unit_move_type.SEA_MOVING);
 	// } else {
-	// really_generate_warmap(pcity, punit, LAND_MOVING);
+	// really_generate_warmap(pcity, punit, unit_move_type.LAND_MOVING);
 	// }
 	// warmap.orig_tile = punit.tile;
 	// } else {
-	// really_generate_warmap(pcity, punit, LAND_MOVING);
-	// really_generate_warmap(pcity, punit, SEA_MOVING);
+	// really_generate_warmap(pcity, punit, unit_move_type.LAND_MOVING);
+	// really_generate_warmap(pcity, punit, unit_move_type.SEA_MOVING);
 	// warmap.orig_tile = pcity.tile;
 	// }
 	// }
@@ -488,7 +488,7 @@ public class Gotohand {
 	// if (!BV_ISSET(came_from, dir)
 	// && !Terrain_H.is_ocean(ptile.terrain)
 	// /* and there is an enemy there */
-	// && is_enemy_unit_tile(ptile, owner)) {
+	// && Unit.is_enemy_unit_tile(ptile, owner)) {
 	// /* then it counts in the zoc claculation */
 	// return false;
 	// }
@@ -604,7 +604,7 @@ public class Gotohand {
 	// BV_CLR_ALL(LOCAL_VECTOR(orig_tile));
 	//
 	// init_warmap(punit.tile, move_type);
-	// warmap_cost = (move_type == SEA_MOVING) ? warmap.seacost : warmap.cost;
+	// warmap_cost = (move_type == unit_move_type.SEA_MOVING) ? warmap.seacost : warmap.cost;
 	// add_to_maPqueue(0, orig_tile);
 	//
 	// if (punit && unit_flag(punit, F_IGTER))
@@ -616,7 +616,7 @@ public class Gotohand {
 	// This shouldn't be neccesary, as ZOC does not have an effect for sea-land
 	// movement, but some code in aiunit.c assumes the goto work like this, so
 	// I will leave it for now */
-	// if (move_type == SEA_MOVING) {
+	// if (move_type == unit_move_type.SEA_MOVING) {
 	// pcargo = other_passengers(punit);
 	// if (pcargo)
 	// if (Terrain_H.is_ocean(dest_tile.terrain) ||
@@ -647,7 +647,7 @@ public class Gotohand {
 	// pdesttile = tile1;
 	//
 	// switch (move_type) {
-	// case LAND_MOVING:
+	// case unit_move_type.LAND_MOVING:
 	// if (WARMAP_COST(tile1) <= WARMAP_COST(ptile))
 	// continue; /* No need for all the calculations. Note that this also
 	// excludes
@@ -679,7 +679,7 @@ public class Gotohand {
 	// if (!Map.same_pos(tile1, dest_tile)) {
 	// /* Allow players to target anything */
 	// if (pplayer.ai.control) {
-	// if ((null==is_enemy_unit_tile(pdesttile, punit.unit_owner())
+	// if ((null==Unit.is_enemy_unit_tile(pdesttile, punit.unit_owner())
 	// || !is_military_unit(punit))
 	// && !is_diplomat_unit(punit)) {
 	// continue; /* unit is non_allied and non_enemy, ie non_attack */
@@ -721,7 +721,7 @@ public class Gotohand {
 	// total_cost = move_cost + WARMAP_COST(ptile);
 	// break;
 	//
-	// case SEA_MOVING:
+	// case unit_move_type.SEA_MOVING:
 	// if (WARMAP_SEACOST(tile1) <= WARMAP_SEACOST(ptile))
 	// continue; /* No need for all the calculations */
 	//
@@ -774,8 +774,8 @@ public class Gotohand {
 	// }
 	// break;
 	//
-	// case AIR_MOVING:
-	// case HELI_MOVING:
+	// case unit_move_type.AIR_MOVING:
+	// case unit_move_type.HELI_MOVING:
 	// if (WARMAP_COST(tile1) <= WARMAP_COST(ptile))
 	// continue; /* No need for all the calculations */
 	//
@@ -853,7 +853,7 @@ public class Gotohand {
 	// && !is_cardinal_dir(dir)) continue;
 	//
 	// if (BV_ISSET(LOCAL_VECTOR(ptile), dir)) {
-	// move_cost = (move_type == SEA_MOVING)
+	// move_cost = (move_type == unit_move_type.SEA_MOVING)
 	// ? WARMAP_SEACOST(tile1)
 	// : WARMAP_COST(tile1);
 	//
@@ -982,7 +982,7 @@ public class Gotohand {
 	// adjc_dir_iterate(punit.tile, ptile, dir) {
 	// int defence_multiplier, num_of_allied_units, best_friendly_defence,
 	// base_move_cost;
-	// city pcity = map_get_city(ptile);
+	// city pcity = Map.map_get_city(ptile);
 	// unit best_ally;
 	//
 	// /*
@@ -1022,10 +1022,10 @@ public class Gotohand {
 	// defence_multiplier = 2;
 	// if (pcity) {
 	// /* This isn't very accurate. */
-	// defence_multiplier += (get_city_bonus(pcity, EFT_LAND_DEFEND)
-	// + get_city_bonus(pcity, EFT_MISSILE_DEFEND)
-	// + get_city_bonus(pcity, EFT_AIR_DEFEND)
-	// + get_city_bonus(pcity, EFT_SEA_DEFEND)) / 100;
+	// defence_multiplier += (Effects.get_city_bonus(pcity, effect_type.EFT_LAND_DEFEND)
+	// + Effects.get_city_bonus(pcity, EFT_MISSILE_DEFEND)
+	// + Effects.get_city_bonus(pcity, EFT_AIR_DEFEND)
+	// + Effects.get_city_bonus(pcity, EFT_SEA_DEFEND)) / 100;
 	// }
 	//
 	// /*
@@ -1041,7 +1041,7 @@ public class Gotohand {
 	// int rating_of_best_ally = 0;
 	//
 	// for (unit aunit : ptile.units.data) {
-	// if (pplayers_allied(aunit.unit_owner(), punit.unit_owner())) {
+	// if (Player_P.pplayers_allied(aunit.unit_owner(), punit.unit_owner())) {
 	// int rating_of_current_ally =
 	// UNIT_RATING(aunit, ptile, defence_multiplier);
 	// num_of_allied_units++;
@@ -1081,7 +1081,7 @@ public class Gotohand {
 	//
 	// if (num_of_allied_units == 0) {
 	// fitness[dir] = rating_of_unit;
-	// } else if (pcity || Map.tile_has_special(ptile, S_FORTRESS)) {
+	// } else if (pcity || Map.tile_has_special(ptile, Terrain_H.S_FORTRESS)) {
 	// fitness[dir] = MAX(rating_of_unit, rating_of_ally);
 	// } else if (rating_of_unit <= rating_of_ally) {
 	// fitness[dir] = rating_of_ally * (num_of_allied_units /
@@ -1125,7 +1125,7 @@ public class Gotohand {
 	// for (unit aunit : adjtile.units.data) {
 	// int attack_of_enemy;
 	//
-	// if (!pplayers_at_war(aunit.unit_owner(), punit.unit_owner())) {
+	// if (!Player_P.pplayers_at_war(aunit.unit_owner(), punit.unit_owner())) {
 	// continue;
 	// }
 	//
@@ -1251,7 +1251,7 @@ public class Gotohand {
 	//
 	// switch (punit.unit_type().move_type) {
 	//
-	// case LAND_MOVING:
+	// case unit_move_type.LAND_MOVING:
 	// if (Terrain_H.is_ocean(ptile.terrain)) {
 	// /* Going to a sea tile, the target should be next to our continent
 	// * and with a boat */
@@ -1279,9 +1279,9 @@ public class Gotohand {
 	//      
 	// return false;
 	//
-	// case SEA_MOVING:
+	// case unit_move_type.SEA_MOVING:
 	// if (Terrain_H.is_ocean(ptile.terrain)
-	// || is_ocean_near_tile(ptile)) {
+	// || Terrain.is_terrain_flag_near_tile(ptile)) {
 	// /* The target is sea or is accessible from sea
 	// * (allow for bombardment and visiting ports) */
 	// return true;
@@ -1376,7 +1376,7 @@ public class Gotohand {
 		// util.freelog(Log.LOG_DEBUG, "Going %s", dir_get_name(dir));
 		// ptile = mapstep(punit.tile, dir);
 
-		// penemy = is_enemy_unit_tile(ptile, punit.unit_owner());
+		// penemy = Unit.is_enemy_unit_tile(ptile, punit.unit_owner());
 		// assert(punit.moves_left > 0);
 
 		// last_tile = Map.same_pos(ptile, punit.goto_tile);
@@ -1419,7 +1419,7 @@ public class Gotohand {
 		// "%s's %s at (%d, %d) . (%d, %d)",
 		// pplayer.name, punit.unit_type().name,
 		// TILE_XY(punit.tile), TILE_XY(dest_tile));
-		// handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+		// Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 		// Unittools.send_unit_info(null, punit);
 		// return GR_FAILED;
 		// }
@@ -1460,7 +1460,7 @@ public class Gotohand {
 //
 //		generate_warmap(null, punit);
 //
-//		if (is_sailing_unit(punit))
+//		if (Unit.is_sailing_unit(punit))
 //			return WARMAP_SEACOST(dest_tile);
 //		else
 //			/* ground unit */
@@ -1580,7 +1580,7 @@ public class Gotohand {
 		 //  util.freelog(Log.LOG_DEBUG,
 		 //	  "air_can_move_between: quick search didn't work. Lets try full.");
 		 //
-		 //  init_warmap(src_tile, AIR_MOVING);
+		 //  init_warmap(src_tile, unit_move_type.AIR_MOVING);
 		 //
 		 //  /* The 0 is inaccurate under A*, but it doesn't matter. */
 		 //  add_to_maPqueue(0, src_tile);

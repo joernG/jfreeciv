@@ -81,7 +81,7 @@ public class Inteldlg{
 //  fcwin_box vbox;
 //  
 //
-//  static char tech_list_names[A_LAST+1][200];
+//  static char tech_list_names[Tech_H.A_LAST+1][200];
 //  int i, j;
 //  
 //  intel_dialog=fcwin_create_layouted_window(intel_proc,

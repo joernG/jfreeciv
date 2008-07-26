@@ -1,5 +1,6 @@
 package server;
 
+import common.City;
 import common.map.tile;
 import common.unit.unit;
 import common.unit.unit_activity;
@@ -98,7 +99,7 @@ public class Unithand{
 //  int number_of_upgraded_units = 0;
 //
 //  if (to_unittype == -1) {
-//    notify_player(pplayer,
+//    Plrhand.notify_player(pplayer,
 //		  "Game: Illegal packet, can't upgrade %s (yet).",
 //		  Unittype_P.unit_types[from_unittype].name);
 //    return;
@@ -126,13 +127,13 @@ public class Unithand{
 //  /* Alert the player about what happened. */
 //  if (number_of_upgraded_units > 0) {
 //    final int cost = unit_upgrade_price(pplayer, from_unittype, to_unittype);
-//    notify_player(pplayer, "Game: %d %s upgraded to %s for %d gold.",
+//    Plrhand.notify_player(pplayer, "Game: %d %s upgraded to %s for %d gold.",
 //		  number_of_upgraded_units, Unittype_P.unit_types[from_unittype].name,
 //		  Unittype_P.unit_types[to_unittype].name,
 //		  cost * number_of_upgraded_units);
 //    Plrhand.send_player_info(pplayer, pplayer);
 //  } else {
-//    notify_player(pplayer, "Game: No units could be upgraded.");
+//    Plrhand.notify_player(pplayer, "Game: No units could be upgraded.");
 //  }
 //}
 //
@@ -155,10 +156,10 @@ public class Unithand{
 //
 //    upgrade_unit(punit, to_unit, false);
 //    Plrhand.send_player_info(pplayer, pplayer);
-//    notify_player(pplayer, "Game: %s upgraded to %s for %d gold.", 
-//		  unit_name(from_unit), unit_name(to_unit), cost);
+//    Plrhand.notify_player(pplayer, "Game: %s upgraded to %s for %d gold.", 
+//		  Unittype_P.unit_name(from_unit), Unittype_P.unit_name(to_unit), cost);
 //  } else {
-//    notify_player(pplayer, "Game: %s", buf);
+//    Plrhand.notify_player(pplayer, "Game: %s", buf);
 //  }
 //}
 //
@@ -170,7 +171,7 @@ public class Unithand{
 //void handle_unit_bribe_inq(connection pc, int unit_id)
 //{
 //  player pplayer = pc.player;
-//  unit punit = find_unit_by_id(unit_id);
+//  unit punit = Game.find_unit_by_id(unit_id);
 //
 //  if (pplayer && punit) {
 //    punit.bribe_cost = unit_bribe_cost(punit);
@@ -186,10 +187,10 @@ public class Unithand{
 //				 int target_id, int value)
 //{
 //  unit pdiplomat = Player_P.player_find_unit_by_id(pplayer, diplomat_id);
-//  unit pvictim = find_unit_by_id(target_id);
+//  unit pvictim = Game.find_unit_by_id(target_id);
 //  city pcity = Game.find_city_by_id(target_id);
 //
-//  if (!pdiplomat || !unit_flag(pdiplomat, F_DIPLOMAT)) {
+//  if (!pdiplomat || !unit_flag(pdiplomat, Eunit_flag_id.F_DIPLOMAT)) {
 //    return;
 //  }
 //
@@ -282,7 +283,7 @@ public class Unithand{
 //
 //  old_pcity = Player_P.player_find_city_by_id(pplayer, punit.homecity);
 //
-//  unit_list_insert(&new_pcity.units_supported, punit);
+//  &new_pcity.units_supported.foo_list_insert(punit);
 //  if (old_pcity) {
 //    unit_list_unlink(&old_pcity.units_supported, punit);
 //  }
@@ -311,7 +312,7 @@ public class Unithand{
 //  if (!punit) {
 //    return;
 //  }
-//  pcity = map_get_city(punit.tile);
+//  pcity = Map.map_get_city(punit.tile);
 //
 //  if (!unit_flag(punit, F_UNDISBANDABLE)) { /* refuse to kill ourselves */
 //    if (pcity) {
@@ -327,7 +328,7 @@ public class Unithand{
 //    Unittools.wipe_unit(punit);
 //  } else {
 //    Plrhand.notify_player_ex(punit.unit_owner(), punit.tile, event_type.E_NOEVENT,
-//              "Game: %s refuses to disband!", unit_name(punit.type));
+//              "Game: %s refuses to disband!", Unittype_P.unit_name(punit.type));
 //    return;
 //  }
 //}
@@ -344,8 +345,8 @@ public class Unithand{
 //{
 //  /* Given that res came from test_unit_add_or_build_city, pcity will
 //     be non-null for all required status values. */
-//  city pcity = map_get_city(punit.tile);
-//  final String unit_name = punit.unit_type().name;
+//  city pcity = Map.map_get_city(punit.tile);
+//  final String Unittype_P.unit_name = punit.unit_type().name;
 //
 //  switch (res) {
 //  case AB_NOT_BUILD_LOC:
@@ -354,7 +355,7 @@ public class Unithand{
 //    break;
 //  case AB_NOT_BUILD_UNIT:
 //    {
-//      final String us = get_units_with_flag_string(F_CITIES);
+//      final String us = get_units_with_flag_string(Eunit_flag_id.F_CITIES);
 //      if (us) {
 //	Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //			 "Game: Only %s can build a city.",
@@ -383,31 +384,31 @@ public class Unithand{
 //  case AB_NO_MOVES_ADD:
 //    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: %s unit has no moves left to add to %s.",
-//		     unit_name, pcity.name);
+//		     Unittype_P.unit_name, pcity.name);
 //    break;
 //  case AB_NO_MOVES_BUILD:
 //    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: %s unit has no moves left to build city.",
-//		     unit_name);
+//		     Unittype_P.unit_name);
 //    break;
 //  case AB_TOO_BIG:
 //    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: %s is too big to add %s.",
-//		     pcity.name, unit_name);
+//		     pcity.name, Unittype_P.unit_name);
 //    break;
 //  case AB_NO_SPACE:
 //    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     ("Game: %s needs an improvement to grow, so " +
 //		       "you cannot add %s."),
-//		     pcity.name, unit_name);
+//		     pcity.name, Unittype_P.unit_name);
 //    break;
 //  default:
 //    /* Shouldn't happen */
 //    util.freelog(Log.LOG_ERROR, "Cannot add %s to %s for unknown reason",
-//	    unit_name, pcity.name);
+//	    Unittype_P.unit_name, pcity.name);
 //    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     "Game: Can't add %s to %s.",
-//		     unit_name, pcity.name);
+//		     Unittype_P.unit_name, pcity.name);
 //    break;
 //  }
 //}
@@ -419,19 +420,19 @@ public class Unithand{
 //**************************************************************************/
 //static void city_add_unit(player pplayer, unit punit)
 //{
-//  city pcity = map_get_city(punit.tile);
-//  final String unit_name = punit.unit_type().name;
+//  city pcity = Map.map_get_city(punit.tile);
+//  final String Unittype_P.unit_name = punit.unit_type().name;
 //
 //  assert(unit_pop_value(punit.type) > 0);
 //  pcity.size += unit_pop_value(punit.type);
 //  /* Make the new people something, otherwise city fails the checks */
-//  pcity.specialists[SP_TAXMAN] += unit_pop_value(punit.type);
+//  pcity.specialists[specialist_type.SP_TAXMAN] += unit_pop_value(punit.type);
 //  Cityturn.auto_arrange_workers(pcity);
 //  Unittools.wipe_unit(punit);
 //  Citytools.send_city_info(null, pcity);
 //  Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_NOEVENT,
 //		   "Game: %s added to aid %s in growing.",
-//		   unit_name, pcity.name);
+//		   Unittype_P.unit_name, pcity.name);
 //}
 //
 ///**************************************************************************
@@ -507,7 +508,7 @@ public class Unithand{
 //      int id = punit.id;
 //      boolean more_to_explore = ai_manage_explorer(punit);
 //
-//      if ((punit = find_unit_by_id(id))) {
+//      if ((punit = Game.find_unit_by_id(id))) {
 //	assert(punit.activity == ACTIVITY_EXPLORE);
 //	if (!more_to_explore) {
 //	  set_unit_activity(punit, unit_activity.ACTIVITY_IDLE);
@@ -625,7 +626,7 @@ public class Unithand{
 //static boolean unit_bombard(unit punit, tile ptile)
 //{
 //  player pplayer = punit.unit_owner();
-//  city pcity = map_get_city(ptile);
+//  city pcity = Map.map_get_city(ptile);
 //  int old_unit_vet;
 //
 //  util.freelog(Log.LOG_DEBUG, "Start bombard: %s's %s to %d, %d.",
@@ -638,7 +639,7 @@ public class Unithand{
 //      util.die("Trying to attack a unit with which you have peace " +
 //	  "or cease-fire at %i, %i", TILE_XY(pdefender.tile));
 //    }
-//    if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
+//    if (Player_P.pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
 //	&& !(unit_flag(punit, F_NUCLEAR) && punit == pdefender)) {
 //      util.die("Trying to attack a unit with which you have alliance at %i, %i",
 //	  TILE_XY(pdefender.tile));
@@ -661,9 +662,9 @@ public class Unithand{
 //  
 //  if (pcity
 //      && pcity.size > 1
-//      && get_city_bonus(pcity, EFT_UNIT_NO_LOSE_POP) == 0
+//      && Effects.get_city_bonus(pcity, EFT_UNIT_NO_LOSE_POP) == 0
 //      && kills_citizen_after_attack(punit)) {
-//    city_reduce_size(pcity,1);
+//    Cityturn.city_reduce_size(pcity,1);
 //    Cityturn.city_refresh(pcity);
 //    Citytools.send_city_info(null, pcity);
 //  }
@@ -672,9 +673,9 @@ public class Unithand{
 //  maybe_make_veteran(punit);
 //  if (punit.veteran != old_unit_vet) {
 //    Plrhand.notify_player_ex(punit.unit_owner(), punit.tile,
-//		     E_UNIT_WIN_ATT,
+//		     event_type.E_UNIT_WIN_ATT,
 //		     "Game: Your bombarding %s%s became more experienced!",
-//		     unit_name(punit.type),
+//		     Unittype_P.unit_name(punit.type),
 //		     get_location_str_at(punit.unit_owner(),
 //		     punit.tile));
 //  }
@@ -706,7 +707,7 @@ public class Unithand{
 //    util.die("Trying to attack a unit with which you have peace " +
 //	"or cease-fire at %i, %i", TILE_XY(def_tile));
 //  }
-//  if (pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
+//  if (Player_P.pplayers_allied(punit.unit_owner(), pdefender.unit_owner())
 //      && !(unit_flag(punit, F_NUCLEAR) && punit == pdefender)) {
 //    util.die("Trying to attack a unit with which you have alliance at %i, %i",
 //	TILE_XY(def_tile));
@@ -714,7 +715,7 @@ public class Unithand{
 //
 //  if (unit_flag(punit, F_NUCLEAR)) {
 //    if ((pcity = sdi_defense_close(punit.unit_owner(), def_tile))) {
-//      Plrhand.notify_player_ex(pplayer, punit.tile, E_UNIT_LOST_ATT,
+//      Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_UNIT_LOST_ATT,
 //		       ("Game: Your Nuclear missile was shot down by" +
 //			 " SDI defences, what a waste."));
 //      Plrhand.notify_player_ex(City.city_owner(pcity), def_tile, E_UNIT_WIN,
@@ -759,11 +760,11 @@ public class Unithand{
 //  }
 //
 //  if (punit.hp > 0
-//      && (pcity = map_get_city(def_tile))
+//      && (pcity = Map.map_get_city(def_tile))
 //      && pcity.size > 1
-//      && get_city_bonus(pcity, EFT_UNIT_NO_LOSE_POP) == 0
+//      && Effects.get_city_bonus(pcity, EFT_UNIT_NO_LOSE_POP) == 0
 //      && kills_citizen_after_attack(punit)) {
-//    city_reduce_size(pcity,1);
+//    Cityturn.city_reduce_size(pcity,1);
 //    Cityturn.city_refresh(pcity);
 //    Citytools.send_city_info(null, pcity);
 //  }
@@ -788,27 +789,27 @@ public class Unithand{
 //		       pwinner.tile, E_UNIT_WIN,
 //		       ("Game: Your %s%s survived the pathetic attack" +
 //		         " from %s's %s and became more experienced!"),
-//		       unit_name(pwinner.type),
+//		       Unittype_P.unit_name(pwinner.type),
 //		       get_location_str_in(pwinner.unit_owner(),
 //					   pwinner.tile),
-//		       plooser.unit_owner().name, unit_name(plooser.type));
+//		       plooser.unit_owner().name, Unittype_P.unit_name(plooser.type));
 //    } else {
 //      Plrhand.notify_player_ex(pwinner.unit_owner(),
 //		       pwinner.tile, E_UNIT_WIN,
 //		       ("Game: Your %s%s survived the pathetic attack" +
 //		         " from %s's %s."),
-//		       unit_name(pwinner.type),
+//		       Unittype_P.unit_name(pwinner.type),
 //		       get_location_str_in(pwinner.unit_owner(),
 //					   pwinner.tile),
-//		       plooser.unit_owner().name, unit_name(plooser.type));
+//		       plooser.unit_owner().name, Unittype_P.unit_name(plooser.type));
 //    }
 //    
 //    Plrhand.notify_player_ex(plooser.unit_owner(),
-//		     def_tile, E_UNIT_LOST_ATT,
+//		     def_tile, event_type.E_UNIT_LOST_ATT,
 //		     ("Game: Your attacking %s failed " +
 //		       "against %s's %s%s!"),
-//		     unit_name(plooser.type), pwinner.unit_owner().name,
-//		     unit_name(pwinner.type),
+//		     Unittype_P.unit_name(plooser.type), pwinner.unit_owner().name,
+//		     Unittype_P.unit_name(pwinner.type),
 //		     get_location_str_at(plooser.unit_owner(),
 //					 pwinner.tile));
 //    Unittools.wipe_unit(plooser);
@@ -821,20 +822,20 @@ public class Unithand{
 //    punit.moved = true;	/* We moved */
 //    if (vet && !unit_flag(punit, F_MISSILE)) {
 //      Plrhand.notify_player_ex(pwinner.unit_owner(), punit.tile,
-//		       E_UNIT_WIN_ATT,
+//		       event_type.E_UNIT_WIN_ATT,
 //		       ("Game: Your attacking %s succeeded" +
 //		         " against %s's %s%s and became more experienced!"),
-//		       unit_name(pwinner.type),
-//		       plooser.unit_owner().name, unit_name(plooser.type),
+//		       Unittype_P.unit_name(pwinner.type),
+//		       plooser.unit_owner().name, Unittype_P.unit_name(plooser.type),
 //		       get_location_str_at(pwinner.unit_owner(),
 //		       plooser.tile));
 //    } else {
 //      Plrhand.notify_player_ex(pwinner.unit_owner(), punit.tile,
-//		       E_UNIT_WIN_ATT,
+//		       event_type.E_UNIT_WIN_ATT,
 //		       ("Game: Your attacking %s succeeded" +
 //		         " against %s's %s%s!"),
-//		       unit_name(pwinner.type),
-//		       plooser.unit_owner().name, unit_name(plooser.type),
+//		       Unittype_P.unit_name(pwinner.type),
+//		       plooser.unit_owner().name, Unittype_P.unit_name(plooser.type),
 //		       get_location_str_at(pwinner.unit_owner(),
 //		       plooser.tile));
 //    }
@@ -963,7 +964,7 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //  /* Caravans.  If city is allied (inc. ours) we would have a popup
 //   * asking if we are moving on. */
 //  if (unit_flag(punit, F_TRADE_ROUTE) && pcity
-//      && !pplayers_allied(City.city_owner(pcity), pplayer) ) {
+//      && !Player_P.pplayers_allied(City.city_owner(pcity), pplayer) ) {
 //    return base_handle_unit_establish_trade(pplayer, punit.id, pcity);
 //  }
 //
@@ -1023,7 +1024,7 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //    unit victim;
 //
 //    /* We can attack ONLY in enemy cities */
-//    if (pcity && !pplayers_at_war(City.city_owner(pcity), pplayer)) {
+//    if (pcity && !Player_P.pplayers_at_war(City.city_owner(pcity), pplayer)) {
 //      Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		       ("Game: Can't attack %s " +
 //			 "because you are not at war with %s."),
@@ -1140,7 +1141,7 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //  if (!punit || !unit_flag(punit, F_HELP_WONDER)) {
 //    return;
 //  }
-//  pcity_dest = map_get_city(punit.tile);
+//  pcity_dest = Map.map_get_city(punit.tile);
 //  
 //  if (!pcity_dest || !unit_can_help_build_wonder(punit, pcity_dest)) {
 //    return;
@@ -1158,7 +1159,7 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //  }
 //  Plrhand.notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		   text, /* Must match arguments below. */
-//		   unit_name(punit.type),
+//		   Unittype_P.unit_name(punit.type),
 //		   get_improvement_type(pcity_dest.currently_building).name,
 //		   pcity_dest.name, 
 //		   abs(build_points_left(pcity_dest)));
@@ -1187,7 +1188,7 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //  /* if no destination city is passed in,
 //   *  check whether the unit is already in the city */
 //  if (!pcity_dest) { 
-//    pcity_dest = map_get_city(punit.tile);
+//    pcity_dest = Map.map_get_city(punit.tile);
 //  }
 //
 //  if (!pcity_dest) {
@@ -1200,30 +1201,30 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //    Plrhand.notify_player_ex(pplayer, punit.tile, event_type.E_NOEVENT,
 //		     ("Game: Sorry, your %s cannot establish" +
 //		       " a trade route because it has no home city"),
-//		     unit_name(punit.type));
+//		     Unittype_P.unit_name(punit.type));
 //    return false;
 //   
 //  }
 //
 //    
-//  if (!can_cities_trade(pcity_homecity, pcity_dest)) {
+//  if (!City.can_cities_trade(pcity_homecity, pcity_dest)) {
 //    Plrhand.notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		     ("Game: Sorry, your %s cannot establish" +
 //		       " a trade route between %s and %s"),
-//		     unit_name(punit.type),pcity_homecity.name,
+//		     Unittype_P.unit_name(punit.type),pcity_homecity.name,
 //		     pcity_dest.name);
 //    return false;
 //  }
 //  
-//  /* This part of code works like can_establish_trade_route, except
+//  /* This part of code works like City.can_establish_trade_route, except
 //   * that we actually do the action of making the trade route. */
 //
 //  /* If we can't make a new trade route we can still get the trade bonus. */
 //  can_establish = !have_cities_trade_route(pcity_homecity, pcity_dest);
 //    
 //  if (can_establish) {
-//    home_full = (city_num_trade_routes(pcity_homecity) == NUM_TRADEROUTES);
-//    dest_full = (city_num_trade_routes(pcity_dest) == NUM_TRADEROUTES);
+//    home_full = (city_num_trade_routes(pcity_homecity) == City_H.NUM_TRADEROUTES);
+//    dest_full = (city_num_trade_routes(pcity_dest) == City_H.NUM_TRADEROUTES);
 //  }
 //  
 //  if (home_full || dest_full) {
@@ -1231,34 +1232,34 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //
 //    /* See if there's a trade route we can cancel at the home city. */
 //    if (home_full) {
-//      if (get_city_min_trade_route(pcity_homecity, &slot) < trade) {
+//      if (City.get_city_min_trade_route(pcity_homecity, &slot) < trade) {
 //	pcity_out_of_home = Game.find_city_by_id(pcity_homecity.trade[slot]);
 //	assert(pcity_out_of_home != null);
 //      } else {
 //	Plrhand.notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		     ("Game: Sorry, your %s cannot establish" +
-//		       " a trade route here!"), unit_name(punit.type));
+//		       " a trade route here!"), Unittype_P.unit_name(punit.type));
 //        Plrhand.notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		       ("      The city of %s already has %d " +
 //			 "better trade routes!"), pcity_homecity.name,
-//		       NUM_TRADEROUTES);
+//		       City_H.NUM_TRADEROUTES);
 //	can_establish = false;
 //      }
 //    }
 //    
 //    /* See if there's a trade route we can cancel at the dest city. */
 //    if (can_establish && dest_full) {
-//      if (get_city_min_trade_route(pcity_dest, &slot) < trade) {
+//      if (City.get_city_min_trade_route(pcity_dest, &slot) < trade) {
 //	pcity_out_of_dest = Game.find_city_by_id(pcity_dest.trade[slot]);
 //	assert(pcity_out_of_dest != null);
 //      } else {
 //	Plrhand.notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		     ("Game: Sorry, your %s cannot establish" +
-//		       " a trade route here!"), unit_name(punit.type));
+//		       " a trade route here!"), Unittype_P.unit_name(punit.type));
 //        Plrhand.notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		       ("      The city of %s already has %d " +
 //			 "better trade routes!"), pcity_dest.name,
-//		       NUM_TRADEROUTES);
+//		       City_H.NUM_TRADEROUTES);
 //	can_establish = false;
 //      }
 //    }
@@ -1289,21 +1290,21 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //  revenue = get_caravan_enter_city_trade_bonus(pcity_homecity, pcity_dest);
 //  if (can_establish) {
 //    /* establish traderoute */
-//    for (i = 0; i < NUM_TRADEROUTES; i++) {
+//    for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //      if (pcity_homecity.trade[i] == 0) {
 //        pcity_homecity.trade[i] = pcity_dest.id;
 //        break;
 //      }
 //    }
-//    assert(i < NUM_TRADEROUTES);
+//    assert(i < City_H.NUM_TRADEROUTES);
 //  
-//    for (i = 0; i < NUM_TRADEROUTES; i++) {
+//    for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //      if (pcity_dest.trade[i] == 0) {
 //        pcity_dest.trade[i] = pcity_homecity.id;
 //        break;
 //      }
 //    }
-//    assert(i < NUM_TRADEROUTES);
+//    assert(i < City_H.NUM_TRADEROUTES);
 //  } else {
 //    /* enter marketplace */
 //    revenue = (revenue + 2) / 3;
@@ -1313,7 +1314,7 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //  Plrhand.notify_player_ex(pplayer, pcity_dest.tile, event_type.E_NOEVENT,
 //		   ("Game: Your %s from %s has arrived in %s," +
 //		     " and revenues amount to %d in gold and research."), 
-//		   unit_name(punit.type), pcity_homecity.name,
+//		   Unittype_P.unit_name(punit.type), pcity_homecity.name,
 //		   pcity_dest.name, revenue);
 //  Unittools.wipe_unit(punit);
 //  pplayer.economic.gold += revenue;
@@ -1495,7 +1496,7 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //   * other players transporters (depending on the rules in
 //   * can_unit_load). */
 //  unit pcargo = Player_P.player_find_unit_by_id(pplayer, cargo_id);
-//  unit ptrans = find_unit_by_id(trans_id);
+//  unit ptrans = Game.find_unit_by_id(trans_id);
 //
 //  if (!pcargo || !ptrans) {
 //    return;
@@ -1515,8 +1516,8 @@ public static boolean handle_unit_move_request(unit punit, tile pdesttile,
 //****************************************************************************/
 //void handle_unit_unload(player pplayer, int cargo_id, int trans_id)
 //{
-//  unit pcargo = find_unit_by_id(cargo_id);
-//  unit ptrans = find_unit_by_id(trans_id);
+//  unit pcargo = Game.find_unit_by_id(cargo_id);
+//  unit ptrans = Game.find_unit_by_id(trans_id);
 //
 //  if (!pcargo || !ptrans) {
 //    return;

@@ -164,7 +164,7 @@ public class Finddlg{
 //      pStr.style |= (TTF_STYLE_BOLD|SF_CENTER);
 //   
 //      if(pCity.owner != owner) {
-//        pLogo = GET_SURF(get_nation_by_idx(
+//        pLogo = GET_SURF(Nation.get_nation_by_idx(
 //			get_player(pCity.owner).nation).flag_sprite);
 //        pLogo = make_flag_surface_smaler(pLogo);
 //      }

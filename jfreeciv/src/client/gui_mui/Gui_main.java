@@ -388,7 +388,7 @@ public class Gui_main{
 //	unit punit;
 //	if ((punit = get_unit_in_focus()))
 //	{
-//	  city pcity = map_get_city(punit.tile);
+//	  city pcity = Map.map_get_city(punit.tile);
 //	  if (pcity)
 //	  {
 //	    popup_city_dialog(pcity, 0);
@@ -1265,8 +1265,8 @@ public class Gui_main{
 //      menu_entry_sensitive(MENU_ORDER_UNLOAD,
 //			   get_transporter_occupancy(punit) > 0);
 //      menu_entry_sensitive(MENU_ORDER_WAKEUP_OTHERS, is_unit_activity_on_tile(ACTIVITY_SENTRY, punit.tile));
-//      menu_entry_sensitive(MENU_ORDER_AUTO_SETTLER, (can_unit_do_auto(punit) && unit_flag(punit, F_SETTLERS)));
-//      menu_entry_sensitive(MENU_ORDER_AUTO_ATTACK, (can_unit_do_auto(punit) && !unit_flag(punit, F_SETTLERS)));
+//      menu_entry_sensitive(MENU_ORDER_AUTO_SETTLER, (can_unit_do_auto(punit) && unit_flag(punit, Eunit_flag_id.F_SETTLERS)));
+//      menu_entry_sensitive(MENU_ORDER_AUTO_ATTACK, (can_unit_do_auto(punit) && !unit_flag(punit, Eunit_flag_id.F_SETTLERS)));
 //      menu_entry_sensitive(MENU_ORDER_AUTO_EXPLORE, can_unit_do_activity(punit, ACTIVITY_EXPLORE));
 //      menu_entry_sensitive(MENU_ORDER_CONNECT, can_unit_do_connect(punit, unit_activity.ACTIVITY_IDLE));
 //      menu_entry_sensitive(MENU_ORDER_GOTO_CITY, any_cities);
@@ -1276,7 +1276,7 @@ public class Gui_main{
 //      menu_entry_sensitive(MENU_ORDER_DIPLOMAT_DLG, is_diplomat_unit(punit) &&
 //        diplomat_can_do_action(punit, DIPLOMAT_ANY_ACTION, punit.tile));
 //
-//      if (unit_flag(punit, F_CITIES) && map_get_city(punit.tile))
+//      if (unit_flag(punit, Eunit_flag_id.F_CITIES) && Map.map_get_city(punit.tile))
 //      {
 //	menu_entry_rename(MENU_ORDER_BUILD_CITY, "Add to City", false);
 //      }
@@ -1287,19 +1287,19 @@ public class Gui_main{
 //
 //      ttype = map_get_tile(punit.tile).terrain;
 //      tinfo = get_tile_type(ttype);
-//      if ((tinfo.irrigation_result != T_NONE)
+//      if ((tinfo.irrigation_result != Terrain_H.T_NONE)
 //	  && (tinfo.irrigation_result != ttype)) {
 //	irrtext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.irrigation_result)).terrain_name);
 //      } else if (Map.map_has_special(punit.tile, S_IRRIGATION)
-//		 && player_knows_techs_with_flag(Game.game.player_ptr,
+//		 && Player_P.player_knows_techs_with_flag(Game.game.player_ptr,
 //						 TF_FARMLAND)) {
 //	irrtext = String.format( "Build Farmland");
 //      } else {
 //        irrtext = String.format( "Build Irrigation");
 //      }
 //
-//      if ((tinfo.mining_result != T_NONE)
+//      if ((tinfo.mining_result != Terrain_H.T_NONE)
 //	  && (tinfo.mining_result != ttype)) {
 //	mintext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.mining_result)).terrain_name);
@@ -1307,7 +1307,7 @@ public class Gui_main{
 //        mintext = String.format( "Build Mine");
 //      }
 //
-//      if ((tinfo.transform_result != T_NONE)
+//      if ((tinfo.transform_result != Terrain_H.T_NONE)
 //	  && (tinfo.transform_result != ttype)) {
 //	transtext = util.my_snprintf( chgfmt,
 //		    (get_tile_type(tinfo.transform_result)).terrain_name);

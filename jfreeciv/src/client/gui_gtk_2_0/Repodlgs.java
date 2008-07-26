@@ -86,7 +86,7 @@ public class Repodlgs{
 //  int is_impr;
 //  int type;
 //};
-//static struct economy_row economy_row_type[unittype.U_LAST + B_LAST];
+//static struct economy_row economy_row_type[unittype.U_LAST + Improvement.B_LAST];
 //
 //static gui_dialog economy_dialog_shell = null;
 //static GtkWidget *economy_label2;
@@ -540,7 +540,7 @@ public class Repodlgs{
 //  for(i=A_FIRST; i<Game.game.num_tech_types; i++) {
 //    if (tech_is_available(Game.game.player_ptr, i)
 //        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
-//        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
+//        && advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST
 //        && (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
 //	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //      if (i==Game.game.player_ptr.ai.tech_goal)
@@ -748,11 +748,11 @@ public class Repodlgs{
 //  if (row >= 0) {
 //    if (economy_row_type[row].is_impr == true) {
 //      /* The user has selected an improvement type. */
-//      boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !is_wonder(i));
+//      boolean is_sellable = (i >= 0 && i < Game.game.num_impr_types && !Improvement.is_wonder(i));
 //
 //      gtk_widget_set_sensitive(sellobsolete_command, is_sellable
 //			       && can_client_issue_orders()
-//			       && improvement_obsolete(Game.game.player_ptr, i));
+//			       && Improvement.improvement_obsolete(Game.game.player_ptr, i));
 //      gtk_widget_set_sensitive(sellall_command, is_sellable
 //			       && can_client_issue_orders());
 //    } else {
@@ -833,7 +833,7 @@ public class Repodlgs{
 //  if(!is_report_dialogs_frozen() && economy_dialog_shell) {
 //    int tax, total, i, entries_used, nbr_impr;
 //    char economy_total[48];
-//    struct improvement_entry entries[B_LAST];
+//    struct improvement_entry entries[Improvement.B_LAST];
 //    struct unit_entry entries_units[unittype.U_LAST];
 //    GtkTreeIter it;
 //    GValue value = { 0, };
@@ -871,7 +871,7 @@ public class Repodlgs{
 //			 3, entries_units[i].total_cost,
 //			 -1);
 //      g_value_init(&value, G_TYPE_STRING);
-//      g_value_set_static_string(&value, unit_name(entries_units[i].type));
+//      g_value_set_static_string(&value, Unittype_P.unit_name(entries_units[i].type));
 //      gtk_list_store_set_value(economy_store, &it, 0, &value);
 //      g_value_unset(&value);
 //    
@@ -1232,7 +1232,7 @@ public class Repodlgs{
 //		7, true,
 //		8, ((unitarray[i].active_count > 0) ? i : unittype.U_LAST), -1);
 //	g_value_init(&value, G_TYPE_STRING);
-//	g_value_set_static_string(&value, unit_name(i));
+//	g_value_set_static_string(&value, Unittype_P.unit_name(i));
 //	gtk_list_store_set_value(activeunits_store, &it, 0, &value);
 //	g_value_unset(&value);
 //

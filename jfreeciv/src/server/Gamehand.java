@@ -133,10 +133,10 @@ public class Gamehand{
 //    }
 //
 //    /* We cannot currently handle sea units as start units. */
-//    if (Unittype_P.unit_types[utype].move_type == SEA_MOVING) {
+//    if (Unittype_P.unit_types[utype].move_type == unit_move_type.SEA_MOVING) {
 //      util.freelog(Log.LOG_ERROR, ("Sea moving start units are not yet supported, " +
 //                           "%s not created."), Unittype_P.unit_types[utype].name);
-//      notify_player(pplayer, ("Sea moving start units are not yet supported. " +
+//      Plrhand.notify_player(pplayer, ("Sea moving start units are not yet supported. " +
 //                               "Nobody gets %s."), Unittype_P.unit_types[utype].name);
 //      return;
 //    }
@@ -179,7 +179,7 @@ public class Gamehand{
 //  util.freelog(Log.LOG_VERBOSE, "Assigning matching nations.");
 //  for(player pplayer: Game.game.players){
 //    for (i = 0; i < Map.map.num_start_positions; i++) {
-//      assert(pplayer.nation != NO_NATION_SELECTED);
+//      assert(pplayer.nation != Nation_H.NO_NATION_SELECTED);
 //      if (pplayer.nation == Map.map.start_positions[i].nation) {
 //	util.freelog(Log.LOG_VERBOSE, "Start_pos %d matches player %d (%s).",
 //		i, pplayer.player_no, Nation.get_nation_name(pplayer.nation));
@@ -340,9 +340,9 @@ public class Gamehand{
 //  ginfo.freecost = Game.game.freecost;
 //  ginfo.conquercost = Game.game.conquercost;
 //  ginfo.cityfactor = Game.game.cityfactor;
-//  for (i = 0; i < A_LAST /*Game.game.num_tech_types */ ; i++)
+//  for (i = 0; i < Tech_H.A_LAST /*Game.game.num_tech_types */ ; i++)
 //    ginfo.global_advances[i] = Game.game.global_advances[i];
-//  for (i = 0; i < B_LAST /*Game.game.num_impr_types */ ; i++)
+//  for (i = 0; i < Improvement.B_LAST /*Game.game.num_impr_types */ ; i++)
 //    ginfo.global_wonders[i] = Game.game.global_wonders[i];
 //  /* the following values are computed every
 //     time a packet_game_info packet is created */
@@ -506,7 +506,7 @@ public class Gamehand{
 //  }
 //
 //  if (you_have_hack) {
-//    pc.access_level = ALLOW_HACK;
+//    pc.access_level = cmdlevel_id.ALLOW_HACK;
 //  }
 //
 //  dsend_packet_single_want_hack_reply(pc, you_have_hack);

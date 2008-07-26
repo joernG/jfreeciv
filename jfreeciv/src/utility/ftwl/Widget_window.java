@@ -314,7 +314,7 @@ public class Widget_window{
 //    assert(pwidget != widget);
 //  } }
 //
-//  widget_list_insert(&window.data.window.children, widget);
+//  &window.data.window.children.foo_list_insert(widget);
 //  widget.parent = window;
 //}
 //
@@ -613,7 +613,7 @@ public class Widget_window{
 //	//printf("####### 1\n");
 //      free(region);
 //    } else {
-//      region_list_insert(copy, region);
+//      copy.foo_list_insert(region);
 //    }
 //  } }
 //
@@ -626,7 +626,7 @@ public class Widget_window{
 //	//printf("####### 2\n");
 //      free(region);
 //    } else {
-//      region_list_insert(copy, region);
+//      copy.foo_list_insert(region);
 //    }
 //  } }
 //}
@@ -695,7 +695,7 @@ public class Widget_window{
 //      region.x += widget.outer_bounds.x;
 //      region.y += widget.outer_bounds.y;
 //      region_list_unlink(&widget.data.window.to_flush, region);
-//      region_list_insert(&normalized_regions, region);
+//      &normalized_regions.foo_list_insert(region);
 //    } }
 //  } }
 //  stop_timer(timer2);

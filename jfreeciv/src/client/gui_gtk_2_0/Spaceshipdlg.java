@@ -244,7 +244,7 @@ public class Spaceshipdlg{
 //  gtk_box_pack_start(GTK_BOX(hbox), pdialog.info_label, false, false, 0);
 //  gtk_widget_set_name(pdialog.info_label, "spaceship label");
 //
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //
 //  gtk_widget_grab_focus(pdialog.image_canvas);
 //

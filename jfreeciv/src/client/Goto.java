@@ -250,7 +250,7 @@ public class Goto{
 //
 //  if (goto_map.num_parts == 1) {
 //    /* first part */
-//    unit punit = find_unit_by_id(goto_map.unit_id);
+//    unit punit = Game.find_unit_by_id(goto_map.unit_id);
 //
 //    p.start_tile = punit.tile;
 //    p.start_moves_left = punit.moves_left;
@@ -295,8 +295,8 @@ public class Goto{
 //  part p = &goto_map.parts[goto_map.num_parts - 1];
 //
 //  assert(is_active);
-//  assert(find_unit_by_id(goto_map.unit_id)
-//	 && find_unit_by_id(goto_map.unit_id) == get_unit_in_focus());
+//  assert(Game.find_unit_by_id(goto_map.unit_id)
+//	 && Game.find_unit_by_id(goto_map.unit_id) == get_unit_in_focus());
 //
 //  if (!Map.same_pos(p.start_tile, p.end_tile)) {
 //    /* Otherwise the last part has zero length. */
@@ -314,8 +314,8 @@ public class Goto{
 //  tile end_tile = p.end_tile;
 //
 //  assert(is_active);
-//  assert(find_unit_by_id(goto_map.unit_id)
-//	 && find_unit_by_id(goto_map.unit_id) == get_unit_in_focus());
+//  assert(Game.find_unit_by_id(goto_map.unit_id)
+//	 && Game.find_unit_by_id(goto_map.unit_id) == get_unit_in_focus());
 //
 //  if (goto_map.num_parts == 1) {
 //    /* we don't have any waypoint but the start pos. */
@@ -399,7 +399,7 @@ public class Goto{
 //  int activity_mc = 0;
 //
 //  assert(hover_state == HOVER_CONNECT);
-//  assert(terrain_control.may_road);
+//  assert(Map.terrain_control.may_road);
 // 
 //  switch (connect_activity) {
 //  case ACTIVITY_IRRIGATE:
@@ -421,8 +421,8 @@ public class Goto{
 //  case ACTIVITY_ROAD:
 //    if (!Map.tile_has_special(ptile, Terrain_H.S_ROAD)) {
 //      if (ttype.road_time == 0
-//	  || (Map.tile_has_special(ptile, S_RIVER)
-//	      && !player_knows_techs_with_flag(pplayer, TF_BRIDGE))) {
+//	  || (Map.tile_has_special(ptile, Terrain_H.S_RIVER)
+//	      && !Player_P.player_knows_techs_with_flag(pplayer, TF_BRIDGE))) {
 //	/* 0 means road is impossible here (??) */
 //	return -1;
 //      }

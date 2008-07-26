@@ -385,17 +385,17 @@ public class Graphics{
 //  
 //  /* Give tile a background color, based on the type of unit */
 //  switch (get_unit_type(i).move_type) {
-//    case LAND_MOVING: bg_color = COLOR_STD_GROUND; break;
-//    case SEA_MOVING:  bg_color = COLOR_STD_OCEAN;  break;
-//    case HELI_MOVING: bg_color = COLOR_STD_YELLOW; break;
-//    case AIR_MOVING:  bg_color = COLOR_STD_CYAN;   break;
+//    case unit_move_type.LAND_MOVING: bg_color = COLOR_STD_GROUND; break;
+//    case unit_move_type.SEA_MOVING:  bg_color = COLOR_STD_OCEAN;  break;
+//    case unit_move_type.HELI_MOVING: bg_color = COLOR_STD_YELLOW; break;
+//    case unit_move_type.AIR_MOVING:  bg_color = COLOR_STD_CYAN;   break;
 //    default:	      bg_color = COLOR_STD_BLACK;  break;
 //  }
 //  gtk_pixcomm_fill(GTK_PIXCOMM(pixcomm), colors_standard[bg_color], false);
 //
 //  /* If we're using flags, put one on the tile */
 //  if(!solid_color_behind_units)  {
-//    Sprite flag=get_nation_by_plr(Game.game.player_ptr).flag_sprite;
+//    Sprite flag=Nation.get_nation_by_plr(Game.game.player_ptr).flag_sprite;
 //
 //    gtk_pixcomm_copyto(GTK_PIXCOMM(pixcomm), flag, 0, 0, false);
 //  }

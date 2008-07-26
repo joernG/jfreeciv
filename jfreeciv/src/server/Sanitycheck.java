@@ -58,7 +58,7 @@ public class Sanitycheck{
 //    if (contains_special(special, S_IRRIGATION))
 //      assert(get_tile_type(terrain).irrigation_result == terrain);
 //
-//    assert(terrain >= T_FIRST && terrain < T_COUNT);
+//    assert(terrain >= Terrain_H.T_FIRST && terrain < Terrain_H.T_COUNT);
 //  }
 //}
 //
@@ -69,7 +69,7 @@ public class Sanitycheck{
 //{
 //  for(tile ptile :  Map.map.tiles){
 //    for(player pplayer: Game.game.players){
-//      player_tile plr_tile = map_get_player_tile(ptile, pplayer);
+//      player_tile plr_tile = Maphand.map_get_player_tile(ptile, pplayer);
 //      /* underflow of unsigned int */
 //      assert(plr_tile.seen < 60000);
 //      assert(plr_tile.own_seen < 60000);
@@ -105,7 +105,7 @@ public class Sanitycheck{
 //static void check_map()
 //{
 //  for(tile ptile :  Map.map.tiles){
-//    city pcity = map_get_city(ptile);
+//    city pcity = Map.map_get_city(ptile);
 //    int cont = map_get_continent(ptile), x, y;
 //
 //    CHECK_INDEX(ptile.index);
@@ -143,10 +143,10 @@ public class Sanitycheck{
 //
 //      /* Check diplomatic status of stacked units. */
 //      for (unit punit2 : ptile.units.data) {
-//	assert(pplayers_allied(punit.unit_owner(), punit2.unit_owner()));
+//	assert(Player_P.pplayers_allied(punit.unit_owner(), punit2.unit_owner()));
 //      } }
 //      if (pcity) {
-//	assert(pplayers_allied(punit.unit_owner(), City.city_owner(pcity)));
+//	assert(Player_P.pplayers_allied(punit.unit_owner(), City.city_owner(pcity)));
 //      }
 //    } }
 //  }
@@ -176,10 +176,13 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //
 //  /* Note that cities may be found on land or water. */
 //
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(x, y)) {
 //    tile ptile;
 //
-//    if ((ptile = city_map_to_map(pcity, x, y))) {
+//    if ((ptile = City.city_map_to_map(pcity, x, y))) {
 //      player owner = map_get_owner(ptile);
 //
 //      switch (City.get_worker_city(pcity, x, y)) {
@@ -190,7 +193,7 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //		  pcity.name, TILE_XY(ptile),
 //		  (ptile).worked.name);
 //	}
-//	if (is_enemy_unit_tile(ptile, pplayer)) {
+//	if (Unit.is_enemy_unit_tile(ptile, pplayer)) {
 //	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "empty but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
@@ -214,7 +217,7 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //		  "worked but main map disagrees!",
 //		  pcity.name, TILE_XY(ptile));
 //	}
-//	if (is_enemy_unit_tile(ptile, pplayer)) {
+//	if (Unit.is_enemy_unit_tile(ptile, pplayer)) {
 //	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "worked but occupied by an enemy unit!",
 //		  pcity.name, TILE_XY(ptile));
@@ -243,18 +246,21 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //    } else {
 //      assert(City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_UNAVAILABLE);
 //    }
-//  } city_map_iterate_end;
+//  } };
 //
 //  /* Sanity check city size versus worker and specialist counts. */
-//  city_map_iterate(x, y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int x = _itr % City_H.CITY_MAP_SIZE, y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(x, y)) {
 //    if (City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_WORKER) {
 //      workers++;
 //    }
-//  } city_map_iterate_end;
+//  } };
 //  if (workers + City.city_specialists(pcity) != pcity.size + 1) {
 //    util.die("%s is illegal (size%d w%d e%d t%d s%d) in %s line %d",
 //        pcity.name, pcity.size, workers, pcity.specialists[specialist_type.SP_ELVIS],
-//        pcity.specialists[SP_TAXMAN], pcity.specialists[SP_SCIENTIST], file, line);
+//        pcity.specialists[specialist_type.SP_TAXMAN], pcity.specialists[specialist_type.SP_SCIENTIST], file, line);
 //  }
 }
 
@@ -277,7 +283,7 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //      int city_x, city_y;
 //      boolean is_valid;
 //
-//      is_valid = map_to_city_map(&city_x, &city_y, pcity, ptile);
+//      is_valid = City.map_to_city_map(&city_x, &city_y, pcity, ptile);
 //      assert(is_valid);
 //
 //      if (pcity.city_map[city_x][city_y] != city_tile_type.C_TILE_WORKER) {
@@ -309,7 +315,7 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //	assert(City.city_owner(pcity) == pplayer);
 //      }
 //
-//      if (!can_unit_continue_current_activity(punit)) {
+//      if (!Unit.can_unit_continue_current_activity(punit)) {
 //	util.freelog(Log.LOG_ERROR, "%s at %d,%d (%s) has activity %s, " +
 //		"which it can't continue!",
 //		punit.unit_type().name,
@@ -317,16 +323,16 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //		get_activity_text(punit.activity));
 //      }
 //
-//      pcity = map_get_city(ptile);
+//      pcity = Map.map_get_city(ptile);
 //      if (pcity) {
-//	assert(pplayers_allied(City.city_owner(pcity), pplayer));
+//	assert(Player_P.pplayers_allied(City.city_owner(pcity), pplayer));
 //      }
 //
 //      assert(punit.moves_left >= 0);
 //      assert(punit.hp > 0);
 //
 //      if (punit.transported_by != -1) {
-//        transporter = find_unit_by_id(punit.transported_by);
+//        transporter = Game.find_unit_by_id(punit.transported_by);
 //        assert(transporter != null);
 //
 //	/* Make sure the transporter is on the tile. */
@@ -338,7 +344,7 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //	assert(transporter2 != null);
 //
 //        /* Also in the list of owner? */
-//        assert(Player_P.player_find_unit_by_id(get_player(transporter.owner),
+//        assert(Player_P.player_Game.find_unit_by_id(get_player(transporter.owner),
 //				      punit.transported_by) != null);
 //        assert(Map.same_pos(ptile, transporter.tile));
 //
@@ -355,10 +361,10 @@ static void real_sanity_check_city(city pcity, final String file, int line)
 //        assert(is_ground_units_transport(transporter));
 //      } else if (!pcity
 //                 && !Terrain_H.is_ocean(ptile.terrain)
-//	         && is_sailing_unit(punit)) {
+//	         && Unit.is_sailing_unit(punit)) {
 //        assert(punit.transported_by != -1);
-//        assert(!is_sailing_unit(transporter));
-//        assert(false); /* assert(is_sailing_units_transport(transporter)); */
+//        assert(!Unit.is_sailing_unit(transporter));
+//        assert(false); /* assert(Unit.is_sailing_units_transport(transporter)); */
 //      }
 //
 //      /* Check for over-full transports. */

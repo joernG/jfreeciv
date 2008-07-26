@@ -76,7 +76,7 @@ public class Advdomestic{
 //  /* Count caravans being built */
 //  for (city acity : pplayer.cities.data) {
 //    if (acity.is_building_unit
-//        && unit_type_flag(acity.currently_building, F_HELP_WONDER)
+//        && Unittype_P.unit_type_flag(acity.currently_building, F_HELP_WONDER)
 //        && (acity.shield_stock
 //	    >= Unittype_P.unit_build_shield_cost(acity.currently_building))
 //        && map_get_continent(acity.tile) == continent) {
@@ -100,7 +100,7 @@ public class Advdomestic{
 //     * to help it makes no sense) and we haven't already got enough caravans
 //     * to finish the wonder. */
 //    if (!acity.is_building_unit
-//        && is_wonder(acity.currently_building)
+//        && Improvement.is_wonder(acity.currently_building)
 //        && map_get_continent(acity.tile) == continent
 //        && acity != pcity
 //        && (build_points_left(acity)
@@ -153,13 +153,13 @@ public class Advdomestic{
 //  /* Food surplus assuming that workers and elvii are already accounted for
 //   * and properly balanced. */
 //  int est_food = pcity.food_surplus
-//                 + 2 * pcity.specialists[SP_SCIENTIST]
-//                 + 2 * pcity.specialists[SP_TAXMAN];
+//                 + 2 * pcity.specialists[specialist_type.SP_SCIENTIST]
+//                 + 2 * pcity.specialists[specialist_type.SP_TAXMAN];
 //
 //  init_choice(choice);
 //
 //  /* Find out desire for settlers (terrain improvers) */
-//  unit_type = best_role_unit(pcity, F_SETTLERS);
+//  unit_type = best_role_unit(pcity, Eunit_flag_id.F_SETTLERS);
 //
 //  if (unit_type != unittype.U_LAST
 //      && est_food > utype_food_cost(get_unit_type(unit_type), gov)) {
@@ -177,14 +177,14 @@ public class Advdomestic{
 //               want);
 //      choice.want = want;
 //      choice.type = CT_NONMIL;
-//      ai_choose_role_unit(pplayer, pcity, choice, F_SETTLERS, want);
+//      ai_choose_role_unit(pplayer, pcity, choice, Eunit_flag_id.F_SETTLERS, want);
 //    }
 //    /* Terrain improvers don't use boats (yet) */
 //  }
 //
 //  /* Find out desire for city founders */
 //  /* Basically, copied from above and adjusted. -- jjm */
-//  unit_type = best_role_unit(pcity, F_CITIES);
+//  unit_type = best_role_unit(pcity, Eunit_flag_id.F_CITIES);
 //
 //  if (unit_type != unittype.U_LAST
 //      && est_food >= utype_food_cost(get_unit_type(unit_type), gov)) {
@@ -196,7 +196,7 @@ public class Advdomestic{
 //      choice.want = want;
 //      choice.need_boat = pcity.ai.founder_boat;
 //      choice.type = CT_NONMIL;
-//      ai_choose_role_unit(pplayer, pcity, choice, F_CITIES, want);
+//      ai_choose_role_unit(pplayer, pcity, choice, Eunit_flag_id.F_CITIES, want);
 //      
 //    } else if (want < -choice.want) {
 //      /* We need boats to colonize! */

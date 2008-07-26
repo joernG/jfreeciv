@@ -227,7 +227,7 @@ public class Repodlgs{
 //  {
 //    if (tech_is_available(Game.game.player_ptr, i)
 //	&& get_invention(Game.game.player_ptr, i) != TECH_KNOWN &&
-//	&& advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
+//	&& advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST
 //	&& num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11)
 //      j++;
 //  }
@@ -247,7 +247,7 @@ public class Repodlgs{
 //      for (i = A_FIRST; i < Game.game.num_tech_types; i++)
 //      {
 //	if (get_invention(Game.game.player_ptr, i) != TECH_KNOWN &&
-//	    advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST &&
+//	    advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST &&
 //	    num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11)
 //	{
 //	  if (i == Game.game.player_ptr.ai.tech_goal)
@@ -545,7 +545,7 @@ public class Repodlgs{
 //void economy_report_dialog_update()
 //{
 //  int tax, total;
-//  static struct improvement_entry entries[B_LAST];
+//  static struct improvement_entry entries[Improvement.B_LAST];
 //  int i, entries_used = 0;
 //
 //  if (is_report_dialogs_frozen())
@@ -654,7 +654,7 @@ public class Repodlgs{
 //    upkeep_gold = util.my_snprintf( "%5d", entry.upkeep_gold);
 //    building_count = util.my_snprintf( "%5d", entry.building_count);
 //
-//    *array++ = unit_name(i);
+//    *array++ = Unittype_P.unit_name(i);
 //    *array++ = can_upgrade_unittype(Game.game.player_ptr, i) != -1 ? "*" : "-";
 //    *array++ = building_count;
 //    *array++ = active_count;
@@ -821,8 +821,7 @@ public class Repodlgs{
 //  }
 //  }
 //
-//  city_list_iterate(Game.game.player_ptr.cities, pcity)
-//  {
+//  for(city pcity : Game.game.player_ptr.cities.data){//  {
 //    if (pcity.is_building_unit &&
 //	(unit_type_exists(pcity.currently_building)))
 //      (unitarray[pcity.currently_building].building_count)++;

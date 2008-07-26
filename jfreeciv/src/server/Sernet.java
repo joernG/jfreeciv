@@ -1,5 +1,6 @@
 package server;
 
+
 public class Sernet{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -237,13 +238,13 @@ public class Sernet{
 //  lost_connection_to_client(pc);
 //  pc.close_connection();
 //}
-//
-///****************************************************************************
-//  Attempt to flush all information in the send buffers for upto 'netwait'
-//  seconds.
-//*****************************************************************************/
-//void flush_packets()
-//{
+
+/****************************************************************************
+  Attempt to flush all information in the send buffers for upto 'netwait'
+  seconds.
+*****************************************************************************/
+public static void flush_packets()
+{
 //  int i;
 //  int max_desc;
 //  fd_set writefs, exceptfs;
@@ -304,8 +305,8 @@ public class Sernet{
 //      }
 //    }
 //  }
-//}
-//
+}
+
 ///*****************************************************************************
 //Get and handle:
 //- new connections,
@@ -358,7 +359,7 @@ public class Sernet{
 //#endif /* HAVE_LIBREADLINE */
 //
 //  if(year!=Game.game.year) {
-//    if (Srv_main.server_state == RUN_GAME_STATE) year=Game.game.year;
+//    if (Srv_main.server_state == server_states.RUN_GAME_STATE) year=Game.game.year;
 //  }
 //  if (Game.game.timeout == 0) {
 //    /* Just in case someone sets timeout we keep Game.game.turn_start updated */
@@ -428,7 +429,7 @@ public class Sernet{
 //	     read_timer_seconds(timer_list_get(pconn.server.ping_timers, 0))
 //	     > Game.game.pingtimeout) || pconn.ping_time > Game.game.pingtimeout) {
 //	  /* cut mute players, except for hack-level ones */
-//	  if (pconn.access_level == ALLOW_HACK) {
+//	  if (pconn.access_level == cmdlevel_id.ALLOW_HACK) {
 //	    util.freelog(Log.LOG_NORMAL,
 //		    "ignoring ping timeout to hack-level connection %s",
 //		    pconn.conn_description());
@@ -494,7 +495,7 @@ public class Sernet{
 //      () send_server_info_to_metaserver(META_REFRESH);
 //      if(Game.game.timeout != 0
 //	&& (new Date()>Game.game.turn_start + Game.game.timeout)
-//	&& (Srv_main.server_state == RUN_GAME_STATE)){
+//	&& (Srv_main.server_state == server_states.RUN_GAME_STATE)){
 //	con_prompt_off();
 //	return 0;
 //      }
@@ -865,7 +866,7 @@ public class Sernet{
 //    connection pconn = &connections[i];
 //    pconn.used = false;
 //    conn_list_init(&pconn.self);
-//    conn_list_insert(&pconn.self, pconn);
+//    &pconn.self.foo_list_insert(pconn);
 //  }
 //#if defined(__VMS)
 //  {
@@ -1075,7 +1076,7 @@ public class Sernet{
 //  case server_states.PRE_GAME_STATE:
 //    status = util.my_snprintf( "Pregame");
 //    break;
-//  case RUN_GAME_STATE:
+//  case server_states.RUN_GAME_STATE:
 //    status = util.my_snprintf( "Running");
 //    break;
 //  case server_states.GAME_OVER_STATE:
@@ -1086,7 +1087,7 @@ public class Sernet{
 //  }
 //
 //   players = util.my_snprintf( "%d",
-//               get_num_human_and_ai_players());
+//               Game.get_num_human_and_ai_players());
 //   port = util.my_snprintf( "%d",
 //              Srv_main.srvarg.port );
 //

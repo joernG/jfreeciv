@@ -85,24 +85,24 @@ public class Aihunt{
 //              * ut.move_rate
 //              + ut.defense_strength) / MAX(UNITTYPE_COSTS(ut), 1);
 //
-//    if (unit_type_flag(i, F_CARRIER)
-//        || unit_type_flag(i, F_MISSILE_CARRIER)) {
+//    if (Unittype_P.unit_type_flag(i, F_CARRIER)
+//        || Unittype_P.unit_type_flag(i, F_MISSILE_CARRIER)) {
 //      desire += desire / 6;
 //    }
-//    if (unit_type_flag(i, F_IGTER)) {
+//    if (Unittype_P.unit_type_flag(i, F_IGTER)) {
 //      desire += desire / 2;
 //    }
-//    if (unit_type_flag(i, F_IGTIRED)) {
+//    if (Unittype_P.unit_type_flag(i, F_IGTIRED)) {
 //      desire += desire / 8;
 //    }
-//    if (unit_type_flag(i, F_PARTIAL_INVIS)) {
+//    if (Unittype_P.unit_type_flag(i, F_PARTIAL_INVIS)) {
 //      desire += desire / 4;
 //    }
-//    if (unit_type_flag(i, F_NO_LAND_ATTACK)) {
+//    if (Unittype_P.unit_type_flag(i, F_NO_LAND_ATTACK)) {
 //      desire -= desire / 4; /* less flexibility */
 //    }
 //    /* Causes continual unhappiness */
-//    if (unit_type_flag(i, F_FIELDUNIT)) {
+//    if (Unittype_P.unit_type_flag(i, F_FIELDUNIT)) {
 //      desire /= 2;
 //    }
 //
@@ -159,7 +159,7 @@ public class Aihunt{
 //              * ut.move_rate) / UNITTYPE_COSTS(ut) + 1;
 //
 //    /* Causes continual unhappiness */
-//    if (unit_type_flag(i, F_FIELDUNIT)) {
+//    if (Unittype_P.unit_type_flag(i, F_FIELDUNIT)) {
 //      desire /= 2;
 //    }
 //
@@ -209,8 +209,8 @@ public class Aihunt{
 //void ai_hunter_choice(player pplayer, city pcity,
 //                      ai_choice choice)
 //{
-//  int best_land_hunter = ai_hunter_guess_best(pcity, LAND_MOVING);
-//  int best_sea_hunter = ai_hunter_guess_best(pcity, SEA_MOVING);
+//  int best_land_hunter = ai_hunter_guess_best(pcity, unit_move_type.LAND_MOVING);
+//  int best_sea_hunter = ai_hunter_guess_best(pcity, unit_move_type.SEA_MOVING);
 //  unit hunter = ai_hunter_find(pplayer, pcity);
 //
 //  if ((best_land_hunter == -1 && best_sea_hunter == -1)
@@ -244,7 +244,7 @@ public class Aihunt{
 //  unit_type punittype = get_unit_type(punit.type);
 //
 //  if (is_barbarian(pplayer)
-//      || !(is_sailing_unit(punit) || is_ground_unit(punit))
+//      || !(Unit.is_sailing_unit(punit) || is_ground_unit(punit))
 //      || punittype.move_rate < 2 * Unit_H.SINGLE_MOVE
 //      || ATTACK_POWER(punit) <= 1
 //      || punit.owner != pplayer.player_no) {
@@ -280,9 +280,9 @@ public class Aihunt{
 //
 //      if (ptile.city
 //          || TEST_BIT(target.ai.hunted, pplayer.player_no)
-//          || (!Terrain_H.is_ocean(ptile.terrain) && is_sailing_unit(punit))
-//          || (!is_sailing_unit(target) && is_sailing_unit(punit))
-//          || (is_sailing_unit(target) && !is_sailing_unit(punit))
+//          || (!Terrain_H.is_ocean(ptile.terrain) && Unit.is_sailing_unit(punit))
+//          || (!Unit.is_sailing_unit(target) && Unit.is_sailing_unit(punit))
+//          || (Unit.is_sailing_unit(target) && !Unit.is_sailing_unit(punit))
 //          || !goto_is_sane(punit, target.tile, true)) {
 //        /* Can't hunt this one. */
 //        continue;
@@ -298,7 +298,7 @@ public class Aihunt{
 //	       target.unit_type().name, TILE_XY(target.tile),
 //               target.id, dist1, dist2);
 //      /* We can't attack units stationary in cities. */
-//      if (map_get_city(target.tile) 
+//      if (Map.map_get_city(target.tile) 
 //          && (dist2 == 0 || dist1 == dist2)) {
 //        continue;
 //      }
@@ -314,7 +314,7 @@ public class Aihunt{
 //      }
 //      for (unit sucker : ptile.units.data) {
 //        stackthreat += ATTACK_POWER(sucker);
-//        if (unit_flag(sucker, F_DIPLOMAT)) {
+//        if (unit_flag(sucker, Eunit_flag_id.F_DIPLOMAT)) {
 //          stackthreat += 500;
 //        }
 //        stackcost += sucker.unit_type().build_cost;
@@ -382,7 +382,7 @@ public class Aihunt{
 //        if (pos.total_MC > missile.moves_left / Unit_H.SINGLE_MOVE) {
 //          break;
 //        }
-//        if (map_get_city(pos.tile)
+//        if (Map.map_get_city(pos.tile)
 //            || !can_unit_attack_tile(punit, pos.tile)) {
 //          continue;
 //        }
@@ -403,8 +403,8 @@ public class Aihunt{
 //          }
 //          if (ut.move_rate + victim.moves_left > pos.total_MC
 //              && ATTACK_POWER(victim) > DEFENCE_POWER(punit)
-//              && (ut.move_type == SEA_MOVING
-//                  || ut.move_type == AIR_MOVING)) {
+//              && (ut.move_type == unit_move_type.SEA_MOVING
+//                  || ut.move_type == unit_move_type.AIR_MOVING)) {
 //            /* Threat to our carrier. Kill it. */
 //            sucker = victim;
 //            UNIT_LOG(LOGLEVEL_HUNT, missile, "found aux target %d(%d, %d)",
@@ -418,15 +418,15 @@ public class Aihunt{
 //      } pf_iterator_end;
 //      pf_destroy_map(map);
 //      if (sucker) {
-//        if (find_unit_by_id(missile.transported_by)) {
+//        if (Game.find_unit_by_id(missile.transported_by)) {
 //          unload_unit_from_transporter(missile);
 //        }
 //        ai_unit_goto(missile, sucker.tile);
-//        sucker = find_unit_by_id(target_sanity); /* Sanity */
+//        sucker = Game.find_unit_by_id(target_sanity); /* Sanity */
 //        if (sucker && is_tiles_adjacent(sucker.tile, missile.tile)) {
 //          ai_unit_attack(missile, sucker.tile);
 //        }
-//        target = find_unit_by_id(target_sanity); /* Sanity */
+//        target = Game.find_unit_by_id(target_sanity); /* Sanity */
 //        break; /* try next missile, if any */
 //      }
 //    } /* if */
@@ -442,7 +442,7 @@ public class Aihunt{
 //**************************************************************************/
 //boolean ai_hunter_manage(player pplayer, unit punit)
 //{
-//  unit target = find_unit_by_id(punit.ai.target);
+//  unit target = Game.find_unit_by_id(punit.ai.target);
 //  int sanity_own = punit.id;
 //  int sanity_target;
 //
@@ -452,7 +452,7 @@ public class Aihunt{
 //  /* Check that target is valid. */
 //  if (!target
 //      || !goto_is_sane(punit, target.tile, true)
-//      || map_get_city(target.tile)
+//      || Map.map_get_city(target.tile)
 //      || !is_player_dangerous(pplayer, target.unit_owner())) {
 //    UNIT_LOG(LOGLEVEL_HUNT, punit, "target vanished");
 //    ai_unit_new_role(punit, AIUNIT_NONE, null);
@@ -464,7 +464,7 @@ public class Aihunt{
 //
 //  /* Check if we can nuke it */
 //  ai_hunter_try_launch(pplayer, punit, target);
-//  target = find_unit_by_id(sanity_target);
+//  target = Game.find_unit_by_id(sanity_target);
 //  if (!target){
 //    UNIT_LOG(LOGLEVEL_HUNT, punit, "mission accomplished");
 //    ai_unit_new_role(punit, AIUNIT_NONE, null);
@@ -478,7 +478,7 @@ public class Aihunt{
 //
 //  /* Check if we can nuke it now */
 //  ai_hunter_try_launch(pplayer, punit, target);
-//  target = find_unit_by_id(sanity_target);
+//  target = Game.find_unit_by_id(sanity_target);
 //  if (!target){
 //    UNIT_LOG(LOGLEVEL_HUNT, punit, "mission accomplished");
 //    ai_unit_new_role(punit, AIUNIT_NONE, null);
@@ -488,10 +488,10 @@ public class Aihunt{
 //  /* If we are adjacent - RAMMING SPEED! */
 //  if (is_tiles_adjacent(punit.tile, target.tile)) {
 //    ai_unit_attack(punit, target.tile);
-//    target = find_unit_by_id(sanity_target);
+//    target = Game.find_unit_by_id(sanity_target);
 //  }
 //
-//  if (!find_unit_by_id(sanity_own)) {
+//  if (!Game.find_unit_by_id(sanity_own)) {
 //    return true;
 //  }
 //  if (!target) {

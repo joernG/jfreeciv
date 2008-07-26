@@ -539,7 +539,7 @@ public class Plrdlg{
 //	gtk_list_store_set(store, it, k, p, -1);
 //	break;
 //      case COL_FLAG:
-//        pixbuf = get_flag(get_nation_by_plr(plr));
+//        pixbuf = get_flag(Nation.get_nation_by_plr(plr));
 //        gtk_list_store_set(store, it, k, pixbuf, -1);
 //        g_object_unref(pixbuf);
 //	break;

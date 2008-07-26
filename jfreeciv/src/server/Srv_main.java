@@ -23,7 +23,7 @@ public class Srv_main{
 
 	/* server state information */
 public static server_states server_state = server_states.PRE_GAME_STATE;
-boolean nocity_send = false;
+public static boolean nocity_send = false;
 
 /* this global is checked deep down the netcode. 
    packets handling functions can set it to none-zero, to
@@ -175,7 +175,7 @@ public void srv_init()
 //      continue;
 //    }
 //    for(player aplayer: Game.game.players){
-//      if (!pplayers_allied(pplayer, aplayer) && aplayer.is_alive) {
+//      if (!Player_P.pplayers_allied(pplayer, aplayer) && aplayer.is_alive) {
 //        all_allied = false;
 //        break;
 //      }
@@ -311,13 +311,13 @@ public void srv_init()
 //      if(pdiplstate.type == DS_CEASEFIRE) {
 //	switch(--pdiplstate.turns_left) {
 //	case 1:
-//	  notify_player(player1,
+//	  Plrhand.notify_player(player1,
 //			("Game: Concerned citizens point " +
 //  			  "out that the cease-fire with %s will run out soon."),
 //			player2.name);
 //  	  break;
 //  	case 0:
-//	  notify_player(player1,
+//	  Plrhand.notify_player(player1,
 //  			("Game: The cease-fire with %s has " +
 //  			  "run out. You are now neutral towards the %s."),
 //			player2.name,
@@ -355,7 +355,7 @@ public void srv_init()
 //  shuffled_for(player pplayer: Game.game.players){
 //    if (pplayer.ai.control) {
 //      ai_do_first_activities(pplayer);
-//      flush_packets();			/* AIs can be such spammers... */
+//      Sernet.flush_packets();			/* AIs can be such spammers... */
 //    }
 //  } shuffled_players_iterate_end;
 //  kill_dying_players();
@@ -419,7 +419,7 @@ public void srv_init()
 //    send_player_cities(pplayer);
 //  }
 //
-//  flush_packets();  /* to curb major city spam */
+//  Sernet.flush_packets();  /* to curb major city spam */
 //  Connection.conn_list_do_unbuffer(&Game.game.game_connections);
 //
 //  shuffled_for(player pplayer: Game.game.players){
@@ -488,7 +488,7 @@ public void srv_init()
 //    player_restore_units(pplayer);
 //    update_city_activities(pplayer);
 //    pplayer.research.changed_from=-1;
-//    flush_packets();
+//    Sernet.flush_packets();
 //  } shuffled_players_iterate_end;
 //
 //  kill_dying_players();
@@ -499,7 +499,7 @@ public void srv_init()
 //    send_player_cities(pplayer);
 //    ai_data_turn_done(pplayer);
 //  }
-//  flush_packets();  /* to curb major city spam */
+//  Sernet.flush_packets();  /* to curb major city spam */
 //
 //  do_reveal_effects();
 //  do_have_embassies_effect();
@@ -573,7 +573,7 @@ public void srv_init()
 //  /* Unit end of turn activities */
 //  shuffled_for(player pplayer: Game.game.players){
 //    update_unit_activities(pplayer); /* major network traffic */
-//    flush_packets();
+//    Sernet.flush_packets();
 //    pplayer.turn_done = false;
 //  } shuffled_players_iterate_end;
 //}
@@ -698,7 +698,7 @@ public void srv_init()
 //{
 //  Speclists<Connection> dest = &pconn.self;
 //  
-//  if (Srv_main.server_state != RUN_GAME_STATE && Srv_main.server_state != server_states.GAME_OVER_STATE
+//  if (Srv_main.server_state != server_states.RUN_GAME_STATE && Srv_main.server_state != server_states.GAME_OVER_STATE
 //      && type != REPORT_SERVER_OPTIONS1 && type != REPORT_SERVER_OPTIONS2) {
 //    util.freelog(Log.LOG_ERROR, "Got a report request %d before Game.game start", type);
 //    return;
@@ -733,15 +733,16 @@ public void srv_init()
 //{
 //  used_ids[id/8]&= 0xff ^ (1<<(id%8));
 //}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//static boolean is_id_allocated(int id)
-//{
+
+/**************************************************************************
+...
+**************************************************************************/
+static boolean is_id_allocated(int id)
+{
 //  return TEST_BIT(used_ids[id / 8], id % 8);
-//}
-//
+	return false;
+}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -749,19 +750,19 @@ public void srv_init()
 //{
 //  used_ids[id/8]|= (1<<(id%8));
 //}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//
-//int get_next_id_number()
-//{
-//  while (is_id_allocated(++global_id_counter) || global_id_counter == 0) {
-//    /* nothing */
-//  }
-//  return global_id_counter;
-//}
-//
+
+/**************************************************************************
+...
+**************************************************************************/
+
+static int get_next_id_number()
+{
+  while (is_id_allocated(++global_id_counter) || global_id_counter == 0) {
+    /* nothing */
+  }
+  return global_id_counter;
+}
+
 ///**************************************************************************
 //Returns 0 if connection should be closed (because the clients was
 //rejected). Returns 1 else.
@@ -860,7 +861,7 @@ public void srv_init()
 //    return true;
 //  }
 //
-//  if (Srv_main.server_state != RUN_GAME_STATE
+//  if (Srv_main.server_state != server_states.RUN_GAME_STATE
 //      && type != PACKET_NATION_SELECT_REQ
 //      && type != PACKET_CONN_PONG
 //      && type != PACKET_REPORT_REQ) {
@@ -871,7 +872,7 @@ public void srv_init()
 //			  "in server_states.GAME_OVER_STATE", type);
 //    } else {
 //      util.freelog(Log.LOG_ERROR, "got a packet of type %d " +
-//	                 "outside RUN_GAME_STATE", type);
+//	                 "outside server_states.RUN_GAME_STATE", type);
 //    }
 //    return true;
 //  }
@@ -893,7 +894,7 @@ public void srv_init()
 //	    type, pconn.conn_description());
 //  }
 //
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    kill_dying_players();
 //  }
 //
@@ -931,7 +932,7 @@ public void srv_init()
 //static boolean is_default_nation_name(final String name,
 //				   int nation_id)
 //{
-//  final nation_type nation = get_nation_by_idx(nation_id);
+//  final nation_type nation = Nation.get_nation_by_idx(nation_id);
 //
 //  int choice;
 //
@@ -1003,7 +1004,7 @@ public void srv_init()
 //    /* FIXME: is there a better way to determine if a *player* has hack
 //     * access? */
 //  if (!util.isLetter(name)
-//      && (!pconn || pconn.access_level != ALLOW_HACK)) {
+//      && (!pconn || pconn.access_level != cmdlevel_id.ALLOW_HACK)) {
 //    if (error_buf) {
 //      error_buf = String.format ("Please choose a name containing " +
 //				      "only ASCII characters."));
@@ -1042,7 +1043,7 @@ public void srv_init()
 //
 //  if (!is_allowed_player_name(pplayer, nation_no, name,
 //			      message, sizeof(message))) {
-//    notify_player(pplayer, "%s", message);
+//    Plrhand.notify_player(pplayer, "%s", message);
 //    send_select_nation(pplayer);
 //    return;
 //  }
@@ -1065,7 +1066,7 @@ public void srv_init()
 //  nation_used_count = 0;
 //
 //  for(player other_player: Game.game.players){
-//    if (other_player.nation == NO_NATION_SELECTED) {
+//    if (other_player.nation == Nation_H.NO_NATION_SELECTED) {
 //      send_select_nation(other_player);
 //    } else {
 //      nation_used_count++;	/* count used nations */
@@ -1077,10 +1078,10 @@ public void srv_init()
 //  /* if there's no nation left, reject remaining players, sorry */
 //  if( nation_used_count == Game.game.playable_nation_count ) {   /* barb */
 //    for(player other_player: Game.game.players){
-//      if (other_player.nation == NO_NATION_SELECTED) {
+//      if (other_player.nation == Nation_H.NO_NATION_SELECTED) {
 //	util.freelog(Log.LOG_NORMAL, "No nations left: Removing player %s.",
 //		other_player.name);
-//	notify_player(other_player,
+//	Plrhand.notify_player(other_player,
 //		      "Game: Sorry, there are no nations left.");
 //	server_remove_player(other_player);
 //      }
@@ -1116,11 +1117,11 @@ public void srv_init()
 //  struct nation_type* nation;
 //
 //  for(player pplayer: Game.game.players){
-//    if (pplayer.nation == NO_NATION_SELECTED) {
+//    if (pplayer.nation == Nation_H.NO_NATION_SELECTED) {
 //      /* still undecided */
 //      continue;  
 //    }
-//    nation = get_nation_by_idx(pplayer.nation);
+//    nation = Nation.get_nation_by_idx(pplayer.nation);
 //    assert(nation.class != null);
 //    if (class == null) {
 //       /* Set the class. */
@@ -1145,7 +1146,7 @@ public void srv_init()
 //
 //  /* Determine which nations are available. */
 //  for (i = 0; i < Game.game.playable_nation_count; i++) {
-//    nation_type nation = get_nation_by_idx(i);
+//    nation_type nation = Nation.get_nation_by_idx(i);
 //
 //    if (nations_available[i]
 //	&& (class == null || nation.class.equals(class))) {
@@ -1162,7 +1163,7 @@ public void srv_init()
 //    }
 //
 //    /* Or else return an invalid value. */
-//    return NO_NATION_SELECTED;
+//    return Nation_H.NO_NATION_SELECTED;
 //  }
 //
 //  /* Then pick one. */
@@ -1194,7 +1195,7 @@ public void srv_init()
 //static void generate_ai_players()
 //{
 //  int nation;
-//  char player_name[MAX_LEN_NAME];
+//  String player_name;
 //  player pplayer;
 //  int i, old_nplayers;
 //  char* common_class;
@@ -1206,7 +1207,7 @@ public void srv_init()
 //  for (i=0; i<Game.game.nplayers; i++) {
 //    pplayer = &Game.game.players[i];
 //    
-//    if (pplayer.nation != NO_NATION_SELECTED) {
+//    if (pplayer.nation != Nation_H.NO_NATION_SELECTED) {
 //      continue;
 //    }
 //
@@ -1221,12 +1222,12 @@ public void srv_init()
 //	break;
 //      }
 //    }
-//    if (pplayer.nation != NO_NATION_SELECTED) {
+//    if (pplayer.nation != Nation_H.NO_NATION_SELECTED) {
 //      continue;
 //    }
 //
 //    nation = select_random_nation(common_class);
-//    if (nation == NO_NATION_SELECTED) {
+//    if (nation == Nation_H.NO_NATION_SELECTED) {
 //      util.freelog(Log.LOG_NORMAL,
 //	      "Ran out of nations.  AI controlled player %s not created.",
 //	      pplayer.name);
@@ -1288,7 +1289,7 @@ public void srv_init()
 //
 //  for(;Game.game.nplayers < Game.game.aifill + i;) {
 //    nation = select_random_nation(common_class);
-//    assert(nation != NO_NATION_SELECTED);
+//    assert(nation != Nation_H.NO_NATION_SELECTED);
 //    mark_nation_as_used(nation);
 //    pick_ai_player_name(nation, player_name);
 //
@@ -1394,7 +1395,7 @@ public static void pick_ai_player_name(int nation, String newname)
 //                    pplayer.name);
 //
 //  for(player other_player: Game.game.players){
-//    notify_player(other_player,
+//    Plrhand.notify_player(other_player,
 //		  "Game: %s rules the %s.", pplayer.name,
 //		  Nation.get_nation_name_plural(pplayer.nation));
 //  }
@@ -1422,7 +1423,7 @@ public static void pick_ai_player_name(int nation, String newname)
 //   */
 //  lsend_packet_freeze_hint(&Game.game.game_connections);
 //
-//  while(Srv_main.server_state==RUN_GAME_STATE) {
+//  while(Srv_main.server_state==server_states.RUN_GAME_STATE) {
 //    /* The beginning of a turn.
 //     *
 //     * We have to initialize data as well as do some actions.  However when
@@ -1613,7 +1614,7 @@ public void srv_main()
 //    start_nations = true;
 //
 //    for (i = 0; i < Map.map.num_start_positions; i++) {
-//      if (Map.map.start_positions[i].nation == NO_NATION_SELECTED) {
+//      if (Map.map.start_positions[i].nation == Nation_H.NO_NATION_SELECTED) {
 //	start_nations = false;
 //	break;
 //      }
@@ -1648,12 +1649,12 @@ public void srv_main()
 //   * AI players may not yet have a nation; these will be selected
 //   * in generate_ai_players() later
 //   */
-//  Srv_main.server_state = RUN_GAME_STATE;
+//  Srv_main.server_state = server_states.RUN_GAME_STATE;
 //  for(player pplayer: Game.game.players){
 //    ai_data_analyze_rulesets(pplayer);
 //    if (pplayer.is_observer) {
 //      pplayer.nation = OBSERVER_NATION;
-//    } else if (pplayer.nation == NO_NATION_SELECTED && !pplayer.ai.control) {
+//    } else if (pplayer.nation == Nation_H.NO_NATION_SELECTED && !pplayer.ai.control) {
 //      send_select_nation(pplayer);
 //      Srv_main.server_state = SELECT_RACES_STATE;
 //    }
@@ -1665,7 +1666,7 @@ public void srv_main()
 //    sniff_packets();
 //
 //    for(player pplayer: Game.game.players){
-//      if (pplayer.nation == NO_NATION_SELECTED && !pplayer.ai.control) {
+//      if (pplayer.nation == Nation_H.NO_NATION_SELECTED && !pplayer.ai.control) {
 //	flag = true;
 //	break;
 //      }
@@ -1673,7 +1674,7 @@ public void srv_main()
 //
 //    if (!flag) {
 //      if (Game.game.nplayers > 0) {
-//	Srv_main.server_state = RUN_GAME_STATE;
+//	Srv_main.server_state = server_states.RUN_GAME_STATE;
 //      } else {
 //	con_write(Erfc_status.C_COMMENT,
 //		  "Last player has disconnected: will need to restart.");
@@ -1708,7 +1709,7 @@ public void srv_main()
 //  Gamelog.gamelog(GAMELOG_MAP);
 //  /* start the Game.game */
 //
-//  Srv_main.server_state = RUN_GAME_STATE;
+//  Srv_main.server_state = server_states.RUN_GAME_STATE;
 //  () send_server_info_to_metaserver(META_INFO);
 //
 //  if(Game.game.is_new_game) {

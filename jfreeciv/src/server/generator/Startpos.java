@@ -56,7 +56,7 @@ public class Startpos{
 //  old_terrain = ptile.terrain;
 //  old_special = ptile.special;
 //
-//  map_set_special(ptile, Terrain_H.S_ROAD);
+//  Map.map_set_special(ptile, Terrain_H.S_ROAD);
 //  map_irrigate_tile(ptile);
 //  irrig_bonus = (get_food_tile(ptile)
 //		 + get_shields_tile(ptile)
@@ -64,7 +64,7 @@ public class Startpos{
 //
 //  ptile.terrain = old_terrain;
 //  ptile.special = old_special;
-//  map_set_special(ptile, Terrain_H.S_ROAD);
+//  Map.map_set_special(ptile, Terrain_H.S_ROAD);
 //  map_mine_tile(ptile);
 //  mine_bonus = (get_food_tile(ptile)
 //		+ get_shields_tile(ptile)
@@ -366,7 +366,7 @@ public class Startpos{
 //    if ((ptile = rand_map_pos_filtered(&data, is_valid_start_pos))) {
 //      islands[islands_index[(int) map_get_continent(ptile)]].starters--;
 //      Map.map.start_positions[data.count].tile = ptile;
-//      Map.map.start_positions[data.count].nation = NO_NATION_SELECTED;
+//      Map.map.start_positions[data.count].nation = Nation_H.NO_NATION_SELECTED;
 //      util.freelog(Log.LOG_DEBUG,
 //	      "Adding %d,%d as starting position %d, %d gooutil.dies on islands.",
 //	      TILE_XY(ptile), data.count,

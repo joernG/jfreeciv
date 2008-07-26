@@ -66,8 +66,8 @@ public class Idex{
 //   Register a city into idex, with current pcity.id.
 //   Call this when pcity created.
 //***************************************************************************/
-//void idex_register_city(city pcity)
-//{
+public static void idex_register_city(city pcity)
+{
 //  city old = (city )
 //    hash_replace(idex_city_hash, &pcity.id, pcity);
 //  if (old) {
@@ -79,7 +79,7 @@ public class Idex{
 //      util.die("byebye");
 //    }
 //  }
-//}
+}
 //
 ///**************************************************************************
 //   Register a unit into idex, with current punit.id.
@@ -92,8 +92,8 @@ public class Idex{
 //  if (old) {
 //    /* error */
 //    util.freelog(LOG_IDEX_ERR, "IDEX: unit collision: new %d %p %s, old %d %p %s",
-//	    punit.id, (void*)punit, unit_name(punit.type),
-//	    old.id, (void*)old, unit_name(old.type));
+//	    punit.id, (void*)punit, Unittype_P.unit_name(punit.type),
+//	    old.id, (void*)old, Unittype_P.unit_name(old.type));
 //    if (IDEX_DIE) {
 //      util.die("byebye");
 //    }
@@ -138,7 +138,7 @@ public class Idex{
 //  if (!old) {
 //    /* error */
 //    util.freelog(LOG_IDEX_ERR, "IDEX: unit unreg missing: %d %p %s",
-//	    punit.id, (void*)punit, unit_name(punit.type));
+//	    punit.id, (void*)punit, Unittype_P.unit_name(punit.type));
 //    if (IDEX_DIE) {
 //      util.die("byebye");
 //    }
@@ -146,8 +146,8 @@ public class Idex{
 //    /* error */
 //    util.freelog(LOG_IDEX_ERR,
 //	    "IDEX: unit unreg mismatch: unreg %d %p %s, old %d %p %s",
-//	    punit.id, (void*)punit, unit_name(punit.type),
-//	    old.id, (void*)old, unit_name(old.type));
+//	    punit.id, (void*)punit, Unittype_P.unit_name(punit.type),
+//	    old.id, (void*)old, Unittype_P.unit_name(old.type));
 //    if (IDEX_DIE) {
 //      util.die("byebye");
 //    }

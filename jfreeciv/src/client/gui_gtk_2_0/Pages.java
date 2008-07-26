@@ -400,7 +400,7 @@ public class Pages{
 //      clear_network_statusbar();
 //      gtk_label_set_text(GTK_LABEL(statusbar), text);
 //    } else {
-//      g_queue_push_tail(statusbar_queue, mystrdup(text));
+//      g_queue_push_tail(statusbar_queue, (text));
 //    }
 //  }
 //}

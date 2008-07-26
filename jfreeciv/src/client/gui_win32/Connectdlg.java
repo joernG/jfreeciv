@@ -776,7 +776,7 @@ public class Connectdlg{
 //      GetCurrentDirectory(MAX_PATH, saved_games_dirname);
 //      SetCurrentDirectory(dirname);
 //
-//      current_filename = mystrdup(ofn.lpstrFile);
+//      current_filename = (ofn.lpstrFile);
 //
 //      send_save_game(current_filename);
 //    } else {
@@ -793,7 +793,7 @@ public class Connectdlg{
 //      GetCurrentDirectory(MAX_PATH, saved_games_dirname);
 //      SetCurrentDirectory(dirname);
 //
-//      current_filename = mystrdup(ofn.lpstrFile);
+//      current_filename = (ofn.lpstrFile);
 //
 //      cmd = util.my_snprintf( "/load %s", ofn.lpstrFile);
 //      send_chat(cmd);

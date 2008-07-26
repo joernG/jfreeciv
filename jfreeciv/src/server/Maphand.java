@@ -1,7 +1,12 @@
 package server;
 
+import port.util;
+import server.maphand.player_tile;
+import utility.Speclists;
+
 import common.Connection;
 import common.Game;
+import common.city.city;
 import common.map.tile;
 import common.player.player;
 
@@ -39,7 +44,7 @@ public class Maphand{
 //
 //#include "citytools.h"
 //#include "cityturn.h"
-//#include "plrhand.h"           /* notify_player */
+//#include "plrhand.h"           /* Plrhand.notify_player */
 //#include "sernet.h"
 //#include "srv_main.h"
 //#include "unithand.h"
@@ -184,25 +189,14 @@ public class Maphand{
 //	  Map.map.num_continents, Map.map.num_oceans);
 //}
 //
-//static void player_tile_init(tile ptile, player pplayer);
-//static void give_tile_info_from_player_to_player(player pfrom,
-//						 player pdest,
-//						 tile ptile);
-//static void send_tile_info_always(player pplayer,
-//				  Speclists<Connection> dest, tile ptile);
-//static void shared_vision_change_seen(tile ptile, player pplayer, int change);
-//static int map_get_seen(final tile ptile, player pplayer);
-//static void map_change_own_seen(tile ptile, player pplayer,
-//				int change);
-//
 ///**************************************************************************
 //Used only in global_warming() and nuclear_winter() below.
 //**************************************************************************/
 //static boolean is_terrain_ecologically_wet(tile ptile)
 //{
-//  return (Map.map_has_special(ptile, S_RIVER)
-//	  || Terrain_H.is_ocean_near_tile(ptile)
-//	  || is_special_near_tile(ptile, S_RIVER));
+//  return (Map.map_has_special(ptile, Terrain_H.S_RIVER)
+//	  || Terrain.is_terrain_flag_near_tile(ptile)
+//	  || is_special_near_tile(ptile, Terrain_H.S_RIVER));
 //}
 //
 ///**************************************************************************
@@ -226,13 +220,13 @@ public class Maphand{
 //    } else {
 //      new = get_tile_type(old).warmer_drier_result;
 //    }
-//    if (new != T_NONE && old != new) {
+//    if (new != Terrain_H.T_NONE && old != new) {
 //      effect--;
 //      change_terrain(ptile, new);
 //      update_tile_knowledge(ptile);
 //      for (unit punit : ptile.units.data) {
-//	if (!can_unit_continue_current_activity(punit)) {
-//	  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//	if (!Unit.can_unit_continue_current_activity(punit)) {
+//	  Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //	}
 //      } }
 //    } else if (old == new) {
@@ -243,7 +237,7 @@ public class Maphand{
 //
 //  Plrhand.notify_player_ex(null, null, E_GLOBAL_ECO,
 //		   "Game: Global warming has occurred!");
-//  notify_player(null, ("Game: Coastlines have been flooded and vast " +
+//  Plrhand.notify_player(null, ("Game: Coastlines have been flooded and vast " +
 //			"ranges of grassland have become deserts."));
 //}
 //
@@ -268,13 +262,13 @@ public class Maphand{
 //    } else {
 //      new = get_tile_type(old).cooler_drier_result;
 //    }
-//    if (new != T_NONE && old != new) {
+//    if (new != Terrain_H.T_NONE && old != new) {
 //      effect--;
 //      change_terrain(ptile, new);
 //      update_tile_knowledge(ptile);
 //      for (unit punit : ptile.units.data) {
-//	if (!can_unit_continue_current_activity(punit)) {
-//	  handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
+//	if (!Unit.can_unit_continue_current_activity(punit)) {
+//	  Unithand.handle_unit_activity_request(punit, unit_activity.ACTIVITY_IDLE);
 //	}
 //      } }
 //    } else if (old == new) {
@@ -285,7 +279,7 @@ public class Maphand{
 //
 //  Plrhand.notify_player_ex(null, null, E_GLOBAL_ECO,
 //		   "Game: Nuclear winter has occurred!");
-//  notify_player(null, ("Game: Wetlands have dried up and vast " +
+//  Plrhand.notify_player(null, ("Game: Wetlands have dried up and vast " +
 //			"ranges of grassland have become tundra."));
 //}
 //
@@ -298,20 +292,20 @@ public class Maphand{
 //***************************************************************/
 //void upgrade_city_rails(player pplayer, boolean discovery)
 //{
-//  if (!(terrain_control.may_road)) {
+//  if (!(Map.terrain_control.may_road)) {
 //    return;
 //  }
 //
 //  Connection.conn_list_do_buffer(&pplayer.connections);
 //
 //  if (discovery) {
-//    notify_player(pplayer,
+//    Plrhand.notify_player(pplayer,
 //		  ("Game: New hope sweeps like fire through the country as " +
 //		    "the discovery of railroad is announced.\n" +
 //		    "      Workers spontaneously gather and upgrade all " +
 //		    "cities with railroads."));
 //  } else {
-//    notify_player(pplayer,
+//    Plrhand.notify_player(pplayer,
 //		  ("Game: The people are pleased to hear that your " +
 //		    "scientists finally know about railroads.\n" +
 //		    "      Workers spontaneously gather and upgrade all " +
@@ -319,7 +313,7 @@ public class Maphand{
 //  }
 //  
 //  for (city pcity : pplayer.cities.data) {
-//    map_set_special(pcity.tile, Terrain_H.S_RAILROAD);
+//    Map.map_set_special(pcity.tile, Terrain_H.S_RAILROAD);
 //    update_tile_knowledge(pcity.tile);
 //  }
 //  }
@@ -327,38 +321,39 @@ public class Maphand{
 //  Connection.conn_list_do_unbuffer(&pplayer.connections);
 //}
 //
-///**************************************************************************
-//Return true iff the player me really gives shared vision to player them.
-//**************************************************************************/
-//static boolean really_gives_vision(player me, player them)
-//{
+/**************************************************************************
+Return true iff the player me really gives shared vision to player them.
+**************************************************************************/
+static boolean really_gives_vision(player me, player them)
+{
 //  return TEST_BIT(me.really_gives_vision, them.player_no);
-//}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//static void buffer_shared_vision(player pplayer)
-//{
-//  for(player pplayer2: Game.game.players){
-//    if (really_gives_vision(pplayer, pplayer2))
-//      Connection.conn_list_do_buffer(&pplayer2.connections);
-//  }
-//  Connection.conn_list_do_buffer(&pplayer.connections);
-//}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//static void unbuffer_shared_vision(player pplayer)
-//{
-//  for(player pplayer2: Game.game.players){
-//    if (really_gives_vision(pplayer, pplayer2))
-//      Connection.conn_list_do_unbuffer(&pplayer2.connections);
-//  }
-//  Connection.conn_list_do_unbuffer(&pplayer.connections);
-//}
-//
+	return false;
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+static void buffer_shared_vision(player pplayer)
+{
+  for(player pplayer2: Game.game.players){
+    if (really_gives_vision(pplayer, pplayer2))
+      Connection.conn_list_do_buffer(pplayer2.connections);
+  }
+  Connection.conn_list_do_buffer(pplayer.connections);
+}
+
+/**************************************************************************
+...
+ **************************************************************************/
+static void unbuffer_shared_vision(player pplayer)
+{
+	for(player pplayer2: Game.game.players){
+		if (really_gives_vision(pplayer, pplayer2))
+			Connection.conn_list_do_unbuffer(pplayer2.connections);
+	}
+	Connection.conn_list_do_unbuffer(pplayer.connections);
+}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -388,15 +383,15 @@ public class Maphand{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//void give_citymap_from_player_to_player(city pcity,
-//					player pfrom, player pdest)
-//{
+public static void give_citymap_from_player_to_player(city pcity,
+					player pfrom, player pdest)
+{
 //  buffer_shared_vision(pdest);
 //  map_city_radius_iterate(pcity.tile, ptile) {
 //    give_tile_info_from_player_to_player(pfrom, pdest, ptile);
 //  } map_city_radius_iterate_end;
 //  unbuffer_shared_vision(pdest);
-//}
+}
 //
 ///**************************************************************************
 //  Send all tiles known to specified clients.
@@ -422,7 +417,7 @@ public class Maphand{
 //    tiles_sent++;
 //    if ((tiles_sent % Map.map.xsize) == 0) {
 //      Connection.conn_list_do_unbuffer(dest);
-//      flush_packets();
+//      Sernet.flush_packets();
 //      Connection.conn_list_do_buffer(dest);
 //    }
 //
@@ -440,7 +435,7 @@ public class Maphand{
 //  }
 //
 //  Connection.conn_list_do_unbuffer(dest);
-//  flush_packets();
+//  Sernet.flush_packets();
 //}
 //
 ///**************************************************************************
@@ -451,8 +446,8 @@ public class Maphand{
 //  Note that this function does not update the playermap.  For that call
 //  update_tile_knowledge().
 //**************************************************************************/
-//void send_tile_info(Speclists<Connection> dest, tile ptile)
-//{
+static void send_tile_info(Speclists<Connection> dest, tile ptile)
+{
 //  struct packet_tile_info info;
 //
 //  if (dest==null) dest = &Game.game.game_connections;
@@ -488,8 +483,8 @@ public class Maphand{
 //      send_packet_tile_info(pconn, &info);
 //    }
 //  }
-//  }
-//}
+//  
+}
 //
 ///**************************************************************************
 //  Send the tile information, as viewed by pplayer, to all specified
@@ -567,16 +562,16 @@ public class Maphand{
 //  map_get_player_tile(ptile, pplayer).pending_seen += 1;
 //}
 //
-///**************************************************************************
-//...
-//**************************************************************************/
-//static void decrement_pending_seen(player pplayer, tile ptile)
-//{
-//  player_tile plr_tile = map_get_player_tile(ptile, pplayer);
-//  assert(plr_tile.pending_seen != 0);
-//  plr_tile.pending_seen -= 1;
-//}
-//
+/**************************************************************************
+...
+ **************************************************************************/
+static void decrement_pending_seen(player pplayer, tile ptile)
+{
+	player_tile plr_tile = map_get_player_tile(ptile, pplayer);
+	assert(plr_tile.pending_seen != 0);
+	plr_tile.pending_seen -= 1;
+}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -659,14 +654,14 @@ public class Maphand{
 //
 //  /* discover cities */ 
 //  reality_check_city(pplayer, ptile);
-//  if ((pcity=map_get_city(ptile)))
+//  if ((pcity=Map.map_get_city(ptile)))
 //    Citytools.send_city_info(pplayer, pcity);
 //
 //  /* If the tile was not known before we need to refresh the cities that
 //     can use the tile. */
 //  if (!old_known) {
 //    map_city_radius_iterate(ptile, tile1) {
-//      pcity = map_get_city(tile1);
+//      pcity = Map.map_get_city(tile1);
 //      if (pcity && City.city_owner(pcity) == pplayer) {
 //	update_city_tile_status_map(pcity, ptile);
 //      }
@@ -680,8 +675,8 @@ public class Maphand{
 //  sidelength 1+2*len, ie length 1 is normal sightrange for a unit.
 //  pplayer may not be null.
 //**************************************************************************/
-//void unfog_area(player pplayer, tile ptile, int len)
-//{
+public static void unfog_area(player pplayer, tile ptile, int len)
+{
 //  /* Did the tile just become visible?
 //     - send info about units and cities and the tile itself */
 //  buffer_shared_vision(pplayer);
@@ -709,57 +704,57 @@ public class Maphand{
 //
 //  reveal_pending_seen(pplayer, ptile, len);
 //  unbuffer_shared_vision(pplayer);
-//}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//static void really_fog_area(player pplayer, tile ptile)
-//{
+}
+
+/**************************************************************************
+...
+**************************************************************************/
+static void really_fog_area(player pplayer, tile ptile)
+{
 //  util.freelog(Log.LOG_DEBUG, "Fogging %i,%i. Previous fog: %i.",
 //	  TILE_XY(ptile), map_get_seen(ptile, pplayer));
 // 
 //  assert(map_get_seen(ptile, pplayer) == 0);
 //
-//  unit_list_iterate(ptile.units, punit)
+//  for(unit punit:ptile.units.data ){
 //    unit_goes_out_of_sight(pplayer,punit);
 //  }  
 //
 //  update_player_tile_last_seen(pplayer, ptile);
-//  send_tile_info_always(pplayer, &pplayer.connections, ptile);
-//}
-//
-///**************************************************************************
-//  Remove a point of visibility from a square centered at x,y with
-//  sidelength 1+2*len, ie length 1 is normal sightrange for a unit.
-//**************************************************************************/
-//void fog_area(player pplayer, tile ptile, int len)
-//{
-//  buffer_shared_vision(pplayer);
-//  for(tile tile1: util.square_tile_iterate(ptile, len)) {
-//    if (map_is_known(tile1, pplayer)) {
-//      /* the player himself */
-//      shared_vision_change_seen(tile1, pplayer, -1);
-//      if (map_get_seen(tile1, pplayer) == 0) {
-//	really_fog_area(pplayer, tile1);
-//      }
-//
-//      /* players (s)he gives shared vision */
-//      for(player pplayer2: Game.game.players){
-//	if (!really_gives_vision(pplayer, pplayer2)) {
-//	  continue;
-//	}
-//	if (map_get_seen(tile1, pplayer2) == 0) {
-//	  really_fog_area(pplayer2, tile1);
-//	}
-//      }
-//    } else {
-//      decrement_pending_seen(pplayer, tile1);
-//    }
-//  }
-//  unbuffer_shared_vision(pplayer);
-//}
-//
+//  send_tile_info_always(pplayer, pplayer.connections, ptile);
+}
+
+/**************************************************************************
+  Remove a point of visibility from a square centered at x,y with
+  sidelength 1+2*len, ie length 1 is normal sightrange for a unit.
+**************************************************************************/
+public static void fog_area(player pplayer, tile ptile, int len)
+{
+  buffer_shared_vision(pplayer);
+  for(tile tile1: util.square_tile_iterate(ptile, len)) {
+    if (map_is_known(tile1, pplayer)) {
+      /* the player himself */
+      shared_vision_change_seen(tile1, pplayer, -1);
+      if (map_get_seen(tile1, pplayer) == 0) {
+	really_fog_area(pplayer, tile1);
+      }
+
+      /* players (s)he gives shared vision */
+      for(player pplayer2: Game.game.players){
+	if (!really_gives_vision(pplayer, pplayer2)) {
+	  continue;
+	}
+	if (map_get_seen(tile1, pplayer2) == 0) {
+	  really_fog_area(pplayer2, tile1);
+	}
+      }
+    } else {
+      decrement_pending_seen(pplayer, tile1);
+    }
+  }
+  unbuffer_shared_vision(pplayer);
+}
+
 ///**************************************************************************
 //  Send basic map information: map size, topology, and is_earth.
 //**************************************************************************/
@@ -800,11 +795,11 @@ public class Maphand{
 //  map_unfog_pseudo_city_area(City.city_owner(pcity), pcity.tile);
 //}
 //
-///**************************************************************************
-//...
-//**************************************************************************/
-//static void shared_vision_change_seen(tile ptile, player pplayer, int change)
-//{
+/**************************************************************************
+...
+**************************************************************************/
+static void shared_vision_change_seen(tile ptile, player pplayer, int change)
+{
 //  map_change_seen(ptile, pplayer, change);
 //  map_change_own_seen(ptile, pplayer, change);
 //
@@ -812,16 +807,16 @@ public class Maphand{
 //    if (really_gives_vision(pplayer, pplayer2))
 //      map_change_seen(ptile, pplayer2, change);
 //  }
-//}
-//
-///**************************************************************************
-//There doesn't have to be a city.
-//**************************************************************************/
-//void map_unfog_pseudo_city_area(player pplayer, tile ptile)
-//{
+}
+
+/**************************************************************************
+There doesn't have to be a city.
+**************************************************************************/
+static void map_unfog_pseudo_city_area(player pplayer, tile ptile)
+{
 //  util.freelog(Log.LOG_DEBUG, "Unfogging city area at %i,%i", TILE_XY(ptile));
-//
-//  buffer_shared_vision(pplayer);
+
+  buffer_shared_vision(pplayer);
 //  map_city_radius_iterate(ptile, tile1) {
 //    if (map_is_known(tile1, pplayer)) {
 //      unfog_area(pplayer, tile1, 0);
@@ -829,14 +824,14 @@ public class Maphand{
 //      increment_pending_seen(pplayer, tile1);
 //    }
 //  } map_city_radius_iterate_end;
-//  unbuffer_shared_vision(pplayer);
-//}
+  unbuffer_shared_vision(pplayer);
+}
 //
 ///**************************************************************************
 //There doesn't have to be a city.
 //**************************************************************************/
-//void map_fog_pseudo_city_area(player pplayer, tile ptile)
-//{
+static void map_fog_pseudo_city_area(player pplayer, tile ptile)
+{
 //  util.freelog(Log.LOG_DEBUG, "Fogging city area at %i,%i", TILE_XY(ptile));
 //
 //  buffer_shared_vision(pplayer);
@@ -848,7 +843,7 @@ public class Maphand{
 //    }
 //  } map_city_radius_iterate_end;
 //  unbuffer_shared_vision(pplayer);
-//}
+}
 //
 ///**************************************************************************
 //For removing a unit. The actual removal is done in server_remove_unit
@@ -861,9 +856,9 @@ public class Maphand{
 //  util.freelog(Log.LOG_DEBUG, "Removing unit sight points at  %i,%i",
 //	  TILE_XY(punit.tile));
 //
-//  if (Map.map_has_special(punit.tile, S_FORTRESS)
+//  if (Map.map_has_special(punit.tile, Terrain_H.S_FORTRESS)
 //      && unit_profits_of_watchtower(punit))
-//    fog_area(pplayer, ptile, get_watchtower_vision(punit));
+//    fog_area(pplayer, ptile, Unittools.get_watchtower_vision(punit));
 //  else
 //    fog_area(pplayer, ptile, punit.unit_type().vision_range);
 //}
@@ -890,7 +885,7 @@ public class Maphand{
 //
 //    /* remove old cities that exist no more */
 //    reality_check_city(pplayer, ptile);
-//    if ((pcity = map_get_city(ptile))) {
+//    if ((pcity = Map.map_get_city(ptile))) {
 //      /* as the tile may be fogged Citytools.send_city_info won't do this for us */
 //      update_dumb_city(pplayer, pcity);
 //      Citytools.send_city_info(pplayer, pcity);
@@ -906,7 +901,7 @@ public class Maphand{
 //       can use the tile. */
 //    if (!old_known) {
 //      map_city_radius_iterate(ptile, tile1) {
-//	pcity = map_get_city(tile1);
+//	pcity = Map.map_get_city(tile1);
 //	if (pcity && City.city_owner(pcity) == pplayer) {
 //	  update_city_tile_status_map(pcity, ptile);
 //	}
@@ -957,18 +952,18 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //      && ((pplayer.private_map + ptile.index).seen != 0);
 	return false;
 }
-
-///***************************************************************
-//Watch out - this can be true even if the tile is not known.
-//***************************************************************/
-//static int map_get_seen(final tile ptile, player pplayer)
-//{
-//  return map_get_player_tile(ptile, pplayer).seen;
-//}
 //
-///***************************************************************
-//...
-//***************************************************************/
+/////***************************************************************
+////Watch out - this can be true even if the tile is not known.
+////***************************************************************/
+static int map_get_seen(final tile ptile, player pplayer)
+{
+  return map_get_player_tile(ptile, pplayer).seen;
+}
+
+/***************************************************************
+...
+***************************************************************/
 //void map_change_seen(tile ptile, player pplayer, int change)
 //{
 //  map_get_player_tile(ptile, pplayer).seen += change;
@@ -1108,11 +1103,12 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 ///***************************************************************
 //...
 //***************************************************************/
-//player_tile map_get_player_tile(final tile ptile,
-//					player pplayer)
-//{
+public static player_tile map_get_player_tile(final tile ptile,
+					player pplayer)
+{
 //  return pplayer.private_map + ptile.index;
-//}
+	return null;
+}
 //
 ///****************************************************************************
 //  Give pplayer the correct knowledge about tile; return true iff
@@ -1225,7 +1221,7 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //      reveal_pending_seen(pdest, ptile, 0);
 //
 //      map_city_radius_iterate(ptile, tile1) {
-//	city pcity = map_get_city(tile1);
+//	city pcity = Map.map_get_city(tile1);
 //	if (pcity && City.city_owner(pcity) == pdest) {
 //	  update_city_tile_status_map(pcity, ptile);
 //	}
@@ -1336,7 +1332,7 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //    unbuffer_shared_vision(pplayer);
 //  }
 //
-//  if (Srv_main.server_state == RUN_GAME_STATE)
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE)
 //    Plrhand.send_player_info(pfrom, null);
 //}
 //
@@ -1384,7 +1380,7 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //    unbuffer_shared_vision(pplayer);
 //  }
 //
-//  if (Srv_main.server_state == RUN_GAME_STATE) {
+//  if (Srv_main.server_state == server_states.RUN_GAME_STATE) {
 //    Plrhand.send_player_info(pfrom, null);
 //  }
 //}
@@ -1465,17 +1461,17 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //static void ocean_to_land_fix_rivers(tile ptile)
 //{
 //  /* clear the river if it exists */
-//  Map.map_clear_special(ptile, S_RIVER);
+//  Map.map_clear_special(ptile, Terrain_H.S_RIVER);
 //
 //  cardinal_for(tile tile1: util.adjc_tile_iterate(ptile)) {
-//    if (Map.map_has_special(tile1, S_RIVER)) {
+//    if (Map.map_has_special(tile1, Terrain_H.S_RIVER)) {
 //      boolean ocean_near = false;
 //      cardinal_for(tile tile2: util.adjc_tile_iterate(tile1)) {
 //        if (Terrain_H.is_ocean(tile2.terrain))
 //          ocean_near = true;
 //      } cardinal_adjc_iterate_end;
 //      if (!ocean_near) {
-//        map_set_special(ptile, S_RIVER);
+//        Map.map_set_special(ptile, Terrain_H.S_RIVER);
 //        return;
 //      }
 //    }
@@ -1685,7 +1681,7 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //	    } }
 //	    
 //	    if (!already_listed) {
-//	      city_list_insert(&cities_to_refresh, homecity);
+//	      &cities_to_refresh.foo_list_insert(homecity);
 //	    }
 //
 //	  } }
@@ -1710,10 +1706,10 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //  x,y coords for (already deleted) city's location.
 //  Tile worker states are updated as necessary, but not sync'd with client.
 //*************************************************************************/
-//void map_update_borders_city_destroyed(tile ptile)
-//{
+public static void map_update_borders_city_destroyed(tile ptile)
+{
 //  map_update_borders_recalculate_position(ptile);
-//}
+}
 //
 ///*************************************************************************
 //  Modify national territories resulting from a change of landmass.
@@ -1729,10 +1725,10 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //  ownership.
 //  Tile worker states are updated as necessary, but not sync'd with client.
 //*************************************************************************/
-//void map_update_borders_city_change(city pcity)
-//{
+static void map_update_borders_city_change(city pcity)
+{
 //  map_update_borders_recalculate_position(pcity.tile);
-//}
+}
 //
 ///*************************************************************************
 //  Delete the territorial claims to all tiles.

@@ -367,8 +367,8 @@ public class Chatline{
 //      pConnDlg.pBeginWidgetList = pConnDlg.pUsers_Dlg.pBeginWidgetList;
 //      FREESTRING16(pStr);
 //
-//      if (aconnection.access_level == ALLOW_CTRL
-//         || aconnection.access_level == ALLOW_HACK) {
+//      if (aconnection.access_level == cmdlevel_id.ALLOW_CTRL
+//         || aconnection.access_level == cmdlevel_id.ALLOW_HACK) {
 //        set_wstate(pConnDlg.pStart, FC_WS_NORMAL);
 //	set_wstate(pConnDlg.pConfigure, FC_WS_NORMAL);
 //      } else {

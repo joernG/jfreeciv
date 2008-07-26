@@ -537,22 +537,22 @@ public class Clinet{
 //    server pserver = (struct server*)fc_malloc(sizeof(struct server));
 //
 //    host = secfile_lookup_str_default(file, "", "server%d.host", i);
-//    pserver.host = mystrdup(host);
+//    pserver.host = (host);
 //
 //    port = secfile_lookup_str_default(file, "", "server%d.port", i);
-//    pserver.port = mystrdup(port);
+//    pserver.port = (port);
 //
 //    version = secfile_lookup_str_default(file, "", "server%d.version", i);
-//    pserver.version = mystrdup(version);
+//    pserver.version = (version);
 //
 //    state = secfile_lookup_str_default(file, "", "server%d.state", i);
-//    pserver.state = mystrdup(state);
+//    pserver.state = (state);
 //
 //    message = secfile_lookup_str_default(file, "", "server%d.message", i);
-//    pserver.message = mystrdup(message);
+//    pserver.message = (message);
 //
 //    nplayers = secfile_lookup_str_default(file, "0", "server%d.nplayers", i);
-//    pserver.nplayers = mystrdup(nplayers);
+//    pserver.nplayers = (nplayers);
 //    n = atoi(nplayers);
 //
 //    if (n > 0) {
@@ -566,19 +566,19 @@ public class Clinet{
 //
 //      name = secfile_lookup_str_default(file, "", 
 //                                        "server%d.player%d.name", i, j);
-//      pserver.players[j].name = mystrdup(name);
+//      pserver.players[j].name = (name);
 //
 //      type = secfile_lookup_str_default(file, "",
 //                                        "server%d.player%d.type", i, j);
-//      pserver.players[j].type = mystrdup(type);
+//      pserver.players[j].type = (type);
 //
 //      host = secfile_lookup_str_default(file, "", 
 //                                        "server%d.player%d.host", i, j);
-//      pserver.players[j].host = mystrdup(host);
+//      pserver.players[j].host = (host);
 //
 //      nation = secfile_lookup_str_default(file, "",
 //                                          "server%d.player%d.nation", i, j);
-//      pserver.players[j].nation = mystrdup(nation);
+//      pserver.players[j].nation = (nation);
 //    }
 //
 //    server_list_insert_back(server_list, pserver);
@@ -905,15 +905,15 @@ public class Clinet{
 //            ("Received a valid announcement from a server on the LAN."));
 //    
 //    pserver =  (struct server*)fc_malloc(sizeof(struct server));
-//    pserver.host = mystrdup(servername);
-//    pserver.port = mystrdup(port);
-//    pserver.version = mystrdup(version);
-//    pserver.state = mystrdup(status);
-//    pserver.nplayers = mystrdup(players);
-//    pserver.message = mystrdup(message);
+//    pserver.host = (servername);
+//    pserver.port = (port);
+//    pserver.version = (version);
+//    pserver.state = (status);
+//    pserver.nplayers = (players);
+//    pserver.message = (message);
 //    pserver.players = null;
 //
-//    server_list_insert(lan_servers, pserver);
+//    lan_servers.foo_list_insert(pserver);
 //
 //    goto again;
 //  }

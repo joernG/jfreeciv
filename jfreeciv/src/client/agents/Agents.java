@@ -155,7 +155,7 @@ public class Agents{
 //    }
 //  } }
 //
-//  call_list_insert(&agents.calls, pcall2);
+//  &agents.calls.foo_list_insert(pcall2);
 //
 //  if (DEBUG_TODO_LISTS) {
 //    util.freelog(Log.LOG_NORMAL, "A: adding call");
@@ -496,7 +496,7 @@ public class Agents{
 //      continue;
 //    }
 //    if (agent.agent.turn_start_notify) {
-//      enqueue_call(agent, OCT_NEW_TURN, CB_LAST);
+//      enqueue_call(agent, OCT_NEW_TURN, CImprovement.B_LAST);
 //    }
 //  }
 //  /*

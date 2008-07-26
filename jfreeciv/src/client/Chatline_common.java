@@ -125,7 +125,7 @@ public class Chatline_common{
 //    remaining premain = fc_malloc(sizeof(*premain));
 //
 //    remaining_list_insert_back(&remains, premain);
-//    premain.text = mystrdup(astring);
+//    premain.text = (astring);
 //    premain.conn_id = conn_id;
 //  }
 //}

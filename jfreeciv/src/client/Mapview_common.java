@@ -1637,7 +1637,7 @@ public class Mapview_common{
 //
 //      pcity = find_city_or_settler_near_tile(ptile, &punit);
 //      if (pcity && pcity.client.colored
-//	  && map_to_city_map(&city_x, &city_y, pcity, ptile)
+//	  && City.map_to_city_map(&city_x, &city_y, pcity, ptile)
 //	  && tile_to_canvas_pos(&canvas_x2, &canvas_y2, ptile)) {
 //	enum city_tile_type worker = City.get_worker_city(pcity, city_x, city_y);
 //
@@ -2063,7 +2063,7 @@ public class Mapview_common{
 //  closest_city = null;
 //
 //  city_map_checked_iterate(ptile, city_x, city_y, tile1) {
-//    pcity = map_get_city(tile1);
+//    pcity = Map.map_get_city(tile1);
 //    if (pcity && pcity.owner == Game.game.player_idx
 //	&& City.get_worker_city(pcity, City_H.CITY_MAP_SIZE - 1 - city_x,
 //			   City_H.CITY_MAP_SIZE - 1 - city_y) == city_tile_type.C_TILE_EMPTY) {
@@ -2095,7 +2095,7 @@ public class Mapview_common{
 //    if (tile1) {
 //      for (unit psettler : tile1.units.data) {
 //	if (psettler.owner == Game.game.player_idx
-//	    && unit_flag(psettler, F_CITIES)
+//	    && unit_flag(psettler, Eunit_flag_id.F_CITIES)
 //	    && city_can_be_built_here(psettler.tile, psettler)) {
 //	  if (!closest_settler) {
 //	    closest_settler = psettler;

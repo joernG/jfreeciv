@@ -194,9 +194,9 @@ public class Gotodlg{
 //  if(len>3 && strcmp(ret.string+len-3, "(A)")==0) {
 //    String name="";
 //    mystrlcpy(name, ret.string, Math.min(sizeof(name),len-2));
-//    return game_find_city_by_name(name);
+//    return Game.game_find_city_by_name(name);
 //  }
-//  return game_find_city_by_name(ret.string);
+//  return Game.game_find_city_by_name(ret.string);
 //}
 //
 ///**************************************************************************
@@ -230,7 +230,7 @@ public class Gotodlg{
 //      if (pcity.airlift) {
 //	sz_strlcat(name, "(A)");
 //      }
-//      city_name_ptrs[j++]=mystrdup(name);
+//      city_name_ptrs[j++]=(name);
 //    }
 //    }
 //  }

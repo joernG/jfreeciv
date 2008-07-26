@@ -167,7 +167,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //	    from, to, strerror(errno));
 //    /* The best we can do? */
 //    if (alloc) {
-//      return mystrdup(text);
+//      return (text);
 //    } else {
 //      buf = String.format "%s", text);
 //      return buf;
@@ -204,7 +204,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //	iconv_close(cd);
 //	if (alloc) {
 //	  free(buf);
-//	  return mystrdup(text); /* The best we can do? */
+//	  return (text); /* The best we can do? */
 //	} else {
 //	  buf = String.format "%s", text);
 //	  return buf;
@@ -236,7 +236,7 @@ public static void init_character_encodings(String my_internal_encoding,
 //    buf[bufsz - 1] = '\0';
 //    return buf;
 //  } else {
-//    return mystrdup(text);
+//    return (text);
 //  }
 //#endif /* HAVE_ICONV */
 //}

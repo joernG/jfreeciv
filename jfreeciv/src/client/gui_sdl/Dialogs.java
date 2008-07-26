@@ -680,7 +680,7 @@ public class Dialogs{
 //      int att_chance, def_chance;
 //      
 //      cBuf = util.my_snprintf( "%s %s %s(A:%d D:%d M:%d FP:%d) HP:%d%%",
-//            get_nation_by_plr(pUnit.unit_owner()).name,
+//            Nation.get_nation_by_plr(pUnit.unit_owner()).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
 //            pUnitType.attack_strength,
@@ -807,11 +807,11 @@ public class Dialogs{
 //  static char buffer[64];
 //  int bonus = (tile_types[pTile.terrain].defense_bonus - 10) * 10;
 //  
-//  if((pTile.special & S_RIVER) == S_RIVER) {
-//    bonus += terrain_control.river_defense_bonus;
+//  if((pTile.special & Terrain_H.S_RIVER) == Terrain_H.S_RIVER) {
+//    bonus += Map.terrain_control.river_defense_bonus;
 //  }
-//  if((pTile.special & S_FORTRESS) == S_FORTRESS) {
-//    bonus += terrain_control.fortress_defense_bonus;
+//  if((pTile.special & Terrain_H.S_FORTRESS) == Terrain_H.S_FORTRESS) {
+//    bonus += Map.terrain_control.fortress_defense_bonus;
 //  }
 //  
 //  buffer = util.my_snprintf( "Terrain Defense Bonus: +%d%% ", bonus);
@@ -831,9 +831,9 @@ public class Dialogs{
 //  boolean first;
 //    
 //  s = util.my_snprintf( "%s", tile_types[pTile.terrain].terrain_name);
-//  if((pTile.special & S_RIVER) == S_RIVER) {
+//  if((pTile.special & Terrain_H.S_RIVER) == Terrain_H.S_RIVER) {
 //    sz_strlcat(s, "/");
-//    sz_strlcat(s, get_special_name(S_RIVER));
+//    sz_strlcat(s, get_special_name(Terrain_H.S_RIVER));
 //  }
 //
 //  first = true;
@@ -964,7 +964,7 @@ public class Dialogs{
 //		  Q"?city:Friendly", Q"?city:Mysterious"};
 //		  
 //      cat_snprintf(cBuf, sizeof(cBuf), "\nCity of %s", pTile.city.name);
-//      if (city_got_citywalls(pTile.city)) {
+//      if (City.city_got_citywalls(pTile.city)) {
 //        cat_snprintf(cBuf, sizeof(cBuf), " with City Walls");
 //      }		  
 //      if (pOwner && pOwner != Game.game.player_ptr) {
@@ -1428,7 +1428,7 @@ public class Dialogs{
 //    /* ----------- */
 //
 //#if 0 /* FIXME: specific connect buttons */
-//    if(unit_flag(pFocus_Unit, F_SETTLERS)) {
+//    if(unit_flag(pFocus_Unit, Eunit_flag_id.F_SETTLERS)) {
 //      create_active_iconlabel(pBuf, pWindow.dst, pStr, "Connect here",
 //						    connect_here_callback);
 //      pBuf.data.cont = pCont;
@@ -1444,7 +1444,7 @@ public class Dialogs{
 //
 //    if(can_unit_paradrop(pFocus_Unit) && pTile.known &&
 //      !(Terrain_H.is_ocean(pTile.terrain) && is_ground_unit(pFocus_Unit)) &&
-//      !(is_sailing_unit(pFocus_Unit) && (!Terrain_H.is_ocean(pTile.terrain) || !pCity)) &&
+//      !(Unit.is_sailing_unit(pFocus_Unit) && (!Terrain_H.is_ocean(pTile.terrain) || !pCity)) &&
 //      !(((pCity && pplayers_non_attack(Game.game.player_ptr, City.city_owner(pCity))) 
 //      || is_non_attack_unit_tile(pTile, Game.game.player_ptr))) &&
 //      (pFocus_Unit.unit_type().paratroopers_range >=
@@ -1517,7 +1517,7 @@ public class Dialogs{
 //	  int att_chance, def_chance;
 //	  
 //          cBuf = util.my_snprintf( "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
-//            get_nation_by_plr(pUnit.unit_owner()).name,
+//            Nation.get_nation_by_plr(pUnit.unit_owner()).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
 //            pUnitType.attack_strength,
@@ -1642,7 +1642,7 @@ public class Dialogs{
 //	  int att_chance, def_chance;
 //	
 //          cBuf = util.my_snprintf( "%s %s %s (A:%d D:%d M:%d FP:%d) HP:%d%%",
-//            get_nation_by_plr(pUnit.unit_owner()).name,
+//            Nation.get_nation_by_plr(pUnit.unit_owner()).name,
 //            (pUnit.veteran ? "Veteran" : ""),
 //            pUnitType.name,
 //            pUnitType.attack_strength,
@@ -1867,11 +1867,11 @@ public class Dialogs{
 //  pCaravan_Dlg.pEndWidgetList = pWindow;
 //    
 //  /* ---------- */
-//  if (can_cities_trade(pHomecity, pDestcity))
+//  if (City.can_cities_trade(pHomecity, pDestcity))
 //  {
 //    int revenue = get_caravan_enter_city_trade_bonus(pHomecity, pDestcity);
 //    
-//    if (can_establish_trade_route(pHomecity, pDestcity)) {
+//    if (City.can_establish_trade_route(pHomecity, pDestcity)) {
 //      cBuf = util.my_snprintf(
 //      		"Establish Traderoute with %s ( %d R&G + %d trade )",
 //      		pHomecity.name, revenue,
@@ -1979,7 +1979,7 @@ public class Dialogs{
 //  int id = MAX_ID - pWidget.ID;
 //  
 //  popdown_diplomat_dialog();
-//  if(pCity && find_unit_by_id(id)) { 
+//  if(pCity && Game.find_unit_by_id(id)) { 
 //    request_diplomat_action(DIPLOMAT_EMBASSY, id, pCity.id, 0);
 //  }
 //
@@ -1997,7 +1997,7 @@ public class Dialogs{
 //
 //  lock_buffer(pWidget.dst);
 //  popdown_diplomat_dialog();
-//  if(pCity && find_unit_by_id(id)) { 
+//  if(pCity && Game.find_unit_by_id(id)) { 
 //    request_diplomat_action(DIPLOMAT_INVESTIGATE, id, pCity.id, 0);
 //  }
 //
@@ -2014,7 +2014,7 @@ public class Dialogs{
 //  int id = MAX_ID - pWidget.ID;
 //
 //  popdown_diplomat_dialog();
-//  if(pCity && find_unit_by_id(id)) { 
+//  if(pCity && Game.find_unit_by_id(id)) { 
 //    request_diplomat_action(SPY_POISON, id, pCity.id, 0);
 //  }
 //
@@ -2033,7 +2033,7 @@ public class Dialogs{
 //  
 //  lock_buffer(pWidget.dst);
 //  popdown_diplomat_dialog();
-//  if(pCity && find_unit_by_id(id)) {
+//  if(pCity && Game.find_unit_by_id(id)) {
 //    request_diplomat_action(SPY_GET_SABOTAGE_LIST, id, pCity.id, 0);
 //  }
 //  return -1;
@@ -2048,7 +2048,7 @@ public class Dialogs{
 //  int id = MAX_ID - pWidget.ID;
 //  
 //  popdown_diplomat_dialog();
-//  if(pCity && find_unit_by_id(id)) { 
+//  if(pCity && Game.find_unit_by_id(id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, id, pCity.id, -1);
 //  }
 //
@@ -2076,7 +2076,7 @@ public class Dialogs{
 //  int diplomat_id = pWidget.data.cont.id1;
 //    
 //  popdown_diplomat_dialog();
-//  if(find_unit_by_id(diplomat_id) && 
+//  if(Game.find_unit_by_id(diplomat_id) && 
 //    Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, steal_advance);
@@ -2220,7 +2220,7 @@ public class Dialogs{
 //  }
 //  
 //  /* get spy tech */
-//  i = unit_type(find_unit_by_id(id)).tech_requirement;
+//  i = unit_type(Game.find_unit_by_id(id)).tech_requirement;
 //  copy_chars_to_string16(pStr, "At Spy's Discretion");
 //  pSurf = create_sellect_tech_icon(pStr, i, FULL_MODE);
 //	
@@ -2298,7 +2298,7 @@ public class Dialogs{
 //  
 //  popdown_diplomat_dialog();
 //  
-//  if(pCity && find_unit_by_id(id)) { 
+//  if(pCity && Game.find_unit_by_id(id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, id, pCity.id, 0);
 //  }
 //
@@ -2317,7 +2317,7 @@ public class Dialogs{
 //  lock_buffer(pWidget.dst);
 //  popdown_diplomat_dialog();
 //  
-//  if(pCity && find_unit_by_id(id)) { 
+//  if(pCity && Game.find_unit_by_id(id)) { 
 //    dsend_packet_city_incite_inq(&aconnection, pCity.id);
 //  }
 //  
@@ -2330,7 +2330,7 @@ public class Dialogs{
 //*****************************************************************/
 //static int diplomat_keep_moving_callback(GUI pWidget)
 //{
-//  unit pUnit = find_unit_by_id(MAX_ID - pWidget.ID);
+//  unit pUnit = Game.find_unit_by_id(MAX_ID - pWidget.ID);
 //  city pCity = pWidget.data.city;
 //  
 //  popdown_diplomat_dialog();
@@ -2354,7 +2354,7 @@ public class Dialogs{
 //  lock_buffer(pWidget.dst);
 //  popdown_diplomat_dialog();
 //  
-//  if(find_unit_by_id(id) && pTunit) { 
+//  if(Game.find_unit_by_id(id) && pTunit) { 
 //    dsend_packet_unit_bribe_inq(&aconnection, pTunit.id);
 //  }
 //   
@@ -2418,7 +2418,7 @@ public class Dialogs{
 //  }
 //  
 //  is_unit_move_blocked = true;
-//  pCity = map_get_city(target_x, target_y);
+//  pCity = Map.map_get_city(target_x, target_y);
 //  spy = unit_flag(pUnit, F_SPY);
 //  
 //  pDiplomat_Dlg = MALLOC(sizeof(struct ADVANCED_DLG));
@@ -2665,7 +2665,7 @@ public class Dialogs{
 //    sabotage_improvement = -1;
 //  }
 //  
-//  if(find_unit_by_id(diplomat_id)
+//  if(Game.find_unit_by_id(diplomat_id)
 //    && Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, sabotage_improvement + 1);
@@ -2743,11 +2743,14 @@ public class Dialogs{
 //  h += pBuf.next.size.h;
 //  /* ------------------ */
 //  n = 0;
-//  built_impr_iterate(pCity, imp) {
+//	for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
+//	if((pCity).improvements[imp] == Improvement.I_NONE) {
+//		continue;
+//	}
 //    if (get_improvement_type(imp).sabotage > 0) {
 //      
 //      create_active_iconlabel(pBuf, pWindow.dst, pStr,
-//	      (char *) get_impr_name_ex(pCity, imp),
+//	      (char *) City.get_impr_name_ex(pCity, imp),
 //				      sabotage_impr_callback);
 //      pBuf.data.cont = pCont;
 //      set_wstate(pBuf , FC_WS_NORMAL);
@@ -2770,7 +2773,7 @@ public class Dialogs{
 //      n++;    
 //      /* ----------- */
 //    }  
-//  } built_impr_iterate_end;
+//  } ;
 //  pAdvanced_Terrain_Dlg.pBeginActiveWidgetList = pBuf;
 //  
 //  if(n) {
@@ -2787,7 +2790,7 @@ public class Dialogs{
 //  pBuf.data.cont = pCont;  
 //  set_wstate(pBuf, FC_WS_NORMAL);
 //  
-//  add_to_gui_list(MAX_ID - B_LAST, pBuf);
+//  add_to_gui_list(MAX_ID - Improvement.B_LAST, pBuf);
 //    
 //  w = MAX(w, pBuf.size.w);
 //  h += pBuf.size.h;
@@ -3194,7 +3197,7 @@ public class Dialogs{
 //  pDiplomatUnit = get_unit_in_focus();
 //  
 //  if (!pDiplomatUnit || !(unit_flag(pDiplomatUnit, F_SPY) ||
-//		    unit_flag(pDiplomatUnit, F_DIPLOMAT))) {
+//		    unit_flag(pDiplomatUnit, Eunit_flag_id.F_DIPLOMAT))) {
 //    remove_locked_buffer();
 //    return;
 //  }
@@ -3918,7 +3921,7 @@ public class Dialogs{
 //    SDL_String16 *pStr;
 //    SDL_Surface *pText, *pText2;
 //    SDL_Rect area;
-//    nation_type pNation = get_nation_by_idx(MAX_ID - pNationButton.ID);
+//    nation_type pNation = Nation.get_nation_by_idx(MAX_ID - pNationButton.ID);
 //      
 //    redraw_widget(pNationButton);
 //    sdl_dirty_rect(pNationButton.size);
@@ -4017,7 +4020,7 @@ public class Dialogs{
 //  GUI pWindow = pNationDlg.pEndWidgetList;
 //  NAT pSetup = (NAT )(pWindow.data.ptr);  
 //  GUI pLabel = pSetup.pName_Edit.next;
-//  nation_type pNation = get_nation_by_idx(pSetup.nation);
+//  nation_type pNation = Nation.get_nation_by_idx(pSetup.nation);
 //  
 //  pTmp_Surf = make_flag_surface_smaler(GET_SURF(pNation.flag_sprite));
 //  pTmp_Surf_zoomed = ZoomSurface(pTmp_Surf, 5.0, 5.0, 1);
@@ -4129,7 +4132,7 @@ public class Dialogs{
 //  pText_Class = null;
 //  for (i = 0; i < Game.game.playable_nation_count; i++) {
 //    
-//    nation_type pNation = get_nation_by_idx(i);
+//    nation_type pNation = Nation.get_nation_by_idx(i);
 //    
 //    pTmp_Surf = make_flag_surface_smaler(GET_SURF(pNation.flag_sprite));
 //    pTmp_Surf_zoomed = ZoomSurface(pTmp_Surf, 3.0, 3.0, 1);
@@ -4209,12 +4212,12 @@ public class Dialogs{
 //  pSetup.nation = Rand.myrand(Game.game.playable_nation_count);
 //  pSetup.nation_city_style = get_nation_city_style(pSetup.nation);
 //  
-//  copy_chars_to_string16(pStr, get_nation_by_idx(pSetup.nation).name_plural);
+//  copy_chars_to_string16(pStr, Nation.get_nation_by_idx(pSetup.nation).name_plural);
 //  change_ptsize16(pStr, 36);
 //  pStr.render = 2;
 //  pStr.fgcol = color;
 //  pTmp_Surf = make_flag_surface_smaler(
-//  		GET_SURF(get_nation_by_idx(pSetup.nation).flag_sprite));
+//  		GET_SURF(Nation.get_nation_by_idx(pSetup.nation).flag_sprite));
 //  pTmp_Surf_zoomed = ZoomSurface(pTmp_Surf, 5.0, 5.0, 1);
 //  SDL_SetColorKey(pTmp_Surf_zoomed, SDL_SRCCOLORKEY|SDL_RLEACCEL,
 //    		getpixel(pTmp_Surf_zoomed, pTmp_Surf_zoomed.w - 1,

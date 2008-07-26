@@ -370,7 +370,7 @@ public class Actions{
 //{
 //  unit punit = get_unit_in_focus();
 //  if(punit) {
-//    if (unit_flag(punit, F_SETTLERS)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //      if(is_menu_item_active(MENU_ORDER, MENU_ORDER_AUTO_SETTLER))
 //	key_unit_auto_settle();
 //    } else {
@@ -402,7 +402,7 @@ public class Actions{
 //{
 //  unit punit = get_unit_in_focus();
 //  if(punit) {
-//    if (unit_flag(punit, F_SETTLERS)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //      if(is_menu_item_active(MENU_ORDER, MENU_ORDER_BUILD_CITY))
 //	key_unit_build_city();
 //    } else {
@@ -470,7 +470,7 @@ public class Actions{
 //{
 //  unit punit = get_unit_in_focus();
 //  if(punit) {
-//    if (unit_flag(punit, F_SETTLERS)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //      if(is_menu_item_active(MENU_ORDER, MENU_ORDER_FORTRESS))
 //	key_unit_fortress();
 //    } else {
@@ -526,7 +526,7 @@ public class Actions{
 //{
 //  unit punit = get_unit_in_focus();
 //  if(punit) {
-//    if (unit_flag(punit, F_SETTLERS)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //      if(is_menu_item_active(MENU_ORDER, MENU_ORDER_POLLUTION))
 //	key_unit_pollution();
 //    } else {
@@ -564,7 +564,7 @@ public class Actions{
 //{
 //  unit punit = get_unit_in_focus();
 //  if(punit) {
-//    if (unit_flag(punit, F_SETTLERS)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //      if(is_menu_item_active(MENU_ORDER, MENU_ORDER_ROAD))
 //	key_unit_road();
 //    } else {

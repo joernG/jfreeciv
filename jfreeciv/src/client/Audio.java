@@ -190,7 +190,7 @@ public class Audio{
 //  free(fname);
 //
 //  if (dname) {
-//    return mystrdup(dname);
+//    return (dname);
 //  }
 //
 //  if (soundset_name.equals(soundset_default)) {

@@ -58,7 +58,7 @@ public class Chatline{
 //      free(data);
 //    }
 //
-//    genlist_insert(&history_list, mystrdup(theinput), 0);
+//    genlist_insert(&history_list, (theinput), 0);
 //    history_pos=-1;
 //  }
 //

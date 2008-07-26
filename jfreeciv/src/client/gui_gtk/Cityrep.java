@@ -236,8 +236,8 @@ public class Cityrep{
 //					    TestCityFunc test_func,
 //					    GtkSignalFunc callback)
 //{
-//  cid cids[unittype.U_LAST + B_LAST];
-//  struct item items[unittype.U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + Improvement.B_LAST];
+//  struct item items[unittype.U_LAST + Improvement.B_LAST];
 //  int item, cids_used, num_selected_cities = 0;
 //  city *selected_cities = null;
 //
@@ -769,7 +769,7 @@ public class Cityrep{
 //  for (i = 0; i < GTK_CLIST(city_list).rows; i++) {
 //    struct city* pcity = gtk_clist_get_row_data(GTK_CLIST(city_list), i);
 //    
-//    if (is_ocean_near_tile(pcity.tile)) {
+//    if (Terrain.is_terrain_flag_near_tile(pcity.tile)) {
 //      gtk_clist_select_row(GTK_CLIST(city_list), i, 0);
 //    }
 //  }
@@ -826,9 +826,9 @@ public class Cityrep{
 //
 //    if ( (which == TYPE_UNIT && pcity.is_building_unit)
 //         || (which == TYPE_NORMAL_IMPROVEMENT && !pcity.is_building_unit
-//             && !is_wonder(pcity.currently_building))
+//             && !Improvement.is_wonder(pcity.currently_building))
 //         || (which == TYPE_WONDER && !pcity.is_building_unit
-//             && is_wonder(pcity.currently_building)) ) {
+//             && Improvement.is_wonder(pcity.currently_building)) ) {
 //      gtk_clist_select_row(GTK_CLIST(city_list), i, 0);
 //    }
 //  }
@@ -1005,10 +1005,10 @@ public class Cityrep{
 //  };
 //  static gchar **title[2];
 //  int i, j;
-//  cid cids[B_LAST + unittype.U_LAST];
+//  cid cids[Improvement.B_LAST + unittype.U_LAST];
 //  int cids_used;
 //  cid selected_cid;
-//  struct item items[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + Improvement.B_LAST];
 //  GtkWidget *button;
 //  GtkWidget *box;
 //  GtkWidget *scrollpane;

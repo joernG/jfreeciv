@@ -310,7 +310,7 @@ public class Plrdlg{
 //
 //    if(pplayer.is_alive) {
 //      XtSetSensitive(players_war_command,
-//		     !pplayers_at_war(Game.game.player_ptr, pplayer)
+//		     !Player_P.pplayers_at_war(Game.game.player_ptr, pplayer)
 //		     && Game.game.player_ptr != pplayer);
 //    }
 //

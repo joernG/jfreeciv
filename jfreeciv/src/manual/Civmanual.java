@@ -303,7 +303,7 @@ public class Civmanual{
 //
 //    case MANUAL_BUILDINGS:
 //      fprintf(doc, "<h1>Freeciv %s buildings help</h1>\n\n", VERSION_STRING);
-//      impr_type_iterate(id) {
+//      for (int id = 0; id < Game.game.num_impr_types; id++) {
 //	impr_type pimpr = get_improvement_type(id);
 //	char buf[64000];
 //
@@ -327,12 +327,12 @@ public class Civmanual{
 //	}
 //	fprintf(doc, "</table>\n\n");
 //	fprintf(doc, "<pre>%s</pre>\n\n", buf);
-//      } impr_type_iterate_end;
+//      } ;
 //      break;
 //
 //    case MANUAL_WONDERS:
 //      fprintf(doc, "<h1>Freeciv %s wonders help</h1>\n\n", VERSION_STRING);
-//      impr_type_iterate(id) {
+//      for (int id = 0; id < Game.game.num_impr_types; id++) {
 //	impr_type pimpr = get_improvement_type(id);
 //	char buf[64000];
 //
@@ -356,7 +356,7 @@ public class Civmanual{
 //	}
 //	fprintf(doc, "</table>\n\n");
 //	fprintf(doc, "<pre>%s</pre>\n\n", buf);
-//      } impr_type_iterate_end;
+//      } ;
 //      break;
 //
 //    case MANUAL_COUNT:

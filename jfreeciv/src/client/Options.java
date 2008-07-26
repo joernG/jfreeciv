@@ -1,5 +1,7 @@
 package client;
 
+import common.event_type;
+
 public class Options{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -262,7 +264,7 @@ public class Options{
 //  GEN_EV(N"Treaty: Peace",                         E_TREATY_PEACE),
 //  GEN_EV(N"Treaty: Shared Vision",                 E_TREATY_SHARED_VISION),
 //  GEN_EV(N"Unit: Attack Failed",                   E_UNIT_LOST_ATT),
-//  GEN_EV(N"Unit: Attack Succeeded",                E_UNIT_WIN_ATT),
+//  GEN_EV(N"Unit: Attack Succeeded",                event_type.E_UNIT_WIN_ATT),
 //  GEN_EV(N"Unit: Bought",                          E_UNIT_BUY),
 //  GEN_EV(N"Unit: Built",                           E_UNIT_BUILT),
 //  GEN_EV(N"Unit: Defender Destroyed",              E_UNIT_LOST),
@@ -332,12 +334,12 @@ public class Options{
 //*****************************************************************/
 //void init_messages_where()
 //{
-//  int out_only[] = { E_IMP_BUY, event_type.E_IMP_SOLD, event_type.E_UNIT_BUY,
-//		     E_UNIT_LOST_ATT, E_UNIT_WIN_ATT, E_GAME_START,
-//		     E_NATION_SELECTED, E_CITY_BUILD, E_NEXT_YEAR,
-//		     E_CITY_PRODUCTION_CHANGED,
-//		     E_CITY_MAY_SOON_GROW, E_WORKLIST};
-//  int all[] = { E_MESSAGE_WALL };
+//  int out_only[] = { event_type.E_IMP_BUY, event_type.E_IMP_SOLD, event_type.E_UNIT_BUY,
+//		     event_type.E_UNIT_LOST_ATT, event_type.event_type.E_UNIT_WIN_ATT, event_type.E_GAME_START,
+//		     event_type.E_NATION_SELECTED, event_type.E_CITY_BUILD, event_type.E_NEXT_YEAR,
+//		     event_type.E_CITY_PRODUCTION_CHANGED,
+//		     event_type.E_CITY_MAY_SOON_GROW, event_type.E_WORKLIST};
+//  int all[] = { event_type.E_MESSAGE_WALL };
 //  int i;
 //
 //  for(i=0; i<E_LAST; i++) {
@@ -362,7 +364,7 @@ public class Options{
 //    }
 //    events[i].descr = _(events[i].descr_orig);
 //    event_to_index[events[i].event] = i;
-//    events[i].tag_name = mystrdup(events[i].enum_name);
+//    events[i].tag_name = (events[i].enum_name);
 //    for (j = 0; j < strlen(events[i].tag_name); j++) {
 //      events[i].tag_name[j] = my_tolower(events[i].tag_name[j]);
 //    }
@@ -788,7 +790,7 @@ public class Options{
 //  case E_MY_DIPLOMAT_THEFT:
 //  case E_MY_DIPLOMAT_ESCAPE:
 //  case E_UNIT_LOST_ATT:
-//  case E_UNIT_WIN_ATT:
+//  case event_type.E_UNIT_WIN_ATT:
 //  case E_UPRISING:
 //  case E_UNIT_RELOCATED:
 //    return false;

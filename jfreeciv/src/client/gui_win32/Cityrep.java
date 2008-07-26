@@ -189,8 +189,8 @@ public class Cityrep{
 //				int *selitems,
 //				int selcount, int *idcount)
 //{
-//  cid cids[unittype.U_LAST + B_LAST];
-//  struct item items[unittype.U_LAST + B_LAST];
+//  cid cids[unittype.U_LAST + Improvement.B_LAST];
+//  struct item items[unittype.U_LAST + Improvement.B_LAST];
 //  int item, cids_used, num_selected_cities = 0;
 //  city *selected_cities = null;
 //
@@ -554,7 +554,7 @@ public class Cityrep{
 //  for (i=0;i<num;i++)
 //    {
 //      pcity=(city )ListBox_GetItemData(hLst,i);
-//      if (is_ocean_near_tile(pcity.tile)) {
+//      if (Terrain.is_terrain_flag_near_tile(pcity.tile)) {
 //	ListBox_SetSel(hLst,true,i);
 //      }
 //    }
@@ -724,10 +724,10 @@ public class Cityrep{
 //  fcwin_box vbox;
 //  fcwin_box hbox;
 //  int selid;
-//  cid cids[B_LAST + unittype.U_LAST];
+//  cid cids[Improvement.B_LAST + unittype.U_LAST];
 //  int cids_used;
 //  cid selected_cid;
-//  struct item items[unittype.U_LAST + B_LAST];
+//  struct item items[unittype.U_LAST + Improvement.B_LAST];
 //  int id,i;
 //  HWND hDlg;
 //  HWND hLst;

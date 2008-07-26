@@ -239,7 +239,7 @@ public class Spaceshipdlg{
 //  XtAddCallback(pdialog.close_command, XtNcallback, spaceship_close_callback,
 //		(XtPointer)pdialog);
 //
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //
 //  XtRealizeWidget(pdialog.shell);
 //

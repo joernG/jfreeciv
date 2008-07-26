@@ -3,6 +3,7 @@ import static port.util.my_snprintf;
 
 import common.unit.unit;
 import common.unittype.Eunit_flag_id;
+import common.unittype.unit_move_type;
 import common.unittype.unittype;
 
 public class Unittype_P {
@@ -46,48 +47,48 @@ public class Unittype_P {
 		 * Returns 1 if the unit_type "exists" in this Game.game, 0 otherwise. A
 		 * unit_type doesn't exist if one of: - id is out of range - the
 		 * unit_type has been flagged as removed by setting its tech_requirement
-		 * to A_LAST.
+		 * to Tech_H.A_LAST.
 		 **********************************************************************/
 //	boolean unit_type_exists(int id) {
 //		if (id < 0 || id >= unittype.U_LAST || id >= Game.game.num_unit_types)
 //			return false;
 //		else
-//			return unit_types[id].tech_requirement != A_LAST;
+//			return unit_types[id].tech_requirement != Tech_H.A_LAST;
 //	}
+
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static boolean is_ground_unittype(int id) {
+		return (unit_types[id].move_type == unit_move_type.LAND_MOVING);
+	}
 
 //	/***************************************************************************
 //	 * ...
 //	 **************************************************************************/
-//	boolean is_ground_unittype(int id) {
-//		return (unit_types[id].move_type == LAND_MOVING);
-//	}
-//
-//	/***************************************************************************
-//	 * ...
-//	 **************************************************************************/
 //	boolean is_air_unittype(int id) {
-//		return (unit_types[id].move_type == AIR_MOVING);
+//		return (unit_types[id].move_type == unit_move_type.AIR_MOVING);
 //	}
 //
 //	/***************************************************************************
 //	 * ...
 //	 **************************************************************************/
 //	boolean is_heli_unittype(int id) {
-//		return (unit_types[id].move_type == HELI_MOVING);
+//		return (unit_types[id].move_type == unit_move_type.HELI_MOVING);
 //	}
 //
-//	/***************************************************************************
-//	 * ...
-//	 **************************************************************************/
-//	boolean is_water_unit(int id) {
-//		return (unit_types[id].move_type == SEA_MOVING);
-//	}
+	/***************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static boolean is_water_unit(int id) {
+		return (unit_types[id].move_type == unit_move_type.SEA_MOVING);
+	}
 //
 //	/***************************************************************************
 //	 * ...
 //	 **************************************************************************/
 //	int utype_shield_cost(unit_type ut, government g) {
-//		if (government_has_flag(g, G_FANATIC_TROOPS)
+//		if (Government.government_has_flag(g, G_FANATIC_TROOPS)
 //				&& BV_ISSET(ut.flags, F_FANATIC)) {
 //			return 0;
 //		}
@@ -118,7 +119,7 @@ public class Unittype_P {
 	/***************************************************************************
 	 * ...
 	 **************************************************************************/
-	static boolean unit_type_flag(int id, Eunit_flag_id flag) {
+	public static boolean unit_type_flag(int id, Eunit_flag_id flag) {
 		// assert (flag >= 0 && flag < F_LAST);
 		assert (flag != Eunit_flag_id.F_LAST);
 		// return BV_ISSET(unit_types[id].flags, flag); //TODO
@@ -228,7 +229,7 @@ public class Unittype_P {
 //	 {
 //	 int count = num_role_units(flag);
 //	 if (count == 1) {
-//	 return mystrdup(unit_name(get_role_unit(flag, 0)));
+//	 return (unit_name(get_role_unit(flag, 0)));
 //	 }
 //	 if (count > 0) {
 //	 struct astring astr;
@@ -318,9 +319,9 @@ public class Unittype_P {
 //	 {
 //	 enum unit_move_type i;
 //	 /* a compile-time check would be nicer, but this will do: */
-//	 assert(ARRAY_SIZE(move_type_names) == (AIR_MOVING - LAND_MOVING + 1));
-//	 for(i=LAND_MOVING; i<=AIR_MOVING; i++) {
-//	 if (mystrcasecmp(move_type_names[i-LAND_MOVING], s)==0) {
+//	 assert(ARRAY_SIZE(move_type_names) == (unit_move_type.AIR_MOVING - unit_move_type.LAND_MOVING + 1));
+//	 for(i=unit_move_type.LAND_MOVING; i<=unit_move_type.AIR_MOVING; i++) {
+//	 if (mystrcasecmp(move_type_names[i-unit_move_type.LAND_MOVING], s)==0) {
 //	 return i;
 //	 }
 //	 }
@@ -387,7 +388,7 @@ public class Unittype_P {
 //	 return false;
 //	 }
 //	 if (unit_type_flag(id, F_FANATIC)
-//	 && !government_has_flag(get_gov_pplayer(p), G_FANATIC_TROOPS))
+//	 && !Government.government_has_flag(get_gov_pplayer(p), G_FANATIC_TROOPS))
 //	 return false;
 //	 if (get_invention(p,unit_types[id].tech_requirement)!=TECH_KNOWN)
 //	 return false;
@@ -409,7 +410,7 @@ public class Unittype_P {
 //		 */
 //	 impr_req = unit_types[id].impr_requirement;
 //	 tech_req = get_improvement_type(impr_req).tech_req;
-//	 if (impr_req != B_LAST && get_invention(p, tech_req) != TECH_KNOWN) {
+//	 if (impr_req != Improvement.B_LAST && get_invention(p, tech_req) != TECH_KNOWN) {
 //	 return false;
 //	 }
 //	 return true;

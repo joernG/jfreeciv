@@ -1,5 +1,7 @@
 package client.gui_xaw;
 
+import common.Game;
+
 public class Wldlg{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -91,9 +93,9 @@ public class Wldlg{
 //  char *worklist_names_ptrs[MAX_LEN_WORKLIST+1];
 //  char worklist_names[MAX_LEN_WORKLIST][200];
 //  int worklist_ids[MAX_LEN_WORKLIST];
-//  char *worklist_avail_names_ptrs[B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1+1];
-//  char worklist_avail_names[B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1][200];
-//  int worklist_avail_ids[B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1];
+//  char *worklist_avail_names_ptrs[Improvement.B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1+1];
+//  char worklist_avail_names[Improvement.B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1][200];
+//  int worklist_avail_ids[Improvement.B_LAST+1+unittype.U_LAST+1+MAX_NUM_WORKLISTS+1];
 //  int worklist_avail_num_improvements;
 //  int worklist_avail_num_targets;
 //};
@@ -571,7 +573,7 @@ public class Wldlg{
 //  if ((inx < 0) || (inx >= MAX_LEN_WORKLIST)) {
 //    return WORKLIST_END;
 //  } else if (pwl.wlefs[inx] == WEF_UNIT) {
-//    return pwl.wlids[inx] + B_LAST;
+//    return pwl.wlids[inx] + Improvement.B_LAST;
 //  } else if (pwl.wlefs[inx] == WEF_IMPR) {
 //    return pwl.wlids[inx];
 //  } else {
@@ -590,7 +592,7 @@ public class Wldlg{
 //	    get_unit_name(id), Unittype_P.unit_build_shield_cost(id));
 //  else if (pcity)
 //    sprintf(buf, "%s (%d)",
-//	    get_impr_name_ex(pcity, id), Improvement.impr_build_shield_cost(id));
+//	    City.get_impr_name_ex(pcity, id), Improvement.impr_build_shield_cost(id));
 //  else
 //    sprintf(buf, "%s (%d)",
 //	    Improvement.get_improvement_name(id), Improvement.impr_build_shield_cost(id));
@@ -1101,9 +1103,9 @@ public class Wldlg{
 //    if (pdialog.worklist_ids[i] == WORKLIST_END) {
 //      wl.wlefs[i] = WEF_END;
 //      wl.wlids[i] = 0;
-//    } else if (pdialog.worklist_ids[i] >= B_LAST) {
+//    } else if (pdialog.worklist_ids[i] >= Improvement.B_LAST) {
 //      wl.wlefs[i] = WEF_UNIT;
-//      wl.wlids[i] = pdialog.worklist_ids[i] - B_LAST;
+//      wl.wlids[i] = pdialog.worklist_ids[i] - Improvement.B_LAST;
 //    } else if (pdialog.worklist_ids[i] >= 0) {
 //      wl.wlefs[i] = WEF_IMPR;
 //      wl.wlids[i] = pdialog.worklist_ids[i];
@@ -1203,7 +1205,7 @@ public class Wldlg{
 //  if(id >= 0) {
 //    if (is_unit) {
 //      popup_help_dialog_typed(get_unit_type(id).name, HELP_UNIT);
-//    } else if(is_wonder(id)) {
+//    } else if(Improvement.is_wonder(id)) {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_WONDER);
 //    } else {
 //      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_IMPROVEMENT);
@@ -1255,7 +1257,7 @@ public class Wldlg{
 //			id, pdialog.pcity.is_building_unit, pdialog.pcity);
 //
 //    if (pdialog.pcity.is_building_unit)
-//      id += B_LAST;
+//      id += Improvement.B_LAST;
 //    pdialog.worklist_names_ptrs[n] = pdialog.worklist_names[n];
 //    pdialog.worklist_ids[n] = id;
 //    n++;
@@ -1303,7 +1305,7 @@ public class Wldlg{
 //    advanced_tech = false;
 // 
 //  /*     + First, improvements and Wonders. */
-//  impr_type_iterate(i) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
 //    /* Can the player (eventually) build this improvement? */
 //    can_build = can_player_build_improvement(pplr,i);
 //    can_eventually_build = can_player_eventually_build_improvement(pplr,i);
@@ -1322,7 +1324,7 @@ public class Wldlg{
 //      pdialog.worklist_avail_names_ptrs[n]=pdialog.worklist_avail_names[n];
 //      pdialog.worklist_avail_ids[n++]=i;
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //  pdialog.worklist_avail_num_improvements=n;
 //
 //  /*     + Second, units. */

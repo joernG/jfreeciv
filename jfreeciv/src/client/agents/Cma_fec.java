@@ -141,7 +141,7 @@ public class Cma_fec{
 //  cm_copy_parameter(&ppreset.parameter, pparam);
 //  ppreset.descr = fc_malloc(MAX_LEN_PRESET_NAME);
 //  () mystrlcpy(ppreset.descr, descr_name, MAX_LEN_PRESET_NAME);
-//  preset_list_insert(&preset_list, ppreset);
+//  &preset_list.foo_list_insert(ppreset);
 //}
 //
 ///**************************************************************************

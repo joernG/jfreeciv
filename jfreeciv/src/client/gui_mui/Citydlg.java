@@ -1,5 +1,7 @@
 package client.gui_mui;
 
+import common.Game;
+
 public class Citydlg{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -406,7 +408,7 @@ public class Citydlg{
 //  city_dialog pdialog;
 //
 //  pcity_sup = Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
-//  pcity_pre = map_get_city(punit.tile);
+//  pcity_pre = Map.map_get_city(punit.tile);
 //
 //  if (pcity_sup && (pdialog = get_city_dialog(pcity_sup)))
 //    city_dialog_update_supported_units(pdialog, 0);
@@ -565,7 +567,7 @@ public class Citydlg{
 //	{
 //	  /* Unit */
 //	  which -= 10000;
-//	  name = String.format( unit_name(which));
+//	  name = String.format( Unittype_P.unit_name(which));
 //
 //	  {
 //	    /* from unit.h get_unit_name() */
@@ -595,14 +597,14 @@ public class Citydlg{
 //      info[0] = 0;
 //
 //      {
-//	/* from city.c get_impr_name_ex() */
+//	/* from city.c City.get_impr_name_ex() */
 //	if (wonder_replacement(pcity, which))
 //        {
 //          info = String.format( "*");
 //	}
 //	else
 //	{
-//	  if (is_wonder(which))
+//	  if (Improvement.is_wonder(which))
 //	  {
 //	    info = String.format( "Wonder");
 //	    if (Game.game.global_wonders[which])
@@ -655,7 +657,7 @@ public class Citydlg{
 //  {
 //    city_dialog pdialog = (city_dialog ) hook.h_Data;
 //    which--;
-//    name = util.my_snprintf( "%s", get_impr_name_ex(pdialog.pcity, which));
+//    name = util.my_snprintf( "%s", City.get_impr_name_ex(pdialog.pcity, which));
 //    cost = util.my_snprintf( "%d", improvement_upkeep(pdialog.pcity, which));
 //    *array++ = name;
 //    *array = cost;
@@ -836,7 +838,7 @@ public class Citydlg{
 //    /* Very special case: If we are currently building a wonder we
 //       allow the finalruction to continue, even if we the wonder is
 //       finished elsewhere, ie unbuildable. */
-//    if (k == 0 && !is_unit && is_wonder(id) && same_as_current_build) {
+//    if (k == 0 && !is_unit && Improvement.is_wonder(id) && same_as_current_build) {
 //      worklist_remove(pwl, k);
 //      break;
 //    }
@@ -881,8 +883,7 @@ public class Citydlg{
 //  city_node node;
 //  NewList((List ) &list);
 //
-//  city_list_iterate(pplayer.cities, pcity)
-//  {
+//  for(city pcity : pplayer.cities.data){//  {
 //    city_node node = malloc_struct(struct city_node);
 //    if (node)
 //    {
@@ -953,7 +954,7 @@ public class Citydlg{
 //  }
 //  else
 //  {
-//    name = get_impr_name_ex(pdialog.pcity, pdialog.pcity.currently_building);
+//    name = City.get_impr_name_ex(pdialog.pcity, pdialog.pcity.currently_building);
 //  }
 //
 //  value = City.city_buy_cost(pdialog.pcity);
@@ -995,11 +996,11 @@ public class Citydlg{
 //    if (!i--)
 //      return;
 //
-//    if (is_wonder(i))
+//    if (Improvement.is_wonder(i))
 //      return;
 //
 //    buf = util.my_snprintf( "Sell %s for %d gold?",
-//		get_impr_name_ex(pdialog.pcity, i), Improvement.impr_sell_gold(i));
+//		City.get_impr_name_ex(pdialog.pcity, i), Improvement.impr_sell_gold(i));
 //
 //    pdialog.sell_id = i;
 //    pdialog.sell_wnd = popup_message_dialog(pdialog.wnd,
@@ -1020,7 +1021,7 @@ public class Citydlg{
 //  int xtile = msg.click.x;
 //  int ytile = msg.click.y;
 //
-//  if (City.is_valid_city_coords(xtile, ytile)) {
+//  if (City.City.is_valid_city_coords(xtile, ytile)) {
 //    city_toggle_worker(pcity, xtile, ytile);
 //  }
 //}
@@ -1035,11 +1036,11 @@ public class Citydlg{
 //
 //  switch (from)  {
 //  case CITIZEN_ELVIS:
-//    to = SP_SCIENTIST;
+//    to = specialist_type.SP_SCIENTIST;
 //    break;
 //
 //  case CITIZEN_SCIENTIST:
-//    to = SP_TAXMAN;
+//    to = specialist_type.SP_TAXMAN;
 //    break;
 //
 //  case CITIZEN_TAXMAN:
@@ -1131,7 +1132,7 @@ public class Citydlg{
 //    else
 //    {
 //      which--;
-//      if (is_wonder(which))
+//      if (Improvement.is_wonder(which))
 //      {
 //	popup_help_dialog_typed(Improvement.get_improvement_name(which), HELP_WONDER);
 //      }
@@ -1263,7 +1264,7 @@ public class Citydlg{
 //
 //    DoMethod(pcprod.available_listview, MUIM_NList_Clear);
 //
-//    impr_type_iterate(i) {
+//    for (int i = 0; i < Game.game.num_impr_types; i++) {
 //      if (City.can_build_improvement(pcity, i))
 //      {
 //        improv = true;
@@ -1275,7 +1276,7 @@ public class Citydlg{
 //
 //        pos++;
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //
 //    if (improv)
 //    {
@@ -1771,7 +1772,7 @@ public class Citydlg{
 //    descr = get_unit_type(pcity.currently_building).name;
 //  } else {
 //    max_shield = Improvement.impr_build_shield_cost(pcity.currently_building);
-//    descr = get_impr_name_ex(pcity, pcity.currently_building);
+//    descr = City.get_impr_name_ex(pcity, pcity.currently_building);
 //  }
 //
 //  if (!worklist_is_empty(&pcity.worklist)) {
@@ -2031,7 +2032,7 @@ public class Citydlg{
 //
 //  buf[0] = '\0';
 //
-//  for (i = 0; i < NUM_TRADEROUTES; i++) {
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //    if (pdialog.pcity.trade[i]) {
 //      city pcity;
 //      x = 1;
@@ -2064,11 +2065,11 @@ public class Citydlg{
 //static void city_dialog_update_title(city_dialog pdialog)
 //{
 //  char *state;
-//  if (city_unhappy(pdialog.pcity)) {
+//  if (City.city_unhappy(pdialog.pcity)) {
 //    state = " - DISORDER";
-//  } else if (city_celebrating(pdialog.pcity)) {
+//  } else if (City.city_celebrating(pdialog.pcity)) {
 //    state = " - celebrating";
-//  } else if (city_happy(pdialog.pcity)) {
+//  } else if (City.city_happy(pdialog.pcity)) {
 //    state = " - happy";
 //  } else state = null;
 //
@@ -2092,13 +2093,16 @@ public class Citydlg{
 //{
 //  LONG j = 0, refresh = false, imprv;
 //
-//  built_impr_iterate(pdialog.pcity, i) {
+//	for (int i = 0; i < Game.game.num_impr_types; i++) {
+//	if((pdialog.pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
 //    DoMethod(pdialog.imprv_listview, MUIM_NList_GetEntry, j++, &imprv);
 //    if (!imprv || imprv - 1 != i) {
 //      refresh = true;
 //      goto out;
 //    }
-//  } built_impr_iterate_end;
+//  } ;
 // out:
 //  /* check the case for to much improvements in list */
 //  DoMethod(pdialog.imprv_listview, MUIM_NList_GetEntry, j, &imprv);
@@ -2108,10 +2112,13 @@ public class Citydlg{
 //    set(pdialog.imprv_listview, MUIA_NList_Quiet, true);
 //    DoMethod(pdialog.imprv_listview, MUIM_NList_Clear);
 //
-//    built_impr_iterate(pdialog.pcity, i) {
+//	for (int i = 0; i < Game.game.num_impr_types; i++) {
+//	if((pdialog.pcity).improvements[i] == Improvement.I_NONE) {
+//		continue;
+//	}
 //      DoMethod(pdialog.imprv_listview, MUIM_NList_InsertSingle, i + 1,
 //	       MUIV_NList_Insert_Bottom);
-//    } built_impr_iterate_end;
+//    } ;
 //
 //    set(pdialog.imprv_listview, MUIA_NList_Quiet, false);
 //  }
@@ -2195,7 +2202,7 @@ public class Citydlg{
 //
 //  city pcity = pdialog.pcity;
 //  player pplayer = &Game.game.players[pcity.owner];
-//  government g = get_gov_pcity(pcity);
+//  government g = Government.get_gov_pcity(pcity);
 //  int cities = pplayer.cities.foo_list_size();
 //  int content = Game.game.unhappysize;
 //  int basis = Game.game.cityfactor + g.empire_size_mod;

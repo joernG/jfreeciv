@@ -1400,7 +1400,7 @@ public class Repodlgs{
 //  
 //  /* send sell */
 //  for (city pCity : Game.game.player_ptr.cities.data) {
-//    if(!pCity.did_sell && city_got_building(pCity, imp)){
+//    if(!pCity.did_sell && City.city_got_building(pCity, imp)){
 //	count++;
 //
 //	city_sell_improvement(pCity, imp);
@@ -1463,7 +1463,7 @@ public class Repodlgs{
 //  value = Improvement.impr_sell_gold(imp);
 //  
 //  for (city pCity : Game.game.player_ptr.cities.data) {
-//    if(!pCity.did_sell && city_got_building(pCity, imp)) {
+//    if(!pCity.did_sell && City.city_got_building(pCity, imp)) {
 //	count++;
 //        gold += value;
 //    }
@@ -1596,7 +1596,7 @@ public class Repodlgs{
 //    GUI pBuf = pEconomyDlg.pEndWidgetList;
 //    int tax, total, entries_used = 0;
 //    char cBuf[128];
-//    struct improvement_entry entries[B_LAST];
+//    struct improvement_entry entries[Improvement.B_LAST];
 //    
 //    get_economy_report_data(entries, &entries_used, &total, &tax);
 //  
@@ -1673,7 +1673,7 @@ public class Repodlgs{
 //  int i, w = 0 , count , h, w2 = 0, w3;
 //  int tax, total, entries_used = 0;
 //  char cBuf[128];
-//  struct improvement_entry entries[B_LAST];
+//  struct improvement_entry entries[Improvement.B_LAST];
 //  SDL_Color color = {255,255,255,128};
 //  SDL_Rect dst;
 //  government pGov = get_gov_pplayer(Game.game.player_ptr);
@@ -2266,7 +2266,7 @@ public class Repodlgs{
 //    case A_NONE:
 //    case A_UNSET:
 //    case A_NOINFO:
-//    case A_LAST:
+//    case Tech_H.A_LAST:
 //      return pNone_Tech_Icon;
 //    case A_FUTURE:
 //      return pFuture_Tech_Icon;
@@ -2370,12 +2370,12 @@ public class Repodlgs{
 //
 //    /* fill array with iprvm. icons */
 //    w = 0;
-//    impr_type_iterate(imp) {
+//    for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
 //      pImpr = get_improvement_type(imp);
 //      if (pImpr.tech_req == tech_id) {
 //        Surf_Array[w++] = GET_SURF(pImpr.sprite);
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //
 //    if (w) {
 //      if (w >= 2) {
@@ -2620,13 +2620,13 @@ public class Repodlgs{
 //    dest.y += dest.h + 4;
 //    dest.x = pWindow.prev.size.x + pWindow.prev.size.w + 10;
 //
-//    impr_type_iterate(imp) {
+//    for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
 //      pImpr = get_improvement_type(imp);
 //      if (pImpr.tech_req == Game.game.player_ptr.research.researching) {
 //        SDL_BlitSurface(GET_SURF(pImpr.sprite), null, pWindow.dst, &dest);
 //        dest.x += GET_SURF(pImpr.sprite).w + 1;
 //      }
-//    } impr_type_iterate_end;
+//    } ;
 //
 //    dest.x += 5;
 //
@@ -2678,13 +2678,13 @@ public class Repodlgs{
 //      dest.y += pSurf.h + 4;
 //      FREESURFACE(pSurf);
 //
-//      impr_type_iterate(imp) {
+//      for (int imp = 0; imp < Game.game.num_impr_types; imp++) {
 //        pImpr = get_improvement_type(imp);
 //        if (pImpr.tech_req == Game.game.player_ptr.ai.tech_goal) {
 //          SDL_BlitSurface(GET_SURF(pImpr.sprite), null, pWindow.dst, &dest);
 //          dest.x += GET_SURF(pImpr.sprite).w + 1;
 //        }
-//      } impr_type_iterate_end;
+//      } ;
 //
 //      dest.x += 5;
 //
@@ -2982,7 +2982,7 @@ public class Repodlgs{
 //  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
 //    if (tech_is_available(Game.game.player_ptr, i)
 //        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
-//        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
+//        && advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST
 //	&& (num_unknown_techs_for_goal(Game.game.player_ptr, i) < 11
 //	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //      count++;
@@ -3052,7 +3052,7 @@ public class Repodlgs{
 //  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
 //    if (tech_is_available(Game.game.player_ptr, i)
 //        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
-//        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST
+//        && advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST
 //	&& ((num = num_unknown_techs_for_goal(Game.game.player_ptr, i)) < 11
 //	    || i == Game.game.player_ptr.ai.tech_goal)) {
 //    
@@ -3191,7 +3191,7 @@ public class Repodlgs{
 //  for (i = A_FIRST; i < Game.game.num_tech_types; i++) {
 //    if (tech_is_available(Game.game.player_ptr, i)
 //        && get_invention(Game.game.player_ptr, i) != TECH_KNOWN
-//        && advances[i].req[0] != A_LAST && advances[i].req[1] != A_LAST) {
+//        && advances[i].req[0] != Tech_H.A_LAST && advances[i].req[1] != Tech_H.A_LAST) {
 //	count++;	  
 //    }
 //  }

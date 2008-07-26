@@ -76,16 +76,16 @@ public class unit {
 //				+ punit.unit_type().veteran[punit.veteran].move_bonus;
 //
 //		switch (punit.unit_type().move_type) {
-//		case LAND_MOVING:
+//		case unit_move_type.LAND_MOVING:
 //			move_rate = (base_move_rate * punit.hp) / punit.unit_type().hp;
 //			break;
 //
-//		case SEA_MOVING:
+//		case unit_move_type.SEA_MOVING:
 //			move_rate = (base_move_rate * punit.hp) / punit.unit_type().hp;
 //
 //			move_rate += (get_player_bonus(punit.unit_owner(), EFT_SEA_MOVE) * Unit_H.SINGLE_MOVE);
 //
-//			if (player_knows_techs_with_flag(punit.unit_owner(), TF_BOAT_FAST)) {
+//			if (Player_P.player_knows_techs_with_flag(punit.unit_owner(), TF_BOAT_FAST)) {
 //				move_rate += Unit_H.SINGLE_MOVE;
 //			}
 //
@@ -94,8 +94,8 @@ public class unit {
 //			}
 //			break;
 //
-//		case HELI_MOVING:
-//		case AIR_MOVING:
+//		case unit_move_type.HELI_MOVING:
+//		case unit_move_type.AIR_MOVING:
 //			move_rate = base_move_rate;
 //			break;
 //

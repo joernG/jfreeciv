@@ -1,5 +1,7 @@
 package client.gui_mui;
 
+import common.Game;
+
 public class Worklistclass{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -101,14 +103,14 @@ public class Worklistclass{
 //*****************************************************************/
 //char *get_improvement_info(int id, city pcity)
 //{
-//  /* from city.c get_impr_name_ex() */
+//  /* from city.c City.get_impr_name_ex() */
 //  if (pcity)
 //  {
 //    if (wonder_replacement(pcity, id))
 //      return "*";
 //  }
 //
-//  if (is_wonder(id))
+//  if (Improvement.is_wonder(id))
 //  {
 //    if (Game.game.global_wonders[id])
 //      return "Built";
@@ -190,7 +192,7 @@ public class Worklistclass{
 //            mystrlcpy(buf,get_unit_info(id),64);
 //	    buf2 = String.format "%d", Unittype_P.unit_build_shield_cost(id));
 //
-//	    *array++ = unit_name(id);
+//	    *array++ = Unittype_P.unit_name(id);
 //	    *array++ = buf;
 //	    *array = buf2;
 //	    break;
@@ -461,7 +463,7 @@ public class Worklistclass{
 //  boolean show_advanced_targets;
 //
 //  
-//  wid worklist_avail_wids[B_LAST + unittype.U_LAST + MAX_NUM_WORKLISTS + 1];
+//  wid worklist_avail_wids[Improvement.B_LAST + unittype.U_LAST + MAX_NUM_WORKLISTS + 1];
 //};
 //
 //
@@ -487,7 +489,7 @@ public class Worklistclass{
 //  entry.id = 0;
 //  DoMethod(data.available_listview, MUIM_NList_InsertSingle, &entry, MUIV_NList_Insert_Bottom);
 //
-//  impr_type_iterate(i) {
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
 //    /* Can the player (eventually) build this improvement? */
 //    can_build = can_player_build_improvement(pplr,i);
 //    can_eventually_build = could_player_eventually_build_improvement(pplr,i);
@@ -506,7 +508,7 @@ public class Worklistclass{
 //      entry.id = i;
 //      DoMethod(data.available_listview, MUIM_NList_InsertSingle, &entry, MUIV_NList_Insert_Bottom);
 //    }
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  /*     + Second, units. */
 //  entry.type = 3;

@@ -159,7 +159,7 @@ public class Finddlg{
 //  
 //  for(i=0, j=0; i<Game.game.nplayers; i++) {
 //    city_list_iterate(Game.game.players[i].cities, pcity) 
-//      *(city_name_ptrs+j++)=mystrdup(pcity.name);
+//      *(city_name_ptrs+j++)=(pcity.name);
 //    }
 //  }
 //  
@@ -197,7 +197,7 @@ public class Finddlg{
 //  ret=XawListShowCurrent(find_list);
 //
 //  if(ret.list_index!=XAW_LIST_NONE)
-//    if((pcity=game_find_city_by_name(ret.string)))
+//    if((pcity=Game.game_find_city_by_name(ret.string)))
 //      center_tile_mapcanvas(pcity.tile);
 //  
 //  popdown_find_dialog();
@@ -224,7 +224,7 @@ public class Finddlg{
 //  ret=XawListShowCurrent(find_list);
 //
 //  if(ret.list_index!=XAW_LIST_NONE)
-//    if((pcity=game_find_city_by_name(ret.string)))
+//    if((pcity=Game.game_find_city_by_name(ret.string)))
 //      center_tile_mapcanvas(pcity.tile);
 //}
 }

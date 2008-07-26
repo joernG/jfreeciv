@@ -17,7 +17,7 @@ public class player {
 	public int player_no;
 	//	  String name="";
 	public String name;
-	//	  char username[MAX_LEN_NAME];
+	//	  String username;
 	public String  username= "";
 	public boolean is_male;
 	public int government;
@@ -45,7 +45,7 @@ public class player {
 	public Speclists<city> cities;
 	//	  struct player_score score;
 	public player_economic economic;
-	//	  struct player_research research;
+		  public player_research research;
 	public player_spaceship spaceship;
 	public int future_tech;
 	public player_ai ai;
@@ -57,7 +57,7 @@ public class player {
 	//	  struct player_tile *private_map;
 	//	  unsigned public int gives_shared_vision; /* bitvector those that give you shared vision */
 	//	  unsigned public int really_gives_vision; /* takes into account that p3 may see what p1 has via p2 */
-	//	  int improvements[B_LAST]; /* improvements with equiv_range==Player */
+	//	  int improvements[Improvement.B_LAST]; /* improvements with equiv_range==Player */
 	//	  int *island_improv; /* improvements with equiv_range==Island, dimensioned to
 	//				 	 [Map.map.num_continents][Game.game.num_impr_types] */
 	//	  struct {

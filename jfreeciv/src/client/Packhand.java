@@ -1,5 +1,7 @@
 package client;
 
+import common.Game;
+
 public class Packhand{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -221,7 +223,7 @@ public class Packhand{
 //
 //  ptile = pcity.tile;
 //  client_remove_city(pcity);
-//  reset_move_costs(ptile);
+//  Map.reset_move_costs(ptile);
 //
 //  /* update menus if the focus unit is on the tile. */
 //  if (get_unit_in_focus()) {
@@ -234,7 +236,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_unit_remove(int unit_id)
 //{
-//  unit punit = find_unit_by_id(unit_id);
+//  unit punit = Game.find_unit_by_id(unit_id);
 //  player powner;
 //
 //  if (!punit) {
@@ -269,8 +271,8 @@ public class Packhand{
 //			     boolean make_winner_veteran)
 //{
 //  boolean show_combat = false;
-//  unit punit0 = find_unit_by_id(attacker_unit_id);
-//  unit punit1 = find_unit_by_id(defender_unit_id);
+//  unit punit0 = Game.find_unit_by_id(attacker_unit_id);
+//  unit punit1 = Game.find_unit_by_id(defender_unit_id);
 //
 //  if (punit0 && punit1) {
 //    unit pwinner = (defender_hp == 0 ? punit0 : punit1);
@@ -332,14 +334,14 @@ public class Packhand{
 //					   int impr, boolean have_impr,
 //					   boolean *impr_changed)
 //{
-//  if (have_impr && pcity.improvements[impr] == I_NONE) {
+//  if (have_impr && pcity.improvements[impr] == Improvement.I_NONE) {
 //    city_add_improvement(pcity, impr);
 //
 //    if (impr_changed) {
 //      *impr_changed = true;
 //    }
-//  } else if (!have_impr && pcity.improvements[impr] != I_NONE) {
-//    city_remove_improvement(pcity, impr);
+//  } else if (!have_impr && pcity.improvements[impr] != Improvement.I_NONE) {
+//    City.city_remove_improvement(pcity, impr);
 //
 //    if (impr_changed) {
 //      *impr_changed = true;
@@ -366,7 +368,7 @@ public class Packhand{
 //
 //  if (get_client_state() == CLIENT_SELECT_RACE_STATE
 //      && value == CLIENT_GAME_RUNNING_STATE
-//      && Game.game.player_ptr.nation == NO_NATION_SELECTED) {
+//      && Game.game.player_ptr.nation == Nation_H.NO_NATION_SELECTED) {
 //    popdown_races_dialog();
 //  }
 //  
@@ -422,11 +424,11 @@ public class Packhand{
 //
 //  if(!pcity) {
 //    city_is_new = true;
-//    pcity = create_city_virtual(get_player(packet.owner),
+//    pcity = City.create_city_virtual(get_player(packet.owner),
 //				map_pos_to_tile(packet.x, packet.y),
 //				packet.name);
 //    pcity.id=packet.id;
-//    idex_register_city(pcity);
+//    Idex.idex_register_city(pcity);
 //    update_descriptions = true;
 //  }
 //  else {
@@ -470,7 +472,7 @@ public class Packhand{
 //
 //  pcity.city_options = packet.city_options;
 //
-//  for (i = 0; i < NUM_TRADEROUTES; i++) {
+//  for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //    pcity.trade[i]=packet.trade[i];
 //    pcity.trade_value[i]=packet.trade_value[i];
 //  }
@@ -525,24 +527,24 @@ public class Packhand{
 //    final int x = i % City_H.CITY_MAP_SIZE, y = i / City_H.CITY_MAP_SIZE;
 //
 //    if (city_is_new) {
-//      /* Need to pre-initialize before set_worker_city()  -- dwp */
+//      /* Need to pre-initialize before City.set_worker_city()  -- dwp */
 //      pcity.city_map[x][y] =
-//	City.is_valid_city_coords(x, y) ? city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE;
+//	City.City.is_valid_city_coords(x, y) ? city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE;
 //    }
-//    if (City.is_valid_city_coords(x, y)) {
-//      set_worker_city(pcity, x, y, packet.city_map[i]);
+//    if (City.City.is_valid_city_coords(x, y)) {
+//      City.set_worker_city(pcity, x, y, packet.city_map[i]);
 //    }
 //  }
 //  
-//  impr_type_iterate(i) {
-//    if (pcity.improvements[i] == I_NONE && packet.improvements[i] == '1'
+//  for (int i = 0; i < Game.game.num_impr_types; i++) {
+//    if (pcity.improvements[i] == Improvement.I_NONE && packet.improvements[i] == '1'
 //	&& !city_is_new) {
 //      audio_play_sound(get_improvement_type(i).soundtag,
 //		       get_improvement_type(i).soundtag_alt);
 //    }
 //    update_improvement_from_packet(pcity, i, packet.improvements[i] == '1',
 //                                   &need_effect_update);
-//  } impr_type_iterate_end;
+//  } ;
 //
 //  /* We should be able to see units in the city.  But for a diplomat
 //   * investigating an enemy city we can't.  In that case we don't update
@@ -553,8 +555,8 @@ public class Packhand{
 //      = (pcity.tile.units.foo_list_size() > 0);
 //  }
 //
-//  pcity.client.happy = city_happy(pcity);
-//  pcity.client.unhappy = city_unhappy(pcity);
+//  pcity.client.happy = City.city_happy(pcity);
+//  pcity.client.unhappy = City.city_unhappy(pcity);
 //
 //  popup = (city_is_new && can_client_change_view()
 //           && pcity.owner == Game.game.player_idx && popup_new_cities)
@@ -599,18 +601,18 @@ public class Packhand{
 //  int i;
 //
 //  if(is_new) {
-//    unit_list_init(&pcity.units_supported);
-//    unit_list_init(&pcity.info_units_supported);
-//    unit_list_init(&pcity.info_units_present);
+//    pcity.units_supported.foo_list_init();
+//    pcity.info_units_supported.foo_list_init();
+//    pcity.info_units_present.foo_list_init();
 //    city_list_insert(&City.city_owner(pcity).cities, pcity);
-//    map_set_city(pcity.tile, pcity);
+//    Map.map_set_city(pcity.tile, pcity);
 //    if(pcity.owner==Game.game.player_idx)
 //      city_report_dialog_update();
 //
 //    for(i=0; i<Game.game.nplayers; i++) {
 //      unit_list_iterate(Game.game.players[i].units, punit) 
 //	if(punit.homecity==pcity.id)
-//	  unit_list_insert(&pcity.units_supported, punit);
+//	  &pcity.units_supported.foo_list_insert(punit);
 //      }
 //    }
 //  } else {
@@ -673,7 +675,7 @@ public class Packhand{
 //	    pcity.name, pcity.id, TILE_XY(pcity.tile));
 //  }
 //
-//  reset_move_costs(pcity.tile);
+//  Map.reset_move_costs(pcity.tile);
 //}
 //
 ///**************************************************************************
@@ -697,7 +699,7 @@ public class Packhand{
 //    city_is_new = true;
 //    pcity=fc_malloc(sizeof(struct city));
 //    pcity.id=packet.id;
-//    idex_register_city(pcity);
+//    Idex.idex_register_city(pcity);
 //  }
 //  else {
 //    city_is_new = false;
@@ -759,7 +761,7 @@ public class Packhand{
 //    specialist_type_iterate(sp) {
 //      pcity.specialists[sp] = 0;
 //    } specialist_type_iterate_end;
-//    for (i = 0; i < NUM_TRADEROUTES; i++) {
+//    for (i = 0; i < City_H.NUM_TRADEROUTES; i++) {
 //      pcity.trade[i] = 0;
 //      pcity.trade_value[i] = 0;
 //    }
@@ -1100,7 +1102,7 @@ public class Packhand{
 //      
 //      punit.homecity = packet_unit.homecity;
 //      if ((pcity=Game.find_city_by_id(punit.homecity))) {
-//	unit_list_insert(&pcity.units_supported, punit);
+//	&pcity.units_supported.foo_list_insert(punit);
 //	repaint_city = true;
 //      }
 //    }
@@ -1113,7 +1115,7 @@ public class Packhand{
 //
 //    if (punit.type != packet_unit.type) {
 //      /* Unit type has changed (been upgraded) */
-//      city pcity = map_get_city(punit.tile);
+//      city pcity = Map.map_get_city(punit.tile);
 //      
 //      punit.type = packet_unit.type;
 //      repaint_unit = true;
@@ -1135,7 +1137,7 @@ public class Packhand{
 //
 //    if (!Map.same_pos(punit.tile, packet_unit.tile)) { 
 //      /*** Change position ***/
-//      city pcity = map_get_city(punit.tile);
+//      city pcity = Map.map_get_city(punit.tile);
 //
 //      old_tile = punit.tile;
 //      moved = true;
@@ -1167,7 +1169,7 @@ public class Packhand{
 //	  refresh_city_dialog(pcity);
 //      }
 //      
-//      if((pcity=map_get_city(punit.tile)))  {
+//      if((pcity=Map.map_get_city(punit.tile)))  {
 //	if (can_player_see_units_in_city(Game.game.player_ptr, pcity)) {
 //	  /* Unit moved into a city - obviously it's occupied. */
 //	  if (!pcity.client.occupied) {
@@ -1241,21 +1243,21 @@ public class Packhand{
 //    idex_register_unit(punit);
 //
 //    unit_list_insert(&get_player(punit.owner).units, punit);
-//    unit_list_insert(&punit.tile.units, punit);
+//    &punit.tile.units.foo_list_insert(punit);
 //
 //    if((pcity=Game.find_city_by_id(punit.homecity))) {
-//      unit_list_insert(&pcity.units_supported, punit);
+//      &pcity.units_supported.foo_list_insert(punit);
 //    }
 //
 //    util.freelog(Log.LOG_DEBUG, "New %s %s id %d (%d %d) hc %d %s", 
 //	    Nation.get_nation_name(punit.unit_owner().nation),
-//	    unit_name(punit.type), TILE_XY(punit.tile), punit.id,
+//	    Unittype_P.unit_name(punit.type), TILE_XY(punit.tile), punit.id,
 //	    punit.homecity, (pcity ? pcity.name : "(unknown)"));
 //
 //    repaint_unit = (punit.transported_by == -1);
 //    agents_unit_new(punit);
 //
-//    if ((pcity = map_get_city(punit.tile))) {
+//    if ((pcity = Map.map_get_city(punit.tile))) {
 //      /* The unit is in a city - obviously it's occupied. */
 //      pcity.client.occupied = true;
 //    }
@@ -1273,7 +1275,7 @@ public class Packhand{
 //  }
 //
 //  if (repaint_unit) {
-//    if (unit_type_flag(punit.type, F_CITIES)) {
+//    if (Unittype_P.unit_type_flag(punit.type, Eunit_flag_id.F_CITIES)) {
 //      int width = get_citydlg_canvas_width();
 //      int height = get_citydlg_canvas_height();
 //      int canvas_x, canvas_y;
@@ -1308,7 +1310,7 @@ public class Packhand{
 //  unit punit;
 //
 //  if (packet.goes_out_of_sight) {
-//    punit = find_unit_by_id(packet.id);
+//    punit = Game.find_unit_by_id(packet.id);
 //    if (punit) {
 //      client_remove_unit(punit);
 //    }
@@ -1417,12 +1419,12 @@ public class Packhand{
 //     * to work.
 //     */
 //    Game.game.palace_building = get_building_for_effect(EFT_CAPITAL_CITY);
-//    if (Game.game.palace_building == B_LAST) {
+//    if (Game.game.palace_building == Improvement.B_LAST) {
 //      util.freelog(LOG_FATAL, "Cannot find any palace building");
 //    }
 //
-//    Game.game.land_defend_building = get_building_for_effect(EFT_LAND_DEFEND);
-//    if (Game.game.land_defend_building == B_LAST) {
+//    Game.game.land_defend_building = get_building_for_effect(effect_type.EFT_LAND_DEFEND);
+//    if (Game.game.land_defend_building == Improvement.B_LAST) {
 //      util.freelog(LOG_FATAL, "Cannot find any land defend building");
 //    }
 //
@@ -1432,20 +1434,20 @@ public class Packhand{
 //    Game.game.player_idx = pinfo.player_idx;
 //    Game.game.player_ptr = &Game.game.players[Game.game.player_idx];
 //  }
-//  for(i=0; i<A_LAST/*Game.game.num_tech_types*/; i++)
+//  for(i=0; i<Tech_H.A_LAST/*Game.game.num_tech_types*/; i++)
 //    Game.game.global_advances[i]=pinfo.global_advances[i];
-//  for(i=0; i<B_LAST/*Game.game.num_impr_types*/; i++) {
+//  for(i=0; i<Improvement.B_LAST/*Game.game.num_impr_types*/; i++) {
 //     Game.game.global_wonders[i]=pinfo.global_wonders[i];
 ///* Only add in the improvement if it's in a "foreign" (i.e. unknown) city
 //   and has equiv_range==World - otherwise we deal with it in its home
 //   city anyway */
-//    if (is_wonder(i) && improvement_types[i].equiv_range==EFR_WORLD &&
+//    if (Improvement.is_wonder(i) && Improvement.improvement_types[i].equiv_range==EFR_WORLD &&
 //        !Game.find_city_by_id(Game.game.global_wonders[i])) {
-//      if (Game.game.global_wonders[i] <= 0 && Game.game.improvements[i] != I_NONE) {
-//        Game.game.improvements[i] = I_NONE;
+//      if (Game.game.global_wonders[i] <= 0 && Game.game.improvements[i] != Improvement.I_NONE) {
+//        Game.game.improvements[i] = Improvement.I_NONE;
 //        need_effect_update = true;
-//      } else if (Game.game.global_wonders[i] > 0 && Game.game.improvements[i] == I_NONE) {
-//        Game.game.improvements[i] = I_ACTIVE;
+//      } else if (Game.game.global_wonders[i] > 0 && Game.game.improvements[i] == Improvement.I_NONE) {
+//        Game.game.improvements[i] = Improvement.I_ACTIVE;
 //        need_effect_update = true;
 //      }
 //    }
@@ -1648,7 +1650,7 @@ public class Packhand{
 //        if (pconn.observer) {
 //          conn_list_insert_back(&pplayer.connections, pconn);
 //        } else {
-//          conn_list_insert(&pplayer.connections, pconn);
+//          &pplayer.connections.foo_list_insert(pconn);
 //        }
 //      }
 //    } }
@@ -2003,7 +2005,7 @@ public class Packhand{
 //      if (ptile.spec_sprite) {
 //	free(ptile.spec_sprite);
 //      }
-//      ptile.spec_sprite = mystrdup(packet.spec_sprite);
+//      ptile.spec_sprite = (packet.spec_sprite);
 //      tile_changed = true;
 //    }
 //  } else {
@@ -2014,7 +2016,7 @@ public class Packhand{
 //    }
 //  }
 //
-//  reset_move_costs(ptile);
+//  Map.reset_move_costs(ptile);
 //
 //  if (ptile.known <= TILE_KNOWN_FOGGED && old_known == TILE_KNOWN) {
 //    /* This is an error.  So first we log the error, then make an assertion.
@@ -2272,7 +2274,7 @@ public class Packhand{
 //    u.veteran[i].move_bonus = p.move_bonus[i];
 //  }
 //
-//  u.helptext = mystrdup(p.helptext);
+//  u.helptext = (p.helptext);
 //
 //  tilespec_setup_unit_type(p.id);
 //}
@@ -2284,7 +2286,7 @@ public class Packhand{
 //{
 //  advance a;
 //
-//  if(p.id < 0 || p.id >= Game.game.num_tech_types || p.id >= A_LAST) {
+//  if(p.id < 0 || p.id >= Game.game.num_tech_types || p.id >= Tech_H.A_LAST) {
 //    util.freelog(Log.LOG_ERROR, "Received bad advance id %d in handle_ruleset_tech()",
 //	    p.id);
 //    return;
@@ -2301,7 +2303,7 @@ public class Packhand{
 //  a.flags = p.flags;
 //  a.preset_cost = p.preset_cost;
 //  a.num_reqs = p.num_reqs;
-//  a.helptext = mystrdup(p.helptext);
+//  a.helptext = (p.helptext);
 //  
 //  tilespec_setup_tech_type(p.id);
 //}
@@ -2314,13 +2316,13 @@ public class Packhand{
 //  impr_type b;
 //  int i;
 //
-//  if(p.id < 0 || p.id >= Game.game.num_impr_types || p.id >= B_LAST) {
+//  if(p.id < 0 || p.id >= Game.game.num_impr_types || p.id >= Improvement.B_LAST) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "Received bad building id %d in handle_ruleset_building()",
 //	    p.id);
 //    return;
 //  }
-//  b = &improvement_types[p.id];
+//  b = &Improvement.improvement_types[p.id];
 //
 //  b.name_orig = p.name;
 //  b.name = b.name_orig;
@@ -2334,7 +2336,7 @@ public class Packhand{
 //  b.build_cost = p.build_cost;
 //  b.upkeep = p.upkeep;
 //  b.sabotage = p.sabotage;
-//  b.helptext = mystrdup(p.helptext);
+//  b.helptext = (p.helptext);
 //  b.soundtag = p.soundtag;
 //  b.soundtag_alt = p.soundtag_alt;
 //
@@ -2345,30 +2347,30 @@ public class Packhand{
 //  } \
 //  b.elem[p.count] = last;
 //
-//  T(terr_gate, terr_gate_count, T_NONE);
+//  T(terr_gate, terr_gate_count, Terrain_H.T_NONE);
 //  T(spec_gate, spec_gate_count, S_NO_SPECIAL);
-//  T(equiv_dupl, equiv_dupl_count, B_LAST);
-//  T(equiv_repl, equiv_repl_count, B_LAST);
+//  T(equiv_dupl, equiv_dupl_count, Improvement.B_LAST);
+//  T(equiv_repl, equiv_repl_count, Improvement.B_LAST);
 //#undef T
 //
 //#ifdef DEBUG
 //  if(p.id == Game.game.num_impr_types-1) {
-//    impr_type_iterate(id) {
+//    for (int id = 0; id < Game.game.num_impr_types; id++) {
 //      int inx;
-//      b = &improvement_types[id];
+//      b = &Improvement.improvement_types[id];
 //      util.freelog(Log.LOG_DEBUG, "Impr: %s...",
 //	      b.name);
 //      util.freelog(Log.LOG_DEBUG, "  tech_req    %2d/%s",
 //	      b.tech_req,
-//	      (b.tech_req == A_LAST) ?
+//	      (b.tech_req == Tech_H.A_LAST) ?
 //	      "Never" : get_tech_name(Game.game.player_ptr, b.tech_req));
 //      util.freelog(Log.LOG_DEBUG, "  bldg_req    %2d/%s",
 //	      b.bldg_req,
-//	      (b.bldg_req == B_LAST) ?
+//	      (b.bldg_req == Improvement.B_LAST) ?
 //	      "None" :
-//	      improvement_types[b.bldg_req].name);
+//	      Improvement.improvement_types[b.bldg_req].name);
 //      util.freelog(Log.LOG_DEBUG, "  terr_gate...");
-//      for (inx = 0; b.terr_gate[inx] != T_NONE; inx++) {
+//      for (inx = 0; b.terr_gate[inx] != Terrain_H.T_NONE; inx++) {
 //	util.freelog(Log.LOG_DEBUG, "    %2d/%s",
 //		b.terr_gate[inx], get_terrain_name(b.terr_gate[inx]));
 //      }
@@ -2380,14 +2382,14 @@ public class Packhand{
 //      util.freelog(Log.LOG_DEBUG, "  equiv_range %2d/%s",
 //	      b.equiv_range, effect_range_name(b.equiv_range));
 //      util.freelog(Log.LOG_DEBUG, "  equiv_dupl...");
-//      for (inx = 0; b.equiv_dupl[inx] != B_LAST; inx++) {
+//      for (inx = 0; b.equiv_dupl[inx] != Improvement.B_LAST; inx++) {
 //	util.freelog(Log.LOG_DEBUG, "    %2d/%s",
-//		b.equiv_dupl[inx], improvement_types[b.equiv_dupl[inx]].name);
+//		b.equiv_dupl[inx], Improvement.improvement_types[b.equiv_dupl[inx]].name);
 //      }
 //      util.freelog(Log.LOG_DEBUG, "  equiv_repl...");
-//      for (inx = 0; b.equiv_repl[inx] != B_LAST; inx++) {
+//      for (inx = 0; b.equiv_repl[inx] != Improvement.B_LAST; inx++) {
 //	util.freelog(Log.LOG_DEBUG, "    %2d/%s",
-//		b.equiv_repl[inx], improvement_types[b.equiv_repl[inx]].name);
+//		b.equiv_repl[inx], Improvement.improvement_types[b.equiv_repl[inx]].name);
 //      }
 //      if (tech_exists(b.obsolete_by)) {
 //	util.freelog(Log.LOG_DEBUG, "  obsolete_by %2d/%s",
@@ -2401,7 +2403,7 @@ public class Packhand{
 //      util.freelog(Log.LOG_DEBUG, "  upkeep      %2d", b.upkeep);
 //      util.freelog(Log.LOG_DEBUG, "  sabotage   %3d", b.sabotage);
 //      util.freelog(Log.LOG_DEBUG, "  helptext    %s", b.helptext);
-//    } impr_type_iterate_end;
+//    } ;
 //  }
 //#endif
 //  
@@ -2483,7 +2485,7 @@ public class Packhand{
 //  gov.ruler_titles = fc_calloc(gov.num_ruler_titles,
 //				sizeof(struct ruler_title));
 //
-//  gov.helptext = mystrdup(p.helptext);
+//  gov.helptext = (p.helptext);
 //  
 //  tilespec_setup_government(p.id);
 //}
@@ -2519,7 +2521,7 @@ public class Packhand{
 //{
 //  tile_type t;
 //
-//  if (p.id < T_FIRST || p.id >= T_COUNT) {
+//  if (p.id < Terrain_H.T_FIRST || p.id >= Terrain_H.T_COUNT) {
 //    util.freelog(Log.LOG_ERROR,
 //	    "Received bad terrain id %d in handle_ruleset_terrain",
 //	    p.id);
@@ -2571,7 +2573,7 @@ public class Packhand{
 //  
 //  t.flags = p.flags;
 //
-//  t.helptext = mystrdup(p.helptext);
+//  t.helptext = (p.helptext);
 //  
 //  tilespec_setup_tile_type(p.id);
 //}
@@ -2581,9 +2583,9 @@ public class Packhand{
 //**************************************************************************/
 //void handle_ruleset_terrain_control(packet_ruleset_terrain_control p)
 //{
-//  /* Since terrain_control is the same as packet_ruleset_terrain_control
+//  /* Since Map.terrain_control is the same as packet_ruleset_terrain_control
 //   * we can just copy the data directly. */
-//  terrain_control = *p;
+//  Map.terrain_control = *p;
 //}
 //
 ///**************************************************************************
@@ -2599,7 +2601,7 @@ public class Packhand{
 //	    p.id);
 //    return;
 //  }
-//  pl = get_nation_by_idx(p.id);
+//  pl = Nation.get_nation_by_idx(p.id);
 //
 //  pl.name_orig = p.name;
 //  pl.name = pl.name_orig;
@@ -2610,21 +2612,21 @@ public class Packhand{
 //  pl.leader_count = p.leader_count;
 //  pl.leaders = fc_malloc(sizeof(*pl.leaders) * pl.leader_count);
 //  for (i = 0; i < pl.leader_count; i++) {
-//    pl.leaders[i].name = mystrdup(p.leader_name[i]);
+//    pl.leaders[i].name = (p.leader_name[i]);
 //    pl.leaders[i].is_male = p.leader_sex[i];
 //  }
 //  pl.city_style = p.city_style;
 //
 //  if (p.class[0] != '\0') {
-//    pl.class = mystrdup(p.class);
+//    pl.class = (p.class);
 //  } else {
-//    pl.class = mystrdup(N"Other");
+//    pl.class = (N"Other");
 //  }
 //
 //  if (p.legend[0] != '\0') {
-//    pl.legend = mystrdup(_(p.legend));
+//    pl.legend = (_(p.legend));
 //  } else {
-//    pl.legend = mystrdup("");
+//    pl.legend = ("");
 //  }
 //
 //  tilespec_setup_nation_flag(p.id);
@@ -2707,7 +2709,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_unit_bribe_info(int unit_id, int cost)
 //{
-//  unit punit = find_unit_by_id(unit_id);
+//  unit punit = Game.find_unit_by_id(unit_id);
 //
 //  if (punit) {
 //    punit.bribe_cost = cost;
@@ -2758,7 +2760,7 @@ public class Packhand{
 //void handle_unit_diplomat_popup_dialog(int diplomat_id, int target_id)
 //{
 //  unit pdiplomat =
-//      Player_P.player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
+//      Player_P.player_Game.find_unit_by_id(Game.game.player_ptr, diplomat_id);
 //
 //  if (pdiplomat) {
 //    process_diplomat_arrival(pdiplomat, target_id);
@@ -2775,9 +2777,9 @@ public class Packhand{
 //  city pcity = Game.find_city_by_id(city_id);
 //
 //  if (punit && pcity) {
-//    impr_type_iterate(i) {
-//      pcity.improvements[i] = (improvements[i]=='1') ? I_ACTIVE : I_NONE;
-//    } impr_type_iterate_end;
+//    for (int i = 0; i < Game.game.num_impr_types; i++) {
+//      pcity.improvements[i] = (improvements[i]=='1') ? Improvement.I_ACTIVE : Improvement.I_NONE;
+//    } ;
 //
 //    popup_sabotage_dialog(pcity);
 //  }

@@ -174,8 +174,8 @@ public class Gui_main{
 //void ui_main(int argc, char *argv[])
 //{
 //  int i = 1;
-//  char *theme = mystrdup(DEFAULT_THEME);
-//  char *resolution = mystrdup(DEFAULT_RESOLUTION);
+//  char *theme = (DEFAULT_THEME);
+//  char *resolution = (DEFAULT_RESOLUTION);
 //  boolean fullscreen = false;
 //  char *option = null;
 //  struct ct_size res;
@@ -213,10 +213,10 @@ public class Gui_main{
 //      fullscreen = true;
 //    } else if ((option = get_option("--res", argv, &i, argc))) {
 //      free(resolution);
-//      resolution = mystrdup(option);
+//      resolution = (option);
 //    } else if ((option = get_option("--theme", argv, &i, argc))) {
 //      free(theme);
-//      theme = mystrdup(option);
+//      theme = (option);
 //    } else {
 //      util.freelog(Log.LOG_ERROR, "unknown option '%s'", argv[i]);
 //    }

@@ -24,7 +24,7 @@ public class player_ai {
 		  public int prev_gold;
 		  public int maxbuycost;
 		  public int est_upkeep; /* estimated upkeep of buildings in cities */
-//		  public int tech_want[]= new int[A_LAST+1];
+//		  public int tech_want[]= new int[Tech_H.A_LAST+1];
 		  public int handicap;			/* sum of enum handicap_type */
 		  public int skill_level;		/* 0-10 value for save/load/display */
 		  public int fuzzy;			/* chance in 1000 to mis-decide */

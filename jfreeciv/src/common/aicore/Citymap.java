@@ -80,7 +80,7 @@ public class Citymap{
 //    } }
 //  }
 //  for (unit punit : pplayer.units.data) {
-//    if (unit_flag(punit, F_CITIES)
+//    if (unit_flag(punit, Eunit_flag_id.F_CITIES)
 //        && punit.ai.ai_role == AIUNIT_BUILD_CITY) {
 //      map_city_radius_iterate(punit.goto_tile, ptile) {
 //        if (citymap[ptile.index] >= 0) {

@@ -1245,7 +1245,7 @@ public class Graphics{
 //  assert(is_real_map_pos(x, y));
 //  normalize_map_pos(&x, &y);
 //  fog = tile_get_known(x, y) == TILE_KNOWN_FOGGED && draw_fog_of_war;
-//  pcity = map_get_city(x, y);
+//  pcity = Map.map_get_city(x, y);
 //  punit = get_drawable_unit(x, y, citymode);
 //  pfocus = get_unit_in_focus();
 //  special = map_get_special(x, y);
@@ -1422,7 +1422,7 @@ public class Graphics{
 //			    width, height_unit, fog);
 //  }
 //
-//  if (contains_special(special, S_FORTRESS) && draw_fortress_airbase)
+//  if (contains_special(special, Terrain_H.S_FORTRESS) && draw_fortress_airbase)
 //    put_overlay_tile_draw(rp,
 //			  canvas_x, canvas_y-NORMAL_TILE_HEIGHT/2,
 //			  sprites.tx.fortress,

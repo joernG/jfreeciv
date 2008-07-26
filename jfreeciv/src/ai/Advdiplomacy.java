@@ -169,10 +169,10 @@ public class Advdiplomacy{
 //  ai1 = ai_data_get(player1);
 //  return (ai1.diplomacy.target != player2 && 
 //          (player1 == ai1.diplomacy.alliance_leader ||
-//           !pplayers_at_war(player2, ai1.diplomacy.alliance_leader)) &&
+//           !Player_P.pplayers_at_war(player2, ai1.diplomacy.alliance_leader)) &&
 //	  player1.ai.love[player2.player_no] > - (MAX_AI_LOVE * 4 / 10)  &&
 //	  (ai1.diplomacy.target == null || 
-//	   !pplayers_allied(ai1.diplomacy.target, player2)));
+//	   !Player_P.pplayers_allied(ai1.diplomacy.target, player2)));
 //}
 //
 
@@ -204,7 +204,7 @@ public class Advdiplomacy{
 //    }
 //
 //    /* Share and expect being shared brotherly between allies */
-//    if (pplayers_allied(pplayer, aplayer)) {
+//    if (Player_P.pplayers_allied(pplayer, aplayer)) {
 //      worth /= 2;
 //    }
 //    if (players_on_same_team(pplayer, aplayer)) {
@@ -225,14 +225,14 @@ public class Advdiplomacy{
 //          || get_invention(eplayer, pclause.value) == TECH_KNOWN) {
 //        continue;
 //      }
-//      if (give && pplayers_allied(aplayer, eplayer)) {
+//      if (give && Player_P.pplayers_allied(aplayer, eplayer)) {
 //        if (is_player_dangerous(pplayer, eplayer)) {
 //          /* Don't risk it falling into enemy hands */
 //          worth = -BIG_NUMBER;
 //          break;
 //        }
 //        worth -= ai_goldequiv_tech(eplayer, pclause.value) / 2;
-//      } else if (!give && pplayers_allied(pplayer, eplayer)) {
+//      } else if (!give && Player_P.pplayers_allied(pplayer, eplayer)) {
 //        /* We can enrichen our side with this tech */
 //        worth += ai_goldequiv_tech(eplayer, pclause.value) / 4;
 //      }
@@ -253,7 +253,7 @@ public class Advdiplomacy{
 //    /* This guy is at war with our alliance and we're not alliance
 //     * leader. */
 //    if (pplayer != ai.diplomacy.alliance_leader
-//        && pplayers_at_war(aplayer, ai.diplomacy.alliance_leader)) {
+//        && Player_P.pplayers_at_war(aplayer, ai.diplomacy.alliance_leader)) {
 //      notify(aplayer, ("*%s (AI)* %s leads our alliance. You must contact " +
 //             "and make peace with him first."), pplayer.name, 
 //             ai.diplomacy.alliance_leader.name);
@@ -367,7 +367,7 @@ public class Advdiplomacy{
 //    break;
 //
 //  case CLAUSE_SEAMAP:
-//    if (!give || pplayers_allied(pplayer, aplayer)) {
+//    if (!give || Player_P.pplayers_allied(pplayer, aplayer)) {
 //      /* Useless to us - we're omniscient! And allies get it for free! */
 //      worth = 0;
 //    } else {
@@ -384,7 +384,7 @@ public class Advdiplomacy{
 //    break;
 //
 //  case CLAUSE_MAP:
-//    if (!give || pplayers_allied(pplayer, aplayer)) {
+//    if (!give || Player_P.pplayers_allied(pplayer, aplayer)) {
 //      /* Useless to us - we're omniscient! And allies get it for free! */
 //      worth = 0;
 //    } else {
@@ -431,7 +431,7 @@ public class Advdiplomacy{
 //
 //  case CLAUSE_VISION:
 //    if (give) {
-//      if (pplayers_allied(pplayer, aplayer)) {
+//      if (Player_P.pplayers_allied(pplayer, aplayer)) {
 //        if (!shared_vision_is_safe(pplayer, aplayer)) {
 //          notify(aplayer, ("*%s (AI)* Sorry, sharing vision with you " +
 //	                    "is not safe."),
@@ -508,7 +508,7 @@ public class Advdiplomacy{
 //
 //  /* If we are at war, and no peace is offered, then no deal, unless
 //   * it is just gifts, in which case we gratefully accept. */
-//  if (pplayers_at_war(pplayer, aplayer) && !has_treaty && !only_gifts) {
+//  if (Player_P.pplayers_at_war(pplayer, aplayer) && !has_treaty && !only_gifts) {
 //    return;
 //  }
 //
@@ -615,12 +615,12 @@ public class Advdiplomacy{
 //   * enemy expansionism */
 //  for (city pcity : pplayer.cities.data) {
 //    if (pcity.is_building_unit 
-//        && unit_type_flag(pcity.currently_building, F_CITIES)) {
+//        && Unittype_P.unit_type_flag(pcity.currently_building, Eunit_flag_id.F_CITIES)) {
 //      kill_desire -= 1;
 //    }
 //  } }
 //  for (unit punit : aplayer.units.data) { 
-//    if (unit_flag(punit, F_CITIES)) {
+//    if (unit_flag(punit, Eunit_flag_id.F_CITIES)) {
 //      kill_desire += 1;
 //    }
 //  } }
@@ -656,8 +656,8 @@ public class Advdiplomacy{
 //      continue;
 //    }
 //
-//    /* Remember: pplayers_allied() returns true when aplayer == eplayer */
-//    if (!cancel_excuse && pplayers_allied(aplayer, eplayer)) {
+//    /* Remember: Player_P.pplayers_allied() returns true when aplayer == eplayer */
+//    if (!cancel_excuse && Player_P.pplayers_allied(aplayer, eplayer)) {
 //      if (ds == DS_CEASEFIRE) {
 //        kill_desire -= kill_desire / 10; /* 10% off */
 //      } else if (ds == DS_NEUTRAL) {
@@ -733,7 +733,7 @@ public class Advdiplomacy{
 //    pplayer.ai.love[aplayer.player_no] -= 
 //                         pplayer.diplstates[a].has_reason_to_cancel;
 //    if ((pplayers_non_attack(pplayer, aplayer) 
-//         || pplayers_allied(pplayer, aplayer))
+//         || Player_P.pplayers_allied(pplayer, aplayer))
 //        && pplayer.diplstates[a].has_reason_to_cancel == 0
 //        && !adip.is_allied_with_enemy
 //        && !adip.at_war_with_ally
@@ -764,7 +764,7 @@ public class Advdiplomacy{
 //     * AI is so naive, that we have to count it even if players are allied */
 //    pplayer.ai.love[aplayer.player_no] -=
 //      Math.min(player_in_territory(pplayer, aplayer) * (MAX_AI_LOVE / 100),
-//          pplayers_allied(aplayer, pplayer) ? 
+//          Player_P.pplayers_allied(aplayer, pplayer) ? 
 //	    ai.diplomacy.love_incr - 1 : (MAX_AI_LOVE / 2));
 // 
 //    /* Increase the love if aplayer has got a building that makes 
@@ -848,7 +848,7 @@ public class Advdiplomacy{
 //    }
 //
 //    /* Strongly prefer players we are at war with already. */
-//    if (!pplayers_at_war(pplayer, aplayer)) {
+//    if (!Player_P.pplayers_at_war(pplayer, aplayer)) {
 //      war_desire[aplayer.player_no] /= 2;
 //    }
 //    
@@ -996,7 +996,7 @@ public class Advdiplomacy{
 //      /* A spaceship victory is always one single player's or team's victory */
 //      if (aplayer.spaceship.state == spaceship_state.SSHIP_LAUNCHED
 //          && ai.diplomacy.spacerace_leader == aplayer
-//          && pplayers_allied(pplayer, aplayer)) {
+//          && Player_P.pplayers_allied(pplayer, aplayer)) {
 //        notify(aplayer, ("*%s (AI)* Your attempt to conquer space for " +
 //               "yourself alone betray your true intentions, and I " +
 //               "will have no more of our alliance!"), pplayer.name);
@@ -1025,13 +1025,13 @@ public class Advdiplomacy{
 //
 //  /*** Declare war - against target ***/
 //
-//  if (target && pplayers_at_war(pplayer, target)) {
+//  if (target && Player_P.pplayers_at_war(pplayer, target)) {
 //    ai.diplomacy.countdown = 0; /* cosmetic */
 //  }
-//  if (target && !pplayers_at_war(pplayer, target)
+//  if (target && !Player_P.pplayers_at_war(pplayer, target)
 //      && ai.diplomacy.countdown <= 0
 //      && !ai_handicap(pplayer, H_AWAY)) {
-//    if (pplayers_allied(pplayer, target)) {
+//    if (Player_P.pplayers_allied(pplayer, target)) {
 //      PLAYER_LOG(Log.LOG_DEBUG, pplayer, ai, "Went to war against %s, who is " +
 //                 "an ally!", target.name); /* Oh, my. */
 //    }
@@ -1060,7 +1060,7 @@ public class Advdiplomacy{
 //    if (aplayer.is_alive
 //        && adip.at_war_with_ally
 //        && !adip.is_allied_with_ally
-//        && !pplayers_at_war(pplayer, aplayer)
+//        && !Player_P.pplayers_at_war(pplayer, aplayer)
 //	&& (pplayer_get_diplstate(pplayer, aplayer).type != DS_CEASEFIRE || 
 //	    Rand.myrand(5) < 1)) {
 //      notify(aplayer, ("*%s (AI)* Your aggression against my allies was " +
@@ -1082,7 +1082,7 @@ public class Advdiplomacy{
 //
 //    /* Remove shared vision if we are not allied or it is no longer safe. */
 //    if (gives_shared_vision(pplayer, aplayer)) {
-//      if (!pplayers_allied(pplayer, aplayer)) {
+//      if (!Player_P.pplayers_allied(pplayer, aplayer)) {
 //        remove_shared_vision(pplayer, aplayer);
 //      } else if (!shared_vision_is_safe(pplayer, aplayer)) {
 //        notify(aplayer, ("*%s (AI)* Sorry, sharing vision with you " +
@@ -1117,7 +1117,7 @@ public class Advdiplomacy{
 //     * make friends with enemies. Then we wait some turns until next time
 //     * we spam them with our gibbering chatter. */
 //    if (!aplayer.ai.control) {
-//      if (!pplayers_allied(pplayer, aplayer)) {
+//      if (!Player_P.pplayers_allied(pplayer, aplayer)) {
 //        adip.spam = Rand.myrand(4) + 3; /* Bugger allies often. */
 //      } else {
 //        adip.spam = Rand.myrand(8) + 6; /* Others are less important. */
@@ -1130,8 +1130,8 @@ public class Advdiplomacy{
 //      break;
 //    case diplstate_type.DS_ALLIANCE:
 //      if (players_on_same_team(pplayer, aplayer)
-//          || (target && (!pplayers_at_war(pplayer, target)
-//              || pplayers_at_war(aplayer, target)))) {
+//          || (target && (!Player_P.pplayers_at_war(pplayer, target)
+//              || Player_P.pplayers_at_war(aplayer, target)))) {
 //        /* Share techs only with team mates and _reliable_ allies.
 //         * This means, if we have a target, then unless we are still
 //         * in countdown mode, we _except_ our allies to be at war

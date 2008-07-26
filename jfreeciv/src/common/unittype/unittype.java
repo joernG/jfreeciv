@@ -32,7 +32,7 @@ import utility.shared.Shared_H;
 //*/
 //
 //enum unit_move_type {
-//  LAND_MOVING = 1, SEA_MOVING, HELI_MOVING, AIR_MOVING
+//  unit_move_type.LAND_MOVING = 1, unit_move_type.SEA_MOVING, unit_move_type.HELI_MOVING, unit_move_type.AIR_MOVING
 //};
 //
 ///* Classes for unit types.
@@ -55,14 +55,14 @@ public class unittype {
 	public static int U_LAST = Shared_H.MAX_NUM_ITEMS;
 //	struct unit_type {
 		  public String name; /* Translated string - doesn't need freeing. */
-//		  char name_orig[MAX_LEN_NAME];	      /* untranslated */
+//		  String name_orig;	      /* untranslated */
 		  public String name_orig;
-//		  char graphic_str[MAX_LEN_NAME];
-//		  char graphic_alt[MAX_LEN_NAME];
-//		  char sound_move[MAX_LEN_NAME];
-//		  char sound_move_alt[MAX_LEN_NAME];
-//		  char sound_fight[MAX_LEN_NAME];
-//		  char sound_fight_alt[MAX_LEN_NAME];
+//		  String graphic_str;
+//		  String graphic_alt;
+//		  String sound_move;
+//		  String sound_move_alt;
+//		  String sound_fight;
+//		  String sound_fight_alt;
 //		  struct Sprite *sprite;
 		  public unit_move_type move_type;
 		  public int build_cost;			/* Use wrappers to access this. */

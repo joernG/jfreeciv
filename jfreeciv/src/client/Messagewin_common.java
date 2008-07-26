@@ -152,7 +152,7 @@ public class Messagewin_common{
 //   */
 //  for (i = 0; i < messages_total; i++) {
 //    if (messages[i].location_ok) {
-//      city pcity = map_get_city(messages[i].tile);
+//      city pcity = Map.map_get_city(messages[i].tile);
 //
 //      messages[i].city_ok = (pcity && City.city_owner(pcity) == Game.game.player_ptr);
 //    } else {
@@ -197,7 +197,7 @@ public class Messagewin_common{
 //
 //  if (messages[message_index].city_ok) {
 //    tile ptile = messages[message_index].tile;
-//    city pcity = map_get_city(ptile);
+//    city pcity = Map.map_get_city(ptile);
 //
 //    if (center_when_popup_city) {
 //      center_tile_mapcanvas(ptile);

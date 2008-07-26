@@ -446,7 +446,7 @@ public class Diplodlg{
 //
 //  pdialog = fc_malloc(sizeof(*pdialog));
 //
-//  dialog_list_insert(&dialog_list, pdialog);
+//  &dialog_list.foo_list_insert(pdialog);
 //  init_treaty(&pdialog.treaty, plr0, plr1);
 //
 //  shell = gtk_dialog_new_with_buttons("Diplomacy meeting",

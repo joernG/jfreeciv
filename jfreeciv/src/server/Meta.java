@@ -1,5 +1,7 @@
 package server;
 
+import common.Game;
+
 public class Meta{
 	public static final boolean DEFAULT_META_SERVER_NO_SEND = true;
 	public static final String DEFAULT_META_SERVER_ADDR = "http://meta.freeciv.org/metaserver.phtml";
@@ -173,7 +175,7 @@ public class Meta{
 //  case SELECT_RACES_STATE:
 //    state = String.format( "Nation Select");
 //    break;
-//  case RUN_GAME_STATE:
+//  case server_states.RUN_GAME_STATE:
 //    state = String.format( "Running");
 //    break;
 //  case server_states.GAME_OVER_STATE:
@@ -219,7 +221,7 @@ public class Meta{
 //    s = end_of_strn(s, &rest);
 //
 //    /* NOTE: send info for ALL players or none at all. */
-//    if (get_num_human_and_ai_players() == 0) {
+//    if (Game.get_num_human_and_ai_players() == 0) {
 //      mystrlcpy(s, "dropplrs=1&", rest);
 //      s = end_of_strn(s, &rest);
 //    } else {
@@ -250,7 +252,7 @@ public class Meta{
 //        s = end_of_strn(s, &rest);
 //
 //        s = String.format "pln[]=%s&",
-//                    my_url_encode(plr.nation != NO_NATION_SELECTED 
+//                    my_url_encode(plr.nation != Nation_H.NO_NATION_SELECTED 
 //                                  ? Nation.get_nation_name_plural(plr.nation)
 //                                  : "none"));
 //        s = end_of_strn(s, &rest);
@@ -372,7 +374,7 @@ public class Meta{
 //    return;
 //  }
 //  
-//  metaserver_path = mystrdup(path);
+//  metaserver_path = (path);
 //
 //  if (!net_lookup_service(metaname, metaport, &meta_addr)) {
 //    util.freelog(Log.LOG_ERROR, "Metaserver: bad address: [%s:%d].",

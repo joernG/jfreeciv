@@ -1,11 +1,12 @@
 package server;
 
-import ai.Aitools;
 import port.util;
 import server.gamelog.EGamelog;
 import utility.Log;
 import utility.Rand;
 import utility.shared.Shared_H;
+import ai.Aitools;
+
 import common.City;
 import common.Game;
 import common.Government;

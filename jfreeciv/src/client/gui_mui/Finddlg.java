@@ -80,7 +80,7 @@ public class Finddlg{
 //
 //    set(find_wnd, MUIA_Window_Open, false);
 //
-//    if ((pcity = game_find_city_by_name(string)))
+//    if ((pcity = Game.game_find_city_by_name(string)))
 //      center_tile_mapcanvas(pcity.tile);
 //  }
 //}

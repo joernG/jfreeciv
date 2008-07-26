@@ -71,8 +71,8 @@ public class Inteldlg{
 //  char buf[64];
 //  city pcity;
 //
-//  static char *tech_list_names_ptrs[A_LAST+1];
-//  static char tech_list_names[A_LAST+1][200];
+//  static char *tech_list_names_ptrs[Tech_H.A_LAST+1];
+//  static char tech_list_names[Tech_H.A_LAST+1][200];
 //  int i, j;
 //  
 //  

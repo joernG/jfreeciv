@@ -33,12 +33,12 @@ public class Tech{
 //
 //#include "tech.h"
 //
-//struct advance advances[A_LAST];
+//struct advance advances[Tech_H.A_LAST];
 ///* the advances array is now setup in:
 //   server/ruleset.c (for the server)
 //   client/packhand.c (for the client) */
 //
-//static int techcoststyle1[A_LAST];
+//static int techcoststyle1[Tech_H.A_LAST];
 //
 //static final String flag_names[] = {
 //  "Bonus_Tech", "Boat_Fast", "Bridge", "Railroad", "Fortress",
@@ -267,7 +267,7 @@ public class Tech{
 ///**************************************************************************
 //... this could be simpler, but we might have or get loops in the tech tree
 //    so i try to avoid endless loops.
-//    if return value > A_LAST then we have a bug
+//    if return value > Tech_H.A_LAST then we have a bug
 //    caller should do something in that case.
 //**************************************************************************/
 //Tech_Type_id get_next_tech(player pplayer, Tech_Type_id goal)
@@ -284,7 +284,7 @@ public class Tech{
 //A tech doesn't exist if one of:
 //- id is out of range
 //- the tech has been flagged as removed by setting its req values
-//  to A_LAST (this function returns 0 if either req is A_LAST, rather
+//  to Tech_H.A_LAST (this function returns 0 if either req is Tech_H.A_LAST, rather
 //  than both, to be on the safe side)
 //**************************************************************************/
 //boolean tech_exists(Tech_Type_id id)
@@ -292,13 +292,13 @@ public class Tech{
 //  if (id < 0 || id >= Game.game.num_tech_types) {
 //    return false;
 //  } else {
-//    return advances[id].req[0] != A_LAST && advances[id].req[1] != A_LAST;
+//    return advances[id].req[0] != Tech_H.A_LAST && advances[id].req[1] != Tech_H.A_LAST;
 //  }
 //}
 //
 ///**************************************************************************
 //Does a linear search of advances[].name
-//Returns A_LAST if none match.
+//Returns Tech_H.A_LAST if none match.
 //**************************************************************************/
 //Tech_Type_id find_tech_by_name(final String s)
 //{
@@ -307,12 +307,12 @@ public class Tech{
 //      return i;
 //    }
 //  } tech_type_iterate_end;
-//  return A_LAST;
+//  return Tech_H.A_LAST;
 //}
 //
 ///**************************************************************************
 //  Does a linear search of advances[].name_orig
-//  Returns A_LAST if none match.
+//  Returns Tech_H.A_LAST if none match.
 //**************************************************************************/
 //Tech_Type_id find_tech_by_name_orig(final String s)
 //{
@@ -321,7 +321,7 @@ public class Tech{
 //      return i;
 //    }
 //  } tech_type_iterate_end;
-//  return A_LAST;
+//  return Tech_H.A_LAST;
 //}
 //
 ///**************************************************************************
@@ -353,7 +353,7 @@ public class Tech{
 //
 ///**************************************************************************
 // Search for a tech with a given flag starting at index
-// Returns A_LAST if no tech has been found
+// Returns Tech_H.A_LAST if no tech has been found
 //**************************************************************************/
 //Tech_Type_id find_tech_by_flag(int index, enum tech_flag_id flag)
 //{
@@ -362,7 +362,7 @@ public class Tech{
 //  {
 //    if(tech_flag(i,flag)) return i;
 //  }
-//  return A_LAST;
+//  return Tech_H.A_LAST;
 //}
 //
 ///**************************************************************************
@@ -562,7 +562,7 @@ public class Tech{
 //**************************************************************************/
 //void precalc_tech_data()
 //{
-//  boolean counted[A_LAST];
+//  boolean counted[Tech_H.A_LAST];
 //
 //  tech_type_iterate(tech) {
 //    memset(counted, 0, sizeof(counted));
@@ -619,7 +619,7 @@ public class Tech{
 //
 //      buffer = util.my_snprintf( "Future Tech. %d",
 //		  pplayer.future_tech + 1);
-//      future.p[pplayer.future_tech] = mystrdup(buffer);
+//      future.p[pplayer.future_tech] = (buffer);
 //    }
 //    return future.p[pplayer.future_tech];
 //  default:

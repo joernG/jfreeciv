@@ -125,7 +125,7 @@ public class Inteldlg{
 //    pdialog.pplayer = pplayer;
 //    pdialog.intel_dialog_shell = 0;
 //    pdialog.intel_diplo_dialog_shell = 0;
-//    dialog_list_insert(&dialog_list, pdialog);
+//    &dialog_list.foo_list_insert(pdialog);
 //  }
 //
 //  if (!(pdialog.intel_dialog_shell)) {
@@ -164,8 +164,8 @@ public class Inteldlg{
 //  char buf[64];
 //  city pcity;
 //
-//  static char *tech_list_names_ptrs[A_LAST+1];
-//  static char tech_list_names[A_LAST+1][200];
+//  static char *tech_list_names_ptrs[Tech_H.A_LAST+1];
+//  static char tech_list_names[Tech_H.A_LAST+1][200];
 //  int i, j;
 //
 //  pdialog.intel_dialog_shell_is_raised = raise;
@@ -367,7 +367,7 @@ public class Inteldlg{
 //    pdialog.pplayer = pplayer;
 //    pdialog.intel_dialog_shell = 0;
 //    pdialog.intel_diplo_dialog_shell = 0;
-//    dialog_list_insert(&dialog_list, pdialog);
+//    &dialog_list.foo_list_insert(pdialog);
 //  }
 //
 //  if (!(pdialog.intel_diplo_dialog_shell)) {

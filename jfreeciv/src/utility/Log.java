@@ -177,7 +177,7 @@ public class Log{
 //  logd_files = (logd_fileinfo )
 //    fc_malloc(n * sizeof(struct logd_fileinfo));
 //  
-//  dup = mystrdup(c+2);
+//  dup = (c+2);
 //  tok = strtok(dup, ":");
 //  
 //  if (!tok) {
@@ -216,7 +216,7 @@ public class Log{
 //      level = -1;
 //      goto out;
 //    }
-//    logd_files[i].name = mystrdup(tok);
+//    logd_files[i].name = (tok);
 //    i++;
 //    tok = strtok(null, ":");
 //  } while(tok);

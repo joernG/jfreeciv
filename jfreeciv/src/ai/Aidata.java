@@ -61,7 +61,7 @@ public class Aidata{
 //
 //  memset(count, 0, sizeof(count));
 //
-//  impr_type_iterate(id) {
+//  for (int id = 0; id < Game.game.num_impr_types; id++) {
 //    ai.impr_calc[id] = AI_IMPR_ESTIMATE;
 //
 //    /* Find largest extension */
@@ -108,7 +108,7 @@ public class Aidata{
 //      }
 //    } effect_type_vector_iterate_end;
 //    
-//  } impr_type_iterate_end;
+//  } ;
 //}
 //
 ///**************************************************************************
@@ -134,14 +134,14 @@ public class Aidata{
 //
 //  for (unit punit : pplayer.units.data) {
 //    switch (punit.unit_type().move_type) {
-//    case LAND_MOVING:
+//    case unit_move_type.LAND_MOVING:
 //      ai.stats.units.land++;
 //      break;
-//    case SEA_MOVING:
+//    case unit_move_type.SEA_MOVING:
 //      ai.stats.units.sea++;
 //      break;
-//    case HELI_MOVING:
-//    case AIR_MOVING:
+//    case unit_move_type.HELI_MOVING:
+//    case unit_move_type.AIR_MOVING:
 //      ai.stats.units.air++;
 //      break;
 //    }
@@ -207,7 +207,7 @@ public class Aidata{
 //        ai.threats.igwall = true;
 //      }
 //
-//      if (is_sailing_unit(punit)) {
+//      if (Unit.is_sailing_unit(punit)) {
 //        /* If the enemy has not started sailing yet, or we have total
 //         * control over the seas, don't worry, keep attacking. */
 //        if (is_ground_units_transport(punit)) {
@@ -314,12 +314,12 @@ public class Aidata{
 //  for (unit punit : pplayer.units.data) {
 //    tile ptile = punit.tile;
 //
-//    if (!Terrain_H.is_ocean(ptile.terrain) && unit_flag(punit, F_SETTLERS)) {
+//    if (!Terrain_H.is_ocean(ptile.terrain) && unit_flag(punit, Eunit_flag_id.F_SETTLERS)) {
 //      ai.stats.workers[(int)map_get_continent(punit.tile)]++;
 //    }
-//    if (unit_flag(punit, F_DIPLOMAT) && punit.ai.ai_role == AIUNIT_ATTACK) {
+//    if (unit_flag(punit, Eunit_flag_id.F_DIPLOMAT) && punit.ai.ai_role == AIUNIT_ATTACK) {
 //      /* Heading somewhere on a mission, reserve target. */
-//      city pcity = map_get_city(punit.goto_tile);
+//      city pcity = Map.map_get_city(punit.goto_tile);
 //
 //      if (pcity) {
 //        BV_SET(ai.stats.diplomat_reservations, pcity.id);
@@ -355,7 +355,7 @@ public class Aidata{
 //
 //    /* Determine who is the leader of our alliance. That is,
 //     * whoever has the more cities. */
-//    if (pplayers_allied(pplayer, aplayer)
+//    if (Player_P.pplayers_allied(pplayer, aplayer)
 //        && aplayer.cities.foo_list_size() > ally_strength) {
 //      ally_strength = aplayer.cities.foo_list_size();
 //      ally_strongest = aplayer;
@@ -367,16 +367,16 @@ public class Aidata{
 //          || !check_pl.is_alive) {
 //        continue;
 //      }
-//      if (pplayers_allied(aplayer, check_pl)
+//      if (Player_P.pplayers_allied(aplayer, check_pl)
 //          && pplayer_get_diplstate(pplayer, check_pl).type == diplstate_type.DS_WAR) {
 //       ai.diplomacy.player_intel[i].is_allied_with_enemy = check_pl;
 //      }
-//      if (pplayers_allied(pplayer, check_pl)
+//      if (Player_P.pplayers_allied(pplayer, check_pl)
 //          && pplayer_get_diplstate(aplayer, check_pl).type == diplstate_type.DS_WAR) {
 //        ai.diplomacy.player_intel[i].at_war_with_ally = check_pl;
 //      }
-//      if (pplayers_allied(aplayer, check_pl)
-//          && pplayers_allied(pplayer, check_pl)) {
+//      if (Player_P.pplayers_allied(aplayer, check_pl)
+//          && Player_P.pplayers_allied(pplayer, check_pl)) {
 //        ai.diplomacy.player_intel[i].is_allied_with_ally = check_pl;
 //      }
 //    }

@@ -62,7 +62,10 @@ public class Citydlg_common{
 //{
 //  int min_x = 0, max_x = 0, min_y = 0, max_y = 0;
 //
-//  city_map_iterate(city_x, city_y) {
+//	for (int _itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {	   
+//	int city_x = _itr % City_H.CITY_MAP_SIZE, city_y = _itr / City_H.CITY_MAP_SIZE;	   
+//
+//	if (City.is_valid_city_coords(city_x, city_y)) {
 //    int canvas_x, canvas_y;
 //
 //    map_to_gui_vector(&canvas_x, &canvas_y,
@@ -93,7 +96,7 @@ public class Citydlg_common{
 //  *canvas_x += (width - NORMAL_TILE_WIDTH) / 2;
 //  *canvas_y += (height - NORMAL_TILE_HEIGHT) / 2;
 //
-//  if (!City.is_valid_city_coords(city_x, city_y)) {
+//  if (!City.City.is_valid_city_coords(city_x, city_y)) {
 //    assert(false);
 //    return false;
 //  }
@@ -138,7 +141,7 @@ public class Citydlg_common{
 //  util.freelog(Log.LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
-//  return City.is_valid_city_coords(*city_x, *city_y);
+//  return City.City.is_valid_city_coords(*city_x, *city_y);
 //}
 //
 ///* Iterate over all known tiles in the city.  This iteration follows the
@@ -154,8 +157,8 @@ public class Citydlg_common{
 //    int canvas_x, canvas_y;						    \
 //    tile ptile;							    \
 //                                                                            \
-//    if (City.is_valid_city_coords(city_x, city_y)				    \
-//	&& (ptile = city_map_to_map(pcity, city_x, city_y))		    \
+//    if (City.City.is_valid_city_coords(city_x, city_y)				    \
+//	&& (ptile = City.city_map_to_map(pcity, city_x, city_y))		    \
 //	&& tile_get_known(ptile)					    \
 //	&& city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y)) {	    \
 //
@@ -284,7 +287,7 @@ public class Citydlg_common{
 //{
 //  if (!is_unit && building_has_effect(id, effect_type.EFT_PROD_TO_GOLD)) {
 //    buffer = String.format "%s (XX) %d/turn",
-//		get_impr_name_ex(pcity, id), MAX(0, pcity.shield_surplus));
+//		City.get_impr_name_ex(pcity, id), MAX(0, pcity.shield_surplus));
 //  } else {
 //    int turns = city_turns_to_build(pcity, id, is_unit, true);
 //    final String name;
@@ -294,7 +297,7 @@ public class Citydlg_common{
 //      name = get_unit_name(id);
 //      cost = Unittype_P.unit_build_shield_cost(id);
 //    } else {
-//      name = get_impr_name_ex(pcity, id);
+//      name = City.get_impr_name_ex(pcity, id);
 //      cost = Improvement.impr_build_shield_cost(id);
 //    }
 //
@@ -319,7 +322,7 @@ public class Citydlg_common{
 //  if (is_unit) {
 //    unit_type ptype = get_unit_type(id);
 //
-//    my_snprintf(buf[0], column_size, unit_name(id));
+//    my_snprintf(buf[0], column_size, Unittype_P.unit_name(id));
 //
 //    /* from unit.h get_unit_name() */
 //    if (ptype.fuel > 0) {
@@ -341,13 +344,13 @@ public class Citydlg_common{
 //    } else {
 //      my_snprintf(buf[0], column_size, get_improvement_type(id).name);
 //
-//      /* from city.c get_impr_name_ex() */
+//      /* from city.c City.get_impr_name_ex() */
 //      if (pcity && is_building_replaced(pcity, id)) {
 //	my_snprintf(buf[1], column_size, "*");
 //      } else {
 //	final String state = "";
 //
-//	if (is_wonder(id)) {
+//	if (Improvement.is_wonder(id)) {
 //	  state = "Wonder";
 //	  if (Game.game.global_wonders[id] != 0) {
 //	    state = "Built";
@@ -658,7 +661,7 @@ public class Citydlg_common{
 //**************************************************************************/
 //int city_toggle_worker(city pcity, int city_x, int city_y)
 //{
-//  assert(City.is_valid_city_coords(city_x, city_y));
+//  assert(City.City.is_valid_city_coords(city_x, city_y));
 //
 //  if (pcity.city_map[city_x][city_y] == city_tile_type.C_TILE_WORKER) {
 //    return dsend_packet_city_make_specialist(&aconnection, pcity.id, city_x,
