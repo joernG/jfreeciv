@@ -158,7 +158,7 @@ public class Diplhand{
 //	  }
 //	  break;
 //	case CLAUSE_CITY:
-//	  pcity = find_city_by_id(pclause.value);
+//	  pcity = Game.find_city_by_id(pclause.value);
 //	  if (!pcity) { /* Can't find out cityname any more. */
 //	    notify_player(pplayer,
 //			  ("City you are trying to give no longer exists, " +
@@ -248,7 +248,7 @@ public class Diplhand{
 //      if (pclause.from == pother) {
 //	switch (pclause.type) {
 //	case CLAUSE_CITY:
-//	  pcity = find_city_by_id(pclause.value);
+//	  pcity = Game.find_city_by_id(pclause.value);
 //	  if (!pcity) { /* Can't find out cityname any more. */
 //	    notify_player(pplayer,
 //			  ("Game: One of the cities %s is giving away is destroyed! " +
@@ -387,7 +387,7 @@ public class Diplhand{
 //	break;
 //      case CLAUSE_CITY:
 //	{
-//	  city pcity = find_city_by_id(pclause.value);
+//	  city pcity = Game.find_city_by_id(pclause.value);
 //
 //	  if (!pcity) {
 //	    util.freelog(Log.LOG_NORMAL,
@@ -569,7 +569,7 @@ public class Diplhand{
 //     *                           - Kris Bubendorfer
 //     */
 //    if (type == CLAUSE_CITY) {
-//      city pcity = find_city_by_id(value);
+//      city pcity = Game.find_city_by_id(value);
 //
 //      if (pcity && !Maphand.map_is_known_and_seen(pcity.tile, pother))
 //	give_citymap_from_player_to_player(pcity, pplayer, pother);

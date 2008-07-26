@@ -31,10 +31,10 @@ public class Barbarian {
 	public static final int  UPRISE_CIV_SIZE = 10;
 	public static final int  UPRISE_CIV_MORE = 30;
 	public static final int  UPRISE_CIV_MOST = 50;
-	public static final int MAP_FACTOR = 2000; /*
-												 * adjust this to get a good
-												 * uprising frequency
-												 */
+	public static final int MAP_FACTOR = 2000; 
+	/*
+	 * adjust this to get a good uprising frequency
+	 */
 
 	/**********************************************************************
 	 * Functions for creating barbarians in huts, land and sea Started by Jerzy

@@ -205,7 +205,7 @@ public class Citydlg{
 //    if (pCityDlg.specs[0]
 //       && is_in_rect_area(Main.event.motion.x, Main.event.motion.y,
 //					pCityDlg.specs_area[0])) {
-//      city_change_specialist(pCityDlg.pCity, SP_ELVIS, SP_TAXMAN);
+//      city_change_specialist(pCityDlg.pCity, specialist_type.SP_ELVIS, SP_TAXMAN);
 //      return -1;
 //    }
 //
@@ -221,7 +221,7 @@ public class Citydlg{
 //    if (pCityDlg.specs[2]
 //       && is_in_rect_area(Main.event.motion.x, Main.event.motion.y,
 //					pCityDlg.specs_area[2])) {
-//      city_change_specialist(pCityDlg.pCity, SP_SCIENTIST, SP_ELVIS);
+//      city_change_specialist(pCityDlg.pCity, SP_SCIENTIST, specialist_type.SP_ELVIS);
 //      return -1;
 //    }
 //    
@@ -407,7 +407,7 @@ public class Citydlg{
 //  unit_type pUType;
 //  Uint16 ww, i, hh;
 //
-//  pUnit = player_find_unit_by_id(Game.game.player_ptr, MAX_ID - pButton.ID);
+//  pUnit = Player_P.player_find_unit_by_id(Game.game.player_ptr, MAX_ID - pButton.ID);
 //  
 //  if(!pUnit || !can_client_issue_orders()) {
 //    return -1;
@@ -713,7 +713,7 @@ public class Citydlg{
 //  unit_list_iterate(*pList, pUnit) {
 //        
 //    pUType = get_unit_type(pUnit.type);
-//    pHome_City = find_city_by_id(pUnit.homecity);
+//    pHome_City = Game.find_city_by_id(pUnit.homecity);
 //    cBuf = util.my_snprintf( "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
 //		pUType.name, pUType.attack_strength,
 //		pUType.defense_strength, pUType.move_rate / Unit_H.SINGLE_MOVE,
@@ -1202,7 +1202,7 @@ public class Citydlg{
 //    name = get_impr_name_ex(pCity, pCity.currently_building);
 //  }
 //
-//  value = city_buy_cost(pCity);
+//  value = City.city_buy_cost(pCity);
 //  if(!pCity.did_buy) {
 //    if (Game.game.player_ptr.economic.gold >= value) {
 //      cBuf = util.my_snprintf(
@@ -1445,7 +1445,7 @@ public class Citydlg{
 //
 //  cBuf = util.my_snprintf( "Sell %s for %d gold?",
 //	      get_impr_name_ex(pCityDlg.pCity, id),
-//	      impr_sell_gold(id));
+//	      Improvement.impr_sell_gold(id));
 //
 //
 //  /* create text label */
@@ -1635,7 +1635,7 @@ public class Citydlg{
 //    *canvas_y = city_y * SCALLED_TILE_HEIGHT;
 //  }
 //
-//  if (!is_valid_city_coords(city_x, city_y)) {
+//  if (!City.is_valid_city_coords(city_x, city_y)) {
 //    assert(false);
 //    return false;
 //  }
@@ -1673,7 +1673,7 @@ public class Citydlg{
 //  util.freelog(Log.LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
-//  return is_valid_city_coords(*city_x, *city_y);
+//  return City.is_valid_city_coords(*city_x, *city_y);
 //}
 //#else
 //
@@ -1715,7 +1715,7 @@ public class Citydlg{
 //  util.freelog(Log.LOG_DEBUG, "get_citymap_cr(pos=(%d,%d))=(%d,%d)",
 //	  map_x, map_y, *pCol, *pRow);
 //  
-//  return is_valid_city_coords(*pCol, *pRow);
+//  return City.is_valid_city_coords(*pCol, *pRow);
 //}
 //#endif
 //
@@ -1820,16 +1820,16 @@ public class Citydlg{
 //  row0 = real_row;
 //
 //  /* draw loop */
-//  for (col = 0; col < CITY_MAP_SIZE; col++) {
-//    for (row = 0; row < CITY_MAP_SIZE; row++) {
+//  for (col = 0; col < City_H.CITY_MAP_SIZE; col++) {
+//    for (row = 0; row < City_H.CITY_MAP_SIZE; row++) {
 //      /* calculate start pixel position and check if it belong to 'pDest' */
 //      sx = x0 + (col - row) * (SCALLED_TILE_WIDTH / 2);
 //      sy = y0 + (row + col) * (SCALLED_TILE_HEIGHT / 2);
 //
 //      if (!((!col && !row) ||
-//	    (!col && (row == CITY_MAP_SIZE - 1)) ||
-//	    (!row && (col == CITY_MAP_SIZE - 1)) ||
-//	    ((col == CITY_MAP_SIZE - 1) && (row == CITY_MAP_SIZE - 1))
+//	    (!col && (row == City_H.CITY_MAP_SIZE - 1)) ||
+//	    (!row && (col == City_H.CITY_MAP_SIZE - 1)) ||
+//	    ((col == City_H.CITY_MAP_SIZE - 1) && (row == City_H.CITY_MAP_SIZE - 1))
 //	  )
 //	  ) {
 //	dest.x = sx;
@@ -1867,11 +1867,11 @@ public class Citydlg{
 //
 //  /* We have to draw the tiles in a particular order, so its best
 //     to avoid using any iterator macro. */
-//  for (city_x = 0; city_x<CITY_MAP_SIZE; city_x++)
+//  for (city_x = 0; city_x<City_H.CITY_MAP_SIZE; city_x++)
 //  {
-//    for (city_y = 0; city_y<CITY_MAP_SIZE; city_y++)
+//    for (city_y = 0; city_y<City_H.CITY_MAP_SIZE; city_y++)
 //    {
-//      if (is_valid_city_coords(city_x, city_y)
+//      if (City.is_valid_city_coords(city_x, city_y)
 //	&& city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
 //	&& tile_get_known(map_x, map_y)
 //	&& sdl_city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y))
@@ -2004,7 +2004,7 @@ public class Citydlg{
 //static void refresh_city_names(city pCity)
 //{
 //  if (pCityDlg.pCity_Name_Edit) {
-//    char name[MAX_LEN_NAME];
+//    String name="";
 //    
 //    convertcopy_to_chars(name, MAX_LEN_NAME,
 //			    pCityDlg.pCity_Name_Edit.string16.text);
@@ -2275,7 +2275,7 @@ public class Citydlg{
 //    if (pCity.trade[i]) {
 //      step += pCity.trade_value[i];
 //
-//      if ((pTradeCity = find_city_by_id(pCity.trade[i]))) {
+//      if ((pTradeCity = Game.find_city_by_id(pCity.trade[i]))) {
 //	cBuf = util.my_snprintf( "%s : +%d", pTradeCity.name,
 //		    pCity.trade_value[i]);
 //      } else {
@@ -2370,7 +2370,7 @@ public class Citydlg{
 //
 //  count = (pCity.ppl_happy[4] + pCity.ppl_content[4]
 //	   + pCity.ppl_unhappy[4] + pCity.ppl_angry[4]
-//	   + pCity.specialists[SP_ELVIS] + pCity.specialists[SP_SCIENTIST]
+//	   + pCity.specialists[specialist_type.SP_ELVIS] + pCity.specialists[SP_SCIENTIST]
 //	   + pCity.specialists[SP_TAXMAN]);
 //
 //  if (count * pIcons.pMale_Happy.w > 180) {
@@ -2443,8 +2443,8 @@ public class Citydlg{
 //	}
 //      }
 //
-//      if (pCity.specialists[SP_ELVIS]) {
-//	for (i = 0; i < pCity.specialists[SP_ELVIS]; i++) {
+//      if (pCity.specialists[specialist_type.SP_ELVIS]) {
+//	for (i = 0; i < pCity.specialists[specialist_type.SP_ELVIS]; i++) {
 //	  SDL_BlitSurface(pIcons.pSpec_Lux, null, pCityWindow.dst, &dest);
 //	  dest.x += step;
 //	}
@@ -3353,7 +3353,7 @@ public class Citydlg{
 //  /* draw productions shields progress */
 //  if (pCity.is_building_unit) {
 //    unit_type pUnit = get_unit_type(pCity.currently_building);
-//    cost = unit_build_shield_cost(pCity.currently_building);
+//    cost = Unittype_P.unit_build_shield_cost(pCity.currently_building);
 //    count = cost / 10;
 //        
 //    copy_chars_to_string16(pStr, pUnit.name);
@@ -3393,7 +3393,7 @@ public class Citydlg{
 //	redraw_widget(pCityDlg.pBuy_Button);
 //      }
 //
-//      cost = impr_build_shield_cost(pCity.currently_building);
+//      cost = Improvement.impr_build_shield_cost(pCity.currently_building);
 //      count = cost / 10;
 //      
 //    }
@@ -3499,7 +3499,7 @@ public class Citydlg{
 //  /* Draw Citizens */
 //  count = (pCity.ppl_happy[4] + pCity.ppl_content[4]
 //	   + pCity.ppl_unhappy[4] + pCity.ppl_angry[4]
-//	   + pCity.specialists[SP_ELVIS] + pCity.specialists[SP_SCIENTIST]
+//	   + pCity.specialists[specialist_type.SP_ELVIS] + pCity.specialists[SP_SCIENTIST]
 //	   + pCity.specialists[SP_TAXMAN]);
 //
 //  pBuf = get_citizen_surface(CITIZEN_ELVIS, 0);
@@ -3549,13 +3549,13 @@ public class Citydlg{
 //  pCityDlg.specs[1] = false;
 //  pCityDlg.specs[2] = false;
 //  
-//  if (pCity.specialists[SP_ELVIS]) {
+//  if (pCity.specialists[specialist_type.SP_ELVIS]) {
 //    pBuf = get_citizen_surface(CITIZEN_ELVIS, 0);
 //    pCityDlg.specs_area[0].x = dest.x;
 //    pCityDlg.specs_area[0].y = dest.y;
 //    pCityDlg.specs_area[0].w = pBuf.w;
 //    pCityDlg.specs_area[0].h = pBuf.h;
-//    for (i = 0; i < pCity.specialists[SP_ELVIS]; i++) {
+//    for (i = 0; i < pCity.specialists[specialist_type.SP_ELVIS]; i++) {
 //      SDL_BlitSurface(pBuf, null, pWindow.dst, &dest);
 //      dest.x += step;
 //      pCityDlg.specs_area[0].w += step;
@@ -4083,7 +4083,7 @@ public class Citydlg{
 //void refresh_unit_city_dialogs(unit pUnit)
 //{
 //
-//  city pCity_sup = find_city_by_id(pUnit.homecity);
+//  city pCity_sup = Game.find_city_by_id(pUnit.homecity);
 //  city pCity_pre = map_get_city(pUnit.x, pUnit.y);
 //
 //  if (pCityDlg && ((pCityDlg.pCity == pCity_sup)

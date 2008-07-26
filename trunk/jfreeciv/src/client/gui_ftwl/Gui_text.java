@@ -358,7 +358,7 @@ public class Gui_text{
 //
 //    add_line("Buy production");
 //    add_line("Cost: %d (%d in treasury)",
-//	     city_buy_cost(pcity), Game.game.player_ptr.economic.gold);
+//	     City.city_buy_cost(pcity), Game.game.player_ptr.economic.gold);
 //    add_line("Producting: %s (%d turns)", name,
 //	     city_turns_to_build(pcity, pcity.currently_building,
 //				 pcity.is_building_unit, true));
@@ -406,7 +406,7 @@ public class Gui_text{
 //{
 //  unit_type ptype = punit.unit_type();
 //  city pcity =
-//      player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//      Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //  INIT;
 //
 //  add("%s", ptype.name);
@@ -439,7 +439,7 @@ public class Gui_text{
 //
 //    if (punit.owner == Game.game.player_idx) {
 //      city pcity =
-//	  player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//	  Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //
 //      if (pcity){
 //	tmp = util.my_snprintf( "/%s", pcity.name);

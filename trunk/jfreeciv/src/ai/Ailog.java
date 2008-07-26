@@ -190,7 +190,7 @@ public class Ailog{
 //    return;
 //  }
 //
-//  pcity = find_city_by_id(punit.ai.charge);
+//  pcity = Game.find_city_by_id(punit.ai.charge);
 //  pcharge = find_unit_by_id(punit.ai.charge);
 //  if (pcharge) {
 //    ptile = pcharge.tile;

@@ -1,7 +1,8 @@
 package server;
-import static server.Srv_main.*;
-import static common.Version.*;
-import static utility.shared.Shared_H.*;
+import static common.Version.freeciv_name_version;
+import static utility.shared.Shared_H.BUG_EMAIL_ADDRESS;
+import static utility.shared.Shared_H.WEBSITE_URL;
+
 import java.io.PrintStream;
 public class Civserver {
 

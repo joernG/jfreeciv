@@ -685,7 +685,7 @@ public class Cma_fe{
 //    dst.x = pBuf.size.x + 10;
 //
 //    for (i = 0;
-//      i < count - (result.specialists[SP_ELVIS]
+//      i < count - (result.specialists[specialist_type.SP_ELVIS]
 //		   + result.specialists[SP_SCIENTIST]
 //		   + result.specialists[SP_TAXMAN]); i++) {
 //      pText = get_citizen_surface(CITIZEN_CONTENT, i);
@@ -694,7 +694,7 @@ public class Cma_fe{
 //    }
 //    
 //    pText = get_citizen_surface(CITIZEN_ELVIS, 0);
-//    for (i = 0; i < result.specialists[SP_ELVIS]; i++) {
+//    for (i = 0; i < result.specialists[specialist_type.SP_ELVIS]; i++) {
 //      SDL_BlitSurface(pText, null, pBuf.dst, &dst);
 //      dst.x += step;
 //    }

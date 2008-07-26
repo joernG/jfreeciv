@@ -78,7 +78,7 @@ public class Advdomestic{
 //    if (acity.is_building_unit
 //        && unit_type_flag(acity.currently_building, F_HELP_WONDER)
 //        && (acity.shield_stock
-//	    >= unit_build_shield_cost(acity.currently_building))
+//	    >= Unittype_P.unit_build_shield_cost(acity.currently_building))
 //        && map_get_continent(acity.tile) == continent) {
 //      caravans++;
 //    }
@@ -104,7 +104,7 @@ public class Advdomestic{
 //        && map_get_continent(acity.tile) == continent
 //        && acity != pcity
 //        && (build_points_left(acity)
-//	    > unit_build_shield_cost(unit_type) * caravans)) {
+//	    > Unittype_P.unit_build_shield_cost(unit_type) * caravans)) {
 //      
 //      /* Desire for the wonder we are going to help - as much as we want to
 //       * build it we want to help building it as well. */
@@ -122,7 +122,7 @@ public class Advdomestic{
 //
 //      want -= dist;
 //      
-//      if (can_build_unit_direct(pcity, unit_type)) {
+//      if (City.can_build_unit_direct(pcity, unit_type)) {
 //        if (want > choice.want) {
 //          choice.want = want;
 //          choice.type = CT_NONMIL;

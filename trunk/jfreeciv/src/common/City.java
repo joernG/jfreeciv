@@ -3,6 +3,8 @@ package common;
 import static utility.shared.Shared_H.TEST_BIT;
 
 import common.city.city;
+import common.city.city_tile_type;
+import common.city.specialist_type;
 import common.map.tile;
 import common.player.player;
 
@@ -21,6 +23,44 @@ public class City{
 //#include "cm.h"
 //
 //#include "city.h"
+	/* first four bits are for auto-attack: */
+	public static final int CITYOPT_AUTOATTACK_BITS= 0xF;
+
+	/* for new city: default auto-attack options all on, others off: */
+	public static final int CITYOPT_DEFAULT =(CITYOPT_AUTOATTACK_BITS);
+
+
+	/* Changing this requires updating CITY_TILES and network capabilities. */
+	public static final int  CITY_MAP_RADIUS =2;
+
+	/* Diameter of the workable city area.  Some places harcdode this number. */
+	public static final int  CITY_MAP_SIZE =(CITY_MAP_RADIUS * 2 + 1) ;
+
+	/* Number of tiles a city can use */
+//	public static final int  CITY_TILES =city_tiles;
+
+	public static final int  INCITE_IMPOSSIBLE_COST =(1000 * 1000 * 1000);
+
+	/*
+	 * Number of traderoutes a city can have.
+	 */
+	public static final int  NUM_TRADEROUTES	=	4;
+
+	/*
+	 * Size of the biggest possible city.
+	 *
+	 * The constant may be changed since it isn't externally visible.
+	 */
+	public static final int  MAX_CITY_SIZE			=		100;
+
+	/**************************************************************************
+	  Return TRUE iff the given city coordinate pair is the center tile of
+	  the citymap.
+	**************************************************************************/
+	public static boolean is_city_center(int city_x, int city_y)
+	{
+	  return CITY_MAP_RADIUS == city_x && CITY_MAP_RADIUS == city_y;
+	}
 //
 ///* Iterate a city map, from the center (the city) outwards */
 //iter_index city_map_iterate_outwards_indices;
@@ -33,8 +73,8 @@ public class City{
 //  Return true if the given city coordinate pair is "valid"; that is, if it
 //  is a part of the citymap and thus is workable by the city.
 //**************************************************************************/
-//boolean is_valid_city_coords(final int city_x, final int city_y)
-//{
+public static boolean is_valid_city_coords(final int city_x, final int city_y)
+{
 //  int dist = map_vector_to_sq_distance(city_x - CITY_MAP_RADIUS,
 //				       city_y - CITY_MAP_RADIUS);
 //
@@ -55,7 +95,8 @@ public class City{
 //   * FIXME: this won't work for hexagonal tiles.
 //   */
 //  return (CITY_MAP_RADIUS * CITY_MAP_RADIUS + 1 >= dist);
-//}
+	return false;
+}
 //
 ///**************************************************************************
 //  Finds the city map coordinate for a given map position and a city
@@ -92,8 +133,8 @@ public class City{
 //  int x, y;
 //
 //  assert(is_valid_city_coords(city_map_x, city_map_y));
-//  x = city_tile.x + city_map_x - CITY_MAP_SIZE / 2;
-//  y = city_tile.y + city_map_y - CITY_MAP_SIZE / 2;
+//  x = city_tile.x + city_map_x - City_H.CITY_MAP_SIZE / 2;
+//  y = city_tile.y + city_map_y - City_H.CITY_MAP_SIZE / 2;
 //
 //  return map_pos_to_tile(x, y);
 //}
@@ -202,16 +243,16 @@ public class City{
 //  tile ptile;
 //
 //  if ((ptile = city_map_to_map(pcity, city_x, city_y))) {
-//    if (pcity.city_map[city_x][city_y] == C_TILE_WORKER
+//    if (pcity.city_map[city_x][city_y] == city_tile_type.C_TILE_WORKER
 //	&& ptile.worked == pcity) {
 //      ptile.worked = null;
 //    }
 //    pcity.city_map[city_x][city_y] = type;
-//    if (type == C_TILE_WORKER) {
+//    if (type == city_tile_type.C_TILE_WORKER) {
 //      ptile.worked = pcity;
 //    }
 //  } else {
-//    assert(type == C_TILE_UNAVAILABLE);
+//    assert(type == city_tile_type.C_TILE_UNAVAILABLE);
 //    pcity.city_map[city_x][city_y] = type;
 //  }
 //}
@@ -220,31 +261,31 @@ public class City{
 //  Return the worker status of the given tile on the citymap for the given
 //  city.
 //**************************************************************************/
-//enum city_tile_type get_worker_city(final city pcity, 
-//                                    int city_x, int city_y)
-//{
+public static city_tile_type get_worker_city(final city pcity, 
+                                    int city_x, int city_y)
+{
 //  if (!is_valid_city_coords(city_x, city_y)) {
-//    return C_TILE_UNAVAILABLE;
+//    return city_tile_type.C_TILE_UNAVAILABLE;
 //  }
-//  return pcity.city_map[city_x][city_y];
-//}
+  return pcity.city_map[city_x][city_y];
+}
+
+	/**************************************************************************
+	 * Return true if this tile on the citymap is being worked by this city.
+	 **************************************************************************/
+	public static boolean is_worker_here(final city pcity, int city_x, int city_y) {
+//		if (!is_valid_city_coords(city_x, city_y)) {
+//			return false;
+//		}
 //
-///**************************************************************************
-//  Return true if this tile on the citymap is being worked by this city.
-//**************************************************************************/
-//boolean is_worker_here(final city pcity, int city_x, int city_y) 
-//{
-//  if (!is_valid_city_coords(city_x, city_y)) {
-//    return false;
-//  }
-//
-//  return get_worker_city(pcity, city_x, city_y) == C_TILE_WORKER;
-//}
-//
+//		return get_worker_city(pcity, city_x, city_y) == city_tile_type.C_TILE_WORKER;
+		return false;
+	}
+
 ///**************************************************************************
 //  Return the extended name of the building.
 //**************************************************************************/
-//final String get_impr_name_ex(final city pcity, Impr_Type_id id)
+//final String get_impr_name_ex(final city pcity, int id)
 //{
 //  static char buffer[256];
 //  final String state = null;
@@ -265,27 +306,27 @@ public class City{
 //  
 //  if (state) {
 //    buffer = util.my_snprintf( "%s(%s)",
-//		get_improvement_name(id), state); 
+//		Improvement.get_improvement_name(id), state); 
 //    return buffer;
 //  } else {
-//    return get_improvement_name(id);
+//    return Improvement.get_improvement_name(id);
 //  }
 //}
-//
-///**************************************************************************
-//  Return the cost (gold) to buy the current city production.
-//**************************************************************************/
-//int city_buy_cost(final city pcity)
-//{
-//  int cost, build = pcity.shield_stock;
+
+/**************************************************************************
+  Return the cost (gold) to buy the current city production.
+**************************************************************************/
+public static int city_buy_cost(final city pcity)
+{
+  int cost=0, build = pcity.shield_stock;
 //
 //  if (pcity.is_building_unit) {
 //    cost = unit_buy_gold_cost(pcity.currently_building, build);
 //  } else {
 //    cost = impr_buy_gold_cost(pcity.currently_building, build);
 //  }
-//  return cost;
-//}
+  return cost;
+}
 
 	/***************************************************************************
 	 * Return the owner of the city.
@@ -300,7 +341,7 @@ public class City{
 // terr_gate (terrain) or spec_gate (specials), or if the building has no
 // terrain/special requirements.
 //**************************************************************************/
-//boolean city_has_terr_spec_gate(final city pcity, Impr_Type_id id)
+//boolean city_has_terr_spec_gate(final city pcity, int id)
 //{
 //  impr_type impr;
 //  int *terr_gate;
@@ -335,7 +376,7 @@ public class City{
 //  Return whether given city can build given building, ignoring whether
 //  it is obsolete.
 //**************************************************************************/
-//boolean can_build_improvement_direct(final city pcity, Impr_Type_id id)
+//boolean can_build_improvement_direct(final city pcity, int id)
 //{
 //  final impr_type building = get_improvement_type(id);
 //
@@ -358,28 +399,28 @@ public class City{
 //
 //  return !improvement_redundant(city_owner(pcity),pcity, id, true);
 //}
-//
-///**************************************************************************
-//  Return whether given city can build given building; returns false if
-//  the building is obsolete.
-//**************************************************************************/
-//boolean can_build_improvement(final city pcity, Impr_Type_id id)
-//{  
+
+/**************************************************************************
+  Return whether given city can build given building; returns false if
+  the building is obsolete.
+**************************************************************************/
+public static boolean can_build_improvement(final city pcity, int id)
+{  
 //  if (!can_build_improvement_direct(pcity, id)) {
 //    return false;
 //  }
 //  if (improvement_obsolete(city_owner(pcity), id)) {
 //    return false;
 //  }
-//  return true;
-//}
-//
+  return true;
+}
+
 ///**************************************************************************
 //  Return whether player can eventually build given building in the city;
 //  returns false if improvement can never possibly be built in this city.
 //**************************************************************************/
 //boolean can_eventually_build_improvement(final city pcity,
-//				      Impr_Type_id id)
+//				      int id)
 //{
 //  /* Can the _player_ ever build this improvement? */
 //  if (!can_player_eventually_build_improvement(city_owner(pcity), id)) {
@@ -399,7 +440,7 @@ public class City{
 //**************************************************************************/
 //boolean can_build_unit_direct(final city pcity, int id)
 //{
-//  Impr_Type_id impr_req;
+//  int impr_req;
 //
 //  if (!can_player_build_unit_direct(city_owner(pcity), id)) {
 //    return false;
@@ -418,13 +459,13 @@ public class City{
 //  }
 //  return true;
 //}
-//
-///**************************************************************************
-//  Return whether given city can build given unit; returns 0 if unit is 
-//  obsolete.
-//**************************************************************************/
-//boolean can_build_unit(final city pcity, int id)
-//{  
+
+/**************************************************************************
+  Return whether given city can build given unit; returns 0 if unit is 
+  obsolete.
+**************************************************************************/
+public static boolean can_build_unit(final city pcity, int id)
+{  
 //  if (!can_build_unit_direct(pcity, id)) {
 //    return false;
 //  }
@@ -433,9 +474,9 @@ public class City{
 //	return false;
 //    }
 //  }
-//  return true;
-//}
-//
+  return true;
+}
+
 ///**************************************************************************
 //  Return whether player can eventually build given unit in the city;
 //  returns 0 if unit can never possibly be built in this city.
@@ -455,24 +496,22 @@ public class City{
 //
 //  return true;
 //}
-//
-///****************************************************************************
-//  Returns true iff if the given city can use this kind of specialist.
-//****************************************************************************/
-//boolean city_can_use_specialist(final city pcity,
-//			     Specialist_type_id type)
-//{
-//  return pcity.size >= Game.game.rgame.specialists[type].min_size;
-//}
-//
-///****************************************************************************
-//  Returns true iff if the given city can change what it is building
-//****************************************************************************/
-//boolean city_can_change_build(final city pcity)
-//{
-//  return !pcity.did_buy || pcity.shield_stock <= 0;
-//}
-//
+
+	/****************************************************************************
+	 * Returns true iff if the given city can use this kind of specialist.
+	 ****************************************************************************/
+	public static boolean city_can_use_specialist(final city pcity, specialist_type type) {
+		return pcity.size >= Game.game.rgame.specialists[type.ordinal()].min_size;
+	}
+
+	/****************************************************************************
+  Returns true iff if the given city can change what it is building
+	 ****************************************************************************/
+	public static boolean city_can_change_build(final city pcity)
+	{
+		return !pcity.did_buy || pcity.shield_stock <= 0;
+	}
+
 ///**************************************************************************
 // Returns how many thousand citizen live in this city.
 //**************************************************************************/
@@ -485,7 +524,7 @@ public class City{
 ///**************************************************************************
 //  Return true if the city has this building in it.
 //**************************************************************************/
-//boolean city_got_building(final city pcity, Impr_Type_id id) 
+//boolean city_got_building(final city pcity, int id) 
 //{
 //  if (!improvement_exists(id)) {
 //    return false;
@@ -498,7 +537,7 @@ public class City{
 //  Return the upkeep (gold) needed each turn to upkeep the given improvement
 //  in the given city.
 //**************************************************************************/
-//int improvement_upkeep(final city pcity, Impr_Type_id i) 
+//int improvement_upkeep(final city pcity, int i) 
 //{
 //  if (!improvement_exists(i))
 //    return 0;
@@ -1365,7 +1404,7 @@ public class City{
 //  int city_shield_stock = include_shield_stock ?
 //      city_change_production_penalty(pcity, id, id_is_unit) : 0;
 //  int improvement_cost = id_is_unit ?
-//    unit_build_shield_cost(id) : impr_build_shield_cost(id);
+//    Unittype_P.unit_build_shield_cost(id) : Improvement.impr_build_shield_cost(id);
 //
 //  if (include_shield_stock && (city_shield_stock >= improvement_cost)) {
 //    return 1;
@@ -1666,8 +1705,8 @@ public class City{
 //  get_tax_income(city_owner(pcity), pcity.trade_prod, &pcity.science_total, 
 //                 &pcity.luxury_total, &pcity.tax_total);
 //
-//  pcity.luxury_total += (pcity.specialists[SP_ELVIS]
-//			  * Game.game.rgame.specialists[SP_ELVIS].bonus);
+//  pcity.luxury_total += (pcity.specialists[specialist_type.SP_ELVIS]
+//			  * Game.game.rgame.specialists[specialist_type.SP_ELVIS].bonus);
 //  pcity.science_total += (pcity.specialists[SP_SCIENTIST]
 //			   * Game.game.rgame.specialists[SP_SCIENTIST].bonus);
 //  pcity.tax_total += (pcity.specialists[SP_TAXMAN]
@@ -1938,7 +1977,7 @@ public class City{
 //  *shields = 0;
 //  
 //  city_map_iterate(x, y) {
-//    if (get_worker_city(pcity, x, y) == C_TILE_WORKER) {
+//    if (get_worker_city(pcity, x, y) == city_tile_type.C_TILE_WORKER) {
 //      *food += base_city_get_food_tile(x, y, pcity, is_celebrating);
 //      *shields += base_city_get_shields_tile(x, y, pcity, is_celebrating);
 //      *trade += base_city_get_trade_tile(x, y, pcity, is_celebrating);
@@ -1963,7 +2002,7 @@ public class City{
 //
 //  for (i = 0; i < NUM_TRADEROUTES; i++) {
 //    pcity.trade_value[i] =
-//	trade_between_cities(pcity, find_city_by_id(pcity.trade[i]));
+//	trade_between_cities(pcity, Game.find_city_by_id(pcity.trade[i]));
 //    pcity.trade_prod += pcity.trade_value[i];
 //  }
 //  pcity.corruption = city_corruption(pcity, pcity.trade_prod);
@@ -2132,7 +2171,7 @@ public class City{
 //    int i;
 //
 //    for (i = 0; i < NUM_TRADEROUTES; i++) {
-//      city pcity2 = find_city_by_id(pcity.trade[i]);
+//      city pcity2 = Game.find_city_by_id(pcity.trade[i]);
 //
 //      if (pcity2) {
 //	generic_city_refresh(pcity2, false, send_unit_info);
@@ -2252,16 +2291,16 @@ public class City{
 ///**************************************************************************
 //  Give the number of specialists in a city.
 //**************************************************************************/
-//int city_specialists(final city pcity)
-//{
-//  int count = 0;
+public static int city_specialists(final city pcity)
+{
+  int count = 0;
 //
 //  specialist_type_iterate(sp) {
 //    count += pcity.specialists[sp];
 //  } specialist_type_iterate_end;
-//
-//  return count;
-//}
+
+  return count;
+}
 //
 ///**************************************************************************
 //  Return a string showing the number of specialists in the array.
@@ -2275,7 +2314,7 @@ public class City{
 //final String specialists_string(final int *specialists)
 //{
 //  size_t len = 0;
-//  static char buf[5 * SP_COUNT];
+//  static char buf[5 * specialist_type.getSize()];
 //
 //  specialist_type_iterate(sp) {
 //    char *separator = (len == 0) ? "" : "/";
@@ -2293,7 +2332,7 @@ public class City{
 // arrays if the improvement has effects and/or an equiv_range that
 // extend outside of the city.
 //**************************************************************************/
-//void city_add_improvement(city pcity, Impr_Type_id impr)
+//void city_add_improvement(city pcity, int impr)
 //{
 //  player pplayer = city_owner(pcity);
 //
@@ -2313,7 +2352,7 @@ public class City{
 // arrays if the improvement has effects and/or an equiv_range that
 // extend outside of the city.
 //**************************************************************************/
-//void city_remove_improvement(city pcity,Impr_Type_id impr)
+//void city_remove_improvement(city pcity,int impr)
 //{
 //  player pplayer = city_owner(pcity);
 //  
@@ -2328,9 +2367,9 @@ public class City{
 //}
 //
 ///**************************************************************************
-//Return the status (C_TILE_EMPTY, C_TILE_WORKER or C_TILE_UNAVAILABLE)
-//of a given map position. If the status is C_TILE_WORKER the city which
-//uses this tile is also returned. If status isn't C_TILE_WORKER the
+//Return the status (city_tile_type.C_TILE_EMPTY, city_tile_type.C_TILE_WORKER or city_tile_type.C_TILE_UNAVAILABLE)
+//of a given map position. If the status is city_tile_type.C_TILE_WORKER the city which
+//uses this tile is also returned. If status isn't city_tile_type.C_TILE_WORKER the
 //city pointer is set to null.
 //**************************************************************************/
 //void get_worker_on_map_position(final tile ptile,
@@ -2339,9 +2378,9 @@ public class City{
 //{
 //  *result_pcity = ptile.worked;
 //  if (*result_pcity) {
-//    *result_city_tile_type = C_TILE_WORKER;
+//    *result_city_tile_type = city_tile_type.C_TILE_WORKER;
 //  } else {
-//    *result_city_tile_type = C_TILE_EMPTY;
+//    *result_city_tile_type = city_tile_type.C_TILE_EMPTY;
 //  }
 //}
 
@@ -2393,7 +2432,7 @@ public class City{
 //  specialist_type_iterate(sp) {
 //    pcity.specialists[sp] = 0;
 //  } specialist_type_iterate_end;
-//  pcity.specialists[SP_ELVIS] = 1;
+//  pcity.specialists[specialist_type.SP_ELVIS] = 1;
 //  pcity.ppl_happy[4] = 0;
 //  pcity.ppl_content[4] = 1;
 //  pcity.ppl_unhappy[4] = 0;

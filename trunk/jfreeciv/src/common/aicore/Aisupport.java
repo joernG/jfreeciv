@@ -113,7 +113,7 @@ public class Aisupport{
 //    if (Map.same_pos(punit.tile, pcity.tile)) {
 //      int id = punit.unit_type().obsoleted_by;
 //
-//      if (id >= 0 && can_build_unit_direct(pcity, id)) {
+//      if (id >= 0 && City.can_build_unit_direct(pcity, id)) {
 //        worth += unit_disband_shields(punit.type) / 2; /* obsolete */
 //      } else {
 //        worth += unit_disband_shields(punit.type); /* good stuff */
@@ -122,9 +122,9 @@ public class Aisupport{
 //  } }
 //  built_impr_iterate(pcity, impr) {
 //    if (improvement_types[impr].is_wonder && !wonder_obsolete(impr)) {
-//      worth += impr_sell_gold(impr);
+//      worth += Improvement.impr_sell_gold(impr);
 //   } else {
-//      worth += impr_sell_gold(impr) / 4;
+//      worth += Improvement.impr_sell_gold(impr) / 4;
 //    }
 //  } built_impr_iterate_end;
 //  if (city_unhappy(pcity)) {

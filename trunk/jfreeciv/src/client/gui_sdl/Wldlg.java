@@ -186,7 +186,7 @@ public class Wldlg{
 //    city_set_worklist(pCity, pEditor.pCopy_WorkList);
 //  } else {
 //    /* commit global worklist */
-//    copy_worklist(pEditor.pOrginal_WorkList, pEditor.pCopy_WorkList);
+//    worklist.copy_worklist(pEditor.pOrginal_WorkList, pEditor.pCopy_WorkList);
 //    update_worklist_report_dialog();
 //  }  
 //  
@@ -850,7 +850,7 @@ public class Wldlg{
 //      }  
 //      /* --------------------------------- */
 //      
-//      copy_worklist(pEditor.pCopy_WorkList, &wl);
+//      worklist.copy_worklist(pEditor.pCopy_WorkList, &wl);
 //    
 //      /* --------------------------------- */
 //      /* create new widget list */
@@ -936,7 +936,7 @@ public class Wldlg{
 //    *cost = unig_build_value(id);
 //    return pType.name;
 //  } else {
-//    *cost = impr_build_shield_cost(id);
+//    *cost = Improvement.impr_build_shield_cost(id);
 //    return get_impr_name_ex(pCity, id);
 //  }
 //}
@@ -1113,7 +1113,7 @@ public class Wldlg{
 //  pEditor.pCity = pCity;
 //  pEditor.pOrginal_WorkList = pWorkList;
 //  pEditor.pCopy_WorkList = MALLOC(sizeof(struct worklist));
-//  copy_worklist(pEditor.pCopy_WorkList, pWorkList);
+//  worklist.copy_worklist(pEditor.pCopy_WorkList, pWorkList);
 //  
 //  if(pCity) {
 //    pEditor.is_building_unit = pCity.is_building_unit;
@@ -1400,7 +1400,7 @@ public class Wldlg{
 //    
 //    /* If there's a city, can the city build the improvement? */
 //    if (pCity) {
-//      can_build = can_build && can_build_improvement(pCity, imp);
+//      can_build = can_build && City.can_build_improvement(pCity, imp);
 //      can_eventually_build = can_eventually_build &&
 //	  can_eventually_build_improvement(pCity, imp);
 //    }
@@ -1440,29 +1440,29 @@ public class Wldlg{
 //	    if(state) {
 //              cBuf = util.my_snprintf( "(%s)\n%d/%d %s\n%s",
 //			  state, pCity.shield_stock,
-//			  impr_build_shield_cost(imp),
+//			  Improvement.impr_build_shield_cost(imp),
 //			  PL("shield", "shields",
-//			      impr_build_shield_cost(imp)),
+//			      Improvement.impr_build_shield_cost(imp)),
 //			  "never");
 //	    } else {
 //	      cBuf = util.my_snprintf( "%d/%d %s\n%s",
-//			  pCity.shield_stock, impr_build_shield_cost(imp),
+//			  pCity.shield_stock, Improvement.impr_build_shield_cost(imp),
 //			  PL("shield","shields",
-//			      impr_build_shield_cost(imp)), "never");
+//			      Improvement.impr_build_shield_cost(imp)), "never");
 //	    }	  
 //          } else {
 //            if (state) {
 //	      cBuf = util.my_snprintf( "(%s)\n%d/%d %s\n%d %s",
 //			  state, pCity.shield_stock,
-//			  impr_build_shield_cost(imp),
+//			  Improvement.impr_build_shield_cost(imp),
 //			  PL("shield","shields",
-//			      impr_build_shield_cost(imp)),
+//			      Improvement.impr_build_shield_cost(imp)),
 //			  turns, PL("turn", "turns", turns));
 //            } else {
 //	      cBuf = util.my_snprintf( "%d/%d %s\n%d %s",
-//			  pCity.shield_stock, impr_build_shield_cost(imp),
+//			  pCity.shield_stock, Improvement.impr_build_shield_cost(imp),
 //			  PL("shield","shields",
-//			      impr_build_shield_cost(imp)),
+//			      Improvement.impr_build_shield_cost(imp)),
 //			  turns, PL("turn", "turns", turns));
 //            }
 //          }
@@ -1476,14 +1476,14 @@ public class Wldlg{
 //        if(imp != B_CAPITAL) {
 //          if(state) {
 //            cBuf = util.my_snprintf( "(%s)\n%d %s",
-//			state, impr_build_shield_cost(imp),
+//			state, Improvement.impr_build_shield_cost(imp),
 //			PL("shield","shields",
-//			    impr_build_shield_cost(imp)));
+//			    Improvement.impr_build_shield_cost(imp)));
 //          } else {
 //	    cBuf = util.my_snprintf( "%d %s",
-//			impr_build_shield_cost(imp),
+//			Improvement.impr_build_shield_cost(imp),
 //			PL("shield","shields",
-//			    impr_build_shield_cost(imp)));
+//			    Improvement.impr_build_shield_cost(imp)));
 //          }
 //        } else {
 //          cBuf = util.my_snprintf( "shields into gold");
@@ -1540,7 +1540,7 @@ public class Wldlg{
 //
 //    /* If there's a city, can the city build the unit? */
 //    if (pCity) {
-//      can_build = can_build && can_build_unit(pCity, un);
+//      can_build = can_build && City.can_build_unit(pCity, un);
 //      can_eventually_build = can_eventually_build &&
 //	  		can_eventually_build_unit(pCity, un);
 //    }
@@ -1566,15 +1566,15 @@ public class Wldlg{
 //		    "(%d/%d/%d)\n%d/%d %s\nnever",
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
-//		    pCity.shield_stock, unit_build_shield_cost(un),
-//	  	    PL("shield","shields", unit_build_shield_cost(un)));
+//		    pCity.shield_stock, Unittype_P.unit_build_shield_cost(un),
+//	  	    PL("shield","shields", Unittype_P.unit_build_shield_cost(un)));
 //        } else {
 //          cBuf = util.my_snprintf(
 //		    "(%d/%d/%d)\n%d/%d %s\n%d %s",
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
-//		    pCity.shield_stock, unit_build_shield_cost(un), 
-//	  	    PL("shield","shields", unit_build_shield_cost(un)),
+//		    pCity.shield_stock, Unittype_P.unit_build_shield_cost(un), 
+//	  	    PL("shield","shields", Unittype_P.unit_build_shield_cost(un)),
 //		    turns, PL("turn", "turns", turns));
 //        }
 //      } else {
@@ -1582,8 +1582,8 @@ public class Wldlg{
 //		    "(%d/%d/%d)\n%d %s",
 //		    pUnit.attack_strength,
 //		    pUnit.defense_strength, pUnit.move_rate / Unit_H.SINGLE_MOVE,
-//		    unit_build_shield_cost(un),
-//		    PL("shield","shields", unit_build_shield_cost(un)));
+//		    Unittype_P.unit_build_shield_cost(un),
+//		    PL("shield","shields", Unittype_P.unit_build_shield_cost(un)));
 //      }
 //
 //      copy_chars_to_string16(pStr, cBuf);

@@ -88,7 +88,7 @@ public class Plrhand {
 	// if (buf[0] != '\0') {
 	// sz_strlcat(buf, ", ");
 	// }
-	// sz_strlcat(buf, get_improvement_name(src.building));
+	// sz_strlcat(buf, Improvement.get_improvement_name(src.building));
 	// } effect_source_vector_iterate_end;
 	//
 	// tech_type_iterate(i) {
@@ -266,11 +266,11 @@ public class Plrhand {
 	// impr_type_iterate(id) {
 	// if (Game.game.global_wonders[id] != 0 && is_wonder(id) &&
 	// improvement_types[id].obsolete_by == tech_found &&
-	// (pcity = find_city_by_id(Game.game.global_wonders[id]))) {
+	// (pcity = Game.find_city_by_id(Game.game.global_wonders[id]))) {
 	// Plrhand.notify_player_ex(City.city_owner(pcity), null, E_WONDER_OBSOLETE,
 	// "Game: Discovery of %s OBSOLETES %s in %s!",
 	// get_tech_name(City.city_owner(pcity), tech_found),
-	// get_improvement_name(id),
+	// Improvement.get_improvement_name(id),
 	// pcity.name);
 	// }
 	// } impr_type_iterate_end;
@@ -403,8 +403,8 @@ public class Plrhand {
 	// || tech_found == Game.game.rtech.colosseum_plus
 	// || tech_found == Game.game.rtech.temple_plus) {
 	// for (city pcity : plr.cities.data) {
-	// city_refresh(pcity);
-	// send_city_info(plr, pcity);
+	// Cityturn.city_refresh(pcity);
+	// Citytools.send_city_info(plr, pcity);
 	// } }
 	// }
 	//
@@ -825,10 +825,10 @@ public class Plrhand {
 	// pplayer.economic.luxury = luxury;
 	// pplayer.economic.science = science;
 	// Gamelog.gamelog(GAMELOG_RATECHANGE, pplayer);
-	// conn_list_do_buffer(&pplayer.connections);
-	// global_city_refresh(pplayer);
+	// Connection.conn_list_do_buffer(&pplayer.connections);
+	// Cityturn.global_city_refresh(pplayer);
 	// Plrhand.send_player_info(pplayer, pplayer);
-	// conn_list_do_unbuffer(&pplayer.connections);
+	// Connection.conn_list_do_unbuffer(&pplayer.connections);
 	// }
 	// }
 	//
@@ -941,7 +941,7 @@ public class Plrhand {
 	// }
 	//
 	// check_player_government_rates(pplayer);
-	// global_city_refresh(pplayer);
+	// Cityturn.global_city_refresh(pplayer);
 	// Plrhand.send_player_info(pplayer, pplayer);
 	// }
 	//
@@ -984,7 +984,7 @@ public class Plrhand {
 	// }
 	//
 	// check_player_government_rates(pplayer);
-	// global_city_refresh(pplayer);
+	// Cityturn.global_city_refresh(pplayer);
 	// Plrhand.send_player_info(pplayer, pplayer);
 	// }
 	//

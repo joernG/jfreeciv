@@ -1,6 +1,10 @@
 package server;
 
-import common.unit.unit;
+import common.Game;
+import common.event_type;
+import common.city.city;
+import common.map.tile;
+import common.player.player;
 
 public class Citytools{
 ///**********************************************************************
@@ -61,7 +65,7 @@ public class Citytools{
 //static int evaluate_city_name_priority(tile ptile,
 //				       city_name city_name,
 //				       int default_priority);
-//static char *search_for_city_name(tile ptile, city_name city_names,
+//static String search_for_city_name(tile ptile, city_name city_names,
 //				  player pplayer);
 //static void server_set_tile_city(city pcity, int city_x, int city_y,
 //				 enum city_tile_type type);
@@ -74,19 +78,19 @@ public class Citytools{
 //
 //  Long explanation:
 //
-//  Historically auto_arrange_workers was called every time a city changed.
+//  Historically Cityturn.auto_arrange_workers was called every time a city changed.
 //  If the city grew or shrunk, a new tile became available or was removed,
 //  the function would be called.  However in at least one place this breaks.
 //  In some operations (like transfer_city) multiple things may change and
 //  the city is not left in a sane state in between.  Calling
-//  auto_arrange_workers after each change means it's called with an "insane"
+//  Cityturn.auto_arrange_workers after each change means it's called with an "insane"
 //  city.  This can lead at best to a failed sanity check with a wasted call,
 //  or at worse to a more major bug.  The solution is freeze_workers and
 //  thaw_workers.
 //
 //  Call freeze_workers to freeze the auto-arranging of citizens.  So long as
 //  the freeze is in place no arrangement will be done for this city.  Any
-//  call to auto_arrange_workers will just queue up an arrangement for later.
+//  call to Cityturn.auto_arrange_workers will just queue up an arrangement for later.
 //  Later when thaw_workers is called, the freeze is removed and the
 //  auto-arrange will be done if there is any arrangement pending.
 //
@@ -110,7 +114,7 @@ public class Citytools{
 //  pcity.server.workers_frozen--;
 //  assert(pcity.server.workers_frozen >= 0);
 //  if (pcity.server.workers_frozen == 0 && pcity.server.needs_arrange) {
-//    auto_arrange_workers(pcity);
+//    Cityturn.auto_arrange_workers(pcity);
 //  }
 //}
 //
@@ -224,7 +228,7 @@ public class Citytools{
 //city name.  If the list has no valid entries in it, null will be
 //returned.
 //*****************************************************************/
-//static char *search_for_city_name(tile ptile, city_name city_names,
+//static String search_for_city_name(tile ptile, city_name city_names,
 //				  player pplayer)
 //{
 //  int choice, best_priority = -1;
@@ -258,9 +262,9 @@ public class Citytools{
 //   Finns' default city names.  Duplicated names may be used by
 //   either nation.)
 //**************************************************************************/
-//boolean is_allowed_city_name(player pplayer, final String city_name,
-//			  char *error_buf, size_t bufsz)
-//{
+public static boolean is_allowed_city_name(player pplayer, final String city_name,
+			  String error_buf, int bufsz)
+{
 //  connection pconn = Connection.find_conn_by_user(pplayer.username);
 //
 //  /* Mode 1: A city name has to be unique for each player. */
@@ -270,9 +274,9 @@ public class Citytools{
 //      error_buf = String.format "You already have a city called %s.",
 //		  city_name);
 //    }
-//    return false;
-//  }
-//
+    return false;
+  }
+
 //  /* Modes 2,3: A city name has to be globally unique. */
 //  if ((Game.game.allowed_city_names == 2 || Game.game.allowed_city_names == 3)
 //      && game_find_city_by_name(city_name)) {
@@ -334,18 +338,18 @@ public class Citytools{
 //
 //  return true;
 //}
-//
-///****************************************************************
-//Come up with a default name when a new city is about to be built.
-//Handle running out of names etc. gracefully.  Maybe we should keep
-//track of which names have been rejected by the player, so that we do
-//not suggest them again?
-//Returned pointer points into internal data structures or static
-//buffer etc, and should be considered read-only (and not freed)
-//by caller.
-//*****************************************************************/
-//char *city_name_suggestion(player pplayer, tile ptile)
-//{
+
+	/****************************************************************
+Come up with a default name when a new city is about to be built.
+Handle running out of names etc. gracefully.  Maybe we should keep
+track of which names have been rejected by the player, so that we do
+not suggest them again?
+Returned pointer points into internal data structures or static
+buffer etc, and should be considered read-only (and not freed)
+by caller.
+	 *****************************************************************/
+	public static String city_name_suggestion(player pplayer, tile ptile)
+	{
 //  int i = 0, j;
 //  boolean nations_selected[Game.game.nation_count];
 //  int nation_list[Game.game.nation_count], n;
@@ -386,7 +390,7 @@ public class Citytools{
 //  while (i < Game.game.nation_count) {
 //    for (; i < queue_size; i++) {
 //      nation_type nation;
-//      char *name;
+//      String name;
 //
 //      {
 //	/* Pick a random nation from the queue. */
@@ -451,22 +455,24 @@ public class Citytools{
 //  assert(false);
 //  tempname = String.format( "A poorly-named city");
 //  return tempname;
-//}
-//
-///****************************************************************************
-//  Return true iff the city can sell the given improvement.
-//****************************************************************************/
-//boolean can_sell_building(city pcity, Impr_Type_id id)
-//{
-//  return (city_got_building(pcity, id) ? !is_wonder(id) : false);
-//}
-//
+		return "";
+}
+	
+	/****************************************************************************
+	  Return true iff the city can sell the given improvement.
+	****************************************************************************/
+	public static boolean can_sell_building(city pcity, int id)
+	{
+//	  return (city_got_building(pcity, id) ? !is_wonder(id) : false);
+		return true;
+	}
+	
 ///**************************************************************************
 //...
 //**************************************************************************/
-//city find_city_wonder(Impr_Type_id id)
+//city find_city_wonder(int id)
 //{
-//  return (find_city_by_id(Game.game.global_wonders[id]));
+//  return (Game.find_city_by_id(Game.game.global_wonders[id]));
 //}
 //
 ///**************************************************************************
@@ -474,7 +480,7 @@ public class Citytools{
 //**************************************************************************/
 //int build_points_left(city pcity)
 //{
-//  int cost = impr_build_shield_cost(pcity.currently_building);
+//  int cost = Improvement.impr_build_shield_cost(pcity.currently_building);
 //
 //  return cost - pcity.shield_stock;
 //}
@@ -735,7 +741,7 @@ public class Citytools{
 //
 //  for (i = 0; i < NUM_TRADEROUTES; i++) {
 //    if (cities[i] != 0) {
-//      oldtradecity = find_city_by_id(cities[i]);
+//      oldtradecity = Game.find_city_by_id(cities[i]);
 //      assert(oldtradecity != null);
 //      if (can_cities_trade(pcity, oldtradecity)
 //          && can_establish_trade_route(pcity, oldtradecity)) {   
@@ -743,7 +749,7 @@ public class Citytools{
 //      }
 //      /* refresh regardless; either it lost a trade route or
 //	 the trade route revenue changed. */
-//      city_refresh(oldtradecity);
+//      Cityturn.city_refresh(oldtradecity);
 //      send_city_info(City.city_owner(oldtradecity), oldtradecity);
 //    }
 //  }
@@ -863,7 +869,7 @@ public class Citytools{
 //  for (i = 0; i < NUM_TRADEROUTES; i++)
 //    old_trade_routes[i] = pcity.trade[i];
 //  for (i = 0; i < NUM_TRADEROUTES; i++) {
-//    city pother_city = find_city_by_id(pcity.trade[i]);
+//    city pother_city = Game.find_city_by_id(pcity.trade[i]);
 //
 //    assert(pcity.trade[i] == 0 || pother_city != null);
 //
@@ -878,7 +884,7 @@ public class Citytools{
 //   * with the transferred city.
 //   */
 //  for (i = 0; i < NUM_TRADEROUTES; i++) {
-//    city pother_city = find_city_by_id(pcity.trade[i]);
+//    city pother_city = Game.find_city_by_id(pcity.trade[i]);
 //    if (pother_city) {
 //      reality_check_city(ptaker, pother_city.tile);
 //      update_dumb_city(ptaker, pother_city);
@@ -886,7 +892,7 @@ public class Citytools{
 //    }
 //  }
 //
-//  city_refresh(pcity);
+//  Cityturn.city_refresh(pcity);
 //
 //  /* 
 //   * maybe_make_contact have to be called before
@@ -898,7 +904,7 @@ public class Citytools{
 //  map_city_radius_iterate(pcity.tile, ptile) {
 //    update_city_tile_status_map(pcity, ptile);
 //  } map_city_radius_iterate_end;
-//  auto_arrange_workers(pcity);
+//  Cityturn.auto_arrange_workers(pcity);
 //  thaw_workers(pcity);
 //  if (raze)
 //    raze_city(pcity);
@@ -910,9 +916,9 @@ public class Citytools{
 //
 //  /* Set production to something valid for pplayer, if not. */
 //  if ((pcity.is_building_unit
-//       && !can_build_unit_direct(pcity, pcity.currently_building))
+//       && !City.can_build_unit_direct(pcity, pcity.currently_building))
 //      || (!pcity.is_building_unit
-//          && !can_build_improvement(pcity, pcity.currently_building))) {
+//          && !City.can_build_improvement(pcity, pcity.currently_building))) {
 //    advisor_choose_build(ptaker, pcity);
 //  } 
 //
@@ -942,7 +948,7 @@ public class Citytools{
 //    build_free_palace(pgiver, pcity.name);
 //  }
 //
-//  sanity_check_city(pcity);
+//  Sanitycheck.sanity_check_city(pcity);
 //  sync_cities();
 //}
 //
@@ -1004,13 +1010,13 @@ public class Citytools{
 //
 //  /* it is possible to build a city on a tile that is already worked
 //   * this will displace the worker on the newly-built city's tile -- Syela */
-//  for (y_itr = 0; y_itr < CITY_MAP_SIZE; y_itr++) {
-//    for (x_itr = 0; x_itr < CITY_MAP_SIZE; x_itr++) {
-//      if (is_valid_city_coords(x_itr, y_itr)
+//  for (y_itr = 0; y_itr < City_H.CITY_MAP_SIZE; y_itr++) {
+//    for (x_itr = 0; x_itr < City_H.CITY_MAP_SIZE; x_itr++) {
+//      if (City.is_valid_city_coords(x_itr, y_itr)
 //	  && city_can_work_tile(pcity, x_itr, y_itr))
-//	pcity.city_map[x_itr][y_itr] = C_TILE_EMPTY;
+//	pcity.city_map[x_itr][y_itr] = city_tile_type.C_TILE_EMPTY;
 //      else
-//	pcity.city_map[x_itr][y_itr] = C_TILE_UNAVAILABLE;
+//	pcity.city_map[x_itr][y_itr] = city_tile_type.C_TILE_UNAVAILABLE;
 //    }
 //  }
 //
@@ -1018,10 +1024,10 @@ public class Citytools{
 //   * status and so must be done after the above. */
 //  map_update_borders_city_change(pcity);
 //
-//  server_set_tile_city(pcity, CITY_MAP_SIZE/2, CITY_MAP_SIZE/2, C_TILE_WORKER);
-//  auto_arrange_workers(pcity);
+//  server_set_tile_city(pcity, City_H.CITY_MAP_SIZE/2, City_H.CITY_MAP_SIZE/2, city_tile_type.C_TILE_WORKER);
+//  Cityturn.auto_arrange_workers(pcity);
 //
-//  city_refresh(pcity);
+//  Cityturn.city_refresh(pcity);
 //
 //  /* Put vision back to normal, if fortress acted as a watchtower */
 //  if (Map.map_has_special(ptile, S_FORTRESS)) {
@@ -1054,7 +1060,7 @@ public class Citytools{
 //  maybe_make_contact(ptile, City.city_owner(pcity));
 //
 //  unit_list_iterate((ptile).units, punit) {
-//    city home = find_city_by_id(punit.homecity);
+//    city home = Game.find_city_by_id(punit.homecity);
 //
 //    /* Catch fortress building, transforming into ocean, etc. */
 //    if (!can_unit_continue_current_activity(punit)) {
@@ -1063,11 +1069,11 @@ public class Citytools{
 //
 //    /* Update happiness (the unit may no longer cause unrest). */
 //    if (home) {
-//      city_refresh(home);
+//      Cityturn.city_refresh(home);
 //      send_city_info(City.city_owner(home), home);
 //    }
 //  } }
-//  sanity_check_city(pcity);
+//  Sanitycheck.sanity_check_city(pcity);
 //
 //  Gamelog.gamelog(GAMELOG_FOUNDCITY, pcity);
 //}
@@ -1081,7 +1087,7 @@ public class Citytools{
 //  player pplayer = City.city_owner(pcity);
 //  tile ptile = pcity.tile;
 //  boolean had_palace = pcity.improvements[Game.game.palace_building] != I_NONE;
-//  char *city_name = mystrdup(pcity.name);
+//  String city_name = mystrdup(pcity.name);
 //
 //  built_impr_iterate(pcity, i) {
 //    city_remove_improvement(pcity, i);
@@ -1152,7 +1158,7 @@ public class Citytools{
 //  }
 //
 //  for (o = 0; o < NUM_TRADEROUTES; o++) {
-//    city pother_city = find_city_by_id(pcity.trade[o]);
+//    city pother_city = Game.find_city_by_id(pcity.trade[o]);
 //
 //    assert(pcity.trade[o] == 0 || pother_city != null);
 //
@@ -1312,7 +1318,7 @@ public class Citytools{
 //  int i;
 //
 //  for (i = 0; i < NUM_TRADEROUTES; i++) {
-//    city other = find_city_by_id(pcity.trade[i]);
+//    city other = Game.find_city_by_id(pcity.trade[i]);
 //    if (other && City.city_owner(other) == pplayer) {
 //      return true;
 //    }
@@ -1431,7 +1437,7 @@ public class Citytools{
 //**************************************************************************/
 //void send_all_known_cities(Speclists<Connection> dest)
 //{
-//  conn_list_do_buffer(dest);
+//  Connection.conn_list_do_buffer(dest);
 //  conn_list_iterate(*dest, pconn) {
 //    player pplayer = pconn.player;
 //    if (!pplayer && !pconn.observer) {
@@ -1444,7 +1450,7 @@ public class Citytools{
 //    }
 //  }
 //  }
-//  conn_list_do_unbuffer(dest);
+//  Connection.conn_list_do_unbuffer(dest);
 //  flush_packets();
 //}
 //
@@ -1454,37 +1460,37 @@ public class Citytools{
 //void send_player_cities(player pplayer)
 //{
 //  for (city pcity : pplayer.cities.data) {
-//    city_refresh(pcity);
+//    Cityturn.city_refresh(pcity);
 //    send_city_info(pplayer, pcity);
 //  }
 //  }
 //}
-//
-//
-///**************************************************************************
-//  A wrapper, accessing either broadcast_city_info() (dest==null),
-//  or a convenience case of send_city_info_at_tile().
-//  Must specify non-null pcity.
-//**************************************************************************/
-//void send_city_info(player dest, city pcity)
-//{
-//  assert(pcity != null);
-//
+
+
+/**************************************************************************
+  A wrapper, accessing either broadcast_city_info() (dest==null),
+  or a convenience case of send_city_info_at_tile().
+  Must specify non-null pcity.
+**************************************************************************/
+public static void send_city_info(player dest, city pcity)
+{
+  assert(pcity != null);
+
 //  if (Srv_main.server_state != RUN_GAME_STATE && Srv_main.server_state != server_states.GAME_OVER_STATE)
 //    return;
 //
 //  if (dest == City.city_owner(pcity) && nocity_send)
 //    return;
 //
-//  if (!dest || dest == City.city_owner(pcity))
+//  if (dest==null || dest == City.city_owner(pcity))
 //    pcity.synced = true;
-//  if (!dest) {
+//  if (dest==null) {
 //    broadcast_city_info(pcity);
 //  } else {
 //    send_city_info_at_tile(dest, &dest.connections, pcity, pcity.tile);
 //  }
-//}
-//
+}
+
 ///**************************************************************************
 //Send info about a city, as seen by pviewer, to dest (usually dest will
 //be pviewer.connections). If pplayer can see the city we update the city
@@ -1565,7 +1571,7 @@ public class Citytools{
 //		  boolean dipl_invest)
 //{
 //  int x, y, i;
-//  char *p;
+//  String p;
 //  packet.id=pcity.id;
 //  packet.owner=pcity.owner;
 //  packet.x = pcity.tile.x;
@@ -1579,7 +1585,7 @@ public class Citytools{
 //    packet.ppl_unhappy[i]=pcity.ppl_unhappy[i];
 //    packet.ppl_angry[i]=pcity.ppl_angry[i];
 //  }
-//  packet.specialists[SP_ELVIS] = pcity.specialists[SP_ELVIS];
+//  packet.specialists[specialist_type.SP_ELVIS] = pcity.specialists[specialist_type.SP_ELVIS];
 //  packet.specialists[SP_SCIENTIST] = pcity.specialists[SP_SCIENTIST];
 //  packet.specialists[SP_TAXMAN] = pcity.specialists[SP_TAXMAN];
 //  for (i = 0; i < NUM_TRADEROUTES; i++) {
@@ -1619,16 +1625,16 @@ public class Citytools{
 //  packet.caravan_shields=pcity.caravan_shields;
 //  packet.last_turns_shield_surplus = pcity.last_turns_shield_surplus;
 //
-//  copy_worklist(&packet.worklist, &pcity.worklist);
+//  worklist.copy_worklist(&packet.worklist, &pcity.worklist);
 //  packet.diplomat_investigate=dipl_invest;
 //
 //  packet.airlift = pcity.airlift;
 //  packet.did_buy = pcity.did_buy;
 //  packet.did_sell = pcity.did_sell;
 //  packet.was_happy = pcity.was_happy;
-//  for (y = 0; y < CITY_MAP_SIZE; y++) {
-//    for (x = 0; x < CITY_MAP_SIZE; x++) {
-//      packet.city_map[x + y * CITY_MAP_SIZE] = get_worker_city(pcity, x, y);
+//  for (y = 0; y < City_H.CITY_MAP_SIZE; y++) {
+//    for (x = 0; x < City_H.CITY_MAP_SIZE; x++) {
+//      packet.city_map[x + y * City_H.CITY_MAP_SIZE] = City.get_worker_city(pcity, x, y);
 //    }
 //  }
 //
@@ -1741,7 +1747,7 @@ public class Citytools{
 //    return;
 //  }
 //
-//  remove_trade_route(pcity, find_city_by_id(pcity.trade[slot]));
+//  remove_trade_route(pcity, Game.find_city_by_id(pcity.trade[slot]));
 //}
 //
 ///**************************************************************************
@@ -1773,27 +1779,27 @@ public class Citytools{
 //    }
 //  }
 //}
-//
-///****************************************************************************
-//  Sell the improvement from the city, and give the player the owner.  Not
-//  all buildings can be sold.
-//
-//  I guess the player should always be the city owner?
-//****************************************************************************/
-//void do_sell_building(player pplayer, city pcity,
-//		      Impr_Type_id id)
-//{
+
+/****************************************************************************
+  Sell the improvement from the city, and give the player the owner.  Not
+  all buildings can be sold.
+
+  I guess the player should always be the city owner?
+****************************************************************************/
+public static void do_sell_building(player pplayer, city pcity,
+		      int id)
+{
 //  if (!is_wonder(id)) {
-//    pplayer.economic.gold += impr_sell_gold(id);
+//    pplayer.economic.gold += Improvement.impr_sell_gold(id);
 //    building_lost(pcity, id);
 //  }
-//}
-//
-///****************************************************************************
-//  Destroy the improvement in the city straight-out.  Note that this is
-//  different from selling a building.
-//****************************************************************************/
-//void building_lost(city pcity, Impr_Type_id id)
+}
+
+/****************************************************************************
+  Destroy the improvement in the city straight-out.  Note that this is
+  different from selling a building.
+****************************************************************************/
+//void building_lost(city pcity, int id)
 //{
 //  player owner = City.city_owner(pcity);
 //  boolean was_capital = pcity.is_capital();
@@ -1807,13 +1813,13 @@ public class Citytools{
 //    spaceship_lost(owner);
 //  }
 //}
-//
-///**************************************************************************
-//  Change the build target.
-//**************************************************************************/
-//void change_build_target(player pplayer, city pcity,
-//			 int target, boolean is_unit, enum event_type event)
-//{
+
+/**************************************************************************
+  Change the build target.
+**************************************************************************/
+public static void change_build_target(player pplayer, city pcity,
+			 int target, boolean is_unit, event_type event)
+{
 //  final String name;
 //  final String source;
 //
@@ -1883,14 +1889,14 @@ public class Citytools{
 //		     get_impr_name_ex(pcity, pcity.currently_building),
 //		     pcity.name);
 //  }
-//}
-//
+}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
 //boolean can_place_worker_here(city pcity, int city_x, int city_y)
 //{
-//  return get_worker_city(pcity, city_x, city_y) == C_TILE_EMPTY;
+//  return City.get_worker_city(pcity, city_x, city_y) == city_tile_type.C_TILE_EMPTY;
 //}
 //
 ///**************************************************************************
@@ -1908,7 +1914,7 @@ public class Citytools{
 //  }
 //  
 //  if (is_enemy_unit_tile(ptile, City.city_owner(pcity))
-//      && !is_city_center(city_x, city_y)) {
+//      && !City.is_city_center(city_x, city_y)) {
 //    return false;
 //  }
 //
@@ -1943,7 +1949,7 @@ public class Citytools{
 //				 enum city_tile_type type)
 //{
 //  enum city_tile_type current;
-//  assert(is_valid_city_coords(city_x, city_y));
+//  assert(City.is_valid_city_coords(city_x, city_y));
 //  current = pcity.city_map[city_x][city_y];
 //  assert(current != type);
 //
@@ -1973,28 +1979,28 @@ public class Citytools{
 //You need to call sync_cities for the affected cities to be synced with the
 //client.
 //**************************************************************************/
-//void server_remove_worker_city(city pcity, int city_x, int city_y)
-//{
-//  assert(is_valid_city_coords(city_x, city_y));
-//  assert(get_worker_city(pcity, city_x, city_y) == C_TILE_WORKER);
-//  server_set_tile_city(pcity, city_x, city_y, C_TILE_EMPTY);
-//}
+public static void server_remove_worker_city(city pcity, int city_x, int city_y)
+{
+//  assert(City.is_valid_city_coords(city_x, city_y));
+//  assert(City.get_worker_city(pcity, city_x, city_y) == city_tile_type.C_TILE_WORKER);
+//  server_set_tile_city(pcity, city_x, city_y, city_tile_type.C_TILE_EMPTY);
+}
 //
 ///**************************************************************************
 //city_x, city_y is in city map coords.
 //You need to call sync_cities for the affected cities to be synced with the
 //client.
 //**************************************************************************/
-//void server_set_worker_city(city pcity, int city_x, int city_y)
-//{
-//  assert(is_valid_city_coords(city_x, city_y));
-//  assert(get_worker_city(pcity, city_x, city_y) == C_TILE_EMPTY);
-//  server_set_tile_city(pcity, city_x, city_y, C_TILE_WORKER);
-//}
+public static void server_set_worker_city(city pcity, int city_x, int city_y)
+{
+//  assert(City.is_valid_city_coords(city_x, city_y));
+//  assert(City.get_worker_city(pcity, city_x, city_y) == city_tile_type.C_TILE_EMPTY);
+//  server_set_tile_city(pcity, city_x, city_y, city_tile_type.C_TILE_WORKER);
+}
 //
 ///****************************************************************************
 //  Updates the worked status of the tile (in map coordinates) for the city.
-//  If the status changes auto_arrange_workers may be called.  The caller needs
+//  If the status changes Cityturn.auto_arrange_workers may be called.  The caller needs
 //  to call sync_cities afterward for the affected city to be synced with the
 //  client.
 //
@@ -2027,56 +2033,55 @@ public class Citytools{
 //  boolean is_available;
 //  boolean result = false;
 //
-//  assert(is_valid_city_coords(city_x, city_y));
+//  assert(City.is_valid_city_coords(city_x, city_y));
 //
-//  current = get_worker_city(pcity, city_x, city_y);
+//  current = City.get_worker_city(pcity, city_x, city_y);
 //  is_available = city_can_work_tile(pcity, city_x, city_y);
 //
 //  switch (current) {
-//  case C_TILE_WORKER:
+//  case city_tile_type.C_TILE_WORKER:
 //    if (!is_available) {
-//      server_set_tile_city(pcity, city_x, city_y, C_TILE_UNAVAILABLE);
-//      pcity.specialists[SP_ELVIS]++; /* keep city sanity */
-//      auto_arrange_workers(pcity); /* will place the displaced */
-//      city_refresh(pcity);
+//      server_set_tile_city(pcity, city_x, city_y, city_tile_type.C_TILE_UNAVAILABLE);
+//      pcity.specialists[specialist_type.SP_ELVIS]++; /* keep city sanity */
+//      Cityturn.auto_arrange_workers(pcity); /* will place the displaced */
+//      Cityturn.city_refresh(pcity);
 //      send_city_info(null, pcity);
 //    }
 //    break;
 //
-//  case C_TILE_UNAVAILABLE:
+//  case city_tile_type.C_TILE_UNAVAILABLE:
 //    if (is_available) {
-//      server_set_tile_city(pcity, city_x, city_y, C_TILE_EMPTY);
+//      server_set_tile_city(pcity, city_x, city_y, city_tile_type.C_TILE_EMPTY);
 //      result = true;
 //    }
 //    break;
 //
-//  case C_TILE_EMPTY:
+//  case city_tile_type.C_TILE_EMPTY:
 //    if (!is_available) {
-//      server_set_tile_city(pcity, city_x, city_y, C_TILE_UNAVAILABLE);
+//      server_set_tile_city(pcity, city_x, city_y, city_tile_type.C_TILE_UNAVAILABLE);
 //    }
 //    break;
 //  }
 //
 //  return result;
 //}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//void sync_cities()
-//{
-//  if (nocity_send)
-//    return;
-//
-//  for(player pplayer: Game.game.players){
-//    for (city pcity : pplayer.cities.data) {
-//      /* sending will set synced to 1. */
-//      if (!pcity.synced)
-//	send_city_info(pplayer, pcity);
-//    } }
-//  }
-//}
-//
+
+	/**************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static void sync_cities() {
+		// if (nocity_send)
+		// return;
+
+		for (player pplayer : Game.game.players) {
+			for (city pcity : pplayer.cities.data) {
+				/* sending will set synced to 1. */
+				if (!pcity.synced)
+					send_city_info(pplayer, pcity);
+			}
+		}
+	}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -2124,11 +2129,11 @@ public class Citytools{
 //        if (Terrain_H.is_ocean(improvement_types[impr].terr_gate[i])
 //            && !city_has_terr_spec_gate(pcity, impr)) {
 //          do_sell_building(pplayer, pcity, impr);
-//          Plrhand.notify_player_ex(pplayer, tile1, E_IMP_SOLD,
+//          Plrhand.notify_player_ex(pplayer, tile1, event_type.E_IMP_SOLD,
 //                           ("Game: You sell %s in %s (now landlocked)" +
 //                             " for %d gold."),
-//                           get_improvement_name(impr), pcity.name,
-//                           impr_sell_gold(impr)); 
+//                           Improvement.get_improvement_name(impr), pcity.name,
+//                           Improvement.impr_sell_gold(impr)); 
 //        }
 //      } built_impr_iterate_end;
 //    }

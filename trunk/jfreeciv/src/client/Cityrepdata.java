@@ -118,7 +118,7 @@ public class Cityrepdata{
 //static final String cr_entry_entertainers(final city pcity)
 //{
 //  static char buf[8];
-//  buf = util.my_snprintf( "%2d", pcity.specialists[SP_ELVIS]);
+//  buf = util.my_snprintf( "%2d", pcity.specialists[specialist_type.SP_ELVIS]);
 //  return buf;
 //}
 //
@@ -348,7 +348,7 @@ public class Cityrepdata{
 //    worklist_is_empty(&pcity.worklist) ? "" :
 //    concise_city_production ? "*" : "(worklist)";
 //	
-//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //    buf = util.my_snprintf( "%s (%d/X/X/X)%s",
 //		get_impr_name_ex(pcity, pcity.currently_building),
 //		MAX(0, pcity.shield_surplus), from_worklist);
@@ -367,14 +367,14 @@ public class Cityrepdata{
 //
 //    if(pcity.is_building_unit) {
 //      name = get_unit_type(pcity.currently_building).name;
-//      cost = unit_build_shield_cost(pcity.currently_building);
+//      cost = Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //    } else {
 //      name = get_impr_name_ex(pcity, pcity.currently_building);
-//      cost = impr_build_shield_cost(pcity.currently_building);
+//      cost = Improvement.impr_build_shield_cost(pcity.currently_building);
 //    }
 //
 //    buf = util.my_snprintf( "%s (%d/%d/%s/%d)%s", name,
-//		pcity.shield_stock, cost, time, city_buy_cost(pcity),
+//		pcity.shield_stock, cost, time, City.city_buy_cost(pcity),
 //		from_worklist);
 //  }
 //

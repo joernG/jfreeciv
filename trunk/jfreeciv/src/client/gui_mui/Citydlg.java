@@ -146,14 +146,14 @@ public class Citydlg{
 //
 //  stock = pcity.shield_stock;
 //  if (pcity.is_building_unit) {
-//    cost = unit_build_shield_cost(pcity.currently_building);
+//    cost = Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //  } else {
 //    if (pcity.currently_building == B_CAPITAL) {
 //      buffer = util.my_snprintf(
 //		  get_improvement_type(pcity.currently_building).name);
 //      return buffer;
 //    }
-//    cost = impr_build_shield_cost(pcity.currently_building);
+//    cost = Improvement.impr_build_shield_cost(pcity.currently_building);
 //  }
 //
 //  stock += surplus;
@@ -405,7 +405,7 @@ public class Citydlg{
 //  city pcity_sup, *pcity_pre;
 //  city_dialog pdialog;
 //
-//  pcity_sup = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//  pcity_sup = Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //  pcity_pre = map_get_city(punit.tile);
 //
 //  if (pcity_sup && (pdialog = get_city_dialog(pcity_sup)))
@@ -582,7 +582,7 @@ public class Citydlg{
 //	  }
 //
 //	  cost = util.my_snprintf(
-//		      "%d", unit_build_shield_cost(which));
+//		      "%d", Unittype_P.unit_build_shield_cost(which));
 //	  rounds = util.my_snprintf( "%d",
 //		      city_turns_to_build(pcity, which, true, true));
 //	}
@@ -615,7 +615,7 @@ public class Citydlg{
 //
 //      if (which != B_CAPITAL)
 //      {
-//	cost = util.my_snprintf( "%d", impr_build_shield_cost(which));
+//	cost = util.my_snprintf( "%d", Improvement.impr_build_shield_cost(which));
 //	rounds = util.my_snprintf( "%d",
 //		    city_turns_to_build(pcity, which, false, true));
 //      }
@@ -842,8 +842,8 @@ public class Citydlg{
 //    }
 //
 //    /* If it can be built... */
-//    if ((is_unit && can_build_unit(pdialog.pcity, id)) ||
-//	(!is_unit && can_build_improvement(pdialog.pcity, id))) {
+//    if ((is_unit && City.can_build_unit(pdialog.pcity, id)) ||
+//	(!is_unit && City.can_build_improvement(pdialog.pcity, id))) {
 //      /* ...but we're not yet building it, then switch. */
 //      if (!same_as_current_build) {
 //	/* Change the current target */
@@ -956,7 +956,7 @@ public class Citydlg{
 //    name = get_impr_name_ex(pdialog.pcity, pdialog.pcity.currently_building);
 //  }
 //
-//  value = city_buy_cost(pdialog.pcity);
+//  value = City.city_buy_cost(pdialog.pcity);
 //
 //  if (Game.game.player_ptr.economic.gold >= value)
 //  {
@@ -999,7 +999,7 @@ public class Citydlg{
 //      return;
 //
 //    buf = util.my_snprintf( "Sell %s for %d gold?",
-//		get_impr_name_ex(pdialog.pcity, i), impr_sell_gold(i));
+//		get_impr_name_ex(pdialog.pcity, i), Improvement.impr_sell_gold(i));
 //
 //    pdialog.sell_id = i;
 //    pdialog.sell_wnd = popup_message_dialog(pdialog.wnd,
@@ -1020,7 +1020,7 @@ public class Citydlg{
 //  int xtile = msg.click.x;
 //  int ytile = msg.click.y;
 //
-//  if (is_valid_city_coords(xtile, ytile)) {
+//  if (City.is_valid_city_coords(xtile, ytile)) {
 //    city_toggle_worker(pcity, xtile, ytile);
 //  }
 //}
@@ -1031,7 +1031,7 @@ public class Citydlg{
 //static void city_citizen(city_citizen_msg msg)
 //{
 //  city_dialog pdialog = msg.pdialog;
-//  Specialist_type_id from = msg.type, to;
+//  specialist_type from = msg.type, to;
 //
 //  switch (from)  {
 //  case CITIZEN_ELVIS:
@@ -1043,7 +1043,7 @@ public class Citydlg{
 //    break;
 //
 //  case CITIZEN_TAXMAN:
-//    to = SP_ELVIST;
+//    to = specialist_type.SP_ELVIST;
 //    break;
 //
 //  default:
@@ -1133,11 +1133,11 @@ public class Citydlg{
 //      which--;
 //      if (is_wonder(which))
 //      {
-//	popup_help_dialog_typed(get_improvement_name(which), HELP_WONDER);
+//	popup_help_dialog_typed(Improvement.get_improvement_name(which), HELP_WONDER);
 //      }
 //      else
 //      {
-//	popup_help_dialog_typed(get_improvement_name(which), HELP_IMPROVEMENT);
+//	popup_help_dialog_typed(Improvement.get_improvement_name(which), HELP_IMPROVEMENT);
 //      }
 //    }
 //  }
@@ -1264,7 +1264,7 @@ public class Citydlg{
 //    DoMethod(pcprod.available_listview, MUIM_NList_Clear);
 //
 //    impr_type_iterate(i) {
-//      if (can_build_improvement(pcity, i))
+//      if (City.can_build_improvement(pcity, i))
 //      {
 //        improv = true;
 //
@@ -1286,7 +1286,7 @@ public class Citydlg{
 //    DoMethod(pcprod.available_listview, MUIM_NList_InsertSingle, 20000, MUIV_NList_Insert_Bottom);
 //
 //    unit_type_iterate(i) {
-//      if (can_build_unit(pcity, i))
+//      if (City.can_build_unit(pcity, i))
 //      {
 //        DoMethod(pcprod.available_listview, MUIM_NList_InsertSingle, i + 10000, MUIV_NList_Insert_Bottom);
 //
@@ -1767,10 +1767,10 @@ public class Citydlg{
 //
 //  shield = pcity.shield_stock;
 //  if (pcity.is_building_unit) {
-//    max_shield = unit_build_shield_cost(pcity.currently_building);
+//    max_shield = Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //    descr = get_unit_type(pcity.currently_building).name;
 //  } else {
-//    max_shield = impr_build_shield_cost(pcity.currently_building);
+//    max_shield = Improvement.impr_build_shield_cost(pcity.currently_building);
 //    descr = get_impr_name_ex(pcity, pcity.currently_building);
 //  }
 //
@@ -2037,7 +2037,7 @@ public class Citydlg{
 //      x = 1;
 //      total += pdialog.pcity.trade_value[i];
 //
-//      if ((pcity = find_city_by_id(pdialog.pcity.trade[i]))) {
+//      if ((pcity = Game.find_city_by_id(pdialog.pcity.trade[i]))) {
 //	cityname = util.my_snprintf( "%s", pcity.name);
 //      } else {
 //	cityname = util.my_snprintf( "%s", "Unknown");

@@ -617,7 +617,7 @@ public class Helpdlg{
 //    impr_type imp = &improvement_types[which];
 //
 //    DoMethod(help_imprv_cost_text, MUIM_SetAsString,
-//	     MUIA_Text_Contents, "%ld", impr_build_shield_cost(which));
+//	     MUIA_Text_Contents, "%ld", Improvement.impr_build_shield_cost(which));
 //    DoMethod(help_imprv_upkeep_text, MUIM_SetAsString,
 //	     MUIA_Text_Contents, "%ld", imp.upkeep);
 //    UpdateTechButton(help_imprv_needs_button, imp.tech_req);
@@ -642,7 +642,7 @@ public class Helpdlg{
 //    impr_type imp = &improvement_types[which];
 //
 //    DoMethod(help_wonder_cost_text, MUIM_SetAsString,
-//	     MUIA_Text_Contents, "%ld", impr_build_shield_cost(which));
+//	     MUIA_Text_Contents, "%ld", Improvement.impr_build_shield_cost(which));
 //
 //    UpdateTechButton(help_wonder_needs_button, imp.tech_req);
 //    UpdateTechButton(help_wonder_obsolete_button, imp.obsolete_by);
@@ -675,7 +675,7 @@ public class Helpdlg{
 //    char *text;
 //
 //    settextf(help_unit_cost_text,
-//	     "Cost: %ld", unit_build_shield_cost(which));
+//	     "Cost: %ld", Unittype_P.unit_build_shield_cost(which));
 //    DoMethod(help_unit_attack_text, MUIM_SetAsString,
 //	     MUIA_Text_Contents, "%ld", utype.attack_strength);
 //    DoMethod(help_unit_defense_text, MUIM_SetAsString,

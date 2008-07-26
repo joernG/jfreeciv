@@ -307,7 +307,7 @@ public class Aiunit{
 //{
 //  unit_type ptype = get_unit_type(type);
 //
-//  return 2 * unit_build_shield_cost(type) * ptype.attack_strength /
+//  return 2 * Unittype_P.unit_build_shield_cost(type) * ptype.attack_strength /
 //      (ptype.attack_strength + ptype.defense_strength);
 //}
 //
@@ -539,7 +539,7 @@ public class Aiunit{
 //
 //        if (val != 0) {
 //          *value += val;
-//          *cost += unit_build_shield_cost(aunit.type);
+//          *cost += Unittype_P.unit_build_shield_cost(aunit.type);
 //        }
 //      }
 //    } }
@@ -611,7 +611,7 @@ public class Aiunit{
 //      /* See description of kill_desire() about these variables. */
 //      int attack = unit_att_rating_now(punit);
 //      int benefit = stack_cost(pdef);
-//      int loss = unit_build_shield_cost(punit.type);
+//      int loss = Unittype_P.unit_build_shield_cost(punit.type);
 //
 //      attack *= attack;
 //      
@@ -773,8 +773,8 @@ public class Aiunit{
 //**************************************************************************/
 //static void ai_military_bodyguard(player pplayer, unit punit)
 //{
-//  unit aunit = player_find_unit_by_id(pplayer, punit.ai.charge);
-//  city acity = find_city_by_id(punit.ai.charge);
+//  unit aunit = Player_P.player_find_unit_by_id(pplayer, punit.ai.charge);
+//  city acity = Game.find_city_by_id(punit.ai.charge);
 //  tile ptile;
 //
 //  CHECK_UNIT(punit);
@@ -1006,7 +1006,7 @@ public class Aiunit{
 //  CHECK_UNIT(punit);
 //
 ///* tired of AI abandoning its cities! -- Syela */
-//  if (punit.homecity != 0 && (pcity = find_city_by_id(punit.homecity))) {
+//  if (punit.homecity != 0 && (pcity = Game.find_city_by_id(punit.homecity))) {
 //    if (pcity.ai.danger != 0) { /* otherwise we can attack */
 //      def = assess_defense(pcity);
 //      if (Map.same_pos(punit.tile, pcity.tile)) {
@@ -1055,8 +1055,8 @@ public class Aiunit{
 //  }
 //
 //  if (punit.ai.charge != BODYGUARD_NONE) { /* I am a bodyguard */
-//    aunit = player_find_unit_by_id(pplayer, punit.ai.charge);
-//    acity = find_city_by_id(punit.ai.charge);
+//    aunit = Player_P.player_find_unit_by_id(pplayer, punit.ai.charge);
+//    acity = Game.find_city_by_id(punit.ai.charge);
 //
 //    /* Check if city we are on our way to rescue is still in danger,
 //     * or unit we should protect is still alive */
@@ -1154,7 +1154,7 @@ public class Aiunit{
 //***********************************************************************/
 //static void ai_military_gohome(player pplayer,unit punit)
 //{
-//  city pcity = find_city_by_id(punit.homecity);
+//  city pcity = Game.find_city_by_id(punit.homecity);
 //
 //  if (!pcity) {
 //    /* Try to find a place to rest. Sitting duck out in the wilderness
@@ -1400,7 +1400,7 @@ public class Aiunit{
 //        invasion_funct(aunit, true, 0, (COULD_OCCUPY(aunit) ? 1 : 2));
 //        if ((pcity = map_get_city(aunit.goto_tile))) {
 //          pcity.ai.attack += unit_att_rating(aunit);
-//          pcity.ai.bcost += unit_build_shield_cost(aunit.type);
+//          pcity.ai.bcost += Unittype_P.unit_build_shield_cost(aunit.type);
 //        } 
 //      }
 //      invasion_funct(aunit, false, aunit.move_rate() / Unit_H.SINGLE_MOVE,
@@ -1437,7 +1437,7 @@ public class Aiunit{
 //
 //  maxd = Math.min(6, move_rate) * THRESHOLD + 1;
 //
-//  bcost = unit_build_shield_cost(punit.type);
+//  bcost = Unittype_P.unit_build_shield_cost(punit.type);
 //  bcost_bal = build_cost_balanced(punit.type);
 //
 //  /* most flexible but costs milliseconds */
@@ -1445,7 +1445,7 @@ public class Aiunit{
 //
 //  if (is_ground_unit(punit)) {
 //    int boatid = find_boat(pplayer, &best_tile, 2);
-//    ferryboat = player_find_unit_by_id(pplayer, boatid);
+//    ferryboat = Player_P.player_find_unit_by_id(pplayer, boatid);
 //  }
 //
 //  if (ferryboat) {
@@ -1507,7 +1507,7 @@ public class Aiunit{
 //      
 //      if ((pdef = get_defender(punit, acity.tile))) {
 //        vuln = unit_def_rating_sq(punit, pdef);
-//        benefit = unit_build_shield_cost(pdef.type);
+//        benefit = Unittype_P.unit_build_shield_cost(pdef.type);
 //      } else { 
 //        vuln = 0; 
 //        benefit = 0; 
@@ -1524,7 +1524,7 @@ public class Aiunit{
 //        if (v > vuln) {
 //          /* They can build a better defender! */ 
 //          vuln = v; 
-//          benefit = unit_build_shield_cost(def_type); 
+//          benefit = Unittype_P.unit_build_shield_cost(def_type); 
 //        }
 //      }
 //
@@ -1574,16 +1574,16 @@ public class Aiunit{
 //                           : SHIELD_WEIGHTING);
 //      /* build_cost of ferry */
 //      needferry = (go_by_boat && !ferryboat
-//		   ? unit_build_shield_cost(boattype) : 0);
+//		   ? Unittype_P.unit_build_shield_cost(boattype) : 0);
 //      /* FIXME: add time to build the ferry? */
-//      want = military_amortize(pplayer, find_city_by_id(punit.homecity),
+//      want = military_amortize(pplayer, Game.find_city_by_id(punit.homecity),
 //                               want, MAX(1, move_time),
 //			       bcost_bal + needferry);
 //
 //      /* BEGIN STEAM-ENGINES-ARE-OUR-FRIENDS KLUGE */
 //      if (want <= 0 && punit.id == 0 && best == 0) {
 //        int bk_e = military_amortize(pplayer,
-//				     find_city_by_id(punit.homecity),
+//				     Game.find_city_by_id(punit.homecity),
 //                                     benefit * SHIELD_WEIGHTING, 
 //                                     MAX(1, move_time),
 //				     bcost_bal + needferry);
@@ -1672,7 +1672,7 @@ public class Aiunit{
 //      }
 //
 //      vuln = unit_def_rating_sq(punit, aunit);
-//      benefit = unit_build_shield_cost(aunit.type);
+//      benefit = Unittype_P.unit_build_shield_cost(aunit.type);
 // 
 //      move_time = turns_to_enemy_unit(punit.type, move_rate, 
 //                                      aunit.tile, aunit.type);
@@ -1689,7 +1689,7 @@ public class Aiunit{
 //         * (costs 2 luxuries to compensate) */
 //        want -= (unhap ? 2 * move_time * TRADE_WEIGHTING : 0);
 //      }
-//      want = military_amortize(pplayer, find_city_by_id(punit.homecity),
+//      want = military_amortize(pplayer, Game.find_city_by_id(punit.homecity),
 //                               want, MAX(1, move_time), bcost_bal);
 //      if (want > best && ai_fuzzy(pplayer, true)) {
 //        best = want;
@@ -1916,7 +1916,7 @@ public class Aiunit{
 //      }
 //    } else {
 //       /* A caravan without a home?  Kinda strange, but it might happen.  */
-//       pcity=player_find_city_by_id(pplayer, punit.homecity);
+//       pcity=Player_P.player_find_city_by_id(pplayer, punit.homecity);
 //       for(player aplayer: Game.game.players){
 //         if (HOSTILE_PLAYER(pplayer, ai, aplayer)) {
 //           continue;
@@ -1937,7 +1937,7 @@ public class Aiunit{
 //           }
 //         } }
 //       }
-//       pcity = player_find_city_by_id(pplayer, best_city);
+//       pcity = Player_P.player_find_city_by_id(pplayer, best_city);
 //
 //       if (pcity) {
 //         if (!Map.same_pos(pcity.tile, punit.tile)) {
@@ -2231,7 +2231,7 @@ public class Aiunit{
 //  n = num_role_units(role);
 //  for (i=n-1; i>=0; i--) {
 //    iunit = Unittype_P.get_role_unit(role, i);
-//    if (can_build_unit(pcity, iunit)) {
+//    if (City.can_build_unit(pcity, iunit)) {
 //      return iunit;
 //    } else {
 //      /* careful; might be unable to build for non-tech reason... */

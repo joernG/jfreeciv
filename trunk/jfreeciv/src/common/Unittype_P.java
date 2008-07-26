@@ -1,9 +1,5 @@
 package common;
-import static port.util.*;
-
-import static utility.shared.Shared_H.*;
-import static common.unittype.unittype.*;
-import static common.Game.*;
+import static port.util.my_snprintf;
 
 import common.unit.unit;
 import common.unittype.Eunit_flag_id;
@@ -143,14 +139,14 @@ public class Unittype_P {
 //		assert (role >= L_FIRST && role < L_LAST);
 //		return BV_ISSET(unit_types[id].roles, role - L_FIRST);
 //	}
-//
-//	/***************************************************************************
-//	 * Returns the number of shields it takes to build this unit.
-//	 **************************************************************************/
-//	int unit_build_shield_cost(int id) {
-//		return unit_types[id].build_cost;
-//	}
-//
+
+	/***************************************************************************
+	 * Returns the number of shields it takes to build this unit.
+	 **************************************************************************/
+	public static int unit_build_shield_cost(int id) {
+		return unit_types[id].build_cost;
+	}
+
 //	/***************************************************************************
 //	 * Returns the amount of gold it takes to rush this unit.
 //	 **************************************************************************/
@@ -380,7 +376,7 @@ public class Unittype_P {
 //		 **********************************************************************/
 //	 boolean can_player_build_unit_direct(player p, int id)
 //	 {
-//	 Impr_Type_id impr_req;
+//	 int impr_req;
 //	 Tech_Type_id tech_req;
 //	 if (!unit_type_exists(id))
 //	 return false;
@@ -541,7 +537,7 @@ public class Unittype_P {
 //	 assert((role>=0 && role<F_LAST) || (role>=L_FIRST && role<L_LAST));
 //	 for(j=n_with_role[role]-1; j>=0; j--) {
 //	 u = with_role[role][j];
-//	 if (can_build_unit(pcity, u)) {
+//	 if (City.can_build_unit(pcity, u)) {
 //	 return u;
 //	 }
 //	 }

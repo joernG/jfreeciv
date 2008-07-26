@@ -1,5 +1,6 @@
 package ai;
 
+
 public class Aicity{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -117,8 +118,8 @@ public class Aicity{
 //  get_tax_income(pplayer, trade, &sci, &lux, &tax);
 //  sci += (acity.specialists[SP_SCIENTIST]
 //	  * Game.game.rgame.specialists[SP_SCIENTIST].bonus);
-//  lux += (acity.specialists[SP_ELVIS]
-//	  * Game.game.rgame.specialists[SP_ELVIS].bonus);
+//  lux += (acity.specialists[specialist_type.SP_ELVIS]
+//	  * Game.game.rgame.specialists[specialist_type.SP_ELVIS].bonus);
 //  tax += (acity.specialists[SP_TAXMAN]
 //	  * Game.game.rgame.specialists[SP_TAXMAN].bonus);
 //
@@ -153,7 +154,7 @@ public class Aicity{
 //  measuring the effect.
 //**************************************************************************/
 //static int base_want(player pplayer, city pcity, 
-//                     Impr_Type_id id)
+//                     int id)
 //{
 //  ai_data ai = ai_data_get(pplayer);
 //  int final_want = 0;
@@ -202,7 +203,7 @@ public class Aicity{
 //  for wonders below for better wonder placements.
 //**************************************************************************/
 //static void adjust_building_want_by_effects(city pcity, 
-//                                            Impr_Type_id id)
+//                                            int id)
 //{
 //  player pplayer = City.city_owner(pcity);
 //  impr_type pimpr = get_improvement_type(id);
@@ -220,7 +221,7 @@ public class Aicity{
 //  v += base_want(pplayer, pcity, id);
 //  if (v != 0) {
 //    CITY_LOG(Log.LOG_DEBUG, pcity, "%s base_want is %d (range=%d)", 
-//             get_improvement_name(id), v, ai.impr_range[id]);
+//             Improvement.get_improvement_name(id), v, ai.impr_range[id]);
 //  }
 //
 //  /* Find number of cities per range.  */
@@ -281,18 +282,18 @@ public class Aicity{
 //            /* TODO */
 //            break;
 //	  case EFT_NO_UNHAPPY:
-//            v += (pcity.specialists[SP_ELVIS] + pcity.ppl_unhappy[4]) * 20;
+//            v += (pcity.specialists[specialist_type.SP_ELVIS] + pcity.ppl_unhappy[4]) * 20;
 //            break;
 //	  case EFT_FORCE_CONTENT:
 //	    if (!government_has_flag(gov, G_NO_UNHAPPY_CITIZENS)) {
-//	      v += (pcity.ppl_unhappy[4] + pcity.specialists[SP_ELVIS]) * 20;
+//	      v += (pcity.ppl_unhappy[4] + pcity.specialists[specialist_type.SP_ELVIS]) * 20;
 //	      v += 5 * c;
 //	    }
 //	    break;
 //	  case EFT_MAKE_CONTENT_MIL_PER:
 //	  case EFT_MAKE_CONTENT:
 //	    if (!government_has_flag(gov, G_NO_UNHAPPY_CITIZENS)) {
-//              v += Math.min(pcity.ppl_unhappy[4] + pcity.specialists[SP_ELVIS],
+//              v += Math.min(pcity.ppl_unhappy[4] + pcity.specialists[specialist_type.SP_ELVIS],
 //                       amount) * 20;
 //              v += Math.min(amount, 5) * c;
 //	    }
@@ -539,13 +540,13 @@ public class Aicity{
 //      }
 //      if (city_got_building(pcity, id)
 //          || pcity.shield_surplus == 0
-//          || !can_build_improvement(pcity, id)
+//          || !City.can_build_improvement(pcity, id)
 //          || improvement_redundant(pplayer, pcity, id, false)) {
 //        continue; /* Don't build redundant buildings */
 //      }
 //      adjust_building_want_by_effects(pcity, id);
 //      CITY_LOG(Log.LOG_DEBUG, pcity, "want to build %s with %d", 
-//               get_improvement_name(id), pcity.ai.building_want[id]);
+//               Improvement.get_improvement_name(id), pcity.ai.building_want[id]);
 //    } }
 //  } impr_type_iterate_end;
 //
@@ -686,7 +687,7 @@ public class Aicity{
 //    if (best_role_unit(pcity, F_TRADE_ROUTE) != unittype.U_LAST) {
 //      pcity.ai.choice.choice = best_role_unit(pcity, F_TRADE_ROUTE);
 //      pcity.ai.choice.type = CT_NONMIL;
-//    } else if (can_build_improvement(pcity, Game.game.default_building)) {
+//    } else if (City.can_build_improvement(pcity, Game.game.default_building)) {
 //      pcity.ai.choice.choice = Game.game.default_building;
 //      pcity.ai.choice.type = CT_BUILDING;
 //    } else if (best_role_unit(pcity, F_SETTLERS) != unittype.U_LAST) {
@@ -705,7 +706,7 @@ public class Aicity{
 //    CITY_LOG(Log.LOG_DEBUG, pcity, "wants %s with desire %d.",
 //	     (is_unit_choice_type(pcity.ai.choice.type) ?
 //	      unit_name(pcity.ai.choice.choice) :
-//	      get_improvement_name(pcity.ai.choice.choice)),
+//	      Improvement.get_improvement_name(pcity.ai.choice.choice)),
 //	     pcity.ai.choice.want);
 //    
 //    if (!pcity.is_building_unit && is_wonder(pcity.currently_building) 
@@ -745,7 +746,7 @@ public class Aicity{
 //static void try_to_sell_stuff(player pplayer, city pcity)
 //{
 //  impr_type_iterate(id) {
-//    if (can_sell_building(pcity, id)
+//    if (Citytools.can_sell_building(pcity, id)
 //	&& !building_has_effect(id, EFT_LAND_DEFEND)) {
 ///* selling walls to buy defenders is counterproductive -- Syela */
 //      really_handle_city_sell(pplayer, pcity, id);
@@ -871,7 +872,7 @@ public class Aicity{
 //    }
 //
 //    /* Cost to complete production */
-//    buycost = city_buy_cost(pcity);
+//    buycost = City.city_buy_cost(pcity);
 //
 //    if (buycost <= 0) {
 //      continue; /* Already completed */
@@ -903,7 +904,7 @@ public class Aicity{
 //                || (pplayer.economic.gold - buycost < limit);
 //
 //    if (bestchoice.type == CT_ATTACKER
-//	&& buycost > unit_build_shield_cost(bestchoice.choice) * 2) {
+//	&& buycost > Unittype_P.unit_build_shield_cost(bestchoice.choice) * 2) {
 //       /* Too expensive for an offensive unit */
 //       continue;
 //    }
@@ -919,7 +920,7 @@ public class Aicity{
 //      /* Buy stuff */
 //      CITY_LOG(LOG_BUY, pcity, "Crash buy of %s for %d (want %d)",
 //               bestchoice.type != CT_BUILDING ? unit_name(bestchoice.choice)
-//               : get_improvement_name(bestchoice.choice), buycost,
+//               : Improvement.get_improvement_name(bestchoice.choice), buycost,
 //               bestchoice.want);
 //      really_handle_city_buy(pplayer, pcity);
 //    } else if (pcity.ai.grave_danger != 0 
@@ -958,14 +959,14 @@ public class Aicity{
 //
 //  for (city pcity : pplayer.cities.data) {
 //    if (CITY_EMERGENCY(pcity)) {
-//      auto_arrange_workers(pcity); /* this usually helps */
+//      Cityturn.auto_arrange_workers(pcity); /* this usually helps */
 //    }
 //    if (CITY_EMERGENCY(pcity)) {
 //      /* Fix critical shortages or unhappiness */
 //      resolve_city_emergency(pplayer, pcity);
 //    }
 //    ai_sell_obsolete_buildings(pcity);
-//    sync_cities();
+//    Citytools.sync_cities();
 //  } }
 //
 //  ai_manage_buildings(pplayer);
@@ -1000,7 +1001,7 @@ public class Aicity{
 ///**************************************************************************
 //... 
 //**************************************************************************/
-//static boolean building_unwanted(player plr, Impr_Type_id i)
+//static boolean building_unwanted(player plr, int i)
 //{
 //  return (ai_wants_no_science(plr)
 //          && building_has_effect(i, EFT_SCIENCE_BONUS));
@@ -1019,11 +1020,11 @@ public class Aicity{
 //	      /* selling city walls is really, really dumb -- Syela */
 //       && (is_building_replaced(pcity, i)
 //	   || building_unwanted(City.city_owner(pcity), i))) {
-//      do_sell_building(pplayer, pcity, i);
-//      notify_player_ex(pplayer, pcity.tile, E_IMP_SOLD,
+//      Citytools.do_sell_building(pplayer, pcity, i);
+//      notify_player_ex(pplayer, pcity.tile, event_type.E_IMP_SOLD,
 //		       "Game: %s is selling %s (not needed) for %d.", 
-//		       pcity.name, get_improvement_name(i), 
-//		       impr_sell_gold(i));
+//		       pcity.name, Improvement.get_improvement_name(i), 
+//		       Improvement.impr_sell_gold(i));
 //      return; /* max 1 building each turn */
 //    }
 //  } built_impr_iterate_end;
@@ -1074,14 +1075,14 @@ public class Aicity{
 //              pcity.name, acity.name, ptile.x, ptile.y);
 //      is_valid = map_to_city_map(&city_map_x, &city_map_y, acity, ptile);
 //      assert(is_valid);
-//      server_remove_worker_city(acity, city_map_x, city_map_y);
-//      acity.specialists[SP_ELVIS]++;
+//      Citytools.server_remove_worker_city(acity, city_map_x, city_map_y);
+//      acity.specialists[specialist_type.SP_ELVIS]++;
 //      if (!city_list_find_id(&minilist, acity.id)) {
 //	city_list_insert(&minilist, acity);
 //      }
 //    }
 //  } map_city_radius_iterate_end;
-//  auto_arrange_workers(pcity);
+//  Cityturn.auto_arrange_workers(pcity);
 //
 //  if (!CITY_EMERGENCY(pcity)) {
 //    util.freelog(LOG_EMERGENCY, "Emergency in %s resolved", pcity.name);
@@ -1094,7 +1095,7 @@ public class Aicity{
 //        && punit.ai.passenger == 0) {
 //      UNIT_LOG(LOG_EMERGENCY, punit, "is causing unrest, disbanded");
 //      handle_unit_disband(pplayer, punit.id);
-//      city_refresh(pcity);
+//      Cityturn.city_refresh(pcity);
 //    }
 //  }
 //
@@ -1109,13 +1110,13 @@ public class Aicity{
 //  cleanup:
 //  for (city acity : minilist.data) {
 //    /* otherwise food total and stuff was wrong. -- Syela */
-//    city_refresh(acity);
-//    auto_arrange_workers(pcity);
+//    Cityturn.city_refresh(acity);
+//    Cityturn.auto_arrange_workers(pcity);
 //  } }
 //
 //  city_list_unlink_all(&minilist);
 //
-//  sync_cities();
+//  Citytools.sync_cities();
 //}
 //#undef LOG_EMERGENCY
 }

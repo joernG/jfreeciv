@@ -341,14 +341,14 @@ public class Cityrep{
 //				        null);
 //
 //    impr_type_iterate(i) {
-//      if (can_build_improvement(pcity, i)) {
+//      if (City.can_build_improvement(pcity, i)) {
 //	cids[cids_used] = cid_encode(false, i);
 //	cids_used++;
 //      }
 //    } impr_type_iterate_end;
 //
 //    unit_type_iterate(i) {
-//      if (can_build_unit(pcity, i)) {
+//      if (City.can_build_unit(pcity, i)) {
 //	cids[cids_used] = cid_encode(true, i);
 //	cids_used++;
 //      }

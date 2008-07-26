@@ -1,7 +1,5 @@
 package common;
 
-import static common.Game.*;
-
 import java.util.Date;
 
 import utility.Speclists;
@@ -510,18 +508,18 @@ public class Connection{
 //	/**************************************************************************
 //	Convenience functions to buffer/unbuffer a list of connections:
 //	**************************************************************************/
-//	void conn_list_do_buffer(Speclists<Connection> dest)
-//	{
+	public static void conn_list_do_buffer(Speclists<Connection> dest)
+	{
 //	conn_list_iterate(*dest, pconn)
 //	connection_do_buffer(pconn);
 //	}
-//	}
-//	void conn_list_do_unbuffer(Speclists<Connection> dest)
-//	{
+	}
+	public static void conn_list_do_unbuffer(Speclists<Connection> dest)
+	{
 //	conn_list_iterate(*dest, pconn)
 //	connection_do_unbuffer(pconn);
 //	}
-//	}
+	}
 
 	/***************************************************************
 	Find connection by exact user name, from Game.game.all_connections,

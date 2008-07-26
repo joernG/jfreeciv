@@ -1,6 +1,5 @@
 package common;
 
-import utility.Log;
 
 public class Nation{
 //#include "fcintl.h"

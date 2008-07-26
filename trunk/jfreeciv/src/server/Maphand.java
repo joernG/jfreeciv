@@ -302,7 +302,7 @@ public class Maphand{
 //    return;
 //  }
 //
-//  conn_list_do_buffer(&pplayer.connections);
+//  Connection.conn_list_do_buffer(&pplayer.connections);
 //
 //  if (discovery) {
 //    notify_player(pplayer,
@@ -324,7 +324,7 @@ public class Maphand{
 //  }
 //  }
 //
-//  conn_list_do_unbuffer(&pplayer.connections);
+//  Connection.conn_list_do_unbuffer(&pplayer.connections);
 //}
 //
 ///**************************************************************************
@@ -342,9 +342,9 @@ public class Maphand{
 //{
 //  for(player pplayer2: Game.game.players){
 //    if (really_gives_vision(pplayer, pplayer2))
-//      conn_list_do_buffer(&pplayer2.connections);
+//      Connection.conn_list_do_buffer(&pplayer2.connections);
 //  }
-//  conn_list_do_buffer(&pplayer.connections);
+//  Connection.conn_list_do_buffer(&pplayer.connections);
 //}
 //
 ///**************************************************************************
@@ -354,9 +354,9 @@ public class Maphand{
 //{
 //  for(player pplayer2: Game.game.players){
 //    if (really_gives_vision(pplayer, pplayer2))
-//      conn_list_do_unbuffer(&pplayer2.connections);
+//      Connection.conn_list_do_unbuffer(&pplayer2.connections);
 //  }
-//  conn_list_do_unbuffer(&pplayer.connections);
+//  Connection.conn_list_do_unbuffer(&pplayer.connections);
 //}
 //
 ///**************************************************************************
@@ -411,19 +411,19 @@ public class Maphand{
 //{
 //  int tiles_sent;
 //
-//  if (!dest) dest = &Game.game.game_connections;
+//  if (dest==null) dest = &Game.game.game_connections;
 //
 //  /* send whole map piece by piece to each player to balance the load
 //     of the send buffers better */
 //  tiles_sent = 0;
-//  conn_list_do_buffer(dest);
+//  Connection.conn_list_do_buffer(dest);
 //
 //  for(tile ptile :  Map.map.tiles){
 //    tiles_sent++;
 //    if ((tiles_sent % Map.map.xsize) == 0) {
-//      conn_list_do_unbuffer(dest);
+//      Connection.conn_list_do_unbuffer(dest);
 //      flush_packets();
-//      conn_list_do_buffer(dest);
+//      Connection.conn_list_do_buffer(dest);
 //    }
 //
 //    conn_list_iterate(*dest, pconn) {
@@ -439,7 +439,7 @@ public class Maphand{
 //    } }
 //  }
 //
-//  conn_list_do_unbuffer(dest);
+//  Connection.conn_list_do_unbuffer(dest);
 //  flush_packets();
 //}
 //
@@ -455,7 +455,7 @@ public class Maphand{
 //{
 //  struct packet_tile_info info;
 //
-//  if (!dest) dest = &Game.game.game_connections;
+//  if (dest==null) dest = &Game.game.game_connections;
 //
 //  info.x = ptile.x;
 //  info.y = ptile.y;
@@ -660,7 +660,7 @@ public class Maphand{
 //  /* discover cities */ 
 //  reality_check_city(pplayer, ptile);
 //  if ((pcity=map_get_city(ptile)))
-//    send_city_info(pplayer, pcity);
+//    Citytools.send_city_info(pplayer, pcity);
 //
 //  /* If the tile was not known before we need to refresh the cities that
 //     can use the tile. */
@@ -671,7 +671,7 @@ public class Maphand{
 //	update_city_tile_status_map(pcity, ptile);
 //      }
 //    } map_city_radius_iterate_end;
-//    sync_cities();
+//    Citytools.sync_cities();
 //  }
 //}
 //
@@ -891,9 +891,9 @@ public class Maphand{
 //    /* remove old cities that exist no more */
 //    reality_check_city(pplayer, ptile);
 //    if ((pcity = map_get_city(ptile))) {
-//      /* as the tile may be fogged send_city_info won't do this for us */
+//      /* as the tile may be fogged Citytools.send_city_info won't do this for us */
 //      update_dumb_city(pplayer, pcity);
-//      send_city_info(pplayer, pcity);
+//      Citytools.send_city_info(pplayer, pcity);
 //    }
 //
 //    if (map_get_seen(ptile, pplayer) != 0) {
@@ -911,7 +911,7 @@ public class Maphand{
 //	  update_city_tile_status_map(pcity, ptile);
 //	}
 //      } map_city_radius_iterate_end;
-//      sync_cities();
+//      Citytools.sync_cities();
 //    }
 //  }
 //}
@@ -1219,7 +1219,7 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //	  dest_tile.city = fc_malloc(sizeof(struct dumb_city));
 //	}
 //	*dest_tile.city = *from_tile.city;
-//	send_city_info_at_tile(pdest, &pdest.connections, null, ptile);
+//	Citytools.send_city_info_at_tile(pdest, &pdest.connections, null, ptile);
 //      }
 //
 //      reveal_pending_seen(pdest, ptile, 0);
@@ -1230,7 +1230,7 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //	  update_city_tile_status_map(pcity, ptile);
 //	}
 //      } map_city_radius_iterate_end;
-//      sync_cities();
+//      Citytools.sync_cities();
 //    }
 //  }
 //}
@@ -1670,7 +1670,7 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //	/* Update happiness */
 //	if (Game.game.happyborders > 0) {
 //	  for (unit unit : tile1.units.data) {
-//	    struct city* homecity = find_city_by_id(unit.homecity);
+//	    struct city* homecity = Game.find_city_by_id(unit.homecity);
 //	    boolean already_listed = false;
 //	    
 //	    if (!homecity) {
@@ -1697,8 +1697,8 @@ public static boolean map_is_known_and_seen(final tile ptile, player pplayer)
 //  /* Update happiness in all homecities we have collected */ 
 //  if (Game.game.happyborders > 0) {
 //    for (city to_refresh : cities_to_refresh.data) {
-//      city_refresh(to_refresh);
-//      send_city_info(City.city_owner(to_refresh), to_refresh);
+//      Cityturn.city_refresh(to_refresh);
+//      Citytools.send_city_info(City.city_owner(to_refresh), to_refresh);
 //    } }
 //    
 //    city_list_unlink_all(&cities_to_refresh);

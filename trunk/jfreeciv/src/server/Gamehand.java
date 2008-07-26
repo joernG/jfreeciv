@@ -311,7 +311,7 @@ public class Gamehand{
 //  struct packet_game_info ginfo;
 //  int i;
 //
-//  if (!dest)
+//  if (dest==null)
 //    dest = &Game.game.game_connections;
 //
 //  ginfo.gold = Game.game.gold;

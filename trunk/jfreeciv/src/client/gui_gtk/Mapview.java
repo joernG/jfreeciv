@@ -168,7 +168,7 @@ public class Mapview{
 //  if (punit && get_client_state() != CLIENT_server_states.GAME_OVER_STATE) {
 //    char buffer[512];
 //    city pcity =
-//	player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//	Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //    int infrastructure =
 //	get_tile_infrastructure_set(punit.tile);
 //    unit_type ptype = punit.unit_type();
@@ -810,9 +810,9 @@ public class Mapview{
 //		     enum color_std color, enum city_tile_type worker,
 //		     int canvas_x, int canvas_y)
 //{
-//  if (worker == C_TILE_EMPTY) {
+//  if (worker == city_tile_type.C_TILE_EMPTY) {
 //    gdk_gc_set_stipple(fill_tile_gc, gray25);
-//  } else if (worker == C_TILE_WORKER) {
+//  } else if (worker == city_tile_type.C_TILE_WORKER) {
 //    gdk_gc_set_stipple(fill_tile_gc, gray50);
 //  } else {
 //    return;

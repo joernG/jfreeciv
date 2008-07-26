@@ -332,7 +332,7 @@ public class Dialogs{
 //{
 //  boolean is_male = (selected_leader_sex == ID_RACESDLG_MALE);
 //  int city_style = city_style_idx[selected_style - ID_RACESDLG_STYLE_BASE];
-//  char name[MAX_LEN_NAME];
+//  String name="";
 // 
 //  ComboBox_GetText(GetDlgItem(hWnd,ID_RACESDLG_LEADER),
 //		   name,MAX_LEN_NAME);
@@ -638,7 +638,7 @@ public class Dialogs{
 //	  break;
 //	case UNITSELECT_READY_ALL:
 //	  for(i=0; i<unit_select_no; i++) {
-//	    unit punit = player_find_unit_by_id(Game.game.player_ptr,
+//	    unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr,
 //							unit_select_ids[i]);
 //	    if(punit) {
 //	      set_unit_focus(punit);
@@ -649,7 +649,7 @@ public class Dialogs{
 //	  id-=UNITSELECT_UNITS_BASE;
 //	  if ((id>=0)&&(id<100))
 //	    {
-//	      unit punit=player_find_unit_by_id(Game.game.player_ptr,
+//	      unit punit=Player_P.player_find_unit_by_id(Game.game.player_ptr,
 //							unit_select_ids[id]);
 //	      if(punit && punit.owner == Game.game.player_idx) {
 //		set_unit_focus(punit);
@@ -746,7 +746,7 @@ public class Dialogs{
 //      unit_type punittemp=punit.unit_type();
 //      city pcity;
 //      unit_select_ids[i]=punit.id;
-//      pcity=player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//      pcity=Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //      buffer = util.my_snprintf( "%s(%s)\n%s",
 //		  punittemp.name,
 //		  pcity ? pcity.name : "",
@@ -774,7 +774,7 @@ public class Dialogs{
 //      unit punit=unit_list[i];
 //      unit_type punittemp=punit.unit_type();
 //      city pcity;
-//      pcity=player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//      pcity=Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //      buffer = util.my_snprintf( "%s(%s)\n%s",
 //		  punittemp.name,
 //		  pcity ? pcity.name : "",
@@ -1012,7 +1012,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 // 
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(DIPLOMAT_INVESTIGATE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1028,7 +1028,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 // 
 //  if(find_unit_by_id(diplomat_id) &&
-//     find_city_by_id(diplomat_target_id)) {
+//     Game.find_city_by_id(diplomat_target_id)) {
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1044,7 +1044,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 // 
 //  if(find_unit_by_id(diplomat_id) &&
-//     find_city_by_id(diplomat_target_id)) {
+//     Game.find_city_by_id(diplomat_target_id)) {
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, -1);
 //  }
@@ -1058,7 +1058,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 // 
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(DIPLOMAT_EMBASSY, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1085,7 +1085,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_POISON, diplomat_id, diplomat_target_id, 0);
 //  }
 //
@@ -1161,7 +1161,7 @@ public class Dialogs{
 //	    break;
 //	  steal_advance=advance_type[steal_advance];
 //	  if(find_unit_by_id(diplomat_id) && 
-//	     find_city_by_id(diplomat_target_id)) { 
+//	     Game.find_city_by_id(diplomat_target_id)) { 
 //	    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //				    diplomat_target_id, steal_advance);
 //	  }
@@ -1184,7 +1184,7 @@ public class Dialogs{
 //*****************************************************************/
 //static void spy_steal_popup(HWND w, void * data)
 //{
-//  city pvcity = find_city_by_id(diplomat_target_id);
+//  city pvcity = Game.find_city_by_id(diplomat_target_id);
 //  player pvictim = null;
 //
 //  if(pvcity)
@@ -1235,7 +1235,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_GET_SABOTAGE_LIST, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -1370,7 +1370,7 @@ public class Dialogs{
 //	    break;
 //	  sabotage_improvement=improvement_type[sabotage_improvement];
 //	  if(find_unit_by_id(diplomat_id) && 
-//	     find_city_by_id(diplomat_target_id)) { 
+//	     Game.find_city_by_id(diplomat_target_id)) { 
 //	    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //				    diplomat_target_id,
 //				    sabotage_improvement + 1);
@@ -1455,7 +1455,7 @@ public class Dialogs{
 //  destroy_message_dialog(w);
 //  diplomat_dialog_open = 0;
 //
-//  if (find_unit_by_id(diplomat_id) && find_city_by_id(diplomat_target_id)) {
+//  if (find_unit_by_id(diplomat_id) && Game.find_city_by_id(diplomat_target_id)) {
 //    dsend_packet_city_incite_inq(&aconnection, diplomat_target_id);
 //  }
 //}

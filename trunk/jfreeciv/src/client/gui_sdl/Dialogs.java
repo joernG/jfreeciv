@@ -586,7 +586,7 @@ public class Dialogs{
 //**************************************************************************/
 //static int unit_select_callback( GUI pWidget )
 //{
-//  unit pUnit = player_find_unit_by_id(Game.game.player_ptr,
+//  unit pUnit = Player_P.player_find_unit_by_id(Game.game.player_ptr,
 //                                   MAX_ID - pWidget.ID);
 //
 //  popdown_unit_select_dialog();
@@ -2077,7 +2077,7 @@ public class Dialogs{
 //    
 //  popdown_diplomat_dialog();
 //  if(find_unit_by_id(diplomat_id) && 
-//    find_city_by_id(diplomat_target_id)) { 
+//    Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, steal_advance);
 //  }
@@ -2666,7 +2666,7 @@ public class Dialogs{
 //  }
 //  
 //  if(find_unit_by_id(diplomat_id)
-//    && find_city_by_id(diplomat_target_id)) { 
+//    && Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, sabotage_improvement + 1);
 //  }

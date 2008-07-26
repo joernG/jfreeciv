@@ -1,8 +1,7 @@
 package common;
 
-import static common.Game.*;
-import static common.player.player_ai.*;
-import static utility.shared.Shared_H.*;
+import static common.player.player_ai.NOT_A_BARBARIAN;
+import static utility.shared.Shared_H.BOOL_VAL;
 import utility.shared.m_pre_result;
 
 import common.city.city;
@@ -68,12 +67,12 @@ public class Player_P{
 ///****************************************************************
 //...
 //*****************************************************************/
-//boolean player_owns_city(player pplayer, city pcity)
-//{
-//  if (!pcity || !pplayer)
-//    return false;			/* better safe than sorry */
-//  return (pcity.owner==pplayer.player_no);
-//}
+public static boolean player_owns_city(player pplayer, city pcity)
+{
+  if (null==pcity || null==pplayer)
+    return false;			/* better safe than sorry */
+  return (pcity.owner==pplayer.player_no);
+}
 //
 ///***************************************************************
 //In the server you must use Plrhand.server_player_init
@@ -137,7 +136,7 @@ public class Player_P{
 //
 //  if (Map.map.num_continents > 0) {
 //    plr.island_improv = fc_malloc((Map.map.num_continents + 1) * 
-//                                   Game.game.num_impr_types * sizeof(Impr_Status));
+//                                   Game.game.num_impr_types * sizeof(int));
 //    for (i = 1; i <= Map.map.num_continents; i++) {
 //      improvement_status_init(&plr.island_improv[i * Game.game.num_impr_types],
 //                              Game.game.num_impr_types);
@@ -321,41 +320,36 @@ public class Player_P{
 //{
 //  return (pplayer == City.city_owner(pcity));
 //}
-//
-///***************************************************************
-// If the specified player owns the city with the specified id,
-// return pointer to the city struct.  Else return null.
-// Now always uses fast idex_lookup_city.
-//***************************************************************/
-//city player_find_city_by_id(final player pplayer,
-//				    int city_id)
-//{
-//  city pcity = idex_lookup_city(city_id);
-//  
-//  if(pcity && (pcity.owner==pplayer.player_no)) {
-//    return pcity;
-//  } else {
-//    return null;
-//  }
-//}
-//
-///***************************************************************
-// If the specified player owns the unit with the specified id,
-// return pointer to the unit struct.  Else return null.
-// Uses fast idex_lookup_city.
-//***************************************************************/
-//unit player_find_unit_by_id(final player pplayer,
-//				    int unit_id)
-//{
-//  unit punit = idex_lookup_unit(unit_id);
-//  
-//  if(punit && (punit.owner==pplayer.player_no)) {
-//    return punit;
-//  } else {
-//    return null;
-//  }
-//}
-//
+
+	/***************************************************************
+	 * If the specified player owns the city with the specified id, return
+	 * pointer to the city struct. Else return null. Now always uses fast
+	 * idex_lookup_city.
+	 ***************************************************************/
+	public static city player_find_city_by_id(final player pplayer, int city_id) {
+		city pcity = Idex.idex_lookup_city(city_id);
+
+		if (pcity!=null && (pcity.owner == pplayer.player_no)) {
+			return pcity;
+		} else {
+			return null;
+		}
+	}
+
+	/***************************************************************
+	 * If the specified player owns the unit with the specified id, return
+	 * pointer to the unit struct. Else return null. Uses fast idex_lookup_city.
+	 ***************************************************************/
+	public static unit player_find_unit_by_id(final player pplayer, int unit_id) {
+		unit punit = Idex.idex_lookup_unit(unit_id);
+
+		if (punit!=null && (punit.owner == pplayer.player_no)) {
+			return punit;
+		} else {
+			return null;
+		}
+	}
+
 ///*************************************************************************
 //Return 1 if x,y is inside any of the player's city radii.
 //**************************************************************************/
@@ -397,7 +391,7 @@ public class Player_P{
 //    income += city_gold_surplus(pcity, pcity.tax_total);
 //
 //    /* Capitalization income. */
-//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //      income += pcity.shield_stock + pcity.shield_surplus;
 //    }
 //  } }
@@ -466,7 +460,7 @@ public class Player_P{
 //...
 //**************************************************************************/
 //boolean player_knows_improvement_tech(player pplayer,
-//				   Impr_Type_id id)
+//				   int id)
 //{
 //  int t;
 //  if (!improvement_exists(id)) return false;

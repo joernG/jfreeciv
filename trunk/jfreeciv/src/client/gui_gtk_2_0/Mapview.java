@@ -1008,9 +1008,9 @@ public class Mapview{
 //		     int canvas_x, int canvas_y)
 //{
 //  if (pcanvas.type == CANVAS_PIXMAP) {
-//    if (worker == C_TILE_EMPTY) {
+//    if (worker == city_tile_type.C_TILE_EMPTY) {
 //      gdk_gc_set_stipple(fill_tile_gc, gray25);
-//    } else if (worker == C_TILE_WORKER) {
+//    } else if (worker == city_tile_type.C_TILE_WORKER) {
 //      gdk_gc_set_stipple(fill_tile_gc, gray50);
 //    } else {
 //      return;

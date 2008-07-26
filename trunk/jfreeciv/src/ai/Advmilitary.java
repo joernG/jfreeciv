@@ -57,10 +57,10 @@ public class Advmilitary{
 //
 //  simple_ai_unit_type_iterate(i) {
 //    m = Unittype_P.unit_types[i].move_type;
-//    if (can_build_unit(pcity, i) && (m == LAND_MOVING || m == SEA_MOVING)) {
+//    if (City.can_build_unit(pcity, i) && (m == LAND_MOVING || m == SEA_MOVING)) {
 //      j = get_virtual_defense_power(v, i, pcity.tile, false, false);
-//      if (j > best || (j == best && unit_build_shield_cost(i) <=
-//                                    unit_build_shield_cost(bestid))) {
+//      if (j > best || (j == best && Unittype_P.unit_build_shield_cost(i) <=
+//                                    Unittype_P.unit_build_shield_cost(bestid))) {
 //        best = j;
 //        bestid = i;
 //      }
@@ -99,11 +99,11 @@ public class Advmilitary{
 //  simple_ai_unit_type_iterate(i) {
 //    cur = ai_unit_attack_desirability(i);
 //    if (which == Unittype_P.unit_types[i].move_type) {
-//      if (can_build_unit(pcity, i)
+//      if (City.can_build_unit(pcity, i)
 //          && (cur > best
 //              || (cur == best
-//                  && unit_build_shield_cost(i)
-//                     <= unit_build_shield_cost(bestid)))) {
+//                  && Unittype_P.unit_build_shield_cost(i)
+//                     <= Unittype_P.unit_build_shield_cost(bestid)))) {
 //        best = cur;
 //        bestid = i;
 //      }
@@ -142,10 +142,10 @@ public class Advmilitary{
 //    }
 //
 //    /* Now find best */
-//    if (can_build_unit(pcity, i)) {
+//    if (City.can_build_unit(pcity, i)) {
 //      j = ai_unit_defence_desirability(i);
-//      if (j > best || (j == best && unit_build_shield_cost(i) <=
-//                               unit_build_shield_cost(bestid))) {
+//      if (j > best || (j == best && Unittype_P.unit_build_shield_cost(i) <=
+//                               Unittype_P.unit_build_shield_cost(bestid))) {
 //        best = j;
 //        bestid = i;
 //      }
@@ -693,7 +693,7 @@ public class Advmilitary{
 //      desire /= POWER_DIVIDER/2; /* Good enough, no rounding errors. */
 //      desire *= desire;
 //      
-//      if (can_build_unit(pcity, unit_type)) {
+//      if (City.can_build_unit(pcity, unit_type)) {
 //        /* We can build the unit now... */
 //      
 //        if (walls && move_type == LAND_MOVING) {
@@ -703,9 +703,9 @@ public class Advmilitary{
 //        }
 //        
 //        if ((desire > best ||
-//             (desire == best && unit_build_shield_cost(unit_type) <=
-//                                unit_build_shield_cost(best_unit_type)))
-//            && unit_build_shield_cost(unit_type) <= pcity.shield_stock + 40) {
+//             (desire == best && Unittype_P.unit_build_shield_cost(unit_type) <=
+//                                Unittype_P.unit_build_shield_cost(best_unit_type)))
+//            && Unittype_P.unit_build_shield_cost(unit_type) <= pcity.shield_stock + 40) {
 //          best = desire;
 //          best_unit_type = unit_type;
 //        }
@@ -730,7 +730,7 @@ public class Advmilitary{
 //
 //        /* Yes, there's some similarity with kill_desire(). */
 //        tech_desire[unit_type] = (desire * danger /
-//				  (unit_build_shield_cost(unit_type)
+//				  (Unittype_P.unit_build_shield_cost(unit_type)
 //				   + tech_cost));
 //      }
 //  } simple_ai_unit_type_iterate_end;
@@ -747,7 +747,7 @@ public class Advmilitary{
 //    if (tech_desire[unit_type] > 0) {
 //      Tech_Type_id tech_req = Unittype_P.unit_types[unit_type].tech_requirement;
 //      int desire = tech_desire[unit_type]
-//                   * unit_build_shield_cost(best_unit_type) / best;
+//                   * Unittype_P.unit_build_shield_cost(best_unit_type) / best;
 //      
 //      pplayer.ai.tech_want[tech_req] += desire;
 //      
@@ -800,7 +800,7 @@ public class Advmilitary{
 //
 //  if (orig_move_type == LAND_MOVING && !boat && boattype < unittype.U_LAST) {
 //    /* cost of ferry */
-//    needferry = unit_build_shield_cost(boattype);
+//    needferry = Unittype_P.unit_build_shield_cost(boattype);
 //  }
 //  
 //  if (!is_stack_vulnerable(ptile)) {
@@ -823,7 +823,7 @@ public class Advmilitary{
 //    if ((move_type == LAND_MOVING || (move_type == SEA_MOVING && shore))
 //        && tech_req != A_LAST
 //        && (tech_dist > 0 ||
-//            !can_build_unit_direct(pcity, Unittype_P.unit_types[unit_type].obsoleted_by))
+//            !City.can_build_unit_direct(pcity, Unittype_P.unit_types[unit_type].obsoleted_by))
 //        && Unittype_P.unit_types[unit_type].attack_strength > 0 /* or we'll get SIGFPE */
 //        && move_type == orig_move_type) {
 //      /* TODO: Case for Airport. -- Raahul */
@@ -839,7 +839,7 @@ public class Advmilitary{
 //      int move_time;
 //      int bcost_balanced = build_cost_balanced(unit_type);
 //      /* See description of kill_desire() for info about this variables. */
-//      int bcost = unit_build_shield_cost(unit_type);
+//      int bcost = Unittype_P.unit_build_shield_cost(unit_type);
 //      int vuln;
 //      int attack = unittype_att_rating(unit_type, will_be_veteran,
 //                                       Unit_H.SINGLE_MOVE,
@@ -928,7 +928,7 @@ public class Advmilitary{
 //                   TILE_XY(ptile), want);
 //
 //        } else if (want > best_choice.want) {
-//          if (can_build_unit(pcity, unit_type)) {
+//          if (City.can_build_unit(pcity, unit_type)) {
 //            /* This is a real unit and we really want it */
 //
 //            CITY_LOG(Log.LOG_DEBUG, pcity, "overriding %s(%d) with %s(%d)" +
@@ -940,12 +940,12 @@ public class Advmilitary{
 //            best_choice.choice = unit_type;
 //            best_choice.want = want;
 //            best_choice.type = CT_ATTACKER;
-//          } else if (can_build_improvement(pcity,
+//          } else if (City.can_build_improvement(pcity,
 //                            get_unit_type(unit_type).impr_requirement)) {
 //	    /* Building this unit requires a specific type of improvement.
 //	     * So we build this improvement instead.  This may not be the
 //	     * best behavior. */
-//            Impr_Type_id id = get_unit_type(unit_type).impr_requirement;
+//            int id = get_unit_type(unit_type).impr_requirement;
 //
 //            CITY_LOG(Log.LOG_DEBUG, pcity, "building %s to build %s",
 //                     get_improvement_type(id).name,
@@ -1017,7 +1017,7 @@ public class Advmilitary{
 //
 //  if (is_ground_unit(myunit)) {
 //    int boatid = find_boat(pplayer, &boat_tile, 2);
-//    ferryboat = player_find_unit_by_id(pplayer, boatid);
+//    ferryboat = Player_P.player_find_unit_by_id(pplayer, boatid);
 //  }
 //
 //  if (ferryboat) {
@@ -1075,7 +1075,7 @@ public class Advmilitary{
 //      def_vet = do_make_unit_veteran(acity, def_type);
 //      vuln = unittype_def_rating_sq(myunit.type, def_type,
 //                                    ptile, false, def_vet);
-//      benefit = unit_build_shield_cost(def_type);
+//      benefit = Unittype_P.unit_build_shield_cost(def_type);
 //    } else {
 //      vuln = 0;
 //      benefit = 0;
@@ -1088,7 +1088,7 @@ public class Advmilitary{
 //                                     ptile, false, pdef.veteran);
 //      if (vuln < m) {
 //        vuln = m;
-//        benefit = unit_build_shield_cost(pdef.type);
+//        benefit = Unittype_P.unit_build_shield_cost(pdef.type);
 //        def_vet = pdef.veteran;
 //        def_type = pdef.type; 
 //      }
@@ -1107,7 +1107,7 @@ public class Advmilitary{
 //      return;
 //    }
 //
-//    benefit = unit_build_shield_cost(pdef.type);
+//    benefit = Unittype_P.unit_build_shield_cost(pdef.type);
 //    go_by_boat = false;
 //
 //    def_type = pdef.type;
@@ -1177,7 +1177,7 @@ public class Advmilitary{
 //{
 //  enum unit_move_type move_type;
 //  player pplayer = City.city_owner(pcity);
-//  Impr_Type_id id;
+//  int id;
 //
 //  /* Sanity */
 //  if (!is_unit_choice_type(choice.type)) return;
@@ -1201,7 +1201,7 @@ public class Advmilitary{
 //  case HELI_MOVING:
 //  case AIR_MOVING:
 //    if ((id = ai_find_source_building(pplayer, EFT_AIR_VETERAN)) != B_LAST
-//        && pcity.shield_surplus > impr_build_shield_cost(id) / 10) {
+//        && pcity.shield_surplus > Improvement.impr_build_shield_cost(id) / 10) {
 //      /* Only build this if we have really high production */
 //      choice.choice = id;
 //      choice.type = CT_BUILDING;
@@ -1277,7 +1277,7 @@ public class Advmilitary{
 //
 //    if (land_id != B_LAST
 //	&& pcity.ai.building_want[land_id] != 0 && our_def != 0 
-//        && can_build_improvement(pcity, land_id)
+//        && City.can_build_improvement(pcity, land_id)
 //        && (danger < 101 || num_defenders > 1
 //            || (pcity.ai.grave_danger == 0 
 //                && pplayer.economic.gold > (80 - pcity.shield_stock) * 2)) 
@@ -1293,7 +1293,7 @@ public class Advmilitary{
 //
 //    } else if (sea_id != B_LAST
 //	       && pcity.ai.building_want[sea_id] != 0 && our_def != 0 
-//               && can_build_improvement(pcity, sea_id) 
+//               && City.can_build_improvement(pcity, sea_id) 
 //               && (danger < 101 || num_defenders > 1) 
 //               && ai_fuzzy(pplayer, true)) {
 //      choice.choice = sea_id;
@@ -1306,7 +1306,7 @@ public class Advmilitary{
 //
 //    } else if (air_id != B_LAST
 //	       && pcity.ai.building_want[air_id] != 0 && our_def != 0 
-//               && can_build_improvement(pcity, air_id) 
+//               && City.can_build_improvement(pcity, air_id) 
 //               && (danger < 101 || num_defenders > 1) 
 //               && ai_fuzzy(pplayer, true)) {
 //      choice.choice = air_id;

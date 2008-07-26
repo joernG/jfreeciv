@@ -253,7 +253,7 @@ public class Options{
 //  GEN_EV(N"Improvement: Built",                    E_IMP_BUILD),
 //  GEN_EV(N"Improvement: Forced to Sell",           E_IMP_AUCTIONED),
 //  GEN_EV(N"Improvement: New Improvement Selected", E_IMP_AUTO),
-//  GEN_EV(N"Improvement: Sold",                     E_IMP_SOLD),
+//  GEN_EV(N"Improvement: Sold",                     event_type.E_IMP_SOLD),
 //  GEN_EV(N"Tech: Learned From Great Library",      E_TECH_GAIN),
 //  GEN_EV(N"Tech: Learned New Tech",                E_TECH_LEARNED),
 //  GEN_EV(N"Treaty: Alliance",                      E_TREATY_ALLIANCE),
@@ -332,7 +332,7 @@ public class Options{
 //*****************************************************************/
 //void init_messages_where()
 //{
-//  int out_only[] = { E_IMP_BUY, E_IMP_SOLD, E_UNIT_BUY,
+//  int out_only[] = { E_IMP_BUY, event_type.E_IMP_SOLD, event_type.E_UNIT_BUY,
 //		     E_UNIT_LOST_ATT, E_UNIT_WIN_ATT, E_GAME_START,
 //		     E_NATION_SELECTED, E_CITY_BUILD, E_NEXT_YEAR,
 //		     E_CITY_PRODUCTION_CHANGED,

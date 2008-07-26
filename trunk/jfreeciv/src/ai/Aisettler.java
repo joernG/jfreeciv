@@ -139,7 +139,7 @@ public class Aisettler{
 //
 //  city_map_checked_iterate(result.tile, i, j, ptile) {
 //    int reserved = citymap_read(ptile);
-//    boolean city_center = is_city_center(i, j);
+//    boolean city_center = City.is_city_center(i, j);
 //
 //    if (reserved < 0
 //        || (handicap && !Maphand.map_is_known(ptile, pplayer))

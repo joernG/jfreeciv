@@ -77,7 +77,7 @@ public class Gotodlg{
 //
 //static int goto_city_callback(GUI pWidget)
 //{
-//  city pDestcity = find_city_by_id(MAX_ID - pWidget.ID);
+//  city pDestcity = Game.find_city_by_id(MAX_ID - pWidget.ID);
 //
 //  if (pDestcity) {
 //    unit pUnit = get_unit_in_focus();

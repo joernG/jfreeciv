@@ -405,7 +405,7 @@ public void srv_init()
 //{
 //  util.freelog(Log.LOG_DEBUG, "Begin phase");
 //
-//  conn_list_do_buffer(&Game.game.game_connections);
+//  Connection.conn_list_do_buffer(&Game.game.game_connections);
 //
 //  for(player pplayer: Game.game.players){
 //    util.freelog(Log.LOG_DEBUG, "beginning player turn for #%d (%s)",
@@ -420,7 +420,7 @@ public void srv_init()
 //  }
 //
 //  flush_packets();  /* to curb major city spam */
-//  conn_list_do_unbuffer(&Game.game.game_connections);
+//  Connection.conn_list_do_unbuffer(&Game.game.game_connections);
 //
 //  shuffled_for(player pplayer: Game.game.players){
 //    update_revolution(pplayer);
@@ -1462,7 +1462,7 @@ public static void pick_ai_player_name(int nation, String newname)
 //    /* After sniff, re-zero the timer: (read-out above on next loop) */
 //    clear_timer_start(eot_timer);
 //    
-//    conn_list_do_buffer(&Game.game.game_connections);
+//    Connection.conn_list_do_buffer(&Game.game.game_connections);
 //
 //    sanity_check();
 //
@@ -1476,7 +1476,7 @@ public static void pick_ai_player_name(int nation, String newname)
 //    util.freelog(Log.LOG_DEBUG, "Sendinfotometaserver");
 //    () send_server_info_to_metaserver(META_REFRESH);
 //
-//    conn_list_do_unbuffer(&Game.game.game_connections);
+//    Connection.conn_list_do_unbuffer(&Game.game.game_connections);
 //
 //    if (is_game_over()) {
 //      Srv_main.server_state=server_states.GAME_OVER_STATE;

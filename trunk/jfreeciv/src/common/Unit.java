@@ -184,7 +184,7 @@ public class Unit{
 //	  && punit.owner == pcity.owner
 //	  && !pcity.is_building_unit && is_wonder(pcity.currently_building)
 //	  && (pcity.shield_stock
-//	      < impr_build_shield_cost(pcity.currently_building)));
+//	      < Improvement.impr_build_shield_cost(pcity.currently_building)));
 //}
 //
 //
@@ -207,7 +207,7 @@ public class Unit{
 //
 //  return (unit_flag(punit, F_TRADE_ROUTE)
 //	  && (pdestcity = map_get_city(punit.tile))
-//	  && (phomecity = find_city_by_id(punit.homecity))
+//	  && (phomecity = Game.find_city_by_id(punit.homecity))
 //	  && can_cities_trade(phomecity, pdestcity));
 //}
 //

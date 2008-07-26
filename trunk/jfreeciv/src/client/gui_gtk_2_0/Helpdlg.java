@@ -688,7 +688,7 @@ public class Helpdlg{
 //  
 //  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
-//    sprintf(buf, "%d", impr_build_shield_cost(which));
+//    sprintf(buf, "%d", Improvement.impr_build_shield_cost(which));
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[1]), buf);
 //    sprintf(buf, "%d", imp.upkeep);
 //    gtk_label_set_text(GTK_LABEL(help_ilabel[3]), buf);
@@ -725,7 +725,7 @@ public class Helpdlg{
 //
 //  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
-//    sprintf(buf, "%d", impr_build_shield_cost(which));
+//    sprintf(buf, "%d", Improvement.impr_build_shield_cost(which));
 //    gtk_label_set_text(GTK_LABEL(help_wlabel[1]), buf);
 //    if (imp.tech_req == A_LAST) {
 //      gtk_label_set_text(GTK_LABEL(help_wlabel[3]), "(Never)");
@@ -767,7 +767,7 @@ public class Helpdlg{
 //
 //  if (i<Game.game.num_unit_types) {
 //    unit_type utype = get_unit_type(i);
-//    sprintf(buf, "%d", unit_build_shield_cost(i));
+//    sprintf(buf, "%d", Unittype_P.unit_build_shield_cost(i));
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[0][1]), buf);
 //    sprintf(buf, "%d", utype.attack_strength);
 //    gtk_label_set_text(GTK_LABEL(help_ulabel[0][4]), buf);

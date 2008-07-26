@@ -107,7 +107,7 @@ public class Cityrep{
 //
 //static int popup_cma_from_city_report_callback(GUI pWidget)
 //{
-//  city pCity = find_city_by_id(MAX_ID - pWidget.ID);
+//  city pCity = Game.find_city_by_id(MAX_ID - pWidget.ID);
 //    
 //  /* state is changed before enter this function */  
 //  if(!get_checkbox_state(pWidget)) {
@@ -493,12 +493,12 @@ public class Cityrep{
 //      pLogo = ResizeSurface(GET_SURF(pUnit.sprite), 36, 24, 1);
 //      SDL_SetColorKey(pLogo,
 //	  SDL_SRCCOLORKEY|SDL_RLEACCEL, get_first_pixel(pLogo));
-//      togrow = unit_build_shield_cost(pCity.currently_building);
+//      togrow = Unittype_P.unit_build_shield_cost(pCity.currently_building);
 //      pName = pUnit.name;
 //    } else {
 //      impr_type pImprv = get_improvement_type(pCity.currently_building);
 //      pLogo = ResizeSurface(GET_SURF(pImprv.sprite), 36, 24, 1);
-//      togrow = impr_build_shield_cost(pCity.currently_building);
+//      togrow = Improvement.impr_build_shield_cost(pCity.currently_building);
 //      pName = pImprv.name;
 //    }
 //    
@@ -1018,12 +1018,12 @@ public class Cityrep{
 //    pLogo = ResizeSurface(GET_SURF(pUnit.sprite), 36, 24, 1);
 //    SDL_SetColorKey(pLogo,
 //	  SDL_SRCCOLORKEY|SDL_RLEACCEL, get_first_pixel(pLogo));
-//    togrow = unit_build_shield_cost(pCity.currently_building);
+//    togrow = Unittype_P.unit_build_shield_cost(pCity.currently_building);
 //    pName = pUnit.name;
 //  } else {
 //    impr_type pImprv = get_improvement_type(pCity.currently_building);
 //    pLogo = ResizeSurface(GET_SURF(pImprv.sprite), 36, 24, 1);
-//    togrow = impr_build_shield_cost(pCity.currently_building);
+//    togrow = Improvement.impr_build_shield_cost(pCity.currently_building);
 //    pName = pImprv.name;
 //  }
 //    

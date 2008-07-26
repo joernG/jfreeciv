@@ -1,6 +1,5 @@
 package common.map;
 
-import common.Map;
 import common.city.iter_index;
 
 public class civ_map {

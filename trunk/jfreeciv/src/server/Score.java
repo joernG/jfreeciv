@@ -416,7 +416,7 @@ public class Score{
 //    pplayer.score.angry += pcity.ppl_angry[4];
 //    pplayer.score.taxmen += pcity.specialists[SP_TAXMAN];
 //    pplayer.score.scientists += pcity.specialists[SP_SCIENTIST];
-//    pplayer.score.elvis += pcity.specialists[SP_ELVIS];
+//    pplayer.score.elvis += pcity.specialists[specialist_type.SP_ELVIS];
 //    pplayer.score.population += city_population(pcity);
 //    pplayer.score.cities++;
 //    pplayer.score.pollution += pcity.pollution;
@@ -454,8 +454,8 @@ public class Score{
 //
 //  impr_type_iterate(i) {
 //    if (is_wonder(i)
-//	&& (pcity = find_city_by_id(Game.game.global_wonders[i]))
-//	&& player_owns_city(pplayer, pcity)) {
+//	&& (pcity = Game.find_city_by_id(Game.game.global_wonders[i]))
+//	&& Player_P.player_owns_city(pplayer, pcity)) {
 //      pplayer.score.wonders++;
 //    }
 //  } impr_type_iterate_end;

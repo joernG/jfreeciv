@@ -43,7 +43,7 @@ public class City_H {
 //	  for (_itr = 0; _itr < CITY_MAP_SIZE * CITY_MAP_SIZE; _itr++) {	    \
 //	    final int x = _itr % CITY_MAP_SIZE, y = _itr / CITY_MAP_SIZE;	    \
 //	    									    \
-//	    if (is_valid_city_coords(x, y)) {
+//	    if (City.is_valid_city_coords(x, y)) {
 //
 //	#define city_map_iterate_end			                            \
 //	    }									    \

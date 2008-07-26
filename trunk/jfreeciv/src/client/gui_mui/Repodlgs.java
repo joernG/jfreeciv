@@ -452,7 +452,7 @@ public class Repodlgs{
 //    coststr = util.my_snprintf( "%5d", entry.cost);
 //    utotal = util.my_snprintf( "%6d", entry.total_cost);
 //
-//    *array++ = get_improvement_name(entry.type);
+//    *array++ = Improvement.get_improvement_name(entry.type);
 //    *array++ = count;
 //    *array++ = coststr;
 //    *array = utotal;

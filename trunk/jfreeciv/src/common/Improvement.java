@@ -1,5 +1,9 @@
 package common;
 
+import common.improvement.impr_type;
+
+import utility.shared.Shared_H;
+
 public class Improvement{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -29,6 +33,21 @@ public class Improvement{
 //#include "tech.h"
 //
 //#include "improvement.h"
+
+	/* B_LAST is a value which is guaranteed to be larger than all
+	 * actual Impr_Type_id values.  It is used as a flag value;
+	 * it can also be used for fixed allocations to ensure ability
+	 * to hold full number of improvement types.  */
+	public static final int B_LAST = Shared_H.MAX_NUM_ITEMS;
+
+	/* Improvement status (for cities' lists of improvements)
+	 * An enum or bitfield would be neater here, but we use a typedef for
+	 * a) less memory usage and b) compatibility with old behaviour */
+//	typedef unsigned char Impr_Status;
+	public static final int  I_NONE      = 0;   /* Improvement not built */
+	public static final int  I_ACTIVE    = 1;   /* Improvement built, and having its effect */
+	public static final int  I_OBSOLETE  = 2;   /* Built, but obsoleted by a tech */
+	public static final int  I_REDUNDANT = 3;   /* Built, but replaced by wonder/other building */
 //
 ///* Names of impr ranges.
 // * (These must correspond to enum impr_range_id in improvement.h.)
@@ -40,16 +59,16 @@ public class Improvement{
 //  "Player",
 //  "World"
 //};
-//
-///**************************************************************************
-//All the city improvements:
-//Use get_improvement_type(id) to access the array.
-//The improvement_types array is now setup in:
-//   server/ruleset.c (for the server)
-//   client/packhand.c (for the client)
-//**************************************************************************/
-//struct impr_type improvement_types[B_LAST];
-//
+
+	/**************************************************************************
+All the city improvements:
+Use get_improvement_type(id) to access the array.
+The improvement_types array is now setup in:
+   server/ruleset.c (for the server)
+   client/packhand.c (for the client)
+	 **************************************************************************/
+	public static impr_type improvement_types[] = new impr_type[B_LAST];
+
 ///**************************************************************************
 //  Convert impr range names to enum; case insensitive;
 //  returns IR_LAST if can't match.
@@ -86,7 +105,7 @@ public class Improvement{
 ///**************************************************************************
 //  Frees the memory associated with this improvement.
 //**************************************************************************/
-//static void improvement_free(Impr_Type_id id)
+//static void improvement_free(int id)
 //{
 //  impr_type p = get_improvement_type(id);
 //
@@ -125,7 +144,7 @@ public class Improvement{
 //- it is a space part, and the spacerace is not enabled.
 //Arguably this should be called improvement_type_exists, but that's too long.
 //**************************************************************************/
-//boolean improvement_exists(Impr_Type_id id)
+//boolean improvement_exists(int id)
 //{
 //  if (id<0 || id>=B_LAST || id>=Game.game.num_impr_types)
 //    return false;
@@ -140,48 +159,46 @@ public class Improvement{
 //
 //  return (improvement_types[id].tech_req!=A_LAST);
 //}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//impr_type get_improvement_type(Impr_Type_id id)
-//{
-//  return &improvement_types[id];
-//}
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//final String get_improvement_name(Impr_Type_id id)
-//{
-//  return get_improvement_type(id).name; 
-//}
-//
-///****************************************************************************
+
+	/**************************************************************************
+	 * ...
+	 **************************************************************************/
+	static impr_type get_improvement_type(int id) {
+		return improvement_types[id];
+	}
+
+	/**************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static String get_improvement_name(int id) {
+		return get_improvement_type(id).name;
+	}
+
+	///****************************************************************************
 //  Get the original (untranslated) improvement name.
 //****************************************************************************/
-//final String get_improvement_name_orig(Impr_Type_id id)
+//final String get_improvement_name_orig(int id)
 //{
 //  return get_improvement_type(id).name_orig; 
 //}
-//
-///****************************************************************************
-//  Returns the number of shields it takes to build this improvement.
-//****************************************************************************/
-//int impr_build_shield_cost(Impr_Type_id id)
-//{
-//  return improvement_types[id].build_cost;
-//}
-//
+
+/****************************************************************************
+  Returns the number of shields it takes to build this improvement.
+****************************************************************************/
+public static int impr_build_shield_cost(int id)
+{
+  return improvement_types[id].build_cost;
+}
+
 ///****************************************************************************
 //  Returns the amount of gold it takes to rush this improvement.
 //****************************************************************************/
-//int impr_buy_gold_cost(Impr_Type_id id, int shields_in_stock)
+//int impr_buy_gold_cost(int id, int shields_in_stock)
 //{
 //  int cost = 0, missing =
 //      improvement_types[id].build_cost - shields_in_stock;
 //
-//  if (building_has_effect(id, EFT_PROD_TO_GOLD)) {
+//  if (building_has_effect(id, effect_type.EFT_PROD_TO_GOLD)) {
 //    /* Can't buy capitalization. */
 //    return 0;
 //  }
@@ -198,19 +215,18 @@ public class Improvement{
 //  }
 //  return cost;
 //}
-//
-///****************************************************************************
-//  Returns the amount of gold received when this improvement is sold.
-//****************************************************************************/
-//int impr_sell_gold(Impr_Type_id id)
-//{
-//  return improvement_types[id].build_cost;
-//}
-//
+
+	/****************************************************************************
+	 * Returns the amount of gold received when this improvement is sold.
+	 ****************************************************************************/
+	public static int impr_sell_gold(int id) {
+		return improvement_types[id].build_cost;
+	}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
-//boolean is_wonder(Impr_Type_id id)
+//boolean is_wonder(int id)
 //{
 //  return (improvement_types[id].is_wonder);
 //}
@@ -219,7 +235,7 @@ public class Improvement{
 //Does a linear search of improvement_types[].name
 //Returns B_LAST if none match.
 //**************************************************************************/
-//Impr_Type_id find_improvement_by_name(final String s)
+//int find_improvement_by_name(final String s)
 //{
 //  impr_type_iterate(i) {
 //    if (strcmp(improvement_types[i].name, s)==0)
@@ -234,7 +250,7 @@ public class Improvement{
 //  improvement that matches the given original (untranslated) name.  Returns
 //  B_LAST if none match.
 //****************************************************************************/
-//Impr_Type_id find_improvement_by_name_orig(final String s)
+//int find_improvement_by_name_orig(final String s)
 //{
 //  impr_type_iterate(i) {
 //    if (mystrcasecmp(improvement_types[i].name_orig, s) == 0) {
@@ -248,7 +264,7 @@ public class Improvement{
 ///**************************************************************************
 // Returns 1 if the improvement is obsolete, now also works for wonders
 //**************************************************************************/
-//boolean improvement_obsolete(final player pplayer, Impr_Type_id id) 
+//boolean improvement_obsolete(final player pplayer, int id) 
 //{
 //  if (!tech_exists(improvement_types[id].obsolete_by)) {
 //    return false;
@@ -268,7 +284,7 @@ public class Improvement{
 // Fills in lists of improvements at all impr_ranges that might affect the
 // given city (owned by the given player)
 //**************************************************************************/
-//static void fill_ranges_improv_lists(Impr_Status *equiv_list[IR_LAST],
+//static void fill_ranges_improv_lists(int *equiv_list[IR_LAST],
 //                                     city pcity,
 //                                     player pplayer)
 //{ 
@@ -302,11 +318,11 @@ public class Improvement{
 // replaces it
 //**************************************************************************/
 //boolean improvement_redundant(player pplayer, final city pcity,
-//                          Impr_Type_id id, boolean want_to_build)
+//                          int id, boolean want_to_build)
 //{
 //  enum impr_range i;
-//  Impr_Status *equiv_list[IR_LAST];
-//  Impr_Type_id *ept;
+//  int *equiv_list[IR_LAST];
+//  int *ept;
 //
 //  /* Make lists of improvements that affect this city */
 //  fill_ranges_improv_lists(equiv_list, (city )pcity, pplayer);
@@ -317,7 +333,7 @@ public class Improvement{
 //  for (ept = improvement_types[id].equiv_repl; ept && *ept != B_LAST; ept++) {
 //    for (i = IR_CITY; i < IR_LAST; i++) {
 //      if (equiv_list[i]) {
-//         Impr_Status stat = equiv_list[i][*ept];
+//         int stat = equiv_list[i][*ept];
 //         if (stat != I_NONE && stat != I_OBSOLETE) return true;
 //      }
 //    }
@@ -329,7 +345,7 @@ public class Improvement{
 //    for (ept = improvement_types[id].equiv_dupl; ept && *ept != B_LAST; ept++) {
 //      for (i = IR_CITY; i < IR_LAST; i++) {
 //        if (equiv_list[i]) {
-//          Impr_Status stat = equiv_list[i][*ept];
+//          int stat = equiv_list[i][*ept];
 //          if (stat != I_NONE && stat != I_OBSOLETE) return true;
 //        }
 //      }
@@ -341,7 +357,7 @@ public class Improvement{
 ///**************************************************************************
 //...
 //**************************************************************************/
-//boolean wonder_obsolete(Impr_Type_id id)
+//boolean wonder_obsolete(int id)
 //{
 //  return improvement_obsolete(null, id);
 //}
@@ -349,13 +365,13 @@ public class Improvement{
 ///**************************************************************************
 // Clears a list of improvements - sets them all to I_NONE
 //**************************************************************************/
-//void improvement_status_init(Impr_Status * improvements, size_t elements)
+//void improvement_status_init(int * improvements, size_t elements)
 //{
 //  /* 
 //   * Since this function is called with elements!=Game.game.num_impr_types
 //   * impr_type_iterate can't used here.
 //   */
-//  Impr_Type_id i;
+//  int i;
 //
 //  for (i = 0; i < elements; i++) {
 //    improvements[i] = I_NONE;
@@ -366,7 +382,7 @@ public class Improvement{
 //   Whether player can build given building somewhere, ignoring whether it
 //   is obsolete.
 //**************************************************************************/
-//boolean can_player_build_improvement_direct(player p, Impr_Type_id id)
+//boolean can_player_build_improvement_direct(player p, int id)
 //{
 //  impr_type impr;
 //  boolean space_part = false;
@@ -421,7 +437,7 @@ public class Improvement{
 //  returns true if building is available with current tech OR will be
 //  available with future tech.  Returns false if building is obsolete.
 //**************************************************************************/
-//boolean can_player_build_improvement(player p, Impr_Type_id id)
+//boolean can_player_build_improvement(player p, int id)
 //{
 //  if (!can_player_build_improvement_direct(p, id)) {
 //    return false;
@@ -437,7 +453,7 @@ public class Improvement{
 //  returns true if building is available with current tech OR will be
 //  available with future tech.  Returns false if building is obsolete.
 //**************************************************************************/
-//boolean can_player_eventually_build_improvement(player p, Impr_Type_id id)
+//boolean can_player_eventually_build_improvement(player p, int id)
 //{
 //  if (!improvement_exists(id)) {
 //    return false;
@@ -451,10 +467,10 @@ public class Improvement{
 ///**************************************************************************
 //  Marks an improvment to the status
 //**************************************************************************/
-//void mark_improvement(city pcity, Impr_Type_id id, Impr_Status status)
+//void mark_improvement(city pcity, int id, int status)
 //{
 //  enum impr_range range;
-//  Impr_Status *improvements = null, *equiv_list[IR_LAST];
+//  int *improvements = null, *equiv_list[IR_LAST];
 //
 //  pcity.improvements[id] = status;
 //  range = improvement_types[id].equiv_range;
@@ -481,7 +497,7 @@ public class Improvement{
 //    pplayer.island_improv = fc_realloc(pplayer.island_improv,
 //                                        (Map.map.num_continents + 1)
 //                                        * Game.game.num_impr_types
-//                                        * sizeof(Impr_Status));
+//                                        * sizeof(int));
 //  
 //    /* We index into this array with the continent number, so don't use zero */
 //    for (i = 1; i <= Map.map.num_continents; i++) {
@@ -492,7 +508,7 @@ public class Improvement{
 //    /* Fill the lists with existent improvements with Island equiv_range */
 //    for (city pcity : pplayer.cities.data) {
 //      Continent_id cont = map_get_continent(pcity.tile);
-//      Impr_Status *improvs = 
+//      int *improvs = 
 //                           &pplayer.island_improv[cont * Game.game.num_impr_types];
 //
 //      built_impr_iterate(pcity, id) {

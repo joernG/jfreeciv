@@ -593,7 +593,7 @@ public class Mapview{
 //      int sy, y, sx, width, height, n;
 //      boolean right;
 //      char buffer[512];
-//      city pCity = player_find_city_by_id(Game.game.player_ptr,
+//      city pCity = Player_P.player_find_city_by_id(Game.game.player_ptr,
 //						  pUnit.homecity);
 //      tile pTile = map_get_tile(pUnit.x, pUnit.y);
 //      int infrastructure = get_tile_infrastructure_set(pTile);
@@ -847,7 +847,7 @@ public class Mapview{
 //	  }
 //	    
 //	  pUType = get_unit_type(aunit.type);
-//          pHome_City = find_city_by_id(aunit.homecity);
+//          pHome_City = Game.find_city_by_id(aunit.homecity);
 //          buffer = util.my_snprintf( "%s (%d,%d,%d)%s\n%s\n(%d/%d)\n%s",
 //		pUType.name, pUType.attack_strength,
 //		pUType.defense_strength, pUType.move_rate / Unit_H.SINGLE_MOVE,
@@ -2249,8 +2249,8 @@ public class Mapview{
 //  if (draw_map_grid) {
 //    int color1 = 0, color2 = 0, x = map_col, y = map_row;
 //    if((SDL_Client_Flags & CF_DRAW_CITY_GRID) == CF_DRAW_CITY_GRID) {
-//      enum city_tile_type city_tile_type = C_TILE_EMPTY,
-//      		city_tile_type1 = C_TILE_EMPTY, city_tile_type2 = C_TILE_EMPTY;
+//      enum city_tile_type city_tile_type = city_tile_type.C_TILE_EMPTY,
+//      		city_tile_type1 = city_tile_type.C_TILE_EMPTY, city_tile_type2 = city_tile_type.C_TILE_EMPTY;
 //      city dummy_pcity;
 //      boolean is_in_city_radius =
 //            player_in_city_radius(Game.game.player_ptr, map_col, map_row);
@@ -2273,7 +2273,7 @@ public class Mapview{
 //	  }
 //	}
 //      } else {
-//        city_tile_type1 = C_TILE_UNAVAILABLE;
+//        city_tile_type1 = city_tile_type.C_TILE_UNAVAILABLE;
 //      }
 //
 //      x = map_col;
@@ -2289,18 +2289,18 @@ public class Mapview{
 //	  }
 //	}
 //      } else {
-//        city_tile_type2 = C_TILE_UNAVAILABLE;
+//        city_tile_type2 = city_tile_type.C_TILE_UNAVAILABLE;
 //      }
 //            
 //      if (is_in_city_radius || pos1_is_in_city_radius) {
-//        if (city_tile_type == C_TILE_WORKER || city_tile_type1 == C_TILE_WORKER) {
+//        if (city_tile_type == city_tile_type.C_TILE_WORKER || city_tile_type1 == city_tile_type.C_TILE_WORKER) {
 //          color1 = 2;
 //        } else {
 //          color1 = 1;
 //        }
 //      }
 //      if (is_in_city_radius || pos2_is_in_city_radius) {	
-//	if (city_tile_type == C_TILE_WORKER || city_tile_type2 == C_TILE_WORKER) {
+//	if (city_tile_type == city_tile_type.C_TILE_WORKER || city_tile_type2 == city_tile_type.C_TILE_WORKER) {
 //          color2 = 2;
 //        } else {
 //          color2 = 1;
@@ -2883,8 +2883,8 @@ public class Mapview{
 //  draw_map_grid = 0;
 //
 //  /* draw loop */
-//  for (; col < CITY_MAP_SIZE; col++) {
-//    for (row = 0; row < CITY_MAP_SIZE; row++) {
+//  for (; col < City_H.CITY_MAP_SIZE; col++) {
+//    for (row = 0; row < City_H.CITY_MAP_SIZE; row++) {
 //#if 1
 //       sx = x0 + (col - row) * HALF_NORMAL_TILE_WIDTH;
 //       sy = y0 + (row + col) * HALF_NORMAL_TILE_HEIGHT;
@@ -2902,9 +2902,9 @@ public class Mapview{
 //	dest.x = sx;
 //	dest.y = sy;
 //	if ((!col && !row) ||
-//	    (!col && row == CITY_MAP_SIZE - 1) ||
-//	    (!row && col == CITY_MAP_SIZE - 1) ||
-//	    (col == CITY_MAP_SIZE - 1 && row == CITY_MAP_SIZE - 1)) {
+//	    (!col && row == City_H.CITY_MAP_SIZE - 1) ||
+//	    (!row && col == City_H.CITY_MAP_SIZE - 1) ||
+//	    (col == City_H.CITY_MAP_SIZE - 1 && row == City_H.CITY_MAP_SIZE - 1)) {
 //	  /* draw black corners */
 //
 //	  SDL_BlitSurface(GET_SURF(sprites.black_tile),
@@ -2912,7 +2912,7 @@ public class Mapview{
 //	} else {
 //	  /* draw map cell */
 //	  draw_map_cell(pDest, dest.x, dest.y, real_col, real_row, 1);
-//	  if (get_worker_city(pCity, col, row) == C_TILE_UNAVAILABLE &&
+//	  if (City.get_worker_city(pCity, col, row) == city_tile_type.C_TILE_UNAVAILABLE &&
 //	      Map.map_get_terrain(real_col, real_row) != T_UNKNOWN) {
 //	    if (!pTile) {
 //	      
@@ -2989,17 +2989,17 @@ public class Mapview{
 //  
 //  /* We have to draw the tiles in a particular order, so its best
 //     to avoid using any iterator macro. */
-//  for (city_x = 0; city_x<CITY_MAP_SIZE; city_x++)
+//  for (city_x = 0; city_x<City_H.CITY_MAP_SIZE; city_x++)
 //  {
-//    for (city_y = 0; city_y<CITY_MAP_SIZE; city_y++) {
-//        if (is_valid_city_coords(city_x, city_y)
+//    for (city_y = 0; city_y<City_H.CITY_MAP_SIZE; city_y++) {
+//        if (City.is_valid_city_coords(city_x, city_y)
 //	  && city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
 //	  && tile_get_known(map_x, map_y)
 //	  && city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y)) {
 //	  draw_map_cell(pDest, canvas_x,
 //		  canvas_y + HALF_NORMAL_TILE_HEIGHT, map_x, map_y, 1);
 //	
-//	if (get_worker_city(pCity, city_x, city_y) == C_TILE_UNAVAILABLE)
+//	if (City.get_worker_city(pCity, city_x, city_y) == city_tile_type.C_TILE_UNAVAILABLE)
 //	{
 //	    
 //	    SDL_Rect dest = {canvas_x, canvas_y + HALF_NORMAL_TILE_HEIGHT, NORMAL_TILE_WIDTH, NORMAL_TILE_HEIGHT};
@@ -3073,15 +3073,15 @@ public class Mapview{
 //  
 //  /* We have to draw the tiles in a particular order, so its best
 //     to avoid using any iterator macro. */
-//  for (city_x = 0; city_x<CITY_MAP_SIZE; city_x++)
+//  for (city_x = 0; city_x<City_H.CITY_MAP_SIZE; city_x++)
 //  {
-//    for (city_y = 0; city_y<CITY_MAP_SIZE; city_y++) {
-//        if (is_valid_city_coords(city_x, city_y)
+//    for (city_y = 0; city_y<City_H.CITY_MAP_SIZE; city_y++) {
+//        if (City.is_valid_city_coords(city_x, city_y)
 //	  && city_map_to_map(&map_x, &map_y, pCity, city_x, city_y)
 //	  && tile_get_known(map_x, map_y)
 //	  && city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y)) {
 //	put_one_tile(&store, map_x, map_y,  canvas_x, canvas_y, 1);
-//	if (get_worker_city(pCity, city_x, city_y) == C_TILE_UNAVAILABLE)
+//	if (City.get_worker_city(pCity, city_x, city_y) == city_tile_type.C_TILE_UNAVAILABLE)
 //	{
 //	    SDL_Color used = {255, 0, 0, 96};
 //	    SDL_Rect dest = {canvas_x, canvas_y, NORMAL_TILE_WIDTH, NORMAL_TILE_HEIGHT};

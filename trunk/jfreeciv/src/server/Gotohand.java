@@ -1388,7 +1388,7 @@ public class Gotohand {
 		// !(last_tile && trigger_special_ability)))
 		// || (pplayer.ai.control && ai_unit_move(punit, ptile));
 
-		// if (!player_find_unit_by_id(pplayer, unit_id)) {
+		// if (!Player_P.player_find_unit_by_id(pplayer, unit_id)) {
 		// return GR_DIED; /* unit util.died during goto! */
 		// }
 

@@ -509,7 +509,7 @@ public class Helpdata{
 //
 //  user_text, if non-null, will be appended to the text.
 //**************************************************************************/
-//char *helptext_building(char *buf, size_t bufsz, Impr_Type_id which,
+//char *helptext_building(char *buf, size_t bufsz, int which,
 //			final String user_text)
 //{
 //  impr_type imp = &improvement_types[which];

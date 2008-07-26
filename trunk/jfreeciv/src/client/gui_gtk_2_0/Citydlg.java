@@ -165,7 +165,7 @@ public class Citydlg{
 //  GtkWidget *show_units_command;
 //  GtkWidget *prev_command, *next_command;
 //
-//  Impr_Type_id sell_id;
+//  int sell_id;
 //
 //  int cwidth;
 //
@@ -248,7 +248,7 @@ public class Citydlg{
 //
 //static void buy_callback(GtkWidget * w, gpointer data);
 //
-//static void sell_callback(Impr_Type_id id, gpointer data);
+//static void sell_callback(int id, gpointer data);
 //static void sell_callback_response(GtkWidget *w, gint response, gpointer data);
 //
 //static void impr_callback(GtkTreeView *view, GtkTreePath *path,
@@ -387,7 +387,7 @@ public class Citydlg{
 //			     can_client_issue_orders() &&
 //			     have_present_units);
 //
-//    sensitive = (city_buy_cost(pdialog.pcity) > 0
+//    sensitive = (City.city_buy_cost(pdialog.pcity) > 0
 //	&& can_client_issue_orders());
 //    gtk_widget_set_sensitive(pdialog.overview.buy_command, sensitive);
 //    gtk_widget_set_sensitive(pdialog.production.buy_command, sensitive);
@@ -407,7 +407,7 @@ public class Citydlg{
 //  city pcity_sup, *pcity_pre;
 //  city_dialog pdialog;
 //
-//  pcity_sup = find_city_by_id(punit.homecity);
+//  pcity_sup = Game.find_city_by_id(punit.homecity);
 //  pcity_pre = map_get_city(punit.tile);
 //
 //  if (pcity_sup && (pdialog = get_city_dialog(pcity_sup)))
@@ -1429,10 +1429,10 @@ public class Citydlg{
 //  get_city_dialog_production(pcity, buf, sizeof(buf));
 //
 //  if (pcity.is_building_unit) {
-//    cost = unit_build_shield_cost(pcity.currently_building);
+//    cost = Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //    descr = get_unit_type(pcity.currently_building).name;
 //  } else {
-//    cost = impr_build_shield_cost(pcity.currently_building);;
+//    cost = Improvement.impr_build_shield_cost(pcity.currently_building);;
 //    descr = get_impr_name_ex(pcity, pcity.currently_building);
 //  }
 //
@@ -1746,7 +1746,7 @@ public class Citydlg{
 //      x = 1;
 //      total += pdialog.pcity.trade_value[i];
 //
-//      if ((pcity = find_city_by_id(pdialog.pcity.trade[i]))) {
+//      if ((pcity = Game.find_city_by_id(pdialog.pcity.trade[i]))) {
 //	cityname = util.my_snprintf( "%s", pcity.name);
 //      } else {
 //	cityname = util.my_snprintf( "%s", "Unknown");
@@ -1865,8 +1865,8 @@ public class Citydlg{
 //  city_dialog pdialog;
 //  GtkWidget *menu, *item;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
-//      (pcity = find_city_by_id(punit.homecity)) &&
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
+//      (pcity = Game.find_city_by_id(punit.homecity)) &&
 //      (pdialog = get_city_dialog(pcity))) {
 //
 //    if (ev.type != GDK_BUTTON_PRESS || ev.button == 2 || ev.button == 3
@@ -1924,7 +1924,7 @@ public class Citydlg{
 //  city_dialog pdialog;
 //  GtkWidget *menu, *item;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
 //      (pcity = map_get_city(punit.tile)) &&
 //      (pdialog = get_city_dialog(pcity))) {
 //
@@ -2035,7 +2035,7 @@ public class Citydlg{
 //  city pcity;
 //  city_dialog pdialog;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
 //      (pcity = map_get_city(punit.tile)) &&
 //      (pdialog = get_city_dialog(pcity)) && can_client_issue_orders() && 
 //      (ev.button == 2 || ev.button == 3)) {
@@ -2058,8 +2058,8 @@ public class Citydlg{
 //  city pcity;
 //  city_dialog pdialog;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
-//      (pcity = find_city_by_id(punit.homecity)) &&
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data)) &&
+//      (pcity = Game.find_city_by_id(punit.homecity)) &&
 //      (pdialog = get_city_dialog(pcity)) && can_client_issue_orders() && 
 //      (ev.button == 2 || ev.button == 3)) {
 //    set_unit_focus(punit);
@@ -2077,7 +2077,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    center_tile_mapcanvas(punit.tile);
 //  }
 //}
@@ -2089,7 +2089,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    set_unit_focus(punit);
 //  }
 //}
@@ -2104,9 +2104,9 @@ public class Citydlg{
 //  city pcity;
 //  city_dialog pdialog;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    set_unit_focus(punit);
-//    if ((pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity)))
+//    if ((pcity = Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity)))
 //      if ((pdialog = get_city_dialog(pcity)))
 //	close_city_dialog(pdialog);
 //  }
@@ -2122,7 +2122,7 @@ public class Citydlg{
 //  city pcity;
 //  city_dialog pdialog;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    set_unit_focus(punit);
 //    if ((pcity = map_get_city(punit.tile)))
 //      if ((pdialog = get_city_dialog(pcity)))
@@ -2137,7 +2137,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    request_unit_load(punit, null);
 //  }
 //}
@@ -2149,7 +2149,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    request_unit_unload(punit);
 //  }
 //}
@@ -2161,7 +2161,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    request_unit_sentry(punit);
 //  }
 //}
@@ -2173,7 +2173,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    request_unit_fortify(punit);
 //  }
 //}
@@ -2185,7 +2185,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    request_unit_disband(punit);
 //  }
 //}
@@ -2197,7 +2197,7 @@ public class Citydlg{
 //{
 //  unit punit;
 //
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, (size_t) data))) {
 //    request_unit_change_homecity(punit);
 //  }
 //}
@@ -2207,7 +2207,7 @@ public class Citydlg{
 //*****************************************************************/
 //static void unit_upgrade_callback(GtkWidget *w, gpointer data)
 //{
-//  unit punit = player_find_unit_by_id(Game.game.player_ptr,
+//  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr,
 //					      (size_t) data);
 //  GtkWidget *shell;
 //  char buf[512];
@@ -2352,7 +2352,7 @@ public class Citydlg{
 //	get_impr_name_ex(pdialog.pcity,
 //			 pdialog.pcity.currently_building);
 //  }
-//  value = city_buy_cost(pdialog.pcity);
+//  value = City.city_buy_cost(pdialog.pcity);
 //
 //  if (Game.game.player_ptr.economic.gold >= value) {
 //    shell = gtk_message_dialog_new(null,
@@ -2383,7 +2383,7 @@ public class Citydlg{
 ///****************************************************************
 //...
 //*****************************************************************/
-//static void sell_callback(Impr_Type_id id, gpointer data)
+//static void sell_callback(int id, gpointer data)
 //{
 //  city_dialog pdialog = (city_dialog ) data;
 //  GtkWidget *shl;
@@ -2408,7 +2408,7 @@ public class Citydlg{
 //    GTK_MESSAGE_QUESTION,
 //    GTK_BUTTONS_YES_NO,
 //    "Sell %s for %d gold?",
-//    get_impr_name_ex(pdialog.pcity, id), impr_sell_gold(id));
+//    get_impr_name_ex(pdialog.pcity, id), Improvement.impr_sell_gold(id));
 //  setup_dialog(shl, pdialog.shell);
 //  pdialog.sell_shell = shl;
 //  
@@ -2459,7 +2459,7 @@ public class Citydlg{
 //  if (!(mask & GDK_CONTROL_MASK)) {
 //    sell_callback(id, data);
 //  } else {
-//    popup_help_dialog_typed(get_improvement_name(id), HELP_IMPROVEMENT);
+//    popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_IMPROVEMENT);
 //  }
 //}
 //

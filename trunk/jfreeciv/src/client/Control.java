@@ -506,13 +506,13 @@ public class Control{
 //    id = *p_id;
 //    free(p_id);
 //    p_id = null;
-//    punit = player_find_unit_by_id(Game.game.player_ptr, id);
+//    punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, id);
 //
 //    if (punit && (unit_can_help_build_wonder_here(punit)
 //		  || unit_can_est_traderoute_here(punit))
 //	&& (!Game.game.player_ptr.ai.control || ai_popup_windows)) {
 //      city pcity_dest = map_get_city(punit.tile);
-//      city pcity_homecity = find_city_by_id(punit.homecity);
+//      city pcity_homecity = Game.find_city_by_id(punit.homecity);
 //      if (pcity_dest && pcity_homecity) {
 //	popup_caravan_dialog(punit, pcity_homecity, pcity_dest);
 //	return;
@@ -564,8 +564,8 @@ public class Control{
 //    victim_id = p_ids[1];
 //    free(p_ids);
 //    p_ids = null;
-//    pdiplomat = player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
-//    pcity = find_city_by_id(victim_id);
+//    pdiplomat = Player_P.player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
+//    pcity = Game.find_city_by_id(victim_id);
 //    punit = find_unit_by_id(victim_id);
 //
 //    if (!pdiplomat || !unit_flag(pdiplomat, F_DIPLOMAT))
@@ -1423,7 +1423,7 @@ public class Control{
 //void do_map_click(tile ptile, enum quickselect_type qtype)
 //{
 //  city pcity = map_get_city(ptile);
-//  unit punit = player_find_unit_by_id(Game.game.player_ptr, hover_unit);
+//  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //  boolean maybe_goto = false;
 //
 //  if (punit && hover_state != HOVER_NONE) {
@@ -1627,7 +1627,7 @@ public class Control{
 //**************************************************************************/
 //void do_unit_goto(tile ptile)
 //{
-//  unit punit = player_find_unit_by_id(Game.game.player_ptr, hover_unit);
+//  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //
 //  if (hover_unit == 0 || hover_state != HOVER_GOTO)
 //    return;
@@ -1730,7 +1730,7 @@ public class Control{
 //      popped = goto_pop_waypoint();
 //
 //  if (hover_state != HOVER_NONE && !popped) {
-//    unit punit = player_find_unit_by_id(Game.game.player_ptr, hover_unit);
+//    unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //
 //    set_hover_state(null, HOVER_NONE, ACTIVITY_LAST);
 //    update_unit_info_label(punit);
@@ -1770,7 +1770,7 @@ public class Control{
 //**************************************************************************/
 //void key_recall_previous_focus_unit()
 //{
-//  unit punit = player_find_unit_by_id(Game.game.player_ptr,
+//  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr,
 //                                              previous_focus_id);
 //  if (punit) {
 //    set_unit_focus_and_select(punit);

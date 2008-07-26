@@ -4,6 +4,7 @@ import utility.Speclists;
 import utility.shared.Shared_H;
 
 import common.Connection;
+import common.city.specialist_type;
 import common.player.player;
 
 public class civ_game {
@@ -61,7 +62,7 @@ public class civ_game {
 //		  public int global_wonders[B_LAST];              /* contains city id's */
 //		         /* global_wonders[] may also be (-1), or the id of a city
 //			    which no longer exists, if the wonder has been destroyed */
-//		  Impr_Status improvements[B_LAST];        /* impr. with equiv_range==World */
+//		  int improvements[B_LAST];        /* impr. with equiv_range==World */
 //
 		  public int heating; /* Number of polluted squares. */
 		  public int globalwarming; /* Total damage done. (counts towards a warming event.) */
@@ -123,9 +124,9 @@ public class civ_game {
 //		  char rulesetdir[MAX_LEN_NAME];
 //		  public int firepower_factor;		/* See README.rulesets */
 //
-//		  Impr_Type_id default_building;
-//		  Impr_Type_id palace_building;
-//		  Impr_Type_id land_defend_building;
+//		  int default_building;
+//		  int palace_building;
+//		  int land_defend_building;
 //
 //		  struct {
 //		    public int cathedral_plus;		/* eg Theology */
@@ -143,38 +144,40 @@ public class civ_game {
 //		    */
 //		    public int partisan_req[MAX_NUM_TECH_LIST];       /* all required for uprisings */
 //		  } rtech;
-//
-//		  /* values from Game.game.ruleset */
-//		  struct {
-//		    struct {
-//		      char name[MAX_LEN_NAME];
-//		      public int min_size, bonus;
-//		    } specialists[SP_COUNT];
-//		    public boolean changable_tax;
-//		    public int forced_science; /* only relevant if !changable_tax */
-//		    public int forced_luxury;
-//		    public int forced_gold;
-//		    public int min_city_center_food;
-//		    public int min_city_center_shield;
-//		    public int min_city_center_trade;
-//		    public int min_dist_bw_cities;
-//		    public int init_vis_radius_sq;
-//		    public int hut_overflight;
-//		    public boolean pillage_select;
-//		    public int nuke_contamination;
-//		    public int granary_food_ini[MAX_GRANARY_INIS];
-//		    public int granary_num_inis;
-//		    public int granary_food_inc;
-//		    public int tech_cost_style;
-//		    public int tech_leakage;
-//		    public int tech_cost_double_year;
-//
-//		    /* Items given to all players at Game.game start.  Server only. */
-//		    public int global_init_techs[MAX_NUM_TECH_LIST];
-//		    public int global_init_buildings[MAX_NUM_BUILDING_LIST];
-//
-//		    public boolean killstack;
-//		  } rgame;
+
+		  /* values from Game.game.ruleset */
+		 public class Trgame {
+		    public class Tspecialists {
+		      public String name="";
+		      public int min_size, bonus;
+		    } 
+		    public Tspecialists specialists[] = new Tspecialists[specialist_type.getSize()];
+		    public boolean changable_tax;
+		    public int forced_science; /* only relevant if !changable_tax */
+		    public int forced_luxury;
+		    public int forced_gold;
+		    public int min_city_center_food;
+		    public int min_city_center_shield;
+		    public int min_city_center_trade;
+		    public int min_dist_bw_cities;
+		    public int init_vis_radius_sq;
+		    public int hut_overflight;
+		    public boolean pillage_select;
+		    public int nuke_contamination;
+		    public int granary_food_ini[];//[MAX_GRANARY_INIS];
+		    public int granary_num_inis;
+		    public int granary_food_inc;
+		    public int tech_cost_style;
+		    public int tech_leakage;
+		    public int tech_cost_double_year;
+
+		    /* Items given to all players at Game.game start.  Server only. */
+		    public int global_init_techs[];//[MAX_NUM_TECH_LIST];
+		    public int global_init_buildings;//[MAX_NUM_BUILDING_LIST];
+
+		    public boolean killstack;
+		  } 
+		  public Trgame rgame;
 //		  
 //		  struct {
 //		    public int improvement_factor;

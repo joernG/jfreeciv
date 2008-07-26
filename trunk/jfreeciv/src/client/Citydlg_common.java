@@ -93,7 +93,7 @@ public class Citydlg_common{
 //  *canvas_x += (width - NORMAL_TILE_WIDTH) / 2;
 //  *canvas_y += (height - NORMAL_TILE_HEIGHT) / 2;
 //
-//  if (!is_valid_city_coords(city_x, city_y)) {
+//  if (!City.is_valid_city_coords(city_x, city_y)) {
 //    assert(false);
 //    return false;
 //  }
@@ -138,7 +138,7 @@ public class Citydlg_common{
 //  util.freelog(Log.LOG_DEBUG, "canvas_to_city_pos(pos=(%d,%d))=(%d,%d)",
 //	  orig_canvas_x, orig_canvas_y, *city_x, *city_y);
 //
-//  return is_valid_city_coords(*city_x, *city_y);
+//  return City.is_valid_city_coords(*city_x, *city_y);
 //}
 //
 ///* Iterate over all known tiles in the city.  This iteration follows the
@@ -149,12 +149,12 @@ public class Citydlg_common{
 //  int _itr;								    \
 //                                                                            \
 //  /* We must go in order to preserve the painter's algorithm. */	    \
-//  for (_itr = 0; _itr < CITY_MAP_SIZE * CITY_MAP_SIZE; _itr++) {            \
-//    int city_x = _itr / CITY_MAP_SIZE, city_y = _itr % CITY_MAP_SIZE;	    \
+//  for (_itr = 0; _itr < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; _itr++) {            \
+//    int city_x = _itr / City_H.CITY_MAP_SIZE, city_y = _itr % City_H.CITY_MAP_SIZE;	    \
 //    int canvas_x, canvas_y;						    \
 //    tile ptile;							    \
 //                                                                            \
-//    if (is_valid_city_coords(city_x, city_y)				    \
+//    if (City.is_valid_city_coords(city_x, city_y)				    \
 //	&& (ptile = city_map_to_map(pcity, city_x, city_y))		    \
 //	&& tile_get_known(ptile)					    \
 //	&& city_to_canvas_pos(&canvas_x, &canvas_y, city_x, city_y)) {	    \
@@ -189,7 +189,7 @@ public class Citydlg_common{
 //   * in iso-view. */
 //  citydlg_known_iterate(pcity, city_x, city_y,
 //			ptile, canvas_x, canvas_y) {
-//    if (pcity.city_map[city_x][city_y] == C_TILE_WORKER) {
+//    if (pcity.city_map[city_x][city_y] == city_tile_type.C_TILE_WORKER) {
 //      put_city_tile_output(pcity, city_x, city_y,
 //			   pcanvas, canvas_x, canvas_y);
 //    }
@@ -201,7 +201,7 @@ public class Citydlg_common{
 //   * the lines would get obscured. */
 //  citydlg_known_iterate(pcity, city_x, city_y,
 //			ptile, canvas_x, canvas_y) {
-//    if (pcity.city_map[city_x][city_y] == C_TILE_UNAVAILABLE) {
+//    if (pcity.city_map[city_x][city_y] == city_tile_type.C_TILE_UNAVAILABLE) {
 //      put_red_frame_tile(pcanvas, canvas_x, canvas_y);
 //    }
 //  } citydlg_known_iterate_end;
@@ -236,12 +236,12 @@ public class Citydlg_common{
 //  stock = pcity.shield_stock;
 //
 //  if (pcity.is_building_unit) {
-//    cost = unit_build_shield_cost(pcity.currently_building);
+//    cost = Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //  } else {
-//    cost = impr_build_shield_cost(pcity.currently_building);
+//    cost = Improvement.impr_build_shield_cost(pcity.currently_building);
 //  }
 //
-//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //    buffer = String.format "%3d gold per turn",
 //		MAX(0, pcity.shield_surplus));
 //  } else {
@@ -282,7 +282,7 @@ public class Citydlg_common{
 //				     int id, boolean is_unit,
 //				     city pcity)
 //{
-//  if (!is_unit && building_has_effect(id, EFT_PROD_TO_GOLD)) {
+//  if (!is_unit && building_has_effect(id, effect_type.EFT_PROD_TO_GOLD)) {
 //    buffer = String.format "%s (XX) %d/turn",
 //		get_impr_name_ex(pcity, id), MAX(0, pcity.shield_surplus));
 //  } else {
@@ -292,10 +292,10 @@ public class Citydlg_common{
 //
 //    if (is_unit) {
 //      name = get_unit_name(id);
-//      cost = unit_build_shield_cost(id);
+//      cost = Unittype_P.unit_build_shield_cost(id);
 //    } else {
 //      name = get_impr_name_ex(pcity, id);
-//      cost = impr_build_shield_cost(id);
+//      cost = Improvement.impr_build_shield_cost(id);
 //    }
 //
 //    if (turns < 999) {
@@ -331,10 +331,10 @@ public class Citydlg_common{
 //      my_snprintf(buf[1], column_size, "%d/%d/%d", ptype.attack_strength,
 //		  ptype.defense_strength, ptype.move_rate / 3);
 //    }
-//    my_snprintf(buf[2], column_size, "%d", unit_build_shield_cost(id));
+//    my_snprintf(buf[2], column_size, "%d", Unittype_P.unit_build_shield_cost(id));
 //  } else {
 //    /* Total & turns left meaningless on capitalization */
-//    if (building_has_effect(id, EFT_PROD_TO_GOLD)) {
+//    if (building_has_effect(id, effect_type.EFT_PROD_TO_GOLD)) {
 //      my_snprintf(buf[0], column_size, get_improvement_type(id).name);
 //      buf[1][0] = '\0';
 //      my_snprintf(buf[2], column_size, "---");
@@ -360,13 +360,13 @@ public class Citydlg_common{
 //      }
 //
 //      my_snprintf(buf[2], column_size, "%d",
-//		  impr_build_shield_cost(id));
+//		  Improvement.impr_build_shield_cost(id));
 //    }
 //  }
 //
 //  /* Add the turns-to-build entry in the 4th position */
 //  if (pcity) {
-//    if (!is_unit && building_has_effect(id, EFT_PROD_TO_GOLD)) {
+//    if (!is_unit && building_has_effect(id, effect_type.EFT_PROD_TO_GOLD)) {
 //      my_snprintf(buf[3], column_size, "%d/turn",
 //		  MAX(0, pcity.shield_surplus));
 //    } else {
@@ -423,7 +423,7 @@ public class Citydlg_common{
 //void city_rotate_specialist(city pcity, int citizen_index)
 //{
 //  struct citizen_type citizens[MAX_CITY_SIZE];
-//  Specialist_type_id from, to;
+//  specialist_type from, to;
 //
 //  if (citizen_index < 0 || citizen_index >= pcity.size) {
 //    return;
@@ -439,10 +439,10 @@ public class Citydlg_common{
 //  /* Loop through all specialists in order until we find a usable one
 //   * (or run out of choices). */
 //  to = from;
-//  assert(to >= 0 && to < SP_COUNT);
+//  assert(to >= 0 && to < specialist_type.getSize());
 //  do {
-//    to = (to + 1) % SP_COUNT;
-//  } while (to != from && !city_can_use_specialist(pcity, to));
+//    to = (to + 1) % specialist_type.getSize();
+//  } while (to != from && !City.city_can_use_specialist(pcity, to));
 //
 //  if (from != to) {
 //    city_change_specialist(pcity, from, to);
@@ -488,7 +488,7 @@ public class Citydlg_common{
 //{
 //  struct worklist copy;
 //
-//  copy_worklist(&copy, pworklist);
+//  worklist.copy_worklist(&copy, pworklist);
 //
 //  /* Don't send the worklist name to the server. */
 //  copy.name[0] = '\0';
@@ -509,10 +509,10 @@ public class Citydlg_common{
 //    boolean old_is_unit;
 //
 //    /* Insert as current production. */
-//    if (item_is_unit && !can_build_unit_direct(pcity, item_id)) {
+//    if (item_is_unit && !City.can_build_unit_direct(pcity, item_id)) {
 //      return false;
 //    }
-//    if (!item_is_unit && !can_build_improvement_direct(pcity, item_id)) {
+//    if (!item_is_unit && !City.can_build_improvement_direct(pcity, item_id)) {
 //      return false;
 //    }
 //
@@ -562,7 +562,7 @@ public class Citydlg_common{
 //  int id;
 //  boolean is_unit;
 //
-//  copy_worklist(Pqueue, &pcity.worklist);
+//  worklist.copy_worklist(Pqueue, &pcity.worklist);
 //
 //  /* The GUI wants current production to be in the task list, but the
 //     worklist API wants it out for reasons unknown. Perhaps someone enjoyed
@@ -585,14 +585,14 @@ public class Citydlg_common{
 //  int id;
 //  boolean is_unit;
 //
-//  copy_worklist(&copy, Pqueue);
+//  worklist.copy_worklist(&copy, Pqueue);
 //
 //  /* The GUI wants current production to be in the task list, but the
 //     worklist API wants it out for reasons unknown. Perhaps someone enjoyed
 //     making things more complicated than necessary? So I dance around it. */
 //  if (worklist_peek(&copy, &id, &is_unit)) {
 //
-//    if (!city_can_change_build(pcity)
+//    if (!City.city_can_change_build(pcity)
 //        && (id != pcity.currently_building
 //            || is_unit != pcity.is_building_unit)) {
 //      /* We cannot change production to one from worklist.
@@ -623,13 +623,13 @@ public class Citydlg_common{
 //{
 //  return (can_client_issue_orders()
 //	  && !pcity.did_buy
-//	  && city_buy_cost(pcity) > 0);
+//	  && City.city_buy_cost(pcity) > 0);
 //}
 //
 ///**************************************************************************
 //  Change the production of a given city.  Return the request ID.
 //**************************************************************************/
-//int city_sell_improvement(city pcity, Impr_Type_id sell_id)
+//int city_sell_improvement(city pcity, int sell_id)
 //{
 //  return dsend_packet_city_sell(&aconnection, pcity.id, sell_id);
 //}
@@ -645,8 +645,8 @@ public class Citydlg_common{
 ///**************************************************************************
 //  Change a specialist in the given city.  Return the request ID.
 //**************************************************************************/
-//int city_change_specialist(city pcity, Specialist_type_id from,
-//			   Specialist_type_id to)
+//int city_change_specialist(city pcity, specialist_type from,
+//			   specialist_type to)
 //{
 //  return dsend_packet_city_change_specialist(&aconnection, pcity.id, from,
 //					     to);
@@ -658,12 +658,12 @@ public class Citydlg_common{
 //**************************************************************************/
 //int city_toggle_worker(city pcity, int city_x, int city_y)
 //{
-//  assert(is_valid_city_coords(city_x, city_y));
+//  assert(City.is_valid_city_coords(city_x, city_y));
 //
-//  if (pcity.city_map[city_x][city_y] == C_TILE_WORKER) {
+//  if (pcity.city_map[city_x][city_y] == city_tile_type.C_TILE_WORKER) {
 //    return dsend_packet_city_make_specialist(&aconnection, pcity.id, city_x,
 //					     city_y);
-//  } else if (pcity.city_map[city_x][city_y] == C_TILE_EMPTY) {
+//  } else if (pcity.city_map[city_x][city_y] == city_tile_type.C_TILE_EMPTY) {
 //    return dsend_packet_city_make_worker(&aconnection, pcity.id, city_x,
 //					 city_y);
 //  } else {

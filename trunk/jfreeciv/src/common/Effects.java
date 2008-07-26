@@ -1,5 +1,8 @@
 package common;
 
+import common.city.city;
+import common.effects.effect_type;
+
 public class Effects{
 
 // Freeciv - Copyright (C) 2004 - The Freeciv Team
@@ -287,7 +290,7 @@ public class Effects{
 // * building that are actually in the group will be obsoleted.
 // */
 //struct effect_group_element {
-//  Impr_Type_id source_building;
+//  int source_building;
 //  enum effect_range range;
 //  boolean survives;
 //};
@@ -349,7 +352,7 @@ public class Effects{
 ///**************************************************************************
 //  Get a list of effects of this type granted by a building.
 //**************************************************************************/
-//effect_list get_building_effects(Impr_Type_id building,
+//effect_list get_building_effects(int building,
 //					 enum effect_type effect_type)
 //{
 //  return &ruleset_cache.effects[effect_type].buckets[building];
@@ -358,7 +361,7 @@ public class Effects{
 ///**************************************************************************
 //  Get a vector of effect types granted by a building.
 //**************************************************************************/
-//effect_type_vector get_building_effect_types(Impr_Type_id id)
+//effect_type_vector get_building_effect_types(int id)
 //{
 //  return &ruleset_cache.buildings[id].types;
 //}
@@ -405,7 +408,7 @@ public class Effects{
 //  Add a source to an existing effects group.
 //**************************************************************************/
 //void effect_group_add_element(effect_group group,
-//			      Impr_Type_id source_building,
+//			      int source_building,
 //			      enum effect_range range, boolean survives)
 //{
 //  effect_group_element elt;
@@ -502,7 +505,7 @@ public class Effects{
 //  the req_type "Building" has already been parsed by req_type_from_str,
 //  and the req "Factory" is passed as the req variable here.
 //**************************************************************************/
-//int parse_effect_requirement(Impr_Type_id source,
+//int parse_effect_requirement(int source,
 //			     enum effect_req_type req_type,
 //			     final String req_value)
 //{
@@ -540,7 +543,7 @@ public class Effects{
 //    break;
 //  default:
 //    util.die("for %s: unimplemented requirement type '%d'",
-//	get_improvement_name(source), req_type);
+//	Improvement.get_improvement_name(source), req_type);
 //    return -1;
 //  }
 //
@@ -548,7 +551,7 @@ public class Effects{
 //    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
 //	    "for building %s: bad effect requirement data '%s'",
-//	    get_improvement_name(source), req_value);
+//	    Improvement.get_improvement_name(source), req_value);
 //    return -1;
 //  } else {
 //    return data;
@@ -558,7 +561,7 @@ public class Effects{
 ///**************************************************************************
 //  Add effect to ruleset cache.
 //**************************************************************************/
-//void ruleset_cache_add(Impr_Type_id source, enum effect_type effect_type,
+//void ruleset_cache_add(int source, enum effect_type effect_type,
 //		       enum effect_range range, boolean survives, int eff_value,
 //		       enum effect_req_type req_type, int req_value,
 //		       int group_id)
@@ -610,7 +613,7 @@ public class Effects{
 //  /* Add building type to the effect type's buildings vector. */
 //  {
 //    building_vector vec;
-//    Impr_Type_id *pbldg;
+//    int *pbldg;
 //
 //    vec = get_buildings_with_effect(effect_type);
 //
@@ -745,7 +748,7 @@ public class Effects{
 //  Note: this function is an inefficient hack to be used by the old AI.  It
 //  will never find wonders, since that's not what the AI wants.
 //**************************************************************************/
-//Impr_Type_id ai_find_source_building(player pplayer,
+//int ai_find_source_building(player pplayer,
 //				     enum effect_type effect_type)
 //{
 //  /* FIXME: this just returns the first building. it should return the best
@@ -763,7 +766,7 @@ public class Effects{
 ///**************************************************************************
 //  Get a building which grants this effect. Returns B_LAST if there is none.
 //**************************************************************************/
-//Impr_Type_id get_building_for_effect(enum effect_type effect_type)
+//int get_building_for_effect(enum effect_type effect_type)
 //{
 //  building_vector_iterate(get_buildings_with_effect(effect_type), pbldg) {
 //    return *pbldg;
@@ -779,7 +782,7 @@ public class Effects{
 //  effect range and may take longer.  This function should only be used
 //  in situations where the range doesn't matter.
 //**************************************************************************/
-//boolean building_has_effect(Impr_Type_id id, enum effect_type effect)
+//boolean building_has_effect(int id, enum effect_type effect)
 //{
 //  return (effect_list_size(get_building_effects(id, effect)) > 0);
 //}
@@ -788,7 +791,7 @@ public class Effects{
 //  Returns the number of total world buildings (this includes buildings
 //  that have been destroyed).
 //**************************************************************************/
-//static int num_world_buildings_total(Impr_Type_id building)
+//static int num_world_buildings_total(int building)
 //{
 //  if (is_wonder(building)) {
 //    return (Game.game.global_wonders[building] != 0) ? 1 : 0;
@@ -803,10 +806,10 @@ public class Effects{
 ///**************************************************************************
 //  Returns the number of buildings of a certain type in the world.
 //**************************************************************************/
-//static int num_world_buildings(Impr_Type_id id)
+//static int num_world_buildings(int id)
 //{
 //  if (is_wonder(id)) {
-//    return find_city_by_id(Game.game.global_wonders[id]) ? 1 : 0;
+//    return Game.find_city_by_id(Game.game.global_wonders[id]) ? 1 : 0;
 //  } else {
 //    util.freelog(Log.LOG_ERROR,
 //	    /* TRANS: Obscure ruleset error. */
@@ -819,10 +822,10 @@ public class Effects{
 //  Returns the number of buildings of a certain type owned by plr.
 //**************************************************************************/
 //static int num_player_buildings(final player pplayer,
-//				Impr_Type_id building)
+//				int building)
 //{
 //  if (is_wonder(building)) {
-//    if (player_find_city_by_id(pplayer, Game.game.global_wonders[building])) {
+//    if (Player_P.player_find_city_by_id(pplayer, Game.game.global_wonders[building])) {
 //      return 1;
 //    } else {
 //      return 0;
@@ -839,12 +842,12 @@ public class Effects{
 //  Returns the number of buildings of a certain type on a continent.
 //**************************************************************************/
 //static int num_continent_buildings(final player pplayer,
-//				   int continent, Impr_Type_id building)
+//				   int continent, int building)
 //{
 //  if (is_wonder(building)) {
 //    final city pcity;
 //
-//    pcity = player_find_city_by_id(pplayer, Game.game.global_wonders[building]);
+//    pcity = Player_P.player_find_city_by_id(pplayer, Game.game.global_wonders[building]);
 //    if (pcity && map_get_continent(pcity.tile) == continent) {
 //      return 1;
 //    }
@@ -859,7 +862,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the number of buildings of a certain type in a city.
 //**************************************************************************/
-//static int num_city_buildings(final city pcity, Impr_Type_id id)
+//static int num_city_buildings(final city pcity, int id)
 //{
 //  return (city_got_building(pcity, id) ? 1 : 0);
 //}
@@ -906,9 +909,9 @@ public class Effects{
 //static int count_sources_in_range(enum target_type target,
 //				  final player target_player,
 //				  final city target_city,
-//				  Impr_Type_id target_building,
+//				  int target_building,
 //				  enum effect_range range, boolean survives,
-//				  Impr_Type_id source)
+//				  int source)
 //{
 //  if (!is_target_possible(target, range)) {
 //    return 0;
@@ -968,8 +971,8 @@ public class Effects{
 //static boolean is_effect_redundant(enum target_type target,
 //				final player target_player,
 //				final city target_city,
-//				Impr_Type_id target_building,
-//				Impr_Type_id source,
+//				int target_building,
+//				int source,
 //				final effect peffect)
 //{
 //  if (!peffect.group) {
@@ -1014,9 +1017,9 @@ public class Effects{
 //static boolean are_effect_reqs_active(enum target_type target,
 //				   final player target_player,
 //				   final city target_city,
-//				   Impr_Type_id target_building,
+//				   int target_building,
 //				   final tile target_tile,
-//				   Impr_Type_id source,
+//				   int source,
 //				   final effect peffect)
 //{
 //  /* Note the target may actually not exist.  In particular, effects that
@@ -1079,9 +1082,9 @@ public class Effects{
 //boolean is_effect_useful(enum target_type target,
 //		      final player target_player,
 //		      final city target_city,
-//		      Impr_Type_id target_building,
+//		      int target_building,
 //		      final tile target_tile,
-//		      Impr_Type_id source, final effect peffect)
+//		      int source, final effect peffect)
 //{
 //  if (is_effect_redundant(target, target_player, target_city,
 //			  target_building, source, peffect)) {
@@ -1107,9 +1110,9 @@ public class Effects{
 //static boolean is_effect_active(enum target_type target,
 //			     final player plr,
 //			     final city pcity,
-//			     Impr_Type_id building,
+//			     int building,
 //			     final tile ptile,
-//			     Impr_Type_id source,
+//			     int source,
 //			     final effect peffect)
 //{
 //  if (count_sources_in_range(target, plr, pcity, building, peffect.range,
@@ -1124,7 +1127,7 @@ public class Effects{
 //  Returns true if a building is replaced.  To be replaced, all its effects
 //  must be made redundant by groups that it is in.
 //**************************************************************************/
-//boolean is_building_replaced(final city pcity, Impr_Type_id building)
+//boolean is_building_replaced(final city pcity, int building)
 //{
 //  boolean groups_present = false;
 //
@@ -1159,9 +1162,9 @@ public class Effects{
 //static int get_effect_value(enum target_type target,
 //			    final player target_player,
 //			    final city target_city,
-//			    Impr_Type_id target_building,
+//			    int target_building,
 //			    final tile target_tile,
-//			    Impr_Type_id source,
+//			    int source,
 //			    enum effect_type effect_type)
 //{
 //  int value = 0;
@@ -1196,7 +1199,7 @@ public class Effects{
 //    				    enum target_type target,
 //			  	    final player target_player,
 //				    final city target_city,
-//				    Impr_Type_id target_building,
+//				    int target_building,
 //				    final tile target_tile,
 //				    enum effect_type effect_type)
 //{
@@ -1266,7 +1269,7 @@ public class Effects{
 ///**************************************************************************
 //  Returns the effect bonus at a building.
 //**************************************************************************/
-//int get_building_bonus(final city pcity, Impr_Type_id id,
+//int get_building_bonus(final city pcity, int id,
 //		       enum effect_type effect_type)
 //{
 //  return get_target_bonus_sources(null, TARGET_BUILDING,
@@ -1301,18 +1304,18 @@ public class Effects{
 //			 	  City.city_owner(pcity), pcity, B_LAST, null,
 //				  effect_type);
 //}
-//
-///**************************************************************************
-//  Returns the effect bonus the currently-in-finalruction-item will provide.
-//
-//  Note this is not called get_current_production_bonus because that would
-//  be confused with EFT_PROD_BONUS.
-//**************************************************************************/
-//int get_current_finalruction_bonus(final city pcity,
-//				   enum effect_type effect_type)
-//{
+
+/**************************************************************************
+  Returns the effect bonus the currently-in-finalruction-item will provide.
+
+  Note this is not called get_current_production_bonus because that would
+  be confused with EFT_PROD_BONUS.
+**************************************************************************/
+public static int get_current_finalruction_bonus(final city pcity,
+				   effect_type effect_type)
+{
 //  if (!pcity.is_building_unit) {
-//    Impr_Type_id bldg = pcity.currently_building;
+//    int bldg = pcity.currently_building;
 //    int power = 0;
 //
 //    effect_list_iterate(*get_building_effects(bldg, effect_type), peffect) {
@@ -1324,8 +1327,8 @@ public class Effects{
 //
 //    return power;
 //  }
-//
-//  return 0;
-//}
-//
+
+  return 0;
+}
+
 }

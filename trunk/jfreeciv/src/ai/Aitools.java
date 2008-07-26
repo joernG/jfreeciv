@@ -612,11 +612,11 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //  if (is_stack_vulnerable(pdef.tile)) {
 //    /* lotsa people util.die */
 //    for (unit aunit : pdef.tile.units.data) {
-//      victim_cost += unit_build_shield_cost(aunit.type);
+//      victim_cost += Unittype_P.unit_build_shield_cost(aunit.type);
 //    } }
 //  } else {
 //    /* Only one unit util.dies if attack is successful */
-//    victim_cost = unit_build_shield_cost(pdef.type);
+//    victim_cost = Unittype_P.unit_build_shield_cost(pdef.type);
 //  }
 //  
 //  return victim_cost;
@@ -634,7 +634,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //  handle_player_change_government(pplayer, gov);
 //
 //  for (city pcity : pplayer.cities.data) {
-//    auto_arrange_workers(pcity); /* update cities */
+//    Cityturn.auto_arrange_workers(pcity); /* update cities */
 //  } }
 //}
 //
@@ -677,10 +677,10 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //  if (cur.want > best.want) {
 //    util.freelog(Log.LOG_DEBUG, "Overriding choice (%s, %d) with (%s, %d)",
 //	    (best.type == CT_BUILDING ? 
-//	     get_improvement_name(best.choice) : Unittype_P.unit_types[best.choice].name), 
+//	     Improvement.get_improvement_name(best.choice) : Unittype_P.unit_types[best.choice].name), 
 //	    best.want, 
 //	    (cur.type == CT_BUILDING ? 
-//	     get_improvement_name(cur.choice) : Unittype_P.unit_types[cur.choice].name), 
+//	     Improvement.get_improvement_name(cur.choice) : Unittype_P.unit_types[cur.choice].name), 
 //	    cur.want);
 //    best.choice =cur.choice;
 //    best.want = cur.want;
@@ -716,7 +716,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //**************************************************************************/
 //void ai_advisor_choose_building(city pcity, ai_choice choice)
 //{ /* I prefer the ai_choice as a return value; gcc prefers it as an arg -- Syela */
-//  Impr_Type_id id = B_LAST;
+//  int id = B_LAST;
 //  unsigned int danger = 0;
 //  int downtown = 0, cities = 0;
 //  int want=0;
@@ -739,7 +739,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //    }
 //    if (!is_wonder(i)
 //	|| (!pcity.is_building_unit && is_wonder(pcity.currently_building)
-//	    && pcity.shield_stock >= impr_build_shield_cost(i) / 2)
+//	    && pcity.shield_stock >= Improvement.impr_build_shield_cost(i) / 2)
 //	|| (!is_building_other_wonder(pcity)
 //	    /* otherwise caravans will be killed! */
 //	    && pcity.ai.grave_danger == 0
@@ -751,12 +751,12 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //      if(pcity.ai.building_want[i]>want) {
 //	/* we have to do the can_build check to avoid Built Granary.
 //	 * Now Building Granary. */
-//        if (can_build_improvement(pcity, i)) {
+//        if (City.can_build_improvement(pcity, i)) {
 //          want = pcity.ai.building_want[i];
 //          id = i;
 //        } else {
 //	  util.freelog(Log.LOG_DEBUG, "%s can't build %s", pcity.name,
-//		  get_improvement_name(i));
+//		  Improvement.get_improvement_name(i));
 //	}
 //      } /* id is the building we like the best */
 //    }
@@ -764,7 +764,7 @@ public static city dist_nearest_city(player pplayer, tile ptile,
 //
 //  if (want != 0) {
 //    util.freelog(Log.LOG_DEBUG, "AI_Chosen: %s with desire = %d for %s",
-//	    get_improvement_name(id), want, pcity.name);
+//	    Improvement.get_improvement_name(id), want, pcity.name);
 //  } else {
 //    util.freelog(Log.LOG_DEBUG, "AI_Chosen: None for %s", pcity.name);
 //  }

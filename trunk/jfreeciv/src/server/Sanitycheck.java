@@ -1,5 +1,7 @@
 package server;
 
+import common.city.city;
+
 public class Sanitycheck{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -150,11 +152,16 @@ public class Sanitycheck{
 //  }
 //}
 //
-///**************************************************************************
-//  Verify that the city has sane values.
-//**************************************************************************/
-//void real_sanity_check_city(city pcity, final String file, int line)
-//{
+//	#  define sanity_check_city(x) real_sanity_check_city(x, __FILE__, __LINE__)
+//	void real_sanity_check_city(struct city *pcity, const char *file, int line);
+	public static void sanity_check_city(city pcity){
+		real_sanity_check_city(pcity, null, 0);
+	}
+/**************************************************************************
+  Verify that the city has sane values.
+**************************************************************************/
+static void real_sanity_check_city(city pcity, final String file, int line)
+{
 //  int workers = 0;
 //  player pplayer = City.city_owner(pcity);
 //
@@ -175,8 +182,8 @@ public class Sanitycheck{
 //    if ((ptile = city_map_to_map(pcity, x, y))) {
 //      player owner = map_get_owner(ptile);
 //
-//      switch (get_worker_city(pcity, x, y)) {
-//      case C_TILE_EMPTY:
+//      switch (City.get_worker_city(pcity, x, y)) {
+//      case city_tile_type.C_TILE_EMPTY:
 //	if (ptile.worked) {
 //	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "empty but worked by %s!",
@@ -201,7 +208,7 @@ public class Sanitycheck{
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	break;
-//      case C_TILE_WORKER:
+//      case city_tile_type.C_TILE_WORKER:
 //	if ((ptile).worked != pcity) {
 //	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "worked but main map disagrees!",
@@ -225,7 +232,7 @@ public class Sanitycheck{
 //		  pcity.name, TILE_XY(ptile));
 //	}
 //	break;
-//      case C_TILE_UNAVAILABLE:
+//      case city_tile_type.C_TILE_UNAVAILABLE:
 //	if (city_can_work_tile(pcity, x, y)) {
 //	  util.freelog(Log.LOG_ERROR, "Tile at %s.%d,%d marked as " +
 //		  "unavailable but seems to be available!",
@@ -234,23 +241,23 @@ public class Sanitycheck{
 //	break;
 //      }
 //    } else {
-//      assert(get_worker_city(pcity, x, y) == C_TILE_UNAVAILABLE);
+//      assert(City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_UNAVAILABLE);
 //    }
 //  } city_map_iterate_end;
 //
 //  /* Sanity check city size versus worker and specialist counts. */
 //  city_map_iterate(x, y) {
-//    if (get_worker_city(pcity, x, y) == C_TILE_WORKER) {
+//    if (City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_WORKER) {
 //      workers++;
 //    }
 //  } city_map_iterate_end;
-//  if (workers + city_specialists(pcity) != pcity.size + 1) {
+//  if (workers + City.city_specialists(pcity) != pcity.size + 1) {
 //    util.die("%s is illegal (size%d w%d e%d t%d s%d) in %s line %d",
-//        pcity.name, pcity.size, workers, pcity.specialists[SP_ELVIS],
+//        pcity.name, pcity.size, workers, pcity.specialists[specialist_type.SP_ELVIS],
 //        pcity.specialists[SP_TAXMAN], pcity.specialists[SP_SCIENTIST], file, line);
 //  }
-//}
-//
+}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -273,7 +280,7 @@ public class Sanitycheck{
 //      is_valid = map_to_city_map(&city_x, &city_y, pcity, ptile);
 //      assert(is_valid);
 //
-//      if (pcity.city_map[city_x][city_y] != C_TILE_WORKER) {
+//      if (pcity.city_map[city_x][city_y] != city_tile_type.C_TILE_WORKER) {
 //	util.freelog(Log.LOG_ERROR, "%d,%d is listed as being worked by %s " +
 //		"on the map, but %s lists the tile %d,%d as having " +
 //		"status %d\n",
@@ -297,7 +304,7 @@ public class Sanitycheck{
 //      assert(punit.unit_owner() == pplayer);
 //
 //      if (punit.homecity != 0) {
-//	pcity = player_find_city_by_id(pplayer, punit.homecity);
+//	pcity = Player_P.player_find_city_by_id(pplayer, punit.homecity);
 //	assert(pcity != null);
 //	assert(City.city_owner(pcity) == pplayer);
 //      }
@@ -331,7 +338,7 @@ public class Sanitycheck{
 //	assert(transporter2 != null);
 //
 //        /* Also in the list of owner? */
-//        assert(player_find_unit_by_id(get_player(transporter.owner),
+//        assert(Player_P.player_find_unit_by_id(get_player(transporter.owner),
 //				      punit.transported_by) != null);
 //        assert(Map.same_pos(ptile, transporter.tile));
 //

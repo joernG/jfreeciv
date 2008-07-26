@@ -128,14 +128,14 @@ public class Cityrep{
 //    flag = 0;
 //
 //    impr_type_iterate(i) {
-//      if (can_build_improvement(pcity, i))
+//      if (City.can_build_improvement(pcity, i))
 //      {
 //	flag = 1;
 //      }
 //    } impr_type_iterate_end;
 //
 //    unit_type_iterate(i) {
-//      if (can_build_unit(pcity, i))
+//      if (City.can_build_unit(pcity, i))
 //      {
 //	flag = 1;
 //      }

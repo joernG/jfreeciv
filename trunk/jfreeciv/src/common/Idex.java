@@ -1,5 +1,8 @@
 package common;
 
+import common.city.city;
+import common.unit.unit;
+
 public class Idex{
 ///**************************************************************************
 //   idex = ident index: a lookup table for quick mapping of unit and city
@@ -150,22 +153,24 @@ public class Idex{
 //    }
 //  }
 //}
-//
-///**************************************************************************
-//   Lookup city with given id.
-//   Returns null if the city is not registered (which is not an error).
-//***************************************************************************/
-//city idex_lookup_city(int id)
-//{
-//  return (city )hash_lookup_data(idex_city_hash, &id);
-//}
-//
-///**************************************************************************
-//   Lookup unit with given id.
-//   Returns null if the unit is not registered (which is not an error).
-//***************************************************************************/
-//unit idex_lookup_unit(int id)
-//{
-//  return (unit )hash_lookup_data(idex_unit_hash, &id);
-//}
+	
+	/**************************************************************************
+	   Lookup city with given id.
+	   Returns null if the city is not registered (which is not an error).
+	***************************************************************************/
+	public static city idex_lookup_city(int id)
+	{
+//	  return (city )hash_lookup_data(idex_city_hash, &id);
+		return new city();
+	}
+
+	/**************************************************************************
+	 * Lookup unit with given id. Returns null if the unit is not registered
+	 * (which is not an error).
+	 ***************************************************************************/
+	public static unit idex_lookup_unit(int id)
+	{
+//		return (unit )hash_lookup_data(idex_unit_hash, id);
+		return null;
+	}
 }

@@ -106,7 +106,7 @@ public class Mapview_common{
 //  get_worker_on_map_position(tile1, &city_tile_type1, &dummy_pcity);
 //  get_worker_on_map_position(tile2, &city_tile_type2, &dummy_pcity);
 //
-//  if (city_tile_type1 == C_TILE_WORKER || city_tile_type2 == C_TILE_WORKER) {
+//  if (city_tile_type1 == city_tile_type.C_TILE_WORKER || city_tile_type2 == city_tile_type.C_TILE_WORKER) {
 //    return COLOR_STD_RED;
 //  } else {
 //    return COLOR_STD_WHITE;
@@ -1639,12 +1639,12 @@ public class Mapview_common{
 //      if (pcity && pcity.client.colored
 //	  && map_to_city_map(&city_x, &city_y, pcity, ptile)
 //	  && tile_to_canvas_pos(&canvas_x2, &canvas_y2, ptile)) {
-//	enum city_tile_type worker = get_worker_city(pcity, city_x, city_y);
+//	enum city_tile_type worker = City.get_worker_city(pcity, city_x, city_y);
 //
 //	put_city_worker(mapview_canvas.store,
 //			city_colors[pcity.client.color_index], worker,
 //			canvas_x2, canvas_y2);
-//	if (worker == C_TILE_WORKER) {
+//	if (worker == city_tile_type.C_TILE_WORKER) {
 //	  put_city_tile_output(pcity, city_x, city_y,
 //			       mapview_canvas.store, canvas_x2, canvas_y2);
 //	}
@@ -1652,7 +1652,7 @@ public class Mapview_common{
 //		 && tile_to_canvas_pos(&canvas_x2, &canvas_y2, ptile)) {
 //	/* Draw citymap overlay for settlers. */
 //	put_city_worker(mapview_canvas.store,
-//			city_colors[punit.client.color_index], C_TILE_EMPTY,
+//			city_colors[punit.client.color_index], city_tile_type.C_TILE_EMPTY,
 //			canvas_x2, canvas_y2);
 //      }
 //    }
@@ -2065,13 +2065,13 @@ public class Mapview_common{
 //  city_map_checked_iterate(ptile, city_x, city_y, tile1) {
 //    pcity = map_get_city(tile1);
 //    if (pcity && pcity.owner == Game.game.player_idx
-//	&& get_worker_city(pcity, CITY_MAP_SIZE - 1 - city_x,
-//			   CITY_MAP_SIZE - 1 - city_y) == C_TILE_EMPTY) {
+//	&& City.get_worker_city(pcity, City_H.CITY_MAP_SIZE - 1 - city_x,
+//			   City_H.CITY_MAP_SIZE - 1 - city_y) == city_tile_type.C_TILE_EMPTY) {
 //      /*
 //       * Note, we must explicitly check if the tile is workable (with
-//       * get_worker_city(), above) since it is possible that another
+//       * City.get_worker_city(), above) since it is possible that another
 //       * city (perhaps an unseen enemy city) may be working it,
-//       * causing it to be marked as C_TILE_UNAVAILABLE.
+//       * causing it to be marked as city_tile_type.C_TILE_UNAVAILABLE.
 //       */
 //      
 //      if (pcity.tile.client.hilite == HILITE_CITY) {
@@ -2151,7 +2151,7 @@ public class Mapview_common{
 //  } else {
 //    impr_type pimprovement_type =
 //		get_improvement_type(pcity.currently_building);
-//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //      buffer = String.format "%s", pimprovement_type.name);
 //    } else if (turns < 999) {
 //      buffer = String.format "%s %d",

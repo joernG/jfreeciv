@@ -1460,7 +1460,7 @@ public class Repodlgs{
 //
 //  imp = pWidget.data.cont.id0;
 //  total_count = pWidget.data.cont.id1;
-//  value = impr_sell_gold(imp);
+//  value = Improvement.impr_sell_gold(imp);
 //  
 //  for (city pCity : Game.game.player_ptr.cities.data) {
 //    if(!pCity.did_sell && city_got_building(pCity, imp)) {
@@ -1473,11 +1473,11 @@ public class Repodlgs{
 //    cBuf = util.my_snprintf(
 //    ("We have %d of %s\n(total value is : %d)\n" +
 //    	"We can sell %d of them for %d gold"),
-//	    total_count, get_improvement_name(imp),
+//	    total_count, Improvement.get_improvement_name(imp),
 //			    total_count * value, count, gold); 
 //  } else {
 //    cBuf = util.my_snprintf(
-//	"We can't sell any %s in this turn", get_improvement_name(imp)); 
+//	"We can't sell any %s in this turn", Improvement.get_improvement_name(imp)); 
 //  }
 //  
 //  
@@ -1900,7 +1900,7 @@ public class Repodlgs{
 //	
 //      pSurf = crop_rect_from_surface(pMain, null);
 //      
-//      cBuf = util.my_snprintf( "%s", get_improvement_name(p.type));
+//      cBuf = util.my_snprintf( "%s", Improvement.get_improvement_name(p.type));
 //      
 //      copy_chars_to_string16(pStr, cBuf);
 //      pStr.style |= TTF_STYLE_BOLD;

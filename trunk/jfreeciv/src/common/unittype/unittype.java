@@ -1,5 +1,5 @@
 package common.unittype;
-import static utility.shared.Shared_H.*; 
+import utility.shared.Shared_H;
 
 //typedef int Unit_Type_id;
 ///*
@@ -9,7 +9,7 @@ import static utility.shared.Shared_H.*;
 //
 //  It could potentially be some other type; "unsigned char" would be
 //  natural, since there are already built-in assumptions that values
-//  are not too large (less than U_LAST = MAX_NUM_ITEMS) since they must
+//  are not too large (less than U_LAST = Shared_H.MAX_NUM_ITEMS) since they must
 //  fit in 8-bit unsigned int for packets; and normal values are always
 //  non-negative.  But note sometimes use (-1) for obsoleted_by and some
 //  related uses, though these use already plain int rather than
@@ -23,7 +23,7 @@ import static utility.shared.Shared_H.*;
 //  - avoids imposing any more limitations that there are already.
 //*/
 //  
-//#define U_LAST MAX_NUM_ITEMS
+//#define U_LAST Shared_H.MAX_NUM_ITEMS
 ///*
 //  U_LAST is a value which is guaranteed to be larger than all
 //  actual Unit_Type_id values.  It is used as a flag value;
@@ -52,7 +52,7 @@ import static utility.shared.Shared_H.*;
 
 
 public class unittype {
-	public static int U_LAST = MAX_NUM_ITEMS;
+	public static int U_LAST = Shared_H.MAX_NUM_ITEMS;
 //	struct unit_type {
 		  public String name; /* Translated string - doesn't need freeing. */
 //		  char name_orig[MAX_LEN_NAME];	      /* untranslated */
@@ -71,7 +71,7 @@ public class unittype {
 		  public int defense_strength;
 		  public int move_rate;
 		  public int tech_requirement;
-		  public int impr_requirement;		/* should be Impr_Type_id */
+		  public int impr_requirement;		/* should be int */
 		  public int vision_range;
 		  public int transport_capacity;
 		  public int hp;

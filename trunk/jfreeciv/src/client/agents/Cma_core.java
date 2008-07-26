@@ -83,7 +83,7 @@ public class Cma_core{
 //
 //#define my_city_map_iterate(pcity, cx, cy) {                           \
 //  city_map_checked_iterate(pcity.tile, cx, cy, _ptile) { \
-//    if(!is_city_center(cx, cy)) {
+//    if(!City.is_city_center(cx, cy)) {
 //
 //#define my_city_map_iterate_end \
 //    }                                \
@@ -107,7 +107,7 @@ public class Cma_core{
 //
 //  T(disorder);
 //  T(happy);
-//  T(specialists[SP_ELVIS]);
+//  T(specialists[specialist_type.SP_ELVIS]);
 //  T(specialists[SP_SCIENTIST]);
 //  T(specialists[SP_TAXMAN]);
 //
@@ -143,7 +143,7 @@ public class Cma_core{
 //
 //  my_city_map_iterate(pcity, x, y) {
 //    result.worker_positions_used[x][y] =
-//	(pcity.city_map[x][y] == C_TILE_WORKER);
+//	(pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER);
 //    if (result.worker_positions_used[x][y]) {
 //      worker++;
 //    }
@@ -167,7 +167,7 @@ public class Cma_core{
 //*****************************************************************************/
 //static boolean check_city(int city_id, cm_parameter parameter)
 //{
-//  city pcity = find_city_by_id(city_id);
+//  city pcity = Game.find_city_by_id(city_id);
 //  struct cm_parameter dummy;
 //
 //  if (!parameter) {
@@ -227,7 +227,7 @@ public class Cma_core{
 //
 //  /* Remove all surplus workers */
 //  my_city_map_iterate(pcity, x, y) {
-//    if ((pcity.city_map[x][y] == C_TILE_WORKER) &&
+//    if ((pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER) &&
 //	!result.worker_positions_used[x][y]) {
 //      util.freelog(APPLY_RESULT_LOG_LEVEL, "Removing worker at %d,%d.", x, y);
 //      last_request_id = city_toggle_worker(pcity, x, y);
@@ -238,12 +238,12 @@ public class Cma_core{
 //  } my_city_map_iterate_end;
 //
 //  /* Change the excess non-elvis specialists to elvises. */
-//  assert(SP_ELVIS == 0);
-//  for (sp = 1; sp < SP_COUNT; sp++) {
+//  assert(specialist_type.SP_ELVIS == 0);
+//  for (sp = 1; sp < specialist_type.getSize(); sp++) {
 //    for (i = 0; i < pcity.specialists[sp] - result.specialists[sp]; i++) {
 //      util.freelog(APPLY_RESULT_LOG_LEVEL, "Change specialist from %d to %d.",
-//	      sp, SP_ELVIS);
-//      last_request_id = city_change_specialist(pcity, sp, SP_ELVIS);
+//	      sp, specialist_type.SP_ELVIS);
+//      last_request_id = city_change_specialist(pcity, sp, specialist_type.SP_ELVIS);
 //      if (first_request_id == 0) {
 //	first_request_id = last_request_id;
 //      }
@@ -257,8 +257,8 @@ public class Cma_core{
 //   * elvis! */
 //  my_city_map_iterate(pcity, x, y) {
 //    if (result.worker_positions_used[x][y] &&
-//	pcity.city_map[x][y] != C_TILE_WORKER) {
-//      assert(pcity.city_map[x][y] == C_TILE_EMPTY);
+//	pcity.city_map[x][y] != city_tile_type.C_TILE_WORKER) {
+//      assert(pcity.city_map[x][y] == city_tile_type.C_TILE_EMPTY);
 //      util.freelog(APPLY_RESULT_LOG_LEVEL, "Putting worker at %d,%d.", x, y);
 //      last_request_id = city_toggle_worker(pcity, x, y);
 //      if (first_request_id == 0) {
@@ -267,14 +267,14 @@ public class Cma_core{
 //    }
 //  } my_city_map_iterate_end;
 //
-//  /* Set all specialists except SP_ELVIS (all the unchanged ones remain
+//  /* Set all specialists except specialist_type.SP_ELVIS (all the unchanged ones remain
 //   * as elvises). */
-//  assert(SP_ELVIS == 0);
-//  for (sp = 1; sp < SP_COUNT; sp++) {
+//  assert(specialist_type.SP_ELVIS == 0);
+//  for (sp = 1; sp < specialist_type.getSize(); sp++) {
 //    for (i = 0; i < result.specialists[sp] - pcity.specialists[sp]; i++) {
 //      util.freelog(APPLY_RESULT_LOG_LEVEL, "Changing specialist from %d to %d.",
-//	      SP_ELVIS, sp);
-//      last_request_id = city_change_specialist(pcity, SP_ELVIS, sp);
+//	      specialist_type.SP_ELVIS, sp);
+//      last_request_id = city_change_specialist(pcity, specialist_type.SP_ELVIS, sp);
 //      if (first_request_id == 0) {
 //	first_request_id = last_request_id;
 //      }
@@ -391,7 +391,7 @@ public class Cma_core{
 //      break;
 //    }
 //
-//    pcity = find_city_by_id(city_id);
+//    pcity = Game.find_city_by_id(city_id);
 //
 //    cm_query_result(pcity, &parameter, &result);
 //    if (!result.found_a_valid) {
@@ -422,7 +422,7 @@ public class Cma_core{
 //    }
 //  }
 //
-//  pcity = find_city_by_id(city_id);
+//  pcity = Game.find_city_by_id(city_id);
 //
 //  if (!handled) {
 //    assert(pcity != null);
@@ -448,7 +448,7 @@ public class Cma_core{
 //*****************************************************************************/
 //static void city_changed(int city_id)
 //{
-//  city pcity = find_city_by_id(city_id);
+//  city pcity = Game.find_city_by_id(city_id);
 //
 //  if (pcity) {
 //    cm_clear_cache(pcity);

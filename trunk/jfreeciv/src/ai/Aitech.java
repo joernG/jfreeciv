@@ -47,7 +47,7 @@ public class Aitech{
 //**************************************************************************/
 //static Tech_Type_id get_wonder_tech(player plr)
 //{
-//  Impr_Type_id building = get_nation_by_plr(plr).goals.wonder;
+//  int building = get_nation_by_plr(plr).goals.wonder;
 //  
 //  if (improvement_exists(building)
 //      && Game.game.global_wonders[building] == 0

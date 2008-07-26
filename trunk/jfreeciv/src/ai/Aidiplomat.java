@@ -1,5 +1,6 @@
 package ai;
 
+
 public class Aidiplomat{
 
 // Freeciv - Copyright (C) 2002 - The Freeciv Project
@@ -175,7 +176,7 @@ public class Aidiplomat{
 //      /* Found no target or city already considered */
 //      return;
 //    }
-//    incite_cost = city_incite_cost(pplayer, acity);
+//    incite_cost = Cityturn.city_incite_cost(pplayer, acity);
 //    if (HOSTILE_PLAYER(pplayer, ai, City.city_owner(acity))
 //        && (incite_cost < INCITE_IMPOSSIBLE_COST)
 //        && (incite_cost < pplayer.economic.gold - pplayer.ai.est_upkeep)) {
@@ -196,7 +197,7 @@ public class Aidiplomat{
 //      gain_theft = total_bulbs_required(pplayer) * TRADE_WEIGHTING;
 //    }
 //    gain = MAX(gain_incite, gain_theft);
-//    loss = unit_build_shield_cost(u) * SHIELD_WEIGHTING;
+//    loss = Unittype_P.unit_build_shield_cost(u) * SHIELD_WEIGHTING;
 //
 //    /* Probability to succeed, assuming no defending diplomat */
 //    p_success = Game.game.diplchance;
@@ -216,7 +217,7 @@ public class Aidiplomat{
 //    }
 //
 //    want = military_amortize(pplayer, pcity, want, time_to_dest, 
-//                             unit_build_shield_cost(u));
+//                             Unittype_P.unit_build_shield_cost(u));
 //
 //    if (!player_has_embassy(pplayer, City.city_owner(acity))
 //        && want < 99) {
@@ -289,7 +290,7 @@ public class Aidiplomat{
 //             ctarget.name);
 //  }
 //
-//  incite_cost = city_incite_cost(pplayer, ctarget);
+//  incite_cost = Cityturn.city_incite_cost(pplayer, ctarget);
 //  if (incite_cost <= gold_avail) {
 //    T(DIPLOMAT_INCITE,0);
 //  } else {
@@ -345,7 +346,7 @@ public class Aidiplomat{
 //      continue; 
 //    }
 //
-//    incite_cost = city_incite_cost(pplayer, acity);
+//    incite_cost = Cityturn.city_incite_cost(pplayer, acity);
 //    can_incite = (incite_cost < INCITE_IMPOSSIBLE_COST);
 //
 //    dipldef = (count_diplomats_on_tile(acity.tile) > 0);
