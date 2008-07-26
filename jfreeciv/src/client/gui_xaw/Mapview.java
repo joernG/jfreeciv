@@ -806,9 +806,9 @@ public class Mapview{
 //		     enum color_std color, enum city_tile_type worker,
 //		     int canvas_x, int canvas_y)
 //{
-//  if (worker == C_TILE_EMPTY) {
+//  if (worker == city_tile_type.C_TILE_EMPTY) {
 //    XSetStipple(display, fill_tile_gc, gray25);
-//  } else if (worker == C_TILE_WORKER) {
+//  } else if (worker == city_tile_type.C_TILE_WORKER) {
 //    XSetStipple(display, fill_tile_gc, gray50);
 //  } else {
 //    return;

@@ -763,7 +763,7 @@ public class Repodlgs{
 //      improvement_entry p = &entries[i];
 //
 //      my_snprintf(economy_list_names[i], sizeof(economy_list_names[i]),
-//		  "%-20s%5d%5d%6d", get_improvement_name(p.type),
+//		  "%-20s%5d%5d%6d", Improvement.get_improvement_name(p.type),
 //		  p.count, p.cost, p.total_cost);
 //      economy_list_names_ptrs[i] = economy_list_names[i];
 //      economy_improvement_type[i] = p.type;

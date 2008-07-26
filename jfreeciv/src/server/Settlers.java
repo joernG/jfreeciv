@@ -74,7 +74,7 @@ public class Settlers{
 //  ai_unit_new_role(punit, AIUNIT_NONE, null);
 //
 //  handle_unit_build_city(pplayer, punit.id,
-//			 city_name_suggestion(pplayer, ptile));
+//			 Citytools.city_name_suggestion(pplayer, ptile));
 //  pcity = map_get_city(ptile);
 //  if (!pcity) {
 //    util.freelog(Log.LOG_ERROR, "%s: Failed to build city at (%d, %d)", 
@@ -898,12 +898,12 @@ public class Settlers{
 //#endif
 //    /* try to work near the city */
 //    city_map_checked_iterate(pcity.tile, i, j, ptile) {
-//      if (get_worker_city(pcity, i, j) == C_TILE_UNAVAILABLE
+//      if (City.get_worker_city(pcity, i, j) == city_tile_type.C_TILE_UNAVAILABLE
 //	  || Terrain_H.terrain_has_flag(pcity.tile.terrain, TER_UNSAFE)) {
 //	/* Don't risk bothering with this tile. */
 //	continue;
 //      }
-//      in_use = (get_worker_city(pcity, i, j) == C_TILE_WORKER);
+//      in_use = (City.get_worker_city(pcity, i, j) == city_tile_type.C_TILE_WORKER);
 //      if (map_get_continent(ptile) == ucont
 //	  && WARMAP_COST(ptile) <= THRESHOLD * mv_rate
 //	  && !BV_CHECK_MASK(TERRITORY(ptile), my_enemies)
@@ -1168,9 +1168,9 @@ public class Settlers{
 //  int best = 0;
 //
 //  city_map_iterate(x, y) {
-//    if (is_city_center(x, y) 
-//	|| get_worker_city(pcity, x, y) == C_TILE_WORKER 
-//	|| get_worker_city(pcity, x, y) == C_TILE_EMPTY) {
+//    if (City.is_city_center(x, y) 
+//	|| City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_WORKER 
+//	|| City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_EMPTY) {
 //      int tmp = city_tile_value(pcity, x, y, 0, 0);
 //
 //      if (tmp > best) {

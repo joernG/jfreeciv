@@ -1,5 +1,8 @@
 package server;
 
+import common.city.city;
+import common.player.player;
+
 public class Cityturn{
 ///**********************************************************************
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
@@ -70,7 +73,7 @@ public class Cityturn{
 //static boolean city_build_building(player pplayer, city pcity);
 //static boolean city_build_unit(player pplayer, city pcity);
 //static boolean city_build_stuff(player pplayer, city pcity);
-//static Impr_Type_id building_upgrades_to(city pcity, Impr_Type_id b);
+//static int building_upgrades_to(city pcity, int b);
 //static void upgrade_building_prod(city pcity);
 //static int unit_upgrades_to(city pcity, int id);
 //static void upgrade_unit_prod(city pcity);
@@ -81,33 +84,34 @@ public class Cityturn{
 //static void define_orig_production_values(city pcity);
 //static void update_city_activity(player pplayer, city pcity);
 //static void nullify_caravan_and_disband_plus(city pcity);
-//
-///**************************************************************************
-//...
-//**************************************************************************/
-//void city_refresh(city pcity)
-//{
-//   generic_city_refresh(pcity, true, send_unit_info);
-//   /* AI would calculate this 1000 times otherwise; better to do it
-//      once -- Syela */
-//   pcity.ai.trade_want =
-//       TRADE_WEIGHTING - city_corruption(pcity, TRADE_WEIGHTING);
-//}
-//
-///**************************************************************************
-//...
-//called on government change or wonder completion or stuff like that -- Syela
-//**************************************************************************/
-//void global_city_refresh(player pplayer)
-//{
-//  conn_list_do_buffer(&pplayer.connections);
+
+	/**************************************************************************
+	 * ...
+	 **************************************************************************/
+	public static void city_refresh(city pcity) {
+//		generic_city_refresh(pcity, true, send_unit_info);
+//		/*
+//		 * AI would calculate this 1000 times otherwise; better to do it once --
+//		 * Syela
+//		 */
+//		pcity.ai.trade_want = TRADE_WEIGHTING
+//				- city_corruption(pcity, TRADE_WEIGHTING);
+	}
+
+	/**************************************************************************
+...
+called on government change or wonder completion or stuff like that -- Syela
+**************************************************************************/
+public static void global_city_refresh(player pplayer)
+{
+//  Connection.conn_list_do_buffer(&pplayer.connections);
 //  city_list_iterate(pplayer.cities, pcity)
 //    city_refresh(pcity);
-//    send_city_info(pplayer, pcity);
+//    Citytools.send_city_info(pplayer, pcity);
 //  }
-//  conn_list_do_unbuffer(&pplayer.connections);
-//}
-//
+//  Connection.conn_list_do_unbuffer(&pplayer.connections);
+}
+
 ///**************************************************************************
 //...
 //**************************************************************************/
@@ -118,18 +122,18 @@ public class Cityturn{
 //
 //  built_impr_iterate(pcity, i) {
 //    if (!is_wonder(i) && improvement_obsolete(pplayer, i)) {
-//      do_sell_building(pplayer, pcity, i);
-//      Plrhand.notify_player_ex(pplayer, pcity.tile, E_IMP_SOLD, 
+//      Citytools.do_sell_building(pplayer, pcity, i);
+//      Plrhand.notify_player_ex(pplayer, pcity.tile, event_type.E_IMP_SOLD, 
 //		       "Game: %s is selling %s (obsolete) for %d.",
-//		       pcity.name, get_improvement_name(i), 
-//		       impr_sell_gold(i));
+//		       pcity.name, Improvement.get_improvement_name(i), 
+//		       Improvement.impr_sell_gold(i));
 //      sold = true;
 //    }
 //  } built_impr_iterate_end;
 //
 //  if (sold && refresh) {
 //    city_refresh(pcity);
-//    send_city_info(pplayer, pcity);
+//    Citytools.send_city_info(pplayer, pcity);
 //    Plrhand.send_player_info(pplayer, null); /* Send updated gold to all */
 //  }
 //}
@@ -160,28 +164,28 @@ public class Cityturn{
 //
 //  /* Now apply results */
 //  city_map_checked_iterate(pcity.tile, x, y, ptile) {
-//    if (pcity.city_map[x][y] == C_TILE_WORKER
-//        && !is_city_center(x, y)
+//    if (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER
+//        && !City.is_city_center(x, y)
 //        && !cmr.worker_positions_used[x][y]) {
-//      server_remove_worker_city(pcity, x, y);
+//      Citytools.server_remove_worker_city(pcity, x, y);
 //    }
-//    if (pcity.city_map[x][y] != C_TILE_WORKER
-//        && !is_city_center(x, y)
+//    if (pcity.city_map[x][y] != city_tile_type.C_TILE_WORKER
+//        && !City.is_city_center(x, y)
 //        && cmr.worker_positions_used[x][y]) {
-//      server_set_worker_city(pcity, x, y);
+//      Citytools.server_set_worker_city(pcity, x, y);
 //    }
 //  } city_map_checked_iterate_end;
 //  specialist_type_iterate(sp) {
 //    pcity.specialists[sp] = cmr.specialists[sp];
 //  } specialist_type_iterate_end;
 //}
-//
-///**************************************************************************
-//  You need to call sync_cities so that the affected cities are synced with 
-//  the client.
-//**************************************************************************/
-//void auto_arrange_workers(city pcity)
-//{
+
+/**************************************************************************
+  You need to call Citytools.sync_cities so that the affected cities are synced with 
+  the client.
+**************************************************************************/
+public static void auto_arrange_workers(city pcity)
+{
 //  struct cm_parameter cmp;
 //  struct cm_result cmr;
 //  player pplayer = City.city_owner(pcity);
@@ -203,7 +207,7 @@ public class Cityturn{
 //    update_city_tile_status_map(pcity, ptile);
 //  } map_city_radius_iterate_end;
 //
-//  sanity_check_city(pcity);
+//  Sanitycheck.sanity_check_city(pcity);
 //  cm_clear_cache(pcity);
 //
 //  cmp.require_happy = false;
@@ -298,17 +302,17 @@ public class Cityturn{
 //
 //  apply_cmresult_to_city(pcity, &cmr);
 //
-//  sanity_check_city(pcity);
+//  Sanitycheck.sanity_check_city(pcity);
 //
 //  city_refresh(pcity);
-//}
-//
+}
+
 ///**************************************************************************
 //Notices about cities that should be sent to all players.
 //**************************************************************************/
 //void send_global_city_turn_notifications(Speclists<Connection> dest)
 //{
-//  if (!dest)
+//  if (dest==null)
 //    dest = &Game.game.all_connections;
 //
 //  for(player pplayer: Game.game.players){
@@ -323,7 +327,7 @@ public class Cityturn{
 //		       E_WONDER_WILL_BE_BUILT,
 //		       ("Game: Notice: Wonder %s in %s will be finished" +
 //			 " next turn."), 
-//		       get_improvement_name(pcity.currently_building),
+//		       Improvement.get_improvement_name(pcity.currently_building),
 //		       pcity.name);
 //      }
 //    } }
@@ -344,9 +348,9 @@ public class Cityturn{
 //		   / pcity.food_surplus;
 //
 //    if (get_city_bonus(pcity, EFT_GROWTH_FOOD) == 0
-//	&& get_current_finalruction_bonus(pcity, EFT_GROWTH_FOOD) > 0
+//	&& Effects.get_current_finalruction_bonus(pcity, EFT_GROWTH_FOOD) > 0
 //	&& pcity.shield_surplus > 0) {
-//      turns_granary = (impr_build_shield_cost(pcity.currently_building)
+//      turns_granary = (Improvement.impr_build_shield_cost(pcity.currently_building)
 //		       - pcity.shield_stock) / pcity.shield_surplus;
 //      /* if growth and granary completion occur simultaneously, granary
 //	 preserves food.  -AJS */
@@ -426,14 +430,14 @@ public class Cityturn{
 //  }
 //
 //  /* First try to kill off the specialists */
-//  while (pop_loss > 0 && city_specialists(pcity) > 0) {
+//  while (pop_loss > 0 && City.city_specialists(pcity) > 0) {
 //    if (pcity.specialists[SP_TAXMAN] > 0) {
 //      pcity.specialists[SP_TAXMAN]--;
 //    } else if (pcity.specialists[SP_SCIENTIST] > 0) {
 //      pcity.specialists[SP_SCIENTIST]--;
 //    } else {
-//      assert(pcity.specialists[SP_ELVIS] > 0);
-//      pcity.specialists[SP_ELVIS]--; 
+//      assert(pcity.specialists[specialist_type.SP_ELVIS] > 0);
+//      pcity.specialists[specialist_type.SP_ELVIS]--; 
 //    }
 //    pop_loss--;
 //  }
@@ -441,22 +445,22 @@ public class Cityturn{
 //  /* we consumed all the pop_loss in specialists */
 //  if (pop_loss == 0) {
 //    city_refresh(pcity);
-//    send_city_info(City.city_owner(pcity), pcity);
+//    Citytools.send_city_info(City.city_owner(pcity), pcity);
 //  } else {
 //    /* Take it out on workers */
 //    city_map_iterate(x, y) {
-//      if (get_worker_city(pcity, x, y) == C_TILE_WORKER
-//          && !is_city_center(x, y) && pop_loss > 0) {
-//        server_remove_worker_city(pcity, x, y);
+//      if (City.get_worker_city(pcity, x, y) == city_tile_type.C_TILE_WORKER
+//          && !City.is_city_center(x, y) && pop_loss > 0) {
+//        Citytools.server_remove_worker_city(pcity, x, y);
 //        pop_loss--;
 //      }
 //    } city_map_iterate_end;
 //    /* Then rearrange workers */
 //    assert(pop_loss == 0);
 //    auto_arrange_workers(pcity);
-//    sync_cities();
+//    Citytools.sync_cities();
 //  }
-//  sanity_check_city(pcity);
+//  Sanitycheck.sanity_check_city(pcity);
 //  return true;
 //}
 //
@@ -484,8 +488,8 @@ public class Cityturn{
 //  boolean rapture_grow = city_rapture_grow(pcity); /* check before size increase! */
 //
 //  if (!city_can_grow_to(pcity, pcity.size + 1)) { /* need improvement */
-//    if (get_current_finalruction_bonus(pcity, EFT_SIZE_ADJ) > 0
-//        || get_current_finalruction_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
+//    if (Effects.get_current_finalruction_bonus(pcity, EFT_SIZE_ADJ) > 0
+//        || Effects.get_current_finalruction_bonus(pcity, EFT_SIZE_UNLIMIT) > 0) {
 //      Plrhand.notify_player_ex(powner, pcity.tile, E_CITY_AQ_BUILDING,
 //		       ("Game: %s needs %s (being built) " +
 //			 "to grow any further."), pcity.name,
@@ -541,8 +545,8 @@ public class Cityturn{
 //  Plrhand.notify_player_ex(powner, pcity.tile, E_CITY_GROWTH,
 //                   "Game: %s grows to size %d.", pcity.name, pcity.size);
 //
-//  sanity_check_city(pcity);
-//  sync_cities();
+//  Sanitycheck.sanity_check_city(pcity);
+//  Citytools.sync_cities();
 //}
 //
 ///**************************************************************************
@@ -599,15 +603,15 @@ public class Cityturn{
 //  /* See what AI has to say */
 //  ai_advisor_choose_building(pcity, &choice);
 //  if (choice.choice >= 0 && choice.choice < B_LAST) {
-//    change_build_target(pplayer, pcity, choice.choice, false, E_IMP_AUTO);
+//    Citytools.change_build_target(pplayer, pcity, choice.choice, false, E_IMP_AUTO);
 //    return;
 //  }
 //
 //  /* Build something random, undecided. */
 //  impr_type_iterate(i) {
-//    if (can_build_improvement(pcity, i)
+//    if (City.can_build_improvement(pcity, i)
 //	&& !building_has_effect(i, EFT_CAPITAL_CITY)) {
-//      change_build_target(pplayer, pcity, i, false, E_IMP_AUTO);
+//      Citytools.change_build_target(pplayer, pcity, i, false, E_IMP_AUTO);
 //      return;
 //    }
 //  } impr_type_iterate_end;
@@ -643,7 +647,7 @@ public class Cityturn{
 //
 //    /* Sanity checks */
 //    if (is_unit &&
-//	!can_build_unit(pcity, target)) {
+//	!City.can_build_unit(pcity, target)) {
 //      int new_target = unit_upgrades_to(pcity, target);
 //
 //      /* If the city can never build this unit or its descendants, drop it. */
@@ -683,8 +687,8 @@ public class Cityturn{
 //			 pcity.name);
 //	target = new_target;
 //      }
-//    } else if (!is_unit && !can_build_improvement(pcity, target)) {
-//      Impr_Type_id new_target = building_upgrades_to(pcity, target);
+//    } else if (!is_unit && !City.can_build_improvement(pcity, target)) {
+//      int new_target = building_upgrades_to(pcity, target);
 //
 //      /* If the city can never build this improvement, drop it. */
 //      if (!can_eventually_build_improvement(pcity, new_target)) {
@@ -723,7 +727,7 @@ public class Cityturn{
 //			   get_impr_name_ex(pcity, improvement_types[target].bldg_req));
 //	} else {
 //	  /* This shouldn't happen...
-//	     FIXME: make can_build_improvement() return a reason enum. */
+//	     FIXME: make City.can_build_improvement() return a reason enum. */
 //	  Plrhand.notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
 //			   ("Game: %s can't build %s from the worklist; " +
 //			     "Reason unknown!  Postponing..."),
@@ -743,7 +747,7 @@ public class Cityturn{
 //    }
 //
 //    /* All okay.  Switch targets. */
-//    change_build_target(pplayer, pcity, target, is_unit, E_WORKLIST);
+//    Citytools.change_build_target(pplayer, pcity, target, is_unit, E_WORKLIST);
 //
 //    success = true;
 //    break;
@@ -771,15 +775,15 @@ public class Cityturn{
 //  we can build.  Returns -1 if we can't upgrade at all (including if the
 //  original building is unbuildable).
 //**************************************************************************/
-//static Impr_Type_id building_upgrades_to(city pcity, Impr_Type_id id)
+//static int building_upgrades_to(city pcity, int id)
 //{
-//  Impr_Type_id check = id, latest_ok = id;
+//  int check = id, latest_ok = id;
 //
-//  if (!can_build_improvement_direct(pcity, check)) {
+//  if (!City.can_build_improvement_direct(pcity, check)) {
 //    return -1;
 //  }
 //  while (improvement_exists(check = improvement_types[check].replaced_by)) {
-//    if (can_build_improvement_direct(pcity, check)) {
+//    if (City.can_build_improvement_direct(pcity, check)) {
 //      latest_ok = check;
 //    }
 //  }
@@ -796,10 +800,10 @@ public class Cityturn{
 //static void upgrade_building_prod(city pcity)
 //{
 //  player pplayer = City.city_owner(pcity);
-//  Impr_Type_id upgrades_to = building_upgrades_to(pcity,
+//  int upgrades_to = building_upgrades_to(pcity,
 //						  pcity.currently_building);
 //
-//  if (can_build_improvement(pcity, upgrades_to)) {
+//  if (City.can_build_improvement(pcity, upgrades_to)) {
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_UNIT_UPGRADED,
 //		     "Game: Production of %s is upgraded to %s in %s.",
 //		     get_improvement_type(pcity.currently_building).name,
@@ -819,11 +823,11 @@ public class Cityturn{
 //{
 //  int check = id, latest_ok = id;
 //
-//  if (!can_build_unit_direct(pcity, check)) {
+//  if (!City.can_build_unit_direct(pcity, check)) {
 //    return -1;
 //  }
 //  while(unit_type_exists(check = Unittype_P.unit_types[check].obsoleted_by)) {
-//    if (can_build_unit_direct(pcity, check)) {
+//    if (City.can_build_unit_direct(pcity, check)) {
 //      latest_ok = check;
 //    }
 //  }
@@ -843,7 +847,7 @@ public class Cityturn{
 //  int id = pcity.currently_building;
 //  int id2 = unit_upgrades_to(pcity, pcity.currently_building);
 //
-//  if (can_build_unit_direct(pcity, id2)) {
+//  if (City.can_build_unit_direct(pcity, id2)) {
 //    pcity.currently_building = id2;
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_UNIT_UPGRADED, 
 //		  "Game: Production of %s is upgraded to %s in %s.",
@@ -915,7 +919,7 @@ public class Cityturn{
 //  boolean space_part;
 //  int mod;
 //
-//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //    assert(pcity.shield_surplus >= 0);
 //    /* pcity.before_change_shields already contains the surplus from
 //     * this turn. */
@@ -924,7 +928,7 @@ public class Cityturn{
 //    pcity.shield_stock = 0;
 //  }
 //  upgrade_building_prod(pcity);
-//  if (!can_build_improvement(pcity, pcity.currently_building)) {
+//  if (!City.can_build_improvement(pcity, pcity.currently_building)) {
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
 //		     ("Game: %s is building %s, which " +
 //		       "is no longer available."),
@@ -934,7 +938,7 @@ public class Cityturn{
 //    return true;
 //  }
 //  if (pcity.shield_stock
-//      >= impr_build_shield_cost(pcity.currently_building)) {
+//      >= Improvement.impr_build_shield_cost(pcity.currently_building)) {
 //    if (pcity.currently_building == Game.game.palace_building) {
 //      for (city palace : pplayer.cities.data) {
 //	if (city_got_building(palace, Game.game.palace_building)) {
@@ -945,19 +949,19 @@ public class Cityturn{
 //    }
 //
 //    space_part = true;
-//    if (get_current_finalruction_bonus(pcity, EFT_SS_STRUCTURAL) > 0) {
+//    if (Effects.get_current_finalruction_bonus(pcity, EFT_SS_STRUCTURAL) > 0) {
 //      pplayer.spaceship.structurals++;
-//    } else if (get_current_finalruction_bonus(pcity, EFT_SS_COMPONENT) > 0) {
+//    } else if (Effects.get_current_finalruction_bonus(pcity, EFT_SS_COMPONENT) > 0) {
 //      pplayer.spaceship.components++;
-//    } else if (get_current_finalruction_bonus(pcity, EFT_SS_MODULE) > 0) {
+//    } else if (Effects.get_current_finalruction_bonus(pcity, EFT_SS_MODULE) > 0) {
 //      pplayer.spaceship.modules++;
 //    } else {
 //      space_part = false;
 //      city_add_improvement(pcity, pcity.currently_building);
 //    }
 //    pcity.before_change_shields -=
-//	impr_build_shield_cost(pcity.currently_building);
-//    pcity.shield_stock -= impr_build_shield_cost(pcity.currently_building);
+//	Improvement.impr_build_shield_cost(pcity.currently_building);
+//    pcity.shield_stock -= Improvement.impr_build_shield_cost(pcity.currently_building);
 //    pcity.turn_last_built = Game.game.turn;
 //    /* to eliminate micromanagement */
 //    if (is_wonder(pcity.currently_building)) {
@@ -978,7 +982,7 @@ public class Cityturn{
 //		     improvement_types[pcity.currently_building].name);
 //
 //
-//    if ((mod = get_current_finalruction_bonus(pcity, EFT_GIVE_IMM_TECH))) {
+//    if ((mod = Effects.get_current_finalruction_bonus(pcity, EFT_GIVE_IMM_TECH))) {
 //      int i;
 //
 //      notify_player(pplayer, PL("Game: %s boosts research; " +
@@ -1044,7 +1048,7 @@ public class Cityturn{
 //  /* We must make a special case for barbarians here, because they are
 //     so dumb. Really. They don't know the prerequisite techs for units
 //     they build!! - Per */
-//  if (!can_build_unit_direct(pcity, pcity.currently_building)
+//  if (!City.can_build_unit_direct(pcity, pcity.currently_building)
 //      && !is_barbarian(pplayer)) {
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_CITY_CANTBUILD,
 //        "Game: %s is building %s, which is no longer available.",
@@ -1054,7 +1058,7 @@ public class Cityturn{
 //    return true;
 //  }
 //  if (pcity.shield_stock
-//      >= unit_build_shield_cost(pcity.currently_building)) {
+//      >= Unittype_P.unit_build_shield_cost(pcity.currently_building)) {
 //    int pop_cost = unit_pop_value(pcity.currently_building);
 //
 //    /* Should we disband the city? -- Massimo */
@@ -1089,9 +1093,9 @@ public class Cityturn{
 //    /* to eliminate micromanagement, we only subtract the unit's
 //       cost */
 //    pcity.before_change_shields
-//      -= unit_build_shield_cost(pcity.currently_building);
+//      -= Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //    pcity.shield_stock
-//      -= unit_build_shield_cost(pcity.currently_building);
+//      -= Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_UNIT_BUILT,
 //		     /* TRANS: <city> is finished building <unit/building>. */
@@ -1145,7 +1149,7 @@ public class Cityturn{
 //			 ("Game: Can't afford to maintain %s in %s, " +
 //			   "building sold!"),
 //			 improvement_types[i].name, pcity.name);
-//	do_sell_building(pplayer, pcity, i);
+//	Citytools.do_sell_building(pplayer, pcity, i);
 //	city_refresh(pcity);
 //      } else
 //	pplayer.economic.gold -= improvement_upkeep(pcity, i);
@@ -1162,12 +1166,12 @@ public class Cityturn{
 //  if (pcity.pollution != 0 && Rand.myrand(100) <= pcity.pollution) {
 //    while (k > 0) {
 //      /* place pollution somewhere in city radius */
-//      int cx = Rand.myrand(CITY_MAP_SIZE);
-//      int cy = Rand.myrand(CITY_MAP_SIZE);
+//      int cx = Rand.myrand(City_H.CITY_MAP_SIZE);
+//      int cy = Rand.myrand(City_H.CITY_MAP_SIZE);
 //      tile ptile;
 //
 //      /* if is a corner tile or not a real map position */
-//      if (!is_valid_city_coords(cx, cy)
+//      if (!City.is_valid_city_coords(cx, cy)
 //	  || !(ptile = city_map_to_map(pcity, cx, cy))) {
 //	continue;
 //      }
@@ -1193,11 +1197,11 @@ public class Cityturn{
 //  celebrating, how close it is to the capital, how many units it has and
 //  upkeeps, presence of courthouse and its buildings and wonders.
 //**************************************************************************/
-//int city_incite_cost(player pplayer, city pcity)
-//{
+public static int city_incite_cost(player pplayer, city pcity)
+{
 //  government g = get_gov_pcity(pcity);
 //  city capital;
-//  int dist, size, cost;
+  int dist, size, cost=0;
 //
 //  if (government_has_flag(get_gov_pcity(pcity), G_UNBRIBABLE)) {
 //    return INCITE_IMPOSSIBLE_COST;
@@ -1210,13 +1214,13 @@ public class Cityturn{
 //  cost = City.city_owner(pcity).economic.gold + 1000;
 //
 //  for (unit punit : pcity.tile.units.data) {
-//    cost += (unit_build_shield_cost(punit.type)
+//    cost += (Unittype_P.unit_build_shield_cost(punit.type)
 //	     * Game.game.incite_cost.unit_factor);
 //  } }
 //
 //  /* Buildings */
 //  built_impr_iterate(pcity, i) {
-//    cost += impr_build_shield_cost(i) * Game.game.incite_cost.improvement_factor;
+//    cost += Improvement.impr_build_shield_cost(i) * Game.game.incite_cost.improvement_factor;
 //  } built_impr_iterate_end;
 //
 //  /* Stability bonuses */
@@ -1266,8 +1270,8 @@ public class Cityturn{
 //  cost = cost / (dist + 3);
 //  cost /= 100;
 //
-//  return cost;
-//}
+  return cost;
+}
 //
 ///**************************************************************************
 // Called every turn, at beginning of turn, for every city.
@@ -1350,7 +1354,7 @@ public class Cityturn{
 //    {
 //      int id=pcity.id;
 //      city_populate(pcity);
-//      if(!player_find_city_by_id(pplayer, id))
+//      if(!Player_P.player_find_city_by_id(pplayer, id))
 //	return;
 //    }
 //
@@ -1382,7 +1386,7 @@ public class Cityturn{
 //    }
 //    check_pollution(pcity);
 //
-//    send_city_info(null, pcity);
+//    Citytools.send_city_info(null, pcity);
 //    if (pcity.anarchy>2 && government_has_flag(g, G_REVOLUTION_WHEN_UNHAPPY)) {
 //      Plrhand.notify_player_ex(pplayer, pcity.tile, E_ANARCHY,
 //		       ("Game: The people have overthrown your %s, " +
@@ -1390,7 +1394,7 @@ public class Cityturn{
 //		       get_government_name(g.index));
 //      handle_player_change_government(pplayer, g.index);
 //    }
-//    sanity_check_city(pcity);
+//    Sanitycheck.sanity_check_city(pcity);
 //  }
 //}
 //

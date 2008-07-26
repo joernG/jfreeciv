@@ -192,7 +192,7 @@ public class Gotodlg{
 //
 //  len = strlen(ret.string);
 //  if(len>3 && strcmp(ret.string+len-3, "(A)")==0) {
-//    char name[MAX_LEN_NAME];
+//    String name="";
 //    mystrlcpy(name, ret.string, Math.min(sizeof(name),len-2));
 //    return game_find_city_by_name(name);
 //  }

@@ -180,8 +180,8 @@ public class Diplodlg{
 //            || get_invention(plr1, i) == TECH_REACHABLE)
 //        && tech_is_available(plr1, i)) {
 //      AppendMenu(menu,MF_STRING,ID_ADVANCES_BASE+i,advances[i].name);
-//      iteminfo.dwItemData = plr0.player_no * MAX_NUM_ITEMS * MAX_NUM_ITEMS +
-//			    plr1.player_no * MAX_NUM_ITEMS + i;
+//      iteminfo.dwItemData = plr0.player_no * Shared_H.MAX_NUM_ITEMS * Shared_H.MAX_NUM_ITEMS +
+//			    plr1.player_no * Shared_H.MAX_NUM_ITEMS + i;
 //      iteminfo.fMask = MIIM_DATA;
 //      iteminfo.cbSize = sizeof(MENUITEMINFO);
 //      SetMenuItemInfo(menu, ID_ADVANCES_BASE+i, false, &iteminfo);
@@ -368,11 +368,11 @@ public class Diplodlg{
 //*****************************************************************/
 //static void handle_advances_menu(Diplomacy_dialog pdialog,int choice)
 //{
-//  int plrno0 = choice / (MAX_NUM_ITEMS * MAX_NUM_ITEMS);
+//  int plrno0 = choice / (Shared_H.MAX_NUM_ITEMS * Shared_H.MAX_NUM_ITEMS);
 //#if 0 /* Unneeded. */
-//  int plrno1 = (choice / MAX_NUM_ITEMS) % MAX_NUM_ITEMS;
+//  int plrno1 = (choice / Shared_H.MAX_NUM_ITEMS) % Shared_H.MAX_NUM_ITEMS;
 //#endif
-//  int value = choice % MAX_NUM_ITEMS;
+//  int value = choice % Shared_H.MAX_NUM_ITEMS;
 //
 //  dsend_packet_diplomacy_create_clause_req(&aconnection, 
 //					   pdialog.treaty.plr1.player_no,

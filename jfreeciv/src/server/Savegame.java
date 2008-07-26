@@ -959,12 +959,12 @@ public class Savegame{
 //  Impr_type_id.  This function tries to find the correct _old_ id for the
 //  improvements's type.  It is used when the improvement is saved.
 //****************************************************************************/
-//static int old_impr_type_id(Impr_Type_id type)
+//static int old_impr_type_id(int type)
 //{
 //  int i;
 //
 //  for (i = 0; i < ARRAY_SIZE(old_impr_types); i++) {
-//    if (mystrcasecmp(get_improvement_name_orig(type),
+//    if (mystrcasecmp(Improvement.get_improvement_name_orig(type),
 //                     old_impr_types[i]) == 0) {
 //      return i;
 //    }
@@ -1012,7 +1012,7 @@ public class Savegame{
 //  bitvector string according to the 1.14.1 improvement ordering.
 //****************************************************************************/
 //static void add_improvement_into_old_bitvector(char* bitvector,
-//                                               Impr_Type_id id)
+//                                               int id)
 //{
 //  int old_id;
 //
@@ -1309,7 +1309,7 @@ public class Savegame{
 //	}
 //	pwl.wlids[i] = type;
 //      } else if (pwl.wlefs[i] == WEF_IMPR) {
-//	Impr_Type_id type;
+//	int type;
 //
 //	if (!name) {
 //	  name = old_impr_type_name(secfile_lookup_int(file, idpath,
@@ -1438,7 +1438,7 @@ public class Savegame{
 //    punit.homecity = secfile_lookup_int(file, "player%d.u%d.homecity",
 //					 plrno, i);
 //
-//    if ((pcity = find_city_by_id(punit.homecity))) {
+//    if ((pcity = Game.find_city_by_id(punit.homecity))) {
 //      unit_list_insert(&pcity.units_supported, punit);
 //    }
 //    
@@ -2100,21 +2100,21 @@ public class Savegame{
 //
 //    /* Initialize pcity.city_map[][], using set_worker_city() so that
 //       ptile.worked gets initialized correctly.  The pre-initialisation
-//       to C_TILE_EMPTY is necessary because set_worker_city() accesses
+//       to city_tile_type.C_TILE_EMPTY is necessary because set_worker_city() accesses
 //       the existing value to possibly adjust ptile.worked, so need to
 //       initialize a non-worked value so ptile.worked (possibly already
-//       set from neighbouring city) does not get unset for C_TILE_EMPTY
-//       or C_TILE_UNAVAILABLE here.  -- dwp
+//       set from neighbouring city) does not get unset for city_tile_type.C_TILE_EMPTY
+//       or city_tile_type.C_TILE_UNAVAILABLE here.  -- dwp
 //    */
 //    p=secfile_lookup_str(file, "player%d.c%d.workers", plrno, i);
-//    for(y=0; y<CITY_MAP_SIZE; y++) {
-//      for(x=0; x<CITY_MAP_SIZE; x++) {
+//    for(y=0; y<City_H.CITY_MAP_SIZE; y++) {
+//      for(x=0; x<City_H.CITY_MAP_SIZE; x++) {
 //	pcity.city_map[x][y] =
-//	    is_valid_city_coords(x, y) ? C_TILE_EMPTY : C_TILE_UNAVAILABLE;
+//	    City.is_valid_city_coords(x, y) ? city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE;
 //	if (*p == '0') {
 //	  set_worker_city(pcity, x, y,
 //			  city_map_to_map(pcity, x, y) ?
-//			  C_TILE_EMPTY : C_TILE_UNAVAILABLE);
+//			  city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE);
 //	} else if (*p=='1') {
 //	  tile ptile;
 //
@@ -2124,17 +2124,17 @@ public class Savegame{
 //	    /* oops, inconsistent savegame; minimal fix: */
 //	    util.freelog(Log.LOG_VERBOSE, "Inconsistent worked for %s (%d,%d), " +
 //		    "converting to elvis", pcity.name, x, y);
-//	    pcity.specialists[SP_ELVIS]++;
-//	    set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
+//	    pcity.specialists[specialist_type.SP_ELVIS]++;
+//	    set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	  } else {
-//	    set_worker_city(pcity, x, y, C_TILE_WORKER);
+//	    set_worker_city(pcity, x, y, city_tile_type.C_TILE_WORKER);
 //	  }
 //	} else {
 //	  assert(*p == '2');
-//	  if (is_valid_city_coords(x, y)) {
-//	    set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
+//	  if (City.is_valid_city_coords(x, y)) {
+//	    set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	  }
-//	  assert(pcity.city_map[x][y] == C_TILE_UNAVAILABLE);
+//	  assert(pcity.city_map[x][y] == city_tile_type.C_TILE_UNAVAILABLE);
 //	}
 //        p++;
 //      }
@@ -2394,7 +2394,7 @@ public class Savegame{
 //			 wlinx, i);
 //    } else if (pwl.wlefs[i] == WEF_IMPR) {
 //      secfile_insert_int(file, pwl.wlids[i], idpath, plrno, wlinx, i);
-//      secfile_insert_str(file, get_improvement_name_orig(pwl.wlids[i]),
+//      secfile_insert_str(file, Improvement.get_improvement_name_orig(pwl.wlids[i]),
 //			 namepath, plrno, wlinx, i);
 //    } else {
 //      secfile_insert_int(file, 0, idpath, plrno, wlinx, i);
@@ -2753,7 +2753,7 @@ public class Savegame{
 //    } else {
 //      secfile_insert_int(file, old_impr_type_id(pcity.changed_from_id),
 //		         "player%d.c%d.changed_from_id", plrno, i);    
-//      secfile_insert_str(file, get_improvement_name_orig(
+//      secfile_insert_str(file, Improvement.get_improvement_name_orig(
 //                                 pcity.changed_from_id),
 //                         "player%d.c%d.changed_from_name", plrno, i);
 //    }
@@ -2787,12 +2787,12 @@ public class Savegame{
 //		       "player%d.c%d.options", plrno, i);
 //    
 //    j=0;
-//    for(y=0; y<CITY_MAP_SIZE; y++) {
-//      for(x=0; x<CITY_MAP_SIZE; x++) {
-//	switch (get_worker_city(pcity, x, y)) {
-//	  case C_TILE_EMPTY:       buf[j++] = '0'; break;
-//	  case C_TILE_WORKER:      buf[j++] = '1'; break;
-//	  case C_TILE_UNAVAILABLE: buf[j++] = '2'; break;
+//    for(y=0; y<City_H.CITY_MAP_SIZE; y++) {
+//      for(x=0; x<City_H.CITY_MAP_SIZE; x++) {
+//	switch (City.get_worker_city(pcity, x, y)) {
+//	  case city_tile_type.C_TILE_EMPTY:       buf[j++] = '0'; break;
+//	  case city_tile_type.C_TILE_WORKER:      buf[j++] = '1'; break;
+//	  case city_tile_type.C_TILE_UNAVAILABLE: buf[j++] = '2'; break;
 //	}
 //      }
 //    }
@@ -2809,7 +2809,7 @@ public class Savegame{
 //    } else {
 //      secfile_insert_int(file, old_impr_type_id(pcity.currently_building),
 //                         "player%d.c%d.currently_building", plrno, i);
-//      secfile_insert_str(file, get_improvement_name_orig(
+//      secfile_insert_str(file, Improvement.get_improvement_name_orig(
 //                                   pcity.currently_building),
 //                         "player%d.c%d.currently_building_name", plrno, i);
 //    }
@@ -3003,18 +3003,18 @@ public class Savegame{
 //  city_map_iterate(x, y) {
 //    boolean res = city_can_work_tile(pcity, x, y);
 //    switch (pcity.city_map[x][y]) {
-//    case C_TILE_EMPTY:
+//    case city_tile_type.C_TILE_EMPTY:
 //      if (!res) {
-//	set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
+//	set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	util.freelog(Log.LOG_DEBUG, "unavailable tile marked as empty!");
 //      }
 //      break;
-//    case C_TILE_WORKER:
+//    case city_tile_type.C_TILE_WORKER:
 //      if (!res) {
 //	tile ptile;
 //
-//	pcity.specialists[SP_ELVIS]++;
-//	set_worker_city(pcity, x, y, C_TILE_UNAVAILABLE);
+//	pcity.specialists[specialist_type.SP_ELVIS]++;
+//	set_worker_city(pcity, x, y, city_tile_type.C_TILE_UNAVAILABLE);
 //	util.freelog(Log.LOG_DEBUG, "Worked tile was unavailable!");
 //
 //	ptile = city_map_to_map(pcity, x, y);
@@ -3026,16 +3026,16 @@ public class Savegame{
 //	} map_city_radius_iterate_end;
 //      }
 //      break;
-//    case C_TILE_UNAVAILABLE:
+//    case city_tile_type.C_TILE_UNAVAILABLE:
 //      if (res) {
-//	set_worker_city(pcity, x, y, C_TILE_EMPTY);
+//	set_worker_city(pcity, x, y, city_tile_type.C_TILE_EMPTY);
 //	util.freelog(Log.LOG_DEBUG, "Empty tile Marked as unavailable!");
 //      }
 //      break;
 //    }
 //  } city_map_iterate_end;
 //
-//  city_refresh(pcity);
+//  Cityturn.city_refresh(pcity);
 //}
 //
 ///***************************************************************
@@ -3638,7 +3638,7 @@ public class Savegame{
 //  if (Game.game.num_impr_types > 0) {
 //    final char* buf[Game.game.num_impr_types];
 //    impr_type_iterate(id) {
-//      buf[id] = get_improvement_name_orig(id);
+//      buf[id] = Improvement.get_improvement_name_orig(id);
 //    } impr_type_iterate_end;
 //    secfile_insert_str_vec(file, buf, Game.game.num_impr_types,
 //                           "savefile.improvement_order");
@@ -3807,7 +3807,7 @@ public class Savegame{
 //    init_old_improvement_bitvector(temp);
 //    impr_type_iterate(id) {
 //      if (is_wonder(id) && Game.game.global_wonders[id] != 0
-//	  && !find_city_by_id(Game.game.global_wonders[id])) {
+//	  && !Game.find_city_by_id(Game.game.global_wonders[id])) {
 //        add_improvement_into_old_bitvector(temp, id);
 //      } 
 //    } impr_type_iterate_end;
@@ -3818,7 +3818,7 @@ public class Savegame{
 //     */
 //    impr_type_iterate(id) {
 //      if (is_wonder(id) && Game.game.global_wonders[id] != 0
-//	  && !find_city_by_id(Game.game.global_wonders[id])) {
+//	  && !Game.find_city_by_id(Game.game.global_wonders[id])) {
 //	temp[id] = '1';
 //      } else {
 //        temp[id] = '0';

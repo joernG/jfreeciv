@@ -936,7 +936,7 @@ public class Stdinhand{
 //{
 //  enum m_pre_result match_result;
 //  player pplayer;
-//  char name[MAX_LEN_NAME];
+//  String name="";
 //
 //  pplayer=find_player_by_name_prefix(arg, &match_result);
 //  
@@ -2754,7 +2754,7 @@ public class Stdinhand{
 //  /* if the connection is already attached to a player,
 //   * unattach and cleanup old player (rename, remove, etc) */
 //  if (pconn.player) {
-//    char name[MAX_LEN_NAME];
+//    String name="";
 //
 //    /* if a pconn.player is removed, we'll lose pplayer */
 //    name = pplayer.name;
@@ -2911,7 +2911,7 @@ public class Stdinhand{
 //  /* if the connection is already attached to a player,
 //   * unattach and cleanup old player (rename, remove, etc) */
 //  if (pconn.player) {
-//    char name[MAX_LEN_NAME];
+//    String name="";
 //
 //    /* if a pconn.player is removed, we'll lose pplayer */
 //    name = pplayer.name;

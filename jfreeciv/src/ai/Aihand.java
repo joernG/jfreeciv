@@ -276,7 +276,7 @@ public class Aihand{
 //        acity.ai.celebrate = false;
 //	/* This isn't strictly necessary since it's done in aaw. */
 //        generic_city_refresh(acity, true, null);
-//        auto_arrange_workers(acity);
+//        Cityturn.auto_arrange_workers(acity);
 //      } }
 //      for (city pcity : pplayer.cities.data) {
 //        val += ai_eval_calc_city(pcity, ai);
@@ -317,7 +317,7 @@ public class Aihand{
 //    for (city acity : pplayer.cities.data) {
 //      /* This isn't strictly necessary since it's done in aaw. */
 //      generic_city_refresh(acity, true, null);
-//      auto_arrange_workers(acity);
+//      Cityturn.auto_arrange_workers(acity);
 //    } }
 //    ai.govt_reeval = CLIP(5, pplayer.cities.foo_list_size(), 20);
 //  }

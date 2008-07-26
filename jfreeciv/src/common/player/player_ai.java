@@ -1,5 +1,4 @@
 package common.player;
-import static utility.shared.Shared_H.*;
 import utility.shared.Shared_H;
 
 public class player_ai {

@@ -278,7 +278,7 @@ public class Dialogs{
 //  {
 //    which-=100;
 //    if (find_unit_by_id(diplomat_id) && 
-//	find_city_by_id(diplomat_target_id)) { 
+//	Game.find_city_by_id(diplomat_target_id)) { 
 //      request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			      diplomat_target_id, which);
 //    }
@@ -374,7 +374,7 @@ public class Dialogs{
 //  DoMethod(data.listview, MUIM_NList_GetEntry, MUIV_NList_GetEntry_Active,&which);
 //  if(which)
 //  {
-//    if(find_unit_by_id(diplomat_id) && find_city_by_id(diplomat_target_id))
+//    if(find_unit_by_id(diplomat_id) && Game.find_city_by_id(diplomat_target_id))
 //    { 
 //      request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			      diplomat_target_id, which - 100 + 1);
@@ -394,7 +394,7 @@ public class Dialogs{
 //  int imprv = ((LONG) which)-100;
 //  if (imprv == -1) *array = "City Production";
 //  else if (imprv == B_LAST) *array = "At Spy's Discretion";
-//  else *array = get_improvement_name(imprv);
+//  else *array = Improvement.get_improvement_name(imprv);
 //}
 //
 //
@@ -516,7 +516,7 @@ public class Dialogs{
 //  diplomat_dialog_open = 0;
 //
 //   if(find_unit_by_id(diplomat_id) && 
-//     (find_city_by_id(diplomat_target_id))) { 
+//     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_EMBASSY, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -532,7 +532,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) && 
-//     (find_city_by_id(diplomat_target_id))) { 
+//     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_INVESTIGATE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -548,7 +548,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, -1);
 //  }
@@ -564,7 +564,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -584,7 +584,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) && 
-//     (pcity=find_city_by_id(diplomat_target_id))) { 
+//     (pcity=Game.find_city_by_id(diplomat_target_id))) { 
 //    packet.value = diplomat_target_id;
 //    send_packet_generic_integer(&aconnection, PACKET_INCITE_INQ, &packet);
 //  }
@@ -619,7 +619,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if( (punit=find_unit_by_id(diplomat_id))
-//      && (pcity=find_city_by_id(diplomat_target_id))
+//      && (pcity=Game.find_city_by_id(diplomat_target_id))
 //      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
 //			    diplomat_target_id, 0);
@@ -647,7 +647,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) &&
-//    (find_city_by_id(diplomat_target_id))) {
+//    (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_POISON, diplomat_id, diplomat_target_id, 0);
 //  }
 //  process_diplomat_arrival(null, 0);
@@ -663,7 +663,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_GET_SABOTAGE_LIST, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -683,7 +683,7 @@ public class Dialogs{
 //*****************************************************************/
 //static void spy_steal(popup_message_data data)
 //{
-//  city pvcity = find_city_by_id(diplomat_target_id);
+//  city pvcity = Game.find_city_by_id(diplomat_target_id);
 //  player pvictim;
 //
 //  message_close(data);
@@ -1408,7 +1408,7 @@ public class Dialogs{
 //        Object *o;
 //        Object *unit_obj;
 //
-//        pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//        pcity = Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //
 //        buffer = util.my_snprintf("%s%s\n%s\n%s", punittemp.name,
 //               (punit.veteran) ? " (veteran)" : "", unit_activity_text(punit),pcity ? pcity.name : "");

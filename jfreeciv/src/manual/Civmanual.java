@@ -312,7 +312,7 @@ public class Civmanual{
 //	}
 //
 //	helptext_building(buf, sizeof(buf), id, null);
-//	fprintf(doc, "%s%s%s\n\n", SECTION_BEGIN, get_improvement_name(id),
+//	fprintf(doc, "%s%s%s\n\n", SECTION_BEGIN, Improvement.get_improvement_name(id),
 //		SECTION_END);
 //	fprintf(doc, "<table>\n");
 //	fprintf(doc, "<tr><td>Cost: <td>%d</tr>\n", pimpr.build_cost);
@@ -341,7 +341,7 @@ public class Civmanual{
 //	}
 //
 //	helptext_building(buf, sizeof(buf), id, null);
-//	fprintf(doc, "%s%s%s\n\n", SECTION_BEGIN, get_improvement_name(id),
+//	fprintf(doc, "%s%s%s\n\n", SECTION_BEGIN, Improvement.get_improvement_name(id),
 //		SECTION_END);
 //	fprintf(doc, "<table>\n");
 //	fprintf(doc, "<tr><td>Cost: <td>%d</tr>\n", pimpr.build_cost);

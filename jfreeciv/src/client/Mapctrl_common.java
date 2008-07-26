@@ -364,7 +364,7 @@ public class Mapctrl_common{
 //
 //  msg = util.my_snprintf( "Game: Copy %s to clipboard.",
 //    clipboard_is_unit ? Unittype_P.unit_types[clipboard].name :
-//    get_improvement_name(clipboard));
+//    Improvement.get_improvement_name(clipboard));
 //  append_output_window(msg);
 //}
 //
@@ -438,7 +438,7 @@ public class Mapctrl_common{
 //
 //  if (keyboardless_goto_active && hover_state == HOVER_GOTO && ptile) {
 //    unit punit =
-//        player_find_unit_by_id(Game.game.player_ptr, hover_unit);
+//        Player_P.player_find_unit_by_id(Game.game.player_ptr, hover_unit);
 //
 //    do_unit_goto(ptile);
 //    set_hover_state(null, HOVER_NONE, ACTIVITY_LAST);
@@ -541,15 +541,15 @@ public class Mapctrl_common{
 //	assert(0!=1);
 //      }
 //
-//      worker = get_worker_city(pcity, city_x, city_y);
-//      if (worker == C_TILE_WORKER) {
+//      worker = City.get_worker_city(pcity, city_x, city_y);
+//      if (worker == city_tile_type.C_TILE_WORKER) {
 //	dsend_packet_city_make_specialist(&aconnection, pcity.id,
 //					  city_x, city_y);
-//      } else if (worker == C_TILE_EMPTY) {
+//      } else if (worker == city_tile_type.C_TILE_EMPTY) {
 //	dsend_packet_city_make_worker(&aconnection, pcity.id,
 //				      city_x, city_y);
 //      } else {
-//	/* If worker == C_TILE_UNAVAILABLE then we can't use this tile.  No
+//	/* If worker == city_tile_type.C_TILE_UNAVAILABLE then we can't use this tile.  No
 //	 * packet is sent and city_workers_display is not updated. */
 //	return;
 //      }

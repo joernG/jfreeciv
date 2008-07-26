@@ -231,7 +231,7 @@ public class Handchat{
 			m_pre_result match_result_player = null, match_result_conn = null;
 			player pdest = null;
 			Connection conn_dest = null;
-//			char name[MAX_LEN_NAME];
+//			String name="";
 			String name;
 			int cpblank;
 

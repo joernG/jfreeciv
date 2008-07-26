@@ -182,7 +182,7 @@ public class Helpdlg{
 //}
 //
 //
-//void popup_impr_info(Impr_Type_id impr)
+//void popup_impr_info(int impr)
 //{ 
 //  GUI pBuf, *pHelpText = null;
 //  GUI pDock;
@@ -252,7 +252,7 @@ public class Helpdlg{
 //    impr_type_iterate(type)
 //    {
 //      pBack = SDL_DisplayFormatAlpha(pTmp);
-//      copy_chars_to_string16(pStr, get_improvement_name(type));
+//      copy_chars_to_string16(pStr, Improvement.get_improvement_name(type));
 //      pText = create_text_surf_smaller_that_w(pStr, 100 - 4);
 //      /* draw name tech text */ 
 //      dst.x = 40 + (pBack.w - pText.w - 40) / 2;
@@ -339,7 +339,7 @@ public class Helpdlg{
 //  
 //  if (impr != B_CAPITAL)
 //  {
-//    sprintf(buffer, "%s %d", N"Cost:", impr_build_shield_cost(impr));
+//    sprintf(buffer, "%s %d", N"Cost:", Improvement.impr_build_shield_cost(impr));
 //    pBuf = create_iconlabel_from_chars(null,
 //		    pWindow.dst, buffer, 12, 0);
 //    pBuf.ID = ID_LABEL;
@@ -700,8 +700,8 @@ public class Helpdlg{
 //    char local[2048];
 //    
 //    local = util.my_snprintf( "%s %d %s",
-//	      N"Cost:", unit_build_shield_cost(type_id),
-//	      PL("shield", "shields", unit_build_shield_cost(type_id)));
+//	      N"Cost:", Unittype_P.unit_build_shield_cost(type_id),
+//	      PL("shield", "shields", Unittype_P.unit_build_shield_cost(type_id)));
 //  
 //    if(pUnit.pop_cost)
 //    {
@@ -1084,7 +1084,7 @@ public class Helpdlg{
 //    impr_type pImpr = get_improvement_type(imp);
 //    if (pImpr.tech_req == tech) {
 //      pBuf = create_iconlabel_from_chars(GET_SURF(pImpr.sprite),
-//	      pWindow.dst, get_improvement_name(imp), 14,
+//	      pWindow.dst, Improvement.get_improvement_name(imp), 14,
 //	      WF_DRAW_THEME_TRANSPARENT|WF_SELLECT_WITHOUT_BAR);
 //      set_wstate(pBuf, FC_WS_NORMAL);
 //      if (is_wonder(imp))

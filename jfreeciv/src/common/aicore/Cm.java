@@ -640,11 +640,11 @@ public class Cm{
 //   * the city center). */
 //  memset(&pcity.specialists, 0, sizeof(pcity.specialists));
 //  city_map_iterate(x, y) {
-//    if (is_city_center(x, y)) {
+//    if (City.is_city_center(x, y)) {
 //      continue;
 //    }
-//    if (pcity.city_map[x][y] == C_TILE_WORKER) {
-//      pcity.city_map[x][y] = C_TILE_EMPTY;
+//    if (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER) {
+//      pcity.city_map[x][y] = city_tile_type.C_TILE_EMPTY;
 //    }
 //  } city_map_iterate_end;
 //
@@ -673,7 +673,7 @@ public class Cm{
 //      for (j = 0; j < nworkers; j++) {
 //        final cm_tile tile = tile_get(type, j);
 //
-//        pcity.city_map[tile.x][tile.y] = C_TILE_WORKER;
+//        pcity.city_map[tile.x][tile.y] = city_tile_type.C_TILE_WORKER;
 //      }
 //    }
 //  }
@@ -929,8 +929,8 @@ public class Cm{
 //  enum specialist_type spec;
 //  enum cm_stat stat;
 //};
-//final static struct spec_stat_pair pairs[SP_COUNT] =  {
-//  { SP_ELVIS, LUXURY },
+//final static struct spec_stat_pair pairs[specialist_type.getSize()] =  {
+//  { specialist_type.SP_ELVIS, LUXURY },
 //  { SP_SCIENTIST, SCIENCE },
 //  { SP_TAXMAN, GOLD }
 //};
@@ -950,7 +950,7 @@ public class Cm{
 //  /* for each specialist type, create a tile_type that has as production
 //   * the bonus for the specialist (if the city is allowed to use it) */
 //  specialist_type_iterate(i) {
-//    if (city_can_use_specialist(pcity, pairs[i].spec)) {
+//    if (City.city_can_use_specialist(pcity, pairs[i].spec)) {
 //      type.spec = pairs[i].spec;
 //      type.production[pairs[i].stat]
 //        = Game.game.rgame.specialists[pairs[i].spec].bonus;
@@ -1148,10 +1148,10 @@ public class Cm{
 //  /* add all the fields into the lattice */
 //  tile_type_init(&type); /* init just once */
 //  my_city_map_iterate(pcity, x, y) {
-//    if (pcity.city_map[x][y] == C_TILE_UNAVAILABLE) {
+//    if (pcity.city_map[x][y] == city_tile_type.C_TILE_UNAVAILABLE) {
 //      continue;
 //    }
-//    if (!is_city_center(x, y)) {
+//    if (!City.is_city_center(x, y)) {
 //      compute_tile_production(pcity, x, y, &type); /* clobbers type */
 //      tile_type_lattice_add(lattice, &type, x, y); /* copy type if needed */
 //    }
@@ -1959,7 +1959,7 @@ public class Cm{
 //  int count = 0;
 //
 //  city_map_iterate(x, y) {
-//    if(result.worker_positions_used[x][y] && !is_city_center(x, y)) {
+//    if(result.worker_positions_used[x][y] && !City.is_city_center(x, y)) {
 //      count++;
 //    }
 //  } city_map_iterate_end;
@@ -1990,7 +1990,7 @@ public class Cm{
 //  /* copy the map of where workers are */
 //  city_map_iterate(x, y) {
 //    result.worker_positions_used[x][y] =
-//      (pcity.city_map[x][y] == C_TILE_WORKER);
+//      (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER);
 //  } city_map_iterate_end;
 //
 //  /* copy the specialist counts */
@@ -2130,12 +2130,12 @@ public class Cm{
 //          pcity.name, pcity.id);
 //  util.freelog(Log.LOG_NORMAL,
 //          "  size=%d, entertainers=%d, scientists=%d, taxmen=%d",
-//          pcity.size, pcity.specialists[SP_ELVIS],
+//          pcity.size, pcity.specialists[specialist_type.SP_ELVIS],
 //          pcity.specialists[SP_SCIENTIST],
 //          pcity.specialists[SP_TAXMAN]);
 //  util.freelog(Log.LOG_NORMAL, "  workers at:");
 //  my_city_map_iterate(pcity, x, y) {
-//    if (pcity.city_map[x][y] == C_TILE_WORKER) {
+//    if (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER) {
 //      util.freelog(Log.LOG_NORMAL, "    (%2d,%2d)", x, y);
 //    }
 //  } my_city_map_iterate_end;
@@ -2172,16 +2172,16 @@ public class Cm{
 //    }
 //  } my_city_map_iterate_end;
 //
-//  for (y = 0; y < CITY_MAP_SIZE; y++) {
-//    char line[CITY_MAP_SIZE + 1];
+//  for (y = 0; y < City_H.CITY_MAP_SIZE; y++) {
+//    char line[City_H.CITY_MAP_SIZE + 1];
 //    int x;
 //
-//    line[CITY_MAP_SIZE] = 0;
+//    line[City_H.CITY_MAP_SIZE] = 0;
 //
-//    for (x = 0; x < CITY_MAP_SIZE; x++) {
-//      if (!is_valid_city_coords(x, y)) {
+//    for (x = 0; x < City_H.CITY_MAP_SIZE; x++) {
+//      if (!City.is_valid_city_coords(x, y)) {
 //        line[x] = '-';
-//      } else if (is_city_center(x, y)) {
+//      } else if (City.is_city_center(x, y)) {
 //        line[x] = 'c';
 //      } else if (result.worker_positions_used[x][y]) {
 //        line[x] = 'w';

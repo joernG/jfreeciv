@@ -312,7 +312,7 @@ public class Dialogs{
 //static void diplomat_sabotage_callback(GtkWidget *w, gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, -1);
 //  }
@@ -325,7 +325,7 @@ public class Dialogs{
 //static void diplomat_investigate_callback(GtkWidget *w, gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) && 
-//     (find_city_by_id(diplomat_target_id))) { 
+//     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_INVESTIGATE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -348,7 +348,7 @@ public class Dialogs{
 //static void diplomat_embassy_callback(GtkWidget *w, gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) && 
-//     (find_city_by_id(diplomat_target_id))) { 
+//     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_EMBASSY, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -361,7 +361,7 @@ public class Dialogs{
 //static void spy_poison_callback(GtkWidget *w, gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_POISON, diplomat_id, diplomat_target_id, 0);
 //  }
 //  gtk_widget_destroy(diplomat_dialog);
@@ -373,7 +373,7 @@ public class Dialogs{
 //static void diplomat_steal_callback(GtkWidget *w, gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -387,7 +387,7 @@ public class Dialogs{
 //{
 //  if (response == GTK_RESPONSE_ACCEPT && steal_advance > 0) {
 //    if (find_unit_by_id(diplomat_id) && 
-//        find_city_by_id(diplomat_target_id)) { 
+//        Game.find_city_by_id(diplomat_target_id)) { 
 //      request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			      diplomat_target_id, steal_advance);
 //    }
@@ -531,7 +531,7 @@ public class Dialogs{
 //{
 //  if (response == GTK_RESPONSE_ACCEPT && sabotage_improvement > -2) {
 //    if (find_unit_by_id(diplomat_id) && 
-//        find_city_by_id(diplomat_target_id)) { 
+//        Game.find_city_by_id(diplomat_target_id)) { 
 //      request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			      diplomat_target_id, sabotage_improvement + 1);
 //    }
@@ -658,7 +658,7 @@ public class Dialogs{
 //*****************************************************************/
 //static void spy_steal_popup(GtkWidget *w, gpointer data)
 //{
-//  city pvcity = find_city_by_id(diplomat_target_id);
+//  city pvcity = Game.find_city_by_id(diplomat_target_id);
 //  player pvictim = null;
 //
 //  if(pvcity)
@@ -682,7 +682,7 @@ public class Dialogs{
 //static void spy_request_sabotage_list(GtkWidget *w, gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_GET_SABOTAGE_LIST, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -706,7 +706,7 @@ public class Dialogs{
 //*****************************************************************/
 //static void diplomat_incite_callback(GtkWidget *w, gpointer data)
 //{
-//  if (find_unit_by_id(diplomat_id) && find_city_by_id(diplomat_target_id)) {
+//  if (find_unit_by_id(diplomat_id) && Game.find_city_by_id(diplomat_target_id)) {
 //    dsend_packet_city_incite_inq(&aconnection, diplomat_target_id);
 //  }
 //  gtk_widget_destroy(diplomat_dialog);
@@ -772,7 +772,7 @@ public class Dialogs{
 //  city pcity;
 //  
 //  if( (punit=find_unit_by_id(diplomat_id))
-//      && (pcity=find_city_by_id(diplomat_target_id))
+//      && (pcity=Game.find_city_by_id(diplomat_target_id))
 //      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
 //			    diplomat_target_id, 0);
@@ -1264,7 +1264,7 @@ public class Dialogs{
 //  gtk_tree_model_get_iter(GTK_TREE_MODEL(unit_select_store), &it, path);
 //  gtk_tree_model_get(GTK_TREE_MODEL(unit_select_store), &it, 0, &id, -1);
 // 
-//  if ((punit = player_find_unit_by_id(Game.game.player_ptr, id))) {
+//  if ((punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, id))) {
 //    set_unit_focus(punit);
 //  }
 //

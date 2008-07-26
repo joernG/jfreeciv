@@ -1,7 +1,6 @@
 package common;
-import static common.Unit.*;
-import static common.Player_P.*;
-import static common.City.*;
+import static common.Player_P.pplayers_at_war;
+
 import common.city.city;
 import common.map.tile;
 import common.player.player;
@@ -532,7 +531,7 @@ public class Combat{
 //     * complicated and is now handled elsewhere. */
 //    if (unit_can_defend_here(defender)) {
 //      boolean change = false;
-//      int build_cost = unit_build_shield_cost(defender.type);
+//      int build_cost = Unittype_P.unit_build_shield_cost(defender.type);
 //      int defense_rating = get_defense_rating(attacker, defender);
 //      /* This will make units roughly evenly good defenders look alike. */
 //      int unit_def 
@@ -586,7 +585,7 @@ public class Combat{
 //  int bestvalue = -1, unit_a, best_cost = 0;
 //
 //  for (unit attacker : ptile.units.data) {
-//    int build_cost = unit_build_shield_cost(attacker.type);
+//    int build_cost = Unittype_P.unit_build_shield_cost(attacker.type);
 //
 //    if (pplayers_allied(defender.unit_owner(), attacker.unit_owner())) {
 //      return null;

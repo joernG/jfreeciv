@@ -109,7 +109,7 @@ public class Climisc{
 //	    TILE_XY(pcity.tile));
 //  }
 //
-//  pcity = player_find_city_by_id(Game.game.player_ptr, hc);
+//  pcity = Player_P.player_find_city_by_id(Game.game.player_ptr, hc);
 //  if (pcity) {
 //    refresh_city_dialog(pcity);
 //    util.freelog(Log.LOG_DEBUG, "home city %s, %s, (%d %d)", pcity.name,
@@ -164,9 +164,9 @@ public class Climisc{
 //  buf = util.my_snprintf(
 //	      "Game: Changing production of every %s into %s.",
 //	      fr_is_unit ? get_unit_type(fr_id).name :
-//	      get_improvement_name(fr_id),
+//	      Improvement.get_improvement_name(fr_id),
 //	      to_is_unit ? get_unit_type(to_id).
-//	      name : get_improvement_name(to_id));
+//	      name : Improvement.get_improvement_name(to_id));
 //  append_output_window(buf);
 //
 //  connection_do_buffer(&aconnection);
@@ -178,9 +178,9 @@ public class Climisc{
 //	  !(pcity.is_building_unit) &&
 //	  (pcity.currently_building == fr_id))) &&
 //	((to_is_unit &&
-//	  can_build_unit (pcity, to_id)) ||
+//	  City.can_build_unit (pcity, to_id)) ||
 //	 (!to_is_unit &&
-//	  can_build_improvement (pcity, to_id))))
+//	  City.can_build_improvement (pcity, to_id))))
 //      {
 //	last_request_id = city_change_production(pcity, to_is_unit, to_id);
 //      }
@@ -249,7 +249,7 @@ public class Climisc{
 //		get_tech_name(Game.game.player_ptr, pclause.value));
 //    break;
 //  case CLAUSE_CITY:
-//    pcity = find_city_by_id(pclause.value);
+//    pcity = Game.find_city_by_id(pclause.value);
 //    if (pcity) {
 //      buf = String.format "The %s give %s",
 //                  Nation.get_nation_name_plural(pclause.from.nation),
@@ -487,9 +487,9 @@ public class Climisc{
 //boolean city_can_build_impr_or_unit(city pcity, cid cid)
 //{
 //  if (cid_is_unit(cid))
-//    return can_build_unit(pcity, cid_id(cid));
+//    return City.can_build_unit(pcity, cid_id(cid));
 //  else
-//    return can_build_improvement(pcity, cid_id(cid));
+//    return City.can_build_improvement(pcity, cid_id(cid));
 //}
 //
 ///****************************************************************
@@ -577,15 +577,15 @@ public class Climisc{
 //
 //    if (is_unit) {
 //      name = get_unit_name(id);
-//      cost = unit_build_shield_cost(id);
+//      cost = Unittype_P.unit_build_shield_cost(id);
 //      pitem.section = unit_type_flag(id, Eunit_flag_id.F_NONMIL) ? 2 : 3;
 //    } else {
 //      name = get_impr_name_ex(pcity, id);
-//      if (building_has_effect(id, EFT_PROD_TO_GOLD)) {
+//      if (building_has_effect(id, effect_type.EFT_PROD_TO_GOLD)) {
 //	cost = -1;
 //	pitem.section = 1;
 //      } else {
-//	cost = impr_build_shield_cost(id);
+//	cost = Improvement.impr_build_shield_cost(id);
 //	if (is_wonder(id)) {
 //      	  pitem.section = 4;
 //        } else {
@@ -717,7 +717,7 @@ public class Climisc{
 //
 //    /* If there's a city, can the city build the improvement? */
 //    if (pcity) {
-//      can_build = can_build && can_build_improvement(pcity, id);
+//      can_build = can_build && City.can_build_improvement(pcity, id);
 //      can_eventually_build = can_eventually_build &&
 //	  can_eventually_build_improvement(pcity, id);
 //    }
@@ -736,7 +736,7 @@ public class Climisc{
 //
 //    /* If there's a city, can the city build the unit? */
 //    if (pcity) {
-//      can_build = can_build && can_build_unit(pcity, id);
+//      can_build = can_build && City.can_build_unit(pcity, id);
 //      can_eventually_build = can_eventually_build &&
 //	  can_eventually_build_unit(pcity, id);
 //    }
@@ -1014,9 +1014,9 @@ public class Climisc{
 //**************************************************************************/
 //void cityrep_buy(city pcity)
 //{
-//  int value = city_buy_cost(pcity);
+//  int value = City.city_buy_cost(pcity);
 //
-//  if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//  if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //    char buf[512];
 //
 //    assert(!pcity.is_building_unit);

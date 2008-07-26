@@ -64,25 +64,25 @@ public class Dialogs{
 //
 ///******************************************************************/
 //static GtkWidget  *races_dialog_shell=null;
-//static GtkWidget  *races_toggles_form[MAX_NUM_ITEMS];
-//static GtkWidget  *races_by_name[MAX_NUM_ITEMS];
-//static GtkWidget  *class[MAX_NUM_ITEMS];
-//static GtkWidget  *legend[MAX_NUM_ITEMS];
-//static GtkWidget  *legend_frame[MAX_NUM_ITEMS];
+//static GtkWidget  *races_toggles_form[Shared_H.MAX_NUM_ITEMS];
+//static GtkWidget  *races_by_name[Shared_H.MAX_NUM_ITEMS];
+//static GtkWidget  *class[Shared_H.MAX_NUM_ITEMS];
+//static GtkWidget  *legend[Shared_H.MAX_NUM_ITEMS];
+//static GtkWidget  *legend_frame[Shared_H.MAX_NUM_ITEMS];
 //static GtkWidget  *races_sex_toggles_form;
 //static GtkWidget  *city_style_toggles_form;
 //static GtkWidget  *races_ok_command;            /* ok button */
 //static GtkWidget  *races_disc_command=null;     /* disc button */
 //static GtkWidget  *races_quit_command=null;     /* quit button */
 // /* toggle race */
-//static GtkWidget **races_toggles[MAX_NUM_ITEMS];
+//static GtkWidget **races_toggles[Shared_H.MAX_NUM_ITEMS];
 //static GtkWidget *races_sex_toggles[2];		/* Male/Female */
 //static GtkWidget **city_style_toggles = null;
 //static GtkWidget *leader_name;			/* leader name */
 //static GtkWidget *notebook;
 //
 //static int       num_classes;
-//static char      *class_names[MAX_NUM_ITEMS];
+//static char      *class_names[Shared_H.MAX_NUM_ITEMS];
 //
 //static GList *leader_strings = null;
 //
@@ -90,7 +90,7 @@ public class Dialogs{
 // * Contains a list of race ids sorted by the race name. Is valid as
 // * long as the races_dialog is poped up. 
 // */
-//static GList *sorted_races_list[MAX_NUM_ITEMS];
+//static GList *sorted_races_list[Shared_H.MAX_NUM_ITEMS];
 //
 ///******************************************************************/
 //static GtkWidget  *notify_dialog_shell;
@@ -468,7 +468,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, -1);
 //  }
@@ -484,7 +484,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) && 
-//     (find_city_by_id(diplomat_target_id))) { 
+//     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_INVESTIGATE, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -509,7 +509,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) && 
-//     (find_city_by_id(diplomat_target_id))) { 
+//     (Game.find_city_by_id(diplomat_target_id))) { 
 //    request_diplomat_action(DIPLOMAT_EMBASSY, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -525,7 +525,7 @@ public class Dialogs{
 //  diplomat_dialog_open=0;
 //
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_POISON, diplomat_id, diplomat_target_id, 0);
 //  }
 //
@@ -538,7 +538,7 @@ public class Dialogs{
 //static void diplomat_steal_callback(gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL,
 //			    diplomat_id, diplomat_target_id, 0);
 //  }
@@ -628,7 +628,7 @@ public class Dialogs{
 //  }
 //  
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_STEAL, diplomat_id,
 //			    diplomat_target_id, steal_advance);
 //  }
@@ -659,7 +659,7 @@ public class Dialogs{
 //  }
 //  
 //  if(find_unit_by_id(diplomat_id) && 
-//     find_city_by_id(diplomat_target_id)) { 
+//     Game.find_city_by_id(diplomat_target_id)) { 
 //    request_diplomat_action(DIPLOMAT_SABOTAGE, diplomat_id,
 //			    diplomat_target_id, sabotage_improvement + 1);
 //  }
@@ -856,7 +856,7 @@ public class Dialogs{
 //*****************************************************************/
 //static void spy_steal_popup(GtkWidget *w, gpointer data)
 //{
-//  city pvcity = find_city_by_id(diplomat_target_id);
+//  city pvcity = Game.find_city_by_id(diplomat_target_id);
 //  player pvictim = null;
 //
 //  if(pvcity)
@@ -885,7 +885,7 @@ public class Dialogs{
 //static void spy_request_sabotage_list(gpointer data)
 //{
 //  if(find_unit_by_id(diplomat_id) &&
-//     (find_city_by_id(diplomat_target_id))) {
+//     (Game.find_city_by_id(diplomat_target_id))) {
 //    request_diplomat_action(SPY_GET_SABOTAGE_LIST, diplomat_id,
 //			    diplomat_target_id, 0);
 //  }
@@ -929,7 +929,7 @@ public class Dialogs{
 //*****************************************************************/
 //static void diplomat_incite_callback(gpointer data)
 //{
-//  if (find_unit_by_id(diplomat_id) && find_city_by_id(diplomat_target_id)) {
+//  if (find_unit_by_id(diplomat_id) && Game.find_city_by_id(diplomat_target_id)) {
 //    dsend_packet_city_incite_inq(&aconnection, diplomat_target_id);
 //  }
 //}
@@ -978,7 +978,7 @@ public class Dialogs{
 //  city pcity;
 //  
 //  if( (punit=find_unit_by_id(diplomat_id))
-//      && (pcity=find_city_by_id(diplomat_target_id))
+//      && (pcity=Game.find_city_by_id(diplomat_target_id))
 //      && !Map.same_pos(punit.tile, pcity.tile)) {
 //    request_diplomat_action(DIPLOMAT_MOVE, diplomat_id,
 //			    diplomat_target_id, 0);
@@ -1476,7 +1476,7 @@ public class Dialogs{
 //  unit_select_dialog_shell = null;
 //  
 //  for(i=0; i<unit_select_no; i++) {
-//    unit punit = player_find_unit_by_id(Game.game.player_ptr,
+//    unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr,
 //						unit_select_ids[i]);
 //    if(punit) {
 //      set_unit_focus(punit);
@@ -1489,7 +1489,7 @@ public class Dialogs{
 //**************************************************************************/
 //static void unit_select_callback(GtkWidget *w, int id)
 //{
-//  unit punit = player_find_unit_by_id(Game.game.player_ptr, id);
+//  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, id);
 //
 //  if (punit) {
 //    set_unit_focus(punit);
@@ -1571,7 +1571,7 @@ public class Dialogs{
 //
 //    unit_select_ids[i]=punit.id;
 //
-//    pcity=player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//    pcity=Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //
 //    if (pcity) {
 //      buffer = util.my_snprintf( "%s (%s)\n%s",
@@ -1835,7 +1835,7 @@ public class Dialogs{
 //    }
 //
 //    /* Append a new class. */
-//    if (!found && num_classes < MAX_NUM_ITEMS) {
+//    if (!found && num_classes < Shared_H.MAX_NUM_ITEMS) {
 //      class_id = num_classes++;
 //      class_names[class_id] = nation.class;
 //    }

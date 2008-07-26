@@ -74,7 +74,7 @@ public class Aihunt{
 //    unit_type ut = get_unit_type(i);
 //    int desire;
 //
-//    if (ut.move_type != umt || !can_build_unit(pcity, i)
+//    if (ut.move_type != umt || !City.can_build_unit(pcity, i)
 //        || ut.attack_strength < ut.transport_capacity) {
 //      continue;
 //    }
@@ -146,7 +146,7 @@ public class Aihunt{
 //    unit_type ut = get_unit_type(i);
 //    int desire;
 //
-//    if (!BV_ISSET(ut.flags, F_MISSILE) || !can_build_unit(pcity, i)) {
+//    if (!BV_ISSET(ut.flags, F_MISSILE) || !City.can_build_unit(pcity, i)) {
 //      continue;
 //    }
 //

@@ -63,7 +63,7 @@ public class Ruleset{
 //static int lookup_unit_type(section_file file, final String prefix,
 //			    final String entry, boolean required, final String filename,
 //			    final String description);
-//static Impr_Type_id lookup_impr_type(section_file file, final String prefix,
+//static int lookup_impr_type(section_file file, final String prefix,
 //				     final String entry, boolean required,
 //				     final String filename, final String description);
 //static int lookup_government(section_file file, final String entry,
@@ -373,17 +373,17 @@ public class Ruleset{
 //
 ///**************************************************************************
 // Lookup a string prefix.entry in the file and return the corresponding
-// Impr_Type_id.  If (!required), return B_LAST if match "None" or can't match.
+// int.  If (!required), return B_LAST if match "None" or can't match.
 // If (required), util.die if can't match.
 // If description is not null, it is used in the warning message
 // instead of prefix (eg pass impr.name instead of prefix="imprs2.b27")
 //**************************************************************************/
-//static Impr_Type_id lookup_impr_type(section_file file, final String prefix,
+//static int lookup_impr_type(section_file file, final String prefix,
 //				     final String entry, boolean required,
 //				     final String filename, final String description)
 //{
 //  char *sval;
-//  Impr_Type_id id;
+//  int id;
 //
 //  if (required) {
 //    sval = secfile_lookup_str(file, "%s.%s", prefix, entry);
@@ -1176,7 +1176,7 @@ public class Ruleset{
 //  sec = secfile_get_secnames_prefix(file, "group_", &nval);
 //  for (i = 0; i < nval; i++) {
 //    effect_group group;
-//    char name[MAX_LEN_NAME];
+//    String name="";
 //
 //    item = secfile_lookup_str(file, "%s.name", sec[i]);
 //    name = item;
@@ -1188,7 +1188,7 @@ public class Ruleset{
 //					    "%s.elements%d.building",
 //					    sec[i], j));
 //	 j++) {
-//      Impr_Type_id id;
+//      int id;
 //      enum effect_range range;
 //      boolean survives;
 //
@@ -2573,9 +2573,9 @@ public class Ruleset{
 //
 //  /* Specialist options */
 //  specialist_names = secfile_lookup_str_vec(file, &nval, "specialist.types");
-//  if (nval != SP_COUNT) {
+//  if (nval != specialist_type.getSize()) {
 //    util.freelog(LOG_FATAL, "There must be exactly %d types of specialist.",
-//	    SP_COUNT);
+//	    specialist_type.getSize());
 //    exit(EXIT_FAILURE);
 //  }
 //
@@ -2604,7 +2604,7 @@ public class Ruleset{
 //    util.freelog(LOG_FATAL, "Forced taxes do not add up in ruleset!");
 //    exit(EXIT_FAILURE);
 //  }
-//  if (Game.game.rgame.specialists[SP_ELVIS].min_size > 0) {
+//  if (Game.game.rgame.specialists[specialist_type.SP_ELVIS].min_size > 0) {
 //    util.freelog(LOG_FATAL, "Elvises must be available without a " +
 //	    "city size restriction!");
 //    exit(EXIT_FAILURE);
@@ -3266,7 +3266,7 @@ public class Ruleset{
 //**************************************************************************/
 //void send_rulesets(Speclists<Connection> dest)
 //{
-//  conn_list_do_buffer(dest);
+//  Connection.conn_list_do_buffer(dest);
 //  lsend_packet_freeze_hint(dest);
 //
 //  send_ruleset_control(dest);
@@ -3281,6 +3281,6 @@ public class Ruleset{
 //  send_ruleset_cache(dest);
 //
 //  lsend_packet_thaw_hint(dest);
-//  conn_list_do_unbuffer(dest);
+//  Connection.conn_list_do_unbuffer(dest);
 //}
 }

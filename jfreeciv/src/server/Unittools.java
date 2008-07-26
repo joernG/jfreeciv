@@ -244,7 +244,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  int potential_gold = 0;
 //
 //  built_impr_iterate(pcity, pimpr) {
-//    potential_gold += impr_sell_gold(pimpr);
+//    potential_gold += Improvement.impr_sell_gold(pimpr);
 //  } built_impr_iterate_end;
 //
 //  for (unit punit : pcity.units_supported.data) {
@@ -580,7 +580,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  if (activity == ACTIVITY_EXPLORE) {
 //    boolean more_to_explore = ai_manage_explorer(punit);
 //
-//    if (!player_find_unit_by_id(pplayer, id)) {
+//    if (!Player_P.player_find_unit_by_id(pplayer, id)) {
 //      /* Died */
 //      return;
 //    }
@@ -1324,7 +1324,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //     * doesn't, he needs to get a new short city packet updating the
 //     * occupied status. */
 //    if (Maphand.map_is_known_and_seen(pcity.tile, pplayer)) {
-//      send_city_info(pplayer, pcity);
+//      Citytools.send_city_info(pplayer, pcity);
 //    }
 //  } }
 //}
@@ -1395,7 +1395,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  punit.hp = MAX(punit.hp * punit.unit_type().hp / old_hp, 1);
 //  punit.moves_left = punit.moves_left * punit.move_rate() / old_mr;
 //
-//  conn_list_do_buffer(&pplayer.connections);
+//  Connection.conn_list_do_buffer(&pplayer.connections);
 //
 //  /* Apply new vision range
 //   *
@@ -1413,7 +1413,7 @@ public static int find_a_unit_type(int role, int role_tech)
 //  fog_area(pplayer, punit.tile, range);
 //
 //  send_unit_info(null, punit);
-//  conn_list_do_unbuffer(&pplayer.connections);
+//  Connection.conn_list_do_unbuffer(&pplayer.connections);
 //}
 //
 /************************************************************************* 
@@ -1447,7 +1447,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  assert(ptile != null);
 //  punit.tile = ptile;
 //
-//  pcity = find_city_by_id(homecity_id);
+//  pcity = Game.find_city_by_id(homecity_id);
 //  if (unit_type_flag(type, F_NOHOME)) {
 //    punit.homecity = 0; /* none */
 //  } else {
@@ -1485,8 +1485,8 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    assert(City.city_owner(pcity) == pplayer);
 //    unit_list_insert(&pcity.units_supported, punit);
 //    /* Refresh the unit's homecity. */
-//    city_refresh(pcity);
-//    send_city_info(pplayer, pcity);
+//    Cityturn.city_refresh(pcity);
+//    Citytools.send_city_info(pplayer, pcity);
 //  }
 //
 //  if (Map.map_has_special(ptile, S_FORTRESS)
@@ -1509,7 +1509,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    }
 //  } map_city_radius_iterate_end;
 //
-//  sync_cities();
+//  Citytools.sync_cities();
 //
 //  return punit;
 	return null;
@@ -1522,7 +1522,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //static void server_remove_unit(unit punit)
 //{
 //  city pcity = map_get_city(punit.tile);
-//  city phomecity = find_city_by_id(punit.homecity);
+//  city phomecity = Game.find_city_by_id(punit.homecity);
 //  tile unit_tile = punit.tile;
 //  player unitowner = punit.unit_owner();
 //
@@ -1573,19 +1573,19 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //      update_city_tile_status_map(pcity, unit_tile);
 //    }
 //  } map_city_radius_iterate_end;
-//  sync_cities();
+//  Citytools.sync_cities();
 //
 //  if (phomecity) {
-//    city_refresh(phomecity);
-//    send_city_info(City.city_owner(phomecity), phomecity);
+//    Cityturn.city_refresh(phomecity);
+//    Citytools.send_city_info(City.city_owner(phomecity), phomecity);
 //  }
 //  if (pcity && pcity != phomecity) {
-//    city_refresh(pcity);
-//    send_city_info(City.city_owner(pcity), pcity);
+//    Cityturn.city_refresh(pcity);
+//    Citytools.send_city_info(City.city_owner(pcity), pcity);
 //  }
 //  if (pcity && unit_tile.units.foo_list_size() == 0) {
 //    /* The last unit in the city was killed: update the occupied flag. */
-//    send_city_info(null, pcity);
+//    Citytools.send_city_info(null, pcity);
 //  }
 //}
 //
@@ -1942,7 +1942,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 		// struct packet_unit_short_info sinfo;
 		// boolean new_information_for_enemy = false;
 
-		// if (!dest) {
+		// if (dest==null) {
 		// dest = &Game.game.game_connections;
 		// }
 
@@ -2021,7 +2021,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //{
 //  int p;
 //  
-//  conn_list_do_buffer(dest);
+//  Connection.conn_list_do_buffer(dest);
 //  conn_list_iterate(*dest, pconn) {
 //    player pplayer = pconn.player;
 //    if (!pconn.player && !pconn.observer) {
@@ -2040,7 +2040,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    }
 //  }
 //  }
-//  conn_list_do_unbuffer(dest);
+//  Connection.conn_list_do_unbuffer(dest);
 //  flush_packets();
 //}
 //
@@ -2183,8 +2183,8 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  () move_unit(punit, city2.tile, punit.moves_left);
 //
 //  /* airlift fields have changed. */
-//  send_city_info(City.city_owner(city1), city1);
-//  send_city_info(City.city_owner(city2), city2);
+//  Citytools.send_city_info(City.city_owner(city1), city1);
+//  Citytools.send_city_info(City.city_owner(city2), city2);
 //
 //  return true;
 //}
@@ -2371,7 +2371,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    Plrhand.notify_player_ex(pplayer, punit.tile, E_HUT_CITY,
 //		     "Game: You found a friendly city.");
 //    create_city(pplayer, punit.tile,
-//		city_name_suggestion(pplayer, punit.tile));
+//		Citytools.city_name_suggestion(pplayer, punit.tile));
 //
 //    if (unit_flag(punit, F_CITIES) || unit_flag(punit, F_SETTLERS)) {
 //      /* In case city was found during autosettler activities */
@@ -2560,7 +2560,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  boolean refresh_homecity = false;
 //
 //  if (punit.homecity != 0)
-//    homecity = find_city_by_id(punit.homecity);
+//    homecity = Game.find_city_by_id(punit.homecity);
 //
 //  if (tocity)
 //    handle_unit_enter_city(punit, tocity);
@@ -2575,8 +2575,8 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    if (tocity) { /* entering a city */
 //      if (tocity.owner == punit.owner) {
 //	if (tocity != homecity) {
-//	  city_refresh(tocity);
-//	  send_city_info(pplayer, tocity);
+//	  Cityturn.city_refresh(tocity);
+//	  Citytools.send_city_info(pplayer, tocity);
 //	}
 //      }
 //
@@ -2590,8 +2590,8 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //	refresh_homecity = true;
 //      }
 //      if (fromcity != homecity && fromcity.owner == punit.owner) {
-//	city_refresh(fromcity);
-//	send_city_info(pplayer, fromcity);
+//	Cityturn.city_refresh(fromcity);
+//	Citytools.send_city_info(pplayer, fromcity);
 //      }
 //    }
 //
@@ -2609,8 +2609,8 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    }
 //    
 //    if (refresh_homecity) {
-//      city_refresh(homecity);
-//      send_city_info(pplayer, homecity);
+//      Cityturn.city_refresh(homecity);
+//      Citytools.send_city_info(pplayer, homecity);
 //    }
 //  }
 //
@@ -2623,19 +2623,19 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //    city pcity = map_get_city(tile1);
 //
 //    if (pcity && update_city_tile_status_map(pcity, src_tile)) {
-//      auto_arrange_workers(pcity);
-//      send_city_info(null, pcity);
+//      Cityturn.auto_arrange_workers(pcity);
+//      Citytools.send_city_info(null, pcity);
 //    }
 //  } map_city_radius_iterate_end;
 //  /* Then check cities near the destination. */
 //  map_city_radius_iterate(dst_tile, tile1) {
 //    city pcity = map_get_city(tile1);
 //    if (pcity && update_city_tile_status_map(pcity, dst_tile)) {
-//      auto_arrange_workers(pcity);
-//      send_city_info(null, pcity);
+//      Cityturn.auto_arrange_workers(pcity);
+//      Citytools.send_city_info(null, pcity);
 //    }
 //  } map_city_radius_iterate_end;
-//  sync_cities();
+//  Citytools.sync_cities();
 //}
 //
 ///**************************************************************************
@@ -2668,7 +2668,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  city pcity;
 //  unit ptransporter = null;
 //    
-//  conn_list_do_buffer(&pplayer.connections);
+//  Connection.conn_list_do_buffer(&pplayer.connections);
 //
 //  /* Transporting units. We first make a list of the units to be moved and
 //     then insert them again. The way this is done makes sure that the
@@ -2821,7 +2821,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //  wakeup_neighbor_sentries(punit);
 //  maybe_make_contact(pdesttile, punit.unit_owner());
 //
-//  conn_list_do_unbuffer(&pplayer.connections);
+//  Connection.conn_list_do_unbuffer(&pplayer.connections);
 //
 //  /* Note, an individual call to move_unit may leave things in an unstable
 //   * state (e.g., negative transporter capacity) if more than one unit is
@@ -3037,7 +3037,7 @@ public static unit create_unit_full(player pplayer, tile ptile,
 //      util.freelog(Log.LOG_DEBUG, "  moving to %d,%d",
 //	      dst_tile.x, dst_tile.y);
 //      res = Unithand.handle_unit_move_request(punit, dst_tile, false, !last_order);
-//      if (!player_find_unit_by_id(pplayer, unitid)) {
+//      if (!Player_P.player_find_unit_by_id(pplayer, unitid)) {
 //	util.freelog(Log.LOG_DEBUG, "  unit util.died while moving.");
 //	/* A player notification should already have been sent. */
 //	return false;

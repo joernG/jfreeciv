@@ -587,13 +587,13 @@ public class Wldlg{
 //{
 //  if (is_unit)
 //    sprintf(buf, "%s (%d)",
-//	    get_unit_name(id), unit_build_shield_cost(id));
+//	    get_unit_name(id), Unittype_P.unit_build_shield_cost(id));
 //  else if (pcity)
 //    sprintf(buf, "%s (%d)",
-//	    get_impr_name_ex(pcity, id), impr_build_shield_cost(id));
+//	    get_impr_name_ex(pcity, id), Improvement.impr_build_shield_cost(id));
 //  else
 //    sprintf(buf, "%s (%d)",
-//	    get_improvement_name(id), impr_build_shield_cost(id));
+//	    Improvement.get_improvement_name(id), Improvement.impr_build_shield_cost(id));
 //}
 //
 //
@@ -698,7 +698,7 @@ public class Wldlg{
 //      break;
 //
 //  for (j = retList.list_index; j < i-1; j++) {
-//    copy_worklist(&pdialog.pplr.worklists[j], 
+//    worklist.copy_worklist(&pdialog.pplr.worklists[j], 
 //                  &pdialog.pplr.worklists[j+1]);
 //  }
 //
@@ -741,7 +741,7 @@ public class Wldlg{
 //
 //  pdialog = (worklist_report_dialog )data;
 //
-//  copy_worklist(&pdialog.pplr.worklists[pdialog.wl_idx], pwl);
+//  worklist.copy_worklist(&pdialog.pplr.worklists[pdialog.wl_idx], pwl);
 //}
 //
 ///****************************************************************
@@ -1204,9 +1204,9 @@ public class Wldlg{
 //    if (is_unit) {
 //      popup_help_dialog_typed(get_unit_type(id).name, HELP_UNIT);
 //    } else if(is_wonder(id)) {
-//      popup_help_dialog_typed(get_improvement_name(id), HELP_WONDER);
+//      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_WONDER);
 //    } else {
-//      popup_help_dialog_typed(get_improvement_name(id), HELP_IMPROVEMENT);
+//      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_IMPROVEMENT);
 //    }
 //  }
 //  else
@@ -1310,7 +1310,7 @@ public class Wldlg{
 //
 //    /* If there's a city, can the city build the improvement? */
 //    if (pdialog.pcity) {
-//      can_build = can_build && can_build_improvement(pdialog.pcity, i);
+//      can_build = can_build && City.can_build_improvement(pdialog.pcity, i);
 //      can_eventually_build = can_eventually_build &&
 //	can_eventually_build_improvement(pdialog.pcity, i);
 //    }
@@ -1333,7 +1333,7 @@ public class Wldlg{
 //
 //    /* If there's a city, can the city build the improvement? */
 //    if (pdialog.pcity) {
-//      can_build = can_build && can_build_unit(pdialog.pcity, i);
+//      can_build = can_build && City.can_build_unit(pdialog.pcity, i);
 //      can_eventually_build = can_eventually_build &&
 //	can_eventually_build_unit(pdialog.pcity, i);
 //    }

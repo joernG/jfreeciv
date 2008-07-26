@@ -1,11 +1,11 @@
 package server;
 
-import java.sql.DriverManager;
 import java.util.Date;
 
 import port.util;
 import utility.Log;
 import utility.Md5;
+
 import common.Connection;
 import common.connection.auth_status;
 import common.packet_gen.authentication_type;

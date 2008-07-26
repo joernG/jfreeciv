@@ -682,7 +682,7 @@ public class Sernet{
 //static final String makeup_connection_name(int *id)
 //{
 //  static unsigned short i = 0;
-//  static char name[MAX_LEN_NAME];
+//  static String name="";
 //
 //  for(;;) {
 //    if (i==(unsigned short)-1) i++;              /* don't use 0 */

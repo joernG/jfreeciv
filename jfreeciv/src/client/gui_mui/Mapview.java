@@ -243,7 +243,7 @@ public class Mapview{
 //  {
 //    city pcity;
 //    int units = 0;
-//    pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//    pcity = Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //
 //    settextf(main_unitname_text, "%s%s", punit.unit_type().name,
 //	     (punit.veteran) ? " (veteran)" : "");

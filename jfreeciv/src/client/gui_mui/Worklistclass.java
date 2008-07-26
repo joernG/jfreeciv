@@ -175,9 +175,9 @@ public class Worklistclass{
 //      case  0:
 //            /* id is improvement */
 //            mystrlcpy(buf,get_improvement_info(id,pcity),64);
-//	    buf2 = String.format "%d", impr_build_shield_cost(id));
+//	    buf2 = String.format "%d", Improvement.impr_build_shield_cost(id));
 //
-//	    *array++ = get_improvement_name(id);
+//	    *array++ = Improvement.get_improvement_name(id);
 //	    *array++ = buf;
 //	    if (id == B_CAPITAL)
 //	    {
@@ -188,7 +188,7 @@ public class Worklistclass{
 //      case  1:
 //	    /* id is unit */
 //            mystrlcpy(buf,get_unit_info(id),64);
-//	    buf2 = String.format "%d", unit_build_shield_cost(id));
+//	    buf2 = String.format "%d", Unittype_P.unit_build_shield_cost(id));
 //
 //	    *array++ = unit_name(id);
 //	    *array++ = buf;
@@ -494,7 +494,7 @@ public class Worklistclass{
 //
 //    /* If there's a city, can the city build the improvement? */
 //    if (data.pcity) {
-//      can_build = can_build && can_build_improvement(data.pcity, i);
+//      can_build = can_build && City.can_build_improvement(data.pcity, i);
 //      can_eventually_build = can_eventually_build &&
 //	can_eventually_build_improvement(data.pcity, i);
 //    }
@@ -520,7 +520,7 @@ public class Worklistclass{
 //
 //    /* If there's a city, can the city build the improvement? */
 //    if (data.pcity) {
-//      can_build = can_build && can_build_improvement(data.pcity, i);
+//      can_build = can_build && City.can_build_improvement(data.pcity, i);
 //      can_eventually_build = can_eventually_build &&
 //	can_eventually_build_improvement(data.pcity, i);
 //    }

@@ -752,7 +752,7 @@ public class Helpdlg{
 //  
 //  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
-//    sprintf(buf, "%d ", impr_build_shield_cost(which));
+//    sprintf(buf, "%d ", Improvement.impr_build_shield_cost(which));
 //    xaw_set_label(help_improvement_cost_data, buf);
 //    sprintf(buf, "%d ", imp.upkeep);
 //    xaw_set_label(help_improvement_upkeep_data, buf);
@@ -787,7 +787,7 @@ public class Helpdlg{
 //
 //  if (which<Game.game.num_impr_types) {
 //    impr_type imp = &improvement_types[which];
-//    sprintf(buf, "%d ", impr_build_shield_cost(which));
+//    sprintf(buf, "%d ", Improvement.impr_build_shield_cost(which));
 //    xaw_set_label(help_improvement_cost_data, buf);
 //    if (imp.tech_req == A_LAST) {
 //      xaw_set_label(help_improvement_req_data, "(Never)");
@@ -826,7 +826,7 @@ public class Helpdlg{
 //  create_help_page(HELP_UNIT);
 //  if (i<Game.game.num_unit_types) {
 //    unit_type utype = get_unit_type(i);
-//    sprintf(buf, "%d ", unit_build_shield_cost(i));
+//    sprintf(buf, "%d ", Unittype_P.unit_build_shield_cost(i));
 //    xaw_set_label(help_unit_cost_data, buf);
 //    sprintf(buf, "%d ", utype.attack_strength);
 //    xaw_set_label(help_unit_attack_data, buf);

@@ -144,7 +144,7 @@ public class Mapclass{
 //	if (punit.owner == Game.game.player_idx)
 //	{
 //	  city pcity;
-//	  pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//	  pcity = Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //	  if (pcity)
 //	    cn = util.my_snprintf( "/%s", pcity.name);
 //	}
@@ -404,7 +404,7 @@ public class Mapclass{
 //#define PACK_USERDATA(punit,command) ((punit?((punit.id+1) << 8):0) | command)
 //#define PACK_CITY_USERDATA(punit,command) ((punit?((punit.id+1) << 8):0) | command)
 //#define UNPACK_UNIT(packed) ((packed>>8)?(find_unit_by_id((packed >> 8)-1)):null)
-//#define UNPACK_CITY(packed) ((packed>>8)?(find_city_by_id((packed >> 8)-1)):null)
+//#define UNPACK_CITY(packed) ((packed>>8)?(Game.find_city_by_id((packed >> 8)-1)):null)
 //#define UNPACK_COMMAND(packed) (packed&0xff)
 //
 //VOID Map_MakeContextItem(Object * menu_title, STRPTR name, ULONG udata)
@@ -1111,19 +1111,19 @@ public class Mapclass{
 //
 //	city_map_iterate(i, j)
 //	{
-//	  enum city_tile_type t = get_worker_city(pcity, i, j);
+//	  enum city_tile_type t = City.get_worker_city(pcity, i, j);
 //
-//	  if (!is_city_center(i, j))
+//	  if (!City.is_city_center(i, j))
 //	  {
 //	    int pix_x = (x + i - 2) * get_normal_tile_width() + _mleft(o);
 //	    int pix_y = (y + j - 2) * get_normal_tile_height() + _mtop(o);
 //
-//	    if (t == C_TILE_EMPTY)
+//	    if (t == city_tile_type.C_TILE_EMPTY)
 //	    {
 //	      static unsigned short pattern[] = {0x4444,0x1111};
 //	      SetAfPt( _rp(o), pattern, 1);
 //	    } else
-//	    if (t == C_TILE_WORKER)
+//	    if (t == city_tile_type.C_TILE_WORKER)
 //	    {
 //	      static unsigned short pattern[] = {0xaaaa,0x5555};
 //	      SetAfPt( _rp(o), pattern, 1);
@@ -1137,7 +1137,7 @@ public class Mapclass{
 //
 //	  }
 //
-//	  if (t == C_TILE_WORKER)
+//	  if (t == city_tile_type.C_TILE_WORKER)
 //	  {
 //	    put_city_output_tile(_rp(o),
 //				 city_get_food_tile(i, j, pcity),
@@ -2158,7 +2158,7 @@ public class Mapclass{
 //
 //	if (tile_get_known(map_x, map_y)
 //	    && city_to_canvas_pos(&canvas_x, &canvas_y, x, y)
-//	    && pcity.city_map[x][y]==C_TILE_WORKER) {
+//	    && pcity.city_map[x][y]==city_tile_type.C_TILE_WORKER) {
 //	  put_city_output_tile(_rp(o),
 //			       city_get_food_tile(x, y, pcity),
 //			       city_get_shields_tile(x, y, pcity), 
@@ -2176,7 +2176,7 @@ public class Mapclass{
 //
 //	if (tile_get_known(map_x, map_y)
 //	    && city_to_canvas_pos(&canvas_x, &canvas_y, x, y)
-//	    && pcity.city_map[x][y]==C_TILE_UNAVAILABLE) {
+//	    && pcity.city_map[x][y]==city_tile_type.C_TILE_UNAVAILABLE) {
 //	  canvas_x += _mleft(o);
 //	  canvas_y += _mtop(o);
 //
@@ -2205,30 +2205,30 @@ public class Mapclass{
 //    } else
 //    {
 //    	int x,y;
-//      for (y = 0; y < CITY_MAP_SIZE; y++)
+//      for (y = 0; y < City_H.CITY_MAP_SIZE; y++)
 //      {
-//        for (x = 0; x < CITY_MAP_SIZE; x++)
+//        for (x = 0; x < City_H.CITY_MAP_SIZE; x++)
 //        {
 //	  LONG x1 = _mleft(o) + x * get_normal_tile_width();
 //	  LONG y1 = _mtop(o) + y * get_normal_tile_height();
 //	  LONG x2 = x1 + get_normal_tile_width() - 1;
 //	  LONG y2 = y1 + get_normal_tile_height() - 1;
 //
-//	  if (is_valid_city_coords(x, y)) {
+//	  if (City.is_valid_city_coords(x, y)) {
 //	    int tilex, tiley;
 //
 //	    if (city_map_to_map(&tilex, &tiley, pcity, x, y)
 //		&& tile_get_known(tilex, tiley)) {
 //	      put_tile(_rp(o), tilex, tiley, x1, y1, 1);
 //
-//	      if (pcity.city_map[x][y] == C_TILE_WORKER) {
+//	      if (pcity.city_map[x][y] == city_tile_type.C_TILE_WORKER) {
 //		put_city_output_tile(_rp(o),
 //				     city_get_food_tile(x, y, pcity),
 //				     city_get_shields_tile(x, y, pcity),
 //				     city_get_trade_tile(x, y, pcity),
 //				     _mleft(o), _mtop(o), x, y);
 //	      } else {
-//		if (pcity.city_map[x][y] == C_TILE_UNAVAILABLE) {
+//		if (pcity.city_map[x][y] == city_tile_type.C_TILE_UNAVAILABLE) {
 //		  SetAPen(rp, data.red_color);
 //		  Move(rp, x1, y1);
 //		  Draw(rp, x2, y1);

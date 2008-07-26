@@ -211,7 +211,7 @@ public class Gotodlg{
 //  int selection;  
 //  if ((selection=ListBox_GetCurSel(goto_list))==LB_ERR)
 //    return 0;
-//  return find_city_by_id(ListBox_GetItemData(goto_list,selection));
+//  return Game.find_city_by_id(ListBox_GetItemData(goto_list,selection));
 //
 //}
 }

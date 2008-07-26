@@ -291,14 +291,14 @@ public class Cma_fec{
 //
 //  stock = pcity.shield_stock;
 //  if (pcity.is_building_unit) {
-//    cost = unit_build_shield_cost(pcity.currently_building);
+//    cost = Unittype_P.unit_build_shield_cost(pcity.currently_building);
 //  } else {
-//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //      buffer = util.my_snprintf(
 //		  get_improvement_type(pcity.currently_building).name);
 //      return buffer;
 //    }
-//    cost = impr_build_shield_cost(pcity.currently_building);
+//    cost = Improvement.impr_build_shield_cost(pcity.currently_building);
 //  }
 //
 //  stock += surplus;

@@ -211,7 +211,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_city_remove(int city_id)
 //{
-//  city pcity = find_city_by_id(city_id);
+//  city pcity = Game.find_city_by_id(city_id);
 //  tile ptile;
 //
 //  if (!pcity)
@@ -329,7 +329,7 @@ public class Packhand{
 //  the existing improvement status was changed by this call.
 //**************************************************************************/
 //static void update_improvement_from_packet(city pcity,
-//					   Impr_Type_id impr, boolean have_impr,
+//					   int impr, boolean have_impr,
 //					   boolean *impr_changed)
 //{
 //  if (have_impr && pcity.improvements[impr] == I_NONE) {
@@ -412,7 +412,7 @@ public class Packhand{
 //  boolean popup, update_descriptions = false, name_changed = false;
 //  unit pfocus_unit = get_unit_in_focus();
 //
-//  pcity=find_city_by_id(packet.id);
+//  pcity=Game.find_city_by_id(packet.id);
 //
 //  if (pcity && (pcity.owner != packet.owner)) {
 //    client_remove_city(pcity);
@@ -506,7 +506,7 @@ public class Packhand{
 //    improvement_status_init(pcity.improvements,
 //			    ARRAY_SIZE(pcity.improvements));
 //  }
-//  copy_worklist(&pcity.worklist, &packet.worklist);
+//  worklist.copy_worklist(&pcity.worklist, &packet.worklist);
 //  pcity.did_buy=packet.did_buy;
 //  pcity.did_sell=packet.did_sell;
 //  pcity.was_happy=packet.was_happy;
@@ -521,15 +521,15 @@ public class Packhand{
 //  pcity.caravan_shields=packet.caravan_shields;
 //  pcity.last_turns_shield_surplus = packet.last_turns_shield_surplus;
 //
-//  for (i = 0; i < CITY_MAP_SIZE * CITY_MAP_SIZE; i++) {
-//    final int x = i % CITY_MAP_SIZE, y = i / CITY_MAP_SIZE;
+//  for (i = 0; i < City_H.CITY_MAP_SIZE * City_H.CITY_MAP_SIZE; i++) {
+//    final int x = i % City_H.CITY_MAP_SIZE, y = i / City_H.CITY_MAP_SIZE;
 //
 //    if (city_is_new) {
 //      /* Need to pre-initialize before set_worker_city()  -- dwp */
 //      pcity.city_map[x][y] =
-//	is_valid_city_coords(x, y) ? C_TILE_EMPTY : C_TILE_UNAVAILABLE;
+//	City.is_valid_city_coords(x, y) ? city_tile_type.C_TILE_EMPTY : city_tile_type.C_TILE_UNAVAILABLE;
 //    }
-//    if (is_valid_city_coords(x, y)) {
+//    if (City.is_valid_city_coords(x, y)) {
 //      set_worker_city(pcity, x, y, packet.city_map[i]);
 //    }
 //  }
@@ -685,7 +685,7 @@ public class Packhand{
 //  boolean city_is_new, city_has_changed_owner = false, need_effect_update = false;
 //  boolean update_descriptions = false;
 //
-//  pcity=find_city_by_id(packet.id);
+//  pcity=Game.find_city_by_id(packet.id);
 //
 //  if (pcity && (pcity.owner != packet.owner)) {
 //    client_remove_city(pcity);
@@ -784,9 +784,9 @@ public class Packhand{
 //    pcity.did_sell           = false;
 //    pcity.was_happy          = false;
 //
-//    for (y = 0; y < CITY_MAP_SIZE; y++) {
-//      for (x = 0; x < CITY_MAP_SIZE; x++) {
-//	pcity.city_map[x][y] = C_TILE_EMPTY;
+//    for (y = 0; y < City_H.CITY_MAP_SIZE; y++) {
+//      for (x = 0; x < City_H.CITY_MAP_SIZE; x++) {
+//	pcity.city_map[x][y] = city_tile_type.C_TILE_EMPTY;
 //      }
 //    }
 //  } /* Dumb values */
@@ -996,7 +996,7 @@ public class Packhand{
 //  boolean ret = false;
 //  unit focus_unit = get_unit_in_focus();
 //  
-//  punit = player_find_unit_by_id(get_player(packet_unit.owner),
+//  punit = Player_P.player_find_unit_by_id(get_player(packet_unit.owner),
 //				 packet_unit.id);
 //
 //  if (punit) {
@@ -1093,13 +1093,13 @@ public class Packhand{
 //    if (punit.homecity != packet_unit.homecity) {
 //      /* change homecity */
 //      city pcity;
-//      if ((pcity=find_city_by_id(punit.homecity))) {
+//      if ((pcity=Game.find_city_by_id(punit.homecity))) {
 //	unit_list_unlink(&pcity.units_supported, punit);
 //	refresh_city_dialog(pcity);
 //      }
 //      
 //      punit.homecity = packet_unit.homecity;
-//      if ((pcity=find_city_by_id(punit.homecity))) {
+//      if ((pcity=Game.find_city_by_id(punit.homecity))) {
 //	unit_list_insert(&pcity.units_supported, punit);
 //	repaint_city = true;
 //      }
@@ -1213,7 +1213,7 @@ public class Packhand{
 //    if (repaint_city || repaint_unit) {
 //      /* We repaint the city if the unit itself needs repainting or if
 //       * there a special city-only redrawing to be done. */
-//      if((pcity=find_city_by_id(punit.homecity))) {
+//      if((pcity=Game.find_city_by_id(punit.homecity))) {
 //	refresh_city_dialog(pcity);
 //      }
 //      if (repaint_unit && punit.tile.city && punit.tile.city != pcity) {
@@ -1243,7 +1243,7 @@ public class Packhand{
 //    unit_list_insert(&get_player(punit.owner).units, punit);
 //    unit_list_insert(&punit.tile.units, punit);
 //
-//    if((pcity=find_city_by_id(punit.homecity))) {
+//    if((pcity=Game.find_city_by_id(punit.homecity))) {
 //      unit_list_insert(&pcity.units_supported, punit);
 //    }
 //
@@ -1324,7 +1324,7 @@ public class Packhand{
 //    static int last_serial_num = 0;
 //
 //    /* fetch city -- abort if not found */
-//    pcity = find_city_by_id(packet.info_city_id);
+//    pcity = Game.find_city_by_id(packet.info_city_id);
 //    if (!pcity) {
 //      return;
 //    }
@@ -1440,7 +1440,7 @@ public class Packhand{
 //   and has equiv_range==World - otherwise we deal with it in its home
 //   city anyway */
 //    if (is_wonder(i) && improvement_types[i].equiv_range==EFR_WORLD &&
-//        !find_city_by_id(Game.game.global_wonders[i])) {
+//        !Game.find_city_by_id(Game.game.global_wonders[i])) {
 //      if (Game.game.global_wonders[i] <= 0 && Game.game.improvements[i] != I_NONE) {
 //        Game.game.improvements[i] = I_NONE;
 //        need_effect_update = true;
@@ -2722,7 +2722,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_city_incite_info(int city_id, int cost)
 //{
-//  city pcity = find_city_by_id(city_id);
+//  city pcity = Game.find_city_by_id(city_id);
 //
 //  if (pcity) {
 //    pcity.incite_revolt_cost = cost;
@@ -2737,7 +2737,7 @@ public class Packhand{
 //**************************************************************************/
 //void handle_city_name_suggestion_info(int unit_id, char *name)
 //{
-//  unit punit = player_find_unit_by_id(Game.game.player_ptr, unit_id);
+//  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, unit_id);
 //
 //  if (!can_client_issue_orders()) {
 //    return;
@@ -2758,7 +2758,7 @@ public class Packhand{
 //void handle_unit_diplomat_popup_dialog(int diplomat_id, int target_id)
 //{
 //  unit pdiplomat =
-//      player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
+//      Player_P.player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
 //
 //  if (pdiplomat) {
 //    process_diplomat_arrival(pdiplomat, target_id);
@@ -2771,8 +2771,8 @@ public class Packhand{
 //void handle_city_sabotage_list(int diplomat_id, int city_id,
 //			       char *improvements)
 //{
-//  unit punit = player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
-//  city pcity = find_city_by_id(city_id);
+//  unit punit = Player_P.player_find_unit_by_id(Game.game.player_ptr, diplomat_id);
+//  city pcity = Game.find_city_by_id(city_id);
 //
 //  if (punit && pcity) {
 //    impr_type_iterate(i) {

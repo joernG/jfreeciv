@@ -1,7 +1,5 @@
 package common;
 
-import common.play_spaceship.spaceship_state;
-
 import server.spaceace.player_spaceship;
 
 public class Spaceship {

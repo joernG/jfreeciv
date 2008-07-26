@@ -58,7 +58,7 @@ public class Terrain_H {
 //		#define T_COUNT (Game.game.terrain_count)
 //
 //		/* A hard limit on the number of terrains; useful for static arrays. */
-//		#define MAX_NUM_TERRAINS MAX_NUM_ITEMS
+//		#define MAX_NUM_TERRAINS Shared_H.MAX_NUM_ITEMS
 //		#define TER_FIRST (TER_NO_BARBS)
 //		#define TER_COUNT (TER_LAST)
 //		#define TER_MAX 64 /* Changing this breaks network compatability. */

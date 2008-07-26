@@ -263,7 +263,7 @@ public class Text{
 //    }
 //
 //    if (pfocus_unit) {
-//      city hcity = find_city_by_id(pfocus_unit.homecity);
+//      city hcity = Game.find_city_by_id(pfocus_unit.homecity);
 //
 //      if (unit_flag(pfocus_unit, F_TRADE_ROUTE)
 //	  && can_cities_trade(hcity, pcity)
@@ -292,7 +292,7 @@ public class Text{
 //      city pcity;
 //      char tmp[64] = {0};
 //
-//      pcity = player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//      pcity = Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //      if (pcity) {
 //	tmp = util.my_snprintf( "/%s", pcity.name);
 //      }
@@ -433,7 +433,7 @@ public class Text{
 //{
 //  int pcity_near_dist;
 //  city pcity =
-//      player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//      Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //  city pcity_near = get_nearest_city(punit, &pcity_near_dist);
 //  unit_type ptype = punit.unit_type();
 //  INIT;
@@ -552,7 +552,7 @@ public class Text{
 //   * GUI widgets may be confused and try to resize themselves. */
 //  if (punit) {
 //    city pcity =
-//	player_find_city_by_id(Game.game.player_ptr, punit.homecity);
+//	Player_P.player_find_city_by_id(Game.game.player_ptr, punit.homecity);
 //    int infrastructure =
 //	get_tile_infrastructure_set(punit.tile);
 //
@@ -791,7 +791,7 @@ public class Text{
 //  get_city_bonus_sources(&sources, pcity, EFT_MAKE_CONTENT);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
-//    add("%s. ", get_improvement_name(src.building));
+//    add("%s. ", Improvement.get_improvement_name(src.building));
 //  } effect_source_vector_iterate_end;
 //  effect_source_vector_free(&sources);
 //
@@ -816,21 +816,21 @@ public class Text{
 //  get_city_bonus_sources(&sources, pcity, EFT_MAKE_HAPPY);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
-//    add("%s. ", get_improvement_name(src.building));
+//    add("%s. ", Improvement.get_improvement_name(src.building));
 //  } effect_source_vector_iterate_end;
 //  effect_source_vector_free(&sources);
 //
 //  get_city_bonus_sources(&sources, pcity, EFT_FORCE_CONTENT);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
-//    add("%s. ", get_improvement_name(src.building));
+//    add("%s. ", Improvement.get_improvement_name(src.building));
 //  } effect_source_vector_iterate_end;
 //  effect_source_vector_free(&sources);
 //
 //  get_city_bonus_sources(&sources, pcity, EFT_NO_UNHAPPY);
 //  effect_source_vector_iterate(&sources, src) {
 //    faces++;
-//    add("%s. ", get_improvement_name(src.building));
+//    add("%s. ", Improvement.get_improvement_name(src.building));
 //  } effect_source_vector_iterate_end;
 //  effect_source_vector_free(&sources);
 //

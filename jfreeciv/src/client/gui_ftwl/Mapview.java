@@ -1480,7 +1480,7 @@ public class Mapview{
 //    city pcity = item.pcity;
 //    int i;
 //
-//    if (Game.game.player_ptr.economic.gold >= city_buy_cost(pcity)) {
+//    if (Game.game.player_ptr.economic.gold >= City.city_buy_cost(pcity)) {
 //      ADD("city_buy");
 //    } else {
 //      ADD_DIS("city_buy");

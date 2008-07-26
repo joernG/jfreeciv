@@ -562,9 +562,9 @@ public class Wldlg{
 //    if (is_unit) {
 //      popup_help_dialog_typed(get_unit_type(id).name, HELP_UNIT);
 //    } else if (is_wonder(id)) {
-//      popup_help_dialog_typed(get_improvement_name(id), HELP_WONDER);
+//      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_WONDER);
 //    } else {
-//      popup_help_dialog_typed(get_improvement_name(id), HELP_IMPROVEMENT);
+//      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_IMPROVEMENT);
 //    }
 //  } else {
 //    popup_help_dialog_string(HELP_WORKLIST_EDITOR_ITEM);
@@ -1354,7 +1354,7 @@ public class Wldlg{
 //  if (ptr.pcity) {
 //    city_get_queue(ptr.pcity, &queue);
 //  } else {
-//    copy_worklist(&queue, pwl);
+//    worklist.copy_worklist(&queue, pwl);
 //  }
 //
 //  for (i = 0; i < MAX_LEN_WORKLIST; i++) {
@@ -1453,7 +1453,7 @@ public class Wldlg{
 //      refresh_worklist(ptr.editor);
 //    }
 //  } else {
-//    copy_worklist(pwl, &queue);
+//    worklist.copy_worklist(pwl, &queue);
 //  }
 //}
 }

@@ -1,5 +1,6 @@
 package common;
 
+import common.city.city;
 import common.game.civ_game;
 import common.unit.unit;
 
@@ -80,17 +81,17 @@ public class Game{
 //
 //  return null;
 //}
-//
-//
-///**************************************************************************
-//  Often used function to get a city pointer from a city ID.
-//  City may be any city in the Game.game.  This now always uses fast idex
-//  method, instead of looking through all cities of all players.
-//**************************************************************************/
-//city find_city_by_id(int id)
-//{
-//  return idex_lookup_city(id);
-//}
+
+
+	/**************************************************************************
+	 * Often used function to get a city pointer from a city ID. City may be any
+	 * city in the Game.game. This now always uses fast idex method, instead of
+	 * looking through all cities of all players.
+	 **************************************************************************/
+	public static city find_city_by_id(int id)
+	{
+		return Idex.idex_lookup_city(id);
+	}
 
 
 	/***************************************************************************
@@ -99,8 +100,7 @@ public class Game{
 	 **************************************************************************/
 	public static unit find_unit_by_id(int id) {
 		//TODO: need a hashmap to find object quick
-//		return idex_lookup_unit(id);
-		return new unit();
+		return Idex.idex_lookup_unit(id);
 	}
 
 	// /**************************************************************************
@@ -116,7 +116,7 @@ public class Game{
 //	  unit_name(punit.type), punit.tile.x, punit.tile.y,
 //	  punit.homecity);
 //
-//  pcity = player_find_city_by_id(punit.unit_owner(), punit.homecity);
+//  pcity = Player_P.player_find_city_by_id(punit.unit_owner(), punit.homecity);
 //  if (pcity) {
 //    unit_list_unlink(&pcity.units_supported, punit);
 //  }
@@ -149,7 +149,7 @@ public class Game{
 //	  pcity.tile.y);
 //
 //  city_map_checked_iterate(pcity.tile, x, y, map_tile) {
-//    set_worker_city(pcity, x, y, C_TILE_EMPTY);
+//    set_worker_city(pcity, x, y, city_tile_type.C_TILE_EMPTY);
 //  } city_map_checked_iterate_end;
 //  city_list_unlink(&City.city_owner(pcity).cities, pcity);
 //  map_set_city(pcity.tile, null);

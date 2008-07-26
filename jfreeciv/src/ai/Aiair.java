@@ -111,7 +111,7 @@ public class Aiair{
 //  /* Ok, we can attack, but is it worth it? */
 //
 //  /* Cost of our unit */
-//  unit_cost = unit_build_shield_cost(punit.type);
+//  unit_cost = Unittype_P.unit_build_shield_cost(punit.type);
 //  /* This is to say "wait, ill unit will get better!" */
 //  unit_cost = unit_cost * punit.unit_type().hp / punit.hp; 
 //
@@ -120,7 +120,7 @@ public class Aiair{
 //
 //  /* Missile would util.die 100% so we adjust the victim_cost -- GB */
 //  if (unit_flag(punit, F_MISSILE)) {
-//    victim_cost -= unit_build_shield_cost(punit.type);
+//    victim_cost -= Unittype_P.unit_build_shield_cost(punit.type);
 //  }
 //
 //  unit_attack = (int) (PROB_MULTIPLIER 
@@ -136,7 +136,7 @@ public class Aiair{
 //    - SHIELD_WEIGHTING + 2 * TRADE_WEIGHTING;
 //  if (profit > 0) {
 //    profit = military_amortize(punit.unit_owner(), 
-//                               find_city_by_id(punit.homecity),
+//                               Game.find_city_by_id(punit.homecity),
 //                               profit, sortie_time, balanced_cost);
 //    util.freelog(Log.LOG_DEBUG, 
 //	    "%s at (%d, %d) is a worthy target with profit %d", 
@@ -393,7 +393,7 @@ public class Aiair{
 //
 //  unit_type_iterate(u_type) {
 //    if (get_unit_type(u_type).move_type != AIR_MOVING) continue;
-//    if (can_build_unit(pcity, u_type)) {
+//    if (City.can_build_unit(pcity, u_type)) {
 //      unit virtual_unit = 
 //	create_unit_virtual(pplayer, pcity, u_type, 
 //                            do_make_unit_veteran(pcity, u_type));

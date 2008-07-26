@@ -332,7 +332,7 @@ public class Cityrep{
 //
 //  gtk_tree_model_get(model, it, 1, &id, -1);
 //
-//  city_change_production(find_city_by_id(id), cid_is_unit(cid), cid_id(cid));
+//  city_change_production(Game.find_city_by_id(id), cid_is_unit(cid), cid_id(cid));
 //}
 //
 ///****************************************************************
@@ -351,7 +351,7 @@ public class Cityrep{
 //  city pcity;  
 //
 //  gtk_tree_model_get(model, it, 1, &id, -1);
-//  pcity = find_city_by_id(id);
+//  pcity = Game.find_city_by_id(id);
 //
 //  () city_queue_insert(pcity, -1, cid_is_unit(cid), cid_id(cid));
 //  /* perhaps should warn the user if not successful? */
@@ -375,7 +375,7 @@ public class Cityrep{
 //  city pcity;  
 //
 //  gtk_tree_model_get(model, it, 1, &id, -1);
-//  pcity = find_city_by_id(id);
+//  pcity = Game.find_city_by_id(id);
 //
 //  () city_queue_insert(pcity, 0, cid_is_unit(cid), cid_id(cid));
 //  /* perhaps should warn the user if not successful? */
@@ -397,7 +397,7 @@ public class Cityrep{
 //  cid cid = GPOINTER_TO_INT(data);
 //
 //  gtk_tree_model_get(model, it, 1, &id, -1);
-//  pcity = find_city_by_id(id);
+//  pcity = Game.find_city_by_id(id);
 //
 //  () city_queue_insert(pcity, 1, cid_is_unit(cid), cid_id(cid));
 //  /* perhaps should warn the user if not successful? */

@@ -670,7 +670,7 @@ public class Wldlg{
 //      break;
 //
 //  for (j = GPOINTER_TO_INT(selection.data); j < i - 1; j++) {
-//    copy_worklist(&preport.pplr.worklists[j], 
+//    worklist.copy_worklist(&preport.pplr.worklists[j], 
 //                  &preport.pplr.worklists[j + 1]);
 //  }
 //
@@ -704,7 +704,7 @@ public class Wldlg{
 //{
 //  worklist_report preport = (worklist_report ) data;
 //
-//  copy_worklist(&preport.pplr.worklists[preport.wl_idx], pwl);
+//  worklist.copy_worklist(&preport.pplr.worklists[preport.wl_idx], pwl);
 //}
 //
 ///****************************************************************
@@ -1441,9 +1441,9 @@ public class Wldlg{
 //    if (is_unit) {
 //      popup_help_dialog_typed(get_unit_type(id).name, HELP_UNIT);
 //    } else if (is_wonder(id)) {
-//      popup_help_dialog_typed(get_improvement_name(id), HELP_WONDER);
+//      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_WONDER);
 //    } else {
-//      popup_help_dialog_typed(get_improvement_name(id), HELP_IMPROVEMENT);
+//      popup_help_dialog_typed(Improvement.get_improvement_name(id), HELP_IMPROVEMENT);
 //    }
 //  } else
 //    popup_help_dialog_string(HELP_WORKLIST_EDITOR_ITEM);

@@ -1,6 +1,6 @@
 package common;
 
-public class Worklist{
+public class worklist{
 
 // Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
 //   This program is free software; you can redistribute it and/or modify
@@ -24,8 +24,24 @@ public class Worklist{
 //#include "mem.h"
 //#include "unit.h"
 //
-//#include "worklist.h"
-//
+	public static final int MAX_LEN_WORKLIST = 16;
+	public static final int MAX_NUM_WORKLISTS = 16;
+
+	/* worklist element flags */
+	enum worklist_elem_flag {
+	  WEF_END,	/* element is past end of list */
+	  WEF_UNIT,	/* element specifies a unit to be built */
+	  WEF_IMPR,	/* element specifies an improvement to be built */
+	  WEF_LAST	/* leave this last */
+	};
+
+	/* a worklist */
+//	struct worklist {
+	  public boolean is_valid;
+	  public String name;
+	  public worklist_elem_flag wlefs[] = new worklist_elem_flag[MAX_LEN_WORKLIST];
+	  public int wlids[]= new int[MAX_LEN_WORKLIST];
+//	};//
 ///****************************************************************
 //  Initialize a worklist to be empty and have a default name.
 //  For elements, only really need to set [0], but initialize the
@@ -116,13 +132,13 @@ public class Worklist{
 //  worklist_remove(pwl, 0);
 //}  
 //
-///****************************************************************
-//...
-//****************************************************************/
-//void copy_worklist(worklist dst, final worklist src)
-//{
+/****************************************************************
+...
+****************************************************************/
+public static void copy_worklist(worklist dst, final worklist src)
+{
 //  memcpy(dst, src, sizeof(struct worklist));
-//}
+}
 //
 ///****************************************************************
 //...

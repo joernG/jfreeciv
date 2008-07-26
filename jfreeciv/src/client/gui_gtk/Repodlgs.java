@@ -757,7 +757,7 @@ public class Repodlgs{
 //    for (i = 0; i < entries_used; i++) {
 //      improvement_entry p = &entries[i];
 //
-//      buf0 = util.my_snprintf( "%-20s", get_improvement_name(p.type));
+//      buf0 = util.my_snprintf( "%-20s", Improvement.get_improvement_name(p.type));
 //      buf1 = util.my_snprintf( "%5d", p.count);
 //      buf2 = util.my_snprintf( "%5d", p.cost);
 //      buf3 = util.my_snprintf( "%6d", p.total_cost);

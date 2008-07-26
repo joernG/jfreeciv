@@ -150,7 +150,7 @@ public class Optiondlg{
 //	}
 //	if (i + 1 < MAX_NUM_WORKLISTS &&
 //	    Game.game.player_ptr.worklists[i + 1].is_valid) {
-//	  copy_worklist(&Game.game.player_ptr.worklists[i],
+//	  worklist.copy_worklist(&Game.game.player_ptr.worklists[i],
 //			  &Game.game.player_ptr.worklists[i + 1]);
 //	} else {
 //	  Game.game.player_ptr.worklists[i].is_valid = false;

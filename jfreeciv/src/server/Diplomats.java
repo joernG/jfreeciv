@@ -114,8 +114,8 @@ public class Diplomats{
 //		     " of %s."), pplayer.name, pcity.name);
 //
 //  /* Update clients. */
-//  city_refresh (pcity);  
-//  send_city_info(null, pcity);
+//  Cityturn.city_refresh (pcity);  
+//  Citytools.send_city_info(null, pcity);
 //
 //  /* this may cause a diplomatic incident */
 //  maybe_cause_incident(SPY_POISON, pplayer, null, pcity);
@@ -173,7 +173,7 @@ public class Diplomats{
 //    first_packet = false;
 //  } }
 //  /* Send city info to investigator's player.
-//     As this is a special case we bypass send_city_info. */
+//     As this is a special case we bypass Citytools.send_city_info. */
 //  package_city(pcity, &city_packet, true);
 //  lsend_packet_city_info(&pplayer.connections, &city_packet);
 //
@@ -500,7 +500,7 @@ public class Diplomats{
 //  if (!Unithand.handle_unit_move_request(pdiplomat, victim_tile, false, false)) {
 //    pdiplomat.moves_left = 0;
 //  }
-//  if (player_find_unit_by_id(pplayer, diplomat_id)) {
+//  if (Player_P.player_find_unit_by_id(pplayer, diplomat_id)) {
 //    Unittools.send_unit_info (pplayer, pdiplomat);
 //  }
 //
@@ -772,7 +772,7 @@ public class Diplomats{
 //  }
 //
 //  /* Get incite cost. */
-//  revolt_cost = city_incite_cost(pplayer, pcity);
+//  revolt_cost = Cityturn.city_incite_cost(pplayer, pcity);
 //
 //  /* If player doesn't have enough gold, can't incite a revolt. */
 //  if (pplayer.economic.gold < revolt_cost) {
@@ -872,7 +872,7 @@ public class Diplomats{
 //  - The saboteur may be captured and executed, or escape to its home town.
 //**************************************************************************/
 //void diplomat_sabotage(player pplayer, unit pdiplomat,
-//		       city pcity, Impr_Type_id improvement)
+//		       city pcity, int improvement)
 //{
 //  player cplayer;
 //  int count, which, target;
@@ -970,7 +970,7 @@ public class Diplomats{
 //      } built_impr_iterate_end;
 //
 //      util.freelog (Log.LOG_DEBUG, "sabotage: random: targeted improvement: %d (%s)",
-//	       target, get_improvement_name (target));
+//	       target, Improvement.get_improvement_name (target));
 //    }
 //  } else {
 //    /*
@@ -982,7 +982,7 @@ public class Diplomats{
 //      if (get_improvement_type(improvement).sabotage > 0) {
 //	target = improvement;
 //	util.freelog (Log.LOG_DEBUG, "sabotage: specified target improvement: %d (%s)",
-//	       target, get_improvement_name (target));
+//	       target, Improvement.get_improvement_name (target));
 //      } else {
 //	Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //			 "Game: You cannot sabotage a %s!",
@@ -990,18 +990,18 @@ public class Diplomats{
 //	diplomat_charge_movement (pdiplomat, pcity.tile);
 //	Unittools.send_unit_info (pplayer, pdiplomat);
 //	util.freelog (Log.LOG_DEBUG, "sabotage: disallowed target improvement: %d (%s)",
-//	       improvement, get_improvement_name (improvement));
+//	       improvement, Improvement.get_improvement_name (improvement));
 //	return;
 //      }
 //    } else {
 //      Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_FAILED,
 //		       ("Game: Your %s could not find the %s to" +
 //			 " sabotage in %s."), unit_name(pdiplomat.type),
-//		       get_improvement_name(improvement), pcity.name);
+//		       Improvement.get_improvement_name(improvement), pcity.name);
 //      diplomat_charge_movement (pdiplomat, pcity.tile);
 //      Unittools.send_unit_info (pplayer, pdiplomat);
 //      util.freelog (Log.LOG_DEBUG, "sabotage: target improvement not found: %d (%s)",
-//	       improvement, get_improvement_name (improvement));
+//	       improvement, Improvement.get_improvement_name (improvement));
 //      return;
 //    }
 //  }
@@ -1018,7 +1018,7 @@ public class Diplomats{
 //    if (pcity.is_building_unit)
 //      prod = unit_name (pcity.currently_building);
 //    else
-//      prod = get_improvement_name (pcity.currently_building);
+//      prod = Improvement.get_improvement_name (pcity.currently_building);
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_SABOTAGE,
 //		     ("Game: Your %s succeeded in destroying" +
 //		       " the production of %s in %s."),
@@ -1053,7 +1053,7 @@ public class Diplomats{
 //			 " to sabotage the %s in %s!"),
 //		       Nation.get_nation_name(pplayer.nation),
 //		       unit_name(pdiplomat.type),
-//		       get_improvement_name(target), pcity.name);
+//		       Improvement.get_improvement_name(target), pcity.name);
 //      Unittools.wipe_unit(pdiplomat);
 //      util.freelog (Log.LOG_DEBUG, "sabotage: caught in capital or on city walls");
 //      return;
@@ -1063,20 +1063,20 @@ public class Diplomats{
 //    Plrhand.notify_player_ex(pplayer, pcity.tile, E_MY_DIPLOMAT_SABOTAGE,
 //		     "Game: Your %s destroyed the %s in %s.",
 //		     unit_name(pdiplomat.type),
-//		     get_improvement_name(target), pcity.name);
+//		     Improvement.get_improvement_name(target), pcity.name);
 //    Plrhand.notify_player_ex(cplayer, pcity.tile, E_ENEMY_DIPLOMAT_SABOTAGE,
 //		     "Game: The %s destroyed the %s in %s.",
 //		     Nation.Nation.get_nation_name_plural(pplayer.nation),
-//		     get_improvement_name(target), pcity.name);
+//		     Improvement.get_improvement_name(target), pcity.name);
 //    util.freelog (Log.LOG_DEBUG, "sabotage: sabotaged improvement: %d (%s)",
-//	       target, get_improvement_name (target));
+//	       target, Improvement.get_improvement_name (target));
 //
 //    /* Do it. */
 //    building_lost(pcity, target);
 //  }
 //
 //  /* Update clients. */
-//  send_city_info(null, pcity);
+//  Citytools.send_city_info(null, pcity);
 //
 //  /* this may cause a diplomatic incident */
 //  maybe_cause_incident(DIPLOMAT_SABOTAGE, pplayer, null, pcity);
@@ -1433,7 +1433,7 @@ public class Diplomats{
 //    dist = Math.min(g.fixed_corruption_distance, dist);
 //  cost /= dist + 2;
 //
-//  cost *= unit_build_shield_cost(punit.type) / 10;
+//  cost *= Unittype_P.unit_build_shield_cost(punit.type) / 10;
 //
 //  /* FIXME: This is a weird one - should be replaced */
 //  if (unit_flag(punit, F_CITIES)) 

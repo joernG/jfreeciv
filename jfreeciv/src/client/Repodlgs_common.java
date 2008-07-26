@@ -84,7 +84,7 @@ public class Repodlgs_common{
 //
 //  for (city pcity : Game.game.player_ptr.cities.data) {
 //    *total_income += pcity.tax_total;
-//    if (get_current_finalruction_bonus(pcity, EFT_PROD_TO_GOLD) > 0) {
+//    if (Effects.get_current_finalruction_bonus(pcity, effect_type.EFT_PROD_TO_GOLD) > 0) {
 //      *total_income += MAX(0, pcity.shield_surplus);
 //    }
 //  } }
@@ -310,7 +310,7 @@ public class Repodlgs_common{
 //  The "message" string will be filled with a GUI-friendly message about
 //  what was sold.
 //****************************************************************************/
-//void sell_all_improvements(Impr_Type_id impr, boolean obsolete_only,
+//void sell_all_improvements(int impr, boolean obsolete_only,
 //			   char *message, size_t message_sz)
 //{
 //  int count = 0, gold = 0;
@@ -326,17 +326,17 @@ public class Repodlgs_common{
 //	    || improvement_obsolete(Game.game.player_ptr, impr)
 //	    || is_building_replaced(pcity, impr))) {
 //      count++;
-//      gold += impr_sell_gold(impr);
+//      gold += Improvement.impr_sell_gold(impr);
 //      city_sell_improvement(pcity, impr);
 //    }
 //  } }
 //
 //  if (count > 0) {
 //    message = String.format "Sold %d %s for %d gold.",
-//		count, get_improvement_name(impr), gold);
+//		count, Improvement.get_improvement_name(impr), gold);
 //  } else {
 //    message = String.format "No %s could be sold.",
-//		get_improvement_name(impr));
+//		Improvement.get_improvement_name(impr));
 //  }
 //}
 //

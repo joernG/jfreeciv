@@ -143,7 +143,7 @@ public class Wldlg{
 //      break;
 //
 //  for (j = selection; j < i-1; j++) {
-//    copy_worklist(&pdialog.pplr.worklists[j],
+//    worklist.copy_worklist(&pdialog.pplr.worklists[j],
 //                  &pdialog.pplr.worklists[j+1]);
 //  }
 //
@@ -348,7 +348,7 @@ public class Wldlg{
 //  worklist_report_dialog pdialog;
 //  pdialog = (worklist_report_dialog )data;
 //
-//  copy_worklist(&pdialog.pplr.worklists[pdialog.wl_idx], pwl);
+//  worklist.copy_worklist(&pdialog.pplr.worklists[pdialog.wl_idx], pwl);
 //  set(pdialog.wl_wnd,MUIA_Window_Open,false);
 //}
 //
